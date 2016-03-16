@@ -1,0 +1,15 @@
+<?php
+
+define("WORKFLOW_MONITORAMENTO_SEB", 28);
+
+define("WF_ESTADO_PREENCHIMENTO",    218);
+define("WF_ESTADO_AVALIACAO",        219);
+define("WF_ESTADO_APROVACAO",        220);
+define("WF_ESTADO_DEVOLVIDO_AO_COORDENADOR_TECNICO",        238);
+
+define("WF_ACAO_ENVIAR_ANALISE",     461);
+define("WF_ACAO_DEVOLVER_CORRECAO",  463);
+define("WF_ACAO_APROVAR",            462);
+
+define("CODIGO_FUNCAO_REITOR", 21);
+?>

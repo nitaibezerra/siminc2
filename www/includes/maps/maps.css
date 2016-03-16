@@ -1,0 +1,90 @@
+/*
+ * jQuery UI Accordion 1.8.14
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Accordion#theming
+ */
+/* IE/Win - Fix animation bug - #4615 */
+.ui-accordion { width: 100%; }
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
+.ui-accordion .ui-accordion-li-fix { display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+.ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: 0px; }
+.ui-accordion-icons .ui-accordion-header a { padding-left:0px; }
+.ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
+.ui-accordion .ui-accordion-content { padding: 0px; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; zoom: 1; }
+.ui-accordion .ui-accordion-content-active { display: block; }
+.tituloAcordion{}
+
+.contextmenu{
+  visibility:hidden;
+  background:#ffffff;
+  border:1px solid #8888FF;
+  z-index: 10;
+  position: relative;
+  width: 140px;
+  cursor:pointer;
+}
+.contextmenu div{
+padding-left: 5px
+
+}
+.iframeBalao{
+	padding:10px;
+	height:300px;
+	width:480px;
+	border:0px;
+}
+
+.bold{font-weight:bold}
+.link{cursor:pointer;vertical-align:middle;}
+.branco{background-color:#FFFFFF}
+
+.popUpConfirmaSalvarFiltro{
+	width:310px;
+	text-align:center;
+	background-color:#FFFFFF;
+	border: solid 1px #000000;
+	padding: 5px;
+	position:relative;
+	z-index:100;	
+}
+
+
+div.color_picker {
+  height: 16px;
+  width: 16px;
+  padding: 0 !important;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  line-height: 16px;
+  float:left;
+  margin-right: 3px;
+}
+
+div#color_selector {
+  width: 110px;
+  position: absolute;
+  border: 1px solid #598FEF;
+  background-color: #EFEFEF;
+  padding: 2px;
+}
+  div#color_custom {width: 100%; float:left }
+  div#color_custom label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+  div#color_custom input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+
+div.color_swatch {
+  height: 12px;
+  width: 12px;
+  border: 1px solid #000;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 12px;
+}
+
+.grupo_filtro_avancado{margin-bottom:7px}
+.div_filtro_avancado{margin-top:7px;border-top:solid 1px #ccc;padding-top:7px}

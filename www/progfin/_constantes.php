@@ -1,0 +1,92 @@
+<?php
+/**
+ * Constantes utilizadas em todo o módulo de programação financeira.
+ * $Id: _constantes.php 99226 2015-06-25 18:38:42Z werteralmeida $
+ */
+
+/*
+ * Lista de perfis do módulo
+ */
+define('PFL_SUPER_USUARIO', 1200);
+define('PFL_UO_EQUIPE_TECNICA', 1212);
+define('PFL_CGF_EQUIPE_FINANCEIRA', 1211);
+
+/*
+ * Tipo de documento utilizado para o fluxo de tramitação de lotes.
+ */
+define('TPDOC_LOTE_LIBERACOES_FINANCEIRAS', 184);
+
+define('ESDID_LOTE_CADASTRADO', 1240);
+define('ESDID_LOTE_AGUARDANDO_COMUNICACAO', 1241);
+define('ESDID_LOTE_PROCESSANDO', 1242);
+define('ESDID_LOTE_ENVIADO_COM_SUCESSO', 1243);
+define('ESDID_LOTE_ENVIADO_PARCIALMENTE', 1244);
+define('ESDID_LOTE_NAO_ENVIADO', 1245);
+define('ESDID_LOTE_CANCELADO', 1330);
+
+define('TRANS_LOTE_CADASTRADO_PARA_CANCELADO', 3079);
+define('TRANS_LOTE_AGD_ENVIO_PARA_PROC', 2829);
+define('TRANS_LOTE_PROC_PARA_SUCESSO', 2830);
+define('TRANS_LOTE_PROC_PARA_PARCIAL', 2831); // -- Com comentário
+define('TRANS_LOTE_PROC_PARA_NAO_ENVIADO', 2832); // -- Com comentário
+
+define('TRANS_LOTE_AGD_ENVIO_PARA_SUCESSO', 2837);
+define('TRANS_LOTE_AGD_ENVIO_PARA_PARCIAL', 2838); // -- Com comentário
+define('TRANS_LOTE_AGD_ENVIO_PARA_NAO_ENVIADO', 2839); // -- Com comentário
+
+define('TRANS_LOTE_CANCELADO_PARA_PARCIAL', 3403); // -- Com comentário
+define('TRANS_LOTE_CANCELADO_PARA_NAO_ENVIADO', 3404); // -- Com comentário
+
+/*
+ * Tipo de documento utilizado para o fluxo de liberações financeiras individuais.
+ */
+define('TPDOC_LIBERACAO_FINANCEIRA', 185);
+
+
+define('ESDID_LIBERACAO_CADASTRADO', 1189);
+define('ESDID_LIBERACAO_ANALISE_SPO', 1190);
+define('ESDID_LIBERACAO_AJUSTES_UO', 1191);
+define('ESDID_LIBERACAO_AGD_COMUNICACAO', 1192);
+define('ESDID_LIBERACAO_PROCESSANDO', 1331);
+define('ESDID_LIBERACAO_ENVIO_SUCESSO', 1193);
+define('ESDID_LIBERACAO_ENVIO_FALHA_AJUSTES_UO', 1194);
+define('ESDID_LIBERACAO_CANCELADO', 1332);
+
+define('TRANS_LIBERACAO_CADASTRADO_ANALISE_SPO', 2724);
+define('TRANS_LIBERACAO_ANALISE_SPO_AGD_COMUNICACAO', 2726);
+define('TRANS_LIBERACAO_ANALISE_SPO_CORRECOES_UO', 2725);
+define('TRANS_LIBERACAO_AGD_COMUNICACAO_PARA_PROC', 3083);
+define('TRANS_LIBERACAO_PROC_PARA_SUCESSO', 3084);
+define('TRANS_LIBERACAO_PROC_PARA_NAO_ENVIADO', 3085);
+define('TRANS_LIBERACAO_ACERTOS_PARA_ANALISE_SPO', 2727);
+
+define('TRANS_LIBERACAO_AGD_COM_PARA_SUCESSO', 3229);
+define('TRANS_LIBERACAO_AGD_COM_PARA_NAO_ENVIADO', 3230);
+define('TRANS_LIBERACAO_PROC_PARA_ERRO', 3329);
+/*
+ * Tipo de documento utilizado para o fluxo de Pedido de Liberação Financeira.
+ */
+define('TPDOC_PEDIDO_LIBERACAO', 215);
+
+define('ESDID_PEDIDO_EM_PREENCHIMENTO', 1400);
+define('ESDID_PEDIDO_ANALISE_SPO', 1401);
+define('ESDID_PEDIDO_EM_ATENDIMENTO', 1402);
+define('ESDID_PEDIDO_AJUSTES_UO', 1403);
+define('ESDID_PEDIDO_ATENDIMENTO_CONCLUIDO', 1476);
+
+define('TRANS_PEDIDO_CONCLUIR_ATENDIMENTO', 3402);
+define('TRANS_PEDIDO_EM_ATENDIMENTO', 3246);
+define('TRANS_PEDIDO_ANALISE_SPO_AJUSTE_UO', 3247);
+
+
+define('CGF_UNIDADE_EMITENTE', 150014);
+define('UNIDADE_FNDE', 26298);
+
+/*
+ * Chave de criptografia do sistema.
+ */
+define('KEY_PROGFIN', pack('H*', sha1('S1M3C__PaSs_PrOG4M4c40fIn4NC31r4')));
+//define('KEY_PROGFIN', /*pack('H*', */hash('sha256', 'S1M3C__PaSs_PrOG4M4c40fIn4NC31r4'))/*)*/;
+//define('KEY_PROGFIN', 'd692e3d3c36da2864af3d292148e5ae75981c13c88c6d8cf4ac887f3d9c1319d');
+
+define('MODULO', $_SESSION['sisdiretorio']);

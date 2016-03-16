@@ -1,0 +1,26 @@
+<?php
+/**
+ * $Id: Plus.php 81167 2014-06-04 12:24:26Z maykelbraz $
+ */
+
+/**
+ *
+ */
+class Simec_Listagem_Acao_Select extends Simec_Listagem_AcaoComID
+{
+    protected $icone = 'ok-circle';
+    protected $cor = 'green';
+    protected $titulo = 'Selecionar item';
+
+    protected $icone2 = 'remove-circle';
+    protected $cor2 = 'red';
+    protected $titulo2 = 'Remover item';
+
+    protected function renderAcao()
+    {
+        $acao = <<<HTML
+<span title="%s" class="glyphicon glyphicon-%s" style="cursor:pointer;color:green" data-id="%s" data-cb="%s"></span>
+HTML;
+        return sprintf($acao, $this->titulo, $this->icone, $this->getAcaoID(), $this->callbackJS);
+    }
+}

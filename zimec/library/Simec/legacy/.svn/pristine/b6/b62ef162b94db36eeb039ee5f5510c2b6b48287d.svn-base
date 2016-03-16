@@ -1,0 +1,13 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ *
+ */
+class Simec_Listagem_Acao_Clear extends Simec_Listagem_Acao
+{
+    protected $icone = 'floppy-remove';
+    protected $titulo = 'Limpar';
+}

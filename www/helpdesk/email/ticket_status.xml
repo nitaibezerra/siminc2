@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<template>
+	<fields>
+		<ticket_subject>Ticket's subject</ticket_subject>
+		<ticket_body>Ticket's body</ticket_body>
+	</fields>
+	<subject>
+		New Support Ticket
+	</subject>
+	<body>
+		Dear Moderator,
+		        
+		A new ticket has been added to your department.
+		
+		Subject: [ticket_subject]
+		Body: 
+		[ticket_body]
+	</body>
+</template>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFontePPA xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <FontePPA>
+    <FPPCod>10000</FPPCod>
+    <FPPDsc>Lei Orçamentária Anual</FPPDsc>
+    <FPPDscResumida>- LOA</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>11000</FPPCod>
+    <FPPDsc>Fiscal/Seguridade</FPPDsc>
+    <FPPDscResumida>-- Fiscal/Segurid.</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>11100</FPPCod>
+    <FPPDsc>Tesouro</FPPDsc>
+    <FPPDscResumida>--- Tesouro</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>11200</FPPCod>
+    <FPPDsc>Financiamento externo contratado</FPPDsc>
+    <FPPDscResumida>--- Fin. ext. contr.</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>11300</FPPCod>
+    <FPPDsc>Financiamento externo a contratar</FPPDsc>
+    <FPPDscResumida>--- Fin. ext. a contr.</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>12000</FPPCod>
+    <FPPDsc>Investimento das Estatais</FPPDsc>
+    <FPPDscResumida>-- Invest. Estatais</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>20000</FPPCod>
+    <FPPDsc>Outros Recursos Admin. pela União</FPPDsc>
+    <FPPDscResumida>- EXTRA-OGU</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>21000</FPPCod>
+    <FPPDsc>Renúncia fiscal</FPPDsc>
+    <FPPDscResumida>-- Renúncia fiscal</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>22000</FPPCod>
+    <FPPDsc>Plano Dispêndios das Estatais</FPPDsc>
+    <FPPDscResumida>-- Pl. Disp. Estatais</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>23000</FPPCod>
+    <FPPDsc>Fundos - Disponibilidades</FPPDsc>
+    <FPPDscResumida>-- Fundos - Disp.</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>23100</FPPCod>
+    <FPPDsc>FAT</FPPDsc>
+    <FPPDscResumida>--- FAT</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>23200</FPPCod>
+    <FPPDsc>FGTS</FPPDsc>
+    <FPPDscResumida>--- FGTS</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>23300</FPPCod>
+    <FPPDsc>Fundos Constitucionais</FPPDsc>
+    <FPPDscResumida>--- Fundos Constit.</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24000</FPPCod>
+    <FPPDsc>Agências Oficiais de Crédito</FPPDsc>
+    <FPPDscResumida>-- Ag. Ofic. Crédito</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24100</FPPCod>
+    <FPPDsc>BNDES</FPPDsc>
+    <FPPDscResumida>--- BNDS</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24200</FPPCod>
+    <FPPDsc>CEF</FPPDsc>
+    <FPPDscResumida>--- CEF</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24300</FPPCod>
+    <FPPDsc>BB</FPPDsc>
+    <FPPDscResumida>--- BB</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24400</FPPCod>
+    <FPPDsc>BNB</FPPDsc>
+    <FPPDscResumida>--- BNB</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24500</FPPCod>
+    <FPPDsc>BASA</FPPDsc>
+    <FPPDscResumida>--- BASA</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>24600</FPPCod>
+    <FPPDsc>FINEP</FPPDsc>
+    <FPPDscResumida>--- FINEP</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>30000</FPPCod>
+    <FPPDsc>PARCERIAS</FPPDsc>
+    <FPPDscResumida>- PARCERIAS</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>31000</FPPCod>
+    <FPPDsc>Estados</FPPDsc>
+    <FPPDscResumida>-- Estados</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>32000</FPPCod>
+    <FPPDsc>Municípios</FPPDsc>
+    <FPPDscResumida>-- Municípios</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>33000</FPPCod>
+    <FPPDsc>Setor Privado</FPPDsc>
+    <FPPDscResumida>-- Setor Privado</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>44444</FPPCod>
+    <FPPDsc>TOTAL</FPPDsc>
+    <FPPDscResumida>TOTAL</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>23400</FPPCod>
+    <FPPDsc>FAR</FPPDsc>
+    <FPPDscResumida>---FAR</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+  <FontePPA>
+    <FPPCod>40000</FPPCod>
+    <FPPDsc>Outras</FPPDsc>
+    <FPPDscResumida>--Outras</FPPDscResumida>
+    <FPPObs/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </FontePPA>
+</ArrayOfFontePPA>

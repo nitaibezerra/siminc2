@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPeriodicidade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <Periodicidade>
+    <PERCod>1</PERCod>
+    <PERDsc>Indisponível</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>2</PERCod>
+    <PERDsc>Semestral</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>3</PERCod>
+    <PERDsc>Quinqüenal</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>4</PERCod>
+    <PERDsc>Decenal</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>5</PERCod>
+    <PERDsc>Trimestral</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>6</PERCod>
+    <PERDsc>Trienal</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>7</PERCod>
+    <PERDsc>Anual</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>8</PERCod>
+    <PERDsc>a definir</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>9</PERCod>
+    <PERDsc>Mensal</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>10</PERCod>
+    <PERDsc>Bianual</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>11</PERCod>
+    <PERDsc>a cada censo ou contagem</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>12</PERCod>
+    <PERDsc>Semestral/Bianual</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>13</PERCod>
+    <PERDsc>Quadrienal</PERDsc>
+  </Periodicidade>
+  <Periodicidade>
+    <PERCod>14</PERCod>
+    <PERDsc>Quadrimestral</PERDsc>
+  </Periodicidade>
+</ArrayOfPeriodicidade>

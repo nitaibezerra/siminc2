@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRestricaoAcao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>0750</PRGCod>
+    <ACACod>2010</ACACod>
+    <SACCod>0132</SACCod>
+    <TRSCod>6</TRSCod>
+    <RSINum>41</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-03-30T00:00:00</RSADataInclusao>
+    <RSADscRestricao>Reforma física do setor.</RSADscRestricao>
+    <RSADscProvidencia>&lt;p&gt;Apressar a conclusão para restabelecer a normalidade do atendimento.&lt;/p&gt;</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1073</PRGCod>
+    <ACACod>4004</ACACod>
+    <SACCod>0029</SACCod>
+    <TRSCod>6</TRSCod>
+    <RSINum>42</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-04-17T00:00:00</RSADataInclusao>
+    <RSADscRestricao>&lt;p&gt;As ações dependem do cadastramento das mesmas pelos respectivos Coordenadores; dependem dos Relatórios elaborados pelos Coordenadores; e dependem, também, de aprovação pela Câmara de Extensão. Existe, ainda, uma carência de equipamentos de informática para se aprimorar o controle das ações. &lt;/p&gt;&lt;p&gt; &lt;/p&gt;</RSADscRestricao>
+    <RSADscProvidencia>&lt;p&gt;Agilizar a aprovação das ações pela Câmara de Extensão e envidar esforços para disponibilizar mais recursos informacionais. &lt;/p&gt;</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1073</PRGCod>
+    <ACACod>4086</ACACod>
+    <SACCod>0011</SACCod>
+    <TRSCod>1</TRSCod>
+    <RSINum>43</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-06-30T00:00:00</RSADataInclusao>
+    <RSADscRestricao>A falta de recursos financeiros (não aprovação do orçamento) que compromete a aquisição de materiais cirúrgicos contribuindo para suspensão de cirurgias e ocasionando a má utilização do leito, cuja internação é automaticamente cancelada não podendo ser cobrado do sistema e nem considerado como ocupapação no Sistema Nacional da DATASUS. </RSADscRestricao>
+    <RSADscProvidencia>&lt;p&gt;Aprovação e sansão do orçamento para regulizar as situaçõs de pendências e acelerar as obras para reabertura do Setor de Urgência. &lt;/p&gt;</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1073</PRGCod>
+    <ACACod>4086</ACACod>
+    <SACCod>0011</SACCod>
+    <TRSCod>1</TRSCod>
+    <RSINum>48</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-07-14T00:00:00</RSADataInclusao>
+    <RSADscRestricao>Terminada a obra do Pronto Socorro, com capacidade para 02 atendimentos na sala da emergência, 03 leitos de semi intensivo, 09 leitos para repouso e 01 leito para isolamento, além de macas e cadeiras. Desse total apenas 03 foram cadastrados como leitos de internação na Central Reguladora o que vem acarretando prejuízos ao hospital, uma vez que todos os leitos existentes funcionam, na prática, para tratamento dos pacientes que não conseguem vagas em outros  serviços do próprio HUCAM ou em outros hospitais, e não são autorizados  pela Cenral documentos (AIHs) para cobrança dos mesmos.</RSADscRestricao>
+    <RSADscProvidencia>Liberação de leitos de Nefrologia que também estavam em obras, planejamento  de reforma de leitos da Pediatria, Urologia - leitos cirúrgicos e Maternidade para atingir 268 leitos no menor tempo possível. Manter conversação com a Central Reguladora no sentido de cadastrar  leitos do Pronto Socorro utilizados para internação  e/ou otimizar a busca de leitos de retaguarda para pacientes que permaneçam no P.S. mais de 24 horas. </RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1073</PRGCod>
+    <ACACod>6373</ACACod>
+    <SACCod>0033</SACCod>
+    <TRSCod>1</TRSCod>
+    <RSINum>47</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-07-14T00:00:00</RSADataInclusao>
+    <RSADscRestricao>Terminada a obra do Pronto Socorro, com capacidade para 02 atendimentos na sala de emergência, 03 leitos de semi-intensivo, 09 leitos para repouso e 01 leito para isolamento. Desse total, apenas 03 foram cadastrados como leitos de internação na Central Reguladora o que vem acarretando prejuízos ao hospital uma vez que todos os leitos existentes funcionam na prática para tratamento dos pacientes que não conseguem vagas em outros serviços do próprio  HUCAM ou em outros hospitas, e não são autorizados pela Central documentos (AIHs) para cobrança dos mesmos.. </RSADscRestricao>
+    <RSADscProvidencia>&lt;p&gt;Liberação de leitos de Nefrologia que também estavam em obras, planejamento de reforma de leitos da Pediatria, Urologia - leitos cirúrgicos e Maternidade para atingir 268 leitos, no menor tempo possível. Manter conversação a Central Reguladora no sentido de cadastrar leitos do Pronto Socorro utilizados para internação  e/ou otimizar busca de leitos de retaguarda para pacientes  que permaneçam  no P. S. mais de 24 horas. . &lt;/p&gt;</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1072</PRGCod>
+    <ACACod>8379</ACACod>
+    <SACCod>0001</SACCod>
+    <TRSCod>10</TRSCod>
+    <RSINum>45</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-05-30T00:00:00</RSADataInclusao>
+    <RSADscRestricao>Com diversos programas em fase de implementação por parte deste ministérios, muitos gestores municipais se confundem ao inscreverem seus professores no PROINFANTIL, o que gera uma série de irregularidades de matrículas (por exemplo professores matriculados que já têm a formação mínima). Outros municípios, após o encerramento do período de inscrição, pedem, tardiamente para aderir ao mesmo, pois observam que o programa é sério e traz resultados no desempenho da educação municipal. Nestes casos a coordenação nacional é obrigada a impedir a inclusão tardia de municípios, pois não haveria condições dos cursistas cumprirem a carga horária do curso, iniciando-o tardiamente. A Coordenação nacional acaba tendo que sugerir que aguardem a abertura de novas turmas dentro do estado.</RSADscRestricao>
+    <RSADscProvidencia>Melhor divulgação do PROINFANTIL, com a utilização dos mais variados meios de comunicação.</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1072</PRGCod>
+    <ACACod>8379</ACACod>
+    <SACCod>0001</SACCod>
+    <TRSCod>2</TRSCod>
+    <RSINum>44</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-05-30T00:00:00</RSADataInclusao>
+    <RSADscRestricao>&lt;p&gt;Alguns municípios acabam se retirando do programa e, com isso, privando seus professores de terem a formação mínima exigida pela legislação vigente para atuar na Educação Infantil, alegando não possuir recursos para a ,amutenção das ações do curso em seus municípios. Isso gera uma redução do número de cursistas previsto.&lt;/p&gt;</RSADscRestricao>
+    <RSADscProvidencia>Aprovação do FUNDEB para que os municípios mais desfavorecidos possam utilizar os recursos para a implementação e manutenção do PROINFANTIL em suas cidades.</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+  <RestricaoAcao>
+    <PRGAno>2006</PRGAno>
+    <PRGCod>1072</PRGCod>
+    <ACACod>8379</ACACod>
+    <SACCod>0001</SACCod>
+    <TRSCod>4</TRSCod>
+    <RSINum>46</RSINum>
+    <TPICod>2</TPICod>
+    <CMPCod>0</CMPCod>
+    <RSADataInclusao>2006-05-30T00:00:00</RSADataInclusao>
+    <RSADscRestricao>Para atingir a meta de 10 mil professores matriculados, o MEC deveria propor a abertura de novos grupos durante o ano de 2006. Porém, a falta de funcionários nas equipes da SEB e da SEED que coordenam nacionalmente o curso é o maior impeditivo para a ampliação do PROINFANTIL.</RSADscRestricao>
+    <RSADscProvidencia>Contratação de funcionários qualificados para exercerem as funções necessárias à coordenação nacional do PROINFANTIL.</RSADscProvidencia>
+    <RSASNTempoHabil>0</RSASNTempoHabil>
+  </RestricaoAcao>
+</ArrayOfRestricaoAcao>

@@ -1,0 +1,14 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ * @todo Implementar a chamada do workflow como um componente isolado.
+ */
+class Simec_Listagem_Acao_Workflow extends Simec_Listagem_AcaoComID
+{
+    protected $icone = 'transfer';
+    protected $titulo = 'Situação';
+    protected $callbackJS = 'showWorkflow';
+}

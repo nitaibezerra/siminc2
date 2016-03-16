@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipoAtualizacao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <TipoAtualizacao>
+    <TATCod>0</TATCod>
+    <TATDsc>Sem Alteração</TATDsc>
+  </TipoAtualizacao>
+  <TipoAtualizacao>
+    <TATCod>1</TATCod>
+    <TATDsc>Inclusão</TATDsc>
+  </TipoAtualizacao>
+  <TipoAtualizacao>
+    <TATCod>2</TATCod>
+    <TATDsc>Alteração</TATDsc>
+  </TipoAtualizacao>
+  <TipoAtualizacao>
+    <TATCod>3</TATCod>
+    <TATDsc>Exclusão</TATDsc>
+  </TipoAtualizacao>
+  <TipoAtualizacao>
+    <TATCod>4</TATCod>
+    <TATDsc>Recuperação</TATDsc>
+  </TipoAtualizacao>
+</ArrayOfTipoAtualizacao>

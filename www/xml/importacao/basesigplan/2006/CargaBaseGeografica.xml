@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBaseGeografica xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <BaseGeografica>
+    <BSGCod>1</BSGCod>
+    <BSGDsc>Indisponível</BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>11</BSGCod>
+    <BSGDsc>Distrital</BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>3</BSGCod>
+    <BSGDsc>Regional       </BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>4</BSGCod>
+    <BSGDsc>Municipal      </BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>5</BSGCod>
+    <BSGDsc>Nacional       </BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>12</BSGCod>
+    <BSGDsc>Por Eixos de Desenvolvimento</BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>7</BSGCod>
+    <BSGDsc>Estadual       </BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>8</BSGCod>
+    <BSGDsc>Amazônia Legal</BSGDsc>
+  </BaseGeografica>
+  <BaseGeografica>
+    <BSGCod>0</BSGCod>
+    <BSGDsc>A Definir</BSGDsc>
+  </BaseGeografica>
+</ArrayOfBaseGeografica>

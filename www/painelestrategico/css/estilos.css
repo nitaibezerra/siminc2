@@ -1,0 +1,354 @@
+body {
+	font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+	background: white;
+}
+
+/* logos */
+#mec {
+	background-color:#FFCB00;
+	height:40px;
+	margin:0;
+	padding:0 0 0 20px;
+	width:100%;
+	clear:both;
+	text-align:left;
+}
+#fgv-pde {
+	clear:both;
+	height:130px;
+	margin:18px 0 0 20px;
+	padding:0;
+	text-align:left;
+	width:100%;
+}
+#fgv-pde img {
+	vertical-align:top;
+}
+/* v */
+#pagina {
+	min-width:820px;
+	overflow:hidden;
+	position:relative;
+	width:100%;
+}
+#cabecalho {
+	background:#FFFFFF;
+	height:170px;
+	min-height:170px;
+	text-align:center;
+}
+#conteudo {
+	background:#1C6077 url(../img/fdo-listras.jpg) repeat-x scroll 0 0;
+	clear:both;
+	min-height:600px;
+	overflow:hidden;
+	padding:20px 20px 30px;
+/*	width:auto;
+*/	}
+#conteudo2 {
+	background:#5C761A url(../img/fdo-listrasback.jpg) repeat-x scroll 0 0;
+	clear:both;
+	min-height:600px;
+	overflow:hidden;
+	padding:20px 20px 30px;
+/*	width:auto;
+*/	}
+#tit-mapas {
+	color:white;
+	float:left;
+	margin:0;
+	padding-top:0;
+}
+#tit-mapas h1 { font-size:48px; font-weight:bold; }
+#tit-mapas h2 { font-size: 24px; font-weight:normal; }
+/*#conteudo h1 {
+	color:white;
+	float:left;
+	font-size:48px;
+	font-weight:bold;
+	margin:0;
+	padding-top:0;
+	}
+	
+#conteudo h2 {
+	color:white;
+	float:left;
+	font-size:24px;
+	font-weight:bold;
+	margin:0;
+	padding-top:0;
+	}*/
+
+#selecao {
+	color:white;
+	float:right;
+	font-size:14px;
+	font-weight:bold;
+	margin:10px 0 0 0;
+	text-align:left;
+	}
+
+/* divs que comportam as tabelas --> principais, ficha objetivo, acoes objetivo */
+#tabela {
+	clear:both;
+	padding:25px 0 0;
+	}
+#tabela-objetivo {
+	clear:both;
+	margin:0;
+	padding:0;
+	}
+#tabela-acoes-objetivo {
+	clear:both;
+	margin:30px 0 10px;
+	padding:0;
+	}
+
+/* define estilos para tabelas --> 1: principal, 2: principal-alt, 3: ficha objetivo, 4: acoes objetivo */
+#tabela-1, #tabela-2, #tabela-3, #tabela-4 {
+	border-collapse:collapse;
+	font-size:13px;
+	text-align:left;
+	width:100%;
+}
+/*#tabela-1 col{
+	border-right:1px solid #5C761A;
+} --> não funcionou no IE */
+#tabela-1 th, #tabela-2 th, #tabela-3 th, #tabela-4 th{
+	background:#D5FBB1 none repeat scroll 0 0;
+	border-bottom:1px solid #5C761A;
+	color:#45545D;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px;
+	text-align:center;
+	text-transform:uppercase;
+}
+#tabela-3 th, #tabela-4 th {
+text-align:left;
+}
+
+#tabela-1 td, #tabela-2 td, #tabela-3 td, #tabela-4 td {
+	background:#E5FCD0 none repeat scroll 0 0;
+	border-bottom:1px solid #5C761A;
+	color:black;
+	font-weight:normal;
+	padding:10px;
+	vertical-align:top;
+}
+#tabela-1 td, #tabela-1 th{
+	border-right:1px solid #5C761A;
+}
+
+#tabela-1 td.bold, #tabela-2 td.bold {
+	color:#45545D;
+	font-weight:bold;
+}
+#tabela-3 td.bold, #tabela-4 td.bold {
+	color:#297500;
+	font-weight:bold;
+}
+#tabela-3 a, #tabela-4 a #tabela-3 a:visited, #tabela-4 a:visited {
+	color:#297500;
+	text-decoration:none;
+}
+#tabela-3 a:hover, #tabela-4 a:hover {
+	color:#297500;
+	text-decoration:underline;
+}
+#legenda-cores {
+	background:#E5FCD0 none repeat scroll 0 0;
+	padding:5px 10px;
+	border-right:1px solid #5C761A;
+	text-align:right;
+
+}
+
+/* elementos para as fichas de objetivos */
+#cabecalho-objetivo {
+	background:#FFFFFF none repeat scroll 0 0;
+	height:53px;
+	margin:5px 20px 0;
+	min-height:53px;
+	text-align:left;
+}
+#cabecalho-objetivo h1 {
+	color: #45545d;
+	font-size: 30px;
+	font-weight: bold;
+}
+h2.ficha-objetivo {
+	color:white;
+	font-size:30px;
+	font-weight:bold;
+	margin:0px 0 16px;
+}
+#descr-objetivo {
+	background-color:#45545D;
+	clear:both;
+	color:white;
+	font-size:15px;
+	line-height:168%;
+	margin:0;
+	padding:10px 15px;
+	text-align:left;
+}
+
+
+/* define as caixinhas dos objetivos nos mapas */
+#opcoes{
+	background-color:#E5FCD0;
+	width:100%;
+}
+* html #opcoes{ /*IE only rule. Original width minus all left/right paddings */
+	width: 100%;
+}
+#opcoes li{
+	list-style-type:none;
+	margin:6px 0;
+	padding:5px 8px;
+	border-color:#5B9937;
+	border-style:dotted;
+	border-width:1px 0;
+	text-align:center;
+}
+#opcoes li li{
+	list-style-type:none;
+	padding:5px 8px;
+	border-style:none;
+	padding:0 0 0 11px;
+}
+#opcoes a, .opcoes a:visited {
+	font: 13px;
+	display: block;
+	width: 100%; /*Define width for IE6's sake*/
+	color: black;
+	text-decoration: none;
+}
+html>body #opcoes a{ /*Non IE rule*/
+	width: auto;
+}
+#opcoes a:hover {
+	text-decoration: underline;
+}
+#hor{
+	background-color:#E5FCD0;
+	width:100%;
+}
+#opcoes-hor {
+	background-color:#E5FCD0;
+	width:100%;
+}
+#opcoes-hor li{
+	border-color:#5B9937;
+	border-style:dotted;
+	border-width:1px 0;
+	display:inline;
+	float:left;
+	list-style-type:none;
+	margin:4px;
+	padding:4px 8px;
+	width:17%;
+}
+
+#opcoes-hor li li{
+    border-style:none;
+    list-style-type:none;
+    margin:0;
+    padding:0 0 0 17px;
+    width:90%;
+}
+
+#opcoes-hor a, #opcoes-hor a:visited {
+	font: 13px;
+	display: block;
+	width: 100%; /*Define width for IE6's sake*/
+	color: black;
+	text-decoration: none;
+}
+
+html>body #opcoes-hor a{ /*Non IE rule*/
+	width: 100%;
+}
+
+#opcoes-hor a:hover{
+	text-decoration: underline;
+}
+
+
+/* define as caixinhas que aparecem no mouse over */
+.flutuantes a {
+color: #D5FBB1;
+text-decoration:none;
+}
+.flutuantes a:hover {
+	text-decoration: underline;
+}
+
+/* cores de status */
+.cor_critico {
+	background: #cd3815;
+}
+.cor_alerta {
+	background: #deb60a;
+}
+.cor_ok {
+	background: #60a300;
+}
+.cor_desatualizado {
+	background: url(../img/ic_desatualizado.png) no-repeat scroll 0 2px;
+}
+
+.led-critico, .led-alerta, .led-ok, .led-desatualizado {
+	margin:0 0 2px 5px;
+	padding:0 10px 8px 22px;
+}
+
+.led-critico {
+	background:#45545D url(../img/led-critico.gif) no-repeat scroll 0 2px;
+}
+.led-alerta {
+	background:#45545D url(../img/led-alerta.gif) no-repeat scroll 0 2px;
+}
+.led-ok {
+	background:#45545D url(../img/led-ok.gif) no-repeat scroll 0 2px;
+}
+.led-desatualizado {
+	background:#45545D url(../img/led-desatualizado.gif) no-repeat scroll 0 2px;
+}
+
+
+/*.questao {
+font: 15px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+}*/
+
+/*.resposta {
+font: 13px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+}*/
+
+/*.cor_mapa {
+	background: steelblue;
+	background: #D3D3D3;
+}*/
+
+/*.Link
+{
+    FONT-SIZE: 11px;
+    COLOR: black;
+    FONT-FAMILY: Arial;
+    TEXT-DECORATION: none
+}*/
+
+/*.perspectiva {
+font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: black;
+FONT-WEIGHT: bold;
+}*/
+
+/*.cabecalho_mapa {
+font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color:white;
+FONT-WEIGHT: bold;
+}*/

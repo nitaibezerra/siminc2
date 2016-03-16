@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipoSituacao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <TipoSituacao>
+    <SITCod>00</SITCod>
+    <SITDsc>Não Informado</SITDsc>
+    <SITTipo>XX</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>01</SITCod>
+    <SITDsc>Não Iniciado</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>02</SITCod>
+    <SITDsc>Em fase de estudos e projetos</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>03</SITCod>
+    <SITDsc>Executados - Entre 0 e 24%</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>04</SITCod>
+    <SITDsc>Executados - Entre 25 e 49%</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>05</SITCod>
+    <SITDsc>Executados - Entre 50 e 74%</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>06</SITCod>
+    <SITDsc>Executados - Entre 75 e 99%</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>07</SITCod>
+    <SITDsc>Concluído</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>08</SITCod>
+    <SITDsc>Não se aplica</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>09</SITCod>
+    <SITDsc>Outras</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>10</SITCod>
+    <SITDsc>Em ritmo acelerado</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>11</SITCod>
+    <SITDsc>Em ritmo normal</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>12</SITCod>
+    <SITDsc>Em ritmo lento</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>13</SITCod>
+    <SITDsc>Paralisado</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>14</SITCod>
+    <SITDsc>Não se aplica</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>15</SITCod>
+    <SITDsc>Outras - Indicar</SITDsc>
+    <SITTipo>AN</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>16</SITCod>
+    <SITDsc>Adiantado</SITDsc>
+    <SITTipo>CR</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>17</SITCod>
+    <SITDsc>Normal</SITDsc>
+    <SITTipo>CR</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>18</SITCod>
+    <SITDsc>Atrasado</SITDsc>
+    <SITTipo>CR</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>19</SITCod>
+    <SITDsc>Não se aplica</SITDsc>
+    <SITTipo>CR</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>20</SITCod>
+    <SITDsc>Conclusão prevista para</SITDsc>
+    <SITTipo>CO</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>21</SITCod>
+    <SITDsc>Não se aplica</SITDsc>
+    <SITTipo>CO</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>22</SITCod>
+    <SITDsc>Em Execução</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>23</SITCod>
+    <SITDsc>Em negociação ou contratação</SITDsc>
+    <SITTipo>ES</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>42</SITCod>
+    <SITDsc>Concluído</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>43</SITCod>
+    <SITDsc>Adiantado</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>44</SITCod>
+    <SITDsc>Normal</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>45</SITCod>
+    <SITDsc>Atrasado</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>46</SITCod>
+    <SITDsc>Paralisado</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+  <TipoSituacao>
+    <SITCod>47</SITCod>
+    <SITDsc>Outros</SITDsc>
+    <SITTipo>CL</SITTipo>
+  </TipoSituacao>
+</ArrayOfTipoSituacao>

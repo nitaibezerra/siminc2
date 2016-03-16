@@ -1,0 +1,77 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ *
+ */
+require dirname(__FILE__) . '/Acao.php';
+/**
+ *
+ */
+require dirname(__FILE__) . '/AcaoComID.php';
+
+/**
+ *
+ */
+class Simec_Listagem_FactoryAcao
+{
+    private function __construct()
+    {
+    }
+
+    public static function getAcao($acao, $config)
+    {
+        if (!self::arquivoDeClasseExiste($acao)) {
+            throw new Exception("A classe da ação solicitada ({$acao}) ainda não foi implementada.");
+        }
+        require_once(self::getCaminhoArquivo($acao));
+        $nomeClasseAcao = 'Simec_Listagem_Acao_' . ucfirst($acao);
+
+        // -- Instanciando a nova ação
+        $objAcao = new $nomeClasseAcao();
+
+        // -- Callback JS
+        if (is_string($config)) {
+            return $objAcao->setCallback($config);
+        } else {
+            $objAcao->setCallback($config['func']);
+        }
+
+        // -- Composição de ID de identificação da ação
+        if (key_exists('id-composto', $config)) {
+            $objAcao->setPartesID($config['id-composto']);
+        }
+
+        // -- Parametros extras
+        if (key_exists('extra-params', $config)) {
+            $objAcao->addParams(Simec_Listagem_Acao::PARAM_EXTRA, $config['extra-params']);
+        }
+
+        // -- Parametros externos
+        if (key_exists('external-params', $config)) {
+            $objAcao->addParams(Simec_Listagem_Acao::PARAM_EXTERNO, $config['external-params']);
+        }
+
+        // -- Condições
+        if (key_exists('condicao', $config) && is_array($config['condicao'])) {
+            foreach ($config['condicao'] as $condicao) {
+                $objAcao->addCondicao($condicao);
+            }
+        }
+
+        return $objAcao;
+    }
+
+    protected static function arquivoDeClasseExiste($acao)
+    {
+        return is_file(self::getCaminhoArquivo($acao));
+    }
+
+    protected static function getCaminhoArquivo($acao)
+    {
+        return dirname(__FILE__) . '/Acao/' . ucfirst($acao) . '.php';
+    }
+
+}

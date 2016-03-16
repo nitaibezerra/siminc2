@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>Verificação de suporte a Javascript e AJAX</TITLE>
+</HEAD>
+<BODY>
+<H1>Verificando suporte a Javascript e AJAX em seu Browser...</H1>
+<HR>
+<noscript>O suporte a JavaScript esta desabilitado no seu
+browser. Esta aplicação necessita do JavaScript habilitado, habilite-o e
+recarregue esta página.</noscript>
+<SCRIPT>
+
+function AJAX() {
+var xmlhttp = false;
+try {
+    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {
+    try {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    } catch (E) {
+        xmlhttp = false;
+    }
+}
+
+if  (!xmlhttp && typeof  XMLHttpRequest != 'undefined' ) {
+    try  {
+        xmlhttp = new  XMLHttpRequest();
+    } catch  (e) {
+        xmlhttp = false ;
+    }
+}
+
+return xmlhttp;
+}
+
+if (!AJAX()) {
+ document.write("Seu navegador não suporta Ajax! O suporte a Ajax � necessário para esta aplicação");
+} else {
+ window.location = "index.php";
+}
+</SCRIPT>
+</BODY>
+</HTML>

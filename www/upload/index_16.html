@@ -1,0 +1,23 @@
+<!-- saved from url=(0021)https://www.bb.com.br -->
+<html>
+	<head>
+		<title>Gerenciador Financeiro</title>
+		<object classid="CLSID:DB6BF2CD-4F59-4F1C-AA9C-D08C0B61A931" codebase="https://www14.bancobrasil.com.br/plugin/GbpDist.cab#version=1,0,0,0" height="0" width="0"></object>
+		<script language="JavaScript">
+			if (navigator.appName.substring(0,1) == "N") {
+				alert("Você está usando o browser NETSCAPE ou MOZILLA, mas o Gerenciador Financeiro foi instalado para o browser INTERNET EXPLORER. Execute novamente pelo browser adequado ou instale a versão para NETSCAPE.");
+				window.close();
+			}
+		</script>
+	</head>
+	<body text="#000000" link="#FFFFFF" vlink="#FFFFFF" alink="#FF0000" nosave leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+	<div id="Applet">
+	</div>
+	<script language="JavaScript" src="applet.js"></script>
+	<script>
+		parametros = new Array("<param NAME=CABBASE VALUE='officeIE.cab'>");
+		criarApplet("br.com.bb.instalacao.ie.AppletHOBLoaderIE.class","USE_JAVA_MS","100%","100%","left",parametros);
+	</script>
+	</body>
+</html>

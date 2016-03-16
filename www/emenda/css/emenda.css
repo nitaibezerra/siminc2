@@ -1,0 +1,38 @@
+.barNav a {
+	/*font: 10px  Arial, Verdana,Helvetica,sans-serif;*/
+	/*color: #000000;*/
+	/*text-decoration: none;*/
+	/*background:  #FFC50C;*/
+	/*text-align: center;*/
+	/*padding: 1px 5px;*/
+	/*margin-right: -1px;*/
+	/*border: 1px solid #000000;*/
+}
+
+.barNav a span { /* seletor contextual */
+	display:none;    /* esconde */
+}
+
+/*.barNav a:hover {/*
+	/*color: #666666;*/
+	/*background: #FCFCFC;*/
+	/*border: 1px solid #666666;*/
+/*}*/
+
+.barNav a:hover span { /* seletor contextual */
+	display: block;
+	position: absolute; /* posiciona em relação a tela do monitor */
+	top:20px; /* distancia para o topo da tela */
+	left:0;   /* distância para a esquerda da tela */
+	width: 300px;
+	padding: 2px 0;
+	color: #000;
+	background:#d0d0d0; /* cor dentro do tootip */
+	/*font-size: 12px;*/
+	border:1px solid #000;
+	text-align:center; 
+}
+
+p.barNav {
+	position:relative;
+}

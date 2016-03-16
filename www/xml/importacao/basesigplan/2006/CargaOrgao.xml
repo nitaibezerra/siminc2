@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOrgao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>01000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Câmara dos Deputados</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Senado Federal</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>03000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Tribunal de Contas da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>10000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Supremo Tribunal Federal</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>11000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Superior Tribunal de Justiça</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Justiça Federal</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>13000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Justiça Militar da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Justiça Eleitoral</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Justiça do Trabalho</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>16000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Justiça do Distrito Federal e dos Territórios</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Presidência da República</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Presidência da República </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20102</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Gabinete da Vice-Presidência da República </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20114</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Advocacia-Geral da União </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20118</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Agência Brasileira de Inteligência - ABIN</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20121</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Secretaria Especial dos Direitos Humanos </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20122</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Secretaria Especial de Políticas para as Mulheres</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20123</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Gabinete do Ministro de Estado Extraordinário de Segurança Alimentar e Combate à Fome</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20124</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Secretaria Especial de Aqüicultura e Pesca </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20125</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Controladoria-Geral da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20126</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Secretaria Especial de Políticas de Promoção da Igualdade Racial</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>20223</ORGCod>
+    <TPOCod>S</TPOCod>
+    <ORGDsc>Secretaria de Comunicação de Governo e Gestão Estratégica </ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Agricultura, Pecuária e Abastecimento</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Ciência e Tecnologia</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Fazenda</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Educação</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Desenvolvimento, Indústria e Comércio Exterior</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Justiça</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério de Minas e Energia</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Previdência Social</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério Público da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério das Relações Exteriores</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Saúde</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Trabalho e Emprego</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério dos Transportes</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério das Comunicações</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Cultura</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Meio Ambiente</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Planejamento, Orçamento e Gestão</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>49000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Desenvolvimento Agrário</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>51000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Esporte</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Defesa</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério da Integração Nacional</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>54000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Turismo</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>55000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério do Desenvolvimento Social e Combate à Fome</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Ministério das Cidades</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>71000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Encargos Financeiros da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Transferências a Estados, Distrito Federal e Municípios</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Operações Oficiais de Crédito</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>75000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Refinanciamento da Dívida Pública Mobiliária Federal</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>90000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Reserva de Contingência</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>91000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Operações Especiais</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>92000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Atividades Padronizadas</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>98000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Receita do Tesouro da União</ORGDsc>
+  </Orgao>
+  <Orgao>
+    <ORGAno>2006</ORGAno>
+    <ORGCod>99000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <ORGDsc>Órgão Genérico Geratriz</ORGDsc>
+  </Orgao>
+</ArrayOfOrgao>

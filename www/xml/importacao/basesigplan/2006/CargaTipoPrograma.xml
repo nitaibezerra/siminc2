@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipoPrograma xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <TipoPrograma>
+    <TPRCod>1</TPRCod>
+    <TPRNome>Finalístico</TPRNome>
+  </TipoPrograma>
+  <TipoPrograma>
+    <TPRCod>2</TPRCod>
+    <TPRNome>Serviços ao Estado</TPRNome>
+  </TipoPrograma>
+  <TipoPrograma>
+    <TPRCod>3</TPRCod>
+    <TPRNome>Gestão de Políticas Públicas</TPRNome>
+  </TipoPrograma>
+  <TipoPrograma>
+    <TPRCod>4</TPRCod>
+    <TPRNome>Apoio Administrativo</TPRNome>
+  </TipoPrograma>
+  <TipoPrograma>
+    <TPRCod>9</TPRCod>
+    <TPRNome>Operações Especiais</TPRNome>
+  </TipoPrograma>
+</ArrayOfTipoPrograma>

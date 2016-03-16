@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<template>
+	<fields>
+		<field name="answer_body" object="answer" method="getBody()">Answer's body</field>
+		<field name="ticket_id" object="answer" method="getTicket_ID()">Ticket ID</field>
+		<field name="ticket_department" object="user" method="getInfo('department_name')">Ticket's department</field>
+		<field name="respondent_name" object="user" method="getName()">Name of respondent</field>
+		<field name="ticket_thread" object="ticket" method="getThread()">Ticket thread</field>
+	</fields>
+	<subject>
+Your Ticket Has Been Updated
+	</subject>
+	<body>
+Hello,
+
+[respondent_name] in the [ticket_department] department has posted a response to your ticket ID [ticket_id].
+
+Ticket Response:
+[answer_body]
+
+Ticket thread:
+[ticket_thread]
+
+Please log in to the Contact Us area for more information.  Do not respond to this email, it will not be answered.
+	</body>
+</template>

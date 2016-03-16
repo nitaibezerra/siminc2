@@ -1,0 +1,245 @@
+<?php
+/**
+ * Interface de definição de Renderers de Simec_Listagem.
+ *
+ * $Id: Abstract.php 103403 2015-10-06 21:10:22Z maykelbraz $
+ * @filesource
+ */
+
+require_once dirname(__FILE__) . '/../Config.php';
+
+
+/**
+ *
+ * @package Simec\View\Listagem\Renderer
+ */
+abstract class Simec_Listagem_Renderer_Abstract
+{
+    /**
+     *
+     * @var Simec_Listagem_Config Configurações de exibição da listagem.
+     */
+    protected $config;
+
+    /**
+     * Armazena os dados utilizados para montar a listagem.
+     * @var array
+     * @see Simec_Listagem_Renderer_Abstract::setDados()
+     */
+    protected $dados;
+
+    /**
+     * Armazena o título do relatório.
+     * Se estiver vazio, nenhum título é exibido.
+     * @var string
+     * @see Simec_Listagem::setTitulo()
+     * @See Simec_Listagem::renderTitulo()
+     */
+    protected $titulo = '';
+
+    /**
+     * @var array Lista de colunas totalizadas com a soma dos valores processados até o momento.
+     */
+    protected $totalColunas = array();
+
+    /**
+     * Atributo de ajuda para renderização do titulo.
+     *
+     * @var bool
+     * @todo Remover a utilização deste campo.
+     * @see Simec_Listagem::setDados()
+     * @see Simec_Listagem::renderCabecalho()
+     */
+    protected $renderPrimeiroItem = true;
+
+    public function __construct(array $dados = null)
+    {
+        if (!empty($dados)) {
+            $this->setDados($dados);
+        }
+    }
+
+    /**
+     * Retorna a configuração do cabecalho da listagem.
+     *
+     * @return string|string[]
+     */
+    protected function getCabecalho()
+    {
+        return $this->config->getCabecalho();
+    }
+
+    protected function setCabecalho($cabecalho)
+    {
+        $this->config->setCabecalho($cabecalho);
+    }
+
+    /**
+     * Atribui ao render o objeto de renderização da listagem.
+     *
+     * @param Simec_Listagem_Config $config Configurações de exibição da listagem.
+     * @return \Simec_Listagem_Renderer_Abstract
+     */
+    public function setConfig(Simec_Listagem_Config $config)
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    /**
+     * Retorna uma referência ao objeto de configuração de exibição da listagem.
+     *
+     * @return \Simec_Listagem_Config
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * Retorna uma referência ao total das colunas totalizadas.
+     *
+     * @return array
+     *
+     * @uses \Simec_Listagem_Config::getColunasTotalizadas()
+     */
+    public function getColunasTotalizadas()
+    {
+        if (empty($this->totalColunas) && 0 !== $this->config->getColunasTotalizadas()) {
+            $this->totalColunas = array_combine(
+                $this->config->getColunasTotalizadas(),
+                array_fill(0, count($this->config->getColunasTotalizadas()), 0)
+            );
+        }
+        return $this->totalColunas;
+    }
+
+    /**
+     * Carrega no objeto os dados que serão utilizados para criar a listagem.
+     *
+     * @param array $dados Dados para criação da listagem.
+     */
+    public function setDados($dados)
+    {
+        if (!is_array($dados)) {
+            return false;
+        }
+
+        $this->dados = $dados;
+
+        // -- Limpando indicador do primeiro campo a ser renderizado
+        $this->renderPrimeiroItem = true;
+
+        return $this;
+    }
+
+    /**
+     * Adiciona um valor ao valor atual de uma coluna totalizada.
+     *
+     * @param string $nomeColuna Nome da coluna a ter o valor atualizado.
+     * @param int|float $valor Valor a ser adicionado ao total da coluna.
+     * @return \Simec_Listagem_Renderer_Abstract
+     */
+    public function somarColuna($nomeColuna, $valor)
+    {
+        if ($this->config->colunaEhTotalizada($nomeColuna)) {
+            if (strpos($valor, '.')) {
+                $valor = (double)$valor;
+            } else {
+                $valor = (int)$valor;
+            }
+            $this->totalColunas[$nomeColuna] += $valor;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retorna o somatório de uma coluna.
+     *
+     * @param string $nomeColuna Nome da coluna.
+     * @return int|float
+     */
+    public function getTotalColuna($nomeColuna)
+    {
+        return $this->totalColunas[$nomeColuna];
+    }
+
+    public function semDados()
+    {
+        return empty($this->dados);
+    }
+
+    /**
+     * Define um título para o relatório.
+     * @param string $titulo Título a ser exibido acima do relatório.
+     */
+    public function setTitulo($titulo)
+    {
+        if (!empty($titulo)) {
+            $this->titulo = $titulo;
+        }
+    }
+
+    /**
+     * Verifica se uma coluna precisa de callback e, se necessário, aplica a função de callback associada.
+     *
+     * @param string $nomeColuna Nome da coluna para verificação.
+     * @param mixed $valor Valor da coluna, parâmetro principal da callback.
+     * @param mixed[] $parametros Parâmetros adicionais da callback: dados da linha, id da linha, array variado.
+     * @return mixed
+     */
+    protected function aplicarCallback($nomeColuna, $valor, array $parametros = array())
+    {
+        if ($this->config->colunaTemCallback($nomeColuna)) {
+            array_unshift($parametros, $valor);
+            $valor = call_user_func_array(
+                $this->config->getCallback($nomeColuna),
+                $parametros
+            );
+        }
+        return $valor;
+    }
+
+
+    /**
+     * Faz a contagem de colunas da listagem, incluíndo colunas de ações (quando presentes).
+     * @todo Precisa disso? Precisa ser assim??? oO
+     * @return integer
+     */
+    protected function quantidadeDeColunasExibidas()
+    {
+        $numColunasOcultas = $this->config->getNumeroColunasOcultas();
+
+        if ($numColunasOcultas != 0) {
+            $qtdColunasExibidas = count(
+                array_diff_key( // -- Criar um array temporário com os campos dados que não estão inclusos na listagem de colunas ocultas
+                    $this->dados[0],
+                    array_combine( // -- Cria um array temporário baseado nas colunas ocultas
+                        $this->config->getColunasOcultas(),
+                        array_fill(0, $numColunasOcultas, null)
+                    )
+                )
+            );
+        }
+        // -- Ajuste da quantidade de colunas da query mediante contagem de ações
+        $numAcoes = $this->config->getNumeroAcoes();
+        if ($numAcoes > 1) {
+            // -- -1 pq a coluna de ID já é contada em $qtdColunasExibidas
+            $qtdColunasExibidas += $numAcoes - 1;
+        }
+
+        return $qtdColunasExibidas;
+    }
+
+    /**
+     * Executa a criação da listagem de acordo com o Delegate implementado.
+     */
+    abstract public function render();
+
+    abstract protected function renderTitulo();
+
+    abstract protected function renderCabecalho();
+
+    abstract protected function renderRodape();
+}

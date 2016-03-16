@@ -1,0 +1,71 @@
+#!/usr/bin/expect -f
+
+# Publicador Web do MEC
+# http://wiki.mec.gov.br/index.php/Publicador_Web
+# Autores: Elias Gomes [elias.gomes@mec.gov.br]
+#		   Rayner Lima [raynerlima@mec.gov.br]
+#		   Arthur ALmeira [arthur.almeida@squadra.com.br]
+
+proc sair_erro args {
+	send_user "ERRO: [lindex $args 0]\n"
+	exit 1
+}
+
+proc sair_sucesso args {
+	exit 0
+}
+
+set pw_url [lindex $argv 0]
+set pw_url_pass [lindex $argv 1]
+set pw_rev HEAD
+set timeout [lindex $argv 2]
+
+#spawn svn list $pw_url -r $pw_rev --depth immediates --non-interactive --trust-server-cert
+spawn svn list --username svn --password $pw_url_pass $pw_url -r $pw_rev --non-interactive 
+sleep 2
+while {true} {
+	expect {
+		"Are you sure you want to continue connecting (yes/no)? " {
+			send "yes\n"
+		}
+		"Password: " {
+			send "$pw_url_pass\n"
+		}
+		"URL '$pw_url' doesn't exist" {
+			sair_erro "A URL informada não existe."
+		}
+		"svn: No repository found in '$pw_url'" {
+			sair_erro "Nenhum repositório encontrado para a URL informada."
+		}
+		"Network connection closed unexpectedly" {
+			sair_erro "A conexão de rede foi fechada inesperadamente."
+		}
+		"such file or directory" {
+			sair_erro "Não foi possível encontrar o arquivo ou diretório."
+		}
+		"svn: URL * non-existent in that revision" {
+			sair_erro "Arquivo não existe nesta revisão."
+		}
+		"svn: URL * não existente nesta revisão" {
+			sair_erro "Arquivo não existe nesta revisão."
+		}
+		"svn: URL '$pw_url' is not under version control" {
+			sair_erro "$pw_url não encontrado no SVN."
+		}
+		"svn: * does not exist" {
+			sair_erro "$pw_url não encontrado no SVN."
+		}
+		"svn: OPTIONS *" {
+			sair_erro "$pw_url não encontrado no SVN."
+		}
+		"svn: Could not open the requested SVN filesystem" {
+			sair_erro "$pw_url não encontrado no SVN."
+		}
+		timeout {
+			sair_erro "A operação demorou mais de $timeout segundos para ser executada."
+		}
+		eof {
+			sair_sucesso
+		}
+	}
+}

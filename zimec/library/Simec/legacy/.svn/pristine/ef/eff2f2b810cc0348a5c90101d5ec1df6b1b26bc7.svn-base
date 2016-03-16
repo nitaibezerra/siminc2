@@ -1,0 +1,13 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ *
+ */
+class Simec_Listagem_Acao_Send2 extends Simec_Listagem_Acao
+{
+    protected $icone = 'share';
+    protected $titulo = 'Enviar';
+}

@@ -1,0 +1,2 @@
+<?php
+$oEmpenho = new Empenho();

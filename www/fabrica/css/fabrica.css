@@ -1,0 +1,187 @@
+div.grid {text-align: center;}
+.listagem {margin: 0 auto; width: 95%;}
+.listagem thead tr th {border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;padding: 2px 2px 2px 3px;color:#2E2E2E;}
+.listagem thead tr th a {color: #2E2E2E !important;}
+.listagem tbody tr.even{background-color:#FFF !important;}
+.listagem tbody tr.odd{background-color:#f7f7f7 !important;}
+.listagem tbody tr:hover{background-color:#ffc !important;}
+.listagem tbody tr td.alignCenter, .listagem tfoot tr td.alignCenter{text-align: center;}
+.listagem tbody tr td.alignRight, .listagem tfoot tr td.alignRight{text-align: right;}
+.listagem tbody tr td.left, .listagem tfoot tr td.left{text-align: left !important;}
+.listagem tfoot tr{background-color:#CCC; border-top: 2px solid #888;}
+.listagem tfoot tr td {font-weight: bold;}
+.listagem a:hover {text-decoration: none;}
+.listagem a:visited{color: #0F55A9}
+.listagem tfoot a.paginador { padding: 0 3px; color: #000; border-right: 1px solid #000;}
+.listagem tfoot a.ultima {border-right: none;}
+.listagem tfoot a.ativo {color: #FFF; background-color: #000; border-right: none;}
+.listagem tfoot a.unico {color: #000; background-color: #FFF; border-right: none; cursor:auto;}
+.mensagem-erro{ display: none; text-align: center; color: red; margin-top: 10px;}
+#tabelaEFICACIA{ display: none;}
+.botaoPesquisar{margin-right: 10px;}
+.botoesDeAcao{text-align: center;}
+img.botoes-tabela{border: none; cursor: pointer;}
+#conteudoMemorando {page-break-after: always; font-size: 11pt; margin: 10px; font-family: Arial;}
+#conteudoMemorando h1, h1.tituloAnexo {font-size: 16pt;}
+#conteudoMemorando .dataMemorando {text-align: right;}
+#conteudoMemorando .servidorResponsavelMemorando, h1.tituloAnexo {text-align: center;}
+#conteudoMemorando p.western {margin: 0;}
+#conteudoMemorando ol {
+	list-style-position: outside;
+	padding: 0 0 0 22px;
+	margin-bottom: 0;
+}
+.conteudoNotaFiscalMemorando {
+    font-family: Arial;
+    font-size: 11pt;
+    margin: 10px;
+}
+#conteudoMemorando ol li {
+	padding: 0;
+	margin: 0 0 20px 0;
+	text-indent: 2cm;
+}
+#conteudoMemorando ol li span {
+	display: block;
+	margin-left: -0.6cm !important;
+	text-align: justify;
+	line-height: 1cm !important;
+}
+#conteudoMemorando blockquote {
+	margin-left: 2cm;
+	margin-top: 0;
+}
+#conteudoMemorando div.servidorResponsavelMemorando p {
+	margin: 0;
+}
+#listaDeOrdensDeServicos {page-break-before: always; }
+textarea.error {border: 1px solid red;}
+#modalFormularioSalvarGlosa{display:none;}
+.abrirModalArtefatosCasoDeUso {cursor: pointer;}
+
+/*
+	Estilizando o plugin da tabela
+*/
+div.dataTables_wrapper {display: block; width: 100%; margin:0 auto; text-align: center;}
+div.dataTables_wrapper table.paginacao, div.dataTables_wrapper table.paginacaoServerSide {width: 95%;}
+div.dataTables_wrapper table.paginacao a img, div.dataTables_wrapper table.paginacaoServerSide a img {*border: none;}
+div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
+	border-top: 2px solid #404040;
+	border-bottom: 3px solid #DFDFDF;
+	text-align: left;
+	padding: 2px 0;
+	font-weight: bold;
+	width:46%;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+div.dataTables_wrapper div.dataTables_paginate {
+	width:49%;
+}
+div.dataTables_wrapper div.dataTables_info span{float: left; display: block;}
+div.dataTables_wrapper div.dataTables_info span.paginasDataTable{float: right;}
+div.dataTables_wrapper div.dataTables_paginate {float: none; text-align: right;}
+div.dataTables_wrapper div.dataTables_paginate span {cursor: pointer;}
+div.dataTables_wrapper div.dataTables_paginate span span{
+	padding: 0 5px; 
+	background-color: #F5F5F5; 
+	font-weight: normal; 
+	text-decoration: underline;
+	color: #006699;
+	border-right: 1px solid #a0a0a0; 
+}
+div.dataTables_wrapper div.dataTables_paginate span span.paginate_active {
+	background-color: #000;
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.dataTables_wrapper div.dataTables_paginate span.previous, 
+div.dataTables_wrapper div.dataTables_paginate span.next{padding: 0 5px; }
+div.dataTables_wrapper div.dataTables_paginate span.previous{border-right: 1px solid #a0a0a0;}
+div.dataTables_wrapper div.dataTables_paginate span.first,
+div.dataTables_wrapper div.dataTables_paginate span.last  {display: none;}
+
+/*
+	Estilizando as modais do simec com jquery-ui::dialog
+*/
+div.modalFabrica {
+	border: 3px solid black;
+}
+
+div.modalFabrica div.ui-dialog-titlebar {
+	text-align: center;
+	border-top: 2px solid #404040;
+}
+
+div.modalFabrica span.ui-dialog-title {
+	float: none;
+}
+
+div.modalFabrica a.ui-dialog-titlebar-close {
+	display: none;
+}
+
+div.modalFabrica div.ui-dialog-content {
+	padding: 0;
+}
+
+div.modalFabrica table.Tabela {
+	width: 100%;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+	border-left: 1px solid #DCDCDC;
+	border-collapse: collapse;
+}
+div.modalFabrica table.Tabela tr {
+	border-bottom: 1px solid #FFF;
+}
+div.modalFabrica table.Tabela td.SubtituloDireita {
+	font-weight: bold;
+	width: 37%;
+}
+
+div.modalFabrica table.Tabela td.SubtituloEsquerda {
+	text-align: right;
+}
+
+#modalArtefatosCasoDeUso, #modalArtefatosVisaoMEC {
+	display: none;
+}
+
+#dialogAjax{
+	background-color:#ffffff;
+	position:absolute;
+	color:#000033;
+	top:50%;
+	left:40%;
+	border:2px solid #cccccc;
+	width:20%;
+	font-size:12px;
+	padding: 20px;
+	line-height: 20px;
+	display: none;
+}
+span.linkVerHistorico {color: #133368; cursor: pointer;}
+span.linkVerHistorico:hover {text-decoration: underline;}
+p.paragrafo_glosa, p.paragrafo_textarea {
+	float: left; width: 48%; margin-left:10px;
+}
+p.paragrafo_textarea {
+	clear: both;
+	width: 95%;
+}
+p.paragrafo_glosa span.campos, p.paragrafo_textarea span.campos {
+	width: 90%; 
+	padding: 3px; 
+	margin-top: 5px; 
+	display: block; 
+	border: 1px solid #888;
+	min-height: 15px;
+}
+p.paragrafo_textarea span.campos {
+	width: 98%;
+	min-height: 90px;
+}
+#dialogAjax img {padding: 5px 20px 0 10px;}

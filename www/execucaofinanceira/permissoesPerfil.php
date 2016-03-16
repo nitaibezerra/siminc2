@@ -1,0 +1,21 @@
+<?php
+global $arrPermissoes;
+
+/************* ADMINISTRADOR **********************/
+// GERAL
+$arrPermissoes[EXEC_PERFIL_ADMINISTRADOR]["principal/administrarProcesso"]["geral"] = true;
+
+/************* TECNICO EM EMPENHO **********************/
+// GERAL
+$arrPermissoes[EXEC_PERFIL_TECNICO_EMPENHO]["principal/listaDeProcessos"]["geral"] 		= false;
+$arrPermissoes[EXEC_PERFIL_TECNICO_EMPENHO]["principal/administrarProcesso"]["geral"] 	= false;
+$arrPermissoes[EXEC_PERFIL_TECNICO_EMPENHO]["principal/empenhoPagamento"]["geral"]		= true;
+$arrPermissoes[EXEC_PERFIL_TECNICO_EMPENHO]["principal/gerarDocumentos"]["geral"]		= false;
+
+// função para retornar se o usuário tem acesso(true/false) à partir dos parâmetros
+function permissoesPerfil($perfil, $pagina, $categoria) {
+	global $arrPermissoes;
+	return $arrPermissoes[$perfil][$pagina][$categoria];	
+}
+
+?>

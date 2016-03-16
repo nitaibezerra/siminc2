@@ -1,0 +1,35 @@
+-----------------------------------------------------------------------------------
+Todo list
+-----------------------------------------------------------------------------------
+ADMIN
+  +  Install script
+  +  Enable account suspension
+  +  browsedepartments: Enable sorting by number of tickets
+  +  browsedepartments: Enable sorting by number of moderators
+  +  documents page
+  +  Admins can re-assign a ticket to a different department
+
+EMAIL
+  +  Allow admins to email all users with a system-wide message
+  +  Create web interface for changing templates
+  +  When users click on ticket link from an email, re-direct them to that ticket once they have logged in
+
+MODS
+  +  Mods can turn off email notices
+  +  Users can be assigned to multiple departments
+
+OTHER
+  +  Create "change account details" page
+  +  login: enable password resend button
+  +  Enable posting of notes to tickets by Admins and Mods
+  +  Enable ticket owners to delete attachments
+  +  Use ImageHandler class to create thumbnails of submitted images
+  +  Flag tickets with name of Mod/Admin processing it
+  +  Handle locale time for timestamp creation
+  +  Show dates of closing/opening of ticket [TRICKY: will need to record actions in DB first]
+  +  Prepare install document
+  +  Write a script that compares language definition files and alerts which
+     constants are not common to all files
+
+DESIGN
+  +  Themes (templates)

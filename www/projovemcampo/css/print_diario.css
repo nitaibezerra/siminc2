@@ -1,0 +1,14 @@
+#presenca{
+    font-size: 10px;
+    font-family: serif;
+}
+
+#tableDiarioFrequencia tbody{
+    font-size: 10px;
+    font-family: serif;
+    font-weight: bold;
+}
+#btnImpressao{
+    display: none;
+}
+

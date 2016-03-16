@@ -1,0 +1,296 @@
+<?php
+	class TarefaAcao extends TarefaPT
+	{
+		protected $objAcao = null;
+		
+		protected static $boolUma = null;
+
+		/**
+		 * Posicao da ordenacao das tarefas filhas
+		 * de um mesmo nó
+		 */
+		public $ROW_NAME_INT_POSITION 			= 'ptoordemprovacao';
+		
+		/**
+		 * Coluna numérica inteira que contém um código único, no escopo
+		 * do projeto, de cada tarefa.
+		 *
+		 */
+		public $ROW_NAME_UNIQUE_CODE 			= 'ptoordemacao';
+				
+		public function setOrigemEspecial( $boolOrigemEspecial )
+		{
+			$this->boolOrigemEspecial = ( $boolOrigemEspecial == true );
+			$this->setSomenteLeitura(
+				( $this->getProjetoId() != null ) 
+				||
+				(
+					( $this->getProfundidade() == 1 ) && ( $this->boolOrigemEspecial )
+				) 
+			);
+		}
+		
+		protected function verificaSeHaConfitoEntreAsTarefasDoProjeto( $intTarefaDataInicio , $intTarefaDataFim )
+		{
+		}
+		
+		/**
+		 * Retorna as tarefas de um projeto
+		 *
+		 * @param Project $objProject
+		 * @return Tarefa
+		 */
+		public static function getArrTarefasPelaAcao( Acao $objAcao )
+		{
+			$objTarefa = $objAcao->criaTarefa();
+			$arrResult = array();
+			$strSql =	' SELECT ' .
+							$objTarefa->ROW_NAME_ID . 
+						' FROM ' .
+							$objTarefa->TABLE_NAME .
+						' WHERE ' .
+							$objTarefa->ROW_NAME_ACTION_ID . ' = ' . escape( $objAcao->getId() ) .
+						' AND ' .
+							$objTarefa->ROW_NAME_CONTAINER_ID . ' IS ' . escape( null ) .
+						' AND ' .
+							$objTarefa->ROW_NAME_BOOL_ACTIVE_STATUS . ' = ' . escape( $objTarefa->TYPE_STATUS_ACTIVE ) .
+						'';
+			if( self::$objDatabase == null )
+			{
+				global $db;
+				self::$objDatabase = $db;
+			}
+			
+			$objSaida = self::$objDatabase->carregar( $strSql );
+			
+			if( $objSaida !== FALSE )
+			{
+				foreach( $objSaida as $objLinha )			
+				{
+					$objTarefa = $objTarefa->getTarefaPeloId( $objLinha[ $objTarefa->ROW_NAME_ID ] );
+					$arrResult[] = $objTarefa;
+				}
+			}
+			return $arrResult;
+		}
+
+		/**
+		 * Retorna a Acao desta tarefa
+		 */
+		public function getAcao()
+		{
+			if( ( $this->objAcao === NULL ) && ( $this->intAcaoId != NULL ) )
+			{
+				$this->objAcao = Acao::getAcaoPeloId( $this->intAcaoId ); 
+			}
+			return $this->objAcao;
+		}
+
+		public function getElementoNome()
+		{
+			return $this->getAcao()->getElementoNome();
+		}
+		
+		public function getElementoNomePlural()
+		{
+			return $this->getAcao()->getElementoNomePlural();
+		}
+
+		protected function getPerfilUMA()
+		{
+			if( $this->boolUma == null )
+			{
+				// o controle atual de perfis permite que o super usuario tenha todos os perfis o que		//
+				// provoca problemas no processo de filtros para um controle espeficico por isto o filtro	//
+				// para usuarios que sao UMAs é feito para todos mas antes deve se checar se o usuario é	//
+				// um super usuario ou nao																	//
+				
+				$this->boolUma = ( !self::$objDatabase->testa_superuser() & self::$objDatabase->testa_uma() );
+			}
+			return $this->boolUma;
+		}
+		
+		/**
+		 * 
+		 * Nesta extensao de tarefa, as tarefas que sao somente leitura sao:
+		 * 1. Aquelas que naturalmente seriam somente leitura pelo processo de controle nativo extendido
+		 * 2. Todas as tarefas caso o perfil do usuario seja UMA	
+		 * @return boolean
+		 */
+		public function getSomenteLeitura()
+		{
+			return parent::getSomenteLeitura() || $this->getPerfilUMA() ;
+		}
+				
+		protected function emergeQtdFilhas()
+		{
+			$strSql =	' SELECT ' .
+							'COUNT( * ) AS qtd_filhas ' . 
+						' FROM ' .
+							$this->TABLE_NAME .
+						' WHERE ' .
+							$this->ROW_NAME_CONTAINER_ID . ' = ' . escape( $this->getId() ) .
+						' AND ' .
+							$this->ROW_NAME_ACTION_ID . ' = ' . escape( $this->getAcaoId() ) .
+						' AND ' .
+							$this->ROW_NAME_BOOL_ACTIVE_STATUS . ' = ' . escape( $this->TYPE_STATUS_ACTIVE ) .
+						'';
+			$objSaida = self::$objDatabase->carregar( $strSql );
+			if( is_array( $objSaida ) && sizeof( $objSaida ) == 1 )
+			{
+				$objSaida = $objSaida[ 0 ];
+			}
+			$this->intQtdTarefasFilhas = (integer) @$objSaida[ 'qtd_filhas' ];
+		}
+		
+		// fim dos setters and getters //
+		public function appendChild()
+		{
+			$objNovaTarefa = $this->criaTarefa();
+			$objNovaTarefa->setDataInicio( $this->getDataInicio() );
+			$objNovaTarefa->setNovaDataInicio( $this->getDataInicio() );
+			$objNovaTarefa->setDataFim( $this->getDataFim() );
+			$objNovaTarefa->setNovaDataFim( $this->getDataFim() );
+			$objNovaTarefa->setNome( 'Nova ' . $this->getElementoNome() );
+			$objNovaTarefa->setDescricao( 'Nova Descrição' );
+			$objNovaTarefa->setProjetoId( $this->getProjetoId() );
+			$objNovaTarefa->setContainerId( $this->getId() );
+			$objNovaTarefa->setProfundidade( $this->getProfundidade() + 1 );
+			$objNovaTarefa->setOrigemEspecial( $this->getOrigemEspecial() );
+			$objNovaTarefa->setAcaoId( $this->getAcaoId() );
+			$objNovaTarefa->inserirTarefa();			
+		}
+		
+		public function append( $intAcaoId )
+		{
+			dbg( $intAcaoId );
+			$this->setNome( 'Nova ' . $this->getElementoNome() );
+			$this->setDescricao( 'Nova Descrição' );
+			$this->setAcaoId( $intAcaoId );
+			$this->setDataInicio( $this->getAcao()->getDataInicio() );
+			$this->setDataFim( $this->getAcao()->getDataFim() );
+			$this->setProfundidade( 1 );
+			$this->inserirTarefa();
+		}
+		
+		/**
+		 * Cria uma nova instancia de tarefaAcao
+		 */
+		public function criaTarefa()
+		{
+			return new TarefaAcao();
+		}		
+
+		/**
+		 * Metodo que reintegra os dados das tarefas de um projeto
+		 */
+		public static function reparaTarefas( Acao $objAcao )
+		{
+			$objTarefa = $objAcao->criaTarefa();;
+			$arrTarefas = $objTarefa->getArrTarefasPelaAcao( $objAcao );
+			$intCodigoUnicoAtual = 1;
+			$intProfundidade = 1;
+			$intCodigoUnicoAtual = self::reparaRecursivamente( $arrTarefas , $intCodigoUnicoAtual , $intProfundidade );
+		}
+				
+		public function getTarefaPeloCodigoUnico( $intTarefaCodigo , Projeto $objProjeto )
+		{
+			$arrResult = array();
+			
+			$strSql =	' SELECT ' .
+							$this->ROW_NAME_ID . 
+						' FROM ' .
+							$this->TABLE_NAME .
+						' WHERE ' .
+							$this->ROW_NAME_UNIQUE_CODE . ' = ' . escape( $intTarefaCodigo ) .
+						' AND ' .
+							$this->ROW_NAME_ACTION_ID . ' = ' . escape( $objProjeto->getId() ) .
+						' AND ' .
+							$this->ROW_NAME_BOOL_ACTIVE_STATUS . ' = ' . escape( $this->TYPE_STATUS_ACTIVE ) .
+						'';
+							
+			$objSaida = self::$objDatabase->carregar( $strSql );
+			if( $objSaida !== FALSE )
+			{
+				foreach( $objSaida as $objLinha )
+				{
+					$objTarefaPredecessora = $this->getTarefaPeloId( $objLinha[ $this->ROW_NAME_ID ] );
+					$arrResult[] = $objTarefaPredecessora;
+				}
+				if( sizeof( $arrResult ) > 1 )
+				{
+					throw new Exception( 'Mais de uma Tarefa por codigo unico ( ' . $intTarefaCodigo . ' ) no projeto ( ' . $objProjeto->getId() . ' ) ') ;	
+				}
+				return $arrResult[ 0 ];
+			}
+			else
+			{
+				return NULL;
+			}
+		}
+
+		/**
+		 * Retorna o array de sucessoras diretas desta tarefa
+		 * 
+		 * @return Array of Tarefa
+		 */
+		protected function getArraydeTarefasSeguintes()
+		{
+			if ( !$this->ROW_NAME_PREDECESSOR_ID ) {
+				# adaptação necessária para tarefas que não tem controle de precedência
+				return array();
+			}
+			if( $this->arrTarefasSeguintes === null )
+			{
+				$arrResult = array();
+				
+				$strSql =	' SELECT ' .
+								$this->ROW_NAME_ID . 
+							' FROM ' .
+								$this->TABLE_NAME .
+							' WHERE ' .
+								$this->ROW_NAME_UNIQUE_CODE . ' > ' . escape( $this->getCodigoUnico() ) .
+							' AND ' .
+								$this->ROW_NAME_ACTION_ID . ' = ' . escape( $this->getAcao()->getId() ) .
+							' AND ' .
+								$this->ROW_NAME_BOOL_ACTIVE_STATUS . ' = ' . escape( $this->TYPE_STATUS_ACTIVE ) .
+							'';
+								
+				$objSaida = self::$objDatabase->carregar( $strSql );
+				if( $objSaida !== FALSE )
+				{
+					foreach( $objSaida as $objLinha )
+					{
+						$objTarefaSeguinte = $this->getTarefaPeloId( $objLinha[ $this->ROW_NAME_ID ] );
+						$arrResult[] = $objTarefaSeguinte;
+					}
+					$this->arrTarefasSeguintes = $arrResult;
+				}
+				else
+				{
+					$this->arrTarefasSeguintes  = array();
+				}
+			}
+			return $this->arrTarefasSeguintes;
+		}
+
+			
+		protected function getArraydeTarefasIrmas()
+		{
+			$objContainer = $this->getContainer();
+			if( $objContainer !== NULL )
+			{
+				if( !$objContainer->getRemoved() )
+				{
+					$arrIrmas = $objContainer->getArraydeTarefasqueContenho();
+				}
+			}
+			else
+			{
+				$arrIrmas = $this->getArrTarefasPelaAcao( $this->getAcao() );
+			}
+			$arrIrmas = orderArrayOfObjectsByMethod( $arrIrmas , 'getPosicao' );
+			return $arrIrmas;
+		}
+	}
+?>

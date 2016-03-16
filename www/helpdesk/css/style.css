@@ -1,0 +1,52 @@
+
+/* Start Tag defined classes */
+
+a {
+    text-decoration : none;
+    color           : #1A477E;
+}
+
+a:hover {
+    color : #F5AE25;
+}
+
+body, html {
+    background : #FFFFFF;
+    color      : #333333;
+    font       : 12px tahoma,helvetica,clean,sans-serif;
+    margin     : 5px;
+}
+
+caption {
+	text-align	  : left;
+	font-style	  : normal;
+	font-weight	  : bold;
+	font-family	  : Verdana;
+	margin-top    : 10px;
+	margin-bottom : 10px;
+}
+
+form {
+    display : inline;
+    margin  : 0px;
+    padding : 0px;
+}
+
+form fieldset {
+  position : relative;
+  border   : 0;
+  margin   : 0;
+  padding  : 0;
+  border   : 0 solid transparent; /* gets rid of border in Opera */
+}
+
+form textarea {
+  margin   : 0px;
+  overflow : auto;
+}
+
+table {
+    border-collapse : collapse;
+    color           : #333333;
+    font            : 12px tahoma,helvetica,clean,sans-serif;
+}

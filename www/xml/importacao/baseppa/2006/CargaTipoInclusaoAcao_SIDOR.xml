@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipoInclusaoAcao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <TipoInclusaoAcao>
+    <TINCod>0</TINCod>
+    <TINDsc>Não Informado</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>1</TINCod>
+    <TINDsc>Projeto de Lei do Executivo</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>2</TINCod>
+    <TINDsc>Emenda Parlamentar</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>3</TINCod>
+    <TINDsc>Lei Específica - Crédito Especial</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>4</TINCod>
+    <TINDsc>Prevista no PPA</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>5</TINCod>
+    <TINDsc>Obras Irregulares</TINDsc>
+  </TipoInclusaoAcao>
+  <TipoInclusaoAcao>
+    <TINCod>6</TINCod>
+    <TINDsc>????</TINDsc>
+  </TipoInclusaoAcao>
+</ArrayOfTipoInclusaoAcao>

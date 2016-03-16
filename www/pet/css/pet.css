@@ -1,0 +1,33 @@
+p {
+    margin: 0 0 10px;
+}
+
+ul, ol {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+ol, ul {
+    list-style: disc outside none;
+}
+
+body {
+    line-height: normal;
+}
+
+h4, h5, h6 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+
+legend {
+    font-size: 20px;
+}
+
+/*.customizacao{*/
+    /*font-size: 11px;*/
+/*}*/

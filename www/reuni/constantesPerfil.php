@@ -1,0 +1,12 @@
+
+<?php
+
+define("IFES_CADASTRO",114);
+define("IFES_CONSULTA",115);
+define("IFES_APROVACAO",116);
+define("SESU_CONSULTAGERAL",117);
+define("SESU_PARECER",118);
+define("SESU_APROVACAO",119);
+define("SESU_ADMINISTRADOR",162);
+
+?>

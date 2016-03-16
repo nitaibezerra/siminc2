@@ -1,0 +1,3 @@
+<?php
+$obGestao->listaDocumentoAnexados();
+?>

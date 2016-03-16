@@ -1,0 +1,18 @@
+<?PHP
+# Mensagens de sistema
+define('MSG001', 'Operação realizada com sucesso!');
+define('MSG002', 'Operação não pode ser realizada!');
+
+# Demandas PAR
+if ($_SESSION['baselogin'] == 'simec_desenvolvimento') {
+
+
+} else {
+
+
+    if (IS_PRODUCAO) {
+    } else {
+    }
+
+}
+?>

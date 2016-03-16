@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOpcaoEstrat xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <OpcaoEstrat>
+    <OESCod>00</OESCod>
+    <OESDsc>Sem Opção Estratégica</OESDsc>
+    <OESSNAtivo>true</OESSNAtivo>
+  </OpcaoEstrat>
+  <OpcaoEstrat>
+    <OESCod>01</OESCod>
+    <OESDsc>CONSOLIDAR A ESTABILIDADE ECONÔMICA COM CRESCIMENTO SUSTENTADO</OESDsc>
+    <OESSNAtivo>true</OESSNAtivo>
+  </OpcaoEstrat>
+  <OpcaoEstrat>
+    <OESCod>02</OESCod>
+    <OESDsc>PROMOVER O DESENVOLVIMENTO SUSTENTÁVEL VOLTADO PARA A GERAÇÃO DE EMPREGOS E OPURTINIDADES DE RENDA</OESDsc>
+    <OESSNAtivo>true</OESSNAtivo>
+  </OpcaoEstrat>
+  <OpcaoEstrat>
+    <OESCod>03</OESCod>
+    <OESDsc>COMBATER A POBREZA E PROMOVER A INCLUSÃO SOCIAL</OESDsc>
+    <OESSNAtivo>true</OESSNAtivo>
+  </OpcaoEstrat>
+  <OpcaoEstrat>
+    <OESCod>04</OESCod>
+    <OESDsc>CONSOLIDAR A DEMOCRACIA E A DEFESA DOS DIREITOS HUMANOS</OESDsc>
+    <OESSNAtivo>true</OESSNAtivo>
+  </OpcaoEstrat>
+</ArrayOfOpcaoEstrat>

@@ -1,0 +1,80 @@
+.tabela_arvore_contrato thead > tr > th, 
+.tabela_arvore_contrato tbody > tr > th, 
+.tabela_arvore_contrato tfoot > tr > th, 
+.tabela_arvore_contrato thead > tr > td, 
+.tabela_arvore_contrato tbody > tr > td, 
+.tabela_arvore_contrato tfoot > tr > td{
+    vertical-align: middle;
+}
+
+.raiz , .item, .item_ordernar {
+    cursor: move;
+}
+
+.checkbox_customizado input[type="radio"], input[type="checkbox"] {
+    margin: 0;
+}
+
+.customizado {
+    z-index: 0;
+}
+
+.theader_1, .theader_3, .theader_5, .theader_7{
+    background-color: #E8E8E8;
+}
+
+.theader_2, .theader_4, .theader_6{
+    background-color:  	#B5B5B5;
+}
+
+.itemNivel1 , .itemNivel3, .itemNivel5, .itemNivel7{
+    background-color: #E0EEEE;
+}
+
+.itemNivel2 , .itemNivel4, .itemNivel6{
+    background-color: #f8f4fb;
+}
+
+table.nivel_1 {
+    font-size: 15px;
+}
+
+table.nivel_2 {
+    font-size: 14px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+table.nivel_3{
+    font-size: 13px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+table.nivel_4{
+    font-size: 12px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+table.nivel_5{
+    font-size: 12px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+table.nivel_6{
+    font-size: 12px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+table.nivel_7{
+    font-size: 12px;
+    margin-left: 15px;
+    width: 97%;
+}
+
+.exibirItem{
+    cursor: pointer;
+}

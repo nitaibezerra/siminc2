@@ -1,0 +1,47 @@
+/*.chosen-container{
+    width:100% !important;
+}*/
+.marcado {
+    background-color: #C1FFC1 !important;
+}
+
+.remover {
+    display: none;
+}
+
+.remover-saldo, .linkLote, .remanejarNc {
+    cursor: pointer;
+}
+
+.errors li {
+    color: red;
+}
+
+.cursor-click {
+    cursor: pointer;
+}
+
+.devolucao {
+    color: red;
+}
+
+.useBalanceAvailable {
+    cursor: pointer;
+}
+
+.tranferir-credito {
+    cursor: pointer;
+}
+
+#saldo-disponivel {
+    position: fixed;
+    right: 0;
+    width: 200px;
+    z-index: 1000;
+    border: 1px solid #3a87ad;
+    border-right: none;
+    border-radius: 1em 0.5em 0.5em 1em;
+    padding: 10px 10px 10px;
+    background-color: #bce8f1;
+    margin-top: 160px;
+}

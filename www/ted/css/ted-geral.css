@@ -1,0 +1,19 @@
+.warning {
+    color:red;
+}
+ul.errors {
+    margin: 0;
+    padding: 0;;
+}
+.errors li {
+    color:red;
+    font-size: 10px;;
+}
+.remove-nc, .remove-nc-dev {
+    cursor: pointer;
+}
+
+.situacao-ted {
+    font-size: 14px;
+    font-weight: bold;
+}
