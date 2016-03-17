@@ -1,229 +1,53 @@
 <?php
+    global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $email_sistema,$servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
 
-ini_set("short_open_tag","on");
+    /**
+     * Configuração PHP  
+     */
+    session_start();
+    ini_set("short_open_tag","on");
+    ini_set('display_errors', 'on');
+    error_reporting(E_ALL ^E_NOTICE);
+    date_default_timezone_set('America/Sao_Paulo');
+    header('content-type: text/html; charset=ISO-8859-1');
 
+    defined('AUTHSSD') || define('AUTHSSD', false);
+    defined('APPRAIZ') || define('APPRAIZ', '');
+    defined('DIRFILES') || define('DIRFILES', APPRAIZ. 'arquivos/');
+    defined('SISRAIZ') || define('SISRAIZ', APPRAIZ . $_SESSION['sisdiretorio'] . '/');
+    defined('MAXONLINETIME') || define('MAXONLINETIME', 3600);
+    defined('IS_PRODUCAO') || define('IS_PRODUCAO', false);
 
-error_reporting(E_ALL ^E_NOTICE ^E_WARNING);
-//error_reporting(0);
+    $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Produção' : 'Ambiente de Desenvolvimento';
+    $_SESSION['sisbaselogin'] = $_REQUEST['baselogin'] && $_REQUEST['baselogin'] != "teste" ? $_REQUEST['baselogin'] : $_SESSION['sisbaselogin'];
+    $_SESSION['baselogin'] = $_REQUEST['baselogin'] ? $_REQUEST['baselogin'] : $_SESSION['baselogin'];
 
-header('content-type: text/html; charset=ISO-8859-1');
+    # Configuração de Banco de Dados
+    include_once 'database.php';
 
-function fechar_conexoes()
-{
-    while(  pg_ping())
-    {
-        pg_close();
+    $email_sistema = 'cristiano.cabral@mec.gov.br; adonias.malosso@mec.gov.br';
+
+    preg_match('/\/([a-zA-Z]*)\//', $_SERVER['REQUEST_URI'], $sisdiretorio);
+    $sisdiretorio = $sisdiretorio[1];
+
+    preg_match('/\/([a-zA-Z]*)\.php/', $_SERVER['REQUEST_URI'], $sisarquivo);
+    $sisarquivo = $sisarquivo[1];
+
+    include_once APPRAIZ. 'includes/simec_funcoes.inc';
+    include_once APPRAIZ. 'includes/backtrace/BackTrace.php';
+    include_once APPRAIZ. 'includes/backtrace/BackTraceExplain.php';
+    include_once APPRAIZ. 'includes/failure/ErrorHandler.php';
+    include_once APPRAIZ. 'includes/failure/ExceptionHandler.php';
+    include_once APPRAIZ. 'includes/library/simec/SoapClient.php';
+    include_once APPRAIZ. "includes/connection/adapter-connection.php";
+    
+    function fechar_conexoes(){
+        while(  pg_ping()){
+            pg_close();
+        }
     }
-}
-register_shutdown_function( 'fechar_conexoes' );
+    register_shutdown_function('fechar_conexoes');
+    ErrorHandler::start();
+    ExceptionHandler::start();
+    ob_start();
 
-global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $email_sistema,$servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
-
-
-/*
- * Indica se a autenticação deve ser pelo SSD
- */
-define('AUTHSSD', false);
-
-/**
- * Indica se servidor é de produção, desenvolvimento ou local.
- */
-define( 'IS_PRODUCAO', strpos( $_SERVER['SERVER_NAME'], 'simec.mec.gov.br' ) !== false );
-define( 'IS_LOCAL', strpos( $_SERVER['SERVER_NAME'], 'simec-d' ) !== false );
-//define( 'IS_PRODUCAO', !IS_LOCAL );
-
-
-define( 'APPRAIZ', '' );
-
-
-/**
- * Tempo máximo que o usuário pode ficar conectado ao sistema sem que sua
- * sessão expire. Essa funcionalidade é controlada no arquivo estouvivo.php,
- * no diretório www.
- */
-define( 'MAXONLINETIME', 3600 );
-
-//include_once APPRAIZ . "adodb/session/adodb-session2.php";
-//ADOdb_Session::config("pgsql", $servidor_bd, $usuario_db, $senha_bd, $nome_bd,array('table'=>'seguranca.phpsession'));
-session_start();
-//
-//echo '<pre>';
-//echo ' 11111111111   ';
-//echo $_SESSION['exercicio'];
-//die;
-if ($_REQUEST['baselogin']) {
-    $_SESSION['baselogin'] = $_REQUEST['baselogin'];
-}
-//exit("aqui: ". $_SESSION['baselogin']);
-
-if ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-//		$nome_bd     = '';
-//		$servidor_bd = '';
-//		$porta_bd    = '5432';
-//		$usuario_db  = '';
-//		$senha_bd    = '';
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-elseif ($_SESSION['baselogin'] == "rehuf")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-
-elseif ($_SESSION['baselogin'] == "PDE_Interativo")
-{
-
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '5432';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-}
-
-else
-{
-    $nome_bd     = '';
-    $servidor_bd = '';
-    $porta_bd    = '';
-    $usuario_db  = '';
-    $senha_bd    = '';
-
-//		$nome_bd     = '';
-
-//        $nome_bd     = '';
-//        $servidor_bd = '';
-//        $porta_bd    = '5432';
-//        $usuario_db  = '';
-//        $senha_bd    = '';
-
-//		$nome_bd     = '';
-//		$servidor_bd = '';
-//		$porta_bd    = '';
-//		$usuario_db  = '';
-//		$senha_bd    = '';
-}
-
-$nome_bd = '';
-$servidor_bd = '';
-$porta_bd = '';
-$usuario_db = '';
-$senha_bd = '';
-
-//$servidor_bd_siafi = '';
-//$porta_bd_siafi = '5432';
-//$nome_bd_siafi = '';
-//$usuario_db_siafi = '';
-//$senha_bd_siafi = '';
-
-//var_dump($servidor_bd_siafi); die;
-//Controle de erros do sistema
-include_once( 'config.dev.php' );
-
-//Emula outro usuário
-if ( $_POST['usucpf_simu'] && ( $_SESSION['superuser'] || $db->testa_uma() || $_SESSION['usuuma'] ) )
-{
-    $_SESSION['usucpf'] = $_POST['usucpf_simu'];
-}
-
-date_default_timezone_set('America/Sao_Paulo');
-
-$_SESSION['ambiente'] = 'Ambiente de Desenvolvimento';
-$_SESSION['sisbaselogin'] = $_REQUEST['baselogin'] && $_REQUEST['baselogin']!="teste" ? $_REQUEST['baselogin'] : $_SESSION['sisbaselogin'];
-
-$email_sistema = '';
-
-// configuração de conexão com o servidor de banco de dados
-
-//$nome_bd     = $_SESSION['sisbaselogin'] ? $_SESSION['sisbaselogin'] : $nome_bd;
-
-/**
- * Solução paleativa para o problema de navegação entre sistemas. Esta
- * rotina tenta adivinhar qual módulo o usuário teve a intenção de acessar.
- * A decisão é tomada a partir da url solicitada pelo usuário no qual ele
- * indica o diretório e a ação pretendida.
- */
-preg_match( '/\/([a-zA-Z]*)\//', $_SERVER['REQUEST_URI'], $sisdiretorio );
-$sisdiretorio = $sisdiretorio[1];
-
-preg_match( '/\/([a-zA-Z]*)\.php/', $_SERVER['REQUEST_URI'], $sisarquivo );
-$sisarquivo = $sisarquivo[1];
-
-define( 'SISRAIZ', APPRAIZ . $_SESSION['sisdiretorio'] . '/' );
-/*
-echo "<pre>";
-print_r($_SESSION);
-*/
-
-?>

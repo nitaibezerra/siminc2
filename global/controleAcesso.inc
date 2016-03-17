@@ -1,4 +1,4 @@
-<?
+<?php
 // carrega a página solicitada pelo usuário
 $sql = sprintf( "select u.usuchaveativacao from seguranca.usuario u where u.usucpf = '%s'", $_SESSION['usucpf'] );
 
