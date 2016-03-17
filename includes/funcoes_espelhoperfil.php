@@ -16,11 +16,11 @@ global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd;
 //    $usuario_db  = '';
 //    $senha_bd    = '';
 //}
-$nome_bd = '';
-$servidor_bd = '';
-$porta_bd = '';
-$usuario_db = '';
-$senha_bd = '';
+//$nome_bd = '';
+//$servidor_bd = '';
+//$porta_bd = '';
+//$usuario_db = '';
+//$senha_bd = '';
 $db2 = new cls_banco();
 
 /* MECANISMO DE ESPELHO DOS PERFIS - Removendo todos os perfis slaves dos outros sistemas	 */
