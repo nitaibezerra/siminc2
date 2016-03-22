@@ -2,7 +2,7 @@
     include_once APPRAIZ . "gestaopessoa/classes/FtDadoPessoal.class.inc";
     include_once APPRAIZ . "includes/classes/fileSimec.class.inc";
 
-    $bloquearEdicao = bloqueiaEdicaoFT();
+//    $bloquearEdicao = bloqueiaEdicaoFT();
 
     function getImagemServidor() {
         global $db;
@@ -223,6 +223,7 @@
 
     unset($_SESSION['sessionFILES']);
     unset($_FILES['Arquivo']);
+    
 ?>
 
 <link href="../includes/JsLibrary/date/displaycalendar/displayCalendar.css" type="text/css" rel="stylesheet"></link>
