@@ -1208,6 +1208,6 @@
     }
 
     function voltarPagina(){
-        window.location.href ='gestaopessoa.php?modulo=principal/forca_trabalho/lista_grid_chefia_servidores_cedido&acao=A';
+        window.history.back();
     }
 </script>
