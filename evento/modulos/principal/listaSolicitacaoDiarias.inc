@@ -250,7 +250,7 @@ function listaSolicitacoes( $dados = null ){
 				val.valor as val,
 				soldeducaoalim+(soldeducaotransp*soltotdias) as deducao,
 				CASE WHEN solcomplemento IS NOT NULL THEN
-'<div border=\"0\"  style=\"color:blue\" align=\"right\" onmouseover=\"SuperTitleAjax(\''evento.php?modulo=principal/listaSolicitacaoDiarias&acao=A&req=toltipvalor&solid=' || sol.solid || ')\" onmouseout=\"SuperTitleOff( this );\" >' || replace(replace(replace(to_char(val.valor-(soldeducaoalim+(soldeducaotransp*soltotdias)),'999,999,999,999,999.99'),'.',':'),',','.'),':',',') || '</div>'
+                                    '<div border=\"0\"  style=\"color:blue\" align=\"right\" onmouseover=\"SuperTitleAjax(/''evento.php?modulo=principal/listaSolicitacaoDiarias&acao=A&req=toltipvalor&solid=' || sol.solid || ')\" onmouseout=\"SuperTitleOff( this );\" >' || replace(replace(replace(to_char(val.valor-(soldeducaoalim+(soldeducaotransp*soltotdias)),'999,999,999,999,999.99'),'.',':'),',','.'),':',',') || '</div>'
                                 ELSE
                                     (val.valor-(soldeducaoalim+(soldeducaotransp*soltotdias)))::varchar
 				END as totres
@@ -289,7 +289,7 @@ function listaSolicitacoes( $dados = null ){
 			ORDER BY
 				2, 4
 				";
-//	ver($sql);
+//ver($sql);
 	$arCabecalho = array("&nbsp","&nbsp","Data de Inclusão", "CPF/Número de Documento", "Nome","E-mail","Banco","Agência", "Conta Corrente", "Código SCDP", "Unidade Gestora/Orçamentária", "Empenho", "Situação", "Valor Itinerário (R$)", "Deduções (R$)", "Valor Total da Ajuda de Custo (R$)"); 
 	unset($_REQUEST['req']);
 	unset($_POST['req']);

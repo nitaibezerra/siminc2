@@ -201,8 +201,9 @@
                 <td>
                     <?PHP
                         $sql = "
-                            SELECT  tgeid as codigo,
-                                    tgedescricao as descricao
+                            SELECT
+                                tgeid as codigo,
+                                tgedescricao as descricao
                             FROM public.tipograuescolaridade
                         ";
                         $db->monta_combo('filtro_tgeid', $sql, 'S', "Selecione...", '', '', '', '220', 'N', 'filtro_tgeid', false, $filtro_tgeid, null);

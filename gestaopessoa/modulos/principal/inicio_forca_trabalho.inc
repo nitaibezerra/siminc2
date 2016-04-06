@@ -1,6 +1,6 @@
 <?PHP   
     $perfil = pegaPerfilGeral();
-ver($perfil, PERFIL_SUPER_USER);
+//ver($perfil, PERFIL_SUPER_USER);
      if( in_array(PERFIL_SUPER_USER, $perfil) || in_array(PERFIL_FT_ADMINISTRADOR_GERAL, $perfil) ){
          header("Location: gestaopessoa.php?modulo=principal/forca_trabalho/painel_forca_trabalho&acao=A");
          
@@ -18,7 +18,7 @@ ver($perfil, PERFIL_SUPER_USER);
             $dados = $db->carregar($sql);
             $_SESSION['fdpcpf'] = $fdpCpf;
         }
-        header("Location: ?modulo=principal/cadDadosPessoais&acao=A");
+        header("Location: gestaopessoa.php?modulo=principal/cadDadosPessoais&acao=A");
         
     } 
     

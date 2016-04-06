@@ -240,8 +240,8 @@
                             ungdsc AS descricao
                         FROM
                             public.unidadegestora
-                        WHERE
-                            orgcod = 'E'
+--                        WHERE
+--                            orgcod = 'U'
                         ORDER BY
                             ungdsc
                     ";
