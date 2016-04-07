@@ -1,4 +1,4 @@
-<?
+<?php
  /*
    Sistema Simec
    Setor responsável: SPO-MEC
@@ -166,15 +166,16 @@ monta_titulo($titulo_modulo,'');
       <tr>
         <td align='right' class="SubTituloDireita">Orgão:</td>
         <td >
-	<?
-   $orgcod =$_SESSION["ittorgao"];
-    $sql = "select orgcod as CODIGO,orgdsc as DESCRICAO from orgao where organo='".$_SESSION['exercicio']."' order by orgdsc ";
-	  $db->monta_combo("orgcod",$sql,'N',"Todos os Órgãos",'atualizaComboUnidade','','MEC',400);
+	<?php
+            $orgcod =$_SESSION["ittorgao"];
+            $sql = "select orgcod as CODIGO,orgdsc as DESCRICAO from orgao where organo='".$_SESSION['exercicio']."' order by orgdsc ";
+//ver($sql,d);
+            $db->monta_combo("orgcod",$sql,'N',"Todos os Órgãos",'atualizaComboUnidade','','MEC',400);
 	?></td>
       </tr>
        <tr>
 	      <td align='right' class="SubTituloDireita">Unidade responsável:</td>
-        <td><?
+        <td><?php
 			if (! $_SESSION['uniorc']) 
 		$sql = "select unicod as CODIGO,unicod||' - '||unidsc as DESCRICAO from unidade where unistatus='A' and unitpocod='U' and orgcod ='".$orgcod."' order by unidsc ";
 		else 
@@ -226,10 +227,11 @@ monta_titulo($titulo_modulo,'');
       </tr> 
        <tr>
         <td align='right' class="SubTituloDireita">Desafio:</td>
-        <td><?
-             $sql= "select descod as codigo, desdsc as descricao from desafio where desstatus='A' order by descricao";
-            $db->monta_combo('descod',$sql,'S','Escolha o desafio','','','',400);
-?>
+        <td>
+            <?php
+                $sql= "select descod as codigo, desdsc as descricao from desafio where desstatus='A' order by descricao";
+                $db->monta_combo('descod',$sql,'S','Escolha o desafio','','','',400);
+            ?>
 	</td> 
       </tr>            
       <tr>

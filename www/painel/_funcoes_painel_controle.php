@@ -18,18 +18,18 @@ function exibeTipos($pesquisa = false){
 		
 		?>
 		<tr style="margin-top: 10px" >
-			<td valign="top" ><img style="cursor: pointer;border: #000000 solid 1px;" onclick="inserirCaixa(<?php=$tpCx['tcoid'];?>,'<?php=$tpCx['tconome'];?>');" src="../imagens/<?php=$tpCx['tcoimagem'];?>" ></td>
-			<td valign="top" ><b><?php=$tpCx['tconome'];?></b><br /><?php=$tpCx['tcodescricao'];?><br /><div style="width: 150px;display: none;background-color: #FFFACD" id="check_<?php=$tpCx['tcoid'];?>" ><img src="../imagens/check.jpg" />Selecionado com sucesso!</div></td>
+			<td valign="top" ><img style="cursor: pointer;border: #000000 solid 1px;" onclick="inserirCaixa(<?=$tpCx['tcoid'];?>,'<?=$tpCx['tconome'];?>');" src="../imagens/<?=$tpCx['tcoimagem'];?>" ></td>
+			<td valign="top" ><b><?=$tpCx['tconome'];?></b><br /><?=$tpCx['tcodescricao'];?><br /><div style="width: 150px;display: none;background-color: #FFFACD" id="check_<?=$tpCx['tcoid'];?>" ><img src="../imagens/check.jpg" />Selecionado com sucesso!</div></td>
 		</tr>
-		<?phpif($key != (count($tipoCaixa) -1)): ?>
+		<?php if($key != (count($tipoCaixa) -1)): ?>
 		<tr><td colspan="2" ><hr></td></tr>
-		<?phpendif; ?>
-		<?phpendforeach;
-		if(!$tipoCaixa):?>
+		<?php endif; ?>
+		<?php endforeach;
+		if(!$tipoCaixa): ?>
 			<tr><td colspan="2" >Não existem tipos cadastrados.</td></tr>
-		<?phpendif; ?>
+		<?php endif; ?>
 		</table>
-<?php}
+<?php }
 
 function montaCaixa($cxccoluna,$usucpf,$abaid){
 		global $db;
@@ -47,36 +47,36 @@ function montaCaixa($cxccoluna,$usucpf,$abaid){
 			($estado_cxcid == 'max')? $style_est = "" : $style_est = "none";
 			($estado_cxcid == 'max')? $src_img_est = "../imagens/menos.gif" : $src_img_est = "../imagens/mais.gif";
 			($cxc['cxcrolagem'] == 'f')? $scroll_cxcid = "false" : $scroll_cxcid = "true";?>
-			<div id="colid_<?php=$cxc['cxcid']?>" class="groupItem">
-				<input type="hidden" id="estado_<?php=$cxc['cxcid']?>" name="estado_<?php=$cxc['cxcid']?>" value="<?php=$estado_cxcid?>"  />
-				<input type="hidden" id="scroll_<?php=$cxc['cxcid']?>" name="scroll_<?php=$cxc['cxcid']?>" value="<?php=$scroll_cxcid?>"  />
+			<div id="colid_<?= $cxc['cxcid'] ?>" class="groupItem">
+				<input type="hidden" id="estado_<?= $cxc['cxcid'] ?>" name="estado_<?= $cxc['cxcid'] ?>" value="<?=$estado_cxcid?>"  />
+				<input type="hidden" id="scroll_<?= $cxc['cxcid'] ?>" name="scroll_<?= $cxc['cxcid'] ?>" value="<?=$scroll_cxcid?>"  />
 				<div style="-moz-user-select: none;" class="itemHeader">
-					<div id="titulo_<?php=$cxc['cxcid']?>" class="titulo_coluna" > <img style="cursor:pointer" onclick="editarNomecaixa('<?php=$cxc['cxcid']?>')"  src="../imagens/editar_nome.gif" border=0 /> <?php=$cxc['cxcdescricao']?></div>
-					<a href="#" class="closeEl" id="<?php=$cxc['cxcid']?>" ><img src="<?php=$src_img_est ?>" border=0 /></a>
-					<a href="#" class="excluir" ><img onclick="excluirBox('<?php=$cxc['cxcid']?>')"  src="../imagens/excluir_2.gif" border=0 /></a>
-					<div id="edit_<?php=$cxc['cxcid']?>"  class="edit" style="margin-right:8px" >
-						<img onclick="exibeEditar('<?php=$cxc['cxcid']?>')" src="../imagens/ico_config.gif" border=1 />
+					<div id="titulo_<?=$cxc['cxcid']?>" class="titulo_coluna" > <img style="cursor:pointer" onclick="editarNomecaixa('<?=$cxc['cxcid']?>')"  src="../imagens/editar_nome.gif" border=0 /> <?=$cxc['cxcdescricao']?></div>
+					<a href="#" class="closeEl" id="<?=$cxc['cxcid']?>" ><img src="<?=$src_img_est ?>" border=0 /></a>
+					<a href="#" class="excluir" ><img onclick="excluirBox('<?=$cxc['cxcid']?>')"  src="../imagens/excluir_2.gif" border=0 /></a>
+					<div id="edit_<?=$cxc['cxcid']?>"  class="edit" style="margin-right:8px" >
+						<img onclick="exibeEditar('<?=$cxc['cxcid']?>')" src="../imagens/ico_config.gif" border=1 />
 					</div>
 				</div>
-				<div style="display:none"  id="editar_<?php=$cxc['cxcid']?>" class="editar" >
+				<div style="display:none"  id="editar_<?=$cxc['cxcid']?>" class="editar" >
 					<div style="padding: 3px 3px 3px 3px;" >
-						<input type="checkbox" id="autoscroll_<?php=$cxc['cxcid']?>" name="autoscroll" value="<?php=$cxc['cxcid']?>" onclick="executarEditar('<?php=$cxc['cxcid']?>',false)" /> Rolagem
-						<span style="cursor:pointer;margin-left:10px;" onclick="editarNomecaixa(<?php=$cxc['cxcid']?>)" ><img src="../imagens/editar_nome.gif" /> Editar Nome </span>
-						<span style="cursor:pointer;margin-left:10px;" onclick="editarConteudoCaixa(<?php=$cxc['cxcid']?>,<?php=$cxc['tcoid']?>)" > <img src="../imagens/editar_conteudo_caixa.png" /> Editar Conteudo</span> 
+						<input type="checkbox" id="autoscroll_<?=$cxc['cxcid']?>" name="autoscroll" value="<?=$cxc['cxcid']?>" onclick="executarEditar('<?=$cxc['cxcid']?>',false)" /> Rolagem
+						<span style="cursor:pointer;margin-left:10px;" onclick="editarNomecaixa(<?=$cxc['cxcid']?>)" ><img src="../imagens/editar_nome.gif" /> Editar Nome </span>
+						<span style="cursor:pointer;margin-left:10px;" onclick="editarConteudoCaixa(<?=$cxc['cxcid']?>,<?=$cxc['tcoid']?>)" > <img src="../imagens/editar_conteudo_caixa.png" /> Editar Conteudo</span> 
 					</div>
 				</div>
-				<div class="itemContent" style="display:<?php=$style_est ?>" id="itemContent_<?php=$cxc['cxcid']?>"  >
-					<?phpif($scroll_cxcid == "true"){ ?>
+				<div class="itemContent" style="display:<?=$style_est ?>" id="itemContent_<?=$cxc['cxcid']?>"  >
+					<?php if($scroll_cxcid == "true"){ ?>
 						<script>
-							document.getElementById( 'autoscroll_<?php=$cxc['cxcid']?>').checked = true;
-							executarEditar(<?php=$cxc['cxcid']?>,true);
-							document.getElementById( 'itemContent_<?php=$cxc['cxcid']?>').style.display = '<?php=$style_est?>';
+							document.getElementById( 'autoscroll_<?=$cxc['cxcid']?>').checked = true;
+							executarEditar(<?=$cxc['cxcid']?>,true);
+							document.getElementById( 'itemContent_<?=$cxc['cxcid']?>').style.display = '<?=$style_est?>';
 						</script>
-					<?php }?>
+					<?php } ?>
 					<?php exibeConteudo($cxc['cxcid'],$cxc['tcoid']); ?>
 				</div>
 			</div>
-		<?phpendforeach;
+		<?php endforeach;
 }
 
 
@@ -956,7 +956,7 @@ function exibeConteudo($cxcid,$tcoid){
 				<div style="padding: 5px; cursor: pointer; width: 95%; font-weight: bold; text-align: center;" >
 					<?php echo $exibeNome ?>
 				</div>
-				<div style="text-align: right;font-size: 10px;margin-right:40px;" ><span onclick="maximizaGrafico('geraGrafico.php?<?phpphp echo unserialize( $dados ) ?>');" style="cursor:pointer" >Maximizar</span></div>
+				<div style="text-align: right;font-size: 10px;margin-right:40px;" ><span onclick="maximizaGrafico('geraGrafico.php?<?php echo unserialize( $dados ) ?>');" style="cursor:pointer" >Maximizar</span></div>
 				<div style="padding: 5px">
 				<div id="grafico_indicador_<?php echo $cxcid ?>"></div>
 				<script type="text/javascript">
@@ -1101,7 +1101,7 @@ function exibePesquisa($cxcid,$checkbox){
 		</tr>
 		<tr>
 			<td  align='right' class="SubTituloDireita">Identificador do Indicador:</td>
-		    <td><?php=campo_texto('indid','N','S','',15,15,'############','','','','',"id='indid'",'',$_POST['indid']);?></td>
+		    <td><?=campo_texto('indid','N','S','',15,15,'############','','','','',"id='indid'",'',$_POST['indid']);?></td>
 		    <td rowspan=7>
 		    <?php
 			//Lista os indicadores já selecionados
@@ -1129,11 +1129,11 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Área:</td>
-		    <td><?php=$db->monta_combo('exoid',$sql,'S','Selecione...','','','','','N',"exoid","",$_POST['exoid']);?></td>
+		    <td><?=$db->monta_combo('exoid',$sql,'S','Selecione...','','','','','N',"exoid","",$_POST['exoid']);?></td>
 		</tr> 
 		<tr>
 			<td  align='right' class="SubTituloDireita">Nome Indicador:</td>
-		    <td><?php=campo_texto('indnome','N','S','',60,100,'','',"","","","id='indnome'","",$_POST['indnome']);?></td>
+		    <td><?=campo_texto('indnome','N','S','',60,100,'','',"","","","id='indnome'","",$_POST['indnome']);?></td>
 		</tr>
 		
 		<tr>
@@ -1148,7 +1148,7 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Tipo Indicador:</td>
-		    <td><?php=$db->monta_combo('tpiid',$sql,'S','Selecione...','','','','','N',"tpiid","",$_POST['tpiid']);?></td>
+		    <td><?=$db->monta_combo('tpiid',$sql,'S','Selecione...','','','','','N',"tpiid","",$_POST['tpiid']);?></td>
 		</tr> 
 		<tr>
 			<?php 
@@ -1162,7 +1162,7 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Secretaria:</td>
-		    <td><?php=$db->monta_combo('secid',$sql,'S','Selecione...',"filtraAcao","",'','','N',"secid","",$_POST['secid']);?></td>
+		    <td><?=$db->monta_combo('secid',$sql,'S','Selecione...',"filtraAcao","",'','','N',"secid","",$_POST['secid']);?></td>
 		</tr>
 		<tr>
 			<?php 
@@ -1194,7 +1194,7 @@ function exibePesquisa($cxcid,$checkbox){
 				}
 			?>
 		    <td align='right' class="SubTituloDireita">Ação:</td>
-		    <td id="td_acao" ><?php=$db->monta_combo('acaid',$sql,'S','Selecione...','','','','','N',"acaid","",$_POST['acaid']);?></td>
+		    <td id="td_acao" ><?=$db->monta_combo('acaid',$sql,'S','Selecione...','','','','','N',"acaid","",$_POST['acaid']);?></td>
 		</tr> 
 		<tr style="display: none">
 			<?php 
@@ -1208,7 +1208,7 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Mapa Estratégico:</td>
-		    <td><?php=$db->monta_combo('mapid',$sql,'S','Selecione...','','','','','S');?></td>
+		    <td><?=$db->monta_combo('mapid',$sql,'S','Selecione...','','','','','S');?></td>
 		</tr> 
 		<tr style="display: none">
 			<?php 
@@ -1220,7 +1220,7 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Tema Estratégico:</td>
-		    <td><?php=$db->monta_combo('temid',$sql,'S','Selecione...','','','','','S');?></td>
+		    <td><?=$db->monta_combo('temid',$sql,'S','Selecione...','','','','','S');?></td>
 		</tr>
 		<tr>
 			<?php 
@@ -1236,13 +1236,13 @@ function exibePesquisa($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Regionalização:</td>
-		    <td><?php=$db->monta_combo('regid',$sql,'S','Selecione...','','','','','N',"regid","",$_POST['regid']);?></td>
+		    <td><?=$db->monta_combo('regid',$sql,'S','Selecione...','','','','','N',"regid","",$_POST['regid']);?></td>
 		</tr> 
 		
 		<tr bgcolor="#cccccc">
 			      <td></td>
 			      <td colspan=2>
-			  	  	<input type="button" class="botao" name="btassociar" value="Pesquisar" onclick="pesquisar(<?php=$cxcid ?>,<?php=$checkbox ?>);">
+			  	  	<input type="button" class="botao" name="btassociar" value="Pesquisar" onclick="pesquisar(<?=$cxcid ?>,<?=$checkbox ?>);">
 			  	  	<input type="button" class="botao" name="bt_limpar" value="Limpar" onclick="limpar();">
 			  	  	<input type="button" class="botao" name="cancelar" value="Cancelar" id="button_cancelar" />
 			  	  	
@@ -1272,7 +1272,7 @@ function exibePesquisaMunicipio($cxcid,$checkbox){
 			<?php 
 			$sql = "select regcod as codigo, regdescricao as descricao from territorios.regiao order by descricao";
 			?>
-		    <td><?php=$db->monta_combo('regcod',$sql,'S','Selecione...','filtraEstado','','','','N',"regcod","",$_POST['regcod']);?></td>
+		    <td><?=$db->monta_combo('regcod',$sql,'S','Selecione...','filtraEstado','','','','N',"regcod","",$_POST['regcod']);?></td>
 		    <td rowspan=5>
 		    <?php
 			//Lista os indicadores já selecionados
@@ -1293,7 +1293,7 @@ function exibePesquisaMunicipio($cxcid,$checkbox){
 				$sql = "select estuf as codigo, estdescricao as descricao from territorios.estado order by estdescricao";
 			?>
 			<td  align='right' class="SubTituloDireita">Estado:</td>
-		    <td id="exibeEstado" ><?php=$db->monta_combo('estuf',$sql,'S','Selecione...','','','','','N',"estuf","",$_POST['estuf']);?></td>
+		    <td id="exibeEstado" ><?=$db->monta_combo('estuf',$sql,'S','Selecione...','','','','','N',"estuf","",$_POST['estuf']);?></td>
 		</tr>
 		<tr>
 			<?php 
@@ -1307,7 +1307,7 @@ function exibePesquisaMunicipio($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Grupo de Municípios:</td>
-		    <td><?php=$db->monta_combo('gtmid',$sql,'S','Selecione...','filtraGrupoMunicipios','','','','N',"gtmid","",$_POST['gtmid']);?></td>
+		    <td><?=$db->monta_combo('gtmid',$sql,'S','Selecione...','filtraGrupoMunicipios','','','','N',"gtmid","",$_POST['gtmid']);?></td>
 		</tr> 
 		<tr>
 		<?php 
@@ -1321,7 +1321,7 @@ function exibePesquisaMunicipio($cxcid,$checkbox){
 				";
 			?>
 			<td  align='right' class="SubTituloDireita">Tipos de Municípios:</td>
-		    <td id="exibeTipoMunicipio" ><?php=$db->monta_combo('tpmid',$sql,'S','Selecione...','','','','','N',"tpmid","",$_POST['tpmid']);?></td>
+		    <td id="exibeTipoMunicipio" ><?=$db->monta_combo('tpmid',$sql,'S','Selecione...','','','','','N',"tpmid","",$_POST['tpmid']);?></td>
 		</tr>
 		<tr>
 		<?php 
@@ -1335,13 +1335,13 @@ function exibePesquisaMunicipio($cxcid,$checkbox){
 				";
 			?>
 			<td  align='right' class="SubTituloDireita">Município:</td>
-		    <td><?php=campo_texto($municipio,"N","S",'',60,100,"","","","","","id='municipio'","",$_POST['municipio']) ?></td>
+		    <td><?=campo_texto($municipio,"N","S",'',60,100,"","","","","","id='municipio'","",$_POST['municipio']) ?></td>
 		</tr>
 		
 		<tr bgcolor="#cccccc">
 			      <td></td>
 			      <td colspan=2>
-			  	  	<input type="button" class="botao" name="btassociar" value="Pesquisar" onclick="pesquisarMunicipio(<?php=$cxcid ?>,<?php=$checkbox ?>);">
+			  	  	<input type="button" class="botao" name="btassociar" value="Pesquisar" onclick="pesquisarMunicipio(<?=$cxcid ?>,<?=$checkbox ?>);">
 			  	  	<input type="button" class="botao" name="bt_limpar" value="Limpar" onclick="limparMunicipios();">
 			  	  	<input type="button" class="botao" name="cancelar" value="Cancelar" id="button_cancelar" />
 			  	  	
@@ -1377,7 +1377,7 @@ function exibePesquisaRegionalizadores($cxcid,$checkbox){
 				";
 			?>
 		    <td align='right' class="SubTituloDireita">Regionalização:</td>
-		    <td><?php=$db->monta_combo('regid',$sql,'S','Selecione...','exibeRegionalizacao','','','','S','regid');?>
+		    <td><?=$db->monta_combo('regid',$sql,'S','Selecione...','exibeRegionalizacao','','','','S','regid');?>
 		    	<span id="span_selecione" style="color:#990000" >Selecione a Regionalização.</span>
 		    	</td>
 		</tr>
@@ -1386,14 +1386,14 @@ function exibePesquisaRegionalizadores($cxcid,$checkbox){
 			<?php 
 			$sql = "select regcod as codigo, regdescricao as descricao from territorios.regiao order by descricao";
 			?>
-		    <td><?php=$db->monta_combo('regcod',$sql,'S','Selecione...','filtraEstado','','','','N',"regcod","",$_POST['regcod']);?></td>
+		    <td><?=$db->monta_combo('regcod',$sql,'S','Selecione...','filtraEstado','','','','N',"regcod","",$_POST['regcod']);?></td>
 		</tr>
 		<tr id="tr_estuf" style="display:none" >
 		<?php 
 				$sql = "select estuf as codigo, estdescricao as descricao from territorios.estado order by estdescricao";
 			?>
 			<td  align='right' class="SubTituloDireita">Estado:</td>
-		    <td id="exibeEstado" ><?php=$db->monta_combo('estuf',$sql,'S','Selecione...','','','','','N',"estuf","",$_POST['estuf']);?></td>
+		    <td id="exibeEstado" ><?=$db->monta_combo('estuf',$sql,'S','Selecione...','','','','','N',"estuf","",$_POST['estuf']);?></td>
 		</tr>
 		<tr id="tr_mundesc" style="display:none">
 			<td  align='right' class="SubTituloDireita">Município:</td>

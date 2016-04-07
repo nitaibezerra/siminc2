@@ -1278,7 +1278,7 @@ if ($_SESSION["obra"]["obrid"]){
 		Documentos (PDF).</span></td>
 	</tr> -->
 	<tr>
-		<td class="SubTituloDireita">Tipo de Aquisição do Terreno</td>
+		<td class="SubTituloDireita">Tipo de Aquisição do Terreno 2</td>
 		<td>
 			<script>
 				jQuery(function(){				

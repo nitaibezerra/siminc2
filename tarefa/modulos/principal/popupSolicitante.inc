@@ -116,8 +116,8 @@ if($_POST['acaoForm']){
 	die;
 }
 
-function alterar($_POST, $_solid,  $boGravaCpf = false){
-	extract($_POST);
+function alterar($post, $_solid,  $boGravaCpf = false){
+	extract($post);
 	$solid = intval($_solid);
 	$arSolicitanteId = $_SESSION['arSolicitante'][0][$solid];
 	if($soltiposolicitante == "E"){

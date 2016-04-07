@@ -395,7 +395,7 @@ function blocoDadosAtendimento(&$obTarefa, $boMensagemObrig = 'N', $boCadAcompan
 	</tr>
 	<tr>
 		<td class="SubTituloDireita">Setor de Origem:</td>
-		<td><?
+		<td><?php
 		if($_SESSION['tarefa']['boPerfilSuperUsuario']){
 			if($obTarefa->unaidsetororigem){
 				$unaidsetororigem = $obTarefa->unaidsetororigem;

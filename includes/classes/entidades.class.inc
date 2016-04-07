@@ -149,6 +149,7 @@ class Entidades {
 				return false;
 		}
 		return false;
+                atualizaCurso($request);
 	}
 	
 	function adicionarFuncoesEntidade($dados) {

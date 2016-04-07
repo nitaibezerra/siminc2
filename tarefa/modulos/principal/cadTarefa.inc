@@ -1,4 +1,4 @@
-<script><!--
+<script>
 function recuperaSetorUsuarioLogado(){
 	return '<?php echo $_SESSION['tarefa']['setorUsuarioLogado']; ?>';
 }
@@ -14,7 +14,7 @@ function verificaSeGerente(){
 function verificaSeSuperUsuario(){
 	return '<?php echo $_SESSION['tarefa']['boPerfilSuperUsuario']; ?>';
 }
---></script>
+</script>
 <?php 
 require_once APPRAIZ . "tarefa/classes/Tarefa.class.inc";
 require_once APPRAIZ . "tarefa/classes/Solicitante.class.inc";
