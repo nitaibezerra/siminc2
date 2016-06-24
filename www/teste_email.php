@@ -38,10 +38,9 @@
 				echo 'Enviou 1';
 			}
 			
-// 			$email = array("maykel.braz@mec.gov.br", "maykelsb@gmail.com", "maykelbraz@mec.gov.br");			
-			$email = array("wescley.lima@mec.gov.br");			
+			$email = array($_SESSION['email_sistema']);			
 			
-			$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+			$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 			
 			$assunto  = "O termo de cooperação 123 necessita de ajustes.";
 			
@@ -64,11 +63,10 @@
 			$corpo .= "Comentários: teste de comentario\n";
 			
 			//envio o correio...
-// 			mail("maykel.braz@mec.gov.br","Formulário recebido teste",$corpo);
-			mail("wescley.lima@mec.gov.br","Formulário recebido teste",$corpo);
+			mail($_SESSION['email_sistema'],"Formulário recebido teste",$corpo);
 			
 // 			if(mail("maykelsb@gmail.com","Formulário recebido teste",$corpo)){
-			if(mail("wescley.lima@mec.gov.br","Formulário recebido teste",$corpo)){
+			if(mail($_SESSION['email_sistema'],"Formulário recebido teste",$corpo)){
 				echo "enviou 2";	
 			}
 			

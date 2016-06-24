@@ -105,7 +105,7 @@ function enviaEmailCadSolicitacao( $scsid, $acao = null )
 
     //seta o destinatario
     $requisitante = $dado['emailrequisitante'];
-    $destinatario = 'julioproenca@mec.gov.br';
+    $destinatario = $_SESSION['email_sistema'];
 
     //pega o emails dos perfis (requisitante, preposto, fiscal e gestor do contrato)
     $sqlx = "SELECT DISTINCT
@@ -186,7 +186,7 @@ function enviaEmailCadSolicitacao( $scsid, $acao = null )
     }
 
 
-    //$emailCopia = 'henriquecouto@mec.gov.br';
+    //$emailCopia = $_SESSION['email_sistema'];
     // seta dados da solicitacao
     $dadoSolicitacao['Nº SS']         = $dado['scsid'];
     $dadoSolicitacao['Solicitação']   = $dado['scsnecessidade'];
@@ -289,7 +289,7 @@ function enviaEmailFluxoHistorico( $scsid ) {
 
     //seta o destinatario
     //$destinatario   = $dado['emailrequisitante'];
-    $destinatario = 'alex.pereira@mec.gov.br';
+    $destinatario = $_SESSION['email_sistema'];
 
     //pega o emails dos perfis (requisitante, preposto, fiscal e gestor do contrato)
     $sqlx = "SELECT DISTINCT
@@ -368,7 +368,6 @@ function enviaEmailFluxoHistorico( $scsid ) {
     }
 
 
-//$emailCopia = 'henriquecouto@mec.gov.br';
     // seta dados da solicitacao
     $dadoSolicitacao['Nº SS']         = $dado['scsid'];
     $dadoSolicitacao['Solicitação']   = $dado['scsnecessidade'];
@@ -437,10 +436,6 @@ function enviaEmailFluxoHistorico( $scsid ) {
 
     if ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "simec-local" )
         return true;
-    //if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-    //	$emailCopia = 'alexpereira@mec.gov.br';
-    //	$destinatario = 'henriquecouto@mec.gov.br';
-    //}
 
 
     enviar_email( $remetente, $destinatario, $assunto, $conteudo, $emailCopia );
@@ -489,7 +484,7 @@ function enviaEmailFluxoHistoricoOS( $odsid ) {
 
     //seta o destinatario
     //$destinatario   = $dado['emailrequisitante'];
-    $destinatario = 'julioproenca@mec.gov.br';
+    $destinatario = $_SESSION['email_sistema'];
 
     //pega o emails dos perfis (requisitante, preposto, fiscal e gestor do contrato)
     /*
@@ -582,7 +577,6 @@ function enviaEmailFluxoHistoricoOS( $odsid ) {
         //array_push ($dadox, $dadox2); 
         $emailCopia = $dadox; //implode("; ", $dadox);
     }
-//$emailCopia = 'henriquecouto@mec.gov.br';
     //busca profissionais envolvidos
     $profissionais = $db->carregarColuna( "SELECT distinct u.usunome || ' - ' || p.pfldsc as descricao 
 											FROM seguranca.usuario u
@@ -673,8 +667,8 @@ function enviaEmailFluxoHistoricoOS( $odsid ) {
     if ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "simec-local" )
         return true;
     if ( $_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br" ) {
-        $emailCopia   = 'alexpereira@mec.gov.br';
-        $destinatario = 'julioproenca@mec.gov.br';
+        $emailCopia   = $_SESSION['email_sistema'];
+        $destinatario = $_SESSION['email_sistema'];
     }
 
 

@@ -1643,7 +1643,6 @@ class funcoesProjetoFabrica{
         $mensagem->Subject = "Fábrica de Software - ALERTA - Estado do Documento";
         $mensagem->Body = $texto;
         $mensagem->IsHTML(true);
-        //$mensagem->AddReplyTo("julianosouza@mec.gov.br");
 
 
         if (is_array($arrEmailDestino)) {

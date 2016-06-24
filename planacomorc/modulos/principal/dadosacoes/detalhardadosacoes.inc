@@ -130,7 +130,7 @@ function enviarEmailExtratoAcoes($params) {
             $origem = "Termos de Execução Descentralizada (TED)";
             break;
     }
-    $destinatarios[] = 'werteralmeida@mec.gov.br';
+    $destinatarios[] = $_SESSION['email_sistema'];
     $paransEmail['remetente'] = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
     $paransEmail['assunto'] = "Reportar Divergência em um valor no quadro - '{$origem}'";
     $paransEmail['mensagem'] = "<pre>Prezado,

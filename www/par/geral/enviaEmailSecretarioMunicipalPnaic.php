@@ -50,7 +50,7 @@ foreach($rs as $dados){
 					mais, acesse o portal do MEC: http://www.mec.gov.br.
 				  ';
 	
-	$cc			= array('WallacePereira@mec.gov.br', 'wescleylima@mec.gov.br');
+	$cc			= array($_SESSION['email_sistema']);
 	$cco		= '';
 	$arquivos 	= array();
 

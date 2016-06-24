@@ -20,7 +20,7 @@ if( $_POST['requisicao'] == 'email' ){
 		if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
 			$retorno = true;
 		} elseif($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-			$strEmailTo = array('thiago.barbosa@mec.gov.br');
+			$strEmailTo = array($_SESSION['email_sistema']);
 			$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);		
 		} else {
 			$strEmailTo = 'dicom_publicacao@fnde.gov.br';

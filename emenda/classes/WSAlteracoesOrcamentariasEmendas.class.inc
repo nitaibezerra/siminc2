@@ -240,7 +240,7 @@ class WSAlteracoesOrcamentariasEmendas{
 						if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
 							$email = $db->pegaUm("select a.autemail from emenda.autor a where a.autcod = '{$v->codigoParlamentar}'");
 						} else {
-							$email = 'wesley.silva@mec.gov.br';
+							$email = $_SESSION['email_sistema'];
 						}
 						if( !empty($email) ){
 							$retorno = enviar_email($remetente, array($email), 'SIMEC - EMENDAS', $conteudo, $cc, null);

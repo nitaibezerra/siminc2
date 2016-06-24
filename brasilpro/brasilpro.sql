@@ -20,7 +20,7 @@ begin transaction;
 insert into seguranca.sistema (
 	sisid, sisdsc, sisurl, sisabrev, sisdiretorio, sisarquivo, sisfinalidade, sisrelacionado, sispublico, sisstatus, sisexercicio, sismostra, sisemail, paginainicial
 ) values (
-	14, 'Brasil Profissionalizado', 'http://', 'Brasil Profissionalizado', 'brasilpro', 'brasilpro', null, null, null, 'A', false, true, 'simec@mec.gov.br', 'inicio&acao=A'
+	14, 'Brasil Profissionalizado', 'http://', 'Brasil Profissionalizado', 'brasilpro', 'brasilpro', null, null, null, 'A', false, true, $_SESSION['email_sistema'], 'inicio&acao=A'
 );
 
 -- PERFILS E MENUS

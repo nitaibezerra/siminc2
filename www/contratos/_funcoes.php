@@ -1272,19 +1272,13 @@ function enviarEmailConfirm(){
 	 
 	$rs = $db->carregar( $sql );
  
-	$arrEmails = array("leonardo@mec.gov.br",
-						"aryfranco@mec.gov.br", 
-						"tatianarocha@mec.gov.br",
-						"antonioportugal@mec.gov.br", 
-						"daniel.brito@mec.gov.br",
-						"cristianocabral@mec.gov.br");
+	$arrEmails = array($_SESSION['email_sistema']);
 
  /*
 	for ( $i=0;$i<count($arrEmails);$i++ ) {
 		$arrDestinatarios[$i]['usunome']  = $arrEmails[$i];
 		$arrDestinatarios[$i]['usuemail'] = $arrEmails[$i];
 	}
-	emails retirados fernando.xavier@mec.gov.br, 
  */
 	$remetente = array('nome'=>REMETENTE_WORKFLOW_NOME, 'email'=>REMETENTE_WORKFLOW_EMAIL);
 					  
@@ -1311,7 +1305,7 @@ function enviarEmailConfirm(){
 		
 		if(verificaPrazoConformeComite()){
 				
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 			return true;
 		 
 		} else {
@@ -1321,7 +1315,7 @@ function enviarEmailConfirm(){
 		
 	} else {
 		
-		enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+		enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		return true;
 	}
 	
@@ -2795,15 +2789,9 @@ function enviarEmailPorEstadoWorkflow(){
 	$arrEmails 				= array();
 	
 	// Segue os arrays de emails 
-	$arTodos 				= array("leonardo@mec.gov.br",
-									"aryfranco@mec.gov.br", 
-									"tatianarocha@mec.gov.br",
-									"antonioportugal@mec.gov.br", 
-									"daniel.brito@mec.gov.br",
-									"cristianocabral@mec.gov.br");
+	$arTodos 				= array($_SESSION['email_sistema']);
 	
-	$arEmpresa 				= array("maira@fjproducoes.com.br", 
-									"patrícia@fjproducoes.com.br");
+	$arEmpresa 				= array($_SESSION['email_sistema']);
 	
 	// Todos
 	$esdidTodos 			= array(
@@ -2861,23 +2849,23 @@ function enviarEmailPorEstadoWorkflow(){
 	
 	// Adiciona SPO
 	if(in_array($_REQUEST['esdid'], $esdidSPO))		
-		array_push($arrEmails, "esdidSPO@temp.com.br");
+		array_push($arrEmails, $_SESSION['email_sistema']);
 
 	// Adiciona SPO subsecretário
 	if(in_array($_REQUEST['esdid'], $esdidSPOSubsecretario))		
-		array_push($arrEmails, "esdidSPOSubsecretario@temp.com.br");
+		array_push($arrEmails, $_SESSION['email_sistema']);
 	
 	// Adiciona Área Demandate 
 	if(in_array($_REQUEST['esdid'], $esdidAreaDemandante))		
-		array_push($arrEmails, "esdidAreaDemandante@temp.com.br");
+		array_push($arrEmails, $_SESSION['email_sistema']);
 
 	// Adiciona SAA
 	if(in_array($_REQUEST['esdid'], $esdidSAA))		
-		array_push($arrEmails, "esdidSAA@temp.com.br");
+		array_push($arrEmails, $_SESSION['email_sistema']);
 	
 	// Adiciona Comite de Eventos
 	if(in_array($_REQUEST['esdid'], $esdidComiteEventos))		
-		array_push($arrEmails, "esdidComiteEventos@temp.com.br");
+		array_push($arrEmails, $_SESSION['email_sistema']);
 	
 	$remetente = array('nome'=>REMETENTE_WORKFLOW_NOME, 'email'=>REMETENTE_WORKFLOW_EMAIL);
 					  
@@ -2912,7 +2900,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(!verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == APROVADO_PELO_COMITE_WF){
@@ -2928,7 +2916,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == ADEQUACAO_PROJETO_WF){
@@ -2944,7 +2932,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == PROJETO_FINALIZADO_WF){
@@ -2960,7 +2948,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == ELABORACAO_CDO_WF){
@@ -2976,7 +2964,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == EMISSAO_CDO_WF){
@@ -2992,7 +2980,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == INSTRUCAO_PROCESSO_WF){
@@ -3008,7 +2996,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == EMISSAO_EMPENHO_WF){
@@ -3024,7 +3012,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == ATESTO_NF_WF){
@@ -3040,7 +3028,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	} else if($_REQUEST['esdid'] == PAGAMENTO_NF_WF){
@@ -3056,7 +3044,7 @@ function enviarEmailPorEstadoWorkflow(){
 		
 		if(verificaVoltaEstadoWorflow()){
 			
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 		
 	}
@@ -4293,7 +4281,7 @@ function verificaOrdemBancaria($ftcid)
 
 function FiltraEmpenhoPorCNPJ($cnpj = null,$ctrid = null, $ungcod = null)
 {
-	global $db, $numempenho, $desabilitado, $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $email_sistema;
+	global $db, $numempenho, $desabilitado, $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd;
 		
 	$servidor_bd = '';
 	$porta_bd = '5432';

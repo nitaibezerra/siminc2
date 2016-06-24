@@ -600,7 +600,7 @@ function estruturaContribuicaoPacto($dados) {
 			),
 	
 			'linhas' => array(
-					array('codigo'=>'1','descricao'=>'comunicar-se com o Ministério da Educação pelo e-mail pactonacional@mec.gov.br'),
+					array('codigo'=>'1','descricao'=>'comunicar-se com o Ministério da Educação pelo e-mail '. $_SESSION['email_sistema']),
 					array('codigo'=>'2','descricao'=>'utilizar o Sispacto 2014')
 	
 			)

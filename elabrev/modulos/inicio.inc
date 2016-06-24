@@ -193,7 +193,7 @@ if ($_SESSION['elabrev']['cooid']) {
             Senhores Dirigentes,
             <br/><br/>
             Hoje, dia <b>26/03/2014</b>, � o prazo final para a solicita��o de altera��es or�ament�rias (cr�ditos) no primeiro momento.
-            Lembramos que tal pedido deve ser efetuado no M�dulo de Altera��es Or�ament�rias. Caso a Unidade n�o possua o acesso, deve efetuar o pedido de acesso no Simec na primeira tela do Simec e entrar em contato por meio do e-mail spo.orcamento@mec.gov.br.
+            Lembramos que tal pedido deve ser efetuado no M�dulo de Altera��es Or�ament�rias. Caso a Unidade n�o possua o acesso, deve efetuar o pedido de acesso no Simec na primeira tela do Simec e entrar em contato por meio do e-mail <?php echo $_SESSION['email_sistema']; ?>.
             Ap�s a inser��o dos cr�ditos a unidade deve acessar a guia ?Resumo/Tr�mite? e clicar na op��o ?Enviar para SPO?. Essa a��o � necess�ria para que a SPO possa analisar as solicita��es e proceder o andamento do pedido.
 <br/><br/>
             Estamos a disposi��o para esclarecimentos.
@@ -537,7 +537,7 @@ if ($_SESSION['elabrev']['cooid']) {
 
                 <p style="text-align: justify;">Senhor Dirigente,</p>
 
-                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionar� um plant�o nesta SPO/MEC somente por meio do endere�o eletr�nico spo.orcamento@mec.gov.br, com a finalidade de esclarecer d�vidas atinentes � inclus�o no SIMEC do detalhamento dos limites para o PLOA 2014. </p>
+                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionar� um plant�o nesta SPO/MEC somente por meio do endere�o eletr�nico <?php echo $_SESSION['email_sistema']; ?>, com a finalidade de esclarecer d�vidas atinentes � inclus�o no SIMEC do detalhamento dos limites para o PLOA 2014. </p>
 
                 <p style="text-align: justify;"><br>Atenciosamente,<br><br><strong>Wagner Vilas Boas de Souza<br>
                         Subsecret&aacute;rio de Planejamento e Or&ccedil;amento

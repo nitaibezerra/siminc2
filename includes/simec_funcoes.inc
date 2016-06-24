@@ -59,7 +59,7 @@ function simec_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$cc
     //$mensagem->From = $remetente['email'];
 
     /* Regras redefinidas pelo Cristiano (08/10/2009)*/
-    $mensagem->From = "simec@mec.gov.br";
+    $mensagem->From = $_SESSION['email_sistema'];
 
     if(count($remetente)==2) {
         $mensagem->AddReplyTo($remetente['email'],$remetente['nome']);

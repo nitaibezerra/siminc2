@@ -1529,15 +1529,7 @@ function enviaEmailStatusPi($pi){
 		global $db;
 		global $servidor_bd;
 		
-		if($_SERVER["HTTP_HOST"] == 'simec' || $_SERVER["HTTP_HOST"] == 'simec.mec.gov.br') {
-			//$emailCopia[] = 'spo@mec.gov.br';
-			$emailCopia[] = 'wesley.figueredo@mec.gov.br';
-		} else {
-			$emailCopia[] = 'alexpereira@mec.gov.br';
-			//$emailCopia[] = 'alexandre.dourado@mec.gov.br';
-			//$emailCopia[] = 'gustavo.guarda@mec.gov.br';
-			//$emailCopia[] = 'gustavoguarda@gmail.com';
-		}
+        $emailCopia[] = $emailCopia[] = $_SESSION['email_sistema'];
 		
 		# Recupera email cadastrador do PI
 		$arCadastradorPI = $db->pegaLinha("SELECT pi.unicod, u.usuemail FROM seguranca.usuario u inner join monitora.usuarioresponsabilidade ur on u.usucpf = ur.usucpf and ur.rpustatus = 'A' inner join monitora.pi_planointerno pi on u.usucpf = pi.usucpf WHERE pi.pliid = $pi");
@@ -1561,7 +1553,7 @@ function enviaEmailStatusPi($pi){
 		$emailCopia = array_unique($emailCopia);
 		
 		// Seta remetente
-		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>'spo@mec.gov.br');
+		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>$_SESSION['email_sistema']);
 	
 		$sql = "SELECT distinct
 					pi.plicod  as plicod,

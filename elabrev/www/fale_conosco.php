@@ -81,7 +81,7 @@ tinyMCE.init({
 <p>
 Dúvidas sobre o preenchimento da Proposta Orçamentária ligue:61-2104.8702 ou 61-2104.8703.
 </p>
-<p>Caso prefira o meio eletrônico, utilize nosso sistema de e-mail (abaixo disponibilizado) ou envie sua mensagem para o endereço <A HREF="mailto:simec@mec.gov.br.com">simec@mec.gov.br</a></p></font>
+<p>Caso prefira o meio eletrônico, utilize nosso sistema de e-mail (abaixo disponibilizado) ou envie sua mensagem para o endereço <A HREF="mailto:<?php echo $_SESSION['email_sistema']; ?>"><?php echo $_SESSION['email_sistema']; ?></a></p></font>
 
 </td></tr></table>
     <center>

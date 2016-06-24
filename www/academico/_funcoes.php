@@ -138,7 +138,7 @@ function enviarEmailEstadoDocumento($docid)
             $e->setTitle($assunto);
             $e->setText($conteudo);
             $e->setName("SIMEC");
-            $e->setEmailOrigem("simec@mec.gov.br");
+            $e->setEmailOrigem($_SESSION['email_sistema']);
             $e->setEmailsDestino($arrEmail);
             $e->enviarEmails();
 
@@ -10415,7 +10415,7 @@ function alertaPerfilEmail($aveid)
                         ";
             $titulo = "Solicitação de Autorização - Diárias e Passagens para o Exterior";
             //Emails - SECRETARIO EXECUTIVO
-            $arrEmail = array("rodrigo.lamego@mec.gov.br", "genilda.mota@mec.gov.br");
+            $arrEmail = array($_SESSION['email_sistema']);
             break;
 
         default:
@@ -10423,10 +10423,10 @@ function alertaPerfilEmail($aveid)
             break;
     }
 
-    $arrEmail = !$arrEmail ? array("julianosouza@mec.gov.br") : $arrEmail;
+    $arrEmail = !$arrEmail ? array($_SESSION['email_sistema']) : $arrEmail;
 
     if ($_SESSION['baselogin'] == "simec_espelho_producao" || $_SESSION['baselogin'] == "simec_desenvolvimento") {
-        $arrEmail = array("cristianocabral@mec.gov.br", "julianosouza@mec.gov.br");
+        $arrEmail = array($_SESSION['email_sistema']);
     }
 
     require_once(APPRAIZ . 'includes/classes/EmailAgendado.class.inc');
@@ -10434,7 +10434,7 @@ function alertaPerfilEmail($aveid)
     $e->setTitle($titulo);
     $e->setText($texto);
     $e->setName("SIMEC");
-    $e->setEmailOrigem("simec@mec.gov.br");
+    $e->setEmailOrigem($_SESSION['email_sistema']);
     $e->setEmailsDestino($arrEmail);
     $e->enviarEmails();
     return true;
@@ -10604,7 +10604,7 @@ function alertaPerfilEmailSBS($sbsid)
                 ";
             $titulo = "Solicitação de Autorização – Decreto 7.689/2012";
             #Email dos acessores do Ministro
-            $arrEmail = array("vladimir.gorayeb@mec.gov.br", "luis.rebello@mec.gov.br", "mariana.andriotti@mec.gov.br", "luciene.silva@mec.gov.br");
+            $arrEmail = array($_SESSION['email_sistema']);
             break;
         case WF_BENS_SERVICOS_AGUARDANDO_AUTORIZACAO_SECRETARIO:
             $texto = "
@@ -10615,16 +10615,16 @@ function alertaPerfilEmailSBS($sbsid)
                 ";
             $titulo = "Solicitação de Autorização – Decreto 7.689/2012";
             #Email dos acessores do Secretario executivo
-            $arrEmail = array("rodrigo.lamego@mec.gov.br", "genilda.mota@mec.gov.br");
+            $arrEmail = array($_SESSION['email_sistema']);
             break;
         default:
             return false;
             break;
     }
-    $arrEmail = !$arrEmail ? array("julianosouza@mec.gov.br") : $arrEmail;
+    $arrEmail = !$arrEmail ? array($_SESSION['email_sistema']) : $arrEmail;
 
     if ($_SESSION['baselogin'] == "simec_espelho_producao" || $_SESSION['baselogin'] == "simec_desenvolvimento") {
-        $arrEmail = array("cristianocabral@mec.gov.br", "julianosouza@mec.gov.br");
+        $arrEmail = array($_SESSION['email_sistema']);
     }
 
     require_once(APPRAIZ . 'includes/classes/EmailAgendado.class.inc');
@@ -10632,7 +10632,7 @@ function alertaPerfilEmailSBS($sbsid)
     $e->setTitle($titulo);
     $e->setText($texto);
     $e->setName("SIMEC");
-    $e->setEmailOrigem("simec@mec.gov.br");
+    $e->setEmailOrigem($_SESSION['email_sistema']);
     $e->setEmailsDestino($arrEmail);
     $e->enviarEmails();
     return true;
@@ -13293,7 +13293,7 @@ function enviarEmailTramiteGm()
         $e->setTitle($assunto);
         $e->setText($conteudo);
         $e->setName("SIMEC");
-        $e->setEmailOrigem("simec@mec.gov.br");
+        $e->setEmailOrigem$_SESSION['email_sistema']);
         $e->setEmailsDestino($arrEmail);
         $e->enviarEmails();
 
@@ -13332,7 +13332,7 @@ function enviarEmailTramiteSetec()
         $e->setTitle($assunto);
         $e->setText($conteudo);
         $e->setName("SIMEC");
-        $e->setEmailOrigem("simec@mec.gov.br");
+        $e->setEmailOrigem($_SESSION['email_sistema']);
         $e->setEmailsDestino($arrEmail);
         $e->enviarEmails();
 
@@ -13533,10 +13533,8 @@ function alertaPerfilEmailInalguracao()
  				status = 'A'";
 	$arrEmail = $db->carregarColuna($sql);
 	
-// 	$arrEmail = !$arrEmail ? array("LotavinoDunice@mec.gov.br","MarioSiqueira@mec.gov.br") : $arrEmail;
-	
 	if ($_SESSION['baselogin'] == "simec_espelho_producao" || $_SESSION['baselogin'] == "simec_desenvolvimento") {
-		$arrEmail = array("lotavinodunice@mec.gov.br","MarioSiqueira@mec.gov.br");
+		$arrEmail = array($_SESSION['email_sistema']);
 	}
 
 	if ($usuemail) {

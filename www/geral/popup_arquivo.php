@@ -162,7 +162,7 @@
             {
             	$usuemail .= $participante['usuemail'].',';
             }
- $usuemail='gilbertocerqueira@mec.gov.br';
+            $usuemail = $_SESSION['email_sistema'];
 		    $mensagem = "Sr(a) Usuário. <p>Reportamos que foi inserida ou substituída uma Ata relativa à reunião com o $assuntoreuniao da qual VSa. participou. Pedimos que entre no sistema e dê o seu parecer sobre a Ata, concordando ou discordando de seu conteúdo. Em caso de discordância, pedimos que apresente também a sua justificativa. <p> Grato";
            // email("Partcipantes de reunião agendada no Simec", $usuemail, $assunto, $mensagem);
 		}

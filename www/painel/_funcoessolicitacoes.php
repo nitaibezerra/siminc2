@@ -80,7 +80,7 @@ function inserirsolicitacao($dados) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SIMEC - Painel";
-	$mensagem->From 		= "simec@mec.gov.br";
+	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($assessores_sec_exe[0]) {
 		foreach($assessores_sec_exe as $ase) {
@@ -223,7 +223,7 @@ function inserirencaminhamento($dados) {
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
 		$mensagem->FromName		= "SIMEC - Painel";
-		$mensagem->From 		= "simec@mec.gov.br";
+		$mensagem->From 		= $_SESSION['email_sistema'];
 		foreach($encaminhados as $encam) {
 			$mensagem->AddAddress($encam['respemail'], $encam['respnome']);
 		}
@@ -338,7 +338,7 @@ function inseriratendimento($dados) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SIMEC - Painel";
-	$mensagem->From 		= "simec@mec.gov.br";
+	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($assessores_sec_exe[0]) {
 		foreach($assessores_sec_exe as $ase) {
@@ -456,9 +456,8 @@ function inserirresposta($dados) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SIMEC";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress("alexandre.dourado@mec.gov.br", "Alexandre Dourado");
-	$mensagem->AddAddress("priscila.vilaca@mec.gov.br", "Priscila Vilaça");
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
 	$mensagem->Subject = "Solicitação atendida";
 	$mensagem->Body = "Solicitação respondida com sucesso";
 	$mensagem->IsHTML( true );

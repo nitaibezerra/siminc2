@@ -372,7 +372,7 @@ monta_titulo( $titulo, '&nbsp' );
 					<p>A partir de 2012, o PDE Interativo será o sistema utilizado pelas escolas públicas para elaboração do Plano de Formação Continuada dos Profissionais da Educação Básica. Assim, todas as escolas que desejem indicar profissionais para participar de cursos de formação continuada oferecidos pelo MEC em 2013 devem elaborar o seu Plano de Formação no PDE Interativo.</p>
 					<p>Embora seja recomendável, não é obrigatório concluir todo o Diagnóstico do PDE Interativo antes de enviar o Plano de Formação. É suficiente que a escola faça os "Primeiros Passos" e finalize as atividades das telas "4.1 Direção" e "5.2 Docentes". A definição dos “Grandes desafios” e a elaboração dos “Planos de Ação” também é opcional antes do envio do Plano de Formação.</p>
 					<p>Caso deseje, após enviar o Plano de Formação Continuada, a escola pode continuar utilizando as demais funcionalidades do PDE Interativo, debatendo outros aspectos da gestão junto à comunidade escolar. E no caso das escolas priorizadas pelo PDE Escola, para o recebimento dos recursos é obrigatório concluir todo o planejamento, inclusive os "Grandes desafios" e "Planos de ação".</p>
-					<p>Para saber mais, acesse o site do PDE Escola: <a href="http://pdeescola.mec.gov.br" target="_blank">pdeescola.mec.gov.br</a>, ligue para 0800 616161 (opção 6, sub-opção 1) ou envie um e-mail para pdeinterativo@mec.gov.br. </p> 
+					<p>Para saber mais, acesse o site do PDE Escola: <a href="http://pdeescola.mec.gov.br" target="_blank">pdeescola.mec.gov.br</a>, ligue para 0800 616161 (opção 6, sub-opção 1) ou envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>. </p> 
 					</td>
 				</tr>    
 			</table>

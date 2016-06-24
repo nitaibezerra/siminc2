@@ -1841,7 +1841,7 @@ function posDevolverCoordenadorIES() {
 		$mensagem->Subject 		= "SIMEC - SISMÉDIO - Devolução do Projeto para alterações";
 		
 		$mensagem->AddAddress( $identificacaousuario['iusemailprincipal'], $identificacaousuario['iusnome'] );
-		$mensagem->AddAddress( "alexandre.dourado@mec.gov.br" );
+		$mensagem->AddAddress( $_SESSION['email_sistema'] );
 		
 			
 		$mensagem->Body = "<p>Prezado(a) ".$identificacaousuario['iusnome']." (Coordenador IES)</p>

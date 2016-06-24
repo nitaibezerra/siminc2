@@ -31,7 +31,7 @@ Equipe Técnica do PAR';
 echo $html;
 $e->setText($html);
 $e->setName("Dirigência - Proinfância e Quadras");
-$e->setEmailOrigem("planodemetas@mec.gov.br");
+$e->setEmailOrigem($_SESSION['email_sistema']);
 $e->setEmailsDestinoPorArquivo(APPRAIZ."www/painel/emailsDaniel.txt");
 $e->setEmailsDestino(array("julianomeinen.souza@gmail.com"));
 //$e->enviarEmails();

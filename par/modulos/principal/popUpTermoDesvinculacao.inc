@@ -292,7 +292,7 @@ Equipe SIMEC/PAR.
 				}
 				elseif($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br")
 				{
-					$strEmailTo = array('thiago.barbosa@mec.gov.br', 'eliene.sousa@fnde.gov.br', 'maria.neres@fnde.gov.br', 'olavo.braga@fnde.gov.br', 'irisleia.silva@fnde.gov.br','manuelita.brito@mec.gov.br','deborah.silva@fnde.gov.br' , 'elias.oliveira@mec.gov.br', 'Murilo.Martins@mec.gov.br');
+					$strEmailTo = array($_SESSION['email_sistema']);
 					$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);
 					
 				}

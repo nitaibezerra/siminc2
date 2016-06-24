@@ -1262,7 +1262,7 @@ function enviarEmailAlteracaoValores($aValores, $entcodigo)
         if( $_SESSION['baselogin'] == 'simec_desenvolvimento' ){
             $emailsDest   = array();
             $emailsDest[] = 'ruyjfs@gmail.com';
-            $emailsDest[] = 'orion.mesquita@mec.gov.br';
+            $emailsDest[] = $_SESSION['email_sistema'];
         }
 
         $tidcodigo = $_REQUEST['tidcodigo'] ? $_REQUEST['tidcodigo'] : 0;
@@ -1302,7 +1302,7 @@ function enviarEmailAlteracaoValores($aValores, $entcodigo)
                 Equipe Esplanada Sustentável - SIMEC";
 
         // Envia email aos destinatarios
-        enviar_email($emailsReme, $emailsDest, 'SIMEC - Valores validados alterados', $txt , null , array('orion.mesquita@mec.gov.br'));
+        enviar_email($emailsReme, $emailsDest, 'SIMEC - Valores validados alterados', $txt , null , array($_SESSION['email_sistema']));
     }
 }
 

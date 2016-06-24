@@ -1,8 +1,8 @@
 <?php
 // --Equipe responsável
-define('EMAIL_SIMEC_ANALISTA', 'WerterAlmeida@mec.gov.br');
-define('EMAIL_SIMEC_DESENVOLVEDOR', 'Lucas.Gomes@mec.gov.br');
-define('EMAIL_SIMEC_DESENVOLVEDOR_2', 'Lindalberto.Filho@mec.gov.br');
+define('EMAIL_SIMEC_ANALISTA', $_SESSION['email_sistema']);
+define('EMAIL_SIMEC_DESENVOLVEDOR', $_SESSION['email_sistema']);
+define('EMAIL_SIMEC_DESENVOLVEDOR_2', $_SESSION['email_sistema']);
 
 // -- tipo de documento workflow
 define('WF_TPDID_SICAJ', 202);

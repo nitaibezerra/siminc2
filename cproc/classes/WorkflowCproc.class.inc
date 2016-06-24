@@ -379,9 +379,7 @@ class WorkflowCproc
 		);
 
 		// para teste de envio de email
-		// $destinatario = array(
-  		//     'usunome' => 'SÁVIO RESENDE DA COSTA',
-  		//     'usuemail' => 'savio.costa@mec.gov.br');
+
 
 		$assunto = "Impressão, assinatura e numeração do documento";
 		$conteudo = $_POST['cmddsc'] . "<br/><br/>Atenciosamente,<br/>Equipe SIMEC. ";

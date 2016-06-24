@@ -1,7 +1,7 @@
 <?php
 	include_once APPRAIZ . "global/config.inc";
 
-	global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $email_sistema,$servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
+	global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
 	
 	define('AUTHSSD', false);
     

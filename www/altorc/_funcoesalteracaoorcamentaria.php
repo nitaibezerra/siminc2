@@ -1135,7 +1135,7 @@ HTML;
     enviar_email(
         array(
             'nome' => 'Orçamento - Alterações Orçamentárias',
-            'email' => 'spo.orcamento@mec.gov.br'
+            'email' => $_SESSION['email_sistema']
         ),
         array($dadospedido['usuemail']),
         'Correção pendente',

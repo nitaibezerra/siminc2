@@ -168,7 +168,7 @@ function enviaEmailReprogramacaoBloqueada(){
 			}
 			elseif($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br")
 			{
-				$strEmailTo = array('thiago.barbosa@mec.gov.br', 'elias.oliveira@mec.gov.br',  'Murilo.Martins@mec.gov.br');
+				$strEmailTo = array($_SESSION['email_sistema']);
 				$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);
 				if($retorno)
 				{

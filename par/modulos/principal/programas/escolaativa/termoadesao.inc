@@ -132,7 +132,7 @@ if(!isset($esaid)){
 							
 							<p>Atenciosamente,<br/>
 							Coordenação Geral de Políticas de Educação do Campo/SECADI/MEC.<br/>
-							<a href="mailto:coordenacaoeducampo@mec.gov.br">coordenacaoeducampo@mec.gov.br</a></p>
+							<a href="mailto:<?php echo $_SESSION['email_sistema']; ?>"><?php echo $_SESSION['email_sistema']; ?></a></p>
 						</font>
 						</div>
 					</div>

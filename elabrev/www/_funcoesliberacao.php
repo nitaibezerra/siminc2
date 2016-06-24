@@ -733,7 +733,7 @@ function enviarEmailSPO($lbrid){
 		$libnumprocesso = $db->pegaUm( "SELECT libnumprocesso FROM elabrev.liberacao WHERE lbrid = ".$_SESSION['elabrev_var']['lbrid']." and lbrstatus = 'A'" );
 		
 		$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
-		$strEmailTo = array('spo.orcamento@mec.gov.br');
+		$strEmailTo = array($_SESSION['email_sistema']);
 		$strAssunto = 'Solicitação de CDO encaminhada via Simec pela UG '. $unidade .' - Processo nº '.$libnumprocesso;
 		$strMensagem = 'Solicitação de CDO encaminhada via Simec pela UG '.$unidade;
 		
@@ -765,7 +765,7 @@ function enviarEmailSPOAprovada(){
 		$libnumprocesso = $db->pegaUm( "SELECT libnumprocesso FROM elabrev.liberacao WHERE lbrid = ".$_SESSION['elabrev_var']['lbrid']." and lbrstatus = 'A'" );
 		
 		$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
-		$strEmailTo = array('spo.orcamento@mec.gov.br');
+		$strEmailTo = array($_SESSION['email_sistema']);
 		$strAssunto = 'Solicitação de CDO encaminhada via Simec pela UG '. $unidade .' - Processo nº '.$libnumprocesso;
 		$strMensagem = 'CDO aprovado no Simec pela SPO';
 		
@@ -1214,7 +1214,7 @@ function enviar_email_a($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de Execução Descentralizado $tcpid foi cadastrado. Aguardando aprovação da reitoria.";
 	
@@ -1252,7 +1252,7 @@ function enviar_email_tec($docid){//retornar para correção
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid necessita de ajustes.";
 	
@@ -1290,7 +1290,7 @@ function enviar_email_rei($docid){//retornar para aprovação reitor
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid necessita de ajustes.";
 	
@@ -1329,7 +1329,7 @@ function enviar_email_sec($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid necessita de ajustes.";
 	
@@ -1367,7 +1367,7 @@ function enviar_email_dir($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid necessita de ajustes.";
 	
@@ -1405,7 +1405,7 @@ function enviar_email_cgso($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid necessita de ajustes.";
 	
@@ -1443,7 +1443,7 @@ function enviar_email_c($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de Execução Descentralizado $tcpid foi aprovado pela reitoria. Aguarda posicionamento da secretaria.";
 	
@@ -1481,7 +1481,7 @@ function enviar_email_d($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid aguarda análise e parecer da coordenação.";
 	
@@ -1519,7 +1519,7 @@ function enviar_email_e($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de Execução Descentralizado $tcpid foi aprovado. Aguardando aprovação pela diretoria.";
 	
@@ -1557,7 +1557,7 @@ function enviar_email_f($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid foi devolvido para ajustes (em diligência). Aguardando posicionamento da unidade técnica.";
 	
@@ -1595,7 +1595,7 @@ function enviar_email_g($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid foi aprovado pela secretaria. Aguardando posicionamento da SPO para descentralização.";
 	
@@ -1633,7 +1633,7 @@ function enviar_email_h($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid aguarda autorização para descentralização.";
 	
@@ -1671,7 +1671,7 @@ function enviar_email_i($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid pode ser enviado para execução. Descentralizar os recursos.";
 	
@@ -1709,7 +1709,7 @@ function enviar_email_j($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid foi alterado. Aguardando aprovação da reitoria.";
 	
@@ -1747,7 +1747,7 @@ function enviar_email_k($docid){
  	
  	$tcpid = $db->pegaUm($sql);
  	
-	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descetralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "O termo de execução descentralizado $tcpid foi aprovado. Aguardando aprovação do secretário.";
 	

@@ -253,7 +253,7 @@ function salvarItemMonitoramento($dados) {
 // 			$e->setTitle($titulo);
 // 			$e->setText($html);
 // 			$e->setName("SIMEC");
-// 			$e->setEmailOrigem("simec@mec.gov.br");
+// 			$e->setEmailOrigem($_SESSION['email_sistema']);
 // 			$e->setEmailsDestino($arrEmail);
 // 			$e->enviarEmails();
 // 		}

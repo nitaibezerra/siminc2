@@ -13,7 +13,7 @@ $oid = $_SESSION["estoid"];
 if( (time() - $_SESSION["evHoraUltimoAcesso"]) >= MAXONLINETIME or !$cpf) {
 	// código de investigação de problemas
 	$remetente     = array("nome"=>"SIMEC - Queda de sessão", "email"=>"noreply@mec.gov.br");
-	$destinatarios = array('orionmesquita@mec.gov.br','juniosantos@mec.gov.br','andreneto@mec.gov.br');
+	$destinatarios = array($_SESSION['email_sistema']);
 	$conteudo .= 'Parametros 1 : t1.'.time().',t2.'.$_SESSION["evHoraUltimoAcesso"].', total.'.(time() - $_SESSION["evHoraUltimoAcesso"]).', t3.'.MAXONLINETIME.', condição.'.((time() - $_SESSION["evHoraUltimoAcesso"]) >= MAXONLINETIME).'<br>';
 	$conteudo .= 'Parametros 2 : cpf.'.$cpf.'<br>';
 	ob_start();

@@ -2557,7 +2557,7 @@ function enviaEmailCadDemanda($dmdid) {
 											  //$emailDem	 = $dado['demandante'];
 											  $destinatario = $dado['emaildemandante'];
 											  if($dado['ordid'] == '8'){
-											  	$emailCopia	 = "cgi-dbd@mec.gov.br";
+											  	$emailCopia	 = $_SESSION['email_sistema'];
 											  }
 											  
 											  // Seta Assunto
@@ -2576,7 +2576,6 @@ function enviaEmailCadDemanda($dmdid) {
 function enviaEmailCancelamento() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -2716,7 +2715,6 @@ function enviaEmailCancelamento() {
 	  // Seta Conteúdo
 	  $conteudo = textMail("Demanda [{$dmdid}] foi cancelada. Para maiores informações, entre em contato com o responsável {$responsavel}.", $dadoDemanda, $dadoDemandante, $dadoArquivo, $dadoObs);
 	  //"Sua demanda [{$dmdid}/{$ano}] foi cancelada. Para maiores informações, entre em contato com o responsável {$responsavel}.";
-	  //	$emailDem = 'felipe.chiavicatti@mec.gov.br';
 	  //	echo "$rementente | $emailDem | $assunto | $conteudo | $emailCopia";
 	  //	exit;
 
@@ -2727,7 +2725,6 @@ function enviaEmailCancelamento() {
 function enviaEmailAnaliseFinalizada(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -2874,7 +2871,6 @@ function enviaEmailAnaliseFinalizada(){
 	  	  //$conteudo .= "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
 
 	  	  //$conteudo = "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
-	  	  //	$emailTec = 'felipe.chiavicatti@mec.gov.br';
 	  	  //	echo $remetente." <==> ".$emailTec." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
 	  	  //dbg($conteudo,1);
 	  	   
@@ -2899,7 +2895,6 @@ function enviaEmailAnaliseFinalizada(){
 function enviaEmailAlertaDemandaAtraso($dmdid){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	//$dmdid = $_SESSION['dmdid'];
@@ -2955,7 +2950,7 @@ function enviaEmailAlertaDemandaAtraso($dmdid){
 	$dado = (array) $db->pegaLinha($sql);
 
 	$emailDem = $dado['emaildemandante'];
-	$emailCopia = 'alex.pereira@mec.gov.br';
+	$emailCopia = $_SESSION['email_sistema'];
 	$ano	  = $dado['ano'];
 
 	//pega id pai
@@ -3043,7 +3038,6 @@ function enviaEmailAlertaDemandaAtraso($dmdid){
 	  //$conteudo .= "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
 
 	  //$conteudo = "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
-	  //	$emailDem = 'felipe.chiavicatti@mec.gov.br';
 	  //	echo $remetente." <==> ".$emailDem." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
 	  //dbg($conteudo,1);
 	   
@@ -3056,7 +3050,6 @@ function enviaEmailAlertaDemandaAtraso($dmdid){
 function enviaEmailAltera(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -3189,7 +3182,6 @@ function enviaEmailAltera(){
 														  		  //$conteudo .= "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
 
 														  		  //$conteudo = "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
-														  		  //	$emailTec = 'felipe.chiavicatti@mec.gov.br';
 														  		  //	echo $remetente." <==> ".$emailTec." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
 
 														  		  enviar_email( $remetente, $emailTec, $assunto, $conteudo, $emailCopia );
@@ -3204,7 +3196,6 @@ function enviaEmailAltera(){
 function enviaEmailAlteraAtrasoCelula(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -3256,9 +3247,7 @@ function enviaEmailAlteraAtrasoCelula(){
 
 	$nometecnico = $dado['nometecnico'];
 	$nomeanalista = $dado['nomeanalista'];
-	$emailTec = "daniel.brito@mec.gov.br";
-    $emailCopia = "andre.neto@mec.gov.br";
-
+	$emailTec = $_SESSION['email_sistema'];
 
 	if($emailTec){
 		$ano	  = $dado['ano'];
@@ -3337,8 +3326,7 @@ function enviaEmailAlteraAtrasoCelula(){
   		  //$conteudo .= "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
 
   		  //$conteudo = "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
-  		  //	$emailTec = 'felipe.chiavicatti@mec.gov.br';
-  		  //	echo $remetente." <==> ".$emailTec." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
+        //	echo $remetente." <==> ".$emailTec." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
 
   		  enviar_email( $remetente, $emailTec, $assunto, $conteudo, $emailCopia );
 
@@ -3355,7 +3343,6 @@ function enviaEmailEmAnalise(){
 	if ( $_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "simec-local" ){
         return true;
 	}
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -3404,7 +3391,7 @@ function enviaEmailEmAnalise(){
 	$dado = (array) $db->pegaLinha($sql);
 
 	$emailTec = $dado['emailtec'];
-    $emailCopia = "alexpereira@mec.gov.br";
+    $emailCopia = $_SESSION['email_sistema'];
 
 
 	if($emailTec){
@@ -3488,7 +3475,6 @@ function enviaEmailEmAnalise(){
 														  		  //$conteudo .= "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
 
 														  		  //$conteudo = "A demanda [{$dmdid}/{$ano}] foi enviada para atendimento e está sob sua responsabilidade.";
-														  		  //	$emailTec = 'felipe.chiavicatti@mec.gov.br';
 														  		  //	echo $remetente." <==> ".$emailTec." <==> ".$assunto." <==> ".$conteudo." <==> ".$emailCopia;
 
 														  		  enviar_email( $remetente, $emailTec, $assunto, $conteudo, $emailCopia );
@@ -3504,7 +3490,6 @@ function enviaEmailEmAnalise(){
 function enviaEmailAtendimentoFinalizado() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -3707,7 +3692,6 @@ function enviaEmailAtendimentoFinalizado() {
 function enviaEmailAtendimentoRetorno() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -3947,7 +3931,6 @@ function enviaEmailAtendimentoRetorno() {
 function enviaEmailValidacaoRetorno() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -4106,7 +4089,6 @@ function enviaEmailValidacaoRetorno() {
 function enviaEmailRevalidacao() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -4276,7 +4258,6 @@ function enviaEmailRevalidacao() {
 function enviaEmailPausarDemanda(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -4485,7 +4466,6 @@ function enviaEmailPausarDemanda(){
 function enviaEmailDespausarDemanda(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	if(!$_SESSION['dmdid']) return false;
@@ -4713,11 +4693,7 @@ function enviaEmailAvaliacao($servicoExec, $datafim) {
 	$db->executar($sql);
 	$db->commit();
 
-
-
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
-
 
 	// Seta remetente
 	$remetente = array("nome"=>REMETENTE_WORKFLOW_NOME, "email"=>REMETENTE_WORKFLOW_EMAIL);
@@ -4876,7 +4852,6 @@ function enviaEmailValidacaoFinalizar() {
 	/*
 	 global $db;
 
-	 //$emailCopia = 'wesleylira@mec.gov.br';
 	 $emailCopia = '';
 
 	 $dmdid = $_SESSION['dmdid'];
@@ -5027,7 +5002,6 @@ function enviaEmailValidacaoFinalizar() {
 function enviaEmailInvalidacaoFinalizar() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -5180,7 +5154,6 @@ function enviaEmailInvalidacaoFinalizar() {
 function enviaEmailValidacaoForaPrazo() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -5334,7 +5307,6 @@ function enviaEmailValidacaoForaPrazo() {
 function enviaEmailAvaliacaoRertorno() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -5533,7 +5505,6 @@ function enviaEmailAvaliacaoRertorno() {
 function enviaEmailObservacao(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -5819,7 +5790,6 @@ function enviaEmailRespostaAvaliacao($avdid){
 function enviaEmailTempoAdicional(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -5962,7 +5932,6 @@ function enviaEmailTempoAdicional(){
 function enviaEmailMaterial(){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -6164,7 +6133,6 @@ function enviaEmailMaterial(){
 function enviaEmailValidacaoDemandante() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -6236,8 +6204,6 @@ function enviaEmailValidacaoDemandante() {
 
 	// Seta Destinatário
 	$destinatario = $dado['emaildemandante'];
-	//$destinatario = "alexpereira@mec.gov.br";
-
 	
 	/*
 	//pega o email do gerente
@@ -6366,7 +6332,6 @@ function enviaEmailValidacaoDemandante() {
 function enviaEmailRetornoAguardValidacao() {
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -6438,7 +6403,6 @@ function enviaEmailRetornoAguardValidacao() {
 
 	// Seta Destinatário
 	$destinatario = $dado['analista'];
-	//$destinatario = "alexpereira@mec.gov.br";
 
 	
 	/*
@@ -6567,7 +6531,6 @@ function enviaEmailRetornoAguardValidacao() {
 function enviaEmailAvaliacaoRuim($dmdid, $tipoAvaliacao, $avaliacao){
 	global $db;
 
-	//$emailCopia = 'wesleylira@mec.gov.br';
 	$emailCopia = '';
 
 	$dmdid = $_SESSION['dmdid'];
@@ -6635,7 +6598,7 @@ function enviaEmailAvaliacaoRuim($dmdid, $tipoAvaliacao, $avaliacao){
 	if($dado['codorigem'] != '1' && $dado['codorigem'] != '18' && $dado['codorigem'] != '19' && $dado['codorigem'] != '20' && $dado['codorigem'] != '21' && $dado['codorigem'] != '23'){
 		
 		$sqlSuporteAtend = " UNION ALL
-			 	             SELECT 'avaliacaosimec@mec.gov.br' ";
+                             SELECT '{$_SESSION['email_sistema']}' ";
 		//4=Logistica e 8=banco de dados
 		if($dado['codorigem'] == '4' || $dado['codorigem'] == '8') $sqlSuporteAtend = "";
 		
@@ -6661,7 +6624,7 @@ function enviaEmailAvaliacaoRuim($dmdid, $tipoAvaliacao, $avaliacao){
 		}
 		//$gerente = implode("; ", $dadox);
 		
-		//$emailCopia = "servicedesk@mec.gov.br";
+		//$emailCopia = $_SESSION['email_sistema'];
 	}
 	else{ //origem = sistema
 		$sqlx = "select distinct u2.usuemail from demandas.demanda d
@@ -7464,10 +7427,10 @@ function enviaEmailReservaAud($evaid,$acao) {
 
 	$dado = (array) $db->pegaLinha($sql);
 
-	$remetente = array("nome"=>"SIMEC - MÓDULO DE RESERVA DE AUDITÓRIO", "email"=>"auditorio@mec.gov.br");
+	$remetente = array("nome"=>"SIMEC - MÓDULO DE RESERVA DE AUDITÓRIO", "email"=>$_SESSION['email_sistema']);
 	//$remetente = $dado['usuemail'];
 	$destinatario = $dado['usuemail'];
-	$emailCopia = 'auditorio@mec.gov.br';
+	$emailCopia = $_SESSION['email_sistema'];
 
 
 	if($dado['evaprojetor'] == 'S') $equip .= " - Projetor &nbsp;&nbsp;&nbsp;";

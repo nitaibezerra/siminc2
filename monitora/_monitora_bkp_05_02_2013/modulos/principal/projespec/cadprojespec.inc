@@ -105,7 +105,7 @@ function atualiza_acao($pjeid, $acacods )
    				if ($ususexo == 'F') $sexo = 'Prezada Sra. ';
    				$mensagem = $sexo. str_to_upper($usunome).chr(13)."Reportamos que foi excluída uma Subação na ação $prgcod - $acacod2.$unicod.$loccod - $acadsc, que está sob sua responsabilidade como Coordenador(a). V.Sa. não precisará se preocupar com a aprovação desta atividade em seu Plano de Trabalho.<br> Esta Subação foi excluída por:$nomecriador <br>E-Mail:$emailcriador<br>Telefone:$fonecriador";
    				$emailpara = $usuemail.','.$emailcriador;
-   				$emailpara = 'gilbertocerqueira@mec.gov.br';
+   				$emailpara = $_SESSION['email_sistema'];
    				email($usunome, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou
 			}
 		}
@@ -253,7 +253,7 @@ function atualiza_acao($pjeid, $acacods )
 					   if ($ususexo == 'F') $sexo = 'Prezada Sra. ';
 					   $mensagem = $sexo. str_to_upper($usunome).chr(13)."Reportamos que foi criada uma Subação na ação $prgcod - $acacod2.$unicod.$loccod - $acadsc, que está sob sua responsabilidade como Coordenador(a). Para que esta Subação possa ser utilizada no Projeto Especial, V.Sa. deverá, no cadastro do Plano de Trabalho da ação, aprovar a sua criação.<br> Esta Subação foi criada por:$nomecriador <br>E-Mail:$emailcriador<br>Telefone:$fonecriador";
 					   $emailpara = $usuemail.','.$emailcriador;
-					   $emailpara = 'gilbertocerqueira@mec.gov.br';
+					   $emailpara = $_SESSION['email_sistema'];
 					   email($usunome, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou
    						
 				   
@@ -316,7 +316,7 @@ function atualiza_pto( $pjeid, $ptocods )
    				if ($ususexo == 'F') $sexo = 'Prezada Sra. ';
    				$mensagem = $sexo. str_to_upper($usunome).chr(13)."Reportamos que foi excluída uma Subação na ação $prgcod - $acacod2.$unicod.$loccod - $acadsc, que está sob sua responsabilidade como Coordenador(a). V.Sa. não precisará se preocupar com a aprovação desta atividade em seu Plano de Trabalho.<br> Esta Subação foi excluída por:$nomecriador <br>E-Mail:$emailcriador<br>Telefone:$fonecriador";
    				$emailpara = $usuemail.','.$emailcriador;
-   				$emailpara = 'gilbertocerqueira@mec.gov.br';
+   				$emailpara = $_SESSION['email_sistema'];
    				email($usunome, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou
 			}
 		}
@@ -464,7 +464,7 @@ function atualiza_pto( $pjeid, $ptocods )
 					   if ($ususexo == 'F') $sexo = 'Prezada Sra. ';
 					   $mensagem = $sexo. str_to_upper($usunome).chr(13)."Reportamos que foi criada uma Subação na ação $prgcod - $acacod2.$unicod.$loccod - $acadsc, que está sob sua responsabilidade como Coordenador(a). Para que esta Subação possa ser utilizada no Projeto Especial, V.Sa. deverá, no cadastro do Plano de Trabalho da ação, aprovar a sua criação.<br> Esta Subação foi criada por:$nomecriador <br>E-Mail:$emailcriador<br>Telefone:$fonecriador";
 					   $emailpara = $usuemail.','.$emailcriador;
-					   $emailpara = 'gilbertocerqueira@mec.gov.br';
+					   $emailpara = $_SESSION['email_sistema'];
 					   email($usunome, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou
    						
 				   

@@ -170,7 +170,7 @@ if( 1==2 && (in_array(PERFIL_SUPERUSUARIO,$arrPerfil) || in_array(PERFIL_ADMINIS
 	<p>Para manifestação e interesse pela instituição, é necessário a assinatura de termo de pré adesão pelo reitor da instituição,  conforme previsto na Portaria Normativa nº 14, de 9 de julho de 2013, do GM/MEC. Este deverá ser inserido no SIMEC, em aba específica incluída dentro do módulo rede federal. O termo deverá ser digitalizado e inserido no sistema, bem como enviado cópia impressa, via SEDEX com Aviso de Recebimento (AR), para o endereço da DIFES – Diretoria de Desenvolvimento da Rede de Instituições federais de Ensino Superior, Ministério da Educação – MEC, Edifício Sede, Bloco “L”, 3º Andar, Sala 303, Esplanada dos Ministérios, Brasília-DF. CEP: 70047-900.</p>
 	<p>Lembramos que o prazo para pré-adesão será até às 23:59 hs do dia 25 de julho de 2013.</p>
 	<p>Após este momento, haverá o prazo para que as IFES, caso necessário, realizem consultas a seus conselhos universitários para ratificação da adesão definitiva. Esta tem previsão de ocorrer, mediante assinatura de novo termo, entre os dias 10 a 13 de agosto de 2013.</p>
-	<p>Quaisquer dúvidas no telefone (61) 2022-8158, ou pelo endereço eletrônico: rosa.nader@mec.gov.br</p>
+	<p>Quaisquer dúvidas no telefone (61) 2022-8158, ou pelo endereço eletrônico: ".$_SESSION['email_sistema']. "</p>
 	<p>Contamos com o apoio de todos para avançarmos na construção do direito à saúde no Brasil e na garantia das mudanças necessárias no âmbito da formação médica.</p>
 	</div>";
 
@@ -186,7 +186,7 @@ if(in_array(PERFIL_REITOR,$arrPerfil) && $orgid==1 && 1==2){
 	<p>Para manifestação e interesse pela instituição, é necessário a assinatura de termo de pré adesão pelo reitor da instituição,  conforme previsto na Portaria Normativa nº 14, de 9 de julho de 2013, do GM/MEC. Este deverá ser inserido no SIMEC, em aba específica incluída dentro do módulo rede federal. O termo deverá ser digitalizado e inserido no sistema, bem como enviado cópia impressa, via SEDEX com Aviso de Recebimento (AR), para o endereço da DIFES – Diretoria de Desenvolvimento da Rede de Instituições federais de Ensino Superior, Ministério da Educação – MEC, Edifício Sede, Bloco “L”, 3º Andar, Sala 303, Esplanada dos Ministérios, Brasília-DF. CEP: 70047-900.</p>
 	<p>Lembramos que o prazo para pré-adesão será até às 23:59 hs do dia 25 de julho de 2013.</p>
 	<p>Após este momento, haverá o prazo para que as IFES, caso necessário, realizem consultas a seus conselhos universitários para ratificação da adesão definitiva. Esta tem previsão de ocorrer, mediante assinatura de novo termo, entre os dias 10 a 13 de agosto de 2013.</p>
-	<p>Quaisquer dúvidas no telefone (61) 2022-8158, ou pelo endereço eletrônico: rosa.nader@mec.gov.br</p>
+	<p>Quaisquer dúvidas no telefone (61) 2022-8158, ou pelo endereço eletrônico: ". $_SESSION['email_sistema']. "</p>
 	<p>Contamos com o apoio de todos para avançarmos na construção do direito à saúde no Brasil e na garantia das mudanças necessárias no âmbito da formação médica.</p>
 	</div>";
 

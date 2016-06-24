@@ -622,8 +622,8 @@ function enviaAbatimentoWS( $sbaid ){
 			$retorno['cod'] = $enviarSuspensaoCobrancaOut->output->exceptionCode;
 			$retorno['txt'] = utf8_decode($enviarSuspensaoCobrancaOut->output->exceptionMessage);
 			$retorno['boo'] = false;
-			$remetente = array('nome'=>'FIES - Abatimento 1% Erro WS Suspensão', 'email'=>'simec@mec.gov.br');
-			enviar_email($remetente, 'alex.pereira@mec.gov.br', 'Erro WS Suspensão', $retorno['txt'], $cc, $cco );
+			$remetente = array('nome'=>'FIES - Abatimento 1% Erro WS Suspensão', 'email'=>$_SESSION['email_sistema']);
+			enviar_email($remetente, $_SESSION['email_sistema'], 'Erro WS Suspensão', $retorno['txt'], $cc, $cco );
 			return $retorno;
 		}
 		
@@ -650,8 +650,8 @@ function enviaAbatimentoWS( $sbaid ){
 	} catch (Exception $e) {
 // 		  		ver(simec_htmlentities($cliente->__getLastRequest()),d);
 		$erro = "Erro do WS: ".$e->getMessage();
-		$remetente = array('nome'=>'FIES - Abatimento 1% Erro WS Suspensão', 'email'=>'simec@mec.gov.br');
-		enviar_email($remetente, 'alex.pereira@mec.gov.br', 'Erro WS Suspensão', $erro, $cc, $cco );
+		$remetente = array('nome'=>'FIES - Abatimento 1% Erro WS Suspensão', 'email'=>$_SESSION['email_sistema']);
+		enviar_email($remetente, $_SESSION['email_sistema'], 'Erro WS Suspensão', $erro, $cc, $cco );
 		//   		$erro = "Erro do WS: ".simec_htmlentities($cliente->__getLastRequest());
 		$retorno['txt'] = $erro;
 		$retorno['boo'] = false;
@@ -3882,7 +3882,7 @@ function enviaEmailAprovacaoParcial( $atpid ){
 				mat.atpid = $atpid";
 	$qtdAprovados = $db->pegaUm($sql);
 	
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Solicitação Aprovada - FIES - Abatimento 1%";
 	
@@ -3900,7 +3900,7 @@ function enviaEmailAprovacaoParcial( $atpid ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES</p>";
 	
-	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 	
 	enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
 }
@@ -3984,7 +3984,7 @@ function enviaEmailReabertura( $atpid ){
 		}
 	}
 	
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Solicitação Reaberta - FIES - Abatimento 1%";
 	
@@ -4009,7 +4009,7 @@ function enviaEmailReabertura( $atpid ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES</p>";
 	
-	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 	
 	if ( $_SERVER['HTTP_HOST'] != "simec-local" ){
        enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
@@ -4103,7 +4103,7 @@ function enviaEmailRejeicaoAtuacao( $atpid ){
 		}
 	}
 
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Atuação profissional rejeitada - FIES - Abatimento 1%";
 
@@ -4119,7 +4119,7 @@ function enviaEmailRejeicaoAtuacao( $atpid ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES</p>";
 
-	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 
 	if ( $_SERVER['HTTP_HOST'] != "simec-local" ){
 		enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
@@ -4207,7 +4207,7 @@ function enviaEmailRejeicao( $sbaid ){
 		}
 	}
 	
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Solicitação Rejeitada - FIES - Abatimento 1%";
 	
@@ -4221,7 +4221,7 @@ function enviaEmailRejeicao( $sbaid ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES</p>";
 	
-	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 	
 	if ( $_SERVER['HTTP_HOST'] != "simec-local" ){
 		enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
@@ -4285,7 +4285,7 @@ function enviaEmailAprovacao( $sbaid ){
 			}
 		}
 		
-		$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+		$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 		
 		$assunto  = "Solicitação Aprovada - FIES - Abatimento 1%";
 		
@@ -4303,7 +4303,7 @@ function enviaEmailAprovacao( $sbaid ){
 					<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 					<p>Agente Operador do FIES</p>";
 		
-		if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+		if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 		
 		if ( $_SERVER['HTTP_HOST'] != "simec-local" ){
 			enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
@@ -4330,7 +4330,7 @@ function enviaEmailEviadoBanco( $sbaid ){
 		$txSuspensao = "<p>Seu pedido foi efetuado com sucesso. A efetivação do abatimento será realizada em {$docente['dtsuspensao']} juntamente com a suspensão das prestações do financiamento, se for o caso.</p>";
 	}		
 
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Solicitação Rejeitada - FIES - Abatimento 1%";
 	
@@ -4346,7 +4346,7 @@ function enviaEmailEviadoBanco( $sbaid ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES</p>";
 
-	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $docente['email'] = $_SESSION['email_sistema'];
 
 	enviar_email($remetente, $docente['email'], $assunto, $conteudo, $cc, $cco );
 }
@@ -4438,7 +4438,7 @@ function verificaSolicitacoesDecursoPrazo(){
 				$test = wf_alterarEstado( $solicitacao['docid'], WF_FIES1_REJEITAR_PRAZO_ABATIMENTO, 'ejeitado por decurso de prazo.', array('docid'=>$solicitacao['docid'] ) );
 				
 				//Email Professor
-				$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+				$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 				
 				$assunto  = "Solicitação Rejeitada por Decurso de Prazo - FIES - Abatimento 1%";
 				
@@ -4452,7 +4452,7 @@ function verificaSolicitacoesDecursoPrazo(){
 							<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 							<p>Agente Operador do FIES.</p>";
 				
-				if( $_SESSION['usucpforigem'] == '' ) $solicitacao['email'] = 'alex.pereira@mec.gov.br';
+				if( $_SESSION['usucpforigem'] == '' ) $solicitacao['email'] = $_SESSION['email_sistema'];
 				
 				enviar_email($remetente, $solicitacao['email'], $assunto, $conteudo, $cc, $cco );
 				
@@ -4470,7 +4470,7 @@ function verificaSolicitacoesDecursoPrazo(){
 				if( is_array($secretarios) ){
 					foreach( $secretarios as $secretario ){
 						
-						if( $_SESSION['usucpforigem'] == '' ) $secretario['email'] = 'alex.pereira@mec.gov.br';
+						if( $_SESSION['usucpforigem'] == '' ) $secretario['email'] = $_SESSION['email_sistema'];
 						
 						enviarEmailSecretarioRejeitaPrazo( $secretario['usuemail'], $solicitacao['nome'], $solicitacao['cpf'] );
 					}
@@ -4489,7 +4489,7 @@ function verificaSolicitacoesDecursoPrazo(){
 				if( is_array($secretarios) ){
 					foreach( $secretarios as $secretario ){
 						
-						if( $_SESSION['usucpforigem'] == '' ) $secretario['email'] = 'alex.pereira@mec.gov.br';
+						if( $_SESSION['usucpforigem'] == '' ) $secretario['email'] = $_SESSION['email_sistema'];
 						
 						enviarEmailSecretarioRejeitaPrazo( $secretario['usuemail'], $solicitacao['nome'], $solicitacao['cpf'] );
 					}
@@ -4501,7 +4501,7 @@ function verificaSolicitacoesDecursoPrazo(){
 
 function enviarEmailSecretarioRejeitaPrazo( $email, $nome, $cpf ){
 	
-	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'FIES - Abatimento 1%', 'email'=>$_SESSION['email_sistema']);
 	
 	$assunto  = "Solicitação Rejeitada por Decurso de Prazo - FIES - Abatimento 1%";
 	
@@ -4513,7 +4513,7 @@ function enviarEmailSecretarioRejeitaPrazo( $email, $nome, $cpf ){
 				<p>Fundo Nacional de Desenvolvimento da Educação - FNDE</p>
 				<p>Agente Operador do FIES.</p>";
 	
-	if( $_SESSION['usucpforigem'] == '' ) $email = 'alex.pereira@mec.gov.br';
+	if( $_SESSION['usucpforigem'] == '' ) $email = $_SESSION['email_sistema'];
 	
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 }

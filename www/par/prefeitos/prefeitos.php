@@ -3339,7 +3339,7 @@ $arrProinfantil = $db->pegaLinha($sql);
 							É por meio deste sistema que os recursos de vários programas são viabilizados para as escolas. <br><br>
 
 							Os municípios que ainda não cadastraram o comitê municipal do PDDE-Interativo – que é responsável por prover acesso das escolas ao sistema – 
-							devem entrar em contato com os técnicos do Ministério da Educação, por meio do e-mail pddeinterativo@mec.gov.br, 
+							devem entrar em contato com os técnicos do Ministério da Educação, por meio do e-mail <?php echo $_SESSION['email_sistema']; ?>, 
 							disponível no sítio <a href="http://pddeinterativo.mec.gov.br/">http://pddeinterativo.mec.gov.br/</a>, pedindo acesso para o Secretário de Educação ao sistema. 
 							O Secretário de Educação, por sua vez, ao acessar o sistema, deve definir os integrantes do Comitê Municipal do PDDE-Interativo que serão responsáveis por 
 							identificar os diretores de cada escola de sua rede de ensino. Este comitê também é responsável por atribuir login e senha para os diretores de 

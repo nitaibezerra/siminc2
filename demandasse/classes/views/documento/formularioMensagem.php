@@ -7,7 +7,6 @@ if($prcid_dest){
 	$ecpemailpara = $db->pegaUm("select prcremailesponsavel from demandasse.procedencia where prcstatus = 'A' and prcid = ".$prcid_dest);
 }
 
-//$ecpemailpara = 'kamyla.sakamoto@mec.gov.br';
 ?>
 
 <div class="container" id="myModal">

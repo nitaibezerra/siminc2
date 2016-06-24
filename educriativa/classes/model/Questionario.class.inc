@@ -79,7 +79,7 @@ class Educriativa_Model_Questionario extends Modelo {
 Sua inscrição na Chamada Pública Inovação e Criatividade na Educação Básica foi finalizada corretamente.
 Obrigado por sua participação.
 </pre>";
-            simec_email(array('nome'=>'Inovação e Criatividade na Educação Básica', 'email'=>'simec@mec.gov.br'), $participante->paremail, $assunto, $conteudo);
+            simec_email(array('nome'=>'Inovação e Criatividade na Educação Básica', 'email'=>$_SESSION['email_sistema']), $participante->paremail, $assunto, $conteudo);
         }
     }
 

@@ -182,7 +182,7 @@ $dados = $db->carregar($sql);
 		<td>
 		<p>Informe quem são as pessoas que exercerão função pedagógica no curso. O sistema apresenta as funções disponíveis e os quantitativos de bolsas cadastradas no projeto validado pelo MEC, que não podem ser alteradas.</p>
 		<p>Ao lado de cada função, clique no [+] para abrir a caixa de texto. Insira o CPF, o e-mail ativo e a quantidade de bolsas que aquela pessoa irá receber enquanto atuar no curso. Não importa quando esta pessoa começará a receber as bolsas, deve-se cadastrar todas as pessoas que, ao longo do curso, irão atuar nas respectivas funções, até o limite de bolsas autorizadas para cada função.</p>
-		<p>O sistema permite, mas NÃO É RECOMENDÁVEL concluir o cadastramento sem vincular todas as pessoas e suas bolsas, pois é desejável que, antes de iniciar o curso, toda a equipe pedagógica esteja articulada, mesmo que posteriormente seja necessário fazer substituições. Dúvidas ou problemas com o sistema? Envie um e-mail para sisfor@mec.gov.br.</p> 
+		<p>O sistema permite, mas NÃO É RECOMENDÁVEL concluir o cadastramento sem vincular todas as pessoas e suas bolsas, pois é desejável que, antes de iniciar o curso, toda a equipe pedagógica esteja articulada, mesmo que posteriormente seja necessário fazer substituições. Dúvidas ou problemas com o sistema? Envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>.</p> 
 		</td>
 		</tr>
 		</table>

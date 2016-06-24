@@ -217,11 +217,11 @@ foreach( $arrObras as $obra ){
 	$assunto  = "Confirmação de abertura de Reformulação de obras de construção de creches em metodologias inovadoras para convencional.";
 
 	if( $_SERVER['SERVER_NAME'] == 'simec-d' || $_SERVER['SERVER_NAME'] == 'simec-d.mec.gov.br' ){
-		$email = Array("eduardoneto@mec.gov.br", "murilo.martins@mec.gov.br", "ThiagoBarbosa@mec.gov.br");
+		$email = Array($_SESSION['email_sistema']);
 	}else{
 		$email = Array($entemail);
 	}
-	// 	$email = Array("ThiagoBarbosa@mec.gov.br", "eduardoneto@mec.gov.br", "murilo.martins@mec.gov.br", "adriana.montemezzo@fnde.gov.br", "fabio.cardoso@fnde.gov.br");
+	// 	$email = Array($_SESSION['email_sistema']);
 	if( $entemail ){
 // 		enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
 	}

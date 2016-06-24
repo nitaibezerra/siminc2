@@ -184,7 +184,7 @@ if($_POST){
 			if($dado['codorigem'] != '1'){
 				
 				$sqlSuporteAtend = " UNION ALL
-					 	             SELECT 'avaliacaosimec@mec.gov.br' ";
+					 	             SELECT '{$_SESSION['email_sistema']}' ";
 				//4=Logistica e 8=banco de dados
 				if($dado['codorigem'] == '4' || $dado['codorigem'] == '8') $sqlSuporteAtend = "";
 				
@@ -201,7 +201,6 @@ if($_POST){
 				$dadox = (array) $db->carregarColuna($sqlx);
 				//$gerente = implode("; ", $dadox);
 				
-				//$emailCopia = "servicedesk@mec.gov.br";
 			}
 			else{ //origem = sistema
 				$sqlx = "select distinct u2.usuemail from demandas.demanda d

@@ -208,7 +208,6 @@ Equipe SIMEC/PAR.
 					{
 							$strEmailTo = $emailExclusao;
 							// Conforme solicitação da manuelita, enviar para o email real no simec-d
-					//$strEmailTo = array('thiago.barbosa@mec.gov.br', 'deborah.silva@fnde.gov.br' , 'manuelita.brito@mec.gov.br', 'eliene.sousa@fnde.gov.br', 'maria.neres@fnde.gov.br', 'olavo.braga@fnde.gov.br', 'irisleia.silva@fnde.gov.br', 'elias.oliveira@mec.gov.br', 'Murilo.Martins@mec.gov.br');
 					$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);
 						
 					}
@@ -392,7 +391,6 @@ Equipe SIMEC/PAR.
 				{
 						
 					// Conforme solicitação da manuelita, enviar para o email real no simec-d
-					//$strEmailTo = array('thiago.barbosa@mec.gov.br', 'manuelita.brito@mec.gov.br', 'deborah.silva@fnde.gov.br'  , 'eliene.sousa@fnde.gov.br', 'maria.neres@fnde.gov.br', 'olavo.braga@fnde.gov.br', 'irisleia.silva@fnde.gov.br','elias.oliveira@mec.gov.br', 'Murilo.Martins@mec.gov.br');
 					$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);
 					
 				}
@@ -830,7 +828,6 @@ Equipe SIMEC/PAR.
 				{
 					$strEmailTo = $dunemail;
 					// Conforme solicitação da manuelita, enviar para o email real no simec-d
-					//$strEmailTo = array('thiago.barbosa@mec.gov.br', 'manuelita.brito@mec.gov.br', 'deborah.silva@fnde.gov.br' , 'eliene.sousa@fnde.gov.br', 'maria.neres@fnde.gov.br', 'olavo.braga@fnde.gov.br', 'irisleia.silva@fnde.gov.br', 'elias.oliveira@mec.gov.br', 'Murilo.Martins@mec.gov.br');
 					$retorno = enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem);
 					
 				}

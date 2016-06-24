@@ -266,7 +266,7 @@ DML;
         enviar_email(
             array( // -- Remetente
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'),
+                'email' => $_SESSION['email_sistema']),
             array( // -- Destinatario
                 'nome' => $usudata['usunome'],
                 'email' => $usudata['usuemail']

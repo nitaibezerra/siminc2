@@ -1540,7 +1540,7 @@ function salvaPDF( $id, $mostraReuni, $mostraTotal, $aritensR, $aritensT ){
 		$PDF->ln(); //quebra de linha
 		$PDF->Cell(19,0.5,'Telefones: (5561) 2022-7839/7840',0,0,'L',0);
 		$PDF->ln(); //quebra de linha
-		$PDF->Cell(19,0.5,'E-mail: luiz.rebello@mec.gov.br',0,0,'L',0);
+		$PDF->Cell(19,0.5,'E-mail: '. $_SESSION['email_sistema'],0,0,'L',0);
 		// ---------------- Fim Em caso de Dùvida ----------------
 		
 	//Insere o registro do arquivo na tabela public.arquivo
@@ -3243,7 +3243,7 @@ if($_SESSION['sig_var']['iscampus'] == 'sim') {
 	Luiz Antonio de Mello Rebello<br />
 	Chefe de Gabinete do Ministro de Estado da Educação<br />
 	Telefones: (5561) 2022-7839/7840<br />
-	E-mail: luiz.rebello@mec.gov.br
+	E-mail: <?php echo $_SESSION['email_sistema']; ?>
 	</td></tr>
 	</table>
 

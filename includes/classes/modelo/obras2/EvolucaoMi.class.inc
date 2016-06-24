@@ -1944,7 +1944,6 @@ class EvolucaoMi extends Modelo {
         if(!empty($dados_responsaveis)){
             foreach ($dados_responsaveis as $key => $usuario) {
                 $destinatario = array($usuario['email']);
-//                $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
                 $dados_email  = $this->montaCorpoEmailTamiteEvolucaoMi($emiid, $arr_dados_tramite_evoMi, $usuario);                
                 $email        = new Email();
                 $email->popularDadosObjeto($dados_email);                    
@@ -1953,7 +1952,6 @@ class EvolucaoMi extends Modelo {
             }            
         }else{
             $destinatario = array('');
-//            $destinatario = array('rodrigocantarino@mec.gov.br');//teste
             $dados_email  = $this->montaCorpoEmailTamiteEvolucaoMi($emiid, $arr_dados_tramite_evoMi, array());
             $email        = new Email();
             $email->popularDadosObjeto($dados_email);                    

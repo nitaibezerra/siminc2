@@ -49,8 +49,8 @@ $wgScriptExtension  = ".php";
 $wgEnableEmail      = true;
 $wgEnableUserEmail  = true; # UPO
 
-$wgEmergencyContact = "simec@mec.gov.br";
-$wgPasswordSender = "simec@mec.gov.br";
+$wgEmergencyContact = $_SESSION['email_sistema'];
+$wgPasswordSender = $_SESSION['email_sistema'];
 
 $wgEnotifUserTalk = true; # UPO
 $wgEnotifWatchlist = true; # UPO

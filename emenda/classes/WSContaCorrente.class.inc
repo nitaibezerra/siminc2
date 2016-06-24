@@ -238,8 +238,8 @@ XML;
 				$mensagem->Host         = "localhost";
 				$mensagem->Mailer       = "smtp";
 				$mensagem->FromName		= "Conta Corrente Atualizadas";
-				$mensagem->From 		= "simec@mec.gov.br";
-				$mensagem->AddAddress( "thiago.barbosa@mec.gov.br", "Wesley Silva" );
+				$mensagem->From 		= $_SESSION['email_sistema'];
+				$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
 				$mensagem->Subject = "Conta Corrente Atualizadas";
 				
 				$mensagem->Body = $conteudo;

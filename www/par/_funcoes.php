@@ -4993,7 +4993,7 @@ function enviaEmailDiligenciaPAR( $preid ){
 		$dia = $arData[2];
 	}
 
-	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - SIMEC";
 
@@ -5168,7 +5168,7 @@ function enviaEmailDiligenciaProinfancia( $preid ){
 		$dia = $arData[2];
 	}
 
-	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - SIMEC";
 
@@ -5236,7 +5236,7 @@ function enviaEmailDiligenciaProinfancia( $preid ){
 			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 		}
 
-		$arCopias = array('DanielBrito@mec.gov.br');
+		$arCopias = array($_SESSION['email_sistema']);
 
 		foreach($arCopias as $dados){
 
@@ -7155,7 +7155,7 @@ function regraEnviaEmail(){
 	if(!$_SESSION['par']['adpid']) return false;
 	if(!$_SESSION['par']['prgid']) return false;
 
-	$remetente = array("nome"=>"SIMEC - PAR", "email"=>"programas@mec.gov.br");
+	$remetente = array("nome"=>"SIMEC - PAR", "email"=>$_SESSION['email_sistema']);
 
 
 
@@ -7172,7 +7172,6 @@ function regraEnviaEmail(){
 			foreach($coordenador as $rs){
 				$destinatario = $rs['entemail'];
 				if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-				  	$emailCopia = 'alexpereira@mec.gov.br';
 				  	$destinatario = $_SESSION['usuemail'];
 				}
 
@@ -7217,12 +7216,12 @@ function regraEnviaEmail(){
 				$conteudo .= "Os cursos estão na fase de <b>".$rs['esddsc']."</b><br>";
 				$conteudo .= "Sua situação como professor tutor está como: <b>" . $rs['pscdescricao'] . "</b><br><br>";
 				$conteudo .= "Importante: se o seu cadastro no Profuncionário não foi qualificado, você não atendeu a algum dos critérios estabelecidos para participação no programa (a formação, o vínculo e/ou a função atualmente exercida não são compatíveis com o curso pleiteado).<br><br>";
-				$conteudo .= "Em caso de dúvida, entre em contato pelo e-mail: profuncionario@mec.gov.br";
+				$conteudo .= "Em caso de dúvida, entre em contato pelo e-mail: ". $_SESSION['email_sistema'];
 				$conteudo .= "<br><br><br>";
 				$conteudo .= "Atenciosamente,<br> Equipe técnica do MEC - PRÓ-FUNCIONÁRIO";
 
 				if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-			  		$emailCopia = 'alexpereira@mec.gov.br';
+			  		$emailCopia = $_SESSION['email_sistema'];
 			  		$destinatario = $_SESSION['usuemail'];
 			  	}
 
@@ -7271,7 +7270,7 @@ function regraEnviaEmail(){
 			$conteudo .= "O curso <b>".$rs['pfcdescricao']."</b> está na fase de <b>".$rs['esddsc']."</b><br>";
 			$conteudo .= "Sua situação no curso está como: <b>" . $rs['pscdescricao'] . "</b><br><br>";
 			$conteudo .= "Importante: se o seu cadastro no Profuncionário não foi qualificado, você não atendeu a algum dos critérios estabelecidos para participação no programa (a formação, o vínculo e/ou a função atualmente exercida não são compatíveis com o curso pleiteado).<br><br>";
-			$conteudo .= "Em caso de dúvida, entre em contato pelo e-mail: profuncionario@mec.gov.br";
+			$conteudo .= "Em caso de dúvida, entre em contato pelo e-mail: ". $_SESSION['email_sistema'];
 			$conteudo .= "<br><br><br>";
 			$conteudo .= "Atenciosamente,<br> Equipe técnica do MEC - PRÓ-FUNCIONÁRIO";
 			*/
@@ -7279,7 +7278,7 @@ function regraEnviaEmail(){
 
 
 			if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-		  		$emailCopia = 'alexpereira@mec.gov.br';
+		  		$emailCopia = $_SESSION['email_sistema'];
 		  		$destinatario = $_SESSION['usuemail'];
 		  	}
 
@@ -12675,7 +12674,7 @@ function ativarConselheiroFundeb($arrRegistro) {
 				);
 
 			if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-				enviar_email( $remetente, 'wesleysilva@mec.gov.br', $assunto, $conteudo );
+				enviar_email( $remetente, $_SESSION['email_sistema'], $assunto, $conteudo );
 			} else {
 				if( $v['email'] ){
 					enviar_email( $remetente, $destinatario, $assunto, $conteudo );

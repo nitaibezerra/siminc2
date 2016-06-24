@@ -25,6 +25,6 @@ define('SIC_PERFIL_GESTOR_SOLICITACOES',	   1025);
 define('SIC_PERFIL_ORGAO_CONTROLE',     	   1394);
 
 // Dados
-define('EMAIL_PRINCIPAL_SIC', 'sic@mec.gov.br');
+define('EMAIL_PRINCIPAL_SIC', $_SESSION['email_sistema']);
 
 ?>

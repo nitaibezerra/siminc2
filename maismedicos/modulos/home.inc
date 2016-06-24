@@ -9,7 +9,7 @@
 			comunicamos que, a partir de hoje, estaremos migrando nosso sistema para EBSERH - Empresa Brasileira de Serviços Hospitalares. 
 			O novo acesso ocorrerá através do endereço <a href="http://sig.ebserh.gov.br" target="_blank">sig.ebserh.gov.br</a>, e todas as informações dos usuários, como senhas e acessos, serão mantidas. 
 			Em caso de dúvida, favor entrar em contato no 
-			e-mail: <a href="mailto:maismedicos@mec.gov.br">maismedicos@mec.gov.br</a>.</p>
+			e-mail: <a href="mailto:<?php echo $_SESSION['email_sistema']; ?>"><?php echo $_SESSION['email_sistema']; ?></a>.</p>
 			<p>&nbsp;</p><br/>
 			<p>Equipe Mais Médicos/SIMEC</p>
 

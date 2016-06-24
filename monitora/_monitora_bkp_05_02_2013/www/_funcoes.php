@@ -388,7 +388,7 @@ function enviarParaAnaliseCPMO2() {
 		$arrEmail = Array('dunice.eduardo@gmail.com');
 	}
 
-	// 	$cc			= array('wescley.lima@mec.gov.br');
+	// 	$cc			= array($_SESSION['email_sistema']);
 	$cco		= '';
 	$arquivos 	= array();
 
@@ -509,7 +509,7 @@ function voltarParaValidacaoCPMO() {
 		$arrEmail = Array('dunice.eduardo@gmail.com');
 	}
 	
-	// 	$cc			= array('wescley.lima@mec.gov.br');
+	// 	$cc			= array($_SESSION['email_sistema']);
 	$cco		= '';
 	$arquivos 	= array();
 
@@ -605,7 +605,7 @@ function envia_emailCorrecao($descricao,$codigo = false)
 	$conteudo	= "<p>Prezado,</p>
 	<p>{$stTexto}.</p>";
 	
-	//$arrEmail = array("julianosouza@mec.gov.br");
+	//$arrEmail = array($_SESSION['email_sistema']);
 	
 	if( $_SESSION['usucpf'] == '' ){
 		$conteudo .= implode(' - ', $arrEmail);
@@ -643,7 +643,7 @@ function finalizarAvaliacaoCPMO($descricao,$codigo = false)
 	$conteudo	= "<p>Prezado,</p>
 	<p>{$stTexto}.</p>";
 	
-	$arrEmail = array("spo.planejamento@mec.gov.br");
+	$arrEmail = array($_SESSION['email_sistema']);
 	
 	if( $_SESSION['usucpf'] == '' ){
 		$conteudo .= implode(' - ', $arrEmail);

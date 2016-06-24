@@ -719,7 +719,7 @@ function envia_email_pedido_segep($docid) {
         $anexos = array();
     }
 
-    $remetente = array('nome' => 'SPO SICAJ', 'email' => 'spo.sicaj@mec.gov.br');
+    $remetente = array('nome' => 'SPO SICAJ', 'email' => $_SESSION['email_sistema']);
 
     if (IS_PRODUCAO) {
         #$destinatario = 'diaju.segep@planejamento.gov.br;';
@@ -836,7 +836,7 @@ function envia_email_mensagem_6($docid) {
         $anexos = array();
     }
 
-    $remetente = array('nome' => 'SPO SICAJ', 'email' => 'spo.sicaj@mec.gov.br');
+    $remetente = array('nome' => 'SPO SICAJ', 'email' => $_SESSION['email_sistema']);
 
 
     $assunto = "[SIMEC]  Análise de ação - {#pdccodacaojudicial} (código SICAJ)";

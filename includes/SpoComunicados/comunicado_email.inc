@@ -190,7 +190,7 @@ HTML;
             </section>
 
             <input class="normal" type="hidden" value="SIMEC" id="stNomeRemetente" name="stNomeRemetente"/>
-            <input class="normal" type="hidden" value="simec@mec.gov.br" name="stEmailRemetente" id="stEmailRemetente" />
+            <input class="normal" type="hidden" value=$_SESSION['email_sistema'] name="stEmailRemetente" id="stEmailRemetente" />
 
             <section class="form-group">
                 <section class="col-md-2">

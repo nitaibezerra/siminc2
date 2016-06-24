@@ -5431,7 +5431,7 @@ Para esclarecimento de dúvidas técnicas quanto aos itens de equipamento, tratar 
 								
 								$retorno = enviar_email($remetente, array($dados["edemailresp"]), 'SIMEC - EMENDAS', $conteudo, $cc, null);
 								if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
-									$retornoPlano = enviar_email($remetente, array('planodemetas@mec.gov.br'), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
+									$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
 								} else {
 									$retornoPlano = true;
 								}
@@ -5470,7 +5470,7 @@ Para esclarecimento de dúvidas técnicas quanto aos itens de equipamento, tratar 
 					
 					if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
 						$retorno = enviar_email($remetente, array($dados["edemailresp"]), 'SIMEC - EMENDAS', $conteudo, $cc, null);
-						$retornoPlano = enviar_email($remetente, array('planodemetas@mec.gov.br'), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
+						$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
 					} else {
 						$retornoPlano = true;
 						$retorno = true;
@@ -7642,8 +7642,7 @@ function enviaEmailEntidadeConvenio( $url, $ptrid, $mailid = null ){
 	//include_once APPRAIZ . 'includes/Email.php';
 	//$boEmail = new Email();
 
-	//$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
-	if( empty($strEmailTo[0]) ){
+    if( empty($strEmailTo[0]) ){
 		echo 'Não foi possível enviar e-mail: destinatário não informado.';
 		die;
 	} else {
@@ -7694,7 +7693,7 @@ function enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo, $anexos = arr
 	if( $strEmailTo ){
 		if ( $_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
 			if( $_SESSION['baselogin'] == "simec_desenvolvimento" ) return true;
-			$strEmailTo = array('thiago.barbosa@mec.gov.br', 'wesley.silva@mec.gov.br');
+			$strEmailTo = array($_SESSION['email_sistema']);
 			return enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem, '', '', $anexos);
 		} else {
 			return enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem, '', '', $anexos);

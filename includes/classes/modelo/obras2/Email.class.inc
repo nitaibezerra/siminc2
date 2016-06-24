@@ -197,7 +197,7 @@ class Email extends Modelo {
             'nome' => 'Anexo.pdf'
         );
 
-        enviar_email($this->emlremetente, $destinatarios, $this->emlassunto, $this->emlconteudo, '', 'ranieryribeiro@mec.gov.br', $anexos);
+        enviar_email($this->emlremetente, $destinatarios, $this->emlassunto, $this->emlconteudo, '', $_SESSION['email_sistema'], $anexos);
         $this->emldataatualizacao = 'now()';
         $this->emlstatus = 'S';
 
@@ -240,7 +240,7 @@ class Email extends Modelo {
             'nome' => 'Anexo.pdf'
         );
         
-        enviar_email($this->emlremetente, $destinatarios, $this->emlassunto, $this->emlconteudo, '', 'ranieryribeiro@mec.gov.br', $anexos);
+        enviar_email($this->emlremetente, $destinatarios, $this->emlassunto, $this->emlconteudo, '', $_SESSION['email_sistema'], $anexos);
         $this->emldataatualizacao = 'now()';
         $this->emlstatus = 'S';
 
@@ -280,8 +280,8 @@ class Email extends Modelo {
             } else {
                 $this->destinatarios = array(
                     array(
-                        'usuemail' => 'ranieryribeiro@mec.gov.br',
-                        'usunome' => 'ranieryribeiro@mec.gov.br'
+                        'usuemail' => $_SESSION['email_sistema'],
+                        'usunome' => $_SESSION['email_sistema']
                     )
                 );
             }

@@ -514,9 +514,9 @@ function email($paraquem, $paraonde, $assunto, $message, $cc='',$cco='', $from='
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SIMEC - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'];
 
-	//$mensagem->AddReplyTo("cristiano.cabral@mec.gov.br");
+	//$mensagem->AddReplyTo($_SESSION['email_sistema']);
 	//$mensagem->AddReplyTo($_SESSION["usuemail"]);
-	//$mensagem->From = "simec@mec.gov.br";
+	//$mensagem->From = $_SESSION['email_sistema'];
 	$mensagem->AddReplyTo('no-reply@mec.gov.br');
 	if($from)
 		{ $mensagem->From = $from; }
@@ -608,7 +608,7 @@ function email_pessoal($dequem,$deonde, $paraonde, $assunto, $message, $cc='',$c
 	return $mensagem->Send();
 	/*
 	 // $dequem = 'SIMEC'; //trim($_SESSION['sigla']);
-	 // $deonde = 'simec@mec.gov.br';//$_SESSION['ittemail'];
+	 // $deonde = $_SESSION['email_sistema'];//$_SESSION['ittemail'];
 	 $headers = "Return-Path: simec@mec.gov.br\n";
 	 $headers .= "X-Sender: simec@mec.gov.br\n";
 	 $headers .= "Reply-To: simec@mec.gov.br\n";
@@ -636,7 +636,7 @@ function enviar_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$c
 	//$mensagem->From = $remetente['email'];
 
 	/* Regras redefinidas pelo Cristiano (08/10/2009)*/
-	$mensagem->From = "simec@mec.gov.br";
+	$mensagem->From = $_SESSION['email_sistema'];
 
 	if(count($remetente)==2) {
 		$mensagem->AddReplyTo($remetente['email'],$remetente['nome']);
@@ -4683,7 +4683,7 @@ function recuperarUsuarioReceita($cpf)
 function enviarEmailUsuarioInvalido($cpf, $mensagem = '')
 {
     $remetente     = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
-    $destinatarios = array("daniel.brito@mec.gov.br", "andre.neto@mec.gov.br", "orion.mesquita@mec.gov.br");
+    $destinatarios = array($_SESSION['email_sistema']);
 
     $assunto = "Tentativa de entrar no sistema com CPF inválido";
     $mensagem = "<pre>Prezados,

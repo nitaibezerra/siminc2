@@ -356,7 +356,7 @@ function envialEmailProfissionais($odsid, $usucpf = '') {
     $mensagem->Host = "localhost";
     $mensagem->Mailer = "smtp";
     $mensagem->FromName = "Fábrica de softwares";
-    $mensagem->From = "simec@mec.gov.br";
+    $mensagem->From = $_SESSION['email_sistema'];
     $mensagem->Body = "Você foi atribudo como profissional responsavel pela ordem de serviço #" . $odsid . "";
     $mensagem->Subject = "Atribuição na ordem de serviço (Em execução)";
 

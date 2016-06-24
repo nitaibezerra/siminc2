@@ -68,7 +68,7 @@ define("ID_RELATORIO_ADJUDICACAO", 13);
 define("ID_RELATORIO_HOMOLOGACAO", 14);
 define("ID_TERMO_ADITIVO", 15);
 
-define('REMETENTE_WORKFLOW_EMAIL', 'eventos@mec.gov.br');
+define('REMETENTE_WORKFLOW_EMAIL', $_SESSION['email_sistema']);
 define('REMETENTE_WORKFLOW_NOME', 'SIMEC-MódulodeEventos');
 
 define('WF_TPDID_COMPRAS', 6);

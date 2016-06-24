@@ -144,22 +144,20 @@ LIMIT 500
 	$cco = "";
 	$i = 0;
 	$sqlEmail = "";
-//	$cc = "planodemetas@mec.gov.br";
-//	$cco = "victor.benzi@mec.gov.br";
-
+    
 	$assunto  = "Webconferência do Pacto com o Ministro da Educação";
 
 	$conteudo = '<p>Aos Dirigentes de Educação.</p>
 
-				<p align="justify">Convidamos os Dirigentes de Educação e suas equipes técnicas para assistirem à webconferência sobre o Pacto Nacional pela Alfabetização na Idade Certa, que será transmitida no dia 13 de novembro, às 10h, no endereço eletrônico <a href="http://portal.mec.gov.br/seb/transmissao">http://portal.mec.gov.br/seb/transmissao</a>. Na ocasião, o Exmo. Sr. Ministro da Educação, Aloízio Mercadante, fará um pronunciamento sobre o Pacto. Sugestões e dúvidas podem ser enviadas para o e-mail pactonacional@mec.gov.br. Contamos com a participação de todos.</p>
+				<p align="justify">Convidamos os Dirigentes de Educação e suas equipes técnicas para assistirem à webconferência sobre o Pacto Nacional pela Alfabetização na Idade Certa, que será transmitida no dia 13 de novembro, às 10h, no endereço eletrônico <a href="http://portal.mec.gov.br/seb/transmissao">http://portal.mec.gov.br/seb/transmissao</a>. Na ocasião, o Exmo. Sr. Ministro da Educação, Aloízio Mercadante, fará um pronunciamento sobre o Pacto. Sugestões e dúvidas podem ser enviadas para o e-mail '. $_SESSION['email_sistema']. '. Contamos com a participação de todos.</p>
 
 				Secretaria de Educação Básica<br>
 				Ministério da Educação';
 	
 	foreach($arDadosUsuarios as $dados){
 		$i++;
-		$remetente = array('nome'=>'Pacto Nacional pela Alfabetização na Idade Certa', 'email'=>'pactonacional@mec.gov.br');
-		enviar_email(array('nome'=>'Pacto Nacional pela Alfabetização na Idade Certa', 'email'=>'pactonacional@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+		$remetente = array('nome'=>'Pacto Nacional pela Alfabetização na Idade Certa', 'email'=>$_SESSION['email_sistema']);
+		enviar_email(array('nome'=>'Pacto Nacional pela Alfabetização na Idade Certa', 'email'=>$_SESSION['email_sistema']), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 		$sqlEmail = "INSERT INTO sispacto.emailenviado2 (usunome, usuemail) VALUES ('teste','".$dados['usuemail']."')";
 		$db->executar($sqlEmail);
 		$db->commit();

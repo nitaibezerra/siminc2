@@ -65,7 +65,7 @@ if($_POST){
 			$destinatarios[] = $destinatario['usuemail'];
 		}
 		
-		$destinatarios[] = "raynerlima@mec.gov.br";
+		$destinatarios[] = $_SESSION['email_sistema'];
 		
 		if( enviar_email( $remetente, $destinatarios, $assunto, $conteudo ) )
         {

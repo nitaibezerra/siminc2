@@ -97,7 +97,7 @@ define('DEMANDA_AVALIACAO_OTIMO', 	4);
 /**********************
  * REMETENTE WORKFLOW
  **********************/ 
- define('REMETENTE_WORKFLOW_EMAIL', 'demandas@mec.gov.br');
+ define('REMETENTE_WORKFLOW_EMAIL', $_SESSION['email_sistema']);
  define('REMETENTE_WORKFLOW_NOME',  'Módulo Demandas');
  
  

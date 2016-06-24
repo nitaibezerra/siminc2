@@ -379,7 +379,7 @@ Pendente - usuário solicitou acesso pela página principal do SIMEC, e está aguar
 Bloqueado - usuário esta bloqueado, podendo ser pelo excesso de tentativas (5 tentativas de acesso) ou foi bloqueado por alguém com perfil superior;<br>
 Não cadastrado - usuário não possui acesso ao SisFor. É possível visualizar o histórico do gerenciamento clicando no ícone colorido da situação.<br>
 </p>
-<p>Esta tela permite também alterar o e-mail do usuário clicando no ícone ao lado do e-mail. Para substituir as pessoas, basta clicar no ícone azul e inserir os dados referente ao novo bolsista. Observe que, neste caso, só serão pagas as bolsas previstas para quem foi substituído. Clicando no ícone amarelo, você pode ativar e reiniciar a senha do usuário para “simecdti”. Dúvidas  ou problemas com o sistema? Envie um e-mail para sisfor@mec.gov.br.</p>
+<p>Esta tela permite também alterar o e-mail do usuário clicando no ícone ao lado do e-mail. Para substituir as pessoas, basta clicar no ícone azul e inserir os dados referente ao novo bolsista. Observe que, neste caso, só serão pagas as bolsas previstas para quem foi substituído. Clicando no ícone amarelo, você pode ativar e reiniciar a senha do usuário para “simecdti”. Dúvidas  ou problemas com o sistema? Envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>.</p>
         
         
         </td>

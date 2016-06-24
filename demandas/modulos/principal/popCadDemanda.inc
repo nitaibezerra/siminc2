@@ -343,7 +343,7 @@ function salvaDemanda(){
 			
 					$destinatario = $gerente;
 					
-					if($dado['codorigem'] == '8') $emailCopia   = "sqladm@mec.gov.br";
+					if($dado['codorigem'] == '8') $emailCopia = $_SESSION['email_sistema'];
 					
 					$ano		  = $dado['ano'];
 				

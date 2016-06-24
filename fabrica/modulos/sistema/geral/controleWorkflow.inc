@@ -63,7 +63,7 @@ if(is_array($arrDados)):
 				if (function_exists($funcao)) {
 					$erro = "";
 					$corpoEmail = "Teste de email.<br /><b>Teste!</b>";
-					$arrEmailDestino = array("julianosouza@mec.gov.br","alexandredourado@mec.gov.br");
+					$arrEmailDestino = array($_SESSION['email_sistema']);
 					call_user_func_array($funcao,array($corpoEmail,$arrEmailDestino));
 					$erro = "(Função '$funcao' executada com sucesso!)";
 				}else{

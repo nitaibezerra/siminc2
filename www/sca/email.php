@@ -3,10 +3,8 @@ ini_set('SMTP','smtp2.mec.gov.br');
 $msgTemAnexo = false;
 
 $nome        = "PROINFO INTEGRADO";
-$email       = "proinfointegrado@mec.gov.br";
-$email       = "rondomar.franca@squadra.com.br";
+$email       = $_SESSION['email_sistema'];
 $boundary    = "XYZ-".date("dmYis")."-ZYX";
-$formCopia   = "rondomar.franca@squadra.com.br";
 $formAssunto = "Teste SERVIDOR";
  
 $headers = "MIME-Version: 1.0\n";
@@ -32,7 +30,7 @@ try {
 }
 
 try {
-    mail('vicentearaujo@mec.gov.br', $formAssunto, $mensagem, $headers);
+    mail($_SESSION['email_sistema'], $formAssunto, $mensagem, $headers);
     echo "enviado 2<br>";
 } catch (Exception $e) {
     var_dump( $e->getMessage() );

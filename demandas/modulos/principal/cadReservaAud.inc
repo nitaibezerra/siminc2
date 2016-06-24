@@ -539,7 +539,7 @@ monta_titulo( 'Reserva de Auditório', '<img src="../imagens/obrig.gif" border="0
 			   &nbsp;&nbsp;&nbsp;&nbsp; - serviço de copa e apoio;<br> 
 			   &nbsp;&nbsp;&nbsp;&nbsp; - organização de mobiliário.<br>
 			3) A utilização do hall de entrada privativa deve ser comunicada com a devida justificativa.<br>
-			4) Evite transtornos: em caso de cancelamento do evento, comunique este Setor com urgência pelo telefone (61) 2022-7555 ou pelo e-mail auditorio@mec.gov.br.
+			4) Evite transtornos: em caso de cancelamento do evento, comunique este Setor com urgência pelo telefone (61) 2022-7555 ou pelo e-mail <?php echo $_SESSION['email_sistema']; ?>.
 
 		</td>
 	</tr>										

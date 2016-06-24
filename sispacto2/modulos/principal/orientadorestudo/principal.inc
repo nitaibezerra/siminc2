@@ -83,7 +83,7 @@ function avancarInstrumento() {
 
 	ajaxatualizar('requisicao=carregarInstrumentos&iusd=<?=$_SESSION['sispacto2']['orientadorestudo']['iusd'] ?>','modalInstrumentos');
 	if(jQuery("#modalInstrumentos").html()=='') {
-		jQuery("#modalInstrumentos").html('<p>Muito obrigada por sua participação! Ela será de grande importância para a avaliação do processo de formação do PNAIC. Se desejar encaminhar comentários e sugestões à pesquisa, envie uma mensagem para avaliacaopnaic@mec.gov.br.</p><p align="center"><input type="button" name="fim" value="Fechar" onclick="fecharInstrumentos();"></p>');
+		jQuery("#modalInstrumentos").html('<p>Muito obrigada por sua participação! Ela será de grande importância para a avaliação do processo de formação do PNAIC. Se desejar encaminhar comentários e sugestões à pesquisa, envie uma mensagem para '. $_SESSION['email_sistema']. '.</p><p align="center"><input type="button" name="fim" value="Fechar" onclick="fecharInstrumentos();"></p>');
 		jQuery("#modalInstrumentos").dialog('open');
 	} else {
 		jQuery("#modalInstrumentos").dialog('open');

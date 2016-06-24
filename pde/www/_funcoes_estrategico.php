@@ -898,7 +898,7 @@ function atividade_atribuir_responsavel( $atividade, $perfil, $usuarios ){
 		$db->alterar_status_usuario( $usuario, 'A', 'Atribuição de responsabilidade em atividade ou projeto.', $_SESSION['sisid'] );
 		$usuariodados = $db->pegaLinha("SELECT * FROM seguranca.usuario WHERE usucpf='".$usuario."'");
 		if($usuariodados['usuchaveativacao'] == "f") {
-			$remetente = array("nome" => "Simec","email" => "simec@mec.gov.br");
+			$remetente = array("nome" => "Simec","email" => $_SESSION['email_sistema']);
 			$destinatario = $usuariodados['usuemail'];
 			$assunto = "Aprovação do Cadastro no Simec";
 			$conteudo = "
@@ -931,7 +931,7 @@ function envia_email_responsavel( $gerente = null, $arrApoio = null ){
 		$sql = "select _atinumero as numero, atidatafim as data, atidetalhamento as detalhamento
 			 	from pde.atividade where atiid = ".$_REQUEST['atiid'];
 		$atidescricao = $db->pegaLinha($sql);
-		$remetente = array("nome" => "Simec","email" => "simec@mec.gov.br");
+		$remetente = array("nome" => "Simec","email" => $_SESSION['email_sistema']);
 		if($email){
 			$assunto  = "[SIMEC] Demandas SEB";
 			$conteudo = "
@@ -960,7 +960,7 @@ function envia_email_responsavel( $gerente = null, $arrApoio = null ){
 				$sql = "select _atinumero as numero, atidatafim as data, atidetalhamento as detalhamento 
 						from pde.atividade where atiid = ".$_REQUEST['atiid'];
 				$atidescricao = $db->pegaLinha($sql);
-				$remetente = array("nome" => "Simec","email" => "simec@mec.gov.br");
+				$remetente = array("nome" => "Simec","email" => $_SESSION['email_sistema']);
 				if($email){
 					$assunto  = "[SIMEC] Demandas SEB";
 					$conteudo = "

@@ -118,7 +118,7 @@ if ($_REQUEST['submeter'] == 'ok'){
 			     </tr>
 				 <tr>
 			        <td align="right" class="subtitulodireita">Cc:</td>
-			        <? $cc = 'monitoramentoobras@mec.gov.br' ?> 
+			        <? $cc = $_SESSION['email_sistema'] ?> 
 			        <td><?=campo_texto('cc','N','S','',70,100,'','');?></td>
 			     </tr>
 			     <tr>

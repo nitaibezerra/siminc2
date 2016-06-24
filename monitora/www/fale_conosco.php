@@ -82,7 +82,7 @@ tinyMCE.init({
 <tr><td><font size="3"><p><b>Prezado Usuário (a)</b></p>Caso tenha qualquer dúvida, reclamação ou sugestão, entre em contato conosco por telefone ou por e-mail.
 <p>Dúvidas sobre o PPA, preenchimento e datas:61-2104.8584 ou 61-2104.9827.
 </p>
-<p>Caso prefira o meio eletrônico, utilize nosso sistema de e-mail (abaixo disponibilizado) ou envie sua mensagem para o endereço <A HREF="mailto:simec@mec.gov.br.com">simec@mec.gov.br</a></p></font>
+<p>Caso prefira o meio eletrônico, utilize nosso sistema de e-mail (abaixo disponibilizado) ou envie sua mensagem para o endereço <A HREF="mailto:<?php echo $_SESSION['email_sistema']; ?>"><?php echo $_SESSION['email_sistema']; ?></a></p></font>
 <p>A sua opinião é muito importante para nós</p>
 </td></tr></table>
     <center>

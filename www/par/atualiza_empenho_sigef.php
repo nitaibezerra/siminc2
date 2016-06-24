@@ -320,9 +320,8 @@ $mensagem->persistencia = $db;
 $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "SCRIPT AUTOMATICO";
-$mensagem->From 		= "simec@mec.gov.br";
-$mensagem->AddAddress( "thiago.barbosa@mec.gov.br", "Thiago Barbosa" );
-//$mensagem->AddAddress( "wesley.silva@mec.gov.br", "Wesley Romualdo" );
+$mensagem->From 		= $_SESSION['email_sistema'];
+$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
 $mensagem->Subject = "Atualização do PAR - Empenho do SIGEF";
 $mensagem->Body = "A atualização dos Empenhos foram realizados com sucesso! Data Inicio: ".$dataIni.", Data Fim: ".date("d/m/Y h:i:s")."</p>
 				   <p>O tempo de execução das atualizações foi de ".$Tfinal." segundos</p>";

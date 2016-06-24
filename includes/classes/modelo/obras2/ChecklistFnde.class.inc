@@ -2162,7 +2162,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2304,7 +2303,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2419,7 +2417,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2562,7 +2559,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2704,7 +2700,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2846,7 +2841,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -2990,7 +2984,6 @@ class ChecklistFnde extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {

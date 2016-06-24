@@ -210,7 +210,7 @@ DML;
 			enviar_email(array
 			(
 				'nome' => 'Limites Orçamentário',
-				'email' => 'spo.planejamento@mec.gov.br'
+				'email' => $_SESSION['email_sistema']
 			), $arDest, 'Pedidos de Limites', $msg);
 		}
 	}
@@ -262,7 +262,7 @@ HTML;
         array(),
         array(
             'usunome' => 'Pedido de Limite - Limites Orçamentários',
-            'usuemail' => 'spo.orcamento@mec.gov.br'
+            'usuemail' => $_SESSION['email_sistema']
         ),
         null,
         false

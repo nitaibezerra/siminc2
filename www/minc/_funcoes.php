@@ -1486,7 +1486,7 @@ function enviaemailparacorrecao(){
 	
 	$conteudo = "Foi enviado para correção o X da escola {$localidade['escola']} que esta sobe sua reponsabilidade.";
 	
-	enviar_email( 'simec@mec.gov.br', $diretores, $assunto, $conteudo );
+	enviar_email( $_SESSION['email_sistema'], $diretores, $assunto, $conteudo );
 	               
 	if($localidade['tipo'] == 3){
 		$filtrolocalidade = "urp.muncod = {$localidade['muncod']}";
@@ -1516,7 +1516,7 @@ function enviaemailparacorrecao(){
 					O apoio pedagógico e operacional da Secretaria Estadual/ Municipal na reelaboração é indispensável.
 					Os Planos de Atividades Culturais reelaborados deverão ser devolvidos à Avaliação MinC/ MEC o mais breve possível.";
 	
-	enviar_email( 'simec@mec.gov.br', $secretarios, $assunto, $conteudo );
+	enviar_email( $_SESSION['email_sistema'], $secretarios, $assunto, $conteudo );
 	
 }
 
@@ -1565,7 +1565,7 @@ function enviaemailCorrigido(){
 	$conteudo = "Prezados Dirigentes e Técnicos da Secretaria Estadual/ Municipal de Educação:
 			     O Plano de Atividade Cultural da Unidade Escolar  {$localidade['escola']} foi reenviado à Avaliação MinC/MEC.";
 
-	enviar_email( 'simec@mec.gov.br', $secretarios, $assunto, $conteudo );
+	enviar_email( $_SESSION['email_sistema'], $secretarios, $assunto, $conteudo );
 
 }
 

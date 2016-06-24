@@ -89,11 +89,7 @@ class AtualizarEmpenhoPagamento extends Modelo {
     }
     
     public function enviarEmailConfirmacao(){
-        $arrEmail = array(
-            array('usuemail'=> 'murilo.martins@mec.gov.br', 'usunome'=> 'Murilo Martins'),
-            array('usuemail'=> 'jairsantos@mec.gov.br', 'usunome'=> 'Jair Santos'),
-            array('usuemail'=> 'thiagobarbosa@mec.gov.br', 'usunome'=> 'Thiago Tasca'),
-        );
+        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> 'SIMEC'));
         $strHtml = $this->getHtmlEmail();
         enviar_email(
             array(

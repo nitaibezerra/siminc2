@@ -55,7 +55,7 @@ define("UNIDADES_OBRIGATORIAS", "'26101','26291', '26290', '26298', '26443', '74
 $obrigatorias_array = array('26101','26291', '26290', '26298', '26443', '74902', '73107');
 
 // -- E-mail de recebimento de notificações sobre
-define('EMAIL_NOTIFICACAO_SUBACAO', 'se.assessores@mec.gov.br');
+define('EMAIL_NOTIFICACAO_SUBACAO', $_SESSION['email_sistema']);
 
 // -- Indica uma transação de criação de PI
 define('TRANSACAO_CRIACAO_PI', 'C');

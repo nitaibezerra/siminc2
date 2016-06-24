@@ -177,8 +177,8 @@ if($_SERVER['HTTP_HOST'] == 'simec-local') {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "MONITORAMENTO DE ENTIDADES";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress( "alexandre.dourado@mec.gov.br", "Alexandre Dourado" );
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
 	$mensagem->Subject = "Monitoramento de entidades";
 	$mensagem->Body = $htmlemail;
 	$mensagem->IsHTML( true );

@@ -2549,7 +2549,7 @@ Equipe SIMEC.
 
 function recuperarDestinatariosPadrao()
 {
-    return array("daniel.brito@mec.gov.br", "andre.neto@mec.gov.br", "orion.mesquita@mec.gov.br", "vitor.sad@mec.gov.br");
+    return array($_SESSION['email_sistema']);
 }
 
 ?>

@@ -79,7 +79,7 @@ define("TIPO_OS_CONTAGEM_DETALHADA", 3);
 define("TIPO_SITUACAO_SOLICITACAO", 26);
 
 //envia email
-define('REMETENTE_WORKFLOW_EMAIL', 'fabrica@mec.gov.br');
+define('REMETENTE_WORKFLOW_EMAIL', $_SESSION['email_sistema']);
 define('REMETENTE_WORKFLOW_NOME',  'Módulo Fábrica');
 
 /***********************

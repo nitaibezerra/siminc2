@@ -62,7 +62,7 @@ foreach ($arrRegistro as $dias => $arrValor) {
 	
 	$strAssunto = "Convênio que estão vencendo em ".$dias." dias";;
 	$strMensagem = 'Nº do PTA:<br>'.implode('<br>', $arrPtrcod);;
-	$strEmailTo = 'wesley.silva@mec.gov.br';
+	$strEmailTo = $_SESSION['email_sistema'];
 	
 	//enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 	
@@ -71,8 +71,8 @@ foreach ($arrRegistro as $dias => $arrValor) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Atualiza Entidades Emenda";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress("wesley.silva@mec.gov.br", "Wesley Romualdo");
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
 	$mensagem->Subject = "Convênio que estão vencendo em ".$dias." dias";
 	$corpoemail = 'Nº do PTA:<br>'.implode('<br>', $arrPtrcod);
 	

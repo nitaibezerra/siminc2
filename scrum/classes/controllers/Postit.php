@@ -195,9 +195,9 @@ class Controller_Postit extends Abstract_Controller
                 ( $datafim_old != $_POST['dmddatafimprevatendimento']." ".substr($_POST['hfimatendimento'], 0, 5) ) &&
                 (int)date("Ymd") >= (int)($ano.$mes.$dia) ){
 
-                $remetente = array("nome"=>"Módulo Demandas", "email"=>"demandas@mec.gov.br");
-                $emailTec = "daniel.brito@mec.gov.br";
-                $emailCopia = "andre.neto@mec.gov.br";
+                $remetente = array("nome"=>"Módulo Demandas", "email"=>$_SESSION['email_sistema']);
+                $emailTec = $_SESSION['email_sistema'];
+//                $emailCopia = $_SESSION['email_sistema'];
 
                 // Seta assunto
                 $assunto  = "SCRUM - Demanda [{$demanda['dmdid']}] – Alteração de demanda atrasada pelo Analista: ".utf8_decode($_POST['analista']);

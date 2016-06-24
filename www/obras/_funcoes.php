@@ -7020,7 +7020,7 @@ function obrEnviaEmailEmpresa( $gpdid, $epcid ){
 	global $db;
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	// destinatário
 	$sql = "SELECT 
@@ -7035,7 +7035,7 @@ function obrEnviaEmailEmpresa( $gpdid, $epcid ){
 	$destinatario = $db->pegaUm( $sql );
 	
 	// Com cópia, para SAA.
-	$cc = array("email" => "monitoramento.obras@mec.gov.br");
+	$cc = array("email" => $_SESSION['email_sistema']);
 	
 	// assunto
 	$assunto = "Solicitação de Definição de Rotas (Monitoramento de Obras - SIMEC)";
@@ -7154,10 +7154,10 @@ function obrEnviaEmailMonitoramento( $gpdid ){
 	global $db;
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	// destinatário
-	$destinatario = array("email" => "monitoramento.obras@mec.gov.br");
+	$destinatario = array("email" => $_SESSION['email_sistema']);
 		
 	// assunto
 	$assunto = "Solicitação de Avaliação da Rota (MEC) (Monitoramento de Obras - SIMEC)";
@@ -7311,7 +7311,7 @@ function obrEnviaEmailSupervisaoFinalizada( $gpdid ){
 
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	
 	// destinatário
@@ -7319,7 +7319,7 @@ function obrEnviaEmailSupervisaoFinalizada( $gpdid ){
 	
 	
 	//Com cópia
-	$cc = 'monitoramento.obras@mec.gov.br';
+	$cc = $_SESSION['email_sistema'];
 	
 	
 	// assunto
@@ -11976,13 +11976,13 @@ function enviaEmailMECEmpresa($obrid, $gpdid){
 		
 		if($orgid == 1){
 			//superior
-			$remetente = "monitoramentodeobras.sesucg.po@mec.gov.br";
+			$remetente = $_SESSION['email_sistema'];
 		}elseif($orgid == 2){
 			//profissional
-			$remetente = "monitoramentodeobras@mec.gov.br";
+			$remetente = $_SESSION['email_sistema'];
 		}else{
 			//básico
-			$remetente = "monitoramentoobras@mec.gov.br";
+			$remetente = $_SESSION['email_sistema'];
 		}
 		
 		//pegando o e-mail da empresa
@@ -12100,14 +12100,14 @@ function enviaEmailEmpresaMEC($obrid, $gpdid){
 		
 		if($orgid == 1){
 			//superior
-			$destinatario = "monitoramentodeobras.SESUCGPO@mec.gov.br";
+			$destinatario = $_SESSION['email_sistema'];
 		}elseif($orgid == 2){
 			//profissional
-			$destinatario = "monitoramentodeobras@mec.gov.br";
+			$destinatario = $_SESSION['email_sistema'];
 		}else{
 			//básico
 			/* Email do Ensino Básico alterado dia 12/04/2011 as 11:44 h.
-			 *$destinatario = "monitoramentoobras@mec.gov.br";
+			 *$destinatario = $_SESSION['email_sistema'];
 			 */ 
 			$destinatario = "monitoraobrascgimp@fnde.gov.br";
 		}

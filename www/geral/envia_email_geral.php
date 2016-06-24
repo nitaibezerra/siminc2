@@ -27,7 +27,7 @@ else
   //if(is_array($resu)) foreach($resu as $k=>$v) ${$k}=$v;
   $assunto = $_REQUEST['assunto'];
   $mensagem = $_REQUEST['email'];
-  $usunome = 'thiago.barbosa@mec.gov.br';//'planodemetas@mec.gov.br';//$_REQUEST['usunome'];
+  $usunome = $_SESSION['email_sistema'];
   $cc=''; // $_REQUEST['cc'];
   $cco=$_REQUEST['cco'];
   enviar_email_usuario( array('nome'=>'SIMEC - PACTO', 'email'=>'noreply@mec.gov.br'), $usunome, $assunto, $mensagem, $cc, $cco )

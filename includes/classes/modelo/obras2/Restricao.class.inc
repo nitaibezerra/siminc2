@@ -1208,7 +1208,6 @@ class Restricao extends Modelo {
         if(!empty($dados_responsaveis)){
             foreach ($dados_responsaveis as $key => $usuario) {
                 $destinatario = array($usuario['email']);
-//                $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
                 $dados_email  = $this->montaCorpoEmailTamiteRestricaoInconformidade($rstid, $arr_dados_tramite, $usuario);                
                 $email        = new Email();
                 $email->popularDadosObjeto($dados_email);                    
@@ -1222,7 +1221,6 @@ class Restricao extends Modelo {
             }            
         }else{
             $destinatario = array('');
-//            $destinatario = array('rodrigocantarino@mec.gov.br');//teste
             $dados_email  = $this->montaCorpoEmailTamiteRestricaoInconformidade($rstid, $arr_dados_tramite, array());
             $email        = new Email();
             $email->popularDadosObjeto($dados_email);                    
@@ -1239,7 +1237,6 @@ class Restricao extends Modelo {
                     if(!empty($dados_responsaveis)){
                         foreach ($dados_responsaveis as $key => $usuario) {
                             $destinatario = array($usuario['email']);
-            //                $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
                             $dados_email = $this->montaCorpoEmailTamiteRestricaoInconformidadeSuperadoComRessalva($rstid, $arr_dados_tramite, $dados_responsaveis);
                             $email        = new Email();
                             $email->popularDadosObjeto($dados_email);                    
@@ -1264,7 +1261,6 @@ class Restricao extends Modelo {
                     if(!empty($dados_responsaveis)){
                         foreach ($dados_responsaveis as $key => $usuario) {
                             $destinatario = array($usuario['email']);
-            //                $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
                             $dados_email = $this->montaCorpoEmailTamiteRestricaoInconformidadeSuperadoSemRessalva($rstid, $arr_dados_tramite, $dados_responsaveis);
                             $email        = new Email();
                             $email->popularDadosObjeto($dados_email);                    
@@ -1290,7 +1286,6 @@ class Restricao extends Modelo {
                 if(!empty($dados_responsaveis)){
                     foreach ($dados_responsaveis as $key => $usuario) {
                         $destinatario = array($usuario['email']);
-        //                $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
                         $dados_email = $this->montaCorpoEmailTamiteRestricaoInconformidadeDevolvendoParaCorrecao($rstid, $arr_dados_tramite, $dados_responsaveis);
                         $email        = new Email();
                         $email->popularDadosObjeto($dados_email);                    

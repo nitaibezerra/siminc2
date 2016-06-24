@@ -47,11 +47,7 @@ class RefreshMaterializedViewPar extends Modelo {
     }
     
     public function enviarEmail($assunto = '', $msg = ''){
-        $arrEmail = array(
-            array('usuemail'=> 'murilo.martins@mec.gov.br', 'usunome'=> 'Murilo Martins'),
-            array('usuemail'=> 'jairsantos@mec.gov.br', 'usunome'=> 'Jair Santos'),
-            array('usuemail'=> 'thiagobarbosa@mec.gov.br', 'usunome'=> 'Thiago Tasca'),
-        );
+        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> 'SIMEC'));
         $strHtml = $this->getHtmlEmail($msg);
         enviar_email(
             array(

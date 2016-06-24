@@ -3444,7 +3444,7 @@ function enviaEmailProfessor($estuf, $muncod, $pcfid){
 								<p>Atenciosamente,</p>
 								<p>Sistema Nacional de Formação - SINAFOR<br>Ministério da Educação<br>0800 61 61 61 Opção 6<br>http://sinafor.mec.gov.br</p>';
 					//$destinatario = $pessoa['pfdemail'];
-					$cc			= array('fernando.aires@mec.gov.br','cid.correa@mec.gov.br');
+					$cc			= array($_SESSION['email_sistema']);
 					$cco		= ''; 
 					$arquivos 	= array();
 					enviar_email($remetente,$destinatario,$assunto, $conteudo, $cc, $cco, $arquivos );	

@@ -1169,7 +1169,7 @@ $arMunicipiosExcecao = array(
 				
 				<p>Atenciosamente,</p>
 				<p>Coordenação Geral de Políticas em Educação do Campo/SECADI/MEC.</p>
-				<p>Coordenacaoeducampo@mec.gov.br</p>
+				<p><?php echo $_SESSION['email_sistema']; ?></p>
 				</div>
 				
 				</div>
@@ -1193,7 +1193,7 @@ $arMunicipiosExcecao = array(
 				
 				<p>Atenciosamente,<br>
 				Coordenação Geral de Políticas em Educação do Campo/SECADI/MEC.<br>
-				Coordenacaoeducampo@mec.gov.br</p>
+				<?php echo $_SESSION['email_sistema']; ?></p>
 				</div>
 				
 				</div>

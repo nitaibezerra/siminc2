@@ -23,7 +23,7 @@ define('PHPST_UPLOAD_PATH', 'upload/');
 define('PHPST_UPLOAD_RELATIVE_PATH', 'http://simec-d/helpdesk/upload/');
 
 // This is the address that will receive all email notifications if such are turned on
-define('PHPST_MAIL_TO', 'cristianocabral@mec.gov.br');
+define('PHPST_MAIL_TO', $_SESSION['email_sistema']);
 
 // This is the name that will appear on email notifications
 define('PHPST_MAIL_NAME', 'HelpDesk SIMEC');
@@ -43,13 +43,13 @@ define('PHPST_MAIL_SENDMETHOD', 'mail');
 
 // If you chose SMTP, you will need to set these constants too
 // email address to appear in from
-define('PHPST_MAIL_SOCKETFROM', 'cristianocabral@mec.gov.br');
+define('PHPST_MAIL_SOCKETFROM', $_SESSION['email_sistema']);
 
 // name to appear in from field
 define('PHPST_MAIL_SOCKETFROMNAME', 'HelpDesk SIMEC');
 
 // email address to reply to
-define('PHPST_MAIL_SOCKETREPLY', 'cristianocabral@mec.gov.br');
+define('PHPST_MAIL_SOCKETREPLY', $_SESSION['email_sistema']);
 
 // name for reply email
 define('PHPST_MAIL_SOCKETREPLYNAME', 'RE HelpDesk SIMEC');

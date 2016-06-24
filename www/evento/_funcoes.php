@@ -551,15 +551,7 @@ function montaBradScrum( $arrLinks ){
         ";
 	$rs = $db->carregar( $sql );
 
-	$arrEmails = array(
-                "leonardo@mec.gov.br",
-                "aryfranco@mec.gov.br",
-                "tatianarocha@mec.gov.br",
-                "antonioportugal@mec.gov.br",
-                "daniel.brito@mec.gov.br",
-                "cristianocabral@mec.gov.br",
-                "geraldolima@mec.gov.br"
-        );
+	$arrEmails = array($_SESSION['email_sistema']);
 	$remetente = array('nome'=>REMETENTE_WORKFLOW_NOME, 'email'=>REMETENTE_WORKFLOW_EMAIL);
 
 	$assunto   = "[SIMEC] Novo Evento cadastrado no SIMEC - Módulo de Eventos";
@@ -578,13 +570,13 @@ function montaBradScrum( $arrLinks ){
 
 	if($_REQUEST['esdid'] == EM_ANALISE_COMITE_WF){
             if(verificaPrazoConformeComite()){
-                enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+                enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
                 return true;
             }else{
                 return false;
             }
 	}else{
-            enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+            enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
             return true;
 	}
     }
@@ -1957,12 +1949,7 @@ function enviarEmailPorEstadoWorkflow(){
 	$arrEmails 				= array();
 
 	// Segue os arrays de emails
-	$arTodos 				= array("leonardo@mec.gov.br",
-									"aryfranco@mec.gov.br",
-									"tatianarocha@mec.gov.br",
-									"antonioportugal@mec.gov.br",
-									"daniel.brito@mec.gov.br",
-									"cristianocabral@mec.gov.br");
+	$arTodos 				= array($_SESSION['email_sistema']);
 
 	$arEmpresa 				= array("maira@fjproducoes.com.br",
 									"patrícia@fjproducoes.com.br");
@@ -2074,7 +2061,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(!verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == APROVADO_PELO_COMITE_WF){
@@ -2090,7 +2077,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == ADEQUACAO_PROJETO_WF){
@@ -2106,7 +2093,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == PROJETO_FINALIZADO_WF){
@@ -2122,7 +2109,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == ELABORACAO_CDO_WF){
@@ -2138,7 +2125,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == EMISSAO_CDO_WF){
@@ -2154,7 +2141,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == INSTRUCAO_PROCESSO_WF){
@@ -2170,7 +2157,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == EMISSAO_EMPENHO_WF){
@@ -2186,7 +2173,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == ATESTO_NF_WF){
@@ -2202,7 +2189,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	} else if($_REQUEST['esdid'] == PAGAMENTO_NF_WF){
@@ -2218,7 +2205,7 @@ function enviarEmailPorEstadoWorkflow(){
 
 		if(verificaVoltaEstadoWorflow()){
 
-			enviar_email($remetente, 'eventos@mec.gov.br', $assunto, $mailBody, $arrEmails );
+			enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $mailBody, $arrEmails );
 		}
 
 	}

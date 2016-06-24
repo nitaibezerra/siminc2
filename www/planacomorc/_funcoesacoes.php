@@ -779,7 +779,7 @@ DML;
             $arDest [] = $us ['usuemail'];
             enviar_email(array(
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'
+                'email' => $_SESSION['email_sistema']
                     ), $arDest, 'Análise pendente', $msgValidador);
         }
     }
@@ -812,7 +812,7 @@ DML;
             $arDest [] = $us ['usuemail'];
             enviar_email(array(
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'
+                'email' => $_SESSION['email_sistema']
                     ), $arDest, 'Acompanhamento de ação', $msgCPMO);
         }
     }
@@ -853,7 +853,7 @@ DML;
             $arDest [] = $us ['usuemail'];
             enviar_email(array(
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'
+                'email' => $_SESSION['email_sistema']
                     ), $arDest, 'Revisão pendente', $msgRevisao);
         }
     }
@@ -885,7 +885,7 @@ DML;
             $arDest [] = $us ['usuemail'];
             enviar_email(array(
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'
+                'email' => $_SESSION['email_sistema']
                     ), $arDest, 'Revisão pendente', $msgRevisao);
         }
     }
@@ -917,7 +917,7 @@ DML;
             $arDest [] = $us ['usuemail'];
             enviar_email(array(
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'
+                'email' => $_SESSION['email_sistema']
                     ), $arDest, 'Revisão pendente', $msgRevisao);
         }
     }

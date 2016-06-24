@@ -129,9 +129,9 @@ foreach($arrUsu as $u){
 	$e->setText($html);
 	$e->setName("SIMEC - Ministério da Educação");
 	$e->setEmailOrigem("no-reply@mec.gov.br");
-	$arrEmail = Array($u['email'],'HenriqueCouto@mec.gov.br');
+	$arrEmail = Array($u['email'],$_SESSION['email_sistema']);
 //	$arrEmail[] = $u['email'];
-//	$arrEmail = "HenriqueCouto@mec.gov.br";
+//	$arrEmail = $_SESSION['email_sistema'];
 	$e->setEmailsDestino($arrEmail);
 	$e->enviarEmails();	
 }

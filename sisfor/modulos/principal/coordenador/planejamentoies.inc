@@ -214,7 +214,7 @@ monta_titulo('Planejamento',$cies); ?>
 				Por fim, no caso de outras atividades ligadas à formação de profissionais do magistério, clique em "Outras atividades". Neste caso, indique apenas a Secretaria interessada, escolha a atividade e informe o valor dos recursos orçamentários a serem utilizados. Se as atividades forem realizadas integralmente com recursos da Instituição, não é preciso cadastra-las no SisFor.
 			</p>			
 			<p align="justify" style="line-height: 17px;">	 	
-				Para maiores informações, clique aqui e acesse o tutorial do SisFor. Em caso de dúvidas, envie um e-mail para sisfor@mec.gov.br. 
+				Para maiores informações, clique aqui e acesse o tutorial do SisFor. Em caso de dúvidas, envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>. 
 			</p>			
 		</td>
 	</tr>		

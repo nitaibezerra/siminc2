@@ -50,11 +50,11 @@ function enviar_email_a($docid){
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid foi cadastrado. Aguardando aprovação da reitoria.</p>";
 	} else {
         $email = $atual;
-        $cc = array("Guilherme.Carvalho@mec.gov.br");
+        $cc = array($_SESSION['email_sistema']);
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid foi cadastrado. Aguardando aprovação da reitoria.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=> $_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi cadastrado. Aguardando aprovação da reitoria.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -90,12 +90,12 @@ function enviar_email_tec($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=> $_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid necessita de ajustes.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -125,12 +125,12 @@ function enviar_email_rei($docid) {
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid necessita de ajustes.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -168,12 +168,12 @@ function enviar_email_sec($docid) {
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid necessita de ajustes.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -202,19 +202,19 @@ function enviar_email_dir($docid){
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}
 
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O termo de execução descentralizada nº $tcpid necessita de ajustes.";
 
@@ -258,12 +258,12 @@ function enviar_email_cgso($docid){
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>  O termo de execução descentralizada nº $tcpid necessita de ajustes.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid necessita de ajustes.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -298,12 +298,12 @@ function enviar_email_c($docid) {
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid foi aprovado pela reitoria. Aguarda posicionamento da secretaria.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p> O termo de execução descentralizada nº $tcpid foi aprovado pela reitoria. Aguarda posicionamento da secretaria.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado pela reitoria. Aguarda posicionamento da secretaria.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -383,12 +383,12 @@ function enviar_email_d($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid aguarda análise e parecer da coordenação.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid aguarda análise e parecer da coordenação.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid aguarda análise e parecer da coordenação.";
 
     /**
@@ -432,12 +432,12 @@ function enviar_email_e($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação pela diretoria.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação pela diretoria.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação pela diretoria.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -472,12 +472,12 @@ function enviar_email_f($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi devolvido para ajustes (em diligência). Aguardando posicionamento da unidade técnica.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi devolvido para ajustes (em diligência). Aguardando posicionamento da unidade técnica.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi devolvido para ajustes (em diligência). Aguardando posicionamento da unidade técnica.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -516,19 +516,19 @@ function enviar_email_g($docid) {
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado pela secretaria. Aguardando posicionamento da UG repassadora.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-// 			$email = array("Guilherme.Carvalho@mec.gov.br");
-			$email = array("Wescley.Lima@mec.gov.br");
+// 			$email = array($_SESSION['email_sistema']);
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado pela secretaria. Aguardando posicionamento da UG repassadora.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado pela secretaria. Aguardando posicionamento da UG repassadora.";
 
@@ -576,12 +576,12 @@ function enviar_email_h($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid aguarda autorização para descentralização.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid aguarda autorização para descentralização.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid aguarda autorização para descentralização.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -610,18 +610,18 @@ function enviar_email_i($docid){
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid pode ser enviado para execução. Descentralizar os recursos.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid pode ser enviado para execução. Descentralizar os recursos.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O termo de execução descentralizada nº $tcpid pode ser enviado para execução. Descentralizar os recursos.";
 
@@ -659,18 +659,18 @@ function enviar_email_j($docid){
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi alterado. Aguardando aprovação da reitoria.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi alterado. Aguardando aprovação da reitoria.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi alterado. Aguardando aprovação da reitoria.";
 
@@ -704,18 +704,18 @@ function enviar_email_k($docid){
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do secretário.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do secretário.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do secretário.";
 
@@ -761,12 +761,12 @@ function enviar_email_l($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Concedente.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Concedente.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Concedente.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco );
 	return true;
@@ -795,12 +795,12 @@ function enviar_email_m($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado.Aguardando aprovação do Representante Legal do Proponente.</p>";
 	} else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Proponente.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 	$assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Proponente.";
 	enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
 	return true;
@@ -833,18 +833,18 @@ function enviar_email_n($docid) {
 			//ver("teste 1",d);
 			$email = $email2;
 			if(!$email) $email = $atual;
-			//$email = array("Guilherme.Carvalho@mec.gov.br");
+			//$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Proponente.</p>";
 	}else{
 			//ver("teste 2", d);
 			//$email = $email2;
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Proponente.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação do Representante Legal do Proponente.";
 
@@ -882,12 +882,12 @@ function enviar_email_o($docid) {
 			$cc = $atual;
 			$conteudo = "<p>O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da coordenação da Secretaria, com parecer e observações (optativos), para finalização do termo.</p>";
 	}else{
-			$email = array("Guilherme.Carvalho@mec.gov.br");
+			$email = array($_SESSION['email_sistema']);
 			$cc = $atual;
 			$conteudo = "<p>O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da coordenação da Secretaria, com parecer e observações (optativos), para finalização do termo.</p>";
 	}
 
-	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+	$remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
 
 	$assunto  = "O relatório de cumprimento do objeto referente ao termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da coordenação da Secretaria, com parecer e observações (optativos), para finalização do termo.";
 
@@ -927,13 +927,13 @@ function enviar_email_gabinete($docid) {
 
         $cc = $atual;
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
     }
 
     $conteudo = "<p>O termo de execução descentralizada nº {$tcpid} estava em diligência e foi enviado para coordenação responsável.</p>";
 
-    $remetente = array('nome'=>'Programação Orçamentária - Termo de Execução Descentralizada', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Termo de Execução Descentralizada', 'email'=>$_SESSION['email_sistema']);
 
     $assunto  = "O termo de execução descentralizada nº {$tcpid} estava em diligência e foi enviado para coordenação responsável.";
 
@@ -1706,7 +1706,7 @@ function enviar_email_dev($titulo_assunto, $content) {
         $conteudo = '<p>Log:</p>';
         $conteudo.= '<p>'.$content.'</p>';
 
-        $remetente = array('nome'=>'Programação Orçamentária - Log de Erro', 'email'=>'simec@mec.gov.br');
+        $remetente = array('nome'=>'Programação Orçamentária - Log de Erro', 'email'=>$_SESSION['email_sistema']);
         $assunto  = $titulo_assunto;
 
         enviar_email($remetente, $email, $assunto, $conteudo);
@@ -1723,7 +1723,7 @@ function enviar_email_arq($docid) {
     $sql = sprintf("SELECT usuemail	FROM seguranca.usuario WHERE usucpf = '%s'", (string) $_SESSION['usucpf']);
     $atual = $db->pegaUm($sql);
 
-    $email2 = array('DiogoFerreira@mec.gov.br', 'GuilhermeCarvalho@mec.gov.br');
+    $email2 = array($_SESSION['email_sistema']);
 
     if (strstr($_SERVER['HTTP_HOST'], 'simec.mec.gov.br')) {
         $email = $email2;
@@ -1733,12 +1733,12 @@ function enviar_email_arq($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando analise da SPO.</p>";
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando analise da SPO.</p>";
     }
 
-    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
     $assunto  = "O termo de execução descentralizada nº $tcpid foi enviado para Arquivado. Aguardando analise da SPO.";
     enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
     return true;
@@ -1777,12 +1777,12 @@ function enviar_email_tec_prop($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da Equipe Técnica.</p>";
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da Equipe Técnica.</p>";
     }
 
-    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
     $assunto  = "O termo de execução descentralizada nº $tcpid foi enviado para Execução (sem nova descentralização). Aguardando análise da Equipe Técnica.";
     enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
     return true;
@@ -1821,12 +1821,12 @@ function enviar_email_dispo_orca($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da Equipe Técnica.</p>";
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando análise da Equipe Técnica.</p>";
     }
 
-    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
     $assunto  = "O termo de execução descentralizada nº $tcpid foi enviado para Execução (sem nova descentralização). Aguardando análise da Equipe Técnica.";
     enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
     return true;
@@ -1865,12 +1865,12 @@ function enviar_email_area_tec_fnde($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da Área Tecnica do FNDE.</p>";
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da Área Tecnica do FNDE.</p>";
     }
 
-    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
     $assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da Área Tecnica do FNDE.";
     enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
     return true;
@@ -1909,12 +1909,12 @@ function enviar_email_dir_fnde($docid) {
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da diretoria do FNDE.</p>";
     } else {
-        $email = array("Guilherme.Carvalho@mec.gov.br");
+        $email = array($_SESSION['email_sistema']);
         $cc = $atual;
         $conteudo = "<p>O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da diretoria do FNDE.</p>";
     }
 
-    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>'simec@mec.gov.br');
+    $remetente = array('nome'=>'Programação Orçamentária - Descentralização de Crédito', 'email'=>$_SESSION['email_sistema']);
     $assunto  = "O termo de execução descentralizada nº $tcpid foi aprovado. Aguardando aprovação da diretoria do FNDE.";
     enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco);
     return true;

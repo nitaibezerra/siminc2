@@ -197,12 +197,11 @@ if($_POST['assunto'] && $_POST['necessidade']) {
  	 if (!$_FILES['anexo']['size'] || EnviarArquivo($_FILES['anexo'], '', $dmdid)) {
 		
  	 	 //envia email
-	 	 $remetente = array('nome'=>'Módulo Demandas', 'email'=>'demandas@mec.gov.br');
-	 	 $destinatario = "marilucia.queiroz@mec.gov.br";
-	 	 $emailCopia = "cristiano.cabral@mec.gov.br";
+	 	 $remetente = array('nome'=>'Módulo Demandas', 'email'=>$_SESSION['email_sistema']);
+	 	 $destinatario = $_SESSION['email_sistema'];
 		 $assunto = "Demanda Nº {$dmdid} Cadastrada pelo módulo ".$_SESSION['sisabrev'];
 		 $conteudo = "Demanda Nº {$dmdid} Cadastrada pelo módulo ".$_SESSION['sisabrev'].".<br>Acesse o sistema demandas para acompanhá-la.";
-		 enviar_email( $remetente, $destinatario, $assunto, $conteudo, $emailCopia );
+		 enviar_email( $remetente, $destinatario, $assunto, $conteudo);
  	 	
  		?>
  		<script>

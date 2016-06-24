@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 $usunome = $_SESSION['usunome'];
-$remetente = array('nome'=>$usunome, 'email'=>'simec@mec.gov.br');
+$remetente = array('nome'=>$usunome, 'email'=>$_SESSION['email_sistema']);
 
 /**
  * Centraliza as requisições ajax do módulo.  

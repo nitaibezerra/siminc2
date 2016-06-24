@@ -1515,7 +1515,7 @@ TEXT;
             enviar_email(
                     array(// -- Remetente
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'), array(// -- Destinatario
+                'email' => $_SESSION['email_sistema']), array(// -- Destinatario
                 'nome' => $usudata['usunome'],
                 'email' => $usudata['usuemail']
                     ), $tituloEmail, $textoEmail
@@ -1544,7 +1544,7 @@ SQL;
                             array(
 // -- Remetente
                         'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                        'email' => 'spo.planejamento@mec.gov.br'), array(
+                        'email' => $_SESSION['email_sistema']), array(
 // -- Destinatario
                         'nome' => $usudata['usunome'],
                         'email' => $usudata['usuemail']
@@ -1593,7 +1593,7 @@ TEXT;
             enviar_email(
                     array(// -- Remetente
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'), array(// -- Destinatario
+                'email' => $_SESSION['email_sistema']), array(// -- Destinatario
                 'nome' => $usudata['usunome'],
                 'email' => $usudata['usuemail']
                     ), $tituloEmail, $textoEmail
@@ -1622,7 +1622,7 @@ SQL;
                             array(
 // -- Remetente
                         'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                        'email' => 'spo.planejamento@mec.gov.br'), array(
+                        'email' => $_SESSION['email_sistema']), array(
 // -- Destinatario
                         'nome' => $usudata['usunome'],
                         'email' => $usudata['usuemail']
@@ -1661,7 +1661,7 @@ TEXT;
             enviar_email(
                     array(// -- Remetente
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'), array(// -- Destinatario
+                'email' => $_SESSION['email_sistema']), array(// -- Destinatario
                 'nome' => $usudata['usunome'],
                 'email' => $usudata['usuemail']
                     ), $tituloEmail, $textoEmail
@@ -1689,7 +1689,7 @@ SQL;
                             array(
 // -- Remetente
                         'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                        'email' => 'spo.planejamento@mec.gov.br'), array(
+                        'email' => $_SESSION['email_sistema']), array(
 // -- Destinatario
                         'nome' => $usudata['usunome'],
                         'email' => $usudata['usuemail']
@@ -1732,7 +1732,7 @@ TEXT;
             enviar_email(
                     array(// -- Remetente
                 'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                'email' => 'spo.planejamento@mec.gov.br'), array(// -- Destinatario
+                'email' => $_SESSION['email_sistema']), array(// -- Destinatario
                 'nome' => $usudata['usunome'],
                 'email' => $usudata['usuemail']
                     ), $tituloEmail, $textoEmail
@@ -1760,7 +1760,7 @@ SQL;
                             array(
 // -- Remetente
                         'nome' => 'Planejamento e Acompanhamento Orçamentário',
-                        'email' => 'spo.planejamento@mec.gov.br'), array(
+                        'email' => $_SESSION['email_sistema']), array(
 // -- Destinatario
                         'nome' => $usudata['usunome'],
                         'email' => $usudata['usuemail']

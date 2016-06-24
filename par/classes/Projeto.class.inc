@@ -476,7 +476,7 @@ XML;
 		
 		if ( $_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
 			//if( $_SESSION['baselogin'] == "simec_desenvolvimento" ) return true;
-			$strEmailTo = array('thiago.barbosa@mec.gov.br', 'wesley.silva@mec.gov.br');
+			$strEmailTo = array($_SESSION['email_sistema']);
 			return enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem, '', '', $anexos);
 		} else {
 			return enviar_email($remetente, $strEmailTo, $strAssunto, $strMensagem, '', '', $anexos);

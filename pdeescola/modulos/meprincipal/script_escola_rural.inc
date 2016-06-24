@@ -76,7 +76,7 @@ $i=1;
 foreach($dados as $d){
 	
 	//envia email
-	$remetente = array("email" => "maiseducacao@mec.gov.br", "nome" => "SIMEC - Mais Educação");
+	$remetente = array("email" => $_SESSION['email_sistema'], "nome" => "SIMEC - Mais Educação");
 	$destinatario = $d['email'];
 	
   	$assunto = "Atualização do Plano de Atendimento das escolas do campo";
@@ -120,7 +120,7 @@ $i=1;
 foreach($dados as $d){
 	
 	//envia email
-	$remetente = array("email" => "maiseducacao@mec.gov.br", "nome" => "SIMEC - Mais Educação");
+	$remetente = array("email" => $_SESSION['email_sistema'], "nome" => "SIMEC - Mais Educação");
 	$destinatario = $d['email'];
 	
   	$assunto = "Atualização do Plano de Atendimento das escolas do campo";
@@ -184,7 +184,7 @@ $i=1;
 foreach($dados as $d){
 	
 	//envia email
-	$remetente = array("email" => "maiseducacao@mec.gov.br", "nome" => "SIMEC - Mais Educação");
+	$remetente = array("email" => $_SESSION['email_sistema'], "nome" => "SIMEC - Mais Educação");
 	$destinatario = $d['email'];
 	
   	$assunto = "Atualização do Plano de Atendimento das escolas do campo";
@@ -264,7 +264,7 @@ $i=1;
 foreach($dados as $d){
 	
 	//envia email
-	$remetente = array("email" => "maiseducacao@mec.gov.br", "nome" => "SIMEC - Mais Educação");
+	$remetente = array("email" => $_SESSION['email_sistema'], "nome" => "SIMEC - Mais Educação");
 	$destinatario = $d['email'];
 	
   	$assunto = "Atualização do Plano de Atendimento das escolas do campo";

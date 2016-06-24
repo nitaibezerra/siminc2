@@ -73,8 +73,8 @@ class Ws_Unasus_Soap extends Modelo{
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
 		$mensagem->FromName		= "WS Mais Médicos";
-		$mensagem->From 		= "simec@mec.gov.br";
-		$mensagem->AddAddress("wescley.lima@mec.gov.br", "Wescley Lima");
+		$mensagem->From 		= $_SESSION['email_sistema'];
+		$mensagem->AddAddress($_SESSION['email_sistema'], "Wescley Lima");
 		$mensagem->AddAddress("henrique.couto@ebserh.gov.br", "Henrique Couto");
 		$mensagem->Subject = $assunto;
 		

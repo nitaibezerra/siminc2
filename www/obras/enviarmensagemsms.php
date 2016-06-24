@@ -64,7 +64,7 @@ if($dados[0]) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SIMEC - Lembrete automático";
-	$mensagem->From 		= "simec@mec.gov.br";
+	$mensagem->From 		= $_SESSION['email_sistema'];
 	$mensagem->Subject      = "Obras desatualizadas no SIMEC - Módulos de obras";
 	$mensagem->IsHTML( true );
 	

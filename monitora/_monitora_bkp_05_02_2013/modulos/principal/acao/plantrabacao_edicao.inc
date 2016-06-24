@@ -51,14 +51,14 @@ if ($_REQUEST['act']=='aprovar_subacao_projeto')
    if ($sexogestor == 'F') $sexo = 'Prezada Sra. ';
    $mensagem = $sexo. str_to_upper($nomegestor).chr(13)."Reportamos que a subação que V.Sa. propôs para apoiar o seu projeto foi aprovada pelo Coordenador da ação $prgcod - $acacod.$unicod.$loccod - $acadsc";
    $emailpara = $emailgestor.','.$emailcoord.','.$emailgerente;
-  // $emailpara = 'gilbertocerqueira@mec.gov.br';
+  // $emailpara = $_SESSION['email_sistema'];
    email($nomecoord, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou
    
    $sexo = 'Prezado Sr.  ';
    if ($sexogerente == 'F') $sexo = 'Prezada Sra. ';
    $mensagem = $sexo. str_to_upper($nomegerente).chr(13)."Reportamos que a subação que V.Sa. propôs para apoiar o seu projeto foi aprovada pelo Coordenador da ação $prgcod - $acacod.$unicod.$loccod - $acadsc";
    $emailpara = $emailgerente.','.$emailcoord.','.$emailgestor;
-  // $emailpara = 'gilbertocerqueira@mec.gov.br';
+  // $emailpara = $_SESSION['email_sistema'];
 
    if ($emailgerente) email($nomecoord, $emailpara, $assunto, $mensagem);// o email vai com cópia para quem criou   
    	?>

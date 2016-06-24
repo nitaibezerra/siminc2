@@ -239,7 +239,7 @@ foreach ( $pendencias as $itemUsu )
 		<p align="left">
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		    Caso já tenha efetuado os devidos registros no SIMEC, por favor, desconsidere a mensagem.
-		    Para maiores informações entre em contato com a Unidade de Monitoramento e Avaliação (UMA) da Coordenação Geral de Planejamento da SPO, via  mensagem eletrônica para o SIMEC (<a href="http://simec.mec.gov.br">http://simec.mec.gov.br</a>) ou (<a href="mailto:spo_planejamento@mec.gov.br">spo_planejamento@mec.gov.br</a>).
+            Para maiores informações entre em contato com a Unidade de Monitoramento e Avaliação (UMA) da Coordenação Geral de Planejamento da SPO, via  mensagem eletrônica para o SIMEC (<a href="http://simec.mec.gov.br">http://simec.mec.gov.br</a>) ou (<a href="mailto:{$_SESSION['email_sistema']}">{$_SESSION['email_sistema']}</a>).
 		</p>
 		<p align="left">
 			$fraseAcao
@@ -272,7 +272,7 @@ EOT;
 			"SIMEC - Sistema Integrado de Planejamento Orçamento e Finanças<br/>" .
 			"Ministério da Educação<br/>" .
 			"http://simec.mec.gov.br<br/>" .
-			"e-mail: simec@mec.gov.br<br/>" .
+			"e-mail: ". $_SESSION['email_sistema']. "<br/>" .
 		"</font>" .
 		"<br/>";
 */

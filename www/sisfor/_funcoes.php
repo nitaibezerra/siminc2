@@ -5561,7 +5561,7 @@ function recusarProjetoCM($sifid) {
             $mensagem->Host = "localhost";
             $mensagem->Mailer = "smtp";
             $mensagem->FromName = "SISFOR - Sistema de Gestão e Monitoramento da Formação Continuada do MEC";
-            $mensagem->From = "simec@mec.gov.br";
+            $mensagem->From = $_SESSION['email_sistema'];
             $mensagem->AddAddress($r['usuemail'], $r['usunome']);
             $mensagem->Subject = "Tramitação de projeto no SISFOR";
             $mensagem->Body = "<p>Prezado(a) " . $r['usunome'] . ", o projeto do curso " . $curso['curnome'] . ", da " . $curso['universidade'] . ", foi recusado por " . $usunome . ". Para visualizar o parecer e tramitar o projeto, siga os seguintes passos:</p>
@@ -5607,7 +5607,7 @@ function aprovarProjetoCM($sifid) {
             $mensagem->Host = "localhost";
             $mensagem->Mailer = "smtp";
             $mensagem->FromName = "SISFOR - Sistema de Gestão e Monitoramento da Formação Continuada do MEC";
-            $mensagem->From = "simec@mec.gov.br";
+            $mensagem->From = $_SESSION['email_sistema'];
             $mensagem->AddAddress($r['usuemail'], $r['usunome']);
             $mensagem->Subject = "Tramitação de projeto no SISFOR";
             $mensagem->Body = "<p>Prezado(a) " . $r['usunome'] . ", o projeto do curso " . $curso['curnome'] . ", da " . $curso['universidade'] . ", foi aprovado por " . $usunome . ". Para visualizar o parecer e tramitar o projeto, siga os seguintes passos:</p>

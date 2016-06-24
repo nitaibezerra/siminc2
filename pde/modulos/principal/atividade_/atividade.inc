@@ -3,7 +3,7 @@ include APPRAIZ . 'includes/classes/dateTime.inc';
 $data = new Data();
 
 
-$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>'simec@mec.gov.br');
+$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
 
 
 if($_REQUEST['atidatafim'] && $_REQUEST['flag2'] == 1){

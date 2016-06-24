@@ -1628,7 +1628,7 @@ function enviar_email_altera_estado($docid) {
         return true;
     }
 
-    $remetente = array('nome' => "Aviso de Tramitação - Termo de Execução Descentralizada: {$dadosTed['tcpid']}", 'email' => 'simec@mec.gov.br');
+    $remetente = array('nome' => "Aviso de Tramitação - Termo de Execução Descentralizada: {$dadosTed['tcpid']}", 'email' => $_SESSION['email_sistema']);
     $assunto = "Termo de Execução Descentralizada: {$dadosTed['tcpid']} - {$tramte['fim']}";
     $conteudo = PegaConteudo($tramite);
     setSessionNotification('mensagem', $conteudo);
@@ -1639,8 +1639,7 @@ function enviar_email_altera_estado($docid) {
         $conteudo.= '<p>Grupo de emails</p>';
         $conteudo.= '<pre>'.print_r($emails, true).'</pre>';
         $emails = array($_SESSION['usuemail']);
-        $cc = 'WerterAlmeida@mec.gov.br';
-        $cco = 'LucasGomes@mec.gov.br';
+        $cc = $_SESSION['email_sistema'];
     }
 
     foreach ($emails as $destinatario)
@@ -1871,7 +1870,7 @@ function envia_email_erro() {
     }
     $ulList .= '</ul>';
 
-    $remetente = array('nome' => "Aviso de Tramitação - TED: {$dadosTed['tcpid']}", 'email' => 'simec@mec.gov.br');
+    $remetente = array('nome' => "Aviso de Tramitação - TED: {$dadosTed['tcpid']}", 'email' => $_SESSION['email_sistema']);
     $assunto = "Termo de Execução Descentralizada: {$dadosTed['tcpid']} - {$tramte['fim']}";
     $template = "
         <p>Situação do TED: {#ted}</p>
@@ -1889,7 +1888,7 @@ function envia_email_erro() {
     $conteudo = str_replace($search, $replace, $template);
 
     //ver($conteudo, d);
-    enviar_email($remetente, 'SPOSuporteOrc@mec.gov.br', $assunto, $conteudo, '', 'LucasGomes@mec.gov.br');
+    enviar_email($remetente, $_SESSION['email_sistema'], $assunto, $conteudo, '');
     return true;
 }
 

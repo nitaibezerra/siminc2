@@ -132,8 +132,8 @@ if (date('i') == '05' || isset($_GET['skip']))
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Agendamento de scripts - Iniciando scripts";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress("alexandre.dourado@mec.gov.br", "Alexandre Dourado");
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
 	$mensagem->Subject = "Agendamento de scripts";
 	
 	ob_start();
@@ -193,10 +193,8 @@ if (date('i') == '05' || isset($_GET['skip']))
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Agendamento de scripts";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress("alexandre.dourado@mec.gov.br", "Alexandre Dourado");
-	$mensagem->AddAddress("danielbrito@mec.gov.br", "Daniel Brito");
-	$mensagem->AddAddress("fellipesantos@mec.gov.br", "Fellipe Esteves");
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
 	$mensagem->Subject = "Agendamento de scripts";
 	$mensagem->Body .= "Envio da mensagem em ".(getmicrotime() - $inicio)." segundos<br/><br/>";
 	$mensagem->Body .= $log;

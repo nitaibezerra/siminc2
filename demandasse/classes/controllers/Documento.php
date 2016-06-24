@@ -403,7 +403,7 @@ WHERE dmdstatus = 'A'
     														ecpemailcc, ecpassunto, ecpcorpoemail, ecpdtenvio)
     			VALUES ($id, 
     					'".$_SESSION['usucpf']."', 
-    					'SecretariaExecutiva@mec.gov.br', 
+    					'".$_SESSION['email_sistema']. "', 
     					'".$_POST['ecpemailpara']."',  
     					NULL, 
     					'".$_POST['ecpassunto']."',  

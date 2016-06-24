@@ -123,7 +123,7 @@ class Erro
 		{
 	    $msgLog = str_replace("<q>","<br>",$msgLog);
 	    $paraquem = 'Administrador do Sistema';
-	    $paraonde = 'cristiano.cabral@mec.gov.br';
+	    $paraonde = $_SESSION['email_sistema'];
 	    $assunto = 'Erro no Simec '.date("d-m-Y H:i:s");
 	    email($paraquem,$paraonde,$assunto,$msgLog."SQL: ".$_SESSION['sql']);
     	}

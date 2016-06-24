@@ -603,7 +603,7 @@ if($esdid == WF_PLAN_FECHADO){
 					- Se você já é bolsista do FNDE/MEC e não deseja substituir sua bolsa atual pela bolsa de Coordenador Institucional, não esqueça de assinalar o penúltimo botão antes do salvamento, caso contrário, o SGB processa a primeira ordem de pagamento enviada (e não realiza duplo pagamento para o mesmo CPF).
 				</p>
 				<p align="justify">
-					Em caso de dúvida, envie um e-mail para sisfor@mec.gov.br. 
+					Em caso de dúvida, envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>. 
 				</p>			
 			</td>
 		</tr>			

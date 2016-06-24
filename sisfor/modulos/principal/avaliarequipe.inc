@@ -95,7 +95,7 @@ if ('gravar' == $_REQUEST['acao']) {
 		<p>Informe, para cada bolsista, se as atividades previstas foram realizadas ou não e por quem ele(a) foi avaliado. Observe que, neste momento, o sistema supõe que o Coordenador do Curso não tem condições de avaliar sozinho toda a equipe e somente fará o registro de quem efetivamente fez o julgamento quanto às atividades.</p>
 		<p>Ao assinalar a opção “Realizou as atividades”, o sistema automaticamente assume a condição de bolsista “Apto”. Caso a situação seja “Não realizou as atividades”, a condição passa para “Não apto” e, neste caso, é obrigatório informar o que motivou esta opção (ou seja, que atividades não foram realizadas). Neste caso, não será gerada nenhuma solicitação de pagamento.</p>
 		<p>Observe que há também a opção “Não se aplica”, que deve ser utilizada SOMENTE no caso dos bolsistas que, naquele período de referência, não tinham atividades previstas e, portanto, não podem ser avaliados. Também neste caso, não será gerada nenhuma solicitação de pagamento.</p>
-		<p>Dúvidas  ou problemas com o sistema? Envie um e-mail para sisfor@mec.gov.br.</p>
+		<p>Dúvidas  ou problemas com o sistema? Envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>.</p>
         </td>
     </tr>
     <tr>

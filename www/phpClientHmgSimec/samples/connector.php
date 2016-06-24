@@ -65,7 +65,6 @@
 		/*
 	} catch (Exception $e) {
 		$erro = $e->getMessage();
-		//mail("raul.maia@mec.gov.br, calixto.jorge@mec.gov.br" , "Erro SGB" , "Erro : ". $erro);
 		echo $erro;
 	}*/
 ?>

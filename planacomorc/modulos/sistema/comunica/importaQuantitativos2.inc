@@ -146,8 +146,8 @@ DML;
           ob_start();
           echo '<pre>';
           var_dump($retornoDTO);
-          enviar_email(array('nome' => "Gustavo 'Raj' Ávila", 'email' => 'gustavo.avila@mec.gov.br'),
-                  array('maykel.braz@mec.gov.br', 'gustavo.avila@mec.gov.br'), 'Resposta da Requisição à SOF', ob_get_contents());
+          enviar_email(array('nome' => "SIMEC", 'email' => $_SESSION['email_sistema']),
+                  array($_SESSION['email_sistema']), 'Resposta da Requisição à SOF', ob_get_contents());
           ob_end_clean();
       }
       if ($retornoDTO->return->sucesso) {
@@ -326,7 +326,7 @@ $arFuncoes = array(
                   </div>
                   <div style="text-align:center;margin:5px;padding:5px">
                       <input type="checkbox" name="send-email" id="send-email" value="1" />
-                      <label for="send-email" style="font-size:12px">Notificar requisição (gustavo.avila@mec.gov.br)</label>
+                      <label for="send-email" style="font-size:12px">Notificar requisição (<?php echo $_SESSION['email_sistema']; ?>)</label>
                   </div>
                   <div>
                       <input type="text" name="pagina" id="pagina" size="5" class="normal" />

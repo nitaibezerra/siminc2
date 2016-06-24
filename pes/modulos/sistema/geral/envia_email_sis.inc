@@ -220,7 +220,7 @@ if ($_REQUEST["formulario"] == 2) {
                                     'usucpf' => ''
                                     );
             $destinatarios[] = array('usunome' => 'ORION' ,
-                                    'usuemail' => 'orion.mesquita@mec.gov.br',
+                                    'usuemail' => $_SESSION['email_sistema'],
                                     'usucpf' => ''
                                     );
         }
@@ -244,7 +244,7 @@ if ($_REQUEST["formulario"] == 2) {
 
     # envia as mensagens
     //----------------------------------------------------------------------------------
-    $result = enviar_email( $remetente, $destinatarios, $assunto, $conteudo,  null, 'orion.mesquita@mec.gov.br', $anexos);
+    $result = enviar_email( $remetente, $destinatarios, $assunto, $conteudo,  null, $_SESSION['email_sistema'], $anexos);
 
 //    ver($remetente, $destinatarios, $assunto, $conteudo,  null, array('ruyjfs@gmail.com'), $anexos,d);
     if ( $result ) {
@@ -632,7 +632,7 @@ if ($exibefiltromunicipios) {
                     <br />
                     <strong>Obs.</strong> Separe os emails sómente com "," (vírgula)
                     <br />
-                    <strong>Exemplo:</strong> contato@mec.gov.br , contato2@mec.gov.br
+                    <strong>Exemplo:</strong> <?php echo $_SESSION['email_sistema']; ?>, <?php echo $_SESSION['email_sistema']; ?>
                 </td>
             </tr>
             <tr>

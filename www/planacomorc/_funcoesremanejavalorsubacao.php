@@ -83,7 +83,7 @@ BODY;
         }
         // -- Manda e-mail para o gestor da subacao
         enviar_email(
-                array('nome' => 'simec@mec.gov.br', 'email' => 'simec@mec.gov.br'), array('nome' => $nomeGestor, 'email' => $emailGestor), 'Remanejamento de Subações', $emailHeader . $emailBody . $emailFooter
+                array('nome' => $_SESSION['email_sistema'], 'email' => $_SESSION['email_sistema']), array('nome' => $nomeGestor, 'email' => $emailGestor), 'Remanejamento de Subações', $emailHeader . $emailBody . $emailFooter
         );
     }
 }

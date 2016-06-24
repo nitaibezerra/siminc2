@@ -59,13 +59,13 @@ function enviaEmailChiavicatti($file) {
 //                 [error] 	=> {$file['error']}
 //                 [size] 	=> {$file['size']}";
     // remetente
-    $remetente = array("nome" => "Arquivo Falha de Envio", "email" => "monitoramento.obras@mec.gov.br");
+    $remetente = array("nome" => "Arquivo Falha de Envio", "email" => $_SESSION['email_sistema']);
     $assunto = "Falha no envio de arquivo";
 
     $destinatario = array();
     $destinatario[] = array(
-        'usunome' => 'Felipe Chiavicatti',
-        'usuemail' => 'felipe.chiavicatti@mec.gov.br'
+        'usunome' => 'SIMEC',
+        'usuemail' => $_SESSION['email_sistema']
     );
     $destinatario[] = array(
         'usunome' => 'Adonias Malosso',
@@ -2810,7 +2810,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
 			</table>";
 
         // remetente
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $assunto = "SIMEC - ORDEM DE SERVICO - Nº {$sosnum} - ENVIADA";
         $conteudo = $html;
 
@@ -5456,7 +5456,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         <tr><td>Realizado em $desdata por $usunomedesbloqueio</td></tr>
         </table>
     ";
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
 
         $usuarios[] = $usucpfpedido;
@@ -5506,7 +5506,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
             <tr><td>Realizado em $dsldata por $usunomedesbloqueio</td></tr>
             </table>
         ";
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
 
         $usuarios[] = $usucpfpedido;
@@ -5536,7 +5536,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         </table>
     ";
 
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
         $usuarios = pegaUsuarios($usuarios);
 
@@ -8247,7 +8247,7 @@ ur.pflcod as perfil
     ";
         $obrInfo = $db->pegaUm($sql);
 
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => "monitoramento.obras@mec.gov.br");
+        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $assunto = "SIMEC - Ordem de serviço aceita - Obra {$obrid} - {$obra->obrnome} - {$obrInfo['mundescricao']}/{$obrInfo['estuf']}";
 
         $sql = " SELECT em.orgid FROM obras2.empreendimento em INNER JOIN obras2.obras o ON o.obrid = {$obrid} AND o.empid = em.empid ";
@@ -9370,13 +9370,13 @@ ur.pflcod as perfil
 
 
 
-                        $remetente = array("nome" => "Alteração de estado do Cumprimento do objeto", "email" => "monitoramento.obras@mec.gov.br");
+                        $remetente = array("nome" => "Alteração de estado do Cumprimento do objeto", "email" => $_SESSION['email_sistema']);
                         $assunto = "Alteração de estado do Cumprimento do objeto";
 
                         $destinatario = array();
                         $destinatario[] = array(
-                            'usunome' => 'Marcus Rocha',
-                            'usuemail' => 'marcus.rocha@mec.gov.br'
+                            'usunome' => 'SIMEC',
+                            'usuemail' => $_SESSION['email_sistema']
                         );
 
 

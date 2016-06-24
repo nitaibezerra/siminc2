@@ -65,7 +65,7 @@
 				<li>Nome completo e localização (sala e ramal) dos usuários que deverão ter acesso ao e-mail;</li>
 				<li>Período de utilização do e-mail;</li>
 				<br>
-				Ex.: Solicito a criação do e-mail institucional educação@mec.gov.br, devido ao Programa de Educação, que será utilizado até o dia 31/12/2009. Segue a lista dos usuários que deverão ter acesso ao mesmo: Carla da Silva Mota (SESU – 3 º andar – Sala 00 – ramal: 5555) e Evandro Silva Torres (SESU – 3 º andar – Sala 00 – ramal: 5555).
+				Ex.: Solicito a criação do e-mail institucional <?php echo $_SESSION['email_sistema']; ?>, devido ao Programa de Educação, que será utilizado até o dia 31/12/2009. Segue a lista dos usuários que deverão ter acesso ao mesmo: Carla da Silva Mota (SESU – 3 º andar – Sala 00 – ramal: 5555) e Evandro Silva Torres (SESU – 3 º andar – Sala 00 – ramal: 5555).
 			</div>
 			
 			<br>

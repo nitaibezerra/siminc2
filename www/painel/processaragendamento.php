@@ -630,10 +630,8 @@ if($_REQUEST['fecharjanela']==true) {
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SISTEMA DE PROCESSAMENTO DE AGENDAMENTOS";
-	$mensagem->From 		= "simec@mec.gov.br";
-	$mensagem->AddAddress("alexandre.dourado@mec.gov.br", "Alexandre Dourado");
-	$mensagem->AddAddress("vitor.sad@mec.gov.br"        , "Vitor Nunes Sad");
-	$mensagem->AddAddress("cristiano.cabral@mec.gov.br" , "Cristiano Cabral");
+	$mensagem->From 		= $_SESSION['email_sistema'];
+	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
 	$mensagem->Subject = "Processamento dos agendamentos";
 	
 	ob_start();

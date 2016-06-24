@@ -336,7 +336,7 @@ function enviaEmailParaAreaResponsavel( $slcid )
 					<p><b>Pergunta:</b>&nbsp;'.$solicitacao['slcpergunta'].'</p>
 				  ';
 	 
-	$cc			= array('tiago.miari@mec.gov.br');
+	$cc			= array($_SESSION['email_sistema']);
 	$cco		= ''; 
 	$arquivos 	= array();
 			
@@ -449,7 +449,6 @@ function enviarEmailAnaliseNAI( $slcid )
         <p>Solicitação de nº '.$solicitacao['slcnumsic'].', prazo de atendimento '.$solicitacao['data_resposta'].', do solicitante '.$solicitacao['entnome']. 'foi enviada para Análise pelo NAI.</p>
     ';
     $arEmail[] = $solicitacao['usuemail'];
-//    $cc = array('tiago.miari@mec.gov.br');
     $cco = '';
     $arquivos = array();
     enviar_email($remetente, $arEmail, $assunto, $conteudo, $cc, $cco, $arquivos);
@@ -562,7 +561,7 @@ function enviaEmailProrrogacao( $slcid )
 					<p><b>Pergunta:</b>&nbsp;'.$solicitacao['slcpergunta'].'</p>
 				  ';
 	 
-	$cc			= array('tiago.miari@mec.gov.br');
+	$cc			= array($_SESSION['email_sistema']);
 	$cco		= ''; 
 	$arquivos 	= array();
 	

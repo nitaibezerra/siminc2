@@ -436,7 +436,7 @@ function enviar_aluno_transferir(){
     				
     				$conteudo = "Foi feito pedido de tranferência do seguinte aluno para escola de sua reponsabilidade:
                                 ".implode('; <br>',$alunos).".";
-//     				enviar_email( 'simec@mec.gov.br', $email_resp_destino, $assunto, $conteudo );
+//     				enviar_email( $_SESSION['email_sistema'], $email_resp_destino, $assunto, $conteudo );
     		}
     	}
     	if($sqlhistorico){
@@ -783,7 +783,7 @@ function receber_aluno_tranferir(){
 			
 			$conteudo = "Foi feito pedido de tranferência do seguinte aluno para escola de sua reponsabilidade:
 					".implode('; <br>',$alunos).".";
-			//     				enviar_email( 'simec@mec.gov.br', $email_resp_destino, $assunto, $conteudo );
+			//     				enviar_email( $_SESSION['email_sistema'], $email_resp_destino, $assunto, $conteudo );
     	}
 	}
 	if($sqlhistorico){
@@ -858,7 +858,7 @@ function receber_aluno_cancelar(){
 			
 			$conteudo = "Foi feito pedido de tranferência do seguinte aluno para escola de sua reponsabilidade:
 					".implode('; <br>',$alunos).".";
-			//     				enviar_email( 'simec@mec.gov.br', $email_resp_destino, $assunto, $conteudo );
+			//     				enviar_email( $_SESSION['email_sistema'], $email_resp_destino, $assunto, $conteudo );
     	}
     }
     

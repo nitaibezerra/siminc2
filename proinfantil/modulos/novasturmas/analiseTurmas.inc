@@ -195,7 +195,7 @@ if( $_REQUEST['requisicao'] == 'enviaranalise' ){
 						
 						$resolucao = verificaResolucao();
 						
-						//$arEmail	= array('wesley.silva@mec.gov.br');
+						//$arEmail	= array($_SESSION['email_sistema']);
 						$assunto	= 'Turmas em diligência';
 						$conteudo 	= '<p>Senhor Prefeito,</p>
 <p>&nbsp;</p>

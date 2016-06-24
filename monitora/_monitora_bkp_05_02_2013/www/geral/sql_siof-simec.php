@@ -4,7 +4,7 @@ $datasql = $data['year'].'-'.$data['mon'].'-'.$data['mday'];
 //print $datasql;
 //exit();
 //Parâmetros de conexão com o PG
-global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $email_sistema;
+global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd;
 //Desenv.
 $servidor_bd = '10.210.3.17';
 $porta_bd = '5432';

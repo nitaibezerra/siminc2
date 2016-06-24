@@ -369,7 +369,7 @@ Acesse o SIMEC para maiores informações
 
 www.simec.mec.gov.br";
 
-    enviar_email(array('nome' => 'Alteração de Receita', 'email' => 'spo.planejamento@mec.gov.br'), 'maykel.braz@mec.gov.br', 'Análise pendente', $msg);
+    enviar_email(array('nome' => 'Alteração de Receita', 'email' => $_SESSION['email_sistema']), $_SESSION['email_sistema'], 'Análise pendente', $msg);
     return true;
 }
 

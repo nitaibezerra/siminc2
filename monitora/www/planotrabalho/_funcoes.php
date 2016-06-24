@@ -1452,17 +1452,11 @@ function validaAcessoUnidade($permissoes, $unicod) {
 function enviaEmailStatusPi($pi){
 		global $db;
 		global $servidor_bd;
-		
-		if($_SERVER["HTTP_HOST"] == 'simec' || $_SERVER["HTTP_HOST"] == 'simec.mec.gov.br') {
-			//$emailCopia[] = 'spo@mec.gov.br';
-			$emailCopia[] = 'wesley.figueredo@mec.gov.br';
-		} else {
-			$emailCopia[] = 'henrique.couto@mec.gov.br';
-			$emailCopia[] = 'alexandre.dourado@mec.gov.br';
-		}
+        
+        $emailCopia[] = $_SESSION['email_sistema'];
 		
 		// Seta remetente
-		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>'spo@mec.gov.br');
+		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>$_SESSION['email_sistema']);
 		// verificando se vincula com as unidades das obras ou não
 		$obrid = $db->pegaUm("SELECT obrid FROM monitora.planointerno WHERE plistatus = 'A' AND plicod = '" . $pi . "'");
 		if($obrid) {

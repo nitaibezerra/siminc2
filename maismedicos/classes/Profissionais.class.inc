@@ -254,7 +254,7 @@ class Profissionais extends Modelo{
 				$this->enviaEmailCadastroSimec($arEmail, ($k==1?true:false));
 				
 				if($k<3){
-					$arEmail['email'] = array("wescley.lima@mec.gov.br", "Wescley Lima");
+					$arEmail['email'] = array($_SESSION['email_sistema'], "Wescley Lima");
 					$this->enviaEmailCadastroSimec($arEmail, true);
 				}
 			}
@@ -308,7 +308,7 @@ class Profissionais extends Modelo{
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
 		$mensagem->FromName		= "SIMEC - Mais Médicos";
-		$mensagem->From 		= "simec@mec.gov.br";
+		$mensagem->From 		= $_SESSION['email_sistema'];
 		$mensagem->AddAddress($para[0], $para[1]);
 		$mensagem->Subject = $assunto;
 	

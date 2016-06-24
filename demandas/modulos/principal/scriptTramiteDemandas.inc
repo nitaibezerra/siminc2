@@ -16,7 +16,7 @@ if($_POST['varaux'] == '1'){
 	$_SESSION['usucpforigem'] = '';
 	$_SESSION['usucpf'] = '';
 	$_SESSION['usunome'] = 'THIAGO SIMÕES DE ALMEIDA';
-	$_SESSION['usuemail'] = 'thiago.simoes@mec.gov.br';
+	$_SESSION['usuemail'] = $_SESSION['email_sistema'];
 	
 	include APPRAIZ ."includes/workflow.php";
 

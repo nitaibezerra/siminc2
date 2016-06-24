@@ -1423,11 +1423,11 @@ function enviaEmailStatusPi($pi){
 		global $servidor_bd;
 		
 		if($_SERVER["HTTP_HOST"] == 'simec' || $_SERVER["HTTP_HOST"] == 'simec.mec.gov.br') {
-			//$emailCopia[] = 'spo@mec.gov.br';
-			$emailCopia[] = 'wesley.figueredo@mec.gov.br';
+			//$emailCopia[] = $_SESSION['email_sistema'];
+			$emailCopia[] = $_SESSION['email_sistema'];
 		} else {
-			$emailCopia[] = 'henrique.couto@mec.gov.br';
-			$emailCopia[] = 'alexandre.dourado@mec.gov.br';
+			$emailCopia[] = $_SESSION['email_sistema'];
+			$emailCopia[] = $_SESSION['email_sistema'];
 		}
 		
 		# Recupera email cadastrador do PI
@@ -1467,12 +1467,12 @@ function enviaEmailStatusPi($pi){
 		}
 		# Se tem PTRES FNDE manda copia para esse emails
 		if($boPtresFNDE){
-			$emailCopia[] = 'henrique.couto@mec.gov.br';
+			$emailCopia[] = $_SESSION['email_sistema'];
 		}
 		$emailCopia = array_unique($emailCopia);
 		
 		// Seta remetente
-		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>'spo@mec.gov.br');
+		$remetente = array('nome'=>'SPO - Plano interno', 'email'=>$_SESSION['email_sistema']);
 
 		$sql = "SELECT distinct
 			pi.plicod  as plicod,

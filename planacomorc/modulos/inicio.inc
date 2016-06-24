@@ -34,7 +34,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 
     <p style="font-weight: bold;font-size: 11px; margin-top: 4px;">
-        Mas não se preocupe, todos os dados e funcionalidades permanecem como antes. Em caso de dúvidas entrar em contato (spo.planejamento@mec.gov.br)
+        Mas não se preocupe, todos os dados e funcionalidades permanecem como antes. Em caso de dúvidas entrar em contato (<?php echo $_SESSION['email_sistema']; ?>)
     </p>
 
 </div>

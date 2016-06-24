@@ -104,7 +104,7 @@ function validarQuestionario(){
 					•	Preencha suas informações com atenção e salve suas respostas antes de comutar entre uma página e outra – elas não são salvas automaticamente. <br>
 					•	Revise as informações ao final do preenchimento do formulário, antes de enviar. <br>
 					•	Caso seja necessário atualizar alguma informação em momento posterior, basta inserir o mesmo CPF novamente. <br>
-					•	No caso de dúvidas, favor entrar em contato com Francisca – e-mail francisca.costa@mec.gov.br ou do telefone (61)2022-8620.
+					•	No caso de dúvidas, favor entrar em contato com Francisca – e-mail <?php echo $_SESSION['email_sistema']; ?> ou do telefone (61)2022-8620.
 					</p>
 					<p style="text-align: justify; font-size: 15px; margin-left: 25px;margin-right: 15px;">
 					Obrigada!

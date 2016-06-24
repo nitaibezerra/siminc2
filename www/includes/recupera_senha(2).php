@@ -47,7 +47,7 @@ include "includes/erros.inc";
 	    $sexo = 'Prezado Sr.  ';
 		if ($sexo == 'F') $sexo = 'Prezada Sra. ';
         $mensagem = $sexo. strtoupper($senha_banco['usunome']).'<br>'.'Sua nova senha = '.$senha.'<br>'.'Ao se conectar, altere esta senha para a sua senha preferida.';
-        $paraonde = 'gilberto.cerqueira@mec.gov.br';
+        $paraonde = $_SESSION['email_sistema'];
         email(strtoupper($senha_banco['usunome']), $senha_banco['usuemail'], $assunto, $mensagem);
         ?>
         <script>

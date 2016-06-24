@@ -1543,7 +1543,6 @@ class ChecklistCumprimento extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -1685,7 +1684,6 @@ class ChecklistCumprimento extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -1827,7 +1825,6 @@ class ChecklistCumprimento extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {
@@ -1969,7 +1966,6 @@ class ChecklistCumprimento extends Modelo {
 
         foreach ($responsavel_destino as $key => $usuario) {
             $destinatario = array($usuario['email']);
-//            $destinatario = array('rodrigocantarino@mec.gov.br'); //teste
             $email->popularDadosObjeto($dados);
             $email->salvar($destinatario);
             if (!empty($destinatario)) {

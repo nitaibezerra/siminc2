@@ -2009,7 +2009,7 @@ function enviarEmailPedidoReconcideracao( $fdpcpf ){
 
     $arrEmail = array($dados['email_servidor'], $dados['email_chefe']);
 
-    $remetente = array("nome" => "Sistema Gestaão de Pessoas - Avaliação de Servidores", "email" => "gestaopessoa@mec.gov.br");
+    $remetente = array("nome" => "Sistema Gestaão de Pessoas - Avaliação de Servidores", "email" => $_SESSION['email_sistema']);
     $destinatario = $arrEmail;
     $assunto = "Pedido de Reconsideração - Gestão Pessoas - Avaliação de Servidores";
 
@@ -4165,7 +4165,7 @@ function enviarEmailTramite(){
     }
     $tramite .= 'Estado atual: '.$atual['esddsc'];
 
-    $remetente = array("nome" => "Sistema Cessão/Prorrogação Servidor", "email" => "gestaopessoa@mec.gov.br");
+    $remetente = array("nome" => "Sistema Cessão/Prorrogação Servidor", "email" => $_SESSION['email_sistema']);
     $destinatario = $arrrEmail;
     $assunto = "Tramitação de Processo - Gestão Pessoas - SIMEC";
     $conteudo = "

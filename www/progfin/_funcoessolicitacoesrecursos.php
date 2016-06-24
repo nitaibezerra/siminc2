@@ -1232,12 +1232,12 @@ function enviarEmailPosTramiteLiberacoesParaAjustesUO($usucpf, $cmddsc) {
         $conteudo = $cmddsc;
     } else {
         $email = $atual;
-        $cc = array('WerterAlmeida@mec.gov.br');
+        $cc = array($_SESSION['email_sistema']);
         $conteudo = $cmddsc;
     }
 
     $_SESSION['_progfin_']['_cmddsc_'] = $cmddsc;
-    $remetente = array('nome' => 'SPO - Programação Financeira', 'email' => 'simec@mec.gov.br');
+    $remetente = array('nome' => 'SPO - Programação Financeira', 'email' => $_SESSION['email_sistema']);
     $assunto  = '[SPO - Programação Financeira] Solicitação de Programação Financeira';
     if (enviar_email($remetente, $email, $assunto, $conteudo, $cc, $cco)) {
         $_SESSION['_progfin_']['_destinatarios_'][] = $email;
@@ -1259,7 +1259,7 @@ function enviaEmailConfirmacaoTramite() {
             $txtDestinatarios .= $email.'<br />';
         }
 
-        $remetente = array('nome' => 'SPO - Programação Financeira', 'email' => 'simec@mec.gov.br');
+        $remetente = array('nome' => 'SPO - Programação Financeira', 'email' => $_SESSION['email_sistema']);
         $assunto  = '[SPO - Programação Financeira] Solicitação de Programação Financeira';
         $conteudo = "<p>{$_SESSION['_progfin_']['_cmddsc_']}</p>";
         $conteudo.= "<p>Usuários que receberam este envio de e-mail:</p>";

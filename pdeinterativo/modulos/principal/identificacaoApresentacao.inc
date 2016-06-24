@@ -17,7 +17,7 @@ monta_titulo( "Apresentação", '&nbsp' );
 		2) O Plano Geral está dividido em planos específicos e este ano a escola poderá visualizar o Plano de Formação (disponível para todas as escolas) e o PDE Escola (disponível apenas para as escolas priorizada por esse programa).<br/>
 		3) Esses dois planos (PDE Escola e Plano de Formação) possuem fluxos de análise independentes. Ou seja, não é obrigatório concluir o PDE Escola para enviar o Plano de Formação e vice-versa.<br/>
 		</p>
-		<p>Em caso de dúvida, ligue para 0800 616161 ou envie um e-mail para pdeinterativo@mec.gov.br.</p>
+		<p>Em caso de dúvida, ligue para 0800 616161 ou envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>.</p>
 		</font>
 		</td>
 	</tr>

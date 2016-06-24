@@ -25,7 +25,7 @@ monta_titulo( "Apresentação", '&nbsp' );
 		<BR><BR>
 		Buscar orientações junto à secretaria estadual ou municipal de educação por meio do comitê estratégico. Os nomes e contatos dos integrantes desse comitê são exibidos no "passo 3" da aba "Primeiros passos".
 		<BR>
-		Em caso de dúvida, ligue para 0800 616161 ou envie um e-mail para pdeinterativo@mec.gov.br.
+		Em caso de dúvida, ligue para 0800 616161 ou envie um e-mail para <?php echo $_SESSION['email_sistema']; ?>.
 		</font>
 		</td>
 	</tr>

@@ -168,7 +168,7 @@ foreach ($arrObrasMi as $v) {
 	$email = Array($arrDados['entemail']);
 	
 	if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
-		$email = array('wesleysilva@mec.gov.br', 'thiago.barbosa@mec.gov.br');
+		$email = array($_SESSION['email_sistema']);
 	}
 	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
 	

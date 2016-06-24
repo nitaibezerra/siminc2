@@ -464,7 +464,7 @@ if ( $_POST['formulario'] ) {
         //recuperando dados para enviar email para o gestor #Atilio, somente o mesmo poderá ativar o usuário.
         $emailCopia = "";
         $remetente = array("nome" => 'SIMEC',"email" => 'noreply@mec.gov.br');
-        $destinatario = array("nome" => 'Atilio Emanuel de Sales Souza',"email" => 'AtilioSouza@mec.gov.br');
+        $destinatario = array("nome" => 'SIMEC',"email" => $_SESSION['email_sistema']);
         $assunto  = "Solicitação de acesso";
         $nmusu    = !empty($_REQUEST['usunome']) ? ", <b>".$usuariod->usunome."</b>" : "";
         $perfil   = !empty($nmPerfil) ? ", para o perfil <b>".$nmPerfil."</b>" : "";
