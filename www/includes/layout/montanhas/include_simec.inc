@@ -1,1 +1,0 @@
-<link href="../includes/layout/<?=$theme?>/css/simec.css" rel="stylesheet" type="text/css" />

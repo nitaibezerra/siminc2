@@ -1,1 +1,0 @@
-require_once( 'sync/activefrozenfield.class.js' );

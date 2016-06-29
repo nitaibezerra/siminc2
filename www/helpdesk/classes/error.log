@@ -1,6 +1,0 @@
-[29-Nov-2005 09:40:48] PHP Fatal error:  You MUST load PDO before loading any PDO drivers in Unknown on line 0
-[29-Nov-2005 09:40:50] PHP Fatal error:  Unable to start pdo_mssql module in Unknown on line 0
-[29-Nov-2005 09:41:49] PHP Warning:  PHP Startup: Unable to load dynamic library 'c:\wamp\php\ext\php_gd2.dll' - The specified procedure could not be found.
- in Unknown on line 0
-[29-Nov-2005 09:41:49] PHP Fatal error:  You MUST load PDO before loading any PDO drivers in Unknown on line 0
-[29-Nov-2005 09:41:50] PHP Fatal error:  Unable to start pdo_mssql module in Unknown on line 0

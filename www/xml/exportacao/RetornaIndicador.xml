@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfIndicador xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
-  <Indicador>
-    <PRGAno>2007</PRGAno>
-    <PRGCod>0150</PRGCod>
-    <INDNum>1290</INDNum>
-  </Indicador>
-</ArrayOfIndicador>

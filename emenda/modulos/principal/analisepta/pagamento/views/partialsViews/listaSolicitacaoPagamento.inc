@@ -1,3 +1,0 @@
-<?php
-	$obPagamento->listaPagamentoSolicitado( $arrPerfil );
-?>

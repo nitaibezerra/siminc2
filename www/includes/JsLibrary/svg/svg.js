@@ -1,4 +1,0 @@
-window.svgObject = function svgObject()
-{
-	
-}

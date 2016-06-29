@@ -1,1 +1,0 @@
-<?= $this->colegiado->getListaColegiadoPorGrupo($this->idGrupo); ?>
