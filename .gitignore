@@ -1,2 +1,3 @@
 global/config.inc
+global/config.dev.php
 global/database.php
