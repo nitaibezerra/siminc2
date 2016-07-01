@@ -1,0 +1,39 @@
+<?php
+
+define( "SISID_EMI",	 				    129);
+
+define( "ANO_EXERCICIO_EMI", 				2008);
+
+// ENTIDADE
+define( "ENTIDADE_FUNID_DIRETOR", 	   		19);
+define( "ENTIDADE_FUNID_COORDENADOR",  		96);
+define( "ENTIDADE_FUNID_ESCOLA", 			3);
+define( "ENTIDADE_FUNID_SEC_ESTADUAL",		6);
+
+define( "TIPO_ENTIDADE_ESCOLA", 1 );
+define( "TIPO_ENTIDADE_SEC", 	2 );
+
+// PERFIS
+define( "PERFIL_SUPER_USUARIO",	 			713);
+define( "PERFIL_CADASTRADOR",			 	714);
+define( "PERFIL_ADMINISTRADOR",	 			715);
+define( "PERFIL_CONSULTA",			 		716);
+define( "PERFIL_SEC_ESTADUAL", 				717);
+define( "PERFIL_SEC_MUNICIPAL",				718);
+define( "PERFIL_ANALISTA_SEDUC",			741);
+
+// WORKFLOW
+define( "WF_TPDID_ENSINO_INOVADOR",	 		58);
+
+define( "WF_ESDID_FINALIZADO",	 			431);
+define( "WF_ESDID_EM_PREENCHIMENTO",	 	432);
+define( "WF_ESDID_EM_ANALISE_SEDUC", 		433);
+define( "WF_ESDID_EM_CORRECAO",	 			435);
+
+define( "WF_AEDID_RETURN_PREENCHIMENTO",   		249 );
+define( "AED_EMITIR_PLANO_ATENDIMENTO_GLOBAL",  1202);
+
+//Data limite
+define("DATA_LIMTE", 20131231235959);
+
+?>

@@ -1,0 +1,50 @@
+/* BARRA BRASIL */
+#barra-brasil { 
+    position:relative;
+    overflow:hidden;
+    width:300px;
+    float: right;
+    background: #000 url(../img/barra_brasil/barra-brasil-v3-bgx.png) center bottom no-repeat;
+}
+
+.bbrasil{padding:0; background: #000 url(../img/barra_brasil/barra-brasil-v3-bgx1.png) 0 100% no-repeat; height:28px}
+.rowbrasil{background: #000 url(../img/barra_brasil/barra-brasil-v3-bgx1.png) 0 100% repeat-x; height:28px}
+
+/* AJUSTE
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 1025px) { 
+    .bbrasil{padding:0; background: #000 url(../img/barra_brasil/barra-brasil-v3-bgx.png) 50% 100% no-repeat; height:28px}
+}
+
+#barra-brasil .barra {
+    display: block;
+    height:28px;
+    margin: 0 auto;
+    background: url(../img/barra_brasil/barra-brasil-v3-bgx.gif) 0 bottom repeat-x;
+}
+
+#barra-brasil .barra ul {
+    float:right;
+    width: 319px;
+}
+
+#barra-brasil .barra ul li {
+    float: left;
+    padding-left: 25px;
+}
+
+#barra-brasil .ai {
+    display: block;
+    width: 161px;
+    height: 28px;
+    text-indent: -5000px;
+    background: #000 url(../img/barra_brasil/ai.png) no-repeat 0 4px;
+}
+
+#barra-brasil .brasilgov {
+    display: block;
+    width: 108px;
+    height: 28px;
+    text-indent: -5000px;
+    background: #000 url(../img/barra_brasil/brasil.png) no-repeat 0 4px;
+}

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPPAFonte xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <PPAFonte>
+    <FPPCod>10000</FPPCod>
+    <FPPDsc>Fiscal/Seguridade</FPPDsc>
+    <FPPDscResumida/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>11000</FPPCod>
+    <FPPDsc>Fiscal/Seguridade (exceto Financiamento Externo)</FPPDsc>
+    <FPPDscResumida>F/S (exceto Financiamento Externo)</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>12000</FPPCod>
+    <FPPDsc>Fiscal/Seguridade - Financiamento Externo</FPPDsc>
+    <FPPDscResumida>F/S - Financiamento Externo</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>13000</FPPCod>
+    <FPPDsc>Doações Externas</FPPDsc>
+    <FPPDscResumida>Doações Externas</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>20000</FPPCod>
+    <FPPDsc>Investimento das Estatais</FPPDsc>
+    <FPPDscResumida>Investimento das Estatais</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>30000</FPPCod>
+    <FPPDsc>Outros Recursos Admin. pela União</FPPDsc>
+    <FPPDscResumida/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>31000</FPPCod>
+    <FPPDsc>Renúncia fiscal</FPPDsc>
+    <FPPDscResumida>Outros - Renúncia Fiscal</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>32000</FPPCod>
+    <FPPDsc>Plano Dispêndios das Estatais</FPPDsc>
+    <FPPDscResumida>Outros - Plano Dispêndios das Estatais</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>33000</FPPCod>
+    <FPPDsc>Fundos - Disponibilidades</FPPDsc>
+    <FPPDscResumida/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>33100</FPPCod>
+    <FPPDsc>FAT</FPPDsc>
+    <FPPDscResumida>Outros - Fundos - Disponibilidades - FAT</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>33200</FPPCod>
+    <FPPDsc>FGTS</FPPDsc>
+    <FPPDscResumida>Outros - Fundos - Disponibilidades - FGTS</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>33300</FPPCod>
+    <FPPDsc>Fundos Constitucionais</FPPDsc>
+    <FPPDscResumida>Outros - Fundos - Disponibilidades - Fundos Constitucionais</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>33400</FPPCod>
+    <FPPDsc>FAR</FPPDsc>
+    <FPPDscResumida>Outros  - Fundos - Disponibilidades - FAR</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34000</FPPCod>
+    <FPPDsc>Agências Oficiais de Crédito</FPPDsc>
+    <FPPDscResumida/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34100</FPPCod>
+    <FPPDsc>BNDES</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - BNDES</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34200</FPPCod>
+    <FPPDsc>CEF</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - CEF</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34300</FPPCod>
+    <FPPDsc>BB</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - BB</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34400</FPPCod>
+    <FPPDsc>BNB</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - BNB</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34500</FPPCod>
+    <FPPDsc>BASA</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - BASA</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>34600</FPPCod>
+    <FPPDsc>FINEP</FPPDsc>
+    <FPPDscResumida>Outros - Agências Oficiais de Crédito - FINEP</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>40000</FPPCod>
+    <FPPDsc>PARCERIAS</FPPDsc>
+    <FPPDscResumida/>
+    <FPPSNTotalizacao>true</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>41000</FPPCod>
+    <FPPDsc>Estados</FPPDsc>
+    <FPPDscResumida>Parcerias - Estados</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>42000</FPPCod>
+    <FPPDsc>Municípios</FPPDsc>
+    <FPPDscResumida>Parcerias - Municípios</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>43000</FPPCod>
+    <FPPDsc>Setor Privado</FPPDsc>
+    <FPPDscResumida>Parcerias - Setor Privado</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+  <PPAFonte>
+    <FPPCod>50000</FPPCod>
+    <FPPDsc>Outras</FPPDsc>
+    <FPPDscResumida>Outras</FPPDscResumida>
+    <FPPSNTotalizacao>false</FPPSNTotalizacao>
+  </PPAFonte>
+</ArrayOfPPAFonte>

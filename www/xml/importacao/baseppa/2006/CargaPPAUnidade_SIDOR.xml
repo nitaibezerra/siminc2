@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPPAUnidade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <PPAUnidade>
+    <UNICod>26000</UNICod>
+    <UNITpoCod>O</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Educação</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Educação</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Educação de Surdos</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Benjamin Constant</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Colégio Pedro II</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Alagoas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Amazonas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal da Bahia </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Campos</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Ceará</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Espírito Santo</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Goiás</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Mato Grosso</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Ouro Preto</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Pará</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26213</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica da Paraíba</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26214</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Pelotas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26215</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Pernambuco</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26216</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Piauí</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26217</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Química de Nilópolis</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26218</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Rio Grande do Norte</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26219</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Santa Catarina</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26220</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de São Paulo</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26221</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Sergipe</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26222</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Roraima</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26223</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Palmas - TO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26224</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Porto Velho </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26225</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Rolim de Moura </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26226</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Santarém </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26230</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Vale do São Francisco</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26231</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Alagoas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26232</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal da Bahia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26233</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Ceará</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26234</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Espírito Santo</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26235</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Goiás</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26236</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Fluminense</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26237</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Juiz de Fora</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26238</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Minas Gerais</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26239</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Pará</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26240</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal da Paraíba</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26241</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Paraná</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26242</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Pernambuco</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26243</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio Grande do Norte</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26244</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio Grande do Sul</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26245</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio de Janeiro</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26246</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Santa Catarina</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26247</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Santa Maria</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26248</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural de Pernambuco</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26249</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural do Rio de Janeiro</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26250</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Roraima</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26251</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Tocantins</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26252</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Campina Grande</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26253</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural da Amazônia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26254</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Triângulo Mineiro</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26255</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Faculdades Federais Integradas de Diamantina</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26256</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica Celso Suckow da Fonseca</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26257</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Minas Gerais</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26258</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Paraná</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26259</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro de Educação Tecnológica da Bahia </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26260</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Alfenas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26261</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Itajubá</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26262</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de São Paulo</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26263</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Lavras</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26264</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural do Semi-Árido</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26265</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Maranhão</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26268</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Rondônia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26269</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade do Rio de Janeiro</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26270</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade do Amazonas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26271</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade de Brasília</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26272</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Maranhão</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26273</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Rio Grande - RS</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26274</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Uberlândia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26275</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Acre</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26276</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Mato Grosso</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26277</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Ouro Preto</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26278</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Pelotas</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26279</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Piauí</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26280</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de São Carlos</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26281</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Sergipe</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26282</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Viçosa</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26283</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Mato Grosso do Sul</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26284</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Faculdade Federal de Ciências Médicas de Porto Alegre</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26285</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de São João Del Rei</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26286</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Amapá</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26290</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26291</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - CAPES</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26292</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Joaquim Nabuco</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26293</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Roquette Pinto </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26294</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Hospital de Clínicas de Porto Alegre</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26295</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Desenvolvimento do Desporto </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26298</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Desenvolvimento da Educação</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26301</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica da Bahia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26302</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Alegre - ES</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26303</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Alegrete - RS</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26304</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Araguatins - TO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26305</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Bambui - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26306</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Barbacena - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26307</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Barreiros - PE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26308</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Belo Jardim - PE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26309</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Bento Gonçalves - RS</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26310</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Cáceres - MT</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26311</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Castanhal - PA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26312</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Catu - BA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26313</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Colatina - ES</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26314</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Concórdia - SC</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26315</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Crato - CE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26316</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Cuiabá - MT</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26317</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Iguatu - CE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26318</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Inconfidentes Visconde de Mauá - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26319</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Januária</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26320</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Machado - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26321</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Manaus - AM</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26322</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Muzambinho - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26323</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Petrolina</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26324</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Rio Pomba</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26325</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Rio Verde - GO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26326</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Salinas Clemente Medrado - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26327</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Santa Teresa- ES</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26328</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Cristóvão - SE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26329</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São João Evangelista Nelson de Senna - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26330</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Luís - MA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26331</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de São Vicente do Sul</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26332</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Satuba - AL</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26333</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sertão - RS</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26334</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sousa - PB</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26335</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Uberaba - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26336</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Uberlândia - MG</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26337</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Urutaí - GO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26338</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Vitória de Santo Antão João Cleófas - PE</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26339</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Gabriel da Cachoeira - AM</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26340</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sombrio - SC</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26341</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Ceres - GO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26342</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Colorado do Oeste - RO</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26343</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Codó - MA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26344</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal Antônio José Teixeira - Guanambi - BA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26345</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Rio do Sul - SC</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26346</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Santa Inês - BA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26347</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal do Senhor do Bomfim - BA</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26349</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Gabriel da Cachoeira - AM</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26350</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal da Grande Dourados</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26351</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Recôncavo da Bahia</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26352</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do ABC</UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Estudos e Pesquisas Educacionais </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Aperfeiçoamento de Pessoal de Nível Superior </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial para Deficientes de Audição </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial para Deficientes da Visão </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Assistência ao Atleta Profissional </UNIDsc>
+  </PPAUnidade>
+  <PPAUnidade>
+    <UNICod>26907</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Financiamento ao Estudante do Ensino Superior</UNIDsc>
+  </PPAUnidade>
+</ArrayOfPPAUnidade>

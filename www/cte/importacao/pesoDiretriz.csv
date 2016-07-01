@@ -1,0 +1,231 @@
+Tabela 3. Pesos de cada Indicador na Composição das Diretrizes;;;;
+Diretriz;cod;indicador;peso_indicador Diretriz;dimensao
+I;328;Qualificação dos professores que atuam nas séries iniciais do ensino fundamental;0,0766;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+I;278;Biblioteca: instalações e espaço físico;0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;320;Existência de recursos audiovisuais;0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0323;Práticas Pedagógicas e Avaliação
+I;291;Suficiência e diversidade do acervo bibliográfico;0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0202;Práticas Pedagógicas e Avaliação
+I;299;Confecção de materiais didáticos diversos;0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;306;Utilização do tempo para assistência individual/coletiva aos alunos que apresent;0,0685;Práticas Pedagógicas e Avaliação
+I;294;Existência e implementação de políticas para a formação continuada de professore;0,0202;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+I;319;Existência e implementação de políticas para a formação continuada de professore;0,0202;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+I;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,0444;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+I;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,0927;Gestão Educacional
+I;304;Quantidade de professores suficiente;0,0202;Gestão Educacional
+I;322;Existência de atividades no contraturno;0,0524;Gestão Educacional
+I;283;Existência e utilização de recursos pedagógicos que considerem a diversidade rac;0,0444;Infra-Estrutura Física e Recursos Pedagógicos
+I;323;Existência de programas de incentivo à leitura, para o professor e o aluno.;0,0363;Práticas Pedagógicas e Avaliação
+I;285;Existência de computadores ligados à rede mundial de computadores e utilização d;0,0806;Infra-Estrutura Física e Recursos Pedagógicos
+I;315;Qualificação dos professores que atuam nos anos/séries finais do ensino fundamen;0,0202;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+I;301;Implantação e Organização do ensino fundamental de 09 anos;0,0847;Gestão Educacional
+I;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0202;Gestão Educacional
+I;318;Existência, suficiência e diversidade de materiais pedagógicos (mapas, jogos, di;0,0847;Infra-Estrutura Física e Recursos Pedagógicos
+I;296;Formas de avaliação da aprendizagem dos alunos;0,0202;Práticas Pedagógicas e Avaliação
+I;327;Existência e funcionalidade de laboratórios (informática e ciências);0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0202;Gestão Educacional
+I;317;Salas de aula: instalações físicas gerais e mobiliário;0,0202;Infra-Estrutura Física e Recursos Pedagógicos
+I;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0202;Práticas Pedagógicas e Avaliação
+II;328;Qualificação dos professores que atuam nas séries iniciais do ensino fundamental;0,0830;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+II;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0218;Práticas Pedagógicas e Avaliação
+II;317;Salas de aula: instalações físicas gerais e mobiliário;0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;281;Existência e implementação de políticas para a formação inicial e continuada de;0,0218;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+II;291;Suficiência e diversidade do acervo bibliográfico;0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;327;Existência e funcionalidade de laboratórios (informática e ciências);0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0218;Gestão Educacional
+II;294;Existência e implementação de políticas para a formação continuada de professore;0,0218;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+II;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,0480;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+II;323;Existência de programas de incentivo à leitura, para o professor e o aluno.;0,0393;Práticas Pedagógicas e Avaliação
+II;301;Implantação e Organização do ensino fundamental de 09 anos;0,0917;Gestão Educacional
+II;283;Existência e utilização de recursos pedagógicos que considerem a diversidade rac;0,0480;Infra-Estrutura Física e Recursos Pedagógicos
+II;304;Quantidade de professores suficiente;0,0218;Gestão Educacional
+II;278;Biblioteca: instalações e espaço físico;0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;318;Existência, suficiência e diversidade de materiais pedagógicos (mapas, jogos, di;0,0917;Infra-Estrutura Física e Recursos Pedagógicos
+II;299;Confecção de materiais didáticos diversos;0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;320;Existência de recursos audiovisuais;0,0218;Infra-Estrutura Física e Recursos Pedagógicos
+II;285;Existência de computadores ligados à rede mundial de computadores e utilização d;0,0873;Infra-Estrutura Física e Recursos Pedagógicos
+II;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0218;Gestão Educacional
+II;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0349;Práticas Pedagógicas e Avaliação
+II;288;Qualificação dos professores que atuam na pré-escola;0,0349;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+II;322;Existência de atividades no contraturno;0,0568;Gestão Educacional
+II;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,1004;Gestão Educacional
+II;296;Formas de avaliação da aprendizagem dos alunos;0,0218;Práticas Pedagógicas e Avaliação
+III;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0685;Práticas Pedagógicas e Avaliação
+III;287;Formas de registro da freqüência;0,0685;Práticas Pedagógicas e Avaliação
+III;306;Utilização do tempo para assistência individual/coletiva aos alunos que apresent;0,2329;Práticas Pedagógicas e Avaliação
+III;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,3151;Gestão Educacional
+III;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0685;Gestão Educacional
+III;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,1096;Práticas Pedagógicas e Avaliação
+III;304;Quantidade de professores suficiente;0,0685;Gestão Educacional
+III;296;Formas de avaliação da aprendizagem dos alunos;0,0685;Práticas Pedagógicas e Avaliação
+IV;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0792;Práticas Pedagógicas e Avaliação
+IV;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0495;Gestão Educacional
+IV;322;Existência de atividades no contraturno;0,1287;Gestão Educacional
+IV;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0495;Práticas Pedagógicas e Avaliação
+IV;304;Quantidade de professores suficiente;0,0495;Gestão Educacional
+IV;326;Política específica de correção de fluxo;0,0495;Práticas Pedagógicas e Avaliação
+IV;306;Utilização do tempo para assistência individual/coletiva aos alunos que apresent;0,1683;Práticas Pedagógicas e Avaliação
+IV;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,2277;Gestão Educacional
+IV;323;Existência de programas de incentivo à leitura, para o professor e o aluno.;0,0891;Práticas Pedagógicas e Avaliação
+IV;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,1089;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+IX;283;Existência e utilização de recursos pedagógicos que considerem a diversidade rac;0,1692;Infra-Estrutura Física e Recursos Pedagógicos
+IX;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,3538;Gestão Educacional
+IX;316;Condições de acesso para pessoas com deficiência física;0,0769;Infra-Estrutura Física e Recursos Pedagógicos
+IX;304;Quantidade de professores suficiente;0,0769;Gestão Educacional
+IX;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0769;Gestão Educacional
+IX;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0769;Gestão Educacional
+IX;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,1692;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+V;326;Política específica de correção de fluxo;0,0543;Práticas Pedagógicas e Avaliação
+V;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0870;Práticas Pedagógicas e Avaliação
+V;322;Existência de atividades no contraturno;0,1413;Gestão Educacional
+V;296;Formas de avaliação da aprendizagem dos alunos;0,0543;Práticas Pedagógicas e Avaliação
+V;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0543;Práticas Pedagógicas e Avaliação
+V;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,1196;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+V;306;Utilização do tempo para assistência individual/coletiva aos alunos que apresent;0,1848;Práticas Pedagógicas e Avaliação
+V;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,2500;Gestão Educacional
+V;287;Formas de registro da freqüência;0,0543;Práticas Pedagógicas e Avaliação
+VI;301;Implantação e Organização do ensino fundamental de 09 anos;0,5833;Gestão Educacional
+VI;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,1389;Gestão Educacional
+VI;316;Condições de acesso para pessoas com deficiência física;0,1389;Infra-Estrutura Física e Recursos Pedagógicos
+VI;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,1389;Gestão Educacional
+VII;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,0235;Gestão Educacional
+VII;312;Suficiência e diversidade de equipamentos esportivos;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;278;Biblioteca: instalações e espaço físico;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;322;Existência de atividades no contraturno;0,0610;Gestão Educacional
+VII;321;Adequação, manutenção e conservação geral das instalações e equipamentos;0,0423;Infra-Estrutura Física e Recursos Pedagógicos
+VII;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,0235;Gestão Educacional
+VII;285;Existência de computadores ligados à rede mundial de computadores e utilização d;0,0939;Infra-Estrutura Física e Recursos Pedagógicos
+VII;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,0235;Gestão Educacional
+VII;320;Existência de recursos audiovisuais;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;317;Salas de aula: instalações físicas gerais e mobiliário;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;327;Existência e funcionalidade de laboratórios (informática e ciências);0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;316;Condições de acesso para pessoas com deficiência física;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;298;Existência e condições de funcionamento da cozinha e  refeitório;0,0892;Infra-Estrutura Física e Recursos Pedagógicos
+VII;309;Existência e conservação de quadra de esportes;0,1362;Infra-Estrutura Física e Recursos Pedagógicos
+VII;326;Política específica de correção de fluxo;0,0235;Práticas Pedagógicas e Avaliação
+VII;305;Existência de parcerias externas para realização de atividades complementares;0,0376;Gestão Educacional
+VII;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,1080;Gestão Educacional
+VII;283;Existência e utilização de recursos pedagógicos que considerem a diversidade rac;0,0516;Infra-Estrutura Física e Recursos Pedagógicos
+VII;291;Suficiência e diversidade do acervo bibliográfico;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VII;318;Existência, suficiência e diversidade de materiais pedagógicos (mapas, jogos, di;0,0986;Infra-Estrutura Física e Recursos Pedagógicos
+VII;299;Confecção de materiais didáticos diversos;0,0235;Infra-Estrutura Física e Recursos Pedagógicos
+VIII;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,1586;Gestão Educacional
+VIII;315;Qualificação dos professores que atuam nos anos/séries finais do ensino fundamen;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0345;Práticas Pedagógicas e Avaliação
+VIII;322;Existência de atividades no contraturno;0,0897;Gestão Educacional
+VIII;322;Existência de atividades no contraturno;0,0897;Gestão Educacional
+VIII;304;Quantidade de professores suficiente;0,0345;Gestão Educacional
+VIII;279;Qualificação dos professores que atuam nas creches;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0345;Gestão Educacional
+VIII;294;Existência e implementação de políticas para a formação continuada de professore;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;288;Qualificação dos professores que atuam na pré-escola;0,0552;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;325;Existência e implementação de políticas para a formação continuada de professore;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0552;Práticas Pedagógicas e Avaliação
+VIII;292;Grau de participação dos profissionais de serviços e apoio escolar em programas;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;328;Qualificação dos professores que atuam nas séries iniciais do ensino fundamental;0,1310;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,0759;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;281;Existência e implementação de políticas para a formação inicial e continuada de;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+VIII;319;Existência e implementação de políticas para a formação continuada de professore;0,0345;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+X;279;Qualificação dos professores que atuam nas creches;0,1786;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+X;281;Existência e implementação de políticas para a formação inicial e continuada de;0,1786;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+X;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,1786;Gestão Educacional
+X;294;Existência e implementação de políticas para a formação continuada de professore;0,1786;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+X;288;Qualificação dos professores que atuam na pré-escola;0,2857;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XI;305;Existência de parcerias externas para realização de atividades complementares;0,2424;Gestão Educacional
+XI;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,1515;Gestão Educacional
+XI;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,1515;Gestão Educacional
+XI;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,1515;Gestão Educacional
+XI;304;Quantidade de professores suficiente;0,1515;Gestão Educacional
+XI;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,1515;Gestão Educacional
+XII;319;Existência e implementação de políticas para a formação continuada de professore;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;315;Qualificação dos professores que atuam nos anos/séries finais do ensino fundamen;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,0472;Gestão Educacional
+XII;292;Grau de participação dos profissionais de serviços e apoio escolar em programas;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;328;Qualificação dos professores que atuam nas séries iniciais do ensino fundamental;0,1792;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;294;Existência e implementação de políticas para a formação continuada de professore;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;279;Qualificação dos professores que atuam nas creches;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;325;Existência e implementação de políticas para a formação continuada de professore;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0472;Gestão Educacional
+XII;281;Existência e implementação de políticas para a formação inicial e continuada de;0,0472;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,2170;Gestão Educacional
+XII;288;Qualificação dos professores que atuam na pré-escola;0,0755;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XII;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,1038;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XIII;284;Plano de Carreira para o magistério;0,5000;Gestão Educacional
+XIII;308;Plano de Carreira dos Profissionais de serviço e apoio escolar;0,5000;Gestão Educacional
+XIV;308;Plano de Carreira dos Profissionais de serviço e apoio escolar;0,1667;Gestão Educacional
+XIV;292;Grau de participação dos profissionais de serviços e apoio escolar em programas;0,1667;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XIV;281;Existência e implementação de políticas para a formação inicial e continuada de;0,1667;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XIV;294;Existência e implementação de políticas para a formação continuada de professore;0,1667;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XIV;284;Plano de Carreira para o magistério;0,1667;Gestão Educacional
+XIV;319;Existência e implementação de políticas para a formação continuada de professore;0,1667;Formação de Professores e de Profissionais de Serviços e Apoio Escolar
+XIX;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,4444;Práticas Pedagógicas e Avaliação
+XIX;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,2778;Práticas Pedagógicas e Avaliação
+XIX;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,2778;Gestão Educacional
+XV;300;Estágio probatório efetivando os professores e outros profissionais da educação.;1,0000;Gestão Educacional
+XVI;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,1067;Práticas Pedagógicas e Avaliação
+XVI;322;Existência de atividades no contraturno;0,1733;Gestão Educacional
+XVI;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0667;Práticas Pedagógicas e Avaliação
+XVI;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,0667;Gestão Educacional
+XVI;301;Implantação e Organização do ensino fundamental de 09 anos;0,2800;Gestão Educacional
+XVI;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,3067;Gestão Educacional
+XVII;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;1,0000;Práticas Pedagógicas e Avaliação
+XVIII;303;Critérios para escolha da Direção Escolar;1,0000;Gestão Educacional
+XX;295;Composição e atuação do Conselho de Alimentação Escolar - CAE;0,2174;Gestão Educacional
+XX;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,2174;Gestão Educacional
+XX;289;Existência, composição e atuação do Conselho Municipal de Educação (CME).;0,3478;Gestão Educacional
+XX;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,2174;Gestão Educacional
+XXI;311;Aplicação dos recursos de redistribuição e complementação do Fundeb;0,1064;Gestão Educacional
+XXI;295;Composição e atuação do Conselho de Alimentação Escolar - CAE;0,1064;Gestão Educacional
+XXI;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,1064;Gestão Educacional
+XXI;286;Cumprimento do dispositivo constitucional de vinculação dos recursos da educação;0,2979;Gestão Educacional
+XXI;313;Existência e funcionamento de Conselhos Escolares (CE).;0,1064;Gestão Educacional
+XXI;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,1064;Gestão Educacional
+XXI;289;Existência, composição e atuação do Conselho Municipal de Educação (CME).;0,1702;Gestão Educacional
+XXII;289;Existência, composição e atuação do Conselho Municipal de Educação (CME).;0,1569;Gestão Educacional
+XXII;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,4510;Gestão Educacional
+XXII;295;Composição e atuação do Conselho de Alimentação Escolar - CAE;0,0980;Gestão Educacional
+XXII;313;Existência e funcionamento de Conselhos Escolares (CE).;0,0980;Gestão Educacional
+XXII;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,0980;Gestão Educacional
+XXII;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0980;Gestão Educacional
+XXIII;301;Implantação e Organização do ensino fundamental de 09 anos;0,2800;Gestão Educacional
+XXIII;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,3067;Gestão Educacional
+XXIII;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0667;Gestão Educacional
+XXIII;289;Existência, composição e atuação do Conselho Municipal de Educação (CME).;0,1067;Gestão Educacional
+XXIII;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,0667;Gestão Educacional
+XXIII;322;Existência de atividades no contraturno;0,1733;Gestão Educacional
+XXIV;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,0575;Gestão Educacional
+XXIV;322;Existência de atividades no contraturno;0,1494;Gestão Educacional
+XXIV;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0920;Práticas Pedagógicas e Avaliação
+XXIV;295;Composição e atuação do Conselho de Alimentação Escolar - CAE;0,0575;Gestão Educacional
+XXIV;305;Existência de parcerias externas para realização de atividades complementares;0,0920;Gestão Educacional
+XXIV;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0575;Práticas Pedagógicas e Avaliação
+XXIV;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0575;Práticas Pedagógicas e Avaliação
+XXIV;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,2644;Gestão Educacional
+XXIV;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0575;Gestão Educacional
+XXIV;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,0575;Gestão Educacional
+XXIV;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,0575;Gestão Educacional
+XXV;313;Existência e funcionamento de Conselhos Escolares (CE).;0,1220;Gestão Educacional
+XXV;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,1220;Gestão Educacional
+XXV;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,5610;Gestão Educacional
+XXV;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,1951;Práticas Pedagógicas e Avaliação
+XXVI;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,0446;Gestão Educacional
+XXVI;327;Existência e funcionalidade de laboratórios (informática e ciências);0,0446;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0446;Práticas Pedagógicas e Avaliação
+XXVI;309;Existência e conservação de quadra de esportes;0,2589;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,0446;Gestão Educacional
+XXVI;285;Existência de computadores ligados à rede mundial de computadores e utilização d;0,1786;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;320;Existência de recursos audiovisuais;0,0446;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0446;Práticas Pedagógicas e Avaliação
+XXVI;317;Salas de aula: instalações físicas gerais e mobiliário;0,0446;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;278;Biblioteca: instalações e espaço físico;0,0446;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,0446;Gestão Educacional
+XXVI;291;Suficiência e diversidade do acervo bibliográfico;0,0446;Infra-Estrutura Física e Recursos Pedagógicos
+XXVI;322;Existência de atividades no contraturno;0,1161;Gestão Educacional
+XXVII;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,1087;Gestão Educacional
+XXVII;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,1087;Gestão Educacional
+XXVII;322;Existência de atividades no contraturno;0,2826;Gestão Educacional
+XXVII;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,1087;Gestão Educacional
+XXVII;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,1087;Gestão Educacional
+XXVII;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,1087;Gestão Educacional
+XXVII;305;Existência de parcerias externas para realização de atividades complementares;0,1739;Gestão Educacional
+;;;;

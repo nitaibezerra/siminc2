@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.1.654 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="xml.fnde.base.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="../xml.fnde.base.xsd" /> 
+  <xs:simpleType name="nu_processo">
+    <xs:restriction base="xs:integer">
+      <xs:totalDigits value="17" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="nu_cgc_favorecido">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="14" />
+      <xs:pattern value="[0-9]{14}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

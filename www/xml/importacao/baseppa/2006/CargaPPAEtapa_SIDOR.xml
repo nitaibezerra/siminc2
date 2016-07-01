@@ -1,0 +1,2980 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPPAEtapa xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <PPAEtapa>
+    <PRGCod>1061</PRGCod>
+    <ACACodPPA>24898</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão e integração do Uso do Rádio Escola Comunitária Baseada na WEB</ETPDsc>
+    <ETPDescricao>Aquisição, configuração e instalação da infra-estrutura de hardware, software e comunicação, necessários para o uso dos programas educativos baseados soluções de multimídia, preferencialmente áudio, transmitido pela internet, resultado de projetos multidi</ETPDescricao>
+    <ETPDscResultado>Infra-estrutura central e unidades escolares implantadas</ETPDscResultado>
+    <ETPVlr>43869864.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>08025</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Implementação da Expansão da Educação Profissional - PROEP</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>82477788.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>19559</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Implantação de Centros Escolares de Educação Profissional - PROEP</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>535129180.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22365</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Modelos dos Gestão Democrática de Sistemas Públicos de Educação Profissional e Tecnológica até 2003</ETPDsc>
+    <ETPDescricao>Não há informações seguras sobre a ação antes de 2000. De 01/2000 até 12/2003 foram feitos estudos comparativos e avaliação de modelos de gestão escolar aplicáveis às instituições de Educação Profissional e Tecnológica</ETPDescricao>
+    <ETPDscResultado>24 Propostas de gestão democrática elaboradas</ETPDscResultado>
+    <ETPVlr>5117290.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22365</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Estratégias democráticas de gestão dos Sistemas Públicos de Educação Profissional e Tecnológica</ETPDsc>
+    <ETPDescricao>Diagnóstico da gestão no Sist. Público de Educação Prof. e Tecnológica, elaboração/discussão das propostas de estratégias de gestão com todos os segmentos sociais envolvidos e impressão/implantação das propostas de estratégias de gestão democrática</ETPDescricao>
+    <ETPDscResultado>Modelo de gestão democrática desenvolvido e implantado = 3 documentos</ETPDscResultado>
+    <ETPVlr>1300000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22370</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Desenvolvimento de Parâmetros Curriculares Nacionais do Nível Tecnológico - PROEP</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2516622.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22380</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Sistema de Informações Gerenciais do PROEP até 2003</ETPDsc>
+    <ETPDescricao>Não há informações precisas sobre as etapas realizadas até 2003. De 01/2000 até 12/2003 foram implantados 4 subsistemas.</ETPDescricao>
+    <ETPDscResultado>4 subsistemas implantados</ETPDscResultado>
+    <ETPVlr>1549332.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22380</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Sistemas de Informações da Educação Profissional e Tecnológica (SIEP) estruturado em Subsistemas</ETPDsc>
+    <ETPDescricao>- Desenvolver modelos e softwares de integração dos Subsistemas e Sistema de Informações
+- Especificação, aquisição e instalação de equipamentos e softwares nas unidades de  Educação Profissional e Tecnológica.
+- Capacitação de pessoal</ETPDescricao>
+    <ETPDscResultado>Subsistemas estruturados</ETPDscResultado>
+    <ETPVlr>5760000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22380</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Sistemas de Informações do PROEP</ETPDsc>
+    <ETPDescricao>Definir o Sistema e planos de interação. Construir e testar o sistema. Treinar equipe técnica para operação do Sistema.</ETPDescricao>
+    <ETPDscResultado>Sistema desenvolvido e implantado</ETPDscResultado>
+    <ETPVlr>482000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22383</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Quadro conceitual e metodológico do Sistema Nacional de Certificação Profissional</ETPDsc>
+    <ETPDescricao>Desenvolvimento do quadro conceitual e metodológico do Sistema Nacional de Certificação Profissional. Esta etapa não demandará nenhum custo financeiro.</ETPDescricao>
+    <ETPDscResultado>Quadro conceitual e metodológico desenvolvido</ETPDscResultado>
+    <ETPVlr>1000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22383</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Proposta de Sistema Nacional de Certificação Profissional</ETPDsc>
+    <ETPDescricao>Definição de diretrizes, elaboração, discussão, aprovação e implantação de proposta de Sistema Nacional de Certificação Profissional</ETPDescricao>
+    <ETPDscResultado>Sistema Nacional de Certificação Profissional implantado</ETPDscResultado>
+    <ETPVlr>539000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>22865</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Capacitação dos Profissionais da Educação Profissional (PROEP)</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>17053470.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>93541</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Educação Profissional Integrada ao Ensino Médio para Jovens e Adultos - PROEJA</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>0</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94397</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X238</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>Área total a ser construída/reformada = 1.820 m², sendo 6 salas de aulas (300 m²), 8 laboratórios (480 m²) e área administrativa e alojamentos (1.040 m²)</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>630000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94397</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X640</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>R$ 380.000 em equipamentos para laboratórios e salas de aulas e R$ 120.000 em equipamentos para área administrativa</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>820000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94397</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X642</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94397</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X644</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94397</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X646</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94432</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X196</ETPCod>
+    <ETPDsc>Implantação da Unidade de Ensino Descentralizada de Santa Inês -  CEFET/MA</ETPDsc>
+    <ETPDescricao>Implantação de nova Unidade de Ensino Descentralizada no CEFET/MA, mediante a construção e a compra de equipamentos e de serviços que propiciem o funcionamento da UNED. O orçamento está distribuído da seguinte forma: Obras: 1.200.000; Equipamentos: 820.000; Capacitação: 300.000; Consultoria: 250.000; e Serviços: 150.000</ETPDescricao>
+    <ETPDscResultado>Expansão da oferta de cursos Profissionais e Tecnológicos no Estado do Maranhão</ETPDscResultado>
+    <ETPVlr>2720000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94435</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X198</ETPCod>
+    <ETPDsc>Implantação da Unidade de Ensino Descentralizada de Camaçari - CEFET/BA</ETPDsc>
+    <ETPDescricao>Implantação de nova Unidade de Ensino Descentralizada no CEFET/BA, mediante a construção e a compra de equipamentos e de serviços que propiciem o funcionamento da UNED. O orçamento está distribuído da seguinte forma: Obras: 1.200.000; Equipamentos: 820.000; Capacitação: 300.000; Consultoria: 250.000; e Serviços: 150.000</ETPDescricao>
+    <ETPDscResultado>Expansão da oferta de cursos Profissionais e Tecnológicos no Estado da Bahia</ETPDscResultado>
+    <ETPVlr>2720000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94444</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X202</ETPCod>
+    <ETPDsc>Implantação da Unidade de Ensino Descentralizada de Maria da Graça - CEFET/RJ</ETPDsc>
+    <ETPDescricao>Implantação de nova Unidade de Ensino Descentralizada no CEFET/RJ, mediante a construção e a compra de equipamentos e de serviços que propiciem o funcionamento da UNED. O orçamento está distribuído da seguinte forma: Obras: 630.000; Equipamentos: 820.000; Capacitação: 300.000; Consultoria: 250.000; e Serviços: 150.000</ETPDescricao>
+    <ETPDscResultado>Expansão da oferta de cursos Profissionais e Tecnológicos no Estado do Rio de Janeiro</ETPDscResultado>
+    <ETPVlr>2150000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94447</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X204</ETPCod>
+    <ETPDsc>Implantação da Unidade de Ensino Descentralizada de Júlio de Castilhos - CEFET/São Vicente do Sul</ETPDsc>
+    <ETPDescricao>Implantação de nova Unidade de Ensino Descentralizada no CEFET/São Vicente do Sul-RS, mediante a construção e a compra de equipamentos e de serviços que propiciem o funcionamento da UNED. O orçamento está distribuído da seguinte forma: Obras: 1.200.000; Equipamentos: 820.000; Capacitação: 300.000; Consultoria: 250.000; e Serviços: 150.000</ETPDescricao>
+    <ETPDscResultado>Expansão da oferta de cursos Profissionais e Tecnológicos no Estado do Rio Grande do Sul</ETPDscResultado>
+    <ETPVlr>2720000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94449</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X234</ETPCod>
+    <ETPDsc>Implantação da Unidade de Ensino Descentralizada de Araranguá - CEFET/SC</ETPDsc>
+    <ETPDescricao>Implantação de nova Unidade de Ensino Descentralizada no CEFET/SC, mediante a construção e a compra de equipamentos e de serviços que propiciem o funcionamento da UNED. O orçamento está distribuído da seguinte forma: Obras: 1.108.000; Equipamentos: 820.000; Capacitação: 300.000; Consultoria: 250.000; e Serviços: 150.000</ETPDescricao>
+    <ETPDscResultado>Expansão da oferta de cursos Profissionais e Tecnológicos no Estado de Santa Catarina</ETPDscResultado>
+    <ETPVlr>2628000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94729</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X648</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 500 m² referentes a 10 salas de aula, 780 m² a 13 laboratórios e 820 m² de área administrativa, totalizando 2.100 m² de área total construída. A um custo de R$ 714,00 o metro quadrado.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94729</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X650</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94729</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X652</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94729</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X654</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94729</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X656</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94741</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X658</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 500 m² referentes a 10 salas de aula, 780 m² a 13 laboratórios e 820 m² de área administrativa, totalizando 2.100 m² de área total construída. A um custo de R$ 714,00 o metro quadrado.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94741</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X660</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94741</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X662</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94741</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X664</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94741</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X666</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94742</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X668</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 500 m² referentes a 10 salas de aula, 780 m² a 13 laboratórios e 820 m² de área administrativa, totalizando 2.100 m² de área total construída. A um custo de R$ 714,00 o metro quadrado.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94742</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X670</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94742</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X672</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94742</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X674</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94742</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X676</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94743</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X678</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 500 m² referentes a 10 salas de aula, 780 m² a 13 laboratórios e 820 m² de área administrativa, totalizando 2.100 m² de área total construída. A um custo de R$ 714,00 o metro quadrado.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94743</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X680</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94743</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X682</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94743</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X684</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94743</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X686</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94744</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X688</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 300 m² referentes a 6 salas de aula, 480 m² a 8 laboratórios, 520 m² de área administrativa e diversos e 800m² de alojamentos, totalizando 2.100 m² de área total construída. </ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94744</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X690</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94744</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X692</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94744</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X694</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94744</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X696</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94746</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X698</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 500 m² referentes a 10 salas de aula, 780 m² a 13 laboratórios, 820 m² de área administrativa, totalizando 2.100 m² de área total construída. Custo por m² = R$ 714,00. </ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1850000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94746</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X710</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 615.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 385.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94746</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X712</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94746</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X714</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94746</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X716</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94747</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X700</ETPCod>
+    <ETPDsc>Obras</ETPDsc>
+    <ETPDescricao>São 300 m² referentes a 6 salas de aula, 480 m² a 8 laboratórios e 1.040 m² de área administrativa e alojamentos, totalizando 1.820 m² de área total construída. </ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>630000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94747</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X702</ETPCod>
+    <ETPDsc>Equipamentos</ETPDsc>
+    <ETPDescricao>São R$ 700.000 para aquisição de equipamentos para laboratórios e salas de aulas e R$ 120.000 para  equipamentos para área administrativa.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>820000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94747</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X704</ETPCod>
+    <ETPDsc>Capacitação</ETPDsc>
+    <ETPDescricao>capacitação do pessoal docente e técnico-administrativo</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94747</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X706</ETPCod>
+    <ETPDsc>Consultoria</ETPDsc>
+    <ETPDescricao>contratação de consultores para atuarem no planejamento estratégico da Escola e outras consultorias.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>250000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94747</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X708</ETPCod>
+    <ETPDsc>Serviços</ETPDsc>
+    <ETPDescricao>contratação de serviços de apoio para iniciar o funcionamento da instituição.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>150000.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1062</PRGCod>
+    <ACACodPPA>94756</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão da Rede Federal de Educação Profissional e Tecnológica</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>9557000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1067</PRGCod>
+    <ACACodPPA>23528</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Consultoria técnica para o desenvolvimento da metodologia de monitoramento de efetividade</ETPDsc>
+    <ETPDescricao>Contratação de consultoria para realizar estudos e pesquisas sobre política educacional; especificação técnica e teórica do sistema de monitoramento; definição de indicadores a monitor; especificação do sistema informacional; implantação do sistema.</ETPDescricao>
+    <ETPDscResultado>Sistema de monitoramento de efetividade concebido.</ETPDscResultado>
+    <ETPVlr>1800000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1067</PRGCod>
+    <ACACodPPA>23528</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Desenvolvimento e manutenção do sistema informacional</ETPDsc>
+    <ETPDescricao>Desenvolvimento do software que será utilizado para o tratamento e consolidação dos dados dos programas a serem monitorados</ETPDescricao>
+    <ETPDscResultado>Software desenvolvido e implantado</ETPDscResultado>
+    <ETPVlr>460000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1067</PRGCod>
+    <ACACodPPA>23528</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Aquisição de equipamento de informática</ETPDsc>
+    <ETPDescricao>Aquisição do servidor que hospedará o sistema informacional e do equipamento que será utilizado para o desenvolvimento do sistema e pela equipe da unidade de monitoramento</ETPDescricao>
+    <ETPDscResultado>Equipamento de informática adquirido</ETPDscResultado>
+    <ETPVlr>240000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1067</PRGCod>
+    <ACACodPPA>23528</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>4   </ETPCod>
+    <ETPDsc>Implantação e funcionamento do sistema de monitoramento</ETPDsc>
+    <ETPDescricao>Criação, implantação e funcionamento da unidade de monitoramento; capacitação das equipes do Ministério, realização das pesquisas e avaliações, realização de eventos e workshops.</ETPDescricao>
+    <ETPDscResultado>Sistema de monitoramento implantado e unidade de monitoramento funcionando.</ETPDscResultado>
+    <ETPVlr>4300000.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22580</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Construção da Escola de Engenharia da UFMG no Campus da Pampulha</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>7543544.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X851</ETPCod>
+    <ETPDsc>Serviços Preliminares</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>664331.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>08</ETPMesInicio>
+    <ETPAnoInicio>2004</ETPAnoInicio>
+    <ETPMesTermino>03</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X853</ETPCod>
+    <ETPDsc>Fundações/Laje de Piso</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2165715.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>10</ETPMesInicio>
+    <ETPAnoInicio>2004</ETPAnoInicio>
+    <ETPMesTermino>03</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X855</ETPCod>
+    <ETPDsc>Estrutura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>6289491.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>11</ETPMesInicio>
+    <ETPAnoInicio>2004</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X857</ETPCod>
+    <ETPDsc>Paredes/Divisórias</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>618120.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>07</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>09</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X859</ETPCod>
+    <ETPDsc>Esquadrias</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1755107.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>08</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>08</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X863</ETPCod>
+    <ETPDsc>Cobertura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>445205.0000</ETPVlr>
+    <ETPOrdem>6</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>08</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>05</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>6</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X865</ETPCod>
+    <ETPDsc>Impermeabilização</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1105040.0000</ETPVlr>
+    <ETPOrdem>7</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>09</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>09</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>7</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X867</ETPCod>
+    <ETPDsc>Pavimentação</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1080819.0000</ETPVlr>
+    <ETPOrdem>8</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>10</ETPMesInicio>
+    <ETPAnoInicio>2006</ETPAnoInicio>
+    <ETPMesTermino>07</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>8</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X869</ETPCod>
+    <ETPDsc>Revestimentos</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1887619.0000</ETPVlr>
+    <ETPOrdem>9</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>09</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>02</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>9</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X871</ETPCod>
+    <ETPDsc>Peitorial/Soleira/Rodapé</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>171162.0000</ETPVlr>
+    <ETPOrdem>10</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>09</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>07</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>10</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X873</ETPCod>
+    <ETPDsc>Caixas/Furos/Arremates</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>225864.0000</ETPVlr>
+    <ETPOrdem>11</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>03</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>11</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X875</ETPCod>
+    <ETPDsc>Divisórias/Bancadas/Prateleiras</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>118993.0000</ETPVlr>
+    <ETPOrdem>12</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>04</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>04</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>12</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X877</ETPCod>
+    <ETPDsc>Pintura/Forros</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1187660.0000</ETPVlr>
+    <ETPOrdem>13</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>04</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>11</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>13</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X879</ETPCod>
+    <ETPDsc>Instalações Elétricas</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2334607.0000</ETPVlr>
+    <ETPOrdem>14</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>02</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>02</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>14</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X881</ETPCod>
+    <ETPDsc>Instalações Hidráulicas/Especiais</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1159658.0000</ETPVlr>
+    <ETPOrdem>15</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>02</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>15</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22581</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X883</ETPCod>
+    <ETPDsc>Serviços Complementares</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3321610.0000</ETPVlr>
+    <ETPOrdem>16</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>04</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>03</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>16</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22585</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Construção do Instituto de Ciências Biológicas da Fundação Universidade de Brasília</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>26137224.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22586</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Instalações</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2608630.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22586</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Conclusão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>869543.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22586</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Fundações</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado>8% do total da obra</ETPDscResultado>
+    <ETPVlr>289627.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22586</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>4   </ETPCod>
+    <ETPDsc>Estrutura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1739087.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>22586</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>5   </ETPCod>
+    <ETPDsc>Arquitetura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3478174.0000</ETPVlr>
+    <ETPOrdem>5</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24891</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Estrutura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>289916.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24891</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Arquitetura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>579833.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24891</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Instalações</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>434875.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24891</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>4   </ETPCod>
+    <ETPDsc>Conclusão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>144958.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24892</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Arquitetura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>866529.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24892</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Instalações</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>649896.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24892</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Conclusão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>216632.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24892</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>4   </ETPCod>
+    <ETPDsc>Estrutura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>433264.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24893</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Estrutura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1057181.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24893</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Arquitetura</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2114363.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24893</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Instalações</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1585772.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>24893</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>4   </ETPCod>
+    <ETPDsc>Conclusão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>528590.0000</ETPVlr>
+    <ETPOrdem>4</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>78336</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Implantação da Universidade Federal do ABC</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>100000000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>78337</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Implantação da Universidade Federal da Grande Dourados</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>45000000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X262</ETPCod>
+    <ETPDsc>Estudos Preliminares - Campus de Amargosa</ETPDsc>
+    <ETPDescricao>Realização de serviços de Topografia e sondagens, com verificação in-loco; bem como a elaboração dos projetos de infra-estrutura, arquitetura e complementares. </ETPDescricao>
+    <ETPDscResultado>Projetos de arquitetura e complementares concluídos</ETPDscResultado>
+    <ETPVlr>282000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X264</ETPCod>
+    <ETPDsc>Execução - Campus de Amargosa</ETPDsc>
+    <ETPDescricao>Implantação dos acessos ao campus, sistema viário e estacionamentos, construção de salas de apoio administrativo, acadêmico e de aulas, laboratórios e biblioteca, instalações elétricas, hidrossanitárias, telefônicas, bem como o acompanhamento e fiscalização da obra, dentre outras atividades.</ETPDescricao>
+    <ETPDscResultado>Complexo construído com 7.000m²</ETPDscResultado>
+    <ETPVlr>8460000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>7</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X266</ETPCod>
+    <ETPDsc>Complementação - Campus de Amargosa</ETPDsc>
+    <ETPDescricao>Compreende a aquisição de mobiliários, equipamentos, bens de consumo, com o objetivo de equipar de forma suficiente o complexo para o seu funcionamento. </ETPDescricao>
+    <ETPDscResultado>Complexo construído e em condições de funcionamento </ETPDscResultado>
+    <ETPVlr>658000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2009</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>12</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X268</ETPCod>
+    <ETPDsc>Estudos Preliminares - Campus de Cachoeira</ETPDsc>
+    <ETPDescricao>Realização de serviços de Topografia e sondagens, com verificação in-loco; bem como a elaboração dos projetos de infra-estrutura, arquitetura e complementares. </ETPDescricao>
+    <ETPDscResultado>Projetos de arquitetura e complementares concluídos</ETPDscResultado>
+    <ETPVlr>300000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X270</ETPCod>
+    <ETPDsc>Execução - Campus de Cachoeira</ETPDsc>
+    <ETPDescricao>Implantação dos acessos ao campus, sistema viário e estacionamentos, construção de salas de apoio administrativo, acadêmico e de aulas, laboratórios e biblioteca, instalações elétricas, hidrossanitárias, telefônicas, bem como o acompanhamento e fiscalização da obra, dentre outras atividades.   </ETPDescricao>
+    <ETPDscResultado>Complexo construído com 7.500m²</ETPDscResultado>
+    <ETPVlr>9000000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>8</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X272</ETPCod>
+    <ETPDsc>Complementação - Campus de Cachoeira</ETPDsc>
+    <ETPDescricao>Compreende a aquisição de mobiliários, equipamentos, bens de consumo, com o objetivo de equipar de forma suficiente o complexo para o seu funcionamento. </ETPDescricao>
+    <ETPDscResultado>Complexo construído e em condições de funcionamento </ETPDscResultado>
+    <ETPVlr>700000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2009</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>13</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X274</ETPCod>
+    <ETPDsc>Estudos Preliminares - Campus de Santo Antônio de Jesus</ETPDsc>
+    <ETPDescricao>Realização de serviços de Topografia e sondagens, com verificação in-loco; bem como a elaboração dos projetos de infra-estrutura, arquitetura e complementares. </ETPDescricao>
+    <ETPDscResultado>Projetos de arquitetura e complementares concluídos   </ETPDscResultado>
+    <ETPVlr>267000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X276</ETPCod>
+    <ETPDsc>Execução - Campus de Santo Antônio de Jesus</ETPDsc>
+    <ETPDescricao>Implantação dos acessos ao campus, sistema viário e estacionamentos, construção de salas de apoio administrativo, acadêmico e de aulas, laboratórios e biblioteca, instalações elétricas, hidrossanitárias, telefônicas, bem como o acompanhamento e fiscalização da obra, dentre outras atividades.   </ETPDescricao>
+    <ETPDscResultado>Complexo construído com 6.675m²</ETPDscResultado>
+    <ETPVlr>8010000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>9</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X278</ETPCod>
+    <ETPDsc>Complementação - Campus de Santo Antônio de Jesus</ETPDsc>
+    <ETPDescricao>Compreende a aquisição de mobiliários, equipamentos, bens de consumo, com o objetivo de equipar de forma suficiente o complexo para o seu funcionamento. </ETPDescricao>
+    <ETPDscResultado>Complexo construído e em condições de funcionamento </ETPDscResultado>
+    <ETPVlr>623000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2009</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>14</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X280</ETPCod>
+    <ETPDsc>Estudos Preliminares - UFRB</ETPDsc>
+    <ETPDescricao>Levantamento das necessidades de pessoal, custeio, investimentos, tecnologia da informação e conectividade, realização de serviços de Topografia e sondagens, com verificação in-loco; bem como a elaboração dos projetos de infra-estrutura, arquitetura e complementares. </ETPDescricao>
+    <ETPDscResultado>Levantamentos e projetos de arquitetura e complementares concluídos</ETPDscResultado>
+    <ETPVlr>625000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2006</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2006</ETPAnoTermino>
+    <ETPUnica>4</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X282</ETPCod>
+    <ETPDsc>Execução - UFRB</ETPDsc>
+    <ETPDescricao>Realização de concursos para docentes e técnicos administrativos, vestibulares,   Implantação dos acessos ao campus, sistema viário e estacionamentos, construção das infra-estruturas e edificações, reformas dos imóveis existentes, reestruturação de departamentos administrativo, e acadêmico, laboratórios e biblioteca, instalações elétricas, hidrossanitárias, telefônicas, sistemas de informática, bem como o acompanhamento e fiscalização de obras, dentre outras atividades</ETPDescricao>
+    <ETPDscResultado>Instituição implantada</ETPDscResultado>
+    <ETPVlr>10625000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2006</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>10</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X284</ETPCod>
+    <ETPDsc>Complementação - UFRB</ETPDsc>
+    <ETPDescricao>Compreende a aquisição de mobiliários, equipamentos, bens de consumo, com o objetivo de equipar de forma suficiente a instituição para o seu funcionamento. </ETPDescricao>
+    <ETPDscResultado>Sede da instituição em condições de funcionamento</ETPDscResultado>
+    <ETPVlr>1250000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2006</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>5</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X482</ETPCod>
+    <ETPDsc>Estudos Preliminares - Campus de Cruz das Almas</ETPDsc>
+    <ETPDescricao>Realização de serviços de Topografia e sondagens, com verificação in-loco; bem como a elaboração dos projetos de infra-estrutura, arquitetura e complementares. </ETPDescricao>
+    <ETPDscResultado>Projetos de arquitetura e complementares concluídos</ETPDscResultado>
+    <ETPVlr>312000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>6</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X492</ETPCod>
+    <ETPDsc>Execução - Campus de Cruz das Almas</ETPDsc>
+    <ETPDescricao>Implantação dos acessos ao campus, sistema viário e estacionamentos, construção de salas de apoio administrativo, acadêmico e de aulas, laboratórios e biblioteca, instalações elétricas, hidrossanitárias, telefônicas, bem como o acompanhamento e fiscalização da obra, dentre outras atividades.   </ETPDescricao>
+    <ETPDscResultado>Complexo construído com 7.800 m²</ETPDscResultado>
+    <ETPVlr>9360000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>06</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>11</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>82196</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X494</ETPCod>
+    <ETPDsc>Complementação - Campus de Cruz das Almas</ETPDsc>
+    <ETPDescricao>Compreende a aquisição de mobiliários, equipamentos, bens de consumo, com o objetivo de equipar de forma suficiente o complexo para o seu funcionamento. </ETPDescricao>
+    <ETPDscResultado>Complexo construído e em funcionamento</ETPDscResultado>
+    <ETPVlr>728000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2009</ETPAnoInicio>
+    <ETPMesTermino>06</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>15</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94363</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Universidade para Todos - PROUNI</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>0</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94525</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X298</ETPCod>
+    <ETPDsc>Obras e Instalações</ETPDsc>
+    <ETPDescricao>·	Construção de 24 salas de aula medindo 2.824,36 m², construção de salas para professores/apoio administrativo com 917,43 m², construção da Biblioteca Central com 713,79 m², construção de 19 Laboratórios medindo 3.462,75 m², construção de bloco para sala de professores medindo 1.200 m², construção de laboratórios de informática medindo 200 m² e construção de um auditório medindo 150 m². </ETPDescricao>
+    <ETPDscResultado>Edificações construídas</ETPDscResultado>
+    <ETPVlr>3836980.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94525</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X300</ETPCod>
+    <ETPDsc>Equipamentos e Laboratórios</ETPDsc>
+    <ETPDescricao>Compra de móveis e equipamentos</ETPDescricao>
+    <ETPDscResultado>Campus em condições de funcionamento</ETPDscResultado>
+    <ETPVlr>2536467.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94526</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X302</ETPCod>
+    <ETPDsc>Obras e Instalações</ETPDsc>
+    <ETPDescricao>Construção de prédio, construção de salas, laboratório e bibliotecas, construção de Ginásio e Parque aquático.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>1030000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94526</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X304</ETPCod>
+    <ETPDsc>Reformas</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>880000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94526</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X306</ETPCod>
+    <ETPDsc>Equipamentos e Laboratórios</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>4327945.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94527</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Benjamin Constant</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>4124947.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94528</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Coari</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>4741233.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94529</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Humaitá</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>4464154.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2009</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94530</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Barreiras</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>17300000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94531</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Vitória da Conquista</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>14300000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94532</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus do Cariri</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3300000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94533</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Volta Redonda</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2256144.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94534</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Catalão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>33464605.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94535</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Jataí</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>16279405.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94536</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Chapadinha</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1286400.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94537</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Imperatriz</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3080000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94538</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus do Médio Araguaia</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>6796346.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94539</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Rondonópolis</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>8338407.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94540</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Sinop</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>12476221.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94541</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Cuité</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3329705.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94542</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus do Agreste</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>38500000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94543</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Vitória de Santo Antão</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>2585427.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94544</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Bom Jesus</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>20019367.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94545</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Parnaíba</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>14208645.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94546</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Picos</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>15195850.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94547</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus do Litoral</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1830090.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94548</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Garanhuns</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>10700000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94549</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Serra Talhada</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>14000000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94550</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Nova Iguaçu</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>7877450.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94551</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Sorocaba</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>32351696.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94552</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Itabaiana</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1000000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94553</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Frederico Westphalen e Campus de Palmeira das Missões</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>3440000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2007</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94554</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Teófilo Otoni</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>1225432.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94555</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Diadema</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>102790000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94556</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Guarulhos</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>41364724.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94557</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Santos</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>73471918.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94558</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de São Raimundo Nonato</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>8281750.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94559</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Petrolina - Fazenda Experimental</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>43702950.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94560</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Petrolina</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>23999500.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94561</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Juazeiro</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>39286000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94562</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de São Mateus</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>23336000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94563</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Alegre</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>6555000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94564</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Marabá</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>10240000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94565</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Castanhal</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>10742630.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94566</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Expansão do Ensino Superior - Campus de Santarém</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>4991862.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94567</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X718</ETPCod>
+    <ETPDsc>Construção de prédios novos</ETPDsc>
+    <ETPDescricao>Nos dez campi da UNIPAMPA prevê-se construir, até o ano de 2010, blocos acadêmicos, administrativos, casas de estudantes, restaurantes universitários, áreas esportivas, bibliotecas, prédio da reitoria, centros de vivências e áreas abertas de lazer.</ETPDescricao>
+    <ETPDscResultado/>
+    <ETPVlr>100910.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1073</PRGCod>
+    <ACACodPPA>94567</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>X736</ETPCod>
+    <ETPDsc>Compra de móveis e equipamentos</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>46145552.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2007</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2010</ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1375</PRGCod>
+    <ACACodPPA>22373</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Aquisição e Ampliação do Prédio Sede da CAPES</ETPDsc>
+    <ETPDescricao/>
+    <ETPDscResultado/>
+    <ETPVlr>17739231.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>1</TATCod>
+    <ETPMesInicio>01</ETPMesInicio>
+    <ETPAnoInicio>2005</ETPAnoInicio>
+    <ETPMesTermino>12</ETPMesTermino>
+    <ETPAnoTermino>2008</ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1376</PRGCod>
+    <ACACodPPA>22098</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Fortalecimento do setor educacional</ETPDsc>
+    <ETPDescricao>Contribui para que as Secretarias de Educação analisem seu desempenho, processos, relações internas e externas, condições de funcionamento e resultados.</ETPDescricao>
+    <ETPDscResultado>Fortalecimento institucional e melhoria da gestão da escola e do desempenho do aluno.</ETPDscResultado>
+    <ETPVlr>26947449.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1376</PRGCod>
+    <ACACodPPA>22098</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Estabelecimento do processo de desenvolvimento de gestão escolar</ETPDsc>
+    <ETPDescricao>Estimula a escola a realizar um diagnóstico de sua situação, seus valores e definição de uma visão de futuro e missão, traçando metas e planos de ação a serem alcançados a longo, médio e curto prazos.</ETPDescricao>
+    <ETPDscResultado>Aperfeiçoamento da gestão da escola pública e melhoria da qualidade de ensino</ETPDscResultado>
+    <ETPVlr>21252360.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1376</PRGCod>
+    <ACACodPPA>22098</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Elevação das escolas do ensino fundamental aos padrões mínimos operacionais</ETPDsc>
+    <ETPDescricao>Adequação de prédios escolares de ensino fundamental das Regiões Norte, Nordeste e Centro-Oeste.</ETPDescricao>
+    <ETPDscResultado>Condições de segurança, salubridade, estabilidade e funcionalidade das escolas de ensino fundamental das Regiões Norte, Nordeste e Centro-Oeste.</ETPDscResultado>
+    <ETPVlr>28247640.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>21995</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Coordenação de Execução do Programa</ETPDsc>
+    <ETPDescricao>Definição de normas, diretrizes e procedimentos, alocação de recursos, identificação de inovações tecnológicas e realização de reuniões estaduais.</ETPDescricao>
+    <ETPDscResultado>Coordenação de Execução do Programa instalada e desempenhando as funções de programação e implementação técnico-pedagógica, administrativa e físico-financeira previstas no contrato de empréstimo.</ETPDscResultado>
+    <ETPVlr>23291575.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>21995</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Assistência Técnica</ETPDsc>
+    <ETPDescricao>Prover Assistência técnica às UFs no desenho, implantação, monitoria e avaliação de seus Planos de Investimento.</ETPDescricao>
+    <ETPDscResultado>PI das UFS elaborados, analisados, aprovados, implementados, monitorados e avaliados</ETPDscResultado>
+    <ETPVlr>209624184.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>21998</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Apoiar a atualização curricular do ensino médio</ETPDsc>
+    <ETPDescricao>Promove procedimentos de atualização das Diretrizes Curriculares Nacionais e dos Parâmetros Curriculares Nacionais do Ensino Médio</ETPDescricao>
+    <ETPDscResultado>Escola orientada</ETPDscResultado>
+    <ETPVlr>6225659.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>21998</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Acompanhar o processo da implementação das DCEM nas Unidades Federadas</ETPDsc>
+    <ETPDescricao>Analisar, acompanhar e avaliar a implementação das propostas curriculares dos sistemas de ensino nas UFs, com vistas à articulação entre os sistemas e à definição de encaminhamentos nacionais em relação às diretrizes nacionais do ensino médio.</ETPDescricao>
+    <ETPDscResultado>Secretarias Estaduais de Educação orientadas</ETPDscResultado>
+    <ETPVlr>6100000.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>21998</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Produção de material instrumental</ETPDsc>
+    <ETPDescricao>Produzir material instrumental para as diferentes áreas do conhecimento como suporte do trabalho dos professores, das equipes técnicas, dos diretores e professores do ensino médio.</ETPDescricao>
+    <ETPDscResultado>Material distribuído</ETPDscResultado>
+    <ETPVlr>110000000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>22009</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>1   </ETPCod>
+    <ETPDsc>Desenvolvimento de propostas de políticas para o Ensino Médio</ETPDsc>
+    <ETPDescricao>Realização de estudos e pesquisas capazes de subsidiar instâncias ligadas ao processo educacional  sistemas de ensino, instituições de ensino superior, sociedades científicas, escolas  com vistas a definição da política orientadora do ensino médio.</ETPDescricao>
+    <ETPDscResultado>Sistema subsidiado</ETPDscResultado>
+    <ETPVlr>6100000.0000</ETPVlr>
+    <ETPOrdem>1</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>1</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>22009</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>2   </ETPCod>
+    <ETPDsc>Operacionalização de políticas e programas</ETPDsc>
+    <ETPDescricao>Identificação, avaliação e sistematização de resultados obtidos através de estudos e pesquisas com vistas à implementação das políticas de ensino médio.</ETPDescricao>
+    <ETPDscResultado>Sistema orientado</ETPDscResultado>
+    <ETPVlr>9151741.0000</ETPVlr>
+    <ETPOrdem>2</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>2</ETPUnica>
+  </PPAEtapa>
+  <PPAEtapa>
+    <PRGCod>1378</PRGCod>
+    <ACACodPPA>22009</ACACodPPA>
+    <LOCCodPPA>00000</LOCCodPPA>
+    <ETPCod>3   </ETPCod>
+    <ETPDsc>Implementação de políticas para o Ensino Médio</ETPDsc>
+    <ETPDescricao>Desenvolvimento de sistemas integrados de informações, orientação técnico-pedagógica e instrumentos de apoio às atividades docentes relacionadas ao currículo e à estruturação da escola de ensino médio.</ETPDescricao>
+    <ETPDscResultado>Sistema desenvolvido</ETPDscResultado>
+    <ETPVlr>3000000.0000</ETPVlr>
+    <ETPOrdem>3</ETPOrdem>
+    <TATCod>0</TATCod>
+    <ETPMesInicio>  </ETPMesInicio>
+    <ETPAnoInicio>    </ETPAnoInicio>
+    <ETPMesTermino>  </ETPMesTermino>
+    <ETPAnoTermino>    </ETPAnoTermino>
+    <ETPUnica>3</ETPUnica>
+  </PPAEtapa>
+</ArrayOfPPAEtapa>

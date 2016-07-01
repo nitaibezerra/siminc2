@@ -1,0 +1,5747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUnidade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Alagoas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>01101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>01000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Câmara dos Deputados</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>01900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>01000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Senado Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Gráfico </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Centro Gráfico do Senado Federal </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Aviação Civil - ANAC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20701</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Gabinete da Presidência da República </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20927</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Fundo de Imprensa Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20926</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Fundo Nacional Antidrogas - FUNAD</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20928</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Fundo Nacional para a Criança e o Adolescente - FNCA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Agricultura, Pecuária e Abastecimento</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comissão Executiva do Plano da Lavoura Cacaueira </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Nacional de Engenharia Agrícola </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Pesquisa Agropecuária - EMBRAPA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais de Abastecimento do Amazonas S.A. - CEASA/AM (Em Liquidação) </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais de Abastecimento do Paraná S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais de Abastecimento de Minas Gerais S.A. - CEASA/MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22209</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Armazéns e Silos do Estado de Minas Gerais - CASEMG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Nacional de Abastecimento - CONAB</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério de Minas e Energia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73106</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transferências Constitucionais - Recursos sob Supervisão do Ministério da Agricultura e do Abastecimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73107</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Educação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73108</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transferências Constitucionais - Recursos sob Supervisão do Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73109</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos Sob Supervisão do Ministério do Esporte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73110</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transferências Constitucionais - Recursos sob Supervisão do Ministério do Desenvolvimento Agrário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>73901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>73000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional do Distrito Federal - FCDF</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob a Supervisão da Secretaria do Tesouro Nacional - Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>90000</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>90000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Reserva de Contingência</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74111</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Instituto Nacional de Colonização e Reforma Agrária/INCRA - Min. do Desenv. Agrário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão da Superintendência de Seguros Privados/SUSEP- Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão da Agência Nacional de Saúde Suplementar/ANS - Ministério da Saúde</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Instituto Nacional de Colonização e Reforma Agrária/INCRA - Min. do Desenv. Agrário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo de Defesa da Economia Cafeeira/Funcafé - MAPA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo de Financiamento ao Estudante do Ensino Superior/FIEES - Min. da Educação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo Nacional de Desenvolvimento/FND - Ministério do Desenv., Ind. e Com. Exterior</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo da Marinha Mercante/FMM - Ministério dos Transportes</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo para o Desenv. Tecnol. das Telecomunicações/FUNTTEL - Min das Comunicações</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74906</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo de Terras e da Reforma Agrária/Banco da Terra - Min. do Desenv. Agrário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74907</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Integração Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74908</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo Geral de Turismo/FUNGETUR - Ministério do Turismo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>92101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>92000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Atividades Padronizadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74909</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob a Supervisão do Fundo Nacional de Desenvolvimento Regional - Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>75101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>75000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74910</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo Nacional de Desenv. Científico e Tecnológico/FNDCT - Min Ciência e Tecnologia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>91101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>91000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Operações Especiais </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>98000</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>98000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Receita do Tesouro da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>74911</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>74000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Fundo Nacional de Habitação de Interesse Social - FNHIS </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>92000</UNICod>
+    <UNITpoCod>O</UNITpoCod>
+    <ORGCod>92000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Atividades Padronizadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20121</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial dos Direitos Humanos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20121</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20121</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Secretaria Especial dos Direitos Humanos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Geral do Cacau </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>CEAGESP - Companhia de Entrepostos e Armazéns Gerais de São Paulo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Federal Agropecuário </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Eletrificação Rural de Cooperativas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Cooperativismo </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional da Reforma e do Desenvolvimento Agrário </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>22906</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>22000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Defesa da Economia Cafeeira</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comissão Nacional de Energia Nuclear</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Indústrias Nucleares do Brasil S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Nuclebrás Equipamentos Pesados S.A. - NUCLEP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Ciência e Tecnologia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Conselho Nacional de Desenvolvimento Científico e Tecnológico</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Financiadora de Estudos e Projetos - FINEP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Centro Tecnológico para Informática </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Espacial Brasileira</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Tecnologia da Informação - ITI</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Desenvolvimento Científico e Tecnológico</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo para as Atividades de Informática </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Amparo a Tecnologia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Atividades Espaciais </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>24905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>24000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Atividades para a Amazônia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola de Administração Fazendária </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>01901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>01000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Rotativo da Câmara dos Deputados</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Informática - PRODASEN</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Editoração e Publicação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial do Senado Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Informática e Processamento de Dados do Senado Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>02904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>02000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo da Secretaria Especial de Editoração e Publicação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>03101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>03000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal de Contas da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>10101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>10000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Supremo Tribunal Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>10102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>10000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Conselho Nacional de Justiça</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>11101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>11000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superior Tribunal de Justiça</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Justiça Federal de Primeiro Grau</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Federal da 1a. Região</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14117</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Pernambuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14118</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Piauí</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14122</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Rondônia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Federal da 2a. Região</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Federal da 3a. Região</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Federal da 4a. Região</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>12106</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>12000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Federal da 5a. Região</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>13101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>13000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Justiça Militar da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Superior Eleitoral</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Acre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Amazonas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral da Bahia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14106</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Ceará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14107</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Distrito Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14108</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Espírito Santo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14109</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Goiás</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14110</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Maranhão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14111</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Mato Grosso</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14113</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Minas Gerais</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14114</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Pará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14116</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Paraná</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14112</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Mato Grosso do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14115</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral da Paraíba</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14119</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Rio de Janeiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14120</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Rio Grande do Norte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14121</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Rio Grande do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14123</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Santa Catarina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14124</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de São Paulo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14125</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Sergipe</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14126</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Tocantins</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14127</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral de Roraima</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14128</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional Eleitoral do Amapá</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>14901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>14000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Partidário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Superior do Trabalho</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 1a. Região - Rio de Janeiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 2a. Região - São Paulo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 3a. Região - Minas Gerais</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 4a. Região - Rio Grande do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15106</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 5a. Região - Bahia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15107</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 6a. Região - Pernambuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15108</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 7a. Região - Ceará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15109</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 8a. Região - Pará/Amapá</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15110</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 9a. Região - Paraná</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15111</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 10a. Região - Distrito Federal/Tocantins</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15112</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 11a. Região - Amazonas/Roraima</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15113</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 12a. Região - Santa Catarina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15114</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 13a. Região - Paraíba</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15115</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 14a. Região - Rondônia/Acre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15116</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 15a. Região - Campinas/SP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>16101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>16000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal de Justiça do Distrito Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Presidência da República</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15117</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 16a. Região - Maranhão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15118</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 17a. Região - Espírito Santo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15119</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 18a. Região - Goiás</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15120</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 19a. Região - Alagoas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15121</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 20a. Região - Sergipe</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15122</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 21a. Região - Rio Grande do Norte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15123</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 22a. Região - Piauí</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15124</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 23a. Região - Mato Grosso</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>15125</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>15000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal Regional do Trabalho da 24a. Região - Mato Grosso do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>16102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>16000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Tribunal de Justiça do Distrito Federal - Justiça dos Territórios </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>16103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>16000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Justiça da Infância e da Juventude</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20101</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Presidência da República </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20102</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Gabinete da Vice-Presidência da República </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20102</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Gabinete da Vice-Presidência da República</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20114</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Advocacia-Geral da União </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20114</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20114</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Advocacia-Geral da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20115</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Políticas Regionais </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20118</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Brasileira de Inteligência - ABIN</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20118</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20118</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Agência Brasileira de Inteligência - ABIN</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20119</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Imprensa Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20120</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Arquivo Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20124</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20124</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Secretaria Especial de Aqüicultura e Pesca</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20122</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Políticas para as Mulheres</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20122</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20122</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Secretaria Especial de Políticas para as Mulheres</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20123</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Gabinete do Ministro de Estado Extraordinário de Segurança Alimentar e Combate à Fome</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20123</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20123</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Gabinete do Ministro de Estado Extraordinário de Segurança Alimentar e Combate à Fome</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20124</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Aqüicultura e Pesca </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20125</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Controladoria-Geral da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20125</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20125</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Controladoria-Geral da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20126</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Especial de Políticas de Promoção da Igualdade Racial</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20126</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20126</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Secretaria Especial de Políticas de Promoção da Igualdade Racial</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20127</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria Executiva do Programa Bolsa Família</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20154</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20114</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Procuradoria-Geral Federal - PGF</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20155</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Subsecretaria de Direitos Humanos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Agência Nacional do Cinema</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Instituto Nacional de Tecnologia da Informação - ITI</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20223</UNICod>
+    <UNITpoCod>S</UNITpoCod>
+    <ORGCod>20000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria de Comunicação de Governo e Gestão Estratégica </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20223</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20223</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Secretaria de Comunicação de Governo e Gestão Estratégica </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20224</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Agência Nacional do Cinema</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20401</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>RADIOBRÁS - Empresa Brasileira de Comunicação S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>20402</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>20101</ORGCod>
+    <TPOCod>S</TPOCod>
+    <UNIDsc>Agência Espacial Brasileira </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco Central do Brasil</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco da Amazônia S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comissão de Valores Mobiliários</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Nacional de Abastecimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Serviço Federal de Processamento de Dados - SERPRO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência de Seguros Privados</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25209</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência Nacional do Abastecimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Nordeste do Brasil S.A. - BNB</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Casa da Moeda do Brasil - CMB</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25214</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Siderúrgica do Nordeste</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25215</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>IRB - Brasil Resseguros S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Receita Federal do Brasil</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Procuradoria-Geral da Fazenda Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25216</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Mafersa Sociedade Anônima </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25218</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Mineração Caraíba Ltda. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25219</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Usiminas Mecânicas S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25220</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Caixa Econômica Federal - CAIXA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25226</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Meridional do Brasil - Viagens e Turismo Ltda. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25228</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Administradora de Cartões de Crédito S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25229</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Corretora de Seguros e Administradora de Bens S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25230</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>COBRA Tecnologia S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25231</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Aços Especiais Itabira </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25234</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Brasil S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25235</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Banco de Investimento S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25236</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Administração de Ativos - Distribuidora de Títulos e Valores Mobiliários S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25237</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB - Financeira S.A. - Crédito, Financiamento e Investimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25238</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB-Leasing S.A. - Arrendamento Mercantil </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25245</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Leasing Company Limited </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25246</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BBTUR - Viagens e Turismo Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25247</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Brasilian American Merchant Bank </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25255</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação de Pesquisa Econômica Aplicada - IPEA </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25256</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Instituto Brasileiro de Geografia e Estatística - IBGE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25257</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Estado do Ceará S.A. - BEC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25259</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BEC Distribuidora de Títulos e Valores Mobiliários Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25266</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Estado do Piauí S.A. - BEP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25267</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Estado do Maranhão S.A. - BEM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25271</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Estado de Santa Catarina S.A. - BESC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25272</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BESC Distribuidora de Títulos e Valores Mobiliários S.A. - BESCVAL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25273</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BESC Financeira S.A. - Crédito, Financiamento e Investimentos - BESCREDI </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25274</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BESC S.A. Arrendamento Mercantil</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25275</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BESC S.A. - Crédito Imobiliário </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25276</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Gestora de Ativos - EMGEA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25277</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ativos S.A. - Companhia Securitizadora de Créditos Financeiros</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25278</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Securities Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25279</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Banco Popular do Brasil S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25280</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BB Administradora de Consórcios S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25281</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco do Brasil Ag Viena</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Administração das Empresas Incorporadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Desenvolvimento e Aperfeiçoamento das Atividades de Fiscalização</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Compensação e Variações Salariais</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Estabilidade do Seguro Rural</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Apoio ao Desenvolvimento Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25907</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Norte - FNO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Colégio Pedro II</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal da Bahia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26235</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Goiás</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25908</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Centro-Oeste - FCO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25909</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Defesa da Economia Cafeeira </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25910</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Nordeste - FNE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25913</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Treinamento e Desenvolvimento</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>25914</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>25000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Garantia à Exportação - FGE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Educação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Educação de Surdos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Benjamin Constant</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Alagoas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Amazonas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26231</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Alagoas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26232</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal da Bahia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26234</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Espírito Santo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26236</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Fluminense</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Campos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Ceará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Espírito Santo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Goiás</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Mato Grosso</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Ouro Preto</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Pará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26213</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica da Paraíba</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26214</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Pelotas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26215</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Pernambuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26216</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Piauí</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26217</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Química de Nilópolis</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26218</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Rio Grande do Norte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26219</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Santa Catarina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26220</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de São Paulo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26240</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal da Paraíba</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26242</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Pernambuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26243</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio Grande do Norte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26221</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Sergipe</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26222</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Roraima</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26223</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Palmas - TO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26224</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Porto Velho </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26225</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Rolim de Moura </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26226</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Técnica Federal de Santarém </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26230</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Vale do São Francisco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26233</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Ceará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26237</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Juiz de Fora</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26238</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Minas Gerais</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26239</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Pará</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26241</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Paraná</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26244</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio Grande do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26245</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Rio de Janeiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26246</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Santa Catarina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26247</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Santa Maria</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26248</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural de Pernambuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26249</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural do Rio de Janeiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26250</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Roraima</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26251</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Tocantins</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26252</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Campina Grande</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26253</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural da Amazônia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26254</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Triângulo Mineiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26255</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Faculdades Federais Integradas de Diamantina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26256</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica Celso Suckow da Fonseca</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26257</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Minas Gerais</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26258</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Paraná</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26259</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro de Educação Tecnológica da Bahia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26260</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Alfenas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26261</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Itajubá</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26262</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de São Paulo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26263</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Lavras</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26264</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal Rural do Semi-Árido </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26265</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica do Maranhão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26268</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Rondônia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26269</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade do Rio de Janeiro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial para Deficientes da Visão </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26351</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal do Recôncavo da Bahia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26270</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade do Amazonas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26271</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade de Brasília</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26272</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Maranhão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26273</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Rio Grande - RS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26274</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Universidade Federal de Uberlândia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26275</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Acre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26276</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Mato Grosso</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26277</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Ouro Preto</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26278</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Pelotas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26279</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Piauí</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26280</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de São Carlos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26281</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Sergipe</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26282</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Viçosa</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26283</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de Mato Grosso do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26284</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Faculdade Federal de Ciências Médicas de Porto Alegre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26292</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Joaquim Nabuco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26294</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Hospital de Clínicas de Porto Alegre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26285</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal de São João Del Rei</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26286</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do Amapá</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26290</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26291</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - CAPES</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26293</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Roquette Pinto </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26295</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Desenvolvimento do Desporto </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26298</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Desenvolvimento da Educação</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26301</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica da Bahia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26302</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Alegre - ES</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26303</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Alegrete - RS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26304</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Araguatins - TO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26305</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Bambui - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26306</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Barbacena - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26307</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Barreiros - PE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26312</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Catu - BA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26343</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Codó - MA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial para Deficientes de Audição </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26308</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Belo Jardim - PE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26309</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Bento Gonçalves - RS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26310</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Cáceres - MT</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26311</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Castanhal - PA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26313</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Colatina - ES</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26314</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Concórdia - SC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26315</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Crato - CE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26316</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Cuiabá - MT</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26317</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Iguatu - CE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26318</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Inconfidentes Visconde de Mauá - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26319</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Januária</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26320</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Machado - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26321</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Manaus - AM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26322</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Muzambinho - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26323</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Petrolina</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26352</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal do ABC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26324</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Rio Pomba</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26325</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Rio Verde - GO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26326</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Salinas Clemente Medrado - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26327</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Santa Teresa- ES</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26328</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Cristóvão - SE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26329</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São João Evangelista Nelson de Senna - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26330</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Luís - MA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26331</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de São Vicente do Sul</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26332</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Satuba - AL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26333</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sertão - RS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26334</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sousa - PB</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26335</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Uberaba - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26336</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Uberlândia - MG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26337</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro Federal de Educação Tecnológica de Urutaí - GO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26338</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Vitória de Santo Antão João Cleófas - PE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26339</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Gabriel da Cachoeira - AM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26340</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Sombrio - SC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26341</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Ceres - GO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26342</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Colorado do Oeste - RO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26344</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal Antônio José Teixeira - Guanambi - BA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26345</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Rio do Sul - SC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26346</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de Santa Inês - BA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26347</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal do Senhor do Bomfim - BA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26349</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Agrotécnica Federal de São Gabriel da Cachoeira - AM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Estudos e Pesquisas Educacionais </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Aperfeiçoamento de Pessoal de Nível Superior </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Assistência ao Atleta Profissional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>26350</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>26000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Universidade Federal da Grande Dourados</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Desenvolvimento, Indústria e Comércio Exterior</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Brasileiro de Turismo </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Metrologia, Normalização e Qualidade Industrial - Inmetro</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional da Propriedade Industrial - INPI</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional do Cinema</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28233</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência da Zona Franca de Manaus - SUFRAMA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28234</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Banco Nacional de Desenvolvimento Econômico e Social - BNDES</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28235</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>BNDES Participações S.A. - BNDESPAR</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28236</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Especial de Financiamento Industrial - FINAME</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Geral de Turismo </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Defesa da Economia Cafeeira </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Desenvolvimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Arquivo Nacional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>28904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>28000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Garantia para Promoção da Competitividade - FGPC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Justiça</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Imprensa Nacional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30107</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento de Polícia Rodoviária Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30108</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento de Polícia Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30109</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Defensoria Pública da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Comunicação S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Nacional do Índio - FUNAI</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Água e Esgoto do Amapá </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Águas e Esgotos de Roraima </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Desenvolvimento do Amapá </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Desenvolvimento de Roraima </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30209</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Energética de Roraima </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Eletricidade do Amapá</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Conselho Administrativo de Defesa Econômica</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Imprensa Nacional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Arquivo Nacional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial dos Direitos da Mulher </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Defesa de Direitos Difusos</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30906</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Segurança e Educação do Trânsito </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30907</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Penitenciário Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30908</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional para a Criança e o Adolescente - FNCA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30909</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo para Aparelhamento e Operacionalização das Atividades-Fim da Polícia Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30910</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Segurança e Educação do Trânsito </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>30911</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>30000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Segurança Pública</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério de Minas e Energia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Águas e Energia Elétrica </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Combustíveis - DNC </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centro de Pesquisas de Energia Elétrica - CEPEL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Pesquisa de Recursos Minerais - CPRM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Itaipu Binacional - ITAIPU </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Eletrobrás Termonuclear S.A. - ELETRONUCLEAR</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32222</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Valesul - Aluminio S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32223</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais Elétricas Brasileiras S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32224</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais Elétricas do Norte do Brasil S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32225</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>ELETROSUL Centrais Elétricas S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32226</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Hidro Elétrica do São Francisco</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32228</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>FURNAS - Centrais Elétricas S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32230</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petróleo Brasileiro S.A. - PETROBRAS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32232</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Braspetro Oil Services Company</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32238</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Indústria Carboquímica Catarinense S.A. - ICC (Em Liquidação) </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32239</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Distribuidora S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32240</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Gás S.A. - GASPETRO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32241</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobrás Internacional S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32242</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Química S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32259</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobrás UK Ltd</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32260</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Braspetro Algerie</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32261</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras America Inc.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32262</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Norge S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32263</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Produção Mineral - DNPM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32264</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Light Participações S.A. - LIGHTPAR</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32265</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional do Petróleo, Gás Natural e Biocombustíveis - ANP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32266</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Energia Elétrica - ANEEL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32267</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Eletricidade do Acre</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32268</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Energética de Alagoas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32269</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Energética do Piauí</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32270</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais Elétricas de Rondônia S.A. - CERON</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32271</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transportadora Brasileira Gasoduto Bolívia-Brasil S.A. - TBG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32272</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Boa Vista Energia S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32273</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Manaus Energia S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32274</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Transporte S.A. - TRANSPETRO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32275</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fronape International Company</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32276</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Geração Térmica de Energia Elétrica</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32277</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Energética do Amazonas - CEAM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32278</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras International Finance Company</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32279</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Downstream Participações Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32280</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Alberto Pasqualini - REFAP S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32281</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comercializadora Brasileira de Energia Emergencial - CBEE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32282</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Netherlands B.V.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32283</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Europe Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32284</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Finance Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32285</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>5283 Participações Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32286</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Braspetro Oil Company</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32287</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras International Braspetro B.V.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32288</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Comercializadora de Energia Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32289</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Negócios Eletrônicos S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32290</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Catleia Oil Company</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32291</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>PetroRio - Petroquímica do Rio de Janeiro S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32292</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petroleo Brasileiro Nigeria Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32293</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Brasoil Oil Services Company Nigeria Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32294</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras International Braspetro B.V. - Sucursal Angola</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32295</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras International Braspetro B.V. - Sucursal Colombia</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32296</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Colombia Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32297</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Bolivia Inversiones y Servicios S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32298</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Participaciones, S.L.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32302</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrolera Santa Fe Southern Cone, Inc.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32304</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Brasoil Alliance Company </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32299</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Energia Participaciones S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32300</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrolera Entre Lomas S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32301</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petrobras Argentina S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32303</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Eg3 S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32305</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Bear Insurance Company Limited</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32306</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Dataflux - Serviços de Telecomunicações S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32307</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transportadora do Nordeste e Sudeste S.A. - TNS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32308</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transportadora Amazonense de Gás S.A. - TAG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32310</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Usina Termelétrica Nova Piratininga Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32312</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Petroquímica Triunfo S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32313</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Transportadora Capixaba de Gás S.A. - TCG</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32314</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa de Pesquisa Energética - EPE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32315</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>TSS Participações S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32316</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Liquigás Distribuidora S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Federal de Eletrificação </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Mineração </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério Público Federal</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério Público Militar</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Previdência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Previdência Social</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional do Seguro Social</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa de Tecnologia e Informações da Previdência Social - DATAPREV</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32317</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>SFE - Sociedade Fluminense de Energia Ltda.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32318</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Termorio S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>32319</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>32000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fafen Energia S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto de Administração Financeira da Previdência e Assistência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional da Previdência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Legião Brasileira de Assistencia - em Extinção </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência Nacional de Previdência Complementar</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Previdência e Assistência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Liquidez da Previdência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34104</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério Público do Trabalho</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>33904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>33000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Regime Geral de Previdência Social</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério Público do Distrito Federal e dos Territórios</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34105</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Escola Superior do Ministério Público da União</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>34106</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>34000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Conselho Nacional do Ministério Público</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério das Relações Exteriores</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Alexandre de Gusmão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>35901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>35000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Cooperação Técnica </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Saúde</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência de Campanhas de Saúde Pública </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36103</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Central de Medicamentos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Oswaldo Cruz</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Alimentação e Nutrição </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação das Pioneiras Sociais </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Central de Medicamentos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Hospital Cristo Redentor S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Assistência Médica da Previdência Social </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36209</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Hospital Fêmina S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Hospital Nossa Senhora da Conceição S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Nacional de Saúde</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Vigilância Sanitária</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36213</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Saúde Suplementar</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Saúde</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo da Central de Medicamentos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Trabalho e Emprego</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Jorge Duprat Figueiredo de Segurança e Medicina do Trabalho</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Escola Nacional de Administração Pública </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Amparo ao Trabalhador</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>38904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>38000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial de Formação Profissional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério dos Transportes</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>36215</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>36000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Hemoderivados e Biotecnologia - HEMOBRÁS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Estradas de Rodagem </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Navegação do São Francisco - FRANAVE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Planejamento de Transportes - GEIPOT (Em Liquidação)</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa de Navegação da Amazônia S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa de Trens Urbanos de Porto Alegre S.A. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39207</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>VALEC - Engenharia, Construções e Ferrovias S.A.</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Brasileira de Trens Urbanos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Ceará - CDC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Espírito Santo - CODESA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia das Docas do Estado da Bahia - CODEBA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39213</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Estado de São Paulo - CODESP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39214</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Maranhão - CODOMAR</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39215</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Pará - CDP</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39216</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Rio de Janeiro - CDRJ</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39217</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Docas do Rio Grande do Norte - CODERN</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39219</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Rede Ferroviária Federal Sociedade Anônima - RFFSA (Em Liquidação) </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39250</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Transportes Terrestres - ANTT</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39251</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Transportes Aquaviários - ANTAQ</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39252</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Infra-Estrutura de Transportes - DNIT</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo da Marinha Mercante - FMM</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>39903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>39000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Rodoviario Nacional </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério das Comunicações</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Correios e Telégrafos - ECT</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Telecomunicações Brasileiras S.A. - TELEBRÁS </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41231</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Telecomunicações - ANATEL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Fiscalização das Telecomunicações </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Universalização dos Serviços de Telecomunicações - FUST</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>41903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>41000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo para o Desenvolvimento Tecnológico das Telecomunicações - FUNTTEL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Cultura</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Casa de Rui Barbosa</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Biblioteca Nacional - BN</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Cultural Palmares</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Direito Autoral </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto do Patrimônio Histórico e Artístico Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Nacional de Artes</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional do Cinema</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>42902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>42000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Cultura</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Meio Ambiente</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis - IBAMA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Desenvolvimento de Barcarena - CODEBAR</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Desenvolvimento do Vale do São Francisco </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Nacional de Águas - ANA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto de Pesquisas Jardim Botânico do Rio de Janeiro - JBRJ</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>44901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>44000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Meio Ambiente - FNMA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47100</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Direta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Planejamento, Orçamento e Gestão</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47102</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria de Estado da Administração e do Patrimônio </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47192</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Entidades Supervisionadas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47200</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Administração Indireta </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência do Desenvolvimento do Nordeste </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência do Desenvolvimento da Amazônia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência da Zona Franca de Manaus </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto de Pesquisa Econômica Aplicada</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Instituto Brasileiro de Geografia e Estatística</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47208</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência Especial de Financiamento Industrial </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47209</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Mineração Caraiba Ltda. </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47900</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundos </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Especial para Calamidades Públicas </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47210</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Escola Nacional de Administração Pública</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47213</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Centrais de Abastecimento do Amazonas S.A. (Em Liquidação)</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Desenvolvimento </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Investimentos da Amazonia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Investimentos do Nordeste </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Custeio de Programas de Habitação Popular </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47906</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Garantia para Promoção da Competitividade - FGPC</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>47907</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>47000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Terras e da Reforma Agraria - Banco da Terra </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>49101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>49000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Desenvolvimento Agrário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Defesa</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52121</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comando do Exército</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>49201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>49000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Instituto Nacional de Colonização e Reforma Agrária - INCRA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>49901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>49000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Terras e da Reforma Agrária - Banco da Terra </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>51101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>51000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Esporte</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52111</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comando da Aeronáutica</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52131</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Comando da Marinha</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52133</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Secretaria da Comissão Interministerial para os Recursos do Mar</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52221</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Indústria de Material Bélico do Brasil - IMBEL</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Ministério da Defesa</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52911</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Aeronáutico</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52211</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Caixa de Financiamento Imobiliário da Aeronáutica</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52212</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Brasileira de Infra-Estrutura Aeroportuária - INFRAERO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52222</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundação Osório</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52231</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa Gerencial de Projetos Navais - EMGEPRON</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Administração do Hospital das Forças Armadas</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Serviço Militar</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52912</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Aeroviário</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52921</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo do Exército</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52931</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Naval</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>52932</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>52000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Desenvolvimento do Ensino Profissional Marítimo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério da Integração Nacional</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia de Desenvolvimento dos Vales do São Francisco e do Parnaíba - CODEVASF</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência do Desenvolvimento da Amazônia </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53203</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Superintendência do Desenvolvimento do Nordeste </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53204</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Departamento Nacional de Obras Contra as Secas - DNOCS</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53205</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência de Desenvolvimento da Amazônia - ADA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53206</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Agência de Desenvolvimento do Nordeste - ADENE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53904</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Desenvolvimento da Amazônia - FDA</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53905</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo de Desenvolvimento do Nordeste - FDNE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Norte - FNO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Centro-Oeste - FCO</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>53903</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>53000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Constitucional de Financiamento do Nordeste - FNE</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>54101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>54000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Turismo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>54201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>54000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>EMBRATUR - Instituto Brasileiro de Turismo</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>54901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>54000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Geral de Turismo - Fungetur    </UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>55101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>55000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério do Desenvolvimento Social e Combate à Fome</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>55901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>55000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Assistência Social</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>56101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Ministério das Cidades</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>56201</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Empresa de Trens Urbanos de Porto Alegre S.A. - TRENSURB</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>56202</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Companhia Brasileira de Trens Urbanos - CBTU</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>56901</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Segurança e Educação do Trânsito - FUNSET</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>71101</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>71000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Recursos sob Supervisão do Ministério da Fazenda</UNIDsc>
+  </Unidade>
+  <Unidade>
+    <UNIAno>2006</UNIAno>
+    <UNICod>56902</UNICod>
+    <UNITpoCod>U</UNITpoCod>
+    <ORGCod>56000</ORGCod>
+    <TPOCod>O</TPOCod>
+    <UNIDsc>Fundo Nacional de Habitação de Interesse Social - FNHIS</UNIDsc>
+  </Unidade>
+</ArrayOfUnidade>

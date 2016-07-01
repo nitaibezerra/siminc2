@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPPAFuncao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <PPAFuncao>
+    <FUNCod>00</FUNCod>
+    <FUNDsc>Não definida</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>01</FUNCod>
+    <FUNDsc>Legislativa</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>02</FUNCod>
+    <FUNDsc>Judiciária</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>03</FUNCod>
+    <FUNDsc>Essencial à Justiça</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>04</FUNCod>
+    <FUNDsc>Administração</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>05</FUNCod>
+    <FUNDsc>Defesa Nacional</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>06</FUNCod>
+    <FUNDsc>Segurança Pública</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>07</FUNCod>
+    <FUNDsc>Relações Exteriores</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>08</FUNCod>
+    <FUNDsc>Assistência Social</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>09</FUNCod>
+    <FUNDsc>Previdência Social</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>10</FUNCod>
+    <FUNDsc>Saúde</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>11</FUNCod>
+    <FUNDsc>Trabalho</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>12</FUNCod>
+    <FUNDsc>Educação</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>13</FUNCod>
+    <FUNDsc>Cultura</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>14</FUNCod>
+    <FUNDsc>Direitos da Cidadania</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>15</FUNCod>
+    <FUNDsc>Urbanismo</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>16</FUNCod>
+    <FUNDsc>Habitação</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>17</FUNCod>
+    <FUNDsc>Saneamento</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>18</FUNCod>
+    <FUNDsc>Gestão Ambiental</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>19</FUNCod>
+    <FUNDsc>Ciência e Tecnologia</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>20</FUNCod>
+    <FUNDsc>Agricultura</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>21</FUNCod>
+    <FUNDsc>Organização Agrária</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>22</FUNCod>
+    <FUNDsc>Indústria</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>23</FUNCod>
+    <FUNDsc>Comércio e Serviços</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>24</FUNCod>
+    <FUNDsc>Comunicações</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>25</FUNCod>
+    <FUNDsc>Energia</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>26</FUNCod>
+    <FUNDsc>Transporte</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>27</FUNCod>
+    <FUNDsc>Desporto e Lazer</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>28</FUNCod>
+    <FUNDsc>Encargos Especiais</FUNDsc>
+  </PPAFuncao>
+  <PPAFuncao>
+    <FUNCod>99</FUNCod>
+    <FUNDsc>Reserva de Contingência</FUNDsc>
+  </PPAFuncao>
+</ArrayOfPPAFuncao>

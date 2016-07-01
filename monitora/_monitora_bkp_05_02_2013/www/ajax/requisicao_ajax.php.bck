@@ -1,0 +1,54 @@
+<?php
+dbg( $_REQUEST , 1 );
+if( !isset( $_REQUEST[ 'rsargs' ] ) )
+{
+	$_REQUEST = Array( 'rsargs' => Array( 'atualizarCampo' , 'Tarefa' , '1027' , 'remove' ) );
+}
+// atualizarCampo,Tarefa,1027,datNovaDataInicio,11&#47;04&#47;2006,11&#47;04&#47;2007
+include "config.inc";
+include APPRAIZ."includes/funcoes.inc";
+include APPRAIZ."includes/classes_simec.inc";
+define( "APP_PLANO_TRABALHO" , APPRAIZ . "pde/modulos/principal/projeto/plantrabdet/" );
+
+global $db;
+$db = new cls_banco();
+
+require_once( APP_PLANO_TRABALHO . 'arquivos_requeridos_tarefas.inc' );
+
+switch( @$_REQUEST[ 'rsargs' ][0] )
+{
+	case 'carregarTarefasFilhas':
+	{
+		require_once( APP_PLANO_TRABALHO . "lista_tarefas_da_tarefa.inc" );
+		break;
+	}
+	case 'atualizarCampo':
+	{
+		require_once( APP_PLANO_TRABALHO . "ActiveFrozenFieldServerSide.inc" );
+		break;
+	}
+	case 'alteraTarefa':
+	{
+		require_once( APP_PLANO_TRABALHO . "altera_tarefa.inc" );
+		break;
+	}
+	case 'verificaRemoverTarefa':
+	{
+		$boolApenasVerifica = true;
+		require_once( APP_PLANO_TRABALHO . "remover_tarefa.inc" );
+		?>
+			(<?= ( json_encode( $arrMensagens ) ) ?>)
+		<?
+		break;
+	}
+	default:
+	{
+		print_r( $_REQUEST );
+		?>
+			Tipo de Requisicao Desconhecido
+		<?
+	}
+}
+
+$db->commit();
+?>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.1.654 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="xml.fnde.ws-sigef.base.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="xml.fnde.ws-sigef.base.xsd" /> 
+  <xs:element name="response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="header" />
+        <xs:element name="status" type="status" />
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="row">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_seq_mov_conta">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:totalDigits value="15" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_seq_conta_corrente_favorec">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:totalDigits value="15" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="ds_razao_social">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="andamento">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="70" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_banco">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="3" />
+                          <xs:pattern value="[0-9]{3}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_agencia">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="[0-9]{4}" />
+                          <xs:maxLength value="4" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_conta_corrente">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:totalDigits value="10" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="cnpj" type="nu_cgc_favorecido" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="situacao_conta">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="ds_problema" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

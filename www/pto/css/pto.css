@@ -1,0 +1,138 @@
+.ms-container .ms-list{
+    height: 160px;
+}
+
+.ms-container {
+    width: 100%;
+}
+
+.ms-container .ms-selectable li.ms-elem-selectable, .ms-container .ms-selection li.ms-elem-selection {
+    font-size: 12px;
+    padding: 8px 10px;
+}
+
+.ms-list li:nth-child(odd){
+    background-color: #E9E9E9;
+}
+
+.dragged {
+    position: absolute;
+    top: 0;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+.sorted_table tr {
+    cursor: pointer;
+}
+
+.sorted_table tr.placeholder {
+    display: block;
+    background: #ff0000;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.sorted_table tr.placeholder:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-left-color: #ff0000;
+    margin-top: -5px;
+    left: -5px;
+    border-right: none;
+}
+
+.sorted_head th {
+    cursor: pointer;
+}
+
+.sorted_head th.placeholder {
+    display: block;
+    background: #ff0000;
+    position: relative;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.sorted_head th.placeholder:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top-color: #ff0000;
+    top: -6px;
+    margin-left: -5px;
+    border-bottom: none;
+}
+
+.tbl_verde > tbody > tr > td.etapa_impl {
+    border: 1px solid #e46c0a;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tbl_painel td > b, .tbl_verde td > b{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tbl_painel td, .tbl_verde td {
+    font-size: 10px;
+}
+
+h4.titulo_principal_solucao {
+    background-color: #00701b;
+    text-align: center;
+    padding: 8px;
+    color: #fff;
+    font-weight: 700;
+}
+
+h5.titulo_solucao {
+    padding: 8px;
+    font-weight: bold;
+    background-color: #CCCCCC;
+    text-align: center;
+}
+
+.tbl_painel > thead > tr > th, .tbl_painel > tbody > tr > th, .tbl_painel > tfoot > tr > th, .tbl_painel > thead > tr > td, .tbl_painel > tbody > tr > td, .tbl_painel > tfoot > tr > td {
+    border: 1px solid #e46c0a;
+}
+
+.tbl_verde > thead > tr > th, .tbl_verde > tbody > tr > th, .tbl_verde > tfoot > tr > th, .tbl_verde > thead > tr > td, .tbl_verde > tbody > tr > td, .tbl_verde > tfoot > tr > td {
+    border: 1pt solid #00863d;
+}
+
+.texto_vertical {
+    /*display: block;*/
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    text-align: center;
+}
+
+.tbl_verde th {
+    background-color: #00863d;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.tbl_plano_implementacao {
+    border-spacing: 3px;
+    border-collapse: inherit;
+}
+
+.table thead > tr > th.alinharMeio, .table tbody > tr > th.alinharMeio, .table tfoot > tr > th.alinharMeio, .table thead > tr > td.alinharMeio, .table tbody > tr > td.alinharMeio, .table tfoot > tr > td.alinharMeio {
+    text-align: center;
+    vertical-align: middle;
+}

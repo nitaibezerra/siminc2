@@ -1,0 +1,351 @@
+<?php
+
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Tabela.class.inc";
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Tabelaresposta.class.inc";
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Grupocoluna.class.inc";
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Grupolinha.class.inc";
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Linha.class.inc";
+include_once APPRAIZ . "includes/classes/modelo/questionario/tabelas/Coluna.class.inc";
+
+class MontatabelaFederal {
+	
+	private $htm;
+	
+	public function montaNovaTabela( $perid, $qrpid, $percent = 90, $ro = 0 ){
+		
+		//global $db;
+
+		//Verifico se existe tabela
+		$obTabela 		= new Tabela( );
+		$verifica = $obTabela->verificaTabela( $perid );
+		
+		$l = 0;
+		
+		if( $ro == 1 ){
+			$habil = "N";
+			$style = "";
+		} elseif( $ro == 2 ) {
+			$habil = "N";
+			$style = "style='width:700px; height:400px; overflow:auto;'";
+		} else {
+			$habil = "S";
+			$style = "style='width:700px; height:400px; overflow:auto;'";
+		}
+
+		$bgcolor1 = "#A8A8A8";
+		$bgcolor2 = "#CCCCCC";
+		$bgcolor1TD = "#DDDDDD";
+		$bgcolor2TD = "#EBEBEB";
+					
+		//Montando a Tabela
+		if( $verifica ){
+			
+			$ano = $_REQUEST['ano'];
+			$entidade = str_replace("\'", "'", trim($_REQUEST['entidade'],","));	
+			$tipoentidade = $_REQUEST['tipoentidade'];
+			
+			global $db;
+			if( $entidade == 'todas' ){
+			
+				// Primeiro semestre
+				$sql = "SELECT
+							it.qrpid
+						FROM
+            			academico.assistenciaestudantil aet
+            			INNER JOIN academico.itemassistencia it on it.aetdid = aet.aetdid
+						WHERE
+							aetsemestre = 1 AND
+							aetano = ".$ano;
+				$arrQrpid1 = $db->carregarColuna($sql);
+				$strQrpid1 = implode(", ", $arrQrpid1);
+			
+				// Segundo semestre
+				$sql = "SELECT
+							it.qrpid
+						FROM
+            			academico.assistenciaestudantil aet
+            			INNER JOIN academico.itemassistencia it on it.aetdid = aet.aetdid
+						WHERE
+							aetsemestre = 2 AND
+							aetano = ".$ano;
+				$arrQrpid2 = $db->carregarColuna($sql);
+				$strQrpid2 = implode(", ", $arrQrpid2);
+			} else {
+				
+				if ($tipoentidade == 'universidade'){
+					$sql = "SELECT cmpentid FROM academico.unicampus WHERE unientid IN ({$entidade})";
+					$entidade = implode(",", $db->carregarColuna($sql));
+				}
+				
+				// Primeiro semestre
+				$sql = "SELECT
+							it.qrpid
+						FROM
+            			academico.assistenciaestudantil aet
+            			INNER JOIN academico.itemassistencia it on it.aetdid = aet.aetdid
+						WHERE
+							aetsemestre = 1 AND
+							entid in (".$entidade.") AND
+							aetano = ".$ano;
+				$arrQrpid1 = $db->carregarColuna($sql);
+				$strQrpid1 = implode(", ", $arrQrpid1);
+			
+				// Segundo semestre
+				$sql = "SELECT
+							it.qrpid
+						FROM
+            			academico.assistenciaestudantil aet
+            			INNER JOIN academico.itemassistencia it on it.aetdid = aet.aetdid
+						WHERE
+							aetsemestre = 2 AND
+							entid in (".$entidade.") AND
+							aetano = ".$ano;
+				$arrQrpid2 = $db->carregarColuna($sql);
+				$strQrpid2 = implode(", ", $arrQrpid2);
+			}
+			
+			if ($strQrpid1 == '' || $strQrpid2 == '' )
+			{
+				echo "Nenhum registro encontrado";
+				return;
+			}
+			
+			
+			//DADOS DA TABELA
+			$arrDadosTabela = $obTabela->pegaDados( $perid );
+			$tabela = $arrDadosTabela['tblid'];
+			$percent = $arrDadosTabela['tblpercent'] ? $arrDadosTabela['tblpercent'] : $percent;
+			//RESPOSTAS - 1 sem
+			$obTabelaResposta = new Tabelaresposta( );
+			$arrResp 		  = $obTabelaResposta->recuperarResposta( $tabela, $strQrpid1 );
+
+			//RESPOSTAS - 2 sem
+			$obTabelaResposta = new Tabelaresposta( );
+			$arrResp2 		  = $obTabelaResposta->recuperarResposta( $tabela, $strQrpid2 );
+			
+			//ver($arrResp, $arrResp2);
+			
+			//SUBTITULO
+			$obGrupoColuna  = new Grupocoluna( );
+			$arrGrupoColuna = $obGrupoColuna->pegaDados( $tabela );
+		
+			//LINHAS
+			$obLinha  		= new Linha( );
+			$obGrupolinha  	= new Grupolinha( );
+			$arrLinha 		= $obLinha->pegaDados( $tabela );
+			
+			//COLUNAS
+			$obColuna  = new Coluna( );
+			$arrC = $obColuna->pegaDados( $tabela );
+
+			$arrColuna = array_merge($arrC, $arrC, $arrC);
+			
+			$htm .= "<div ".$style.">";
+			$htm .= "<input type='hidden' name='idTabela' id='idTabela' value='{$tabela}'>";
+			$htm .= "<input type='hidden' name='tipoTabela' id='tipoTabela' value='{$arrDadosTabela['tbltipo']}'>";
+			$htm .= "<table class='tabela' style='width:{$percent}%;border-collapse:collapse' border='1' align='center'>";
+			$htm .= "<tr>";
+			$htm .= "<td bgcolor='$bgcolor1' colspan='50' align='center'><b>{$arrDadosTabela['descricao']}</b></td>";
+			$htm .= "</tr>";
+			$htm .= "<tr>";
+			$grupo = $obGrupolinha->conta( $tabela );
+	
+			$rolspan = $obGrupoColuna->verificaNiveis( $tabela );
+			$colspan = $grupo > 1 ? 2 : 1;
+			
+			if( $arrDadosTabela['colunas'] && $arrDadosTabela['linhas'] ){
+				$htm .= "<td bgcolor='$bgcolor1' align='center' colspan='$colspan' rowspan='{$rolspan}'><b>{$arrDadosTabela['colunas']} / {$arrDadosTabela['linhas']}</b></td>";
+			} else {
+				$flag = 2;
+			} 
+			
+			$t = 0;
+			$i = 0;
+			$grupai = "";
+			foreach( $arrGrupoColuna as $subTitulo ){
+				if( $subTitulo['grupai'] <> '' ){
+					$t = 1;
+				}
+			}
+			foreach( $arrGrupoColuna as $subTitulo ){
+				$arrGrcid = $obGrupoColuna->pegaArrUltimoNivel( $subTitulo['codigo'] );
+				
+				$col = $obColuna->conta( $arrGrcid );
+	
+				if( $arrDadosTabela['colunas'] == '' && $arrDadosTabela['linhas'] == '' && $t == 1 && $i == 0){
+					$htm .= "<td bgcolor='$bgcolor1' align='center'></td>";
+				}
+				if( $subTitulo['descricao'] <> '&nbsp;' ){
+					if( $subTitulo['grupai'] <> '' ){
+						// filho
+						$htm .= "</tr><tr><td bgcolor='$bgcolor1' align='center' colspan='{$col}'><b>{$subTitulo['descricao']}</b></td>";
+					} else {
+						// pai
+						$htm .= "<td bgcolor='$bgcolor1' align='center' colspan='{$col}'><b>{$subTitulo['descricao']}</b></td>";
+					}
+				}
+				$grupai = $subTitulo['grupai'];
+				$i++;
+			}
+			$htm .= "</tr>";
+			//Monta as colunas
+			$htm .= "<tr>";
+			if( $flag == 2 ){
+				$htm .= "<td bgcolor='$bgcolor1' align='center' width='40%'><b>{$arrLinha[0]['grupolinha']}</b></td>";
+			}
+			$htm .= " <td bgcolor='$bgcolor2' align='center'><b>1 º Sem ".$_REQUEST['ano']."</b></td>";
+			$htm .= " <td bgcolor='$bgcolor2' align='center'><b>2 º Sem ".$_REQUEST['ano']."</b></td>";
+			$htm .= " <td bgcolor='$bgcolor2' align='center'><b>Consolidado ".$_REQUEST['ano']."</b></td>";
+			$htm .= "</tr>";
+			
+			$grp = 0;
+			$bgcolor = "$bgcolor2";
+			$soma = array();
+			foreach( $arrLinha as $linha ){
+				$htm .= "<tr>";
+				if( $grp <> $linha['grupoid'] ){
+					if( $linha['grupolinha'] <> '&nbsp;' && $linha['grupopai'] || $grupo > 1 ){
+						$numero = $obLinha->conta( $linha['grupoid'] );
+						$htm .= "<td bgcolor='$bgcolor2' rowspan='{$numero}' width='25%' align='center'><b>{$linha['grupolinha']}</b></td>";
+					}
+				}
+				if( $linha['lindsc'] == 't' ){
+					$resposta = isset($arrResp[$linha['codigo']]['']) ? $arrResp[$linha['codigo']][''] : '';
+					$htm .= "<td bgcolor='$bgcolor'><b>{$linha['descricao']}: ".campo_texto('campo_desc_'.$linha['codigo'],'N',$habil,'',30,160,'','','','','','campo_desc_'.$linha['codigo'], '', $resposta)."</b></td>";
+				} else {
+					$htm .= "<td bgcolor='$bgcolor'><b>{$linha['descricao']}</b></td>";
+				}
+				$l++;
+				$grp = $linha['grupoid'];
+				foreach( $arrColuna as $coluna ){
+					$c++;
+					if ($l % 2){
+						$bgcolor = $bgcolor1;
+						$bgcolorTD = $bgcolor1TD;
+					}else{
+						$bgcolor = $bgcolor2;
+						$bgcolorTD = $bgcolor2TD;
+					}
+					// O miolo da Tabela
+					if( $c == 1 ){
+						$resposta = isset($arrResp[$linha['codigo']][$coluna['codigo']]) ? $arrResp[$linha['codigo']][$coluna['codigo']] : '';
+					} elseif( $c == 2 ){
+						$resposta = isset($arrResp2[$linha['codigo']][$coluna['codigo']]) ? $arrResp2[$linha['codigo']][$coluna['codigo']] : '';
+					} else {
+						$resposta1 = isset($arrResp[$linha['codigo']][$coluna['codigo']]) ? $arrResp[$linha['codigo']][$coluna['codigo']] : '';
+						$resposta2 = isset($arrResp2[$linha['codigo']][$coluna['codigo']]) ? $arrResp2[$linha['codigo']][$coluna['codigo']] : '';
+						$resposta = $resposta1 + $resposta2;
+					}
+
+					switch ($coluna['coltipo']){
+		 			case 'CK':
+		 				$habilCK = $habil == "N" ? 'disabled' : '';
+		 				$checked = $resposta == 1 ? 'checked="checked"' : '';
+						$htm .= "<td align='center' bgcolor='$bgcolorTD'><input type=\"checkbox\" $habilCK name=\"campo_" . $linha['codigo'].'_'.$coluna['codigo'] . "\" value='1' " . $checked . " />";
+		 				if( $arrDadosTabela['tbltotalizador'] == 'S' ){
+		 					if( $resposta == 1 ){
+			 					$soma[$coluna['codigo']][] = 1;
+		 					} else {
+			 					$soma[$coluna['codigo']][] = 0;
+		 					}
+		 				}
+		 				break;
+		 			case 'TX':
+		 				$mascara = $coluna['colmascara'] ? $coluna['colmascara'] : '';
+		 				if( $arrDadosTabela['tbltotalizador'] == 'S' ){
+		 					$soma[$c][] = $resposta;
+		 				}
+		 				$max = $coluna['coltamanhomaximo'] ? $coluna['coltamanhomaximo'] : 60;
+		 				if( $habil == 'N' ){
+		 					$htm .= "<td align='center' bgcolor='$bgcolorTD'>".$resposta."&nbsp;</td>";
+		 				} else {
+							$htm .= "<td align='center' bgcolor='$bgcolorTD'>".campo_texto('campo_'.$linha['codigo'].'_'.$coluna['codigo'],'N',$habil,'',8,$max,$mascara,'','','','','campo_'.$linha['codigo'].'_'.$coluna['codigo'], '', $resposta)."</td>";
+		 				}
+		 				break;
+		 			case 'RA':
+		 				$habilCK = $habil == "N" ? 'disabled': '';
+		 				$checked = $resposta == 1 ? 'checked="checked"' : '';
+						$htm .= "<td align='center' bgcolor='$bgcolorTD'><input type=\"radio\" $habilCK name=\"campo_" . $linha['codigo'] . "\" value='".$coluna['codigo']."' " . $checked . " />";
+		 				break;
+		 			}
+				}
+				$c = 0;
+				$htm .= "</tr>";
+			}
+			// caso tenha que ter totalizador ele gera a última linha
+			if( $arrDadosTabela['tbltotalizador'] == 'S' ){
+				$htm .= "<tr>";
+				$htm .= "<td align='center' bgcolor='#A8A8A8'><b>TOTAL</b></td>";
+				foreach( $soma as $s ){
+					foreach( $s as $valores ){
+						$sum = $sum + str_replace(',','.',str_replace('.','',$valores));
+					}
+					$htm .= "<td align='center' bgcolor='#A8A8A8'><b>".$sum."</b></td>";
+					$sum = 0;
+				}
+				$htm .= "</tr>";
+			}
+			$htm .= "</table>";
+			$htm .= "</div>";
+			$this->htm = $htm;
+		} else {
+			$htm .= "<div style='width:100%; height:100%; overflow:auto;'>";
+			$htm .= "<table class='tabela' style='width:{$percent}%;' align='center'>";
+			$htm .= "<tr>";
+			$htm .= "<td bgcolor='$bgcolor1' colspan='50' align='center'><b>AQUI SERÁ MONTADA UMA TABELA. PERID: {$perid}</b></td>";
+			$htm .= "</tr>";
+			$htm .= "</table>";
+			$htm .= "</div>";
+			$this->htm = $htm;
+		}
+	}
+	
+	function salvar() {
+		
+		$qrpid = $_POST['qrpid'];
+		
+		$obTabelaResposta = new Tabelaresposta();
+		$obTabelaResposta->excluirPorQuestionarioTabela( $qrpid, $_POST['idTabela'] );
+		$obTabelaResposta->commit();
+
+		foreach ($_POST as $chave => $values){
+			$arr = array();
+			if(strstr($chave,"campo_")){
+				if($values != ''){
+					$resp = $values;	
+					$obTabelaResposta = new Tabelaresposta( );
+					$arr = explode("_",$chave);
+					//if( $_POST['tipoTabela'] == 'RA' ){
+					if( !$arr[2] ){ //RADIO
+						list( , $linha ) = explode("_",$chave);;
+						$coluna = $values;
+						$resp = 1;
+					} else {
+						if( $arr[1] == 'desc' ){ // Campo texto de descrição na LINHA
+							list( , $tipo, $linha ) = explode("_",$chave);;
+							$coluna = null;
+						} else {
+							list( , $linha, $coluna ) = explode("_",$chave);;
+						}
+					}
+					
+					$arrCampos = array('tblid', 'linid', 'colid', 'qrpid', 'tbrdsc');
+					$arrDados  = array("tblid" => $_POST['idTabela'],
+										  "linid" => $linha,
+										  "colid" => $coluna,
+										  "qrpid" => $qrpid,
+										  "tbrdsc" => $resp);
+					$obTabelaResposta->popularObjeto( $arrCampos, $arrDados );
+					$obTabelaResposta->salvar();
+					$obTabelaResposta->commit();
+				}
+			}
+		} 
+	}
+	
+	function show(){
+		echo $this->htm;
+	}
+}
+
+?>

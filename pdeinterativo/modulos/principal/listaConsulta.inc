@@ -1,0 +1,216 @@
+<?php
+set_time_limit(0); 
+ini_set("memory_limit", "1024M");
+
+if($_POST['requisicao']){
+	$arrDados = $_POST['requisicao']();
+}
+
+if($_POST['requisicaoAjax']){
+	$_POST['requisicaoAjax']();
+	exit;
+}
+
+include APPRAIZ . 'includes/cabecalho.inc';
+print '<br/>';
+
+$db->cria_aba($abacod_tela,$url,'');
+$titulo = str_replace("...","",$_SESSION['mnudsc']);
+monta_titulo( $titulo, '&nbsp' );
+
+
+$arrPerfil = pegaPerfilGeral();
+if(!$db->testa_superuser() && (in_array(PDEINT_PERFIL_COMITE_ESTADUAL,$arrPerfil) || in_array(PDEINT_PERFIL_COMITE_MUNICIPAL,$arrPerfil))){	
+	if(in_array(PDEINT_PERFIL_COMITE_MUNICIPAL,$arrPerfil)){
+		$_POST['usu_plfcod'] = "Municipal";
+		$arrTravaConsulta['usu_plfcod'] = "Municipal";
+		$sql = "select 
+					mun.estuf,
+					mun.muncod
+				from 
+					pdeinterativo.usuarioresponsabilidade ur
+				inner join
+					territorios.municipio mun ON mun.muncod::integer = ur.muncod::integer
+				where 
+					usucpf = '{$_SESSION['usucpf']}' 
+				and 
+					rpustatus = 'A' 
+				and 
+					pflcod = ".PDEINT_PERFIL_COMITE_MUNICIPAL."
+				order by
+					rpuid desc";
+		$arrUR = $db->pegaLinha($sql);
+		$_POST['muncod'] = !$arrUR['muncod'] || $arrUR['muncod'] == "" ? "X" : $arrUR['muncod'];
+		$arrTravaConsulta['muncod'] = $_POST['muncod'];
+		$_POST['estuf'] = !$arrUR['estuf'] || $arrUR['estuf'] == "" ? "X" : $arrUR['estuf'];
+		$arrTravaConsulta['estuf'] = $arrUR['estuf'];
+	}else{
+		$_POST['usu_plfcod'] = "Estadual";
+		$arrTravaConsulta['usu_plfcod'] = "Estadual";
+		$sql = "select 
+					estuf 
+				from 
+					pdeinterativo.usuarioresponsabilidade 
+				where 
+					usucpf = '{$_SESSION['usucpf']}' 
+				and 
+					rpustatus = 'A' 
+				and 
+					pflcod = ".PDEINT_PERFIL_COMITE_ESTADUAL."
+				order by
+					rpuid desc";
+		$arrEstuf = $db->pegaUm($sql);
+		$_POST['estuf'] = !$arrEstuf || $arrEstuf == "" ? "X" : $arrEstuf;
+		$arrTravaConsulta['estuf'] = $_POST['estuf'];
+	}
+
+}
+
+
+?>
+<script type="text/javascript" src="/includes/prototype.js"></script>
+<script language="javascript" type="text/javascript" src="../includes/JQuery/jquery-ui-1.8.4.custom/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../pdeinterativo/js/pdeinterativo.js"></script>
+<script>	
+	
+	jQuery(function() {
+	
+		<?php if($_SESSION['pdeinterativo']['msg']): ?>
+			alert('<?php echo $_SESSION['pdeinterativo']['msg'] ?>');
+			<?php unset($_SESSION['pdeinterativo']['msg']) ?>
+		<?php endif; ?>
+	});
+	
+	function pesquisarMembroConsulta()
+	{
+		jQuery("[name=form_lista_consulta]").submit();
+	}
+	
+	function editarMembroConsulta(usucpf)
+	{
+		jQuery("[name=form_lista_consulta]").attr("action","pdeinterativo.php?modulo=principal/cadastroConsulta&acao=A")
+		jQuery("[name=usucpf]").val(usucpf);
+		jQuery("[name=requisicao]").val("carregarMembroConsulta");
+		jQuery("[name=form_lista_consulta]").submit();
+	}
+	
+	function excluirMembroConsulta(usucpf)
+	{
+		if(confirm("Deseja realmente excluir?")){
+			jQuery("[name=usucpf]").val(usucpf);
+			jQuery("[name=requisicao]").val("excluirMembroConsulta");
+			jQuery("[name=form_lista_consulta]").submit();
+		}
+	}
+	
+</script>
+<link rel="stylesheet" type="text/css" href="../pdeinterativo/css/pdeinterativo.css"/>
+<form name="form_lista_consulta" id="form_lista_consulta"  method="post" action="" >
+	<input type="hidden" name="requisicao" value="" />
+	<table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
+		<tr>
+			<td width="25%" class="SubTituloDireita" >CPF:</td>
+			<td><?php echo campo_texto("usucpf","N","S","CPF","16","14","###.###.###-##","","","","","","",$_POST['usucpf'])?></td>
+		</tr>
+		<tr>
+			<td class="SubTituloDireita" >Nome:</td>
+			<td><?php echo campo_texto("usunome","N","S","Nome","40","40","","","","","","","",$_POST['usunome'])?></td>
+		</tr>
+		<tr>
+			<td class="SubTituloDireita" >Estado:</td>
+			<td>
+				<?php $sql = "	select
+									estuf as codigo,
+									estdescricao as descricao
+								from
+									territorios.estado
+								order by
+									estdescricao" ?>
+				<?php $db->monta_combo("estuf",$sql,($arrTravaConsulta['estuf'] ? "N" : "S"),"Selecione...","filtraMunicipio","","","","N","","",$_POST['estuf']) ?>
+			</td>
+		</tr>
+		<tr>
+			<td class="SubTituloDireita" >Município:</td>
+			<td id="td_muncod">
+				<?php if($_POST['estuf']): ?>
+					<?php $sql = "	select
+										muncod as codigo,
+										mundescricao as descricao
+									from
+										territorios.municipio
+									where
+										estuf = '{$_POST['estuf']}'
+									order by
+										mundescricao" ?>
+					<?php $db->monta_combo("muncod",$sql,($arrTravaConsulta['muncod'] ? "N" : "S"),"Selecione...","","","","","N","","",$_POST['muncod']) ?>
+				<?php else: ?>
+					<?php $db->monta_combo("muncod",array(),"N","Selecione o Estado","","","","","S") ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<?php if(!$arrTravaConsulta['usu_plfcod']): ?>
+			<tr>
+				<td class="SubTituloDireita" >Membro de Consulta:</td>
+				<td id="td_usustatus" >
+					<input 						    type="radio" name="usu_plfcod" <?php echo $_POST['usu_plfcod'] == "Estadual" ? "checked='checked'" : "" ?> id="usu_plfcod_E" value="Estadual" /> Estadual
+					<input style="margin-left:10px" type="radio" name="usu_plfcod" <?php echo $_POST['usu_plfcod'] == "Municipal" ? "checked='checked'" : "" ?> id="usu_plfcod_M" value="Municipal" /> Municipal
+					<input style="margin-left:10px" type="radio" name="usu_plfcod" <?php echo $_POST['usu_plfcod'] == "Ambos" ? "checked='checked'" : "" ?> id="usu_plfcod_A" value="Ambos" /> Ambos
+				</td>
+			</tr>
+		<?php endif; ?>
+		<tr>
+			<td class="SubTituloDireita" >Status Geral do Usuário:</td>
+			<td id="td_usustatus" >
+				<input 						    type="radio" name="rdo_status" <?php echo $_POST['rdo_status'] == "A" ? "checked='checked'" : "" ?> id="rdo_status_A" value="A" /> Ativo
+				<input style="margin-left:10px" type="radio" name="rdo_status" <?php echo $_POST['rdo_status'] == "P" ? "checked='checked'" : "" ?> id="rdo_status_P" value="P" /> Pendente
+				<input style="margin-left:10px" type="radio" name="rdo_status" <?php echo $_POST['rdo_status'] == "B" ? "checked='checked'" : "" ?> id="rdo_status_B" value="B" /> Bloqueado
+			</td>
+		</tr>
+		<tr>
+			<td class="SubTituloDireita" ></td>
+			<td>
+				<input type="button" name="btn_pesquisar" value="Pesquisar" onclick="pesquisarMembroConsulta()" />
+				<input type="button" name="btn_ver_todos" value="Ver Todos" onclick="window.location.href='pdeinterativo.php?modulo=principal/listaConsulta&acao=A'" />
+			</td>
+		</tr>
+		<tr>
+			<td class="SubTituloEsquerda" ><a href="javascript:window.location.href='pdeinterativo.php?modulo=principal/cadastroConsulta&acao=A'"> <img src="../imagens/gif_inclui.gif" class="link img_middle"  > Inserir</a></td>
+			<td>
+			</td>
+		</tr>
+	</table>
+</form>
+<?php
+
+if(!$db->testa_superuser()) {
+
+	if(in_array(PDEINT_PERFIL_COMITE_ESTADUAL, $arrPerfil)) {
+		
+		$estuf = $db->pegaUm("SELECT estuf FROM pdeinterativo.usuarioresponsabilidade WHERE usucpf='".$_SESSION['usucpf']."' AND estuf IS NOT NULL and rpustatus = 'A' order by rpuid desc");
+		
+		if($estuf) {
+			$_POST['estuf'] = $estuf;	
+		} else {
+			$erromsg = "Usuário não possui UF vinculado";
+		}
+	}
+	
+	if(in_array(PDEINT_PERFIL_COMITE_MUNICIPAL, $arrPerfil)) {
+		$muncod = $db->pegaUm("SELECT muncod FROM pdeinterativo.usuarioresponsabilidade WHERE usucpf='".$_SESSION['usucpf']."' AND muncod IS NOT NULL and rpustatus = 'A' order by rpuid desc");
+
+		if($muncod) {
+			$_POST['muncod'] = $muncod;	
+		} else {
+			$erromsg = "Usuário não possui Município vinculado";
+		}
+	}
+
+}
+
+if($erromsg) {
+	echo "<p align=center><b>".$erromsg."</b></center>";
+} else {
+	listaMembroConsulta();
+}
+
+?>

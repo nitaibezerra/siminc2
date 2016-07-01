@@ -1,0 +1,114 @@
+
+.aviso{
+    color:red;
+}
+
+/**
+ *  Formulario
+ */
+.CampoEstilo:focus{
+	BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    FONT-SIZE: 10px;
+    VERTICAL-ALIGN: middle;
+    BORDER-LEFT: #FF9900 3px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    FONT-FAMILY: verdana;
+	BACKGROUND-COLOR: #ffffcc;	
+}
+
+.container_botao{
+    text-align: center; background-color: #CCCCCC;
+}
+
+/**
+ *  Listagem
+ */
+.container_lista{
+    width:100%;
+}
+
+.container_lista thead tr{
+    font-weight:bold; text-align:center;
+}
+.container_lista thead tr td{
+    font-weight:bold; text-align:center;
+    background-color: #CCCCCC
+}
+
+.container_lista tr{
+    /*background-color: #fafafa;*/
+    background-color: #e0e0e0;
+}
+
+.container_lista tr:hover{
+    background-color: #ffffcc;
+}
+
+div.botao_gravar{
+	width: 95%;
+	margin: 10px auto;
+}
+
+.destaque-ano{
+    color: blue;
+    font-size: 12px;
+}
+
+.destaque-ano-anterior{
+    color: red;
+    font-size: 12px;
+}
+
+.div_info {
+    background-color: #D3D3D3;
+    border-color: black;
+    font-family: arial,serif,sans-serif;
+    font-size: 18px;
+    height: auto;
+    position: absolute;
+    visibility: hidden;
+    width: 28%;
+    z-index: 100;
+}
+
+/**
+ * barra de progressão
+ */
+.all-rounded {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.spacer {
+    display: block;
+}
+
+#progress-bar {
+    width: 100px;
+    margin: 0 auto;
+    /*background: #cccccc;*/
+    background: #FFF;
+    border: 1px solid #f2f2f2;
+    height: 21px;
+    float: left;
+}
+
+#progress-bar-percentage {
+    background: #84D328;
+    padding: 3px 0px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+#progress-bar-percentage-red {
+    background: red;
+    padding: 3px 0px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}

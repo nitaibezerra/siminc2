@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+#aba {
+border-bottom:1px solid #CCCCCC;
+margin:0pt;
+padding-bottom:19px;
+padding-left:10px;
+padding-top: 10px;
+}
+
+#aba ul, #aba li {
+display:inline;
+list-style-type:none;
+margin:0pt;
+padding:0pt;
+}
+
+#aba a:link, #aba a:visited {
+background:#dddddd none repeat scroll 0%;
+border:1px solid #CCCCCC;
+color:#404040;
+float:left;
+line-height:14px;
+margin-right:8px;
+padding:2px 10px;
+text-decoration:none;
+}
+
+#aba a:hover {
+color:#252525;
+background-color:#efefef;
+}
+
+#aba_ativo a:link, #aba_ativo a:visited {
+background: #ffffff none repeat scroll 0%;
+border:1px solid #CCCCCC;
+border-bottom: 1px solid #ffffff;
+color:#404040;
+float:left;
+line-height:14px;
+margin-right:8px;
+padding:2px 10px;
+text-decoration:none;
+font-weight: bold;
+}
+
+#aba_ativo a:hover {
+}
+
+#aba_conteudo {
+background:#FFFFFF none repeat scroll 0%;
+border-color:-moz-use-text-color #CCCCCC rgb(204, 204, 204);
+border-style:none solid solid;
+border-width:medium 1px 1px;
+clear:both;
+margin:0px;
+padding:30px;
+}

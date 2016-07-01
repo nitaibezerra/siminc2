@@ -1,0 +1,21 @@
+/*!
+ * jQuery UI CSS Framework 1.8.20
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming
+ */
+@import url("http://jqueryui.com/themes/base/jquery.ui.core.css");
+
+@import url("http://jqueryui.com/themes/base/jquery.ui.accordion.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.autocomplete.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.button.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.datepicker.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.dialog.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.progressbar.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.resizable.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.selectable.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.slider.css");
+@import url("http://jqueryui.com/themes/base/jquery.ui.tabs.css");

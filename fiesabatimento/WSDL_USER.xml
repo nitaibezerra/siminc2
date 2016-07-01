@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ssd.mec.gov.br/UserMaintenance" xmlns:ns2="http://model.business.server.ssd.mec.gov.br" xmlns:ns1="http://entity.persistence.server.ssd.mec.gov.br" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:tns="http://ssd.mec.gov.br/UserMaintenance" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ssd.mec.gov.br/UserMaintenance">
+<xsd:element name="recoveryUserPasswordByCPFOrCNPJ">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="recoveryUserPasswordByCPFOrCNPJResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserInfoByOneOfTheIdentifiers">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="email" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="nis" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserInfoByOneOfTheIdentifiersResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoByStatusFies">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="status" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoByStatusFiesResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermissionWithResponsible">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="responsibleForChangeId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermissionWithResponsibleResponse">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatus">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="justification" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="userPermissionStatusDesired" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatusResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatusWithResponsible">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="justification" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="userPermissionStatusDesired" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="responsibleForChangeId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatusWithResponsibleResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="signUpInformationUser">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userInfo" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="userProfile" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="signUpInformationUserResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getMaintenanceTicketInfo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="flag" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getMaintenanceTicketInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:MaintenanceTicketInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoByStatus">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="status" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoByStatusResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getExternalUserInfo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="ticket" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getExternalUserInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ExternalUserAuthInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoFies">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoFiesResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermissionByCPFOrCNPJ">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="responsibleForChangeCpfOrCnpj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermissionByCPFOrCNPJResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getDateByTimestamp">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="timestampCreation" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="timestampExpiration" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getDateByTimestampResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="recoveryUserPasswordByHashAndCode">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="hash" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="code" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="password" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="recoveryUserPasswordByHashAndCodeResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermission">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="includeUserPermissionResponse">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="getUserInfo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserInfoByCPFOrCNPJ">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserInfoByCPFOrCNPJResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserPermissionsInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getSystemPermissionsInfo">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="getSystemPermissionsInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfConfigurationPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="signUpUser">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userInfo" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="signUpUserResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserMaintenanceUrl">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="flag" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceId" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserMaintenanceUrlResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UrlInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserMaintenanceTicket">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userMaintenanceTicketId" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserMaintenanceTicketResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserMaintenanceTicket"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUsersWaitingForPermissionRelease">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="getUsersWaitingForPermissionReleaseResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserInfoAndPermissionId"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserAndPermissionInfoFies">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="email" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="nis" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserAndPermissionInfoFiesResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserAndPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUsersByPermissionStatus">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="status" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUsersByPermissionStatusResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:ArrayOfUserInfoAndPermissionId"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserAndPermissionInfo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="email" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="nis" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getUserAndPermissionInfoResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:UserAndPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatusByCPFOrCNPJ">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="permissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="justification" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="userPermissionStatusDesired" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="responsibleForChangeCpfOrCnpj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionStatusByCPFOrCNPJResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPasswordByCPFOrCNPJ">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cpfOrCnpj" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="oldPassword" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="newPassword" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPasswordByCPFOrCNPJResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionWithResponsible">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="oldPermissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="newPermissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="justification" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="responsibleForChangeId" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionWithResponsibleResponse">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="getTicketUserInfoByUserTicketId">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userTicketId" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="getTicketUserInfoByUserTicketIdResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns2:TicketUserInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermission">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="oldPermissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="newPermissionId" type="xsd:long"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="justification" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="changeUserPermissionResponse">
+<xsd:complexType/>
+</xsd:element>
+<xsd:element name="updateUser">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="userInfo" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="updateUserResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://model.business.server.ssd.mec.gov.br">
+<xsd:complexType name="UserInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="address" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="alternativeEmail" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="alternativeTelephoneDDD" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="alternativeTelephoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="bairro" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="birthDate" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="cellPhoneDDD" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="cellPhoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="changeData" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="cnpj" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="codigoNacionalidade" nillable="true" type="xsd:int"/>
+<xsd:element minOccurs="0" name="complemento" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="dataExpedicaoRG" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="dispatcherAgency" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="email" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="localidade" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="lotacao" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="motherName" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="naturality" nillable="true" type="ns1:City"/>
+<xsd:element minOccurs="0" name="nis" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="numero" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="postalCode" nillable="true" type="xsd:int"/>
+<xsd:element minOccurs="0" name="responsibleCpf" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="responsibleName" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="rg" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="siglaUFCEP" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="siglaUfOrgaoExpedidor" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="socialReason" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="telephoneDDD" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="telephoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="tipoLogradouro" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="userId" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="workInstitution" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ArrayOfUserPermissionInfo">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="UserPermissionInfo" nillable="true" type="ns2:UserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UserPermissionInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="changeData" nillable="true" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="justificationOfStatusChange" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="permissionId" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="profileDescription" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="profileSg" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="responsibleIdForStatusChange" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="userPermissionStatus" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="MaintenanceTicketInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="creationTimestamp" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="expirationTimestamp" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="id" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ExternalUserAuthInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="CNPJ" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="CPF" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="dtExpirationCert" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="id" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="tipoCertificado" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ArrayOfConfigurationPermissionInfo">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="ConfigurationPermissionInfo" nillable="true" type="ns2:ConfigurationPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ConfigurationPermissionInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="canChangeSameLevel" nillable="true" type="xsd:boolean"/>
+<xsd:element minOccurs="0" name="changeData" type="xsd:dateTime"/>
+<xsd:element minOccurs="0" name="changeJustify" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="changeUserResponsibleConf" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="defaultPermission" nillable="true" type="xsd:boolean"/>
+<xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="id" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="parentNodeDescription" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="parentNodeId" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="parentNodeSg" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="personType" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="registerStatus" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="sgProfile" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UrlInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="url" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UserMaintenanceTicket">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="expirationTimestamp" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="flag" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="service" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="systemId" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="userId" nillable="true" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ArrayOfUserInfoAndPermissionId">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="UserInfoAndPermissionId" nillable="true" type="ns2:UserInfoAndPermissionId"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UserInfoAndPermissionId">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="permissionId" nillable="true" type="xsd:long"/>
+<xsd:element minOccurs="0" name="userInfo" nillable="true" type="ns2:UserInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UserAndPermissionInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="userInfo" nillable="true" type="ns2:UserInfo"/>
+<xsd:element minOccurs="0" name="userPermissionsInfo" nillable="true" type="ns2:ArrayOfUserPermissionInfo"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TicketUserInfo">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="flag" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="userId" nillable="true" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://entity.persistence.server.ssd.mec.gov.br">
+<xsd:complexType name="City">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="codigoIBGE" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="descricao" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="estado" nillable="true" type="ns1:Uf"/>
+<xsd:element minOccurs="0" name="siglaEstado" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Uf">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="descricao" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="sigla" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="changeUserPermissionResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="signUpUserResponse">
+    <wsdl:part name="parameters" element="tns:signUpUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatus"/>
+  </wsdl:message>
+  <wsdl:message name="getDateByTimestampRequest">
+    <wsdl:part name="parameters" element="tns:getDateByTimestamp"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoFiesResponse">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoFiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoByStatusRequest">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoByStatus"/>
+  </wsdl:message>
+  <wsdl:message name="getUserAndPermissionInfoRequest">
+    <wsdl:part name="parameters" element="tns:getUserAndPermissionInfo"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoByStatusFiesResponse">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoByStatusFiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="signUpInformationUserRequest">
+    <wsdl:part name="parameters" element="tns:signUpInformationUser"/>
+  </wsdl:message>
+  <wsdl:message name="getUsersByPermissionStatusRequest">
+    <wsdl:part name="parameters" element="tns:getUsersByPermissionStatus"/>
+  </wsdl:message>
+  <wsdl:message name="getUserMaintenanceTicketResponse">
+    <wsdl:part name="parameters" element="tns:getUserMaintenanceTicketResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoResponse">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserAndPermissionInfoFiesRequest">
+    <wsdl:part name="parameters" element="tns:getUserAndPermissionInfoFies"/>
+  </wsdl:message>
+  <wsdl:message name="getTicketUserInfoByUserTicketIdRequest">
+    <wsdl:part name="parameters" element="tns:getTicketUserInfoByUserTicketId"/>
+  </wsdl:message>
+  <wsdl:message name="updateUserRequest">
+    <wsdl:part name="parameters" element="tns:updateUser"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionWithResponsibleResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionWithResponsibleResponse"/>
+  </wsdl:message>
+  <wsdl:message name="signUpUserRequest">
+    <wsdl:part name="parameters" element="tns:signUpUser"/>
+  </wsdl:message>
+  <wsdl:message name="getUsersByPermissionStatusResponse">
+    <wsdl:part name="parameters" element="tns:getUsersByPermissionStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPasswordByCPFOrCNPJRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPasswordByCPFOrCNPJ"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusByCPFOrCNPJResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatusByCPFOrCNPJResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getMaintenanceTicketInfoResponse">
+    <wsdl:part name="parameters" element="tns:getMaintenanceTicketInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoByOneOfTheIdentifiersResponse">
+    <wsdl:part name="parameters" element="tns:getUserInfoByOneOfTheIdentifiersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSystemPermissionsInfoRequest">
+    <wsdl:part name="parameters" element="tns:getSystemPermissionsInfo"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusByCPFOrCNPJRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatusByCPFOrCNPJ"/>
+  </wsdl:message>
+  <wsdl:message name="updateUserResponse">
+    <wsdl:part name="parameters" element="tns:updateUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="recoveryUserPasswordByHashAndCodeRequest">
+    <wsdl:part name="parameters" element="tns:recoveryUserPasswordByHashAndCode"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoByOneOfTheIdentifiersRequest">
+    <wsdl:part name="parameters" element="tns:getUserInfoByOneOfTheIdentifiers"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionWithResponsibleRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionWithResponsible"/>
+  </wsdl:message>
+  <wsdl:message name="getExternalUserInfoResponse">
+    <wsdl:part name="parameters" element="tns:getExternalUserInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionResponse">
+    <wsdl:part name="parameters" element="tns:includeUserPermissionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoFiesRequest">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoFies"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoByCPFOrCNPJRequest">
+    <wsdl:part name="parameters" element="tns:getUserInfoByCPFOrCNPJ"/>
+  </wsdl:message>
+  <wsdl:message name="getMaintenanceTicketInfoRequest">
+    <wsdl:part name="parameters" element="tns:getMaintenanceTicketInfo"/>
+  </wsdl:message>
+  <wsdl:message name="recoveryUserPasswordByCPFOrCNPJResponse">
+    <wsdl:part name="parameters" element="tns:recoveryUserPasswordByCPFOrCNPJResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDateByTimestampResponse">
+    <wsdl:part name="parameters" element="tns:getDateByTimestampResponse"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPermission"/>
+  </wsdl:message>
+  <wsdl:message name="getSystemPermissionsInfoResponse">
+    <wsdl:part name="parameters" element="tns:getSystemPermissionsInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserMaintenanceUrlResponse">
+    <wsdl:part name="parameters" element="tns:getUserMaintenanceUrlResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getTicketUserInfoByUserTicketIdResponse">
+    <wsdl:part name="parameters" element="tns:getTicketUserInfoByUserTicketIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoRequest">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfo"/>
+  </wsdl:message>
+  <wsdl:message name="signUpInformationUserResponse">
+    <wsdl:part name="parameters" element="tns:signUpInformationUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserMaintenanceUrlRequest">
+    <wsdl:part name="parameters" element="tns:getUserMaintenanceUrl"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoByStatusResponse">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoByStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoResponse">
+    <wsdl:part name="parameters" element="tns:getUserInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUsersWaitingForPermissionReleaseResponse">
+    <wsdl:part name="parameters" element="tns:getUsersWaitingForPermissionReleaseResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserAndPermissionInfoResponse">
+    <wsdl:part name="parameters" element="tns:getUserAndPermissionInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPasswordByCPFOrCNPJResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPasswordByCPFOrCNPJResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoByCPFOrCNPJResponse">
+    <wsdl:part name="parameters" element="tns:getUserInfoByCPFOrCNPJResponse"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionByCPFOrCNPJRequest">
+    <wsdl:part name="parameters" element="tns:includeUserPermissionByCPFOrCNPJ"/>
+  </wsdl:message>
+  <wsdl:message name="recoveryUserPasswordByHashAndCodeResponse">
+    <wsdl:part name="parameters" element="tns:recoveryUserPasswordByHashAndCodeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserInfoRequest">
+    <wsdl:part name="parameters" element="tns:getUserInfo"/>
+  </wsdl:message>
+  <wsdl:message name="getUsersWaitingForPermissionReleaseRequest">
+    <wsdl:part name="parameters" element="tns:getUsersWaitingForPermissionRelease"/>
+  </wsdl:message>
+  <wsdl:message name="getExternalUserInfoRequest">
+    <wsdl:part name="parameters" element="tns:getExternalUserInfo"/>
+  </wsdl:message>
+  <wsdl:message name="recoveryUserPasswordByCPFOrCNPJRequest">
+    <wsdl:part name="parameters" element="tns:recoveryUserPasswordByCPFOrCNPJ"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionRequest">
+    <wsdl:part name="parameters" element="tns:includeUserPermission"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionWithResponsibleRequest">
+    <wsdl:part name="parameters" element="tns:includeUserPermissionWithResponsible"/>
+  </wsdl:message>
+  <wsdl:message name="getUserAndPermissionInfoFiesResponse">
+    <wsdl:part name="parameters" element="tns:getUserAndPermissionInfoFiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserMaintenanceTicketRequest">
+    <wsdl:part name="parameters" element="tns:getUserMaintenanceTicket"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionWithResponsibleResponse">
+    <wsdl:part name="parameters" element="tns:includeUserPermissionWithResponsibleResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getUserPermissionsInfoByStatusFiesRequest">
+    <wsdl:part name="parameters" element="tns:getUserPermissionsInfoByStatusFies"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusWithResponsibleRequest">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatusWithResponsible"/>
+  </wsdl:message>
+  <wsdl:message name="changeUserPermissionStatusWithResponsibleResponse">
+    <wsdl:part name="parameters" element="tns:changeUserPermissionStatusWithResponsibleResponse"/>
+  </wsdl:message>
+  <wsdl:message name="includeUserPermissionByCPFOrCNPJResponse">
+    <wsdl:part name="parameters" element="tns:includeUserPermissionByCPFOrCNPJResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="UserMaintenancePortType">
+    <wsdl:operation name="recoveryUserPasswordByCPFOrCNPJ">
+      <wsdl:input name="recoveryUserPasswordByCPFOrCNPJRequest" message="tns:recoveryUserPasswordByCPFOrCNPJRequest"/>
+      <wsdl:output name="recoveryUserPasswordByCPFOrCNPJResponse" message="tns:recoveryUserPasswordByCPFOrCNPJResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfoByOneOfTheIdentifiers">
+      <wsdl:input name="getUserInfoByOneOfTheIdentifiersRequest" message="tns:getUserInfoByOneOfTheIdentifiersRequest"/>
+      <wsdl:output name="getUserInfoByOneOfTheIdentifiersResponse" message="tns:getUserInfoByOneOfTheIdentifiersResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoByStatusFies">
+      <wsdl:input name="getUserPermissionsInfoByStatusFiesRequest" message="tns:getUserPermissionsInfoByStatusFiesRequest"/>
+      <wsdl:output name="getUserPermissionsInfoByStatusFiesResponse" message="tns:getUserPermissionsInfoByStatusFiesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermissionWithResponsible">
+      <wsdl:input name="includeUserPermissionWithResponsibleRequest" message="tns:includeUserPermissionWithResponsibleRequest"/>
+      <wsdl:output name="includeUserPermissionWithResponsibleResponse" message="tns:includeUserPermissionWithResponsibleResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatus">
+      <wsdl:input name="changeUserPermissionStatusRequest" message="tns:changeUserPermissionStatusRequest"/>
+      <wsdl:output name="changeUserPermissionStatusResponse" message="tns:changeUserPermissionStatusResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatusWithResponsible">
+      <wsdl:input name="changeUserPermissionStatusWithResponsibleRequest" message="tns:changeUserPermissionStatusWithResponsibleRequest"/>
+      <wsdl:output name="changeUserPermissionStatusWithResponsibleResponse" message="tns:changeUserPermissionStatusWithResponsibleResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="signUpInformationUser">
+      <wsdl:input name="signUpInformationUserRequest" message="tns:signUpInformationUserRequest"/>
+      <wsdl:output name="signUpInformationUserResponse" message="tns:signUpInformationUserResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMaintenanceTicketInfo">
+      <wsdl:input name="getMaintenanceTicketInfoRequest" message="tns:getMaintenanceTicketInfoRequest"/>
+      <wsdl:output name="getMaintenanceTicketInfoResponse" message="tns:getMaintenanceTicketInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoByStatus">
+      <wsdl:input name="getUserPermissionsInfoByStatusRequest" message="tns:getUserPermissionsInfoByStatusRequest"/>
+      <wsdl:output name="getUserPermissionsInfoByStatusResponse" message="tns:getUserPermissionsInfoByStatusResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getExternalUserInfo">
+      <wsdl:input name="getExternalUserInfoRequest" message="tns:getExternalUserInfoRequest"/>
+      <wsdl:output name="getExternalUserInfoResponse" message="tns:getExternalUserInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoFies">
+      <wsdl:input name="getUserPermissionsInfoFiesRequest" message="tns:getUserPermissionsInfoFiesRequest"/>
+      <wsdl:output name="getUserPermissionsInfoFiesResponse" message="tns:getUserPermissionsInfoFiesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermissionByCPFOrCNPJ">
+      <wsdl:input name="includeUserPermissionByCPFOrCNPJRequest" message="tns:includeUserPermissionByCPFOrCNPJRequest"/>
+      <wsdl:output name="includeUserPermissionByCPFOrCNPJResponse" message="tns:includeUserPermissionByCPFOrCNPJResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDateByTimestamp">
+      <wsdl:input name="getDateByTimestampRequest" message="tns:getDateByTimestampRequest"/>
+      <wsdl:output name="getDateByTimestampResponse" message="tns:getDateByTimestampResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="recoveryUserPasswordByHashAndCode">
+      <wsdl:input name="recoveryUserPasswordByHashAndCodeRequest" message="tns:recoveryUserPasswordByHashAndCodeRequest"/>
+      <wsdl:output name="recoveryUserPasswordByHashAndCodeResponse" message="tns:recoveryUserPasswordByHashAndCodeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermission">
+      <wsdl:input name="includeUserPermissionRequest" message="tns:includeUserPermissionRequest"/>
+      <wsdl:output name="includeUserPermissionResponse" message="tns:includeUserPermissionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo">
+      <wsdl:input name="getUserInfoRequest" message="tns:getUserInfoRequest"/>
+      <wsdl:output name="getUserInfoResponse" message="tns:getUserInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfoByCPFOrCNPJ">
+      <wsdl:input name="getUserInfoByCPFOrCNPJRequest" message="tns:getUserInfoByCPFOrCNPJRequest"/>
+      <wsdl:output name="getUserInfoByCPFOrCNPJResponse" message="tns:getUserInfoByCPFOrCNPJResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfo">
+      <wsdl:input name="getUserPermissionsInfoRequest" message="tns:getUserPermissionsInfoRequest"/>
+      <wsdl:output name="getUserPermissionsInfoResponse" message="tns:getUserPermissionsInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSystemPermissionsInfo">
+      <wsdl:input name="getSystemPermissionsInfoRequest" message="tns:getSystemPermissionsInfoRequest"/>
+      <wsdl:output name="getSystemPermissionsInfoResponse" message="tns:getSystemPermissionsInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="signUpUser">
+      <wsdl:input name="signUpUserRequest" message="tns:signUpUserRequest"/>
+      <wsdl:output name="signUpUserResponse" message="tns:signUpUserResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserMaintenanceUrl">
+      <wsdl:input name="getUserMaintenanceUrlRequest" message="tns:getUserMaintenanceUrlRequest"/>
+      <wsdl:output name="getUserMaintenanceUrlResponse" message="tns:getUserMaintenanceUrlResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserMaintenanceTicket">
+      <wsdl:input name="getUserMaintenanceTicketRequest" message="tns:getUserMaintenanceTicketRequest"/>
+      <wsdl:output name="getUserMaintenanceTicketResponse" message="tns:getUserMaintenanceTicketResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersWaitingForPermissionRelease">
+      <wsdl:input name="getUsersWaitingForPermissionReleaseRequest" message="tns:getUsersWaitingForPermissionReleaseRequest"/>
+      <wsdl:output name="getUsersWaitingForPermissionReleaseResponse" message="tns:getUsersWaitingForPermissionReleaseResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserAndPermissionInfoFies">
+      <wsdl:input name="getUserAndPermissionInfoFiesRequest" message="tns:getUserAndPermissionInfoFiesRequest"/>
+      <wsdl:output name="getUserAndPermissionInfoFiesResponse" message="tns:getUserAndPermissionInfoFiesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByPermissionStatus">
+      <wsdl:input name="getUsersByPermissionStatusRequest" message="tns:getUsersByPermissionStatusRequest"/>
+      <wsdl:output name="getUsersByPermissionStatusResponse" message="tns:getUsersByPermissionStatusResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getUserAndPermissionInfo">
+      <wsdl:input name="getUserAndPermissionInfoRequest" message="tns:getUserAndPermissionInfoRequest"/>
+      <wsdl:output name="getUserAndPermissionInfoResponse" message="tns:getUserAndPermissionInfoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatusByCPFOrCNPJ">
+      <wsdl:input name="changeUserPermissionStatusByCPFOrCNPJRequest" message="tns:changeUserPermissionStatusByCPFOrCNPJRequest"/>
+      <wsdl:output name="changeUserPermissionStatusByCPFOrCNPJResponse" message="tns:changeUserPermissionStatusByCPFOrCNPJResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPasswordByCPFOrCNPJ">
+      <wsdl:input name="changeUserPasswordByCPFOrCNPJRequest" message="tns:changeUserPasswordByCPFOrCNPJRequest"/>
+      <wsdl:output name="changeUserPasswordByCPFOrCNPJResponse" message="tns:changeUserPasswordByCPFOrCNPJResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionWithResponsible">
+      <wsdl:input name="changeUserPermissionWithResponsibleRequest" message="tns:changeUserPermissionWithResponsibleRequest"/>
+      <wsdl:output name="changeUserPermissionWithResponsibleResponse" message="tns:changeUserPermissionWithResponsibleResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTicketUserInfoByUserTicketId">
+      <wsdl:input name="getTicketUserInfoByUserTicketIdRequest" message="tns:getTicketUserInfoByUserTicketIdRequest"/>
+      <wsdl:output name="getTicketUserInfoByUserTicketIdResponse" message="tns:getTicketUserInfoByUserTicketIdResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermission">
+      <wsdl:input name="changeUserPermissionRequest" message="tns:changeUserPermissionRequest"/>
+      <wsdl:output name="changeUserPermissionResponse" message="tns:changeUserPermissionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdl:input name="updateUserRequest" message="tns:updateUserRequest"/>
+      <wsdl:output name="updateUserResponse" message="tns:updateUserResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserMaintenanceHttpBinding" type="tns:UserMaintenancePortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="recoveryUserPasswordByCPFOrCNPJ">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="recoveryUserPasswordByCPFOrCNPJRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recoveryUserPasswordByCPFOrCNPJResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfoByOneOfTheIdentifiers">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserInfoByOneOfTheIdentifiersRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserInfoByOneOfTheIdentifiersResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoByStatusFies">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserPermissionsInfoByStatusFiesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserPermissionsInfoByStatusFiesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermissionWithResponsible">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="includeUserPermissionWithResponsibleRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="includeUserPermissionWithResponsibleResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatus">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPermissionStatusRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPermissionStatusResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatusWithResponsible">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPermissionStatusWithResponsibleRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPermissionStatusWithResponsibleResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="signUpInformationUser">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="signUpInformationUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="signUpInformationUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMaintenanceTicketInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getMaintenanceTicketInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMaintenanceTicketInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoByStatus">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserPermissionsInfoByStatusRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserPermissionsInfoByStatusResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExternalUserInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getExternalUserInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getExternalUserInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfoFies">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserPermissionsInfoFiesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserPermissionsInfoFiesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermissionByCPFOrCNPJ">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="includeUserPermissionByCPFOrCNPJRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="includeUserPermissionByCPFOrCNPJResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDateByTimestamp">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getDateByTimestampRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDateByTimestampResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recoveryUserPasswordByHashAndCode">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="recoveryUserPasswordByHashAndCodeRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recoveryUserPasswordByHashAndCodeResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="includeUserPermission">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="includeUserPermissionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="includeUserPermissionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserInfoByCPFOrCNPJ">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserInfoByCPFOrCNPJRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserInfoByCPFOrCNPJResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserPermissionsInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserPermissionsInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserPermissionsInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSystemPermissionsInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getSystemPermissionsInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSystemPermissionsInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="signUpUser">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="signUpUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="signUpUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserMaintenanceUrl">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserMaintenanceUrlRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserMaintenanceUrlResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserMaintenanceTicket">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserMaintenanceTicketRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserMaintenanceTicketResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersWaitingForPermissionRelease">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUsersWaitingForPermissionReleaseRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersWaitingForPermissionReleaseResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserAndPermissionInfoFies">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserAndPermissionInfoFiesRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserAndPermissionInfoFiesResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsersByPermissionStatus">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUsersByPermissionStatusRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersByPermissionStatusResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserAndPermissionInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getUserAndPermissionInfoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserAndPermissionInfoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionStatusByCPFOrCNPJ">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPermissionStatusByCPFOrCNPJRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPermissionStatusByCPFOrCNPJResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPasswordByCPFOrCNPJ">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPasswordByCPFOrCNPJRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPasswordByCPFOrCNPJResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermissionWithResponsible">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPermissionWithResponsibleRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPermissionWithResponsibleResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTicketUserInfoByUserTicketId">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getTicketUserInfoByUserTicketIdRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTicketUserInfoByUserTicketIdResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeUserPermission">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeUserPermissionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeUserPermissionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserMaintenance">
+    <wsdl:port name="UserMaintenanceHttpPort" binding="tns:UserMaintenanceHttpBinding">
+      <wsdlsoap:address location="https://ssd.mec.gov.br/ssd-server/services/UserMaintenance"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

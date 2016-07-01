@@ -1,0 +1,150 @@
+<?php 
+class Numeracao {
+	
+	public static function lista( $arConfiguracao = array() ){
+		
+		if($arConfiguracao['filtro']){
+			$arConfiguracao = array_merge($arConfiguracao, $arConfiguracao['filtro']);			
+		}
+		
+		if(!empty($arConfiguracao) && is_array($arConfiguracao) ){
+			extract($arConfiguracao);
+		}
+		
+		//ver($arConfiguracao,$filtro);
+		$arWhere = array();
+		
+		array_push($arWhere, " nd.nudusucpf = '{$_SESSION['usucpf']}' and a.nudid is null ");
+		// não vai dar problema com a códiçã acima pois somente administrador e super usuario pode pesquisar				
+		if($usucpf){
+			array_push($arWhere, " nd.nudusucpf = '".$usucpf."' ");
+		}
+		if($tpdid_pesq){
+			array_push($arWhere, " td.tpdid = '".$tpdid_pesq."' ");
+		}
+		if($nudnumero){
+			array_push($arWhere, " nd.nudnumero = '".$nudnumero."' ");
+		}
+		if($prcnumsidoc_pesq){
+			array_push($arWhere, " p.prcnumsidoc = '".$prcnumsidoc_pesq."' ");
+		}
+		if($dtinicio){
+			array_push($arWhere, " nd.nuddatageracao >= '".formata_data_sql($dtinicio)."' ");
+		}
+		if($dtfim){
+			array_push($arWhere, " nd.nuddatageracao <= '".formata_data_sql($dtfim)."' ");
+		}
+		if($nudstatus){
+			array_push($arWhere, " nudstatus = '".$nudstatus."' ");
+		}else{
+			array_push($arWhere, " nudstatus = 'A' ");
+		}
+		
+		$arCabecalho = array("Tipo Documento","Número Sidoc","Número do Documento","Data de Geração");
+		
+		if(possuiPerfil(array(PRF_ADMINISTRADOR,PRF_SUPERUSUARIO))){
+			unset($arWhere[0]);
+			$arCabecalho = array("Ação","Tipo Documento","Número Sidoc","Número do Documento","Data de Geração", "Nome"); 
+			$campo = ",us.usunome";
+			$left = "left join seguranca.usuario AS us ON us.usucpf = nd.nudusucpf";
+		}
+		
+		$sql = "SELECT
+					p.prcid,
+					coalesce(a.nudid,0) as nudidanexo,
+					a.arqid, 
+					td.tpddsc, 
+					p.prcnumsidoc, 
+					nd.nudnumero,
+					nd.nudid,
+					to_char(nd.nuddatageracao, 'DD/MM/YYYY') as nuddatageracao
+					$campo 
+				FROM profeinep.processoprofeinep p
+				INNER JOIN profeinep.numeracaodocumento nd ON p.prcid  = nd.prcid
+				INNER JOIN profeinep.tipodocumento 	 td ON nd.tpdid = td.tpdid
+				LEFT  JOIN profeinep.anexos 			  a ON a.nudid  = nd.nudid AND a.anxstatus = 'A'
+				$left
+				$leftAnexo
+				WHERE 
+					1=1
+					" . ( is_array($arWhere) && count($arWhere) ? ' and ' . implode(' AND ', $arWhere) : '' ) ." 
+					$where 
+				ORDER BY nd.nuddatageracao desc
+				";
+		$i = 0;			
+		if(possuiPerfil(array(PRF_ADMINISTRADOR,PRF_SUPERUSUARIO))){
+			$arParamCol[$i] = array("type" => Lista::TYPESTRING, 
+					   "style" => "width:10px;",
+					   "html"  => "{nudid}",
+					   "align" => "center",
+					   "php"   => array(
+										"expressao" => "({nudidanexo})",
+										"true"      => "<a style=\"margin: 0 -5px 0 5px;\" href=\"#\"><img src=\"/imagens/excluir_01.gif\" border=0 title=\"Numero possui documento.\">",
+										"false"     => "<a style=\"margin: 0 -5px 0 5px;\" href=\"#\" onclick=\"excluirNudid({nudid})\"><img src=\"/imagens/excluir.gif\" border=0 title=\"Excluir Numero\">",
+										"type"      => "numeric",
+									  ));
+			$i++;
+		}		
+									  
+		$arParamCol[$i] = array("type" => Lista::TYPESTRING, 
+							   "style" => "width:10px;",
+							   "html"  => "{nudidanexo}",
+							   "align" => "center",
+							   "php"   => array(
+												"expressao" => "({nudidanexo})",
+												"true" => "<a href=\"#\" onclick=\"window.location.href='?modulo=principal/documento&acao=A&requisicao=download&arqid={arqid}'\"> <img src=\"/imagens/anexo.gif\" border=0 title=\"Anexo\"> </a> ",
+												"false" => "",
+												"type" => "numeric",
+											  ));
+												  
+		$arParamCol[$i++] = array("type" => "string", 
+							   "style" => "width:400px;",
+							   "html"  => "{tpddsc}",
+							   "align" => "left");
+		
+		$arParamCol[$i++] = array("type"  => "string",
+							   "style" => "width:300px;",
+							   "html"  => "<a href=\"#\" onclick=\"window.location.href='?modulo=principal/editarprocesso&acao=A&prcid={prcid}'\">{prcnumsidoc}</a>",
+							   "align" => "left");
+		
+		$arParamCol[$i++] = array("type"  => "numeric",
+							   "style" => "width:200px;",
+							   "html"  => "{nudnumero}",
+							   "align" => "right");
+		
+		$arParamCol[$i++] = array("type"  => "date",
+							   "style" => "width:120px;",
+							   "html"  => "{nuddatageracao}",
+							   "align" => "center");
+		
+		$arParamCol[$i++] = array("type"  => "string",
+							   "style" => "width:300px;",
+							   "html"  => "{usunome}",
+							   "align" => "left");
+		
+		// ARRAY de parametros de configuração da tabela
+		$arConfig = array(//"style" => "width:95%;",
+						  "totalLinha" => false,
+						  "totalRegistro" => true);
+		
+		$oPaginacaoAjax = new PaginacaoAjax();
+		$oPaginacaoAjax->setNrPaginaAtual($nrPaginaAtual);
+		$oPaginacaoAjax->setNrRegPorPagina($nrRegPorPagina);
+		$oPaginacaoAjax->setNrBlocoPaginacaoMaximo($nrBlocoPaginacaoMaximo);
+		$oPaginacaoAjax->setNrBlocoAtual($nrBlocoAtual);
+		$oPaginacaoAjax->setDiv( 'listaNumeracao' );
+		$oPaginacaoAjax->setCabecalho( $arCabecalho );
+		$oPaginacaoAjax->setSql( $sql );
+//		$oPaginacaoAjax->setAcao( $acao );
+		$oPaginacaoAjax->setParamCol( $arParamCol );
+		$oPaginacaoAjax->setConfig( $arConfig );
+		$oPaginacaoAjax->show();
+		
+		
+		/*
+		 * FIM - VIEW
+		 * o método show() renderiza os parametros, mostrando na tela a lista.
+		 */	
+	}
+}
+?>

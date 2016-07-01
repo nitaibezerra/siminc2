@@ -1,0 +1,456 @@
+<?php
+define ('HOST','172.20.65.115');
+define ('PORT','8201');
+define ('TIMEOUT',300);
+error_reporting(E_ALL);
+$projetos = gerar_ar_projetos();
+ob_start();
+$converter = new assoc_array2xml;
+$xml = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><pta><entidade>";
+$xml .= $converter->array2xml($projetos);
+$xml .="</entidade></pta>";
+
+$erro_conexao = false;
+abrir_conexao($sk,$erro_conexao);
+if($erro_conexao) {
+  die($erro_conexao);
+}
+$codigo = $mensagem = false;
+echo "<pre>conexao aberta, buscando resposta\n";
+ob_flush();
+$resposta_completa = ler_status($sk,$codigo,$mensagem);
+
+if($codigo !== 0)
+{
+  fclose($sk);
+  die("Erro cod(".$codigo.") '".$mensagem."'" );
+}
+else
+{
+  echo "Conectado, enviando xml '$xml' \n";
+  flush();
+  enviar_xml($sk,$xml);
+  echo "xml enviado, buscando resposta \n";
+  flush();
+  $codigo = $mensagem = false;
+  ler_status($sk,$codigo,$mensagem);
+  if($codigo !== 0)
+  {
+    fclose($sk);
+    die("Erro cód(".$codigo.") '".$mensagem."'" );
+    #TRATAR ERRO
+  }
+  else {
+    echo "Envio com sucesso:'$mensagem'";
+	flush();
+  }
+}
+fclose($sk);
+
+
+#######################################################
+
+
+function enviar_xml($sk,$xml) {
+  fputs($sk, $xml);
+}
+
+function abrir_conexao(&$sk,&$erro) {
+  echo "Abrindo conexao";
+  flush();
+  $sk=fsockopen(HOST,PORT,$errnum,$errstr,TIMEOUT) ;
+  if (!is_resource($sk)) {$erro_conexao = "Erro de Conexao:".$errnum." ".$errstr;}
+}
+
+function ler_status($sk,&$codigo,&$mensagem) {
+  $lido = "";
+  ///while (!feof($sk)) {
+   $lido.= fgets ($sk, 1024);
+ // }
+  $codigo = (int)pegar_valor($lido,'codigo');
+  $mensagem = pegar_valor($lido,'msg');
+  echo "RESPOSTA COMPLETA:".$lido."\n";
+  echo "COD($codigo)\n";
+  echo "MSG:$mensagem\n";
+  flush();
+}
+
+function pegar_valor($xml,$tag) {
+  $inicio = (strpos  ( $xml, "<$tag>" ) + strlen($tag) + 2) ;
+  $tamanho = strpos  ( $xml, "</$tag>" ) - $inicio;
+  return  substr($xml, $inicio , $tamanho);
+}
+
+########################################################################
+########################################################################
+########################################################################
+
+
+function gerar_ar_projetos(){
+  require_once "config.inc";
+  include APPRAIZ . "includes/classes_simec.inc";
+  include APPRAIZ . "includes/funcoes.inc";
+  $db = new cls_banco();
+  $sql = sql();
+  echo "Buscando dados no banco\n";
+  flush();
+  $recurso = $db->record_set( $sql );
+  echo "Dados lidos\n";
+  flush();
+  $total = $db->conta_linhas( $recurso ) + 1;
+  $projetos = array();
+  for ( $linha = 0; $linha < $total; $linha++ )
+  {
+    $dados = $db->carrega_registro( $recurso, $linha );
+    processar_linha($dados,$projetos);
+  }
+  return $projetos;
+}
+
+
+
+
+
+function processar_linha($dados,&$projetos) {
+	$codigoibge = $dados['codigoibge'];
+	$projetos['codigoibge'] = $dados['codigoibge'];
+    $projetos['nomeentidade'] = $dados['nomeentidade'];
+	$projetos['nomemunicipio'] = $dados['nomemunicipio'];
+	$projetos['uf'] = $dados['uf'];
+	$projetos['nomedirigente'] = $dados['nomedirigente'];
+	#### projetos
+	$pi = $dados['pi'];
+	$projetos['projetos']['NOME_FILHO'] = 'projeto';
+	$projetos['projetos'][$pi]['pi'] = $dados['pi'];
+	$projetos['projetos'][$pi]['ano'] = $dados['ano'];
+	$projetos['projetos'][$pi]['cronogramaexecucaoinicial'] = 
+		$dados['cronogramaexecucaoinicial'];
+	$projetos['projetos'][$pi]['cronogramaexecucaofinal'] = 
+		$dados['cronogramaexecucaofinal'];
+	##### acoes
+	$codigodimensao = $dados['codigodimensao'];
+	$projetos['projetos'][$pi]['acoes']['NOME_FILHO'] = 'acao';
+    $projetos['projetos'][$pi]['acoes'][$codigodimensao]['codigodimensao'] = 
+		$dados['codigodimensao'];
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['descricaodimensao'] = 
+		$dados['descricaodimensao'];
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['detalhamento'] = 
+		$dados['detalhamento'];
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['valorconcedente'] = 
+		$dados['valorconcedente'];
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['valorproponente'] = 
+		$dados['valorproponente'];
+	##### escolas
+	$codigoinep = $dados['codigoinep'];
+	
+	$campos = array(
+	  'codigoinep',
+      'nomeescola',
+	  'quantidadealunos'
+	);
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['escolas']['NOME_FILHO'] = 'escola';
+	foreach($campos as $campo) 
+	{
+	  $projetos['projetos'][$pi]['acoes'][$codigodimensao]['escolas'][$codigoinep][$campo] = 
+		$dados[$campo];
+	}
+
+    ##### beneficiarios
+
+    $codigobeneficiario = $dados['codigobeneficiario'];
+    
+	$campos = array(
+	  'codigobeneficiario',
+      'descricaobeneficiario',
+	  'quantidadezonarural',
+	  'quantidadezonaurbana'
+	);
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['beneficiarios']['NOME_FILHO'] = 'beneficiario';
+	foreach($campos as $campo) 
+	{
+	  $projetos['projetos'][$pi]['acoes'][$codigodimensao]['beneficiarios'][$codigobeneficiario][$campo] = 
+		$dados[$campo];
+	}
+
+    #### especificacoes
+	$codigosubacao = $dados['codigosubacao'];
+    
+	$campos = array(
+	  'codigosubacao',
+      'descricaosubacao',
+	  'codigounidademedida',
+	  'descricaounidademedida',
+	  'quantidade',
+	  'valorunitario'
+	);
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['especificacoes']['NOME_FILHO'] = 'especificacao';
+	foreach($campos as $campo) 
+	{
+	  $projetos['projetos'][$pi]['acoes'][$codigodimensao]['especificacoes'][$codigosubacao][$campo] = 
+		$dados[$campo];
+	}
+
+	#### especificacoes.itens
+	$descricaoitem = $dados['descricaoitem'];
+    
+	$campos = array(
+	  'descricaoitem',
+      'codigounidademedida',
+	  'descricaounidademedida',
+	  'quantidade',
+	  'valorunitario'
+	);
+	$projetos['projetos'][$pi]['acoes'][$codigodimensao]['especificacoes'][$codigosubacao]['itens']['NOME_FILHO'] = 'item';
+	foreach($campos as $campo) 
+	{
+	  $projetos['projetos'][$pi]['acoes'][$codigodimensao]['especificacoes'][$codigosubacao]['itens'][$descricaoitem][$campo] = 
+		$dados[$campo];
+	}
+}
+
+
+
+function sql() {
+  return "
+  select
+
+m.muncod as codigoIbge,
+
+m.mundescricao as nomeEntidade,
+
+m.mundescricao as nomeMunicipio,
+
+m.estuf as UF,
+
+iu.inucadsec as nomeDirigente,
+
+'2008' as ano,
+
+pr.prgplanointerno as pi,
+
+a.acidtinicial as cronogramaExecucaoInicial,
+
+a.acidtfinal as cronogramaExecucaoFinal,
+
+d.dimcod as codigoDimensao,
+
+d.dimdsc as descricaoDimensao,
+
+--descrição da subação + estratégia de implementação + descrição da unidade de medida + quantidade (por ano) + valor unitário
+
+s.sbadsc || ' ' || s.sbastgmpl || ' ' || u.unddsc || ' ' || 'Ano1:'||s.sba0ano
+
+||'Ano2:'|| s.sba1ano ||'Ano3:'|| s.sba2ano ||'Ano4:'|| s.sba3ano ||'Ano5:'|| s.sba4ano || s.sbaunt as detalhamento,
+
+(csa2.valor*0.99) as valorConcedente,
+
+(csa2.valor*0.01) as valorProponente,
+
+e.entcodent as codigoInep, 
+
+e.entnome as nomeEscola,
+
+q.qfaqtd as quantidadeAlunos,
+
+b.benid as codigoBeneficiario,
+
+b.bendsc as descricaoBeneficiario,
+
+sb.vlrrural as quantidadeZonaRural,
+
+sb.vlrurbano as quantidadeZonaUrbana,
+
+s.sbaid as codigoSubacao,
+
+s.sbadsc as descricaoSubacao,
+
+u.undid as codigoUnidadeMedida,
+
+u.unddsc as descricaoUnidadeMedida,
+
+(s.sba0ano + s.sba1ano + s.sba2ano + s.sba3ano + s.sba4ano) as quantidade,
+
+s.sbaunt as valorUnitario,
+
+csa.cosdsc as descricaoItem,
+
+csa.cosqtd as quantidade,
+
+csa.cosvlruni as valorUnitario
+
+from
+
+cte.dimensao d
+
+inner join cte.areadimensao ad ON ad.dimid = d.dimid
+
+inner join cte.indicador i ON i.ardid = ad.ardid
+
+inner join cte.criterio c ON c.indid = i.indid
+
+inner join cte.pontuacao p ON p.crtid = c.crtid and p.indid = i.indid
+
+inner join cte.instrumentounidade iu ON iu.inuid = p.inuid
+
+inner join territorios.municipio m ON m.muncod = iu.muncod
+
+--inner join territorios.municipio m ON m.estuf = iu.estuf
+
+inner join cte.acaoindicador a ON a.ptoid = p.ptoid
+
+inner join cte.subacaoindicador s ON s.aciid = a.aciid
+
+inner join cte.unidademedida u ON u.undid = s.undid
+
+inner join cte.qtdfisicoano q ON q.sbaid = s.sbaid
+
+inner join entidade.entidade e ON e.entid = q.entid
+
+inner join cte.subacaobeneficiario sb ON sb.sbaid = s.sbaid
+
+inner join cte.beneficiario b ON b.benid = sb.benid
+
+inner join cte.programa pr ON pr.prgid = s.prgid
+
+inner join cte.composicaosubacao csa ON csa.sbaid = s.sbaid
+
+inner join (select sbaid, sum(cosqtd*cosvlruni) as valor from cte.composicaosubacao group by sbaid ) csa2 ON csa2.sbaid = s.sbaid
+
+
+
+group by
+
+m.muncod,
+
+m.mundescricao,
+
+m.estuf,
+
+iu.inucadsec,
+
+pr.prgplanointerno,
+
+a.acidtinicial,
+
+a.acidtfinal,
+
+d.dimcod,
+
+d.dimdsc,
+
+s.sbadsc || ' ' || s.sbastgmpl || ' ' || u.unddsc || ' ' || 'Ano1:'||s.sba0ano
+
+||'Ano2:'|| s.sba1ano ||'Ano3:'|| s.sba2ano ||'Ano4:'|| s.sba3ano ||'Ano5:'|| s.sba4ano || s.sbaunt,
+
+csa2.valor,
+
+e.entcodent, 
+
+e.entnome,
+
+q.qfaqtd,
+
+b.benid,
+
+b.bendsc,
+
+sb.vlrurbano,
+
+sb.vlrrural,
+
+s.sbaid,
+
+s.sbadsc,
+
+u.undid,
+
+u.unddsc,
+
+s.sba0ano + s.sba1ano + s.sba2ano + s.sba3ano + s.sba4ano,
+
+s.sbaunt,
+
+csa.cosdsc,
+
+csa.cosqtd,
+
+csa.cosvlruni
+
+  ";
+}
+
+class assoc_array2xml {
+	var $text;
+	var $arrays, $keys, $node_flag, $depth, $xml_parser;
+
+	function array2xml($array) {
+		$this->array_transform($array);
+		return $this->text;
+	}
+
+	function array_transform($array,$ident = 1,$nome_filho_recebido = false){
+		//global $array_text;
+		foreach($array as $key => $value){
+			if(!is_array($value)){
+				if($key != 'NOME_FILHO') {
+				  $this->text .= "<$key>".xmlentities($value)."</$key>";
+				}
+			} else {
+				$nome_filho_a_passar = false;
+				if(isset($value['NOME_FILHO'])) {
+				  $nome_filho_a_passar = $value['NOME_FILHO'];
+				}
+				if($nome_filho_recebido) {
+				  $key = $nome_filho_recebido;
+				}
+				$this->text.= "<$key>";
+				$this->array_transform($value,$ident+1,$nome_filho_a_passar);
+				$this->text.= "</$key>";
+			}
+		}
+		$ident--;
+		return $this->text;
+	}
+
+	/*function array_transform($array,$ident = 1,$nome_filho_recebido = false){
+		//global $array_text;
+		foreach($array as $key => $value){
+			if(!is_array($value)){
+				if($key != 'NOME_FILHO') {
+				  $this->text .= str_repeat("   ",$ident)."<$key>$value</$key>\n";
+				}
+			} else {
+				$nome_filho_a_passar = false;
+				if(isset($value['NOME_FILHO'])) {
+				  $nome_filho_a_passar = $value['NOME_FILHO'];
+				}
+				if($nome_filho_recebido) {
+				  $key = $nome_filho_recebido;
+				}
+				$this->text.= str_repeat("   ",$ident)."<$key>\n";
+				$this->array_transform($value,$ident+1,$nome_filho_a_passar);
+				$this->text.= str_repeat("   ",$ident)."</$key>\n";
+			}
+		}
+		$ident--;
+		return $this->text;
+	}*/
+}
+function xmlentities( $strText, $strQuoteStyle = ENT_QUOTES, $strCharSet = 'ISO' )
+{
+	if ( $strCharSet == 'UTF8' )
+	{
+		$strText = utf8_decode( $strText );
+	}
+	static $trans;
+	if ( !isset( $trans ) )
+	{
+		$trans = get_html_translation_table( HTML_ENTITIES, $strQuoteStyle );
+		foreach ( $trans as $key => $value )
+		{
+			$trans[ $key ] = '&#' . ord( $key ) . ';';
+		}
+		$trans[ chr(38) ] = '&';
+	}
+	return preg_replace( "/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/" , "&#38;" , strtr( $strText, $trans ) );
+}

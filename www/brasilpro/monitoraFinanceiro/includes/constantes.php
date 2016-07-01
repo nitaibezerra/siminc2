@@ -1,0 +1,32 @@
+<?php
+/**
+ * STATUS DE MONITORAMENTO DA SUBAÇÃO
+ *
+ */
+define( "STATUSNAOSELECIONADO", 0 );
+define( "EXECUTADA"  , 8 );
+define( "EMEXECUCAO" , 9);
+define( "NAOINICIADA", 10);
+define( "CANCELADA"  , 11);
+
+/**
+ * STATUS DE ITENS COMPOSIÇÃO
+ *
+ */
+define( "STATUSNAOSELECIONADOITENS", 0 );
+define( "EXECUTADOITEMCOMP", 1 );
+define( "EMEXECUÇÃOITEMCOMP", 2 );
+define( "NAOINICIADAITEMCOMP", 3 );
+define( "CANCELADAITEMCOMP", 4 );
+define( "EMPLANEJAMENTOITEMCOMP", 5 );
+
+/**
+ * ERROS DO SISTEMA
+ *
+ */
+define( "MONITORAMENTONAOINICIADA", 3 );
+define( "ERRONAOINICIADA", 1 );
+define( "ERRONAOEXECUTADAOUEMEXECUCAO", 2 );
+
+
+?>

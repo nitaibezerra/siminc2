@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPPASubFuncao xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <PPASubFuncao>
+    <SFUCod>000</SFUCod>
+    <FUNCod>00</FUNCod>
+    <SFUDsc>Não definida</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>031</SFUCod>
+    <FUNCod>01</FUNCod>
+    <SFUDsc>Ação Legislativa</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>032</SFUCod>
+    <FUNCod>01</FUNCod>
+    <SFUDsc>Controle Externo</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>061</SFUCod>
+    <FUNCod>02</FUNCod>
+    <SFUDsc>Ação Judiciária</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>062</SFUCod>
+    <FUNCod>02</FUNCod>
+    <SFUDsc>Defesa do Interesse Público no Processo Judiciário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>091</SFUCod>
+    <FUNCod>03</FUNCod>
+    <SFUDsc>Defesa da Ordem Jurídica</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>092</SFUCod>
+    <FUNCod>03</FUNCod>
+    <SFUDsc>Representação Judicial e Extrajudicial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>121</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Planejamento e Orçamento</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>122</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Administração Geral</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>123</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Administração Financeira</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>124</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Controle Interno</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>125</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Normatização e Fiscalização</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>126</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Tecnologia da Informação</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>127</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Ordenamento Territorial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>128</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Formação de Recursos Humanos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>129</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Administração de Receitas</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>130</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Administração de Concessões</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>131</SFUCod>
+    <FUNCod>04</FUNCod>
+    <SFUDsc>Comunicação Social</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>151</SFUCod>
+    <FUNCod>05</FUNCod>
+    <SFUDsc>Defesa Aérea</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>152</SFUCod>
+    <FUNCod>05</FUNCod>
+    <SFUDsc>Defesa Naval</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>153</SFUCod>
+    <FUNCod>05</FUNCod>
+    <SFUDsc>Defesa Terrestre</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>181</SFUCod>
+    <FUNCod>06</FUNCod>
+    <SFUDsc>Policiamento</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>182</SFUCod>
+    <FUNCod>06</FUNCod>
+    <SFUDsc>Defesa Civil</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>183</SFUCod>
+    <FUNCod>06</FUNCod>
+    <SFUDsc>Informação e Inteligência</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>211</SFUCod>
+    <FUNCod>07</FUNCod>
+    <SFUDsc>Relações Diplomáticas</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>212</SFUCod>
+    <FUNCod>07</FUNCod>
+    <SFUDsc>Cooperação Internacional</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>241</SFUCod>
+    <FUNCod>08</FUNCod>
+    <SFUDsc>Assistência ao Idoso</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>242</SFUCod>
+    <FUNCod>08</FUNCod>
+    <SFUDsc>Assistência ao Portador de Deficiência</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>243</SFUCod>
+    <FUNCod>08</FUNCod>
+    <SFUDsc>Assistência à Criança e ao Adolescente</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>244</SFUCod>
+    <FUNCod>08</FUNCod>
+    <SFUDsc>Assistência Comunitária</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>271</SFUCod>
+    <FUNCod>09</FUNCod>
+    <SFUDsc>Previdência Básica</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>272</SFUCod>
+    <FUNCod>09</FUNCod>
+    <SFUDsc>Previdência do Regime Estatutário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>273</SFUCod>
+    <FUNCod>09</FUNCod>
+    <SFUDsc>Previdência Complementar</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>274</SFUCod>
+    <FUNCod>09</FUNCod>
+    <SFUDsc>Previdência Especial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>301</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Atenção Básica</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>302</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Assistência Hospitalar e Ambulatorial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>303</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Suporte Profilático e Terapêutico</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>304</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Vigilância Sanitária</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>305</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Vigilância Epidemiológica</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>306</SFUCod>
+    <FUNCod>10</FUNCod>
+    <SFUDsc>Alimentação e Nutrição</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>331</SFUCod>
+    <FUNCod>11</FUNCod>
+    <SFUDsc>Proteção e Benefícios ao Trabalhador</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>332</SFUCod>
+    <FUNCod>11</FUNCod>
+    <SFUDsc>Relações de Trabalho</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>333</SFUCod>
+    <FUNCod>11</FUNCod>
+    <SFUDsc>Empregabilidade</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>334</SFUCod>
+    <FUNCod>11</FUNCod>
+    <SFUDsc>Fomento ao Trabalho</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>361</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Ensino Fundamental</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>362</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Ensino Médio</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>363</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Ensino Profissional</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>364</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Ensino Superior</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>365</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Educação Infantil</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>366</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Educação de Jovens e Adultos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>367</SFUCod>
+    <FUNCod>12</FUNCod>
+    <SFUDsc>Educação Especial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>391</SFUCod>
+    <FUNCod>13</FUNCod>
+    <SFUDsc>Patrimônio Histórico, Artístico e Arqueológico</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>392</SFUCod>
+    <FUNCod>13</FUNCod>
+    <SFUDsc>Difusão Cultural</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>421</SFUCod>
+    <FUNCod>14</FUNCod>
+    <SFUDsc>Custódia e Reintegração Social</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>422</SFUCod>
+    <FUNCod>14</FUNCod>
+    <SFUDsc>Direitos Individuais, Coletivos e Difusos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>423</SFUCod>
+    <FUNCod>14</FUNCod>
+    <SFUDsc>Assistência aos Povos Indígenas</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>451</SFUCod>
+    <FUNCod>15</FUNCod>
+    <SFUDsc>Infra-estrutura Urbana</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>452</SFUCod>
+    <FUNCod>15</FUNCod>
+    <SFUDsc>Serviços Urbanos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>453</SFUCod>
+    <FUNCod>15</FUNCod>
+    <SFUDsc>Transportes Coletivos Urbanos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>481</SFUCod>
+    <FUNCod>16</FUNCod>
+    <SFUDsc>Habitação Rural</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>482</SFUCod>
+    <FUNCod>16</FUNCod>
+    <SFUDsc>Habitação Urbana</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>511</SFUCod>
+    <FUNCod>17</FUNCod>
+    <SFUDsc>Saneamento Básico Rural</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>512</SFUCod>
+    <FUNCod>17</FUNCod>
+    <SFUDsc>Saneamento Básico Urbano</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>541</SFUCod>
+    <FUNCod>18</FUNCod>
+    <SFUDsc>Preservação e Conservação Ambiental</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>542</SFUCod>
+    <FUNCod>18</FUNCod>
+    <SFUDsc>Controle Ambiental</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>543</SFUCod>
+    <FUNCod>18</FUNCod>
+    <SFUDsc>Recuperação de Áreas Degradadas</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>544</SFUCod>
+    <FUNCod>18</FUNCod>
+    <SFUDsc>Recursos Hídricos</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>545</SFUCod>
+    <FUNCod>18</FUNCod>
+    <SFUDsc>Meteorologia</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>571</SFUCod>
+    <FUNCod>19</FUNCod>
+    <SFUDsc>Desenvolvimento Científico</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>572</SFUCod>
+    <FUNCod>19</FUNCod>
+    <SFUDsc>Desenvolvimento Tecnológico e Engenharia</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>573</SFUCod>
+    <FUNCod>19</FUNCod>
+    <SFUDsc>Difusão do Conhecimento Científico e Tecnológico</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>601</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Promoção da Produção Vegetal</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>602</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Promoção da Produção Animal</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>603</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Defesa Sanitária Vegetal</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>604</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Defesa Sanitária Animal</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>605</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Abastecimento</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>606</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Extensão Rural</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>607</SFUCod>
+    <FUNCod>20</FUNCod>
+    <SFUDsc>Irrigação</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>631</SFUCod>
+    <FUNCod>21</FUNCod>
+    <SFUDsc>Reforma Agrária</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>632</SFUCod>
+    <FUNCod>21</FUNCod>
+    <SFUDsc>Colonização</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>661</SFUCod>
+    <FUNCod>22</FUNCod>
+    <SFUDsc>Promoção Industrial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>662</SFUCod>
+    <FUNCod>22</FUNCod>
+    <SFUDsc>Produção Industrial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>663</SFUCod>
+    <FUNCod>22</FUNCod>
+    <SFUDsc>Mineração</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>664</SFUCod>
+    <FUNCod>22</FUNCod>
+    <SFUDsc>Propriedade Industrial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>665</SFUCod>
+    <FUNCod>22</FUNCod>
+    <SFUDsc>Normalização e Qualidade</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>691</SFUCod>
+    <FUNCod>23</FUNCod>
+    <SFUDsc>Promoção Comercial</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>692</SFUCod>
+    <FUNCod>23</FUNCod>
+    <SFUDsc>Comercialização</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>693</SFUCod>
+    <FUNCod>23</FUNCod>
+    <SFUDsc>Comércio Exterior</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>694</SFUCod>
+    <FUNCod>23</FUNCod>
+    <SFUDsc>Serviços Financeiros</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>695</SFUCod>
+    <FUNCod>23</FUNCod>
+    <SFUDsc>Turismo</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>721</SFUCod>
+    <FUNCod>24</FUNCod>
+    <SFUDsc>Comunicações Postais</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>722</SFUCod>
+    <FUNCod>24</FUNCod>
+    <SFUDsc>Telecomunicações</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>751</SFUCod>
+    <FUNCod>25</FUNCod>
+    <SFUDsc>Conservação de Energia</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>752</SFUCod>
+    <FUNCod>25</FUNCod>
+    <SFUDsc>Energia Elétrica</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>753</SFUCod>
+    <FUNCod>25</FUNCod>
+    <SFUDsc>Petróleo</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>754</SFUCod>
+    <FUNCod>25</FUNCod>
+    <SFUDsc>Álcool</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>781</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Transporte Aéreo</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>782</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Transporte Rodoviário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>783</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Transporte Ferroviário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>784</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Transporte Hidroviário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>785</SFUCod>
+    <FUNCod>26</FUNCod>
+    <SFUDsc>Transportes Especiais</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>811</SFUCod>
+    <FUNCod>27</FUNCod>
+    <SFUDsc>Desporto de Rendimento</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>812</SFUCod>
+    <FUNCod>27</FUNCod>
+    <SFUDsc>Desporto Comunitário</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>813</SFUCod>
+    <FUNCod>08</FUNCod>
+    <SFUDsc>Lazer</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>841</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Refinanciamento da Dívida Interna</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>842</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Refinanciamento da Dívida Externa</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>843</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Serviço da Dívida Interna</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>844</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Serviço da Dívida Externa</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>845</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Transferências</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>846</SFUCod>
+    <FUNCod>28</FUNCod>
+    <SFUDsc>Outros Encargos Especiais</SFUDsc>
+  </PPASubFuncao>
+  <PPASubFuncao>
+    <SFUCod>999</SFUCod>
+    <FUNCod>99</FUNCod>
+    <SFUDsc>Reserva de Contingência</SFUDsc>
+  </PPASubFuncao>
+</ArrayOfPPASubFuncao>

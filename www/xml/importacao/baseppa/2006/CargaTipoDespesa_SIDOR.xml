@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipoDespesa xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <TipoDespesa>
+    <TDPCod>0</TDPCod>
+    <TDPDsc>Não Definida</TDPDsc>
+  </TipoDespesa>
+  <TipoDespesa>
+    <TDPCod>1</TDPCod>
+    <TDPDsc>Obrigatória</TDPDsc>
+  </TipoDespesa>
+  <TipoDespesa>
+    <TDPCod>2</TDPCod>
+    <TDPDsc>Financeira</TDPDsc>
+  </TipoDespesa>
+  <TipoDespesa>
+    <TDPCod>3</TDPCod>
+    <TDPDsc>Discricionária</TDPDsc>
+  </TipoDespesa>
+  <TipoDespesa>
+    <TDPCod>4</TDPCod>
+    <TDPDsc>Não Orçamentária</TDPDsc>
+  </TipoDespesa>
+</ArrayOfTipoDespesa>

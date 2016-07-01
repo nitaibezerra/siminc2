@@ -1,0 +1,13 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ *
+ */
+class Simec_Listagem_Acao_Info extends Simec_Listagem_Acao
+{
+    protected $icone = 'info-sign';
+    protected $titulo = 'Mais informações';
+}

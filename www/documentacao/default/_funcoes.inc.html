@@ -1,0 +1,3026 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Docs for page funcoes.inc</title>
+	<link rel="stylesheet" type="text/css" id="layout" href="../media/layout.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="../media/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../media/print.css" media="print">
+</head>
+
+<body>
+<div id="header">
+	<div id="navLinks">
+        
+                                    
+                            	        [ <a href="../classtrees_default.html">Class Tree: default</a> ]
+            [ <a href="../elementindex_default.html">Index: default</a> ]
+        		[ <a href="../elementindex.html">All elements</a> ]		
+	</div>
+	<div id="packagePosition">
+		<div id="packageTitle2">default</div>
+		<div id="packageTitle">default</div>
+		<div id="elementPath"> &middot; </div>
+	</div>
+</div>
+
+<div id="nav" class="small">
+	<div id="packages">
+		Packages:
+					<p><a href="../li_default.html">default</a></p>
+			</div>
+
+				<div id="index">
+			<div id="files">
+								Files:<br>
+								<a href="../default/_classes_simec.inc.html">		classes_simec.inc
+		</a><br>
+			<a href="../default/_funcoes.inc.html">		funcoes.inc
+		</a><br>
+				</div>
+			<div id="interfaces">
+							</div>
+			<div id="classes">
+				Classes:<br>
+								<a href="../default/cls_banco.html">		cls_banco
+		</a><br>
+			<a href="../default/cls_classes_simec.html">		cls_classes_simec
+		</a><br>
+			<a href="../default/criptografia.html">		criptografia
+		</a><br>
+			<a href="../default/GeraExcel.html">		GeraExcel
+		</a><br>
+			<a href="../default/Teste.html">		Teste
+		</a><br>
+			<a href="../default/Testes.html">		Testes
+		</a><br>
+				</div>
+		</div>
+	</div>
+
+<div id="body">
+	    		<h1>Procedural File: funcoes.inc</h1>
+	<p style="margin: 0px;">Source Location: /funcoes.inc</p>
+	
+<br>
+<br>
+
+<div class="contents">
+<h2>Classes:</h2>
+<dl>
+</dl>
+</div>
+
+<h2>Page Details:</h2>
+<hr>
+<hr>
+<div id="global">
+</div><hr>
+<div id="define">
+	<a name="defined"></a>
+	<h3>d</h3>
+	<div class="indent">
+	<p class="linenumber">[line 1388]</p>
+	<p><code>d = &quot;die&quot;</code></p>
+			</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+</div><hr>
+<div id="function">
+	<a name="functionajusta_data"></a>
+	<h3>ajusta_data</h3>
+	<div class="indent">
+		<code>void ajusta_data(
+ $data)</code>
+		<p class="linenumber">[line 151]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionaleatorio"></a>
+	<h3>aleatorio</h3>
+	<div class="indent">
+		<code>void aleatorio(
+)</code>
+		<p class="linenumber">[line 131]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionalert"></a>
+	<h3>alert</h3>
+	<div class="indent">
+		<code>void alert(
+ $str, [ $close = false], [ $escape = true])</code>
+		<p class="linenumber">[line 2377]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$str</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$close</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$escape</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionassociaPerfilUsuarioPendente"></a>
+	<h3>associaPerfilUsuarioPendente</h3>
+	<div class="indent">
+		<code>boolean associaPerfilUsuarioPendente(
+string/array $usucpf, string/array $perfil, [string $sisid = null], [array $arrUsuResp = null])</code>
+		<p class="linenumber">[line 2969]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - ( true se tudo ocorrer normalmente / falso se houver erros )</li>
+	<li><b>author</b> - Juliano Meinen</li>
+	<li><b>version</b> - 1.0</li>
+	<li><b>since</b> - 28/07/2010</li>
+	<li><b>example</b> - example not found</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string/array</span>
+			<b>$usucpf</b> 
+			- 
+			cpf do usuário</li>
+					<li>
+			<span class="type">string/array</span>
+			<b>$perfil</b> 
+			- 
+			perfil do usuário (normalmente é uma constante com valor numérico)</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sisid</b> 
+			- 
+			(opcional) identificador do sistema</li>
+					<li>
+			<span class="type">array</span>
+			<b>$arrUsuResp</b> 
+			- 
+			(opcional) colunas e valores para inclusão na tabela de usuarioresponsabilidade do schema</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionbusca_filho"></a>
+	<h3>busca_filho</h3>
+	<div class="indent">
+		<code>void busca_filho(
+ $id)</code>
+		<p class="linenumber">[line 2108]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$id</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_bool"></a>
+	<h3>campo_bool</h3>
+	<div class="indent">
+		<code>void campo_bool(
+ $var,  $obrig,  $habil,  $label,  $size,  $max,  $masc,  $hid, [ $align = &#039;left&#039;], [ $txtdica = &#039;&#039;], [ $acao = 0])</code>
+		<p class="linenumber">[line 959]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$var</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$obrig</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$habil</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$label</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$size</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$max</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$masc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$hid</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$align</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$txtdica</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$acao</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_data"></a>
+	<h3>campo_data</h3>
+	<div class="indent">
+		<code>void campo_data(
+ $dt,  $obrig,  $habil,  $label,  $formata, [ $txtdica = &#039;&#039;], [ $txtOnChange = &#039;&#039;], [ $value = null])</code>
+		<p class="linenumber">[line 751]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$dt</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$obrig</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$habil</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$label</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$formata</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$txtdica</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$txtOnChange</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$value</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_data2"></a>
+	<h3>campo_data2</h3>
+	<div class="indent">
+		<code>mixed campo_data2(
+string $dt, string $obrig, string $habil, string $label, string $formata, [string $txtdica = &#039;&#039;], [string $txtOnBlur = &#039;&#039;], [string $value = null], [string $txtOnChange = &#039;&#039;], [string $classe = &#039;&#039;], [string $id = &#039;&#039;])</code>
+		<p class="linenumber">[line 804]</p>
+		<p align="center"><strong>Cria um campo data2 no formulário
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$dt</b> 
+			- 
+			- data</li>
+					<li>
+			<span class="type">string</span>
+			<b>$obrig</b> 
+			- 
+			- se é obrigatório</li>
+					<li>
+			<span class="type">string</span>
+			<b>$habil</b> 
+			- 
+			- se está habilitado</li>
+					<li>
+			<span class="type">string</span>
+			<b>$label</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$formata</b> 
+			- 
+			- mascara</li>
+					<li>
+			<span class="type">string</span>
+			<b>$txtdica</b> 
+			- 
+			- Title</li>
+					<li>
+			<span class="type">string</span>
+			<b>$txtOnBlur</b> 
+			- 
+			- funções do onblur</li>
+					<li>
+			<span class="type">string</span>
+			<b>$value</b> 
+			- 
+			- valor inicial</li>
+					<li>
+			<span class="type">string</span>
+			<b>$txtOnChange</b> 
+			- 
+			- funções do onchange</li>
+					<li>
+			<span class="type">string</span>
+			<b>$classe</b> 
+			- 
+			- classe do input</li>
+					<li>
+			<span class="type">string</span>
+			<b>$id</b> 
+			- 
+			- id do input</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_popup"></a>
+	<h3>campo_popup</h3>
+	<div class="indent">
+		<code>void campo_popup(
+string $nome, string $sql, string $titulo, [ $func = null], [string $tamanho_janela = &#039;400x400&#039;], [integer $width = 30], [array $where = null], [ $typeCampo = 1], [ $limpar = true], [ $disabled = false])</code>
+		<p class="linenumber">[line 1711]</p>
+		<p align="center"><strong>Monta um combo especial com seleção em popups.
+</strong></p>
+<p>Monta apenas o campo do formulário. Consulte as observações indicada  para cada parâmetro. É necessário que o campo identificador seja  renomeado para 'codigo' e a descrição para 'descricao'. Veja restante  dos comentário do arquivo www/geral/combopopup.php</p>		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			nome atribuido ao campo no formulário</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sql</b> 
+			- 
+			consulta a ser realizada no banco, sendo os álias (codigo,                                                                            descricao,                                                                            value)                    OBS.: O &quot;value&quot; é opcional, caso não seja passado o return será o &quot;codigo&quot;. <ul><li>return fica setado em um campo &quot;hidden&quot;, portanto o campo visto denomina-se por: &quot;nome do campo&quot;_dsc.</li></ul></li>
+					<li>
+			<span class="type">string</span>
+			<b>$titulo</b> 
+			- 
+			titulo que deverá aparecer no popup</li>
+					<li>
+			<span class="type">string</span>
+			<b>$tamanho_janela</b> 
+			- 
+			tamanho da janela popup no formato HEIGHTxWIDTH</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$width</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">array</span>
+			<b>$where</b> 
+			- 
+			ex: array( array(&quot;codigo&quot;       =&gt; nomeCampoBanco,                                             &quot;descricao&quot; =&gt; labelCampoFormulario,                                            &quot;tipo&quot;       =&gt; 1 = inteiro ou 0 = string),                                         array(&quot;codigo&quot;       =&gt; nomeCampoBanco2,                                             &quot;descricao&quot; =&gt; labelCampoFormulario2                                            &quot;tipo&quot;       =&gt; 1 = inteiro ou  0 = string),                           )</li>
+					<li>
+			<span class="type"></span>
+			<b>$func</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$typeCampo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$limpar</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$disabled</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_radio"></a>
+	<h3>campo_radio</h3>
+	<div class="indent">
+		<code>void campo_radio(
+string $nome, array $opcoes, string $alinhamento, [boolean $return = false])</code>
+		<p class="linenumber">[line 2007]</p>
+		<p align="center"><strong>Monta campo radio com as opções determinadas pelo segundo parâmetros.
+</strong></p>
+<p>O formato do segundo parÂmetro deve ser  $opcoes = array(  		&quot;label1&quot; =&gt; array(  			&quot;valor&quot; =&gt; &quot;valor1&quot;,  			&quot;id&quot; =&gt; &quot;id1&quot;  			&quot;callbak&quot; =&gt; &quot;nome_da_funcao&quot;  );  Caso queira que algum valor seja por default, selecionado</p>		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">array</span>
+			<b>$opcoes</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$alinhamento</b> 
+			- 
+			vertical ou horizontal ( 'v'|'h' )</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$return</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_radio_sim_nao"></a>
+	<h3>campo_radio_sim_nao</h3>
+	<div class="indent">
+		<code>void campo_radio_sim_nao(
+string $nome, [string $alinhamento = &#039;v&#039;])</code>
+		<p class="linenumber">[line 2050]</p>
+		<p align="center"><strong>Monta campo radio com opções booleana. Os valores dos campos serão '0' ou '1'.
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$alinhamento</b> 
+			- 
+			vertical ou horizontal ( 'v'|'h' )</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_textarea"></a>
+	<h3>campo_textarea</h3>
+	<div class="indent">
+		<code>string campo_textarea(
+string $var, string $obrig, string $habil, string $label, string $cols, string $rows, string $max, [string $funcao = &#039;&#039;], [string $acao = 0], [string $txtdica = &#039;&#039;], [string $tab = false], [ $title = NULL], [ $value = null])</code>
+		<p class="linenumber">[line 1149]</p>
+		<p align="center"><strong>Monta campo textarea.
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$var</b> 
+			- 
+			nome do campo</li>
+					<li>
+			<span class="type">string</span>
+			<b>$obrig</b> 
+			- 
+			obrigatório ou não S|N</li>
+					<li>
+			<span class="type">string</span>
+			<b>$habil</b> 
+			- 
+			habilitado ou não S|N</li>
+					<li>
+			<span class="type">string</span>
+			<b>$label</b> 
+			- 
+			???</li>
+					<li>
+			<span class="type">string</span>
+			<b>$cols</b> 
+			- 
+			quantidade de coluna</li>
+					<li>
+			<span class="type">string</span>
+			<b>$rows</b> 
+			- 
+			quantidade de linhas</li>
+					<li>
+			<span class="type">string</span>
+			<b>$max</b> 
+			- 
+			tamanho máximo de caracteres</li>
+					<li>
+			<span class="type">string</span>
+			<b>$funcao</b> 
+			- 
+			???</li>
+					<li>
+			<span class="type">string</span>
+			<b>$acao</b> 
+			- 
+			???</li>
+					<li>
+			<span class="type">string</span>
+			<b>$txtdica</b> 
+			- 
+			texto de dica, exibido quando o mouse fica sob o textarea</li>
+					<li>
+			<span class="type">string</span>
+			<b>$tab</b> 
+			- 
+			habilita digitação do tab ou não true|false</li>
+					<li>
+			<span class="type"></span>
+			<b>$title</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$value</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_texto"></a>
+	<h3>campo_texto</h3>
+	<div class="indent">
+		<code>mixed campo_texto(
+string $var, string $obrig, string $habil, string $label, integer $size, integer $max, string $masc, string $hid, [string $align = &#039;left&#039;], [string $txtdica = &#039;&#039;], [integer $acao = 0], [string $complemento = &#039;&#039;], [string $evtkeyup = &#039;&#039;], [string $value = null], [string $evtblur = &#039;&#039;], [ $arrStyle = null], array $arrStyle:)</code>
+		<p class="linenumber">[line 864]</p>
+		<p align="center"><strong>Cria um campo texto no formulário
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$var</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$obrig</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$habil</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$label</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$size</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$max</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$masc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$hid</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$align</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$txtdica</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$acao</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$complemento</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$evtkeyup</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$value</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$evtblur</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">array</span>
+			<b>$arrStyle:</b> 
+			- 
+			Variavel onde podem ser passados parametros de estilo, sendo o índice a propriedade. ex: array('width' =&gt;'100%')</li>
+					<li>
+			<span class="type"></span>
+			<b>$arrStyle</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_texto_ajax"></a>
+	<h3>campo_texto_ajax</h3>
+	<div class="indent">
+		<code>string campo_texto_ajax(
+ $sql,  $id, string $nome, [string $label = &#039;&#039;], [mixed $valor = &#039;&#039;], [integer $size = &#039;&#039;], [integer $maxlength = &#039;&#039;], [string $mascara = &#039;&#039;], [string $align = &#039;left&#039;], [boolean $obrigatorio = false], [boolean $habilitado = true], [boolean $hidden = false], [ $label_externo = false], [string $complemento = &#039;&#039;], [string[] $parametros_extra = array()], [ $valor_label = &#039;&#039;], [boolean $valida = false])</code>
+		<p class="linenumber">[line 1029]</p>
+		<p align="center"><strong>Faz um input de texto com busca de dados no servidor.
+</strong></p>
+<p>A consulta sql precisa ter um %s com o valor que será buscado</p><h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Adonias Malosso &lt;<a href="mailto:malosso@gmail.com">malosso@gmail.com</a>&gt;</li>
+	<li><b>version</b> - 1.0</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$label</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">mixed</span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$size</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$maxlength</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$mascara</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$align</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$obrigatorio</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$habilitado</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$hidden</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$complemento</b> 
+			- 
+			conteúdo que vai dentro da tag input, os eventos onfocus, onkeyup e onkeydown não podem ser sobreescritos</li>
+					<li>
+			<span class="type">string[]</span>
+			<b>$parametros_extra</b> 
+			- 
+			envia na requisição ajax os valores dos campos com os nomes indicados</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$valida</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$sql</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$id</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$label_externo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$valor_label</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncampo_texto_ajax_cascata"></a>
+	<h3>campo_texto_ajax_cascata</h3>
+	<div class="indent">
+		<code>string campo_texto_ajax_cascata(
+string $sql, string $nome, string $descricao, string[] $dependencias, [integer $size = &#039;&#039;], [integer $maxlength = &#039;&#039;], [string $mascara = &#039;&#039;], [string $align = &#039;left&#039;], [boolean $obrigatorio = false], [ $valor = &#039;&#039;], [ $valor_label = &#039;&#039;])</code>
+		<p class="linenumber">[line 1113]</p>
+		<p align="center"><strong>Monta um campo texto ajax em cascata. Caso o campo que ele é  dependente seja edita o valor deste é apagado. As dependencias  devem ser passadas na ordem de modo que somente o último é verificado.
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$sql</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$descricao</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string[]</span>
+			<b>$dependencias</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$size</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$maxlength</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$mascara</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$align</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$obrigatorio</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$valor_label</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncarrega_orgao"></a>
+	<h3>carrega_orgao</h3>
+	<div class="indent">
+		<code>void carrega_orgao(
+string $editavel, string $usucpf)</code>
+		<p class="linenumber">[line 2418]</p>
+		<p align="center"><strong>Função que carrega os orgãos de acordo com o tipo  e com o município informado.
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Fernando A. Bagno da Silva</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$editavel</b> 
+			- 
+			-&gt; se os campos estao habilitados ou não</li>
+					<li>
+			<span class="type">string</span>
+			<b>$usucpf</b> 
+			- 
+			-&gt; cpf do usuário cadastrado, caso exista  /</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncarrega_unidade"></a>
+	<h3>carrega_unidade</h3>
+	<div class="indent">
+		<code>void carrega_unidade(
+integer $entid, string $editavel, string $usucpf)</code>
+		<p class="linenumber">[line 2506]</p>
+		<p align="center"><strong>Função que carrega as unidades daquele órgão (caso  existam)
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Fernando A. Bagno da Silva</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">integer</span>
+			<b>$entid</b> 
+			- 
+			-&gt; ID do orgão selecionado</li>
+					<li>
+			<span class="type">string</span>
+			<b>$editavel</b> 
+			- 
+			-&gt; se os campos estao habilitados ou não</li>
+					<li>
+			<span class="type">string</span>
+			<b>$usucpf</b> 
+			- 
+			-&gt; cpf do usuário cadastrado, caso exista</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncarrega_unidade_gestora"></a>
+	<h3>carrega_unidade_gestora</h3>
+	<div class="indent">
+		<code>void carrega_unidade_gestora(
+integer $unicod, string $editavel, string $usucpf)</code>
+		<p class="linenumber">[line 2587]</p>
+		<p align="center"><strong>Função que carrega a unidade gestora de uma unidade orçamentária,  quando existir
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Fernando A. Bagno da Silva</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">integer</span>
+			<b>$unicod</b> 
+			- 
+			-&gt; ID da unidade selecionada</li>
+					<li>
+			<span class="type">string</span>
+			<b>$editavel</b> 
+			- 
+			-&gt; se os campos estao habilitados ou não</li>
+					<li>
+			<span class="type">string</span>
+			<b>$usucpf</b> 
+			- 
+			-&gt; cpf do usuário cadastrado, caso exista</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncombo_popup"></a>
+	<h3>combo_popup</h3>
+	<div class="indent">
+		<code>void combo_popup(
+string $nome, string $sql, string $titulo, [string $tamanho_janela = &#039;400x400&#039;], [integer $maximo_itens = 0], [string[] $codigos_fixos = array()], [string $mensagem_fixo = &#039;&#039;], [string $habilitado = &#039;S&#039;], [boolean $campo_busca_codigo = false], [boolean $campo_flag_contem = false], [integer $size = 10], [integer $width = 400], [ $onpop = null], [ $onpush = null], [ $param_conexao = false], [ $where = null], [ $value = null], [ $mostraPesquisa = true], [ $campo_busca_descricao = false], [string $funcaoJS = null], [ $intervalo = false], [ $arrVisivel = null], [ $arrOrdem = null])</code>
+		<p class="linenumber">[line 1508]</p>
+		<p align="center"><strong>Monta um combo especial com seleção em popups.
+</strong></p>
+<p>Monta apenas o campo do formulário. Consulte as observações indicada  para cada parâmetro. É necessário que o campo identificador seja  renomeado para 'codigo' e a descrição para 'descricao'. Veja restante  dos comentário do arquivo www/geral/combopopup.php</p>		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			nome atribuido ao campo no formulário</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sql</b> 
+			- 
+			consulta a ser realizada no banco</li>
+					<li>
+			<span class="type">string</span>
+			<b>$titulo</b> 
+			- 
+			titulo que deverá aparecer no popup</li>
+					<li>
+			<span class="type">string</span>
+			<b>$tamanho_janela</b> 
+			- 
+			tamanho da janela popup no formato HEIGHTxWIDTH</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$maximo_itens</b> 
+			- 
+			máximo de itens que podem ser selecionados ( se igual a 0 quantidade é ilimitada )</li>
+					<li>
+			<span class="type">string[]</span>
+			<b>$codigos_fixos</b> 
+			- 
+			códigos que o usuário não pode remover do combo</li>
+					<li>
+			<span class="type">string</span>
+			<b>$mensagem_fixo</b> 
+			- 
+			mensagem que será exibida caso o usuário tente remover um item fixo</li>
+					<li>
+			<span class="type">string</span>
+			<b>$habilitado</b> 
+			- 
+			indica se o campo está aberto para edição ( S | N )</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$campo_busca_codigo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$campo_flag_contem</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$size</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$width</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">string</span>
+			<b>$funcaoJS</b> 
+			- 
+			Função Javascript a ser chamada quando se escolhe uma opção da popup(onclick). É passado por parâmetro para esta função js o objeto(this) (Adicionado por: Felipe Carvalho)</li>
+					<li>
+			<span class="type"></span>
+			<b>$onpop</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$onpush</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$param_conexao</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$where</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$value</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$mostraPesquisa</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$campo_busca_descricao</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$intervalo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$arrVisivel</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$arrOrdem</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncontrola_navegacao"></a>
+	<h3>controla_navegacao</h3>
+	<div class="indent">
+		<code>void controla_navegacao(
+ $nl)</code>
+		<p class="linenumber">[line 183]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$nl</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioncorrige_cpf"></a>
+	<h3>corrige_cpf</h3>
+	<div class="indent">
+		<code>void corrige_cpf(
+ $cpf)</code>
+		<p class="linenumber">[line 723]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiondbg"></a>
+	<h3>dbg</h3>
+	<div class="indent">
+		<code>void dbg(
+[ $var = NULL], [ $morte = FALSE], [ $usucpf = &#039;&#039;])</code>
+		<p class="linenumber">[line 1371]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$var</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$morte</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$usucpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiondecimal2romano"></a>
+	<h3>decimal2romano</h3>
+	<div class="indent">
+		<code>string decimal2romano(
+integer $decimal)</code>
+		<p class="linenumber">[line 25]</p>
+		<p align="center"><strong>Converte Inteiros em Algarismos Romanos
+</strong></p>
+<p>por: Werter Dias Almeida em 11/03/2009</p>		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">integer</span>
+			<b>$decimal</b> 
+			- 
+			valor</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiondesformata_valor"></a>
+	<h3>desformata_valor</h3>
+	<div class="indent">
+		<code>string desformata_valor(
+float $valor, integer $casas_decimais)</code>
+		<p class="linenumber">[line 1961]</p>
+		<p align="center"><strong>Formata um string com a mascara ###.###.###,## para um  ponto flutuante.
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">float</span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$casas_decimais</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiondv_cpf_cnpj_ok"></a>
+	<h3>dv_cpf_cnpj_ok</h3>
+	<div class="indent">
+		<code>void dv_cpf_cnpj_ok(
+ $cpfcnpj)</code>
+		<p class="linenumber">[line 578]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpfcnpj</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionemail"></a>
+	<h3>email</h3>
+	<div class="indent">
+		<code>void email(
+ $paraquem,  $paraonde,  $assunto,  $message, [ $cc = &#039;&#039;], [ $cco = &#039;&#039;])</code>
+		<p class="linenumber">[line 322]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$paraquem</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$paraonde</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$assunto</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$message</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cco</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionemailPara"></a>
+	<h3>emailPara</h3>
+	<div class="indent">
+		<code>void emailPara(
+ $cpf)</code>
+		<p class="linenumber">[line 13]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionemail_pessoal"></a>
+	<h3>email_pessoal</h3>
+	<div class="indent">
+		<code>void email_pessoal(
+ $dequem,  $deonde,  $paraonde,  $assunto,  $message, [ $cc = &#039;&#039;], [ $cco = &#039;&#039;])</code>
+		<p class="linenumber">[line 388]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$dequem</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$deonde</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$paraonde</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$assunto</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$message</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cco</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionenviar_email"></a>
+	<h3>enviar_email</h3>
+	<div class="indent">
+		<code>void enviar_email(
+ $remetente,  $destinatario,  $assunto,  $conteudo, [ $cc = &#039;&#039;], [ $cco = &#039;&#039;], [ $arquivos = array()])</code>
+		<p class="linenumber">[line 438]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$remetente</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$destinatario</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$assunto</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$conteudo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cco</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$arquivos</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionenviar_email_usuario"></a>
+	<h3>enviar_email_usuario</h3>
+	<div class="indent">
+		<code>void enviar_email_usuario(
+ $remetente,  $destinatario,  $assunto,  $conteudo, [ $cc = &#039;&#039;], [ $cco = &#039;&#039;])</code>
+		<p class="linenumber">[line 501]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$remetente</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$destinatario</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$assunto</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$conteudo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cc</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$cco</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functioneof"></a>
+	<h3>eof</h3>
+	<div class="indent">
+		<code>void eof(
+)</code>
+		<p class="linenumber">[line 1968]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionexibir_erros"></a>
+	<h3>exibir_erros</h3>
+	<div class="indent">
+		<code>void exibir_erros(
+ $erros)</code>
+		<p class="linenumber">[line 729]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$erros</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionfator_vencimento"></a>
+	<h3>fator_vencimento</h3>
+	<div class="indent">
+		<code>void fator_vencimento(
+ $data)</code>
+		<p class="linenumber">[line 738]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformatar_cnpj"></a>
+	<h3>formatar_cnpj</h3>
+	<div class="indent">
+		<code>void formatar_cnpj(
+ $cnpj)</code>
+		<p class="linenumber">[line 293]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cnpj</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformatar_cpf"></a>
+	<h3>formatar_cpf</h3>
+	<div class="indent">
+		<code>void formatar_cpf(
+ $cpf)</code>
+		<p class="linenumber">[line 289]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformatar_cpf_cnpj"></a>
+	<h3>formatar_cpf_cnpj</h3>
+	<div class="indent">
+		<code>void formatar_cpf_cnpj(
+ $cpfcnpj)</code>
+		<p class="linenumber">[line 302]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpfcnpj</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_cep"></a>
+	<h3>formata_cep</h3>
+	<div class="indent">
+		<code>void formata_cep(
+ $num)</code>
+		<p class="linenumber">[line 626]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$num</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_data"></a>
+	<h3>formata_data</h3>
+	<div class="indent">
+		<code>void formata_data(
+ $data)</code>
+		<p class="linenumber">[line 166]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_data_sql"></a>
+	<h3>formata_data_sql</h3>
+	<div class="indent">
+		<code>void formata_data_sql(
+ $data)</code>
+		<p class="linenumber">[line 176]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_fone_fax"></a>
+	<h3>formata_fone_fax</h3>
+	<div class="indent">
+		<code>void formata_fone_fax(
+ $numero)</code>
+		<p class="linenumber">[line 611]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$numero</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_numero"></a>
+	<h3>formata_numero</h3>
+	<div class="indent">
+		<code>void formata_numero(
+ $nm)</code>
+		<p class="linenumber">[line 124]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$nm</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionformata_valor"></a>
+	<h3>formata_valor</h3>
+	<div class="indent">
+		<code>string formata_valor(
+float $valor, [integer $casas_decimais = 2], [ $adicionar_zeros_direita = true])</code>
+		<p class="linenumber">[line 1907]</p>
+		<p align="center"><strong>Formata um numero real com a mascara ###.###.###,##  O segundo parâmetro indica a quantidade de casas decimais
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">float</span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$casas_decimais</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$adicionar_zeros_direita</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionget_rnd_iv"></a>
+	<h3>get_rnd_iv</h3>
+	<div class="indent">
+		<code>void get_rnd_iv(
+ $iv_len)</code>
+		<p class="linenumber">[line 107]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$iv_len</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiongravaThemaUsuario"></a>
+	<h3>gravaThemaUsuario</h3>
+	<div class="indent">
+		<code>void gravaThemaUsuario(
+[string $theme = &amp;quot;verde&amp;quot;], [string $usucpf = null])</code>
+		<p class="linenumber">[line 2808]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Juliano Meinen</li>
+	<li><b>version</b> - 1.0</li>
+	<li><b>since</b> - 01/06/2010</li>
+	<li><b>example</b> - example not found</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$theme</b> 
+			- 
+			tema do usuário</li>
+					<li>
+			<span class="type">string</span>
+			<b>$usucpf</b> 
+			- 
+			cpf do usuário</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiongrid"></a>
+	<h3>grid</h3>
+	<div class="indent">
+		<code>void grid(
+ $name,  &$data)</code>
+		<p class="linenumber">[line 1318]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$name</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>&$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiongrid_html"></a>
+	<h3>grid_html</h3>
+	<div class="indent">
+		<code>void grid_html(
+ $msg)</code>
+		<p class="linenumber">[line 1361]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$msg</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionhidden_popup"></a>
+	<h3>hidden_popup</h3>
+	<div class="indent">
+		<code>void hidden_popup(
+ $nome,  $sql,  $titulo, [ $tamanho_janela = &#039;400x400&#039;], [ $explica = &#039;&#039;])</code>
+		<p class="linenumber">[line 1851]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$sql</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$titulo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$tamanho_janela</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$explica</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionin"></a>
+	<h3>in</h3>
+	<div class="indent">
+		<code>void in(
+ $valor,  $vetor)</code>
+		<p class="linenumber">[line 118]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vetor</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionlimpar_numero"></a>
+	<h3>limpar_numero</h3>
+	<div class="indent">
+		<code>void limpar_numero(
+ $num)</code>
+		<p class="linenumber">[line 742]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$num</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmake_seed"></a>
+	<h3>make_seed</h3>
+	<div class="indent">
+		<code>void make_seed(
+)</code>
+		<p class="linenumber">[line 309]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmd5_decrypt"></a>
+	<h3>md5_decrypt</h3>
+	<div class="indent">
+		<code>void md5_decrypt(
+ $enc_text, [ $password = &#039;&#039;], [ $iv_len = 16])</code>
+		<p class="linenumber">[line 234]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$enc_text</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$password</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$iv_len</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmd5_decrypt_senha"></a>
+	<h3>md5_decrypt_senha</h3>
+	<div class="indent">
+		<code>void md5_decrypt_senha(
+ $enc_text,  $password, [ $iv_len = 16])</code>
+		<p class="linenumber">[line 251]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$enc_text</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$password</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$iv_len</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmd5_encrypt"></a>
+	<h3>md5_encrypt</h3>
+	<div class="indent">
+		<code>void md5_encrypt(
+ $plain_text, [ $password = &#039;&#039;], [ $iv_len = 16])</code>
+		<p class="linenumber">[line 212]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$plain_text</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$password</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$iv_len</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmd5_encrypt_senha"></a>
+	<h3>md5_encrypt_senha</h3>
+	<div class="indent">
+		<code>void md5_encrypt_senha(
+ $plain_text,  $password, [ $iv_len = 16])</code>
+		<p class="linenumber">[line 195]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$plain_text</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$password</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$iv_len</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmd5_senha"></a>
+	<h3>md5_senha</h3>
+	<div class="indent">
+		<code>void md5_senha(
+ $senha)</code>
+		<p class="linenumber">[line 748]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$senha</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmes_extenso"></a>
+	<h3>mes_extenso</h3>
+	<div class="indent">
+		<code>void mes_extenso(
+ $mes)</code>
+		<p class="linenumber">[line 1285]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$mes</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmontaLinkManual"></a>
+	<h3>montaLinkManual</h3>
+	<div class="indent">
+		<code>void montaLinkManual(
+ $intSisId)</code>
+		<p class="linenumber">[line 2226]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$intSisId</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmontaLinkManual2"></a>
+	<h3>montaLinkManual2</h3>
+	<div class="indent">
+		<code>void montaLinkManual2(
+ $intSisId)</code>
+		<p class="linenumber">[line 2265]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$intSisId</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmontarAbasArray"></a>
+	<h3>montarAbasArray</h3>
+	<div class="indent">
+		<code>void montarAbasArray(
+array $itensMenu, [$boOpenWin $url = false], [ $boOpenWin = false])</code>
+		<p class="linenumber">[line 2315]</p>
+		<p align="center"><strong>Monta abas no padrao do SIMEC
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">array</span>
+			<b>$itensMenu</b> 
+			- 
+			<p>Um array no seguinte formato:   Array   (       [0] =&gt; Array       (           ['descricao'] =&gt; TITULO DA ABA 1           ['link']      =&gt; LINK DA ABA 1       )</p><p>[1] =&gt; Array (           ['descricao'] =&gt; TITULO DA ABA 1           ['link']      =&gt; LINK DA ABA 1           )       )   )</p></li>
+					<li>
+			<span class="type">$boOpenWin</span>
+			<b>$url</b> 
+			- 
+			Boleano. Quando true esse parametro indica que as abas devem ser abertas em uma nova janela. (09-11-2010)</li>
+					<li>
+			<span class="type"></span>
+			<b>$boOpenWin</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_arvore_menu"></a>
+	<h3>monta_arvore_menu</h3>
+	<div class="indent">
+		<code>void monta_arvore_menu(
+ $cod)</code>
+		<p class="linenumber">[line 1275]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cod</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_cabecalho_relatorio"></a>
+	<h3>monta_cabecalho_relatorio</h3>
+	<div class="indent">
+		<code>void monta_cabecalho_relatorio(
+string $largura)</code>
+		<p class="linenumber">[line 2649]</p>
+		<p align="center"><strong>Função que monta o cabecalho padrão com o brasão brasileiro  utilizado nos relatórios do SIMEC
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Fernando A. Bagno da Silva</li>
+	<li><b>since</b> - 20/02/2009</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$largura</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_grafico_avaliacao"></a>
+	<h3>monta_grafico_avaliacao</h3>
+	<div class="indent">
+		<code>void monta_grafico_avaliacao(
+ $vl0,  $vl1,  $vl2,  $vl3,  $vltotal,  $mes,  $percent)</code>
+		<p class="linenumber">[line 1435]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$vl0</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl1</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl2</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl3</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vltotal</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$mes</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$percent</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_grafico_validacao"></a>
+	<h3>monta_grafico_validacao</h3>
+	<div class="indent">
+		<code>void monta_grafico_validacao(
+ $vl0,  $vl1,  $vl2,  $vl3,  $vltotal)</code>
+		<p class="linenumber">[line 1423]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$vl0</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl1</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl2</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vl3</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$vltotal</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_link"></a>
+	<h3>monta_link</h3>
+	<div class="indent">
+		<code>void monta_link(
+ $modulo,  $acao, [ $parametros = &#039;&#039;])</code>
+		<p class="linenumber">[line 2118]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$modulo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$acao</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$parametros</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmonta_titulo"></a>
+	<h3>monta_titulo</h3>
+	<div class="indent">
+		<code>void monta_titulo(
+ $linha1,  $linha2)</code>
+		<p class="linenumber">[line 268]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$linha1</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$linha2</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmostracod"></a>
+	<h3>mostracod</h3>
+	<div class="indent">
+		<code>void mostracod(
+ $id)</code>
+		<p class="linenumber">[line 2123]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$id</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmostrarComboPopup"></a>
+	<h3>mostrarComboPopup</h3>
+	<div class="indent">
+		<code>void mostrarComboPopup(
+string $stDescricao, string $stNomeCampo, string $sql_combo, string $sql_carregados, string $stTextoSelecao, [ $where = null], [string $funcaoJS = null], [boolean $semTR = false], [string $intervalo = false], [ $arrVisivel = null], [ $arrOrdem = null])</code>
+		<p class="linenumber">[line 1649]</p>
+		<p align="center"><strong>Monta o HTTML do combo_popup
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Cristiano Teles</li>
+	<li><b>since</b> - 09/02/2009</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$stDescricao</b> 
+			- 
+			Descrição do campo</li>
+					<li>
+			<span class="type">string</span>
+			<b>$stNomeCampo</b> 
+			- 
+			Nome do campo que será criado HTML/PHP</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sql_combo</b> 
+			- 
+			SQL para carregar as opções</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sql_carregados</b> 
+			- 
+			SQL para mostrar campos selecionados</li>
+					<li>
+			<span class="type">string</span>
+			<b>$stTextoSelecao</b> 
+			- 
+			Texto para aparecer no popup</li>
+					<li>
+			<span class="type">string</span>
+			<b>$funcaoJS</b> 
+			- 
+			Função Javascript a ser chamada quando se escolhe uma opção da popup(onclick). É passado por parâmetro para esta função js o objeto(this) (Adicionado por: Felipe Carvalho)</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$semTR</b> 
+			- 
+			Se true, não coloca TR, o que deve ser feito manualmente. Usado para casos em que se deve setar o innerHTML ou outro atributo DOM da TR. (Adicionado por: Felipe Carvalho)</li>
+					<li>
+			<span class="type">string</span>
+			<b>$intervalo</b> 
+			- 
+			se &quot;S&quot; será adicionado um campo chamado Selecionar intervalo onde, depois que dois registros forem clicados e acionado o botão de intervalo, todos os registros entre esse intervalo serão selecionados. ( Adicionado por: Victor Benzi )</li>
+					<li>
+			<span class="type">Array</span>
+			<b>$where</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$arrVisivel</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$arrOrdem</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmostra_num"></a>
+	<h3>mostra_num</h3>
+	<div class="indent">
+		<code>void mostra_num(
+ $num, [ $dec = 0], [ $simb = &#039;&#039;])</code>
+		<p class="linenumber">[line 1985]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$num</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$dec</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$simb</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionmudaStatus"></a>
+	<h3>mudaStatus</h3>
+	<div class="indent">
+		<code>void mudaStatus(
+ $projeto,  $codUnidade,  $tipo,  $status)</code>
+		<p class="linenumber">[line 2219]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$projeto</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$codUnidade</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$tipo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$status</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionnomeUnidade"></a>
+	<h3>nomeUnidade</h3>
+	<div class="indent">
+		<code>void nomeUnidade(
+ $cod)</code>
+		<p class="linenumber">[line 2139]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cod</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionobrigatorio"></a>
+	<h3>obrigatorio</h3>
+	<div class="indent">
+		<code>void obrigatorio(
+)</code>
+		<p class="linenumber">[line 229]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionpega_numero"></a>
+	<h3>pega_numero</h3>
+	<div class="indent">
+		<code>void pega_numero(
+ $cnpjcpf)</code>
+		<p class="linenumber">[line 297]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cnpjcpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionpermissaoReuni"></a>
+	<h3>permissaoReuni</h3>
+	<div class="indent">
+		<code>void permissaoReuni(
+ $arrayPerfil,  $unicod)</code>
+		<p class="linenumber">[line 2173]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$arrayPerfil</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$unicod</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionpermissaoUsuario"></a>
+	<h3>permissaoUsuario</h3>
+	<div class="indent">
+		<code>void permissaoUsuario(
+ $cod)</code>
+		<p class="linenumber">[line 2163]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cod</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionpopup_arquivo"></a>
+	<h3>popup_arquivo</h3>
+	<div class="indent">
+		<code>void popup_arquivo(
+string $nome, [string $sqlListagem = &#039;&#039;], string $campo_id_vinculo,  $valor_id_vinculo, [integer $inserir = 1], integar $width, integer $height, [ $tabela_vinculo = &#039;&#039;])</code>
+		<p class="linenumber">[line 1876]</p>
+		<p align="center"><strong>Cria os botões de listagem e inclusão de arquivos.
+</strong></p>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			Nome para controle dos dados da sessao</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sqlListagem</b> 
+			- 
+			Se o valor for diferente de '', insere o botão para listar os arquivos de acordo com a query passada</li>
+					<li>
+			<span class="type">string</span>
+			<b>$campo_id_vinculo</b> 
+			- 
+			Nome do campo que será usado para a tabela de assiciação documento_processo (pjeid, ptoid, acaid, etc.)</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$inserir</b> 
+			- 
+			Variável para verificação de inclusão ou não do botão de inserção de novos arquivos</li>
+					<li>
+			<span class="type">integar</span>
+			<b>$width</b> 
+			- 
+			largura da janela a ser aberta</li>
+					<li>
+			<span class="type">integer</span>
+			<b>$height</b> 
+			- 
+			altura da janela a ser aberta</li>
+					<li>
+			<span class="type"></span>
+			<b>$valor_id_vinculo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$tabela_vinculo</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionprocura_array"></a>
+	<h3>procura_array</h3>
+	<div class="indent">
+		<code>void procura_array(
+ $search_value,  $the_array)</code>
+		<p class="linenumber">[line 1244]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$search_value</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$the_array</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionrecuperaThemaUsuario"></a>
+	<h3>recuperaThemaUsuario</h3>
+	<div class="indent">
+		<code>string recuperaThemaUsuario(
+[string $usucpf = null])</code>
+		<p class="linenumber">[line 2874]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - ( nome do tema)</li>
+	<li><b>author</b> - Juliano Meinen</li>
+	<li><b>version</b> - 1.0</li>
+	<li><b>since</b> - 02/06/2010</li>
+	<li><b>example</b> - example not found</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$usucpf</b> 
+			- 
+			cpf do usuário</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionremoveAcentos"></a>
+	<h3>removeAcentos</h3>
+	<div class="indent">
+		<code>void removeAcentos(
+ $str)</code>
+		<p class="linenumber">[line 2389]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$str</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionretornaseq"></a>
+	<h3>retornaseq</h3>
+	<div class="indent">
+		<code>void retornaseq(
+string $num)</code>
+		<p class="linenumber">[line 2692]</p>
+		<p align="center"><strong>Função que retorna o próximo valor à partir do parâmetro recebido.
+</strong></p>
+<p>O padrão para os valores é o seguinte: '0' à '9', e depois de 'A' à 'Z', dependendo  do número de caracteres do parâmetro.</p><p>Exemplos:  			valor passado por parâmetro: '99'   ---&gt;  valor retornado: 'AA'  			valor passado por parâmetro: 'ABA'  ---&gt;  valor retornado: 'ABC'  			valor passado por parâmetro: '677'  ---&gt;  valor retornado: '678'  			valor passado por parâmetro: 'AMZZ' ---&gt;  valor retornado: 'ANAA'</p><h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Cristiano Cabral</li>
+	<li><b>since</b> - 07/04/2009</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$num</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionsenha"></a>
+	<h3>senha</h3>
+	<div class="indent">
+		<code>void senha(
+)</code>
+		<p class="linenumber">[line 313]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionsomar_dias_uteis"></a>
+	<h3>somar_dias_uteis</h3>
+	<div class="indent">
+		<code>void somar_dias_uteis(
+ $str_data, [ $int_qtd_dias_somar = 7])</code>
+		<p class="linenumber">[line 3123]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$str_data</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$int_qtd_dias_somar</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionsql_vincula_arquivo"></a>
+	<h3>sql_vincula_arquivo</h3>
+	<div class="indent">
+		<code>void sql_vincula_arquivo(
+ $campo,  $item, [ $chave = 0])</code>
+		<p class="linenumber">[line 277]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$campo</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$item</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$chave</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionstatusFase"></a>
+	<h3>statusFase</h3>
+	<div class="indent">
+		<code>void statusFase(
+ $unicod)</code>
+		<p class="linenumber">[line 2212]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$unicod</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionstr_to_upper"></a>
+	<h3>str_to_upper</h3>
+	<div class="indent">
+		<code>void str_to_upper(
+ $str)</code>
+		<p class="linenumber">[line 1301]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$str</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiontexto_popup"></a>
+	<h3>texto_popup</h3>
+	<div class="indent">
+		<code>void texto_popup(
+string $nome, string $sql, string $titulo, [string $maxlength = &#039;&#039;], [string $tamanho_campo = 20], [string $mascara = &#039;&#039;], [string $tamanho_janela = &#039;400x400&#039;], [string $complemento = &#039;&#039;], [ $onblur = &#039;&#039;])</code>
+		<p class="linenumber">[line 1830]</p>
+		<p align="center"><strong>Mona um campo texto que pode ser preenchido com valores listados em um popup.
+</strong></p>
+<p>Monta apenas o campo do formulário. Consulte as observações indicada  para cada parâmetro. É necessário que o campo identificador seja  renomeado para 'codigo' e a dhttp://www.maujor.com/tutorial/haslayout.phpescrição para 'descricao'. Veja restante  dos comentário do arquivo www/geral/textopopup.php</p>		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$nome</b> 
+			- 
+			nome atribuido ao campo no formulário</li>
+					<li>
+			<span class="type">string</span>
+			<b>$sql</b> 
+			- 
+			consulta a ser realizada no banco</li>
+					<li>
+			<span class="type">string</span>
+			<b>$titulo</b> 
+			- 
+			titulo que deverá aparecer no popup</li>
+					<li>
+			<span class="type">string</span>
+			<b>$maxlength</b> 
+			- 
+			quantidade máxima de caracteres</li>
+					<li>
+			<span class="type">string</span>
+			<b>$tamanho_campo</b> 
+			- 
+			tamanho do campo texto</li>
+					<li>
+			<span class="type">string</span>
+			<b>$mascara</b> 
+			- 
+			máscara do campo texto</li>
+					<li>
+			<span class="type">string</span>
+			<b>$tamanho_janela</b> 
+			- 
+			tamanho da janela popup no formato HEIGHTxWIDTH</li>
+					<li>
+			<span class="type">string</span>
+			<b>$complemento</b> 
+			- 
+			complemento para o input</li>
+					<li>
+			<span class="type"></span>
+			<b>$onblur</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiontirar_acentos"></a>
+	<h3>tirar_acentos</h3>
+	<div class="indent">
+		<code>void tirar_acentos(
+ $variavel)</code>
+		<p class="linenumber">[line 562]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$variavel</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functiontradutor_att"></a>
+	<h3>tradutor_att</h3>
+	<div class="indent">
+		<code>void tradutor_att(
+ $valor)</code>
+		<p class="linenumber">[line 2070]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$valor</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionulcase"></a>
+	<h3>ulcase</h3>
+	<div class="indent">
+		<code>void ulcase(
+ $variavel)</code>
+		<p class="linenumber">[line 538]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$variavel</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionupdateArquivo"></a>
+	<h3>updateArquivo</h3>
+	<div class="indent">
+		<code>void updateArquivo(
+ $nome,  $unicod,  $codResposta)</code>
+		<p class="linenumber">[line 157]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$nome</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$unicod</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$codResposta</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionvalidachar"></a>
+	<h3>validachar</h3>
+	<div class="indent">
+		<code>void validachar(
+char $char)</code>
+		<p class="linenumber">[line 2743]</p>
+		<p align="center"><strong>Função que valida se o caracter é permitido.
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Cristiano Cabral</li>
+	<li><b>since</b> - 07/04/2009</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">char</span>
+			<b>$char</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionvalidaCPF"></a>
+	<h3>validaCPF</h3>
+	<div class="indent">
+		<code>void validaCPF(
+ $cpf)</code>
+		<p class="linenumber">[line 53]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpf</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionvalidaXML"></a>
+	<h3>validaXML</h3>
+	<div class="indent">
+		<code>array validaXML(
+string $arqXml,  $xsd)</code>
+		<p class="linenumber">[line 2932]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - com mensagem de erro, caso ocorra.</li>
+	<li><b>author</b> - Wesley Romualdo da Silva</li>
+	<li><b>version</b> - 1.0</li>
+	<li><b>since</b> - 10/06/2010</li>
+	<li><b>example</b> - example not found</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">string</span>
+			<b>$arqXml</b> 
+			- 
+			pode ser um arquivo ou um string xml</li>
+					<li>
+			<span class="type"></span>
+			<b>$xsd</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionvalorMonetarioExtenso"></a>
+	<h3>valorMonetarioExtenso</h3>
+	<div class="indent">
+		<code>void valorMonetarioExtenso(
+[float $valor = 0], [boolean $maiusculas = false])</code>
+		<p class="linenumber">[line 2755]</p>
+		<p align="center"><strong>Função que coloca em extenso valores monetários.
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Felipe de Oliveira Carvalho</li>
+	<li><b>since</b> - 22/12/2009</li>
+</ul>
+		
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type">float</span>
+			<b>$valor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type">boolean</span>
+			<b>$maiusculas</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionver"></a>
+	<h3>ver</h3>
+	<div class="indent">
+		<code>void ver(
+)</code>
+		<p class="linenumber">[line 1390]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverficaPerfil"></a>
+	<h3>verficaPerfil</h3>
+	<div class="indent">
+		<code>void verficaPerfil(
+ $cpf,  $sisid)</code>
+		<p class="linenumber">[line 2146]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cpf</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$sisid</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverficaSuperUsuario"></a>
+	<h3>verficaSuperUsuario</h3>
+	<div class="indent">
+		<code>void verficaSuperUsuario(
+ $sisid)</code>
+		<p class="linenumber">[line 2152]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$sisid</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverificaPerfil"></a>
+	<h3>verificaPerfil</h3>
+	<div class="indent">
+		<code>void verificaPerfil(
+ $pflcods)</code>
+		<p class="linenumber">[line 657]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$pflcods</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverifica_cep"></a>
+	<h3>verifica_cep</h3>
+	<div class="indent">
+		<code>void verifica_cep(
+ $cep)</code>
+		<p class="linenumber">[line 636]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$cep</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverifica_data"></a>
+	<h3>verifica_data</h3>
+	<div class="indent">
+		<code>void verifica_data(
+ $data)</code>
+		<p class="linenumber">[line 642]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$data</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverifica_datas"></a>
+	<h3>verifica_datas</h3>
+	<div class="indent">
+		<code>void verifica_datas(
+ $dtmaior,  $dtmenor,  $dif)</code>
+		<p class="linenumber">[line 137]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$dtmaior</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$dtmenor</b> 
+			- 
+			</li>
+					<li>
+			<span class="type"></span>
+			<b>$dif</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="functionverifica_email"></a>
+	<h3>verifica_email</h3>
+	<div class="indent">
+		<code>void verifica_email(
+ $email)</code>
+		<p class="linenumber">[line 632]</p>
+				
+		<h4>Parameters</h4>
+		<ul>
+					<li>
+			<span class="type"></span>
+			<b>$email</b> 
+			- 
+			</li>
+				</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+</div>
+	<div id="credit">
+		<hr>
+		Documentation generated on Tue, 14 Dec 2010 13:50:39 -0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	</div>
+</div>
+</body>
+</html>

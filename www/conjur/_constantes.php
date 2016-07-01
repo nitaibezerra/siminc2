@@ -1,0 +1,137 @@
+<?
+define("CONJUR_SISID", 29);
+
+define("TIPODOC", 30);
+define("NOVO_TIPODOC", 49);
+define("ORGCOD", 26000);
+define("EST_ANALISEGABINETE", 78);
+define("EST_AGUARDATRIBUICAO", 81);
+define("EST_FIMPROCESSO", 99);
+define("EST_ANEXADO", 205);
+define("TIPOPRCJUDICIAL",2);
+
+define("PRF_ADMCONJUR", 66);
+define("PRF_SUPERUSUARIO", 197);
+define("PRF_ADMINISTRADOR", 244);
+define("PRF_TECNICO", 245); // PRF_APOIO
+define("PRF_TECNICO_ADM", 252); // PRF_APOIO_ADM
+define("PRF_ADVOGADO", 246);
+define("PRF_CONSULTAGERAL", 247);
+define("PRF_APOIO_PROTOCOLO", 251);
+define("PRF_APOIO_GABINETE", 476);
+define("PRF_GESTOR", 1074);
+define("PRF_APOIO_BIBLIOTECA", 1151);
+define("PRF_EXTERNO_CONJUR", 1235);
+define("PRF_APOIO_DGAA", 1412);
+
+define("CONJUR_PROCESSO_ENCERRADO", 80);
+
+define("FUN_PARTICIPANTECONJUR", 50);
+
+
+define("WF_EM_ANALISE_GABINETE", 78);
+
+//
+//Novo Workflow
+//
+//Estados
+//
+
+define("WF_AGUARDANDO_PROVIDENCIA_SEATA", 374);
+define("WF_ENCERRADO", 375);
+define("WF_AGUARDANDO_RESPOSTA_EXTERNA", 376);
+define("WF_ARQUIVADO", 377);
+define("WF_EM_ANALISE_GABINETE", 378);
+define("WF_DESARQUIVADO", 379);
+define("WF_EM_ANALISE_GABINETE_AUXILIAR", 380);
+define("WF_EM_ANALISE_COORDENADOR_GERAL", 381);
+define("WF_EM_ANALISE_ADVOGADO", 382);
+define("WF_ANEXADO", 383);
+define("WF_EM_ANALISE_COORDENADOR", 575);
+define("WF_EM_ANALISE_CHEFEDIVISAO", 576);
+
+
+// Ações do Coordenador Geral
+define("WF_AEDID_ENCAMINHAR_ADVOGADO", 	1072);
+define("WF_AEDID_RETORNAR_ADVOGADO", 	1256);
+
+define("WF_AEDID_ENCAMINHAR_CHEFE_DIVISAO_CGAE", 	1489);
+define("WF_AEDID_ENCAMINHAR_COORD_CGAE", 			1490);
+
+define("WF_AEDID_RETORNAR_CHEFE_DIVISAO_CGAE", 	1493);
+define("WF_AEDID_RETORNAR_COORD_CGAE", 			1494);
+
+// Ações do Análise advogado
+define("WF_AEDID_RETORNAR_COORDENADOR", 1059);
+define("WF_AEDID_ENCAMINHAR_CHEFE_DIVISAO_CGAE_2", 	1496);
+define("WF_AEDID_ENCAMINHAR_COORD_CGAE_2", 			1497);
+
+// Ações do Análise Coordenador CGAE
+define("WF_AEDID_RETORNAR_COORDENADOR_CGAE", 		1492);
+define("WF_AEDID_ENCAMINHAR_ADVOGADO_3", 			1500);
+define("WF_AEDID_ENCAMINHAR_CHEFE_DIVISAO_CGAE_3", 	1502);
+
+// Ações do Análise Chefe Divisão
+define("WF_AEDID_RETORNAR_COORDENADOR_CGAE_4", 		1495);
+define("WF_AEDID_ENCAMINHAR_ADVOGADO_4", 			1504);
+define("WF_AEDID_ENCAMINHAR_COORD_CGAE_4", 			1506);
+
+
+define("TPD_CONJUR_NOVO", 49);
+
+//
+//ações
+//
+if($_SESSION['baselogin'] == "simec_desenvolvimento"){
+	define("ACAO_ENCAMINHAR_PARA_ADVOGADO", 1056);
+} else {
+	define("ACAO_ENCAMINHAR_PARA_ADVOGADO", 1072);
+	define("ACAO_AGUARDAR_RESPOSTA_EXTERNA", 1047);
+}
+
+//
+//Coordenações
+//
+
+define("COORD_CGAC",  1);
+define("COORD_CGNLJ", 2);
+define("COORD_CGEPD", 3); // CGAE
+define("COORD_PROTOCOLO_APOIO_SEATA", 4);
+define("COORD_GABINETE_CONJUR", 5);
+define("COORD_GABAUX", 6);
+define("COORD_EXT", 7);
+
+
+define("COORD_CGAE_CHEFE_GABINETE", 	9);
+define("COORD_CGAE_CHEFE_SUB_COORD", 	10);
+define("COORD_CGAE_CHEFE_DIVISAO",11);
+//
+//Wokflows
+//
+
+define("NOVO_WORKFLOW",  49);
+define("WORKFLOW_BIBLIOTECA",  172);
+
+
+define("WF_AEDID_ENCAMINHAR_ANALISE_GAB",1048);
+define("WF_AEDID_ENCAMINHAR_CGAC",1052);
+define("WF_AEDID_ENCAMINHAR_CGAA",1053);
+define("WF_AEDID_ENCAMINHAR_CGAE",1054);
+define("WF_AEDID_ENCERRAR_PROCESSO",1046);
+define("WF_AEDID_ARQUIVAR_PROCESSO",1049);
+
+
+define("WF_ESDID_ARQUIVADO",377);
+
+
+//Tipo de Documento 
+define("TP_PARECER",2);
+define("TP_COTA",13);
+define("TP_NOTA",6);
+define("TP_DESPACHO",7);
+define("TP_OFICIO",1);
+define("TP_INFORMACAO",4);
+
+
+
+?>

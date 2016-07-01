@@ -1,0 +1,72 @@
+BODY {
+font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+background: #002868;
+}
+
+.questao {
+font: 15px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+}
+
+.resposta {
+font: 13px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+}
+
+.cor_mapa {
+	/* background: steelblue */;
+	background: #D3D3D3;
+}
+
+.cor_critico {
+background: #FFC0CB;
+BORDER-RIGHT: #002868 2px solid;
+    BORDER-TOP: #002868 2px solid;
+    BORDER-LEFT: #002868 2px solid;
+    BORDER-BOTTOM: #002868 2px solid;
+}
+
+.cor_alerta {
+background: #FFFACD;
+BORDER-RIGHT: #002868 2px solid;
+    BORDER-TOP: #002868 2px solid;
+    BORDER-LEFT: #002868 2px solid;
+    BORDER-BOTTOM: #002868 2px solid;
+}
+
+.cor_ok {
+background: #98FB98;
+BORDER-RIGHT: #002868 2px solid;
+    BORDER-TOP: #002868 2px solid;
+    BORDER-LEFT: #002868 2px solid;
+    BORDER-BOTTOM: #002868 2px solid;
+}
+
+.cor_desatualizado {
+background: #AFEEEE;
+BORDER-RIGHT: #002868 2px solid;
+    BORDER-TOP: #002868 2px solid;
+    BORDER-LEFT: #002868 2px solid;
+    BORDER-BOTTOM: #002868 2px solid;
+}
+
+.Link
+{
+    FONT-SIZE: 11px;
+    COLOR: black;
+    FONT-FAMILY: Arial;
+    TEXT-DECORATION: none
+}
+
+.perspectiva {
+font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color: black;
+FONT-WEIGHT: bold;
+}
+
+.cabecalho_mapa {
+font: 14px "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+color:white;
+FONT-WEIGHT: bold;
+}

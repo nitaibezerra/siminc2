@@ -1,0 +1,144 @@
+@CHARSET "ISO-8859-1";
+
+a { outline:0; }
+
+/********** CSS das Tabelas ***********/
+.tabelasubacao{
+	margin-bottom: 10px;
+}
+
+.tabelasubacao td.tbsubtd{
+	text-align : center;
+	font-weight: bold;
+}
+
+.tabelasubacao .tdbtncontainerleft{
+	text-align : left;
+}
+
+.tabelasubacao .tdbtncontainerRight{
+	text-align : right;
+}
+
+.tabelaExecucaoAnos{
+	width: 100%;
+	background-color: #F2F2F2;
+}
+
+.abaAnos{
+	 
+	height: auto; 
+	vertical-align: top;
+}
+
+   #tabAbasSelecaoCosano td.container {
+            height: 200px;
+        }
+
+        #abasSelecaoCosano {
+            background: none;/*transparent url("../imagens/bg.gif") repeat-x bottom;*/
+            line-height: normal;
+            padding: 0 auto;
+            text-align: center;
+            border-top: 2px solid #FFFFFF;
+            border-left: 2px solid #FFFFFF;
+            border-right: 2px solid #FFFFFF;
+        }
+
+        #abasSelecaoCosano td {
+            margin: 0;
+            padding: 0 0 0 5px;
+            background: url("../../imagens/left_both.gif") no-repeat left top;
+            border-bottom: 1px solid #765;
+            background-position: 0% 0%;
+        }
+
+        #abasSelecaoCosano a {
+            display: block;
+            background: url("../../imagens/right_both.gif") no-repeat right top;
+            padding: 5px 0 4px 0;
+            text-decoration: none;
+            font-weight: bold;
+            color: #765;
+            width: auto;
+            font-size:12px
+        }
+
+        #abasSelecaoCosano a:hover {
+            background-position: 0% -150px;
+            color: #333;
+        }
+
+        #abasSelecaoCosano td:hover, #abasSelecaoCosano td:hover a {
+            background-position: 0% -150px;
+            color: #333;
+        }
+
+        #abasSelecaoCosano td:hover a {
+            background-position: 100% -150px;
+        }
+
+        #loader-container,
+        #LOADER-CONTAINER
+        {
+            background: none;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            z-index: 8000;
+            height: 100%;
+        }
+
+
+        #loader {
+            background-color: #fff;
+            color: #000033;
+            width: 300px;
+            border: 2px solid #cccccc;
+            font-size: 12px;
+            padding: 25px;
+            font-weight: bold;
+            margin: 150px auto;
+        }
+        
+		#divImportarDados{      
+        	border: 3px groove red;    
+        	background: #fff;
+        	padding: 10px;
+        	display: none;
+        }
+#loader-container,
+#LOADER-CONTAINER
+{
+    background: none;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 8000;
+    height: 1200px;
+}
+
+#loader {
+    background-color: #fff;
+    color: #000033;
+    width: 300px;
+    border: 2px solid #cccccc;
+    font-size: 12px;
+    padding: 25px;
+    font-weight: bold;
+    margin: 150px auto;
+}
+
+#divImportarDados{      
+	border: 3px groove red;    
+	background: #fff;
+	padding: 10px;
+	display: none;
+}
+
+.hidden{display:none}
+.link{cursor:pointer}
+.middle{vertical-align:middle}
+.SubTituloTabela{text-align:center;font-weight:bold;background-color:#C9C9C9}
+.bold{font-weight:bold}
+#tbl_escolas{width:100%;overflow:auto;height:380px}

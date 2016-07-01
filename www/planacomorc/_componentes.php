@@ -1,0 +1,7 @@
+<?php 
+
+define("WF_SUBACAO_APROVADO", 971);
+define("WF_SUBACAO_EM_ANALISE", 970);
+define("WF_SUBACAO_EM_PREENCHIMENTO", 969);
+
+?>

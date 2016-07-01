@@ -1,0 +1,145 @@
+<?php 
+
+
+// ------------------------------------------------------------------------------------
+$requisicao = $_REQUEST["requisicao"];
+$unidadeProcedenciaId = $_REQUEST["unpid"]; 
+$unidadeProcedenciaDescricao = pg_escape_string($_REQUEST["unpdsc"]);
+// ------------------------------------------------------------------------------------
+
+if($requisicao=="inserir"){
+	if( isConcluidaInsercao($unidadeProcedenciaDescricao) ) {
+		exibirMensagemSucessoAndRetornar();
+	}
+}  
+
+function isConcluidaInsercao($descricao) {
+	global $db;
+	$sql = "INSERT INTO 
+				conjur.unidadeprocedencia(unpdsc, undpstatus)
+			VALUES('".$descricao."', 'A')";
+	$db->executar($sql);
+	return $db->commit();		
+}
+
+if($requisicao=="alterar"){
+	if( isConcluidaAlteracao($unidadeProcedenciaId,$unidadeProcedenciaDescricao) ) {
+		exibirMensagemSucessoAndRetornar();
+	}
+} 
+
+function isConcluidaAlteracao($unidadeProcedenciaId, $unidadeProcedenciaDescricao) {
+	global $db;
+	$sql = "UPDATE
+				conjur.unidadeprocedencia
+			SET
+				unpdsc = '" . $unidadeProcedenciaDescricao ."'
+			WHERE
+				unpid = ".$unidadeProcedenciaId;	
+	$db->executar($sql);
+	return $db->commit();		
+}
+
+function exibirMensagemSucessoAndRetornar() {
+	echo "<script>
+			alert('Dados gravados com sucesso.');
+			window.opener.location.href = '?modulo=sistema/geral/listaUnidadeProcedencia&acao=A';
+			self.close();
+		  </script>";
+	die();
+}
+
+
+
+if( $unidadeProcedenciaId ) {
+	global $db;
+	$sql = "SELECT * FROM conjur.unidadeprocedencia WHERE unpid = ".$unidadeProcedenciaId;
+	$dados = $db->carregar($sql);
+	extract($dados[0]);
+} else {
+	$unpid = "";
+	$unpdsc = "";
+}
+
+
+monta_titulo( 'CONJUR', '<img src="../imagens/obrig.gif" border="0">&nbsp;Indica Campo Obrigatório' );
+
+?>
+<script language="JavaScript" src="../includes/funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
+<link rel='stylesheet' type='text/css' href='../includes/listagem.css'/>
+<script src="../includes/calendario.js"></script>
+<script language="javascript" type="text/javascript" src="../includes/JsLibrary/date/displaycalendar/displayCalendar.js"></script>
+<link href="../includes/JsLibrary/date/displaycalendar/displayCalendar.css" type="text/css" rel="stylesheet"></link>
+
+<form id="formulario" action="conjur.php?modulo=sistema/geral/cadDadosUnidadeProcedencia&acao=A" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="requisicao" name="requisicao" value="1">
+	<input type="hidden" id="unpid" name="unpid" value="<?=$unpid?>">
+ 
+	<table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
+		<tr>
+	    	<td class ="SubTituloDireita" align="right">Descrição:</td>
+	        <td>
+	        	<?=campo_texto('unpdsc', 'S', 'S', '', 70, 100, '', '', 'left', '',  0, 'id="unpdsc"', '', '', ''); ?>
+	       	</td>
+	    </tr>
+		<tr style="background-color: #c0c0c0; text-align: center;">
+			<td colspan="2">
+				<input type="button" id="btSalvar" value="Salvar" style="cursor:pointer" onclick="procederCadastro();" />
+				<input type="button" id="btFechar" value="Fechar" style="cursor:pointer" onclick="self.close();" />
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script>
+
+
+var btSalvar	=	document.getElementById("btSalvar");
+var btFechar	=	document.getElementById("btFechar");
+
+function desabilitarBotoes() {
+	btSalvar.disabled	= true;
+	btFechar.disabled	= true;	
+}
+
+function habilitarBotoes() {
+	btSalvar.disabled	= false;
+	btFechar.disabled	= false;	
+}
+
+
+
+function procederCadastro()
+{
+	desabilitarBotoes();
+	if( preenchimentoAceito() ) {
+		definirInserirOuAlterar();
+		submeterFormulario();
+	} 
+}
+
+function preenchimentoAceito() {
+	var descricao  = document.getElementById("unpdsc");
+	if(descricao.value == "") {
+		alert("O campo 'Descrição' deve ser preenchido.");
+		descricao.focus();
+		habilitarBotoes();
+		return false;
+	}	
+	return true;
+}
+
+function definirInserirOuAlterar() {
+	var id = document.getElementById("unpid");
+	var requisicao = document.getElementById("requisicao");
+	requisicao.value = ( id==null || id.value=="" ) ? "inserir" : "alterar";
+
+}
+
+function submeterFormulario() {
+	var formulario = document.getElementById("formulario");
+	formulario.submit();
+}
+
+</script>

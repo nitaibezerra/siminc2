@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.1.654 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="xml.fnde.sigef.base.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="xml.fnde.ws-sigef.base.xsd" />
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="header" />
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="params">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_municipio_siafi">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="nu_cgc_favorecido" type="nu_cgc_favorecido" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_esfera_adm">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="1" />
+                          <xs:pattern value="[0-2]{1}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_empenho_original">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="[0-9]{6}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="vl_empenho">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                          <xs:totalDigits value="20" />
+                          <xs:fractionDigits value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="nu_processo" type="nu_processo" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="sg_uf">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="2" />
+                          <xs:enumeration value="AC" />
+                          <xs:enumeration value="AL" />
+                          <xs:enumeration value="AM" />
+                          <xs:enumeration value="AP" />
+                          <xs:enumeration value="BA" />
+                          <xs:enumeration value="CE" />
+                          <xs:enumeration value="DF" />
+                          <xs:enumeration value="ES" />
+                          <xs:enumeration value="GO" />
+                          <xs:enumeration value="MA" />
+                          <xs:enumeration value="MG" />
+                          <xs:enumeration value="MS" />
+                          <xs:enumeration value="MT" />
+                          <xs:enumeration value="PA" />
+                          <xs:enumeration value="PB" />
+                          <xs:enumeration value="PE" />
+                          <xs:enumeration value="PI" />
+                          <xs:enumeration value="PR" />
+                          <xs:enumeration value="RJ" />
+                          <xs:enumeration value="RN" />
+                          <xs:enumeration value="RO" />
+                          <xs:enumeration value="RR" />
+                          <xs:enumeration value="RS" />
+                          <xs:enumeration value="SC" />
+                          <xs:enumeration value="SE" />
+                          <xs:enumeration value="SP" />
+                          <xs:enumeration value="TO" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_especie_empenho">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="[0]{1}[1-4]{1}" />
+                          <xs:maxLength value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_plano_interno_solic">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="11" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_esfera_orcamentaria_solic">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="1" />
+                          <xs:pattern value="[0-9]{1}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_ptres_solic">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="6" />
+                          <xs:pattern value="[0-9]{6}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_fonte_recurso_solic">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="10" />
+                          <xs:pattern value="[0-9]{10}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="co_natureza_despesa_solic">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:totalDigits value="8" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="an_exercicio_original">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                          <xs:pattern value="20[0-9]{2}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="an_convenio">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                          <xs:pattern value="20[0-9]{2}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element minOccurs="0" maxOccurs="1" name="nu_convenio">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="6" />
+                          <xs:pattern value="[0-9]{6}" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

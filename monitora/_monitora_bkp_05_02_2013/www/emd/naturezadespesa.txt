@@ -1,0 +1,272 @@
+3.0.00.00	DESPESAS CORRENTES
+3.1.00.00	PESSOAL E ENCARGOS SOCIAIS
+3.1.30.00	Transferências a Estados e ao Distrito Federal
+3.1.30.41	Contribuições
+3.1.30.99	A Classificar (2-I)
+3.1.80.00	Transferências ao Exterior
+3.1.80.04	Contratação por Tempo Determinado
+3.1.80.34	Outras Despesas de Pessoal Decorrentes de Contratos de Terceirização (1-A)
+3.1.80.99	A Classificar (2-I)
+3.1.90.00	Aplicações Diretas
+3.1.90.01	Aposentadorias e Reformas
+3.1.90.03	Pensões
+3.1.90.04	Contratação por Tempo Determinado
+3.1.90.07	Contribuição a Entidades Fechadas de Previdência
+3.1.90.08	Outros Benefícios Assistenciais (3-I)
+3.1.90.09	Salário-Família
+3.1.90.11	Vencimentos e Vantagens Fixas – Pessoal Civil
+3.1.90.12	Vencimentos e Vantagens Fixas – Pessoal Militar
+3.1.90.13	Obrigações Patronais
+3.1.90.16	Outras Despesas Variáveis – Pessoal Civil
+3.1.90.17	Outras Despesas Variáveis – Pessoal Militar
+3.1.90.34	Outras Despesas de Pessoal decorrentes de Contratos de Terceirização
+3.1.90.67	Depósitos Compulsórios
+3.1.90.91	Sentenças Judiciais
+3.1.90.92	Despesas de Exercícios Anteriores
+3.1.90.94	Indenizações e Restituições Trabalhistas
+3.1.90.96	Ressarcimento de Despesas de Pessoal Requisitado
+3.1.90.99	A Classificar (2-I)
+3.1.99.00	A Definir
+3.1.99.99	A Classificar
+3.2.00.00	JUROS E ENCARGOS DA DÍVIDA
+3.2.90.00	Aplicações Diretas
+3.2.90.21	Juros sobre a Dívida por Contrato
+3.2.90.22	Outros Encargos sobre a Dívida por Contrato
+3.2.90.23	Juros, Deságios e Descontos da Dívida Mobiliária
+3.2.90.24	Outros Encargos sobre a Dívida Mobiliária
+3.2.90.25	Encargos sobre Operações de Crédito por Antecipação da Receita
+3.2.90.91	Sentenças Judiciais
+3.2.90.92	Despesas de Exercícios Anteriores
+3.2.90.93	Indenizações e Restituições
+3.2.90.99	A Classificar (2-I)
+3.2.99.00	A Definir
+3.2.99.99	A Classificar
+3.3.00.00	OUTRAS DESPESAS CORRENTES
+3.3.20.00	Transferências à União
+3.3.20.14	Diárias – Civil
+3.3.20.30	Material de Consumo
+3.3.20.35	Serviços de Consultoria
+3.3.20.36	Outros Serviços de Terceiros - Pessoa Física
+3.3.20.39	Outros Serviços de Terceiros – Pessoa Jurídica
+3.3.20.41	Contribuições
+3.3.20.99	A Classificar (2-I)
+3.3.30.00	Transferências a Estados e ao Distrito Federal
+3.3.30.14	Diárias – Civil
+3.3.30.18	Auxílio Financeiro a Estudantes (9-I)
+3.3.30.20	Auxílio Financeiro a Pesquisadores (15-I)
+3.3.30.30	Material de Consumo
+3.3.30.33	Passagens e Despesas com Locomoção (4-I)
+3.3.30.35	Serviços de Consultoria
+3.3.30.36	Outros Serviços de Terceiros - Pessoa Física
+3.3.30.39	Outros Serviços de Terceiros – Pessoa Jurídica
+3.3.30.41	Contribuições
+3.3.30.43	Subvenções Sociais
+3.3.30.47	Obrigações Tributárias e Contributivas (13-I)
+3.3.30.81	Distribuição Constitucional ou Legal de Receitas (1-A)
+3.3.30.92	Despesas de Exercícios Anteriores
+3.3.30.93	Indenizações e Restituições
+3.3.30.99	A Classificar (2-I)
+3.3.40.00	Transferências a Municípios
+3.3.40.18	Auxílio Financeiro a Estudantes (9-I)
+3.3.40.30	Material de Consumo
+3.3.40.35	Serviços de Consultoria
+3.3.40.36	Outros Serviços de Terceiros – Pessoa Física
+3.3.40.39	Outros Serviços de Terceiros – Pessoa Jurídica
+3.3.40.41	Contribuições
+3.3.40.43	Subvenções Sociais
+3.3.40.47	Obrigações Tributárias e Contributivas - (13-I)
+3.3.40.81	Distribuição Constitucional ou Legal de Receitas (1-A)
+3.3.40.92	Despesas de Exercícios Anteriores
+3.3.40.93	Indenizações e Restituições
+3.3.40.99	A Classificar (2-I)
+3.3.50.00	Transferências a Instituições Privadas sem Fins Lucrativos
+3.3.50.14	Diárias - Civil (5-I)
+3.3.50.18	Auxílio Financeiro a Estudantes (9-I)
+3.3.50.30	Material de Consumo (5-I)
+3.3.50.31	Premiações Culturais, Artísticas, Científicas, Desportivas e Outras (12-I)
+3.3.50.33	Passagens e Despesas com Locomoção (5-I)
+3.3.50.35	Serviços de Consultoria (5-I) (10-I)
+3.3.50.36	Outros Serviços de Terceiros – Pessoa Física (5-I)
+3.3.50.39	Outros Serviços de Terceiros - Pessoa Jurídica
+3.3.50.41	Contribuições
+3.3.50.43	Subvenções Sociais
+3.3.50.47	Obrigações Tributárias e Contributivas (5-I)
+3.3.50.92	Despesas de Exercícios Anteriores
+3.3.50.99	A Classificar (2-I)
+3.3.60.00	Transferências a Instituições Privadas com Fins Lucrativos
+3.3.60.41	Contribuições
+3.3.60.99	A Classificar (2-I)
+3.3.70.00	Transferências a Instituições Multigovernamentais Nacionais
+3.3.70.41	Contribuições
+3.3.70.99	A Classificar (2-I)
+3.3.80.00	Transferências ao Exterior
+3.3.80.04	Contratação por Tempo Determinado
+3.3.80.14	Diárias – Civil
+3.3.80.30	Material de Consumo
+3.3.80.33	Passagens e Despesas com Locomoção
+3.3.80.35	Serviços de Consultoria
+3.3.80.36	Outros Serviços de Terceiros - Pessoa Física
+3.3.80.37	Locação de Mão-de-Obra
+3.3.80.39	Outros Serviços de Terceiros - Pessoa Jurídica
+3.3.80.41	Contribuições
+3.3.80.92	Despesas de Exercícios Anteriores
+3.3.80.99	A Classificar (2-I)
+3.3.90.00	Aplicações Diretas
+3.3.90.01	Aposentadorias e Reformas
+3.3.90.03	Pensões
+3.3.90.04	Contratação por Tempo Determinado
+3.3.90.05	Outros Benefícios Previdenciários
+3.3.90.06	Benefício Mensal ao Deficiente e ao Idoso
+3.3.90.08	Outros Benefícios Assistenciais
+3.3.90.09	Salário-Família
+3.3.90.10	Outros Benefícios de Natureza Social
+3.3.90.14	Diárias – Civil
+3.3.90.15	Diárias – Militar
+3.3.90.18	Auxílio Financeiro a Estudantes
+3.3.90.19	Auxílio-Fardamento
+3.3.90.20	Auxílio Financeiro a Pesquisadores
+3.3.90.26	Obrigações decorrentes de Política Monetária
+3.3.90.27	Encargos pela Honra de Avais, Garantias, Seguros e Similares
+3.3.90.28	Remuneração de Cotas de Fundos Autárquicos
+3.3.90.30	Material de Consumo
+3.3.90.31	Premiações Culturais, Artísticas, Científicas, Desportivas e Outras (6-I)
+3.3.90.32	Material de Distribuição Gratuita
+3.3.90.33	Passagens e Despesas com Locomoção
+3.3.90.35	Serviços de Consultoria
+3.3.90.36	Outros Serviços de Terceiros - Pessoa Física
+3.3.90.37	Locação de Mão-de-Obra
+3.3.90.38	Arrendamento Mercantil
+3.3.90.39	Outros Serviços de Terceiros - Pessoa Jurídica
+3.3.90.45	Equalização de Preços e Taxas
+3.3.90.46	Auxílio-Alimentação
+3.3.90.47	Obrigações Tributárias e Contributivas
+3.3.90.48	Outros Auxílios Financeiros a Pessoas Físicas
+3.3.90.49	Auxílio-Transporte
+3.3.90.67	Depósitos Compulsórios
+3.3.90.91	Sentenças Judiciais
+3.3.90.92	Despesas de Exercícios Anteriores
+3.3.90.93	Indenizações e Restituições
+3.3.90.95	Indenização pela Execução de Trabalhos de Campo
+3.3.90.99	A Classificar (2-I)
+3.3.99.00	A Definir
+3.3.99.99	A Classificar
+4.0.00.00	DESPESAS DE CAPITAL
+4.4.00.00	INVESTIMENTOS
+4.4.20.00	Transferências à União
+4.4.20.41	Contribuições
+4.4.20.42	Auxílios
+4.4.20.51	Obras e Instalações
+4.4.20.52	Equipamentos e Material Permanente
+4.4.20.92	Despesas de Exercícios Anteriores
+4.4.20.93	Indenizações e Restituições
+4.4.20.99	A Classificar (2-I)
+4.4.30.00	Transferências a Estados e ao Distrito Federal
+4.4.30.20	Auxílio Financeiro a Pesquisadores (15-I)
+4.4.30.41	Contribuições
+4.4.30.42	Auxílios
+4.4.30.51	Obras e Instalações
+4.4.30.52	Equipamentos e Material Permanente
+4.4.30.92	Despesas de Exercícios Anteriores
+4.4.30.93	Indenizações e Restituições
+4.4.30.99	A Classificar (2-I)
+4.4.40.00	Transferências a Municípios
+4.4.40.41	Contribuições
+4.4.40.42	Auxílios
+4.4.40.51	Obras e Instalações
+4.4.40.52	Equipamentos e Material Permanente
+4.4.40.92	Despesas de Exercícios Anteriores
+4.4.40.99	A Classificar (2-I)
+4.4.50.00	Transferências a Instituições Privadas sem Fins Lucrativos
+4.4.50.39	Outros Serviços de Terceiros - Pessoa Jurídica
+4.4.50.41	Contribuições
+4.4.50.42	Auxílios
+4.4.50.51	Obras e Instalações
+4.4.50.52	Equipamentos e Material Permanente
+4.4.50.99	A Classificar (2-I)
+4.4.60.00	Transferências a Instituições Privadas com Fins Lucrativos
+4.4.60.41	Contribuições
+4.4.60.42	Auxílios (11-I)
+4.4.60.99	A Classificar (2-I)
+4.4.70.00	Transferências a Instituições Multigovernamentais Nacionais
+4.4.70.41	Contribuições
+4.4.70.42	Auxílios
+4.4.70.99	A Classificar (2-I)
+4.4.80.00	Transferências ao Exterior
+4.4.80.41	Contribuições
+4.4.80.42	Auxílios
+4.4.80.51	Obras e Instalações
+4.4.80.52	Equipamentos e Material Permanente
+4.4.80.99	A Classificar (2-I)
+4.4.90.00	Aplicações Diretas
+4.4.90.04	Contratação por Tempo Determinado
+4.4.90.14	Diárias – Civil
+4.4.90.17	Outras Despesas Variáveis - Pessoal Militar
+4.4.90.18	Auxílio Financeiro a Estudantes (16-I)
+4.4.90.20	Auxílio Financeiro a Pesquisadores
+4.4.90.30	Material de Consumo
+4.4.90.33	Passagens e Despesas com Locomoção
+4.4.90.35	Serviços de Consultoria
+4.4.90.36	Outros Serviços de Terceiros - Pessoa Física
+4.4.90.37	Locação de Mão-de-Obra
+4.4.90.39	Outros Serviços de Terceiros - Pessoa Jurídica
+4.4.90.51	Obras e Instalações
+4.4.90.52	Equipamentos e Material Permanente
+4.4.90.61	Aquisição de Imóveis
+4.4.90.91	Sentenças Judiciais
+4.4.90.92	Despesas de Exercícios Anteriores
+4.4.90.93	Indenizações e Restituições
+4.4.90.99	A Classificar
+4.4.99.00	A Definir
+4.4.99.99	A Classificar
+4.5.00.00	INVERSÕES FINANCEIRAS
+4.5.30.00	Transferências a Estados e ao Distrito Federal
+4.5.30.41	Contribuições
+4.5.30.42	Auxílios
+4.5.30.61	Aquisição de Imóveis
+4.5.30.64	Aquisição de Títulos Representativos de Capital já Integralizado
+4.5.30.65	Constituição ou Aumento de Capital de Empresas
+4.5.30.66	Concessão de Empréstimos e Financiamentos
+4.5.30.99	A Classificar
+4.5.40.00	Transferências a Municípios
+4.5.40.41	Contribuições
+4.5.40.42	Auxílios
+4.5.40.64	Aquisição de Títulos Representativos de Capital já Integralizado
+4.5.40.66	Concessão de Empréstimos e Financiamentos
+4.5.40.99	A Classificar
+4.5.50.00	Transferências a Instituições Privadas sem Fins Lucrativos
+4.5.50.66	Concessão de Empréstimos e Financiamentos
+4.5.50.99	A Classificar
+4.5.80.00	Transferências ao Exterior
+4.5.80.66	Concessão de Empréstimos e Financiamentos
+4.5.80.99	A Classificar
+4.5.90.00	Aplicações Diretas
+4.5.90.27	Encargos pela Honra de Avais, Garantias, Seguros e Similares
+4.5.90.61	Aquisição de Imóveis
+4.5.90.62	Aquisição de Produtos para Revenda
+4.5.90.63	Aquisição de Títulos de Crédito
+4.5.90.64	Aquisição de Títulos Representativos de Capital já Integralizado
+4.5.90.65	Constituição ou Aumento de Capital de Empresas
+4.5.90.66	Concessão de Empréstimos e Financiamentos
+4.5.90.67	Depósitos Compulsórios
+4.5.90.91	Sentenças Judiciais
+4.5.90.92	Despesas de Exercícios Anteriores
+4.5.90.93	Indenizações e Restituições
+4.5.90.99	A Classificar (2-I)
+4.5.99.00	A Definir
+4.5.99.99	A Classificar
+4.6.00.00	AMORTIZAÇÃO DA DÍVIDA
+4.6.90.00	Aplicações Diretas
+4.6.90.71	Principal da Dívida Contratual Resgatado
+4.6.90.72	Principal da Dívida Mobiliária Resgatado
+4.6.90.73	Correção Monetária ou Cambial da Dívida Contratual Resgatada
+4.6.90.74	Correção Monetária ou Cambial da Dívida Mobiliária Resgatada
+4.6.90.75	Correção Monetária da Dívida de Operações de Crédito por Antecipação da Receita
+4.6.90.76	Principal Corrigido da Dívida Mobiliária Refinanciado
+4.6.90.77	Principal Corrigido da Dívida Contratual Refinanciado
+4.6.90.91	Sentenças Judiciais
+4.6.90.92	Despesas de Exercícios Anteriores
+4.6.90.93	Indenizações e Restituições
+4.6.90.99	A Classificar (2-I)
+4.6.99.00	A Definir
+4.6.99.99	A Classificar
+9.9.99.99	Reserva de Contingência

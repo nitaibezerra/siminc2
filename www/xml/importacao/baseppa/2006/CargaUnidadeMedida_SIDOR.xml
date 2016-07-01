@@ -1,0 +1,2127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUnidadeMedida xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <UnidadeMedida>
+    <UNMCod>0</UNMCod>
+    <UNMDsc>nao informado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>2</UNMCod>
+    <UNMDsc>%</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>12</UNMCod>
+    <UNMDsc>% de execução física</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>24</UNMCod>
+    <UNMDsc>-</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>35</UNMCod>
+    <UNMDsc>1000 ha</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>37</UNMCod>
+    <UNMDsc>a definir</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>42</UNMCod>
+    <UNMDsc>barril de óleo equivalente</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>44</UNMCod>
+    <UNMDsc>barril de óleo equivalente/dia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>46</UNMCod>
+    <UNMDsc>barril/dia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>51</UNMCod>
+    <UNMDsc>curie</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>67</UNMCod>
+    <UNMDsc>ha</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>75</UNMCod>
+    <UNMDsc>kg</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>86</UNMCod>
+    <UNMDsc>km</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>88</UNMCod>
+    <UNMDsc>km²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>93</UNMCod>
+    <UNMDsc>m</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>94</UNMCod>
+    <UNMDsc>m²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>97</UNMCod>
+    <UNMDsc>m³</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>98</UNMCod>
+    <UNMDsc>m³.km</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>103</UNMCod>
+    <UNMDsc>mci(milicurie)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>104</UNMCod>
+    <UNMDsc>MW</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>106</UNMCod>
+    <UNMDsc>mil</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>107</UNMCod>
+    <UNMDsc>mil barris de óleo equivalente</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>109</UNMCod>
+    <UNMDsc>mil km²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>110</UNMCod>
+    <UNMDsc>mil m³</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>114</UNMCod>
+    <UNMDsc>milhão de t.milha</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>115</UNMCod>
+    <UNMDsc>milhar</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>118</UNMCod>
+    <UNMDsc>minuto</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>126</UNMCod>
+    <UNMDsc>percentagem</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>136</UNMCod>
+    <UNMDsc>R$</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>137</UNMCod>
+    <UNMDsc>R$ 1.000</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>141</UNMCod>
+    <UNMDsc>R$ mil</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>143</UNMCod>
+    <UNMDsc>R$ milhão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>149</UNMCod>
+    <UNMDsc>reais milhoes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>150</UNMCod>
+    <UNMDsc>saca</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>157</UNMCod>
+    <UNMDsc>TKU - Tonelada pôr Quilômetro Útil</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>163</UNMCod>
+    <UNMDsc>Tbyte</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>164</UNMCod>
+    <UNMDsc>t</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>172</UNMCod>
+    <UNMDsc>unidade</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>179</UNMCod>
+    <UNMDsc>US$ milhão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1168</UNMCod>
+    <UNMDsc>kg de dbo/dia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1169</UNMCod>
+    <UNMDsc>m³/h</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1170</UNMCod>
+    <UNMDsc>Mbyte</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1171</UNMCod>
+    <UNMDsc>metro linear</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1172</UNMCod>
+    <UNMDsc>milhão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1201</UNMCod>
+    <UNMDsc>Gbyte</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1208</UNMCod>
+    <UNMDsc>hora/ano</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1209</UNMCod>
+    <UNMDsc>norma</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1210</UNMCod>
+    <UNMDsc>órgão habilitado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1211</UNMCod>
+    <UNMDsc>pessoa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1212</UNMCod>
+    <UNMDsc>certificados concedidos / órgão habilitado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1213</UNMCod>
+    <UNMDsc>órgão habilitado e integrado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1214</UNMCod>
+    <UNMDsc>agente capacitado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1215</UNMCod>
+    <UNMDsc>construção em m²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1216</UNMCod>
+    <UNMDsc>m2</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1217</UNMCod>
+    <UNMDsc>unidade</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1218</UNMCod>
+    <UNMDsc>R$ bilhão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1219</UNMCod>
+    <UNMDsc>% de manutenção</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1220</UNMCod>
+    <UNMDsc>% de implementação</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1221</UNMCod>
+    <UNMDsc>litro</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1222</UNMCod>
+    <UNMDsc>tonelada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1223</UNMCod>
+    <UNMDsc>etapa concluída</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1224</UNMCod>
+    <UNMDsc>evento promovido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1225</UNMCod>
+    <UNMDsc>desenho industrial de produtos registrados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1226</UNMCod>
+    <UNMDsc/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1227</UNMCod>
+    <UNMDsc>número de espécies</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1228</UNMCod>
+    <UNMDsc>número de amostras analisadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1229</UNMCod>
+    <UNMDsc>irrigantes emancipados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1230</UNMCod>
+    <UNMDsc>número de ampolas com sêmen</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1231</UNMCod>
+    <UNMDsc>estudo/laudo técnico realizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1232</UNMCod>
+    <UNMDsc>número de famílias assentadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1233</UNMCod>
+    <UNMDsc>número de agricultores capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1234</UNMCod>
+    <UNMDsc>indicador conjuntural</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1235</UNMCod>
+    <UNMDsc>número de alevinos produzidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1236</UNMCod>
+    <UNMDsc>assentados emancipados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1237</UNMCod>
+    <UNMDsc>linha de crédito</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1238</UNMCod>
+    <UNMDsc>número de operações</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1239</UNMCod>
+    <UNMDsc>operações de crédito/pessoas capacitads</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1240</UNMCod>
+    <UNMDsc>participação anual</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1241</UNMCod>
+    <UNMDsc>t/a</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1242</UNMCod>
+    <UNMDsc>% de cursos realizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1243</UNMCod>
+    <UNMDsc>programa implantado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1244</UNMCod>
+    <UNMDsc>número de alevinos recebidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1245</UNMCod>
+    <UNMDsc>% de projetos apoiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1246</UNMCod>
+    <UNMDsc>norma/legislação aprovada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1247</UNMCod>
+    <UNMDsc>diagnóstico concluído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1248</UNMCod>
+    <UNMDsc>plano concluído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1249</UNMCod>
+    <UNMDsc>propostas elaboradas e encaminhadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1250</UNMCod>
+    <UNMDsc>rede disponibilizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1251</UNMCod>
+    <UNMDsc>sistemas de monitoramento e avaliação implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1252</UNMCod>
+    <UNMDsc>modelos de gestão implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1253</UNMCod>
+    <UNMDsc>mw</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1254</UNMCod>
+    <UNMDsc>pessoas capacitadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1255</UNMCod>
+    <UNMDsc>pesquisa realizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1256</UNMCod>
+    <UNMDsc>água armazenada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1257</UNMCod>
+    <UNMDsc>escolas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1258</UNMCod>
+    <UNMDsc>sistemas integrados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1259</UNMCod>
+    <UNMDsc>perfil e dimensão definidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1260</UNMCod>
+    <UNMDsc>diretrizes formuladas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1261</UNMCod>
+    <UNMDsc>banco de conhecimento disponibilizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1262</UNMCod>
+    <UNMDsc>número de interlocutores atingidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1263</UNMCod>
+    <UNMDsc>suporte e capacitação disponibilizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1264</UNMCod>
+    <UNMDsc>metros cúbicos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1265</UNMCod>
+    <UNMDsc>acordos de intercâmbio firmados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1266</UNMCod>
+    <UNMDsc>empregos - unidades</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1267</UNMCod>
+    <UNMDsc>pessoas capacitadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1268</UNMCod>
+    <UNMDsc>hectare</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1269</UNMCod>
+    <UNMDsc>processo analisado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1270</UNMCod>
+    <UNMDsc>sistema</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1271</UNMCod>
+    <UNMDsc>reunião realizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1272</UNMCod>
+    <UNMDsc>número de visitantes atendidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1273</UNMCod>
+    <UNMDsc>evento</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1274</UNMCod>
+    <UNMDsc>estudo / pesquisa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1275</UNMCod>
+    <UNMDsc>reunião técnica realizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1276</UNMCod>
+    <UNMDsc>cadastro</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1277</UNMCod>
+    <UNMDsc>mapas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1278</UNMCod>
+    <UNMDsc>porcentagem de realização</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1279</UNMCod>
+    <UNMDsc>complexo industrial</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1280</UNMCod>
+    <UNMDsc>estudo realizado apresentado em relatório e aprovado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1281</UNMCod>
+    <UNMDsc>cluster</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1282</UNMCod>
+    <UNMDsc>arranjo produtivo</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1283</UNMCod>
+    <UNMDsc>km</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1284</UNMCod>
+    <UNMDsc>cursos implantados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1285</UNMCod>
+    <UNMDsc>projeto desenvolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1286</UNMCod>
+    <UNMDsc>aluno atendido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1287</UNMCod>
+    <UNMDsc>instituição apoiada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1288</UNMCod>
+    <UNMDsc>01 cartório </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1289</UNMCod>
+    <UNMDsc>02 cartórios</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1290</UNMCod>
+    <UNMDsc>número de sistemas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1291</UNMCod>
+    <UNMDsc>metros</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1292</UNMCod>
+    <UNMDsc>milhão de alevinos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1293</UNMCod>
+    <UNMDsc>estudos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1294</UNMCod>
+    <UNMDsc>acervo atualizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1295</UNMCod>
+    <UNMDsc>instituição equipada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1296</UNMCod>
+    <UNMDsc>aluno com necessidade especial matriculado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1297</UNMCod>
+    <UNMDsc>número de famílias beneficiadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1298</UNMCod>
+    <UNMDsc>alfabetizador qualificado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1299</UNMCod>
+    <UNMDsc>livos disponibilizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1300</UNMCod>
+    <UNMDsc>número de famías atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1301</UNMCod>
+    <UNMDsc>número de imóveis georeferenciados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1302</UNMCod>
+    <UNMDsc>nº de operações</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1303</UNMCod>
+    <UNMDsc>serviço disponibilizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1304</UNMCod>
+    <UNMDsc>recurso transferido para despesas com transporte ou locomoção de alunosde </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1305</UNMCod>
+    <UNMDsc>número</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1306</UNMCod>
+    <UNMDsc>percentual de implantação do sistema</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1307</UNMCod>
+    <UNMDsc>unidade conectada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1308</UNMCod>
+    <UNMDsc>nº de posições consolidadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1309</UNMCod>
+    <UNMDsc>parcela transferida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1310</UNMCod>
+    <UNMDsc>plano elaborado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1311</UNMCod>
+    <UNMDsc>km2</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1312</UNMCod>
+    <UNMDsc>amostra botânica</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1313</UNMCod>
+    <UNMDsc>espécime botânico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1314</UNMCod>
+    <UNMDsc>informação produzida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1315</UNMCod>
+    <UNMDsc>espécime vegetal</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1316</UNMCod>
+    <UNMDsc>número de contratos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1317</UNMCod>
+    <UNMDsc>número de jovens beneficiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1318</UNMCod>
+    <UNMDsc>% dos recursos utilizados do saldo do fundo</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1319</UNMCod>
+    <UNMDsc>exemplar trabalhado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1320</UNMCod>
+    <UNMDsc>segurança</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1321</UNMCod>
+    <UNMDsc>{projetos apoiados} * 100 / total de projetos apresentados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1322</UNMCod>
+    <UNMDsc>trabalho técnico-científico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1323</UNMCod>
+    <UNMDsc>número de pareceres</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1324</UNMCod>
+    <UNMDsc>diretrizes atualizadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1325</UNMCod>
+    <UNMDsc>percentual de recurso aplicado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1326</UNMCod>
+    <UNMDsc>projeto aprovado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1327</UNMCod>
+    <UNMDsc>item do acervo</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1328</UNMCod>
+    <UNMDsc>nº de ações implementadas no ano * 100 / nº total de ações previstas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1329</UNMCod>
+    <UNMDsc>% do projeto apoiado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1330</UNMCod>
+    <UNMDsc>km2 incorporado aos resultados do programa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1331</UNMCod>
+    <UNMDsc>apoio prestado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1332</UNMCod>
+    <UNMDsc>ação executada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1333</UNMCod>
+    <UNMDsc>ação executada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1334</UNMCod>
+    <UNMDsc>física</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1335</UNMCod>
+    <UNMDsc>US$ bilhão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1336</UNMCod>
+    <UNMDsc>pessoa capacitada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1337</UNMCod>
+    <UNMDsc>empresas implantadas e/ou revitalizadas (unidades)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1338</UNMCod>
+    <UNMDsc>nº de ups sistema implementado, no ano * 100 / nº total de ups</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1339</UNMCod>
+    <UNMDsc>número de trabalhos publicados /pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1340</UNMCod>
+    <UNMDsc>unidade reaparelhada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1341</UNMCod>
+    <UNMDsc>número de publicações por técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1342</UNMCod>
+    <UNMDsc>aluno/professor e outros</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1343</UNMCod>
+    <UNMDsc>aluno / professor e outros</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1344</UNMCod>
+    <UNMDsc>estudos realizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1345</UNMCod>
+    <UNMDsc>pessoas atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1346</UNMCod>
+    <UNMDsc>livros disponibilizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1347</UNMCod>
+    <UNMDsc>pontuação global - anexo v - contrato de gestão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1348</UNMCod>
+    <UNMDsc>nº de projetos aprovados*100/ nº total de projetos apresentados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1349</UNMCod>
+    <UNMDsc>número de trabalhos publicados por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1350</UNMCod>
+    <UNMDsc>entreposto concluído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1351</UNMCod>
+    <UNMDsc>relação entre receita própria e occ (rrp)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1352</UNMCod>
+    <UNMDsc>aluno / professor / outros informado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1353</UNMCod>
+    <UNMDsc>pessoa-hora</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1354</UNMCod>
+    <UNMDsc>aluno formado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1355</UNMCod>
+    <UNMDsc>aluno</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1356</UNMCod>
+    <UNMDsc>ipub, igpub, ppbd, iodt, ipd</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1357</UNMCod>
+    <UNMDsc>número de tecnologias geradas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1358</UNMCod>
+    <UNMDsc>território rural</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1359</UNMCod>
+    <UNMDsc>ips  e img</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1360</UNMCod>
+    <UNMDsc>m3</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1361</UNMCod>
+    <UNMDsc>número de perímetros irrigados nos diferentes estágios</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1362</UNMCod>
+    <UNMDsc>planos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1363</UNMCod>
+    <UNMDsc>órgão colegiado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1364</UNMCod>
+    <UNMDsc>pontuação global obtida na avaliação anual do contr. gestão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1365</UNMCod>
+    <UNMDsc>sistemas produtivos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1366</UNMCod>
+    <UNMDsc>índice de projetos de pesquisa básica desenvolvidos (ppbd)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1367</UNMCod>
+    <UNMDsc>m³/mês</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1368</UNMCod>
+    <UNMDsc>instrumento projeto</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1369</UNMCod>
+    <UNMDsc>número de servidores que conhecem e cumprem as normas de conduta</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1370</UNMCod>
+    <UNMDsc>proposição</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1371</UNMCod>
+    <UNMDsc>ator social</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1372</UNMCod>
+    <UNMDsc>artigos publicados/(pesquisadores-técnicos dedicados à pesquisa)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1373</UNMCod>
+    <UNMDsc>projetos apoiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1374</UNMCod>
+    <UNMDsc>idct e iis</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1375</UNMCod>
+    <UNMDsc>número de estudos realizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1376</UNMCod>
+    <UNMDsc>índice de incremento médio das coleções científicas do mpeg (imcc)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1377</UNMCod>
+    <UNMDsc>% de implantação</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1378</UNMCod>
+    <UNMDsc>pcdt</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1379</UNMCod>
+    <UNMDsc>nº de eventos científicos e produtos geraods/técnico - idec</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1380</UNMCod>
+    <UNMDsc>nº de projetos genoma atendidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1381</UNMCod>
+    <UNMDsc>indicador geral de publicações igpub</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1382</UNMCod>
+    <UNMDsc>número de trabalhos publicados, por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1383</UNMCod>
+    <UNMDsc>nº de eventos científicos e produtos gerados/técnico - idec</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1384</UNMCod>
+    <UNMDsc>% de execução</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1385</UNMCod>
+    <UNMDsc>número de manifestações</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1386</UNMCod>
+    <UNMDsc>cartório construído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1387</UNMCod>
+    <UNMDsc>nº de projetos atendidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1388</UNMCod>
+    <UNMDsc>número de trabalhos publicados, por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1389</UNMCod>
+    <UNMDsc>metro quadrado de área construída</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1390</UNMCod>
+    <UNMDsc>anexo construído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1391</UNMCod>
+    <UNMDsc>un</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1392</UNMCod>
+    <UNMDsc>número de técnicos capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1393</UNMCod>
+    <UNMDsc>% de bibliotecas informatizadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1394</UNMCod>
+    <UNMDsc>número de calibrações realizadas por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1395</UNMCod>
+    <UNMDsc>número de atividades de divulgação por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1396</UNMCod>
+    <UNMDsc>(número de unidades capacitadas / total unidades) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1397</UNMCod>
+    <UNMDsc>(número de projetos desenvolvidos/número de projetos apresentados ) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1398</UNMCod>
+    <UNMDsc>% redes interescolares implantadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1399</UNMCod>
+    <UNMDsc>% de projetos regionais apoiados e implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1400</UNMCod>
+    <UNMDsc>% de projetos apoiados e implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1401</UNMCod>
+    <UNMDsc>% de professores, alunos e egressos capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1402</UNMCod>
+    <UNMDsc>índice geral de publicações - igpub</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1403</UNMCod>
+    <UNMDsc>índice de incremento médio das coleções científicas - imcc</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1404</UNMCod>
+    <UNMDsc>percentual</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1405</UNMCod>
+    <UNMDsc>trabalhos publicados por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1406</UNMCod>
+    <UNMDsc>% sistemas locais de inovação consolidados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1407</UNMCod>
+    <UNMDsc>(nº de projetos atendidos/nº de projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1408</UNMCod>
+    <UNMDsc>(nº de projetos genoma atendidos/nº de projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1409</UNMCod>
+    <UNMDsc>% de centros e laboratórios implantados e em funcionamento</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1410</UNMCod>
+    <UNMDsc>bem adquirido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1411</UNMCod>
+    <UNMDsc>nº de trabalhos/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1412</UNMCod>
+    <UNMDsc>% de projetos aprovados e implantados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1413</UNMCod>
+    <UNMDsc>índice de eventos técnicos-científicos-etc</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1414</UNMCod>
+    <UNMDsc>% projetos apoiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1415</UNMCod>
+    <UNMDsc>número de eventos e produtos por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1416</UNMCod>
+    <UNMDsc>% centros emergentes atendidos/centros existentes </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1417</UNMCod>
+    <UNMDsc>trabalhos publicados por pequisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1418</UNMCod>
+    <UNMDsc>% estudos implementados e tableas elaboradas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1419</UNMCod>
+    <UNMDsc>itens de informação disseminados por técnico envolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1420</UNMCod>
+    <UNMDsc>nº de biblioteca digitais implantadas / nº de bibliotecas planejadas * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1421</UNMCod>
+    <UNMDsc>nº de ponto de presença (pop) da rede mantido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1422</UNMCod>
+    <UNMDsc>índice de desenvolvimento tecnológico/instituição mobilizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1423</UNMCod>
+    <UNMDsc>nº de trabalhos publicados por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1424</UNMCod>
+    <UNMDsc>número de eventos científicos e produtos gerados/técnico - idec</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1425</UNMCod>
+    <UNMDsc>(número de produtos desenvolvidos/número total de produtos demandados)*100 </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1426</UNMCod>
+    <UNMDsc>(número de imagens processadas/número de imagens coletadas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1427</UNMCod>
+    <UNMDsc>(número de ações apoiadas/número de ações pretendidas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1428</UNMCod>
+    <UNMDsc>número de aplicações desenvolvidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1429</UNMCod>
+    <UNMDsc>número de projetos desenvolvidos/número de projetos aprovados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1430</UNMCod>
+    <UNMDsc>número de equipamentos desenvolvidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1431</UNMCod>
+    <UNMDsc>número de processos e técnicas desenvolvidos/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1432</UNMCod>
+    <UNMDsc>cartório</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1433</UNMCod>
+    <UNMDsc>número de cursos realizados/número de cursos planejados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1434</UNMCod>
+    <UNMDsc>número de processos e técnicas desenvolvidos por pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1435</UNMCod>
+    <UNMDsc>imóvel ampliado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1436</UNMCod>
+    <UNMDsc>nº de processos e técnicas/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1437</UNMCod>
+    <UNMDsc>número de eventos científicos e produtos gerados, por técnico - idec</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1438</UNMCod>
+    <UNMDsc>hora/ano de sinal adquirido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1439</UNMCod>
+    <UNMDsc>nº de arquivos procesados/ nº de arquivos totais * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1440</UNMCod>
+    <UNMDsc>número de relatórios produzidos / pesquisador envolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1441</UNMCod>
+    <UNMDsc>sistema implantado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1442</UNMCod>
+    <UNMDsc>(número de centros apoiados / número de centros planejados) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1443</UNMCod>
+    <UNMDsc>número de estudos realizados / pesquisador envolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1444</UNMCod>
+    <UNMDsc>número de arquivos desenvolvidos / pesquisador envolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1445</UNMCod>
+    <UNMDsc>(número de municípios inseridos / número de municípios existentes) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1446</UNMCod>
+    <UNMDsc>(número de dados processados / número de dados coletados) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1447</UNMCod>
+    <UNMDsc>(metro quadrado de área construída / área total planejada) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1448</UNMCod>
+    <UNMDsc>(nº de bibliotecas digitais implantadas / nº de bibliotecas planejadas ) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1449</UNMCod>
+    <UNMDsc>estudo elaborado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1450</UNMCod>
+    <UNMDsc>empresário capacitado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1451</UNMCod>
+    <UNMDsc>(número de cursos realizados / número de cursos planejados) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1452</UNMCod>
+    <UNMDsc>(número de projetos desenvolvidos / número de projetos aprovados) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1453</UNMCod>
+    <UNMDsc>matrículas dos alunos </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1454</UNMCod>
+    <UNMDsc>% centros emergentes atendidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1455</UNMCod>
+    <UNMDsc>estratégia por espécie</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1456</UNMCod>
+    <UNMDsc>nº de pessoas atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1457</UNMCod>
+    <UNMDsc>% estudos implementados e tabelas elaboradas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1458</UNMCod>
+    <UNMDsc>itens de informação disseminados / técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1459</UNMCod>
+    <UNMDsc>ações prioritárias atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1460</UNMCod>
+    <UNMDsc>nº de processos e técnicas desenvolvidos / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1461</UNMCod>
+    <UNMDsc>nº de trabalhos publicados/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1462</UNMCod>
+    <UNMDsc>nºde trabalhos publicados/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1463</UNMCod>
+    <UNMDsc>quantidade de microbacias e sub-bacias críticas prioritárias recuperadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1464</UNMCod>
+    <UNMDsc>nº de processos e técnicas desenvolvidas/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1465</UNMCod>
+    <UNMDsc>nº de eventos científicos e produtos gerados / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1466</UNMCod>
+    <UNMDsc>nº de trabalhos publicados / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1467</UNMCod>
+    <UNMDsc>número de acessos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1468</UNMCod>
+    <UNMDsc>(nº de projetos aprovados/nº total de projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1469</UNMCod>
+    <UNMDsc>(nº de ações implementadas no ano/nº total de ações previstas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1470</UNMCod>
+    <UNMDsc>(nºde produtos desenvolvidos/nº total de produtos demandados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1471</UNMCod>
+    <UNMDsc>% dos instrumentos de gestão de recursos hídricos implementados </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1472</UNMCod>
+    <UNMDsc>percentual dos instrumentos de gestão de recursos hídricos implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1473</UNMCod>
+    <UNMDsc>(nº de unidades capacitadas/total unidades)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1474</UNMCod>
+    <UNMDsc>(nº de ups sistema implementado, no ano/nº total de ups)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1475</UNMCod>
+    <UNMDsc>(nº de projetos desenvolvidos/nº de projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1476</UNMCod>
+    <UNMDsc>volume de redução do aporte de matéria orgânica (toneladas/ano)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1477</UNMCod>
+    <UNMDsc>número de eventos científicos e produtos gerados/técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1478</UNMCod>
+    <UNMDsc>nº de arquivos desenvolvidos / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1479</UNMCod>
+    <UNMDsc>nº de estudos realizados / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1480</UNMCod>
+    <UNMDsc>nº de calibrações realizadas / pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1481</UNMCod>
+    <UNMDsc>nº de eventos científicos e produtos gerados / técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1482</UNMCod>
+    <UNMDsc>(nº de ações apoiadas/nº de ações pretendidas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1483</UNMCod>
+    <UNMDsc>número de alternativas geradas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1484</UNMCod>
+    <UNMDsc>nº de processos e técnicas desenvolvidos/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1485</UNMCod>
+    <UNMDsc>% da produção total</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1486</UNMCod>
+    <UNMDsc>participação relativa na produção total</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1487</UNMCod>
+    <UNMDsc>(nº de arquivos processados / nº de arquivos totais) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1488</UNMCod>
+    <UNMDsc>(nº de produtos desenvolvidos/nº total de produtos demandados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1489</UNMCod>
+    <UNMDsc>índice de projetos de pesquisa básica desenvolvidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1490</UNMCod>
+    <UNMDsc>nº de projetos atendidos/projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1491</UNMCod>
+    <UNMDsc>nº de estudos atendidos / nº de estudos solicitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1492</UNMCod>
+    <UNMDsc>(nº projetos apoiados/total de projetos apresentados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1493</UNMCod>
+    <UNMDsc>(nº pós graduados nas ups / nº pós graduados no país) * 100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1494</UNMCod>
+    <UNMDsc>nº de aplicações desenvolvidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1495</UNMCod>
+    <UNMDsc>(nº de centros apoiados/nº de centros planejados) *100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1496</UNMCod>
+    <UNMDsc>nº de ações apoiadas/nº de ações pretendidas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1497</UNMCod>
+    <UNMDsc>(nº de dados processados/nº de dados coletados) *100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1498</UNMCod>
+    <UNMDsc>(nº de imagens processadas/nº de imagens coletadas)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1499</UNMCod>
+    <UNMDsc>quilômetro quadrado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1500</UNMCod>
+    <UNMDsc>nº de relatórios produzidos/pesquisador</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1501</UNMCod>
+    <UNMDsc>(nº de municípios inseridos/nº de municípios existentes)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1502</UNMCod>
+    <UNMDsc>(nº de cursos realizados/nº de cursos planejados)*100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1503</UNMCod>
+    <UNMDsc>(nº de projetos desenvolvidos/nº de projetos aprovados) *100</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1504</UNMCod>
+    <UNMDsc>nº de eventos científicos e rpodutos gerados/técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1505</UNMCod>
+    <UNMDsc>nº de eventos científicos e produtos gerados/técnico</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1506</UNMCod>
+    <UNMDsc>percentagem da adoção</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1507</UNMCod>
+    <UNMDsc>percentual de área preservada (hectare – ha)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1508</UNMCod>
+    <UNMDsc>percentual dos agentes sociais capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1509</UNMCod>
+    <UNMDsc>cursos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1510</UNMCod>
+    <UNMDsc>número de associações</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1511</UNMCod>
+    <UNMDsc>% de eleitores identificados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1512</UNMCod>
+    <UNMDsc>% dos eleitores identificados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1513</UNMCod>
+    <UNMDsc>aldeias indígenas atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1514</UNMCod>
+    <UNMDsc>quilômetro de estrada implantado (quilômetro – ha)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1515</UNMCod>
+    <UNMDsc>metro quadrado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1516</UNMCod>
+    <UNMDsc>técnicos qualificados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1517</UNMCod>
+    <UNMDsc>volume de matéria prima</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1518</UNMCod>
+    <UNMDsc>percentual de implantação</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1519</UNMCod>
+    <UNMDsc>curso</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1520</UNMCod>
+    <UNMDsc>pessoas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1521</UNMCod>
+    <UNMDsc>tonelada de co2 não emitida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1522</UNMCod>
+    <UNMDsc>número de extrativistas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1523</UNMCod>
+    <UNMDsc>% de professores qualificados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1524</UNMCod>
+    <UNMDsc>número de diretrizes formuladas e implementadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1525</UNMCod>
+    <UNMDsc>número de diretrizes elaboradas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1526</UNMCod>
+    <UNMDsc>normas/regulamentos/produto/sistema certificado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1527</UNMCod>
+    <UNMDsc>monografias (revisões taxonômicas)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1528</UNMCod>
+    <UNMDsc>relatório aprovado e apresentado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1529</UNMCod>
+    <UNMDsc>bases de dados geradas e disseminadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1530</UNMCod>
+    <UNMDsc>global</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1531</UNMCod>
+    <UNMDsc>km de oleodutos e m3 de tancagem</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1532</UNMCod>
+    <UNMDsc>km2 preservado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1533</UNMCod>
+    <UNMDsc>hectares</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1534</UNMCod>
+    <UNMDsc>km adequado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1535</UNMCod>
+    <UNMDsc>km de linha e mva instalado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1536</UNMCod>
+    <UNMDsc>número de produtores familiares capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1537</UNMCod>
+    <UNMDsc>km duplicado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1538</UNMCod>
+    <UNMDsc>toneladas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1539</UNMCod>
+    <UNMDsc>áreas atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1540</UNMCod>
+    <UNMDsc>km e mva</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1541</UNMCod>
+    <UNMDsc>bacias sedimentares marítimas brasileiras </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1542</UNMCod>
+    <UNMDsc>unidade: número de cavidades naturais subterrâneas manejadas e protegidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1543</UNMCod>
+    <UNMDsc>metros quadrados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1544</UNMCod>
+    <UNMDsc>reais (R$)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1545</UNMCod>
+    <UNMDsc>tonelada de co2 não emitida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1546</UNMCod>
+    <UNMDsc>tonelada de co2 evitada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1547</UNMCod>
+    <UNMDsc>R$ (reais)</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1548</UNMCod>
+    <UNMDsc>reais(R$) monetária</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1549</UNMCod>
+    <UNMDsc>número de tecnologia difundida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1550</UNMCod>
+    <UNMDsc>número de armas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1551</UNMCod>
+    <UNMDsc>número de imóveis cadastrado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1552</UNMCod>
+    <UNMDsc>número de imóveis titulados </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1553</UNMCod>
+    <UNMDsc>projetos de tecnologia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1554</UNMCod>
+    <UNMDsc>KW</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1555</UNMCod>
+    <UNMDsc>centrais apoiadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1556</UNMCod>
+    <UNMDsc>km construído</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1557</UNMCod>
+    <UNMDsc>kwh</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1558</UNMCod>
+    <UNMDsc>planos e instrumento projeto</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1559</UNMCod>
+    <UNMDsc>campanha/atividade realizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1560</UNMCod>
+    <UNMDsc>não se aplica</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1561</UNMCod>
+    <UNMDsc>não se aplica, o indicador é de natureza política e não-mensurável</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1562</UNMCod>
+    <UNMDsc>porcentagem dos recursos de subvenção alocados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1563</UNMCod>
+    <UNMDsc>pontuação global obtida na avaliação do contrato de gestão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1564</UNMCod>
+    <UNMDsc>informação técnico-científica</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1565</UNMCod>
+    <UNMDsc>implementação das políticas ambientais </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1566</UNMCod>
+    <UNMDsc>número de pesquisa desenvolvida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1567</UNMCod>
+    <UNMDsc>número  de terras indígenas com ações de gestão ambiental desenvolvidas. </UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1568</UNMCod>
+    <UNMDsc>sistema controlado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1569</UNMCod>
+    <UNMDsc>unidade consumidora</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1570</UNMCod>
+    <UNMDsc>número de indivíduos capacitados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1571</UNMCod>
+    <UNMDsc>testes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1572</UNMCod>
+    <UNMDsc>comunidade atendida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1573</UNMCod>
+    <UNMDsc>número de comunidades</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1574</UNMCod>
+    <UNMDsc>nº de processos analisados e concluídos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1575</UNMCod>
+    <UNMDsc>povos indígenas isolados e de recente contato localizados e protegidos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1576</UNMCod>
+    <UNMDsc>número de profissionais treinados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1577</UNMCod>
+    <UNMDsc>número de planos implementados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1578</UNMCod>
+    <UNMDsc>unidade de controle implantada/adequada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1579</UNMCod>
+    <UNMDsc>pontuação global obtida na avaliação anual do contrato de gestão</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1580</UNMCod>
+    <UNMDsc>número de sistema corporativo</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1581</UNMCod>
+    <UNMDsc>milhões</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1582</UNMCod>
+    <UNMDsc>não definida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1583</UNMCod>
+    <UNMDsc>projetos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1584</UNMCod>
+    <UNMDsc>rede interescolar apoiada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1585</UNMCod>
+    <UNMDsc>unidades cooperantes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1586</UNMCod>
+    <UNMDsc>gigabyte</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1587</UNMCod>
+    <UNMDsc>proposta de regionaslização elaborada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1588</UNMCod>
+    <UNMDsc>funcionamento do programa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1589</UNMCod>
+    <UNMDsc>proposta de regionalização elaborada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1590</UNMCod>
+    <UNMDsc>valor</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1591</UNMCod>
+    <UNMDsc>percentual de domcílios capacitados em relação ao total</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1592</UNMCod>
+    <UNMDsc>agendas ambientais da atividade turística executadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1593</UNMCod>
+    <UNMDsc>número de projetos apoiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1594</UNMCod>
+    <UNMDsc>sistemas implantados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1595</UNMCod>
+    <UNMDsc>ação integrada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1596</UNMCod>
+    <UNMDsc>unidade instalada e unidade ampliada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1597</UNMCod>
+    <UNMDsc>domicílios atendidos em 1.000 unidades</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1598</UNMCod>
+    <UNMDsc>unidade de coordenação implementada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1599</UNMCod>
+    <UNMDsc>agenda ambientais das atividades turísticas executadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1600</UNMCod>
+    <UNMDsc>: unidade</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1601</UNMCod>
+    <UNMDsc>estudos técnicos elaborados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1602</UNMCod>
+    <UNMDsc>% de famílias assistidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1603</UNMCod>
+    <UNMDsc>pessoa assistida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1604</UNMCod>
+    <UNMDsc>sistema de informações georreferenciadas desenvolvido e disponibilizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1605</UNMCod>
+    <UNMDsc>espécies promissoras priorizadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1606</UNMCod>
+    <UNMDsc>identificação de roteiros existentes antes da intervenções da ação e depois</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1607</UNMCod>
+    <UNMDsc>atividade</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1608</UNMCod>
+    <UNMDsc>percentual de realização</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1609</UNMCod>
+    <UNMDsc>nº de bioemprendimentos apoiados/nºde bioemprendimentos aprovados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1610</UNMCod>
+    <UNMDsc>: porcentagem</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1611</UNMCod>
+    <UNMDsc>comunidades atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1612</UNMCod>
+    <UNMDsc>espécie conservada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1613</UNMCod>
+    <UNMDsc>conselhos de meio ambiente com funcionamento regular</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1614</UNMCod>
+    <UNMDsc>tonelada ou fração</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1615</UNMCod>
+    <UNMDsc>quantidade</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1616</UNMCod>
+    <UNMDsc>% de realização</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1617</UNMCod>
+    <UNMDsc>qualificação profissional em ecoturismo realizada nos pólos selecionados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1618</UNMCod>
+    <UNMDsc>incremento na qualidade dos serviços prestados pela secretaria do conama</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1619</UNMCod>
+    <UNMDsc>produtor atendido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1620</UNMCod>
+    <UNMDsc>unidades</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1621</UNMCod>
+    <UNMDsc>estudo apoiado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1622</UNMCod>
+    <UNMDsc>estudo/pesquisa realizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1623</UNMCod>
+    <UNMDsc>estudo/pesquisa realizado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1624</UNMCod>
+    <UNMDsc>recursos destinados a fomento a projetos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1625</UNMCod>
+    <UNMDsc>sistema controlado por conselhos atuantes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1626</UNMCod>
+    <UNMDsc>reais</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1627</UNMCod>
+    <UNMDsc>número de instrumentos econômicos formulados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1628</UNMCod>
+    <UNMDsc>porcentual do mercado detido pela empresa dominante</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1629</UNMCod>
+    <UNMDsc>número de sistemas modernizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1630</UNMCod>
+    <UNMDsc>segmento estruturado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1631</UNMCod>
+    <UNMDsc>número de estações terrestres implantadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1632</UNMCod>
+    <UNMDsc>número de estudos e pesquisas realizados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1633</UNMCod>
+    <UNMDsc>plano de deenvolvimento implantado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1634</UNMCod>
+    <UNMDsc>número de acessos e equipamentos</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1635</UNMCod>
+    <UNMDsc>número de acessos instalados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1636</UNMCod>
+    <UNMDsc>número de famílias atendidas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1637</UNMCod>
+    <UNMDsc>número de conselhos criados/implantados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1638</UNMCod>
+    <UNMDsc>unidade de atendimento apoiada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1639</UNMCod>
+    <UNMDsc>percentual de execução</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1640</UNMCod>
+    <UNMDsc>km ou m²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1641</UNMCod>
+    <UNMDsc>unidade apoiada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1642</UNMCod>
+    <UNMDsc>terminal pesqueiro instalado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1643</UNMCod>
+    <UNMDsc>embarcação pesqueira incorporada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1644</UNMCod>
+    <UNMDsc>unidade de embarcação modernizada e/ou adaptada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1645</UNMCod>
+    <UNMDsc>unidade de recife artificial instalado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1646</UNMCod>
+    <UNMDsc>unidade de ensino de aqüicultura e pesca implantada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1647</UNMCod>
+    <UNMDsc>número de produtores beneficiados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1648</UNMCod>
+    <UNMDsc>instrumento legal revisto</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1649</UNMCod>
+    <UNMDsc>programa social apoiado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1650</UNMCod>
+    <UNMDsc>nº de entidades apoiadas</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1651</UNMCod>
+    <UNMDsc>nº de acordos celebrados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1652</UNMCod>
+    <UNMDsc>% da frota pesqueira monitorada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1653</UNMCod>
+    <UNMDsc>unidades monetárias - real</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1654</UNMCod>
+    <UNMDsc>unidade monetária - real</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1655</UNMCod>
+    <UNMDsc>unidade monetária - real</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1656</UNMCod>
+    <UNMDsc>não há</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1657</UNMCod>
+    <UNMDsc>km de rede e kva de transformadores</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1658</UNMCod>
+    <UNMDsc>% de transferência</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1659</UNMCod>
+    <UNMDsc>% de execução física</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1660</UNMCod>
+    <UNMDsc>unidade/ano</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1661</UNMCod>
+    <UNMDsc>conselhos atuantes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1662</UNMCod>
+    <UNMDsc>unidade implementada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1663</UNMCod>
+    <UNMDsc>roteiros implementados após as intervenções</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1664</UNMCod>
+    <UNMDsc>gigabytes</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1665</UNMCod>
+    <UNMDsc>candidato aprovado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1666</UNMCod>
+    <UNMDsc>percentual de atendimento consular por 1000</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1667</UNMCod>
+    <UNMDsc>programa apoiado</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1668</UNMCod>
+    <UNMDsc>hora</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1669</UNMCod>
+    <UNMDsc>real mil equivalente</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1670</UNMCod>
+    <UNMDsc>% execução física</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1671</UNMCod>
+    <UNMDsc>unidade implantada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1672</UNMCod>
+    <UNMDsc>sistema mantido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1673</UNMCod>
+    <UNMDsc>Bolsa de sangue como sorologia negativa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1674</UNMCod>
+    <UNMDsc>Software desenvolvido</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1675</UNMCod>
+    <UNMDsc>Unidade Modernizada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1676</UNMCod>
+    <UNMDsc>nº passageiros transportados por dia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1677</UNMCod>
+    <UNMDsc>Equipes de Saúde da Família</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1678</UNMCod>
+    <UNMDsc>Percentual de cobertura populacional</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1679</UNMCod>
+    <UNMDsc>Ponte adequada</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1680</UNMCod>
+    <UNMDsc>R$ mil equivalente</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1681</UNMCod>
+    <UNMDsc>habitante</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1682</UNMCod>
+    <UNMDsc>mil doses</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1683</UNMCod>
+    <UNMDsc>Estados / Municípios qualificados</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1684</UNMCod>
+    <UNMDsc>número de bolsas de sangue com sorologia negativa</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1685</UNMCod>
+    <UNMDsc>mil barris de petróleo por dia</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1686</UNMCod>
+    <UNMDsc>milicurie</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1687</UNMCod>
+    <UNMDsc>Base construída com 16000 m²</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1688</UNMCod>
+    <UNMDsc>Equipe de Saúde da Família Mantida</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1689</UNMCod>
+    <UNMDsc>Gb</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1690</UNMCod>
+    <UNMDsc>pacote</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1691</UNMCod>
+    <UNMDsc>Ton</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1692</UNMCod>
+    <UNMDsc>kw equivalente</UNMDsc>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1693</UNMCod>
+    <UNMDsc>terabecquerel</UNMDsc>
+  </UnidadeMedida>
+</ArrayOfUnidadeMedida>

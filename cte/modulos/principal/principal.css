@@ -1,0 +1,407 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+/**
+ * 
+ * Estilização de TAGS
+ * 
+ */
+body{
+	font:11px tahoma;
+}
+h1{
+	text-indent:-20050px;
+	background:url(..Imagens/index1.gif) left top no-repeat;
+	width:220px;
+	float:left;
+	margin-top:3px;
+}
+h2{
+	font-size:1.5em;
+	padding:25px 20px 20px 20px;
+	display:table;
+	float:left;
+}
+fieldset{
+	border:none;
+}
+label{
+	display:block;
+	color:#000066;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:underline;
+}
+a:visited{
+	color: blue;
+}
+p{
+	color:#000066;
+}
+/**
+ * 
+ * Estilização de Ids
+ * 
+ */
+#global{
+	width:770px;
+}
+#barra_governo{
+	height:34px;
+	overflow:hidden;
+	background:#FC0;
+}
+#form_governo{
+	width:450px;
+	float:right;
+	margin-top:5px;
+}
+#barra_login{
+	width:770px;
+	background:#F5F5F5;
+	border-bottom:3px solid #1070A6;
+}
+#barra_login:after{
+	content:".";
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	overflow:hidden;
+}
+#login_sistema{
+	width:200px;
+	padding:10px 0px 10px 0px;
+	float:right;
+}
+#dados_login{
+	float:right;
+	border:1px solid #1070A6;
+	padding:7px;
+	margin:5px;
+}
+#infoEsconde{
+	display:block;
+	margin-bottom:3px;
+}
+#conteudo{
+	min-height:380px;
+}
+#conteudo_index{
+	padding:40px;
+}
+#conteudo_index p{
+	clear:both;
+	margin:0.8em 0;
+}
+#rodape{
+	background:url(../Imagens/barrarodape.gif);
+	height:35px;
+}
+#rodape a{
+	color:#FFF;
+	position:relative;
+	top:17px;
+	margin-left:10px;
+}
+#seleciona_perfil{
+	padding:20px;
+}
+#seleciona_perfil p{
+	margin-bottom:10px;
+}
+#menu{
+	background:#1070A6;
+	padding-bottom:5px;
+}
+#menu ul li.item{
+	display:inline;
+	padding:0px 4px;
+}
+#menu ul li a{
+	color:#FFF;
+	padding:2px 2px 2px 2px;
+	position:relative;
+	top:1px;
+}
+#menu ul li a:hover{
+	text-decoration:none;
+	color:#1070A6;
+	background:#F5F5F5;
+}
+#formescolha{
+	padding:10px;
+	margin-bottom:10px;
+}
+#form_usuario{
+	padding:10px;
+	width:760px;
+	margin:0 auto;
+	display:table;
+}
+#form_usuario label{
+	display:block;
+	padding:3px;
+}
+#item:hover ul{
+	display:block;
+}
+#form_overlay{
+	position:absolute;
+	width:770px;
+	height:105%;
+	background:#F5F5F5;
+	z-index:10000;
+	-moz-opacity:0.6;
+}
+#msg1_overlay, #msg3_overlay{
+	position:absolute;
+	width:350px;
+	padding:20px 5px;
+	background:#FFF;
+	z-index:1000000;
+	border:3px solid #1070A6;
+	color:#1070A6;
+	margin:150px 210px;
+	font-weight:bolder;
+	text-align:center;
+}
+#msg1_overlay{
+	display:block;
+}
+#msg3_overlay{
+	display:none;
+}
+#msg2_overlay{
+	position:absolute;
+	z-index:1000000;
+	background:#FFF;
+	width:150px;
+	text-align:center;
+	padding:10px;
+	border:3px solid #1070A6;
+	margin:150px 300px;
+	display:none;
+}
+/**
+ *  	Rede Municipal  	Rede Estadual
+Educacenso 	A informar 	Educacenso 	A informar
+ * Estilização de Classes
+ * 
+ */
+.input{
+	border:1px solid #1070A6;
+	background:#FAFAFA;
+}
+.login{
+	width:130px;
+	margin-top:2px;
+}
+.senha{
+	margin-left:8px;
+}
+.submit{
+	border:1px solid #1070A6;
+	background:#FAFAFA;
+	color:#006;
+	margin-left:147px;
+	margin-top:2px;
+}
+.radio{
+	position:relative;
+	top:2px;
+}
+.sub_itens{
+	position:absolute;
+	display:block;
+	top:150px;
+	left:70px;
+	background:#1070A6;
+	padding:5px;
+	list-style-type:none;
+	display:none;
+}
+.subiu{
+	top:124px;
+}
+.sub_itens a{
+	display:block;
+	width:170px;
+}
+.perfil{
+	float:left;
+}
+.logout{
+	float:right;
+}
+.userForm{
+	width:360px;
+	border:1px solid #000066;	
+	padding:4px;
+	float:left;
+}
+.leftField{
+	margin-right:10px;
+}
+.subField{
+	margin-top:2px;
+	text-align:right;
+}
+.grande, .medio, .pequeno{
+	padding:1px;
+}
+.grande{
+	width:350px;
+}
+.medio{
+	width:150px;
+}
+.intermediario{
+	width:60px;
+}
+.pequeno{
+	width:30px;
+}
+.leftField select{
+	padding:1px;
+}
+.fechado{
+	height:11px;
+	overflow:hidden;
+}
+
+/* Planejamento Estratégico */
+#submit_busca{
+	color: #000066;
+	border:1px solid;
+	padding:2px;
+	background:#66E6FF;
+	cursor:pointer;
+}
+#menu_estados{
+	clear:left;
+	list-style:none;
+}
+#menu_estados li{
+	width:85px;
+	height:30px;
+	margin-bottom:1px;
+	display:block;
+	float:left;
+}
+#menu_estados li a{
+	background:#66E6FF;
+	display:table-cell;
+	width:85px;
+	height:30px;
+	vertical-align:middle;
+	text-align:center;
+	color:#006;
+}
+html>body #menu_estados li a:hover{
+	background:#3373B3;
+}
+#cadastro_planejamento{
+	clear:left;
+}
+#cadastro_planejamento table{
+	width:100%;
+	text-align:center;
+	position:relative;
+	top:-1px;
+}
+.campos_busca{
+	padding:5px;
+	background:#00FFFF;
+	margin-bottom:1px;
+	text-align:right;
+}
+.campos_busca label{
+	display:inline;
+	margin-right:10px;
+}
+.sigla_uf, .nome_municipio{
+	background:#66E6FF;
+	display:block;
+	padding:4px;
+	text-align:center;
+	float:left;
+	margin-bottom:1px;
+	color:#006;
+}
+.sigla_uf{	
+	width:28px;
+	margin-right:1px;
+}
+.nome_municipio{
+	width:200px;
+}
+
+.erro{
+	color: red;
+}
+.tit1{
+	background:#4DD2FF;
+	padding:4px;
+	color:#006;
+}
+.tit2{
+	padding:3px;
+	background:#3DFFFF;
+	color:#006;
+}
+.tit3{
+	padding:3px;
+	background:#D9D9D9;
+}
+.linha{
+	background:#D9D9D9;
+}
+.linha td{
+	padding:3px;
+}
+.footer_submit{
+	padding:4px;
+	background:#22FFDD;
+}
+.footer_submit input{
+	width:150px;
+	color: #056;
+	border:1px solid;
+	cursor:pointer;
+}
+.footer_submit input:hover{
+	background:#0CD;	
+	color:#034;
+}
+
+
+table.bordasimples{
+	border: 1px solid;
+	width: 100%;
+	border-collapse: collapse;
+	
+}
+
+table.bordasimples tr td{
+	border:1px solid black;
+}
+
+table.bordasimples tr.color1{
+	background-color: lightgray;
+}
+
+table.bordasimples tr.color2{
+	background-color: white;
+}
+
+.wBord{
+	width:10px;
+	border:none;
+	background:#D9D9D9;
+}

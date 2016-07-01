@@ -1,0 +1,3267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Docs For Class cls_banco</title>
+	<link rel="stylesheet" type="text/css" id="layout" href="../media/layout.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="../media/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../media/print.css" media="print">
+</head>
+
+<body>
+<div id="header">
+	<div id="navLinks">
+        
+                                    
+                            	        [ <a href="../classtrees_default.html">Class Tree: default</a> ]
+            [ <a href="../elementindex_default.html">Index: default</a> ]
+        		[ <a href="../elementindex.html">All elements</a> ]		
+	</div>
+	<div id="packagePosition">
+		<div id="packageTitle2">default</div>
+		<div id="packageTitle">default</div>
+		<div id="elementPath"> &middot; </div>
+	</div>
+</div>
+
+<div id="nav" class="small">
+	<div id="packages">
+		Packages:
+					<p><a href="../li_default.html">default</a></p>
+			</div>
+
+				<div id="index">
+			<div id="files">
+								Files:<br>
+								<a href="../default/_classes_simec.inc.html">		classes_simec.inc
+		</a><br>
+			<a href="../default/_funcoes.inc.html">		funcoes.inc
+		</a><br>
+				</div>
+			<div id="interfaces">
+							</div>
+			<div id="classes">
+				Classes:<br>
+								<a href="../default/cls_banco.html">		cls_banco
+		</a><br>
+			<a href="../default/cls_classes_simec.html">		cls_classes_simec
+		</a><br>
+			<a href="../default/criptografia.html">		criptografia
+		</a><br>
+			<a href="../default/GeraExcel.html">		GeraExcel
+		</a><br>
+			<a href="../default/Teste.html">		Teste
+		</a><br>
+			<a href="../default/Testes.html">		Testes
+		</a><br>
+				</div>
+		</div>
+	</div>
+
+<div id="body">
+	    		<h1>Class: cls_banco</h1>
+	<p style="margin: 0px;">Source Location: /classes_simec.inc</p>
+	
+
+<div class="leftcol">
+	<h3><a href="#class_details">Class Overview</a> <span class="smalllinenumber">[line 38]</span></h3>
+	<div id="classTree"><pre></pre>
+</div>
+	<div class="small">
+	<p></p>
+		<h4>Author(s):</h4>
+	<ul>
+			</ul>
+	<h4>Version:</h4>
+	<ul>
+			</ul>
+
+	<h4>Copyright:</h4>
+	<ul>
+			</li>
+	</div>
+</div>
+
+<div class="middlecol">
+	<h3><a href="#class_vars">Variables</a></h3>
+	<ul class="small">
+				<li><a href="../default/cls_banco.html#var$arrayQuery">$arrayQuery</a></li>
+				<li><a href="../default/cls_banco.html#var$link">$link</a></li>
+				<li><a href="../default/cls_banco.html#var$numQuery">$numQuery</a></li>
+				<li><a href="../default/cls_banco.html#var$num_rows">$num_rows</a></li>
+				<li><a href="../default/cls_banco.html#var$oci_id">$oci_id</a></li>
+				<li><a href="../default/cls_banco.html#var$resultado">$resultado</a></li>
+				<li><a href="../default/cls_banco.html#var$sql">$sql</a></li>
+				<li><a href="../default/cls_banco.html#var$tentativas">$tentativas</a></li>
+				<li><a href="../default/cls_banco.html#var$ultimo_SQL">$ultimo_SQL</a></li>
+			</ul>
+	<h3><a href="#class_consts">Constants</a></h3>
+	<ul class="small">
+			</ul>
+</div>
+<div class="rightcol">
+	<h3><a href="#class_methods">Methods</a></h3>
+	<ul class="small">
+				<li><a href="../default/cls_banco.html#methodcls_banco">cls_banco</a></li>
+				<li><a href="../default/cls_banco.html#method__destruct">__destruct</a></li>
+				<li><a href="../default/cls_banco.html#methodalterar_status_usuario">alterar_status_usuario</a></li>
+				<li><a href="../default/cls_banco.html#methodantiInjection">antiInjection</a></li>
+				<li><a href="../default/cls_banco.html#methodapagatudo">apagatudo</a></li>
+				<li><a href="../default/cls_banco.html#methodbusca_explicacao">busca_explicacao</a></li>
+				<li><a href="../default/cls_banco.html#methodbusca_pai">busca_pai</a></li>
+				<li><a href="../default/cls_banco.html#methodcabecalho_acao">cabecalho_acao</a></li>
+				<li><a href="../default/cls_banco.html#methodcabecalho_programa">cabecalho_programa</a></li>
+				<li><a href="../default/cls_banco.html#methodcabecalho_projeto">cabecalho_projeto</a></li>
+				<li><a href="../default/cls_banco.html#methodcarregaAgrupado">carregaAgrupado</a></li>
+				<li><a href="../default/cls_banco.html#methodcarregar">carregar</a></li>
+				<li><a href="../default/cls_banco.html#methodcarregarColuna">carregarColuna</a></li>
+				<li><a href="../default/cls_banco.html#methodcarregarObjeto">carregarObjeto</a></li>
+				<li><a href="../default/cls_banco.html#methodcarrega_registro">carrega_registro</a></li>
+				<li><a href="../default/cls_banco.html#methodcarrega_tudo">carrega_tudo</a></li>
+				<li><a href="../default/cls_banco.html#methodchama_etapafase">chama_etapafase</a></li>
+				<li><a href="../default/cls_banco.html#methodchama_subacao">chama_subacao</a></li>
+				<li><a href="../default/cls_banco.html#methodclose">close</a></li>
+				<li><a href="../default/cls_banco.html#methodcommit">commit</a></li>
+				<li><a href="../default/cls_banco.html#methodconta_linhas">conta_linhas</a></li>
+				<li><a href="../default/cls_banco.html#methodconverttoxml">converttoxml</a></li>
+				<li><a href="../default/cls_banco.html#methodcriarColunasDeOrdenacaoEmArray">criarColunasDeOrdenacaoEmArray</a></li>
+				<li><a href="../default/cls_banco.html#methodcria_aba">cria_aba</a></li>
+				<li><a href="../default/cls_banco.html#methodehcoorduma">ehcoorduma</a></li>
+				<li><a href="../default/cls_banco.html#methodehcriador">ehcriador</a></li>
+				<li><a href="../default/cls_banco.html#methodehdecisor">ehdecisor</a></li>
+				<li><a href="../default/cls_banco.html#methodehdigitador">ehdigitador</a></li>
+				<li><a href="../default/cls_banco.html#methodeof">eof</a></li>
+				<li><a href="../default/cls_banco.html#methodescape">escape</a></li>
+				<li><a href="../default/cls_banco.html#methodexecutar">executar</a></li>
+				<li><a href="../default/cls_banco.html#methodgerar_senha">gerar_senha</a></li>
+				<li><a href="../default/cls_banco.html#methodGetLogin">GetLogin</a></li>
+				<li><a href="../default/cls_banco.html#methodgrafico_validacao_prg">grafico_validacao_prg</a></li>
+				<li><a href="../default/cls_banco.html#methodinsucesso">insucesso</a></li>
+				<li><a href="../default/cls_banco.html#methodis_utf8">is_utf8</a></li>
+				<li><a href="../default/cls_banco.html#methodmerge">merge</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_checkbox">monta_checkbox</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_combo">monta_combo</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_combo_multiplo">monta_combo_multiplo</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista">monta_lista</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista_agrupado">monta_lista_agrupado</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista_array">monta_lista_array</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista_grupo">monta_lista_grupo</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista_simples">monta_lista_simples</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_lista_tabulado">monta_lista_tabulado</a></li>
+				<li><a href="../default/cls_banco.html#methodmonta_radio">monta_radio</a></li>
+				<li><a href="../default/cls_banco.html#methodmostra_resp">mostra_resp</a></li>
+				<li><a href="../default/cls_banco.html#methodmudaPosicao">mudaPosicao</a></li>
+				<li><a href="../default/cls_banco.html#methodpegaLinha">pegaLinha</a></li>
+				<li><a href="../default/cls_banco.html#methodpegarColunas">pegarColunas</a></li>
+				<li><a href="../default/cls_banco.html#methodpegarTabelas">pegarTabelas</a></li>
+				<li><a href="../default/cls_banco.html#methodpegaUm">pegaUm</a></li>
+				<li><a href="../default/cls_banco.html#methodpegaUmObjeto">pegaUmObjeto</a></li>
+				<li><a href="../default/cls_banco.html#methodpega_ano_atual">pega_ano_atual</a></li>
+				<li><a href="../default/cls_banco.html#methodrandomkey">randomkey</a></li>
+				<li><a href="../default/cls_banco.html#methodrandomstr">randomstr</a></li>
+				<li><a href="../default/cls_banco.html#methodrecord_set">record_set</a></li>
+				<li><a href="../default/cls_banco.html#methodrecuperar">recuperar</a></li>
+				<li><a href="../default/cls_banco.html#methodrelatsubacao">relatsubacao</a></li>
+				<li><a href="../default/cls_banco.html#methodrollback">rollback</a></li>
+				<li><a href="../default/cls_banco.html#methodsalvaQueryArray">salvaQueryArray</a></li>
+				<li><a href="../default/cls_banco.html#methodsql_to_excel">sql_to_excel</a></li>
+				<li><a href="../default/cls_banco.html#methodStoreLogin">StoreLogin</a></li>
+				<li><a href="../default/cls_banco.html#methodsucesso">sucesso</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_altagestao">testa_altagestao</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_altagestaopje">testa_altagestaopje</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_cgo">testa_cgo</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_coordenador">testa_coordenador</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_coordenador_plan">testa_coordenador_plan</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_coorduma">testa_coorduma</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_digitador">testa_digitador</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_documentador_projespec">testa_documentador_projespec</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_emenda">testa_emenda</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_gerente">testa_gerente</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_gerente_exe">testa_gerente_exe</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_proprietario">testa_proprietario</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_responsabilidade">testa_responsabilidade</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_responsavel_projespec">testa_responsavel_projespec</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_superuser">testa_superuser</a></li>
+				<li><a href="../default/cls_banco.html#methodtesta_uma">testa_uma</a></li>
+				<li><a href="../default/cls_banco.html#methodusuarioJoinUnidadesPermitidas">usuarioJoinUnidadesPermitidas</a></li>
+				<li><a href="../default/cls_banco.html#methodusuarioPossuiPermissaoAlgumaUnidade">usuarioPossuiPermissaoAlgumaUnidade</a></li>
+				<li><a href="../default/cls_banco.html#methodusuarioPossuiPermissaoTodasUnidades">usuarioPossuiPermissaoTodasUnidades</a></li>
+				<li><a href="../default/cls_banco.html#methodusuarioPossuiPermissaoUnidade">usuarioPossuiPermissaoUnidade</a></li>
+				<li><a href="../default/cls_banco.html#methodusuarioUnidadesPermitidas">usuarioUnidadesPermitidas</a></li>
+				<li><a href="../default/cls_banco.html#methodverifica_geral">verifica_geral</a></li>
+				<li><a href="../default/cls_banco.html#methodverifica_momento">verifica_momento</a></li>
+				<li><a href="../default/cls_banco.html#methodverifica_momento2">verifica_momento2</a></li>
+				<li><a href="../default/cls_banco.html#methodverifica_resp_elabrev">verifica_resp_elabrev</a></li>
+			</ul>
+</div>
+
+<div id="content">
+<hr>
+	<div class="contents">
+	</div>
+
+	<div class="leftCol">
+    	<h2>Inherited Variables</h2>
+		<h2>Inherited Constants</h2>
+		</div>
+
+	<div class="rightCol">
+	<h2>Inherited Methods</h2>
+		</div>
+	<br clear="all">
+	<hr>
+
+	<a name="class_details"></a>
+	<h2>Class Details</h2>
+		<p class="small" style="color: #334B66;">[ <a href="#top">Top</a> ]</p>
+
+	<hr>
+	<a name="class_vars"></a>
+	<h2>Class Variables</h2>
+		<a name="var$arrayQuery"></a>
+	<p></p>
+	<h4>$arrayQuery</h4>
+	<div class="indent">
+		<p class="linenumber">[line 47]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$link"></a>
+	<p></p>
+	<h4>$link</h4>
+	<div class="indent">
+		<p class="linenumber">[line 40]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$numQuery"></a>
+	<p></p>
+	<h4>$numQuery</h4>
+	<div class="indent">
+		<p class="linenumber">[line 48]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$num_rows"></a>
+	<p></p>
+	<h4>$num_rows</h4>
+	<div class="indent">
+		<p class="linenumber">[line 42]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$oci_id"></a>
+	<p></p>
+	<h4>$oci_id</h4>
+	<div class="indent">
+		<p class="linenumber">[line 45]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$resultado"></a>
+	<p></p>
+	<h4>$resultado</h4>
+	<div class="indent">
+		<p class="linenumber">[line 41]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$sql"></a>
+	<p></p>
+	<h4>$sql</h4>
+	<div class="indent">
+		<p class="linenumber">[line 44]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$tentativas"></a>
+	<p></p>
+	<h4>$tentativas</h4>
+	<div class="indent">
+		<p class="linenumber">[line 46]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="var$ultimo_SQL"></a>
+	<p></p>
+	<h4>$ultimo_SQL</h4>
+	<div class="indent">
+		<p class="linenumber">[line 43]</p>
+				<p><b>Type:</b> mixed</p>
+		<p><b>Overrides:</b> </p>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+
+	<hr>
+	<a name="class_methods"></a>
+	<h2>Class Methods</h2>
+	
+	<a name="methodcls_banco"></a>
+	<p></p>
+	<h3>cls_banco</h3>
+	<div class="indent">
+		<p>
+		<code>cls_banco cls_banco(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 52]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="method__destruct"></a>
+	<p></p>
+	<h3>__destruct</h3>
+	<div class="indent">
+		<p>
+		<code>void __destruct(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 86]</p>
+		<p align="center"><strong>function destrutora
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+	<li><b>access</b> - public</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodalterar_status_usuario"></a>
+	<p></p>
+	<h3>alterar_status_usuario</h3>
+	<div class="indent">
+		<p>
+		<code>void alterar_status_usuario(
+
+$cpf, 
+$status, 
+$justificativa, [
+$sisid = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 3480]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>access</b> - public</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cpf</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$status</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$justificativa</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$sisid</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodantiInjection"></a>
+	<p></p>
+	<h3>antiInjection</h3>
+	<div class="indent">
+		<p>
+		<code>: antiInjection(
+string
+$string, [string
+$p = &quot;&quot;])</code>
+		</p>
+	
+		<p class="linenumber">[line 144]</p>
+		<p align="center"><strong>function antiInjection
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - string</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$string</b> 
+		- 
+		string (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$p</b> 
+		- 
+		p (opcional)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodapagatudo"></a>
+	<p></p>
+	<h3>apagatudo</h3>
+	<div class="indent">
+		<p>
+		<code>: apagatudo(
+string
+$texto, string
+$tabela)</code>
+		</p>
+	
+		<p class="linenumber">[line 311]</p>
+		<p align="center"><strong>function apagatudo
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - boolean (false)</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$texto</b> 
+		- 
+		texto (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$tabela</b> 
+		- 
+		tabela (obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodbusca_explicacao"></a>
+	<p></p>
+	<h3>busca_explicacao</h3>
+	<div class="indent">
+		<p>
+		<code>: busca_explicacao(
+string
+$campo, string
+$tabela)</code>
+		</p>
+	
+		<p class="linenumber">[line 348]</p>
+		<p align="center"><strong>function busca_explicacao
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - string</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$campo</b> 
+		- 
+		campo (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$tabela</b> 
+		- 
+		tabela (obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodbusca_pai"></a>
+	<p></p>
+	<h3>busca_pai</h3>
+	<div class="indent">
+		<p>
+		<code>void busca_pai(
+
+$cod, 
+$i)</code>
+		</p>
+	
+		<p class="linenumber">[line 1621]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$i</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcabecalho_acao"></a>
+	<p></p>
+	<h3>cabecalho_acao</h3>
+	<div class="indent">
+		<p>
+		<code>void cabecalho_acao(
+
+$acaid)</code>
+		</p>
+	
+		<p class="linenumber">[line 3059]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$acaid</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcabecalho_programa"></a>
+	<p></p>
+	<h3>cabecalho_programa</h3>
+	<div class="indent">
+		<p>
+		<code>void cabecalho_programa(
+
+$prgid)</code>
+		</p>
+	
+		<p class="linenumber">[line 3084]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$prgid</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcabecalho_projeto"></a>
+	<p></p>
+	<h3>cabecalho_projeto</h3>
+	<div class="indent">
+		<p>
+		<code>void cabecalho_projeto(
+
+$pjeid)</code>
+		</p>
+	
+		<p class="linenumber">[line 3038]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$pjeid</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarregaAgrupado"></a>
+	<p></p>
+	<h3>carregaAgrupado</h3>
+	<div class="indent">
+		<p>
+		<code>void carregaAgrupado(
+
+$sql, 
+$agrupador)</code>
+		</p>
+	
+		<p class="linenumber">[line 2517]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$sql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$agrupador</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarregar"></a>
+	<p></p>
+	<h3>carregar</h3>
+	<div class="indent">
+		<p>
+		<code>: carregar(
+string
+$SQL, [string
+$var = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 384]</p>
+		<p align="center"><strong>function carregar
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - array / null</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$SQL</b> 
+		- 
+		SQL (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$var</b> 
+		- 
+		var (opcional)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarregarColuna"></a>
+	<p></p>
+	<h3>carregarColuna</h3>
+	<div class="indent">
+		<p>
+		<code>void carregarColuna(
+
+$SQL, [
+$coluna = ''], [
+$var = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 397]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$SQL</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$coluna</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$var</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarregarObjeto"></a>
+	<p></p>
+	<h3>carregarObjeto</h3>
+	<div class="indent">
+		<p>
+		<code>: carregarObjeto(
+string
+$sql, [boolean
+$class = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 288]</p>
+		<p align="center"><strong>function carregarObjeto
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - array</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$sql</b> 
+		- 
+		sql (obrigatório)</li>
+			<li>
+		<span class="type">boolean</span>
+		<b>$class</b> 
+		- 
+		class (opcional)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarrega_registro"></a>
+	<p></p>
+	<h3>carrega_registro</h3>
+	<div class="indent">
+		<p>
+		<code>void carrega_registro(
+
+$recurso, [
+$posicao = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2647]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$recurso</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$posicao</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcarrega_tudo"></a>
+	<p></p>
+	<h3>carrega_tudo</h3>
+	<div class="indent">
+		<p>
+		<code>void carrega_tudo(
+
+$recurso)</code>
+		</p>
+	
+		<p class="linenumber">[line 2658]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$recurso</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodchama_etapafase"></a>
+	<p></p>
+	<h3>chama_etapafase</h3>
+	<div class="indent">
+		<p>
+		<code>void chama_etapafase(
+
+$cod)</code>
+		</p>
+	
+		<p class="linenumber">[line 3214]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodchama_subacao"></a>
+	<p></p>
+	<h3>chama_subacao</h3>
+	<div class="indent">
+		<p>
+		<code>void chama_subacao(
+
+$cod)</code>
+		</p>
+	
+		<p class="linenumber">[line 3318]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodclose"></a>
+	<p></p>
+	<h3>close</h3>
+	<div class="indent">
+		<p>
+		<code>void close(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2727]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcommit"></a>
+	<p></p>
+	<h3>commit</h3>
+	<div class="indent">
+		<p>
+		<code>void commit(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2715]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodconta_linhas"></a>
+	<p></p>
+	<h3>conta_linhas</h3>
+	<div class="indent">
+		<p>
+		<code>void conta_linhas(
+
+$recurso)</code>
+		</p>
+	
+		<p class="linenumber">[line 2526]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$recurso</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodconverttoxml"></a>
+	<p></p>
+	<h3>converttoxml</h3>
+	<div class="indent">
+		<p>
+		<code>void converttoxml(
+
+&$dbconnection, 
+$strsql, 
+$filename, 
+$arquivo)</code>
+		</p>
+	
+		<p class="linenumber">[line 3159]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>&$dbconnection</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$strsql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$filename</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arquivo</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcriarColunasDeOrdenacaoEmArray"></a>
+	<p></p>
+	<h3>criarColunasDeOrdenacaoEmArray</h3>
+	<div class="indent">
+		<p>
+		<code>void criarColunasDeOrdenacaoEmArray(
+
+$arrayOriginal, 
+$arrayDeTiposParaOrdenacao, 
+$ordem)</code>
+		</p>
+	
+		<p class="linenumber">[line 2197]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$arrayOriginal</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arrayDeTiposParaOrdenacao</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$ordem</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodcria_aba"></a>
+	<p></p>
+	<h3>cria_aba</h3>
+	<div class="indent">
+		<p>
+		<code>: cria_aba(
+integer
+$abacod_tela, string
+$url, string|array
+$parametros, [
+$arMnuid = array()])</code>
+		</p>
+	
+		<p class="linenumber">[line 1064]</p>
+		<p align="center"><strong>Monta abas de sistema através dos parametros
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - void</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">integer</span>
+		<b>$abacod_tela</b> 
+		- 
+		codigo da aba (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$url</b> 
+		- 
+		diz qual aba ficará destacada (obrigatório)</li>
+			<li>
+		<span class="type">string|array</span>
+		<b>$parametros</b> 
+		- 
+		adiciona novos parametros ao link da aba (obrigatório)</li>
+			<li>
+		<span class="type">array</span>
+		<b>$arMnuid</b> 
+		- 
+		não mostra as abas passada pelo array (não obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodehcoorduma"></a>
+	<p></p>
+	<h3>ehcoorduma</h3>
+	<div class="indent">
+		<p>
+		<code>void ehcoorduma(
+
+$cpf)</code>
+		</p>
+	
+		<p class="linenumber">[line 479]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cpf</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodehcriador"></a>
+	<p></p>
+	<h3>ehcriador</h3>
+	<div class="indent">
+		<p>
+		<code>void ehcriador(
+
+$cod, [
+$busca = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 680]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$busca</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodehdecisor"></a>
+	<p></p>
+	<h3>ehdecisor</h3>
+	<div class="indent">
+		<p>
+		<code>void ehdecisor(
+
+$cod, 
+$tab, 
+$mom)</code>
+		</p>
+	
+		<p class="linenumber">[line 486]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$tab</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$mom</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodehdigitador"></a>
+	<p></p>
+	<h3>ehdigitador</h3>
+	<div class="indent">
+		<p>
+		<code>void ehdigitador(
+
+$cod, 
+$tab, 
+$mom)</code>
+		</p>
+	
+		<p class="linenumber">[line 584]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$tab</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$mom</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodeof"></a>
+	<p></p>
+	<h3>eof</h3>
+	<div class="indent">
+		<p>
+		<code>: eof(
+string
+$sql)</code>
+		</p>
+	
+		<p class="linenumber">[line 121]</p>
+		<p align="center"><strong>function eof
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - boolean</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$sql</b> 
+		- 
+		sql (obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodescape"></a>
+	<p></p>
+	<h3>escape</h3>
+	<div class="indent">
+		<p>
+		<code>: escape(
+string
+$mixValorCampo)</code>
+		</p>
+	
+		<p class="linenumber">[line 708]</p>
+		<p align="center"><strong>function escape
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - array / null / numeric</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$mixValorCampo</b> 
+		- 
+		Valor do Campo (obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodexecutar"></a>
+	<p></p>
+	<h3>executar</h3>
+	<div class="indent">
+		<p>
+		<code>: executar(
+string
+$SQL, [boolean
+$auditoria = false])</code>
+		</p>
+	
+		<p class="linenumber">[line 202]</p>
+		<p align="center"><strong>function executar
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - string</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$SQL</b> 
+		- 
+		SQL (obrigatório)</li>
+			<li>
+		<span class="type">boolean</span>
+		<b>$auditoria</b> 
+		- 
+		auditoria (opcional) Cria um log de auditoria</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodgerar_senha"></a>
+	<p></p>
+	<h3>gerar_senha</h3>
+	<div class="indent">
+		<p>
+		<code>void gerar_senha(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 3591]</p>
+		<h4>Tags:</h4>
+<ul>
+	<li><b>access</b> - public</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodGetLogin"></a>
+	<p></p>
+	<h3>GetLogin</h3>
+	<div class="indent">
+		<p>
+		<code>void GetLogin(
+
+&$username, 
+&$password)</code>
+		</p>
+	
+		<p class="linenumber">[line 2748]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>&$username</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>&$password</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodgrafico_validacao_prg"></a>
+	<p></p>
+	<h3>grafico_validacao_prg</h3>
+	<div class="indent">
+		<p>
+		<code>void grafico_validacao_prg(
+[
+$prgid = 0], [
+$refcod = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 100]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$prgid</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$refcod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodinsucesso"></a>
+	<p></p>
+	<h3>insucesso</h3>
+	<div class="indent">
+		<p>
+		<code>void insucesso(
+[
+$mensagem = ''], [
+$parametros = ''], [
+$modulo = ''])</code>
+		</p>
+	
+		<p class="linenumber">[line 2690]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$mensagem</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$parametros</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$modulo</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodis_utf8"></a>
+	<p></p>
+	<h3>is_utf8</h3>
+	<div class="indent">
+		<p>
+		<code>void is_utf8(
+
+$string)</code>
+		</p>
+	
+		<p class="linenumber">[line 3143]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$string</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmerge"></a>
+	<p></p>
+	<h3>merge</h3>
+	<div class="indent">
+		<p>
+		<code>void merge(
+
+$array1, 
+$array2)</code>
+		</p>
+	
+		<p class="linenumber">[line 2225]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$array1</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$array2</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_checkbox"></a>
+	<p></p>
+	<h3>monta_checkbox</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_checkbox(
+
+$nome, 
+$query, 
+$marcados, [
+$separador = '  '])</code>
+		</p>
+	
+		<p class="linenumber">[line 1037]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$nome</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$query</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$marcados</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$separador</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_combo"></a>
+	<p></p>
+	<h3>monta_combo</h3>
+	<div class="indent">
+		<p>
+		<code>string monta_combo(
+string
+$var, string|array
+$sql, string
+$habil, [string
+$titulo = ''], string
+$acao, string
+$opc, [string
+$txtdica = ''], [integer
+$size = ''], [char
+$obrig = ''], [string
+$id = ''], [bool
+$return = false], [string
+$value = null], [
+$title = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 879]</p>
+		<p align="center"><strong>Monta combobox html retornando ou imprimindo o componente
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$var</b> 
+		- 
+		Nome da variável que possui o valor selecionado</li>
+			<li>
+		<span class="type">string|array</span>
+		<b>$sql</b> 
+		- 
+		Sql ou array com as opções do combobox</li>
+			<li>
+		<span class="type">string</span>
+		<b>$habil</b> 
+		- 
+		'S'|'N' Define se será habilitado para o usuário</li>
+			<li>
+		<span class="type">string</span>
+		<b>$titulo</b> 
+		- 
+		Titulo</li>
+			<li>
+		<span class="type">string</span>
+		<b>$acao</b> 
+		- 
+		Nome da funcao a ser executada, ele complementa sozinho o ( this.value )</li>
+			<li>
+		<span class="type">string</span>
+		<b>$opc</b> 
+		- 
+		</li>
+			<li>
+		<span class="type">string</span>
+		<b>$txtdica</b> 
+		- 
+		</li>
+			<li>
+		<span class="type">integer</span>
+		<b>$size</b> 
+		- 
+		Tamanho do campo</li>
+			<li>
+		<span class="type">char</span>
+		<b>$obrig</b> 
+		- 
+		'S'|'N' Define se é campo obrigatório</li>
+			<li>
+		<span class="type">string</span>
+		<b>$id</b> 
+		- 
+		Nome do id</li>
+			<li>
+		<span class="type">bool</span>
+		<b>$return</b> 
+		- 
+		true|false Retorna(true) o valor ou imprime(false)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$value</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$title</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_combo_multiplo"></a>
+	<p></p>
+	<h3>monta_combo_multiplo</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_combo_multiplo(
+string
+$var, string|array
+$sql, string
+$habil, [string
+$titulo = ''], string
+$acao, string
+$opc, [string
+$txtdica = ''], [integer
+$tamanho = 4], [integer
+$size = ''], [
+$arrSelected = array()], [
+$id = null], [
+$return = false])</code>
+		</p>
+	
+		<p class="linenumber">[line 978]</p>
+		<p align="center"><strong>Monta combobox_multipla html imprimindo o componente
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$var</b> 
+		- 
+		Nome da variável que possui o valor selecionado</li>
+			<li>
+		<span class="type">string|array</span>
+		<b>$sql</b> 
+		- 
+		Sql ou array com as opções do combobox</li>
+			<li>
+		<span class="type">string</span>
+		<b>$habil</b> 
+		- 
+		'S'|'N' Define se será habilitado para o usuário</li>
+			<li>
+		<span class="type">string</span>
+		<b>$titulo</b> 
+		- 
+		Titulo</li>
+			<li>
+		<span class="type">string</span>
+		<b>$acao</b> 
+		- 
+		Nome da funcao JAVASCRIPT a ser executada, ele complementa sozinho o ( this.value )</li>
+			<li>
+		<span class="type">string</span>
+		<b>$opc</b> 
+		- 
+		</li>
+			<li>
+		<span class="type">string</span>
+		<b>$txtdica</b> 
+		- 
+		</li>
+			<li>
+		<span class="type">integer</span>
+		<b>$tamanho</b> 
+		- 
+		Quantidade de opções que serão exibidas</li>
+			<li>
+		<span class="type">integer</span>
+		<b>$size</b> 
+		- 
+		Tamanho do campo</li>
+			<li>
+		<span class="type"></span>
+		<b>$arrSelected</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$id</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$return</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista"></a>
+	<p></p>
+	<h3>monta_lista</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista(
+
+$sql, [
+$cabecalho = &quot;&quot;], 
+$perpage, 
+$pages, 
+$soma, 
+$alinha, [
+$valormonetario = &quot;S&quot;], [
+$nomeformulario = &quot;&quot;], [
+$celWidth = &quot;&quot;], [
+$celAlign = &quot;&quot;])</code>
+		</p>
+	
+		<p class="linenumber">[line 1644]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$sql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$cabecalho</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$perpage</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$pages</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$soma</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$alinha</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$valormonetario</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$nomeformulario</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$celWidth</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$celAlign</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista_agrupado"></a>
+	<p></p>
+	<h3>monta_lista_agrupado</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista_agrupado(
+
+$arrRsAgrupado, [
+$cabecalho = &quot;&quot;], [
+$soma = ''], [
+$largura = '95%'])</code>
+		</p>
+	
+		<p class="linenumber">[line 1512]</p>
+		<p align="center"><strong>Monta uma lista com sumário a partir de um array multidimensional
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$arrRsAgrupado</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$cabecalho</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$soma</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$largura</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista_array"></a>
+	<p></p>
+	<h3>monta_lista_array</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista_array(
+
+$dados, [
+$cabecalho = &quot;&quot;], 
+$perpage, 
+$pages, 
+$soma, 
+$alinha, [
+$html = array()], [
+$arrayDeTiposParaOrdenacao = array()])</code>
+		</p>
+	
+		<p class="linenumber">[line 2248]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$dados</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$cabecalho</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$perpage</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$pages</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$soma</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$alinha</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$html</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arrayDeTiposParaOrdenacao</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista_grupo"></a>
+	<p></p>
+	<h3>monta_lista_grupo</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista_grupo(
+
+$sql, [
+$cabecalho = &quot;&quot;], 
+$perpage, 
+$pages, 
+$soma, 
+$alinha, 
+$par2, [
+$nomeformulario = &quot;&quot;], [
+$grupo = &quot;&quot;], [
+$ordem = array()], [
+$mostraGrupo = false])</code>
+		</p>
+	
+		<p class="linenumber">[line 1923]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$sql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$cabecalho</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$perpage</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$pages</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$soma</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$alinha</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$par2</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$nomeformulario</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$grupo</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$ordem</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$mostraGrupo</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista_simples"></a>
+	<p></p>
+	<h3>monta_lista_simples</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista_simples(
+string|array
+$sql, [array
+$cabecalho = &quot;&quot;], inteiro
+$perpage, inteiro
+$pages, [string
+$soma = 'N'], [string
+$largura = '95%'], [string
+$valormonetario = 'S'], [
+$totalregistro = false], [
+$arrHeighTds = false], [
+$heightTBody = false], [
+$boImprimiTotal = false])</code>
+		</p>
+	
+		<p class="linenumber">[line 1260]</p>
+		<p align="center"><strong>Monta lista simples HTML, com estilo padrão
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string|array</span>
+		<b>$sql</b> 
+		- 
+		sql ou array com os itens da listagem (obrigatório)</li>
+			<li>
+		<span class="type">array</span>
+		<b>$cabecalho</b> 
+		- 
+		array contendo os itens do cabeçalho (opcional)</li>
+			<li>
+		<span class="type">inteiro</span>
+		<b>$perpage</b> 
+		- 
+		Nº de registros por página (obrigatório)</li>
+			<li>
+		<span class="type">inteiro</span>
+		<b>$pages</b> 
+		- 
+		Nº de índices de página visível na barra de paginação (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$soma</b> 
+		- 
+		'S'|'N' define se a lista terá somatória (opcional)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$largura</b> 
+		- 
+		define largura da tabela da lista &quot;padrão 95%&quot; (opcional)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$valormonetario</b> 
+		- 
+		'S'|'N' define formatação dos valores numéricos (opcional)</li>
+			<li>
+		<span class="type"></span>
+		<b>$totalregistro</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arrHeighTds</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$heightTBody</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$boImprimiTotal</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_lista_tabulado"></a>
+	<p></p>
+	<h3>monta_lista_tabulado</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_lista_tabulado(
+string|array
+$sql, [array
+$cabecalho = &quot;&quot;], inteiro
+$perpage, inteiro
+$pages, [string
+$soma = 'N'], [string
+$largura = '95%'], [string
+$valormonetario = 'S'], [
+$totalregistro = false], [
+$arrHeighTds = false], [
+$heightTBody = false], [
+$boImprimiTotal = false])</code>
+		</p>
+	
+		<p class="linenumber">[line 1185]</p>
+		<p align="center"><strong>Monta lista simples HTML, com estilo padrão
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string|array</span>
+		<b>$sql</b> 
+		- 
+		sql ou array com os itens da listagem (obrigatório)</li>
+			<li>
+		<span class="type">array</span>
+		<b>$cabecalho</b> 
+		- 
+		array contendo os itens do cabeçalho (opcional)</li>
+			<li>
+		<span class="type">inteiro</span>
+		<b>$perpage</b> 
+		- 
+		Nº de registros por página (obrigatório)</li>
+			<li>
+		<span class="type">inteiro</span>
+		<b>$pages</b> 
+		- 
+		Nº de índices de página visível na barra de paginação (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$soma</b> 
+		- 
+		'S'|'N' define se a lista terá somatória (opcional)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$largura</b> 
+		- 
+		define largura da tabela da lista &quot;padrão 95%&quot; (opcional)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$valormonetario</b> 
+		- 
+		'S'|'N' define formatação dos valores numéricos (opcional)</li>
+			<li>
+		<span class="type"></span>
+		<b>$totalregistro</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arrHeighTds</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$heightTBody</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$boImprimiTotal</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmonta_radio"></a>
+	<p></p>
+	<h3>monta_radio</h3>
+	<div class="indent">
+		<p>
+		<code>void monta_radio(
+
+$var, 
+$sql, 
+$habil, 
+$op)</code>
+		</p>
+	
+		<p class="linenumber">[line 2494]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$var</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$sql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$habil</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$op</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmostra_resp"></a>
+	<p></p>
+	<h3>mostra_resp</h3>
+	<div class="indent">
+		<p>
+		<code>void mostra_resp(
+
+$chave_valor, 
+$chave_nome, [
+$ano = true], [
+$schema = 'monitora'])</code>
+		</p>
+	
+		<p class="linenumber">[line 2958]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$chave_valor</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$chave_nome</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$ano</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$schema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodmudaPosicao"></a>
+	<p></p>
+	<h3>mudaPosicao</h3>
+	<div class="indent">
+		<p>
+		<code>void mudaPosicao(
+
+$id1, 
+$id2, 
+$tabela, 
+$atributoOrdem, 
+$id)</code>
+		</p>
+	
+		<p class="linenumber">[line 1841]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$id1</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$id2</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$tabela</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$atributoOrdem</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$id</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpegaLinha"></a>
+	<p></p>
+	<h3>pegaLinha</h3>
+	<div class="indent">
+		<p>
+		<code>void pegaLinha(
+
+$SQL, [
+$linha = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2538]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$SQL</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$linha</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpegarColunas"></a>
+	<p></p>
+	<h3>pegarColunas</h3>
+	<div class="indent">
+		<p>
+		<code>string[] pegarColunas(
+string
+$table, [string
+$schema = 'public'])</code>
+		</p>
+	
+		<p class="linenumber">[line 2600]</p>
+		<p align="center"><strong>Captura o nome das colunas de uma tabela.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$table</b> 
+		- 
+		</li>
+			<li>
+		<span class="type">string</span>
+		<b>$schema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpegarTabelas"></a>
+	<p></p>
+	<h3>pegarTabelas</h3>
+	<div class="indent">
+		<p>
+		<code>string[] pegarTabelas(
+[string
+$schema = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 2625]</p>
+		<p align="center"><strong>Captura as tabelas de um schema, caso o schema não seja indicado  todas as tabelas são retornadas.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$schema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpegaUm"></a>
+	<p></p>
+	<h3>pegaUm</h3>
+	<div class="indent">
+		<p>
+		<code>void pegaUm(
+
+$SQL, [
+$coluna = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2546]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$SQL</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$coluna</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpegaUmObjeto"></a>
+	<p></p>
+	<h3>pegaUmObjeto</h3>
+	<div class="indent">
+		<p>
+		<code>: pegaUmObjeto(
+string
+$sql, [boolean
+$class = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 270]</p>
+		<p align="center"><strong>function executar
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - object</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$sql</b> 
+		- 
+		sql (obrigatório)</li>
+			<li>
+		<span class="type">boolean</span>
+		<b>$class</b> 
+		- 
+		class (opcional)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodpega_ano_atual"></a>
+	<p></p>
+	<h3>pega_ano_atual</h3>
+	<div class="indent">
+		<p>
+		<code>void pega_ano_atual(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2557]</p>
+		<p align="center"><strong>Retorna o ano do exercício ativo.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrandomkey"></a>
+	<p></p>
+	<h3>randomkey</h3>
+	<div class="indent">
+		<p>
+		<code>void randomkey(
+
+$len)</code>
+		</p>
+	
+		<p class="linenumber">[line 2776]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$len</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrandomstr"></a>
+	<p></p>
+	<h3>randomstr</h3>
+	<div class="indent">
+		<p>
+		<code>void randomstr(
+
+$len)</code>
+		</p>
+	
+		<p class="linenumber">[line 2768]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$len</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrecord_set"></a>
+	<p></p>
+	<h3>record_set</h3>
+	<div class="indent">
+		<p>
+		<code>void record_set(
+
+$SQL)</code>
+		</p>
+	
+		<p class="linenumber">[line 2511]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$SQL</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrecuperar"></a>
+	<p></p>
+	<h3>recuperar</h3>
+	<div class="indent">
+		<p>
+		<code>: recuperar(
+string
+$SQL, [string
+$var = null])</code>
+		</p>
+	
+		<p class="linenumber">[line 325]</p>
+		<p align="center"><strong>function recuperar
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - array / null</li>
+	<li><b>author</b> - Gilberto Arruda Cerqueira Xavier</li>
+	<li><b>since</b> - 24/06/2005</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$SQL</b> 
+		- 
+		SQL (obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$var</b> 
+		- 
+		var (opcional)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrelatsubacao"></a>
+	<p></p>
+	<h3>relatsubacao</h3>
+	<div class="indent">
+		<p>
+		<code>void relatsubacao(
+
+$res, 
+$acaoid)</code>
+		</p>
+	
+		<p class="linenumber">[line 3110]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$res</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$acaoid</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodrollback"></a>
+	<p></p>
+	<h3>rollback</h3>
+	<div class="indent">
+		<p>
+		<code>void rollback(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2710]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodsalvaQueryArray"></a>
+	<p></p>
+	<h3>salvaQueryArray</h3>
+	<div class="indent">
+		<p>
+		<code>: salvaQueryArray(
+string
+$query, string
+$momentoAnterior, string
+$momentoPosterior)</code>
+		</p>
+	
+		<p class="linenumber">[line 176]</p>
+		<p align="center"><strong>function salvaQueryArray
+</strong></p>
+<h4>Tags:</h4>
+<ul>
+	<li><b>return</b> - boleano</li>
+	<li><b>author</b> - Thiago Tasca Barbosa</li>
+	<li><b>since</b> - 03/05/2010</li>
+</ul>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$query</b> 
+		- 
+		(obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$momentoAnterior</b> 
+		- 
+		(obrigatório)</li>
+			<li>
+		<span class="type">string</span>
+		<b>$momentoPosterior</b> 
+		- 
+		(obrigatório)</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodsql_to_excel"></a>
+	<p></p>
+	<h3>sql_to_excel</h3>
+	<div class="indent">
+		<p>
+		<code>void sql_to_excel(
+
+$sql, 
+$arquivo, [
+$cabecalho = &quot;&quot;], [
+$formatocoluna = &quot;&quot;])</code>
+		</p>
+	
+		<p class="linenumber">[line 1123]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$sql</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$arquivo</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$cabecalho</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$formatocoluna</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodStoreLogin"></a>
+	<p></p>
+	<h3>StoreLogin</h3>
+	<div class="indent">
+		<p>
+		<code>void StoreLogin(
+
+$username, 
+$password)</code>
+		</p>
+	
+		<p class="linenumber">[line 2737]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$username</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$password</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodsucesso"></a>
+	<p></p>
+	<h3>sucesso</h3>
+	<div class="indent">
+		<p>
+		<code>void sucesso(
+
+$modulo, [
+$parametros = ''])</code>
+		</p>
+	
+		<p class="linenumber">[line 2664]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$modulo</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$parametros</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_altagestao"></a>
+	<p></p>
+	<h3>testa_altagestao</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_altagestao(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2802]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_altagestaopje"></a>
+	<p></p>
+	<h3>testa_altagestaopje</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_altagestaopje(
+[
+$cod = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2808]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_cgo"></a>
+	<p></p>
+	<h3>testa_cgo</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_cgo(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2937]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_coordenador"></a>
+	<p></p>
+	<h3>testa_coordenador</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_coordenador(
+
+$acao, 
+$t)</code>
+		</p>
+	
+		<p class="linenumber">[line 2782]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$acao</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$t</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_coordenador_plan"></a>
+	<p></p>
+	<h3>testa_coordenador_plan</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_coordenador_plan(
+
+$cod)</code>
+		</p>
+	
+		<p class="linenumber">[line 2822]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_coorduma"></a>
+	<p></p>
+	<h3>testa_coorduma</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_coorduma(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2921]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_digitador"></a>
+	<p></p>
+	<h3>testa_digitador</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_digitador(
+
+$acao, 
+$t)</code>
+		</p>
+	
+		<p class="linenumber">[line 2882]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$acao</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$t</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_documentador_projespec"></a>
+	<p></p>
+	<h3>testa_documentador_projespec</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_documentador_projespec(
+[
+$cod = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2862]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_emenda"></a>
+	<p></p>
+	<h3>testa_emenda</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_emenda(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2795]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_gerente"></a>
+	<p></p>
+	<h3>testa_gerente</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_gerente(
+
+$prg, 
+$t)</code>
+		</p>
+	
+		<p class="linenumber">[line 2835]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$prg</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$t</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_gerente_exe"></a>
+	<p></p>
+	<h3>testa_gerente_exe</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_gerente_exe(
+
+$acao, 
+$t)</code>
+		</p>
+	
+		<p class="linenumber">[line 2871]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$acao</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$t</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_proprietario"></a>
+	<p></p>
+	<h3>testa_proprietario</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_proprietario(
+
+$cod)</code>
+		</p>
+	
+		<p class="linenumber">[line 2898]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_responsabilidade"></a>
+	<p></p>
+	<h3>testa_responsabilidade</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_responsabilidade(
+
+$id, 
+$pflcod, 
+$campo)</code>
+		</p>
+	
+		<p class="linenumber">[line 2949]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$id</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$pflcod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$campo</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_responsavel_projespec"></a>
+	<p></p>
+	<h3>testa_responsavel_projespec</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_responsavel_projespec(
+[
+$cod = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 2845]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_superuser"></a>
+	<p></p>
+	<h3>testa_superuser</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_superuser(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2910]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodtesta_uma"></a>
+	<p></p>
+	<h3>testa_uma</h3>
+	<div class="indent">
+		<p>
+		<code>void testa_uma(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 2928]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodusuarioJoinUnidadesPermitidas"></a>
+	<p></p>
+	<h3>usuarioJoinUnidadesPermitidas</h3>
+	<div class="indent">
+		<p>
+		<code>string usuarioJoinUnidadesPermitidas(
+[
+$esquema = 'elabrev'])</code>
+		</p>
+	
+		<p class="linenumber">[line 3399]</p>
+		<p align="center"><strong>Monta join a ser utilizado por algum outro query com as unidades do  usuário. não é possível adivinhar qual o nome da tabela que conterá <ul><li>unicod para fazer a restrição, portanto A RESTRICAO DO UNICOD DEVE</li></ul> SER ADICIONADO AO FINAL DO RETORNO.
+</strong></p>
+<p>Exemplo:  $join = $db-&gt;usuarioJoinUnidadesPermitidas();  $join .= &quot; and minhatabela.unicod = unijoin.unicod &quot;;</p><p>O nome das tabelas são unijoin (unidade) e usujoin  (usuarioresponsabilidade). Este segundo só aparece caso o usuário não  possui um perfil que permita trabalhar com todas as unidades</p>		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$esquema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodusuarioPossuiPermissaoAlgumaUnidade"></a>
+	<p></p>
+	<h3>usuarioPossuiPermissaoAlgumaUnidade</h3>
+	<div class="indent">
+		<p>
+		<code>boolean usuarioPossuiPermissaoAlgumaUnidade(
+[
+$esquema = 'elabrev'])</code>
+		</p>
+	
+		<p class="linenumber">[line 3354]</p>
+		<p align="center"><strong>Verifica se o usuário possui algum perfil que permite manipular  alguma unidade. Os perfis que permitem essa manipulação são os  que possuem registros em elabrev.tprperfil com o tprcod = 9.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$esquema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodusuarioPossuiPermissaoTodasUnidades"></a>
+	<p></p>
+	<h3>usuarioPossuiPermissaoTodasUnidades</h3>
+	<div class="indent">
+		<p>
+		<code>boolean usuarioPossuiPermissaoTodasUnidades(
+[
+$esquema = 'elabrev'])</code>
+		</p>
+	
+		<p class="linenumber">[line 3331]</p>
+		<p align="center"><strong>Verifica se o usuário possui algum perfil que permite manipular  todas as ações. Os perfis que permitem essa manipulação são os  que não possuem registros em elabrev.tprperfil.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$esquema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodusuarioPossuiPermissaoUnidade"></a>
+	<p></p>
+	<h3>usuarioPossuiPermissaoUnidade</h3>
+	<div class="indent">
+		<p>
+		<code>boolean usuarioPossuiPermissaoUnidade(
+string
+$unicod, [
+$esquema = 'elabrev'])</code>
+		</p>
+	
+		<p class="linenumber">[line 3367]</p>
+		<p align="center"><strong>Verifica se usuário pode manipular uma determinada unidade.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type">string</span>
+		<b>$unicod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$esquema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodusuarioUnidadesPermitidas"></a>
+	<p></p>
+	<h3>usuarioUnidadesPermitidas</h3>
+	<div class="indent">
+		<p>
+		<code>string[] usuarioUnidadesPermitidas(
+[
+$esquema = 'elabrev'])</code>
+		</p>
+	
+		<p class="linenumber">[line 3433]</p>
+		<p align="center"><strong>Captura os códigos da unidades que o usuário pode manipular.
+</strong></p>
+		
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$esquema</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodverifica_geral"></a>
+	<p></p>
+	<h3>verifica_geral</h3>
+	<div class="indent">
+		<p>
+		<code>void verifica_geral(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 803]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodverifica_momento"></a>
+	<p></p>
+	<h3>verifica_momento</h3>
+	<div class="indent">
+		<p>
+		<code>void verifica_momento(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 423]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodverifica_momento2"></a>
+	<p></p>
+	<h3>verifica_momento2</h3>
+	<div class="indent">
+		<p>
+		<code>void verifica_momento2(
+)</code>
+		</p>
+	
+		<p class="linenumber">[line 434]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+	<a name="methodverifica_resp_elabrev"></a>
+	<p></p>
+	<h3>verifica_resp_elabrev</h3>
+	<div class="indent">
+		<p>
+		<code>void verifica_resp_elabrev(
+[
+$cod = 0], [
+$tab = 0])</code>
+		</p>
+	
+		<p class="linenumber">[line 728]</p>
+				
+	
+	<h4>Parameters:</h4>
+	<ul>
+			<li>
+		<span class="type"></span>
+		<b>$cod</b> 
+		- 
+		</li>
+			<li>
+		<span class="type"></span>
+		<b>$tab</b> 
+		- 
+		</li>
+		</ul>
+	</div>
+	<p class="top">[ <a href="#top">Top</a> ]</p>
+
+	<hr>
+	<a name="class_consts"></a>
+	<h2>Class Constants</h2>
+	</div>
+	<div id="credit">
+		<hr>
+		Documentation generated on Tue, 14 Dec 2010 13:50:38 -0200 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	</div>
+</div>
+</body>
+</html>

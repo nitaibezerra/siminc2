@@ -1,0 +1,15 @@
+.box.principal .titulo{background: url('../img/bg-titulo.png') repeat-y 100% 0 #D5D8DE !important; color:#2D3E58 !important}
+.box.principal.black .titulo{background: #2D3E58 !important; color:#fff}
+.login input{width:80px}
+.box.principal .titulo{background-color: #2D3E58; color:#fff}
+.login input{width:80px}
+
+.header.verde{background-color:#00B989;}
+.header.azul1{background-color:#00B0BC;}
+.header.azul2{background-color:#29569E;}
+.header.rosa{background-color:#91418E;}
+
+#barra-brasil .barra ul li {
+    padding-left: 16px;
+}
+  

@@ -1,0 +1,22 @@
+/**
+ * path from the html until the javascript library
+ * 
+ * caminho do html até a biblioteca javascript
+ */
+
+PATH_JS_LIBRARY = '../../javascript/'
+PATH_IMAGES		= '../../../img/';
+
+//PATH_JS_LIBRARY = '../template/javascript/';
+//PATH_IMAGES		= '../template/img/';
+
+function writeJsScript( strScript )
+{
+	document.write
+		( 
+		'<script language="javascript" src="'+ PATH_JS_LIBRARY + strScript + '" >' +
+		'</script>' + "\n" 
+		);
+}
+
+writeJsScript( 'core/_start.js' );

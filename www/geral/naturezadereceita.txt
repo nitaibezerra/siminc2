@@ -1,0 +1,1073 @@
+1000.00.00 Receitas Correntes
+1100.00.00 Receita Tributária
+1110.00.00 Impostos
+1111.00.00 Impostos sobre o Comércio Exterior
+1111.01.00 Imposto sobre a Importação
+1111.01.01 Receita do Principal do Imposto sobre a Importação (9)(I)
+1111.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre a Importação (9)(I)
+1111.01.03 Imposto sobre a Importação - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1111.02.00 Imposto sobre a Exportação
+1111.02.01 Receita do Principal do Imposto sobre a Exportação (9)(I)
+1111.02.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre a Exportação (9)(I)
+1112.00.00 Impostos sobre o Patrimônio e a Renda
+1112.01.00 Imposto sobre a Propriedade Territorial Rural
+1112.03.00 Imposto sobre a Propriedade Territorial Rural - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1112.04.00 Imposto sobre a Renda e Proventos de Qualquer Natureza
+1112.04.10 Pessoas Físicas
+1112.04.11 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre a Renda - Pessoas Físicas (14)(I)
+1112.04.20 Pessoas Jurídicas (13)(E)
+1112.04.21 Pessoas Jurídicas - Líquida de Incentivos
+1112.04.22 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre a Renda - Pessoas Jurídicas (9)(I)
+1112.04.23 Imposto de Renda Pessoa Jurídica - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1112.04.30 Retido nas Fontes (13)(E)
+1112.04.31 Retido nas Fontes - Trabalho
+1112.04.32 Retido nas Fontes - Capital
+1112.04.33 Retido nas Fontes - Remessa ao Exterior
+1112.04.34 Retido nas Fontes - Outros Rendimentos
+1112.04.35 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre a Renda - Retido na Fonte (9)(I)
+1113.00.00 Impostos sobre a Produção e a Circulação
+1113.01.00 Imposto sobre Produtos Industrializados
+1113.01.01 Produtos do Fumo
+1113.01.02 Bebidas
+1113.01.03 Automóveis
+1113.01.04 Vinculados à Importação
+1113.01.09 Outros Produtos
+1113.01.10 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre Produtos Industrializados (9)(I)
+1113.01.11 Imposto sobre Produtos Industrializados de Bebidas - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1113.01.12 Imposto sobre Produtos Industrializados de Importação - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1113.01.13 Imposto sobre Produtos Industrializados - Outros Produtos - Operações Intra- Orçamentárias (15)(I) (16)(A)
+1113.03.00 Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários
+1113.03.01 Comercialização do Ouro
+1113.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários - Comercialização do Ouro (14)(I)
+1113.03.09 Demais Operações
+1113.03.10 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1115.00.00 Impostos Extraordinários
+1120.00.00 Taxas
+1121.00.00 Taxas pelo Exercício do Poder de Polícia
+1121.01.00 Emolumentos e Taxas de Mineração (17)(E)
+1121.02.00 Taxas de Fiscalização das Telecomunicações
+1121.03.00 Taxa de Controle e Fiscalização de Produtos Químicos (3)(A)
+1121.04.00 Taxas do Departamento de Polícia Federal
+1121.05.00 Taxas de Migração
+1121.06.00 Taxa de Fiscalização das Telecomunicações - Operações Intra-Orçamentárias (16)(I)
+1121.10.00 Taxa de Licenciamento, Controle e Fiscalização de Materiais Nucleares e Radioativos e suas Instalações
+1121.11.00 Taxa de Fiscalização e Controle da Previdência Complementar - TAFIC (12)(I)
+1121.12.00 Taxa de Licenciamento, Controle e Fiscalização de Materiais Nucleares e Radioativos e suas Instalações - Operações Intra-Orçamentárias (17)(I)
+1121.13.00 Taxa de Fiscalização dos Produtos Controlados pelo Ministério do Exército
+1121.14.00 Taxa de Fiscalização dos Mercados de Títulos e Valores Mobiliários
+1121.15.00 Taxa de Fiscalização dos Mercados de Seguro, de Capitalização e da Previdência Privada Aberta
+1121.16.00 Taxa de Fiscalização de Serviços de Energia Elétrica
+1121.17.00 Taxa de Fiscalização de Vigilância Sanitária
+1121.18.00 Taxa de Fiscalização de Vigilância Sanitária - Operações Intra-Orçamentárias (16)(I)
+1121.20.00 Taxa de Saúde Suplementar
+1121.20.01 Taxa por Plano de Assistência à Saúde (4)(I)
+1121.20.02 Taxa por Registro de Produto (4)(I)
+1121.20.03 Taxa por Alteração de Dados de Produto (4)(I)
+1121.20.04 Taxa por Registro de Operadora (4)(I)
+1121.20.05 Taxa por Alteração de Dados de Operadora (4)(I)
+1121.20.06 Taxa por Pedido de Reajuste de Contraprestação Pecuniária (4)(I)
+1121.21.00 Taxa de Controle e Fiscalização Ambiental
+1121.22.00 Taxa de Serviços Administrativos
+1121.23.00 Taxa de Serviços Metrológicos
+1121.24.00 Taxa de Fiscalização sobre a Distribuição Gratuita de Prêmios e Sorteios
+1121.25.00 Taxa de Saúde Suplementar - Operações Intra-Orçamentárias (16)(I)
+1121.25.01 Taxa por Plano de Assistência à Saúde - Operações Intra-Orçamentárias (16)(I)
+1121.25.02 Taxa por Registro de Produto - Operações Intra-Orçamentárias (16)(I)
+1121.25.03 Taxa por Alteração de Dados de Produto - Operações Intra-Orçamentárias (16)(I)
+1121.25.04 Taxa por Registro de Operadora - Operações Intra-Orçamentárias (16)(I)
+1121.25.05 Taxa por Alteração de Dados de Operadora - Operações Intra-Orçamentárias (16)(I)
+1121.25.06 Taxa por Pedido de Reajuste de Contraprestação Pecuniária - Operações Intra- Orçamentárias (16)(I)
+1122.00.00 Taxas pela Prestação de Serviços
+1122.01.00 Emolumentos Consulares
+1122.02.00 Emolumentos da Justiça do Distrito Federal (13)(E)
+1122.03.00 Taxa de Utilização do Sistema Eletrônico de Controle de Arrecadação do Adicional ao Frete para a Renovação da Marinha Mercante - MERCANTE (10)(I)
+1122.04.00 Taxa de Avaliação do Ensino Superior (11)(I)
+1122.06.00 Taxa Judiciária da Justiça do Distrito Federal
+1122.07.00 Emolumentos e Custas da Justiça do Distrito Federal (13)(A)
+1122.08.00 Emolumentos e Custas Judiciais (13)(A)
+1122.10.00 Montepio Civil (13)(E)
+1122.11.00 Taxa de Utilização do Sistema Integrado de Comércio Exterior - SISCOMEX
+1122.12.00 Emolumentos e Custas Processuais Administrativas (13)(A)
+1122.15.00 Taxa Militar
+1122.19.00 Taxa de Classificação de Produtos Vegetais
+1122.21.00 Taxa de Serviços Cadastrais (13)(A)
+1122.22.00 Taxa de Serviços Aqüícolas (8)(I)
+1122.23.00 Emolumentos e Custas Judiciais - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1122.24.00 Taxa de Utilização do Sistema Integrado de Comércio Exterior - SISCOMEX - Operações Intra- Orçamentárias (15)(I) (16)(A)
+1122.25.00 Emolumentos e Custas Processuais Administrativas - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1122.98.00 Outras Taxas pela Prestação de Serviços - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1122.99.00 Outras Taxas pela Prestação de Serviços (16)(I)
+1200.00.00 Receita de Contribuições
+1210.00.00 Contribuições Sociais
+1210.01.00 Contribuição para o Financiamento da Seguridade Social
+1210.01.01 Receita do Principal da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1210.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuição para o Financiamento da Seguridade Social (9)(I)
+1210.01.03 Contribuição para o Financiamento da Seguridade Social - Operações Intra-Orçamentárias (16)(I)
+1210.02.00 Contribuição para o Salário-Educação
+1210.04.00 Cota-Parte da Contribuição Sindical
+1210.05.00 Contribuição para o Ensino Aeroviário
+1210.06.00 Contribuição para o Desenvolvimento do Ensino Profissional Marítimo
+1210.07.00 Contribuição para o Fundo de Saúde das Forças Armadas (13)(A)
+1210.08.00 Contribuição da Renda Líquida de Concursos de Prognósticos para a Seguridade Social (4)(E)
+1210.09.00 Contribuição sobre a Arrecadação dos Fundos de Investimentos Regionais
+1210.10.00 Contribuições sobre a Receita de Concursos de Prognósticos (4)(E)
+1210.11.00 Contribuição e Adicional sobre a Receita de Concursos de Prognósticos para o Desenvolvimento do Desporto (4)(E)
+1210.11.01 Contribuição sobre a Receita de Concursos de Prognósticos para o Desenvolvimento do Desporto (4)(E)
+1210.11.02 Contribuição do Adicional à Receita de Concursos de Prognósticos para o Desenvolvimento do Desporto (4)(E)
+1210.12.00 Contribuição sobre a Receita de Concursos de Prognósticos para o FUNPEN (4)(E)
+1210.13.00 Contribuição sobre Movimentação ou Transmissão de Valores e de Créditos e Direitos de Natureza Financeira (8)(A)
+1210.13.01 Receita do Principal da Contribuição sobre Movimentação Financeira (9)(I)
+1210.13.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuição sobre Movimentação Financeira (9)(I)
+1210.14.00 Contribuição sobre a Receita de Concursos de Prognósticos e Prêmios Prescritos (4)(E)
+1210.15.00 Contribuição para o Custeio das Pensões Militares
+1210.16.00 Renda Líquida da Loteria Federal Instantânea (4)(E)
+1210.17.00 Contribuição sobre a Receita de Sorteios Realizados por Entidades Filantrópicas (3)(A)
+1210.18.00 Contribuições sobre a Receita de Concursos de Prognósticos (4)(I)
+1210.18.01 Contribuição sobre a Receita da Loteria Federal (4)(I)
+1210.18.02 Contribuição sobre a Receita de Loterias Esportivas (4)(I)
+1210.18.03 Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (4)(I)
+1210.18.04 Contribuição sobre a Receita de Loterias de Números (4)(I)
+1210.18.05 Contribuição sobre a Receita da Loteria Instantânea (4)(I)
+1210.18.06 Prêmios Prescritos de Loterias Federais (4)(I)
+1210.18.07 Contribuição sobre a Receita de Outros Concursos de Prognósticos (17)(I)
+1210.18.08 Contribuição Sobre a Receita de Concurso de Prognóstico Específico Destinado ao Desenvolvimento da Prática Desportiva - Modalidade Futebol (18)(I)
+1210.18.09 Outros Prêmios Prescritos (18)(I)
+1210.29.00 Contribuições para o Regime Próprio de Previdência do Servidor Público (4)(A) (18)(A)
+1210.29.01 Contribuição Patronal para o Regime Próprio de Previdência (4)(I) (10)(A) (11)(A) (15)(A) (18)(A)
+1210.29.03 Contribuição Patronal para o Plano de Seguridade Social do Servidor Público - Inativo (10)(I) (11)(E)
+1210.29.05 Contribuição Patronal para o Plano de Seguridade Social do Servidor Público - Pensionista (10)(I) (11)(E)
+1210.29.07 Contribuição do Servidor Ativo para o Regime Próprio de Previdência (4)(I) (10)(A) (18)(A)
+1210.29.09 Contribuição do Servidor Inativo para o Regime Próprio de Previdência (10)(I) (18)(A)
+1210.29.11 Contribuição de Pensionista para o Regime Próprio de Previdência (10)(I) (18)(A)
+1210.29.13 Contribuição Previdenciária para Amortização do Déficit Atuarial (18)(I)
+1210.29.15 Contribuição Previdenciária em Regime de Parcelamento de Débitos (18)(I)
+1210.30.00 Contribuições Previdenciárias para o Regime Geral de Previdência Social (4)(A)
+1210.30.01 Contribuição Previdenciária do Segurado Obrigatório - Contribuinte Individual (4)(A)
+1210.30.02 Contribuição Previdenciária do Segurado Assalariado
+1210.30.03 Contribuição Previdenciária da Empresa sobre Segurado Assalariado
+1210.30.04 Contribuição Previdenciária da Empresa Optante pelo SIMPLES (4)(A)
+1210.30.05 Contribuição Previdenciária sobre Espetáculo Desportivo
+1210.30.06 Contribuição Previdenciária sobre a Produção Rural
+1210.30.07 Contribuição Previdenciária em Regime de Parcelamento de Débitos (4)(A)
+1210.30.08 Contribuição Previdenciária para o Seguro de Acidente do Trabalho
+1210.30.09 Contribuição Previdenciária sobre Reclamatória Trabalhista (4)(A)
+1210.30.10 Contribuição Previdenciária em Regime de Parcelamento de Débitos dos Municípios (1)(I) (4)(A)
+1210.30.11 Contribuição Previdenciária do Segurado Obrigatório - Empresário (4)(I)
+1210.30.12 Contribuição Previdenciária do Segurado Facultativo (4)(I)
+1210.30.13 Contribuição Previdenciária do Segurado Especial (4)(I)
+1210.30.14 Contribuição Previdenciária do Segurado Obrigatório - Empregado Doméstico (4)(I)
+1210.30.15 Contribuição Previdenciária dos Órgãos do Poder Público (4)(I)
+1210.30.16 Contribuição Previdenciária das Entidades Filantrópicas (4)(I)
+1210.30.17 Contribuição Previdenciária - Retenção sobre Nota Fiscal - Sub-Rogação (4)(I)
+1210.30.18 Arrecadação FIES - Certificados Financeiros do Tesouro Nacional (4)(I)
+1210.30.19 Arrecadação FNS - Certificados Financeiros do Tesouro Nacional (4)(I)
+1210.30.20 Certificados da Dívida Pública - CDP (4)(I)
+1210.30.21 Contribuição Previdenciária na Forma de Depósito Judicial, Recursal e Custas Judiciais (4)(I)
+1210.30.22 Contribuição Previdenciária das Cooperativas de Trabalho Descontada do Cooperado (8)(I)
+1210.30.23 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuição dos Empregadores e Trabalhadores para a Seguridade Social (9)(I)
+1210.30.99 Outras Contribuições Previdenciárias
+1210.31.00 Contribuição ao Programa de Ensino Fundamental (13)(E)
+1210.32.00 Contribuições Rurais
+1210.32.01 Contribuição Industrial Rural
+1210.32.02 Contribuição sobre a Propriedade Rural (13)(E)
+1210.32.03 Adicional à Contribuição Previdenciária
+1210.33.00 Contribuição e Adicional para o Serviço Nacional de Aprendizagem Comercial - SENAC
+1210.33.01 Contribuição para o Serviço Nacional de Aprendizagem Comercial - SENAC
+1210.33.02 Adicional à Contribuição para o Serviço Nacional de Aprendizagem Comercial - SENAC
+1210.34.00 Contribuição e Adicional para o Serviço Nacional de Aprendizagem Industrial -SENAI
+1210.34.01 Contribuição para o Serviço Nacional de Aprendizagem Industrial - SENAI
+1210.34.02 Adicional à Contribuição para o Serviço Nacional de Aprendizagem Industrial - SENAI
+1210.35.00 Contribuição e Adicional para o Serviço Social do Comércio - SESC
+1210.35.01 Contribuição para o Serviço Social do Comércio - SESC
+1210.35.02 Adicional à Contribuição para o Serviço Social do Comércio - SESC
+1210.36.00 Contribuição e Adicional para o Serviço Social da Indústria - SESI
+1210.36.01 Contribuição para o Serviço Social da Indústria - SESI
+1210.36.02 Adicional à Contribuição ao Serviço Social da Indústria - SESI
+1210.37.00 Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - PIS/PASE
+1210.37.01 Receitas dos Principais das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1210.37.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1210.37.03 Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1210.38.00 Contribuição Social sobre o Lucro das Pessoas Jurídicas
+1210.38.01 Receita do Principal da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1210.38.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1210.38.03 Contribuição Social sobre o Lucro das Pessoas Jurídicas - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1210.39.00 Contribuição para o Serviço Nacional de Aprendizagem Rural - SENAR
+1210.40.00 Cota-Parte das Contribuições Rurais (13)(E)
+1210.41.00 Contribuição para o Serviço Social do Transporte - SEST
+1210.42.00 Contribuição para o Serviço Nacional de Aprendizagem do Transporte - SENAT
+1210.43.00 Contribuição para o Serviço Brasileiro de Apoio às Micro e Pequenas Empresas - SEBRAE
+1210.44.00 Contribuição para o Serviço Nacional de Aprendizagem do Cooperativismo - SESCOOP
+1210.45.00 Contribuição sobre Jogos de Bingo
+1210.46.00 Compensações Financeiras entre o Regime Geral e os Regimes Próprios de Previdência dos Servidores (18)(E)
+1210.46.01 Regime de Previdência dos Servidores da União (13)(E)
+1210.46.02 Regime de Previdência dos Servidores dos Estados e Distrito Federal (13)(E)
+1210.46.03 Regime de Previdência dos Servidores dos Municípios (13)(E)
+1210.47.00 Contribuição Relativa à Despedida de Empregado sem Justa Causa (1)(I)
+1210.48.00 Contribuição sobre a Remuneração Devida ao Trabalhador (1)(I)
+1210.98.00 Outras Contribuições Sociais - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1210.99.00 Outras Contribuições Sociais
+1220.00.00 Contribuições Econômicas
+1220.01.00 Contribuição para o Programa de Integração Nacional - PIN
+1220.02.00 Contribuição para o Programa de Redistribuição de Terras e de Estímulo à Agroindústria do Norte e do Nordeste - PROTERRA
+1220.03.00 Contribuições para o Desenvolvimento e Aperfeiçoamento das Atividades de Fiscalização
+1220.03.01 Selo Especial de Controle
+1220.03.02 Lojas Francas, Entrepostos Aduaneiros e Depósitos Alfandegados
+1220.03.03 Contribuições sobre as Lojas Francas, Entrepostos Aduaneiros e Depósitos Alfandegados - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1220.05.00 Contribuição sobre Apostas em Competições Hípicas
+1220.06.00 Contribuição para o Desenvolvimento da Indústria Cinematográfica Nacional
+1220.06.01 Contribuição para o Desenvolvimento da Indústria Cinematográfica Nacional - Remessas (3)(I)
+1220.06.02 Contribuição para o Desenvolvimento da Indústria Cinematográfica Nacional - Títulos (3)(I)
+1220.07.00 Cota-Parte dos Preços de Realização dos Combustíveis Automotivos (8)(E)
+1220.13.00 Cota-Parte da Margem de Revenda dos Combustíveis (4)(E)
+1220.14.00 Cotas de Contribuição sobre a Exportação (13)(E)
+1220.16.00 Adicional sobre as Tarifas de Passagens Aéreas Domésticas
+1220.18.00 Cota-Parte do Adicional ao Frete para Renovação da Marinha Mercante
+1220.22.00 Compensações Financeiras (4)(A) (13)(E)
+1220.22.11 Utilização de Recursos Hídricos (13)(E)
+1220.22.20 Exploração de Recursos Minerais (13)(E)
+1220.22.31 Royalties pela Produção de Petróleo ou Gás Natural - em Terra (13)(E)
+1220.22.32 Royalties pela Produção de Petróleo ou Gás Natural - em Plataforma (13)(E)
+1220.22.41 Royalties Excedentes pela Produção de Petróleo ou Gás Natural - em Terra (13)(E)
+1220.22.42 Royalties Excedentes pela Produção de Petróleo ou Gás Natural - em Plataforma (13)(E)
+1220.22.50 Participação Especial pela Produção de Petróleo ou Gás Natural (13)(E)
+1220.24.00 Contribuição sobre a Receita das Concessionárias e Permissionárias de Energia Elétrica
+1220.25.00 Contribuição pela Licença de Uso, Aquisição ou Transferência de Tecnologia
+1220.26.00 Contribuição sobre a Receita das Empresas Prestadoras de Serviços de Telecomunicações
+1220.26.01 Contribuição sobre a Receita Operacional Bruta Decorrente de Prestação de Serviços de Telecomunicações
+1220.26.02 Contribuição sobre a Receita Bruta das Empresas Prestadoras de Serviços de Telecomunicações
+1220.27.00 Contribuição sobre o Faturamento das Empresas de Informática
+1220.27.01 Contribuição das Empresas Instaladas na Amazônia (11)(I)
+1220.27.02 Contribuição das Empresas Instaladas nas Demais Regiões (11)(I)
+1220.28.00 Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (6)(A)
+1220.28.01 Contribuição Relativa às Atividades de Importação de Petróleo e seus Derivados, Gás Natural e álcool Carburante (6)(I)
+1220.28.02 Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (6)(I)
+1220.28.03 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1220.99.00 Outras Contribuições Econômicas
+1220.99.01 Outras Contribuições Econômicas - Principal (14)(I)
+1220.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Outras Contribuições Econômicas (14)(I)
+1300.00.00 Receita Patrimonial
+1310.00.00 Receitas Imobiliárias
+1311.00.00 Aluguéis
+1312.00.00 Arrendamentos
+1313.00.00 Foros
+1314.00.00 Laudêmios
+1315.00.00 Taxa de Ocupação de Imóveis
+1315.10.00 Taxa de Ocupação de Terrenos da União (17)(I)
+1315.20.00 Taxa de Ocupação de Imóveis Funcionais e Próprios Nacionais Residenciais (17)(I)
+1315.30.00 Taxa de Ocupação de Outros Imóveis (17)(I)
+1316.00.00 Aluguéis - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1318.00.00 Arrendamentos - Operações Intra-orçamentárias (18)(I)
+1319.00.00 Outras Receitas Imobiliárias
+1320.00.00 Receitas de Valores Mobiliários
+1321.00.00 Juros de Títulos de Renda
+1322.00.00 Dividendos
+1323.00.00 Participações
+1325.00.00 Remuneração de Depósitos Bancários
+1326.00.00 Remuneração de Depósitos Especiais
+1327.00.00 Remuneração de Saldos de Recursos Não-Desembolsados
+1329.00.00 Outras Receitas de Valores Mobiliários (10)(I)
+1328.00.00 Remuneração dos Investimentos do Regime Próprio de Previdência do Servidor (18)(I)
+1328.10.00 Remuneração dos Investimentos do Regime Próprio de Previdência do Servidor em Renda Fixa (18)(I)
+1328.20.00 Remuneração dos Investimentos do Regime Próprio de Previdência do Servidor em Renda Variável (18)(I)
+1328.30.00 Remuneração dos Investimentos do Regime Próprio de Previdência do Servidor em Fundos Imobiliários (18)(I)
+1330.00.00 Receita de Concessões e Permissões
+1330.01.00 Receita de Outorga dos Serviços de Telecomunicações (4)(I) (15)(E)
+1330.02.00 Receita de Outorga dos Serviços de Radiodifusão Sonora e de Sons e Imagens (4)(I) (15)(E)
+1330.03.00 Receita de Outorga dos Serviços de Transporte Ferroviário (4)(I) (15)(E)
+1330.04.00 Receita de Outorga de Direitos de Exploração e Produção de Petróleo e Gás Natural (4)(I) - (15)(E)
+1330.04.01 Bônus de Assinatura de Contrato de Concessão (4)(I) (15)(E)
+1330.04.02 Pagamento pela Retenção de área para Exploração ou Produção (4)(I) (15)(E)
+1330.05.00 Receita de Outorga do Direito de Uso de Radiofreqüência (4)(I) (15)(E)
+1330.06.00 Receita de Outorga dos Serviços de Transportes Rodoviário Interestadual e Internacional de Passageiros (4)(I) (15)(E)
+1330.07.00 Receita de Concessão de Direito Real de Uso de área Pública (4)(I) (15)(E)
+1330.08.00 Receita de Transferência de Concessão, de Permissão ou de Autorização de Serviços de Telecomunicações ou de Uso de Radiofreqüência (4)(I) (15)(E)
+1330.09.00 Receita de Outorga para Exploração dos Serviços de Energia Elétrica (4)(I) (15)(E)
+1330.10.00 Receita de Outorga de Direitos de Uso de Recursos Hídricos (4)(I) (15)(E)
+1330.11.00 Receita de Outorga de Direitos de Uso de Outros Bens Públicos (8)(I) (15)(E)
+1330.99.00 Outras Receitas de Concessões e Permissões (13)(I) (15)(E)
+1331.00.00 Receita de Concessões e Permissões - Serviços (4)(E) (15)(I)
+1331.01.00 Receita de Concessões e Permissões - Serviços de Transporte (15)(I)
+1331.01.01 Receita de Outorga dos Serviços de Transporte Ferroviário (15)(I)
+1331.01.02 Receita de Outorga dos Serviços de Transportes Rodoviário Interestadual e Internacional de Passageiros (15)(I)
+1331.01.03 Receita de Outorga dos Serviços de Transporte Metroviário de Passageiros (15)(I)
+1331.01.04 Receita de Outorga dos Serviços de Transporte Marítimo de Passageiros (15)(I)
+1331.01.99 Outras Receitas de Concessões e Permissões - Serviços de Transporte (15)(I)
+1331.02.00 Receita de Concessões e Permissões - Serviços de Comunicação (15)(I)
+1331.02.01 Receita de Outorga dos Serviços de Telecomunicações (15)(I)
+1331.02.02 Receita de Outorga dos Serviços de Radiodifusão Sonora e de Sons e Imagens (15)(I)
+1331.02.03 Receita de Outorga do Direito de Uso de Radiofrequência (15)(I)
+1331.02.04 Receita de Transferência de Concessão, de Permissão ou de Autorização de Telecomunicações ou de Uso de Radiofrequência (15)(I)
+1331.02.05 Receita de Outorga dos Serviços de Telecomunicações - Operações Intra-Orçamentárias (16)(I)
+1331.02.06 Receita de Outorga do Direito de Uso de Radiofreqüência - Operações Intra- Orçamentárias (16)(I)
+1331.02.99 Outras Receitas de Concessões e Permissões - Serviços de Comunicação (15)(I)
+1331.03.00 Receita de Outorga para Exploração dos Serviços de Energia Elétrica (15)(I)
+1331.99.00 Outras Receitas de Concessões e Permissões - Serviços (15)(I)
+1332.00.00 Receita de Concessões e Permissões - Exploração de Recursos Naturais (4)(E) (15)(I)
+1332.01.00 Receita de Outorga dos Serviços de Exploração e Produção de Petróleo e Gás Natural (15)(I)
+1332.01.01 Bônus de Assinatura de Contrato de Concessão (15)(I)
+1332.01.02 Pagamento pela Retenção de área para Exploração ou Produção (15)(I)
+1332.02.00 Receita de Outorga de Direitos de Uso de Recursos Hídricos (15)(I)
+1332.03.00 Receita de Outorga de Direitos de Exploração e Pesquisa Mineral (16)(I)
+1332.04.00 Receita de Concessão Florestal (17)(I)
+1332.04.01 Receita de Concessão de Florestas Nacionais - Valor Mínimo (17)(I)
+1332.04.02 Receita de Concessão de Florestas Nacionais - Demais Valores (17)(I)
+1332.04.03 Receita de Outras Concessões Florestais - Valor Mínimo (17)(I)
+1332.04.04 Receita de Outras Concessões Florestais - Demais Valores (17)(I)
+1332.04.05 Receita de Custos de Edital de Concessão Florestal (17)(I)
+1332.04.06 Receita de Contratos de Transição de Concessão Florestal (17)(I)
+1332.99.00 Outras Receitas de Concessões e Permissões - Recursos Naturais (15)(I)
+1333.00.00 Receita de Concessões e Permissões - Direitos de Uso de Bens Públicos (4)(E) (15)(I)
+1333.01.00 Receita de Concessão de Direito Real de Uso de área Pública (15)(I)
+1333.02.00 Receita de Outorga de Direito de Uso ou de Exploração de Criação Protegida - Instituição Científica e Tecnológica (17)(I)
+1333.99.00 Outras Receitas de Concessões e Permissões - Direitos de Uso de Bens Públicos (15)(I)
+1334.00.00 Receita de Outorga de Serviços de Exploração e Produção de Petróleo e Gás Natural (4)(E)
+1334.01.00 Bônus de Assinatura de Contrato de Concessão (4)(E)
+1334.02.00 Pagamento pela Retenção de área para Exploração ou Produção (4)(E)
+1335.00.00 Receita de Outorga do Direito de Uso de Radiofreqüência (4)(E)
+1336.00.00 Receita de Outorga dos Serviços de Transportes Rodoviário Interestadual e Internacional de Passageiros (4)(E)
+1337.00.00 Receita de Contrato de Permissão de Uso (4)(E)
+1338.00.00 Receita de Transferência de Concessão, de Permissão ou de Autorização de Serviço de Telecomunicações ou de Uso de Radiofreqüência (4)(E)
+1339.00.00 Outras Receitas de Concessões e Permissões (4)(E) (15)(I)
+1340.00.00 Compensações Financeiras (13)(I)
+1340.01.00 Utilização de Recursos Hídricos - Itaipu (13)(I)
+1340.02.00 Utilização de Recursos Hídricos - Demais Empresas (13)(I)
+1340.03.00 Exploração de Recursos Minerais (13)(I)
+1340.04.00 Royalties pela Produção de Petróleo ou Gás Natural - em Terra (13)(I)
+1340.05.00 Royalties pela Produção de Petróleo ou Gás Natural - em Plataforma (13)(I)
+1340.06.00 Royalties Excedentes pela Produção de Petróleo ou Gás Natural - em Terra (13)(I)
+1340.07.00 Royalties Excedentes pela Produção de Petróleo ou Gás Natural - em Plataforma (13)(I)
+1340.08.00 Participação Especial pela Produção de Petróleo ou Gás Natural (13)(I)
+1341.00.00 Dividendos - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1390.00.00 Outras Receitas Patrimoniais
+1400.00.00 Receita Agropecuária
+1410.00.00 Receita da Produção Vegetal
+1420.00.00 Receita da Produção Animal e Derivados
+1490.00.00 Outras Receitas Agropecuárias
+1500.00.00 Receita Industrial
+1510.00.00 Receita da Indústria Extrativa Mineral (4)(E)
+1520.00.00 Receita da Indústria de Transformação
+1520.12.00 Receita da Indústria Mecânica
+1520.14.00 Receita da Indústria de Material de Transporte (4)(E)
+1520.20.00 Receita da Indústria Química
+1520.21.00 Receita da Indústria de Produtos Farmacêuticos e Veterinários
+1520.22.00 Receita da Indústria de Produtos Farmacêuticos e Veterinários - Operações Intra- Orçamentárias (17)(I)
+1520.26.00 Receita da Indústria de Produtos Alimentares
+1520.27.00 Receita da Indústria de Bebidas e Destilados (2)(I)
+1520.29.00 Receita da Indústria Editorial e Gráfica
+1520.30.00 Receita da Indústria Editorial e Gráfica - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1520.98.00 Outras Receitas da Indústria de Transformação - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1520.99.00 Outras Receitas da Indústria de Transformação
+1530.00.00 Receita da Indústria de Construção
+1590.00.00 Outras Receitas Industriais (13)(I)
+1600.00.00 Receita de Serviços
+1600.01.00 Serviços Comerciais
+1600.01.01 Serviços de Comercialização de Medicamentos
+1600.01.02 Serviços de Comercialização de Livros, Periódicos, Material Escolar e de Publicidade
+1600.01.03 Serviços de Comercialização e Distribuição de Produtos Agropecuários
+1600.01.06 Serviços de Comercialização e Distribuição de Produtos, Dados e Materiais de Informática
+1600.01.07 Receita de Utilização de Posições Orbitais
+1600.01.08 Serviços de Comercialização de Medicamentos - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.01.09 Serviços de Comercialização de Livros, Periódicos, Materiais Escolares e Publicidade - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.01.99 Outros Serviços Comerciais
+1600.02.00 Serviços Financeiros
+1600.02.01 Juros de Empréstimos
+1600.02.02 Concessão de Aval do Tesouro Nacional (13)(A)
+1600.02.03 Serviços Financeiros de Compensação de Variações Salariais
+1600.02.04 Serviços Financeiros de Garantia da Atividade Agropecuária
+1600.02.05 Operações de Autoridade Monetária (8)(E)
+1600.02.06 Remuneração sobre Repasse para Programas de Desenvolvimento Econômico
+1600.02.07 Comissões pela Prestação de Garantia
+1600.02.09 Outras Operações de Autoridade Monetária (8)(E)
+1600.02.10 Serviços Financeiros dos Financiamentos à Estocagem de álcool Etílico Combustível (8)(I)
+1600.02.11 Serviços Financeiros Proveniente da Execução de Garantia - Operações de Crédito Internas (10)(I)
+1600.02.12 Serviços Financeiros Proveniente da Execução de Garantia - Operações de Crédito Externas (10)(I)
+1600.02.99 Outros Serviços Financeiros
+1600.03.00 Serviços de Transporte
+1600.03.01 Serviços de Transporte Rodoviário
+1600.03.02 Serviços de Transporte Ferroviário
+1600.03.03 Serviços de Transporte Hidroviário
+1600.03.04 Serviços de Transporte Aéreo
+1600.03.05 Serviços de Transportes Especiais
+1600.03.99 Outros Serviços de Transporte (13)(I)
+1600.04.00 Serviços de Comunicação
+1600.05.00 Serviços de Saúde
+1600.05.01 Serviços Hospitalares
+1600.05.02 Serviços de Registro de Análise e de Controle de Produtos Sujeitos a Normas de Vigilância Sanitária
+1600.05.03 Serviços Radiológicos e Laboratoriais (3)(I)
+1600.05.05 Serviços Hospitalares - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.05.99 Outros Serviços de Saúde
+1600.06.00 Serviços Portuários
+1600.07.00 Serviços de Armazenagem
+1600.08.00 Serviços de Processamento de Dados
+1600.09.00 Serviços de Socorro Marítimo
+1600.10.00 Serviços de Informações Estatísticas
+1600.11.00 Serviços de Metrologia e Certificação
+1600.11.01 Metrologia Legal e Certificatória Delegada
+1600.11.02 Metrologia Científica e Industrial
+1600.11.03 Metrologia Legal
+1600.11.04 Certificação de Produtos e Serviços
+1600.11.05 Informação Tecnológica
+1600.11.06 Metrologia Legal e Certificatória Delegada - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.11.07 Metrologia Científica e Industrial - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.11.08 Certificação de Produtos e Serviços - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.11.09 Serviços de Informação Tecnológica - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.12.00 Serviços Tecnológicos
+1600.13.00 Serviços Administrativos
+1600.14.00 Serviços de Inspeção e Fiscalização
+1600.15.00 Serviços de Meteorologia
+1600.16.00 Serviços Educacionais
+1600.17.00 Serviços Agropecuários
+1600.18.00 Serviços de Reparação, Manutenção e Instalação
+1600.19.00 Serviços Recreativos e Culturais
+1600.20.00 Serviços de Consultoria, Assistência Técnica e Análise de Projetos
+1600.21.00 Serviços de Hospedagem e Alimentação
+1600.22.00 Serviços de Estudos e Pesquisas
+1600.23.00 Serviços de Registro de Marcas, de Patentes e de Transferências de Tecnologia
+1600.23.01 Serviços de Patentes
+1600.23.02 Serviços de Registro de Marcas
+1600.23.03 Serviços de Transferência de Tecnologia
+1600.23.04 Serviços de Registro de Indicações Geográficas
+1600.23.05 Serviços de Registro de Programas de Computador
+1600.23.06 Serviços de Patentes - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.23.07 Serviços de Registro de Marcas - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.23.08 Serviços de Transferência de Tecnologia - Operações Intra-orçamentárias (18)(I)
+1600.23.09 Serviços de Registro de Indicações Geográficas - Operações Intra-orçamentárias (18)(I)
+1600.23.10 Serviços de Registro de Programas de Computador - Operações Intra-orçamentárias (18)(I)
+1600.23.99 Outros Serviços de Registro de Marcas, de Patentes e de Transferência Tecnológica (13)(I)
+1600.24.00 Serviços de Registro do Comércio
+1600.25.00 Serviços de Informações Científicas e Tecnológicas
+1600.26.00 Serviços de Fornecimento de água
+1600.27.00 Serviços de Perfuração e Instalação de Poços
+1600.28.00 Serviços de Geoprocessamento
+1600.29.00 Serviços de Cadastramento de Fornecedores
+1600.30.00 Tarifa de Utilização de Faróis
+1600.31.00 Tarifa e Adicional sobre Tarifa Aeroportuária
+1600.31.01 Tarifa Aeroportuária
+1600.31.02 Adicional sobre Tarifa Aeroportuária
+1600.31.03 Parcela da Tarifa de Embarque Internacional(4)(I)
+1600.32.00 Serviços de Cadastro da Atividade Mineral (3)(E) (16)(I)
+1600.33.00 Tarifas de Uso das Comunicações e dos Auxílios à Navegação Aérea em Rota
+1600.34.00 Serviços de Regulamentação da Exploração dos Serviços de Telecomunicações - Regime Privado
+1600.35.00 Serviços de Compensação de Variações Salariais
+1600.36.00 Prestação de Serviços pelo Banco Central do Brasil
+1600.36.01 Tarifa pelo Uso do Sistema de Informações do Banco Central(4)(I)
+1600.36.02 Tarifa pelo Uso do Sistema de Transferência de Reserva do Banco Central(4)(I)
+1600.37.00 Operações de Câmbio (4)(E)
+1600.38.00 Operações em Moeda Estrangeira (4)(E)
+1600.39.00 Operações com Ouro (4)(E)
+1600.40.00 Certificação e Homologação de Produtos de Telecomunicações (1)(I)
+1600.49.00 Serviços de Comunicação - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.50.00 Serviços de Armazenagem - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.51.00 Serviços de Processamento de Dados - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.52.00 Serviços Tecnológicos - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.53.00 Serviços Administrativos - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.54.00 Serviços Educacionais - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.55.00 Serviços de Hospedagem e Alimentação - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.56.00 Certificação e Homologação da Atividade Mineral (16)(I)
+1600.57.00 Serviços de Estudos e Pesquisas - Operações Intra-Orçamentárias (17)(I)
+1600.58.00 Serviços de Informações Científicas e Tecnológicas - Operações Intra-Orçamentárias (17)(I)
+1600.60.00 Serviços Voltados à Inovação e à Pesquisa no Ambiente Produtivo - Instituição Científica e Tecnológica (17)(I)
+1600.60.01 Serviços Prestados Diretamente por Instituição Científica e Tecnológica (17)(I)
+1600.60.02 Serviços Decorrentes de Parcerias com Outras Instituições Públicas e Privadas (17)(I)
+1600.70.00 Tarifa de Compartilhamento e Utilização em Atividades de Pesquisa e Inovação - Instituição Científica e Tecnológica (17)(I)
+1600.70.01 Compartilhamento de Laboratórios e Afins com Microempresas e Empresas de Pequeno Porte em Atividades de Inovação (17)(I)
+1600.70.02 Utilização de Laboratórios e Afins por Empresas Nacionais e Organizações de Direito Privado Sem Fins Lucrativos em Atividades de Pesquisa (17)(I)
+1600.98.00 Outros Serviços - Operações Intra-Orçamentárias (15)(I) (16)(A)
+1600.99.00 Outros Serviços
+1700.00.00 Transferências Correntes
+1720.00.00 Transferências Intergovernamentais
+1721.00.00 Transferências da União (4)(E)
+1721.01.00 Participação na Receita da União (4)(E)
+1721.01.20 Transferências de Recursos do Fundo de Manutenção do Ensino Fundamental e de Valorização do Magistério - FUNDEF (4)(E)
+1721.09.00 Outras Transferências da União (4)(E)
+1721.09.01 Transferência Financeira - L.C. no 87/96 (4)(E)
+1721.09.10 Complementação da União ao Fundo de Manutenção do Ensino Fundamental e de Valorização do Magistério - FUNDEF (4)(E)
+1721.09.99 Demais Transferências da União (4)(E)
+1722.01.00 Participação na Receita dos Estados (4)(E)
+1722.01.20 Transferências de Recursos do Fundo de Manutenção do Ensino Fundamental e de Valorização do Magistério - FUNDEF (4)(E)
+1722.00.00 Transferências dos Estados
+1722.09.00 Outras Transferências dos Estados (13)(E)
+1722.99.00 Outras Transferências dos Estados (13)(I)
+1723.00.00 Transferências dos Municípios
+1723.09.00 Outras Transferências dos Municípios (4)(I) (13)(E)
+1723.99.00 Outras Transferências dos Municípios (13)(I)
+1730.00.00 Transferências de Instituições Privadas
+1740.00.00 Transferências do Exterior
+1750.00.00 Transferências de Pessoas
+1760.00.00 Transferências de Convênios
+1761.00.00 Transferências de Convênios da União e de suas Entidades
+1762.00.00 Transferências de Convênios dos Estados e do Distrito Federal e de suas Entidades
+1763.00.00 Transferências de Convênios dos Municípios e de suas Entidades
+1764.00.00 Transferências de Convênios de Instituições Privadas
+1770.00.00 Transferências para o Combate à Fome (7)(I)
+1770.01.00 Provenientes do Exterior (7)(I) (15)(E)
+1770.02.00 Provenientes de Pessoas Jurídicas (7)(I) (15)(E)
+1770.03.00 Provenientes de Pessoas Físicas (7)(I) (15)(E)
+1770.04.00 Provenientes de Depósito Não-Identificados (7)(I) (15)(E)
+1771.00.00 Provenientes do Exterior (15)(I)
+1772.00.00 Provenientes de Pessoas Jurídicas (15)(I)
+1773.00.00 Provenientes de Pessoas Físicas (15)(I)
+1774.00.00 Provenientes de Depósito Não-Identificados (15)(I)
+1900.00.00 Outras Receitas Correntes
+1910.00.00 Multas e Juros de Mora
+1911.00.00 Multas e Juros de Mora dos Tributos
+1911.01.00 Multas e Juros de Mora do Imposto sobre a Importação
+1911.01.01 Receita de Multa e Juros de Mora do Imposto sobre a Importação (9)(I)
+1911.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre a Importação (9)(I)
+1911.02.00 Multas e Juros de Mora do Imposto sobre a Renda e Proventos de Qualquer Natureza
+1911.02.01 Multas e Juros de Mora do Imposto sobre a Renda das Pessoas Físicas
+1911.02.02 Multas e Juros de Mora do Imposto sobre a Renda das Pessoas Jurídicas
+1911.02.03 Multas e Juros de Mora do Imposto sobre a Renda Retido nas Fontes
+1911.02.04 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre a Renda - Pessoas Jurídicas (9)(I)
+1911.02.05 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre a Renda - Retido na Fonte (9)(I)
+1911.02.06 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora do Imposto Sobre a Renda - Pessoas Físicas (14)(I)
+1911.03.00 Multas e Juros de Mora do Imposto sobre Produtos Industrializados
+1911.03.01 Receita de Multa e Juros de Mora do Imposto sobre Produtos Industrializados (9)(I)
+1911.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre Produtos Industrializados (9)(I)
+1911.04.00 Multas e Juros de Mora do Imposto sobre Operações de Crédito, Câmbio e Seguro ou Relativas a Títulos ou Valores Mobiliários
+1911.04.01 Receita de Multa e Juros de Mora do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1911.04.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1911.07.00 Multas e Juros de Mora do Imposto sobre a Exportação
+1911.07.01 Receita de Multa e Juros de Mora do Imposto sobre a Exportação (9)(I)
+1911.07.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora do Imposto sobre a Exportação (9)(I)
+1911.08.00 Multas e Juros de Mora do Imposto sobre a Propriedade Territorial Rural
+1911.31.00 Multas e Juros de Mora da Taxa de Fiscalização das Telecomunicações
+1911.32.00 Multas e Juros de Mora da Taxa de Fiscalização dos Produtos Controlados pelo Ministério do Exército
+1911.33.00 Multas e Juros de Mora da Taxa de Fiscalização das Telecomunicações - Operações Intra- Orçamentárias (16)(I)
+1911.34.00 Multas e Juros de Mora da Taxa de Fiscalização dos Mercados de Seguro, da Capitalização e da Previdência Privada Aberta
+1911.35.00 Multas e Juros de Mora da Taxa de Fiscalização de Vigilância Sanitária
+1911.36.00 Multas e Juros de Mora da Taxa de Saúde Suplementar
+1911.37.00 Multas e Juros de Mora da Taxa de Fiscalização dos Mercados de Títulos e Valores Mobiliários
+1911.99.00 Multas e Juros de Mora de Outros Tributos
+1911.99.01 Multas e Juros de Mora de Outros Tributos - Principal (14)(I)
+1911.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora de Outros Tributos (14)(I)
+1912.00.00 Multas e Juros de Mora das Contribuições
+1912.01.00 Multa e Juros de Mora da Contribuição para o Financiamento da Seguridade Social
+1912.01.01 Receita de Multa e Juros de Mora da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1912.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1912.02.00 Multas e Juros de Mora da Contribuição do Salário-Educação
+1912.03.00 Multas e Juros de Mora da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1912.03.01 Receita de Multas e Juros de Mora da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1912.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1912.07.00 Multas e Juros de Mora da Contribuição sobre Movimentação Financeira (8)(A)
+1912.07.01 Receita de Multa e Juros de Mora da Contribuição sobre Movimentação Financeira (9)(I)
+1912.07.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Contribuição sobre Movimentação Financeira (9)(I)
+1912.29.00 Multas e Juros de Mora das Contribuições para o Regime Próprio de Previdência do Servidor (18)(I)
+1912.29.01 Multas e Juros de Mora da Contribuição Patronal para o Regime Próprio de Previdência (18)(I)
+1912.29.02 Multas e Juros de Mora da Contribuição do Servidor para o Regime Próprio de Previdência (18)(I)
+1912.30.00 Multas e Juros de Mora das Contribuições Previdenciárias para o Regime Geral de Previdência Social (4)(A)
+1912.30.01 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Obrigatório - Contribuinte Individual (4)(I)
+1912.30.02 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Assalariado (4)(I)
+1912.30.03 Multas e Juros de Mora da Contribuição Previdenciária da Empresa sobre Segurado Assalariado (4)(I)
+1912.30.04 Multas e Juros de Mora da Contribuição Previdenciária da Empresa Optante pelo SIMPLES (4)(I)
+1912.30.05 Multas e Juros de Mora da Contribuição Previdenciária sobre Espetáculo Desportivo (4)(I)
+1912.30.06 Multas e Juros de Mora da Contribuição Previdenciária sobre a Produção Rural (4)(I)
+1912.30.07 Multas e Juros de Mora da Contribuição Previdenciária em Regime de Parcelamento de Débitos (4)(I)
+1912.30.08 Multas e Juros de Mora da Contribuição Previdenciária para o Seguro de Acidente do Trabalho (4)(I)
+1912.30.09 Multas e Juros de Mora da Contribuição Previdenciária sobre Reclamatória Trabalhista (4)(I)
+1912.30.10 Multas e Juros de Mora da Contribuição Previdenciária em Regime de Parcelamento de Débitos dos Municípios (4)(I)
+1912.30.11 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Obrigatório - Empresário (4)(I)
+1912.30.12 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Facultativo (4)(I)
+1912.30.13 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Especial (4)(I)
+1912.30.14 Multas e Juros de Mora da Contribuição Previdenciária do Segurado Obrigatório - Empregado Doméstico (4)(I)
+1912.30.15 Multas e Juros de Mora da Contribuição Previdenciária dos Órgãos do Poder Público (4)(I)
+1912.30.16 Multas e Juros de Mora da Contribuição Previdenciária das Entidades Filantrópicas (4)(I)
+1912.30.17 Multas e Juros de Mora da Contribuição Previdenciária - Retenção sobre Nota Fiscal - Sub-Rogação (4)(I)
+1912.30.18 Multas e Juros de Mora da Arrecadação FIES - Certificados Financeiros do Tesouro Nacional (4)(I)
+1912.30.19 Multas e Juros de Mora da Arrecadação FNS - Certificados Financeiros do Tesouro Nacional (4)(I)
+1912.30.20 Multas e Juros de Mora de Certificados da Dívida Pública - CDP (4)(I)
+1912.30.21 Multas e Juros de Mora da Contribuição Previdenciária na Forma de Depósito Judicial, Recursal e Custas Judiciais (4)(I)
+1912.30.99 Multas e Juros de Mora de Outras Contribuições Previdenciárias (4)(I)
+1912.31.00 Multas e Juros de Mora das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - PIS/PASE
+1912.31.01 Receita de Multa e Juros de Mora das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1912.31.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1912.32.00 Multas e Juros de Mora da Contribuição Social sobre o Lucro das Pessoas Jurídicas
+1912.32.01 Receita de Multa e Juros de Mora da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1912.32.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1912.33.00 Multas e Juros de Mora das Contribuições sobre a Receita de Concursos de Prognósticos (4)(A)
+1912.33.01 Multas e Juros de Mora da Contribuição sobre a Receita da Loteria Federal (4)(I)
+1912.33.02 Multas e Juros de Mora da Contribuição sobre a Receita de Loterias Esportivas (4)(I)
+1912.33.03 Multas e Juros de Mora da Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (4)(I)
+1912.33.04 Multas e Juros de Mora da Contribuição sobre a Receita de Loterias de Números (4)(I)
+1912.33.05 Multas e Juros de Mora da Contribuição sobre a Receita da Loteria Instantânea (4)(I)
+1912.33.06 Multas e Juros de Mora de Prêmios Prescritos de Loterias Federais (4)(I)
+1912.33.07 Multas e Juros de Mora da Contribuição sobre a Receita de Outros Concursos de Prognósticos (17)(I)
+1912.34.00 Multas e Juros de Mora da Contribuição para o Plano de Seguridade Social dos Servidores Públicos - CPSS (18)(E)
+1912.51.00 Multas e Juros de Mora da Contribuição sobre Aposta em Competições Hípicas
+1912.52.00 Multas e Juros de Mora da Cota-Parte do Adicional ao Frete para a Renovação da Marinha Mercante
+1912.53.00 Multas e Juros de Mora da Contribuição Relativa à Despedida de Empregado sem Justa Causa (1)(I)
+1912.54.00 Multas e Juros de Mora da Contribuição sobre a Remuneração Devida ao Trabalhador (1)(I)
+1912.55.00 Juros de Mora do FUNDAF - Receita das Contribuições (15)(I)
+1912.55.01 Juros de Mora do FUNDAF - Receita da Contribuição para o Financiamento da Seguridade Social (15)(I)
+1912.55.02 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Contribuição para o Financiamento da Seguridade Social (15)(I)
+1912.55.03 Juros de Mora do FUNDAF - Receita da Contribuição sobre Movimentação Financeira (15)(I)
+1912.55.04 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Contribuição sobre Movimentação Financeira (15)(I)
+1912.55.05 Juros de Mora do FUNDAF - Receita das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (15)(I)
+1912.55.06 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (15)(I)
+1912.55.07 Juros de Mora do FUNDAF - Receita da Contribuição Social sobre o Lucro das Pessoas Jurídicas (15)(I)
+1912.55.08 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Contribuição Social sobre o Lucro das Pessoas Jurídicas (15)(I)
+1912.55.09 Juros de Mora do FUNDAF - Contribuição sobre a Receita da Loteria Federal (15)(I)
+1912.55.10 Juros de Mora do FUNDAF - Contribuição sobre a Receita de Loterias Esportivas (15)(I)
+1912.55.11 Juros de Mora do FUNDAF - Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (15)(I)
+1912.55.12 Juros de Mora do FUNDAF - Contribuição sobre a Receita de Loterias de Números (15)(I)
+1912.55.13 Juros de Mora do FUNDAF - Contribuição sobre a Receita da Loteria Instantânea (15)(I)
+1912.55.14 Juros de Mora do FUNDAF - Receita de Prêmios Prescritos de Loterias Federais (15)(I)
+1912.99.00 Multas e Juros de Mora de Outras Contribuições
+1912.99.01 Multas e Juros de Mora de Outras Contribuições - Principal (14)(I)
+1912.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora de Outras Contribuições (14)(I)
+1913.00.00 Multas e Juros de Mora da Dívida Ativa dos Tributos
+1913.01.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Importação
+1913.01.01 Receita de Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Importação (9)(I)
+1913.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Importação (9)(I)
+1913.02.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Renda e Proventos de Qualquer Natureza
+1913.02.01 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Renda das Pessoas Físicas
+1913.02.02 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Renda das Pessoas Jurídicas
+1913.02.03 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Renda Retido nas Fontes
+1913.02.04 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Renda - Pessoas Jurídicas (9)(I)
+1913.02.05 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Renda - Retido na Fonte (9)(I)
+1913.02.06 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Renda - Pessoas Físicas (14)(I)
+1913.03.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre Produtos Industrializados
+1913.03.01 Receita de Multa e Juros de Mora da Dívida Ativa do Imposto sobre Produtos Industrializados (9)(I)
+1913.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre Produtos Industrializados (9)(I)
+1913.04.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro ou Relativas a Títulos ou Valores Mobiliários
+1913.04.01 Receita de Multa e Juros de Mora da Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1913.04.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1913.07.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Exportação
+1913.07.01 Receita de Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Exportação (9)(I)
+1913.07.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa do Imposto sobre a Exportação (9)(I)
+1913.08.00 Multas e Juros de Mora da Dívida Ativa do Imposto sobre a Propriedade Territorial Rural
+1913.09.00 Multas e Juros de Mora da Dívida Ativa da Taxa de Fiscalização das Telecomunicações
+1913.10.00 Multas e Juros de Mora da Dívida Ativa da Taxa de Fiscalização dos Produtos Controlados pelo Ministério do Exército
+1913.99.00 Multas e Juros de Mora da Dívida Ativa de Outros Tributos
+1914.00.00 Multas e Juros de Mora da Dívida Ativa das Contribuições
+1914.01.00 Multas e Juros de Mora da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social
+1914.01.01 Receita de Multa e Juros de Mora da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1914.01.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1914.02.00 Multas e Juros de Mora da Dívida Ativa da Contribuição do Salário-Educação
+1914.03.00 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre Movimentação Financeira (8)(A)
+1914.03.01 Receita de Multa e Juros de Mora da Dívida Ativa da Contribuição sobre Movimentação Financeira (9)(I)
+1914.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa da Contribuição sobre Movimentação Financeira (9)(I)
+1914.04.00 Multas e Juros de Mora da Dívida Ativa das Contribuições Previdenciárias para o Regime Geral de Previdência Social (4)(A)
+1914.04.01 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Contribuinte Individual (4)(I)
+1914.04.02 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Assalariado (4)(I)
+1914.04.03 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária da Empresa sobre Segurado Assalariado (4)(I)
+1914.04.04 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária da Empresa Optante pelo SIMPLES (4)(I)
+1914.04.05 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária sobre Espetáculo Desportivo (4)(I)
+1914.04.06 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária sobre a Produção Rural (4)(I)
+1914.04.07 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária em Regime de Parcelamento de Débitos (4)(I)
+1914.04.08 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária para o Seguro de Acidente do Trabalho (4)(I)
+1914.04.09 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária sobre Reclamatória Trabalhista (4)(I)
+1914.04.10 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária em Regime de Parcelamento de Débitos dos Municípios (4)(I)
+1914.04.11 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Empresário (4)(I)
+1914.04.12 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Facultativo (4)(I)
+1914.04.13 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Especial (4)(I)
+1914.04.14 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Empregado Doméstico (4)(I)
+1914.04.15 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária dos Órgãos do Poder Público (4)(I)
+1914.04.16 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária das Entidades Filantrópicas (4)(I)
+1914.04.17 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária - Retenção sobre Nota Fiscal - Sub-Rogação (4)(I)
+1914.04.18 Multas e Juros de Mora da Dívida Ativa da Arrecadação FIES - Certificados Financeiros do Tesouro Nacional (4)(I)
+1914.04.19 Multas e Juros de Mora da Dívida Ativa da Arrecadação FNS - Certificados Financeiros do Tesouro Nacional (4)(I)
+1914.04.20 Multas e Juros de Mora da Dívida Ativa de Certificados da Dívida Pública - CDP (4)(I)
+1914.04.21 Multas e Juros de Mora da Dívida Ativa da Contribuição Previdenciária na Forma de Depósito Judicial, Recursal e Custas Judiciais (4)(I)
+1914.04.99 Multas e Juros de Mora da Dívida Ativa de Outras Contribuições Previdenciárias (4)(I)
+1914.05.00 Multas e Juros de Mora da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - PIS/PASE
+1914.05.01 Receita de Multa e Juros de Mora da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1914.05.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1914.06.00 Multas e Juros de Mora da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas
+1914.06.01 Receita de Multa e Juros de Mora da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1914.06.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multa e Juros de Mora da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1914.07.00 Multas e Juros de Mora da Dívida Ativa das Contribuições sobre a Receita de Concursos de Prognósticos (4)(A)
+1914.07.01 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Receita da Loteria Federal (4)(I)
+1914.07.02 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Receita de Loterias Esportivas (4)(I)
+1914.07.03 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (4)(I)
+1914.07.04 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Receita de Loterias de Números (4)(I)
+1914.07.05 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Receita da Loteria Instantânea (4)(I)
+1914.07.06 Multas e Juros de Mora da Dívida Ativa de Prêmios Prescritos de Loterias Federais (4)(I)
+1914.08.00 Multas e Juros de Mora da Dívida Ativa da Contribuição Relativa à Despedida do Empregado sem Justa Causa (1)(I)
+1914.09.00 Multas e Juros de Mora da Dívida Ativa da Contribuição sobre a Remuneração Devida ao Trabalhador (1)(I)
+1914.10.00 Multas e Juros de Mora da Dívida Ativa da Cota-Parte do Adicional ao Frete para Renovação da Marinha Mercante (13)(I)
+1914.11.00 Multas e Juros de Mora da Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1914.11.01 Receita de Multas e Juros de Mora da Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1914.11.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora da Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1914.12.00 Juros de Mora do FUNDAF - Dívida Ativa das Contribuições (15)(I)
+1914.12.01 Juros de Mora do FUNDAF - Receita da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social (15)(I)
+1914.12.02 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social (15)(I)
+1914.12.03 Juros de Mora do FUNDAF - Receita da Dívida Ativa da Contribuição sobre Movimentação Financeira (15)(I)
+1914.12.04 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Dívida Ativa da Contribuição sobre Movimentação Financeira (15)(I)
+1914.12.05 Juros de Mora do FUNDAF - Receita da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (15)(I)
+1914.12.06 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (15)(I)
+1914.12.07 Juros de Mora do FUNDAF - Receita da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas (15)(I)
+1914.12.08 Juros de Mora do FUNDAF - Receita do Programa de Recuperação Fiscal e do Parcelamento Especial da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas (15)(I)
+1914.12.09 Juros de Mora do FUNDAF - Dívida Ativa da Contribuição sobre a Receita da Loteria Federal (15)(I)
+1914.12.10 Juros de Mora do FUNDAF - Dívida Ativa da Contribuição sobre a Receita de Loterias Esportivas (15)(I)
+1914.12.11 Juros de Mora do FUNDAF - Dívida Ativa da Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (15)(I)
+1914.12.12 Juros de Mora do FUNDAF - Dívida Ativa da Contribuição sobre a Receita de Loterias de Números (15)(I)
+1914.12.13 Juros de Mora do FUNDAF - Dívida Ativa da Contribuição sobre a Receita da Loteria Instantânea (15)(I)
+1914.12.14 Juros de Mora do FUNDAF - Receita da Dívida Ativa de Prêmios Prescritos de Loterias Federais (15)(I)
+1914.99.00 Multas e Juros de Mora da Dívida Ativa de Outras Contribuições
+1914.99.01 Multas e Juros de Mora da Dívida Ativa de Outras Contribuições - Principal (14)(I)
+1914.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Multas e Juros de Mora da Dívida Ativa de Outras Contribuições (14)(I)
+1915.00.00 Multas e Juros de Mora da Dívida Ativa de Outras Receitas
+1915.01.00 Multas e Juros de Mora da Dívida Ativa das Multas por Infração à Legislação Trabalhista (1)(I) (2)(A)
+1915.02.00 Multas e Juros de Mora da Dívida Ativa da Receita de Exploração de Recursos Minerais (16)(I)
+1915.03.00 Multas e Juros de Mora da Dívida Ativa da Receita de Outorga de Direitos de Exploração e Pesquisa Mineral (16)(I)
+1915.04.00 Multas e Juros de Mora da Receita da Dívida Ativa das Multas Previstas na Legislação Mineraria (18)(I)
+1915.05.00 Multas e Juros de Mora da Receita da Dívida Ativa dos Serviços de Inspeção e Fiscalização da Atividade Mineral (18)(I)
+1915.99.00 Outras Multas e Juros de Mora da Dívida Ativa de Outras Receitas (1)(I)
+1915.99.01 Outras Multas e Juros de Mora da Dívida Ativa de Outras Receitas - Principal (14)(I)
+1915.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Outras Multas e Juros de Mora da Dívida Ativa de Outras Receitas (14)(I)
+1918.00.00 Multas e Juros de Mora de Outras Receitas
+1918.01.00 Multas e Juros de Mora de Aluguéis (13)(I)
+1918.02.00 Multas e Juros de Mora de Arrendamentos (13)(I)
+1918.03.00 Multas e Juros de Mora de Laudêmios (13)(I)
+1918.04.00 Multas e Juros de Mora de Alienação de Domínio Útil (13)(I)
+1918.05.00 Multas e Juros de Mora de Alienações de Outros Bens Imóveis (13)(I)
+1918.06.00 Multas e Juros de Mora de Parcelamentos (13)(I)
+1918.07.00 Multas e Juros de Mora de Foros (13)(I)
+1918.08.00 Multas e Juros de Mora de Taxas de Ocupação (13)(I)
+1918.09.00 Multa e Juros de Mora de Dividendos (13)(I)
+1918.10.00 Multas e Juros de Mora de Participações (13)(I)
+1918.11.00 Multas e Juros de Mora da Receita dos Direitos "Antidumping" e dos Direitos Compensatórios (13)(I)
+1918.12.00 Multas e Juros de Mora da Receita de Alienações Bens Apreendidos (13)(I)
+1918.13.00 Multas e Juros de Mora dos Financiamentos à Estocagem de álcool Etílico Combustível (13)(I)
+1918.14.00 Multas e Juros de Mora da Receita de Exploração de Recursos Minerais (16)(I)
+1918.15.00 Multas e Juros de Mora da Receita de Outorga de Direitos de Exploração e Pesquisa Mineral (16)(I)
+1918.16.00 Multas e Juros de Mora da Receita de Concessão Florestal (17)(I)
+1918.98.00 Multas e Juros de Mora de Outras Receitas - Operações Intra-Orçamentárias (17)(I)
+1918.99.00 Outras Multas e Juros de Mora (13)(I)
+1919.00.00 Multas de Outras Origens
+1919.01.00 Multas Previstas na Legislação de Metrologia
+1919.02.00 Multas do Regulamento para o Tráfego Marítimo
+1919.03.00 Multa de Poluição de águas
+1919.04.00 Multas Previstas em Acordos Internacionais sobre a Pesca
+1919.05.00 Multas Decorrentes de Apreensão de Embarcações de Pesca
+1919.06.00 Multas do Código Eleitoral e Leis Conexas
+1919.07.00 Multas Previstas no Regulamento do Estrangeiro
+1919.08.00 Multas Previstas na Lei do Serviço Militar
+1919.09.00 Multas Previstas na Lei Geral das Telecomunicações
+1919.10.00 Multas Previstas na Legislação Sanitária
+1919.12.00 Multas Previstas na Legislação de Registro do Comércio
+1919.13.00 Multas Previstas na Legislação sobre Lubrificantes e Combustíveis
+1919.14.00 Multas por Infração à Legislação Trabalhista
+1919.15.00 Multas Previstas na Legislação de Trânsito
+1919.16.00 Multas Previstas na Legislação do Seguro-Desemprego e Abono Salarial
+1919.17.00 Multas Previstas na Lei Delegada no 4/62
+1919.18.00 Multas de Aluguéis (13)(E)
+1919.19.00 Multas de Arrendamentos (13)(E)
+1919.20.00 Multas de Laudêmios (13)(E)
+1919.20.00 Multa Prevista na Lei de Prevenção ao Uso de Drogas (18)(I)
+1919.21.00 Multas de Alienação de Domínio Útil (13)(E)
+1919.22.00 Multas de Alienações de Outros Bens Imóveis (13)(E)
+1919.23.00 Multas de Parcelamentos (13)(E)
+1919.24.00 Multas de Foros (13)(E)
+1919.25.00 Multas de Taxas de Ocupação (13)(E)
+1919.26.00 Multas Previstas na Legislação sobre Defesa dos Direitos Difusos
+1919.27.00 Multas e Juros Previstos em Contratos
+1919.28.00 Multas Decorrentes da Operação do Transporte Rodoviário Interestadual e Internacional de Passageiros e Cargas
+1919.29.00 Multas Previstas por Infrações à Legislação sobre Transportes Ferroviários
+1919.30.00 Multas Previstas no Código Brasileiro de Aeronáutica
+1919.31.00 Multa de Tarifa de Pedágio
+1919.32.00 Multas Decorrentes de Sentenças Penais Condenatórias
+1919.33.00 Receita de Quebra de Fiança
+1919.34.00 Multas Previstas em Lei por Infrações no Setor de Energia Elétrica
+1919.35.00 Multas por Danos ao Meio Ambiente
+1919.36.00 Multa de Segurança Privada (8)(A)
+1919.39.00 Multa e Juros de Mora de Dividendo (13)(E)
+1919.40.00 Multas e Juros de Mora de Participações (13)(E)
+1919.41.00 Multas por Infrações à Legislação Cinematográfica (2)(I)
+1919.45.00 Multas e Juros de Mora da Receita dos Direitos "Antidumping" e dos Direitos Compensatórios (13)(E)
+1919.46.00 Multas e Juros de Mora da Receita Decorrente de Bens Apreendidos (13)(E)
+1919.48.00 Multas Aplicadas pelo Tribunal de Contas da União
+1919.49.00 Multas Previstas na Legislação sobre Regime de Previdência Privada Complementar (1)(I)
+1919.50.00 Multas por Auto de Infração (3)(I)
+1919.51.00 Multas e Juros de Mora dos Financiamentos à Estocagem de álcool Etílico Combustível (8)(I) (13)(E)
+1919.52.00 Multas Previstas na Legislação Minerária (16)(I)
+1919.59.00 Multas Previstas na Lei Geral das Telecomunicações - Operações Intra-orçamentárias (18)(I)
+1919.98.00 Outras Multas - Operações Intra-Orçamentárias (16)(I)
+1919.99.00 Outras Multas
+1920.00.00 Indenizações e Restituições
+1921.00.00 Indenizações
+1921.01.00 Utilização de Recursos Hídricos - Tratado de Itaipu (13)(E)
+1921.01.01 Utilização de Recursos Hídricos - Tratado de Itaipu - Parcelas Vincendas (13)(E)
+1921.01.02 Utilização de Recursos Hídricos - Tratado de Itaipu - Parcelas Vencidas (13)(E)
+1921.05.00 Indenizações Previstas na Legislação sobre Defesa dos Direitos Difusos
+1921.06.00 Indenizações por Danos Causados ao Patrimônio Público
+1921.09.00 Outras Indenizações (15)(E)
+1921.99.00 Outras Indenizações (15)(I)
+1922.00.00 Restituições
+1922.01.00 Restituições de Convênios
+1922.02.00 Restituições de Benefícios Não-Desembolsados
+1922.03.00 Restituição de Contribuições Previdenciárias Complementares
+1922.04.00 Restituições Não-Reclamadas das Condenações Judiciais
+1922.05.00 Ressarcimento por Operadoras de Seguros Privados de Assistência a Saúde
+1922.06.00 Ressarcimento do Custo de Disponibilização de Medicamentos (1)(I) (8)(E) (11)(I)
+1922.07.00 Recuperação de Despesas de Exercícios Anteriores (13)(I)
+1922.08.00 Restituições de Convênios - Operações Intra-Orçamentárias (17)(I)
+1922.09.00 Recuperação de Despesas de Exercícios Anteriores - Operações Intra-orçamentárias (18)(I)
+1922.10.00 Compensações Financeiras entre o Regime Geral e os Regimes Próprios de Previdência dos Servidores (18)(I)
+1922.98.00 Outras Restituições - Operações Intra-orçamentárias (18)(I)
+1922.99.00 Outras Restituições
+1930.00.00 Receita da Dívida Ativa
+1931.00.00 Receita da Dívida Ativa Tributária
+1931.01.00 Receita da Dívida Ativa do Imposto sobre a Renda e Proventos de Qualquer Natureza
+1931.01.01 Receita da Dívida Ativa do Imposto sobre a Renda das Pessoas Físicas
+1931.01.02 Receita da Dívida Ativa do Imposto sobre a Renda das Pessoas Jurídicas
+1931.01.03 Receita da Dívida Ativa do Imposto sobre a Renda Retido nas Fontes
+1931.01.04 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre a Renda - Pessoas Jurídicas (9)(I)
+1931.01.05 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre a Renda - Retido na Fonte (9)(I)
+1931.01.06 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre a Renda - Pessoas Físicas (14)(I)
+1931.02.00 Receita da Dívida Ativa do Imposto sobre Produtos Industrializados
+1931.02.01 Receita da Dívida Ativa do Imposto sobre Produtos Industrializados - Principal (9)(I)
+1931.02.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre Produtos Industrializados (9)(I)
+1931.03.00 Receita da Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos e Valores Mobiliários
+1931.03.01 Receita da Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários - Principal (9)(I)
+1931.03.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (9)(I)
+1931.04.00 Receita da Dívida Ativa do Imposto sobre a Propriedade Territorial Rural
+1931.05.00 Receita da Dívida Ativa do Imposto sobre a Importação
+1931.05.01 Receita da Dívida Ativa do Imposto sobre a Importação - Principal (9)(I)
+1931.05.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre a Importação (9)(I)
+1931.06.00 Receita da Dívida Ativa do Imposto sobre a Exportação
+1931.06.01 Receita da Dívida Ativa do Imposto sobre a Exportação - Principal (9)(I)
+1931.06.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa do Imposto sobre a Exportação (9)(I)
+1931.07.00 Receita da Dívida Ativa de Custas Judiciais
+1931.08.00 Receita da Dívida Ativa da Taxa de Fiscalização de Telecomunicações
+1931.10.00 Receita da Dívida Ativa do Imposto sobre a Propriedade Territorial Rural - Operações Intra- Orçamentárias (17)(I)
+1931.36.00 Receita da Dívida Ativa da Taxa de Saúde Suplementar (8)(I)
+1931.99.00 Receita da Dívida Ativa de Outros Tributos
+1931.99.01 Receita da Dívida Ativa de Outros Tributos - Principal (14)(I)
+1931.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Receita da Dívida Ativa de Outros Tributos (14)(I)
+1932.00.00 Receita da Dívida Ativa Não-Tributária
+1932.01.00 Receita da Dívida Ativa das Contribuições Previdenciárias para o Regime Geral de Previdência Social (4)(A)
+1932.01.01 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Contribuinte Individual (4)(I)
+1932.01.02 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Assalariado (4)(I)
+1932.01.03 Receita da Dívida Ativa da Contribuição Previdenciária da Empresa sobre Segurado Assalariado (4)(I)
+1932.01.04 Receita da Dívida Ativa da Contribuição Previdenciária da Empresa Optante pelo SIMPLES (4)(I)
+1932.01.05 Receita da Dívida Ativa da Contribuição Previdenciária sobre Espetáculo Desportivo (4)(I)
+1932.01.06 Receita da Dívida Ativa da Contribuição Previdenciária sobre a Produção Rural (4)(I)
+1932.01.07 Receita da Dívida Ativa da Contribuição Previdenciária em Regime de Parcelamento de Débitos (4)(I)
+1932.01.08 Receita da Dívida Ativa da Contribuição Previdenciária para o Seguro de Acidente do Trabalho (4)(I)
+1932.01.09 Receita da Dívida Ativa da Contribuição Previdenciária sobre Reclamatória Trabalhista (4)(I)
+1932.01.10 Receita da Dívida Ativa da Contribuição Previdenciária em Regime de Parcelamento de Débitos dos Municípios (4)(I)
+1932.01.11 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Empresário (4)(I)
+1932.01.12 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Facultativo (4)(I)
+1932.01.13 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Especial (4)(I)
+1932.01.14 Receita da Dívida Ativa da Contribuição Previdenciária do Segurado Obrigatório - Empregado Doméstico (4)(I)
+1932.01.15 Receita da Dívida Ativa da Contribuição Previdenciária dos Órgãos do Poder Público (4)(I)
+1932.01.16 Receita da Dívida Ativa da Contribuição Previdenciária das Entidades Filantrópicas (4)(I)
+1932.01.17 Receita da Dívida Ativa da Contribuição Previdenciária - Retenção sobre Nota Fiscal - Sub- Rogação (4)(I)
+1932.01.18 Receita da Dívida Ativa da Arrecadação FIES - Certificados Financeiros do Tesouro Nacional (4)(I)
+1932.01.19 Receita da Dívida Ativa da Arrecadação FNS - Certificados Financeiros do Tesouro Nacional (4)(I)
+1932.01.20 Receita da Dívida Ativa de Certificados da Dívida Pública - CDP (4)(I)
+1932.01.21 Receita da Dívida Ativa da Contribuição Previdenciária na Forma de Depósito Judicial, Recursal e Custas Judiciais (4)(I)
+1932.01.99 Receita da Dívida Ativa de Outras Contribuições Previdenciárias (4)(I)
+1932.02.00 Receita da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social
+1932.02.01 Receita da Dívida Ativa da Contribuição para o Financiamento da Seguridade Social - Principal (9)(I)
+1932.02.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa da Contribuição para o Financiamento da Seguridade Social (9)(I)
+1932.03.00 Receita da Dívida Ativa do Salário-Educação
+1932.04.00 Receita da Dívida Ativa da Contribuição sobre Movimentação Financeira (8)(A)
+1932.04.01 Receita da Dívida Ativa da Contribuição sobre Movimentação Financeira - Principal (9)(I)
+1932.04.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa da Contribuição sobre Movimentação Financeira (9)(I)
+1932.05.00 Receita da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - PIS/PASE
+1932.05.01 Receita da Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público - Principal (9)(I)
+1932.05.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa das Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (9)(I)
+1932.06.00 Receita da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas
+1932.06.01 Receita da Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas - Principal (9)(I)
+1932.06.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa da Contribuição Social sobre o Lucro das Pessoas Jurídicas (9)(I)
+1932.07.00 Receita da Dívida Ativa das Contribuições sobre a Receita de Concursos de Prognósticos (4)(A)
+1932.07.01 Receita da Dívida Ativa da Contribuição sobre a Receita da Loteria Federal (4)(I)
+1932.07.02 Receita da Dívida Ativa da Contribuição sobre a Receita de Loterias Esportivas (4)(I)
+1932.07.03 Receita da Dívida Ativa da Contribuição sobre a Receita de Concursos Especiais de Loterias Esportivas (4)(I)
+1932.07.04 Receita da Dívida Ativa da Contribuição sobre a Receita de Loterias de Números (4)(I)
+1932.07.05 Receita da Dívida Ativa da Contribuição sobre a Receita da Loteria Instantânea (4)(I)
+1932.07.06 Receita da Dívida Ativa de Prêmios Prescritos de Loterias Federais (4)(I)
+1932.08.00 Receita da Dívida Ativa das Multas do Código Eleitoral e Leis Conexas
+1932.09.00 Receita da Dívida Ativa da Cota-Parte do Adicional ao Frete para a Renovação da Marinha Mercante
+1932.10.00 Receita da Dívida Ativa da Contribuição sobre Aposta em Competições Hípicas
+1932.11.00 Receita da Dívida Ativa de Aluguéis
+1932.12.00 Receita da Dívida Ativa de Foros
+1932.13.00 Receita da Dívida Ativa de Taxa de Ocupação
+1932.14.00 Receita da Dívida Ativa de Arrendamento
+1932.15.00 Receita da Dívida Ativa de Laudêmios
+1932.16.00 Receita da Dívida Ativa de Outras Contribuições
+1932.16.01 Receita da Dívida Ativa de Outras Contribuições - Principal (14)(I)
+1932.16.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa de Outras Contribuições (14)(I)
+1932.17.00 Receita da Dívida Ativa das Multas por Infração à Legislação Trabalhista (1)(I) (2)(A)
+1932.18.00 Receita da Dívida Ativa da Contribuição Relativa à Despedida de Empregado sem Justa Causa (1)(I)
+1932.19.00 Receita da Dívida Ativa da Contribuição sobre a Remuneração Devida ao Trabalhador (1)(I)
+1932.20.00 Receita da Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1932.20.01 Receita da Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante - Principal (14)(I)
+1932.20.02 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Dívida Ativa da Contribuição Relativa às Atividades de Comercialização de Petróleo e seus Derivados, Gás Natural e álcool Carburante (14)(I)
+1932.99.00 Receita da Dívida Ativa Não-Tributária de Outras Receitas
+1932.21.00 Receita da Dívida Ativa da Atividade Mineral (18)(I)
+1932.21.01 Receita da Dívida Ativa da Exploração de Recursos Minerais (18)(I)
+1932.21.02 Receita da Dívida Ativa da Outorga de Direitos de Exploração e Pesquisa Mineral (18)(I)
+1932.21.04 Receita da Dívida Ativa das Multas Previstas na Legislação Mineraria (18)(I)
+1932.21.05 Receita da Dívida Ativa dos Serviços de Inspeção e Fiscalização da Atividade Mineral (18)(I)
+1932.99.01 Receita da Dívida Ativa Não-Tributária de Outras Receitas - Principal (14)(I)
+1932.99.02 Programa de Recuperação Fiscal e do Parcelamento Especial - Receita da Dívida Ativa Não-Tributária de Outras Receitas (14)(I)
+1990.00.00 Receitas Diversas
+1990.01.00 Receita do Programa de Recuperação Fiscal e do Parcelamento Especial - Outras Receitas (8)(I) (9)(A)
+1990.01.01 Parcela do REFIS - Imposto sobre a Importação (8)(I) (9)(E)
+1990.01.02 Parcela do REFIS - Imposto sobre a Exportação (8)(I) (9)(E)
+1990.01.03 Parcela do REFIS - Imposto sobre Produtos Industrializados (8)(I) (9)(E)
+1990.01.04 Parcela do REFIS - Imposto sobre a Renda - Pessoas Jurídicas (8)(I) (9)(E)
+1990.01.05 Parcela do REFIS - Imposto sobre a Renda - Retido na Fonte (8)(I) (9)(E)
+1990.01.06 Parcela do REFIS - Imposto sobre Operações de Crédito, Câmbio e Seguro, ou Relativas a Títulos ou Valores Mobiliários (8)(I) (9)(E)
+1990.01.07 Parcela do REFIS - Contribuição sobre Movimentação Financeira (8)(I) (9)(E)
+1990.01.08 Parcela do REFIS - Contribuição para o Financiamento da Seguridade Social (8)(I) (9)(E)
+1990.01.09 Parcela do REFIS - Contribuições para os Programas de Integração Social e de Formação do Patrimônio do Servidor Público (8)(I) (9)(E)
+1990.01.10 Parcela do REFIS - Contribuição Social sobre o Lucro das Pessoas Jurídicas (8)(I) (9)(E)
+1990.01.11 Parcela do REFIS - Contribuição dos Empregados e Trabalhadores para a Seguridade - Social (8)(I) (9)(E)
+1990.01.99 Parcela do REFIS - Outras Receitas (8)(I) (9)(E)
+1990.02.00 Receitas de Ônus de Sucumbência de Ações Judiciais (4)(A)
+1990.02.01 Receita de Honorários de Advogados (4)(I)
+1990.02.02 Receita de Ônus de Sucumbência (4)(I)
+1990.03.00 Receita Decorrente de Alienação de Bens Apreendidos
+1990.03.01 Receita de Leilões de Mercadorias Apreendidas
+1990.03.02 Receita de Alienação de Bens Apreendidos
+1990.03.03 Receita de Alienação de Bens Caucionados (4)(I)
+1990.03.04 Receita de Alienação de Bens Apreendidos Associados ao Tráfico Ilícito de Entorpecentes e Drogas Afins (17)(I)
+1990.04.00 Produto de Depósitos Abandonados (Dinheiro e/ou Objetos de Valor)
+1990.05.00 Saldos de Exercícios Anteriores (13)(E)
+1990.05.00 Receita de Bens e Valores Perdidos em Favor da União (18)(I)
+1990.05.01 Saldos de Exercícios Anteriores - Convênios (13)(E)
+1990.05.02 Saldos de Exercícios Anteriores - Recursos do Tesouro Nacional (13)(E)
+1990.05.03 Saldos de Exercícios Anteriores - Recursos Próprios (13)(E)
+1990.05.99 Saldos de Exercícios Anteriores - Recursos Diversos (13)(E)
+1990.06.00 Receita Decorrente da Não-Aplicação de Incentivos Fiscais em Projetos Culturais e pela Indústria Cinematográfica (14)(A)
+1990.07.00 Receita dos Direitos "Antidumping" e dos Direitos Compensatórios
+1990.08.00 Demais Receitas para o Desenvolvimento do Desporto
+1990.16.00 Receita de Participação do Seguro DPVAT - Sistema Nacional de Trânsito
+1990.17.00 Receita Decorrente da Conta Petróleo, Derivados e álcool
+1990.18.00 Reserva Global de Reversão
+1990.19.00 Recolhimento do Beneficiário ao Fundo de Saúde Militar (4)(I) (5)(A)
+1990.20.00 Contribuição Voluntária - Montepio Civil (13)(I)
+1990.96.00 Receita de Variação Cambial (13)(I)
+1990.97.00 Outras Receitas - Operações Intra-Orçamentárias (17)(I)
+1990.99.00 Outras Receitas
+2000.00.00 Receitas de Capital
+2100.00.00 Operações de Crédito
+2110.00.00 Operações de Crédito Internas
+2111.00.00 Títulos de Responsabilidade do Tesouro Nacional
+2111.01.00 Títulos de Responsabilidade do Tesouro Nacional - Refinanciamento da Dívida Pública Federal
+2111.02.00 Títulos da Dívida Agrária - TDA
+2111.03.00 Títulos de Responsabilidade do Tesouro Nacional - Outras Aplicações
+2112.00.00 Obrigações do Fundo Nacional de Desenvolvimento - FND
+2113.00.00 Empréstimos Compulsórios
+2114.00.00 Operações de Crédito Internas - Contratuais (3)(I)
+2119.00.00 Outras Operações de Crédito Internas
+2120.00.00 Operações de Crédito Externas
+2122.00.00 Títulos de Responsabilidade do Tesouro Nacional
+2122.01.00 Título de Responsabilidade do Tesouro Nacional - Refinanciamento da Dívida Pública Federal
+2122.02.00 Títulos de Responsabilidade do Tesouro Nacional - Outras Aplicações
+2123.00.00 Operações de Créditos Externas - Contratuais (3)(I)
+2129.00.00 Outras Operações de Crédito Externas
+2200.00.00 Alienação de Bens
+2210.00.00 Alienação de Bens Móveis
+2211.00.00 Alienação de Títulos Mobiliários
+2212.00.00 Alienação de Estoques
+2212.01.00 Alienação de Estoques da Política de Garantia de Preços Mínimos - PGPM (16)(A)
+2212.01.01 Alienação de Estoques Reguladores - PGPM (15)(I) (16)(A)
+2212.01.02 Alienação de Estoques Estratégicos - PGPM (15)(I) (16)(A)
+2212.01.03 Alienação de Estoques Destinados a Vendas em Balcão - PGPM (16)(I)
+2212.02.00 Alienação de Estoques Estratégicos Vinculados à Política de Garantia de Preços Mínimos - PGPM (16)(E)
+2212.02.01 Alienação de Estoques Estratégicos Vinculados à Política de Garantia de Preços Mínimos - Recurso Próprio (15)(I) (16)(E)
+2212.02.02 Alienação de Estoques Estratégicos Vinculados à Política de Garantia de Preços Mínimos - Recurso do Tesouro (15)(I) (16)(E)
+2212.03.00 Alienação de Estoques Comerciais e Sociais - Comercialização (16)(A)
+2212.03.01 Alienação de Estoques Destinados a Programas Sociais e Institucionais - Comercialização (15)(I) (16)(A)
+2212.03.02 Alienação de Estoques por Atacado - Comercialização (15)(I) (16)(A)
+2212.03.03 Alienação de Estoques Adquiridos em Consignação - Comercialização (16)(I)
+2212.04.00 Alienação de Estoques Destinados a Vendas em Balcão (16)(E)
+2212.04.01 Alienação de Estoques Destinados a Vendas em Balcão - Recurso Próprio (15)(I) (16)(E)
+2212.04.02 Alienação de Estoques Destinados a Vendas em Balcão - Recurso do Tesouro (15)(I) (16)(E)
+2212.05.00 Alienação de Estoques por Atacado (16)(E)
+2212.05.01 Alienação de Estoques por Atacado - Recurso Próprio (15)(I) (16)(E)
+2212.05.02 Alienação de Estoques por Atacado - Recurso do Tesouro (15)(I) (16)(E)
+2212.06.00 Alienação de Estoques Adquiridos em Consignação (16)(E)
+2212.06.01 Alienação de Estoques Adquiridos em Consignação - Recurso Próprio (15)(I) (16)(E)
+2212.06.02 Alienação de Estoques Adquiridos em Consignação - Recurso do Tesouro (15)(I) (16)(E)
+2212.07.00 Alienação de Estoques do Programa de Aquisição de Alimentos - PAA (8)(I) (16)(A)
+2212.07.01 Alienação de Estoques Adquiridos para Combate à Fome e Segurança Alimentar (15)(I) (16)(A)
+2212.07.02 Alienação de Estoques Adquiridos da Agricultura Familiar (15)(I) (16)(A)
+2212.08.00 Alienação de Estoques Adquiridos da Agricultura Familiar (15)(I) (16)(E)
+2212.08.01 Alienação de Estoques Adquiridos da Agricultura Familiar - Recurso Próprio (15)(I) (16)(E)
+2212.08.02 Alienação de Estoques Adquiridos da Agricultura Familiar - Recurso do Tesouro (15)(I) (16)(E)
+2212.09.00 Alienação de Estoques de Café - FUNCAFé (15)(I) (16)(A)
+2212.09.01 Alienação de Estoques do Tesouro Afetos ao FUNCAFé (15)(I) (16)(A)
+2212.09.02 Alienação de Estoques Próprios do FUNCAFé (15)(I) (16)(A)
+2213.00.00 Receitas de Equalização (11)(E)
+2213.01.00 Execução da PGPM e Sustentação de Preços de Mercado - Equalização de Preços (11)(E)
+2214.00.00 Alienação de Animais Reprodutores e Matrizes
+2219.00.00 Alienação de Outros Bens Móveis
+2220.00.00 Alienação de Bens Imóveis
+2221.00.00 Alienação de Imóveis Rurais para Colonização e Reforma Agrária
+2222.00.00 Produto de Alienações de Bens Imóveis de Domínio da União (8)(A)
+2223.00.00 Alienação de Embarcações
+2224.00.00 Alienação de Imóveis Rurais
+2225.00.00 Alienação de Imóveis Urbanos (2)(I)
+2229.00.00 Alienação de Outros Bens Imóveis
+2300.00.00 Amortização de Empréstimos
+2300.10.00 Amortização de Empréstimos - BEA/BIB
+2300.20.00 Amortização Proveniente da Execução de Garantia - Operações de Crédito (10)(I)
+2300.20.01 Amortização Proveniente da Execução de Garantia - Operações de Crédito Internas (10)(I)
+2300.20.02 Amortização Proveniente da Execução de Garantia - Operações de Crédito Externas (10)(I)
+2300.30.00 Amortização de Empréstimos - Estados e Municípios
+2300.40.00 Amortização de Empréstimos - Refinanciamento de Dívidas de Médio e Longo Prazo
+2300.50.00 Amortização de Empréstimos - Programa das Operações Oficiais de Crédito
+2300.60.00 Amortização de Empréstimos - Refinanciamento de Dívidas do Clube de Paris
+2300.70.00 Outras Amortizações de Empréstimos
+2300.70.01 Amortização de Empréstimos - em Títulos (4)(E)
+2300.70.02 Amortização de Empréstimos - em Contratos
+2300.80.00 Amortização de Financiamentos
+2300.80.01 Amortização de Financiamentos de Bens
+2300.80.02 Amortização de Financiamentos de Projetos
+2300.80.03 Amortização de Financiamento do Fundo de Financiamento ao Estudante do Ensino Superior - FIES (4)(I)
+2300.80.04 Amortização de Financiamentos à Estocagem de álcool Etílico Combustível (8)(I)
+2300.99.00 Amortização de Empréstimos Diversos
+2400.00.00 Transferências de Capital
+2420.00.00 Transferências Intergovernamentais
+2421.00.00 Transferências da União (4)(E)
+2421.01.00 Participação na Receita da União (4)(E)
+2421.09.00 Outras Transferências da União (4)(E)
+2421.09.01 Transferência Financeira - L.C. no 87/96 (4)(E)
+2421.09.99 Demais Transferências da União (4)(E)
+2422.00.00 Transferências dos Estados
+2422.01.00 Participação na Receita dos Estados (4)(E)
+2422.09.00 Outras Transferências dos Estados (13)(E)
+2422.99.00 Outras Transferências dos Estados (13)(I)
+2423.00.00 Transferências dos Municípios
+2423.09.00 Outras Transferências dos Municípios (4)(I) (13)(E)
+2423.99.00 Outras Transferências dos Municípios (13)(I)
+2430.00.00 Transferências de Instituições Privadas
+2440.00.00 Transferências do Exterior
+2450.00.00 Transferências de Pessoas
+2460.00.00 Transferências de Outras Instituições Públicas
+2470.00.00 Transferências de Convênios
+2471.00.00 Transferências de Convênios da União e de suas Entidades
+2472.00.00 Transferências de Convênios dos Estados e do Distrito Federal e de suas Entidades
+2473.00.00 Transferências de Convênios dos Municípios e de suas Entidades
+2474.00.00 Transferências de Convênios de Instituições Privadas
+2480.00.00 Transferências para o Combate à Fome (7)(I)
+2480.01.00 Provenientes do Exterior (7)(I) (15)(E)
+2480.02.00 Provenientes de Pessoas Jurídicas (7)(I) (15)(E)
+2480.03.00 Provenientes de Pessoas Físicas (7)(I) (15)(E)
+2480.04.00 Provenientes de Depósitos Não-Identificados (7)(I) (15)(E)
+2481.00.00 Provenientes do Exterior (15)(I)
+2482.00.00 Provenientes de Pessoas Jurídicas (15)(I)
+2483.00.00 Provenientes de Pessoas Físicas (15)(I)
+2484.00.00 Provenientes de Depósitos Não-Identificados (15)(I)
+2500.00.00 Outras Receitas de Capital
+2520.00.00 Integralização do Capital Social
+2521.00.00 Integralização com Recursos do Tesouro Nacional
+2522.00.00 Integralização com Recursos de Outras Fontes
+2530.00.00 Resultado do Banco Central do Brasil
+2540.00.00 Remuneração das Disponibilidades do Tesouro Nacional
+2550.00.00 Receita da Dívida Ativa Proveniente de Amortização de Empréstimos e Financiamentos (13)(I)
+2580.00.00 Saldos de Exercícios Anteriores (13)(E)
+2580.01.00 Saldos de Exercícios Anteriores - Convênios (13)(E)
+2580.02.00 Saldos de Exercícios Anteriores - Operações de Crédito (13)(E)
+2580.03.00 Saldos de Exercícios Anteriores - Recursos do Tesouro Nacional (13)(E)
+2580.04.00 Saldos de Exercícios Anteriores - Recursos Próprios (13)(E)
+2580.99.00 Saldos de Exercícios Anteriores - Recursos Diversos (13)(E)
+2590.00.00 Outras Receitas
+2590.01.00 Receita da Dívida Ativa Proveniente de Amortização de Empréstimos e Financiamentos (11)(I)(13)(E)

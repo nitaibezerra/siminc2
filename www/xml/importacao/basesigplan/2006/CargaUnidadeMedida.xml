@@ -1,0 +1,2233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUnidadeMedida xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sigplan.gov.br/xml/">
+  <UnidadeMedida>
+    <UNMCod>1313</UNMCod>
+    <UNMDsc>número de aldeias indígenas atendidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1314</UNMCod>
+    <UNMDsc>número de alterações de entidades sindicais</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1315</UNMCod>
+    <UNMDsc>número de aplicações interativas implantadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1316</UNMCod>
+    <UNMDsc>Número de Casos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1317</UNMCod>
+    <UNMDsc>Número de casos confirmados/100.00 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1318</UNMCod>
+    <UNMDsc>Número de casos confirmados/100.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1319</UNMCod>
+    <UNMDsc>número de dias de consumo de alimentos estocados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1320</UNMCod>
+    <UNMDsc>número de imóveis</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1321</UNMCod>
+    <UNMDsc>número de imóveis regularizados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1322</UNMCod>
+    <UNMDsc>número de instituições</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1323</UNMCod>
+    <UNMDsc>número de internação decorrentes de Causas Externas por 10 mil hab.</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1324</UNMCod>
+    <UNMDsc>número de internação decorrentes de Causas Externas por 10.000 mil hab</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1325</UNMCod>
+    <UNMDsc>número de ítens  por técnico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1326</UNMCod>
+    <UNMDsc>número de mortes a cada 100.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1327</UNMCod>
+    <UNMDsc>número de outorgas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1328</UNMCod>
+    <UNMDsc>número de pedidos de patente por técnico, com duas casas decimais</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1329</UNMCod>
+    <UNMDsc>número de produtos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1330</UNMCod>
+    <UNMDsc>numero de projeto</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1331</UNMCod>
+    <UNMDsc>número de projetos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1332</UNMCod>
+    <UNMDsc>número de projetos, programas e ações, sem casa decimal</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1333</UNMCod>
+    <UNMDsc>número de publicações indexadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1334</UNMCod>
+    <UNMDsc>número vítimas não fatais a cada 100.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1335</UNMCod>
+    <UNMDsc>ocorrências registradas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1336</UNMCod>
+    <UNMDsc>Paciente por 10.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1337</UNMCod>
+    <UNMDsc>pacote</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1338</UNMCod>
+    <UNMDsc>parcerias consolidadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1339</UNMCod>
+    <UNMDsc>parecer </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1340</UNMCod>
+    <UNMDsc>parecer elaborado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1341</UNMCod>
+    <UNMDsc>participação no mercado internacional - percentual</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1342</UNMCod>
+    <UNMDsc>pedidos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1343</UNMCod>
+    <UNMDsc>percentagem %</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1344</UNMCod>
+    <UNMDsc>percentual %                  </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1345</UNMCod>
+    <UNMDsc>percentual alcançado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1346</UNMCod>
+    <UNMDsc>percentual de aplocais atendido</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1347</UNMCod>
+    <UNMDsc>percentual de área preservada (hectare – ha)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1348</UNMCod>
+    <UNMDsc>percentual de arranjos produtivos locais atendido</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1349</UNMCod>
+    <UNMDsc>percentual de beneficiários conhecedores de seus direitos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1350</UNMCod>
+    <UNMDsc>percentual de beneficiários conhecedores de seus direitos em relação ao total</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1351</UNMCod>
+    <UNMDsc>Percentual de crescimento</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1352</UNMCod>
+    <UNMDsc>Percentual de crianças cadastradas e pesadas com desnutrição</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1353</UNMCod>
+    <UNMDsc>percentual de defesa civil municipal</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1354</UNMCod>
+    <UNMDsc>percentual de internação da população</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1355</UNMCod>
+    <UNMDsc>Percentual de participação</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1356</UNMCod>
+    <UNMDsc>pesquisadores</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1357</UNMCod>
+    <UNMDsc>pessoa beneficiada</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1358</UNMCod>
+    <UNMDsc>pessoas atingidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1359</UNMCod>
+    <UNMDsc>pessoas atingidas / número de ppds</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1360</UNMCod>
+    <UNMDsc>pessoas capacitadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1361</UNMCod>
+    <UNMDsc>pontos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1362</UNMCod>
+    <UNMDsc>população coberta</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1363</UNMCod>
+    <UNMDsc>porcentagem (%)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1364</UNMCod>
+    <UNMDsc>porcentagem para ambos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1365</UNMCod>
+    <UNMDsc>posição</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1366</UNMCod>
+    <UNMDsc>posição em listagem de países</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1367</UNMCod>
+    <UNMDsc>processo julgado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1368</UNMCod>
+    <UNMDsc>procon estadual ou do distrito federal integrado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1369</UNMCod>
+    <UNMDsc>produtos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1370</UNMCod>
+    <UNMDsc>profissional capacitado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1371</UNMCod>
+    <UNMDsc>profissionalcapacitado </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1372</UNMCod>
+    <UNMDsc>projeto apoiado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1373</UNMCod>
+    <UNMDsc>projeto ou estudo apoiado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1374</UNMCod>
+    <UNMDsc>projetos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1375</UNMCod>
+    <UNMDsc>projetos e estudos apoiados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1376</UNMCod>
+    <UNMDsc>Proporção</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1377</UNMCod>
+    <UNMDsc>publicações por técnico, com duas casas decimais</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1378</UNMCod>
+    <UNMDsc>quantidade</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1379</UNMCod>
+    <UNMDsc>quantidade de exportação - dólar</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1380</UNMCod>
+    <UNMDsc>quantidade de microbacias e sub-bacias críticas prioritárias recuperadas</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1381</UNMCod>
+    <UNMDsc>quilômetro de estrada implantado (quilômetro – ha)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1382</UNMCod>
+    <UNMDsc>R$ bilhões (de 12/2002)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1383</UNMCod>
+    <UNMDsc>R$ mil equivalente</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1384</UNMCod>
+    <UNMDsc>R$/ ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1385</UNMCod>
+    <UNMDsc>R$/ha/ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1386</UNMCod>
+    <UNMDsc>reais (r$) bilhões (de 12/2002)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1387</UNMCod>
+    <UNMDsc>registro de patentes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1388</UNMCod>
+    <UNMDsc>registros acumulados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1389</UNMCod>
+    <UNMDsc>registros/ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1390</UNMCod>
+    <UNMDsc>relação percentual enrtre metas realizadas e metas previstas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1391</UNMCod>
+    <UNMDsc>renda per capita</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1392</UNMCod>
+    <UNMDsc>renda per capita (em salários mínimos)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1393</UNMCod>
+    <UNMDsc>taxa</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1394</UNMCod>
+    <UNMDsc>taxa de aumento do número de pessoas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1395</UNMCod>
+    <UNMDsc>taxa de cobertura dos serviços urbanos de abastecimento de água</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1396</UNMCod>
+    <UNMDsc>taxa de crescimento de áreas de várzeas ao processo produtivo (%)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1397</UNMCod>
+    <UNMDsc>taxa de crescimento de áreas de várzeas ao processo produtivo (porcentagem)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1398</UNMCod>
+    <UNMDsc>taxa de incremento de áreas de várzeas ao processo produtivo</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1399</UNMCod>
+    <UNMDsc>taxa geométrica de crescimento</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1400</UNMCod>
+    <UNMDsc>Taxas de Morbidade e Mortalidade por Causas Externas por 100 mil hab.</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1401</UNMCod>
+    <UNMDsc>Tbyte</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1402</UNMCod>
+    <UNMDsc>telefones por 100 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1403</UNMCod>
+    <UNMDsc>telefones x 100 habt</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1404</UNMCod>
+    <UNMDsc>terabytes (trilhões de bytes) de informações disponíveis eletronicamente</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1405</UNMCod>
+    <UNMDsc>treinando</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1406</UNMCod>
+    <UNMDsc>unidade (escala de avaliação de 0 a 10)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1407</UNMCod>
+    <UNMDsc>unidade da federação</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1408</UNMCod>
+    <UNMDsc>unidades coletadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1409</UNMCod>
+    <UNMDsc>uniddade</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1410</UNMCod>
+    <UNMDsc>usuários</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1411</UNMCod>
+    <UNMDsc>vazão</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1412</UNMCod>
+    <UNMDsc>vazão em litros/segundo/ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1413</UNMCod>
+    <UNMDsc>vítimas/pessoas envolvidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1414</UNMCod>
+    <UNMDsc>xxx</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1415</UNMCod>
+    <UNMDsc>xxxx</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1416</UNMCod>
+    <UNMDsc>laboratório</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1417</UNMCod>
+    <UNMDsc>KW EQUIVALENTE</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1418</UNMCod>
+    <UNMDsc>% de implantação</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1419</UNMCod>
+    <UNMDsc>mg/l</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1420</UNMCod>
+    <UNMDsc>Mbyte</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1421</UNMCod>
+    <UNMDsc>unidade/ano</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1422</UNMCod>
+    <UNMDsc>%</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1423</UNMCod>
+    <UNMDsc>% de implementação dos instrumentos de gerenciamento de recursos hídricos </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1424</UNMCod>
+    <UNMDsc>-</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1425</UNMCod>
+    <UNMDsc>a definir</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1426</UNMCod>
+    <UNMDsc>acidente por milhão de decolagens</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1427</UNMCod>
+    <UNMDsc>Alerta Emitido</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1428</UNMCod>
+    <UNMDsc>dias</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1429</UNMCod>
+    <UNMDsc>grau</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>150</UNMCod>
+    <UNMDsc>SACA</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>151</UNMCod>
+    <UNMDsc>Sacas de 60 kg por ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>152</UNMCod>
+    <UNMDsc>Sacas/ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>153</UNMCod>
+    <UNMDsc>Segundo</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>154</UNMCod>
+    <UNMDsc>Segundos </UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>155</UNMCod>
+    <UNMDsc>SEM UNIDADE</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>156</UNMCod>
+    <UNMDsc>Servidor/Ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>157</UNMCod>
+    <UNMDsc>t</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>158</UNMCod>
+    <UNMDsc>t por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>159</UNMCod>
+    <UNMDsc>t por mês</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>160</UNMCod>
+    <UNMDsc>t/ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>161</UNMCod>
+    <UNMDsc>Telefone fixo por 100 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>162</UNMCod>
+    <UNMDsc>Telefone por 1.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>163</UNMCod>
+    <UNMDsc>TERABYTE</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>164</UNMCod>
+    <UNMDsc>TON</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>165</UNMCod>
+    <UNMDsc>Tonelada</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>166</UNMCod>
+    <UNMDsc>tonelada equivalente de petróleo por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>167</UNMCod>
+    <UNMDsc>Tonelada/ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>168</UNMCod>
+    <UNMDsc>trabalhador</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>169</UNMCod>
+    <UNMDsc>Treinando-dia</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>170</UNMCod>
+    <UNMDsc>UN</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>171</UNMCod>
+    <UNMDsc>UND</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>172</UNMCod>
+    <UNMDsc>UNIDADE</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>173</UNMCod>
+    <UNMDsc>Unidade por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>174</UNMCod>
+    <UNMDsc>Unidade por serviço</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>175</UNMCod>
+    <UNMDsc>US$</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>176</UNMCod>
+    <UNMDsc>US$ 1.000</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>177</UNMCod>
+    <UNMDsc>US$ bilhão por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>178</UNMCod>
+    <UNMDsc>US$ MIL</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>179</UNMCod>
+    <UNMDsc>US$ milhão</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>180</UNMCod>
+    <UNMDsc>US$ milhões</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>181</UNMCod>
+    <UNMDsc>Veículo</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>190</UNMCod>
+    <UNMDsc>Mil barris por dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1212</UNMCod>
+    <UNMDsc>%  DA EXECUÇÃO FÍSICA</UNMDsc>
+    <UNMTipo>0</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1213</UNMCod>
+    <UNMDsc>% DE EXECUCAO FISICA</UNMDsc>
+    <UNMTipo>0</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1214</UNMCod>
+    <UNMDsc>RC MIL</UNMDsc>
+    <UNMTipo>0</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1215</UNMCod>
+    <UNMDsc/>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1216</UNMCod>
+    <UNMDsc> Nº de óbitos decorrentes de causas externas por 100.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1217</UNMCod>
+    <UNMDsc>% de crianças cadastradas e pesadas com desnutrição</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1218</UNMCod>
+    <UNMDsc>% de defesa civil municipal</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1219</UNMCod>
+    <UNMDsc>% de processos solucionados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1220</UNMCod>
+    <UNMDsc>% de relatórios que subsidiaram o processo decisório</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1221</UNMCod>
+    <UNMDsc>% sobre o total de municípios solicitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1222</UNMCod>
+    <UNMDsc>(laudos emitidos + pesquisas publicadas) x 100 / nº de técnicos da fundacentro</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1223</UNMCod>
+    <UNMDsc>1.000 unidades de domicílios atendidos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1224</UNMCod>
+    <UNMDsc>1/100</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1225</UNMCod>
+    <UNMDsc>1/1000 nascidos vivos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1226</UNMCod>
+    <UNMDsc>1000 t</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1227</UNMCod>
+    <UNMDsc>a defiinir</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1228</UNMCod>
+    <UNMDsc>acessos anuais em relação aos acessos do ano base</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1229</UNMCod>
+    <UNMDsc>acordos firmados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1230</UNMCod>
+    <UNMDsc>acordos multilaterais firmados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1231</UNMCod>
+    <UNMDsc>agenda</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1232</UNMCod>
+    <UNMDsc>apli/ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1233</UNMCod>
+    <UNMDsc>área nacional cultivada - hectare</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1234</UNMCod>
+    <UNMDsc>artesãos partcicipantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1235</UNMCod>
+    <UNMDsc>artseãos participantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1236</UNMCod>
+    <UNMDsc>bep</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1237</UNMCod>
+    <UNMDsc>bilhões de reais (r$)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1238</UNMCod>
+    <UNMDsc>bilhões r$</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1239</UNMCod>
+    <UNMDsc>bolsas concedida</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1240</UNMCod>
+    <UNMDsc>bolsas concedidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1241</UNMCod>
+    <UNMDsc>bolsista de iniciação científica</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1242</UNMCod>
+    <UNMDsc>certificados acumulados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1243</UNMCod>
+    <UNMDsc>Consulta per capita</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1244</UNMCod>
+    <UNMDsc>consulta realizada</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1245</UNMCod>
+    <UNMDsc>decimal</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1246</UNMCod>
+    <UNMDsc>documentos/publicações catalogadas e disponibilizados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1247</UNMCod>
+    <UNMDsc>domicílio, em  unidade, atendido</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1248</UNMCod>
+    <UNMDsc>domicílios atendidos em 1.000 nidades</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1249</UNMCod>
+    <UNMDsc>domínios registrados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1250</UNMCod>
+    <UNMDsc>doutores por milhão de residentes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1251</UNMCod>
+    <UNMDsc>é o valor que resulta da fórmula de cálculo</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1252</UNMCod>
+    <UNMDsc>emprego gerado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1253</UNMCod>
+    <UNMDsc>empresas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1254</UNMCod>
+    <UNMDsc>empresas atendidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1255</UNMCod>
+    <UNMDsc>eventos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1256</UNMCod>
+    <UNMDsc>eventos por técnico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1257</UNMCod>
+    <UNMDsc>eventos realizados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1258</UNMCod>
+    <UNMDsc>famílias atendidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1259</UNMCod>
+    <UNMDsc>famílias por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1260</UNMCod>
+    <UNMDsc>fóruns realizados</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1261</UNMCod>
+    <UNMDsc>freqüência de contatos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1262</UNMCod>
+    <UNMDsc>Gbyte</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1263</UNMCod>
+    <UNMDsc>gigabytes (bilhões de bytes) de informações disponíveis eletronicamente</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1264</UNMCod>
+    <UNMDsc>imagens produzidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1265</UNMCod>
+    <UNMDsc>indicador mantido</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1266</UNMCod>
+    <UNMDsc>indicadores de relações de trabalho</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1267</UNMCod>
+    <UNMDsc>informação e base de dados disponibilizadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1268</UNMCod>
+    <UNMDsc>informação ou base de dados disponilizada</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1269</UNMCod>
+    <UNMDsc>instituição representativa </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1270</UNMCod>
+    <UNMDsc>instituições capacitadas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1271</UNMCod>
+    <UNMDsc>intercâmbios</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1272</UNMCod>
+    <UNMDsc>ítens regulatórios por técnico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1273</UNMCod>
+    <UNMDsc>itens tecnológicos por técnico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1274</UNMCod>
+    <UNMDsc>kg de dbo/dia</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1275</UNMCod>
+    <UNMDsc>km de rodovias em boas condições / km de malha (%)</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1276</UNMCod>
+    <UNMDsc>km de rodovias em boas condições / km total da malha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1277</UNMCod>
+    <UNMDsc>KW</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1278</UNMCod>
+    <UNMDsc>Leitos por mil habitantes </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1279</UNMCod>
+    <UNMDsc>licença e autorizações concedidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1280</UNMCod>
+    <UNMDsc>licença ou autorização concedida</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1281</UNMCod>
+    <UNMDsc>licenças e autorizações concedidas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1282</UNMCod>
+    <UNMDsc>litro</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1283</UNMCod>
+    <UNMDsc>m³/ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1284</UNMCod>
+    <UNMDsc>m³/s</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1285</UNMCod>
+    <UNMDsc>m3/habitante/ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1286</UNMCod>
+    <UNMDsc>matéria jornalística distribuída</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1287</UNMCod>
+    <UNMDsc>mestre por milhões de residentes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1288</UNMCod>
+    <UNMDsc>meta</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1289</UNMCod>
+    <UNMDsc>mil doses</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1290</UNMCod>
+    <UNMDsc>mil hosts</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1291</UNMCod>
+    <UNMDsc>milhão de m³</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1292</UNMCod>
+    <UNMDsc>milhão de sacas</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1293</UNMCod>
+    <UNMDsc>milhão de usuários</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1294</UNMCod>
+    <UNMDsc>milhão ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1295</UNMCod>
+    <UNMDsc>milhão R$</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1296</UNMCod>
+    <UNMDsc>milhões de hectares</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1297</UNMCod>
+    <UNMDsc>milhões de m3/dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1298</UNMCod>
+    <UNMDsc>missões</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1299</UNMCod>
+    <UNMDsc>município</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1300</UNMCod>
+    <UNMDsc>municípios</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1301</UNMCod>
+    <UNMDsc>Nº de casos/100.000 &lt; 15 anos </UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1302</UNMCod>
+    <UNMDsc>nº de domicilios</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1303</UNMCod>
+    <UNMDsc>nº de mortes de crianças menores de 28 dias de vida</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1304</UNMCod>
+    <UNMDsc>nº de mortes de crianças menores de 28 dias de vida/1000 nasc.vivos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1305</UNMCod>
+    <UNMDsc>Nº de óbitos pelas causas selecionadas por 100.000 habitantes</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1306</UNMCod>
+    <UNMDsc>nº de procedimentos ambulatoriais especializados per capita</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1307</UNMCod>
+    <UNMDsc>não aplicável</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1308</UNMCod>
+    <UNMDsc>nota</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1309</UNMCod>
+    <UNMDsc>novos núcleos/incubadoras/centrosde estudos e prestadores de serviços em design</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1310</UNMCod>
+    <UNMDsc>número absoluto</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1311</UNMCod>
+    <UNMDsc>número de acessos / trimestre</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1312</UNMCod>
+    <UNMDsc>número de acidentes com vítimas a cada 10.000 veículos</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>0</UNMCod>
+    <UNMDsc>Nao Informado</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>379</UNMCod>
+    <UNMDsc>CENTRO IMPLANTADO</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1166</UNMCod>
+    <UNMDsc>BENEFICIADA</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1167</UNMCod>
+    <UNMDsc>hectare</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1168</UNMCod>
+    <UNMDsc>KGDBO/DIA</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1169</UNMCod>
+    <UNMDsc>M³/H</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1170</UNMCod>
+    <UNMDsc>MEGABYTE</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1171</UNMCod>
+    <UNMDsc>METRO LINEAR</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1172</UNMCod>
+    <UNMDsc>milhão</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1174</UNMCod>
+    <UNMDsc>1/1.000.000</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1175</UNMCod>
+    <UNMDsc>Em definição</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1177</UNMCod>
+    <UNMDsc>kg DBO por dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1178</UNMCod>
+    <UNMDsc>kg de lã por hectare.ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1179</UNMCod>
+    <UNMDsc>Litro por animal.ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1180</UNMCod>
+    <UNMDsc>Livro por pessoa.ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1181</UNMCod>
+    <UNMDsc>m³ por habitante.ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1182</UNMCod>
+    <UNMDsc>Milhão de barris de petróleo por dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1183</UNMCod>
+    <UNMDsc>Pessoa por projeto</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1184</UNMCod>
+    <UNMDsc>R$ mil por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1185</UNMCod>
+    <UNMDsc>R$ por ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1186</UNMCod>
+    <UNMDsc>Saca de 60 kg por ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1187</UNMCod>
+    <UNMDsc>t equivalente de petróleo por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1188</UNMCod>
+    <UNMDsc>t por ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1189</UNMCod>
+    <UNMDsc>Treinando.dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1190</UNMCod>
+    <UNMDsc>US$ milhão por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1191</UNMCod>
+    <UNMDsc>US$ por barril de petróleo processado</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1194</UNMCod>
+    <UNMDsc>kg / ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1195</UNMCod>
+    <UNMDsc>kg de ATR / t de cana</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1196</UNMCod>
+    <UNMDsc>Milhão de t</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1197</UNMCod>
+    <UNMDsc>mil toneladas</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>189</UNMCod>
+    <UNMDsc>ação judicial desenvolvida</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1208</UNMCod>
+    <UNMDsc>HORA/ANO</UNMDsc>
+    <UNMTipo>0</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1211</UNMCod>
+    <UNMDsc>X</UNMDsc>
+    <UNMTipo>0</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1198</UNMCod>
+    <UNMDsc>% da execução física </UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>2</UNMCod>
+    <UNMDsc>%</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1201</UNMCod>
+    <UNMDsc>GB</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1205</UNMCod>
+    <UNMDsc>Percentual de Execução Física</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1206</UNMCod>
+    <UNMDsc>R$ 1000,00l</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>12</UNMCod>
+    <UNMDsc>% de execução física</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>13</UNMCod>
+    <UNMDsc>% de execução física 46425 m²</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>14</UNMCod>
+    <UNMDsc>% de mulheres</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>15</UNMCod>
+    <UNMDsc>% de realização</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>18</UNMCod>
+    <UNMDsc>% físico executado</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>19</UNMCod>
+    <UNMDsc>% obra concluída</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>20</UNMCod>
+    <UNMDsc>(kg/ano)/ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>21</UNMCod>
+    <UNMDsc>(kg/ha)/ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>22</UNMCod>
+    <UNMDsc>(milhões de barris/dia)</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>23</UNMCod>
+    <UNMDsc>(US$/barril processado)</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>24</UNMCod>
+    <UNMDsc>-</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>25</UNMCod>
+    <UNMDsc>1</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>26</UNMCod>
+    <UNMDsc>1.000 m³</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>27</UNMCod>
+    <UNMDsc>1.000 m³.km</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>28</UNMCod>
+    <UNMDsc>1/1.000</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>29</UNMCod>
+    <UNMDsc>1/10.000</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>30</UNMCod>
+    <UNMDsc>1/100.000</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>31</UNMCod>
+    <UNMDsc>1/100.000 habitantes</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>32</UNMCod>
+    <UNMDsc>1/1000</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>33</UNMCod>
+    <UNMDsc>1/100000</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>34</UNMCod>
+    <UNMDsc>1:1.000.000</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>35</UNMCod>
+    <UNMDsc>1000 HA</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>36</UNMCod>
+    <UNMDsc>1000 m³</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>37</UNMCod>
+    <UNMDsc>A definir</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>38</UNMCod>
+    <UNMDsc>Aeroporto</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>39</UNMCod>
+    <UNMDsc>Agentes</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>40</UNMCod>
+    <UNMDsc>aluno</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>41</UNMCod>
+    <UNMDsc>ANO</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>42</UNMCod>
+    <UNMDsc>barril de óleo equivalente</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>43</UNMCod>
+    <UNMDsc>Barril de óleo equivalente por dia</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>44</UNMCod>
+    <UNMDsc>barril de óleo equivalente/dia</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>45</UNMCod>
+    <UNMDsc>barril de petróleo equivalente por dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>46</UNMCod>
+    <UNMDsc>BARRIL/DIA</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>47</UNMCod>
+    <UNMDsc>bilhão de m³. Km</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>48</UNMCod>
+    <UNMDsc>bilhão de t.milha por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>49</UNMCod>
+    <UNMDsc>Centro</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>50</UNMCod>
+    <UNMDsc>Centros Construídos</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>51</UNMCod>
+    <UNMDsc>CURIE</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>52</UNMCod>
+    <UNMDsc>Dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>53</UNMCod>
+    <UNMDsc>dias</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>54</UNMCod>
+    <UNMDsc>dragagem realizada</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>55</UNMCod>
+    <UNMDsc>Estação por 100 habitantes</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>56</UNMCod>
+    <UNMDsc>Estação por 1000 habitantes</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>57</UNMCod>
+    <UNMDsc>Estação/ 1000 habitantes</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>58</UNMCod>
+    <UNMDsc>Estações/Ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>59</UNMCod>
+    <UNMDsc>Família</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>60</UNMCod>
+    <UNMDsc>Família atendida</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>61</UNMCod>
+    <UNMDsc>Família atendida/real</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>62</UNMCod>
+    <UNMDsc>Família por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>63</UNMCod>
+    <UNMDsc>familias</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>64</UNMCod>
+    <UNMDsc>GIGAPOP</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>65</UNMCod>
+    <UNMDsc>GWh</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>66</UNMCod>
+    <UNMDsc>GWh por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>67</UNMCod>
+    <UNMDsc>ha</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>68</UNMCod>
+    <UNMDsc>habitante por km²</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>69</UNMCod>
+    <UNMDsc>Hectare / ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>70</UNMCod>
+    <UNMDsc>Hora</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>71</UNMCod>
+    <UNMDsc>IDH municipal</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>72</UNMCod>
+    <UNMDsc>Indefinido</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>73</UNMCod>
+    <UNMDsc>Índice numérico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>74</UNMCod>
+    <UNMDsc>Interno por docente médico</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>75</UNMCod>
+    <UNMDsc>KG</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>76</UNMCod>
+    <UNMDsc>kg de ração / kg de peixe vivo</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>77</UNMCod>
+    <UNMDsc>kg por barco.ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>78</UNMCod>
+    <UNMDsc>kg por covo.dia de mar</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>79</UNMCod>
+    <UNMDsc>kg por dia de mar</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>80</UNMCod>
+    <UNMDsc>kg por ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>81</UNMCod>
+    <UNMDsc>kg por ha.ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>82</UNMCod>
+    <UNMDsc>kg por unidade de esforço</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>83</UNMCod>
+    <UNMDsc>kg/ha</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>84</UNMCod>
+    <UNMDsc>kg/ha/ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>85</UNMCod>
+    <UNMDsc>kg/lactação/animal</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>86</UNMCod>
+    <UNMDsc>km</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>87</UNMCod>
+    <UNMDsc>km por núcleo</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>88</UNMCod>
+    <UNMDsc>km²</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>89</UNMCod>
+    <UNMDsc>km² por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>90</UNMCod>
+    <UNMDsc>km2</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>91</UNMCod>
+    <UNMDsc>Leito por médico-residente</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>92</UNMCod>
+    <UNMDsc>Litros por animal.ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>93</UNMCod>
+    <UNMDsc>M</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>94</UNMCod>
+    <UNMDsc>m²</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>95</UNMCod>
+    <UNMDsc>m² de área ampliada</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>96</UNMCod>
+    <UNMDsc>m² de área construída</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>97</UNMCod>
+    <UNMDsc>M³</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>98</UNMCod>
+    <UNMDsc>m³.km</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>99</UNMCod>
+    <UNMDsc>m³/habitante/ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>100</UNMCod>
+    <UNMDsc>m2</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>101</UNMCod>
+    <UNMDsc>m3</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>102</UNMCod>
+    <UNMDsc>MCI</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>103</UNMCod>
+    <UNMDsc>MCI(MILICURIE)</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>104</UNMCod>
+    <UNMDsc>MEGAWATTS</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>105</UNMCod>
+    <UNMDsc>Mês</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>106</UNMCod>
+    <UNMDsc>MIL</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>107</UNMCod>
+    <UNMDsc>mil barris de óleo equivalente</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>108</UNMCod>
+    <UNMDsc>mil barris de petróleo equivalente por dia</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>109</UNMCod>
+    <UNMDsc>MIL KM²</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>110</UNMCod>
+    <UNMDsc>MIL M³</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>111</UNMCod>
+    <UNMDsc>mil passageiros</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>112</UNMCod>
+    <UNMDsc>milhão de m³ por dia</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>113</UNMCod>
+    <UNMDsc>milhão de m³. km</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>114</UNMCod>
+    <UNMDsc>Milhão de t.milha</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>115</UNMCod>
+    <UNMDsc>MILHAR</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>116</UNMCod>
+    <UNMDsc>MILHEIRO</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>117</UNMCod>
+    <UNMDsc>min</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>118</UNMCod>
+    <UNMDsc>MINUTO</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>119</UNMCod>
+    <UNMDsc>MW</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>120</UNMCod>
+    <UNMDsc>MWh</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>121</UNMCod>
+    <UNMDsc>Nota média 1/10</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>122</UNMCod>
+    <UNMDsc>Número índice</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>123</UNMCod>
+    <UNMDsc>NÚMERO-ÍNDICE</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>124</UNMCod>
+    <UNMDsc>Paciente por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>125</UNMCod>
+    <UNMDsc>Pacientes por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>126</UNMCod>
+    <UNMDsc>PERCENTAGEM</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>127</UNMCod>
+    <UNMDsc>PERCENTUAL</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>128</UNMCod>
+    <UNMDsc>Pessoa</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>129</UNMCod>
+    <UNMDsc>Pessoa por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>130</UNMCod>
+    <UNMDsc>PESSOAS</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>131</UNMCod>
+    <UNMDsc>Pessoas por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>132</UNMCod>
+    <UNMDsc>PONTO CRÍTICO</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>133</UNMCod>
+    <UNMDsc>Porcentagem</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>134</UNMCod>
+    <UNMDsc>PROJETO</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>135</UNMCod>
+    <UNMDsc>Projeto executado</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>136</UNMCod>
+    <UNMDsc>R$</UNMDsc>
+    <UNMTipo>T</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>137</UNMCod>
+    <UNMDsc>R$ 1.000</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>138</UNMCod>
+    <UNMDsc>R$ bilhão</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>139</UNMCod>
+    <UNMDsc>R$ bilhão por ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>140</UNMCod>
+    <UNMDsc>R$ bilhões</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>141</UNMCod>
+    <UNMDsc>R$ mil</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>142</UNMCod>
+    <UNMDsc>R$ milhão</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>143</UNMCod>
+    <UNMDsc>R$ milhões</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>144</UNMCod>
+    <UNMDsc>R$ por ha.ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>145</UNMCod>
+    <UNMDsc>R$ por ha/ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>146</UNMCod>
+    <UNMDsc>R$ por t.km</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>147</UNMCod>
+    <UNMDsc>R$1.000 por ano</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>148</UNMCod>
+    <UNMDsc>REAIS</UNMDsc>
+    <UNMTipo/>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>149</UNMCod>
+    <UNMDsc>REAIS MILHOES</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1430</UNMCod>
+    <UNMDsc>kg</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1431</UNMCod>
+    <UNMDsc>kg/ha</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1432</UNMCod>
+    <UNMDsc>km²</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1433</UNMCod>
+    <UNMDsc>m³</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1434</UNMCod>
+    <UNMDsc>MVA</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1435</UNMCod>
+    <UNMDsc>número índice</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1436</UNMCod>
+    <UNMDsc>Ocorrência de delito/DEAM</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1437</UNMCod>
+    <UNMDsc>percentual</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1438</UNMCod>
+    <UNMDsc>porcentagem</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1439</UNMCod>
+    <UNMDsc>R$ milhões</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1440</UNMCod>
+    <UNMDsc>R$/ton</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1441</UNMCod>
+    <UNMDsc>tonelada</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1442</UNMCod>
+    <UNMDsc>tonelada/ano</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1443</UNMCod>
+    <UNMDsc>viagens ao dia/habitante</UNMDsc>
+    <UNMTipo>I</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1444</UNMCod>
+    <UNMDsc>: unidade</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1445</UNMCod>
+    <UNMDsc>a definir</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1446</UNMCod>
+    <UNMDsc>hora</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1447</UNMCod>
+    <UNMDsc>hora/ano</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1448</UNMCod>
+    <UNMDsc>percentagem</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1449</UNMCod>
+    <UNMDsc>R$ bilhão</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+  <UnidadeMedida>
+    <UNMCod>1450</UNMCod>
+    <UNMDsc>R$ milhão</UNMDsc>
+    <UNMTipo>A</UNMTipo>
+  </UnidadeMedida>
+</ArrayOfUnidadeMedida>

@@ -1,0 +1,218 @@
+ <?php
+/*
+   Sistema Simec
+   Setor responsável: SPO-MEC
+   Desenvolvedor: Equipe Consultores Simec
+   Analista: Marcelo Freire Costa (marcelofreire.freire@gmail.com)
+   Programador: Marcelo Freire Costa (e-mail: marcelofreire.freire@gmail.com)
+   Módulo:associa_perfil.inc
+   Finalidade: permitir a associação de um perfil as operações de menu
+   */
+
+require_once APPRAIZ . "includes/library/simec/Listagem.php";
+
+//Armazena o caminho de redirecionamento
+$modulo=$_REQUEST['modulo'] ;
+
+//ver($_REQUEST);
+
+
+//Caso seja seja solicitada a inclusão de menus ao perfil faça
+if ($_REQUEST['act']=='cadastra' and $_POST['pflcod']<>'') {
+    //Deleta-se os menus do perfil para cadastrar novamente
+    $sql = 'delete from perfilmenu where pflcod='.$_POST['pflcod'];
+    $db->executar($sql);
+    $mnuid = $_POST['mnuid'];
+    $nlinhas = count($mnuid)-1;
+    for ($j=0; $j<=$nlinhas;$j++){
+        //Cadastra-se o menu do perfil
+        $sql = "insert into perfilmenu (pflcod, mnuid, pmnstatus) VALUES (".$_POST['pflcod'].",".$mnuid[$j].",'A')";
+        $db->executar($sql);
+    }
+    $db -> commit();
+    $db->sucesso($modulo);
+}
+
+//Caso seja passado o código do perfil atribui-se a variável $pflcod
+if ($_REQUEST['pflcod']) {
+    $pflcod = $_REQUEST['pflcod'];
+    unset($_SESSION['pflcod']);
+}
+
+//para não perder pflcod ao paginar listagem
+if((empty($_SESSION['pflcod']) && !empty($pflcod))){
+    $_SESSION['pflcod'] = $pflcod;
+}
+
+if(!empty($_SESSION['pflcod']) && empty($pflcod)){
+    $pflcod = $_SESSION['pflcod'];
+}
+
+//Inclui o cabeçalho da página
+include APPRAIZ."includes/cabecalho.inc";
+/**
+ * Funções de apoio ao gerenciamento do perfil.
+ * @see _funcoesspo_componentes.php
+ */
+require_once APPRAIZ . "includes/funcoesspo_componentes.php";
+?>
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-12">
+   		<h2>Associar menus aos perfis</h2>
+    	<ol class="breadcrumb">
+    	   	<li>
+				<a href="<?php echo $_SESSION['sisdiretorio']; ?>.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a>
+	      	</li>
+	       	<li><a>Sistema</a></li>
+	       	<li><a>Perfil</a></li>
+    	</ol>	
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+	<div class="row">
+	    <?php $db->cria_aba($abacod_tela,$url,$parametros);//cria as abas ?>
+	    <div class="well col-md-12">
+	        <form id="formulario" method="POST" name="formulario"  role="form" class="form-horizontal" novalidate="novalidate">
+	            <input type=hidden name="act" value=0>
+	            <table  class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
+	                <?php if($_SESSION['sisid'] == 4) { ?>
+	                <tr>
+	                    <div class="form-group control-group">
+	                        <label for="sisid" class="col-lg-2 control-label pad-12">Sistema:</label>
+	                        <div class="col-lg-10">
+	                            <?php
+	                                //Atribui o sisid passado a uma variável
+	                                $sisid = $_REQUEST['sisid'];
+	
+	                                    //Caso não seja passado o sisid atribui-se valor zero para não dar erro nas consultas abaixo
+	                                        if($sisid == '')
+	                                        {
+	                                              $sisid =0;
+	                                        }
+	
+	                              //Pesquisa-se os sistemas cadastrados para montar a combo
+	                                $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
+	                                //Monta a combo
+	                                //$db->monta_combo("sisid",$sql,'S',"Selecione o Sistema",'submete_sistema','');
+	                                inputCombo('sisid', $sql, $valor, 'sisid', array('habil' => 'S', 'titulo'=>'Selecione o Sistema','acao' =>'submete_sistema'));
+	
+	                            ?>
+	                        </div>
+	                    </div>
+	                </tr>
+	                <tr>
+	                    <div class="form-group control-group">
+	                        <label for="pflcod" class="col-lg-2 control-label pad-12">Associação do Perfil:</label>
+	                        <div class="col-lg-10">
+	                                <?php
+	                                 //Pesquisa os perfis cadastrados para o sistema para montar a combo
+	                                  $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from perfil where pflstatus='A' and sisid=".$sisid." order by pfldsc ";
+	                                  //monta a combo de perfis
+	                                  //$db->monta_combo("pflcod",$sql,'S',"Selecione o Perfil",'submete_perfil','');
+	                                  inputCombo('pflcod', $sql, $valor, 'pflcod', array('habil' => 'S', 'titulo'=>'Selecione o Perfil','acao' =>'submete_perfil'));
+	                                ?>
+	                        </div>
+	                    </div>
+	                </tr>
+	                <?php } else { ?>
+	                <tr>
+	                    <div class="form-group control-group">
+	                        <label for="pflcod" class="col-lg-2 control-label pad-12">Associação do Perfil:</label>
+	                        <div class="col-lg-10">
+	                            <?php
+	                              $sisid = $_SESSION['sisid'];
+	                             //Pesquisa os perfis cadastrados para o sistema para montar a combo
+	                              $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from perfil where pflstatus='A' and sisid=".$_SESSION['sisid']." order by pfldsc ";
+	                              //monta a combo de perfis
+	                              //$db->monta_combo("pflcod",$sql,'S',"Selecione o Perfil",'submete_perfil','');
+	                              inputCombo('pflcod', $sql, $valor, 'pflcod', array('habilitado' => 'S', 'titulo'=>'Selecione o Perfil','acao' =>'submete_perfil'));
+	                            ?>
+	                        </div>
+	                    </div>
+	                </tr>
+	                <?php } ?>
+	            </table>
+	
+	            <?php
+	            if ($pflcod && $sisid) {
+	                $cabecalho = array('Sim/Não','Código','Menu / Módulo','Visível','Link','Transação');
+	                $sql= "SELECT
+	
+	                            CASE
+	                                WHEN p.mnuid is null THEN '<input type=\"Checkbox\" name=\"mnuid[]\" value=\"'||menu.mnuid||'\" class=\"marcar\">'
+	                                ELSE '<input type=\"Checkbox\" name=\"mnuid[]\" value=\"'||menu.mnuid||'\"  class=\"marcar\" checked>'
+	                            END as acao,
+	                            menu.mnucod,
+	                            CASE
+	                                WHEN mnutipo=2 then '&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc when  mnutipo=3 THEN '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc
+	                                WHEN  mnutipo=4 THEN '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc
+	                                ELSE mnudsc
+	                            END as mnudsc,
+	                            CASE
+	                                WHEN mnushow=false THEN '<font color=#808080>Não</font>'
+	                                ELSE '<font color=#008000>Sim</font>'
+	                            END as mnushow,
+	                            mnulink,
+	                            mnutransacao
+	                        FROM menu
+	                        LEFT JOIN perfilmenu p on menu.mnuid = p.mnuid AND p.pflcod=".$pflcod."
+	                        WHERE  mnustatus = 'A' ANd menu.sisid=".$sisid."
+	                        ORDER BY mnucod";
+	
+	                if ($pflcod && $sisid) {?>
+	                    <tr>
+	                        <input  type="checkbox" name="checkAll" id="checkAll" style="margin-left:1%;" value="todos" onclick="marcardesmarcar();" /><b> Marcar/Desmarcar todos</b><br/>
+	                    </tr>
+	                <?php }
+	                //Monta a lista de menus do perfil
+	                $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
+	                $listagem->setCabecalho ($cabecalho)
+	                         ->setQuery ($sql)
+	                         ->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS)
+	                         ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);?>
+	                <button type="button" class="btn btn-success" id="salvarMomentoCredito" onclick="validar_cadastro()">Cadastrar</button>
+	
+	            <?php } ?>
+	        </form>
+	    </div>
+	</div>
+</div>
+<script>
+    jQuery( document ).ready(function() {
+        jQuery('#tb_render > tbody > tr ').each(function() {
+           var linha = $(this);
+           // alinhando a esquerda a coluna 3 (Menu/Módulo) da tabela
+          linha.find('td:eq(2)').removeClass('text-center').addClass('text-left');
+        });
+    });
+
+    function validar_cadastro() {
+      //Atribui a ação a ser realizada
+      document.formulario.act.value = 'cadastra';
+      //Submete a página
+      document.formulario.submit();
+    }
+
+    function submete_perfil(cod){
+      //Caso o código do perfil e do sistema sejam informados
+      if (document.formulario.pflcod.value != '' || document.formulario.sisid.value != '')
+      {
+          //Submete a página
+          document.formulario.submit();
+      }
+    }
+
+    function submete_sistema(cod){
+        //Limpa o código do perfil
+    	document.formulario.pflcod.value = '';
+    	//Submete a página
+        document.formulario.submit();
+    }
+
+    function marcardesmarcar(){
+        //pelo id do marcaTodos, desmarca e marca todos os checkbox
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+    }
+</script>

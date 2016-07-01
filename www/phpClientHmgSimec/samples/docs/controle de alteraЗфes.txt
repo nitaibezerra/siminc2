@@ -1,0 +1,7 @@
+13/06/2008
+- Resolveu problema de alterar a permissão do usuário. Ao alterar o sistema estava tentando fazer um delete e um include. Agora ele só faz um update;
+(desenv)
+- Resolveu problema da inclusão de uma nova permissão;
+(desenv)
+- Resolveu problema da geração do ticket de manunteção do usuário quando o perfil é default;
+(desenv)

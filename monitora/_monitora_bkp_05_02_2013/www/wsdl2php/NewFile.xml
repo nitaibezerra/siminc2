@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:ns1="http://dto.simec.intraSiconvWS.sistema.fnde.gov.br"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns2="http://simec.intraSiconvWS.sistema.fnde.gov.br">
+	<SOAP-ENV:Body>
+		<ns2:enviarProposta>
+			<ns2:propostaWSDTO>
+				<ns1:ano>2012</ns1:ano>
+				<ns1:atribuicaoRespAnalise xsi:nil="true" />
+				<ns1:bensServicoWS>
+					<ns2:item>
+						<ns1:cep>69945000</ns1:cep>
+						<ns1:descricao>
+							AquisiÃ§Ã£o de MicroÃ´nibus
+						</ns1:descricao>
+						<ns1:despesaCompartilhada xsi:nil="true" />
+						<ns1:endereco>
+							AVENIDA BRASIL NÂº 591
+						</ns1:endereco>
+						<ns1:id xsi:nil="true" />
+						<ns1:justificativaAnalista xsi:nil="true" />
+						<ns1:municipioWS>
+							<ns1:codigo>0643</ns1:codigo>
+							<ns1:id xsi:nil="true" />
+							<ns1:nome>AcrelÃ¢ndia</ns1:nome>
+							<ns1:unidadeFederativaWS>
+								<ns1:id xsi:nil="true" />
+								<ns1:sigla>AC</ns1:sigla>
+							</ns1:unidadeFederativaWS>
+						</ns1:municipioWS>
+						<ns1:naturezaAquisicaoWS>
+							<ns1:codigo>1</ns1:codigo>
+							<ns1:descricao>
+								OUTROS SERVICOS DE TERCEIROS-PESSOA
+								JURIDICA
+							</ns1:descricao>
+							<ns1:id xsi:nil="true" />
+						</ns1:naturezaAquisicaoWS>
+						<ns1:naturezaDespesaSubItemWS>
+							<ns1:descricaoSubItem xsi:nil="true" />
+							<ns1:id xsi:nil="true" />
+							<ns1:naturezaDespesaWS xsi:nil="true" />
+							<ns1:observacao xsi:nil="true" />
+							<ns1:subItem xsi:nil="true" />
+						</ns1:naturezaDespesaSubItemWS>
+						<ns1:observacao>
+							BENS/SERVIÃ‡OS DA PROPOSTA
+						</ns1:observacao>
+						<ns1:propostaProgramaWS>
+							<ns1:id xsi:nil="true" />
+							<ns1:objetoWS xsi:nil="true" />
+							<ns1:origemRecursoPropProgramaWS>
+								<ns1:cnpjBeneficiarioEspecificoWS
+									xsi:nil="true" />
+								<ns1:cnpjProgramaEmendaWS
+									xsi:nil="true" />
+								<ns1:id xsi:nil="true" />
+								<ns1:qualificacaoProponenteWS
+									xsi:nil="true" />
+								<ns1:valorRepasse>
+									203030.3
+								</ns1:valorRepasse>
+							</ns1:origemRecursoPropProgramaWS>
+							<ns1:programaWS>
+								<ns1:acaoOrcamentaria xsi:nil="true" />
+								<ns1:aceitaDespesaAdministrativa
+									xsi:nil="true" />
+								<ns1:aceitaPropostaDeProponenteNaoCadastrado
+									xsi:nil="true" />
+								<ns1:chamamentoPublico xsi:nil="true" />
+								<ns1:cnpjBeneficiarioEspecificoWS
+									xsi:nil="true" />
+								<ns1:cnpjProgramaEmendaWS
+									xsi:nil="true" />
+								<ns1:codigo>2629820120008</ns1:codigo>
+								<ns1:concedente xsi:nil="true" />
+								<ns1:criteriosDeSelecao xsi:nil="true" />
+								<ns1:dataDisponibilizacao
+									xsi:nil="true" />
+								<ns1:dataFimBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:dataFimEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:dataFimPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:dataInicioBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:dataInicioEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:dataInicioPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:dataPublicacaoImprensa
+									xsi:nil="true" />
+								<ns1:descricao xsi:nil="true" />
+								<ns1:estadosHabilitados xsi:nil="true" />
+								<ns1:executor xsi:nil="true" />
+								<ns1:id xsi:nil="true" />
+								<ns1:modalidades xsi:nil="true" />
+								<ns1:naturezasJuridicas xsi:nil="true" />
+								<ns1:nome xsi:nil="true" />
+								<ns1:numeroDocumento xsi:nil="true" />
+								<ns1:objetoWS xsi:nil="true" />
+								<ns1:obrigaPlanoTrabalho xsi:nil="true" />
+								<ns1:observacao xsi:nil="true" />
+								<ns1:publicadoImprensa xsi:nil="true" />
+								<ns1:qualificacaoBeneficiarioEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:qualificacaoBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:qualificacaoPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:regrasWS xsi:nil="true" />
+								<ns1:status xsi:nil="true" />
+							</ns1:programaWS>
+							<ns1:qualificacaoProponenteWS
+								xsi:nil="true" />
+							<ns1:regrasWS>
+								<ns1:aceitaContrapartidaBens>
+									true
+								</ns1:aceitaContrapartidaBens>
+								<ns1:descricao>
+									Contrapartida financeira
+								</ns1:descricao>
+								<ns1:id xsi:nil="true" />
+								<ns1:percentualMaximoContrapartidaBens
+									xsi:nil="true" />
+								<ns1:percentualMinimoContrapartida
+									xsi:nil="true" />
+							</ns1:regrasWS>
+							<ns1:valorContrapartida xsi:nil="true" />
+							<ns1:valorContrapartidaBensServicos>
+								0
+							</ns1:valorContrapartidaBensServicos>
+							<ns1:valorContrapartidaFinanceira
+								xsi:nil="true" />
+							<ns1:valorGlobal>203030.3</ns1:valorGlobal>
+						</ns1:propostaProgramaWS>
+						<ns1:quantidade>1</ns1:quantidade>
+						<ns1:statusBensServicosPropostaWS>
+							<ns1:codigo>APROVADO</ns1:codigo>
+							<ns1:id xsi:nil="true" />
+						</ns1:statusBensServicosPropostaWS>
+						<ns1:tipoDespesaWS>OUTROS</ns1:tipoDespesaWS>
+						<ns1:unidadeFornecimento>
+							UN
+						</ns1:unidadeFornecimento>
+						<ns1:valorUnitario>103030.3</ns1:valorUnitario>
+					</ns2:item>
+					<ns2:item>
+						<ns1:cep>69945000</ns1:cep>
+						<ns1:descricao>
+							AquisiÃ§Ã£o de equipamentos de informÃ¡tica
+						</ns1:descricao>
+						<ns1:despesaCompartilhada xsi:nil="true" />
+						<ns1:endereco>
+							AVENIDA BRASIL NÂº 591
+						</ns1:endereco>
+						<ns1:id xsi:nil="true" />
+						<ns1:justificativaAnalista xsi:nil="true" />
+						<ns1:municipioWS>
+							<ns1:codigo>0643</ns1:codigo>
+							<ns1:id xsi:nil="true" />
+							<ns1:nome>AcrelÃ¢ndia</ns1:nome>
+							<ns1:unidadeFederativaWS>
+								<ns1:id xsi:nil="true" />
+								<ns1:sigla>AC</ns1:sigla>
+							</ns1:unidadeFederativaWS>
+						</ns1:municipioWS>
+						<ns1:naturezaAquisicaoWS>
+							<ns1:codigo>1</ns1:codigo>
+							<ns1:descricao>
+								OUTROS SERVICOS DE TERCEIROS- PESSOA
+								JURIDICA
+							</ns1:descricao>
+							<ns1:id xsi:nil="true" />
+						</ns1:naturezaAquisicaoWS>
+						<ns1:naturezaDespesaSubItemWS>
+							<ns1:descricaoSubItem xsi:nil="true" />
+							<ns1:id xsi:nil="true" />
+							<ns1:naturezaDespesaWS xsi:nil="true" />
+							<ns1:observacao xsi:nil="true" />
+							<ns1:subItem xsi:nil="true" />
+						</ns1:naturezaDespesaSubItemWS>
+						<ns1:observacao>
+							BENS/SERVIÃ‡OS DA PROPOSTA
+						</ns1:observacao>
+						<ns1:propostaProgramaWS>
+							<ns1:id xsi:nil="true" />
+							<ns1:objetoWS xsi:nil="true" />
+							<ns1:origemRecursoPropProgramaWS>
+								<ns1:cnpjBeneficiarioEspecificoWS
+									xsi:nil="true" />
+								<ns1:cnpjProgramaEmendaWS
+									xsi:nil="true" />
+								<ns1:id xsi:nil="true" />
+								<ns1:qualificacaoProponenteWS
+									xsi:nil="true" />
+								<ns1:valorRepasse>
+									203030.3
+								</ns1:valorRepasse>
+							</ns1:origemRecursoPropProgramaWS>
+							<ns1:programaWS>
+								<ns1:acaoOrcamentaria xsi:nil="true" />
+								<ns1:aceitaDespesaAdministrativa
+									xsi:nil="true" />
+								<ns1:aceitaPropostaDeProponenteNaoCadastrado
+									xsi:nil="true" />
+								<ns1:chamamentoPublico xsi:nil="true" />
+								<ns1:cnpjBeneficiarioEspecificoWS
+									xsi:nil="true" />
+								<ns1:cnpjProgramaEmendaWS
+									xsi:nil="true" />
+								<ns1:codigo>2629820120008</ns1:codigo>
+								<ns1:concedente xsi:nil="true" />
+								<ns1:criteriosDeSelecao xsi:nil="true" />
+								<ns1:dataDisponibilizacao
+									xsi:nil="true" />
+								<ns1:dataFimBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:dataFimEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:dataFimPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:dataInicioBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:dataInicioEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:dataInicioPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:dataPublicacaoImprensa
+									xsi:nil="true" />
+								<ns1:descricao xsi:nil="true" />
+								<ns1:estadosHabilitados xsi:nil="true" />
+								<ns1:executor xsi:nil="true" />
+								<ns1:id xsi:nil="true" />
+								<ns1:modalidades xsi:nil="true" />
+								<ns1:naturezasJuridicas xsi:nil="true" />
+								<ns1:nome xsi:nil="true" />
+								<ns1:numeroDocumento xsi:nil="true" />
+								<ns1:objetoWS xsi:nil="true" />
+								<ns1:obrigaPlanoTrabalho xsi:nil="true" />
+								<ns1:observacao xsi:nil="true" />
+								<ns1:publicadoImprensa xsi:nil="true" />
+								<ns1:qualificacaoBeneficiarioEmendaParlamentar
+									xsi:nil="true" />
+								<ns1:qualificacaoBeneficiarioEspecifico
+									xsi:nil="true" />
+								<ns1:qualificacaoPropostaVoluntaria
+									xsi:nil="true" />
+								<ns1:regrasWS xsi:nil="true" />
+								<ns1:status xsi:nil="true" />
+							</ns1:programaWS>
+							<ns1:qualificacaoProponenteWS
+								xsi:nil="true" />
+							<ns1:regrasWS>
+								<ns1:aceitaContrapartidaBens>
+									true
+								</ns1:aceitaContrapartidaBens>
+								<ns1:descricao>
+									Contrapartida financeira
+								</ns1:descricao>
+								<ns1:id xsi:nil="true" />
+								<ns1:percentualMaximoContrapartidaBens
+									xsi:nil="true" />
+								<ns1:percentualMinimoContrapartida
+									xsi:nil="true" />
+							</ns1:regrasWS>
+							<ns1:valorContrapartida xsi:nil="true" />
+							<ns1:valorContrapartidaBensServicos>
+								0
+							</ns1:valorContrapartidaBensServicos>
+							<ns1:valorContrapartidaFinanceira
+								xsi:nil="true" />
+							<ns1:valorGlobal>203030.3</ns1:valorGlobal>
+						</ns1:propostaProgramaWS>
+						<ns1:quantidade>1</ns1:quantidade>
+						<ns1:statusBensServicosPropostaWS>
+							<ns1:codigo>APROVADO</ns1:codigo>
+							<ns1:id xsi:nil="true" />
+						</ns1:statusBensServicosPropostaWS>
+						<ns1:tipoDespesaWS>OUTROS</ns1:tipoDespesaWS>
+						<ns1:unidadeFornecimento>
+							UN
+						</ns1:unidadeFornecimento>
+						<ns1:valorUnitario>100000</ns1:valorUnitario>
+					</ns2:item>
+				</ns1:bensServicoWS>
+				<ns1:capacidadeTecnica xsi:nil="true" />
+				<ns1:contaBancariaWS>
+					<ns1:agencia>4158-0</ns1:agencia>
+					<ns1:bancoWS>
+						<ns1:codigo>001</ns1:codigo>
+						<ns1:id xsi:nil="true" />
+						<ns1:nome xsi:nil="true" />
+					</ns1:bancoWS>
+					<ns1:conta xsi:nil="true" />
+					<ns1:dataRetornoUltimoPedidoAberturaWS
+						xsi:nil="true" />
+					<ns1:dataUltimaModificacaoWS xsi:nil="true" />
+					<ns1:dataUltimoEnvioPedidoAberturaWS xsi:nil="true" />
+					<ns1:descricao xsi:nil="true" />
+					<ns1:digitoVerificadorAgencia>
+						0
+					</ns1:digitoVerificadorAgencia>
+					<ns1:id xsi:nil="true" />
+					<ns1:mensagemErro xsi:nil="true" />
+					<ns1:msgErroProcessamento xsi:nil="true" />
+					<ns1:situacao>CADASTRADO</ns1:situacao>
+				</ns1:contaBancariaWS>
+				<ns1:cronogramaDesembolsoWS>
+					<ns1:id xsi:nil="true" />
+					<ns1:parcelaCronogramaDesembolsoWS>
+						<ns2:item>
+							<ns1:ano>2012</ns1:ano>
+							<ns1:id xsi:nil="true" />
+							<ns1:mes>6</ns1:mes>
+							<ns1:numero>1</ns1:numero>
+							<ns1:parcelaMetaWS>
+								<ns2:item>
+									<ns1:id xsi:nil="true" />
+									<ns1:idMetaCronogramaFisico>
+										0
+									</ns1:idMetaCronogramaFisico>
+									<ns1:parcelaEtapaWS>
+										<ns2:item>
+											<ns1:id xsi:nil="true" />
+											<ns1:idEtapaCronogramaFisico>
+												0
+											</ns1:idEtapaCronogramaFisico>
+											<ns1:valor>
+												103030.3
+											</ns1:valor>
+										</ns2:item>
+										<ns2:item>
+											<ns1:id xsi:nil="true" />
+											<ns1:idEtapaCronogramaFisico>
+												0
+											</ns1:idEtapaCronogramaFisico>
+											<ns1:valor>
+												100000
+											</ns1:valor>
+										</ns2:item>
+									</ns1:parcelaEtapaWS>
+									<ns1:valor>203030.3</ns1:valor>
+								</ns2:item>
+							</ns1:parcelaMetaWS>
+							<ns1:tipoParticipanteWS>
+								<ns1:codigo>1</ns1:codigo>
+								<ns1:descricao xsi:nil="true" />
+								<ns1:id xsi:nil="true" />
+							</ns1:tipoParticipanteWS>
+							<ns1:transferenciasRecursosWS
+								xsi:nil="true" />
+							<ns1:valor>203030.3</ns1:valor>
+						</ns2:item>
+					</ns1:parcelaCronogramaDesembolsoWS>
+				</ns1:cronogramaDesembolsoWS>
+				<ns1:cronogramaFisicoWS xsi:nil="true" />
+				<ns1:dataAprovacaoDePropostaWS xsi:nil="true" />
+				<ns1:dataAprovacaoPlanoTrabalhoWS xsi:nil="true" />
+				<ns1:dataEntregaProjetoBasicoWS xsi:nil="true" />
+				<ns1:dataLimiteComplementacaoPbWS xsi:nil="true" />
+				<ns1:dataLimiteEntregaProjetoBasicoWS xsi:nil="true" />
+				<ns1:dataPropostaWS>
+					2012-06-06T20:47:29
+				</ns1:dataPropostaWS>
+				<ns1:dataUltimoEnvioContratoRepasseWS xsi:nil="true" />
+				<ns1:dataVersaoWS xsi:nil="true" />
+				<ns1:despesaAdministrativa xsi:nil="true" />
+				<ns1:empenhoPublicacao xsi:nil="true" />
+				<ns1:executorWS xsi:nil="true" />
+				<ns1:fimExecucao xsi:nil="true" />
+				<ns1:gestao>15253</ns1:gestao>
+				<ns1:gestaoContratoPublicacao xsi:nil="true" />
+				<ns1:historico xsi:nil="true" />
+				<ns1:id xsi:nil="true" />
+				<ns1:inicioExecucao xsi:nil="true" />
+				<ns1:instituicaoMandatariaWS xsi:nil="true" />
+				<ns1:intervenenteWS xsi:nil="true" />
+				<ns1:justificativa>
+					AquisiÃ§Ã£o de veÃ­culo para transporte Ã”nibus
+					Rural&#13; &#13; PÃºblico alvo: Alunos do ensino
+					bÃ¡sico que utilizam a escola no perÃ­odo
+					integral.&#13; &#13; Beneficiados: 1470 alunos&#13;
+					&#13; Meta de captaÃ§Ã£o:&#13; R$ 200.000,00&#13;
+					Objetivo&#13; O objetivo imediato Ã© a aquisiÃ§Ã£o
+					de Ã´nibus
+				</ns1:justificativa>
+				<ns1:login>
+					<ns1:id>32</ns1:id>
+					<ns1:senha>teste</ns1:senha>
+					<ns1:usuario>teste</ns1:usuario>
+				</ns1:login>
+				<ns1:mandatarioWS xsi:nil="true" />
+				<ns1:membroParticipanteWS>
+					<ns1:ativoNoSistema>true</ns1:ativoNoSistema>
+					<ns1:cargoFuncao xsi:nil="true" />
+					<ns1:cep xsi:nil="true" />
+					<ns1:cpf></ns1:cpf>
+					<ns1:email xsi:nil="true" />
+					<ns1:endereco xsi:nil="true" />
+					<ns1:id xsi:nil="true" />
+					<ns1:matricula xsi:nil="true" />
+					<ns1:municipioMembroWS xsi:nil="true" />
+					<ns1:municipioWS xsi:nil="true" />
+					<ns1:nome xsi:nil="true" />
+					<ns1:orgaoExpedidor xsi:nil="true" />
+					<ns1:rg xsi:nil="true" />
+					<ns1:senha xsi:nil="true" />
+					<ns1:telefone xsi:nil="true" />
+				</ns1:membroParticipanteWS>
+				<ns1:modalidadePropostaWS>
+					<ns1:id xsi:nil="true" />
+					<ns1:value>1</ns1:value>
+				</ns1:modalidadePropostaWS>
+				<ns1:motivosNaoAcatamentoContratoRepasse xsi:nil="true" />
+				<ns1:objetoConvenio>objeto</ns1:objetoConvenio>
+				<ns1:orgaoAdministrativoWS>
+					<ns1:codigo>26298</ns1:codigo>
+					<ns1:id xsi:nil="true" />
+					<ns1:responsavelWS xsi:nil="true" />
+				</ns1:orgaoAdministrativoWS>
+				<ns1:orgaoConcedenteWS>
+					<ns1:codigo>26298</ns1:codigo>
+					<ns1:id xsi:nil="true" />
+					<ns1:responsavelWS>
+						<ns1:ativoNoSistema>true</ns1:ativoNoSistema>
+						<ns1:cargoFuncao xsi:nil="true" />
+						<ns1:cep xsi:nil="true" />
+						<ns1:cpf></ns1:cpf>
+						<ns1:email xsi:nil="true" />
+						<ns1:endereco xsi:nil="true" />
+						<ns1:id xsi:nil="true" />
+						<ns1:matricula xsi:nil="true" />
+						<ns1:municipioMembroWS xsi:nil="true" />
+						<ns1:municipioWS xsi:nil="true" />
+						<ns1:nome xsi:nil="true" />
+						<ns1:orgaoExpedidor xsi:nil="true" />
+						<ns1:rg xsi:nil="true" />
+						<ns1:senha xsi:nil="true" />
+						<ns1:telefone xsi:nil="true" />
+					</ns1:responsavelWS>
+				</ns1:orgaoConcedenteWS>
+				<ns1:orgaoExecutorWS>
+					<ns1:codigo>26298</ns1:codigo>
+					<ns1:id xsi:nil="true" />
+					<ns1:responsavelWS xsi:nil="true" />
+				</ns1:orgaoExecutorWS>
+				<ns1:parecerPlanoTrabalho xsi:nil="true" />
+				<ns1:parecerProposta>
+					<ns1:atribuicaoResponsavel xsi:nil="true" />
+					<ns1:dataWS>0000-00-00T00:00:00</ns1:dataWS>
+					<ns1:funcaoResponsavel>
+						TÃ©cnico
+					</ns1:funcaoResponsavel>
+					<ns1:id xsi:nil="true" />
+					<ns1:parecer xsi:nil="true" />
+					<ns1:responsavelWS>
+						<ns1:ativoNoSistema>true</ns1:ativoNoSistema>
+						<ns1:cargoFuncao xsi:nil="true" />
+						<ns1:cep xsi:nil="true" />
+						<ns1:cpf></ns1:cpf>
+						<ns1:email xsi:nil="true" />
+						<ns1:endereco xsi:nil="true" />
+						<ns1:id xsi:nil="true" />
+						<ns1:matricula xsi:nil="true" />
+						<ns1:municipioMembroWS xsi:nil="true" />
+						<ns1:municipioWS xsi:nil="true" />
+						<ns1:nome xsi:nil="true" />
+						<ns1:orgaoExpedidor xsi:nil="true" />
+						<ns1:rg xsi:nil="true" />
+						<ns1:senha xsi:nil="true" />
+						<ns1:telefone xsi:nil="true" />
+					</ns1:responsavelWS>
+					<ns1:tipoParticipanteWS>
+						<ns1:codigo>1</ns1:codigo>
+						<ns1:descricao xsi:nil="true" />
+						<ns1:id xsi:nil="true" />
+					</ns1:tipoParticipanteWS>
+				</ns1:parecerProposta>
+				<ns1:permiteAdiarEntregaProjBasico xsi:nil="true" />
+				<ns1:permiteLiberarPrimeiroRepasse xsi:nil="true" />
+				<ns1:permiteProrrogarEntregaProjBasico xsi:nil="true" />
+				<ns1:prazoEntregaProjBasico xsi:nil="true" />
+				<ns1:proponenteWS xsi:nil="true" />
+				<ns1:propostaParticipeMembroWS xsi:nil="true" />
+				<ns1:propostaProgramaWS>
+					<ns1:id xsi:nil="true" />
+					<ns1:objetoWS xsi:nil="true" />
+					<ns1:origemRecursoPropProgramaWS>
+						<ns1:cnpjBeneficiarioEspecificoWS
+							xsi:nil="true" />
+						<ns1:cnpjProgramaEmendaWS xsi:nil="true" />
+						<ns1:id xsi:nil="true" />
+						<ns1:qualificacaoProponenteWS xsi:nil="true" />
+						<ns1:valorRepasse>203030.3</ns1:valorRepasse>
+					</ns1:origemRecursoPropProgramaWS>
+					<ns1:programaWS>
+						<ns1:acaoOrcamentaria xsi:nil="true" />
+						<ns1:aceitaDespesaAdministrativa xsi:nil="true" />
+						<ns1:aceitaPropostaDeProponenteNaoCadastrado
+							xsi:nil="true" />
+						<ns1:chamamentoPublico xsi:nil="true" />
+						<ns1:cnpjBeneficiarioEspecificoWS
+							xsi:nil="true" />
+						<ns1:cnpjProgramaEmendaWS xsi:nil="true" />
+						<ns1:codigo>2629820120008</ns1:codigo>
+						<ns1:concedente xsi:nil="true" />
+						<ns1:criteriosDeSelecao xsi:nil="true" />
+						<ns1:dataDisponibilizacao xsi:nil="true" />
+						<ns1:dataFimBeneficiarioEspecifico
+							xsi:nil="true" />
+						<ns1:dataFimEmendaParlamentar xsi:nil="true" />
+						<ns1:dataFimPropostaVoluntaria xsi:nil="true" />
+						<ns1:dataInicioBeneficiarioEspecifico
+							xsi:nil="true" />
+						<ns1:dataInicioEmendaParlamentar xsi:nil="true" />
+						<ns1:dataInicioPropostaVoluntaria
+							xsi:nil="true" />
+						<ns1:dataPublicacaoImprensa xsi:nil="true" />
+						<ns1:descricao xsi:nil="true" />
+						<ns1:estadosHabilitados xsi:nil="true" />
+						<ns1:executor xsi:nil="true" />
+						<ns1:id xsi:nil="true" />
+						<ns1:modalidades xsi:nil="true" />
+						<ns1:naturezasJuridicas xsi:nil="true" />
+						<ns1:nome xsi:nil="true" />
+						<ns1:numeroDocumento xsi:nil="true" />
+						<ns1:objetoWS xsi:nil="true" />
+						<ns1:obrigaPlanoTrabalho xsi:nil="true" />
+						<ns1:observacao xsi:nil="true" />
+						<ns1:publicadoImprensa xsi:nil="true" />
+						<ns1:qualificacaoBeneficiarioEmendaParlamentar
+							xsi:nil="true" />
+						<ns1:qualificacaoBeneficiarioEspecifico
+							xsi:nil="true" />
+						<ns1:qualificacaoPropostaVoluntaria
+							xsi:nil="true" />
+						<ns1:regrasWS xsi:nil="true" />
+						<ns1:status xsi:nil="true" />
+					</ns1:programaWS>
+					<ns1:qualificacaoProponenteWS xsi:nil="true" />
+					<ns1:regrasWS>
+						<ns1:aceitaContrapartidaBens>
+							true
+						</ns1:aceitaContrapartidaBens>
+						<ns1:descricao>
+							Contrapartida financeira
+						</ns1:descricao>
+						<ns1:id xsi:nil="true" />
+						<ns1:percentualMaximoContrapartidaBens
+							xsi:nil="true" />
+						<ns1:percentualMinimoContrapartida
+							xsi:nil="true" />
+					</ns1:regrasWS>
+					<ns1:valorContrapartida xsi:nil="true" />
+					<ns1:valorContrapartidaBensServicos>
+						0
+					</ns1:valorContrapartidaBensServicos>
+					<ns1:valorContrapartidaFinanceira xsi:nil="true" />
+					<ns1:valorGlobal>203030.3</ns1:valorGlobal>
+				</ns1:propostaProgramaWS>
+				<ns1:repasseExercicioFuturoPropostaWS>
+					<ns1:ano>2012</ns1:ano>
+					<ns1:historico>true</ns1:historico>
+					<ns1:id xsi:nil="true" />
+					<ns1:valor>203030.3</ns1:valor>
+				</ns1:repasseExercicioFuturoPropostaWS>
+				<ns1:sequencial xsi:nil="true" />
+				<ns1:situacaoEnvioContratoRepasseWS xsi:nil="true" />
+				<ns1:situacaoLegado xsi:nil="true" />
+				<ns1:situacaoProjetoBasicoWS xsi:nil="true" />
+				<ns1:situacaoPropostaWS xsi:nil="true" />
+				<ns1:tipoNaoAcatamentoContratoRepasseWS xsi:nil="true" />
+				<ns1:tipoProjetoBasicoWS xsi:nil="true" />
+				<ns1:valorContraPartida xsi:nil="true" />
+				<ns1:valorContrapartidaBensServicos>
+					0
+				</ns1:valorContrapartidaBensServicos>
+				<ns1:valorContrapartidaFinanceira xsi:nil="true" />
+				<ns1:valorGlobal>203030.3</ns1:valorGlobal>
+				<ns1:valorRepasse>203030.3</ns1:valorRepasse>
+			</ns2:propostaWSDTO>
+			<ns2:login>
+				<ns1:id>32</ns1:id>
+				<ns1:senha>teste</ns1:senha>
+				<ns1:usuario>teste</ns1:usuario>
+			</ns2:login>
+		</ns2:enviarProposta>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

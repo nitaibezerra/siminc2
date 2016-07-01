@@ -1,0 +1,13 @@
+<?php
+/**
+ * $Id$
+ */
+
+/**
+ *
+ */
+class Simec_Listagem_Acao_Delete extends Simec_Listagem_Acao
+{
+    protected $icone = 'trash';
+    protected $titulo = 'Apagar';
+}

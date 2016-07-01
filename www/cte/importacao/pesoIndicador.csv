@@ -1,0 +1,54 @@
+Tabela 1. Pesos de cada Indicador na Composição do PAR ou do IDEB;;;;
+dimensões;cod;indicador;peso indicador Ideb;peso indicador Dimensão
+Gestão Educacional;311;Aplicação dos recursos de redistribuição e complementação do Fundeb;0,0112;0,0303
+;295;Composição e atuação do Conselho de Alimentação Escolar - CAE;0,0112;0,0303
+;303;Critérios para escolha da Direção Escolar;0,0135;0,0364
+;286;Cumprimento do dispositivo constitucional de vinculação dos recursos da educação;0,0314;0,0848
+;324;Cálculo anual/semestral do número de remoções e substituições de professores;0,0112;0,0303
+;314;Divulgação e Análise dos resultados das avaliações oficiais do MEC;0,0112;0,0303
+;300;Estágio probatório efetivando os professores e outros profissionais da educação.;0,0269;0,0727
+;290;Existência de Projeto Pedagógico (PP) nas escolas e grau de participação dos pro;0,0516;0,1394
+;322;Existência de atividades no contraturno;0,0291;0,0788
+;310;Existência de parcerias externas para execução/adoção de metodologias específica;0,0112;0,0303
+;305;Existência de parcerias externas para realização de atividades complementares;0,0179;0,0485
+;313;Existência e funcionamento de Conselhos Escolares (CE).;0,0112;0,0303
+;329;Existência, acompanhamento e avaliação do Plano Municipal de Educação (PME), des;0,0112;0,0303
+;289;Existência, composição e atuação do Conselho Municipal de Educação (CME).;0,0179;0,0485
+;301;Implantação e Organização do ensino fundamental de 09 anos;0,0471;0,1273
+;293;Manutenção ou recuperação de espaços e equipamentos públicos da cidade, que pode;0,0112;0,0303
+;308;Plano de Carreira dos Profissionais de serviço e apoio escolar;0,0112;0,0303
+;284;Plano de Carreira para o magistério;0,0112;0,0303
+;304;Quantidade de professores suficiente;0,0112;0,0303
+;307;Relação com a comunidade/ Promoção de atividades e utilização da escola como esp;0,0112;0,0303
+Formação de Professores e dos Profissionais de serviço e apoio escolar e Condições de Trabalho;294;Existência e implementação de políticas para a formação continuada de professore;0,0112;0,0685
+;319;Existência e implementação de políticas para a formação continuada de professore;0,0112;0,0685
+;325;Existência e implementação de políticas para a formação continuada de professore;0,0112;0,0685
+;281;Existência e implementação de políticas para a formação inicial e continuada de;0,0112;0,0685
+;292;Grau de participação dos profissionais de serviços e apoio escolar em programas;0,0112;0,0685
+;297;Qualificação dos professores que atuam em educação especial, escolas do campo, c;0,0247;0,1507
+;288;Qualificação dos professores que atuam na pré-escola;0,0179;0,1096
+;279;Qualificação dos professores que atuam nas creches;0,0112;0,0685
+;328;Qualificação dos professores que atuam nas séries iniciais do ensino fundamental;0,0426;0,2603
+;315;Qualificação dos professores que atuam nos anos/séries finais do ensino fundamen;0,0112;0,0847
+ Práticas Pedagógicas;282;Estímulo às práticas pedagógicas fora do espaço escolar;0,0112;0,0847
+;323;Existência de programas de incentivo à leitura, para o professor e o aluno.;0,0202;0,1525
+;296;Formas de avaliação da aprendizagem dos alunos;0,0112;0,0847
+;287;Formas de registro da freqüência;0,0112;0,0847
+;326;Política específica de correção de fluxo;0,0112;0,0847
+;302;Presença de coordenadores ou supervisores pedagógicos nas escolas;0,0179;0,1356
+;280;Reuniões pedagógicas e horários de trabalhos pedagógicos, para discussão dos con;0,0112;0,0847
+;306;Utilização do tempo para assistência individual/coletiva aos alunos que apresent;0,0381;0,2881
+Infra-estrutura física e recursos pedagógicos;321;Adequação, manutenção e conservação geral das instalações e equipamentos;0,0202;0,0604
+;278;Biblioteca: instalações e espaço físico;0,0112;0,0336
+;316;Condições de acesso para pessoas com deficiência física;0,0112;0,0336
+;299;Confecção de materiais didáticos diversos;0,0112;0,0336
+;285;Existência de computadores ligados à rede mundial de computadores e utilização d;0,0448;0,1342
+;320;Existência de recursos audiovisuais;0,0112;0,0336
+;298;Existência e condições de funcionamento da cozinha e  refeitório;0,0426;0,1275
+;309;Existência e conservação de quadra de esportes;0,0650;0,1946
+;327;Existência e funcionalidade de laboratórios (informática e ciências);0,0112;0,0336
+;283;Existência e utilização de recursos pedagógicos que considerem a diversidade rac;0,0247;0,0738
+;318;Existência, suficiência e diversidade de materiais pedagógicos (mapas, jogos, di;0,0471;0,1409
+;317;Salas de aula: instalações físicas gerais e mobiliário;0,0112;0,0336
+;312;Suficiência e diversidade de equipamentos esportivos;0,0112;0,0336
+;291;Suficiência e diversidade do acervo bibliográfico;0,0112;0,0336

@@ -1,0 +1,31 @@
+@CHARSET "ISO-8859-1";
+.termoAdesao{
+	width: 60%;
+	height: 400px;
+	overflow: auto;
+	border: solid 1px black;
+	background-color: #FFFFFF;
+	text-align: justify;
+	margin: 5px;
+	padding: 5px;
+	font-size: 14px;
+}
+.SubtituloTabela{background-color:#cccccc}
+.negrito{font-weight:bold}
+.bold{font-weight:bold}
+.normal{font-weight:normal}
+.center{text-align: center;}
+.direita{text-align: right;}
+.esquerda{text-align: left;}
+.msg_erro{color:#990000}
+.link{cursor: pointer}
+.mini{width:12px;height:12px}
+.sucess_msg{color: blue;}
+.img_middle{vertical-align:middle}
+.hidden{display:none}
+.absolute{position:absolute;padding-top:5px;padding-bottom:5px;padding-left:5px;margin-top:5px;margin-left:50px;border:solid 1px black;background-color: #FFFFFF}
+.fechar{position:relative;right:-5px;top:-26px;}
+.img{background-color:#FFFFFF}
+.red{color:#990000}
+.mensagem{text-align: center; font-weight: bold;background-color:#cccccc;color: blue;}
+.field_ano{width:100%;padding:5px;margin:3px}

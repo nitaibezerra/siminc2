@@ -1,0 +1,1 @@
+<?php $this->usuario->getListing($this->parans); ?>

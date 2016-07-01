@@ -1,0 +1,14 @@
+.x-icon {cursor: pointer}
+#flash-notice {
+    padding: 20px;
+    width: 650px;
+    height: 5px;
+    border: 7px solid #333;
+    background: #fff;
+    line-height: 5px;
+    position: fixed;
+    z-index: 10000;
+}
+.modal-dialog {
+    display: none;
+}
