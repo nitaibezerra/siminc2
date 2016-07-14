@@ -914,7 +914,7 @@ function geraArrayDePropostasdeAcaoAgrupadasPelosProgramas( $strAgrupadoPor , $i
 	if( $boolIncluiProgramasSemProposta )
 	{
 		$strSql .= ' ) AS BuscaRestrita
-			 ON BuscaRestrita.programa_id =  Programas.prgid where Programas.prsano = ' . $intAnoExercicio;
+			 ON BuscaRestrita.programa_id =  Programas.prgid where Programas.prsano::INTEGER = '. $intAnoExercicio;
 	}
  	$_SESSION[ "debugger" ] = $strSql ;
 	$objResultSet		= $db->record_set( $strSql );
