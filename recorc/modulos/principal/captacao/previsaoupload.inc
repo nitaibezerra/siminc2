@@ -277,7 +277,7 @@ $(document).ready(function(){
         <div class="well">
             <form name="previsaoupload" id="previsaoupload" enctype="multipart/form-data" method="POST">
                 
-                <div class="alert alert-warning" role="alert"><b>AVISO:</b> O ano na coluna exercicio do arquivo deve ser semrpe o Ano Corrente, independente se os dados são para a PLOA do próximo ano.</div>
+                <div class="alert alert-warning" role="alert"><b>AVISO:</b> O ano na coluna exercicio do arquivo deve ser sempre o Ano Corrente, independente se os dados são para a PLOA do próximo ano.</div>
                 
                 <?php if (isset($_FILES['previsao']) && (UPLOAD_ERR_OK == $_FILES['previsao']['error']) && $exercicioValido): ?>
 				<div class="form-group form-horizontal" id="prfid_group">
