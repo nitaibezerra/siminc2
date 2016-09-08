@@ -551,7 +551,7 @@ td.bordaDireitaBaixo {
 		<td nowrap align="left" valign="top" height="1"
 			style="padding: 5px 0 0 0;"><font style="font-size: 11px;"> MEC -
 		Ministério da Educação<br />
-		SIMEC - Sistema Integrado do Ministério da Educação<br />
+		SIMEC - Sistema Integrado de Monitoramento Execução e Controle<br />
 		PDDE EDUCAÇÃO INTEGRAL </font></td>
 		<td align="right" valign="top" height="1" style="padding: 5px 0 0 0;">
 		<font style="font-size: 11px;"> Impresso por: <b><?= $_SESSION['usunome'] ?></b><br />

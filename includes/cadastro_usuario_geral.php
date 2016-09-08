@@ -994,7 +994,7 @@ if( ($permissao == true) && ($habilitar_edicao == 'S') ) {
 							 sisid = %d",
 						    $sisid);
 			$sistema = (object) $db->pegaLinha( $sql );
-
+//if($sistema->sisid == 179) ver($sistema,d);
 			$sql = sprintf("SELECT
 							 us.suscod ,
 							 us.pflcod ,

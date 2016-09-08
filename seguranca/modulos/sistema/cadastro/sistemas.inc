@@ -602,7 +602,7 @@ endif;
       </tr>
       <tr>
         <td align='right' class="SubTituloDireita">abreviação:</td>
-	    <td><?=campo_texto('abrev','S','S','',15,15,'','');?></td>
+	    <td><?=campo_texto('abrev','S','S','',25,100,'','');?></td>
       </tr>
       <tr>
         <td align='right' class="SubTituloDireita">Finalidade:</td>

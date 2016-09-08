@@ -328,7 +328,7 @@ $r->setTolizadorLinha(true);
 				.'	<tr bgcolor="#ffffff">' 	
 				.'		<td valign="top" width="50" rowspan="1"><img src="../imagens/brasao.gif" width="45" height="45" border="0"></td>'			
 				.'		<td nowrap align="left" valign="middle" height="1" style="padding:5px 0 0 0;">'				
-				.'			SIMEC- Sistema Integrado do Ministério da Educação<br/>'				
+				.'			SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>'				
 //				.'			Acompanhamento da Execução Orçamentária<br/>'					
 				.'			MEC / SE - Secretaria Executiva <br />'
 				.'			Secretário / '.$_POST['estado'].' - '.$nome.' <br />'

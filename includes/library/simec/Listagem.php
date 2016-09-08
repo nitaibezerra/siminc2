@@ -889,6 +889,7 @@ HTML;
                     if (self::RETORNO_BUFFERIZADO == $this->bufferizarRetorno) {
                         ob_end_clean();
                     }
+//ver($this->getQuery());
                     return false;
                 case Simec_Listagem::SEM_REGISTROS_LISTA_VAZIA:
                     // -- Neste caso, a lista precisa continuar sendo renderizada, mesmo vazia
@@ -928,6 +929,7 @@ HTML;
 
             return $listagem;
         }
+
     }
 
     /**

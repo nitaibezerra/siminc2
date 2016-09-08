@@ -215,7 +215,7 @@ class RelatorioQuestionarioFederal{
 					</td>
 					<td nowrap align="left" valign="top" height="1" style="padding:5px 0 0 0;">
 						<font style="font-size:11px;">
-							SIMEC - Sistema Integrado do Ministério da Educação<br/>
+							SIMEC - Sistema Integrado de Monitoramento Execução e Controle<br/>
 							'.$_SESSION['sisdsc'].'
 						</font>
 					</td>

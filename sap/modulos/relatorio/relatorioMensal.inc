@@ -54,7 +54,7 @@ $somaSaldoAtual=0;
 		<tr bgcolor="#ffffff" style="">
         	<td valign="top" width="50" rowspan="2" style=""><img src="../imagens/brasao.gif" width="45" height="45" colspan="1"></td>                    
         	<td nowrap align="left" valign="middle" height="1" style="padding:5px 0 0 0;" colspan="2">                 
-                SIMEC- Sistema Integrado do Ministério da Educação<br/>                              
+                SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>                              
                 Ministério da Educação <br />
                 Secretaria Executiva<br />
                 Subsecretaria de Assuntos Administrativos<br />

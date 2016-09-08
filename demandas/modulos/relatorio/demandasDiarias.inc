@@ -54,7 +54,7 @@
 				<img src="../imagens/brasao.gif" width="45" height="45" border="0">
 			</td>
 			<td style="border-bottom: solid 0px black;">
-				SIMEC- Sistema Integrado do Ministério da Educação<br/>
+				SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>
 				Acompanhamento de Demandas<br/>
 			</td>
 

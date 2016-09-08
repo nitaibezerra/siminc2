@@ -82,7 +82,7 @@ class cls_banco
                 
                 pg_query(self::$link[$this->nome_bd], "SET standard_conforming_strings TO off;");
 
-                pg_set_client_encoding(self::$link[$this->nome_bd],'LATIN5');
+                pg_set_client_encoding(self::$link[$this->nome_bd],'LATIN1');
 
 		if((!self::$link[$this->nome_bd]))
 		    cls_classes_simec::erro(104,2);
@@ -422,8 +422,10 @@ class cls_banco
     		}
 
     	} else {
-
-			$res = pg_fetch_all($this->executar($SQL));
+            $res = $this->executar($SQL);
+            if($res){
+                $res = pg_fetch_all($res);
+            }
 
     	}
 
