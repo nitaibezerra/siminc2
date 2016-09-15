@@ -45,7 +45,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             <?php if (in_array(1207, $perfis) || in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_CPMO, $perfis)) { ?>
                 <div style=" background-color: #9370DB;" class="divGraf">
                     <center>
-                        <span class="tituloCaixa" >Instituições Federais</span> <br><br><br>
+                        <span class="tituloCaixa" >Unidades Orçamentárias</span> <br><br><br>
                     </center>
 
                     <?php
