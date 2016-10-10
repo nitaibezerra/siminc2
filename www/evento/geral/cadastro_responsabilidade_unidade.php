@@ -185,7 +185,7 @@ document.getElementById('tabela').style.display  = "none";
 			WHERE
 				unistatus = 'A' and
 				unitpocod = 'U' and
-				orgcod = '26000' and
+				orgcod = '". CODIGO_ORGAO_SISTEMA. "' and
 				unicod != '26101' and
 				unicod ilike '26%'
 			GROUP BY 

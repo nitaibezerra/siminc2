@@ -11,7 +11,7 @@ $client = new SoapClient( 'http://www.sigplan.gov.br/infrasig/sigtoinfra.asmx?ws
 	)
 );
 
-$client->geracaoPorOrgao( array( 'usuario' => 'leo.kessel' , 'senha' => 'kessel' , 'PRGAno' => '2006', 'ORGCod' => '26000' ) );
+$client->geracaoPorOrgao( array( 'usuario' => 'leo.kessel' , 'senha' => 'kessel' , 'PRGAno' => '2006', 'ORGCod' => CODIGO_ORGAO_SISTEMA ) );
 //print_r($client->__getFunctions());
 
 ?>

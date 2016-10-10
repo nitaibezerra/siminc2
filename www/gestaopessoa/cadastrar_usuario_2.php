@@ -50,7 +50,7 @@
 	$entid 		= "389372";
 	
 	//$orgcod     = $_REQUEST['orgcod'];
-	$orgcod 	= "26000";
+	$orgcod 	= CODIGO_ORGAO_SISTEMA;
 	$usufuncao  = $_REQUEST['usufuncao'];
 	//$unicod     = $_REQUEST['unicod'];
 	$unicod     = "26101";
@@ -62,7 +62,7 @@
 	$pflcod     = $_REQUEST['pflcod'];
 	//$pflcod     = 304; //perfil avaliacao 
 	//$orgao      = $_REQUEST['orgao'];
-	$orgao      = "26000";
+	$orgao      = CODIGO_ORGAO_SISTEMA;
 	//$muncod     = $_REQUEST['muncod'];
 	$muncod     = "5300108";
 	//$tpocod     = $_REQUEST['tpocod'];
@@ -569,7 +569,7 @@ if ( $_POST['formulario'] ) {
 							</td>
 						</tr>
 					<?php endif; ?>
-					<?php if ( $unicod == '26101' AND $orgcod == '26000' ): ?>
+					<?php if ( $unicod == '26101' AND $orgcod == CODIGO_ORGAO_SISTEMA ): ?>
 						<tr bgcolor="#F2F2F2">
 							<td align = 'right' class="subtitulodireita">Unidade Gestora:</td>
 							<td>
@@ -769,7 +769,7 @@ if ( $_POST['formulario'] ) {
 				}
 				
 			<?php endif; ?>
-			if ( document.formulario.orgcod.value == '26000' && document.formulario.unicod.value == '26101' ) {
+			if ( document.formulario.orgcod.value == CODIGO_ORGAO_SISTEMA && document.formulario.unicod.value == '26101' ) {
 				if ( document.formulario.ungcod.value == '' ) {
 					mensagem += '\n\tUnidade Gestora';
 					validacao = false;

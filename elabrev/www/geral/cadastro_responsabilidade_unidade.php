@@ -170,7 +170,7 @@ document.getElementById('tabela').style.display  = "none";
 
 	  $cabecalho = 'Selecione a(s) Unidade(s)';
 	  $sql = "select unicod, unicod, unidsc from unidade where unistatus='A' 
-	  		 and orgcod='26000' 
+	  		 and orgcod= '". CODIGO_ORGAO_SISTEMA. "' 
 	         order by unicod, unidsc";
 
 	  $RS = @$db->carregar($sql);

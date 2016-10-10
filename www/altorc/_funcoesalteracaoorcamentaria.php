@@ -524,21 +524,21 @@ function preencheObjeto(&$objeto, $dados)
 function pedidoAlteracaoOrcamentariaAsObject($paoid)
 {
     global $db;
-    $query = <<<DML
-SELECT pao.siopid AS "identificadorUnico",
+    $query = "
+SELECT pao.siopid AS identificadorUnico,
        pao.paoano AS exercicio,
-       mcr.mcrcod AS "codigoMomento",
-       '' AS "codigoClassificacaoAlteracao",
-       tcr.tcrcod AS "codigoTipoAlteracao",
+       mcr.mcrcod AS codigoMomento,
+       '' AS codigoClassificacaoAlteracao,
+       tcr.tcrcod AS codigoTipoAlteracao,
        pao.paodsc AS descricao,
-       '26000' AS "codigoOrgao",
+       '". CODIGO_ORGAO_SISTEMA. "' AS codigoOrgao,
        pao.paoid,
        mcr.mcrid
   FROM altorc.pedidoalteracaoorcamentaria pao
     INNER JOIN altorc.momentocredito mcr USING(mcrid)
     INNER JOIN altorc.tipocredito tcr USING(tcrid)
   WHERE pao.paoid = %d
-DML;
+";
     $stmt = sprintf($query, $paoid);
     $dadospedido = $db->pegaLinha($stmt);
     $pedido = new PedidoAlteracaoDTO();

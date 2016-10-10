@@ -54,7 +54,7 @@ $mcrid = (integer) $_REQUEST['mcrid'];
 								unijoin.unicod = u.unicod and
 								unijoin.unitpocod = u.unitpocod
 							where
-								u.orgcod = '26000' and
+								u.orgcod = '". CODIGO_ORGAO_SISTEMA. "' and
 								u.unistatus = 'A'
 							group by
 								u.unicod, u.unidsc
@@ -84,7 +84,7 @@ $mcrid = (integer) $_REQUEST['mcrid'];
 								unijoin.unicod = u.unicod and
 								unijoin.unitpocod = u.unitpocod
 							where
-								u.orgcod = '26000' and
+								u.orgcod = '". CODIGO_ORGAO_SISTEMA. "' and
 								u.unistatus = 'A' and
 								u.unicod = '".$unicod."'
 							group by

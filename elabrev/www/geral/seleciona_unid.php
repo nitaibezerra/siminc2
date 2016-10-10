@@ -34,7 +34,7 @@
 	$db = new cls_banco();
 	
 	$cabecalho = 'Selecione a(s) Unidade(s)';
-	$sql = "select uniid, unicod, unidsc from unidade where unistatus='A' and orgcod='26000' order by unidsc";
+	$sql = "select uniid, unicod, unidsc from unidade where unistatus='A' and orgcod='". CODIGO_ORGAO_SISTEMA. "' order by unidsc";
 	$RS = $db->carregar($sql);
 	$nlinhas = count($RS)-1;
 	

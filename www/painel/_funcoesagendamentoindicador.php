@@ -978,7 +978,7 @@ function arquivoCodigo($tabela) {
 			$sql = "select distinct unicod as codigo, unidsc as descricao, ende.estuf as uf from public.unidade uni
 					inner join entidade.entidade ent on ent.entunicod=uni.unicod 
 					inner join entidade.endereco ende on ende.entid=ent.entid   
-					where orgcod='26000' and gunid IN (3,9) and unistatus='A' AND ent.entstatus='A'
+					where orgcod= '". CODIGO_ORGAO_SISTEMA. "' and gunid IN (3,9) and unistatus='A' AND ent.entstatus='A'
 					order by codigo, descricao";
 			break;
 		case 'entidade.instituto':

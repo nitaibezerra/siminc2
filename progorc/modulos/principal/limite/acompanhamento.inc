@@ -154,7 +154,7 @@ DML;
                 <label for="inputUnidade" class="col-lg-2 control-label">Unidade Orçamentária (UO)</label>
                 <section class="col-lg-10">
                     <?php
-                    $sql = <<<DML
+                    $sql = "
                                 SELECT
 uni.unicod AS codigo,
 uni.unicod || ' - ' || unidsc AS descricao
@@ -162,12 +162,12 @@ FROM
 public.unidade uni
 WHERE
     (
-        uni.orgcod = '26000'
+        uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
     OR  uni.unicod IN('74902',
                       '73107'))
 AND uni.unistatus = 'A'
 ORDER BY uni.unicod
-DML;
+";
                     $unicod = $_REQUEST['unicod'];
                     $db->monta_combo('unicod', $sql, 'S', 'Selecione uma Unidade', null, null, null, null, 'N', 'unicod', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($unicod) ? $unicod : null));
 

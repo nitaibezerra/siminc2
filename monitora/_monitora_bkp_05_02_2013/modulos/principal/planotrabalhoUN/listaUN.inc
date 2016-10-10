@@ -14,7 +14,7 @@ $unidades_excluidas = array(AD => 'Administração Direta',
 boUnidadesObrigatorias();
 							
 $filtro[] = "uni.unicod NOT IN ('".implode("','",array_keys($unidades_excluidas))."')";
-$filtro[] = "uni.orgcod = '26000'";
+$filtro[] = "uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'";
 $filtro[] = "uni.unistatus = 'A'";
 
 // verifica se é possui uma busca por codigo

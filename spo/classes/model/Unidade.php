@@ -15,7 +15,7 @@ class Spo_Model_Unidade extends Modelo
     /**
      * Código do Órgão ao qual o MEC está associado.
      */
-    const CODIGO_ORGAO = '26000';
+    const CODIGO_ORGAO = CODIGO_ORGAO_SISTEMA;
 
     /**
      * Nome da tabela especificada
@@ -104,15 +104,14 @@ class Spo_Model_Unidade extends Modelo
             $obrigatorias = '';
         }
 
-        return <<<DML
-SELECT uni.unicod AS codigo,
-       uni.unicod || ' - ' || unidsc AS descricao
-  FROM public.unidade uni
-  WHERE (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
-    AND uni.unistatus = 'A'
-    {$whereUO}
-    {$obrigatorias}
-ORDER BY uni.unicod
-DML;
+        return "
+            SELECT uni.unicod AS codigo,
+                uni.unicod || ' - ' || unidsc AS descricao
+            FROM public.unidade uni
+            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
+                AND uni.unistatus = 'A'
+                {$whereUO}
+                {$obrigatorias}
+            ORDER BY uni.unicod";
     }
 }

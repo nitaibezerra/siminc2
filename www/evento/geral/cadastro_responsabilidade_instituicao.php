@@ -171,7 +171,7 @@ document.getElementById('tabela').style.display  = "none";
 <td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="3"><strong>Selecione a(s) Instituição(ões)</strong></td>
 </tr>
 <tr>
-<?
+<?php
 
 	  $cabecalho = 'Selecione a(s) Instituição(ões)';
 	  $sql = "select 
@@ -184,7 +184,7 @@ document.getElementById('tabela').style.display  = "none";
 			  where
 				unistatus = 'A' and
 				unitpocod = 'U' and
-				orgcod = '26000' and
+				orgcod = '". CODIGO_ORGAO_SISTEMA. "' and
 				unicod != '26101' and
 				unicod ilike '26%' AND 
 				funid <> 31 AND 

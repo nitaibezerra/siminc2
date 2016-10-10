@@ -891,7 +891,7 @@ function carregarGridUniversidade($dados) {
 						  INNER JOIN entidade.entidade ent ON ent.entunicod = uni.unicod 
 					  	  INNER JOIN entidade.endereco ende ON ende.entid = ent.entid 
 						  WHERE ende.muncod='".$dados['muncod']."' 
-						  AND uni.orgcod='26000' AND gunid=3 AND unistatus='A' ORDER BY descricao");
+						  AND uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND gunid=3 AND unistatus='A' ORDER BY descricao");
 	// Imprimindo as linhas da tabela	
 	$html .= processarLinhasTabela($ies, $detalhes, array('tipotabela'=>'universidade',
 														  'seriehistorica'=>$seriehistorica));

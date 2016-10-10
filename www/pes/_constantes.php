@@ -46,7 +46,7 @@ if(isset($_SESSION['exercicio']) && !empty($_SESSION['exercicio']))  {
 }
 
 
-define('K_ORGCODIGO', '26000');
+define('K_ORGCODIGO', CODIGO_ORGAO_SISTEMA);
 
 /********************************************
 * 			  TIPOS DE DESPESA 				*

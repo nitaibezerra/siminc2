@@ -1477,7 +1477,7 @@ function obras_pegarUnidadesPermitidas(){
 				FROM
 					unidade
 				WHERE
-					orgcod = '26000'";
+					orgcod = '". CODIGO_ORGAO_SISTEMA. "'";
 		}else{
 			
 			// pega as unidades do perfil do usuário

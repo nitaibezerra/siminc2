@@ -19,7 +19,7 @@ $sql = "select * from
 						( 
 						select  'EYX' as login, 
 							MD5('COISUCA') as senha, 
-							'26000' as orgao, 
+							 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao, 
 							acao.acaid, 
 							acao.esfcod, 
 							acao.unicod, 
@@ -76,7 +76,7 @@ $sql = "select * from
 						
 						select  'EYX' as login,
 							MD5('COISUCA') as senha,
-							'26000' as orgao,
+							 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao,
 							acao.acaid,
 							acao.esfcod, 
 							acao.unicod, 

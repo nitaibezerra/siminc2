@@ -228,7 +228,7 @@ return;
 					FROM unidade
 					WHERE
 						unitpocod = 'U' AND
-						orgcod = 26000 AND
+						orgcod = '". CODIGO_ORGAO_SISTEMA. "' AND
 						unicod <> '26100' AND
 						unistatus = 'A'
 					ORDER BY unicod"

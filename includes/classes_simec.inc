@@ -4041,8 +4041,8 @@ inner join elabrev.ppaacao_proposta  ap on ap.acaid = ua.acaid and ua.acaid=".$_
 		$join .=
 				" inner join unidade unijoin on " .
 					" unijoin.unicod != '26100' and " .
-					" unijoin.unicod != '26000' and " .
-					" unijoin.orgcod = '26000' ";
+					" unijoin.unicod != '". CODIGO_ORGAO_SISTEMA. "' and " .
+					" unijoin.orgcod = '". CODIGO_ORGAO_SISTEMA. "' ";
 		if ( !$podeTodas )
 		{
 			$join .= " and unijoin.unicod = usujoin.unicod ";
@@ -4065,7 +4065,7 @@ inner join elabrev.ppaacao_proposta  ap on ap.acaid = ua.acaid and ua.acaid=".$_
 					where
 						unistatus = 'A' and
 						(
-							( orgcod = '26000' and unicod != '26100' )
+							( orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unicod != '26100' )
 							or
 							( unicod = '74902' )
 						)
@@ -4083,7 +4083,7 @@ inner join elabrev.ppaacao_proposta  ap on ap.acaid = ua.acaid and ua.acaid=".$_
 				" usucpf = '" . $_SESSION['usucpf'] . "' and " .
 				" rpustatus = 'A' and " .
 				" unistatus = 'A' and " .
-				" orgcod = '26000' and " .
+				" orgcod = '". CODIGO_ORGAO_SISTEMA. "' and " .
 				" unicod != '26100' ";
 		}
 		if ( !$this->usuarioPossuiPermissaoAlgumaUnidade( $esquema ) )

@@ -448,17 +448,17 @@ DML;
                         }
                         $obrigatorias = UNIDADES_OBRIGATORIAS;
 
-                        $sql = <<<DML
+                        $sql = "
                             SELECT
                                 uni.unicod AS codigo,
                                 uni.unicod || ' - ' || unidsc AS descricao
                             FROM public.unidade uni
-                            WHERE (uni.orgcod = '26000' OR  uni.unicod IN('74902', '73107'))
+                            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR  uni.unicod IN('74902', '73107'))
                                 AND uni.unistatus = 'A'
                                 {$whereUO}
                                 AND uni.unicod not in ($obrigatorias)
                             ORDER BY 1
-DML;
+";
                         if ($_REQUEST['sbaid']) {
                             $sqlUni = <<<DML
                                 SELECT unicod FROM monitora.pi_subacao pis inner join monitora.pi_subacaounidade psu on pis.sbaid = psu.sbaid where psu.sbaid = {$_REQUEST['sbaid']}

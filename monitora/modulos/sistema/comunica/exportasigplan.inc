@@ -258,7 +258,7 @@ if ( $_REQUEST["formulario"] ) {
 					prgdscresultadosespobt as \"PRGDscResultadosEspObt\",
 					to_char( prgdataatusituacaoatual, 'YYYY-MM-DDT' ) || to_char( prgdataatusituacaoatual, 'HH24:MI:SS' )  as \"PRGDataAtuSituacaoAtual\"
 				from monitora.programa
-				where prgano = '".$_SESSION["exercicio"]."' and orgcod = '26000'";
+				where prgano = '".$_SESSION["exercicio"]."' and orgcod = '". CODIGO_ORGAO_SISTEMA. "'";
 				
 			$documento = sigplan_gravarDocumento( $sql, "Programa", "RetornaPrograma" );
 		}

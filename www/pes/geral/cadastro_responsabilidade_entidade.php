@@ -56,7 +56,7 @@ function listaEntidades(){
                 ' (' || ent.uorcodigo || ') ' || ent.entnome as entidade
             from pes.pesentidade ent
                 inner join pes.pesunidadeorcamentaria uor on uor.uorcodigo = ent.uorcodigo
-            where uor.orgcodigo = '26000'
+            where uor.orgcodigo = '". CODIGO_ORGAO_SISTEMA. "'
             order by ent.entnome ";
 	$ugs = $db->carregar($sql);
 
@@ -134,7 +134,7 @@ function buscaUgsAtribuido($usucpf, $pflcod){
             from pes.pesentidade ent
                 inner join pes.pesunidadeorcamentaria uor on uor.uorcodigo = ent.uorcodigo
                 inner join pes.usuarioresponsabilidade ur on ur.entcodigo = ent.entcodigo
-            where uor.orgcodigo = '26000'
+            where uor.orgcodigo = '". CODIGO_ORGAO_SISTEMA. "'
             and ur.rpustatus = 'A' AND ur.usucpf = '$usucpf' AND ur.pflcod = '$pflcod'
             order by ent.entnome ";
 

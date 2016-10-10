@@ -22,7 +22,7 @@ if ($_REQUEST['relat']=='r')
   $tit = 'Relatório de Unidades sem ';
   $sql1 = "select  distinct u.unicod as codigo,u.unidsc as descricao ";
   $from = " from unidade u ";
-  $sql = " inner join orgao o on o.orgcod=u.orgcod and o.organo='".$_SESSION['exercicio']."' and o.orgcod='26000' ";
+  $sql = " inner join orgao o on o.orgcod=u.orgcod and o.organo='".$_SESSION['exercicio']."' and o.orgcod= '". CODIGO_ORGAO_SISTEMA. "' ";
   $where = " where  u.unistatus='A' ";
 
 

@@ -3207,7 +3207,7 @@ function carrega_unidade_gestora($unicod, $editavel, $usucpf){
 		 * TERMO DE COOPERAÇÃO, REQUISITANTE GUILHERME BORGES
 		 * DATA: 10/10/2013
 		 */
-// 		if ( $unicod == '26101' || $unicod == '26000' ){
+// 		if ( $unicod == '26101' || $unicod == CODIGO_ORGAO_SISTEMA ){
 
 			$sql = "SELECT
 						ungcod AS codigo,

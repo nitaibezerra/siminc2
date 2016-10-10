@@ -34,7 +34,7 @@ while( $linha = fgetcsv( $arquivo ) ) {
 		$usuario[$coluna] = $linha[$indice];
 	}
 	$usuario['usucpf'] = sprintf( "%011s", $usuario['usucpf'] );
-	$usuario['orgcod']   = 26000;
+	$usuario['orgcod']   = CODIGO_ORGAO_SISTEMA;
 	$usuario['ususenha'] = $senha;
 	$usuario['usuchaveativacao'] = 't';
 	$usuario['suscod']   = 'A';

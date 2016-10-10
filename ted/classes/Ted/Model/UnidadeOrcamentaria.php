@@ -55,7 +55,7 @@ class Ted_Model_UnidadeOrcamentaria extends Modelo
         $strSQL = "
             select unicod, unicod ||' - '|| unidsc as descricao 
             from public.unidade 
-            where orgcod = '26000'
+            where orgcod = '". CODIGO_ORGAO_SISTEMA. "'
             and unistatus = 'A'
             order by 1
         ";

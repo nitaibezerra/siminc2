@@ -645,7 +645,7 @@
 		listar_unidades_orcamentarias( <?= $orgcod ?> );
 	<?php endif; ?>
 
-	<?php if (  $orgcod == '26000' AND $unicod == '26101' ): ?>
+	<?php if (  $orgcod == CODIGO_ORGAO_SISTEMA AND $unicod == '26101' ): ?>
 		listar_unidades_gestoras( <?= $unicod ?> );
 	<?php endif; ?>
 

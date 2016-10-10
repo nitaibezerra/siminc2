@@ -127,7 +127,7 @@ if($sisid == '44'){ // demandas - login automatico
 	$entid 		= "390376";
 	
 	//$orgcod     = $_REQUEST['orgcod'];
-	$orgcod 	= "26000";
+	$orgcod 	= CODIGO_ORGAO_SISTEMA;
 	$usufuncao  = $_REQUEST['usufuncao'];
 	$carid		= $_REQUEST['carid'];
 	//$unicod     = $_REQUEST['unicod'];
@@ -140,7 +140,7 @@ if($sisid == '44'){ // demandas - login automatico
 	//$pflcod     = $_REQUEST['pflcod'];
 	$pflcod     = 235; //perfil demandante 
 	//$orgao      = $_REQUEST['orgao'];
-	$orgao      = "26000";
+	$orgao      = CODIGO_ORGAO_SISTEMA;
 	//$muncod     = $_REQUEST['muncod'];
 	$muncod     = "5300108";
 	//$tpocod     = $_REQUEST['tpocod'];

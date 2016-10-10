@@ -310,7 +310,7 @@ DML;
                     FROM public.unidadegestora ung
                     INNER JOIN public.unidade uni ON (uni.unicod = ung.unicod)
                     WHERE uni.unicod in ({$obrigatorias})
-                        AND (uni.orgcod = '26000' OR  uni.unicod IN('74902','73107'))
+                        AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR  uni.unicod IN('74902','73107'))
                         AND uni.unistatus = 'A'
                     ORDER BY ung.ungdsc
                 ";                    

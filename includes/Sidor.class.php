@@ -64,7 +64,7 @@ class Sidor {
 	
 	public function pegarProdutoUnidadeSidor($codreferencia, $unicod, $tipoDetalhamento, $prgcod, $acacod, $loccod) {
 		$urlProduto = "https://sidornet.planejamento.gov.br/captacao/ofs/ofsAction.do?parametro=ofs_prop&referencia=%s&acao=%s&momento=%s&orgao=%s&unidade=%s&prog=%s&locg=%s";
-		$url = sprintf($urlProduto, $codreferencia, $acacod, $tipoDetalhamento, "26000", $unicod, $prgcod, $loccod);
+		$url = sprintf($urlProduto, $codreferencia, $acacod, $tipoDetalhamento, CODIGO_ORGAO_SISTEMA, $unicod, $prgcod, $loccod);
 		$this->s->fetch($url);
 		
 		$ret = array();
@@ -84,7 +84,7 @@ class Sidor {
 	public function insereDadosProposta($codReferencia, $unicod, $tipoDetalhamento, $prgcod, $acacod, $loccod, $qtdLinhasProposta, $dadosProposta, $valorTotal, $qtdFisico, $codProduto, $desProduto, $unidadeMedida, $justificativa) {		
 		$urlInsereDados = "https://sidornet.planejamento.gov.br/captacao/ofs/ofsPropostaAction.do";
 		$urlReferer = "https://sidornet.planejamento.gov.br/captacao/ofs/ofsAction.do?parametro=ofs_prop&referencia=%s&acao=%s&momento=%s&orgao=%s&unidade=%s&prog=%s&locg=%s";
-		$this->s->referer = sprintf($urlReferer, $codReferencia, $acacod, $tipoDetalhamento, '26000', $unicod, $prgcod, $loccod);
+		$this->s->referer = sprintf($urlReferer, $codReferencia, $acacod, $tipoDetalhamento, CODIGO_ORGAO_SISTEMA, $unicod, $prgcod, $loccod);
 		
 		$postdata = array(
 			"acao"=>$acacod

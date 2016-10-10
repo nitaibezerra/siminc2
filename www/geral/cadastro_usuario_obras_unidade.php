@@ -43,7 +43,7 @@ function listaUnidades(){
 									unidade
 								WHERE
 									unistatus='A' AND
-									orgcod = '26000'
+									orgcod = '". CODIGO_ORGAO_SISTEMA. "'
 								ORDER BY 
 									unicod, unidsc");
 	

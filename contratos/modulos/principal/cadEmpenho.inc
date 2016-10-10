@@ -471,7 +471,7 @@ jQuery(document).ready(function() {
 										unistatus = 'A' AND
 										unitpocod = 'U' AND
 										".(count($notUnicod)>0 ? "unicod IN ('".implode('\',\'', $notUnicod)."') AND" : "")."
-										orgcod = '26000' AND
+										orgcod = '". CODIGO_ORGAO_SISTEMA. "' AND
 										unicod != '26101' AND
 										unicod ilike '26%'
 									GROUP BY 

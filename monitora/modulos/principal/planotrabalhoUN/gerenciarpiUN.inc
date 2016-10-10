@@ -176,7 +176,7 @@ if(!$db->testa_superuser()){
 			<td>
 				<?php
 					$unidade = $_REQUEST['unidade'];
-					$sql = "SELECT u.unicod as codigo, u.unicod ||' - '|| u.unidsc as descricao FROM public.unidade u WHERE orgcod = '26000' $stWhere ORDER BY unicod";
+					$sql = "SELECT u.unicod as codigo, u.unicod ||' - '|| u.unidsc as descricao FROM public.unidade u WHERE orgcod = '". CODIGO_ORGAO_SISTEMA. "' $stWhere ORDER BY unicod";
 					$db->monta_combo('unidade', $sql, 'S',  'Selecione', '', '', '', '', 'N'); 
 				?>
 			</td>
@@ -302,7 +302,7 @@ if(!$db->testa_superuser()){
                         	LEFT JOIN public.unidade u ON u.unicod = pi.unicod
                         	LEFT JOIN ( select pliid, sum(pipvalor) as valor from monitora.pi_planointernoptres group by pliid ) pt ON pt.pliid = pi.pliid 
                        WHERE pi.plistatus = 'A' " . ( !empty($arFiltro) ? "AND" . implode(" AND ", $arFiltro) : '' ) . " 
-                       AND u.orgcod = '26000'
+                       AND u.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                        AND pi.pliano = '{$_SESSION['exercicio']}'
                        $stWhere
                        GROUP BY pi.pliid,pi.plicod,pi.plititulo,u.unidsc,pi.plidata,pi.plisituacao,pi.obrid,ent.entnome, pt.valor

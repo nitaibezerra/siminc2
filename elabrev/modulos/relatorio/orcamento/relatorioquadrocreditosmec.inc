@@ -29,7 +29,7 @@
 	if ( !count( $unidades ) || $unidades[0] == '' )
 	{
 		$unidades = array();
-		$sql_unidade = "select unicod from unidade where unitpocod='U' and orgcod='26000' and unicod<>'26100' and unistatus = 'A' group by unicod, unidsc order by unicod DESC";
+		$sql_unidade = "select unicod from unidade where unitpocod='U' and orgcod= '". CODIGO_ORGAO_SISTEMA. "' and unicod<>'26100' and unistatus = 'A' group by unicod, unidsc order by unicod DESC";
 		$dados_unidade = $db->carregar( $sql_unidade );
 		for ( $i = count( $dados_unidade ) - 1; $i >= 0; $i--  )
 		{

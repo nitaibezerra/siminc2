@@ -306,7 +306,7 @@ $id 		= "div_auth";
 						    CASE coalesce(trim(nr.nrccod), '') WHEN '' THEN n.ndpcod ELSE nr.nrccod END as codigonatureza, 
 						    d.dpaid as sequencial, a.esfcod as codigoesfera, a.funcod as codigofuncao, a.sfucod as codigosubfuncao,
 		                    '0' as quantidadeacrescimo, '0' as quantidadereducao, '{$_SESSION['exercicio']}' as exercicio, '6' as codigotipoinclusaolocalizador,
-		                    '26000' as codigoorgao, '9200' as codigomomento, '1' as codigoclassificacaoalteracao
+		                     '". CODIGO_ORGAO_SISTEMA. "' AS  codigoorgao, '9200' as codigomomento, '1' as codigoclassificacaoalteracao
 						FROM elabrev.despesaacao d 
 						    INNER JOIN monitora.acao 			 a on  a.acaid = d.acaidloa and a.unicod like '26%' and a.prgano = '{$_SESSION['exercicio']}' and a.acasnrap = 'f' 
 						    INNER JOIN elabrev.tipocredito 		tc on tc.tcrid = d.tcrid
@@ -328,7 +328,7 @@ $id 		= "div_auth";
 						    CASE coalesce(trim(nr.nrccod), '') WHEN '' THEN n.ndpcod ELSE nr.nrccod END as codigonatureza,
 						    d.dpaid as sequencial, a.esfcod as codigoesfera, a.funcod as codigofuncao, a.sfucod as codigosubfuncao,
 		                    '0' as quantidadeacrescimo, '0' as quantidadereducao, '{$_SESSION['exercicio']}' as exercicio, '6' as codigotipoinclusaolocalizador,
-		                    '26000' as codigoorgao, '9200' as codigomomento, '1' as codigoclassificacaoalteracao
+		                     '". CODIGO_ORGAO_SISTEMA. "' AS  codigoorgao, '9200' as codigomomento, '1' as codigoclassificacaoalteracao
 						FROM elabrev.despesaacao d
 							INNER JOIN monitora.acao 			 a on a.acaid = d.acaidloa  and a.unicod like '26%' and a.prgano = '{$_SESSION['exercicio']}' and a.acasnrap = 'f' 
 						    INNER JOIN elabrev.tipocredito 		tc on tc.tcrid = d.tcrid

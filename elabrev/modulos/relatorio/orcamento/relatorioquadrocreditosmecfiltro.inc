@@ -733,7 +733,7 @@ include APPRAIZ."includes/cabecalho.inc";
 					<!-- UNIDADES -->
 					<td align='right' class="SubTituloDireita">Unidadesssss Orçamentárias:</td>
 					<td>
-						<? $sql_unidade = "select unicod as Codigo, unicod|| ' - ' ||unidsc as Descricao from unidade where unitpocod='U' and orgcod='26000' and unicod<>'26100' and unistatus = 'A' group by unicod, unidsc order by unicod|| ' - ' ||unidsc"; ?>
+						<? $sql_unidade = "select unicod as Codigo, unicod|| ' - ' ||unidsc as Descricao from unidade where unitpocod='U' and orgcod= '". CODIGO_ORGAO_SISTEMA. "' and unicod<>'26100' and unistatus = 'A' group by unicod, unidsc order by unicod|| ' - ' ||unidsc"; ?>
 						<? combo_popup( 'unidades_sintese', $sql_unidade, 'Selecione a(s) Unidade(s) Orçamentárias', '400x500' ); ?>
 					</td>
 				</tr>
@@ -831,7 +831,7 @@ include APPRAIZ."includes/cabecalho.inc";
 					<!-- UNIDADES -->
 					<td align='right' class="SubTituloDireita">Unidades Orçamentárias:</td>
 					<td>
-						<? $sql_unidade = "select unicod as Codigo, unicod || ' - ' || unidsc as Descricao from unidade where unitpocod='U' and orgcod='26000' and unicod<>'26100' and unicod<'27000' and unistatus = 'A' group by unicod, unidsc order by unicod|| ' - ' ||unidsc"; ?>
+						<? $sql_unidade = "select unicod as Codigo, unicod || ' - ' || unidsc as Descricao from unidade where unitpocod='U' and orgcod= '". CODIGO_ORGAO_SISTEMA. "' and unicod<>'26100' and unicod<'27000' and unistatus = 'A' group by unicod, unidsc order by unicod|| ' - ' ||unidsc"; ?>
 						<? combo_popup( 'unidades', $sql_unidade, 'Selecione a(s) Unidade(s) Orçamentárias', '400x500', 0, $filtro, '' ); ?>
 					</td>
 				</tr>

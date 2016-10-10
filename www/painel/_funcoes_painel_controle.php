@@ -1742,7 +1742,7 @@ function pesquisaRegionalizadores($dados){
 					LEFT JOIN 
 						territorios.municipio mun ON mun.muncod = ende.muncod
 					WHERE
-						uni.orgcod='26000'
+						uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "'
 					AND
 						gunid IN (3, 9)
 					AND 
@@ -2215,7 +2215,7 @@ function pesquisaUniversidade($cxcid,$checkbox){
 	$sql = "SELECT uni.unicod as codigo, UPPER(uni.unidsc) as descricao FROM public.unidade uni 
 		  INNER JOIN entidade.entidade ent ON ent.entunicod = uni.unicod 
 		  INNER JOIN entidade.endereco ende ON ende.entid = ent.entid 
-		  WHERE uni.orgcod='26000' AND gunid=3 AND unistatus='A' ".((count($filtroprocesso) > 0)?"AND ".implode(" AND ", $filtroprocesso):"")." ORDER BY descricao";
+		  WHERE uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND gunid=3 AND unistatus='A' ".((count($filtroprocesso) > 0)?"AND ".implode(" AND ", $filtroprocesso):"")." ORDER BY descricao";
 	//dbg($sql);
 	//die;
 	/*$sql = "SELECT 
@@ -2424,7 +2424,7 @@ function listaUniversidadesSelecionados($cxcid,$usucpf){
 				  WHERE 
 					uni.unicod in ('".implode("' ,'",$conteudo)."')
 				AND 
-					uni.orgcod='26000' AND gunid=3 AND unistatus='A' ORDER BY descricao";
+					uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND gunid=3 AND unistatus='A' ORDER BY descricao";
 	
 	$muncod = $db->carregar($sql);
 	if(!$muncod){
@@ -5596,7 +5596,7 @@ function exibeListaUniversidades($cxcid){
 				  WHERE 
 					uni.unicod in ('".implode("' ,'",$conteudo)."')
 				AND 
-					uni.orgcod='26000' AND gunid=3 AND unistatus='A' ORDER BY descricao";
+					uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND gunid=3 AND unistatus='A' ORDER BY descricao";
 
 		$universidades = $db->carregar($sql);
 	echo '<table cellspacing="0" cellpadding="3" style="width: 100%;" >';
@@ -5854,7 +5854,7 @@ $sql = "select conteudo from painel.conteudocaixa where cxcid = $cxcid";
 									INNER JOIN 
 										entidade.endereco ende ON ende.entid = ent.entid
 									WHERE
-										uni.orgcod='26000'
+										uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "'
 									AND
 										gunid IN (3,9)
 									AND 

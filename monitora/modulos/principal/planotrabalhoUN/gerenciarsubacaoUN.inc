@@ -174,7 +174,7 @@ monta_titulo( $titulo_modulo, $unidade);
 							u.unicod || ' - ' || u.unidsc as descricao
 						 FROM public.unidade u 
 							--inner join monitora.pi_subacaounidade su on u.unicod = su.unicod
-							WHERE u.orgcod = '26000' and u.unistatus = 'A' $stWhere
+							WHERE u.orgcod = '". CODIGO_ORGAO_SISTEMA. "' and u.unistatus = 'A' $stWhere
 						ORDER BY u.unicod 
 						";
 				//ver($sql);
@@ -256,7 +256,7 @@ monta_titulo( $titulo_modulo, $unidade);
 						INNER JOIN monitora.pi_subacaounidade suu ON suu.sbaid = sa.sbaid 
 						INNER JOIN public.unidade u ON suu.unicod = u.unicod 
 						WHERE sa.sbastatus = 'A' " . ( !empty($arFiltro) ? " AND " . implode(" AND ", $arFiltro) : '' ) . " AND suu.unicod IS NOT NULL
-						AND u.orgcod = '26000' $stWhere
+						AND u.orgcod = '". CODIGO_ORGAO_SISTEMA. "' $stWhere
 						GROUP BY sa.sbaid, sa.sbacod, sa.sbatitulo, sa.sbadsc, sa.sbasituacao, sa.sbastatus
 						--ORDER BY sa.sbatitulo";
 				//ver($sql);

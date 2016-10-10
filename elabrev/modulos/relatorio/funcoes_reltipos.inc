@@ -507,7 +507,7 @@ function geraArrayDePropostasAgrupadasPelasUnidades( $strAgrupadoPor , $intAnoEx
 			ON
 				UnidadesComPropostas.unidade_codigo = Unidade.unicod
 			WHERE
-				Unidade.orgcod = '26000'
+				Unidade.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
 			GROUP BY
 				Unidade.unicod 
 				,Unidade.unidsc

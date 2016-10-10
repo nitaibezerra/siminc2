@@ -39,7 +39,7 @@ function exibirAcao(unicod, acacod) {
                            WHERE
                             unistatus = 'A'
                            AND
-                            orgcod = '26000'
+                            orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                            ORDER BY
                             1";
                     inputCombo('unicod', $sql, $_REQUEST['unicod'], 'unicod', array());

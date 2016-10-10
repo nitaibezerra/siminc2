@@ -26,16 +26,16 @@ DML;
     $whereUO = sprintf($where, $_SESSION['usucpf'], PFL_UO_EQUIPE_TECNICA);
 
 }
-$query = <<<DML
+$query = "
     SELECT
         uni.unicod AS codigo,
         uni.unicod || ' - ' || uni.unidsc AS descricao
     FROM public.unidade uni
     WHERE uni.unistatus = 'A'
-        AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+        AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
         {$whereUO}
     ORDER BY uni.unicod
-DML;
+";
 $form->addInputCombo('unicod', $query, $_GET['unicod'], 'unicod', array('flabel' => 'Unidade Orçamentária (UO)'));
 $query = <<<DML
     SELECT

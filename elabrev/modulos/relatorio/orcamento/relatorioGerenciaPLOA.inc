@@ -93,14 +93,14 @@ DML;
 /**
  * Query de consulta das unidade, com placeholder para substituição
  */
-$qryUnidade = <<<DML
+$qryUnidade = "
 SELECT uni.unicod AS codigo,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod like '74902') __WHERE_ADICIONAL__
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod like '74902') __WHERE_ADICIONAL__
   ORDER BY uni.unicod
-DML;
+";
 
 /**
  * Query de consulta dos localizadores, com placeholder para substituição

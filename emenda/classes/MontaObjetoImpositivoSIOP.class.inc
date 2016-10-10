@@ -162,7 +162,7 @@ class MontaObjetoImpositivoSIOP{
 		
 		$ObjetoWS = new filtroAnaliseEmendaDTO();
 		$ObjetoWS->exercicio			= $_SESSION['exercicio'];
-		$ObjetoWS->codigoOrgao			= '26000';
+		$ObjetoWS->codigoOrgao			= CODIGO_ORGAO_SISTEMA;
 		$ObjetoWS->codigosUO			=  $this->getCodigosUO( $arrEmendas['unicod'] ); /*$db->pegaUm("select ungcod from public.unidadegestora where unicod = '{$arrEmendas['unicod']}'");*/
 		$ObjetoWS->codigosParlamentar	= $this->getCodigosParlamentar($arrEmendas['emeid']);
 		$ObjetoWS->codigoMomento		= $this->momento;					#1000 – Unidade Orçamentária; 2000 – Órgão Central; 2500 – SRI; 3000 – SOF; 5000 – Formalização

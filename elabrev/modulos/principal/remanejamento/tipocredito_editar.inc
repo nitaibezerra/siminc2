@@ -22,14 +22,14 @@ $sql_acao =
 	" group by prgcod, acacod, acadsc";
 
 
-$sql_unidade = <<<DML
+$sql_unidade = "
 SELECT unicod AS codigo,
        unicod || ' - ' || unidsc AS descricao
   FROM public.unidade
   WHERE unitpocod = 'U'
     AND uniano = '{$_SESSION['exercicio']}'
---    AND orgcod = '26000'
-DML;
+--    AND orgcod = '". CODIGO_ORGAO_SISTEMA. "'
+";
 
 $sql_gnd = "select gndcod as codigo, gndcod || ' - ' || gnddsc as descricao from public.gnd";
 $sql_grupounidade = "select gunid as codigo, gundsc as descricao from public.grupounidade";

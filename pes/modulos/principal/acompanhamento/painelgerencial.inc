@@ -106,7 +106,7 @@ $sql = "select  distinct ent.entcodigo, ent.entnome, ent.uorcodigo, coalesce(ano
             ) as validacao
             group by entcodigo
             ) as val on val.entcodigo = ent.entcodigo
-        where orgcodigo = '26000'
+        where orgcodigo = '". CODIGO_ORGAO_SISTEMA. "'
         -- and ent.entcodigo = 454
 
         ";

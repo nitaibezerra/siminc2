@@ -14,14 +14,14 @@
 <td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="3"><strong>Selecione a(s) Unidade(s)</strong></td>
 </tr>
 <tr>
-<?
+<?php
 	include "config.inc";	  
 	include APPRAIZ."includes/classes_simec.inc";
 	include APPRAIZ."includes/funcoes.inc";
 	$db = new cls_banco();
 
 	  $cabecalho = 'Selecione a(s) Unidade(s)';
-	  $sql = "select unicod, unidsc, uniano from unidade where unitpocod='U' and orgcod = 26000 and unicod<>'26100' and unistatus='A' order by unicod";
+	  $sql = "select unicod, unidsc, uniano from unidade where unitpocod='U' and orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unicod<>'26100' and unistatus='A' order by unicod";
 	  $RS = $db->carregar($sql);
 	  $nlinhas = count($RS)-1;
 	  for ($i=0; $i<=$nlinhas;$i++)

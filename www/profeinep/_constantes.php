@@ -26,7 +26,7 @@ define("AEDID_ENCAMINHAR_PARA_APOIO"		,1336);
 define("AEDID_RETORNAR_PARA_APOIO_1"		,1347);
 define("AEDID_RETORNAR_PARA_APOIO_2"		,1349);
 
-define("ORGCOD",							26000);
+define("ORGCOD",							CODIGO_ORGAO_SISTEMA);
 define("TIPOPRCJUDICIAL",					2);
 
 define("PRF_SUPERUSUARIO",					746);

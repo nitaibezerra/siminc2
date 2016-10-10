@@ -270,7 +270,7 @@ function retornaSqlUoComboCompleta() {
             FROM
                 unidade
             WHERE
-                orgcod = '26000'
+                orgcod = '". CODIGO_ORGAO_SISTEMA. "'
             OR  unicod IN ( '73107' ,
                            '74902')
             ORDER BY
@@ -294,7 +294,7 @@ function retornaSqlUgComboCompleta($unicod) {
                 FROM
                     unidade
                 WHERE
-                    orgcod = '26000'
+                    orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                 OR  unicod IN ( '73107' ,
                                '74902'))
         {$filtro}                   

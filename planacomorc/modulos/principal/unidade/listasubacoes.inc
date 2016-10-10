@@ -96,17 +96,17 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 in_array(PFL_SUPER_USUARIO, $perfis)) {
                             $whereUO = "";
                         }
-                        $sql = <<<DML
+                        $sql = "
                             SELECT
                                 uni.unicod AS codigo,
                                 uni.unicod || ' - ' || unidsc AS descricao
                             FROM public.unidade uni
-                            WHERE (uni.orgcod = '26000' OR  uni.unicod IN('74902', '73107'))
+                            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR  uni.unicod IN('74902', '73107'))
                                 AND uni.unistatus = 'A'
                                 {$whereUO}
                                 AND uni.unicod NOT IN($obrigatorias)
                             ORDER BY uni.unicod
-DML;
+";
                         if ($_REQUEST['unicod']) {
                             $unicod = $_REQUEST['unicod'];
                         }

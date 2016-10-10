@@ -129,7 +129,7 @@ switch($dadosindicador['regid']) {
 														 LEFT JOIN public.unidade uni ON uni.unicod = ent.entunicod
 														 LEFT JOIN painel.detalheseriehistorica d ON d.unicod = uni.unicod  
 														 LEFT JOIN painel.seriehistorica s ON s.sehid = d.sehid 
-														 WHERE {condicao_dpeid} s.indid='".$_SESSION['indid']."' AND uni.orgcod='26000' AND uni.gunid=3 AND uni.unistatus='A' AND (sehstatus='A' OR sehstatus='H') 
+														 WHERE {condicao_dpeid} s.indid='".$_SESSION['indid']."' AND uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND uni.gunid=3 AND uni.unistatus='A' AND (sehstatus='A' OR sehstatus='H') 
 														 GROUP BY e.estuf, estdescricao ORDER BY descricao");
 		
 		$tabeladefiltros[] = array("descricao"		  => "Município:",
@@ -145,7 +145,7 @@ switch($dadosindicador['regid']) {
 														 LEFT JOIN public.unidade uni ON uni.unicod = ent.entunicod 
 														 LEFT JOIN painel.detalheseriehistorica d ON d.unicod = uni.unicod    
 														 LEFT JOIN painel.seriehistorica s ON s.sehid = d.sehid 
-														 WHERE {condicao_dpeid} {condicao_estuf} s.indid='".$_SESSION['indid']."' AND uni.orgcod='26000' AND uni.gunid=3 AND uni.unistatus='A' AND (sehstatus='A' OR sehstatus='H') 
+														 WHERE {condicao_dpeid} {condicao_estuf} s.indid='".$_SESSION['indid']."' AND uni.orgcod= '". CODIGO_ORGAO_SISTEMA. "' AND uni.gunid=3 AND uni.unistatus='A' AND (sehstatus='A' OR sehstatus='H') 
 														 GROUP BY mun.muncod, mun.mundescricao ORDER BY mun.mundescricao");
 		break;
 	case REGIONALIZACAO_CAMPUS_PROFISSIONAL:

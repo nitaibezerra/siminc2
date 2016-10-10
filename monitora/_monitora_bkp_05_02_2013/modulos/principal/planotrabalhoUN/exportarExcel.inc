@@ -92,7 +92,7 @@ function monta_sql( $superuser ){
 						INNER JOIN monitora.pi_subacaounidade suu ON suu.sbaid = sa.sbaid 
 						INNER JOIN public.unidade u ON suu.unicod = u.unicod 
 						WHERE sa.sbastatus = 'A' " . ( !empty($arFiltro) ? " AND " . implode(" AND ", $arFiltro) : '' ) . " AND suu.unicod IS NOT NULL
-						AND u.orgcod = '26000' $stWhere
+						AND u.orgcod = '". CODIGO_ORGAO_SISTEMA. "' $stWhere
 						GROUP BY sa.sbaid, sa.sbacod, sa.sbatitulo, sa.sbadsc, sa.sbasituacao, sa.sbastatus
 						--ORDER BY sa.sbatitulo";
 	return $sql;

@@ -18,15 +18,15 @@ require_once(dirname(__FILE__) . '/funcoesspo_componentes.php');
  */
 function inputComboUnicod($valor, array $whereAdicional = array(), array $opcoesAdicionais = array())
 {
-    $query = <<<DML
+    $query = "
 SELECT uni.unicod AS codigo,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
     %s
   ORDER BY uni.unicod
-DML;
+";
 
     // -- Se houver um $whereAdicional, o incluí na query
     $substituto = '';

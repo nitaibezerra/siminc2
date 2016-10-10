@@ -3,7 +3,7 @@ define("CONJUR_SISID", 29);
 
 define("TIPODOC", 30);
 define("NOVO_TIPODOC", 49);
-define("ORGCOD", 26000);
+define("ORGCOD", CODIGO_ORGAO_SISTEMA);
 define("EST_ANALISEGABINETE", 78);
 define("EST_AGUARDATRIBUICAO", 81);
 define("EST_FIMPROCESSO", 99);

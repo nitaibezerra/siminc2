@@ -222,7 +222,7 @@ include APPRAIZ . 'includes/cabecalho.inc';
                 <label class="control-label col-md-2" for="unicod">Unidade Orçamentária</label>
                 <div class="col-md-10">
                     <?php
-                    $sqlUO = <<<DML
+                    $sqlUO = "
                         SELECT
                             uni.unicod AS codigo,
                             uni.unicod || ' - ' || unidsc AS descricao
@@ -230,12 +230,12 @@ include APPRAIZ . 'includes/cabecalho.inc';
                             public.unidade uni
                         WHERE
                             (
-                                uni.orgcod = '26000'
+                                uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                                 OR  uni.unicod IN('74902', '73107')
                             )
                         AND uni.unistatus = 'A'
                         ORDER BY uni.unicod
-DML;
+";
                     ?>
                     <?php echo inputCombo('unicod', $sqlUO, isset($_POST['unicod']) ? $_POST['unicod'] : '', 'unicod'); ?>
                 </div>

@@ -49,30 +49,30 @@ class Proporc_Model_Despesaunidadeorcamentaria extends Modelo
 
     static public function queryTodasAsUnidades()
     {
-        return <<<DML
+        return "
 SELECT uni.unicod AS codigo,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
   ORDER BY uni.unicod
-DML;
+";
     }
 
     static public function queryUnidadesSelecionadas($dspid)
     {
-        $sql = <<<DML
+        $sql = "
 SELECT uni.unicod AS codigo,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
     AND EXISTS (SELECT 1
                   FROM proporc.despesaunidadeorcamentaria dpu
                   WHERE uni.unicod = dpu.unicod
                     AND dpu.dspid = %d)
   ORDER BY uni.unicod
-DML;
+";
         return sprintf($sql, $dspid);
     }
 

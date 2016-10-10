@@ -417,15 +417,15 @@ SELECT DISTINCT acacod AS codigo,
     AND acasnrap = 'f'
   ORDER BY acacod
 DML;
-$sql_unidade = <<<DML
+$sql_unidade = "
 SELECT uniid AS codigo,
        unicod || ' - ' || unidsc AS descricao
   FROM unidade
   WHERE unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
     AND orgcod = '{$_SESSION['ittorgao']}'
   ORDER BY unicod
-DML;
+";
 $sql_subacao = <<<DML
 SELECT sbaid AS codigo,
        sbacod || ' - ' || sbatitulo AS descricao

@@ -387,7 +387,7 @@ SELECT
 FROM public.unidadegestora ung
 LEFT JOIN  elabrev.representantelegal rpl ON ung.ungcod = rpl.ug
 LEFT JOIN public.unidade uni ON ung.unicod = uni.unicod
-" . ($where ? " WHERE " . implode(" AND ", $where) : "WHERE uni.orgcod = '26000'") . "
+" . ($where ? " WHERE " . implode(" AND ", $where) : "WHERE uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'") . "
 ORDER BY ung.unicod
 ";
 $arCabecalho = array(

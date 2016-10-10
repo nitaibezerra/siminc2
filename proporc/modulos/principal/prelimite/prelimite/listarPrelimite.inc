@@ -13,7 +13,7 @@ if(isset($_GET['unicod']) && $_GET['unicod'] != ''){
 if(isset($_GET['esdid']) && $_GET['esdid'] != ''){
     $where .= "AND esd.esdid = '". $_GET['esdid']."'";
 }
-$query = <<<DML
+$query = "
     SELECT
         pp.prpid,
         uni.unicod|| ' - '|| uni.unidsc AS unidade,
@@ -31,12 +31,12 @@ $query = <<<DML
     LEFT JOIN seguranca.usuario usu ON (pp.usucpfresponsavel = usu.usucpf)
     LEFT JOIN seguranca.usuario usu2 ON (pp.usucpf = usu2.usucpf)
     WHERE uni.unistatus = 'A'
-        AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+        AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
         $where
         $whereUO
     order by uni.unicod
 ;
-DML;
+";
 $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
 $listagem->setCabecalho(array('Unidade', 'Usuário' , 'Responsável','Última Alteração','Status', 'Modelo Preenchido'));
 $listagem->addCallbackDeCampo(array('unidade', 'usuario'), 'alinhaParaEsquerda');

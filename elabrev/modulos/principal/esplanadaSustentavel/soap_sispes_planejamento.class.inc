@@ -133,7 +133,7 @@ class soapSispesPlanejamento
         
         $params = new consultarEntidadesDoOrgao();
         $params->arg0 = $this->getCredencialDTO(); // CredencialDTO
-        $params->arg1 = '26000'; // Codigo Orgao
+        $params->arg1 = CODIGO_ORGAO_SISTEMA; // Codigo Orgao
         $params->arg2 = date('Y'); // Ano Exercicio 
         
         $wsQualitativo = new MetaWSImplService($this->urlWsdl, array(

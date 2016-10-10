@@ -152,7 +152,7 @@ require_once APPRAIZ . 'includes/cabecalho.inc';
                 FROM public.unidadegestora ung
                 LEFT JOIN ted.representantelegal rpl ON ung.ungcod = rpl.ug and substituto = 'f'
                 LEFT JOIN public.unidade uni ON ung.unicod = uni.unicod
-                " . ($where ? " WHERE " . implode(" AND ", $where) : "WHERE uni.orgcod = '26000'") . "
+                " . ($where ? " WHERE " . implode(" AND ", $where) : "WHERE uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'") . "
                 ORDER BY ung.unicod
             ";
 

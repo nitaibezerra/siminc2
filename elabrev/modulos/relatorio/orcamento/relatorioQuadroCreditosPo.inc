@@ -285,7 +285,7 @@ if (!isset($_POST['requisicao'])) {
 							Órgão:
 						</td>
 						<td width="100%" align="left" class="TituloTela" style="color:#000000;">
-							&nbsp;&nbsp;26000 Ministério da Educação
+							&nbsp;&nbsp;<?php echo CODIGO_ORGAO_SISTEMA. ' '. NOME_ORGAO_SISTEMA; ?>
 						</td>
 					</tr>
 					<tr>

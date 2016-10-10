@@ -259,14 +259,14 @@ DML;
                 <label class="col-md-2 control-label">Unidade Orçamentária:</label>
                 <section class="col-md-10">
                     <?php
-                    $sql = <<<DML
+                    $sql = "
                                 SELECT
                                     unicod as codigo,
                                     unicod || ' - ' || unidsc as descricao
                                     FROM public.unidade
-                                    where orgcod = '26000' and unistatus = 'A'
+                                    where orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unistatus = 'A'
                                     ORDER BY unicod
-DML;
+";
                     $options = array(
                         'titulo' => 'Selecione o(s) Perfil(s)'
                     );

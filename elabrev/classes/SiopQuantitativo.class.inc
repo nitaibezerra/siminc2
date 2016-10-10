@@ -854,7 +854,7 @@ SQL;
                           FROM (SELECT --1,
                                        'EYX' AS login,
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                          || CASE WHEN acao.acacod in('09HB', '2000', '2272', '2991', '2992', '4001',
@@ -976,7 +976,7 @@ SQL;
                                 SELECT --2,
                                        'EYX' AS login,
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                            || CASE WHEN acao.acacod IN ('09HB', '2000', '2272', '2991', '2992', '4001',
@@ -1099,7 +1099,7 @@ SQL;
                                 SELECT --3,
                                        'EYX' AS login,
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                            || CASE WHEN acao.acacod IN('09HB', '2000', '2272', '2991', '2992', '4001',
@@ -1214,7 +1214,7 @@ SQL;
                                 SELECT --4,
                                        'EYX' AS login,
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                            || CASE WHEN acao.acacod IN('09HB', '2000', '2272', '2991', '2992', '4001',
@@ -1337,7 +1337,7 @@ SQL;
                                 SELECT --5,
                                        'EYX' AS login, 
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                            || CASE WHEN acao.acacod IN ('09HB', '2000', '2272', '2991', '2992', '4001',
@@ -1458,7 +1458,7 @@ SQL;
                                 SELECT --6,
                                        'EYX' AS login,
                                        MD5('COISUCA') AS senha,
-                                       '26000' AS orgao,
+                                       '". CODIGO_ORGAO_SISTEMA. "' AS orgao,
                                        acao.acaid,
                                        CAST(acao.acaid AS varchar(5))
                                            || CASE WHEN acao.acacod IN('09HB', '2000', '2272', '2991', '2992', '4001',

@@ -511,7 +511,7 @@ monta_titulo( 'Relatório Módulo Financeiro', 'Relatório Geral' );
 				<td>
 					<div id="orgao_campo_off" style="color:#a0a0a0;">Ministério da Educação</div>
 					<div id="orgao_campo_on" style="display:none;">
-						<input type="hidden" name="orgao[]" value="26000"/>
+						<input type="hidden" name="orgao[]" value="<?php echo CODIGO_ORGAO_SISTEMA; ?>"/>
 						<? $sql_combo = "select o.orgcod as codigo, o.orgcod || ' - ' || o.orgdsc as descricao from financeiro.execucao r inner join public.orgao o on r.orgcod = o.orgcod where r.rofano = '" . $ano . "' group by o.orgcod, o.orgdsc order by o.orgcod, o.orgdsc"; 
 						if ( $_REQUEST['orgao'] && $_REQUEST['orgao'][0] != '' )
 						{

@@ -74,9 +74,9 @@ monta_titulo('Definição de responsabilidades - Unidade Orçamentária', '');
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do unicod selecionado previamente.
 $unidadesObrigatorias = UNIDADES_OBRIGATORIAS;
-$sql = <<<DML
-SELECT distinct '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value="' || uni.unicod || '" '
-           || 'onclick="marcarAcao(this)"'
+$sql = "
+SELECT distinct '<input type=\"checkbox\" name=\"unicod\" id=\"chk_' || uni.unicod || '\" value=\"' || uni.unicod || '\" '
+           || 'onclick=\"marcarAcao(this)\"'
            || case WHEN (SELECT count(urp.rpuid)
                            FROM {$esquema}.usuarioresponsabilidade urp
                            WHERE urp.unicod = uni.unicod
@@ -86,12 +86,11 @@ SELECT distinct '<input type="checkbox" name="unicod" id="chk_' || uni.unicod ||
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A' and     (
-        uni.orgcod = '26000'
+        uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
     OR  uni.unicod IN('74902',
                       '73107'))
-
   ORDER BY 1
-DML;
+";
 
  $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
     $listagem->setCabecalho(array(

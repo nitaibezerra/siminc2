@@ -502,7 +502,7 @@ $cabecalho = array(
                     <div class="col-lg-10">
                     <?php
                         $unidade = $_REQUEST['unidade'];
-                        $sql = <<<DML
+                        $sql = "
                                                         SELECT
                         uni.unicod AS codigo,
                         uni.unicod || ' - ' || unidsc AS descricao
@@ -510,14 +510,14 @@ $cabecalho = array(
                         public.unidade uni
                         WHERE
                             (
-                                uni.orgcod = '26000'
+                                uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                             OR  uni.unicod IN('74902',
                                               '73107'))
                         AND uni.unistatus = 'A'
                          {$whereUO}
                         AND uni.unicod NOT IN($obrigatorias)
                         ORDER BY uni.unicod
-DML;
+";
 //ver($sql,d);
                         if (in_array(PFL_GESTAO_ORCAMENTARIA, $perfis) ||
                                 in_array(PFL_SUPERUSUARIO, $perfis)) {

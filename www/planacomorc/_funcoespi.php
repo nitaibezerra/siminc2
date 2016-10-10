@@ -1218,15 +1218,15 @@ SQL;
     }
 
 
-    $sql = <<<DML
+    $sql = "
 SELECT uni.unicod AS codigo,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND orgcod = '26000'
+    AND orgcod = '". CODIGO_ORGAO_SISTEMA. "'
      {$filtroPerfilUO}
   ORDER BY uni.unicod
-DML;
+";
     return sprintf($sql, UNIDADES_OBRIGATORIAS);
 }
 

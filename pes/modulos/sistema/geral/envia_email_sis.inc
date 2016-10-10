@@ -172,7 +172,7 @@ if ($_REQUEST["formulario"] == 2) {
                         ) as validacao
                         group by entcodigo
                         ) as val on val.entcodigo = ent.entcodigo
-                    where orgcodigo = '26000'
+                    where orgcodigo = '". CODIGO_ORGAO_SISTEMA. "'
                     $sWhere
                     and  (   case
                             when coalesce(val.status, '') = '' and coalesce(total, 0) = 0 then '1'

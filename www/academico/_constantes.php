@@ -1,6 +1,6 @@
 <?PHP
 // Constantes do Orgão a ser filtrado no sistema
-define('ORGAO', 26000);
+define('ORGAO', CODIGO_ORGAO_SISTEMA);
 
 // Constantes de perfis do módulo
 define('PERFIL_IFESCADBOLSAS', 279); //277

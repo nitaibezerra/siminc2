@@ -86,7 +86,7 @@ function exibirRelatorio() {
 			<td>
 				<?php
 					$unidade = $_REQUEST['unidade'];
-					$sql = "SELECT u.unicod as codigo, u.unicod ||' - '|| u.unidsc as descricao FROM public.unidade u WHERE orgcod = '26000' $stWhere ORDER BY unicod";
+					$sql = "SELECT u.unicod as codigo, u.unicod ||' - '|| u.unidsc as descricao FROM public.unidade u WHERE orgcod = '". CODIGO_ORGAO_SISTEMA. "' $stWhere ORDER BY unicod";
 					$db->monta_combo('unidade', $sql, 'S',  'Selecione', '', '', '', '', 'N'); 
 				?>
 			</td>

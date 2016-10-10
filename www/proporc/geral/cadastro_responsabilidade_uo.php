@@ -73,9 +73,9 @@ monta_titulo('Definição de responsabilidades - Unidade Orçamentária', '');
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do unicod selecionado previamente.
 $unidadesObrigatorias = UNIDADES_OBRIGATORIAS;
-$sql = <<<DML
-SELECT '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value="' || uni.unicod || '" '
-           || 'onclick="marcarAcao(this)"'
+$sql = "
+SELECT '<input type=\"checkbox\" name=\"unicod\" id=\"chk_' || uni.unicod || '\" value=\"' || uni.unicod || '\" '
+           || 'onclick=\"marcarAcao(this)\"'
            || case WHEN (SELECT count(urp.rpuid)
                            FROM {$esquema}.usuarioresponsabilidade urp
                            WHERE urp.unicod = uni.unicod
@@ -85,12 +85,13 @@ SELECT '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
   WHERE uni.unistatus = 'A'
-    AND (uni.orgcod = '26000' OR uni.unicod IN('74902', '73107'))
+    AND (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
   ORDER BY uni.unicod
-DML;
+";
 
 $cabecalho = array('', 'UO - Descrição');
 $db->monta_lista_simples($sql, $cabecalho, 2000, 5, 'N', '100%', 'N');
+
 ?>
 </div>
 <form name="formassocia" style="margin:0px;" method="POST">

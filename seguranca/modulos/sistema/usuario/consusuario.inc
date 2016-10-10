@@ -217,7 +217,7 @@ if(isset($_REQUEST['servico']) &&  $_REQUEST['servico']== 'listar_mun'){
 				$sql = 	"SELECT 
 							unicod as codigo, unidsc as descricao
 						FROM public.unidade
-							where orgcod = '26000' and unistatus = 'A' 
+							where orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unistatus = 'A' 
 							ORDER BY unicod, unidsc";
 				campo_popup('unidade',$sql,'Selecione','','400x400','30', 
 								array(

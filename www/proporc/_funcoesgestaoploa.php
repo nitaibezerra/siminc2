@@ -550,7 +550,7 @@ DML;
     }
 
 
-    $query = <<<DML
+    $query = "
 SELECT DISTINCT a.acaid,
 {$compSelectAcaid_2}
                 a.prgid,
@@ -565,8 +565,8 @@ SELECT DISTINCT a.acaid,
   FROM elabrev.ppaacao_orcamento a
     INNER JOIN unidade u ON a.unicod = u.unicod
 /* Retirei para aparecer as unidades do FNDE (74902 / etc)
-    INNER JOIN unidade unijoin ON (unijoin.unicod != '26100' AND unijoin.unicod != '26000'
-                                                             AND unijoin.orgcod = '26000'
+    INNER JOIN unidade unijoin ON (unijoin.unicod != '26100' AND unijoin.unicod != '". CODIGO_ORGAO_SISTEMA. "'
+                                                             AND unijoin.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                                                              AND a.unicod = unijoin.unicod)
 */
     LEFT JOIN workflow.documento doc using (docid)
@@ -578,7 +578,7 @@ SELECT DISTINCT a.acaid,
   ORDER BY a.acacod,
            a.unicod,
            a.loccod
-DML;
+";
     $dml = new Simec_DB_DML($query);
     $dml->addParams($dados)
         ->addParam('ppoid', $ppoid)

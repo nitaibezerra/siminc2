@@ -64,7 +64,7 @@ class pedidoAlteracaoDTO {
   	$this->codigoClassificacaoAlteracao 		= $codigoclassificacaoalteracao; //1
 	//$this->codigoInstrumentoLegal 				= $codigoinstrumentolegal;
 	$this->codigoMomento 						= $codigomomento; //9200
-	$this->codigoOrgao 							= $codigoorgao; //26000
+	$this->codigoOrgao 							= $codigoorgao; //42000 CODIGO_ORGAO_SISTEMA
 	//$this->codigoSituacaoPedidoAlteracao 		= $codigosituacaopedidoalteracao;
 	$this->codigoTipoAlteracao 					= $codigotipoalteracao; //tipocredito
 	//$this->dataCriacao 							= $datacriacao;

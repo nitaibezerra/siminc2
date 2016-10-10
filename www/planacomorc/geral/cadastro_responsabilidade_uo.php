@@ -71,9 +71,9 @@ monta_titulo('Definição de responsabilidades - Unidade Orçamentária', '');
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do unicod selecionado previamente.
 $unidadesObrigatorias = UNIDADES_OBRIGATORIAS;
-$sql = <<<DML
-SELECT '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value="' || uni.unicod || '" '
-           || 'onclick="marcarAcao(this)"'
+$sql = "
+SELECT '<input type=\"checkbox\" name=\"unicod\" id=\"chk_' || uni.unicod || '\" value=\"' || uni.unicod || '\" '
+           || 'onclick=\"marcarAcao(this)\"'
            || case WHEN (SELECT count(urp.rpuid) FROM planacomorc.usuarioresponsabilidade urp WHERE urp.unicod = uni.unicod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}' AND rpustatus = 'A') > 0 THEN ' checked' ELSE '' END || '>' AS unicod,
        uni.unicod || ' - ' || uni.unidsc AS descricao
   FROM public.unidade uni
@@ -81,9 +81,9 @@ SELECT '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value
  --     on urp.unicod = uni.unicod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
   WHERE uni.unistatus = 'A'
     --AND uni.unicod IN ($unidadesObrigatorias)
-    AND orgcod = '26000'     
+    AND orgcod = '". CODIGO_ORGAO_SISTEMA. "'     
   ORDER BY uni.unicod::integer
-DML;
+";
 
 $cabecalho = array('', 'UO - Descrição');
 $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');

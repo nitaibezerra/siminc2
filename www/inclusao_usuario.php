@@ -254,7 +254,7 @@ monta_titulo($titulo_modulo,$subtitulo_modulo);
       </tr>
 	  <?}?>
 	  	  <?
-	  if ($unicod == '26101' and $orgcod=='26000') {?>
+	  if ($unicod == '26101' and $orgcod== CODIGO_ORGAO_SISTEMA) {?>
 
       <tr bgcolor="#F2F2F2">
         <td align = 'right' class="subtitulodireita">Unidade Gestora (UG):</td>

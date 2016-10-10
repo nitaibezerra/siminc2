@@ -246,7 +246,7 @@ $(function(){
 	
 		<p>&nbsp;</p>
 		<div id="gridRemessa">
-		<font size="3"><b>26000 - MINISTÉRIO DA EDUCAÇÃO - MEC</b></font><br/><br/>
+		<font size="3"><b><?php echo CODIGO_ORGAO_SISTEMA. ' - '. NOME_ORGAO_SISTEMA. ' - '. SIGLA_ORGAO_SISTEMA; ?></b></font><br/><br/>
 		<font size="2"><b>26443 - EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES - EBSERH</b></font><br/><br/>
 		<b>Sistema WebPortfólio UNASUS<br/>
 		Ação 20 GK - MAIS MÉDICOS PARA O BRASIL<br/>

@@ -94,7 +94,7 @@ select
 ( 	
 select  'EYX' as login, 
 	md5('COISUCA') as senha, 
-	'26000' as orgao, 
+	 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao, 
 	acao.acaid, 
 	acao.esfcod, 
 	acao.unicod, 
@@ -199,7 +199,7 @@ union all
 
 select  'EYX' as login,
 	md5('COISUCA') as senha,
-	'26000' as orgao,
+	 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao,
 	acao.acaid,
 	acao.esfcod, 
 	acao.unicod, 
@@ -414,7 +414,7 @@ select
 ( 	
 select  'EYX' as login, 
 	md5('COISUCA') as senha, 
-	'26000' as orgao, 
+	 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao, 
 	acao.acaid, 
 	acao.esfcod, 
 	acao.unicod, 
@@ -520,7 +520,7 @@ union all
 
 select  'EYX' as login,
 	md5('COISUCA') as senha,
-	'26000' as orgao,
+	 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao,
 	acao.acaid,
 	acao.esfcod, 
 	acao.unicod, 

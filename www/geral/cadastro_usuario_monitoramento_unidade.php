@@ -180,7 +180,7 @@ document.getElementById('tabela').style.display  = "none";
 		where
 			unistatus = 'A' and
 			unitpocod = 'U' and
-			orgcod = '26000'
+			orgcod = '". CODIGO_ORGAO_SISTEMA. "'
 		group by unicod, unidsc
 		order by unicod
 	";

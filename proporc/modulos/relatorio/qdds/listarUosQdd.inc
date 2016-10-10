@@ -197,7 +197,7 @@ $sql = "SELECT
             public.unidade
         WHERE
             unistatus = 'A'
-        AND orgcod ='26000'
+        AND orgcod = '". CODIGO_ORGAO_SISTEMA. "'
         ORDER BY
             2; ";
 $acoes = array(

@@ -174,7 +174,7 @@ document.getElementById('tabela').style.display  = "none";
 			from unidade
 			where
 				unistatus='A' and
-				orgcod = '26000'
+				orgcod = '". CODIGO_ORGAO_SISTEMA. "'
 			order by unicod, unidsc
 ";
 	  $RS = @$db->carregar($sql);

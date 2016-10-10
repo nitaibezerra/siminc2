@@ -429,7 +429,7 @@ class ErrorHandler {
             }
             return false;
         }
-ver($iCode, $sMessage, $sFile, $iLine, $aContext, d);
+//ver($iCode, $sMessage, $sFile, $iLine, $aContext, d);
         // Ignorando erros de pg_last_error() e pg_errormessage()
         if(false !== strpos($sMessage, 'pg_last_error():') || false !== strpos($sMessage, 'pg_errormessage():')  || false !== strpos($sMessage, 'session data (memcache)')){
             return false;

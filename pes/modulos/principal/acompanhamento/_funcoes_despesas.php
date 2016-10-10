@@ -2039,7 +2039,7 @@ function montaTabelaPainelExecucaoResumida( $aexano = null)
                             ) as foo
                             group by entcodigo, lsaalunoequivalente
                     ) lsa on lsa.entcodigo = ent.entcodigo
-            where uor.orgcodigo = '26000'
+            where uor.orgcodigo = '". CODIGO_ORGAO_SISTEMA. "'
             and ent.aexano = {$aexano}
             -- and ent.uorcodigo = '26256'
             group by ent.uorcodigo, ent.entcodigo, ent.entnome, ent.aexano, acc.valor, lsaalunoequivalente, desppactuadaequival

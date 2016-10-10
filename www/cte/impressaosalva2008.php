@@ -2226,8 +2226,8 @@ function usuarioJoinUnidadesPermitidas( $esquema = 'elabrev' )
 	$join .=
 			" inner join unidade unijoin on " .
 				" unijoin.unicod != '26100' and " .
-				" unijoin.unicod != '26000' and " .
-				" unijoin.orgcod = '26000' ";
+				" unijoin.unicod != '". CODIGO_ORGAO_SISTEMA. "' and " .
+				" unijoin.orgcod = '". CODIGO_ORGAO_SISTEMA. "' ";
 	if ( !$podeTodas )
 	{
 		$join .= " and unijoin.unicod = usujoin.unicod ";
@@ -2250,7 +2250,7 @@ function usuarioUnidadesPermitidas( $esquema = 'elabrev' )
 				where
 					unistatus = 'A' and
 					(
-						( orgcod = '26000' and unicod != '26100' )
+						( orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unicod != '26100' )
 						or
 						( unicod = '74902' )
 					)
@@ -2268,7 +2268,7 @@ function usuarioUnidadesPermitidas( $esquema = 'elabrev' )
 			" usucpf = '" . $_SESSION['usucpf'] . "' and " .
 			" rpustatus = 'A' and " .
 			" unistatus = 'A' and " .
-			" orgcod = '26000' and " .
+			" orgcod = '". CODIGO_ORGAO_SISTEMA. "' and " .
 			" unicod != '26100' ";
 	}
 	if ( !$this->usuarioPossuiPermissaoAlgumaUnidade( $esquema ) )

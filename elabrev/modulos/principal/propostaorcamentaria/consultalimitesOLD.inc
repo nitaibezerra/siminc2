@@ -221,7 +221,7 @@ if ($_REQUEST['acao']== 'C') $titulo_modulo='Consultar Propostas Orçamentárias';
 	}
 	else
 	{
-	$sql = "select distinct count(unicod) from elabrev.usuarioresponsabilidade inner join unidade using ( unicod ) where usucpf = '" . $_SESSION['usucpf'] . "' and unistatus = 'A' and orgcod = '26000' and unicod != '26100' and rpustatus = 'A' ";
+	$sql = "select distinct count(unicod) from elabrev.usuarioresponsabilidade inner join unidade using ( unicod ) where usucpf = '" . $_SESSION['usucpf'] . "' and unistatus = 'A' and orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unicod != '26100' and rpustatus = 'A' ";
 	$qtdunidades =(integer)$db->pegaUm( $sql );
 	$ppoid =$db->pegaUm( "select ppoid as codigo from elabrev.propostaorcamento where ppostatus = 'A' and ppoanoexercicio = '".$_SESSION['exercicio']."'");
 
@@ -239,7 +239,7 @@ dbg($qtdPropostas);
 	}
 	elseif ($qtdunidades == 1 && $qtdPropostas == 1)
 	{
-	$sql = "select distinct unicod from elabrev.usuarioresponsabilidade inner join unidade using ( unicod ) where usucpf = '" . $_SESSION['usucpf'] . "' and unistatus = 'A' and orgcod = '26000' and unicod != '26100' ";
+	$sql = "select distinct unicod from elabrev.usuarioresponsabilidade inner join unidade using ( unicod ) where usucpf = '" . $_SESSION['usucpf'] . "' and unistatus = 'A' and orgcod = '". CODIGO_ORGAO_SISTEMA. "' and unicod != '26100' ";
 	$unidade =$db->pegaUm($sql);
 //	$unidade = $db->usuarioUnidadesPermitidas();
 	$acao = 'consultar';

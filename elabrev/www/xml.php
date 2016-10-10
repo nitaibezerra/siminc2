@@ -1,6 +1,6 @@
 select  'EYX' as login, 
 							MD5('COISUCA') as senha, 
-							'26000' as orgao, 
+							 '". CODIGO_ORGAO_SISTEMA. "' AS  orgao, 
 							acao.acaid, 
 							acao.acaid::varchar(5)||case when acao.acacod in ('09HB', '2000', '2272', '2991', '2992', '4001', '4006', '4009', '4086', '6318', '6321','00C5','0110','00H1') and substr(nd.ndpcod, 1,2)<>'31' then '1' else tda.tpdid::varchar(2) end as codigo,							
 							acao.esfcod, 
