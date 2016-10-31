@@ -10,19 +10,23 @@ if($_REQUEST['rodar']!=''){
 }
 ?>
 <script>
+    strUrlBase = 'http://<?php echo $_SERVER['HTTP_HOST']; ?>';
+    
     $(document).ready(function() {
         $("#btnExecutar").click(function() {
-            window.open('http://simec.mec.gov.br/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php', '_blank');
+            window.open(strUrlBase+ '/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php', '_blank');
         });
         $("#btnExecutarFonND").click(function() {
             bootbox.confirm('Você realmente tem <b>CERTEZA ABSOLUTA </b> que deseja apagar e realizar uma nova carga de dados financeiros? <br/>\n\
      Essa nova carga poderá demorar até <b>20 MINUTOS</b>.', function (re) {
                 if (re) {
-                    window.open('http://simec.mec.gov.br/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php?carga_com_fonte_e_nd=SIM', '_blank');
+                    alert('Essa funcionalidade está em fase de configuração no MinC.');
+//                    window.open(strUrlBase+ '/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php?carga_com_fonte_e_nd=SIM', '_blank');
                 }
             });
         });
-    });</script>
+    });
+</script>
 <div class="col-lg-12">
     <div class="page-header">
         <ol class="breadcrumb">

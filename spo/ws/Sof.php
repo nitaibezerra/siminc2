@@ -61,7 +61,7 @@ abstract class Spo_Ws_Sof extends Simec_BasicWS
     protected function _init()
     {
         $this->loadURL();
-        $this->setCredenciais('wsmec', 'Ch0c014t3', 32);
+        $this->setCredenciais(WEB_SERVICE_SIOP_USUARIO, WEB_SERVICE_SIOP_SENHA, WEB_SERVICE_SIOP_PERFIL);
     }
 
     /**
@@ -93,17 +93,8 @@ abstract class Spo_Ws_Sof extends Simec_BasicWS
             ->add('cache_wsdl', WSDL_CACHE_NONE)
             ->add('soap_version', SOAP_1_2);
 
-        switch ($this->enviroment) {
-            case self::PRODUCTION;
-                $options->add('local_cert', APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem")
-                    ->add('passphrase', 'simec');
-                break;
-            case self::STAGING:
-            case self::DEVELOPMENT:
-                $options->add('local_cert', APPRAIZ . "planacomorc/modulos/sistema/comunica/WS_SISMEC_2.pem")
-                    ->add('passphrase', 'sismec');
-                break;
-        }
+        $options->add('local_cert', APPRAIZ. WEB_SERVICE_SIOP_CERTIFICADO)
+            ->add('passphrase', 'simec');
 
         return $options;
     }

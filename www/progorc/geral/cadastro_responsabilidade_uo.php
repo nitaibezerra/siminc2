@@ -89,7 +89,7 @@ SELECT distinct '<input type=\"checkbox\" name=\"unicod\" id=\"chk_' || uni.unic
         uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
     OR  uni.unicod IN('74902',
                       '73107'))
-  ORDER BY uni.unicod
+  ORDER BY 2
 ";
 
 //$cabecalho = array('', 'UO - Descrição');

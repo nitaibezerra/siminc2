@@ -31,18 +31,7 @@ class Spo_Ws_Sof_Quantitativo extends Spo_Ws_Sof
      */
     protected function loadURL()
     {
-        switch ($this->enviroment) {
-            case self::PRODUCTION:
-                $this->urlWSDL = <<<URL
-https://www.siop.gov.br/services/WSQuantitativo?wsdl
-URL;
-                break;
-            case self::STAGING:
-            case self::DEVELOPMENT:
-                $this->urlWSDL = <<<URL
-https://testews.siop.gov.br/services/WSQuantitativo?wsdl
-URL;
-        }
+        $this->urlWSDL = WEB_SERVICE_SIOP_URL. 'WSQuantitativo?wsdl';
         return $this;
     }
 
@@ -228,7 +217,7 @@ URL;
 		$consultarExecucaoOrcamentaria->paginacao = new paginacaoDTO();
 		$consultarExecucaoOrcamentaria->paginacao->pagina = $pagina;
 		$consultarExecucaoOrcamentaria->paginacao->registrosPorPagina = self::REGISTROS_POR_PAGINA;
-
+        
 		$consultarExecucaoOrcamentariaResponse = $this->getSoapClient()->call(
 				'consultarExecucaoOrcamentaria',
 				array($consultarExecucaoOrcamentaria)
