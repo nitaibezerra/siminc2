@@ -10,7 +10,7 @@ if ($_REQUEST['importar'])
 
 	try
 	{
-		$ws = new Spo_Ws_Sof_Receita('spo', Spo_Ws_Sof_Receita::DEVELOPMENT);
+		$ws = new Spo_Ws_Sof_Receita('spo', Spo_Ws_Sof_Receita::PRODUCTION);
 
 		$mensagem = 'Registros importados com sucesso.';
 

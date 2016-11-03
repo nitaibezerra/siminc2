@@ -20,8 +20,7 @@ if($_REQUEST['rodar']!=''){
             bootbox.confirm('Você realmente tem <b>CERTEZA ABSOLUTA </b> que deseja apagar e realizar uma nova carga de dados financeiros? <br/>\n\
      Essa nova carga poderá demorar até <b>20 MINUTOS</b>.', function (re) {
                 if (re) {
-                    alert('Essa funcionalidade está em fase de configuração no MinC.');
-//                    window.open(strUrlBase+ '/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php?carga_com_fonte_e_nd=SIM', '_blank');
+                    window.open(strUrlBase+ '/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php?carga_com_fonte_e_nd=SIM', '_blank');
                 }
             });
         });

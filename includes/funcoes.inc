@@ -4928,12 +4928,17 @@ function carregarSistemas()
 
 		$sistemas = array();
 
-		foreach ($resultado as $sistema)
-		{
-			$sistemas[$sistema['sisid']] = $sistema;
-		}
+        if($resultado){
+            foreach ($resultado as $sistema)
+            {
+                $sistemas[$sistema['sisid']] = $sistema;
+            }
 
-		$_SESSION['sistemas'][$_SESSION['usucpf']] = $sistemas;
+            $_SESSION['sistemas'][$_SESSION['usucpf']] = $sistemas;
+        } else {
+//            header('Location: /logout.php');
+//            die;
+        }
 	}
 
 	return $sistemas;

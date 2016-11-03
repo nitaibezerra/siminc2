@@ -377,6 +377,7 @@ class Spo_Ws_Sof_Quantitativo extends Spo_Ws_Sof
 		$args = func_get_args();
 		$this->_checkArguments($args, $validParameters);
         $mixed->credencial = $this->credenciais;
+        
 		return $this->getSoapClient()->call("obterInformacaoCaptacaoPLOA", $args);
 	}
 

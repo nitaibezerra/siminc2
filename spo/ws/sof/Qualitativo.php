@@ -31,23 +31,7 @@ class Spo_Ws_Sof_Qualitativo extends Spo_Ws_Sof
      */
     protected function loadURL()
     {
-        switch ($this->enviroment) {
-            case self::PRODUCTION:
-                $this->urlWSDL = <<<DML
-https://www.siop.gov.br/services/WSQualitativo?wsdl
-DML;
-                break;
-            case self::STAGING:
-                $this->urlWSDL = <<<DML
-https://testews.siop.gov.br/services/WSQualitativo?wsdl
-DML;
-//https://homologacao.siop.planejamento.gov.br/services/WSQualitativo?wsdl
-                break;
-            case self::DEVELOPMENT:
-                $this->urlWSDL = <<<DML
-https://testews.siop.gov.br/services/WSQualitativo?wsdl
-DML;
-        }
+        $this->urlWSDL = WEB_SERVICE_SIOP_URL. 'WSQualitativo?wsdl';
         return $this;
     }
 

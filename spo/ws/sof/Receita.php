@@ -26,18 +26,7 @@ class Spo_Ws_Sof_Receita extends Spo_Ws_Sof
      */
     protected function loadURL()
     {
-        switch ($this->enviroment) {
-            case self::PRODUCTION:
-                $this->urlWSDL = <<<DML
-https://www.siop.gov.br/services/WSReceita?wsdl
-DML;
-                break;
-            case self::STAGING:
-            case self::DEVELOPMENT:
-                $this->urlWSDL = <<<DML
-https://testews.siop.gov.br/services/WSReceita?wsdl
-DML;
-        }
+        $this->urlWSDL = WEB_SERVICE_SIOP_URL. 'WSReceita?wsdl';
         return $this;
     }
 

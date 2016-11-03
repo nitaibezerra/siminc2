@@ -76,7 +76,7 @@ abstract class Spo_Ws_Sof extends Simec_BasicWS
         if (class_exists('credencialDTO')) {
             $this->credenciais = new credencialDTO();
             $this->credenciais->usuario = $usuario;
-            $this->credenciais->senha = md5($senha);
+            $this->credenciais->senha = $senha;
             $this->credenciais->perfil = $perfil;
         }
     }
