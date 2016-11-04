@@ -23,10 +23,10 @@ ksort($mapServiçosTED1);
 
 $mapServiçosTED2 = array
 (
-	'Solicitar NC' => array('ws' => 'solicitarNC', 'tbl' => 'ted.log', 'param' => 'logtipo = 3'),
-	'Consultar NC' => array('ws' => 'consultarNC', 'tbl' => 'ted.log', 'param' => 'logtipo = 2'),
-	'Solicitar PF' => array('ws' => 'solicitarPF', 'tbl' => 'ted.log', 'param' => 'logtipo = 4'),
-	'Solicitar processo' => array('ws' => 'solicitarProcesso', 'tbl' => 'ted.log', 'param' => 'logtipo = 1'),
+	'Solicitar NC' => array('ws' => 'solicitarNC', 'tbl' => 'ted.log', 'param' => "logtipo = '3'"),
+	'Consultar NC' => array('ws' => 'consultarNC', 'tbl' => 'ted.log', 'param' => "logtipo = '2'"),
+	'Solicitar PF' => array('ws' => 'solicitarPF', 'tbl' => 'ted.log', 'param' => "logtipo = '4'"),
+	'Solicitar processo' => array('ws' => 'solicitarProcesso', 'tbl' => 'ted.log', 'param' => "logtipo = '1'"),
 );
 
 ksort($mapServiçosTED2);
@@ -36,12 +36,14 @@ $fm = new Simec_Helper_FlashMessage('spo/relatorio/logs/listar');
 <script type="text/javascript" src="/includes/funcoesspo.js"></script>
 <script>
 $(document).ready(function() {
-    $('#ted1,#ted2').on("change", function() {
+    
+    $('#ted1, #ted2').on("change", function() {
     	$('#servico1,#servico2').val('').trigger('chosen:updated');
         $(this).val() == 1 ? 
         ($('#ted-1').show(), $('#ted-2').hide()) : 
         ($('#ted-2').show(), $('#ted-1').hide());
     });
+    
 	$('#codeModal').on('show.bs.modal', function (event) {
 	  var button = $(event.relatedTarget);
 	  var code = button.data('code');
@@ -50,8 +52,21 @@ $(document).ready(function() {
 	  modal.find('.modal-body').find('.code').text(formatXml(code)).prettify();
 	  modal.find('.modal-body').find('.xml').val(formatXml(xml));
 	});
-	$('#ted1').change();
+    
+    // Controla exibição das opções TED
+    controlarExibicaoServico();
 });
+
+function controlarExibicaoServico(){
+    var strTed = '<?php echo isset($_REQUEST['ted'])? $_REQUEST['ted']: 1; ?>';
+    if(strTed == 2){
+        $('#ted-2').show();
+        $('#ted-1').hide();
+    } else {
+        $('#ted-1').show();
+        $('#ted-2').hide();
+    }
+}
 </script>
 <div class="col-lg-12">
     <div class="page-header">
@@ -87,13 +102,15 @@ $(document).ready(function() {
 	                    	$dados = array();
 	                    	
 	                    	foreach ($mapServiçosTED1 as $name => $info) {
-	                    		$dados[] = array('codigo' => $name, 'descricao' => $name);
+	                    		$dados[] = array(
+                                    'codigo' => $name,
+                                    'descricao' => $name);
 	                    	}
 
 	                        $options = array(
 	                            'titulo' => 'Selecione ao menos um serviço'
 	                        );
-	                        
+
 	                        inputCombo('servico1', $dados, $_REQUEST['servico1'], 'servico1', $options);
 	                    ?>
 	                    </span>
@@ -126,21 +143,41 @@ $(document).ready(function() {
         </fieldset>
     </div>
     <?php
+
     	if ($_REQUEST['ted']) 
     	{
-	    	$servico = $_REQUEST['ted'] == '1' ? $mapServiçosTED1[$_REQUEST['servico1']] : $mapServiçosTED2[$_REQUEST['servico2']];
-	    	
-	    	$sql = "SELECT 
-	    			logid as \"ID\",
-	    			logmsg as \"Mensagem\",
-	    			logxmlenvio as \"Requisição XML\",
-	    			logxmlretorno as \"Resposta XML\",
-	    			to_char(logdata,'DD/MM/YYYY HH24:MI:SS') as \"Requisição Data\", 
-	    			to_char(logdtretorno,'DD/MM/YYYY HH24:MI:SS') as \"Resposta Data\"
-					FROM {$servico['tbl']} 
-					WHERE {$servico['param']}
-					ORDER BY logdata DESC";
-	    	
+            if($_REQUEST['ted'] == '1'){
+                $servico = $mapServiçosTED1[$_REQUEST['servico1']];
+                $sql = "SELECT 
+                        hwpid as \"ID\",
+                        hwpwebservice as \"Mensagem\",
+                        hwpxmlenvio as \"Requisição XML\",
+                        hwpxmlretorno as \"Resposta XML\",
+                        to_char(hwpdataenvio,'DD/MM/YYYY HH24:MI:SS') as \"Requisição Data\", 
+                        to_char(hwpdataenvio,'DD/MM/YYYY HH24:MI:SS') as \"Resposta Data\"
+                        FROM {$servico['tbl']}
+                ";
+                if($servico['param']){
+                    $sql .= " WHERE {$servico['param']}";
+                }
+                $sql .= "ORDER BY hwpdataenvio DESC";
+            } else {
+                $servico = $mapServiçosTED2[$_REQUEST['servico2']];
+                $sql = "SELECT 
+                        logid as \"ID\",
+                        logmsg as \"Mensagem\",
+                        logxmlenvio as \"Requisição XML\",
+                        logxmlretorno as \"Resposta XML\",
+                        to_char(logdata,'DD/MM/YYYY HH24:MI:SS') as \"Requisição Data\", 
+                        to_char(logdtretorno,'DD/MM/YYYY HH24:MI:SS') as \"Resposta Data\"
+                        FROM {$servico['tbl']} 
+                ";
+                if($servico['param']){
+                    $sql .= " WHERE {$servico['param']}";
+                }
+                $sql .= "ORDER BY logdata DESC";
+            }
+
 			$listagem = new Simec_Listagem();
 	        $listagem->setQuery($sql);
 	        $listagem->turnOnPesquisator();
