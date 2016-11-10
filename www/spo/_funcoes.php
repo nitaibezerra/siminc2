@@ -423,11 +423,13 @@ function obterAcoesAcompanhamentoOrcamentario($params, $fm) {
                     $count++;
                 }
             } else {
-                $localizador->snAcompanhamentoOpcional = $localizador->snAcompanhamentoOpcional ? 't' : 'f';
-                $insert.= "insert into wssof.ws_acoesacompanhamentoorcamentariodto ";
-                $insert.= "(codigoacao, codigoprograma, codigofuncao, codigosubfuncao, codigoorgao, codigoesfera, localizadores, dataultimaatualizacao, snacompanhamentoopcional) values ";
-                $insert.= "('{$acao->codigoAcao}', '{$acao->codigoPrograma}', '{$acao->codigoFuncao}', '{$acao->codigoSubFuncao}', '{$acao->codigoOrgao}', '{$acao->codigoEsfera}', '{$localizador->codigoLocalizador}', '" . date('Y-m-d H:i:s') . "', '{$localizador->snAcompanhamentoOpcional}');";
-                $count++;
+                if($localizador && $localizador->codigoLocalizador){
+                    $localizador->snAcompanhamentoOpcional = $localizador->snAcompanhamentoOpcional ? 't' : 'f';
+                    $insert.= "insert into wssof.ws_acoesacompanhamentoorcamentariodto ";
+                    $insert.= "(codigoacao, codigoprograma, codigofuncao, codigosubfuncao, codigoorgao, codigoesfera, localizadores, dataultimaatualizacao, snacompanhamentoopcional) values ";
+                    $insert.= "('{$acao->codigoAcao}', '{$acao->codigoPrograma}', '{$acao->codigoFuncao}', '{$acao->codigoSubFuncao}', '{$acao->codigoOrgao}', '{$acao->codigoEsfera}', '{$localizador->codigoLocalizador}', '" . date('Y-m-d H:i:s') . "', '{$localizador->snAcompanhamentoOpcional}');";
+                    $count++;
+                }
             }
         }
 
