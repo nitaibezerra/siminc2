@@ -45,6 +45,8 @@ $mapTabelasProgCompleQuant = array(
 );
 
 require_once APPRAIZ . "includes/cabecalho.inc";
+
+$anoPloa = $_SESSION['exercicio']+1;
 ?>
 <link rel="stylesheet" href="/library/bootstrap-toggle/css/bootstrap-toggle.min.css">
 <script src="/library/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
@@ -68,8 +70,7 @@ require_once APPRAIZ . "includes/cabecalho.inc";
     <ol class="breadcrumb">
         <li><a href="spo.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a></li>
         <li>Snapshots</li>
-        <li class="active">Snapshots Dados Carga da PLOA <b><?php $anoPloa = $_SESSION['exercicio'] + 1;
-echo $anoPloa; ?></b></li>
+        <li class="active">Snapshots Dados Carga da PLOA <b><?php echo $exercicio; ?>/<?php echo $anoPloa; ?></b></li>
     </ol>
 <?php echo $fm->getMensagens(); ?>
     <div class="well">
@@ -107,7 +108,7 @@ echo $anoPloa; ?></b></li>
                             <i class="glyphicon glyphicon-remove red"></i>
                         <?php endif; ?>
                         <?php echo $name; ?> <span class="badge" style="font-weight: normal;"><?php echo $check + 1; ?></span><br>
-<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="form-group">
@@ -144,8 +145,9 @@ echo $anoPloa; ?></b></li>
 
                      $query = "select dataultimaatualizacao from {$info['tbl']}
                                           where to_char(dataultimaatualizacao, 'YYYY-MM-DD') = to_char(current_date, 'YYYY-MM-DD')"
-                        . "AND (SELECT MAX(exercicio) FROM wssof.ws_acoesdto LIMIT 1) = '{$_SESSION['exercicio']}' ";
+                        . "AND exercicio = '{$_SESSION['exercicio']}' ";
                         $recurso = $db->executar($query);
+//ver($query);
                     $check = $db->conta_linhas($recurso);
                 ?>
                     <input type="hidden" name="tabelas[<?php echo $name; ?>]" value="<?php echo $check >= 0 ? '1' : '0'; ?>" />
