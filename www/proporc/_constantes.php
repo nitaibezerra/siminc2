@@ -53,6 +53,10 @@ define('PFL_CGO_EQUIPE_ORCAMENTARIA', 1221);
  */
 define('PFL_ADMINISTRADOR', 1213);
 /**
+ * Perfil de consulta
+ */
+define('PFL_CONSULTA', 1232);
+/**
  * Transição de Análise SPO para Envio à SOF.
  */
 define('AESDID_SPO_PARA_SIOP', 2732);

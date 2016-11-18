@@ -72,11 +72,11 @@ require(APPRAIZ . 'includes/cabecalho.inc');
         var result = true;
         $.each($('#'+idBotao).parent('form').serializeArray(),function(index,val){
             if(val.name == 'requisicao'){
-                $('[name='+val.name+']').val(requisicao);
+                $('[name="'+val.name+'"]').val(requisicao);
                 return;
             }
-            if($('[name='+val.name+']').is(':required') && val.value == ''){
-                var label = $('[name='+val.name+']').parent().parent().find('label').text().replace(':','');
+            if($('[name="'+val.name+'"]').is(':required') && val.value == ''){
+                var label = $('[name="'+val.name+'"]').parent().parent().find('label').text().replace(':','');
                 bootbox.alert('Selecione uma opção para o label ' + label);
                 result = false;
             }

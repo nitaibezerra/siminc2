@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 		Sistema Simec
 		Setor responsável: SPO-MEC
@@ -22,7 +22,7 @@ if (!$ppoid){
         alert('Não foi encontrado a proposta ativa para o Exercício de <?=$_SESSION['exercicio']?> !');
 	history.back(-1);
     </script>
-<?
+<?php
     exit;
 }
 
@@ -295,7 +295,7 @@ if(!isset($_POST['requisicao'])){
 	<td align="center" width="15%"><b>PRÓPRIOS<br>(b)</b></td>
 	<td align="center" width="15%"><b>TOTAL<br>(c=a+b)</b></td>
     </tr>
-<?  
+<?php
     $Query1 ="
         SELECT 
             codGrupo, 
@@ -355,7 +355,7 @@ if(!isset($_POST['requisicao'])){
                     </td>
                 </tr>	
                 <tr><td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td> <td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td> <td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td> <td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td></tr>
-<?          }
+<?php          }
 
             if ($grupoNovo == $grupo)
             {
@@ -386,7 +386,7 @@ if(!isset($_POST['requisicao'])){
                     <td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td> 
                     <td class="SemBordaCimaBaixo">&nbsp;&nbsp;</td>
                 </tr>
-<?		  	
+<?php
 
                 $grupo = $res[0];
             }
@@ -398,7 +398,7 @@ if(!isset($_POST['requisicao'])){
             <td class="SemBordaCimaBaixo" align="right"><?=number_format( ( $res[4]+$res[5] ) , 0, ',', '.')?></td> 
         </tr>						
 
-<?
+<?php
         }
         $c = ExecutaQuery (0,$ppoid,$unidade);
 ?>
@@ -414,7 +414,7 @@ if(!isset($_POST['requisicao'])){
             <td align="right"><b><?=number_format( ($c[0]+$c[1]) , 0, ',', '.')?></b></td>
         </tr>	
 
-<?
+<?php
     }
 ?>
 </table>
@@ -427,7 +427,7 @@ if(!isset($_POST['requisicao'])){
 	<td align="center" width="15%"><b>DESPESAS PROGRAMADAS</b></td>
 	<td align="center" width="15%"><b>SALDO A PROGRAMAR</b></td>
     </tr>		
-<?
+<?php
     $Query2 = "
         SELECT
             codigo, 

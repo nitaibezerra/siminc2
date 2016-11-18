@@ -7,11 +7,17 @@
  */
 $uoEquipeTecnica = in_array(PFL_UO_EQUIPE_TECNICA, pegaPerfilGeral($_SESSION['usucpf'])) ? 1 : 0;
 $where = '';
-if(isset($_GET['unicod']) && $_GET['unicod'] != ''){
+if($_GET['unicod']){
     $where = "AND uni.unicod = '". $_GET['unicod']."'";
 }
-if(isset($_GET['esdid']) && $_GET['esdid'] != ''){
+if($_GET['esdid']){
     $where .= "AND esd.esdid = '". $_GET['esdid']."'";
+}
+if($_GET['formprelimite']['unicod']){
+    $where = "AND uni.unicod = '". $_GET['formprelimite']['unicod']."'";
+}
+if($_GET['formprelimite']['esdid']){
+    $where .= "AND esd.esdid = '". $_GET['formprelimite']['esdid']."'";
 }
 $query = "
     SELECT
@@ -35,7 +41,6 @@ $query = "
         $where
         $whereUO
     order by uni.unicod
-;
 ";
 $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
 $listagem->setCabecalho(array('Unidade', 'Usuário' , 'Responsável','Última Alteração','Status', 'Modelo Preenchido'));
@@ -48,3 +53,4 @@ $listagem->setAcaoComoCondicional('user', array(array('campo' => 'uo_equipe_tecn
 $listagem->addCallbackDeCampo('arquivo', 'arquivoPreenchido');
 $listagem->turnOnPesquisator();
 $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+

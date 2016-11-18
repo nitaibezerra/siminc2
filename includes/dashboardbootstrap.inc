@@ -113,21 +113,29 @@ function montaBotaoInicio($params) {
 function montaComunicados() {
     include_once APPRAIZ . 'includes/SpoComunicados/classes/Comunicado.php';
     $modulo = MODULO;
-    $params = array();
-    $params['texto'] = 'Editar Comunicados';
-    $params['tipo'] = 'listar';
-    $params['url'] = "{$modulo}.php?modulo=principal/comunicado/listar&acao=A";
-    montaBotaoInicio($params);
+    $listaPerfil = pegaperfilgeral();
+    
+    if(
+        in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+        || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+    ){
+        $params = array();
+        $params['texto'] = 'Editar Comunicados';
+        $params['tipo'] = 'listar';
+        $params['url'] = "{$modulo}.php?modulo=principal/comunicado/listar&acao=A";
+        montaBotaoInicio($params);
 
-    $params = array();
-    $params['texto'] = 'Cadastrar Comunicado';
-    $params['tipo'] = 'cadastrar';
-    $params['url'] = "{$modulo}.php?modulo=principal/comunicado/cadastrar&acao=A";
-    montaBotaoInicio($params);
-
+        $params = array();
+        $params['texto'] = 'Cadastrar Comunicado';
+        $params['tipo'] = 'cadastrar';
+        $params['url'] = "{$modulo}.php?modulo=principal/comunicado/cadastrar&acao=A";
+        montaBotaoInicio($params);
+        
     echo <<<HTML
     <span class="subTituloCaixa">&nbsp;</span>
 HTML;
+    }
+    
     $comunicado = new Comunicado($modulo);
     $listaComunicado = $comunicado->listaInicial();
     if ($listaComunicado !== FALSE) {
@@ -144,5 +152,5 @@ HTML;
         endforeach;
     }else {
         echo "<p style=\"clear:both;color:#FFF\"><br/> Não existem comunicados cadastrados.</p>";
-    };
+    }
 }

@@ -13,6 +13,9 @@ include APPRAIZ . "includes/dashboardbootstrap.inc";
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
+
+$listaPerfil = pegaperfilgeral();
+
 ?>
 <link href="/includes/spo.css" rel="stylesheet" media="screen">
 <script type="text/javascript" src="/includes/funcoesspo.js"></script>
@@ -30,6 +33,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 <table width="95%" class="tabela" bgcolor="#f5f5f5" border="0" cellSpacing="1" cellPadding="3" align="center">
     <tr align="center">
         <td align="center">
+        <?php
+        if(
+            in_array(PFL_UO_EQUIPE_TECNICA, $listaPerfil)
+            || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+            || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+        ){
+        ?>
             <div id="divLiberacaoFinanceira" class="divGraf">
                 <span class="tituloCaixa">PLOA <?php echo $_SESSION['exercicio'] + 1; ?></span>
                 <?php
@@ -39,45 +49,69 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params['url'] = 'proporc.php?modulo=principal/gestaoploa/inicio&acao=A';
                 montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'Controle de Envio SIOP';
-                $params['tipo'] = 'log';
-                $params['url'] = 'proporc.php?modulo=principal/gestaoploa/controleenvio&acao=A';
-                montaBotaoInicio($params);
+                if(
+                    in_array(PFL_AD_EQUIPE_TECNICA, $listaPerfil)
+                    || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+                    || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+                ){
+                    $params = array();
+                    $params['texto'] = 'Controle de Envio SIOP';
+                    $params['tipo'] = 'log';
+                    $params['url'] = 'proporc.php?modulo=principal/gestaoploa/controleenvio&acao=A';
+                    montaBotaoInicio($params);
+                }
                 $params = array();
 
                 $params['texto'] = 'Pré-Limites Pessoal, Benefícios e Pensões';
                 $params['tipo'] = 'listar';
                 $params['url'] = 'proporc.php?modulo=principal/prelimite/pessoal&acao=A';
                 montaBotaoInicio($params);
-                ?>
-                <span class="subTituloCaixa">Relatórios</span>
-                <?php
-                $params = array();
-                $params['texto'] = 'Extrato Completo';
-                $params['tipo'] = 'relatorio';
-                $params['url'] = 'proporc.php?modulo=relatorio/gestaoploa/extrato&acao=A';
-                montaBotaoInicio($params);
-                ?>
 
+                if(
+                    in_array(PFL_AD_EQUIPE_TECNICA, $listaPerfil)
+                    || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+                    || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+                ){
+                    echo '<span class="subTituloCaixa">Relatórios</span>';
+                    
+                    $params = array();
+                    $params['texto'] = 'Extrato Completo';
+                    $params['tipo'] = 'relatorio';
+                    $params['url'] = 'proporc.php?modulo=relatorio/gestaoploa/extrato&acao=A';
+                    montaBotaoInicio($params);
+                }
+
+                ?>
 
             </div>
+        <?php } ?>
             <div id="divAcoes" class="divGraf" style="cursor: pointer;">
                 <span class="tituloCaixa">Ações</span>
                 <?php
-                $params = array();
-                $params['texto'] = 'Extrato completo das Ações ' . $_SESSION['exercicio'];
-                $params['tipo'] = 'snapshot';
-                $params['url'] = 'proporc.php?modulo=principal/dadosacoes/listadadosacoes&acao=A';
-                montaBotaoInicio($params);
-                ?>
-                <span class="subTituloCaixa">Relatórios</span>
-                <?php
-                $params = array();
-                $params['texto'] = 'Espelho das Ações';
-                $params['tipo'] = 'espelho';
-                $params['url'] = 'proporc.php?modulo=relatorio/espelho/espelhoacoes&acao=A';
-                montaBotaoInicio($params);
+                if(
+                       in_array(PFL_UO_EQUIPE_TECNICA, $listaPerfil)
+                    || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+                    || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+                ){
+                    $params = array();
+                    $params['texto'] = 'Extrato completo das Ações ' . $_SESSION['exercicio'];
+                    $params['tipo'] = 'snapshot';
+                    $params['url'] = 'proporc.php?modulo=principal/dadosacoes/listadadosacoes&acao=A';
+                    montaBotaoInicio($params);
+                }
+
+                if(
+                    in_array(PFL_AD_EQUIPE_TECNICA, $listaPerfil)
+                    || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+                    || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+                ){
+                    echo '<span class="subTituloCaixa">Relatórios</span>';
+                    $params = array();
+                    $params['texto'] = 'Espelho das Ações';
+                    $params['tipo'] = 'espelho';
+                    $params['url'] = 'proporc.php?modulo=relatorio/espelho/espelhoacoes&acao=A';
+                    montaBotaoInicio($params);
+                }
                 ?>
             </div>
             <div id="divManuais" class="divCap" style="cursor:pointer;">
@@ -91,6 +125,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
                 ?>
             </div>
+        <?php
+            if(
+                in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $listaPerfil)
+                || in_array(PFL_ADMINISTRADOR, $listaPerfil)
+            ){
+        ?>
             <div id="divLimites" class="divGraf" style="background-color: #18bc9c">
                 <span class="tituloCaixa">Parâmetros SPO para PLOA <?php echo $_SESSION['exercicio'] + 1; ?></span>
                 <?php
@@ -112,18 +152,20 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params['url'] = 'proporc.php?modulo=principal/despesas/carga&acao=A';
                 montaBotaoInicio($params);
 
-                $params = array();
-                $ploa = $_SESSION['exercicio'] + 1;
-                $params['texto'] = "Período de Preenchimento da Proposta (PLOA {$ploa})";
-                $params['tipo'] = 'calendario';
-                $params['url'] = 'proporc.php?modulo=principal/periodoreferencia/periodoreferencia&acao=A';
-                montaBotaoInicio($params);
+                # Em desenvolvimento
+//                $params = array();
+//                $ploa = $_SESSION['exercicio'] + 1;
+//                $params['texto'] = "Período de Preenchimento da Proposta (PLOA {$ploa})";
+//                $params['tipo'] = 'calendario';
+//                $params['url'] = 'proporc.php?modulo=principal/periodoreferencia/periodoreferencia&acao=A';
+//                montaBotaoInicio($params);
 
-                $params = array();
-                $ploa = $_SESSION['exercicio'] + 1;
-                $params['texto'] = "Período de Pré-Limite";
-                $params['tipo'] = 'calendario';
-                montaBotaoInicio($params);
+                # Em desenvolvimento
+//                $params = array();
+//                $ploa = $_SESSION['exercicio'] + 1;
+//                $params['texto'] = "Período de Pré-Limite";
+//                $params['tipo'] = 'calendario';
+//                montaBotaoInicio($params);
                 ?>
                 <span class="subTituloCaixa">Relatórios</span>
                 <?php
@@ -151,24 +193,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params['url'] = 'proporc.php?modulo=relatorio/qdds/listarUosQdd&acao=A&tipo=showLimites';
                 montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'UO e Grupo de Colunas';
-                $params['tipo'] = 'relatorio';
-                $params['url'] = '';
-                montaBotaoInicio($params);
+//                $params = array();
+//                $params['texto'] = 'UO e Grupo de Colunas';
+//                $params['tipo'] = 'relatorio';
+//                $params['url'] = '';
+//                montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'QDD por PO / Subação';
-                $params['tipo'] = 'relatorio';
-                $params['url'] = '';
-                montaBotaoInicio($params);
+//                $params = array();
+//                $params['texto'] = 'QDD por PO / Subação';
+//                $params['tipo'] = 'relatorio';
+//                $params['url'] = '';
+//                montaBotaoInicio($params);
                 ?>
             </div>
+        <?php } ?>
             <div id="divComunicados" class="divCap">
                 <span class="tituloCaixa">Comunicados</span>
-                <?php
-                montaComunicados();
-                ?>
+                <?php montaComunicados(); ?>
             </div>
         </td>
     </tr>
