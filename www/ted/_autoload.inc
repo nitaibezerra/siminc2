@@ -8,13 +8,13 @@ set_include_path(implode(PATH_SEPARATOR, array(
     ))
 );
 
-include APPRAIZ . 'includes/classes/Modelo.class.inc';
-include APPRAIZ . 'ted/classes/Ted/Connect.php';
-include APPRAIZ . 'ted/classes/Ted/Model/Utils.php';
+include APPRAIZ. 'includes/classes/Modelo.class.inc';
+include APPRAIZ. 'ted/classes/Ted/Connect.php';
+include APPRAIZ. 'ted/classes/Ted/Model/Utils.php';
 
 function ted_autoload($classe) {
     $classPath = str_replace('_', DIRECTORY_SEPARATOR, $classe);
-    include_once "$classPath.php";
+    include_once APPRAIZ. 'ted/classes/'. "$classPath.php";
 }
 
 spl_autoload_register('ted_autoload');
