@@ -14,7 +14,8 @@ include APPRAIZ. 'ted/classes/Ted/Model/Utils.php';
 
 function ted_autoload($classe) {
     $classPath = str_replace('_', DIRECTORY_SEPARATOR, $classe);
-    include_once APPRAIZ. 'ted/classes/'. "$classPath.php";
+    include_once "$classPath.php";
+echo "$classPath.php ";
 }
 
 spl_autoload_register('ted_autoload');
