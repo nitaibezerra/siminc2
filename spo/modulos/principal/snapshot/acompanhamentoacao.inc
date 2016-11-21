@@ -13,7 +13,7 @@ try{
             case 'cargaAcao':
                 $modelo->executaCargaAcao($_POST['formacompanhamentoacao']['prfid']);
                 $modelo->getFlashMessage()->addMensagem('Carga executada com sucesso!', Simec_Helper_FlashMessage::SUCESSO);
-                break;
+            break;
         }
     }
 }catch(Exception $e) {

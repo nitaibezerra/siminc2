@@ -163,7 +163,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params = array();
                 $params['texto'] = 'Acompanhamento de Ações';
                 $params['tipo'] = 'snapshot';
-                $params['url'] = 'spo.php?modulo=principal/snapshot/acompanhamentoAcao&acao=A';
+                $params['url'] = 'spo.php?modulo=principal/snapshot/acompanhamentoacao&acao=A';
                 montaBotaoInicio($params);
 
                 $params = array();
