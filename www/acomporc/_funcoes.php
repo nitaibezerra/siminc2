@@ -604,9 +604,9 @@ function apresentarMonitorInterno($dados)
         LEFT JOIN seguranca.usuario usu USING(usucpf)
         WHERE pfu.pflcod = %d
 DML;
-    $stmt = sprintf($sql, PFL_CGP_GESTAO);
+    $stmt = sprintf($sql, PFL_MONITOR_INTERNO);
     $combo = inputCombo('usucpf', $stmt, $dados['usucpf'], 'usucpf',array('return'=>true));
-    $pflcod = PFL_CGP_GESTAO;
+    $pflcod = PFL_MONITOR_INTERNO;
     echo <<<HTML
     <div class="col-md-12">
         <form class="form-horizontal" id="form-responsavel" method="POST" role="form">

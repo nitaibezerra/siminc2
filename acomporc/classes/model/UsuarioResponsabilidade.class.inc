@@ -115,7 +115,7 @@ DML;
             AND prfid = '{$this->arAtributos['prfid']}' AND pflcod  = '%s'
             AND acacod IS NULL
 DML;
-        if(!$this->executar(sprintf($query, PFL_CGP_GESTAO))){
+        if(!$this->executar(sprintf($query, PFL_MONITOR_INTERNO))){
             return false;
         }
 
@@ -125,7 +125,7 @@ DML;
                 INSERT INTO {$this->stNomeTabela}(pflcod, usucpf, unicod, prfid)
                 VALUES(%d, '%s', '%s', %d)
 DML;
-            $stmt = sprintf($query, PFL_CGP_GESTAO, $this->arAtributos['usucpf'], $this->arAtributos['unicod'], $this->arAtributos['prfid']);
+            $stmt = sprintf($query, PFL_MONITOR_INTERNO, $this->arAtributos['usucpf'], $this->arAtributos['unicod'], $this->arAtributos['prfid']);
 
             if (!$this->executar($stmt)) {
                 return false;
