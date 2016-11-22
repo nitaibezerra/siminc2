@@ -70,11 +70,11 @@
                             <input type="hidden" name="acpidHidden[<?=$po['sspid']?>]" value="<?=$po['acpid']?>">
                             <? if (!$apenasListar) : ?>
                             <span class="input-group-addon" id="basic-addon1"><strong>Realizado</strong></span>
-                            <input type="text" name="realizadoloa[<?=$po['sspid'] ?>]" id="realizadoloa<?= $po['plocod'] ?>" class="form-control" maxlength="11" value="<?=$po['metafisicarealizada']?>" onkeyup="this.value = mascaraglobal('###.###.###', this.value);" onblur="MouseBlur(this);mascaraglobal('###.###.###', this.value);">
+                            <input type="text" name="realizadoloa[<?=$po['sspid'] ?>]" id="realizadoloa<?= $po['plocod'] ?>" class="form-control" maxlength="18" value="<?=simec_number_format($po['metafisicarealizada']);?>" onkeyup="this.value = mascaraglobal('###.###.###.###,##', this.value);" onblur="MouseBlur(this);mascaraglobal('###.###.###.###,##', this.value);">
                             <? else: ?>
                                 <?if ($po['metafisicarealizada'] != ''): ?>
                                 <span class="input-group-addon" id="basic-addon1"><strong>Realizado</strong></span>
-                                <input type="text" name="realizadoloa[<?=$po['sspid'] ?>]" id="realizadoloa<?= $po['plocod'] ?>" class="form-control" maxlength="11" value="<?=$po['metafisicarealizada']?>" onkeyup="this.value = mascaraglobal('###.###.###', this.value);" onblur="MouseBlur(this);mascaraglobal('###.###.###', this.value);">
+                                <input type="text" name="realizadoloa[<?=$po['sspid'] ?>]" id="realizadoloa<?= $po['plocod'] ?>" class="form-control" maxlength="18" value="<?=$posimec_number_format($po['metafisicarealizada']);?>" onkeyup="this.value = mascaraglobal('###.###.###.###,##', this.value);" onblur="MouseBlur(this);mascaraglobal('###.###.###.###,##', this.value);">
                                 <? else: ?>
                                 <label class="control-label">Realizado:</label>
                                 <p class="form-control-static">Sem meta para o acompanhamento.</p>

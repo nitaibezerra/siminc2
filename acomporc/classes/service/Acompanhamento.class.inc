@@ -240,7 +240,7 @@ class Acomporc_Service_Acompanhamento extends Spo_Service_Abstract {
                 'sspid' => $chave,
                 'aclid' => $dados['aclid'],
                 'prfid' => $dados['prfid'],
-                'metafisicarealizada' => $dados['realizadoloa'][$chave],
+                'metafisicarealizada' => $this->formatarValorMonetarioParaBanco($dados['realizadoloa'][$chave]),
                 'dataultimatualizacao' => 'now()'
             );
         }
