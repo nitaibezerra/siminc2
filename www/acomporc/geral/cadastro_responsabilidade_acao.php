@@ -264,7 +264,7 @@ HTML;
         function marcarAcao(obj)
         {
             if (obj.checked) {
-                if (!jQuery('#usuacaresp option[value="'+obj.value+']"')[0]) {
+                if (!jQuery('#usuacaresp option[value="'+obj.value+'"]')[0]) {
                     jQuery("#usuacaresp").append('<option value="'+obj.value+'">'+obj.parentNode.parentNode.cells[1].innerHTML+'</option>');
                 }
             } else {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 	/**
 	 * Sistema Integrado de Monitoramento do Ministério da Educação
