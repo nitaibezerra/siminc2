@@ -50,8 +50,8 @@ function getDadosIndicador($indid, $publico=null) {
 		inner join painel.coleta col on col.colid = ind.colid
 		where ind.indid = $indid";
 	}else{
-		$sql = "SELECT * FROM dblink ('".$dbPainelPublico."',
-				'SELECT 
+		$sql = "
+                SELECT 
 					ind.indid,
 					unm.unmdesc,
 					tip.tpidsc,
@@ -63,12 +63,12 @@ function getDadosIndicador($indid, $publico=null) {
 					est.estdsc,
 					indnome, indobjetivo, indformula, indtermos, indfontetermo, 
 					ume.umedesc, reg.regdescricao, exo.exodsc, indobservacao,coldsc, 
-					(case ind.indescala when ''t'' then ''Sim'' when ''f'' then ''Não'' end)::varchar(3) as escala, 
-					(case ind.indcumulativo when ''S'' then ''Sim'' when ''N'' then ''Não'' when ''A'' then ''Anual'' end)::varchar(3) as qndtacumulada,
-					(case ind.indqtdevalor when ''t'' then ''Sim'' when ''f'' then ''Não'' end)::varchar(3) as valormonetario, 
-					(case ind.indcumulativovalor when ''S'' then ''Sim'' when ''N'' then ''Não'' when ''A'' then ''Anual'' end)::varchar(3) as valoracumulado,
-					(case ind.indpublicado when ''t'' then ''Sim'' when ''f'' then ''Não'' end)::varchar(3) as publicado, 
-					(case ind.indpublico when ''t'' then ''Sim'' when ''f'' then ''Não'' end)::varchar(3) as publico
+					(case ind.indescala when 't' then 'Sim' when 'f' then 'Não' end)::varchar(3) as escala, 
+					(case ind.indcumulativo when 'S' then 'Sim' when 'N' then 'Não' when 'A' then 'Anual' end)::varchar(3) as qndtacumulada,
+					(case ind.indqtdevalor when 't' then 'Sim' when 'f' then 'Não' end)::varchar(3) as valormonetario, 
+					(case ind.indcumulativovalor when 'S' then 'Sim' when 'N' then 'Não' when 'A' then 'Anual' end)::varchar(3) as valoracumulado,
+					(case ind.indpublicado when 't' then 'Sim' when 'f' then 'Não' end)::varchar(3) as publicado, 
+					(case ind.indpublico when 't' then 'Sim' when 'f' then 'Não' end)::varchar(3) as publico
 				FROM painel.indicador ind
 				INNER JOIN painel.unidademedicao unm ON unm.unmid = ind.unmid
 				inner join painel.tipoindicador tip ON tip.tpiid = ind.tpiid
@@ -81,35 +81,9 @@ function getDadosIndicador($indid, $publico=null) {
 				inner join painel.unidademeta ume on ume.umeid = ind.umeid
 				inner join painel.regionalizacao reg on reg.regid = ind.regid
 				inner join painel.eixo exo on exo.exoid = ind.exoid
-				inner join painel.coleta col on col.colid = ind.colid;'
-				) AS rs (
-					indid integer,
-					unmdesc varchar(100),
-					tpidsc varchar(100),
-					secretaria varchar(100),
-					secdsc varchar(100),
-					acadsc varchar(100),
-					perdsc varchar(100),
-					perdata varchar(100),
-					estdsc varchar(100),
-					indnome varchar(250), 
-					indobjetivo varchar(1000), 
-					indformula varchar(1000), 
-					indtermos varchar(1000), 
-					indfontetermo varchar(1000), 
-					umedesc varchar(100), 
-					regdescricao varchar(200), 
-					exodsc varchar(50), 
-					indobservacao varchar(2000),
-					coldsc varchar(100), 
-					escala varchar(3), 
-					qndtacumulada varchar(3), 
-					valormonetario varchar(3), 
-					valoracumulado varchar(3), 
-					publicado varchar(3), 
-					publico varchar(3)
-				)
-				where indid = $indid";
+				inner join painel.coleta col on col.colid = ind.colid
+				where
+                    ind.indid = $indid";
 	}
 	return $db->pegaLinha($sql);
 }
