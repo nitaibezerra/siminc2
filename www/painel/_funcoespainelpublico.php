@@ -101,10 +101,11 @@ function getDetalhesIndicador($indid, $publico=null) {
 			where
 				indid = $indid
 			order by
-				det.tdiid,tip.tidid";
-	if($publico){
-		$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (tdidsc varchar(255), tdistatus varchar(1), tdiordem integer, tdinumero integer, tidid integer, tiddsc varchar(255), tidstatus varchar(1))";
-	}
+				det.tdiid,
+                tip.tidid";
+//	if($publico){
+//		$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (tdidsc varchar(255), tdistatus varchar(1), tdiordem integer, tdinumero integer, tidid integer, tiddsc varchar(255), tidstatus varchar(1))";
+//	}
 	$arrDados = $db->carregar($sql);
 	
 	if($arrDados):
@@ -125,7 +126,7 @@ function dadosSincronizacao() {
 	global $db, $dbPainelPublico;
 	
 	$sql = "SELECT indid FROM painel.indicador WHERE indid = ".$_SESSION['indid'];
-	$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (indid integer)";
+//	$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (indid integer)";
 	$existeIndPP = $db->pegaUm($sql);
 	
 	// pegando o formato do indicador
@@ -162,25 +163,25 @@ function dadosSincronizacao() {
 	
 	if($existeIndPP) {
 		if($formatoinput['unmid'] == UNIDADEMEDICAO_PERCENTUAL || $formatoinput['unmid'] == UNIDADEMEDICAO_RAZAO){
-			$qtde = "''<center><span style=\"color:#990000\" >N/A</span></center>'' as qtde";
+			$qtde = "'<center><span style=\"color:#990000\" >N/A</span></center>' as qtde";
 		}else{
-			$qtde = "''<div style=\"width:100%;text-align:right;color:#0066CC\">'' || to_char(sehqtde, ''".str_replace(array(".",",","#"),array("g","d","9"),$formatoinput['mascara'])."'') || ''</div>'' as qtde
-					   ".(($formatoinput['campovalor'])?", ''<div style=\"width:100%;text-align:right;color:#0066CC\">'' || to_char(sehvalor, ''".str_replace(array(".",",","#"),array("g","d","9"),$formatoinput['campovalor']['mascara'])."'') || ''</div>'' as valor":"");
+			$qtde = "'<div style=\"width:100%;text-align:right;color:#0066CC\">' || to_char(sehqtde, '".str_replace(array(".",",","#"),array("g","d","9"),$formatoinput['mascara'])."') || '</div>' as qtde
+					   ".(($formatoinput['campovalor'])?", '<div style=\"width:100%;text-align:right;color:#0066CC\">' || to_char(sehvalor, '".str_replace(array(".",",","#"),array("g","d","9"),$formatoinput['campovalor']['mascara'])."') || '</div>' as valor":"");
 		}
 	
-		$sql = "SELECT ''<center><img src=../imagens/excel.gif style=cursor:pointer; title=''\'Exportar CSV\''' onclick=exportarsehcsv(''|| seh.sehid ||'',''\'sim\''');> <img border=0 onclick=excluirSerieHistoricaPainelPublico(''||sehid||''); style=cursor: pointer; title=Excluir src=/imagens/excluir.gif></center>'' as acoes,
-					   to_char(seh.sehdtcoleta,''DD/MM/YYYY'') as data, 
+		$sql = "SELECT '<center><img src=../imagens/excel.gif style=cursor:pointer; title=''Exportar CSV'' onclick=exportarsehcsv('|| seh.sehid ||',''sim'');> <img border=0 onclick=excluirSerieHistoricaPainelPublico('||sehid||'); style=cursor: pointer; title=Excluir src=/imagens/excluir.gif></center>' as acoes,
+					   to_char(seh.sehdtcoleta,'DD/MM/YYYY') as data, 
 					   dpe.dpedsc,
 					   $qtde
 				FROM painel.seriehistorica seh 
 				LEFT JOIN painel.detalheperiodicidade dpe ON dpe.dpeid = seh.dpeid 
-				WHERE seh.indid = ".$_SESSION['indid']." AND (sehstatus=''A'' OR sehstatus=''H'') 
+				WHERE seh.indid = ".$_SESSION['indid']." AND (sehstatus='A' OR sehstatus='H') 
 				ORDER BY dpedatainicio";
-		if($formatoinput['campovalor']){
-			$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (acoes varchar, data varchar(10), dpedsc varchar(50), qtde varchar, valor varchar)";
-		}else{
-			$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (acoes varchar, data varchar(10), dpedsc varchar(50), qtde varchar)";
-		}
+//		if($formatoinput['campovalor']){
+//			$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (acoes varchar, data varchar(10), dpedsc varchar(50), qtde varchar, valor varchar)";
+//		}else{
+//			$sql = "SELECT * FROM dblink ('".$dbPainelPublico."','".$sql."') AS rs (acoes varchar, data varchar(10), dpedsc varchar(50), qtde varchar)";
+//		}
 		
 		echo "<table class=tabela bgcolor=#f5f5f5 cellSpacing=1 cellPadding=3 align=center>
 			  <tr>
