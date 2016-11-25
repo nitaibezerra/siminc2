@@ -85,7 +85,7 @@ if($acaid) {
 </tr>
 
 <tr>
-	<td class="SubTituloDireita" valign="top">Desafios Metas PNE vinculadas:</td>
+	<td class="SubTituloDireita" valign="top">Desafios Metas PNC vinculadas:</td>
     <td >
         <table cellpadding="0" border="0" width="98%"  id="orcamento"  style="BORDER-RIGHT: #C9C9C9 1px solid; BORDER-TOP: #C9C9C9 1px solid; BORDER-LEFT: #C9C9C9 1px solid; BORDER-BOTTOM: #C9C9C9 1px solid;">
 		<tr>
@@ -113,7 +113,7 @@ if($acaid) {
 		} 
 		?>
         <tr>
-			<td align="right" colspan="6"><input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres" value="Vincular meta PNE"></td>
+			<td align="right" colspan="6"><input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres" value="Vincular meta PNC"></td>
 		</tr>
         </table>
     </td>

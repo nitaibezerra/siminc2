@@ -1762,7 +1762,7 @@ function pegaMapasCadastrados($usucpf = null,$die = true)
 			<?php if($_GET['mapid'] ||  $_SESSION['painel_vars']['mapid']): ?>
 				<tr>
 					<td class="SubTituloDireita">Camadas:</td>
-					<td ><?
+					<td ><?php
 						$_GET['mapid'] = $_GET['mapid'] ? $_GET['mapid'] : $_SESSION['painel_vars']['mapid'];
 						$grupotm = $db->carregar("	SELECT 
 														'tipmunici_'||gtm.gtmid as codigo,
@@ -1829,7 +1829,7 @@ function pegaMapasCadastrados($usucpf = null,$die = true)
 			<?php if($_GET['mapid'] ||  $_SESSION['painel_vars']['mapid']): ?>
 				<tr>
 					<td class="SubTituloDireita">Camadas:</td>
-					<td ><?
+					<td ><?php
 						$_GET['mapid'] = $_GET['mapid'] ? $_GET['mapid'] : $_SESSION['painel_vars']['mapid'];
 						$grupotm = $db->carregar("	SELECT 
 														'tipmunici_'||gtm.gtmid as codigo,
@@ -1970,7 +1970,7 @@ function gerarXml() {
 	endif;
 }
 
-//if(!function_exists("montaBalaoTipoMunicipio")) {
+if(!function_exists("montaBalaoTipoMunicipio")) {
 
 	function montaBalaoTipoMunicipio()
 	{
@@ -2241,7 +2241,7 @@ function  instituicoesresidenciamedica() {
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) from mapa.tema t
 				inner join mapa.temadado td ON td.tmaid = t.tmaid
 				where t.tmaid in ( 593, 594, 595, 596, 597, 598, 599, 600 , 657) and muncod in('".implode("','",$arrMuncod)."')
@@ -2281,7 +2281,7 @@ function  instituicoesresidenciamedica() {
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) as valor from mapa.tema t
 				inner join mapa.temadado td ON td.tmaid = t.tmaid
 				where t.tmaid in ( 601, 602, 603, 604, 605 ) and muncod in('".implode("','",$arrMuncod)."')
@@ -2321,7 +2321,7 @@ function  instituicoesresidenciamedica() {
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select \"Existentes_Cirurgia Geral\"::numeric as v ,
 			  \"Existentes_Clínica Médica\"::numeric as x ,
 			  \"Existentes_Ginecologia e Obstetrícia\"::numeric as o,
@@ -2376,7 +2376,7 @@ function  instituicoesresidenciamedica() {
 		<tr>
 			<td width="50%" valign="top">
 			<p><b>Contratação de Professores</b></p>
-			<?
+			<?php
 			$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) from mapa.tema t
 					inner join mapa.temadado td ON td.tmaid = t.tmaid
 					where t.tmaid in ( 607, 608, 609) and muncod in('".implode("','",$arrMuncod)."')
@@ -2386,7 +2386,7 @@ function  instituicoesresidenciamedica() {
 			</td>
 			<td width="50%" valign="top">
 			<p><b>Mestres e Doutores na Área da Saúde</b></p>
-			<?
+			<?php
 			$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) from mapa.tema t
 					inner join mapa.temadado td ON td.tmaid = t.tmaid
 					where t.tmaid in ( 610, 611, 612 ) and muncod in('".implode("','",$arrMuncod)."')
@@ -2707,7 +2707,7 @@ function  instituicoesresidenciamedica() {
 		$db->monta_lista_simples($arrLista,$cabecalho,50,5,'N','100%',$par2);
 	}
 
-//}
+}
 
 
 function exibeMunicipiosInstituicao()
@@ -2737,7 +2737,7 @@ function exibeMunicipiosInstituicao()
 	
 }
 	
-// if(!function_exists("montaBalao")) {
+ if(!function_exists("montaBalao")) {
 
 	function montaBalao() {
 		global $db;
@@ -3086,11 +3086,11 @@ function abreMunInsPopUp(muncod)
 	
 	<tr>
 		<td colspan=2 class="SubtituloCentro">
-		<?
+		<?php
 		$sql = "select leitos_observacao from carga.medicos_planilha_base where muncod = '{$_REQUEST['muncod']}';";
 		$leitos_observacao = $db->pegaUm($sql);
 		?>
-		<? if($leitos_observacao):?>
+		<?php if($leitos_observacao):?>
 			<script>
 				function exibeLeitosObservacao()
 				{
@@ -3098,13 +3098,13 @@ function abreMunInsPopUp(muncod)
 				}
 			</script>
 			<img src='../imagens/consultar.gif' style="cursor:pointer"  onclick="exibeLeitosObservacao(<?=$_REQUEST['muncod']?>)"  />
-		<? endif;?>
+		<?php endif;?>
 		Leitos SUS
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) as valor from mapa.tema t
 				inner join mapa.temadado td ON td.tmaid = t.tmaid
 				where t.tmaid in ( 593, 594, 595, 596, 597, 598, 599, 600 ,657) and muncod = '{$_REQUEST['muncod']}'
@@ -3138,9 +3138,9 @@ function abreMunInsPopUp(muncod)
 		$db->monta_lista_simples($arrDados,array(),10000,5,'N','100%',$par2);
 		?>
 		
-		<? if($leitos_observacao):?>
+		<?php if($leitos_observacao):?>
 			<b><?=$leitos_observacao;?></b>
-		<? endif;?>
+		<?php endif;?>
 		
 		</td>
 	</tr>
@@ -3149,7 +3149,7 @@ function abreMunInsPopUp(muncod)
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) as valor from mapa.tema t
 				inner join mapa.temadado td ON td.tmaid = t.tmaid
 				where t.tmaid in ( 601, 602, 603, 604, 605 ) and muncod = '{$_REQUEST['muncod']}'
@@ -3189,7 +3189,7 @@ function abreMunInsPopUp(muncod)
 	</tr>
 	<tr>
 		<td colspan=2>
-		<?
+		<?php
 		$sql = "select \"Existentes_Cirurgia Geral\"::numeric as v ,
 			  \"Existentes_Clínica Médica\"::numeric as x ,
 			  \"Existentes_Ginecologia e Obstetrícia\"::numeric as o,
@@ -3244,7 +3244,7 @@ function abreMunInsPopUp(muncod)
 		<tr>
 			<td width="50%" valign="top">
 			<p><b>Contratação de Professores</b></p>
-			<?
+			<?php
 			$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) from mapa.tema t
 					inner join mapa.temadado td ON td.tmaid = t.tmaid
 					where t.tmaid in ( 607, 608, 609) and muncod = '{$_REQUEST['muncod']}'
@@ -3254,7 +3254,7 @@ function abreMunInsPopUp(muncod)
 			</td>
 			<td width="50%" valign="top">
 			<p><b>Mestres e Doutores na Área da Saúde</b></p>
-			<?
+			<?php
 			$sql = "select tmadsc, round(coalesce(sum(tmdvalor),0),0) from mapa.tema t
 					inner join mapa.temadado td ON td.tmaid = t.tmaid
 					where t.tmaid in ( 610, 611, 612 ) and muncod = '{$_REQUEST['muncod']}'
@@ -3543,7 +3543,7 @@ function abreMunInsPopUp(muncod)
 	
 	}
 
-// }
+ }
 
 function montaSQL($dados = false) {
 	global $db;
@@ -4052,39 +4052,39 @@ function carregarFiltroNormal()
 	?>
 	<form method="post" name="formulario" id="formulario">
 	<table align="center" border="0" class="tabela" cellpadding="3" cellspacing="1">
-		<? if($dadoscenario[0]) : ?>
+		<?php if($dadoscenario[0]) : ?>
 		<tr>
 			<td class="SubTituloDireita">Cenário:</td>
-			<td colspan="2"><? $db->monta_combo('cenario', $dadoscenario, 'S', '', '', '', '', '', 'N', 'cenario'); ?></td>
+			<td colspan="2"><?php $db->monta_combo('cenario', $dadoscenario, 'S', '', '', '', '', '', 'N', 'cenario'); ?></td>
 		</tr>
-		<? endif; ?>
-		<?
+		<?php endif; ?>
+		<?php
 		if($indicadores[0]) {
 			$n=0;
 			foreach($indicadores as $indicador) {
 				?>
 				<tr>
 					<td><input type="checkbox" name="icone[]" <?php echo $icone[$n] != "" ? "checked='checked'" : "" ?> onclick="if(this.checked){showOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);}else{clearOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);}"  id="id_<?=$indicador['indid'] ?>" value="<?=$indicador['indid'] ?>"  /></td>
-					<? if($dadosmapa['mapcontexto']=="t") : ?>
-					<td><? $db->monta_combo('cond['.$indicador['indid'].']', array(0 => array('codigo'=>'com','descricao'=>'Com'), 1 => array('codigo'=>'sem','descricao'=>'Sem')), 'S', '', '', '', '', '', 'N', ''); ?></td>
-					<? endif; ?>
+					<?php if($dadosmapa['mapcontexto']=="t") : ?>
+					<td><?php $db->monta_combo('cond['.$indicador['indid'].']', array(0 => array('codigo'=>'com','descricao'=>'Com'), 1 => array('codigo'=>'sem','descricao'=>'Sem')), 'S', '', '', '', '', '', 'N', ''); ?></td>
+					<?php endif; ?>
 					<td><img src="<?=$indicador['indicone'] ?>"></td>
 					<td><font size=1><?=$indicador['inddsc'] ?></font></td>
 				</tr>
-				<?
+				<?php
 				$n++;
 			}
 		}
 		?>
 		
-		<? if($dadosmapa['mapcontexto']=="t") : ?>
+		<?php if($dadosmapa['mapcontexto']=="t") : ?>
 		<tr>
 		<td colspan="2" class="SubTituloDireita">Contexto:</td>
-		<td colspan="2"><?
+		<td colspan="2"><?php
 		$db->monta_combo('contexto', array(0 => array('codigo'=>'OR','descricao'=>'OU'), 1 => array('codigo'=>'AND','descricao'=>'E')), 'S', '', '', '', '', '', 'N', 'contexto'); 
 		?></td>
 		</tr>
-		<? endif; ?>
+		<?php endif; ?>
 	</table>
 	<br>
 	<br>
@@ -4101,7 +4101,7 @@ function carregarFiltroNormal()
 			<tr>
 				<td class="SubTituloDireita" width="10%">População:</td>
 				<td width="10%">
-				<?
+				<?php
 				$opts = Array(Array('codigo'=>'>' ,'descricao'=>'Maior que'),
 							  Array('codigo'=>'>=','descricao'=>'Maior Igual a'),
 							  Array('codigo'=>'=' ,'descricao'=>'Igual a'),
@@ -4114,11 +4114,11 @@ function carregarFiltroNormal()
 				</td>
 				<td>
 				<?php if($filt_populacao == "entre"): ?>
-					<div id="div_qtd_populacao" style="display:none;" ><? echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"','',$qtd_populacao); ?></div>
-					<div id="div_ent_populacao" style="display:"><? echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ,'',$ent_populacao1); ?> à <? echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ,'',$ent_populacao2 ); ?></div>				
+					<div id="div_qtd_populacao" style="display:none;" ><?php echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"','',$qtd_populacao); ?></div>
+					<div id="div_ent_populacao" style="display:"><?php echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ,'',$ent_populacao1); ?> à <?php echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ,'',$ent_populacao2 ); ?></div>				
 				<?php else: ?>
-					<div id="div_qtd_populacao"><? echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"','',$qtd_populacao); ?></div>
-					<div id="div_ent_populacao" style="display:none;"><? echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ,'',$ent_populacao1); ?> à <? echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ,'',$ent_populacao2 ); ?></div>				
+					<div id="div_qtd_populacao"><?php echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"','',$qtd_populacao); ?></div>
+					<div id="div_ent_populacao" style="display:none;"><?php echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ,'',$ent_populacao1); ?> à <?php echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ,'',$ent_populacao2 ); ?></div>				
 				<?php endif; ?>
 				</td>
 			</tr>
@@ -4201,7 +4201,7 @@ function carregarFiltroNormal()
 	<tr>
 		<td>
 		<div style="display:none" id="agrup">
-		<p>Grupo de municípios: <?
+		<p>Grupo de municípios: <?php
 		$gtmid= !$gtmid ? 6 : $gtmid;
 		$sql = "SELECT 
 					gtm.gtmid as codigo,
@@ -4219,7 +4219,7 @@ function carregarFiltroNormal()
 		$db->monta_combo('gtmid', $sql, 'S', '', '', '', '', '200', 'N', 'gtmid','',$gtmid); 
 		?></p>
 	
-			<?
+			<?php
 			$agrupador_selecionado = $agrupador;
 			$agrupador_padrão = array(
 										'regiao' => array(
@@ -4568,7 +4568,7 @@ function comboTipoFiltro($name,$value = ">=",$value_inicio = null,$value_fim = n
 		<?php $name_fim = str_replace("cmb_filtro","cmb_filtro_fim",$name); echo campo_texto($name_fim,"N","S","",10,50,"","","","","","","",$value_fim) ?>
 		</span>
 	
-<?}
+<?php }
 
 function gerarRelatorio() {
 	global $db;
@@ -5516,7 +5516,7 @@ function restaurarItens() {
     addOption(document.getElementById('agrupador'),"Município","municipio",false);
     }
 
-<?
+<?php
 $sql = "SELECT * FROM mapa.indicador WHERE mapid='".$_SESSION['painel_vars']['mapid']."' and indstatus = 'A' ORDER BY indid";
 $indicadores = $db->carregar($sql);
 ?>
@@ -5535,7 +5535,7 @@ function carregarCamadaMapa()
 	
 	divCarregando();
 	
-	<?
+	<?php
 	$estufs = $db->carregarColuna("SELECT estuf FROM territoriosgeo.estado");
 	if($estufs) : 
 	 	foreach($estufs as $estuf) : 
@@ -5543,7 +5543,7 @@ function carregarCamadaMapa()
 	 	if(!estado['<?=$estuf ?>']) {
 	 		montarPoligonoEstado('<?=$estuf ?>');
 	 	}
-	 	<? 
+	 	<?php 
 	 	endforeach;
 	endif;
 	?>
@@ -5563,23 +5563,23 @@ function carregarCamadaMapa()
 		carregarTipoMunicipioPorGrupoMunicipio(jQuery('#camada').val().substring(10));
 		break;
 		case 'municipio':
-		<?
+		<?php
 		if($estufs) : 
 		 	foreach($estufs as $estuf) : 
-		 	?>carregaMunicipiosPorUF('<?=$estuf ?>');<? 
+		 	?>carregaMunicipiosPorUF('<?=$estuf ?>');<?php 
 		 	endforeach;
 		endif;
 		?>
 		break;
 	}
 		
-	<? if($indicadores[0]): ?>
-	<? foreach($indicadores as $indicador) : ?>
+	<?php if($indicadores[0]): ?>
+	<?php foreach($indicadores as $indicador) : ?>
 	if(pontoMarcadores['<?=$indicador['indicone'] ?>']) {
 	deleteOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);
 	}
-	<? endforeach; ?>
-	<? endif; ?>
+	<?php endforeach; ?>
+	<?php endif; ?>
 
 	divCarregado();
 	
@@ -5689,7 +5689,7 @@ function carregarMapasPontos(tipo) {
 	
 	divCarregando();
 	
-	<?
+	<?php
 	$estufs = $db->carregarColuna("SELECT estuf FROM territoriosgeo.estado");
 	if($estufs) : 
 	 	foreach($estufs as $estuf) : 
@@ -5697,7 +5697,7 @@ function carregarMapasPontos(tipo) {
 	 	if(!estado['<?=$estuf ?>']) {
 	 		montarPoligonoEstado('<?=$estuf ?>');
 	 	}
-	 	<? 
+	 	<?php 
 	 	endforeach;
 	endif;
 	?>
@@ -5717,23 +5717,23 @@ function carregarMapasPontos(tipo) {
 		carregarTipoMunicipioPorGrupoMunicipio(jQuery('#camada').val().substring(10));
 		break;
 		case 'municipio':
-		<?
+		<?php
 		if($estufs) : 
 		 	foreach($estufs as $estuf) : 
-		 	?>carregaMunicipiosPorUF('<?=$estuf ?>');<? 
+		 	?>carregaMunicipiosPorUF('<?=$estuf ?>');<?php 
 		 	endforeach;
 		endif;
 		?>
 		break;
 	}
 		
-	<? if($indicadores[0]): ?>
-	<? foreach($indicadores as $indicador) : ?>
+	<?php if($indicadores[0]): ?>
+	<?php foreach($indicadores as $indicador) : ?>
 	if(pontoMarcadores['<?=$indicador['indicone'] ?>']) {
 	deleteOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);
 	}
-	<? endforeach; ?>
-	<? endif; ?>
+	<?php endforeach; ?>
+	<?php endif; ?>
 	
 
 	
@@ -5773,7 +5773,7 @@ function mm(lat,lng,muncod) {
 }
 </script>
 
-<?
+<?php
 $sql = "SELECT * FROM mapa.mapa WHERE mapid='".$_SESSION['painel_vars']['mapid']."'";
 $dadosmapa = $db->pegaLinha($sql);
 
@@ -5783,37 +5783,37 @@ $dadoscenario = $db->carregar($sql);
 <div id="filtro_normal" >
 <form method="post" name="formulario" id="formulario">
 <table align="center" border="0" class="tabela" cellpadding="3" cellspacing="1">
-	<? if($dadoscenario[0]) : ?>
+	<?php if($dadoscenario[0]) : ?>
 	<tr>
 		<td class="SubTituloDireita">Cenário:</td>
-		<td colspan="2"><? $db->monta_combo('cenario', $dadoscenario, 'S', '', '', '', '', '', 'N', 'cenario'); ?></td>
+		<td colspan="2"><?php $db->monta_combo('cenario', $dadoscenario, 'S', '', '', '', '', '', 'N', 'cenario'); ?></td>
 	</tr>
-	<? endif; ?>
-	<?
+	<?php endif; ?>
+	<?php
 	if($indicadores[0]) {
 		foreach($indicadores as $indicador) {
 			?>
 			<tr>
 				<td><input type="checkbox" name="icone[]" onclick="if(this.checked){showOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);}else{clearOverlays(pontoMarcadores['<?=$indicador['indicone'] ?>']);}"  id="id_<?=$indicador['indid'] ?>" value="<?=$indicador['indid'] ?>"  /></td>
-				<? if($dadosmapa['mapcontexto']=="t") : ?>
-				<td><? $db->monta_combo('cond['.$indicador['indid'].']', array(0 => array('codigo'=>'com','descricao'=>'Com'), 1 => array('codigo'=>'sem','descricao'=>'Sem')), 'S', '', '', '', '', '', 'N', ''); ?></td>
-				<? endif; ?>
+				<?php if($dadosmapa['mapcontexto']=="t") : ?>
+				<td><?php $db->monta_combo('cond['.$indicador['indid'].']', array(0 => array('codigo'=>'com','descricao'=>'Com'), 1 => array('codigo'=>'sem','descricao'=>'Sem')), 'S', '', '', '', '', '', 'N', ''); ?></td>
+				<?php endif; ?>
 				<td><img src="<?=$indicador['indicone'] ?>"></td>
 				<td><font size=1><?=$indicador['inddsc'] ?></font></td>
 			</tr>
-			<?
+			<?php
 		}
 	}
 	?>
 	
-	<? if($dadosmapa['mapcontexto']=="t") : ?>
+	<?php if($dadosmapa['mapcontexto']=="t") : ?>
 	<tr>
 	<td colspan="2" class="SubTituloDireita">Contexto:</td>
-	<td colspan="2"><?
+	<td colspan="2"><?php
 	$db->monta_combo('contexto', array(0 => array('codigo'=>'OR','descricao'=>'OU'), 1 => array('codigo'=>'AND','descricao'=>'E')), 'S', '', '', '', '', '', 'N', 'contexto'); 
 	?></td>
 	</tr>
-	<? endif; ?>
+	<?php endif; ?>
 	<tr>
 		<td colspan="2" class="SubTituloDireita">Agrupado:</td>
 		<td colspan="2" >
@@ -5837,7 +5837,7 @@ $dadoscenario = $db->carregar($sql);
 		<tr>
 			<td class="SubTituloDireita" width="10%">População:</td>
 			<td width="10%">
-			<?
+			<?php
 			$opts = Array(Array('codigo'=>'>' ,'descricao'=>'Maior que'),
 						  Array('codigo'=>'>=','descricao'=>'Maior Igual a'),
 						  Array('codigo'=>'=' ,'descricao'=>'Igual a'),
@@ -5850,8 +5850,8 @@ $dadoscenario = $db->carregar($sql);
 			?>
 			</td>
 			<td>
-			<div id="div_qtd_populacao"><? echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"' ); ?></div>
-			<div id="div_ent_populacao" style="display:none;"><? echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ); ?> à <? echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ); ?></div>
+			<div id="div_qtd_populacao"><?php echo campo_texto('qtd_populacao', 'N', 'S', '', 10, 12, "##########", "", '', '', 0, 'id="qtd_populacao"' ); ?></div>
+			<div id="div_ent_populacao" style="display:none;"><?php echo campo_texto('ent_populacao1', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao1"' ); ?> à <?php echo campo_texto('ent_populacao2', 'N', 'S', '', 10, 12, "#########", "", '', '', 0, 'id="ent_populacao2"' ); ?></div>
 			</td>
 		</tr>
 		</table>
@@ -5908,7 +5908,7 @@ $dadoscenario = $db->carregar($sql);
 <tr>
 	<td>
 	<div style="display:none" id="agrup">
-	<p>Grupo de municípios: <?
+	<p>Grupo de municípios: <?php
 	$gtmid=6;
 	$_GET['mapid'] = $_GET['mapid'] ? $_GET['mapid'] : $_SESSION['painel_vars']['mapid'];
 	$sql = "SELECT 
@@ -5927,7 +5927,7 @@ $dadoscenario = $db->carregar($sql);
 	$db->monta_combo('gtmid', $sql, 'S', '', '', '', '', '200', 'N', 'gtmid','',$gtmid); 
 	?></p>
 
-		<?
+		<?php
 			// Início dos agrupadores
 			$agrupador = new Agrupador('filtros','');
 			
@@ -5995,7 +5995,7 @@ $dadoscenario = $db->carregar($sql);
 	</table>
 </div>
 <div id="div_filtros_normais" style="width:100%" ><?php listaFiltrosNormais($_SESSION['painel_vars']['mapid']) ?></div>
-<?
+<?php
 }
 
 function mapaTemas()

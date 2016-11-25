@@ -1289,7 +1289,7 @@ if( $possuiItens ):
 <!-- VERIFICA CHECKLIST -->
 <?php if( $atividade['atitipoenem'] == 'A' ): ?>
 	<a href="?modulo=principal/atividade_mae/listar_checklist&acao=A&atiid=<?= $atividade['atiid'] ?>">
-		<? 
+		<?php
 		$sql = "select iclid from pde.itemchecklist icl 
 				WHERE icl.atiid = ".$atividade['atiid']."
 				order by iclid";
