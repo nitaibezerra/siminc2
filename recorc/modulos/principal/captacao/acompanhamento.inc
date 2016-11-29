@@ -61,7 +61,6 @@ include APPRAIZ . "includes/cabecalho.inc";
     </section>
 </section>
 <br>
-<section class="col-md-7">
     <?php
     /* Filtros (Para as 2 SQL) */
     if (isset($prfid) && $prfid != '') {
@@ -70,6 +69,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     $perfis = pegaPerfilGeral($_SESSION['usucpf$perfi']);
 
     if (in_array(PFL_SUPER_USUARIO, $perfis) || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $perfis)) {
+        echo '<section class="col-md-7">';
         $sql = <<<DML
 -- SQL SU / CGO
 SELECT
@@ -139,7 +139,10 @@ DML;
             </div>
             <?php
         endif;
-    }if (in_array(PFL_UO_EQUIPE_TECNICA, $perfis)) {
+        echo "</section>";
+    }
+    
+    if (in_array(PFL_UO_EQUIPE_TECNICA, $perfis)) {
         /* Tratamento de perfis */
 
         $where[] = $whereUO = ' uni.unicod IN(' . pegaResposabilidade($_SESSION['usucpf'], PFL_UO_EQUIPE_TECNICA, 'unicod') . ')';
@@ -147,7 +150,6 @@ DML;
 
 
         $sql = <<<DML
--- SQL SU / CGO
 SELECT
     vie.unicod                                 AS acao,
     ''||vie.unicod || ' - ' || uni.unidsc|| '' AS unidade,
@@ -194,7 +196,7 @@ GROUP BY
 ORDER BY
     vie.unicod
 DML;
-//ver($sql,d);
+//echo "<pre>"; var_dump($sql);die;
         $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
         //Status
         $listagem->setCabecalho(array(
@@ -215,14 +217,13 @@ DML;
 //                if (false === $listagem->render()):
 //
         ?>
-        <div class="alert alert-info col-md-4 col-md-offset-4 text-center">
+<!--        <div class="alert alert-info col-md-4 col-md-offset-4 text-center">
             Nenhum registro encontrado
-        </div>
-        //<?php
+        </div>-->
+        <?php
 //                endif;
     }
-    ?>
-</section>
+?>
 <section class="col-md-5">
     <section class="panel panel-primary">
         <section class="panel-heading"><strong>GRÁFICO</strong></section>
