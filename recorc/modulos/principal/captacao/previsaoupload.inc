@@ -193,19 +193,21 @@ if (isset($_POST['action'])) {
                     $db->commit();
 
                     $sqlDadosBanco = <<<DML
-SELECT exercicio,
-       dac.unicod || ' - ' || unidsc AS unidade,
-       dac.foncod || ' - ' || COALESCE(fon.fondsc, '?') AS fonte,
-       dac.nrccod || ' - ' || COALESCE(nrc.nrcdsc, '?') AS natureza,
-       mes,
-       valor
-  FROM recorc.dadoscargaprevisao dac
+SELECT DISTINCT
+    exercicio,
+    dac.unicod || ' - ' || unidsc AS unidade,
+    dac.foncod || ' - ' || COALESCE(fon.fondsc, '?') AS fonte,
+    dac.nrccod || ' - ' || COALESCE(nrc.nrcdsc, '?') AS natureza,
+    mes,
+    valor
+FROM recorc.dadoscargaprevisao dac
     LEFT JOIN public.unidade uni ON (uni.unicod = dac.unicod)
     LEFT JOIN public.fonterecurso fon ON (fon.foncod = dac.foncod)
     LEFT JOIN public.naturezareceita nrc ON (nrc.nrccod = dac.nrccod)
-  ORDER BY uni.unicod,
-           fon.foncod,
-           nrcid
+ORDER BY
+    unidade,
+    fonte,
+    natureza
 DML;
                     $qtdRegistros = $db->pegaUm("SELECT COUNT(1) FROM({$sqlDadosBanco}) data");
                     setFlashMessage(
