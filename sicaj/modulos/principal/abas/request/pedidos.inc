@@ -194,9 +194,14 @@ function atualizarPedido($request) {
                 $v = limpaValorMonetario($v);
 
             $v = trim($v);
-            $sqlUpdate .= "{$k}='{$v}', ";
+            if($k == 'pdcdatainicio'){
+                $sqlUpdate .= "{$k}='". formataDataUs($v). "', ";
+            } else {
+                $sqlUpdate .= "{$k}='{$v}', ";
+            }
         }
     }
+
     $sqlUpdate = substr($sqlUpdate, 0 , -2);
     $sqlUpdate .= " where pdcid = {$request['pdcid']}";
 
