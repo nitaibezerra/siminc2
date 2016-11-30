@@ -143,7 +143,7 @@ function salvarPedido($request) {
           '{$request['pdcjuizodacao']}',
           '{$request['pdccodobjeto']}',
           '{$request['pdcnumbeneficioacao']}',
-          '{$request['pdcdatainicio']}',
+          '". formataDataUs($request['pdcdatainicio']). "',
           'NOW()',
           '{$request['pdcobservacao']}',
           'A',
