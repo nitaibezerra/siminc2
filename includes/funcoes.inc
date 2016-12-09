@@ -629,7 +629,7 @@ function enviar_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$c
 	global $db;
 	$mensagem->persistencia = $db;
 //	$mensagem->Host         = "localhost";
-	$mensagem->Host         = "smtp2.mec.gov.br";
+	$mensagem->Host         = $_SESSION['config_smtp'];
 	$mensagem->Mailer       = "smtp";
 
 	/* Regras definidas pelo Cristiano (11/11/2008)*/
@@ -714,8 +714,11 @@ function enviar_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$c
 	$mensagem->Subject = $assunto;
 	$mensagem->Body = $conteudo;
 	$mensagem->IsHTML( true );
-	return $mensagem->Send();
-
+    if($mensagem->Host){
+        return $mensagem->Send();
+    } else {
+        return TRUE;
+    }
 }
 
 function enviar_email_usuario( $remetente, $destinatario, $assunto, $conteudo, $cc='',$cco='' ){
