@@ -507,6 +507,11 @@ DML;
                     <div class="col-lg-10">
                         <select style="width: 100%;" class="form-control chosen-select" id="exercicio" name="exercicio" class="CampoEstilo" style="width: auto;"
                             onchange="javascript:location.href = 'planacomorc.php?modulo=sistema/tabelasapoio/cadastrarVinculacaoOrcamentaria&acao=A&execucao=editar&vacid=<?= $resultSet['vacid'] ?>&vaeid=<?= $_GET['vaeid'] ?>&clicouexercicio=' + this.value">
+                            <option value="2015" <?= ($resultSet['exercicio'] == '2020' or $_GET['clicouexercicio'] == '2020') ? 'selected="selected"' : ''; ?>>2020</option>
+                            <option value="2015" <?= ($resultSet['exercicio'] == '2019' or $_GET['clicouexercicio'] == '2019') ? 'selected="selected"' : ''; ?>>2019</option>
+                            <option value="2015" <?= ($resultSet['exercicio'] == '2018' or $_GET['clicouexercicio'] == '2018') ? 'selected="selected"' : ''; ?>>2018</option>
+                            <option value="2015" <?= ($resultSet['exercicio'] == '2017' or $_GET['clicouexercicio'] == '2017') ? 'selected="selected"' : ''; ?>>2017</option>
+                            <option value="2015" <?= ($resultSet['exercicio'] == '2016' or $_GET['clicouexercicio'] == '2016') ? 'selected="selected"' : ''; ?>>2016</option>
                             <option value="2015" <?= ($resultSet['exercicio'] == '2015' or $_GET['clicouexercicio'] == '2015') ? 'selected="selected"' : ''; ?>>2015</option>
                             <option value="2014" <?= ($resultSet['exercicio'] == '2014' or $_GET['clicouexercicio'] == '2014') ? 'selected="selected"' : ''; ?>>2014</option>
                             <option value="2013" <?= ($resultSet['exercicio'] == '2013' or $_GET['clicouexercicio'] == '2013') ? 'selected="selected"' : ''; ?>>2013</option>                            

@@ -461,7 +461,7 @@ function enviarApenasEmpenhados() {
 <?php
 $obrigatorias = UNIDADES_OBRIGATORIAS;
 if (count($_REQUEST['ptres']) != 0 || $_REQUEST['ptres'] != 'null' || $_REQUEST['ptres'] != '' || $_REQUEST['ptres'] != null) {
-    $andPtres = "AND pt.ptrid in (" . $_REQUEST['ptres'] . ")";
+    $andPtres = "AND pt.ptrid in (" . (is_array($_REQUEST['ptres'])? join($_REQUEST['ptres'], ','): $_REQUEST['ptres']) . ")";
 }
 if ($_REQUEST['ptres'][0]) {
     $sqlPTRES = "SELECT
@@ -532,7 +532,6 @@ $sql = "SELECT
                     WHERE unicod IN ({$obrigatorias})
                     ORDER BY
                         uni.unicod";
-
 $db->monta_combo('unidade', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'unidade', null, isset($unidade) ? $unidade : '', null, 'class="form-control chosen-select" style="width=100%;""', null, null);
 ?>
                     </div>

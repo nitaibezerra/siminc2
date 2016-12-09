@@ -173,7 +173,7 @@ class Acomporc_Service_Acompanhamento extends Spo_Service_Abstract {
             'docid' => $dados['docid'],
             'fisicoexecutado' => $this->formatarValorMonetarioParaBanco($dados['acoexecutadofisico']),
             'fisicoexecutadorap' => $this->formatarValorMonetarioParaBanco($dados['acoexecutadorapfisico']),
-            'dataapuracao' => $dados['acodataapuracao'],
+            'dataapuracao' => formata_data_sql($dados['acodataapuracao']),
             'reprogramacaofisica' => $this->formatarValorMonetarioParaBanco($dados['acoreprogramadofisico']),
             'reprogramacaofinanceira' => $this->formatarValorMonetarioParaBanco($dados['acoreprogramadofinanceiro']),
             'ultimoretornosiop' => 'N');

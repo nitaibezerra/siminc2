@@ -15,14 +15,15 @@ $fm = new Simec_Helper_FlashMessage('spo/ploa/config');
 if (isset($_REQUEST['requisicao'])) {
     $requisicao = $_REQUEST['requisicao'];
     $srvPrf = new Proporc_Service_Periodoreferencia();
-    $srvPrf->setDados($_REQUEST['configuracao']);
+    $srvPrf->setDados($_REQUEST['configuracao']? $_REQUEST['configuracao']: array());
     try {
         switch ($requisicao) {
             case 'visualizarConfigPeriodo':
                 $srvPrf->visualizarConfig();
                 die();
             default:
-                ver($requisicao, d);
+                die();
+//                ver($requisicao, d);
         }
     } catch(Exception $e) {
         $fm->addMensagem('Não foi possível executar sua requisição.', Simec_Helper_FlashMessage::ERRO);
