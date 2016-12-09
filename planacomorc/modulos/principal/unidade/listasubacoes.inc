@@ -101,12 +101,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 uni.unicod AS codigo,
                                 uni.unicod || ' - ' || unidsc AS descricao
                             FROM public.unidade uni
-                            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR  uni.unicod IN('74902', '73107'))
+                            WHERE 
+                                uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "'
                                 AND uni.unistatus = 'A'
                                 {$whereUO}
                                 AND uni.unicod NOT IN($obrigatorias)
                             ORDER BY uni.unicod
-";
+                        ";
                         if ($_REQUEST['unicod']) {
                             $unicod = $_REQUEST['unicod'];
                         }

@@ -27,8 +27,8 @@ SELECT;
 
 
 //$sql_lista = retornaConsultaPTRES($params);
-$sql_lista = <<<DML
-    {$params ['SELECT']}
+$sql_lista = "
+    {$params['SELECT']}
     FROM monitora.acao aca
     INNER JOIN monitora.ptres dtl ON aca.acaid = dtl.acaid
     INNER JOIN public.unidade uni ON uni.unicod = dtl.unicod
@@ -53,10 +53,10 @@ $sql_lista = <<<DML
         {$params['where']}
         AND ptrstatus = 'A'
         AND aca.acasnrap = FALSE
-        AND aca.unicod IN('26101','26291', '26290', '26298', '26443', '74902', '73107')
+        AND aca.unicod IN(". UNIDADES_OBRIGATORIAS. ")
 
     GROUP BY dtl.ptrid,dtl.ptres,descricao,uni.unidsc, pemp.total,  uni.unicod ORDER BY 1
-DML;
+";
 
 require_once APPRAIZ . "www/planacomorc/_funcoes.php";
 require_once APPRAIZ . "www/planacomorc/_constantes.php";
@@ -185,7 +185,7 @@ DML;
             $listagem->setCabecalho($cabecalho);
             $listagem->turnOnPesquisator();
             $listagem->addCallbackDeCampo(array('dotacaoinicial','det_subacao','nao_det_subacao','empenhado','nao_empenhado'), 'mascaraMoeda');
-            #ver($sql_lista);
+//ver($sql_lista);
             $listagem->setQuery($sql_lista);
             $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
             $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);

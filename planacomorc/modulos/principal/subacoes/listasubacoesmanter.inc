@@ -1,4 +1,4 @@
-<?
+<?php
 include_once '_funcoessubacoes.php';
 if ($_REQUEST['requisicao']) {
     $_REQUEST['requisicao']($_REQUEST);

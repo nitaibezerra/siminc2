@@ -841,12 +841,12 @@ function retornaConsultaSubacao_bootstrap(array $params, $apenasObrigatorias = "
                     SELECT
                         sbaid
                     FROM monitora.pi_subacaounidade
-                    WHERE unicod IN('26101', '26291', '26290', '26298', '26443', '74902', '73107')
+                    WHERE unicod IN(". UNIDADES_OBRIGATORIAS. ")
                         OR ungcod IN (
                             SELECT
                                 ungcod
                             FROM public.unidadegestora
-                            WHERE unicod IN( '26101', '26291', '26290', '26298', '26443', '74902', '73107')
+                            WHERE unicod IN(". UNIDADES_OBRIGATORIAS. ")
                         )
 		)";
         }
