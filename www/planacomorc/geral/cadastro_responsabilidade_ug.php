@@ -11,6 +11,7 @@ require_once "config.inc";
 
 include APPRAIZ . "includes/classes_simec.inc";
 include APPRAIZ . "includes/funcoes.inc";
+include APPRAIZ . "www/planacomorc/_constantes.php";
 $db = new cls_banco();
 
 function gravarResponsabilidadeAcao($dados) {
@@ -99,19 +100,23 @@ monta_titulo('Definição de responsabilidades - Unidade Gestora', '');
 
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do ungcod selecionado previamente.
-$sql = <<<DML
-SELECT '<input type="checkbox" name="ungcod" id="chk_' || ung.ungcod || '" value="' || ung.ungcod || '" '
-           || 'onclick="marcarAcao(this)"'
-           || CASE WHEN urp.rpuid IS NOT NULL AND urp.rpustatus = 'A' THEN ' checked' ELSE '' END || '>' AS ungcod,
-       ung.ungcod || ' - ' || ung.ungdsc AS descricao
-  FROM public.unidadegestora ung
-    LEFT JOIN planacomorc.usuarioresponsabilidade urp
-      ON urp.ungcod = ung.ungcod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
-  WHERE ung.ungstatus = 'A'
-  ORDER BY ung.ungcod
-DML;
+$sql = "
+SELECT
+    '<input type=\"checkbox\" name=\"ungcod\" id=\"chk_' || ung.ungcod || '\" value=\"' || ung.ungcod || '\" '
+    || 'onclick=\"marcarAcao(this)\"'
+    || CASE WHEN urp.rpuid IS NOT NULL AND urp.rpustatus = 'A' THEN ' checked' ELSE '' END || '>' AS ungcod,
+    ung.ungcod || ' - ' || ung.ungdsc AS descricao
+FROM public.unidadegestora ung
+    LEFT JOIN planacomorc.usuarioresponsabilidade urp ON urp.ungcod = ung.ungcod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
+WHERE
+    ung.ungstatus = 'A'
+    AND ung.unicod IN(". UNIDADES_OBRIGATORIAS. ")
+ORDER BY
+    ung.ungcod
+";
 
 $cabecalho = array('', 'UG - Descrição');
+//echo "<pre>"; var_dump($sql); die;
 $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
 ?>
 </div>
