@@ -9,7 +9,7 @@
  * @global cls_banco $db
  * @param type $dados
  */
-require (APPRAIZ . 'includes/library/simec/Listagem.php');
+require_once (APPRAIZ . 'includes/library/simec/Listagem.php');
 
 function carregarUnidade($dados) {
     global $db;

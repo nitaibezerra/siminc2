@@ -23,12 +23,12 @@ if ($_REQUEST['requisicao']) {
  *
  * @see Simec_Listagem
  */
-require APPRAIZ . 'includes/library/simec/Listagem.php';
+require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 
 /**
  * Classe de Questionário
  */
-require APPRAIZ . 'planacomorc/classes/Questionario.class.inc';
+require_once APPRAIZ . 'planacomorc/classes/Questionario.class.inc';
 
 /**
  * Cabecalho padrão do simec.

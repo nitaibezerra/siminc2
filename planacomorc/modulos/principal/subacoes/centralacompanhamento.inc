@@ -8,7 +8,7 @@
  * @see _funcoesacoes.php
  */
 include_once '_funcoessubacoes.php';
-require APPRAIZ . 'includes/library/simec/Listagem.php';
+require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 
 /* Funções de Gráficos do Cockpit */
 include_once '../../pde/www/_funcoes_cockpit.php';

@@ -5,7 +5,7 @@
  */
 include_once APPRAIZ . 'includes/funcoesspo.php';
 include '_funcoespi.php';
-require(APPRAIZ . 'includes/library/simec/Listagem.php');
+require_once(APPRAIZ . 'includes/library/simec/Listagem.php');
 
 // -- Filtro de períodos
 $sqlPeriodo = <<<DML

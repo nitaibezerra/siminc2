@@ -1,6 +1,6 @@
-<?
+<?php
 include_once '_funcoesproduto.php';
-require APPRAIZ . 'includes/library/simec/Listagem.php';
+require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 
 if($_REQUEST['requisicao']) {
     $_REQUEST['requisicao']($_REQUEST);

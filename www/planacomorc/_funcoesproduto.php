@@ -180,7 +180,7 @@ function carregarSubacao($dados) {
         'Metodologia de conversão do(s) produto(s) da subação no produto da ação'
     );
 
-    require(APPRAIZ . 'includes/library/simec/Listagem.php');
+    require_once(APPRAIZ . 'includes/library/simec/Listagem.php');
 
     $list = new Simec_Listagem();
     $list->setCabecalho($colunms)->setQuery($sql)->setFormOff();

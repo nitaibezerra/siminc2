@@ -229,7 +229,7 @@ DML;
 
             $query = sprintf($query, (int) $_SESSION['planacomorc']['qstid']);
 
-            require(APPRAIZ . 'includes/library/simec/Listagem.php');
+            require_once(APPRAIZ . 'includes/library/simec/Listagem.php');
 
             $list = new Simec_Listagem();
             $list->setCabecalho($colunms);

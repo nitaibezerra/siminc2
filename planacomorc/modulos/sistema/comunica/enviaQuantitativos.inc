@@ -298,7 +298,7 @@ function exibirLogEnvio(idAcaoProgramatica)
                             ORDER BY 2
 DML;
 
-                require(APPRAIZ . 'includes/library/simec/Listagem.php');
+                require_once(APPRAIZ . 'includes/library/simec/Listagem.php');
 
                 $colunms = array(
                     'Ações',

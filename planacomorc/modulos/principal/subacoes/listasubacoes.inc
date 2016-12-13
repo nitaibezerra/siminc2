@@ -1,5 +1,5 @@
 <?php
-die("ok");
+
 /**
  * Listagem de subações.
  *
@@ -20,7 +20,7 @@ if ($_REQUEST['requisicao']) {
 
 //Chamada de programa
 include APPRAIZ . "includes/cabecalho.inc";
-require APPRAIZ . 'includes/library/simec/Listagem.php';
+require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 ?>
 
 <script src="./js/planacomorc.js"></script>

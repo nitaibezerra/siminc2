@@ -190,7 +190,7 @@ if (1 != $_SESSION['superuser']) {
     	<section class="panel panel-primary">
             <section class="panel-heading"><strong>GRÁFICO</strong></section>
             <section class="panel-body" style="background-color: royalblue;">
-            <?
+            <?php
             $sql = <<<DML
 SELECT esddsc AS descricao,
        COUNT(esdid) AS valor
