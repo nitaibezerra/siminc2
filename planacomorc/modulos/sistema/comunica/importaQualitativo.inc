@@ -91,8 +91,8 @@ if ('enviasolicitacao' == $_POST['requisicao']) {
 include APPRAIZ . "includes/cabecalho.inc";
 monta_titulo('Comunicação de Dados - SIOP', 'Qualitativos');
 
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura = "300px";
 $altura = "215px";

@@ -3,7 +3,7 @@
 # DEFINIÇÃO DE VARIÁVEIS
 #ftp
 USER='serpro'
-PASSWD='Ch0c014t3'
+PASSWD=WEB_SERVICE_SIOP_SENHA
 #log
 LOGPG='logs/';
 FILELOG=$LOGPG"log_"`date +%Y%m%d`;

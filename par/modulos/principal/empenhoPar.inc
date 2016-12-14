@@ -1042,8 +1042,8 @@ monta_titulo( $titulo_modulo, $tabela_execucao );
         }
     }
 
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "250px";
 $altura 	= "120px";

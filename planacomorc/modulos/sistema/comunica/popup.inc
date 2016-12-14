@@ -10,14 +10,14 @@
     </tr>
       <tr>
         <td width="30%" class="SubtituloDireita">Usuário:</td>
-          <td><?php echo campo_texto("wsusuario","S","S","Usuário","21","","","","","","","id='wsusuario'", '', 'wsmec'); ?></td>
+          <td><?php echo campo_texto("wsusuario","S","S","Usuário","21","","","","","","","id='wsusuario'", '', WEB_SERVICE_SIOP_USUARIO); ?></td>
       </tr>
     <tr>
       <td class="SubtituloDireita">Senha:</td>
       <td>
         <input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);"
                onmouseout="MouseOut(this);" onfocus="MouseClick(this);this.select();"
-               onmouseover="MouseOver(this);" value="Ch0c014t3" size="22" id="wssenha" name="wssenha">
+               onmouseover="MouseOver(this);" value="<?php echo WEB_SERVICE_SIOP_SENHA; ?>" size="22" id="wssenha" name="wssenha">
         <img border="0" title="Indica campo obrigatório." src="../imagens/obrig.gif">
       </td>
     </tr>

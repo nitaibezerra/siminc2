@@ -207,20 +207,20 @@ $valorProjeto = $db->pegaUm("SELECT sum(pc.prcvalortotal) FROM execucaofinanceir
 		</tr>
 	</table>
 </form>
-<?
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+<?php
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "270px";
 $altura 	= "150px";
 $id 		= "div_auth";
 ?>
-<?
+<?php
 /*$usuario = 'juliov';  
 $senha   = 'vasco011';*/
 
-$usuario = 'MECTIAGOT';
-$senha   = 'M3135689';
+//$usuario = 'MECTIAGOT';
+//$senha   = 'M3135689';
 ?>
 <div class="demo">
 	<div id="dialog-confirm" title="Resposta da solicitação de Empenho:"></div>

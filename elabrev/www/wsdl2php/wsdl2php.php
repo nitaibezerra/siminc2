@@ -38,14 +38,10 @@ ini_set('soap.wsdl_cache_enabled', 0); // disable WSDL cache
   die("usage: wsdl2php <wsdl-file>\n");
 }*/
 
-//$wsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
-$wsdl = 'https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
+$wsdl = WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
 
-/*$caminho_certificado	=  "simec.pem";
-$senha_certificado 		= "siMEC2013";*/
-
-$caminho_certificado	=  APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-$senha_certificado		= "siMEC2013"; 
+$caminho_certificado	=  WEB_SERVICE_SIOP_CERTIFICADO;
+$senha_certificado		= WEB_SERVICE_SIOP_SENHA; 
 
 print "Analyzing WSDL";
 

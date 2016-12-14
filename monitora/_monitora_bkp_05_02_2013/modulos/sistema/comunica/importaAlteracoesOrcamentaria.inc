@@ -11,7 +11,7 @@ if($_POST['requisicao'] == 'enviasolicitacao') {
 	include(APPRAIZ."monitora/classes/MontaObjetoAlteracao.class.inc");
 	
 	//Endereço do wsdl do serviço
-	/*$wsdl = "https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl";
+	/*$wsdl = WEB_SERVICE_SIOP_URL. "WSAlteracoesOrcamentarias?wsdl";
 	
 	if( $_SESSION['baselogin'] == 'simec_espelho_producao' ){
 		$certificado =  APPRAIZ. "monitora/modulos/sistema/comunica/mec.pem";
@@ -238,8 +238,8 @@ if($_POST['requisicao'] == 'enviasolicitacao') {
 include APPRAIZ . "includes/cabecalho.inc";
 monta_titulo('Comunicação de Dados - SIOP', 'Alterações Orçamentárias');
 
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "250px";
 $altura 	= "120px";
@@ -382,12 +382,12 @@ $id 		= "div_auth";
 			<td width="30%" class="SubtituloDireita">Usuário:</td>
 			<td><?php
 				$wsusuario = $usuario; 
-				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', 'wsmec') ?></td>
+				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', WEB_SERVICE_SIOP_USUARIO) ?></td>
 		</tr>
 		<tr>
 			<td class="SubtituloDireita">Senha:</td>
 			<td>
-				<input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);" onmouseout="MouseOut(this);" onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="Ch0c014t3" size="23" id="wssenha" name="wssenha">
+				<input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);" onmouseout="MouseOut(this);" onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="<?php echo WEB_SERVICE_SIOP_SENHA; ?>" size="23" id="wssenha" name="wssenha">
 				<img border="0" title="Indica campo obrigatório." src="../imagens/obrig.gif">
 			</td>
 		</tr>

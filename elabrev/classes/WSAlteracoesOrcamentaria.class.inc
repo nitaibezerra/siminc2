@@ -516,7 +516,8 @@ class WSAlteracoesOrcamentarias extends SoapClient {
                                     'enviarPedidoAlteracaoResponse' => 'enviarPedidoAlteracaoResponse',
                                    );
 
-  public function WSAlteracoesOrcamentarias($wsdl = "https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl", $options = array()) {
+  public function WSAlteracoesOrcamentarias($wsdl = NULL, $options = array()) {
+    $wsdl = $wsdl?$wsdl: WEB_SERVICE_SIOP_URL. "WSAlteracoesOrcamentarias?wsdl";
     foreach(self::$classmap as $key => $value) {
       if(!isset($options['classmap'][$key])) {
         $options['classmap'][$key] = $value;
@@ -541,7 +542,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
     $this->arrPedido = $arrPedido;
   	$this->tipolog = 'cadastrarPedidoAlteracao';
     return $this->__soapCall('cadastrarPedidoAlteracao', array($cadastrarPedidoAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -555,7 +556,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function consultarSituacaoTransmissaoSiafi(consultarSituacaoTransmissaoSiafi $consultarSituacaoTransmissaoSiafi) {
     return $this->__soapCall('consultarSituacaoTransmissaoSiafi', array($consultarSituacaoTransmissaoSiafi),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -569,7 +570,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function excluirPedidoAlteracao(excluirPedidoAlteracao $excluirPedidoAlteracao) {
     return $this->__soapCall('excluirPedidoAlteracao', array($excluirPedidoAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -586,7 +587,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'obterPedidoAlteracao';
   	
     return $this->__soapCall('obterPedidoAlteracao', array($obterPedidoAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -603,7 +604,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'obterPedidosAlteracao';
   	
     return $this->__soapCall('obterPedidosAlteracao', array($obterPedidosAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -620,7 +621,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'obterPerguntaJustificativa';
   	
     return $this->__soapCall('obterPerguntaJustificativa', array($obterPerguntaJustificativa),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -636,7 +637,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'naograva';
   	
     return $this->__soapCall('obterPerguntasJustificativa', array($obterPerguntasJustificativa),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -652,7 +653,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'naograva';
   	
     return $this->__soapCall('obterSaldosAcoesPAC', array($obterSaldosAcoesPAC),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -668,7 +669,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'naograva';
   	
     return $this->__soapCall('obterTabelasApoioAlteracoesOrcamentarias', array($obterTabelasApoioAlteracoesOrcamentarias),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -684,7 +685,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'obterAnalisesEmendas';
   	
     return $this->__soapCall('obterAnalisesEmendas', array($obterAnalisesEmendas),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -700,7 +701,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
   	$this->tipolog = 'cadastrarAnalisesEmendas';
   	
     return $this->__soapCall('cadastrarAnalisesEmendas', array($cadastrarAnalisesEmendas),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -714,7 +715,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function cadastrarPedidoPAC(cadastrarPedidoPAC $cadastrarPedidoPAC) {
     return $this->__soapCall('cadastrarPedidoPAC', array($cadastrarPedidoPAC),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -728,7 +729,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function enviarPedidoAlteracao(enviarPedidoAlteracao $enviarPedidoAlteracao) {
     return $this->__soapCall('enviarPedidoAlteracao', array($enviarPedidoAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -742,7 +743,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function obterPedidosAlteracaoPorDescricao(obterPedidosAlteracaoPorDescricao $obterPedidosAlteracaoPorDescricao) {
     return $this->__soapCall('obterPedidosAlteracaoPorDescricao', array($obterPedidosAlteracaoPorDescricao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -756,7 +757,7 @@ class WSAlteracoesOrcamentarias extends SoapClient {
    */
   public function verificarPedidoAlteracao(verificarPedidoAlteracao $verificarPedidoAlteracao) {
     return $this->__soapCall('verificarPedidoAlteracao', array($verificarPedidoAlteracao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );

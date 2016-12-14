@@ -9,9 +9,9 @@ ini_set("memory_limit", "3000M");
 }*/
 
 
-$wsdl = "https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl";
-$certificado = "C:\Documents and Settings\wesleysilva\Meus documentos\siop\mec.pem";
-$senha = "mec2011";
+$wsdl = WEB_SERVICE_SIOP_URL. "WSQuantitativo?wsdl";
+$certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+$senha = WEB_SERVICE_SIOP_SENHA;
 echo "<pre>";
 $clienteSoap = new SoapClient($wsdl, array(
 		'local_cert'	=> $certificado, 
@@ -53,13 +53,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 ?>
 <script type="text/javascript" src="../includes/JQuery/jquery-1.4.2.js"></script>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
-<?
+<?php
 
 /*$usuario = 'lindberg';
 $senha = md5('621lindberg');*/
 
-$usuario = 'wsmec';
-$senha = md5('Ch0c014t3');
+$usuario = WEB_SERVICE_SIOP_USUARIO;
+$senha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "250px";
 $altura 	= "120px";
@@ -392,16 +392,7 @@ function executaSolicitacao($funcao, $param = array() ){
 	require_once(APPRAIZ . 'www/webservice/painel/nusoap.php');	
 	
 	#Desenvolvimento
-	//$urlWS = 'https://10.209.64.83/services/WSQualitativo?wsdl';
-	//$urlWS = 'https://200.198.196.188:443/services/WSQualitativo?wsdl';
-	//$urlWS = 'https://www.siop.planejamento.gov.br/services-homologacao/WSQualitativo?wsdl';
-	//$urlWS = 'https://www.siop.planejamento.gov.br/services-homologacao/WSAlteracoesOrcamentarias?wsdl';
-	//$urlWS = 'https://www.siop.planejamento.gov.br:443/services-homologacao/WSAlteracoesOrcamentarias';
-	$urlWS = 'https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
-	#Homologação
-	//$urlWS = 'https://200.198.196.188/services/WSQualitativo?wsdl';
-	#Produção
-	//$urlWS = 'http://www.siop.planejamento.gov.br/services/WSQualitativo?wsdl';
+	$urlWS = WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
 	
 	$endpoint = $urlWS;
 	$wsdl = true;

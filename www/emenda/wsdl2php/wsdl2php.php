@@ -34,15 +34,11 @@ ini_set('soap.wsdl_cache_enabled', 0); // disable WSDL cache
   die("usage: wsdl2php <wsdl-file>\n");
 }*/
 
-//$wsdl = 'http://172.20.65.93:8080/IntraSiconvWS/services/SimecWsFacade?wsdl';
-//$wsdl = 'http://www.fnde.gov.br/IntraSiconvWS/services/SimecWsFacade?wsdl';
-//$wsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl';
-//$wsdl = 'https://www.siop.planejamento.gov.br/services/WSQuantitativo?wsdl';
-$wsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl';
+$wsdl = WEB_SERVICE_SIOP_URL. 'WSQuantitativo?wsdl';
 
 print "Analyzing WSDL";
-$caminho_certificado = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-$senha_certificado = 'siMEC2013';
+$caminho_certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+$senha_certificado = WEB_SERVICE_SIOP_SENHA;
 try {
 
 	$client = new SoapClient($wsdl, array(

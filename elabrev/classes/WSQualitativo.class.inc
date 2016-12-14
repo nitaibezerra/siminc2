@@ -760,7 +760,8 @@ class WSQualitativo extends SoapClient {
                                     'obterAcaoPorIdentificadorUnicoResponse' => 'obterAcaoPorIdentificadorUnicoResponse',
                                    );
 
-  public function WSQualitativo($wsdl = "https://www.siop.planejamento.gov.br/services/WSQualitativo?wsdl", $options = array()) {
+  public function WSQualitativo($wsdl = NULL, $options = array()) {
+    $wsdl = $wsdl?$wsdl: WEB_SERVICE_SIOP_URL. 'WSQualitativo?wsdl';
     foreach(self::$classmap as $key => $value) {
       if(!isset($options['classmap'][$key])) {
         $options['classmap'][$key] = $value;
@@ -777,7 +778,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterAcaoPorIdentificadorUnico(obterAcaoPorIdentificadorUnico $obterAcaoPorIdentificadorUnico) {
     return $this->__soapCall('obterAcaoPorIdentificadorUnico', array($obterAcaoPorIdentificadorUnico),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -791,7 +792,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterAcoesPorIniciativa(obterAcoesPorIniciativa $obterAcoesPorIniciativa) {
     return $this->__soapCall('obterAcoesPorIniciativa', array($obterAcoesPorIniciativa),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -805,7 +806,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterAcoesPorPrograma(obterAcoesPorPrograma $obterAcoesPorPrograma) {
     return $this->__soapCall('obterAcoesPorPrograma', array($obterAcoesPorPrograma),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -819,7 +820,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterFinanciamentoExtraOrcamentarioPorIniciativa(obterFinanciamentoExtraOrcamentarioPorIniciativa $obterFinanciamentoExtraOrcamentarioPorIniciativa) {
     return $this->__soapCall('obterFinanciamentoExtraOrcamentarioPorIniciativa', array($obterFinanciamentoExtraOrcamentarioPorIniciativa),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -833,7 +834,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterIndicadoresPorPrograma(obterIndicadoresPorPrograma $obterIndicadoresPorPrograma) {
     return $this->__soapCall('obterIndicadoresPorPrograma', array($obterIndicadoresPorPrograma),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -847,7 +848,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterIniciativasPorObjetivo(obterIniciativasPorObjetivo $obterIniciativasPorObjetivo) {
     return $this->__soapCall('obterIniciativasPorObjetivo', array($obterIniciativasPorObjetivo),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -861,7 +862,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterLocalizadoresPorAcao(obterLocalizadoresPorAcao $obterLocalizadoresPorAcao) {
     return $this->__soapCall('obterLocalizadoresPorAcao', array($obterLocalizadoresPorAcao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -875,7 +876,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterMedidaInstitucionalPorIniciativa(obterMedidaInstitucionalPorIniciativa $obterMedidaInstitucionalPorIniciativa) {
     return $this->__soapCall('obterMedidaInstitucionalPorIniciativa', array($obterMedidaInstitucionalPorIniciativa),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -889,7 +890,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterMetasPorObjetivo(obterMetasPorObjetivo $obterMetasPorObjetivo) {
     return $this->__soapCall('obterMetasPorObjetivo', array($obterMetasPorObjetivo),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -903,7 +904,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterMomentoCarga(obterMomentoCarga $obterMomentoCarga) {
     return $this->__soapCall('obterMomentoCarga', array($obterMomentoCarga),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -917,7 +918,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterObjetivosPorPrograma(obterObjetivosPorPrograma $obterObjetivosPorPrograma) {
     return $this->__soapCall('obterObjetivosPorPrograma', array($obterObjetivosPorPrograma),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -931,7 +932,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterOrgao(obterOrgao $obterOrgao) {
     return $this->__soapCall('obterOrgao', array($obterOrgao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -945,7 +946,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterOrgaoPorCodigoSiorg(obterOrgaoPorCodigoSiorg $obterOrgaoPorCodigoSiorg) {
     return $this->__soapCall('obterOrgaoPorCodigoSiorg', array($obterOrgaoPorCodigoSiorg),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -959,7 +960,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterPlanosOrcamentariosPorAcao(obterPlanosOrcamentariosPorAcao $obterPlanosOrcamentariosPorAcao) {
     return $this->__soapCall('obterPlanosOrcamentariosPorAcao', array($obterPlanosOrcamentariosPorAcao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -973,7 +974,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterProgramacaoCompleta(obterProgramacaoCompleta $obterProgramacaoCompleta) {
     return $this->__soapCall('obterProgramacaoCompleta', array($obterProgramacaoCompleta),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -987,7 +988,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterProgramasPorOrgao(obterProgramasPorOrgao $obterProgramasPorOrgao) {
     return $this->__soapCall('obterProgramasPorOrgao', array($obterProgramasPorOrgao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -1001,7 +1002,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterRegionalizacoesPorMeta(obterRegionalizacoesPorMeta $obterRegionalizacoesPorMeta) {
     return $this->__soapCall('obterRegionalizacoesPorMeta', array($obterRegionalizacoesPorMeta),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -1015,7 +1016,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterTabelasApoio(obterTabelasApoio $obterTabelasApoio) {
     return $this->__soapCall('obterTabelasApoio', array($obterTabelasApoio),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -1029,7 +1030,7 @@ class WSQualitativo extends SoapClient {
    */
   public function obterUnidadesOrcamentariasOrgao(obterUnidadesOrcamentariasOrgao $obterUnidadesOrcamentariasOrgao) {
     return $this->__soapCall('obterUnidadesOrcamentariasOrgao', array($obterUnidadesOrcamentariasOrgao),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );

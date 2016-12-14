@@ -93,7 +93,7 @@ abstract class Spo_Ws_Sof extends Simec_BasicWS
             ->add('cache_wsdl', WSDL_CACHE_NONE)
             ->add('soap_version', SOAP_1_2);
 
-        $options->add('local_cert', APPRAIZ. WEB_SERVICE_SIOP_CERTIFICADO)
+        $options->add('local_cert', WEB_SERVICE_SIOP_CERTIFICADO)
             ->add('passphrase', 'simec');
 
         return $options;

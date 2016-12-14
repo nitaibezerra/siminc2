@@ -192,7 +192,7 @@ class ImportacaoSiop extends cls_banco {
 				</head>
 				<body/>
 			</html>
-			<?
+			<?php
 			exit();
 		}
 	}
@@ -237,8 +237,8 @@ class ImportacaoSiop extends cls_banco {
 			if ( !$verificacao ) {
 				throw new Exception( "O serviço solicitado não existe." );
 			}
-			$usuario = 'wsmec';
-			$senha = md5('Ch0c014t3');
+			$usuario = WEB_SERVICE_SIOP_USUARIO;
+			$senha = WEB_SERVICE_SIOP_SENHA;
 			
 			# monta parâmetros
 			$objeto = new stdClass();

@@ -115,9 +115,9 @@ monta_titulo( 'Enviar Emendas Impositivo para o SIOP', '' );
 	</tr>
 	</table>
 </form>
-<?
-$usersiop = 'wsmec';
-$passsiop = 'Ch0c014t3';
+<?php
+$usersiop = WEB_SERVICE_SIOP_USUARIO;
+$passsiop = WEB_SERVICE_SIOP_SENHA;
 ?>
 <div id="dialog_recurso" title="Enviar Emendas Impositivo para o SIOP" style="display: none" >
 	<table class="tabela" style="width: 100%" bgcolor="#f5f5f5" cellspacing="1" cellpadding="2" align="center" border="0">

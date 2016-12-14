@@ -32,19 +32,7 @@ class WSAlteracoesOrcamentarias extends Spo_Ws_Sof
      */
     protected function loadURL()
     {
-        switch ($this->enviroment) {
-            case self::PRODUCTION:
-                $this->urlWSDL = <<<URL
-https://webservice.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl
-URL;
-                break;
-            case self::STAGING:
-            case self::DEVELOPMENT:
-                $this->urlWSDL = <<<URL
-https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl
-URL;
-                break;
-        }
+        $this->urlWSDL = WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
         return $this;
     }
 

@@ -2,7 +2,7 @@
 
 require_once 'ClienteCurlSSL.php';
 require_once "configuracao.php";
-$caminho_certificado =  dirname(__FILE__).DIRECTORY_SEPARATOR.$arquivo_certificado;
+$caminho_certificado =  WEB_SERVICE_SIOP_CERTIFICADO;
 
 // +------------------------------------------------------------------------+
 // | wsdl2php                                                               |
@@ -25,7 +25,7 @@ $caminho_certificado =  dirname(__FILE__).DIRECTORY_SEPARATOR.$arquivo_certifica
 // | see http://wsdl2php.sf.net                                             |
 // +------------------------------------------------------------------------+
 //$wsdl = 'http://172.20.65.93:8080/IntraSiconvWS/services/SimecWsFacade?wsdl';
-$wsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl';
+$wsdl = WEB_SERVICE_SIOP_URL. 'WSQuantitativo?wsdl';
 
 ini_set('soap.wsdl_cache_enabled', 0); // disable WSDL cache
 

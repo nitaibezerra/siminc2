@@ -1,21 +1,21 @@
 <?php
-//    $urlWsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSQualitativo?wsdl';
-//    $this->certificado = APPRAIZ . "planacomorc/modulos/sistema/comunica/si_mec.pem";
-//    $this->senha_certificado = "siMEC2013";
+//    $urlWsdl = WEB_SERVICE_SIOP_URL. 'WSQualitativo?wsdl';
+//    $this->certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+//    $this->senha_certificado = WEB_SERVICE_SIOP_SENHA;
 //    
 
 //    $codigomomento = $arrParam['post']['codigomomento'];
     
-//    $wsusuario = 'wsmec';
-//    $wssenha = 'Ch0c014t3';
+//    $wsusuario = WEB_SERVICE_SIOP_USUARIO;
+//    $wssenha = WEB_SERVICE_SIOP_SENHA;
 //
 
     
-    $client = new SoapClient("https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl", array(
-        'proxy_host' => "proxy3.mec.gov.br",
-        'proxy_port' => 8080,
-        'local_cert' => "D:\\simec\\planacomorc/modulos/sistema/comunica/simec.pem",
-        'passphrase ' => 'siMEC2013',
+    $client = new SoapClient(WEB_SERVICE_SIOP_URL. "WSQuantitativo?wsdl", array(
+//        'proxy_host' => "proxy3.mec.gov.br",
+//        'proxy_port' => 8080,
+        'local_cert' => WEB_SERVICE_SIOP_CERTIFICADO,
+        'passphrase ' => WEB_SERVICE_SIOP_SENHA,
         'exceptions' => true,
         'trace' => true,
         'encoding' => 'ISO-8859-1'));
@@ -23,8 +23,8 @@
     $cl = new StdClass();
     $cl->credencial = new stdClass();
     $cl->credencial->perfil = 32;
-    $cl->credencial->senha = '46e13e5b3e289bb88b9bb24d29c5706d';
-    $cl->credencial->usuario = 'wsmec';
+    $cl->credencial->senha = WEB_SERVICE_SIOP_SENHA;
+    $cl->credencial->usuario = WEB_SERVICE_SIOP_USUARIO;
     
     $cl->filtro = new StdClass();
     $cl->filtro->anoReferencia = 2013;
@@ -57,8 +57,8 @@
     $ar = array(
         'credencial' => array(
             'perfil' => 32,
-            'senha' => '46e13e5b3e289bb88b9bb24d29c5706d',
-            'usuario' => 'wsmec'),
+            'senha' => WEB_SERVICE_SIOP_SENHA,
+            'usuario' => WEB_SERVICE_SIOP_USUARIO),
         'filtro' => array(
             'anoReferencia' => 2013,
             //'unidadesOrcamentarias' => array('26101'),
@@ -74,7 +74,7 @@
     
     //$x = $client->__call("consultarExecucaoOrcamentaria", $ar);
     $x = $client->__soapCall("consultarExecucaoOrcamentaria", array($cl), array(
-        'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+        'uri' => WEB_SERVICE_SIOP_URL,
         'soapaction' => ''));
     if($x->return->execucoesOrcamentarias->execucaoOrcamentaria) {
     	foreach($x->return->execucoesOrcamentarias->execucaoOrcamentaria as $r) {

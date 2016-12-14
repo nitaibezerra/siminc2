@@ -11,20 +11,10 @@ class MontaObjetoAlteracao{
 	
 	public function __construct( $arrParam = array() ){
 		global $db;
-	
-		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-			//$urlWsdl	 				= "https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl";
-			$urlWsdl	 				= "https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl";
-			$this->certificado 			=  APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-			$this->senha_certificado 	= "siMEC2013";
-		} else {
-			$urlWsdl					= "https://webservice.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl";
-			$this->certificado 			=  APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-//			$this->certificado 			=  "/etc/ssl/cert_simec_2012.pem";
-//			$this->senha_certificado 	= "12345678";
-			$this->senha_certificado 	= "siMEC2013";
-		}
-
+        
+        $urlWsdl = WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
+        $this->certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+//        $this->senha_certificado = WEB_SERVICE_SIOP_SENHA;
 		/*if($db){
 			$this->dbws = $db;
 		} else {*/

@@ -19,10 +19,10 @@ include(APPRAIZ."monitora/classes/AlteracaoOrcamentariaDAO.class.inc");
 	include(APPRAIZ."monitora/classes/WSAlteracoesOrcamentaria.class.inc");
 	
 	//Endereço do wsdl do serviço
-	$wsdl = "https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl";
-	$certificado =  APPRAIZ. "monitora/modulos/sistema/comunica/mec.pem";
+	$wsdl = WEB_SERVICE_SIOP_URL. "WSAlteracoesOrcamentarias?wsdl";
+	$certificado = WEB_SERVICE_SIOP_CERTIFICADO;
 	//Senha do certificado
-	$senha_certificado = "mec2011";
+	$senha_certificado = WEB_SERVICE_SIOP_SENHA;
 	$documento = $_POST['documento'];
 	
 	$obAlteracaoDAO = new AlteracaoOrcamentariaDAO();
@@ -37,8 +37,8 @@ include(APPRAIZ."monitora/classes/AlteracaoOrcamentariaDAO.class.inc");
 	//monta a credencial
 	$credencial = new credencialDTO();
 	$credencial->perfil = 32;
-	$credencial->usuario = 'wsmec';
-	$credencial->senha = md5('Ch0c014t3');
+	$credencial->usuario = WEB_SERVICE_SIOP_USUARIO;
+	$credencial->senha = WEB_SERVICE_SIOP_SENHA;
 	
 	$arrPedido = $obAlteracaoDAO->carregarPedidoAlteracao();
 	//ver($arrPedido,d);

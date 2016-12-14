@@ -36,14 +36,9 @@ class SiopQualitativo{
     if (isset($_POST['webservice'])) {
         $arrParam['post']['webservice'] = $_POST['webservice'];
     }
-
-    if (('simec_desenvolvimento' == $_SESSION['baselogin']) || ('simec_espelho_producao' == $_SESSION['baselogin'])) { // -- dev
-        $this->_urlWsdl = 'http://homologacao.siop.planejamento.gov.br/services/WSQualitativo?wsdl';
-//        $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-    } else { // -- producao
-        $this->_urlWsdl = 'http://www.siop.planejamento.gov.br/services/WSQualitativo?wsdl';
-        $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-    }
+    
+    $this->_urlWsd = WEB_SERVICE_SIOP_URL. 'WSQualitativo?wsdl';
+    $this->_callOptions['local_cert'] = WEB_SERVICE_SIOP_CERTIFICADO;
 
     $this->_callOptions['passphrase'] = 'simec';
     $this->_callOptions['exceptions'] = true;
@@ -380,4 +375,3 @@ class SiopQualitativo{
   }
 
 }
-?>

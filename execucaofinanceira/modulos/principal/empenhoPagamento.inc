@@ -118,9 +118,9 @@ $valorProjeto = $db->pegaUm("SELECT sum(pc.prcvalortotal) FROM execucaofinanceir
 		</tr>
 	</table>
 </form>
-<?
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+<?php
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "270px";
 $altura 	= "150px";
@@ -136,13 +136,13 @@ $id 		= "div_auth";
 			<td width="30%" class="SubtituloDireita">Usuário:</td>
 			<td><?php
 				$wsusuario = $usuario; 
-				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', 'wsmec') ?></td>
+				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', WEB_SERVICE_SIOP_USUARIO) ?></td>
 		</tr>
 		<tr>
 			<td class="SubtituloDireita">Senha:</td>
 			<td>
 				<input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);" onmouseout="MouseOut(this);" 
-					onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="Ch0c014t3" size="23" id="wssenha" name="wssenha">
+					onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="<?php echo WEB_SERVICE_SIOP_SENHA; ?>" size="23" id="wssenha" name="wssenha">
 				<img border="0" title="Indica campo obrigatório." src="../imagens/obrig.gif">
 			</td>
 		</tr>

@@ -874,7 +874,7 @@ if (!function_exists('insereAcoesDTO')) {
    */
    function insereAcoesDTO($arrDados) {
     global $db;
-
+ver('ok inserir ações!', d);
     if (is_array($arrDados)) {
       // -- Lista as acoes já cadastradas
       $sql = <<<QUERY

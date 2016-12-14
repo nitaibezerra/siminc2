@@ -121,6 +121,7 @@ class WSQuantitativo extends SoapClient {
     $this->soapClient = $client;
     $this->tipolog = '';
     $this->db = '';
+//ver($wsdl, $options, d);
     parent::__construct($wsdl, $options);
   }
 
@@ -131,7 +132,7 @@ class WSQuantitativo extends SoapClient {
    */
   public function consultarExecucaoOrcamentaria(consultarExecucaoOrcamentaria $consultarExecucaoOrcamentaria) {
     return $this->__soapCall('consultarExecucaoOrcamentaria', array($consultarExecucaoOrcamentaria), array(
-        'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+        'uri' => WEB_SERVICE_SIOP_URL,
         'soapaction' => ''));
   }
   /**
@@ -141,7 +142,7 @@ class WSQuantitativo extends SoapClient {
    */
   public function consultarExecucaoOrcamentariaMensal(consultarExecucaoOrcamentariaMensal $consultarExecucaoOrcamentariaMensal) {
     return $this->__soapCall('consultarExecucaoOrcamentariaMensal', array($consultarExecucaoOrcamentariaMensal), array(
-        'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+        'uri' => WEB_SERVICE_SIOP_URL,
         'soapaction' => ''));
   }
 
@@ -152,7 +153,7 @@ class WSQuantitativo extends SoapClient {
    */
   public function consultarAcompanhamentoOrcamentario(consultarAcompanhamentoOrcamentario $consultarAcompanhamentoOrcamentario) {
     return $this->__soapCall('consultarAcompanhamentoOrcamentario', array($consultarAcompanhamentoOrcamentario), array(
-        'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+        'uri' => WEB_SERVICE_SIOP_URL,
         'soapaction' => ''));
   }
 
@@ -171,7 +172,7 @@ class WSQuantitativo extends SoapClient {
             'cadastrarAcompanhamentoOrcamentario',
             array($cadastrarAcompanhamentoOrcamentario),
             array(
-                'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+                'uri' => WEB_SERVICE_SIOP_URL,
                 'soapaction' => '',
                 'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
             )
@@ -188,8 +189,8 @@ class WSQuantitativo extends SoapClient {
   	$this->arrProposta = $arrProposta;
   	$this->tipolog = 'cadastrarProposta';
 
-    return $this->__soapCall('cadastrarProposta', array($cadastrarProposta),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+    return $this->__soapCall('cadastrarProposta', array($cadastrarProposta), array(
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -197,8 +198,8 @@ class WSQuantitativo extends SoapClient {
 
   public function obterAcoesDisponiveisAcompanhamentoOrcamentario(obterAcoesDisponiveisAcompanhamentoOrcamentario $obter)
   {
-    return $this->__soapCall('obterAcoesDisponiveisAcompanhamentoOrcamentario', array($obter),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+    return $this->__soapCall('obterAcoesDisponiveisAcompanhamentoOrcamentario', array($obter), array(
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -211,8 +212,8 @@ class WSQuantitativo extends SoapClient {
    * @return consultarExecucaoOrcamentariaEstataisMensalResponse
    */
   public function consultarExecucaoOrcamentariaEstataisMensal(consultarExecucaoOrcamentariaEstataisMensal $consultarExecucaoOrcamentariaEstataisMensal) {
-    return $this->__soapCall('consultarExecucaoOrcamentariaEstataisMensal', array($consultarExecucaoOrcamentariaEstataisMensal),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+    return $this->__soapCall('consultarExecucaoOrcamentariaEstataisMensal', array($consultarExecucaoOrcamentariaEstataisMensal), array(
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -228,8 +229,8 @@ class WSQuantitativo extends SoapClient {
   	$this->arrProposta = $arrProposta;
   	$this->tipolog = 'consultarProposta';
 
-    return $this->__soapCall('consultarProposta', array($consultarProposta),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+    return $this->__soapCall('consultarProposta', array($consultarProposta), array(
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -245,8 +246,8 @@ class WSQuantitativo extends SoapClient {
   	$this->arrProposta = $arrProposta;
   	$this->tipolog = 'excluirProposta';
 
-    return $this->__soapCall('excluirProposta', array($excluirProposta),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+    return $this->__soapCall('excluirProposta', array($excluirProposta), array(
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -260,7 +261,7 @@ class WSQuantitativo extends SoapClient {
    */
   public function obterExecucaoOrcamentariaSam(obterExecucaoOrcamentariaSam $obterExecucaoOrcamentariaSam) {
     return $this->__soapCall('obterExecucaoOrcamentariaSam', array($obterExecucaoOrcamentariaSam), array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => '')
     );
   }
@@ -274,7 +275,7 @@ class WSQuantitativo extends SoapClient {
   public function obterProgramacaoCompletaQuantitativo(obterProgramacaoCompletaQuantitativo $obterProgramacaoCompletaQuantitativo) {
     $this->tipolog = 'obterProgramacaoCompletaQuantitativo';
     return $this->__soapCall('obterProgramacaoCompletaQuantitativo', array($obterProgramacaoCompletaQuantitativo), array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => '')
     );
   }
@@ -288,7 +289,7 @@ class WSQuantitativo extends SoapClient {
   public function obterTabelasApoioQuantitativo(obterTabelasApoioQuantitativo $obterTabelasApoioQuantitativo) {
     $this->tipolog = 'obterTabelasApoioQuantitativo';
     return $this->__soapCall('obterTabelasApoioQuantitativo', array($obterTabelasApoioQuantitativo), array(
-        'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+        'uri' => WEB_SERVICE_SIOP_URL,
         'soapaction' => '')
     );
   }
@@ -318,7 +319,7 @@ class WSQuantitativo extends SoapClient {
 			//if( $tipo == 'response' )ver(simec_htmlentities($request),d);
 
 			$request = str_ireplace( "'", '"', $request );
-	         if( $this->tipolog != 'naograva'  ){
+	         if( $this->tipolog != 'naograva' && is_array($this->arrProposta)){
 		         if( $tipo == 'request' ){
 			         $sql = "INSERT INTO elabrev.logerrows(logtipo, acacod, unicod, prgcod, loccod, prgano, usucpf, logdatainclusao, acaid, xmlrequest, xmlresponse)
 							VALUES ('{$this->tipolog}', '{$this->arrProposta['acacod']}', '{$this->arrProposta['unicod']}', '{$this->arrProposta['prgcod']}', '{$this->arrProposta['loccod']}', '{$_SESSION['exercicio']}', '{$_SESSION['usucpf']}', now(), ".($this->arrProposta['acaid'] ? "'".$this->arrProposta['acaid']."'" : 'null').", '$request', null) returning logid";
@@ -354,4 +355,3 @@ class WSQuantitativo extends SoapClient {
 	        return call_user_func_array(array($this->soapClient, $method), $args);
 	    }
 }
-?>

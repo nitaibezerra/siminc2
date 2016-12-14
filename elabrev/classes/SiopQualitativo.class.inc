@@ -17,19 +17,9 @@ class SiopQualitativo{
 	public function __construct( $arrParam = array() ){
 		global $db;
 		
-		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-			$urlWsdl	 				= "https://homologacao.siop.planejamento.gov.br/services/WSQualitativo?wsdl";
-			/*$this->certificado 			=  APPRAIZ. "elabrev/modulos/sistema/comunica/mec.pem";
-			$this->senha_certificado 	= "mec2011";*/
-			$this->certificado 			=  APPRAIZ. "elabrev/modulos/sistema/comunica/simec.pem";
-			$this->senha_certificado 	= "siMEC2013";
-		} else {
-			$urlWsdl					= "https://www.siop.planejamento.gov.br/services/WSQualitativo?wsdl";
-			/*$this->certificado 			=  "/etc/ssl/cert_simec_2012.pem";
-			$this->senha_certificado 	= "12345678";*/
-			$this->certificado 			=  APPRAIZ. "elabrev/modulos/sistema/comunica/simec.pem";
-			$this->senha_certificado 	= "siMEC2013";
-		}
+        $urlWsdl = WEB_SERVICE_SIOP_URL. 'WSQualitativo?wsdl';
+        $this->certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+//        $this->senha_certificado = WEB_SERVICE_SIOP_SENHA;
 
 		if($db){
 			$this->db = $db;

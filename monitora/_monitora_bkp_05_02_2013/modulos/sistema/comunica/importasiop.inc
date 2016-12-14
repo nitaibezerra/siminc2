@@ -22,10 +22,10 @@ if($_POST['requisicao'] == 'enviasolicitacao') {
 	//include(APPRAIZ."monitora/classes/WSQuantitativo.class.inc");
 	
 	//Endereço do wsdl do serviço
-	$wsdl = "https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl";
-	$certificado =  APPRAIZ. "monitora/modulos/sistema/comunica/mec.pem";
+	$wsdl = WEB_SERVICE_SIOP_URL. "WSQuantitativo?wsdl";
+	$certificado =  WEB_SERVICE_SIOP_CERTIFICADO;
 	//Senha do certificado
-	$senha_certificado = "mec2011";
+	$senha_certificado = WEB_SERVICE_SIOP_SENHA;
 	
 	$obSiop = new ImportacaoSiop($wsdl, $certificado, $senha_certificado);
 	$teste = $obSiop->conectarWS( $_POST );
@@ -73,8 +73,8 @@ if($_POST['requisicao'] == 'enviasolicitacao') {
 include APPRAIZ . "includes/cabecalho.inc";
 monta_titulo('Comunicação de Dados - SIOP', '');
 
-$wsusuario = 'wsmec';
-$wssenha = 'Ch0c014t3';
+$wsusuario = WEB_SERVICE_SIOP_USUARIO;
+$wssenha = WEB_SERVICE_SIOP_SENHA;
 
 $largura 	= "250px";
 $altura 	= "120px";
@@ -288,12 +288,12 @@ function enviar(){
 			<td width="30%" class="SubtituloDireita">Usuário:</td>
 			<td><?php
 				$wsusuario = $usuario; 
-				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', 'wsmec') ?></td>
+				echo campo_texto("wsusuario","S","S","Usuário","22","","","","","","","id='wsusuario'", '', WEB_SERVICE_SIOP_USUARIO) ?></td>
 		</tr>
 		<tr>
 			<td class="SubtituloDireita">Senha:</td>
 			<td>
-				<input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);" onmouseout="MouseOut(this);" onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="Ch0c014t3" size="23" id="wssenha" name="wssenha">
+				<input type="password" class="obrigatorio normal" title="Senha" onblur="MouseBlur(this);" onmouseout="MouseOut(this);" onfocus="MouseClick(this);this.select();" onmouseover="MouseOver(this);" value="<?php echo WEB_SERVICE_SIOP_SENHA; ?>" size="23" id="wssenha" name="wssenha">
 				<img border="0" title="Indica campo obrigatório." src="../imagens/obrig.gif">
 			</td>
 		</tr>

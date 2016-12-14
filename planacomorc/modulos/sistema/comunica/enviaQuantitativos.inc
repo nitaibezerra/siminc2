@@ -179,8 +179,8 @@ if (isset($_POST['codigomomento']) && count($_POST['acaid_cadastrarAcompanhament
      */
     require(APPRAIZ . 'planacomorc/classes/SiopQuantitativo.class.inc');
 
-    $wsusuario = 'wsmec';
-    $wssenha = 'Ch0c014t3';
+    $wsusuario = WEB_SERVICE_SIOP_USUARIO;
+    $wssenha = WEB_SERVICE_SIOP_SENHA;
 
     // -- credenciais e dados
     $arrParam = array(

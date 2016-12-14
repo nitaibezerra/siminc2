@@ -8,9 +8,9 @@ if(!$_SESSION['usucpf']) $_SESSION['usucpforigem'] = '';
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();
 
-$caminho_certificado	=  "planacomorc/modulos/sistema/comunica/WS_SISMEC_2.pem";
-$senha_certificado		= "sismec";
-$wsdl = 'https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
+$caminho_certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+$senha_certificado = WEB_SERVICE_SIOP_SENHA;
+$wsdl = WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
 
 ?>
 <html>

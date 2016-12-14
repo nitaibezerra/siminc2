@@ -36,7 +36,7 @@ class ClienteCurlSSL {
 /*
 echo "<pre>";
 print_r(html_entity_decode(CurlClient::execute(
-	"https://homologacao.siop.planejamento.gov.br/services/WSAlteracoesOrcamentarias?wsdl",
+	WEB_SERVICE_SIOP_URL. "WSAlteracoesOrcamentarias?wsdl",
 	dirname(__FILE__)."\mec.pem", 
 	"mec2011")));
 echo "</pre>";

@@ -28,15 +28,10 @@ class SiopQuantitativo
 	public function __construct($arrParam = array())
     {
 		global $db;
-		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-			$urlWsdl = "https://testews.siop.gov.br/services/WSQuantitativo?wsdl";
-			$this->certificado = APPRAIZ. "elabrev/modulos/sistema/comunica/mec.pem";
-			$this->senha_certificado = "mec2011";
-		} else {
-			$urlWsdl = "https://www.siop.gov.br/services/WSQuantitativo?wsdl";
-			$this->certificado =  APPRAIZ. "planacomorc/modulos/sistema/comunica/simec.pem";
-			$this->senha_certificado = "siMEC2013";
-		}
+
+        $urlWsdl = WEB_SERVICE_SIOP_URL. 'WSQuantitativo?wsdl';
+        $this->certificado = WEB_SERVICE_SIOP_CERTIFICADO;
+//        $this->senha_certificado = WEB_SERVICE_SIOP_SENHA;
 
 		if($db){
 			$this->db = $db;

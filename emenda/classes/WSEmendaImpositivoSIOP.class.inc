@@ -126,7 +126,8 @@ class WSEmendaImpositivoSIOP extends SoapClient {
                                     'retornoCadastrarAnaliseEmendaDTO' => 'retornoCadastrarAnaliseEmendaDTO',
                                    );
 
-  public function WSEmendaImpositivoSIOP($wsdl = "https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl", $options = array()) {
+  public function WSEmendaImpositivoSIOP($wsdl = NULL, $options = array()) {
+    $wsdl = $wsdl?$wsdl: WEB_SERVICE_SIOP_URL. "WSAlteracoesOrcamentarias?wsdl";
     foreach(self::$classmap as $key => $value) {
       if(!isset($options['classmap'][$key])) {
         $options['classmap'][$key] = $value;
@@ -150,7 +151,7 @@ class WSEmendaImpositivoSIOP extends SoapClient {
   	$this->tipolog = 'obterAnalisesEmendas';
   	
     return $this->__soapCall('obterAnalisesEmendas', array($obterAnalisesEmendas),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );
@@ -166,7 +167,7 @@ class WSEmendaImpositivoSIOP extends SoapClient {
   	$this->tipolog = 'cadastrarAnalisesEmendas';
   	
     return $this->__soapCall('cadastrarAnalisesEmendas', array($cadastrarAnalisesEmendas),       array(
-            'uri' => 'http://servicoweb.siop.sof.planejamento.gov.br/',
+            'uri' => WEB_SERVICE_SIOP_URL,
             'soapaction' => ''
            )
       );

@@ -5,7 +5,8 @@
  * $Id: SiopQuantitativo.class.inc 93158 2015-01-27 12:04:31Z maykelbraz $
  */
 
-include_once APPRAIZ . "planacomorc/classes/WSQuantitativo.class.inc";
+include_once APPRAIZ. "global/config.inc";
+include_once APPRAIZ. "planacomorc/classes/WSQuantitativo.class.inc";
 
 class SiopQuantitativo {
   private $_urlWsdl;
@@ -28,22 +29,9 @@ class SiopQuantitativo {
 
   public function __construct($arrParam = array()) {
     global $db;
-    if (('simec_desenvolvimento' == $_SESSION['baselogin']) || ('simec_espelho_producao' == $_SESSION['baselogin'])) { // -- dev
-        if (isset($arrParam['post']['webservice']) && (2 == $arrParam['post']['webservice'])) { // -- antigo
-            $this->_urlWsdl = 'https://homologacao.siop.planejamento.gov.br/services/WSQuantitativo?wsdl';
-            $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec_old.pem";
-        } else { // -- novo webservice 10/06/2013
-            $this->_urlWsdl = 'https://testews.siop.gov.br/services/WSQuantitativo?wsdl';
-            $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-        }
-    } else { // -- producao
-        $this->_urlWsdl = 'https://webservice.siop.gov.br/services/WSQuantitativo?wsdl';
-        if (isset($arrParam['post']['webservice']) && (2 == $arrParam['post']['webservice'])) { // -- antigo
-            $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-        } else { // -- novo webservice 10/06/2013
-            $this->_callOptions['local_cert'] = APPRAIZ . "planacomorc/modulos/sistema/comunica/simec.pem";
-        }
-    }
+
+    $this->_urlWsdl = WEB_SERVICE_SIOP_URL. 'WSQuantitativo?wsdl';
+    $this->_callOptions['local_cert'] = WEB_SERVICE_SIOP_CERTIFICADO;
 
     $this->_callOptions['passphrase'] = "simec";
     $this->_callOptions['exceptions'] = true;
@@ -82,7 +70,6 @@ class SiopQuantitativo {
     }
     $wsQualitativo = new WSQuantitativo($this->_urlWsdl, $this->_callOptions);
     $classObter = get_class($oEnvio);
-
 
     return $wsQualitativo->$classObter($oEnvio);
   }
@@ -419,7 +406,7 @@ DML;
 
     $ObjetoWS = new credencialDTO();
     $ObjetoWS->perfil = 32;
-    $ObjetoWS->senha = md5($this->wssenha);
+    $ObjetoWS->senha = $this->wssenha;
     $ObjetoWS->usuario = $this->wsusuario;
 
     return $ObjetoWS;

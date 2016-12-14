@@ -6,17 +6,15 @@ class WSAlteracoesOrcamentariasEmendas{
 		
 		$this->usuario		= $arrParam['usuario']; 
 		$this->senha		= $arrParam['senha'];
-		//$this->urlWsdl	= 'https://webservice.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
-		//$this->urlWsdl	= 'https://www.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
-		$this->urlWsdl		= 'https://testews.siop.gov.br/services/WSAlteracoesOrcamentarias?wsdl';
+		$this->urlWsdl		= WEB_SERVICE_SIOP_URL. 'WSAlteracoesOrcamentarias?wsdl';
 		$this->exercicio 	= $arrParam['exercicio'];
 	}
 	/*36800001 e 36800003*/
 	
 	public function obterEmendasAprovadas(){
 		
-		$caminho_certificado	=  APPRAIZ."planacomorc/modulos/sistema/comunica/WS_SISMEC_2.pem";
-		$senha_certificado		= "sismec";
+		$caminho_certificado	=  WEB_SERVICE_SIOP_CERTIFICADO;
+		$senha_certificado		= WEB_SERVICE_SIOP_SENHA;
 		
 		/* $caminho_certificado	=  APPRAIZ."spo/certificados/sof_siop.pem";
 		$senha_certificado		= "simec"; */
