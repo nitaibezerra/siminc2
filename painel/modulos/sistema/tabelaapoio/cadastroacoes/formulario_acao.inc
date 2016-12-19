@@ -118,7 +118,7 @@ monta_titulo( $titulo_modulo , '<img src="../imagens/obrig.gif" border="0"> Indi
         <tr>
             <td align='right' class="SubTituloDireita">Detalhe:</td>
             <td>
-                <?php echo campo_textarea( 'acadetalhe', 'N', 'S', '', 64, 05, 1000, '', '', '', '', 'id="acadetalhe"', ($arrDados[acadetalhe]) ? ($arrDados[acadetalhe]) : '' ); ?>
+                <?php echo campo_textarea( 'acadetalhe', 'N', 'S', '', 64, 05, 100000, '', '', '', '', 'id="acadetalhe"', ($arrDados[acadetalhe]) ? ($arrDados[acadetalhe]) : '' ); ?>
             </td>
         </tr>
 <!--        <tr>

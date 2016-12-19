@@ -430,7 +430,7 @@ DML;
                 <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Outras Metas do PNE Relacionadas: </label>
                     <div class="col-lg-10">
-                        <?
+                        <?php
                         $sql = <<<DML
                             SELECT
                                 eqdid AS codigo,

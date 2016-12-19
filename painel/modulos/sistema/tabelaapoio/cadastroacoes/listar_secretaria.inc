@@ -67,7 +67,9 @@
 					'<input type=\"checkbox\" id=\"chk_'||sec.secid||'\" onclick=\"resultado(this,\''||sec.secid||'\',\''||sec.secdsc||'\');\">' as checkbox,
 					sec.secdsc 
 				FROM painel.secretaria sec
-				". ($_POST['filtroPesquisa'] ? 'WHERE '. $filtro : '') . "
+                WHERE
+                    secstatus = 'A'
+				". ($_POST['filtroPesquisa'] ? 'AND '. $filtro : '') . "
 				ORDER BY sec.secdsc";
                 break;
             default:

@@ -98,7 +98,7 @@ function addCaixa(){
 		 <input type="button" style="display:none" id="buttonListaTodosTipos" onclick="listaTipos();" value="Listar Todos" />
 		<br/>
 		<div id="TipoCaixa">
-		<?phpexibeTipos(); ?>
+		<?php exibeTipos(); ?>
 		</div>
 		</td>
 	</tr>
@@ -1443,7 +1443,7 @@ function exibePesquisaRegionalizadores($cxcid,$checkbox){
 		 
 		</table>
 	</form>
-<? }
+<?php }
 
 function pesquisaRegionalizadores($dados){
 	global $db;
@@ -1947,7 +1947,7 @@ function exibePesquisaUniversidade($cxcid,$checkbox){
 		 
 		</table>
 	</form>
-<? }
+<?php }
 
 function pesquisaIndicador($cxcid,$checkbox,$link = null){
 	global $db;
@@ -2673,7 +2673,7 @@ function selecionaGraficoIndicador($cxcid,$indid){
 				 </tr>
 		</table>
 	
-<? }
+<?php }
 
 function geraGraficoIndicador($cxcid,$indid,$tipo,$dpeid = null,$sehid = null ,$tidid = null){
 	global $db;
@@ -3523,7 +3523,7 @@ function exibedashBoard($indid){
 		 </tr>
 	</table>
 	
-<? }
+<?php }
 
 /**
  * Função que exibe o formulário de busca dos indicadores
@@ -3548,16 +3548,16 @@ function exibeFormBuscaIndicador($cxcid){
 	}
 	?>
 	<div style="padding:3px;">
-		<input type="text" id="busca_<? echo $cxcid ?>" onkeypress="BuscaIndicadorEnter(event,<? echo $cxcid ?>);" name="busca_<? echo $cxcid ?>" value="<? echo $texto ?>" /> <input type="button" onclick="buscarIndicador(<? echo $cxcid ?>);" name="buscar" value="Buscar" /> <input type="button" onclick="limparBusca(<? echo $cxcid ?>);" name="limpar_busca" value="Limpar Busca" />
+		<input type="text" id="busca_<?php echo $cxcid ?>" onkeypress="BuscaIndicadorEnter(event,<? echo $cxcid ?>);" name="busca_<? echo $cxcid ?>" value="<? echo $texto ?>" /> <input type="button" onclick="buscarIndicador(<? echo $cxcid ?>);" name="buscar" value="Buscar" /> <input type="button" onclick="limparBusca(<? echo $cxcid ?>);" name="limpar_busca" value="Limpar Busca" />
 	</div>
-	<div id="resultadoBusca_<? echo $cxcid ?>" >
-	<? 
+	<div id="resultadoBusca_<?php echo $cxcid ?>" >
+	<?php 
 	if($texto || $texto != ''){
 		 exibeBuscaIndicador($texto);
 	}
 	?>
 	</div>
-<? }
+<?php }
 
 //Grava a busca do usuário
 function gravaBuscaIndicador($cxcid,$texto){
@@ -3903,7 +3903,7 @@ function addArvoreIndicador($cxcid){
 		</table>
 		</form>		
 		  
-<? }
+<?php }
 
 //Chama a inclusão do conteudo da caixa
 function exibeConteudoCaixa($cxcid,$tcoid,$abaid){
@@ -4092,9 +4092,8 @@ function exibeArvore($cxcid){
 	
 	?>
 	<script type="text/javascript">
-		<!--
 
-		d_<? echo $cxcid ?> = new dTree('d_<? echo $cxcid ?>');
+		d_<?php echo $cxcid ?> = new dTree('d_<? echo $cxcid ?>');
 
 		d_<? echo $cxcid ?>.config.folderLinks = true;
 		d_<? echo $cxcid ?>.config.useIcons = true;
@@ -4116,7 +4115,7 @@ function exibeArvore($cxcid){
 		    texto = '<a style="cursor:pointer"  onmouseover="this; return escape(\'<?=$eixo["exodsc"]?>\');"><b><?=strlen($eixo["exodsc"]) > 50 ? substr($eixo["exodsc"],0,50)."..." : $eixo["exodsc"]?></b></a>';
 			//imprime eixo
 			d_<? echo $cxcid ?>.add(<?=$eixo["exoid"]?>,<?=$estrutura["exodsc"] ? $estrutura["exodsc"] : 0;?>,' '+texto,'','','','../imagens/eixos-mini2.png','../imagens/eixos-mini2.png');
-		    <?
+		    <?php
 		    //Nível 2
 		    $sql = "select distinct
 						aca.acadsc,
@@ -4145,7 +4144,7 @@ function exibeArvore($cxcid){
 			    texto = '<a style="cursor:pointer"  onmouseover="this; return escape(\'<?=$ac["acadsc"]?>\');"><?=strlen($ac["acadsc"]) > 50 ? substr($ac["acadsc"],0,50)."..." : $ac["acadsc"]?></a>';
 				//imprime o programa
 				d_<? echo $cxcid ?>.add(999<?=$ac["acaid"]?>,<?=$eixo["exoid"]?>,' '+texto,'','','','../includes/dtree/img/folder.gif','');
-				<?
+				<?php
 				//Nível 3
 				$sql = "select distinct
 							ind.indnome,
@@ -4191,7 +4190,7 @@ function exibeArvore($cxcid){
 					    texto = '<span style="cursor:pointer" onmouseover="this; return escape(\'<?=$ind['indnome']?>\');" ><i><?=$link?></i></span>';
 						//imprime o programa
 						d_<? echo $cxcid ?>.add(99999<?=$ind["indid"]?>,999<?=$ac["acaid"]?>,' '+texto,'','','','<?=$img;?>','');
-						<?
+						<?php
 					endforeach;
 			endforeach;
 		endforeach; ?>
@@ -4200,7 +4199,7 @@ function exibeArvore($cxcid){
 
 		//-->
 </script>
-	<?
+	<?php
 }
 
 function atualizaTabelaIndicador($indid,$parametros = null){
@@ -4819,7 +4818,7 @@ function db_exibeGraficos($indid){
 	<div id="legenda_grafico">
 	</div>
 
-<?	
+<?php
 	
 }
 //Exibe a legenda do Gráfico na DashBoard
@@ -5178,33 +5177,33 @@ function exibeMapaDashBoard($visualizaMapa,$indid,$sehid =null,$dpeid_inicio = n
 	if($abaPadrao == "mapa"){
 			if($visualizaMapa == "true"){ ?>
 				<div style="cursor:pointer;padding:3px;font-weight: bold;width:95%;text-align:left" onclick="escondeMapaDashBoard('<?=$indid ?>');"> <img title="Esconder Mapa" style="vertical-align:middle;" src="../imagens/fechar_globo_terrestre.png" />  Esconder Mapa</div>
-			<? }else{ ?>
+			<?php }else{ ?>
 				<div style="cursor:pointer;padding:3px;font-weight: bold;width:95%;text-align:left" onclick="visualizaMapaDashBoard('<?=$indid ?>');"> <img title="Visualizar Mapa" style="vertical-align:middle;" src="../imagens/globo_terrestre.png" />  Visualizar Mapa</div>
-			<? } 
+			<?php } 
 	}?>
 	
 	<table width="100%">
-	<tr style="display:none" id='linha_mapa_<? echo $indid; ?>'>
-	<?
+	<tr style="display:none" id='linha_mapa_<?php echo $indid; ?>'>
+	<?php
 	
 	if($abaPadrao == "mapa"){
 		if($visualizaMapa == "true"){ ?>
 			<td colspan=4 width=50%>
 			<div id=div_exibe_mapa_<? echo $indid; ?> style=height:300px; ></div>
 			</td>
-		<? }else{ ?>
+		<?php }else{ ?>
 			<td style="display:none">
 			<div style="text-align:center;float:left;display:none;" id=div_exibe_mapa_<? echo $indid; ?>></div>
 			</td>
-		<? } ?>
+		<?php } ?>
 		<td colspan=4 width=50% id=info_mapa_<? echo $indid; ?> valign=top></td>
-<?	} ?>
+<?php	} ?>
 	</tr>
 	</table>
 	<script>
 	exibeGrafico('<? echo $indid; ?>', '<? echo md5_encrypt($filtro); ?>');
 	</script>
-<?
+<?php
 }
 
 function filtraMunicipio($estuf){
@@ -5228,7 +5227,7 @@ function filtraMunicipio($estuf){
 		<option value="<? echo $mun['muncod'] ?>"><? echo $mun['mundescricao'] ?></option>
 	<? } ?>
 	</select>
-<?
+<?php
 }
 
 function filtraMunicipioPorTipoGrupo($tpmid,$estuf){
@@ -5270,11 +5269,11 @@ function filtraMunicipioPorTipoGrupo($tpmid,$estuf){
 	?>
 	<select id="muncod" name="muncod" style="width:200px;" onchange="filtraRegionalizador(this.value)" >
 		<option value="todos">Selecione...</option>
-	<? foreach($municipios as $mun){?>
+	<?php foreach($municipios as $mun){?>
 		<option value="<? echo $mun['muncod'] ?>"><? echo $mun['mundescricao'] ?></option>
-	<? } ?>
+	<?php } ?>
 	</select>
-<?}
+<?php }
 
 function filtraRegionalizador($indid,$muncod,$value = null){
 	global $db;
@@ -5942,7 +5941,7 @@ function filtraGrupoMunicipios($gtmid,$filtro = null){
 }
 
 function addAbaCompartilhada(){
-	global $db;?>
+	global $db; ?>
 		<table class="tabela" width="95%" bgcolor="FFFFFF" cellSpacing="1" border=0 cellPadding="3" align="center">
 	<tr>
 		<td><input type="hidden" name="tcoid" id="tcoid" /></td>
@@ -5957,7 +5956,7 @@ function addAbaCompartilhada(){
 		 <input type="button" style="display:none" id="buttonListaTodosTipos" onclick="listaAbas();" value="Listar Todos" />
 		<br/>
 		<div id="TipoAbas" style="padding-top:20px;width:100%">
-		<?listaAbas();?>
+		<?php listaAbas();?>
 		</div>
 		</td>
 	</tr>
@@ -5965,7 +5964,7 @@ function addAbaCompartilhada(){
 		<td colspan="2" class="SubTituloDireita" style="text-align: center;" ><input type="button" name="cancelar" value="Cancelar" id="button_cancelar" /></td>
 	</tr>
 </table>	
-<?}
+<?php }
 
 function pesquisaAbas($pesquisa){
 	global $db;
@@ -6229,7 +6228,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 		<tr bgcolor="#f9f9f9">
 			      <td colspan="2" align="left">
 			  	  	<span style="font-size: 16px;font-weight: bold;"><? echo $indid." - ".$ind['indnome'] ?></span><br />
-			  	  	<b><? echo $ind['exodsc'] ?></b> >> <b><? echo $ind['secdsc'] ?></b> >> <b><? echo $ind['acadsc'] ?></b>
+			  	  	<b><?php echo $ind['exodsc'] ?></b> >> <b><? echo $ind['secdsc'] ?></b> >> <b><? echo $ind['acadsc'] ?></b>
 			  	  </td>
 		 </tr>
 		 <tr>
@@ -6244,7 +6243,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 								<?php } ?>
 								<div>
 								
-								<? 
+								<?php
 											$sql = "select 
 														tdiid,
 														tdidsc
@@ -6285,7 +6284,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 											<fieldset style="padding:5px;">
 												<legend>Período:</legend>
 											
-												<? 
+												<?php
 												//Carrega o período do indicador
 												$sql = "select  
 															dpe.dpeid,
@@ -6313,21 +6312,21 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 													
 													?>
 													<select name="periodo_inicio" id="periodo_inicio">
-													<? foreach($periodos as $k => $periodo){ //inicio do foreach do periodo inicio?>
+													<?php foreach($periodos as $k => $periodo){ //inicio do foreach do periodo inicio?>
 														<option <? echo $k == $k1 ? "selected=\"selected\"" : "" ?> value="<? echo $periodo['dpeid'] ?>" ><? echo $periodo['dpedsc'] ?></option>
-													<? } //fim do foreach do periodo inicio?>
+													<?php } //fim do foreach do periodo inicio?>
 													</select>
 													<span id="ate_periodo" >até</span> 
 													<select name="periodo_fim" id="periodo_fim">
-													<? foreach($periodos as $k => $periodo){ //inicio do foreach do periodo fim ?>
+													<?php foreach($periodos as $k => $periodo){ //inicio do foreach do periodo fim ?>
 														<option <? echo $k == (count($periodos) - 1)? "selected=\"selected\"" : "" ?> value="<? echo $periodo['dpeid'] ?>" ><? echo $periodo['dpedsc'] ?></option>
-													<? } //fim do foreach do periodo fim ?>
+													<?php } //fim do foreach do periodo fim ?>
 													</select>
-												<? } ?>
+												<?php } ?>
 											</fieldset>
 											</div>
 										
-										<? $sql = "	select 
+										<?php $sql = "	select 
 														unmdesc,
 														i.indescala,
 														per.perdsc
@@ -6342,7 +6341,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 								
 											$escala = $db->pegaLinha($sql);;
 											
-											if(strstr($escala['unmdesc'], 'Número inteiro') && $escala['indescala'] == "t"){?>
+											if(strstr($escala['unmdesc'], 'Número inteiro') && $escala['indescala'] == "t"){ ?>
 											
 											<div id="opc_escala" style="margin:5px;float:left;width:150px">
 											<fieldset style="padding:5px;">
@@ -6355,8 +6354,8 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 												</select>
 											</fieldset>
 											</div>
-											<? }
-											if(strstr($escala['unmdesc'], 'Moeda')){?>
+											<?php }
+											if(strstr($escala['unmdesc'], 'Moeda')){ ?>
 											<div id="opc_escala_moeda" style="margin:5px;float:left;width:150px;">
 											<fieldset style="padding:5px;">
 												<legend>Aplicar escala em:</legend>
@@ -6368,7 +6367,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 												</select>
 											</fieldset>
 											</div>
-											<? }
+											<?php }
 											if(strstr($escala['unmdesc'], 'Moeda') && strstr($escala['perdsc'], 'Anual')){?>
 											<div id="opc_escala_moeda" style="margin:5px;float:left;width:100px;">
 											<fieldset style="padding:5px;">
@@ -6382,7 +6381,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 										</div>
 									
 									
-											<? }
+											<?php }
 											if($ind['regid'] == 7 || $ind['regid'] == 2 || $ind['regid'] == 4 || $ind['regid'] == 5 || $ind['regid'] == 6 || $ind['regid'] == 8 || $ind['regid'] == 9 || $ind['regid'] == 10 || $ind['regid'] == 11 || $ind['regid'] == 12 || $ind['regid'] == REGIONALIZACAO_POLO){ //Estado?>
 										<div style="clear:both">	
 											<div id="opc_regiao" style="margin:5px;float:left;width:100px">
@@ -6390,7 +6389,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 												<legend>Região:</legend>
 												<select style="width:90px;" id="regcod" onchange="filtraEstadoDB(this.value)" >
 													<option selected="selected" value="todos">Selecione...</option>
-													<? 
+													<?php 
 													$sql = "select 
 																regcod, regdescricao
 															from
@@ -6399,8 +6398,8 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 																regdescricao";
 													$regiao = $db->carregar($sql);
 													foreach($regiao as $rg){?>
-														<option value="<? echo $rg['regcod'] ?>"><? echo $rg['regdescricao'] ?></option>
-													<? } ?>
+														<option value="<?php echo $rg['regcod'] ?>"><?php echo $rg['regdescricao'] ?></option>
+													<?php } ?>
 												</select>
 											</fieldset>
 											</div>
@@ -6411,7 +6410,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 												<span id="exibeEstado" >
 													<select id="estuf" style="width:100px;" onchange="filtraMunicipio(this.value)" >
 														<option selected="selected" value="todos">Selecione...</option>
-														<? 
+														<?php 
 														$sql = "select 
 																	estuf, estdescricao
 																from
@@ -6420,20 +6419,20 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 																	estdescricao";
 														$estados = $db->carregar($sql);
 														foreach($estados as $uf){?>
-															<option value="<? echo $uf['estuf'] ?>"><? echo $uf['estdescricao'] ?></option>
-														<? } ?>
+															<option value="<?php echo $uf['estuf'] ?>"><?php echo $uf['estdescricao'] ?></option>
+														<?php } ?>
 													</select>
 													</span>
 												</fieldset>
 											</div>
-											<? } if($ind['regid'] == 7 || $ind['regid'] == 2 || $ind['regid'] == 4 || $ind['regid'] == 5 || $ind['regid'] == 8 || $ind['regid'] == 9 || $ind['regid'] == 10 || $ind['regid'] == 11 || $ind['regid'] == 12 || $ind['regid'] == REGIONALIZACAO_POLO){ //Município?>
+											<?php } if($ind['regid'] == 7 || $ind['regid'] == 2 || $ind['regid'] == 4 || $ind['regid'] == 5 || $ind['regid'] == 8 || $ind['regid'] == 9 || $ind['regid'] == 10 || $ind['regid'] == 11 || $ind['regid'] == 12 || $ind['regid'] == REGIONALIZACAO_POLO){ //Município?>
 											<div id="opc_grp_mun" style="margin:5px;float:left;width:160px;">
 											<fieldset style="padding:5px;">
 												<legend>Grupo de Municípios:</legend>
 												<span id="exibe_grupo_municipio">
 												<select id="gtmid" style="width:150px;" onchange="filtraGrupoMunicipios(this.value)" >
 													<option selected="selected" value="todos">Selecione...</option>
-												<? 
+												<?php 
 													$sql = "select 
 																gtmid, gtmdsc
 															from
@@ -6444,8 +6443,8 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 																gtmdsc";
 													$grupoMun = $db->carregar($sql);
 													foreach($grupoMun as $gm){?>
-														<option value="<? echo $gm['gtmid'] ?>"><? echo $gm['gtmdsc'] ?></option>
-													<? } ?>
+														<option value="<?php echo $gm['gtmid'] ?>"><?php echo $gm['gtmdsc'] ?></option>
+													<?php } ?>
 													</select>
 												</span>
 											</fieldset>
@@ -6472,17 +6471,17 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 												</span>
 												</fieldset>
 											</div>
-											<? } ?>
+											<?php } ?>
 									
-									<? if($det[0]['tdiid'] && $det[0]['tdiid'] != ""){ ?>
+									<?php if($det[0]['tdiid'] && $det[0]['tdiid'] != ""){ ?>
 									<div style="clear:both">
-										<? 	$sql = "select tdidsc from painel.detalhetipoindicador where tdiid = {$det[0]['tdiid']}"; 
+										<?php 	$sql = "select tdidsc from painel.detalhetipoindicador where tdiid = {$det[0]['tdiid']}"; 
 											$detalhe1 = $db->pegaUm($sql);
 										?>
 										<div id="opc_det1" style="margin:5px;float:left;width:210px;">
 											<fieldset style="padding:5px;">
-												<legend><? echo $detalhe1 ?>:</legend>
-											<? 
+												<legend><?php echo $detalhe1 ?>:</legend>
+											<?php 
 											$sql = "select 
 														tidid as codigo,
 														tiddsc as descricao
@@ -6496,16 +6495,16 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 											?>
 										</fieldset>
 											</div>
-									<? } ?>
-									<? if($det[1]['tdiid'] && $det[1]['tdiid'] != ""){ ?>
+									<?php } ?>
+									<?php if($det[1]['tdiid'] && $det[1]['tdiid'] != ""){ ?>
 										
-										<? 	$sql = "select tdidsc from painel.detalhetipoindicador where tdiid = {$det[1]['tdiid']}"; 
+										<?php 	$sql = "select tdidsc from painel.detalhetipoindicador where tdiid = {$det[1]['tdiid']}"; 
 											$detalhe2 = $db->pegaUm($sql);
 										?>
 										<div id="opc_det2" style="margin:5px;float:left;width:210px;">
 											<fieldset style="padding:5px;">
-												<legend><? echo $detalhe2 ?>:</legend>
-											<? 
+												<legend><?php echo $detalhe2 ?>:</legend>
+											<?php 
 											$sql = "select 
 														tidid as codigo,
 														tiddsc as descricao
@@ -6521,7 +6520,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 											</div>
 									</div>
 									
-									<? } ?>
+									<?php } ?>
 								<div style="clear:both;margin:5px;">								
 								<input style="margin-left:5px;" type="button" name="button_visualizar" id="button_visualizar" onclick="vizualizarGrafico('<?php echo $indid ?>')" value="Vizualizar" />
 								<input style="margin-left:5px;" type="button" name="button_salvar_grafico" id="button_salvar_grafico" onclick="salvarGrafico('<?php echo $indid ?>','<?php echo $cxcid ?>')" value="Salvar" />
@@ -6548,7 +6547,7 @@ function exibeFiltroGrafico($cxcid,$indid,$tipo,$tipoTidid = null,$tidid = null)
 		 </tr>
 	</table>
 	
-<? }
+<?php }
 
 function salvaGrafico($cxcid,$dados){
 	global $db;
@@ -6614,7 +6613,7 @@ function maximizaGrafico($parametros){
 	<div style="font-size: 12px;font-family: verdana" >
 		<fieldset style="padding: 5px;" >
   	  		<legend style="font-size: 12px;font-weight: bold" >Indicador</legend>
-  	  			<? echo $exibeNome ?>
+  	  			<?php echo $exibeNome ?>
 		</fieldset>
 	</div>
 	<div id="div_graficos" style="font-family: verdana;padding:5px;height:400px;overflow:auto;">	
@@ -6626,19 +6625,19 @@ function maximizaGrafico($parametros){
 		  	  	</div>
 		</fieldset>
 	</div>
-	<? if($tipo != "linha" && $tipo != "barra"){ ?>
+	<?php if($tipo != "linha" && $tipo != "barra"){ ?>
 		<div style="font-size:12px;font-family:verdana;margin-top:-20px" >
 			<fieldset style="padding: 5px;" >
 	  	  		<legend style="font-size: 12px;font-weight: bold" >Legenda</legend>
-					<? exibeLegendaGrafico($indid,$sehid,$tdiid,$tdiid,$dpeid1,$dpeid2,$estuf,$muncod,$tidid1,$tidid2,$detalhe,$valorDetalhe); ?>
+					<?php exibeLegendaGrafico($indid,$sehid,$tdiid,$tdiid,$dpeid1,$dpeid2,$estuf,$muncod,$tidid1,$tidid2,$detalhe,$valorDetalhe); ?>
 			</fieldset>
 		</div>
-	<? } ?>
-	<div style="font-size: 12px;font-family: verdana;padding: 5px;" ><? exibeFonterafico($indid); ?></div>
+	<?php } ?>
+	<div style="font-size: 12px;font-family: verdana;padding: 5px;" ><?php exibeFonterafico($indid); ?></div>
 	<script>
 		swfobject.embedSWF("/includes/open_flash_chart/open-flash-chart.swf", "grafico_indicador", "100%", "350", "9.0.0", "expressInstall.swf", {"data-file":"<?php echo $DefaultParametros ?>","loading":"Carregando gráfico..."} );
 	</script>
-<?	
+<?php	
 }
 
 function abrirEscola($muncod,$filtro){
@@ -6942,7 +6941,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Área:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['exodsc'] ?>
+									  	  	<?php echo $ind['exodsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -6950,7 +6949,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Secretaria:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['secdsc'] ?>
+									  	  	<?php echo $ind['secdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -6958,7 +6957,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Ação:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['acadsc'] ?>
+									  	  	<?php echo $ind['acadsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -6966,7 +6965,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Nome Indicador:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indnome'] ?>
+									  	  	<?php echo $ind['indnome'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -6974,7 +6973,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Objetivo Indicador:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indobjetivo'] ?>
+									  	  	<?php echo $ind['indobjetivo'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -6982,7 +6981,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Observação:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo !$ind['indobservacao'] ? "N/A" : $ind['indobservacao'];?>
+									  	  	<?php echo !$ind['indobservacao'] ? "N/A" : $ind['indobservacao'];?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -6995,7 +6994,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Unidade de Medição:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['unmdesc'] ?>
+									  	  	<?php echo $ind['unmdesc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7003,7 +7002,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Unidade de exibição do produto:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['umedesc'] ?>
+									  	  	<?php echo $ind['umedesc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7011,7 +7010,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Possui dados cumulativos:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indcumulativo']=="S" ? "Sim" : ( $ind['indcumulativo']=="N" ? "Não" : "Por Ano" ); ?>
+									  	  	<?php echo $ind['indcumulativo']=="S" ? "Sim" : ( $ind['indcumulativo']=="N" ? "Não" : "Por Ano" ); ?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -7024,7 +7023,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Fórmula:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indformula'] = !$ind['indformula'] ? "N/A" : $ind['indformula'] ?>
+									  	  	<?php echo $ind['indformula'] = !$ind['indformula'] ? "N/A" : $ind['indformula'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7032,7 +7031,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Termos:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indtermos'] = !$ind['indtermos'] ? "N/A" : $ind['indtermos'] ?>
+									  	  	<?php echo $ind['indtermos'] = !$ind['indtermos'] ? "N/A" : $ind['indtermos'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7040,7 +7039,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Fonte:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indfontetermo'] = !$ind['indfontetermo'] ? "N/A" : $ind['indfontetermo'] ?>
+									  	  	<?php echo $ind['indfontetermo'] = !$ind['indfontetermo'] ? "N/A" : $ind['indfontetermo'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7048,7 +7047,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Periodicidade:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['perdsc'] = !$ind['perdsc'] ? "N/A" : $ind['perdsc'] ?>
+									  	  	<?php echo $ind['perdsc'] = !$ind['perdsc'] ? "N/A" : $ind['perdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7056,7 +7055,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Estilo:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['estdsc'] = !$ind['estdsc'] ? "N/A" : $ind['estdsc'] ?>
+									  	  	<?php echo $ind['estdsc'] = !$ind['estdsc'] ? "N/A" : $ind['estdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7064,7 +7063,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Coleta:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['coldsc'] = !$ind['coldsc'] ? "N/A" : $ind['coldsc'] ?>
+									  	  	<?php echo $ind['coldsc'] = !$ind['coldsc'] ? "N/A" : $ind['coldsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7072,7 +7071,7 @@ function exibeAbaAjax($abaAjax){
 									  	  	<b>Regionalização:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['regdescricao'] = !$ind['regdescricao'] ? "N/A" : $ind['regdescricao'] ?>
+									  	  	<?php echo $ind['regdescricao'] = !$ind['regdescricao'] ? "N/A" : $ind['regdescricao'] ?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -7122,10 +7121,10 @@ function exibeAbaAjax($abaAjax){
 			<fieldset style="padding:5px;margin: 5px;">
 				<legend>Apresentação:</legend>
 				<select id="tipo_grafico" onchange="escondePeriodo(this.value);mudaTipoGrafico2(<?php echo $_SESSION['indid'] ?>);">
-						<option <? echo ($tipo == "linha" ? "selected=selected" : "") ?> value="linha" >Gráfico em Linha</option>
-						<option <? echo ($tipo == "barra" ? "selected=selected" : "") ?> value="barra" >Gráfico em Barra</option>
-						<? echo $option_barra; ?>
-						<? echo $option_pizza; ?>
+						<option <?php echo ($tipo == "linha" ? "selected=selected" : "") ?> value="linha" >Gráfico em Linha</option>
+						<option <?php echo ($tipo == "barra" ? "selected=selected" : "") ?> value="barra" >Gráfico em Barra</option>
+						<?php echo $option_barra; ?>
+						<?php echo $option_pizza; ?>
 					</select>
 				<span style="margin-left:10px;display:none" id="grafico_linha_financeiro"><input type="radio" onclick="checkFinanceiro(this)" id="finac_qtde" name="finac_tipo" value="qntde" />Quantidade  <input onclick="checkFinanceiro(this)" style="margin-left:10px;" type="radio" id="finac_valor" name="finac_tipo" value="valor" />Valor Monetário R$ <input onclick="checkFinanceiro(this)" style="margin-left:10px;" type="radio" checked="checked" id="finac_ambos" name="finac_tipo" value="ambos" />Ambos </span>
 			</fieldset>
@@ -7182,7 +7181,7 @@ function exibeAbaAjax($abaAjax){
 					?>
 					jQuery("#tipo_grafico").val("<?php echo $tipoGrafico ?>");
 				<?php } ?>
-				mudaTipoGrafico2(<? echo $_SESSION['indid'] ?>,'div_mapa2');
+				mudaTipoGrafico2(<?php echo $_SESSION['indid'] ?>,'div_mapa2');
 				
 			});
 			</script>
@@ -7201,7 +7200,7 @@ function exibeAbaAjax($abaAjax){
 			  	  		</fieldset>
 			  	  		<script>
 								jQuery(document).ready(function() {
-									mudaTipoGrafico2(<? echo $_SESSION['indid'] ?>,'div_mapa')
+									mudaTipoGrafico2(<?php echo $_SESSION['indid'] ?>,'div_mapa')
 								});
 						</script>
 		  	  		</div>
@@ -7236,7 +7235,7 @@ function exibeAbaAjax($abaAjax){
 			<div style="display: none" id="legenda_grafico">
 			<script>
 			jQuery(document).ready(function() {
-				mudaTipoGrafico2(<? echo $_SESSION['indid'] ?>)
+				mudaTipoGrafico2(<?php echo $_SESSION['indid'] ?>)
 			});
 			</script>
 			<?php
@@ -7259,10 +7258,10 @@ function exibePaginaInicial(){
 			 </td>
 		</tr>
 		<tr>
-			<td valign="top" id="td_exibe_resultado_busca" ><? exibeResultadoBusca(); ?></td>
+			<td valign="top" id="td_exibe_resultado_busca" ><?php exibeResultadoBusca(); ?></td>
 		</tr>
 	</table>
-	<?
+	<?php
 }
 
 function exibeResultadoBusca($busca = null){
@@ -7300,20 +7299,20 @@ function exibeResultadoBusca($busca = null){
 	?>
 	<table cellspacing="1" cellpadding="3" bgcolor="#f5f5f5" align="center" border="0" width="100%">
 		<tr>
-			<td valign="top" width="<? echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
+			<td valign="top" width="<?php echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
 			<?php foreach($td[0] as $arrTd): ?>
 				<?=exibeBuscaRegionalizador($arrTd,$busca); ?>
 			<?php endforeach; ?>
 			</td>
 			<?php if( $td[1] ): ?>
-				<td valign="top" width="<? echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
+				<td valign="top" width="<?php echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
 				<?php foreach($td[1] as $arrTd): ?>
 					<?=exibeBuscaRegionalizador($arrTd,$busca); ?>
 			<?php endforeach; ?>
 				</td>
 			<?php endif; ?>
 			<?php if( $td[2] ): ?>
-				<td valign="top" width="<? echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
+				<td valign="top" width="<?php echo count($arrDados) > 2 ? "33" : (count($arrDados) == 2 ? "50" : "100") ?>%" >
 				<?php foreach($td[2] as $arrTd): ?>
 					<?=exibeBuscaRegionalizador($arrTd,$busca); ?>
 			<?php endforeach; ?>
@@ -7322,7 +7321,7 @@ function exibeResultadoBusca($busca = null){
 			</tr>
 	</table>
 
-<?}
+<?php }
 
 function exibeBuscaRegionalizador($arrPesquisa,$busca = null){
 	global $db;
@@ -7457,7 +7456,7 @@ function exibeMapaRegionalizador($cxpid){
 			</td>
 		</tr>
 	</table>
-	<?
+	<?php
 }
 
 function retornaNomeRegionalizador($regid){
@@ -7535,17 +7534,17 @@ function buscaRegionalizador($cxpid,$regiao,$busca = null,$letraInicial = null){
 	$arrDados = $db->pegaLinha($sql);
 	
 	?>
-	<div style="cursor:pointer;width:100%;border:solid 1px #888888 ;background-color:#EEE9E9; color: black;font-weight: bold;margin-top:10px" ><div style="padding: 5px;"><? echo $regiao != "todas" ? "$regiao - " : "" ?><?=$arrDados['cxpunidade']?></div></div>
+	<div style="cursor:pointer;width:100%;border:solid 1px #888888 ;background-color:#EEE9E9; color: black;font-weight: bold;margin-top:10px" ><div style="padding: 5px;"><?php echo $regiao != "todas" ? "$regiao - " : "" ?><?=$arrDados['cxpunidade']?></div></div>
 	<div style="width:100%;height:302px;overflow:auto;border-right:solid 1px #888888 ;border-left:solid 1px #888888 ;border-bottom:solid 1px #888888 ;background-color: #FFFFFF; color: black;" ><div style="padding: 5px;">
-	<? $arAlfabeto = array( "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+	<?php $arAlfabeto = array( "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
                                     "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ); 
 			foreach($arAlfabeto as $letra){
 				if($letraInicial != $letra){?>
 			<div onclick="exibeRegionalizadorLetraInicial('<?=$regiao?>','<?=$arrDados['cxpid'] ?>','<?=$letra?>');" style="margin:1px;border:solid 1px black;padding:3px;float:left;width:8px;text-align:center;cursor:pointer;"><?=$letra?></div>
-		<?}else{?>
+		<?php }else{ ?>
 			<div style="margin:1px;border:solid 1px black;padding:3px;float:left;width:8px;text-align:center;font-weight:bold;text-decoration:underline;"><?=$letra ?></div>
-		<?}?>
-	<?}?> <div onclick="exibeRegionalizadorLetraInicial('<?=$regiao?>','<?=$arrDados['cxpid'] ?>','');" style="margin:1px;border:solid 1px black;padding:3px;float:left;width:34px;text-align:center;cursor:pointer;<?php echo $letraInicial ? "" : "font-weight:bold;text-decoration:underline"?>">Todos</div>
+		<?php } ?>
+	<?php } ?> <div onclick="exibeRegionalizadorLetraInicial('<?=$regiao?>','<?=$arrDados['cxpid'] ?>','');" style="margin:1px;border:solid 1px black;padding:3px;float:left;width:34px;text-align:center;cursor:pointer;<?php echo $letraInicial ? "" : "font-weight:bold;text-decoration:underline"?>">Todos</div>
 	<?php
 		if($regiao && $regiao != "todas"){
 			if($regiao == "Sul"){
@@ -7574,7 +7573,7 @@ function buscaRegionalizador($cxpid,$regiao,$busca = null,$letraInicial = null){
 			echo "<center><span style=\"color:#990000\" >Foram encontrados mais de 50 registros, favor refinar sua busca.</span></center>";
 		}?>
 	</div></div>
-	<?
+	<?php
 }
 
 function exibeDadosIndicador($indid){
@@ -7656,7 +7655,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Área:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['exodsc'] ?>
+									  	  	<?php echo $ind['exodsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7664,7 +7663,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Secretaria:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['secdsc'] ?>
+									  	  	<?php echo $ind['secdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7672,7 +7671,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Ação:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['acadsc'] ?>
+									  	  	<?php echo $ind['acadsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7680,7 +7679,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Nome Indicador:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indnome'] ?>
+									  	  	<?php echo $ind['indnome'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7688,7 +7687,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Objetivo Indicador:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indobjetivo'] ?>
+									  	  	<?php echo $ind['indobjetivo'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7696,7 +7695,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Observação:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo !$ind['indobservacao'] ? "N/A" : $ind['indobservacao'];?>
+									  	  	<?php echo !$ind['indobservacao'] ? "N/A" : $ind['indobservacao'];?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -7709,7 +7708,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Unidade de Medição:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['unmdesc'] ?>
+									  	  	<?php echo $ind['unmdesc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7717,7 +7716,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Unidade de exibição do produto:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['umedesc'] ?>
+									  	  	<?php echo $ind['umedesc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7725,7 +7724,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Possui dados cumulativos:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indcumulativo']=="S" ? "Sim" : ( $ind['indcumulativo']=="N" ? "Não" : "Por Ano" ); ?>
+									  	  	<?php echo $ind['indcumulativo']=="S" ? "Sim" : ( $ind['indcumulativo']=="N" ? "Não" : "Por Ano" ); ?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -7738,7 +7737,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Fórmula:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indformula'] = !$ind['indformula'] ? "N/A" : $ind['indformula'] ?>
+									  	  	<?php echo $ind['indformula'] = !$ind['indformula'] ? "N/A" : $ind['indformula'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7746,7 +7745,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Termos:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indtermos'] = !$ind['indtermos'] ? "N/A" : $ind['indtermos'] ?>
+									  	  	<?php echo $ind['indtermos'] = !$ind['indtermos'] ? "N/A" : $ind['indtermos'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7754,7 +7753,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Fonte:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['indfontetermo'] = !$ind['indfontetermo'] ? "N/A" : $ind['indfontetermo'] ?>
+									  	  	<?php echo $ind['indfontetermo'] = !$ind['indfontetermo'] ? "N/A" : $ind['indfontetermo'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7762,7 +7761,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Periodicidade:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['perdsc'] = !$ind['perdsc'] ? "N/A" : $ind['perdsc'] ?>
+									  	  	<?php echo $ind['perdsc'] = !$ind['perdsc'] ? "N/A" : $ind['perdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7770,7 +7769,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Estilo:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['estdsc'] = !$ind['estdsc'] ? "N/A" : $ind['estdsc'] ?>
+									  	  	<?php echo $ind['estdsc'] = !$ind['estdsc'] ? "N/A" : $ind['estdsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7778,7 +7777,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Coleta:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['coldsc'] = !$ind['coldsc'] ? "N/A" : $ind['coldsc'] ?>
+									  	  	<?php echo $ind['coldsc'] = !$ind['coldsc'] ? "N/A" : $ind['coldsc'] ?>
 									  	  </td>
 								</tr>
 								<tr>
@@ -7786,7 +7785,7 @@ function exibeDadosIndicador($indid){
 									  	  	<b>Regionalização:</b>
 									  	  </td>
 									  	  <td align="left">
-									  	  	<? echo $ind['regdescricao'] = !$ind['regdescricao'] ? "N/A" : $ind['regdescricao'] ?>
+									  	  	<?php echo $ind['regdescricao'] = !$ind['regdescricao'] ? "N/A" : $ind['regdescricao'] ?>
 									  	  </td>
 								</tr>
 								<tr bgcolor="#cccccc">
@@ -7807,4 +7806,4 @@ function exibeDadosIndicador($indid){
 			 </div>
 			 <?php 
 }
-?> 
+
