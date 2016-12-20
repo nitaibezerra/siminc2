@@ -1,4 +1,4 @@
-<?
+<?php
 
  /*
    Sistema Simec
@@ -145,9 +145,9 @@ function listaUgs(){
 	// SQL para buscar estados existentes
 	$sql = "SELECT ungcod, ungabrev || ' / ' || ungdsc as ungdsc  
 			FROM public.unidadegestora 
-			WHERE --unicod = '26101' and 
-			ungstatus='A'
-			AND ungcod in ('150002','155007','150001','150003','150004','150019','150016','150011','150028','152390','152389','152734','153173','154003','153978')
+			WHERE
+                unicod = '42101'
+                AND ungstatus='A'
 			ORDER BY ungcod, ungcod";
 	$ugs = $db->carregar($sql);
 	

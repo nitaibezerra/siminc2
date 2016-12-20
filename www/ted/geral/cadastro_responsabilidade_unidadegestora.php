@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Sistema Simec
 Setor responsável: SPO-MEC
@@ -142,10 +142,15 @@ function listaUgs(){
 	$db = new cls_banco();
 	
 	// SQL para buscar estados existentes
-	$sql = "SELECT ungcod, '('||u.unicod||') - ' || ungdsc as ungdsc
+	$sql = "SELECT
+                ungcod,
+                '('||u.unicod||') - ' || ungdsc as ungdsc
 			FROM public.unidadegestora ug
 				inner join public.unidade u ON u.unicod = ug.unicod
-			WHERE ungstatus='A' --and u.unicod != '26101'   
+			WHERE
+                ungstatus='A'
+                AND  u.orgcod = '42000'
+                --AND u.unicod != '42101'
 			ORDER BY 2";
 	$ugs = $db->carregar($sql);
 	

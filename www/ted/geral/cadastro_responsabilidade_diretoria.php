@@ -1,4 +1,4 @@
-<?
+<?php
 
  /*
    Sistema Simec
@@ -37,7 +37,7 @@ function listaUgs()
 	
 	$stWhere = '';
 	if($pflcod == PERFIL_SECRETARIA){		
-		$stWhere = ' AND d.dircod IN (38,39,41,42,43,58) ';
+		$stWhere = ' AND d.dircod IN ('. DIR_SUBSEC. ') ';
 	}
 
     if ($pflcod == PERFIL_DIRETORIA_FNDE) {
@@ -45,13 +45,15 @@ function listaUgs()
     }
 	
 	// SQL para buscar estados existentes
-	$sql = "SELECT dircod, '('||ug.ungabrev||') / ' || dirdsc as dirdsc
+	$sql = "SELECT DISTINCT dircod, '('||ug.ungabrev||') / ' || dirdsc as dirdsc
 			FROM public.unidadegestora ug
 				inner join ted.diretoria d ON d.ungcod = ug.ungcod
-			WHERE ungstatus='A' and dirstatus = 'A'
+			WHERE
+                ungstatus='A'
+                AND dirstatus = 'A'
 			{$stWhere}
 			ORDER BY 2";
-    //ver($sql, d);
+//ver($sql, d);
 	$ugs = $db->carregar($sql);
 	
 	$count = count($ugs);
@@ -167,7 +169,7 @@ function buscaUgsAtribuido($usucpf, $pflcod){
 				<table width="100%" align="center" border="0" cellspacing="0" cellpadding="2" class="listagem" id="tabela">
 					<thead>
 						<tr>
-							<td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="4"><strong>Selecione o tipo de ensino</strong></td>		
+							<td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="4"><strong>Selecione a Diretoria da Unidade Gestora:</strong></td>		
 						</tr>
 					</thead>
 					<?php listaUgs(); ?>
@@ -235,6 +237,7 @@ function retorna(objeto)
 	tamanho = campoSelect.options.length;
 	if (campoSelect.options[0].value=='') {tamanho--;}
 	//if (document.formulario.ugsresp[objeto].checked == true){
+//console.log(objeto);
 	if (document.formulario.dircod[objeto].checked == true){		
 		campoSelect.options[tamanho] = new Option(document.formulario.dirdsc[objeto].value, document.formulario.dircod[objeto].value, false, false);
 		sortSelect(campoSelect);

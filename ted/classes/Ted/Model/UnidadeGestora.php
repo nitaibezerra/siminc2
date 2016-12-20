@@ -108,7 +108,7 @@ class Ted_Model_UnidadeGestora extends Modelo
             ORDER BY 2
         ", $andWhere);
 
-        //ver($strSQL, d);
+//        ver($strSQL, d);
         $list = $this->carregar($strSQL);
         $options = array();
         if ($list) {
@@ -125,11 +125,13 @@ class Ted_Model_UnidadeGestora extends Modelo
      */
     public function pegaListaConcedente()
     {
-        $strSQL = "SELECT ungcod as codigo,
-                   ungcod || ' - ' || ungabrev||' / '||ungdsc as descricao
+        $strSQL = "
+            SELECT
+                ungcod as codigo,
+                ungcod || ' - ' || ungabrev||' / '||ungdsc as descricao
             FROM {$this->stNomeTabela}
             WHERE ungstatus = 'A'
-            and ungcod in ('155007', '150004', '150002', '150001','150003','150019','150016','150011','150028','152390','152389','152734','153173','154003','153978','150014')
+            and unicod IN(". UNIDADES_OBRIGATORIAS. ")
             ORDER BY 2";
 
         $list = $this->carregar($strSQL);

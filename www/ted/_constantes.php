@@ -137,17 +137,20 @@ define("OBJETIVO_HINT", "Favor Preencher com a descrição do objeto a ser executa
 define("JUSTIFICATIVA_HINT", "Favor registrar: Contextualização da obra no campus em que o projeto será executado; Motivação da obra, isto é, qual o problema que a obra busca sanar e qual a demanda para o projeto. Caso a proposta tenha recursos a serem descentralizados em mais de um exercício, o proponente deverá inserir no campo da justificativa o comentário de como o recurso deverá ser distribuído ao longo dos exercícios. Ex.: A construção em questão deverá ter aporte de recursos distribuídos em mais de um exercício. Sendo a parcela para 2013 de R$ XX, para 2014 de R$ YY e para 2015 de R$ ZZ.");
 
 #UGs
-define("UG_FNDE", 	153173);
-define("UG_CGSO", 	152734);
-define("UG_CAPES", 	154003);
-define("UG_INEP", 	153978);
-define("UG_SECADI", 150028);
-define("UG_SETEC", 	150016);
-define("UG_SEB", 	150019);
+define("UG_FNDE", 	403201);
+define("UG_CGSO", 	420019);
+define("UG_CAPES", 	420008);
+define("UG_INEP", 	420014);
+define("UG_SECADI", 420046);
+define("UG_SETEC", 	420020);
+define("UG_SEB", 	403201);
 
 #UOs
-define("UO_FNDE", 26298);
-define("UO_MEC", 26101);
+define("UO_FNDE", 42101);
+define("UO_MEC", 42101);
+
+# Diretorias/Secretarias
+define("DIR_SUBSEC", '111,115,112,118,120,113,128,145,159,158,121,114,116,123,124,119,127,122,117,110,125,126');
 
 define('MODULO_NAME', 'Termo de Execução Descentralizada');
 
