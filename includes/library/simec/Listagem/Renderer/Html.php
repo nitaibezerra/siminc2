@@ -663,12 +663,13 @@ HTML;
                     </tfoot>
 HTML;
         } elseif (Simec_Listagem::TOTAL_SOMATORIO_COLUNA == $this->config->getTotalizador()) {
+            // -- Correção para quando tem mais de uma ação na listagem.
+            $dadosLinha = $this->dados[0];
+            if($dadosLinha){
             echo <<<HTML
                     <tfoot>
                         <tr>
 HTML;
-                            // -- Correção para quando tem mais de uma ação na listagem.
-                            $dadosLinha = $this->dados[0];
                             for ($i = 0; $i < $qtdAcoes; $i++) {
                                 array_unshift($dadosLinha, "--a{$i}");
                             }
@@ -696,6 +697,7 @@ HTML;
                         </tr>
                     </tfoot>
 HTML;
+            }
         }
     }
 
