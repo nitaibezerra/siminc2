@@ -191,7 +191,7 @@ class Ted_Model_PrevisaoOrcamentaria extends Modelo
 				ON u.unicod = p.unicod
 			WHERE p.ptrano = '{$_SESSION['exercicio']}'
 				AND p.ptrstatus = 'A'
-				AND u.unicod IN ( '26101','26298','26291','26290' )
+				AND u.unicod IN (". UNIDADES_OBRIGATORIAS. " )
 			
 		";
 		$list = $this->carregar($sql);
@@ -835,7 +835,7 @@ DML;
                     ON u.unicod = p.unicod
                 WHERE p.ptrano = '{$_SESSION['exercicio']}'
                 AND p.ptrstatus = 'A'
-                AND u.unicod IN ('26101','26298','26291','26290')
+                AND u.unicod IN (". UNIDADES_OBRIGATORIAS. ")
             ) AS vTable
             ".($keyword ? "WHERE codigo = {$keyword}" : "")."
 		";
@@ -883,7 +883,7 @@ DML;
                 JOIN public.unidadegestora u
                     ON u.unicod = p.unicod
                 WHERE p.ptrstatus = 'A'
-                AND u.unicod IN ('26101','26298','26291','26290')
+                AND u.unicod IN (". UNIDADES_OBRIGATORIAS. ")
                 %s
             ) AS vTable
             ORDER BY vTable.descricao ASC

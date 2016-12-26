@@ -170,7 +170,7 @@ border-color:#ddd
             </div>
         </div>
 
-        <div class="panel panel-primary">
+<!--        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Cronograma Físico/Financeiro <span class="glyphicon glyphicon-minus panel-control" style="float:right"></span></h3>
             </div>
@@ -186,7 +186,7 @@ border-color:#ddd
             <div class="panel-body">
                 <?php require_once dirname(__FILE__) . '/programacao/nota_credito.inc'; ?>
             </div>
-        </div>
+        </div>-->
 
     </section>
 </section>
