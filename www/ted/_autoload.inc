@@ -19,7 +19,9 @@ function ted_autoload($classe) {
     if(is_numeric(strpos($classPath, 'Ted'))){
         include_once APPRAIZ. 'ted/classes/'. "$classPath.php";
     } else {
-        include_once "$classPath.php";
+        if(is_numeric(strpos($classPath, 'Zend'))){
+            include_once "$classPath.php";
+        }
     }
 }
 

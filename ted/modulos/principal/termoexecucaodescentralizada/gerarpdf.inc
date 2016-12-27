@@ -12,13 +12,29 @@ Ted_Utils_Model::userIsAllowed();
 $pdf->getElement('tcpid')->setValue(Ted_Utils_Model::capturaTcpid());
 
 if (isset($_POST['requisicao']) && ($_POST['requisicao'] == 'gerarPDF')) {
-
-    include_once APPRAIZ . 'elabrev/classes/modelo/HtmlToPdf.class.inc';
-
     $html = $pdf->showForm();
-    $pdfObj = new HtmlToPdf($html);
-    $pdfObj->setTitle("Termo_De_Execucao_Descentralizada_n_{$pdf->getElement('tcpid')->getValue()}.pdf");
-    $pdfObj->getPDF();
+
+    include_once APPRAIZ. "includes/dompdf/dompdf_config.inc.php";
+    //ob_clean();
+    $dompdf = new DOMPDF();
+    $dompdf->load_html($html);
+    $dompdf->set_paper('A4','portrait');
+    $dompdf->render();
+    $arqnome = "TED_{$pdf->getElement('tcpid')->getValue()}.pdf";
+    if(isset($_SERVER['WINDIR']) && $_SERVER['WINDIR'] == "C:\Windows"){
+        $caminhoArq = "C:/Temp/".$arqnome;
+    } else {
+        $caminhoArq = "/tmp/".$arqnome;
+    }
+    file_put_contents($caminhoArq, $dompdf->output());
+    // caminho completo
+    $file = $caminhoArq;
+    // cabeçalho
+    header("Content-type: application/pdf");
+    header("Content-Disposition: attachment;filename=$file");
+    // mostra o download
+    readfile($file);
+    die;
 }
 
 //Cabeçalho do sistema

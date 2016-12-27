@@ -41,8 +41,10 @@ $reitor = $termoExecDesc->capturaReitor();
 $rsCountSolAlt = $termoExecDesc->capturaContagemTermo();
 ?>
 
+<?php if(!isset($_POST['requisicao'])): ?>
 <section class="col-md-12">
 	<form class="form-horizontal" enctype="multipart/form-data" name="<?= $this->element->getName(); ?>" id="<?= $this->element->getId(); ?>" action="<?= $this->element->getAction(); ?>" method="<?= $this->element->getMethod(); ?>" role="form">
+<?php endif; ?>
 		<?= $this->element->tcpid; ?>
 		<section class="well">
 			<table class="col-md-12 table-condensed table-hover table-responsive">
@@ -552,6 +554,7 @@ $rsCountSolAlt = $termoExecDesc->capturaContagemTermo();
 		    ?>	    
 	    </section>	    	   
 		<hr>
+<?php if(!isset($_POST['requisicao'])): ?>
 		<div class="well form-group">    	
 			<div class=" col-md-10">			
 				<button type="submit" class="btn btn-success" name="requisicao" value="gerarPDF" id="submit"><span class="glyphicon glyphicon-list-alt"></span> Gerar PDF</button>					    			
@@ -559,3 +562,4 @@ $rsCountSolAlt = $termoExecDesc->capturaContagemTermo();
 		</div>		
 	</form>
 </section>
+<?php endif; ?>
