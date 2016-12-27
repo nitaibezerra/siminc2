@@ -48,7 +48,7 @@ class Ted_Form_RelPorUG extends Ted_Form_Abstract
 		        ungcod ||' - '|| ungdsc as descricao
 		    FROM public.unidadegestora
 		    where
-		        ungcod in ('150011','150016','152389','152390','150028','150002','150019','150004')";
+		        unicod in (". UNIDADES_OBRIGATORIAS. ")";
 		
 		$list = $db->carregar($sql);
 		$options = array();
@@ -71,7 +71,7 @@ class Ted_Form_RelPorUG extends Ted_Form_Abstract
 		if (count($_REQUEST['ungcod']) > 0){
 			$whereG = " and tcp.ungcodconcedente in ('".implode("','", $_REQUEST['ungcod'])."')";
 		} else {
-			$whereG = " and tcp.ungcodconcedente in ('150011','150016','152389','152390','150028','150002','150019','150004')";
+			$whereG = " and tcp.ungcodconcedente IS NOT NULL";
 		}
 		
 		$sql = "SELECT 
