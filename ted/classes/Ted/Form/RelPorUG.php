@@ -119,9 +119,9 @@ class Ted_Form_RelPorUG extends Ted_Form_Abstract
 							LEFT JOIN public.unidadegestora unc 
 								ON unc.ungcod = tcp.ungcodconcedente
 							LEFT JOIN ted.representantelegal rpp
-								ON rpp.ug = tcp.ungcodconcedente
+								ON(rpp.ug = tcp.ungcodconcedente AND rpp.status = 'A' AND rpp.substituto = FALSE)
 							LEFT JOIN ted.representantelegal rpc
-								ON rpc.ug = tcp.ungcodproponente
+								ON(rpc.ug = tcp.ungcodproponente AND rpc.status = 'A' AND rpc.substituto = FALSE)
 							LEFT JOIN workflow.documento doc  
 								ON doc.docid = tcp.docid
 							LEFT JOIN workflow.estadodocumento esd  
