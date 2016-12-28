@@ -219,11 +219,11 @@ SCRIPT;
         if (!$remetente->usucpf ) {
             return false;
         }
-        $objetoEmail->Host = '';
+        $objetoEmail->Host = $_SESSION['config_smtp'];
         $objetoEmail->CharSet = 'ISO-8895-1';
         $objetoEmail->Timeout = 60;
         #$this->SMTPDebug = true;
-        $objetoEmail->From     = isset( $remetenteInformado["usuemail"] ) ? $remetenteInformado["usuemail"] : $remetente->usuemail;
+        $objetoEmail->From = isset( $remetenteInformado["usuemail"] ) ? $remetenteInformado["usuemail"] : $remetente->usuemail;
         $objetoEmail->FromName = isset( $remetenteInformado["usunome"]  ) ? $remetenteInformado["usunome"]  : $remetente->usunome;
 
         # identifica os destinatários
@@ -246,8 +246,10 @@ SCRIPT;
         set_time_limit(180);
 
 
-        if(!$objetoEmail->Send()) {
-            return false;
+        if($_SESSION['config_smtp']){
+            if(!$objetoEmail->Send()) {
+                return false;
+            }
         }
 
         if($condicao){
