@@ -85,10 +85,13 @@ if (isset($_GET['requisicao']) || !empty($_GET['requisicao'])) {
 
 if(!isset($_GET['requisicao'])){
     try{
-        $anexoBA = $modeloEspelho->buscaAnexo('BA');
-        $anexoGE = $modeloEspelho->buscaAnexo('GE');
-        $anexoTE = $modeloEspelho->buscaAnexo('TE');
-        $anexoSU = $modeloEspelho->buscaAnexo('SU');
+        $anexoAC = $modeloEspelho->buscaAnexo('AC');
+        $anexoAD = $modeloEspelho->buscaAnexo('AD');
+        $anexoAI = $modeloEspelho->buscaAnexo('AI');
+        $anexoAV = $modeloEspelho->buscaAnexo('AV');
+        $anexoHM = $modeloEspelho->buscaAnexo('HM');
+        $anexoMU = $modeloEspelho->buscaAnexo('MU');
+        $anexoPC = $modeloEspelho->buscaAnexo('PC');
         $anexoOU = $modeloEspelho->buscaAnexo('OU');
     }catch(Exception $ex){
         $modeloEspelho->getFlashMessage()->addMensagem('Erro na aplicação: <br>'.$ex->getMessage(),  Simec_Helper_FlashMessage::ERRO);

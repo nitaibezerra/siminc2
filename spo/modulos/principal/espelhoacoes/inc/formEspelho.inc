@@ -29,9 +29,17 @@ if($permissaoAcesso): ?>
         <section class="form-group">
             <label for="tipo" class="col-lg-2 control-label">Tipo:</label>
             <section class="col-lg-10">
-                <?
-                $opcoes = array('Superior' => 'SU', 'Básica' => 'BA', 'Gestão' => 'GE', 'Tecnológica' => 'TE', 'Outros' => 'OU');
-                inputChoices('tipo', $opcoes, $dados['arptipo'], 'tipo');
+                <?php
+                    $opcoes = array(
+                        'Artes Cênicas' => 'AC',
+                        'Artes Visuais e Artes Digitais e Eletrônicas' => 'AD',
+                        'Artes Integradas' => 'AI',
+                        'Audiovisual' => 'AV',
+                        'Humanidades' => 'HM',
+                        'Música' => 'MU',
+                        'Patrimônio Cultural' => 'PC',
+                        'Outros' => 'OU');
+                    inputChoices('tipo', $opcoes, $dados['arptipo'], 'tipo');
                 ?>
             </section>
         </section>

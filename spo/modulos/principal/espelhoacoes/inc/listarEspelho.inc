@@ -6,22 +6,34 @@ $sql = <<<DML
         arq.arqextensao,
         arq.arqid as id,
         con.angdsc,
-        CASE arptipo
-            WHEN 'GE' THEN 'Programa de Gestão'
-            WHEN 'SU' THEN 'Programa Educação Superior'
-            WHEN 'BA' THEN 'Educação Básica'
-            WHEN 'TE' THEN 'Programa de Educação Tecnológica'
-            WHEN 'OU' THEN 'Outras Ações'
+        CASE arptipo WHEN 'AC' THEN
+            'Artes Cênicas'
+        WHEN 'AD' THEN
+            'Artes Visuais e Artes Digitais e Eletrônicas'
+        WHEN 'AI' THEN
+            'Artes Integradas'
+        WHEN 'AV' THEN
+            'Audiovisual'
+        WHEN 'HM' THEN
+            'Humanidades'
+        WHEN 'MU' THEN
+            'Música'
+        WHEN 'PC' THEN
+            'Patrimônio Cultural'
+        ELSE
+            'Outros'
         END as tipo_arquivo,
         arq.arqtamanho,
         to_char(arq.arqdata, 'DD/MM/YYYY') || ' ' || arq.arqhora as arqdata,
         usu.usunome
     FROM spo.anexogeral con
-    INNER JOIN public.arquivo arq on con.arqid = arq.arqid
-    INNER JOIN seguranca.usuario usu on usu.usucpf = arq.usucpf
-    WHERE angtipoanexo = 'E'
+        JOIN public.arquivo arq on con.arqid = arq.arqid
+        JOIN seguranca.usuario usu on usu.usucpf = arq.usucpf
+    WHERE
+        angtipoanexo = 'E'
         AND con.exercicio = '{$_SESSION ['exercicio']}'
-    order by arptipo
+    ORDER BY
+        arptipo
 DML;
   
     $listagem = new Simec_Listagem();

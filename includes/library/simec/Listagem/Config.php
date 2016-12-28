@@ -90,7 +90,7 @@ class Simec_Listagem_Config
 
     public function salvar($namespace)
     {
-        $_SESSION['simec-listagem'][$namespace] = serialize($this);
+//        $_SESSION['simec-listagem'][$namespace] = serialize($this);
         return $this;
     }
 
