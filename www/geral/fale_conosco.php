@@ -1,4 +1,4 @@
-    <?
+<?
 
     include_once "config.inc";
     include_once APPRAIZ."includes/funcoes.inc";
