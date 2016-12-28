@@ -50,8 +50,9 @@ if (!empty($fontesComLimiteExcedido)) {
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script type="text/javascript" lang="JavaScript">
 $(function(){
-    if ($('.make-switch')) {
+    if ($('.make-switch').size() > 0) {
         $('#btn-enviar').show();
+        $('#btn-marcar').show();
     }
     $('#modal-alert .modal-title').text('Retorno da SOF');
     $('#modal-alert .modal-dialog').removeClass('modal-lg');
@@ -147,5 +148,5 @@ echo $fm->getMensagens();
 
     </div>
     <button type="button" class="btn btn-success" style="display:none" id="btn-enviar">Enviar selecionados para o SIOP</button>
-    <button type="button" class="btn btn-info" id="btn-marcar" data-acao="marcar">Marcar todos</button>
+    <button type="button" class="btn btn-info" style="display:none" id="btn-marcar" data-acao="marcar">Marcar todos</button>
 </form>
