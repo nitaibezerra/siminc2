@@ -148,14 +148,14 @@ function DownloadArquivoInfo($arqid){
 				            <input type="hidden" name="formulario" value="1"/>
 				           
 				            <?php if (!IS_PRODUCAO) : ?>
-				            <input type="hidden" name="baselogin" id="baselogin" value="simec_espelho_producao"/>
+<!--				            <input type="hidden" name="baselogin" id="baselogin" value="simec_espelho_producao"/>
 				            <div class="form-group text-right">
 			                    <div class="col-lg-12">
 			                        <div class="make-switch" data-on-label="Espelho" data-off-label="Desenv. " data-on="primary" data-off="danger">
 			                            <input type="checkbox" name="baselogincheck" id="baselogincheck" value="simec_espelho_producao" checked="checked" />
 			                        </div>
 			                    </div>
-			                </div>
+			                </div>-->
 			                <?php endif; ?>
 							<div class="form-group">
 								<div class="col-sm-12">
