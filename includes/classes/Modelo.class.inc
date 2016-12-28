@@ -300,7 +300,7 @@ class Modelo extends cls_banco{
         // -- Faz join com as tabelas mapeadas nas foreing keys
         $opcoes['join'] = isset($opcoes['join'])?$opcoes['join']:false;
 
-		$sql = "SELECT $stCampos FROM $this->stNomeTabela t1";
+		$sql = "SELECT DISTINCT $stCampos FROM $this->stNomeTabela t1";
 
         $contagemTabelas = 2;
         if ($opcoes['join']) {
