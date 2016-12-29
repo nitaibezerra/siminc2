@@ -68,7 +68,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         window.location = 'progorc.php?modulo=principal/comunicado/visualizar&acao=A&download=S&arqid=' + arqid;
     }
 </script>
-<br>
+<!--<br>
 <br>
 Senhor Dirigente,
 <br>
@@ -80,7 +80,7 @@ Em caso de dúvidas, favor entrar em contato com a Coordenação de Programação Orç
 Atenciosamente,
 <br>
 <br>
-SPO
+SPO-->
 
 <table width="95%" class="tabela" bgcolor="#f5f5f5" border="0"
        cellSpacing="1" cellPadding="3" align="center">

@@ -60,7 +60,7 @@ if (isset($_REQUEST['dados']['acacod']) && $_REQUEST['dados']['acacod'] != '') {
 if (isset($_REQUEST['dados']['esdid']) && $_REQUEST['dados']['esdid'] != '') {
     $filtro .= " AND doc.esdid = {$_REQUEST['dados']['esdid']} ";
 }
-if (isset($_REQUEST['dados']['dspid']) && $_REQUEST['dados']['dspid'] != '') {
+if (isset($_REQUEST['dados']['dspid']) && is_numeric($_REQUEST['dados']['dspid'])) {
     $filtro .= " AND dsp.dspid = {$_REQUEST['dados']['dspid']} ";
 }
 if (isset($_REQUEST['dados']['gdpid']) && $_REQUEST['dados']['gdpid'] != '') {
@@ -226,14 +226,21 @@ font-size:10px
                 <div class="col-md-10">
                     <?php
                     $sql = <<<DML
-SELECT gdp.gdpid AS codigo,
-       gdp.gdpnome AS descricao
-  FROM proporc.grupodespesa gdp
-  WHERE EXISTS (SELECT 1
-                  FROM proporc.periodoreferencia prf
-                  WHERE prf.prfid = gdp.prfid
-                    AND prf.prsano = '{$_SESSION['exercicio']}')
-  ORDER BY gdp.gdpordem
+SELECT DISTINCT
+    gdp.gdpid AS codigo,
+    gdp.gdpnome AS descricao
+FROM proporc.grupodespesa gdp
+WHERE
+    EXISTS(
+        SELECT
+            1
+        FROM proporc.periodoreferencia prf
+        WHERE
+            prf.prfid = gdp.prfid
+            AND prf.prsano = '{$_SESSION['exercicio']}'
+    )
+ORDER BY
+    descricao
 DML;
                     inputCombo("dados[gdpid]", $sql, $_REQUEST['dados']['gdpid'], "gdpid");
                     ?>
@@ -246,15 +253,22 @@ DML;
                 <div class="col-md-10">
                     <?php
                     $sql = <<<DML
-SELECT dsp.dspid AS codigo,
-       dsp.dspnome AS descricao
-  FROM proporc.despesa dsp
-  WHERE EXISTS (SELECT 1
-                  FROM proporc.grupodespesa gdp
-                    INNER JOIN proporc.periodoreferencia prf USING(prfid)
-                  WHERE gdp.gdpid = dsp.gdpid
-                    AND prf.prsano = '{$_SESSION['exercicio']}')
-  ORDER BY dsp.dspnome
+SELECT DISTINCT
+    dsp.dspid AS codigo,
+    dsp.dspnome AS descricao
+FROM proporc.despesa dsp
+WHERE
+    EXISTS (
+        SELECT
+            1
+        FROM proporc.grupodespesa gdp
+            JOIN proporc.periodoreferencia prf USING(prfid)
+        WHERE
+            gdp.gdpid = dsp.gdpid
+            AND prf.prsano = '{$_SESSION['exercicio']}'
+    )
+ORDER BY
+    descricao
 DML;
                     inputCombo("dados[dspid]", $sql, $_REQUEST['dados']['dspid'], "dspid");
                     ?>
