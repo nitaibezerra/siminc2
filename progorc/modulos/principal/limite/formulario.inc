@@ -289,7 +289,7 @@ DML;
             }
             $db->commit();
         }
-        #ver($_REQUEST['anexo'],$_POST ['ccrid'], d);
+//ver($_REQUEST['anexo'],$_POST ['ccrid'], d);
         foreach ($_POST ['ccrid'] [$_REQUEST ['anexo']] as $c) {
             $sql = "select ccr.ccrid from progorc.contacorrente ccr inner join progorc.pedidodetalhe pdd on (ccr.ccrid = pdd.ccrid)
 			where pdd.pdlid = {$pdlidR} and ccr.ccrid = $c";
@@ -680,6 +680,7 @@ DML;
             <tbody>
 HTML;
     $anexoconta = $db->carregar($sql);
+//ver($sql,d);
     if ($anexoconta) {
         foreach ($anexoconta as $conta) {
             if ($pdlescolhaR == 'C1' && $conta['conta'] == 'CA') {
@@ -1072,7 +1073,7 @@ if ($_SESSION['exercicio'] < 2015) {
 }
 // -- Form de análise da Secretária
 if (in_array(PFL_SECRETARIA, $perfis) || in_array(PFL_SUPER_USUARIO, $perfis) || in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $perfis)) {
-    $listaAbas[] = array('id' => 2, 'descricao' => 'Análise Secretaria SESU/SETEC', 'link' => "{$urlBaseDasAbas}analise");
+    $listaAbas[] = array('id' => 2, 'descricao' => 'Análise Secretaria', 'link' => "{$urlBaseDasAbas}analise");
 }
 // -- Form de análise da SPO
 if (($esdid == STDOC_ANALISE_SPO) && ($esdid != STDOC_RECUSADO || $esdid != STDOC_ATENDIDO) && (in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $perfis) || in_array(PFL_SUPER_USUARIO, $perfis))) {

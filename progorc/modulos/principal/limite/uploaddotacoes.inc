@@ -87,7 +87,7 @@ function explodeCSVLine($line) {
 }
 
 if (isset($_POST['action'])) {
-	if($_FILES['limite']['type'] != "application/vnd.ms-excel"){
+	if(!in_array($_FILES['limite']['type'], array('application/vnd.ms-excel', 'text/csv'))){
 		echo "<script>
 				alert('Formato de Arquivo inválido.');
 				window.location = 'progorc.php?modulo=principal/limite/uploaddotacoes&acao=A';
@@ -110,7 +110,7 @@ if (isset($_POST['action'])) {
         // -- Eliminando cabeçalho        
         array_shift($data);
         // -- Quebrando as linhas em colunas
-        $data = array_map(explodeCSVLine, $data);                
+        $data = array_map(explodeCSVLine, $data);
         global $db;
         //    $sqlTruncate = "truncate recorc.dadoscargaprevisao";
         $sqlTruncate = "DELETE FROM progorc.cargadotacaoconta";
