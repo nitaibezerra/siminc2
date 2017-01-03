@@ -525,20 +525,22 @@ function pedidoAlteracaoOrcamentariaAsObject($paoid)
 {
     global $db;
     $query = "
-SELECT pao.siopid AS identificadorUnico,
-       pao.paoano AS exercicio,
-       mcr.mcrcod AS codigoMomento,
-       '' AS codigoClassificacaoAlteracao,
-       tcr.tcrcod AS codigoTipoAlteracao,
-       pao.paodsc AS descricao,
-       '". CODIGO_ORGAO_SISTEMA. "' AS codigoOrgao,
-       pao.paoid,
-       mcr.mcrid
-  FROM altorc.pedidoalteracaoorcamentaria pao
-    INNER JOIN altorc.momentocredito mcr USING(mcrid)
-    INNER JOIN altorc.tipocredito tcr USING(tcrid)
-  WHERE pao.paoid = %d
-";
+        SELECT
+            pao.siopid AS \"identificadorUnico\",
+            pao.paoano AS exercicio,
+            mcr.mcrcod AS \"codigoMomento\",
+            '' AS \"codigoClassificacaoAlteracao\",
+            tcr.tcrcod AS \"codigoTipoAlteracao\",
+            pao.paodsc AS descricao,
+            '". CODIGO_ORGAO_SISTEMA. "' AS \"codigoOrgao\",
+            pao.paoid,
+            mcr.mcrid
+        FROM altorc.pedidoalteracaoorcamentaria pao
+            JOIN altorc.momentocredito mcr USING(mcrid)
+            JOIN altorc.tipocredito tcr USING(tcrid)
+        WHERE
+            pao.paoid = %d
+    ";
     $stmt = sprintf($query, $paoid);
     $dadospedido = $db->pegaLinha($stmt);
     $pedido = new PedidoAlteracaoDTO();
