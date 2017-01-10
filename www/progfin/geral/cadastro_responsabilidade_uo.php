@@ -73,19 +73,34 @@ monta_titulo('Definição de responsabilidades - Unidade Orçamentária', '');
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do unicod selecionado previamente.
 $unidadesObrigatorias = UNIDADES_OBRIGATORIAS;
+$orgCodMin = CODIGO_ORGAO_SISTEMA;
 $sql = <<<DML
-SELECT '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value="' || uni.unicod || '" '
-           || 'onclick="marcarAcao(this)"'
-           || case WHEN (SELECT count(urp.rpuid)
-                           FROM {$esquema}.usuarioresponsabilidade urp
-                           WHERE urp.unicod = uni.unicod
-                             AND urp.usucpf = '{$usucpf}'
-                             AND urp.pflcod = '{$pflcod}'
-                             AND rpustatus = 'A') > 0 THEN ' checked' ELSE '' END || '>' AS unicod,
-       uni.unicod || ' - ' || uni.unidsc AS descricao
-  FROM public.unidade uni
-  WHERE uni.unistatus = 'A'
-  ORDER BY uni.unicod
+    SELECT
+        '<input type="checkbox" name="unicod" id="chk_' || uni.unicod || '" value="' || uni.unicod || '" '
+        || 'onclick="marcarAcao(this)"'
+        || CASE WHEN (
+            SELECT
+                count(urp.rpuid)
+            FROM {$esquema}.usuarioresponsabilidade urp
+            WHERE
+                urp.unicod = uni.unicod
+                AND urp.usucpf = '{$usucpf}'
+                AND urp.pflcod = '{$pflcod}'
+                AND rpustatus = 'A'
+        ) > 0 THEN
+            ' checked'
+        ELSE
+            ''
+        END
+        || '>' AS unicod,
+        uni.unicod || ' - ' || uni.unidsc AS descricao
+    FROM
+        public.unidade uni
+    WHERE
+        uni.unistatus = 'A'
+        AND uni.orgcod = '{$orgCodMin}'
+    ORDER BY
+        uni.unicod
 DML;
 
 $cabecalho = array('', 'UO - Descrição');
@@ -97,15 +112,17 @@ $db->monta_lista_simples($sql, $cabecalho, 2000, 5, 'N', '100%', 'N');
 <input type="hidden" name="pflcod" value="<?=$pflcod?>">
 <input type="hidden" name="requisicao" value="gravarResponsabilidadeAcao">
 <select multiple size="8" name="usuacaresp[]" id="usuacaresp" style="width:500px;" class="CampoEstilo">
-<?
+<?php
 $sql = <<<DML
-SELECT uni.unicod AS codigo,
-       uni.unicod || ' - ' || uni.unidsc AS descricao
-  FROM {$esquema}.usuarioresponsabilidade ur
-    INNER JOIN public.unidade uni USING(unicod)
-  WHERE ur.usucpf = '{$usucpf}'
-    AND ur.pflcod = '{$pflcod}'
-    AND ur.rpustatus = 'A'
+    SELECT
+        uni.unicod AS codigo,
+        uni.unicod || ' - ' || uni.unidsc AS descricao
+    FROM {$esquema}.usuarioresponsabilidade ur
+        JOIN public.unidade uni USING(unicod)
+    WHERE
+        ur.usucpf = '{$usucpf}'
+        AND ur.pflcod = '{$pflcod}'
+        AND ur.rpustatus = 'A'
 DML;
 $usuarioresponsabilidade = $db->carregar($sql);
 
