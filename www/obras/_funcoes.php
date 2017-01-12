@@ -141,23 +141,35 @@ function obrPegaOrgidPermitido( $usucpf ){
  * 
  */
 function obrMontaAbasTipoEnsino( $usucpf, $orgid = "" ){
-	
-	// itens do menu padrão (super user, perfil sem responsabilidade)
-	$arAbas = array( 0 => array( "descricao" => "Ensino Superior", 	   
-								 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_SESU  ),
-					 1 => array( "descricao" => "Ensino Profissional",
-					 			 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_SETEC ),
- 					 2 => array( "descricao" => "Administrativo",
-					 			 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_ADM  ),
- 					 3 => array( "descricao" => "Hospitais",
-					 			 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_REHUF  ),
-					 4 => array( "descricao" => "Instituições Militares",
-					 			 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_MILITAR  ) );
-					 
-					 /*,
-					2 => array( "descricao" => "Ensino Básico",
-					 			 "link" 	 => str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid=" . ORGAO_FNDE  ),*/
-					 
+    global $db;
+    
+    # Consulta Eixos
+    $sql = "
+        SELECT
+            orgid,
+            orgdesc
+        FROM obras.orgao
+        ORDER BY
+            orgid
+    ";
+    $listaOrg = $db->carregar($sql);
+
+    # Itens do menu padrão (super user, perfil sem responsabilidade)
+    $arAbas = array();
+    
+    # Fix - Retirando Bug de parametros repetidos
+    $paramOrgid = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], '&orgid='), strpos($_SERVER['REQUEST_URI'], '&orgid=')+1);
+    if(strLen($paramOrgid) > 1){
+        $_SERVER['REQUEST_URI'] = str_replace($paramOrgid, '', $_SERVER['REQUEST_URI']);
+    }
+    
+    foreach($listaOrg as $org){
+        $arAbas[] = array(
+            'descricao' => $org['orgdesc'],
+            'link' => str_replace('/obras/', '', $_SERVER['REQUEST_URI']). '&orgid='. $org['orgid']
+        );
+    }
+
 	// busca os orgãos do usuario logado
 	$orgids = obrPegaOrgidPermitido( $usucpf );
 	
@@ -178,7 +190,6 @@ function obrMontaAbasTipoEnsino( $usucpf, $orgid = "" ){
 		}
 		
 		$orgid = empty($orgid) ? $orgids[0]["id"] : $orgid;
-		
 	}
 	
 	// cria o id do orgão que o usuário selecionou (default o primeiro orgão que o usuário possuir responsabilidade)
@@ -186,8 +197,7 @@ function obrMontaAbasTipoEnsino( $usucpf, $orgid = "" ){
 	
 	$_REQUEST["orgid"] = empty($_REQUEST["orgid"]) ? $orgid : $_REQUEST["orgid"]; 
 	
-	return montarAbasArray( $arAbas, str_replace("/obras/","",$_SERVER['REQUEST_URI'])."&orgid={$orgid}" );
-								 
+	return montarAbasArray($arAbas, str_replace("/obras/", "", $_SERVER['REQUEST_URI']). "&orgid={$orgid}");
 }
 
 function obrBuscaCampusEntidade( $entid ){

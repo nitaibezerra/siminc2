@@ -283,15 +283,15 @@ if( (obrPegaOrgidPermitido($_SESSION["usucpf"]) /*&& !possuiPerfil(PERFIL_SAA)*/
 		popupAlertaGeral($texto,'450px',"200px");
 	}	
 
-	if ( $_SESSION["obras"]["orgid"] == ORGAO_FNDE ) {
-		$texto = "<div style=\"font-size:12px\" >Prezado Usuário,<br /><br />
-		Informamos que todas as obras foram migradas para o Obras 2.0 e devem ser atualizadas por lá.
-		<br /><br />
-		Em caso de dúvidas entrar em contato.
-		</div>";
-
-		popupAlertaGeral($texto,'450px',"200px");
-	}
+//	if ( $_SESSION["obras"]["orgid"] == ORGAO_FNDE ) {
+//		$texto = "<div style=\"font-size:12px\" >Prezado Usuário,<br /><br />
+//		Informamos que todas as obras foram migradas para o Obras 2.0 e devem ser atualizadas por lá.
+//		<br /><br />
+//		Em caso de dúvidas entrar em contato.
+//		</div>";
+//
+//		popupAlertaGeral($texto,'450px',"200px");
+//	}
 ?>
 	<link rel="stylesheet" type="text/css" href="/includes/superTitle.css" />
 	<script type="text/javascript" src="/includes/remedial.js"></script>
@@ -308,17 +308,17 @@ if( (obrPegaOrgidPermitido($_SESSION["usucpf"]) /*&& !possuiPerfil(PERFIL_SAA)*/
 		<input type="hidden" name="arEntidCampus" id="arEntidCampus" value="<?=$_SESSION["obrasarvore"]["arEntidCampus"] ?>"/>
 		<table class="tabela" bgcolor="#f5f5f5" cellspacing="1" cellpadding=3 align="center">
 			<?php
-			if ( $_SESSION["obra"]["orgid"] == 3 ):
+//			if ( $_SESSION["obra"]["orgid"] == 3 ):
 			?>
-			<tr>
+<!--			<tr>
 				<td colspan="2" class="" style="color: black; text-align: justify;"><font size=+2>
 O Módulo Monitoramento de Obras do Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação (Simec) passou por reformulação a fim de melhorar os processos de monitoramento das ações para os usuários do sistema. 
 Com isso todas as obras de educação básica foram migradas para o obras 2 e devem a partir de então serem acompanhadas nele (obras 2).
 				</td>
-			</tr>
+			</tr>-->
 			<?php
-			die;
-			endif;
+//			die;
+//			endif;
 			?>
 			<tr>
 				<td colspan="2" class="subTituloCentro">Argumentos de Pesquisa</td>

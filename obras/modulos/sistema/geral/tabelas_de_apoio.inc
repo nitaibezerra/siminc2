@@ -170,10 +170,24 @@ switch ($_REQUEST['tabelas']){
 											</td>
 											<td align=\"left\">".$dados['descricao']."</td>
 											<td align=\"center\">
-												<select class='CampoEstilo' id='descricaoServicos_".$dados['codigo']."' name='descricaoServicos'>
-													<option value='1' ". ($dados['idorgao'] == 1 ? 'selected=selected' : '').">Educação Superior</option>
-													<option value='2' ". ($dados['idorgao'] == 2 ? 'selected=selected' : '').">Educação Técnica</option>
-													<option value='3' ". ($dados['idorgao'] == 3 ? 'selected=selected' : '').">Educação Básica</option>	
+												<select class='CampoEstilo' id='descricaoServicos_".$dados['codigo']."' name='descricaoServicos'>";
+                        
+                        # Consulta Eixos
+                        $sql = "
+                            SELECT
+                                orgid,
+                                orgdesc
+                            FROM obras.orgao
+                            ORDER BY
+                                orgid
+                        ";
+                        $listaOrg = $db->carregar($sql);
+                        
+                        foreach($listaOrg as $org){
+                            $codigoTabela .= "<option value='{$org['orgid']}' ". ($dados['idorgao'] == $org['orgid'] ? 'selected=selected' : '').">{$org['orgdesc']}</option>";
+                        }
+                        
+                        $codigoTabela .= "
 												</select>
 											</td>
 										 </tr>";
@@ -364,17 +378,29 @@ switch ($_REQUEST['tabelas']){
 					colDescricaoServicos.innerHTML = "<textarea class='txareanormal' cols='70' rows='2' name='descricaoServicos' id='descricaoServicos'></textarea>";
 					<? } ?>
 					
-					<? if($tabela == "programafonte") {?>
+					<?php if($tabela == "programafonte") { ?>
 		
 					var orgaoNovoItem = document.getElementById('orgaoNovoItem');			
 					var colDescricaoServicos = linha.insertCell(2);
 					colDescricaoServicos.style.textAlign = "center";		
 					colDescricaoServicos.innerHTML =   '<select class="CampoEstilo" id="descricaoServicos" name="descricaoServicos">' 
-													 + '<option value="1" '+( orgaoNovoItem.value == 1 ? 'selected="selected"' : '')+' >Educação Superior</option>'
-													 + '<option value="2" '+( orgaoNovoItem.value == 2 ? 'selected="selected"' : '')+' >Educação Técnica</option>'
-													 + '<option value="3" '+( orgaoNovoItem.value == 3 ? 'selected="selected"' : '')+' >Educação Básica</option>'
+                    <?php
+                        # Consulta Eixos
+                        $sql = "
+                            SELECT
+                                orgid,
+                                orgdesc
+                            FROM obras.orgao
+                            ORDER BY
+                                orgid
+                        ";
+                        $listaOrg = $db->carregar($sql);
+                        
+                        foreach($listaOrg as $org){ ?>
+                            + '<option value="<?php echo $org['orgid']; ?>" '+( orgaoNovoItem.value == '<?php echo $org['orgid']; ?>' ? 'selected="selected"' : '')+' ><?php echo $org['orgdesc']; ?></option>'
+                        <?php } ?>
 													 + '</select>';
-					<? } ?>
+					<?php } ?>
 		
 					<? if($tabela == "tipologiaobra") {?>
 					
@@ -785,10 +811,22 @@ switch ($_REQUEST['tabelas']){
 						&nbsp;&nbsp;&nbsp;<input type="text" size="60" id="descricaoNovoItem" class="normal">
 					</td>
 					<td width="45%" valign="top" align="center" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;">
+                    <?php
+                        # Consulta Eixos
+                        $sql = "
+                            SELECT
+                                orgid,
+                                orgdesc
+                            FROM obras.orgao
+                            ORDER BY
+                                orgid
+                        ";
+                        $listaOrg = $db->carregar($sql);
+                    ?>
 					<select class='CampoEstilo' id='orgaoNovoItem' name='orgaoNovoItem'>
-						<option value='1'>Educação Superior</option>
-						<option value='2'>Educação Técnica</option>
-						<option value='3'>Educação Básica</option>
+                        <?php foreach($listaOrg as $org): ?>
+                            <option value='<?php echo $org['orgid']; ?>'><?php echo $org['orgdesc']; ?></option>
+                        <?php endforeach; ?>
 					</select></td>
 				</tr>
 				<? }else if($tabela == "tipologiaobra") { ?>

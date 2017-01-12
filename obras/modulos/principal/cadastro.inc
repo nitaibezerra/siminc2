@@ -738,6 +738,7 @@ if ($_SESSION["obra"]["obrid"]){
 		if( (int)$orgid != ORGAO_REHUF && (int)$orgid != ORGAO_SESU && (int)$orgid != ORGAO_MILITAR ) $ajaxTipologia = 'ajaxTipologia';
 		$somenteLeitura = $bloqueioPAC2 == 'S' ? 'N' : $somenteLeitura;
 		$sql = "SELECT tpoid as codigo, tpodsc as descricao FROM obras.tipologiaobra WHERE tpostatus = 'A' AND orgid = ".$orgid." ORDER BY tpodsc ASC";
+//ver($sql);
 		$db->monta_combo("tpoid", $sql, $somenteLeitura, "Selecione...", $ajaxTipologia, '', '', '340', 'N', 'tpoid');
 		?>
 		</td>
@@ -763,7 +764,8 @@ if ($_SESSION["obra"]["obrid"]){
 			$bloqueadosub = 'N';
 		}
 
-		/*$wh = "";
+		$wh = "";
+        /*
 		if( $tpoid )
 		{
 			$wh = " AND prfid IN (SELECT prfid FROM obras.tipologiaprograma WHERE tpoid = ".$tpoid.") ";
@@ -797,7 +799,7 @@ if ($_SESSION["obra"]["obrid"]){
 		 			and orgid = ". ($_REQUEST["org"] ? $_REQUEST["org"] : $orgid)." 
 		 			".$wh."
 				ORDER BY prfdesc";
-		//ajaxCarregaTipologiaProg
+//ver($sql);
 		$db->monta_combo("prfid", $sql, $somenteLeitura, "Selecione...", '', '', '', '340', 'S', 'prfid');
 		
 		?>

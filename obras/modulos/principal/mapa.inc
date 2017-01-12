@@ -1,4 +1,4 @@
-<?
+<?php
 
 if($_REQUEST['requisicao'] == "validarlatlongmunicipio") {
 	$sql = "SELECT distanciaPontosGPS(
@@ -39,7 +39,7 @@ if($_REQUEST['requisicao'] == "validarlatlongmunicipio") {
   <head>
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
     <title>Mapa</title>
-    <?
+    <?php
 		function curPageURL() {
 		 $pageURL = 'http';
 		 if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -58,22 +58,7 @@ if($_REQUEST['requisicao'] == "validarlatlongmunicipio") {
 			$idobra=$_SESSION["obra"]["obrid"];
 		
     ?>
-	<?if ($local[2]=="simec.mec.gov.br" ){ ?>
-    	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAXKOUFW3PNxuPE30S17ocgBQhVwj8ALbvbyVgNcB-R-H_S2MIRxSRw07TtkPv50s-khCgCjw1KhcuSw" type="text/javascript"></script>
-  	<? } ?>
-  	<?if ($local[2]=="simec-d.mec.gov.br"){ ?>
-  		<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAXKOUFW3PNxuPE30S17ocgBRYtD8tuHxswJ_J7IRZlgTxP-EUtxRD3aBmpKp7QQhM-oKEpi_q_Z6nzQ" type="text/javascript"></script> 
-	<? } ?>
-	<?if ($local[2]=="simec" ){ ?>
-    	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAXKOUFW3PNxuPE30S17ocgBTNzTBk8zukZFuO3BxF29LAEN1D1xRrpthpVw0AZ6npV05I8JLIRtHtyQ" type="text/javascript"></script>
-  	<? } ?>
-  	<?if ($local[2]=="simec-d"){ ?>
-  		<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAXKOUFW3PNxuPE30S17ocgBTFm3qU4CVFuo3gZaqihEzC-0jfaRSyt8kdLeiWuocejyXXgeTtRztdYQ" type="text/javascript"></script> 
-	<? } ?>
-	
-	<?if ($local[2]=="simec-local"){ ?>
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAXKOUFW3PNxuPE30S17ocgBRzjpIxsx3o6RYEdxEmCzeJMTc4zBRTBTWZ8zjwenwhN3CBw_oSZaFJjQ" type="text/javascript"></script> 	
-    <? } ?>
+	<script src="<?php echo WS_GOOGLE_MAPS_URL; ?>" type="text/javascript"></script>
     <script type="text/javascript" src="/includes/prototype.js"></script>
     <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
     <script type="text/javascript">	
