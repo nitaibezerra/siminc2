@@ -140,13 +140,19 @@ DML;
  */
 function inputComboUngcod($valor, array $whereAdicional = array(), array $opcoesAdicionais = array())
 {
+    $orgcod = CODIGO_ORGAO_SISTEMA;
     $query = <<<DML
-SELECT ung.ungcod AS codigo,
-       ung.ungcod || ' - ' || ung.ungdsc AS descricao
-  FROM public.unidadegestora ung
-    WHERE ung.ungstatus= 'A'
-      %s
-  ORDER BY ung.unicod
+        SELECT
+            ung.ungcod AS codigo,
+            ung.ungcod || ' - ' || ung.ungdsc AS descricao
+        FROM public.unidadegestora ung
+            JOIN public.unidade uni ON ung.unicod = uni.unicod
+        WHERE
+            ung.ungstatus= 'A'
+            AND uni.orgcod = '{$orgcod}'
+            %s
+        ORDER BY
+            ung.unicod
 DML;
 
     // -- Se houver um $whereAdicional, o incluí na query
@@ -189,7 +195,7 @@ DML;
         $substituto = ' AND ' . implode(' AND ', $whereAdicional);
     }
     $stmt = sprintf($query, $ano, $substituto);
-    //ver($stmt);
+//ver($stmt);
 
     inputCombo(
         'dados[fdsid]',
