@@ -57,20 +57,34 @@
         <div >
 
             <?php
-            $sql = "  SELECT 
-                    DISTINCT cfpmes as codigo,
-                    CASE WHEN cfpmes::integer = 1 THEN 'Janeiro' 
-                    WHEN cfpmes::integer = 2 THEN 'Fevereiro'
-                    WHEN cfpmes::integer = 3 then 'Março'
-                    WHEN cfpmes::integer = 4 THEN 'Abril'
-                    WHEN cfpmes::integer = 5 THEN 'Maio'
-                    WHEN cfpmes::integer = 6 THEN 'Junho'
-                    WHEN cfpmes::integer = 7 THEN 'Julho'
-                    WHEN cfpmes::integer = 8 THEN 'Agosto'
-                    WHEN cfpmes::integer = 9 THEN 'Setembro'
-                    WHEN cfpmes::integer = 10 THEN 'Outubro'
-                    WHEN cfpmes::integer = 11 THEN 'Novembro'
-                    WHEN cfpmes::integer = 12 THEN 'Dezembro' end as descricao
+            $sql = "
+                SELECT DISTINCT
+                    cfpmes as codigo,
+                    CASE WHEN cfpmes::integer = 1 THEN
+                        'Janeiro' 
+                    WHEN cfpmes::integer = 2 THEN
+                        'Fevereiro'
+                    WHEN cfpmes::integer = 3 then
+                        'Março'
+                    WHEN cfpmes::integer = 4 THEN
+                        'Abril'
+                    WHEN cfpmes::integer = 5 THEN
+                        'Maio'
+                    WHEN cfpmes::integer = 6 THEN
+                        'Junho'
+                    WHEN cfpmes::integer = 7 THEN
+                        'Julho'
+                    WHEN cfpmes::integer = 8 THEN
+                        'Agosto'
+                    WHEN cfpmes::integer = 9 THEN
+                        'Setembro'
+                    WHEN cfpmes::integer = 10 THEN
+                        'Outubro'
+                    WHEN cfpmes::integer = 11 THEN
+                        'Novembro'
+                    WHEN cfpmes::integer = 12 THEN
+                        'Dezembro' 
+                    END as descricao
               FROM progfin.cargacusteiofolhapagamento
               WHERE cfpano::integer =  {$_SESSION['exercicio']}";
             if (isset($_REQUEST ['mes']) && $_REQUEST ['mes'] != '') {
@@ -110,13 +124,14 @@ foreach ($db->carregar($sql) as $value) {
 }
 $rubricas = substr($rubricas, 0, -1);
 $sql = "
-        SELECT DISTINCT 
-            cfpcodigodespesa ,
-            cfprubrica
-       FROM
-        progfin.cargacusteiofolhapagamento
-       WHERE
-        cfpmes::integer = {$mes} AND cfpcodigodespesa::INTEGER NOT IN ($elementos)  AND cfprubrica::INTEGER NOT IN(0,$rubricas)";
+    SELECT DISTINCT 
+        cfpcodigodespesa ,
+        cfprubrica
+    FROM progfin.cargacusteiofolhapagamento
+    WHERE
+        cfpmes::integer = ". ((int)$mes). "
+        AND cfpcodigodespesa::INTEGER NOT IN($elementos)
+        AND cfprubrica::INTEGER NOT IN(0,$rubricas)";
 
 #ver($sql,d);
 $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO, Simec_Listagem::RETORNO_BUFFERIZADO);

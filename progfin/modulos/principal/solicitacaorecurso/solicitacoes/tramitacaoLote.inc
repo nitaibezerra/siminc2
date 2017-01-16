@@ -26,7 +26,6 @@ if (count($_POST['dados']['plfid'])) {
     $_SESSION['_progfin_']['_destinatarios_'][] = array();
     /* Enviando os PEDIDOS */
     foreach ($_POST['dados']['plfid'] as $plfid) {
-
         $pedido = $db->pegaLinha("select docid, usucpf from progfin.pedidoliberacaofinanceira where plfid = {$plfid}");
         $docid = $pedido['docid'];
         $aedid = TRANS_PEDIDO_ANALISE_SPO_AJUSTE_UO;
@@ -159,32 +158,40 @@ include APPRAIZ . 'includes/cabecalho.inc';
  *
  */
 function tramitacaoLoteListagem() {
-    $estados = $_GET['esdid'] ? $_GET['esdid'] : ESDID_PEDIDO_ANALISE_SPO;
-
-    $strSQL = sprintf("
-                    SELECT DISTINCT
-                        plf.plfid,
-                        lpad(plf.plfid::text, 7,'0') AS numpedido,
-                        to_char(dataultimaatualizacao,'dd/mm/yyyy') as datapedido,
-                        uni.unicod || ' - ' || uni.unidsc AS unidade,
-                        COUNT( 0 )              AS liberacoes,
-                        SUM(lfnvalorsolicitado) AS solicitado,
-                        SUM(lfnvalorautorizado) AS autorizado,
-                        SUM(lfnvaloratendido)   AS atendido,
-                        esd.esddsc              AS situacao,
-                        esd.esdid
-                    FROM progfin.pedidoliberacaofinanceira plf
-                    JOIN public.unidade uni ON uni.unicod = plf.unicod
-                    JOIN public.unidadegestora ung ON ung.unicod = uni.unicod
-                    LEFT JOIN progfin.liberacoesfinanceiras lfn ON lfn.plfid = plf.plfid and lfn.ungcodfavorecida = ung.ungcod
-                    JOIN workflow.documento doc ON plf.docid = doc.docid
-                    LEFT JOIN workflow.estadodocumento esd ON esd.esdid = doc.esdid
-                      WHERE esd.esdid IN(%d)
-                    AND lfnvalorsolicitado is not null
-                    AND plf.unicod NOT IN ('26101', '26298', '26291', '26290', '26443')
-                    GROUP BY 1,2,3,4,9,10
-                    ORDER BY 1 DESC
-                ", $estados);
+    $estados = $_GET['esdid'];
+    $filtro = NULL;
+    if($estados){
+        $filtro = 'AND esd.esdid IN(%d)';
+    }
+    
+    $sql = "
+        SELECT DISTINCT
+            plf.plfid,
+            lpad(plf.plfid::text, 7,'0') AS numpedido,
+            to_char(dataultimaatualizacao,'dd/mm/yyyy') as datapedido,
+            uni.unicod || ' - ' || uni.unidsc AS unidade,
+            COUNT( 0 )              AS liberacoes,
+            SUM(lfnvalorsolicitado) AS solicitado,
+            SUM(lfnvalorautorizado) AS autorizado,
+            SUM(lfnvaloratendido)   AS atendido,
+            esd.esddsc              AS situacao,
+            esd.esdid
+        FROM progfin.pedidoliberacaofinanceira plf
+            JOIN public.unidade uni ON uni.unicod = plf.unicod
+            JOIN public.unidadegestora ung ON ung.unicod = uni.unicod
+            LEFT JOIN progfin.liberacoesfinanceiras lfn ON lfn.plfid = plf.plfid and lfn.ungcodfavorecida = ung.ungcod
+            JOIN workflow.documento doc ON plf.docid = doc.docid
+            LEFT JOIN workflow.estadodocumento esd ON esd.esdid = doc.esdid
+        WHERE
+            lfnvalorsolicitado IS NOT NULL
+            AND plf.unicod NOT IN(". UNIDADES_OBRIGATORIAS. ")
+            {$filtro}
+        GROUP BY
+            1,2,3,4,9,10
+        ORDER BY
+            1 DESC
+    ";
+    $strSQL = sprintf($sql, $estados);
 
     require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 
