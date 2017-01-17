@@ -4652,8 +4652,9 @@ function verificaUsuarioReceita($cpf)
  */
 function recuperarUsuarioReceita($cpf)
 {
-    $objSoap = new SoapClient("http://ws.mec.gov.br/PessoaFisica/wsdl", array('trace' => 1, 'exceptions' => true, 'cache_wsdl' => WSDL_CACHE_NONE));
-    $xml = $objSoap->solicitarDadosPessoaFisicaPorCpf($cpf);
+    include_once APPRAIZ. 'www/includes/webservice/cpf.php';
+    $objPessoaFisica = new PessoaFisicaClient("http://ws.mec.gov.br/PessoaFisica/wsdl");
+    $xml = $objPessoaFisica->solicitarDadosPessoaFisicaPorCpf($cpf);
 
     $obj = (array) simplexml_load_string($xml);
 

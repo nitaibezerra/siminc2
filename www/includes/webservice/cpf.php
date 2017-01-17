@@ -6,6 +6,8 @@ if (!$_POST['ajaxCPF']):
 <?php
 endif;
 include_once 'config.inc';
+include_once 'RestReceitaFederal.php';
+include_once 'AdapterReceitaFederalSimec.php';
 
 /**
  * Classe para acesso ao webservice de pessoa física.
@@ -31,11 +33,11 @@ final class PessoaFisicaClient
     public function __construct($wsdl)
     {
 
-        try{
-            $this->soapClient = new Simec_SoapClient( $wsdl );
-        } catch (Exception $e){
-            exit("Não está conectado!");
-        }
+//        try{
+//            $this->soapClient = new Simec_SoapClient( $wsdl );
+//        } catch (Exception $e){
+//            exit("Não está conectado!");
+//        }
 
     }
 
@@ -47,7 +49,7 @@ final class PessoaFisicaClient
      */
     public function solicitarDadosPessoaFisicaPorCpf( $cpf )
     {
-        return (  $this->soapClient->solicitarDadosPessoaFisicaPorCpf($cpf) );
+        return AdapterReceitaFederalSimec::solicitarDadosPessoaFisicaPorCpf($cpf);
     }
 
     /**
@@ -58,7 +60,7 @@ final class PessoaFisicaClient
      */
     public function solicitarDadosResumidoPessoaFisicaPorCpf( $cpf )
     {
-        return (  $this->soapClient->solicitarDadosResumidoPessoaFisicaPorCpf( $cpf ) );
+        return AdapterReceitaFederalSimec::solicitarDadosPessoaFisicaPorCpf($cpf);
     }
 
     /**
@@ -95,7 +97,7 @@ if ($_POST['ajaxCPF']){
      * Aqui � feita a chamada do m�todo da classe cliente do webservice.
      */
     $objPessoaFisica = new PessoaFisicaClient("http://ws.mec.gov.br/PessoaFisica/wsdl");
-    $xml 			 = $objPessoaFisica->solicitarDadosPessoaFisicaPorCpf($cpf);
+    $xml = $objPessoaFisica->solicitarDadosPessoaFisicaPorCpf($cpf);
 
     $obj = (array) simplexml_load_string($xml);
 

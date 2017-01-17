@@ -12,18 +12,9 @@ if(!$_SESSION['usucpf']) $_SESSION['usucpforigem'] = '';
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();
 
-include_once APPRAIZ.'includes/classes/SimecWsCPFReceita.class.inc';
+include_once APPRAIZ. 'www/includes/webservice/cpf.php';
 
-$wsdl = 'http://ws.mec.gov.br/PessoaFisica/wsdl';
-
-$boReceita = new SimecWsCPFReceita($wsdl, array(
-												'exceptions'	=> true,
-										        'trace'			=> true,
-												'encoding'		=> 'ISO-8859-1' )
-												);
-
-$retorno = $boReceita->solicitarDadosReceitaPorCpf( '' );
+    $objPessoaFisica = new PessoaFisicaClient("http://ws.mec.gov.br/PessoaFisica/wsdl");
+    $retorno = $objPessoaFisica->solicitarDadosPessoaFisicaPorCpf('');
 
 ver($retorno);
-
-?>
