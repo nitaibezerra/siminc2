@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+include_once 'RestReceitaFederal.php';
+include_once 'AdapterReceitaFederalSimec.php';
+
 /**
  * Classe para acesso ao webservice de pessoa jurídica.
  * 
@@ -23,11 +27,11 @@ final class PessoaJuridicaClient
 	public function __construct($wsdl)
 	{
 
-		try{
-			$this->soapClient = new SoapClient( $wsdl );
-		} catch (Exception $e){
-			exit("Não está conectado!");
-		}
+//		try{
+//			$this->soapClient = new SoapClient( $wsdl );
+//		} catch (Exception $e){
+//			exit("Não está conectado!");
+//		}
 		
 	}
 	
@@ -39,7 +43,7 @@ final class PessoaJuridicaClient
 	 */
 	public function solicitarDadosResumidoPessoaJuridicaPorCnpj( $cnpj )
 	{
-		return (  $this->soapClient->solicitarDadosResumidoPessoaJuridicaPorCnpj( $cnpj ) );
+		return AdapterReceitaFederalSimec::solicitarDadosPessoaJuridicaPorCnpj($cnpj);
 	}
 	
 	/**
@@ -50,7 +54,7 @@ final class PessoaJuridicaClient
 	 */
 	public function solicitarDadosPessoaJuridicaPorCnpj( $cnpj )
 	{
-		return (  $this->soapClient->solicitarDadosPessoaJuridicaPorCnpj( $cnpj ) );
+		return AdapterReceitaFederalSimec::solicitarDadosPessoaJuridicaPorCnpj($cnpj);
 	}
 	
 	/**

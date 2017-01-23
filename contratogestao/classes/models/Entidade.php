@@ -1,5 +1,7 @@
 <?php
 
+include_once APPRAIZ. 'www/includes/webservice/PessoaJuridicaClient.php';
+
 class Model_Entidade extends Abstract_Model {
 
     protected $_schema = 'entidade';
@@ -122,8 +124,8 @@ class Model_Entidade extends Abstract_Model {
     }
 
     public function getEntidadeReceitaFederalByCnpj($cnpj) {
-        $soapClient = new SoapClient('http://ws.mec.gov.br/PessoaJuridica/wsdl');
-        $xml = $soapClient->solicitarDadosPessoaJuridicaPorCnpj($cnpj);
+        $objPessoaJuridica = new PessoaJuridicaClient("http://ws.mec.gov.br/PessoaJuridica/wsdl");
+        $xml = $objPessoaJuridica->solicitarDadosPessoaJuridicaPorCnpj($cnpj);
         $xmlCorrigido = str_replace(array("& "), array("&amp; "), $xml);
         return simplexml_load_string($xmlCorrigido);
     }

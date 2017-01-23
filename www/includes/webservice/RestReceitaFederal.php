@@ -65,6 +65,18 @@ class RestReceitaFederal {
     }
     
     /**
+     * Metodo chamado quando o objeto da classe e instanciado
+     *
+     * @return VOID
+     */
+    public function __construct() {
+        # Carrega credenciais de acesso ao serviço
+        $this->baseUrl = WS_RF_BASE_URL;
+        $this->user = WS_RF_USER;
+        $this->password = WS_RF_SENHA;
+    }
+    
+    /**
      * @author Alysson Vicuña de Oliveira
      *
      * @param $cnpj - CNPJ a ser consultado
@@ -74,7 +86,6 @@ class RestReceitaFederal {
      */
     public function consultarPessoaJuridicaReceitaFederal($cnpj, $forcarBuscaReceita = false, $returnJSON = false) {
         $cnpj = $this->retirarMascara($cnpj);
-
         if (15 == strlen($cnpj) && !isRfCnpj($cnpj)) {
             throw new InvalidArgumentException("CPF/CNPJ inválido");
         }
@@ -100,19 +111,6 @@ class RestReceitaFederal {
         }
 
         return $retornoResultado;
-    }
-    
-    /**
-     * Retira os caracteres de mascara do texto. Por exemplo: '.', '/', '-'.
-     * 
-     * @param string $texto
-     * @return string
-     */
-    protected function retirarMascara($texto) {
-        $chars = array(".", "/", "-");
-        $resultado = str_replace($chars, "", $texto);
-        
-        return $resultado;
     }
 
     /**
@@ -154,17 +152,18 @@ class RestReceitaFederal {
     }
 
     /**
-     * Metodo chamado quando o objeto da classe e instanciado
-     *
-     * @return VOID
+     * Retira os caracteres de mascara do texto. Por exemplo: '.', '/', '-'.
+     * 
+     * @param string $texto
+     * @return string
      */
-    public function __construct() {
-        # Carrega credenciais de acesso ao serviço
-        $this->baseUrl = WS_RF_BASE_URL;
-        $this->user = WS_RF_USER;
-        $this->password = WS_RF_SENHA;
+    protected function retirarMascara($texto) {
+        $chars = array(".", "/", "-");
+        $resultado = str_replace($chars, "", $texto);
+        
+        return $resultado;
     }
-
+    
     /**
      * Metodo chamado quando o objeto da classe e serializado
      *

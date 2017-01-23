@@ -12,10 +12,29 @@ class AdapterReceitaFederalSimec {
      * @param string $numero
      * @return string
      */
+    public static function solicitarDadosPessoaJuridicaPorCnpj($numero){
+        $wsReceitaFederal = new RestReceitaFederal();
+        $pj = $wsReceitaFederal->consultarPessoaJuridicaReceitaFederal($numero);
+        $pfSimec = self::inserirCamposPJSimec(self::formatar($pj));
+        
+        $xmlDataObject = new SimpleXMLElement('<?xml version="1.0"?><document></document>');
+        self::arrayToXml($pfSimec, $xmlDataObject);
+
+        $xml = $xmlDataObject->asXML();
+        
+        return $xml;
+    }
+    
+    /**
+     * Busca os dados de Pessoa Fisica por número de CPF informado.
+     * 
+     * @param string $numero
+     * @return string
+     */
     public static function solicitarDadosPessoaFisicaPorCpf($numero){
         $wsReceitaFederal = new RestReceitaFederal();
         $pf = $wsReceitaFederal->consultarPessoaFisicaReceitaFederal($numero);
-        $pfSimec = self::formatarPessoaFisica($pf);
+        $pfSimec = self::inserirCamposPFSimec(self::formatar($pf));
         
         $xmlDataObject = new SimpleXMLElement('<?xml version="1.0"?><document></document>');
         self::arrayToXml($pfSimec, $xmlDataObject);
@@ -51,7 +70,7 @@ class AdapterReceitaFederalSimec {
      * @param stdclass $pf
      * @return array
      */
-    public static function formatarPessoaFisica(stdclass $pf){
+    public static function formatar(stdclass $pf){
         $resultado = array();
         
         if($pf){
@@ -64,16 +83,16 @@ class AdapterReceitaFederalSimec {
             }
         }
 
-        return self::inserirCamposSimec($resultado);
+        return $resultado;
     }
     
     /**
-     * Insere campos extras esperados nas funções de retorno do SIMEC.
+     * Insere campos extras de Pessoa Fisica esperados nas funções de retorno do SIMEC.
      * 
      * @param array $resultado 
      * @return array
      */
-    public static function inserirCamposSimec(array $resultado) {
+    public static function inserirCamposPFSimec(array $resultado) {
         $resultado['PESSOA']->no_pessoa_rf = ucwords(strtolower($resultado['no_pessoa_fisica']));
         $resultado['PESSOA']->nu_cpf_rf = $resultado['nu_cpf'];
         $resultado['PESSOA']->no_mae_rf = ucwords(strtolower($resultado['no_mae']));
@@ -98,6 +117,34 @@ class AdapterReceitaFederalSimec {
         $resultado['PESSOA']->ENDERECOS->ENDERECO->ds_tipo_logradouro = trim($resultado['PESSOA']->ENDERECOS->ENDERECO->LOGRADOURO->ds_tipo_logradouro);
         $resultado['PESSOA']->ENDERECOS->ENDERECO->ds_numero = trim($resultado['PESSOA']->ENDERECOS->ENDERECO->nu_complemento);
         $resultado['PESSOA']->ENDERECOS->ENDERECO->nu_cep = trim($resultado['PESSOA']->ENDERECOS->ENDERECO->LOGRADOURO->nu_cep);
+        
+        return $resultado;
+    }
+    
+    /**
+     * Insere campos extras de Pessoa Fisica esperados nas funções de retorno do SIMEC.
+     * 
+     * @param array $resultado 
+     * @return array
+     */
+    public static function inserirCamposPJSimec(array $resultado) {
+        foreach($resultado as $nomeAtributo => $valor){
+            $nomeAtributoSimec = $nomeAtributo. '_rf';
+            if(!is_array($valor) && !is_object($valor)){
+                $resultado['PESSOA']->$nomeAtributoSimec = $valor;
+            }
+        }
+        # Tipo de Natureza Juridica
+        $resultado['PESSOA']->no_empresarial_rf = ucwords(strtolower($resultado['NATUREZAJURIDICA']->ds_natureza_juridica));
+        $resultado['PESSOA']->co_natureza_juridica_rf = $resultado['NATUREZAJURIDICA']->co_natureza_juridica;
+        # Contatos
+        $resultado['PESSOA']->CONTATOS = new stdClass();
+        $resultado['PESSOA']->CONTATOS->CONTATO = array();
+        $listaTelefones = $resultado['PESSOA']->TELEFONES;
+        foreach($listaTelefones as $telefone){
+            $telefone->ds_contato_pessoa = $telefone->DDD->co_ddd. '-'. $telefone->nu_telefone;
+            $resultado['PESSOA']->CONTATOS->CONTATO[] = $telefone;
+        }
         
         return $resultado;
     }
