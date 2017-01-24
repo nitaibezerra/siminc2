@@ -12,9 +12,7 @@ include_once 'PessoaJuridicaClient.php';
 
 
 if ($_POST['ajaxPJ']):
-
-	$pj = str_replace(array('/', '.', '-'), '', $_POST['ajaxPJ']);
-
+ 	$pj = str_replace(array('/', '.', '-'), '', $_POST['ajaxPJ']);
 	/**
 	 * Aqui é feita a chamada do método da classe cliente do webservice.
 	 */
@@ -32,6 +30,9 @@ if ($_POST['ajaxPJ']):
 	}
 
 	$empresa  = (array) $obj['PESSOA'];
+//echo '<pre>';
+//var_dump($empresa);
+//die('</pre>');
 	$endereco = (array) $obj['PESSOA']->ENDERECOS->ENDERECO;
 	$contato  = (array) $obj['PESSOA']->CONTATOS->CONTATO;
 
@@ -56,8 +57,8 @@ if ($_POST['ajaxPJ']):
 		}
 	endfor;
 
-	if(is_array($return) && is_array($socio) ){
-		die(implode('|', $return)."$$".implode('|', $socio));
+	if(is_array($return)){
+		die(implode('|', $return). "$$". ( is_array($socio)? implode('|', $socio): NULL));
 	}
 	die();
 
