@@ -1,4 +1,4 @@
-<?
+<?php
  /*
    Sistema Simec
    Setor responsável: SPO-MEC
@@ -18,7 +18,7 @@ $usucpf = $_REQUEST["usucpf"];
 $pflcod = $_REQUEST["pflcod"];
 
 if(!$pflcod && !$usucpf) {
-	?><font color="red">Requisição inválida</font><?
+	?><font color="red">Requisição inválida</font><?php
 	eixt();
 }
 
@@ -98,7 +98,7 @@ else {
 				$sqlRespUsuario = "SELECT 
 									DISTINCT 
 									e.entid AS codigo, 
-									e.entnome ||' - '||(SELECT
+									e.entnome ||' - '|| (SELECT
 														 orgdesc 
 														FROM
 														 obras.orgao 
@@ -108,18 +108,17 @@ else {
 																		WHEN funid = 16 OR funid = 44 THEN 5
 																		WHEN funid = 118 THEN 6
 																		ELSE 3
-																	  END) || funid AS descricao, 
+																	  END) || ' - ' || funid AS descricao, 
 									ur.rpustatus AS status
 								   FROM
 								    obras.usuarioresponsabilidade ur 
 								    INNER JOIN entidade.entidade e ON e.entid = ur.entid
 								    INNER JOIN entidade.funcaoentidade ef ON ef.entid = e.entid
 								   WHERE
-								    ur.usucpf = '%s' AND 
-								    ur.pflcod = '%s' AND 
-								    ur.rpustatus='A' AND 
-								    ".($arrWhere ? implode(" AND ",$arrWhere)." AND " : "")." 
-								    ef.funid in (1,3, 6, 7, 11, 12, 14, 16, 34, 43, 44, 118)";
+								    ur.usucpf = '%s'
+								    AND ur.pflcod = '%s'
+                                    AND ur.rpustatus='A'
+								    ". ($arrWhere ? ' AND '. implode(" AND ",$arrWhere): NULL);
 				break;
 			case "E": // Estados
 				$aca_prg = "Estados Associados";
@@ -226,7 +225,7 @@ else {
 	  <td valign="top">Código</td>
 	  <td valign="top">Descrição</td>
     </tr>
-		<?
+		<?php
 			foreach ($respUsuario as $ru) {
 		?>
 	<tr onmouseover="this.bgColor='#ffffcc';" onmouseout="this.bgColor='F7F7F7';" bgcolor="F7F7F7">
@@ -234,7 +233,7 @@ else {
 	  <td valign="top" width="90" style="border-top: 1px solid #cccccc; padding:2px; color:#003366;" nowrap><?if ($rp["tprsigla"]=='A'){?><a href="simec_er.php?modulo=principal/acao/cadacao&acao=C&acaid=<?=$ru["acaid"]?>&prgid=<?=$ru["prgid"]?>"><?=$ru["codigo"]?></a><?} else {print $ru["codigo"];}?></td>
 	  <td valign="top" width="290" style="border-top: 1px solid #cccccc; padding:2px; color:#006600;"><?=$ru["descricao"]?></td>
 	</tr>
-		<?
+		<?php
 		}
 		?>
 	<tr>
@@ -243,7 +242,7 @@ else {
 	  </td>
 	</tr>
 </table>
-	<?
+	<?php
 		}
 	}
 	$teste = $db->carregar("SELECT DISTINCT * FROM obras.usuarioresponsabilidade WHERE usucpf = '{$usucpf}' AND pflcod = {$pflcod} AND rpustatus = 'A'");

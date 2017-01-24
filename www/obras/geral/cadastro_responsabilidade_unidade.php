@@ -194,12 +194,11 @@ function listaUnidades(){
 				    left JOIN territorios.municipio 	 m on  m.muncod 	  = ed.muncod
 					INNER JOIN entidade.funcaoentidade 	ef on ef.entid 		  = e.entid
 				WHERE
-					entstatus='A' AND
-					funid IN ('".str_replace(",","','",$funid)."')
+					entstatus='A'
+					-- AND funid IN ('".str_replace(",","','",$funid)."')
 					".($where ? " AND ".implode(" AND ", $where) : '')."
 				ORDER BY 
 					entnome";
-		
 		$unidadesExistentes = $db->carregar($sql);
 		
 	} elseif(!$db->testa_superuser() && $entid) {
@@ -504,7 +503,7 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 		<form name="formulario" action="<?=$_SERVER['REQUEST_URI'] ?>" method="post">
 		<table style="width:100%; display:none;" id="filtro" class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
 			<tr>
-				<td class="subtitulodireita">Tipo de Ensino:</td>
+				<td class="subtitulodireita">Área:</td>
 				<td>
 				<?php
 					if ($db->testa_superuser()){
