@@ -193,7 +193,7 @@ function obrMontaAbasTipoEnsino( $usucpf, $orgid = "" ){
 	}
 	
 	// cria o id do orgão que o usuário selecionou (default o primeiro orgão que o usuário possuir responsabilidade)
-	$orgid = empty($orgid) ? 1 : $orgid;
+	$orgid = empty($orgid) ? $listaOrg[0]['orgid'] : $orgid;
 	
 	$_REQUEST["orgid"] = empty($_REQUEST["orgid"]) ? $orgid : $_REQUEST["orgid"]; 
 	
