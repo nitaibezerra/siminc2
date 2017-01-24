@@ -258,7 +258,7 @@ function buscaOrgaoCadastrado($usucpf, $pflcod){
 <html>
 	<head>
 		<meta http-equiv="Pragma" content="no-cache">
-		<title>Tipo de Ensino</title>
+		<title>Área</title>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>
 		<link rel="stylesheet" type="text/css" href="../../includes/Estilo.css">
 		<link rel='stylesheet' type='text/css' href='../../includes/listagem.css'>
