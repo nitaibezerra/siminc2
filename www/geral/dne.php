@@ -90,7 +90,7 @@ function dne()
 
     try{
         $cp = str_replace(array('.', '-'), '', $_REQUEST['endcep']);
-        $rs = $db->carregar('select * from cep.v_endereco2 where cep = \'' . $cp . '\' order by cidade asc');
+        $rs = $db->carregar('select * from cep.v_endereco where cep = \'' . $cp . '\' order by cidade asc');
 
         //$ws  = new SoapClient('http://dne.mec.gov.br/server/service.php?WSDL');
         //$res = $ws->getDNE(null, 0, 0, 0, str_replace(array('.', '-'), '', $_REQUEST['endcep']));
