@@ -296,12 +296,12 @@ BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-RIGHT: 0px; BORDER-TOP: 0px}
   </head>
   <body onload="initialize()" onunload="GUnload()">
     <form action="#">
-    <table bgcolor=#c3c3c3 width=530><tr><td align=center>
+    <table bgcolor=#c3c3c3 width="100%"><tr><td align=center>
     <?php if($habilitado){ ?><font color=blue>Navegue pelo mapa e clique sobre o ponto desejado para definir as coordenadas.<? } ?></font>
     </td></tr></table>
-    <div id="mapa" style="width: 530px; height: 550px">
+    <div id="mapa" style="width: 100%; height: 550px">
     </div>
-    <table bgcolor=#c3c3c3 width=530>
+    <table bgcolor=#c3c3c3 width="100%">
     <tr>
     <td>
     Latitude: <input type=text id=lat value="0" STYLE="border:none ; background-color:#c3c3c3" size=8 /> 

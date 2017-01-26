@@ -583,20 +583,18 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
     <input type="hidden" name="unicod" id="unicod" value="<?=$unicod;?>">
     <input type="hidden" name="sbaidAnterior"  id="sbaidAnterior" value="">
     <input type="hidden" name="sbaidAtual"  id="sbaidAtual" value="<?php echo $sbaidAtual;?>">
-    <?
+    <?php
     if($_REQUEST['req'] == 'vincular') {
-
-        $anos= array(
-            0 => array("id" => 1, "descricao" => "2009", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2009&req=vincular"),
-            1 => array("id" => 2, "descricao" => "2010", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2010&req=vincular"),
-            2 => array("id" => 3, "descricao" => "2011", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2011&req=vincular"),
-            3 => array("id" => 4, "descricao" => "2012", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2012&req=vincular"),
-            4 => array("id" => 5, "descricao" => "2013", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2013&req=vincular"),
-            5 => array("id" => 6, "descricao" => "2014", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2014&req=vincular"),
-            6 => array("id" => 7, "descricao" => "2015", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2015&req=vincular")
-            );
-        echo "<br />";				 
-        echo montarAbasArray($anos, "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=".$_REQUEST['anoexercicio']."&req=vincular");        
+        $anos = array(
+            6 => array("id" => 7, "descricao" => "2015", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2015&req=vincular"),
+            7 => array("id" => 8, "descricao" => "2016", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2016&req=vincular"),
+            8 => array("id" => 9, "descricao" => "2017", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2017&req=vincular"),
+            9 => array("id" => 10, "descricao" => "2018", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2018&req=vincular"),
+            10 => array("id" => 11, "descricao" => "2019", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2019&req=vincular"),
+            11 => array("id" => 12, "descricao" => "2020", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2020&req=vincular")
+        );
+        echo "<br />";
+        echo montarAbasArray($anos, "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=".$_REQUEST['anoexercicio']."&req=vincular");
     ?>
     <table  class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
         <? //if($_REQUEST['anoexercicio'] == '2010') { ?>
@@ -609,7 +607,7 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
         </tr>
         <tr>
             <td>
-            <?
+            <?php
             $sql = "SELECT 	
                 '<center><img src=\"/imagens/excluir.gif\" border=0 title=\"Excluir\" style=\"cursor:pointer;\" onclick=\"removerVinculacao(\'".$_SESSION['obra']['obrid']."\',\''|| p.pliid ||'\')\"></center>' as acao,'<a style=cursor:pointer; onclick=abrir_dadospi(\''||p.pliid||'\');>'||p.plicod||'</a>' as plicod,
                 coalesce(p.plititulo,'Não preenchido') as titulo,
@@ -645,7 +643,7 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
             <td><input type="button" value="Vincular PIs" onclick="window.open('obras.php?modulo=principal/vincular_pi&acao=A&obrid=<? echo $_SESSION['obra']['obrid']; ?>&anoexercicio=<? echo $_REQUEST['anoexercicio']; ?>&unicod=<?php echo $unicod?>','vincular','scrollbars=yes,height=600,width=600,status=no,toolbar=no,menubar=no,location=no');"></td>
         </tr>
     </table>
-    <?
+    <?php
     } else {
         $res = obras_pegarOrgaoPermitido();
         if($_SESSION["obra"]["orgid"]) {
@@ -654,20 +652,18 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
             $orgid = $res[0]['id'];
         }
 
-        $anos= array(
-            0 => array("id" => 1, "descricao" => "2009", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2009&req=vincular"),
-            1 => array("id" => 2, "descricao" => "2010", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2010"),
-            2 => array("id" => 3, "descricao" => "2011", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2011"),
-            3 => array("id" => 4, "descricao" => "2012", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2012"),
-            4 => array("id" => 5, "descricao" => "2013", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2013"),
-            5 => array("id" => 6, "descricao" => "2014", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2014"),
-            6 => array("id" => 7, "descricao" => "2015", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2015")
+        $anos = array(
+            6 => array("id" => 7, "descricao" => "2015", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2015"),
+            7 => array("id" => 8, "descricao" => "2016", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2016"),
+            8 => array("id" => 9, "descricao" => "2017", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2017"),
+            9 => array("id" => 10, "descricao" => "2018", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2018"),
+            10 => array("id" => 11, "descricao" => "2019", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2019"),
+            11 => array("id" => 12, "descricao" => "2020", "link" => "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=2020")
         );
 
         echo "<br />";
 
         echo montarAbasArray($anos, "/obras/obras.php?modulo=principal/cadastro_pi&acao=A&obrid=".$_REQUEST['obrid']."&anoexercicio=".$_REQUEST['anoexercicio']);
-
     ?>
 
     <table  class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">

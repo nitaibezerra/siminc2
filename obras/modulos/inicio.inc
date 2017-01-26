@@ -637,14 +637,14 @@ Com isso todas as obras de educação básica foram migradas para o obras 2 e devem
 			<tr>
 				<td class="SubTituloDireita" style="width: 190px;">Esfera:</td>
 				<td>
-					<?php 					
+					<?php
 						$obrtipoesfera = $_SESSION["obras"]["filtros"]["obrtipoesfera"];
 						
 						$arrEsfera = array(
-										array('codigo' => 'E', 'descricao' => 'Estadual'),
-										array('codigo' => 'M', 'descricao' => 'Municipal')
-									);
-						$db->monta_combo( "obrtipoesfera", $arrEsfera, "S", "Todas", "", "", "", "", "N", "obrtipoesfera" );						
+                            array('codigo' => 'E', 'descricao' => 'Estadual'),
+                            array('codigo' => 'M', 'descricao' => 'Municipal')
+                        );
+						$db->monta_combo( "obrtipoesfera", $arrEsfera, "S", "Todas", "", "", "", "", "N", "obrtipoesfera" );
 					?>
 				</td>
 			</tr>
@@ -714,14 +714,16 @@ Com isso todas as obras de educação básica foram migradas para o obras 2 e devem
 						}
 					</script>
 					<span style="padding-left:10px;display:<?php echo $_SESSION["obras"]["filtros"]["supervisao"] == "S" ? "" : "none" ?>" id="inicio_subfiltro"  >
-						<?php $arrTipoSupervisao = array( 
-															0=> array("codigo" => ">", "descricao" => "Maior que"),
-															1=> array("codigo" => ">=", "descricao" => "Maior Igual a"),
-															2=> array("codigo" => "=", "descricao" => "Igual a"),
-															3=> array("codigo" => "<", "descricao" => "Menor que"),
-															4=> array("codigo" => "<=", "descricao" => "Menor Igual a"),
-															5=> array("codigo" => "entre", "descricao" => "Entre")
-														)?>
+						<?php
+                            $arrTipoSupervisao = array(
+                                0=> array("codigo" => ">", "descricao" => "Maior que"),
+                                1=> array("codigo" => ">=", "descricao" => "Maior Igual a"),
+                                2=> array("codigo" => "=", "descricao" => "Igual a"),
+                                3=> array("codigo" => "<", "descricao" => "Menor que"),
+                                4=> array("codigo" => "<=", "descricao" => "Menor Igual a"),
+                                5=> array("codigo" => "entre", "descricao" => "Entre")
+                            )
+                        ?>
 						<?php $tiposupervisao = $_SESSION["obras"]["filtros"]["tiposupervisao"]; $db->monta_combo("tiposupervisao",$arrTipoSupervisao,"S","","verificaSubFiltro","") ?>
 						<?php $subfiltro_inicio = $_SESSION["obras"]["filtros"]["subfiltro_inicio"]; echo campo_texto("subfiltro_inicio","N","S","",10,20,"[#]","","","","","id='subfiltro_inicio'") ?>
 						<span id="fim_subfiltro" style="display:<?php echo $_SESSION["obras"]["filtros"]['tiposupervisao'] && $_SESSION["obras"]["filtros"]['tiposupervisao'] == "entre" ? "" : "none" ?>"  >
@@ -743,7 +745,7 @@ Com isso todas as obras de educação básica foram migradas para o obras 2 e devem
 			<tr id="vistoriainseridaunidade">
 				<td class="SubTituloDireita">Tipo Vistoria (Realizado por):</td>
 				<td>
-					<?
+					<?php
 					$rsuid = $_SESSION["obras"]["filtros"]["rsuid"];
 					
 					$sql = "SELECT rsuid as codigo, rsudsc as descricao
