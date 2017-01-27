@@ -769,7 +769,7 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
             </td>
         </tr>
         <tr>
-            <td class='SubTituloDireita'>Nível/Etapa de Ensino:</td>
+            <td class='SubTituloDireita'>Nível/Etapa:</td>
             <td>
                 <?php
                 if($neeid){
@@ -801,7 +801,6 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
                             FROM monitora.pi_niveletapaensino 
                             WHERE neeano='".$pliano."' AND neestatus='A' 
                             ORDER BY neecod";
-
                         $niveletapaensino = $db->carregar($sql);
                     }
 
@@ -821,10 +820,16 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
                         echo $arCatApropri['descricao'];
                         echo "<input type=\"hidden\" name=\"capid\" id=\"capid\" value=\"{$arCatApropri['codigo']}\">"; 
                 } else {
-                        $sql = "SELECT capid as codigo, capcod ||' - '|| capdsc as descricao
-                                    FROM monitora.pi_categoriaapropriacao 
-                                    WHERE capano='".$pliano."' and capstatus='A' AND capcod IN('41','42','43')
-                                    ORDER BY capcod";
+                        $sql = "
+                            SELECT
+                                capid as codigo,
+                                capcod ||' - '|| capdsc as descricao
+                            FROM monitora.pi_categoriaapropriacao 
+                            WHERE
+                                capano='".$pliano."' 
+                                AND capstatus='A' 
+                                AND capcod IN('41', '42', '43')
+                            ORDER BY capcod";
                         $db->monta_combo('capid', $sql, $permissao_formulario, 'Selecione', 'atualizarPrevisaoPI', '', '', '340', 'S', 'capid');
                 } 
                 ?>
@@ -862,7 +867,7 @@ monta_titulo("Subação/PI",'<img src="../imagens/obrig.gif" border="0"> Indica Ca
         if($_REQUEST['anoexercicio'] == '2015'){
         ?>
         <tr>
-            <td align='right' class="SubTituloDireita" valign="top">Outras metas do PNE relacionadas:</td>
+            <td align='right' class="SubTituloDireita" valign="top">Outras metas do PNC relacionadas:</td>
             <td>
                 <?php 
                 $sql = "SELECT eqdid AS codigo,eqdcod || ' - ' || eqddsc AS descricao FROM monitora.pi_enquadramentodespesa WHERE eqdstatus = 'A' AND eqdano = '{$_SESSION['exercicio']}' ORDER BY eqdcod";

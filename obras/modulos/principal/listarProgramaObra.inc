@@ -189,7 +189,7 @@ $sql_lista = <<<DML
     GROUP BY ptr.ptrid, ptr.ptres,aca.prgcod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unidsc, ptr.ptrdotacao, pemp.total
     ORDER BY ptr.ptres
 DML;
-#ver($sql_lista);
+//ver($_SESSION['exercicio']);
 ?>
 <html>
 <head>
@@ -206,31 +206,46 @@ DML;
 <tr>
 	<td class="SubTituloDireita" align="right">Programa:</td>
 	<td>
-	<?
-	$sql = "SELECT p.prgcod as codigo, (p.prgcod || ' - ' || p.prgdsc) as descricao
-			FROM monitora.programa p
-			WHERE p.prgano = '".$_GET['anoexercicio']."' ORDER BY prgcod";
-	$db->monta_combo('prgcod', $sql, 'S','Selecione','','','',400); 
+	<?php
+        $prgcod = $_REQUEST['prgcod'];
+        $sql = "SELECT p.prgcod as codigo, (p.prgcod || ' - ' || p.prgdsc) as descricao
+                FROM monitora.programa p
+                WHERE p.prgano = '".$_GET['anoexercicio']."' ORDER BY prgcod";
+        $db->monta_combo('prgcod', $sql, 'S','Selecione','','','',400);
 	?>
 	</td>
 </tr>	
 <tr>
 	<td class="SubTituloDireita" align="right">Ação:</td>
 	<td>
-	<?
-	$sql = "SELECT ac.acacod as codigo, (ac.acacod || ' - ' || ac.acadsc) as descricao
- 			FROM monitora.acao ac 
- 			WHERE ac.unicod = '".$_GET['unicod']."' AND ac.prgano = '".$_GET['anoexercicio']."' AND ac.acastatus = 'A' AND ac.acasnrap = false
- 			GROUP BY ac.acacod, ac.acadsc 
- 			ORDER BY ac.acacod";
-	$db->monta_combo('acacod', $sql, 'S', 'Selecione','','','',400); 
+	<?php
+        $sql = "
+            SELECT
+                ac.acacod as codigo,
+                (ac.acacod || ' - ' || ac.acadsc) as descricao
+            FROM monitora.acao ac 
+            WHERE
+                ac.unicod = '".$_GET['unicod']."'
+                AND ac.prgano = '".$_GET['anoexercicio']."'
+                AND ac.acastatus = 'A'
+                AND ac.acasnrap = FALSE
+            GROUP BY
+                ac.acacod,
+                ac.acadsc
+            ORDER BY
+                ac.acacod";
+        $acacod = $_REQUEST['acacod'];
+        $db->monta_combo('acacod', $sql, 'S', 'Selecione','','','',400);
 	?>
 	</td>
 </tr>
 <tr>
 	<td class="SubTituloDireita" align="right">Buscar:</td>
 	<td>
-	<? echo campo_texto('buscalivre', "N", "S", "", 67, 150, "", "", '', '', 0, '' ); ?>
+	<?php
+        $buscalivre = $_REQUEST['buscalivre'];
+        echo campo_texto('buscalivre', "N", "S", "", 67, 150, "", "", '', '', 0, '' );
+    ?>
 	</td>
 </tr>
 <tr style="background-color: #cccccc">

@@ -3181,7 +3181,12 @@ inner join elabrev.ppaacao_proposta  ap on ap.acaid = ua.acaid and ua.acaid=".$_
 			}
 			if ( !$ano )
 			{
-				$ano = date("Y");
+                $exercicio = ANO_EXERCICIO;
+                if($exercicio){
+                    $ano = $exercicio;
+                } else {
+                    $ano = date("Y");
+                }
 			}
 		}
 		return $ano;
