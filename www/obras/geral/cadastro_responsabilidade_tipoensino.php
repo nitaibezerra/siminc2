@@ -279,7 +279,7 @@ function buscaOrgaoCadastrado($usucpf, $pflcod){
 					</script>
 					<thead>
 						<tr>
-							<td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="3"><strong>Selecione o Tipo de ensino</strong></td>		
+							<td valign="top" class="title" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" colspan="3"><strong>Selecione a Área</strong></td>		
 						</tr>
 					</thead>
 					<?php listaOrgao(); ?>

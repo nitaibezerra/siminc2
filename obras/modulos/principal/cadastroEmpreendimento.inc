@@ -131,8 +131,8 @@ if ( !possuiPerfil( PERFIL_ADMINISTRADOR ) ) {
 	}
 }
 
-if($_SESSION["obras"]["orgid"] && $_SESSION["obra"]["orgid"]) {
-	echo "<script>alert('Não foi identificado nenhum Tipo de ensino');window.location='obras.php?modulo=inicio&acao=A';</script>";
+if(!$_SESSION["obras"]["orgid"] && !$_SESSION["obra"]["orgid"]) {
+	echo "<script>alert('Não foi identificado nenhuma Área vinculada ao perfil do usuário.'); window.location='obras.php?modulo=inicio&acao=A';</script>";
 	exit;
 }
 
