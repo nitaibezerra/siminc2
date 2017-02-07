@@ -56,15 +56,19 @@ function EnviarArquivo($arquivo,$dados=null,$dmdid){
 			);";
 	$db->executar($sql);
 	
-	if(!is_dir('../../arquivos/demandas/'.floor($arqid/1000))) {
-		mkdir(APPRAIZ.'/arquivos/demandas/'.floor($arqid/1000), 0777);
-	}
-	
 	if($_SESSION['sisid'] == 23){
-		$caminho = APPRAIZ . 'arquivos/demandas/'. floor($arqid/1000) .'/'. $arqid;
+		$caminhoPasta = APPRAIZ . 'arquivos/demandas/'. floor($arqid/1000);
 	} else {
-		$caminho = APPRAIZ . 'arquivos/'. $_SESSION['sisdiretorio'] .'/'. floor($arqid/1000) .'/'. $arqid;
+		$caminhoPasta = APPRAIZ . 'arquivos/'. $_SESSION['sisdiretorio'] .'/'. floor($arqid/1000);
 	}
+    # Fix corrigindo tipo de barras.
+    $caminhoPasta = str_replace(' ', '', str_replace('/', "\ ", $caminhoPasta));
+    # Fix criando estrutura de pastas caso não exista.
+	if(!is_dir($caminhoPasta)) {
+		mkdir($caminhoPasta, 0777, TRUE);
+	}
+    # Fix caminho completo do arquivo.
+    $caminho = $caminhoPasta. str_replace(' ', '', '\ '). $arqid;
 
 	switch($arquivo["type"]) {
 		case 'image/jpeg':
@@ -146,7 +150,6 @@ function salvaDemanda(){
 	//Pega o analista do sistema!
 	$sql = "SELECT usucpf FROM demandas.usuarioresponsabilidade WHERE pflcod = 237 AND rpustatus = 'A' AND sidid = ".$_SESSION['sidid'];
 	$usucpfexecutor = $db->pegaUm( $sql );
-
 	$sql = sprintf("INSERT INTO demandas.demanda
 					(
 						%s
@@ -239,7 +242,7 @@ function salvaDemanda(){
 if($_POST['varaux'] == 'okCad') {
  	 $dmdid 	= salvaDemanda();
  	 
-	 if (!$_FILES['anexo']['size'] || EnviarArquivo($_FILES['anexo'], '', $dmdid)) {
+	 if (!$_FILES['anexo']['size'] || EnviarArquivo($_FILES['anexo'], array('arqdescricao' => 'Arquivo de demanda do Monitoramento de Obras.'), $dmdid)) {
 	 		$_SESSION['dmdid'] = $dmdid;
 	 		
 		 	?>
@@ -247,7 +250,7 @@ if($_POST['varaux'] == 'okCad') {
 		 		alert('Demanda cadastrada com sucesso!');
 		 		location.href=window.location.href;
 			</script>
-			<?
+			<?php
 	 	die;
 	 } else {
 	 	die("<script>
@@ -387,7 +390,7 @@ function validaForm()
 						WHERE
 		  					pristatus = 'A'
 						ORDER BY
-							pridsc";
+							priid";
 					
 				$db->monta_combo( "priid", $sql, "S", "", "", "", "", "", "N", "priid" );
 				?>
