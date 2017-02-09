@@ -238,7 +238,6 @@ if($_SESSION["obras"]["gpdid"] || $_REQUEST["gpdid"] ){
 }	
 // cabecalho padrão do SIMEC
 include APPRAIZ . "includes/cabecalho.inc";
-
 // Monta as abas
 print "<br/>";
 $db->cria_aba( $abacod_tela, $url, $parametros );
@@ -251,6 +250,7 @@ monta_titulo( "Grupo de Supervisão", "" );
 <script type="text/javascript" src="/includes/JQuery/jquery.js"></script>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
 <script src="../obras/js/obras.js"></script>
+<script>$ = jQuery;</script>
 
 
 <form action="" method="post" name="formulario" id="obrFormLote" enctype="multipart/form-data" >

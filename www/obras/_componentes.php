@@ -8208,14 +8208,14 @@ class supervisao extends obraPai{
 	function obrBuscaTipoEnsinoResp( ){
 		
 		global $db;
+        $arTipoEnsino = array();
 		
-		$arTipoEnsino = array( ORGAO_SESU, 
-							   ORGAO_SETEC, 
-							   ORGAO_FNDE,
-							   ORGAO_ADM,
-							   ORGAO_REHUF,
-							   ORGAO_MILITAR );
-		
+        $sql = "SELECT orgid FROM obras.orgao ORDER BY orgid;";
+        $listaOrgao = $db->carregar($sql);
+        foreach($listaOrgao as $contador => $orgao){
+            $arTipoEnsino[] = $orgao['orgid'];
+        }
+
 		if( !$db->testa_superuser() && !possuiPerfil(PERFIL_SAA) ){
 			
 			$sql = "SELECT DISTINCT
@@ -8247,9 +8247,9 @@ class supervisao extends obraPai{
 	 * 
 	 */
 	function obrMontaAbasTipoEnsino( $tipos, $orgid = "" ){
-		
+		global $db;
+        
 		$arItensMenu = array();
-		
 		$orgidPrincipal = $orgid ? $orgid : 1;
 		
 		if( is_array( $tipos ) ){
@@ -8258,29 +8258,18 @@ class supervisao extends obraPai{
 			foreach( $tipos as $tipoensino ){
 				
 				// atribui as descrições dos menus 
-				switch( $tipoensino ){
-					case 1:
-						$descricao = "Educação Superior";
-					break;
-					case 2:
-						$descricao = "Educação Profissional";
-					break;
-					case 3:
-						$descricao = "Educação Básica";
-					break;
-					
-				}
-	
+				$sql = "SELECT orgdesc FROM obras.orgao WHERE orgid = ". (int)$tipoensino;
+				$descricao = $db->pegaUm($sql);
+
 				// insere os dados de menu no array
-				array_push( $arItensMenu, array( "descricao" => $descricao,
-												 "link"      => "obras.php?modulo=principal/supervisao/repositorio&acao=A&orgid={$tipoensino}" ) );
-				
+				array_push($arItensMenu, array(
+                    "descricao" => $descricao,
+                    "link" => "obras.php?modulo=principal/supervisao/repositorio&acao=A&orgid={$tipoensino}"));
 			}
 			
 		}
 		
-		return montarAbasArray( $arItensMenu, "obras.php?modulo=principal/supervisao/repositorio&acao=A&orgid={$orgidPrincipal}" );
-		
+		return montarAbasArray($arItensMenu, "obras.php?modulo=principal/supervisao/repositorio&acao=A&orgid={$orgidPrincipal}");
 	}
 	
 	/**

@@ -104,33 +104,36 @@ function montaListaOS($gpdid){
                 oe.empvlrsetec,
                 oe.empvlrfnde,
                 oe.empvlrsesu
-            FROM
-               obras.ordemservico os  
-            JOIN obras.situacaoos so ON (so.stoid = os.stoid)
-            JOIN obras.grupodistribuicao gd ON (gd.gpdid = os.gpdid AND gpdstatus = 'A')
-            LEFT JOIN workflow.documento hd ON hd.docid = gd.docid
-            LEFT JOIN (SELECT
-                    MAX(hstid),
-                    docid,
-                    htddata
-                    FROM
-                        workflow.historicodocumento
+            FROM obras.ordemservico os  
+                JOIN obras.situacaoos so ON (so.stoid = os.stoid)
+                JOIN obras.grupodistribuicao gd ON (gd.gpdid = os.gpdid AND gpdstatus = 'A')
+                LEFT JOIN workflow.documento hd ON hd.docid = gd.docid
+                LEFT JOIN (
+                    SELECT
+                        MAX(hstid),
+                        docid,
+                        htddata
+                    FROM workflow.historicodocumento
                     WHERE
                         aedid = 378
                     GROUP BY
-                        docid, htddata
+                        docid,
+                        htddata
                     ) hdo ON hdo.docid = gd.docid
-            JOIN obras.empresacontratada ec ON (ec.epcid = gd.epcid)
-            JOIN entidade.entidade e ON (ec.entid = e.entid)
-            JOIN obras.rotas r ON (r.gpdid  = gd.gpdid
-                                   AND r.rotstatus = 'A'
-                                   AND strid = 1)
-            JOIN seguranca.usuario u ON (u.usucpf  = os.usucpf)
-            JOIN obras.empenho oe ON oe.estuf = gd.estuf
-            WHERE  (os.orsstatus = 'A')
-            AND (gd.gpdid = $gpdid)
-            AND so.stoid IN (1, 2, 3)
-            ORDER BY os.orsid DESC";
+                LEFT JOIN obras.empresacontratada ec ON (ec.epcid = gd.epcid)
+                LEFT JOIN entidade.entidade e ON (ec.entid = e.entid)
+                LEFT JOIN obras.rotas r ON (
+                    r.gpdid  = gd.gpdid
+                    AND r.rotstatus = 'A'
+                    AND strid = 1)
+                LEFT JOIN seguranca.usuario u ON (u.usucpf  = os.usucpf)
+                LEFT JOIN obras.empenho oe ON oe.estuf = gd.estuf
+            WHERE
+                (os.orsstatus = 'A')
+                AND (gd.gpdid = $gpdid)
+                AND so.stoid IN (1, 2, 3)
+            ORDER BY
+                os.orsid DESC";
 
 	$dados = $db->carregar($sql);
 	

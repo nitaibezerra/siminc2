@@ -7,7 +7,7 @@ set_time_limit(0);
  * @author Fernando Bagno <fernandosilva@mec.gov.br>
  * @since 16/03/2010
  * @version 1.0
- *  
+ * 
  */
 $supervisao   = new supervisao();
 $obrRespOrgid = $supervisao->obrBuscaTipoEnsinoResp();
@@ -208,7 +208,7 @@ monta_titulo( "Repositorio de Obras", "" );
 			</td>
 		</tr>
 		<tr>
-			<td class="SubTituloDireita" style="width: 190px;">Situacao da Obra:</td>
+			<td class="SubTituloDireita" style="width: 190px;">Situacão da Obra:</td>
 			<td>
 				<?php 
 				
@@ -230,7 +230,7 @@ monta_titulo( "Repositorio de Obras", "" );
 			</td>
 		</tr>
 		<tr>
-			<td class="SubTituloDireita" style="width: 190px;">Classificacao da Obra:</td>
+			<td class="SubTituloDireita" style="width: 190px;">Classificação da Obra:</td>
 			<td>
 				<?php 
 				
@@ -255,19 +255,20 @@ monta_titulo( "Repositorio de Obras", "" );
 				<?php 
 				
 					$prfid = $_SESSION["obras"]["filtros"]["prfid"];
-					
-					$sql = "SELECT 
-									prfid as codigo,
-									prfdesc as descricao
-							  	FROM 
-							  		obras.programafonte
-							  	WHERE
-							  		orgid = {$_SESSION["obras"]["orgid"]}
-							  	ORDER BY
-							  		prfdesc";
-				
+                    $whereoOrg = NULL;
+					if($_SESSION["obras"]["orgid"]){
+                        $whereoOrg = "WHERE orgid = ". (int)$_SESSION["obras"]["orgid"];
+                    }
+					$sql = "
+                        SELECT
+                            prfid as codigo,
+                            prfdesc as descricao
+                        FROM 
+                            obras.programafonte
+                        $whereoOrg
+                        ORDER BY
+                            prfdesc";
 					$db->monta_combo( "prfid", $sql, "S", "Todos", "", "", "", "", "N", "prfid" );
-					
 				?>
 			</td>
 		</tr>
@@ -299,30 +300,32 @@ monta_titulo( "Repositorio de Obras", "" );
 				<?php 
 				
 					$entidunidade = $_SESSION["obras"]["filtros"]["entidunidade"];
-					
-					$sql = "SELECT 
-								ee.entid as codigo, 
-								upper(ee.entnome) as descricao 
-							FROM
-								entidade.entidade ee
-							INNER JOIN 
-								obras.obrainfraestrutura oi ON oi.entidunidade = ee.entid 
-							WHERE
-								orgid = {$_SESSION["obras"]["orgid"]} AND
-								obsstatus = 'A'
-							GROUP BY 
-								ee.entnome, 
-								ee.entid 
-							ORDER BY 
-								ee.entnome";
-				
+                    $whereoOrg = NULL;
+					if($_SESSION["obras"]["orgid"]){
+                        $whereoOrg = "AND orgid = ". (int)$_SESSION["obras"]["orgid"];
+                    }
+					$sql = "
+                        SELECT
+                            ee.entid as codigo,
+                            upper(ee.entnome) as descricao
+                        FROM
+                            entidade.entidade ee
+                            JOIN obras.obrainfraestrutura oi ON oi.entidunidade = ee.entid
+                        WHERE
+                            obsstatus = 'A'
+                            $whereoOrg
+                        GROUP BY
+                            ee.entnome,
+                            ee.entid
+                        ORDER BY
+                            ee.entnome";
 					$db->monta_combo( "entidunidade", $sql, "S", "Todos", "", "", "", "", "N", "entidunidade" );
 					
 				?>
 			</td>
 		</tr>
 		<tr>
-			<td class="SubTituloDireita" style="width: 190px;">Nome da Obra / Numero do Convenio / Numero do PI / ID:</td>
+			<td class="SubTituloDireita" style="width: 190px;">Nome da Obra / Número do Convênio / Número do PI / ID:</td>
 			<td>
 				<?php $obrtextobusca = $_SESSION["obras"]["filtros"]["obrtextobusca"]; ?>
 				<?php print campo_texto( 'obrtextobusca', 'N', 'S', '', 47, 60, '', '', 'left', '', 0, ''); ?>

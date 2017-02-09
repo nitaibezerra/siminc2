@@ -134,32 +134,35 @@ class OrdemServico extends Modelo{
 		 * Cláusulas de parametro - FIM
 		 */
 		
-		$sql = "SELECT 
-				   {$coluna}
-				FROM 
-				   obras.ordemservico os   
-				JOIN obras.situacaoos so ON (so.stoid = os.stoid) 
-				JOIN obras.grupodistribuicao gd ON (gd.gpdid = os.gpdid AND gpdstatus = 'A') 
-				JOIN workflow.documento doc ON doc.docid = gd.docid
-				LEFT JOIN (SELECT
-							MAX(hstid),	
-							docid, 
-							htddata 
-						   FROM 
-							workflow.historicodocumento
-						   WHERE
-							aedid = 378
-						   GROUP BY
-							docid, htddata
-							) hd ON hd.docid = gd.docid				    
-				JOIN obras.empresacontratada ec ON (ec.epcid = gd.epcid) 
-				JOIN entidade.entidade e ON (ec.entid = e.entid) 
-				JOIN obras.rotas r ON (r.gpdid  = gd.gpdid 
-								       AND r.rotstatus = 'A' 
-								       AND strid = " . Rotas::ROTAAPROVADA . ") 
-				JOIN seguranca.usuario u ON (u.usucpf  = os.usucpf)
-				{$where}
-				ORDER BY os.orsid DESC";
+		$sql = "
+            SELECT
+                {$coluna}
+            FROM obras.ordemservico os
+            JOIN obras.situacaoos so ON (so.stoid = os.stoid)
+            JOIN obras.grupodistribuicao gd ON (gd.gpdid = os.gpdid AND gpdstatus = 'A')
+            LEFT JOIN workflow.documento doc ON doc.docid = gd.docid
+            LEFT JOIN(
+                SELECT
+                    MAX(hstid),
+                    docid,
+                    htddata
+                FROM workflow.historicodocumento
+                WHERE
+                    aedid = 378
+                GROUP BY
+                    docid,
+                    htddata
+            ) hd ON hd.docid = gd.docid
+            LEFT JOIN obras.empresacontratada ec ON (ec.epcid = gd.epcid) 
+            LEFT JOIN entidade.entidade e ON (ec.entid = e.entid) 
+            LEFT JOIN obras.rotas r ON(
+                r.gpdid  = gd.gpdid 
+                AND r.rotstatus = 'A' 
+                AND strid = ". Rotas::ROTAAPROVADA. ")
+            JOIN seguranca.usuario u ON (u.usucpf  = os.usucpf)
+            {$where}
+            ORDER BY
+                os.orsid DESC";
 		if($retorno == 'array'){
 			return $this->carregar( $sql );
 		} elseif ($retorno == 'string') {

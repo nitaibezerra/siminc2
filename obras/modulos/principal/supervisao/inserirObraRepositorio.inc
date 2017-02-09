@@ -293,6 +293,7 @@ monta_titulo( "Selecionar Obras Para o Repositório", "Para inserir uma obra no r
 		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>
 		<script type="text/javascript" src="/includes/JQuery/jquery.js"></script>
+        <script language="JavaScript" src="../includes/calendario.js"></script>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 		<link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>
 	</head>
@@ -313,7 +314,8 @@ monta_titulo( "Selecionar Obras Para o Repositório", "Para inserir uma obra no r
 									INNER JOIN
 										obras.obrainfraestrutura oi ON oi.entidunidade = ee.entid
 									WHERE
-										obsstatus = 'A' AND orgid in ( {$_SESSION["obras"]["orgidRepositorio"]} )
+										obsstatus = 'A'
+                                        AND orgid IN(". (int)$_SESSION["obras"]["orgidRepositorio"]. ")
 									ORDER BY
 										entnome";
 							
@@ -435,21 +437,18 @@ monta_titulo( "Selecionar Obras Para o Repositório", "Para inserir uma obra no r
 					<td class="SubTituloDireita" style="width: 190px;">Programa:</td>
 					<td>
 						<?php 
-						
 							$prfid = $_SESSION["obras"]["filtros"]["prfid"];
-							
-							$sql = "SELECT 
+							$sql = "
+                                SELECT
 									prfid as codigo,
 									prfdesc as descricao
-							  	FROM 
+							  	FROM
 							  		obras.programafonte
 							  	WHERE
-							  		orgid = {$_SESSION["obras"]["orgid"]}
+							  		orgid = ". (int)$_SESSION["obras"]["orgid"]. "
 							  	ORDER BY
 							  		prfdesc";
-						
 							$db->monta_combo( "prfid", $sql, "S", "Todos", "", "", "", "", "N", "prfid" );
-							
 						?>
 					</td>
 				</tr>
