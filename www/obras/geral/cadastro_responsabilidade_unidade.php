@@ -63,20 +63,6 @@ if ( !$perfilSuperUser && !$orgid ){
 	}
 }
 
-if ($orgid == 1){
-	$funid = '12';	
-}elseif ($orgid == 2){
-	$funid = '11,14';	
-}elseif($orgid == 5) {
-	$funid = '16';
-}elseif($orgid == 6) {
-	$funid = '118';
-}elseif ($muncod){
-	$funid = '1,3,7';
-}else{
-	$funid = '1,6,43,3,44,42,115';
-}
-
 if ($_POST && $gravar == 1){
 	atribuiUnidade($usucpf, $pflcod, $unicod, $orgid);
 }
@@ -394,14 +380,16 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 		foreach ($_REQUEST["uniresp"] as $v){
 			list(,$entid[]) = explode('|', $v );
 		}
-		$where = " e.entid IN (".implode(',',$entid).") AND ef.funid in (1, 3, 6, 7, 11, 12, 14, 16, 34, 43, 42, 44, 118)";
+		$where = " e.entid IN (".implode(',',$entid).") ";
 	}else{
 		$where = " (ur.usucpf = '{$usucpf}' AND 
-			 	    ur.pflcod = {$pflcod})  AND ef.funid in (1, 3, 6, 7, 11, 12, 14, 16, 34, 43, 42, 44, 118)";	
+			 	    ur.pflcod = {$pflcod}) ";	
 	}
 	
 	$perfilSuperUser = $db->testa_superuser(); //testa se o usuário é super usuário
 	
+    $orgid = $_REQUEST['orgid'];
+    
 	if ( !$perfilSuperUser ){
 		$sql = "SELECT
 				    oo.orgid
@@ -422,7 +410,7 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 			$sql = "select entid from obras.usuarioresponsabilidade where usucpf = '{$_SESSION["usucpf"]}';";
 			$entid = $db->pegaUm($sql);
 			if($entid){
-				$where = " e.entid = $entid AND ef.funid in (1, 3, 6, 7, 11, 12, 14, 16, 34, 43, 42, 44, 118)";
+				$where = " e.entid = $entid ";
 			}
 		}
 	}
@@ -457,33 +445,18 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 				foreach($RS[$i] as $k=>$v){ 
 					${$k}=$v;
 				}
-				if ($funid == 12){
-					$orgid = 1;	
-				}elseif($funid == 11 || $funid == 14 ){
-					$orgid = 2;
-				}elseif($funid == 16 || $funid == 44 ){
-					$orgid = 5;
-				}elseif($funid == 118 ){
-					$orgid = 6;
-				}else{
-					$orgid = 3;
-				}
-				
-				
+
 				$orgdsc[$funid] = $orgdsc[$funid] ? $orgdsc[$funid] : recuperaOrgao($orgid);  
 				if ( in_array("{$orgdsc[$funid]} - {$descricao}", $arDescricao) ){
 					continue;
 				}
 				$arDescricao[]  = "{$orgdsc[$funid]} - {$descricao}";
-				
-				
+
 	    		print " <option value=\"$orgid|$codigo\">{$orgdsc[$funid]} - $descricao</option>";
-	    		
 			}
 		}
 	} else{
 		print '<option value="">Clique faça o filtro para selecionar.</option>';
-		
 	}
 }
 
@@ -559,7 +532,7 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 				?>
 				</td>
 			</tr>
-<? if ($orgid == 3): ?>			
+<?php if ($orgid == 3): ?>			
 			<tr>
 				<td class="subtitulodireita">Unidade Federativa:</td>
 				<td>
@@ -577,7 +550,7 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 				?>
 				</td>
 			</tr>
-			<? if ($estuf): ?>			
+			<?php if ($estuf): ?>			
 			<tr>
 				<td class="subtitulodireita">Município:</td>
 				<td>
@@ -596,8 +569,8 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 				?>
 				</td>
 			</tr>	
-			<? endif; ?>
-<? endif; ?>								
+			<?php endif; ?>
+<?php endif; ?>								
 		</table>		
 		<!-- Lista de Unidades -->
 		<div id="tabela" style="overflow:auto; width:496px; height:270px; border:2px solid #ececec; background-color: #ffffff;">	
@@ -645,7 +618,7 @@ document.getElementById('tabela').style.display  = 'block';
 
 var campoSelect = document.getElementById("uniresp");
 
-<?
+<?php
 if ($funid):
 ?>
 if (campoSelect.options[0].value != ''){
@@ -657,7 +630,7 @@ if (campoSelect.options[0].value != ''){
 		}
 	}
 }
-<?
+<?php
 endif;
 ?>
 

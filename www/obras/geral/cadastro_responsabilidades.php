@@ -98,17 +98,7 @@ else {
 				$sqlRespUsuario = "SELECT 
 									DISTINCT 
 									e.entid AS codigo, 
-									e.entnome ||' - '|| (SELECT
-														 orgdesc 
-														FROM
-														 obras.orgao 
-														WHERE orgid = CASE
-																		WHEN funid = 12 THEN 1
-																		WHEN funid = 11 OR funid = 14 THEN 2
-																		WHEN funid = 16 OR funid = 44 THEN 5
-																		WHEN funid = 118 THEN 6
-																		ELSE 3
-																	  END) || ' - ' || funid AS descricao, 
+									e.entnome AS descricao, 
 									ur.rpustatus AS status
 								   FROM
 								    obras.usuarioresponsabilidade ur 
@@ -230,7 +220,7 @@ else {
 		?>
 	<tr onmouseover="this.bgColor='#ffffcc';" onmouseout="this.bgColor='F7F7F7';" bgcolor="F7F7F7">
       <td valign="top" width="12" style="padding:2px;"><img src="../imagens/seta_filho.gif" width="12" height="13" alt="" border="0"></td>
-	  <td valign="top" width="90" style="border-top: 1px solid #cccccc; padding:2px; color:#003366;" nowrap><?if ($rp["tprsigla"]=='A'){?><a href="simec_er.php?modulo=principal/acao/cadacao&acao=C&acaid=<?=$ru["acaid"]?>&prgid=<?=$ru["prgid"]?>"><?=$ru["codigo"]?></a><?} else {print $ru["codigo"];}?></td>
+	  <td valign="top" width="90" style="border-top: 1px solid #cccccc; padding:2px; color:#003366;" nowrap><?php if ($rp["tprsigla"]=='A'){?><a href="simec_er.php?modulo=principal/acao/cadacao&acao=C&acaid=<?=$ru["acaid"]?>&prgid=<?=$ru["prgid"]?>"><?=$ru["codigo"]?></a><?} else {print $ru["codigo"];}?></td>
 	  <td valign="top" width="290" style="border-top: 1px solid #cccccc; padding:2px; color:#006600;"><?=$ru["descricao"]?></td>
 	</tr>
 		<?php
