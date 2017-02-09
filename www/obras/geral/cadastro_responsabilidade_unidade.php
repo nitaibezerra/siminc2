@@ -388,7 +388,7 @@ function buscaUnidadesCadastradas($usucpf, $pflcod){
 	
 	$perfilSuperUser = $db->testa_superuser(); //testa se o usuário é super usuário
 	
-    $orgid = $_REQUEST['orgid'];
+    $orgid = (int)$_REQUEST['orgid'];
     
 	if ( !$perfilSuperUser ){
 		$sql = "SELECT
