@@ -10,6 +10,10 @@
  */
 include_once '_funcoespi.php';
 
+if ($_REQUEST['carregarComboUG'] == 'ok') {
+    echo carregarComboUG($_REQUEST['unicod']);
+    die();
+}
 if ($_REQUEST['carregarComboSubacaoFederais'] == 'ok') {
     carregarComboSubacaoUO($_REQUEST['unicod']);
     die();
@@ -231,8 +235,29 @@ include APPRAIZ . "includes/cabecalho.inc";
                         $editavel = 'N';
                     }
 
-                    $db->monta_combo('unicod', $sql, $editavel, 'Selecione', 'carregarSubacao', null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+                    $db->monta_combo('unicod', $sql, $editavel, 'Selecione', 'carregarUG', null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
                     ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnidade" class="col-lg-2 control-label">Unidade Gestora:</label>
+                    <div class="col-lg-10 carregaUG">
+                        <?php
+                        $ungcod = $dadosPI['ungcod'];
+                        $ungdata = array();
+                        if (!empty($ungcod)) {
+                            $sql = <<<DML
+                                SELECT ung.ungcod AS codigo,
+                                       ung.ungcod || ' - ' || ung.ungabrev AS descricao
+                                  FROM public.unidadegestora ung
+                                  WHERE ung.ungstatus= 'A'
+                                    AND ung.ungcod = '%s' {$filtroPerfilUG}
+                                  ORDER BY ung.unicod
+DML;
+                            $ungdata = sprintf($sql, $ungcod);
+                        }
+                        $db->monta_combo('ungcod', $ungdata, 'S', 'Selecione', 'carregarSubacao', null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -635,6 +660,14 @@ DML;
     /**
      * Carrega novo conteúdo para o select de Subações via requisição ajax.
      */
+    function carregarUG(unicod) {
+        $.post(window.location + '&carregarComboUG=ok&unicod=' + unicod, function(response) {
+            $('#ungcod').remove();
+            $('.carregaUG').html(response);
+            $(".chosen-select").chosen();
+            carregarSubacao();
+        });
+    }
     function carregarSubacao(unicod) {
         var params = '&carregarComboSubacaoFederais=ok&unicod=' + unicod;
         $.post(window.location + params, function(response) {
