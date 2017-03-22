@@ -687,7 +687,7 @@ DML;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label">Nível/Etapa de Ensino:</label>
+                        <label for="inputUnidade" class="col-lg-2 control-label">Seguimento Cultural:</label>
                         <div class="col-lg-10">
                             <?php
                             $sql = <<<DML
@@ -704,7 +704,7 @@ DML;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label">Categoria de Apropriação:</label>
+                        <label for="inputUnidade" class="col-lg-2 control-label">Modalidade de Pactuação:</label>
                         <div class="col-lg-10">
                             <?php
                             $sql = <<<DML
@@ -737,7 +737,7 @@ DML;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label">Modalidade de Ensino / Tema / Público:</label>
+                        <label for="inputUnidade" class="col-lg-2 control-label">Área Cultural:</label>
                         <div class="col-lg-10">
                             <?php
                             $sql = <<<DML
@@ -781,7 +781,7 @@ DML;
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="meta" class="col-lg-2 control-label">Outras Metas do PNE Relacionadas: </label>
+                        <label for="meta" class="col-lg-2 control-label">Outras Metas do PNC Relacionadas: </label>
                         <div class="col-lg-10">
                         <?php
                             $sql = <<<DML
@@ -803,11 +803,11 @@ DML;
                             <thead>
                                 <tr>
                                     <th>Enquadramento</th>
-                                    <th colspan="3">Subação</th>
-                                    <th>Nível</th>
-                                    <th>Apropriação</th>
+                                    <th colspan="3">Sequencial</th>
+                                    <th>Seguimento</th>
+                                    <th>Pactuação</th>
                                     <th>Codificação</th>
-                                    <th>Modalidade</th>
+                                    <th>Área</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1097,7 +1097,7 @@ DML;
             msg += "<li>O preenchimento do campo Unidade Orçamentária é obrigatório.</li>";
         }
         if (!$('#ungcod').val()) {
-            msg += "<li>O preenchimento do campo Unidade Gestora é obrigatório.</li>";
+            msg += "<li>O preenchimento do campo Sub-Unidade é obrigatório.</li>";
         }
         if (!$('#sbaid').val()) {
             msg += "<li>O preenchimento do campo Subação é obrigatório.</li>";
@@ -1107,7 +1107,7 @@ DML;
             msg += "<li>O preenchimento do campo Enquadramento da Despesa é obrigatório.</li>";
         }
         if (document.getElementById("neeid").value == '') {
-            msg += "<li>O preenchimento do campo Nível/Etapa de Ensino é obrigatório.</li>";
+            msg += "<li>O preenchimento do campo Seguimento Cultural é obrigatório.</li>";
         }
         if (document.getElementById("capid").value == '') {
             msg += "<li>O preenchimento do campo Categoria de Apropriação é obrigatório.</li>";
@@ -1116,7 +1116,7 @@ DML;
             msg += "<li>O preenchimento do campo Codifição da Unidade é obrigatório e igual a 2(dois dígitos).</li>";
         }
         if (!$('#mdeid').val()) {
-            msg += "<li>O preenchimento do campo Modadelidade de Ensino é obrigatório.</li>";
+            msg += "<li>O preenchimento do campo Área Cultural é obrigatório.</li>";
         }
         if (document.formulario.plititulo.value == '') {
             msg += "<li>O preenchimento do campo Título é obrigatório.</li>";

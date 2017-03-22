@@ -352,7 +352,7 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="neeid">Nível/Etapa de Ensino:</label>
+                        <label class="control-label" for="neeid">Seguimento Cultural:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
@@ -371,7 +371,7 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="capid">Categoria de Apropriação:</label>
+                        <label class="control-label" for="capid">Modalidade de Pactuação:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
@@ -405,7 +405,7 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label for="mdeid" class="control-label">Modalidade de Ensino / Tema / Público:</label>
+                        <label for="mdeid" class="control-label">Área Cultural:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
@@ -453,7 +453,7 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Outras Metas do PNE Relacionadas: </label>
+                    <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
                     <div class="col-lg-10">
                         <?php
                         $sql = <<<DML
@@ -474,11 +474,11 @@ DML;
                         <table class="table table-striped table-bordered table-hover">
                             <tr style="text-align:center">
                                 <td style="width:30px;height:20px"><b>Enquadramento</b></td>
-                                <td colspan="3"><b>Subação</b></td>
-                                <td style="width:30px;height:20px"><b>Nível</b></td>
-                                <td style="width:30px;height:20px"><b>Apropriação</b></td>
+                                <td colspan="3"><b>Sequencial</b></td>
+                                <td style="width:30px;height:20px"><b>Seguimento</b></td>
+                                <td style="width:30px;height:20px"><b>Pactuação</b></td>
                                 <td style="width:30px;height:20px"><b>Codificação</b></td>
-                                <td style="width:30px;height:20px"><b>Modalidade</b></td>
+                                <td style="width:30px;height:20px"><b>Área</b></td>
                             </tr>
                             <tr style="text-align:center">
                                 <td style="width:30px;height:20px">
