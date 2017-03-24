@@ -166,7 +166,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <div class="row col-md-12">
     <ol class="breadcrumb">
         <li><a href="<?php echo MODULO; ?>.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a></li>
-        <li><a href="<?php echo MODULO; ?>.php?modulo=principal/unidade/listapimanter&acao=A">Instituições Federais - Planos Internos</a></li>
+        <li><a href="<?php echo MODULO; ?>.php?modulo=principal/unidade/listapimanter&acao=A">Plano Interno</a></li>
         <li class="active"><?php echo $dadosPI ? 'Alterar Plano Interno' : 'Cadastrar Plano Interno'; ?></li>
     </ol>
 </div>

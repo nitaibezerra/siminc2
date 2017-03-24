@@ -49,7 +49,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </center>
 
                     <?php
-                    $params = array();
+                    /*$params = array();
                     $params['texto'] = 'Lista de Subações';
                     $params['tipo'] = 'listar';
                     $params['url'] = 'planacomorc.php?modulo=principal/unidade/listasubacoes&acao=A';
@@ -59,7 +59,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     $params['texto'] = 'Cadastrar Subação';
                     $params['tipo'] = 'cadastrar';
                     $params['url'] = 'planacomorc.php?modulo=principal/unidade/cadastro_subacoes&acao=A';
-                    montaBotaoInicio($params);
+                    montaBotaoInicio($params);*/
 
                     $params = array();
                     $params['texto'] = 'Lista de PI';
