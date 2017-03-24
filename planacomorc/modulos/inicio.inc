@@ -234,7 +234,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 //                    montaBotaoInicio($params);
                 ?>
             </div>
-
+<!--
             <div id="divPI" class="divGraf">
                 <span class="tituloCaixa" >Plano Interno</span> <br><br><br>
                 <?php
@@ -263,6 +263,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
                 ?>
             </div>
+-->
             <div style="background-color: darksalmon;" class="divGraf">
                 <span class="tituloCaixa" >PTRES <?= $_SESSION['exercicio']; ?></span> <br><br><br>
                 <?php
