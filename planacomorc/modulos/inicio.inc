@@ -45,7 +45,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             <?php if (in_array(1207, $perfis) || in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_CPMO, $perfis)) { ?>
                 <div style=" background-color: #9370DB;" class="divGraf">
                     <center>
-                        <span class="tituloCaixa" >Instituições Federais</span> <br><br><br>
+                        <span class="tituloCaixa" >Plano Interno</span> <br><br><br>
                     </center>
 
                     <?php
@@ -169,6 +169,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
                 ?>
             </div>
+<!--
             <div class="divGraf bg-ds" id="divSubacoes">
                 <span class="tituloCaixa">Subações <?= $_SESSION['exercicio']; ?></span><br><br><br>
                 <?php
@@ -233,7 +234,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 //                    $params['url'] = '/planacomorc/planacomorc.php?modulo=relatorio/responsaveis/subacoes&acao=A';
 //                    montaBotaoInicio($params);
                 ?>
-            </div>
+<!--            </div> -->
 <!--
             <div id="divPI" class="divGraf">
                 <span class="tituloCaixa" >Plano Interno</span> <br><br><br>
@@ -284,13 +285,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
 
                 $params = array();
-                $params['texto'] = 'Modalidades de Ensino/Tema/Público';
+                $params['texto'] = 'Área Cultural';
                 $params['tipo'] = 'cadastrar';
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadModalidadesEnsino&acao=A';
                 montaBotaoInicio($params);
 
                 $params = array();
-                $params['texto'] = 'Nível/Etapa de Ensino';
+                $params['texto'] = 'Seguimento Cultural';
                 $params['tipo'] = 'cadastrar';
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadNivelEtapaEnsino&acao=A';
                 montaBotaoInicio($params);
@@ -301,7 +302,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadExecutorOrcamentarioFinanceiro&acao=A';
                 montaBotaoInicio($params);
 
-                $params = array();
+/*              $params = array();
                 $params['texto'] = 'Gestor da Subação';
                 $params['tipo'] = 'cadastrar';
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadGestorSubacao&acao=A';
@@ -311,7 +312,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $params['texto'] = 'Vinculação de Enquadramentos de Despesa a Subação';
                 $params['tipo'] = 'cadastrar';
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/AddEnquadramentoSubacao&acao=A';
-                montaBotaoInicio($params);
+                montaBotaoInicio($params);*/
 
                 $params = array();
                 $params['texto'] = 'Vinculação Orçamentária da Ação Estratégica.';
@@ -320,7 +321,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
 
                 $params = array();
-                $params['texto'] = ' Categoria de Apropriação.';
+                $params['texto'] = ' Modalidade de Pactuação.';
                 $params['tipo'] = 'cadastrar';
                 $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadCategoriaApropriacao&acao=A&listar=true';
                 montaBotaoInicio($params);
