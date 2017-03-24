@@ -17,7 +17,7 @@ include APPRAIZ . 'includes/cabecalho.inc';
 <div class="row col-md-12">
         <ol class="breadcrumb">
             <li><a href="<?php echo MODULO; ?>.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a></li>
-            <li class="active">Categoria de Apropriação</li>
+            <li class="active">Modalidade de Pactuação</li>
         </ol>
 
     <?php

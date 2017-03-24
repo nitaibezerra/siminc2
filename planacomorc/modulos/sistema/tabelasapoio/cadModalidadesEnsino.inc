@@ -17,7 +17,7 @@ include APPRAIZ . 'includes/cabecalho.inc';
 <div class="col-lg-12">
         <ol class="breadcrumb">
             <li><a href="<?php echo MODULO; ?>.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a></li>
-            <li class="active">Modalidades de Ensino/Tema/Público</li>
+            <li class="active">Área Cultural</li>
         </ol>
 
 
