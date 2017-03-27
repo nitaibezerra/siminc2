@@ -204,6 +204,30 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
+                        <label class="control-label" for="plititulo">Título:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" value="<?php
+                        if ($dadosPI['plititulo']) {
+                            echo $dadosPI['plititulo'];
+                        }
+                        ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <textarea class="obrigatorio txareanormal form-control"  rows="2" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
+                            if ($dadosPI['plidsc']) {
+                                echo $dadosPI['plidsc'];
+                            }
+                            ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
                         <label class="control-label" for="unicod">Unidade Orçamentária (UO):</label>
                     </div>
                     <div class="col-lg-10">
@@ -260,7 +284,7 @@ DML;
                         ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div style="display: none;" class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label">Subação:</label>
                     <div class="col-lg-10 carregaSubacao">
                     <?php if (!$dadosPI['pliid']) { ?>
@@ -322,7 +346,7 @@ DML;
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div style="display: none;" class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label">Cadastrado SIAFI:</label>
                     <div class="col-lg-10">
                         <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
@@ -349,6 +373,106 @@ DML;
                     $db->monta_combo('eqdid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($eqdid) ? $eqdid : null));
                     ?>
                     </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>Detalhamento Orçamentário</b>
+                    </div>
+                    <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
+                        <tr>
+                            <td rowspan="2" nowrap><b>PTRES</b><input type="hidden" name="pliptres"></td>
+                            <td rowspan="2" style="width:45%" nowrap><b>Funcional</b></td>
+                            <td rowspan="2" nowrap><b>Dotação Atual PO (R$)</b></td>
+                            <td style="display:none;" colspan="2" nowrap><b>
+                                <span id="detSub">
+                                <?php
+                                if ($sbaid && $dadosPI['pliid']) {
+                                    echo 'Detalhado na Subação (R$)';
+                                }if (!$sbaid && $dadosPI['pliid']) {
+                                    echo 'Detalhado em Subação (R$)';
+                                }if (!$dadosPI['pliid']) {
+                                    echo 'Detalhado na Subação (R$)';
+                                } ?>
+                                </span></b>
+                            </td>
+                            <td colspan="2" nowrap><b>
+                                <span id="detPi">
+                                <?php
+                                if ($sbaid && $dadosPI['pliid']) {
+                                    echo 'Detalhado em PI (R$)';
+                                }if (!$sbaid && $dadosPI['pliid']) {
+                                    echo 'Detalhado em PI (R$)';
+                                }if (!$dadosPI['pliid']) {
+                                    echo 'Detalhado em PI (R$)';
+                                } ?>
+                                </span></b>
+                            </td>
+                            <td colspan="2"><b>Empenho (R$)</b></td>
+                            <td rowspan="2" align="center"><b>Valor Previsto (Anual)</b></td>
+                        </tr>
+                        <tr>
+                            <td nowrap><b>Detalhado</b></td>
+                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
+                            <td nowrap><b>Empenhado</b></td>
+                            <td nowrap><b>Não&nbsp;Empenhado</b></td>
+                        </tr>
+                        <?php
+                        if ($dadosPI['pliid']) {
+                            $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
+                            #ver($dadosPTRES);
+                            if ($dadosPTRES) {
+                                $valortotalpi = 0;
+                                $cor = 1;
+                                foreach ($dadosPTRES as $ptres):
+                                    ?>
+                                    <tr style="height:30px;"
+                                        id="ptres_<?php echo $ptres['ptrid']; ?>">
+                                        <td align="center"><?php echo $ptres['ptres']; ?></td>
+                                        <td align="left"><?php echo $ptres['descricao']; ?></td>
+                                        <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
+                                        <td align="right"><?php echo $ptres['det_subacao']; ?></td>
+                                        <td align="right"><?php echo $ptres['nao_det_subacao']; ?></td>
+                                        <td align="right"><?php echo $ptres['det_pi']; ?></td>
+                                        <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
+                                        <td align="right"><?php echo $ptres['empenhado']; ?></td>
+                                        <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
+                                        <?php /* não dar espaço entre este input e o td */ ?>
+                                        <td align="center">
+                                            <input type="text" name="plivalored[<?php echo $ptres['ptrid']; ?>]"
+                                                   id="plivalored[<?php echo $ptres['ptrid']; ?>]" value="<?php echo $ptres['pipvalor']; ?>"
+                                                   onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);calculovalorPI();"
+                                                   class="normal somar CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);" style="text-align:right;width:20ex"
+                                                   onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
+                                                   data-ptres="<?php echo $ptres['ptres']; ?>"
+                                                   onblur="verificaDisponivel(this, '<?php echo $ptres['ptrid']; ?>', '<?php echo $ptres['pipvalor']; ?>');
+                                                           MouseBlur(this)"/>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $cor++;
+                                    $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
+                                endforeach;
+                            }
+                        }
+                        ?>
+                        <tr style="display: none; height:30px">
+                            <td align="right" valign="top" colspan="9"><b>TOTAL:</b></td>
+                            <td align="center" valign="top">
+                                <input type="text" name="valortotalpi" id="valortotalpi"
+                                       value="<?php echo number_format($valortotalpi, 2, ',', '.'); ?>" disabled
+                                       onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);"
+                                       class="disabled CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);"
+                                       onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
+                                       onblur="MouseBlur(this);" style="text-align:right;width:20ex" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="10">
+                                <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres"
+                                       value="Selecionar Funcional/PTRES" class="btn btn-info"/>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
@@ -388,7 +512,7 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div style="display: none;" class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="idCodificacao">Codificação da Unidade(livre):</label>
                     </div>
@@ -426,33 +550,6 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="plititulo">Título:</label>
-                    </div>
-                    <div class="col-lg-1" style="display: <?= $tipoSubacao == 's' ? 'none' : 'block'?>;">
-                        <p class="form-control-static" id="prefixotitulo"><?php echo $dadosPI['sbasigla']; ?></p>
-                    </div>
-                    <div class="<?= $tipoSubacao == 's' ? 'col-lg-10' : 'col-lg-9'?>">
-                        <input type="text" value="<?php
-                        if ($dadosPI['plititulo']) {
-                            echo $dadosPI['plititulo'];
-                        }
-                        ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <textarea class="obrigatorio txareanormal form-control"  rows="2" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
-                        if ($dadosPI['plidsc']) {
-                            echo $dadosPI['plidsc'];
-                        }
-                        ?></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
                     <div class="col-lg-10">
                         <?php
@@ -468,7 +565,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('multiple'=>'multiple','titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div style="display: none;" class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
                     <div class="col-lg-10">
                         <table class="table table-striped table-bordered table-hover">
@@ -517,108 +614,6 @@ DML;
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <b>Detalhamento Orçamentário</b>
-                    </div>
-                    <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
-                        <tr>
-                            <td rowspan="2" nowrap><b>PTRES</b><input type="hidden" name="pliptres"></td>
-                            <td rowspan="2" style="width:45%" nowrap><b>Ação</b></td>
-                            <td rowspan="2" nowrap><b>Dotação Atual (R$)</b></td>
-                            <td colspan="2" nowrap><b>
-                                <span id="detSub">
-                                <?php
-                                if ($sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado na Subação (R$)';
-                                }if (!$sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em Subação (R$)';
-                                }if (!$dadosPI['pliid']) {
-                                    echo 'Detalhado na Subação (R$)';
-                                } ?>
-                                </span></b>
-                            </td>
-                            <td colspan="2" nowrap><b>
-                                <span id="detPi">
-                                <?php
-                                if ($sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em PI na Subação (R$)';
-                                }if (!$sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em PI (R$)';
-                                }if (!$dadosPI['pliid']) {
-                                    echo 'Detalhado em PI na Subação (R$)';
-                                } ?>
-                                </span></b>
-                            </td>
-                            <td colspan="2"><b>Empenho (R$)</b></td>
-                            <td rowspan="2" align="center"><b>Valor Previsto(Anual)</b></td>
-                        </tr>
-                        <tr>
-                            <td nowrap><b>Detalhado</b></td>
-                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
-                            <td nowrap><b>Detalhado</b></td>
-                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
-                            <td nowrap><b>Empenhado</b></td>
-                            <td nowrap><b>Não&nbsp;Empenhado</b></td>
-                        </tr>
-                        <?php
-                        if ($dadosPI['pliid']) {
-                            $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
-                            #ver($dadosPTRES);
-                            if ($dadosPTRES) {
-                                $valortotalpi = 0;
-                                $cor = 1;
-                                foreach ($dadosPTRES as $ptres):
-                        ?>
-                        <tr style="height:30px;"
-                            id="ptres_<?php echo $ptres['ptrid']; ?>">
-                            <td align="center"><?php echo $ptres['ptres']; ?></td>
-                            <td align="left"><?php echo $ptres['descricao']; ?></td>
-                            <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
-                            <td align="right"><?php echo $ptres['det_subacao']; ?></td>
-                            <td align="right"><?php echo $ptres['nao_det_subacao']; ?></td>
-                            <td align="right"><?php echo $ptres['det_pi']; ?></td>
-                            <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
-                            <td align="right"><?php echo $ptres['empenhado']; ?></td>
-                            <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
-                            <?php /* não dar espaço entre este input e o td */ ?>
-                            <td align="center">
-                                <input type="text" name="plivalored[<?php echo $ptres['ptrid']; ?>]"
-                                    id="plivalored[<?php echo $ptres['ptrid']; ?>]" value="<?php echo $ptres['pipvalor']; ?>"
-                                    onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);calculovalorPI();"
-                                    class="normal somar CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);" style="text-align:right;width:20ex"
-                                    onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
-                                    data-ptres="<?php echo $ptres['ptres']; ?>"
-                                    onblur="verificaDisponivel(this, '<?php echo $ptres['ptrid']; ?>', '<?php echo $ptres['pipvalor']; ?>');
-                                    MouseBlur(this)"/>
-                            </td>
-                        </tr>
-                        <?php
-                                    $cor++;
-                                    $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
-                                endforeach;
-                            }
-                        }
-                        ?>
-                        <tr style="height:30px">
-                            <td align="right" valign="top" colspan="9"><b>TOTAL:</b></td>
-                            <td align="center" valign="top">
-                                <input type="text" name="valortotalpi" id="valortotalpi"
-                                    value="<?php echo number_format($valortotalpi, 2, ',', '.'); ?>" disabled
-                                    onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);"
-                                    class="disabled CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);"
-                                    onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
-                                    onblur="MouseBlur(this);" style="text-align:right;width:20ex" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" colspan="10">
-                                <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres"
-                                    value="Selecionar Ação/PTRES" class="btn btn-info"/>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
