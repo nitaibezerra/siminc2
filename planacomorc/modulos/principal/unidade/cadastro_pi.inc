@@ -512,7 +512,7 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div style="display: none;" class="form-group">
+                <div style="display:none;" class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="idCodificacao">Codificação da Unidade(livre):</label>
                     </div>
@@ -938,10 +938,10 @@ DML;
 
     function submeter(pliid) {
         var codsubacao = $('#subacao').text();
-        if ('' === codsubacao) {
-            alert('O código da subação não pode ser deixado em branco.');
-            return false;
-        }
+//        if ('' === codsubacao) {
+//            alert('O código da subação não pode ser deixado em branco.');
+//            return false;
+//        }
 
         var pi = document.getElementById("enquadramento").innerHTML
             + codsubacao
@@ -955,7 +955,7 @@ DML;
         var l = $('#plicodsubacao').val();
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
-        validarFormulario(['idCodificacao', 'eqdid', 'unicod', 'neeid', 'capid','mdeid','plititulo', 'plidsc'], 'formulario', 'validar(' + pliid + ')');
+        validarFormulario([ 'eqdid', 'unicod', 'neeid', 'capid','mdeid','plititulo', 'plidsc'], 'formulario', 'validar(' + pliid + ')');
     }
 
     function submeterComSituacao(pliid, situacao) {
