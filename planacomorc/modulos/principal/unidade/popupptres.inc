@@ -520,7 +520,7 @@ DML;
                 "Ação",
                 "Unidade Orçamentária",
                 "Dotação&nbsp;Atual&nbsp;(R$)",
-                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
+//                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
             ));
         } else {
@@ -529,7 +529,7 @@ DML;
                 "Ação",
                 "Unidade Orçamentária",
                 "Dotação&nbsp;Atual&nbsp;(R$)",
-                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
+//                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>PI (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
             ));
@@ -606,43 +606,43 @@ DML;
                     var acao = $('tr#' + id + ' td:nth-child(4)').text();
                     celAcao.innerHTML = acao;
 
-                    var celSubacaoDet = tabelaorigem.rows[linha].insertCell(2);
-                    celSubacaoDet.style.textAlign = "right";
-                    var subacaoDet = $('tr#' + id + ' td:nth-child(6)').text();
-                    celSubacaoDet.innerHTML = subacaoDet;
+//                    var celSubacaoDet = tabelaorigem.rows[linha].insertCell(2);
+//                    celSubacaoDet.style.textAlign = "right";
+//                    var subacaoDet = $('tr#' + id + ' td:nth-child(6)').text();
+//                    celSubacaoDet.innerHTML = subacaoDet;
+//
+//                    var celSubacaoNaoDet = tabelaorigem.rows[linha].insertCell(3);
+//                    celSubacaoNaoDet.style.textAlign = "right";
+//                    var subacaoNaoDet = $('tr#' + id + ' td:nth-child(7)').text();
+//                    celSubacaoNaoDet.innerHTML = subacaoNaoDet;
 
-                    var celSubacaoNaoDet = tabelaorigem.rows[linha].insertCell(3);
-                    celSubacaoNaoDet.style.textAlign = "right";
-                    var subacaoNaoDet = $('tr#' + id + ' td:nth-child(7)').text();
-                    celSubacaoNaoDet.innerHTML = subacaoNaoDet;
-
-                    var celEmpenhoEmp = tabelaorigem.rows[linha].insertCell(4);
+                    var celEmpenhoEmp = tabelaorigem.rows[linha].insertCell(2);
                     celEmpenhoEmp.style.textAlign = "right";
-                    var empenhoEmp = $('tr#' + id + ' td:nth-child(8)').text();
+                    var empenhoEmp = $('tr#' + id + ' td:nth-child(6)').text();
                     celEmpenhoEmp.innerHTML = empenhoEmp;
-                    ;
 
-                    var celEmpenhoNaoEmp = tabelaorigem.rows[linha].insertCell(5);
+
+                    var celEmpenhoNaoEmp = tabelaorigem.rows[linha].insertCell(3);
                     celEmpenhoNaoEmp.style.textAlign = "right";
-                    var empenhoNaoEmp = $('tr#' + id + ' td:nth-child(9)').text();
+                    var empenhoNaoEmp = $('tr#' + id + ' td:nth-child(7)').text();
                     celEmpenhoNaoEmp.innerHTML = empenhoNaoEmp;
 
-                    var celEmpenho = tabelaorigem.rows[linha].insertCell(6);
+                    var celEmpenho = tabelaorigem.rows[linha].insertCell(4);
                     celEmpenho.style.textAlign = "right";
-                    var empenho = $('tr#' + id + ' td:nth-child(10)').text();
+                    var empenho = $('tr#' + id + ' td:nth-child(8)').text();
                     celEmpenho.innerHTML = empenho;
 
-                    var celNaoEmpenho = tabelaorigem.rows[linha].insertCell(7);
+                    var celNaoEmpenho = tabelaorigem.rows[linha].insertCell(5);
                     celNaoEmpenho.style.textAlign = "right";
-                    var naoEmpenho = $('tr#' + id + ' td:nth-child(11)').text();
+                    var naoEmpenho = $('tr#' + id + ' td:nth-child(9)').text();
                     celNaoEmpenho.innerHTML = naoEmpenho;
 
-                    var celEmpenhoE = tabelaorigem.rows[linha].insertCell(8);
+                    var celEmpenhoE = tabelaorigem.rows[linha].insertCell(6);
                     celEmpenhoE.style.textAlign = "right";
-                    var empenhoE = $('tr#' + id + ' td:nth-child(12)').text();
+                    var empenhoE = $('tr#' + id + ' td:nth-child(10)').text();
                     celEmpenhoE.innerHTML = empenhoE + '<input type="hidden" value="'+id+'" name="acaid['+ ptres +']">';
 
-                    var celValorPre = tabelaorigem.rows[linha].insertCell(9);
+                    var celValorPre = tabelaorigem.rows[linha].insertCell(7);
                     celValorPre.style.textAlign = "right";
                     celValorPre.innerHTML = '<input type="text" class="CampoEstilo normal form-control obrigatorio somar" name="plivalor[' + ptres + '][' + id + ']" size="28" '
                             + 'onKeyUp="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);calculovalorPI()" '
