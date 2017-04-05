@@ -228,7 +228,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="unicod">Unidade Orçamentária (UO):</label>
+                        <label class="control-label" for="unicod">Unidade Solicitante:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
@@ -475,6 +475,86 @@ DML;
                     </table>
                 </div>
                 <div class="form-group">
+                    <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
+                    <div class="col-lg-10">
+                        <?php
+                        $sql = <<<DML
+                            SELECT
+                                oppid AS codigo,
+                                oppdesc AS descricao
+                            FROM monitora.pi_objetivo_ppa
+                            WHERE oppstatus = 'A'
+                                AND prsano = '{$_SESSION['exercicio']}'
+                            ORDER BY oppid
+DML;
+                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
+                    <div class="col-lg-10">
+                        <?php
+                        $sql = <<<DML
+                            SELECT
+                                mppid AS codigo,
+                                mppdesc AS descricao
+                            FROM monitora.pi_metas_ppa
+                            WHERE mppstatus = 'A'
+                                AND prsano = '{$_SESSION['exercicio']}'
+                            ORDER BY mppid
+DML;
+                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta" class="col-lg-2 control-label">Indicador PPA: </label>
+                    <div class="col-lg-10">
+                        <?php
+                        $sql = <<<DML
+                            SELECT
+                                ippid AS codigo,
+                                ippdesc AS descricao
+                            FROM monitora.pi_indicador_ppa
+                            WHERE ippstatus = 'A'
+                                AND prsano = '{$_SESSION['exercicio']}'
+                            ORDER BY ippid
+DML;
+                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
+                    <div class="col-lg-10">
+                        <?php
+                        $sql = <<<DML
+                            SELECT
+                                mpnid AS codigo,
+                                mpndesc AS descricao
+                            FROM monitora.pi_meta_pnc
+                            WHERE mpnstatus = 'A'
+                                AND prsano  = '{$_SESSION['exercicio']}'
+                            ORDER BY mpnid
+DML;
+                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta" class="col-lg-2 control-label">Indicador PNC: </label>
+                    <div class="col-lg-10">
+                        <?php
+                        $sql = <<<DML
+                            SELECT
+                                ipnid AS codigo,
+                                ipndesc AS descricao
+                            FROM monitora.pi_indicador_pnc
+                            WHERE ipnstatus = 'A'
+                                AND prsano = '{$_SESSION['exercicio']}'
+                            ORDER BY ipnid
+DML;
+                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Seguimento Cultural:</label>
                     </div>
@@ -547,86 +627,6 @@ DML;
                     $mdeid = $dadosPI['mdeid'];
                     $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
                     ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                oppid AS codigo,
-                                oppdesc AS descricao
-                            FROM monitora.pi_objetivo_ppa
-                            WHERE oppstatus = 'A'
-                                AND oppano = '{$_SESSION['exercicio']}'
-                            ORDER BY oppid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                mppid AS codigo,
-                                mppdesc AS descricao
-                            FROM monitora.pi_metas_ppa
-                            WHERE mppstatus = 'A'
-                                AND mppano = '{$_SESSION['exercicio']}'
-                            ORDER BY mppid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Iniciativa PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                ippid AS codigo,
-                                ippdesc AS descricao
-                            FROM monitora.pi_iniciativa_ppa
-                            WHERE ippstatus = 'A'
-                                AND ippano = '{$_SESSION['exercicio']}'
-                            ORDER BY ippid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                mpnid AS codigo,
-                                mpndesc AS descricao
-                            FROM monitora.pi_meta_pnc
-                            WHERE mpnstatus = 'A'
-                                AND mpnano = '{$_SESSION['exercicio']}'
-                            ORDER BY mpnid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Iniciativa PNC: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                ipnid AS codigo,
-                                ipndesc AS descricao
-                            FROM monitora.pi_iniciativa_pnc
-                            WHERE ipnstatus = 'A'
-                                AND ipnano = '{$_SESSION['exercicio']}'
-                            ORDER BY ipncod
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
                 <div style="display: none;" class="form-group">
