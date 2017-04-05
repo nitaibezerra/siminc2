@@ -371,8 +371,8 @@ $sql_lista = <<<DML
         trim(aca.prgcod || '.' || aca.acacod || '.' || aca.unicod || '.' || aca.loccod || ' - ' || aca.acatitulo) AS descricao,
         aca.unicod || ' - ' || uni.unidsc as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
-        COALESCE(SUM(dts.valor), 0.00) AS det_subacao,
-        (COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(SUM(dts.valor), 0.00)) AS nao_det_subacao,
+         /*COALESCE(SUM(dts.valor), 0.00) AS det_subacao,
+         (COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(SUM(dts.valor), 0.00)) AS nao_det_subacao,*/
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
         $detalhamentoPi
         COALESCE((pemp.total), 0.00) AS empenhado,
@@ -540,7 +540,7 @@ DML;
         $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));
         $listagem->setIdLinha();
         $listagem->addCallbackDeCampo(array(
-            'dotacaoatual', 'det_subacao', 'nao_det_subacao', 'det_pi', 'nao_det_pi', 'empenhado', 'nao_empenhado', 'saldo'), 'mascaraMoeda');
+            'dotacaoatual', 'det_subacao', 'nao_det_subacao' , 'det_pi', 'nao_det_pi', 'empenhado', 'nao_empenhado', 'saldo'), 'mascaraMoeda');
         $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
         $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
         ?>
