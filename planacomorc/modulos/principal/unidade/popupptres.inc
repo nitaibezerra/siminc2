@@ -79,7 +79,7 @@ function popupDetalhe($ptrid) {
         /* Monta o HTML do grafico de Execução */
         $sqlGrafico = "
             SELECT
-                'Dotação Atual' AS descricao,
+                'Dotação Atual PO' AS descricao,
                 'Total' as categoria,
                 {$dadosPtres['dotacaoatual']} AS valor
 
@@ -518,8 +518,8 @@ DML;
             $listagem->setCabecalho(array(
                 "PTRES",
                 "Ação",
-                "Unidade Orçamentária",
-                "Dotação&nbsp;Atual&nbsp;(R$)",
+                "Unidade Solicitante",
+                "Dotação&nbsp;Atual&nbsp; PO (R$)",
 //                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
             ));
@@ -527,10 +527,10 @@ DML;
             $listagem->setCabecalho(array(
                 "PTRES",
                 "Ação",
-                "Unidade Orçamentária",
-                "Dotação&nbsp;Atual&nbsp;(R$)",
+                "Unidade Solicitante",
+                "Dotação&nbsp;Atual&nbsp; PO (R$)",
 //                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
-                '<center>PI (R$)</center>' => array('Detalhado', 'Não Detalhado'),
+                '<center>Detalhado em PI (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
             ));
         }
