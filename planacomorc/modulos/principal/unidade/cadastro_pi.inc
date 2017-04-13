@@ -556,7 +556,7 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="neeid">Seguimento Cultural:</label>
+                        <label class="control-label" for="neeid">Segmento Cultural:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
