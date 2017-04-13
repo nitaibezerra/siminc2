@@ -507,14 +507,14 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Indicador PPA: </label>
+                    <label for="meta" class="col-lg-2 control-label">Iniciativa PPA: </label>
                     <div class="col-lg-10">
                         <?php
                         $sql = <<<DML
                             SELECT
                                 ippid AS codigo,
                                 ippdesc AS descricao
-                            FROM monitora.pi_indicador_ppa
+                            FROM monitora.pi_iniciativa_ppa
                             WHERE ippstatus = 'A'
                                 AND prsano = '{$_SESSION['exercicio']}'
                             ORDER BY ippid
@@ -636,7 +636,7 @@ DML;
                             <tr style="text-align:center">
                                 <td style="width:30px;height:20px"><b>Enquadramento</b></td>
                                 <td colspan="3"><b>Sequencial</b></td>
-                                <td style="width:30px;height:20px"><b>Seguimento</b></td>
+                                <td style="width:30px;height:20px"><b>Segmento</b></td>
                                 <td style="width:30px;height:20px"><b>Pactuação</b></td>
                                 <td style="width:30px;height:20px"><b>Codificação</b></td>
                                 <td style="width:30px;height:20px"><b>Área</b></td>

@@ -2,9 +2,10 @@
 --ROLLBACK;
 --COMMIT;
 /*drop table IF EXISTS monitora.pi_objetivo_ppa,
-monitora.pi_indicador_ppa,
+monitora.pi_iniciativa_ppa,
 monitora.pi_metas_ppa,
 monitora.pi_indicador_pnc,monitora.pi_meta_pnc;*/
+
 CREATE TABLE monitora.pi_objetivo_ppa
 (
   oppid SERIAL PRIMARY KEY,
@@ -67,18 +68,18 @@ CREATE TABLE planointerno.metappa
   CONSTRAINT ckc_mppsigla_metappa CHECK (mppstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
 )*/
 
-CREATE TABLE monitora.pi_indicador_ppa
+CREATE TABLE monitora.pi_iniciativa_ppa
 (
   ippid SERIAL,
-  mppid SERIAL NOT NULL UNIQUE ,
+  oppid SERIAL NOT NULL UNIQUE ,
   ippdesc VARCHAR(1000),
   ippnome CHARACTER VARYING(500),
   ippcod VARCHAR(4),
   ippstatus char default 'A'::character varying,
   prsano CHAR(4),
-  PRIMARY KEY (ippid,mppid),
-  CONSTRAINT fk_indppa_reference_meta FOREIGN KEY (mppid)
-  REFERENCES monitora.pi_metas_ppa (mppid) MATCH SIMPLE
+  PRIMARY KEY (ippid,oppid),
+  CONSTRAINT fk_inippa_reference_obj FOREIGN KEY (oppid)
+  REFERENCES monitora.pi_objetivo_ppa (oppid) MATCH SIMPLE
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_indppa_reference_programa FOREIGN KEY (prsano)
   REFERENCES monitora.programacaoexercicio (prsano) MATCH SIMPLE
@@ -115,24 +116,7 @@ CREATE TABLE monitora.pi_meta_pnc
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_mpnstatus_metpnc CHECK (mpnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
-/* DDL-SIMINC
-CREATE TABLE planointerno.metapnc
-(
-  mpnid serial NOT NULL,
-  prsano character(4) NOT NULL,
-  mpncod character(4) NOT NULL,
-  mpnnome character varying(400) NOT NULL,
-  mpndescricao character varying(500),
-  mpnstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
-  mpnquantificavel boolean NOT NULL DEFAULT false,
-  mpnregionalizado boolean DEFAULT false,
-  mpnacumulativo boolean DEFAULT true,
-  CONSTRAINT pk_metapnc PRIMARY KEY (mpnid),
-  CONSTRAINT fk_metapnc_reference_programa FOREIGN KEY (prsano)
-  REFERENCES planointerno.programacaoexercicio (prsano) MATCH SIMPLE
-  ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT ckc_mpnsigla_metapnc CHECK (mpnstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
-);*/
+
 CREATE TABLE monitora.pi_indicador_pnc
 (
   ipnid SERIAL NOT NULL UNIQUE ,
@@ -150,11 +134,10 @@ CREATE TABLE monitora.pi_indicador_pnc
   CONSTRAINT ckc_ipnstatus_indpnc CHECK (ipnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
 
-ALTER TABLE monitora.pi_indicador_ppa OWNER TO postgres;
+ALTER TABLE monitora.pi_iniciativa_ppa,monitora.pi_objetivo_ppa,pi_metas_ppa,pi_iniciativa_ppa,pi_meta_pnc,pi_indicador_pnc OWNER TO postgres;
 
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_objetivo_ppa,
-monitora.pi_indicador_ppa,
+monitora.pi_iniciativa_ppa,
 monitora.pi_indicador_pnc,
 monitora.pi_metas_ppa,
 monitora.pi_meta_pnc TO usr_simec;
-

@@ -490,7 +490,7 @@ DML;
                         </div>
                         <div class="form-group">
 
-                            <label for="inputUnidade" class="col-lg-2 control-label">Ação:</label>
+                            <label for="inputUnidade" class="col-lg-2 control-label">Funcional:</label>
                             <div class="col-lg-10 comboAcao">
                                 <?php
                                 $sql = "SELECT ac.acacod as codigo, (ac.acacod || ' - ' || ac.acadsc) as descricao
@@ -517,7 +517,7 @@ DML;
         if ($_REQUEST['tipo'] == 'pi') {
             $listagem->setCabecalho(array(
                 "PTRES",
-                "Ação",
+                "Funcional",
                 "Unidade Solicitante",
                 "Dotação&nbsp;Atual&nbsp; PO (R$)",
 //                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
@@ -526,7 +526,7 @@ DML;
         } else {
             $listagem->setCabecalho(array(
                 "PTRES",
-                "Ação",
+                "Funcional",
                 "Unidade Solicitante",
                 "Dotação&nbsp;Atual&nbsp; PO (R$)",
 //                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
