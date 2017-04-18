@@ -202,6 +202,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </p>
                     </div>
                 </div>
+                <fieldset><legend>Dados do Plano interno</legend>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="plititulo">Título:</label>
@@ -226,6 +227,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             ?></textarea>
                     </div>
                 </div>
+                </fieldset>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="unicod">Unidade Solicitante:</label>
@@ -473,7 +475,8 @@ DML;
                         </tr>
                     </table>
                 </div>
-                <div class="form-group">
+                <fieldset><legend>Metas </legend>
+                    <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
                     <div class="col-lg-10">
                         <?php
@@ -489,7 +492,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
                     <div class="col-lg-10">
                         <?php
@@ -505,7 +508,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Iniciativa PPA: </label>
                     <div class="col-lg-10">
                         <?php
@@ -521,7 +524,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
                     <div class="col-lg-10">
                         <?php
@@ -537,7 +540,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="meta" class="col-lg-2 control-label">Indicador PNC: </label>
                     <div class="col-lg-10">
                         <?php
@@ -553,6 +556,7 @@ DML;
                         inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                     </div>
                 </div>
+                </fieldset>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
@@ -628,6 +632,74 @@ DML;
                     ?>
                     </div>
                 </div>
+                <fieldset><legend>Produto PI:</legend>
+                    <div class="form-group">
+                        <div class="col-md-2 text-right">
+                            <label for="mdeid" class="control-label">Selecionar:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <?php
+                            $sql = <<<DML
+                            SELECT
+                                MAX(mdeid) AS codigo,
+                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                            FROM monitora.pi_modalidadeensino
+                            WHERE mdestatus = 'A'
+                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                            GROUP BY descricao
+                            ORDER BY descricao ASC
+DML;
+
+                            $mdeid = $dadosPI['mdeid'];
+                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2 text-right">
+                            <label for="mdeid" class="control-label">Unidade de Medida:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <?php
+                            $sql = <<<DML
+                            SELECT
+                                MAX(mdeid) AS codigo,
+                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                            FROM monitora.pi_modalidadeensino
+                            WHERE mdestatus = 'A'
+                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                            GROUP BY descricao
+                            ORDER BY descricao ASC
+DML;
+
+                            $mdeid = $dadosPI['mdeid'];
+                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2 text-right">
+                            <label for="mdeid" class="control-label">Quantidade:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <?php
+                            $sql = <<<DML
+                            SELECT
+                                MAX(mdeid) AS codigo,
+                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                            FROM monitora.pi_modalidadeensino
+                            WHERE mdestatus = 'A'
+                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                            GROUP BY descricao
+                            ORDER BY descricao ASC
+DML;
+
+                            $mdeid = $dadosPI['mdeid'];
+                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                            ?>
+                        </div>
+                    </div>
+                </fieldset>
                 <div style="display: none;" class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
                     <div class="col-lg-10">
