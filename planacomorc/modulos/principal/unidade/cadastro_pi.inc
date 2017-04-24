@@ -202,32 +202,36 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </p>
                     </div>
                 </div>
-                <fieldset><legend>Dados do Plano interno</legend>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="plititulo">Título:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" value="<?php
-                        if ($dadosPI['plititulo']) {
-                            echo $dadosPI['plititulo'];
-                        }
-                        ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Dados do Plano interno</legend>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label class="control-label" for="plititulo">Título:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <input type="text" value="<?php
+                                    if ($dadosPI['plititulo']) {
+                                        echo $dadosPI['plititulo'];
+                                    }
+                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <textarea class="obrigatorio txareanormal form-control"  rows="2" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
+                                        if ($dadosPI['plidsc']) {
+                                            echo $dadosPI['plidsc'];
+                                        }
+                                        ?></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <textarea class="obrigatorio txareanormal form-control"  rows="2" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
-                            if ($dadosPI['plidsc']) {
-                                echo $dadosPI['plidsc'];
-                            }
-                            ?></textarea>
-                    </div>
-                </div>
-                </fieldset>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="unicod">Unidade Solicitante:</label>
@@ -376,7 +380,7 @@ DML;
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-body">
                         <b>Detalhamento Orçamentário</b>
                     </div>
                     <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
@@ -475,88 +479,92 @@ DML;
                         </tr>
                     </table>
                 </div>
-                <fieldset><legend>Metas </legend>
-                    <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                oppid AS codigo,
-                                oppdesc AS descricao
-                            FROM monitora.pi_objetivo_ppa
-                            WHERE oppstatus = 'A'
-                                AND prsano = '{$_SESSION['exercicio']}'
-                            ORDER BY oppid
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Metas </legend>
+                            <div class="form-group">
+                            <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                                    SELECT
+                                        oppid AS codigo,
+                                        oppdesc AS descricao
+                                    FROM monitora.pi_objetivo_ppa
+                                    WHERE oppstatus = 'A'
+                                        AND prsano = '{$_SESSION['exercicio']}'
+                                    ORDER BY oppid
 DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                                    SELECT
+                                        mppid AS codigo,
+                                        mppdesc AS descricao
+                                    FROM monitora.pi_metas_ppa
+                                    WHERE mppstatus = 'A'
+                                        AND prsano = '{$_SESSION['exercicio']}'
+                                    ORDER BY mppid
+DML;
+                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="meta" class="col-lg-2 control-label">Iniciativa PPA: </label>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                                    SELECT
+                                        ippid AS codigo,
+                                        ippdesc AS descricao
+                                    FROM monitora.pi_iniciativa_ppa
+                                    WHERE ippstatus = 'A'
+                                        AND prsano = '{$_SESSION['exercicio']}'
+                                    ORDER BY ippid
+DML;
+                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                                    SELECT
+                                        mpnid AS codigo,
+                                        mpndesc AS descricao
+                                    FROM monitora.pi_meta_pnc
+                                    WHERE mpnstatus = 'A'
+                                        AND prsano  = '{$_SESSION['exercicio']}'
+                                    ORDER BY mpnid
+DML;
+                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="meta" class="col-lg-2 control-label">Indicador PNC: </label>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                                    SELECT
+                                        ipnid AS codigo,
+                                        ipndesc AS descricao
+                                    FROM monitora.pi_indicador_pnc
+                                    WHERE ipnstatus = 'A'
+                                        AND prsano = '{$_SESSION['exercicio']}'
+                                    ORDER BY ipnid
+DML;
+                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                            </div>
+                        </div>
+                        </fieldset>
                     </div>
                 </div>
-                    <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                mppid AS codigo,
-                                mppdesc AS descricao
-                            FROM monitora.pi_metas_ppa
-                            WHERE mppstatus = 'A'
-                                AND prsano = '{$_SESSION['exercicio']}'
-                            ORDER BY mppid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                    <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Iniciativa PPA: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                ippid AS codigo,
-                                ippdesc AS descricao
-                            FROM monitora.pi_iniciativa_ppa
-                            WHERE ippstatus = 'A'
-                                AND prsano = '{$_SESSION['exercicio']}'
-                            ORDER BY ippid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                    <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Meta PNC: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                mpnid AS codigo,
-                                mpndesc AS descricao
-                            FROM monitora.pi_meta_pnc
-                            WHERE mpnstatus = 'A'
-                                AND prsano  = '{$_SESSION['exercicio']}'
-                            ORDER BY mpnid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                    <div class="form-group">
-                    <label for="meta" class="col-lg-2 control-label">Indicador PNC: </label>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
-                            SELECT
-                                ipnid AS codigo,
-                                ipndesc AS descricao
-                            FROM monitora.pi_indicador_pnc
-                            WHERE ipnstatus = 'A'
-                                AND prsano = '{$_SESSION['exercicio']}'
-                            ORDER BY ipnid
-DML;
-                        inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
-                    </div>
-                </div>
-                </fieldset>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
@@ -632,74 +640,78 @@ DML;
                     ?>
                     </div>
                 </div>
-                <fieldset><legend>Produto PI:</legend>
-                    <div class="form-group">
-                        <div class="col-md-2 text-right">
-                            <label for="mdeid" class="control-label">Selecionar:</label>
-                        </div>
-                        <div class="col-lg-10">
-                            <?php
-                            $sql = <<<DML
-                            SELECT
-                                MAX(mdeid) AS codigo,
-                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                            FROM monitora.pi_modalidadeensino
-                            WHERE mdestatus = 'A'
-                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                            GROUP BY descricao
-                            ORDER BY descricao ASC
+            <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Produto PI:</legend>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label for="mdeid" class="control-label">Selecionar:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                    $sql = <<<DML
+                                    SELECT
+                                        MAX(mdeid) AS codigo,
+                                        mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                                    FROM monitora.pi_modalidadeensino
+                                    WHERE mdestatus = 'A'
+                                        AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                                    GROUP BY descricao
+                                    ORDER BY descricao ASC
 DML;
 
-                            $mdeid = $dadosPI['mdeid'];
-                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2 text-right">
-                            <label for="mdeid" class="control-label">Unidade de Medida:</label>
-                        </div>
-                        <div class="col-lg-10">
-                            <?php
-                            $sql = <<<DML
-                            SELECT
-                                MAX(mdeid) AS codigo,
-                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                            FROM monitora.pi_modalidadeensino
-                            WHERE mdestatus = 'A'
-                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                            GROUP BY descricao
-                            ORDER BY descricao ASC
+                                    $mdeid = $dadosPI['mdeid'];
+                                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label for="mdeid" class="control-label">Unidade de Medida:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                    $sql = <<<DML
+                                    SELECT
+                                        MAX(mdeid) AS codigo,
+                                        mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                                    FROM monitora.pi_modalidadeensino
+                                    WHERE mdestatus = 'A'
+                                        AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                                    GROUP BY descricao
+                                    ORDER BY descricao ASC
 DML;
 
-                            $mdeid = $dadosPI['mdeid'];
-                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2 text-right">
-                            <label for="mdeid" class="control-label">Quantidade:</label>
-                        </div>
-                        <div class="col-lg-10">
-                            <?php
-                            $sql = <<<DML
-                            SELECT
-                                MAX(mdeid) AS codigo,
-                                mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                            FROM monitora.pi_modalidadeensino
-                            WHERE mdestatus = 'A'
-                                AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                            GROUP BY descricao
-                            ORDER BY descricao ASC
+                                    $mdeid = $dadosPI['mdeid'];
+                                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label for="mdeid" class="control-label">Quantidade:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                    $sql = <<<DML
+                                    SELECT
+                                        MAX(mdeid) AS codigo,
+                                        mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
+                                    FROM monitora.pi_modalidadeensino
+                                    WHERE mdestatus = 'A'
+                                        AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                                    GROUP BY descricao
+                                    ORDER BY descricao ASC
 DML;
 
-                            $mdeid = $dadosPI['mdeid'];
-                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                            ?>
-                        </div>
+                                    $mdeid = $dadosPI['mdeid'];
+                                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                                    ?>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                </fieldset>
+                </div>
                 <div style="display: none;" class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
                     <div class="col-lg-10">
