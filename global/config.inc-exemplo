@@ -7,16 +7,17 @@
     session_start();
     ini_set("short_open_tag","on");
     ini_set('display_errors', 'on');
-    error_reporting(E_ALL ^E_NOTICE);
+//    error_reporting(E_ALL ^E_NOTICE);
     date_default_timezone_set('America/Sao_Paulo');
     header('content-type: text/html; charset=ISO-8859-1');
 
     defined('AUTHSSD') || define('AUTHSSD', false);
-    defined('APPRAIZ') || define('APPRAIZ', '');
+    defined('APPRAIZ') || define('APPRAIZ', 'PREENCHER'); # Exemplo: /var/www/projeto/
     defined('DIRFILES') || define('DIRFILES', APPRAIZ. 'arquivos/');
     defined('SISRAIZ') || define('SISRAIZ', APPRAIZ . $_SESSION['sisdiretorio'] . '/');
     defined('MAXONLINETIME') || define('MAXONLINETIME', 3600);
-    defined('IS_PRODUCAO') || define('IS_PRODUCAO', false);
+    
+    define('IS_PRODUCAO', FALSE);
 
     $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Produção' : 'Ambiente de Desenvolvimento';
     $_SESSION['sisbaselogin'] = $_REQUEST['baselogin'] && $_REQUEST['baselogin'] != "teste" ? $_REQUEST['baselogin'] : $_SESSION['sisbaselogin'];
@@ -25,7 +26,8 @@
     # Configuração de Banco de Dados
     include_once 'database.php';
 
-    $_SESSION['email_sistema'] = $_SESSION['email_sistema'];
+    $_SESSION['email_sistema'] = 'PREENCHER'; # Exemplo: projeto@orgao.gov.br
+    $_SESSION['config_smtp'] = 'PREENCHER'; # Exemplo: smtp.simec.orgao.gov.br
 
     preg_match('/\/([a-zA-Z]*)\//', $_SERVER['REQUEST_URI'], $sisdiretorio);
     $sisdiretorio = $sisdiretorio[1];
@@ -33,6 +35,33 @@
     preg_match('/\/([a-zA-Z]*)\.php/', $_SERVER['REQUEST_URI'], $sisarquivo);
     $sisarquivo = $sisarquivo[1];
 
+    # Configurações do órgão que está usando o sistema.
+    define('CODIGO_ORGAO_SISTEMA', 'PREENCHER'); # Exemplo: 42000
+    define('NOME_ORGAO_SISTEMA', 'PREENCHER'); # Exemplo: Ministério da Cultura
+    define('SIGLA_ORGAO_SISTEMA', 'PREENCHER'); # Exemplo: MinC
+    define("UNIDADES_OBRIGATORIAS", "PREENCHER"); # Exemplo: '42101', '42902'
+    $obrigatorias_array = array('PREENCHER'); # Exemplo: '42101', '42902'
+    
+    # SIOP - Configuração de webservice do SIOP
+    # Arquivo de credencial
+    define('WEB_SERVICE_SIOP_CERTIFICADO', 'PREENCHER'); # Exemplo: APPRAIZ. 'global/prod_orgao_2016.crt'
+    define('WEB_SERVICE_SIOP_URL', 'PREENCHER'); # Exemplo: https://testews.siop.gov.br/services/
+    define('WEB_SERVICE_SIOP_USUARIO', 'PREENCHER'); # Exemplo: WS-USUARIO-123
+    define('WEB_SERVICE_SIOP_SENHA', 'PREENCHER'); # Exemplo: senhaSenhaSenha123
+    define('WEB_SERVICE_SIOP_PERFIL', 'PREENCHER'); # Exemplo: 32
+
+    # Configurações de Webservice(REST) do Orgão pra gerenciar consultas ao Webservice da Receita Federal
+    # Homologação
+    define('WS_RF_BASE_URL', 'PREENCHER'); # Exemplo: http://servico.orgao.gov.br/cpf/servicos/
+    define('WS_RF_USER', 'PREENCHER'); # Exemplo: usuario123
+    define('WS_RF_SENHA', 'PREENCHER'); # Exemplo: senhaSenhaSenha123
+    
+    # Aplicativo de Mapas do Google
+    define('WS_GOOGLE_MAPS_URL', 'PREENCHER'); # Exemplo: http://maps.google.com/maps?file=api&amp;v=2&amp;key=123
+    
+    # Ano padrão do exercicío para módulos que não tem opção de mudar exercicio.
+    define('ANO_EXERCICIO', 'PREENCHER'); # Exemplo: 2017
+    
     include_once APPRAIZ. 'includes/simec_funcoes.inc';
     include_once APPRAIZ. 'includes/backtrace/BackTrace.php';
     include_once APPRAIZ. 'includes/backtrace/BackTraceExplain.php';
@@ -40,12 +69,13 @@
     include_once APPRAIZ. 'includes/failure/ExceptionHandler.php';
     include_once APPRAIZ. 'includes/library/simec/SoapClient.php';
     include_once APPRAIZ. "includes/connection/adapter-connection.php";
-    
+
     function fechar_conexoes(){
         while(  pg_ping()){
             pg_close();
         }
     }
+
     register_shutdown_function('fechar_conexoes');
     ErrorHandler::start();
     ExceptionHandler::start();
