@@ -489,7 +489,7 @@ DML;
                                 $sql = <<<DML
                                     SELECT
                                         oppid AS codigo,
-                                        oppdesc AS descricao
+                                        oppnome AS descricao
                                     FROM monitora.pi_objetivo_ppa
                                     WHERE oppstatus = 'A'
                                         AND prsano = '{$_SESSION['exercicio']}'
