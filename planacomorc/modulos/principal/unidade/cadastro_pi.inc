@@ -565,6 +565,26 @@ DML;
                         </fieldset>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Números SNIIC </legend>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                        SELECT neeid AS codigo,
+                            neecod ||' - '|| needsc AS descricao
+                        FROM monitora.pi_niveletapaensino
+                        WHERE neeano = '{$_SESSION['exercicio']}'
+                            AND neestatus = 'A'
+                        ORDER BY neecod
+DML;
+                                $neeid = $dadosPI['neeid'];
+                                $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
+                                ?>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
@@ -601,6 +621,26 @@ DML;
                     $capid = $dadosPI['capid'];
                     $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($capid) ? $capid : null));
                     ?>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Números de Convênio </legend>
+                            <div class="col-lg-10">
+                                <?php
+                                $sql = <<<DML
+                        SELECT neeid AS codigo,
+                            neecod ||' - '|| needsc AS descricao
+                        FROM monitora.pi_niveletapaensino
+                        WHERE neeano = '{$_SESSION['exercicio']}'
+                            AND neestatus = 'A'
+                        ORDER BY neecod
+DML;
+                                $neeid = $dadosPI['neeid'];
+                                $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
+                                ?>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
                 <div style="display:none;" class="form-group">
