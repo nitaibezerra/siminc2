@@ -523,7 +523,7 @@ DML;
                                 $sql = <<<DML
                                     SELECT
                                         ippid AS codigo,
-                                        ippdesc AS descricao
+                                        ippnome AS descricao
                                     FROM monitora.pi_iniciativa_ppa
                                     WHERE ippstatus = 'A'
                                         AND prsano = '{$_SESSION['exercicio']}'
@@ -539,7 +539,7 @@ DML;
                                 $sql = <<<DML
                                     SELECT
                                         mpnid AS codigo,
-                                        mpndesc AS descricao
+                                        mpnnome AS descricao
                                     FROM monitora.pi_meta_pnc
                                     WHERE mpnstatus = 'A'
                                         AND prsano  = '{$_SESSION['exercicio']}'
