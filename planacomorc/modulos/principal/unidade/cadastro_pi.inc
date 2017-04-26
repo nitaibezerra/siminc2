@@ -568,19 +568,36 @@ DML;
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset><legend>Números SNIIC </legend>
-                            <div class="col-lg-10">
-                                <?php
-                                $sql = <<<DML
-                        SELECT neeid AS codigo,
-                            neecod ||' - '|| needsc AS descricao
-                        FROM monitora.pi_niveletapaensino
-                        WHERE neeano = '{$_SESSION['exercicio']}'
-                            AND neestatus = 'A'
-                        ORDER BY neecod
-DML;
-                                $neeid = $dadosPI['neeid'];
-                                $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
-                                ?>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <input type="text" value="<?php
+                                    if ($dadosPI['plititulo']) {
+                                        echo $dadosPI['plititulo'];
+                                    }
+                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" onclick="" id="btn_selecionar_sniic"
+                                           value="ADICIONAR" class="btn btn-info"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    <tr style="height: 30px;">
+                                        <td style="text-align: left;">090421131325</td>
+                                        <td style="text-align: center;">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 30px;">
+                                        <td style="text-align: left;">293983982020</td>
+                                        <td style="text-align: center;">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
@@ -621,26 +638,6 @@ DML;
                     $capid = $dadosPI['capid'];
                     $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($capid) ? $capid : null));
                     ?>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Números de Convênio </legend>
-                            <div class="col-lg-10">
-                                <?php
-                                $sql = <<<DML
-                        SELECT neeid AS codigo,
-                            neecod ||' - '|| needsc AS descricao
-                        FROM monitora.pi_niveletapaensino
-                        WHERE neeano = '{$_SESSION['exercicio']}'
-                            AND neestatus = 'A'
-                        ORDER BY neecod
-DML;
-                                $neeid = $dadosPI['neeid'];
-                                $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
-                                ?>
-                            </div>
-                        </fieldset>
                     </div>
                 </div>
                 <div style="display:none;" class="form-group">
@@ -747,6 +744,90 @@ DML;
                                     $mdeid = $dadosPI['mdeid'];
                                     $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
                                     ?>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnidade" class="col-lg-2 control-label">TED:</label>
+                    <div class="col-lg-10">
+                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
+                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
+                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnidade" class="col-lg-2 control-label">Edital:</label>
+                    <div class="col-lg-10">
+                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
+                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
+                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Números De Convênio</legend>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <input type="text" value="<?php
+                                    if ($dadosPI['plititulo']) {
+                                        echo $dadosPI['plititulo'];
+                                    }
+                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" onclick="" id="btn_selecionar_sniic"
+                                           value="ADICIONAR" class="btn btn-info"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">090421131325</td>
+                                            <td style="text-align: center;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">293983982020</td>
+                                            <td style="text-align: center;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Localização do Projeto</legend>
+                            <div class="form-group">
+                                <div class="col-md-1 text-right">
+                                    <label for="mdeid" class="control-label">Selecionar:</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">090421131325</td>
+                                            <td style="text-align: center;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">293983982020</td>
+                                            <td style="text-align: center;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </fieldset>
