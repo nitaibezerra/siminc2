@@ -486,32 +486,34 @@ DML;
                             <label for="meta" class="col-lg-2 control-label">Objetivo PPA: </label>
                             <div class="col-lg-10">
                                 <?php
-                                $sql = <<<DML
-                                    SELECT
-                                        oppid AS codigo,
-                                        oppnome AS descricao
-                                    FROM monitora.pi_objetivo_ppa
-                                    WHERE oppstatus = 'A'
-                                        AND prsano = '{$_SESSION['exercicio']}'
-                                    ORDER BY oppid
+                                    $sql = <<<DML
+                                        SELECT
+                                            oppid AS codigo,
+                                            oppnome AS descricao
+                                        FROM monitora.pi_objetivo_ppa
+                                        WHERE oppstatus = 'A'
+                                            AND prsano = '{$_SESSION['exercicio']}'
+                                        ORDER BY oppid
 DML;
-                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                                    inputCombo('oppid[]', $sql, $enquadramento_pi, 'objetivo',array('titulo'=>'Selecione alguma opção'));
+                                ?>
                             </div>
                         </div>
                             <div class="form-group">
                             <label for="meta" class="col-lg-2 control-label">Metas PPA: </label>
                             <div class="col-lg-10">
                                 <?php
-                                $sql = <<<DML
-                                    SELECT
-                                        mppid AS codigo,
-                                        mppdesc AS descricao
-                                    FROM monitora.pi_metas_ppa
-                                    WHERE mppstatus = 'A'
-                                        AND prsano = '{$_SESSION['exercicio']}'
-                                    ORDER BY mppid
+                                    $sql = <<<DML
+                                        SELECT
+                                            mppid AS codigo,
+                                            mppdesc AS descricao
+                                        FROM monitora.pi_metas_ppa
+                                        WHERE mppstatus = 'A'
+                                            AND prsano = '{$_SESSION['exercicio']}'
+                                        ORDER BY mppid
 DML;
-                                inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
+                                    inputCombo('mppid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));
+                                ?>
                             </div>
                         </div>
                             <div class="form-group">
