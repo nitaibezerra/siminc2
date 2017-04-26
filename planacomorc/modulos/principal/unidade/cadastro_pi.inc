@@ -870,7 +870,7 @@ DML;
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <fieldset><legend>Responsáveis pelo Projeto</legend>
+                        <fieldset><legend>Custeio e Capital</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
