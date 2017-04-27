@@ -896,15 +896,15 @@ DML;
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"></td>
-                                            <td style="text-align: center;"><b>Total(Custeio e Capital)</b></td>
+                                            <td colspan="3" style="text-align: center;"><b>Total(Custeio e Capital)</b></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
-                                            <td style="text-align: center;">R$25.769.250,00</td>
+                                            <td colspan="3" style="text-align: center;">R$25.769.250,00</td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
-                                            <td style="text-align: center;">R$25.769.250,00</td>
+                                            <td colspan="3" style="text-align: center;">R$25.769.250,00</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;"></td>
