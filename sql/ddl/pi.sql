@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS monitora.pi_indicador_pnc;
 DROP TABLE IF EXISTS monitora.pi_meta_pnc;
 DROP TABLE IF EXISTS monitora.pi_indicador_ppa;
+DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
 DROP TABLE IF EXISTS monitora.pi_metas_ppa;
 DROP TABLE IF EXISTS monitora.pi_iniciativa_ppa; -- Renomeada pra pi_indicador_ppa
 DROP TABLE IF EXISTS monitora.pi_objetivo_ppa;
@@ -22,21 +23,6 @@ CREATE TABLE monitora.pi_objetivo_ppa
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_oppstatus_objppa CHECK (oppstatus= ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
-/* DDL-SIMINC
-CREATE TABLE planointerno.ppaobjetivo
-(
-  objid serial NOT NULL,
-  prsano character(4) NOT NULL,
-  objcod character(4) NOT NULL,
-  objnome character varying(400) NOT NULL,
-  objdescricao character varying(500),
-  objstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
-  CONSTRAINT pk_ppaobjetivo PRIMARY KEY (objid),
-  CONSTRAINT fk_ppaobjet_reference_programa FOREIGN KEY (prsano)
-      REFERENCES monitora.programacaoexercicio (prsano) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT ckc_objstatus_ppaobjet CHECK (objstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
-)*/
 
 CREATE TABLE monitora.pi_metas_ppa
 (
@@ -52,29 +38,30 @@ CREATE TABLE monitora.pi_metas_ppa
   CONSTRAINT ckc_mppstatus_metppa CHECK (mppstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
 
-/* DDL-SIMINC
-CREATE TABLE planointerno.metappa
+DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
+CREATE TABLE monitora.pi_objetivoppa_metappa
 (
-  mppid serial NOT NULL,
-  prsano character(4) NOT NULL,
-  mppcod character(4) NOT NULL,
-  mppnome character varying(400) NOT NULL,
-  mppdescricao character varying(4000),
-  mppstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
-  mppquantificavel boolean NOT NULL DEFAULT false,
-  mppregionalizado boolean DEFAULT false,
-  mppacumulativo boolean DEFAULT true,
-  CONSTRAINT pk_metappa PRIMARY KEY (mppid),
-  CONSTRAINT fk_metappa_reference_programa FOREIGN KEY (prsano)
-  REFERENCES planointerno.programacaoexercicio (prsano) MATCH SIMPLE
-  ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT ckc_mppsigla_metappa CHECK (mppstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
-)*/
+  opmid serial NOT NULL,
+  oppid integer NOT NULL,
+  mppid integer NOT NULL,
+  mpodata timestamp without time zone NOT NULL DEFAULT now(),
+  CONSTRAINT pk_pi_objetivoppa_metappa PRIMARY KEY (opmid),
+  CONSTRAINT fk_objetivoppa_metappa_reference_pi_objetivo_ppa FOREIGN KEY (oppid)
+      REFERENCES monitora.pi_objetivo_ppa (oppid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_objetivoppa_metappa_reference_metas_ppa FOREIGN KEY (mppid)
+      REFERENCES monitora.pi_metas_ppa (mppid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
 
+DROP TABLE IF EXISTS monitora.pi_iniciativa_ppa; -- Renomeada pra pi_indicador_ppa
 CREATE TABLE monitora.pi_iniciativa_ppa
 (
-  ippid SERIAL,
-  oppid SERIAL NOT NULL UNIQUE ,
+  ippid serial NOT NULL,
+  oppid integer NOT NULL,
   ippdesc VARCHAR(1000),
   ippnome CHARACTER VARYING(500),
   ippcod VARCHAR(4),
@@ -89,22 +76,6 @@ CREATE TABLE monitora.pi_iniciativa_ppa
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_ippstatus_indppa CHECK (ippstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
-/* DDL-SIMINC
-CREATE TABLE planointerno.ppainiciativa
-(
-  iniid serial NOT NULL,
-  prsano character(4) NOT NULL,
-  inicod character(4) NOT NULL,
-  ininome character varying(500) NOT NULL,
-  inidescricao character varying(500),
-  inistatus character(1) NOT NULL DEFAULT 'A'::bpchar,
-  CONSTRAINT pk_ppainiciativa PRIMARY KEY (iniid),
-  CONSTRAINT fk_ppainici_reference_programa FOREIGN KEY (prsano)
-  REFERENCES planointerno.programacaoexercicio (prsano) MATCH SIMPLE
-  ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT ckc_inistatus_ppainici CHECK (inistatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
-);*/
-
 
 CREATE TABLE monitora.pi_meta_pnc
 (
@@ -122,8 +93,8 @@ CREATE TABLE monitora.pi_meta_pnc
 
 CREATE TABLE monitora.pi_indicador_pnc
 (
-  ipnid SERIAL NOT NULL UNIQUE ,
-  mpnid  SERIAL NOT NULL UNIQUE,
+  ipnid SERIAL NOT NULL,
+  mpnid integer NOT NULL,
   ipndesc VARCHAR(1000),
   ipnstatus char default 'A'::character varying,
   prsano CHAR(4),
@@ -139,8 +110,11 @@ CREATE TABLE monitora.pi_indicador_pnc
 
 -- ALTER TABLE monitora.pi_iniciativa_ppa,monitora.pi_objetivo_ppa,pi_metas_ppa,pi_iniciativa_ppa,pi_meta_pnc,pi_indicador_pnc OWNER TO postgres;
 
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_objetivo_ppa,
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE 
 monitora.pi_iniciativa_ppa,
 monitora.pi_indicador_pnc,
+monitora.pi_objetivo_ppa,
 monitora.pi_metas_ppa,
+monitora.pi_objetivoppa_metappa,
 monitora.pi_meta_pnc TO usr_simec;
+

@@ -367,12 +367,15 @@ DML;
                     <div class="col-lg-10 carregaEnq">
                     <?php
                     $sql = <<<DML
-                        SELECT eqdid AS codigo,
-                            eqdcod || ' - ' || eqddsc AS descricao
+                        SELECT
+                            eqdid AS codigo,
+                            eqddsc AS descricao
                         FROM monitora.pi_enquadramentodespesa
-                        WHERE eqdstatus = 'A'
+                        WHERE
+                            eqdstatus = 'A'
                             AND eqdano = '{$_SESSION['exercicio']}'
-                        ORDER BY eqdcod
+                        ORDER BY
+                            eqddsc
 DML;
                     $eqdid = $dadosPI['eqdid'];
                     $db->monta_combo('eqdid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($eqdid) ? $eqdid : null));
@@ -491,9 +494,11 @@ DML;
                                             oppid AS codigo,
                                             oppnome AS descricao
                                         FROM monitora.pi_objetivo_ppa
-                                        WHERE oppstatus = 'A'
+                                        WHERE
+                                            oppstatus = 'A'
                                             AND prsano = '{$_SESSION['exercicio']}'
-                                        ORDER BY oppid
+                                        ORDER BY
+                                            oppnome
 DML;
                                     inputCombo('oppid[]', $sql, $enquadramento_pi, 'objetivo',array('titulo'=>'Selecione alguma opção'));
                                 ?>
@@ -508,9 +513,11 @@ DML;
                                             mppid AS codigo,
                                             mppdesc AS descricao
                                         FROM monitora.pi_metas_ppa
-                                        WHERE mppstatus = 'A'
+                                        WHERE
+                                            mppstatus = 'A'
                                             AND prsano = '{$_SESSION['exercicio']}'
-                                        ORDER BY mppid
+                                        ORDER BY
+                                            mppdesc
 DML;
                                     inputCombo('mppid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));
                                 ?>
@@ -525,9 +532,11 @@ DML;
                                         ippid AS codigo,
                                         ippnome AS descricao
                                     FROM monitora.pi_iniciativa_ppa
-                                    WHERE ippstatus = 'A'
+                                    WHERE
+                                        ippstatus = 'A'
                                         AND prsano = '{$_SESSION['exercicio']}'
-                                    ORDER BY ippid
+                                    ORDER BY
+                                        ippnome
 DML;
                                 inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                             </div>
@@ -541,9 +550,11 @@ DML;
                                         mpnid AS codigo,
                                         mpnnome AS descricao
                                     FROM monitora.pi_meta_pnc
-                                    WHERE mpnstatus = 'A'
+                                    WHERE
+                                        mpnstatus = 'A'
                                         AND prsano  = '{$_SESSION['exercicio']}'
-                                    ORDER BY mpnid
+                                    ORDER BY
+                                        mpnnome
 DML;
                                 inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                             </div>
@@ -557,9 +568,11 @@ DML;
                                         ipnid AS codigo,
                                         ipndesc AS descricao
                                     FROM monitora.pi_indicador_pnc
-                                    WHERE ipnstatus = 'A'
+                                    WHERE
+                                        ipnstatus = 'A'
                                         AND prsano = '{$_SESSION['exercicio']}'
-                                    ORDER BY ipnid
+                                    ORDER BY
+                                        ipndesc
 DML;
                                 inputCombo('m_eqdid[]', $sql, $enquadramento_pi, 'meta',array('titulo'=>'Selecione alguma opção'));?>
                             </div>
@@ -579,8 +592,7 @@ DML;
                                     ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" onclick="" id="btn_selecionar_sniic"
-                                           value="ADICIONAR" class="btn btn-info"/>
+                                    <input type="button" onclick="" id="btn_selecionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -606,17 +618,45 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
+                        <label for="mdeid" class="control-label">Área Cultural:</label>
+                    </div>
+                    <div class="col-lg-10">
+                    <?php
+                    $sql = <<<DML
+                        SELECT
+                            MAX(mdeid) AS codigo,
+                            upper(public.removeacento(mdedsc)) AS descricao
+                        FROM monitora.pi_modalidadeensino
+                        WHERE
+                            mdestatus = 'A'
+                            AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                        GROUP BY
+                            descricao
+                        ORDER BY
+                            descricao ASC
+DML;
+
+                    $mdeid = $dadosPI['mdeid'];
+                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                    ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
                     $sql = <<<DML
-                        SELECT neeid AS codigo,
-                            neecod ||' - '|| needsc AS descricao
+                        SELECT
+                            neeid AS codigo,
+                            needsc AS descricao
                         FROM monitora.pi_niveletapaensino
-                        WHERE neeano = '{$_SESSION['exercicio']}'
+                        WHERE
+                            neeano = '{$_SESSION['exercicio']}'
                             AND neestatus = 'A'
-                        ORDER BY neecod
+                        ORDER BY
+                            descricao
 DML;
                     $neeid = $dadosPI['neeid'];
                     $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
@@ -657,28 +697,7 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label for="mdeid" class="control-label">Área Cultural:</label>
-                    </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $sql = <<<DML
-                        SELECT
-                            MAX(mdeid) AS codigo,
-                            mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                        FROM monitora.pi_modalidadeensino
-                        WHERE mdestatus = 'A'
-                            AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                        GROUP BY descricao
-                        ORDER BY descricao ASC
-DML;
 
-                    $mdeid = $dadosPI['mdeid'];
-                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                    ?>
-                    </div>
-                </div>
             <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset><legend>Produto PI:</legend>
@@ -781,8 +800,7 @@ DML;
                                     ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" onclick="" id="btn_selecionar_sniic"
-                                           value="ADICIONAR" class="btn btn-info"/>
+                                    <input type="button" onclick="" id="btn_selecionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
                                 </div>
                             </div>
                             <div class="form-group">
