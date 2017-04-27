@@ -663,25 +663,6 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="capid">Modalidade de Pactuação:</label>
-                    </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $sql = <<<DML
-                        SELECT
-                            capid AS codigo, capcod ||' - '|| capdsc AS descricao
-                        FROM monitora.pi_categoriaapropriacao
-                        WHERE capano = '{$_SESSION['exercicio']}'
-                            AND capstatus = 'A'
-                        ORDER BY capcod
-DML;
-                    $capid = $dadosPI['capid'];
-                    $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($capid) ? $capid : null));
-                    ?>
-                    </div>
-                </div>
                 <div style="display:none;" class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="idCodificacao">Codificação da Unidade(livre):</label>
@@ -771,21 +752,22 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">TED:</label>
-                    <div class="col-lg-10">
-                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
-                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
-                        </div>
+                    <div class="col-md-2 text-right">
+                        <label class="control-label" for="capid">Modalidade de Pactuação:</label>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Edital:</label>
                     <div class="col-lg-10">
-                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
-                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
-                        </div>
+                        <?php
+                        $sql = <<<DML
+                        SELECT
+                            capid AS codigo, capcod ||' - '|| capdsc AS descricao
+                        FROM monitora.pi_categoriaapropriacao
+                        WHERE capano = '{$_SESSION['exercicio']}'
+                            AND capstatus = 'A'
+                        ORDER BY capcod
+DML;
+                        $capid = $dadosPI['capid'];
+                        $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($capid) ? $capid : null));
+                        ?>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -822,6 +804,24 @@ DML;
                                 </div>
                             </div>
                         </fieldset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnidade" class="col-lg-2 control-label">TED:</label>
+                    <div class="col-lg-10">
+                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
+                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
+                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUnidade" class="col-lg-2 control-label">Edital:</label>
+                    <div class="col-lg-10">
+                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
+                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
+                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
