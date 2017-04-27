@@ -759,11 +759,14 @@ DML;
                         <?php
                         $sql = <<<DML
                         SELECT
-                            capid AS codigo, capcod ||' - '|| capdsc AS descricao
+                            capid AS codigo,
+                            capdsc AS descricao
                         FROM monitora.pi_categoriaapropriacao
-                        WHERE capano = '{$_SESSION['exercicio']}'
+                        WHERE
+                            capano = '{$_SESSION['exercicio']}'
                             AND capstatus = 'A'
-                        ORDER BY capcod
+                        ORDER BY
+                            descricao
 DML;
                         $capid = $dadosPI['capid'];
                         $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($capid) ? $capid : null));
