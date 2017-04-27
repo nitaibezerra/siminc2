@@ -589,13 +589,13 @@ DML;
                                     <tr style="height: 30px;">
                                         <td style="text-align: left;">090421131325</td>
                                         <td style="text-align: center;">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-trash"></span>
                                         </td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td style="text-align: left;">293983982020</td>
                                         <td style="text-align: center;">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-trash"></span>
                                         </td>
                                     </tr>
                                 </table>
@@ -791,13 +791,13 @@ DML;
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">090421131325</td>
                                             <td style="text-align: center;">
-                                                <span class="glyphicon glyphicon-remove"></span>
+                                                <span class="glyphicon glyphicon-trash"></span>
                                             </td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">293983982020</td>
                                             <td style="text-align: center;">
-                                                <span class="glyphicon glyphicon-remove"></span>
+                                                <span class="glyphicon glyphicon-trash"></span>
                                             </td>
                                         </tr>
                                     </table>
@@ -826,13 +826,13 @@ DML;
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">DF</td>
                                             <td style="text-align: left;">Brasília</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-remove"</td>
+                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
 
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">MA</td>
                                             <td style="text-align: left;">São Luiz</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-remove"</td>
+                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -856,13 +856,13 @@ DML;
                                             <td style="text-align: left;">Fulano da Silva</td>
                                             <td style="text-align: left;">+55 61 6489465116</td>
                                             <td style="text-align: left;">email@email.email</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-remove"</td>
+                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Adler Adriel</td>
                                             <td style="text-align: left;">+55 61 65156189641894</td>
                                             <td style="text-align: left;">email@email.email</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-remove"</td>
+                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -906,6 +906,135 @@ DML;
                                             <td style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;"><input type="text"> </td>
                                             <td style="text-align: center;"><input type="text"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset><legend>Cronogramas</legend>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <tr>
+                                            <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
+                                            <td style="text-align: left;"><b>Cronograma Físico</b></td>
+                                            <td colspan="2" style="text-align: left;"><b>Cronograma Orçamentário</b></td>
+                                            <td colspan="2" style="text-align: center;"><b>Cronograma Financeiro</b></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Previsto</td>
+                                            <td style="text-align: left;">Previsto Custeio</td>
+                                            <td style="text-align: left;">Previsto Capital</td>
+                                            <td style="text-align: left;">Previsto Custeio</td>
+                                            <td style="text-align: left;">Previsto Capital</td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Janeiro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Fevereiro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Março</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Abril</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Maio</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Junho</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Julho</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Agosto</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Setembro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Outubro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Novembro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td style="text-align: left;">Dezembro</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="height: 30px; ">
+                                            <td style="text-align: left;">Total:</td>
+                                            <td>R$</td>
+                                            <td>R$</td>
+                                            <td>R$</td>
+                                            <td>R$</td>
+                                            <td>R$</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -1532,7 +1661,7 @@ DML;
             // alert(val[1]);
             if (document.getElementById(val[1])) {
                 campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
-                campo.attr('class', 'glyphicon glyphicon-remove');
+                campo.attr('class', 'glyphicon glyphicon-trash');
                 campo.attr('title', 'Remover item');
                 campo.css('color', 'gray');
             }
