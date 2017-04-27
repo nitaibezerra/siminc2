@@ -775,11 +775,7 @@ DML;
                         <fieldset><legend>Números De Convênio</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <input type="text" value="<?php
-                                    if ($dadosPI['plititulo']) {
-                                        echo $dadosPI['plititulo'];
-                                    }
-                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
+                                    <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" onclick="" id="btn_selecionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
@@ -922,8 +918,8 @@ DML;
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Valor do Projeto:</td>
-                                            <td style="text-align: left;"><input type="text"> </td>
-                                            <td style="text-align: center;"><input type="text"></td>
+                                            <td style="text-align: left;"><input class="CampoEstilo normal form-control obrigatorio" type="text"> </td>
+                                            <td style="text-align: center;"><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -940,7 +936,7 @@ DML;
                                         <tr>
                                             <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
                                             <td style="text-align: left;"><b>Cronograma Físico</b></td>
-                                            <td colspan="2" style="text-align: left;"><b>Cronograma Orçamentário</b></td>
+                                            <td colspan="2" style="text-align: center;"><b>Cronograma Orçamentário</b></td>
                                             <td colspan="2" style="text-align: center;"><b>Cronograma Financeiro</b></td>
                                         </tr>
                                         <tr style="height: 30px;">
@@ -952,99 +948,99 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Janeiro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Fevereiro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                        ]</tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Março</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Abril</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Maio</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Junho</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Julho</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Agosto</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Setembro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Outubro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Novembro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Dezembro</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px; ">
                                             <td style="text-align: left;">Total:</td>
