@@ -618,17 +618,45 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
+                        <label for="mdeid" class="control-label">Área Cultural:</label>
+                    </div>
+                    <div class="col-lg-10">
+                    <?php
+                    $sql = <<<DML
+                        SELECT
+                            MAX(mdeid) AS codigo,
+                            upper(public.removeacento(mdedsc)) AS descricao
+                        FROM monitora.pi_modalidadeensino
+                        WHERE
+                            mdestatus = 'A'
+                            AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                        GROUP BY
+                            descricao
+                        ORDER BY
+                            descricao ASC
+DML;
+
+                    $mdeid = $dadosPI['mdeid'];
+                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
+                    ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
                     $sql = <<<DML
-                        SELECT neeid AS codigo,
-                            neecod ||' - '|| needsc AS descricao
+                        SELECT
+                            neeid AS codigo,
+                            needsc AS descricao
                         FROM monitora.pi_niveletapaensino
-                        WHERE neeano = '{$_SESSION['exercicio']}'
+                        WHERE
+                            neeano = '{$_SESSION['exercicio']}'
                             AND neestatus = 'A'
-                        ORDER BY neecod
+                        ORDER BY
+                            descricao
 DML;
                     $neeid = $dadosPI['neeid'];
                     $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($neeid) ? $neeid : null));
@@ -669,28 +697,7 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label for="mdeid" class="control-label">Área Cultural:</label>
-                    </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $sql = <<<DML
-                        SELECT
-                            MAX(mdeid) AS codigo,
-                            mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                        FROM monitora.pi_modalidadeensino
-                        WHERE mdestatus = 'A'
-                            AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                        GROUP BY descricao
-                        ORDER BY descricao ASC
-DML;
 
-                    $mdeid = $dadosPI['mdeid'];
-                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                    ?>
-                    </div>
-                </div>
             <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset><legend>Produto PI:</legend>
