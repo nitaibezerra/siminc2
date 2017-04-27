@@ -731,21 +731,7 @@ DML;
                                     <label for="mdeid" class="control-label">Quantidade:</label>
                                 </div>
                                 <div class="col-lg-10">
-                                    <?php
-                                    $sql = <<<DML
-                                    SELECT
-                                        MAX(mdeid) AS codigo,
-                                        mdecod ||' - '|| upper(public.removeacento(mdedsc)) AS descricao
-                                    FROM monitora.pi_modalidadeensino
-                                    WHERE mdestatus = 'A'
-                                        AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                                    GROUP BY descricao
-                                    ORDER BY descricao ASC
-DML;
-
-                                    $mdeid = $dadosPI['mdeid'];
-                                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;""', null, (isset($mdeid) ? $mdeid : null));
-                                    ?>
+                                    <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="quantidade" name="quantidade" maxlength="50" size="10" />
                                 </div>
                             </div>
                         </fieldset>
