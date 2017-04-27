@@ -1,15 +1,16 @@
-﻿BEGIN;
---ROLLBACK;
---COMMIT;
+﻿BEGIN; --ROLLBACK; COMMIT;
 
-DROP TABLE IF EXISTS monitora.pi_indicador_pnc;
-DROP TABLE IF EXISTS monitora.pi_meta_pnc;
-DROP TABLE IF EXISTS monitora.pi_indicador_ppa;
-DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
-DROP TABLE IF EXISTS monitora.pi_metas_ppa;
-DROP TABLE IF EXISTS monitora.pi_iniciativa_ppa; -- Renomeada pra pi_indicador_ppa
-DROP TABLE IF EXISTS monitora.pi_objetivo_ppa;
+ALTER TABLE monitora.pi_niveletapaensino
+   ADD COLUMN mdeid integer NOT NULL DEFAULT NULL;
+COMMENT ON COLUMN monitora.pi_niveletapaensino.mdeid
+  IS 'Relação com a tabela de Área Cultural. monitora.pi_modalidadeensino';
 
+ALTER TABLE monitora.pi_niveletapaensino
+   ADD CONSTRAINT fk_pi_niveletapaensino_reference_pi_modalidadeensino FOREIGN KEY(mdeid)
+  REFERENCES monitora.pi_modalidadeensino(mdeid) MATCH SIMPLE
+  ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
 CREATE TABLE monitora.pi_objetivo_ppa
 (
   oppid SERIAL PRIMARY KEY,
@@ -23,7 +24,9 @@ CREATE TABLE monitora.pi_objetivo_ppa
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_oppstatus_objppa CHECK (oppstatus= ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_objetivo_ppa TO usr_simec;
 
+-- DROP TABLE IF EXISTS monitora.pi_metas_ppa;
 CREATE TABLE monitora.pi_metas_ppa
 (
   mppid SERIAL PRIMARY KEY,
@@ -37,8 +40,9 @@ CREATE TABLE monitora.pi_metas_ppa
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_mppstatus_metppa CHECK (mppstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_metas_ppa TO usr_simec;
 
-DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
+-- DROP TABLE IF EXISTS monitora.pi_objetivoppa_metappa;
 CREATE TABLE monitora.pi_objetivoppa_metappa
 (
   opmid serial NOT NULL,
@@ -56,8 +60,9 @@ CREATE TABLE monitora.pi_objetivoppa_metappa
 WITH (
   OIDS=FALSE
 );
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_objetivoppa_metappa TO usr_simec;
 
-DROP TABLE IF EXISTS monitora.pi_iniciativa_ppa; -- Renomeada pra pi_indicador_ppa
+-- DROP TABLE IF EXISTS monitora.pi_iniciativa_ppa; -- Renomeada pra pi_indicador_ppa
 CREATE TABLE monitora.pi_iniciativa_ppa
 (
   ippid serial NOT NULL,
@@ -76,7 +81,9 @@ CREATE TABLE monitora.pi_iniciativa_ppa
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_ippstatus_indppa CHECK (ippstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_iniciativa_ppa TO usr_simec;
 
+-- DROP TABLE IF EXISTS monitora.pi_meta_pnc;
 CREATE TABLE monitora.pi_meta_pnc
 (
   mpnid SERIAL PRIMARY KEY,
@@ -90,7 +97,9 @@ CREATE TABLE monitora.pi_meta_pnc
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_mpnstatus_metpnc CHECK (mpnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_meta_pnc TO usr_simec;
 
+-- DROP TABLE IF EXISTS monitora.pi_indicador_pnc;
 CREATE TABLE monitora.pi_indicador_pnc
 (
   ipnid SERIAL NOT NULL,
@@ -108,13 +117,6 @@ CREATE TABLE monitora.pi_indicador_pnc
   CONSTRAINT ckc_ipnstatus_indpnc CHECK (ipnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
 
--- ALTER TABLE monitora.pi_iniciativa_ppa,monitora.pi_objetivo_ppa,pi_metas_ppa,pi_iniciativa_ppa,pi_meta_pnc,pi_indicador_pnc OWNER TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_indicador_pnc TO usr_simec;
 
-GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE 
-monitora.pi_iniciativa_ppa,
-monitora.pi_indicador_pnc,
-monitora.pi_objetivo_ppa,
-monitora.pi_metas_ppa,
-monitora.pi_objetivoppa_metappa,
-monitora.pi_meta_pnc TO usr_simec;
 
