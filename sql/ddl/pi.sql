@@ -116,7 +116,35 @@ CREATE TABLE monitora.pi_indicador_pnc
   ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_ipnstatus_indpnc CHECK (ipnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
 );
-
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_indicador_pnc TO usr_simec;
 
+CREATE TABLE monitora.pi_produto
+(
+  pprid serial NOT NULL,
+  prsano character(4) NOT NULL,
+  pprnome character varying(200) NOT NULL,
+  pprdescricao character varying(500),
+  pprstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_pi_produto PRIMARY KEY(pprid),
+  CONSTRAINT ckc_pprstatus_pi_produto CHECK(pprstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_produto TO usr_simec;
 
+-- DROP TABLE monitora.pi_unidade_medida;
+CREATE TABLE monitora.pi_unidade_medida
+(
+  pumid serial NOT NULL,
+  prsano character(4) NOT NULL,
+  pumnome character varying(100) NOT NULL,
+  pumdescricao character varying(200),
+  pumstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_pi_unidade_medida PRIMARY KEY(pumid),
+  CONSTRAINT ckc_pi_unidade_medida CHECK(pumstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_unidade_medida TO usr_simec;
