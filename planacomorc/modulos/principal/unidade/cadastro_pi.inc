@@ -488,7 +488,9 @@ DML;
                     <div class="panel-body">
                         <fieldset><legend>Metas</legend>
                             <div class="form-group">
-                                <label for="oppid" class="col-lg-2 control-label">Objetivo PPA:</label>
+                                <div class="col-md-2 text-right">
+                                <label for="oppid" class=" control-label">Objetivo PPA:</label>
+                                </div>
                                 <div class="col-lg-10">
                                     <?php
                                         $sql = <<<DML
@@ -508,7 +510,9 @@ DML;
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="mppid" class="col-lg-2 control-label">Metas PPA: </label>
+                                <div class="col-md-2 text-right">
+                                    <label for="mppid" class=" control-label">Metas PPA: </label>
+                                </div>
                                 <div class="col-lg-10">
                                     <?php
                                         $sql = <<<DML
@@ -528,7 +532,9 @@ DML;
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="ippid" class="col-lg-2 control-label">Iniciativa PPA: </label>
+                                <div class="col-md-2 text-right">
+                                    <label for="ippid" class="control-label">Iniciativa PPA: </label>
+                                </div>
                                 <div class="col-lg-10">
                                     <?php
                                         $sql = <<<DML
@@ -548,7 +554,9 @@ DML;
                                 </div>
                             </div>
                             <div class="form-group grupo_pnc">
-                                <label for="mpnid" class="col-lg-2 control-label">Meta PNC: </label>
+                                <div class="col-md-2 text-right">
+                                    <label for="mpnid" class="control-label">Meta PNC: </label>
+                                </div>
                                 <div class="col-lg-10">
                                     <?php
                                         $sql = <<<DML
@@ -568,7 +576,9 @@ DML;
                                 </div>
                             </div>
                             <div class="form-group grupo_pnc">
-                                <label for="ipnid" class="col-lg-2 control-label">Indicador PNC: </label>
+                                <div class="col-md-2 text-right">
+                                    <label for="ipnid" class="control-label">Indicador PNC: </label>
+                                </div>
                                 <div class="col-lg-10">
                                 <?php
                                     $sql = <<<DML
@@ -1462,7 +1472,7 @@ DML;
         var l = $('#plicodsubacao').val();
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
-        validarFormulario(['eqdid', 'unicod', 'ungcod', 'neeid', 'capid', 'mdeid', 'plititulo', 'plidsc', 'oppid'], 'formulario', 'validar('+ pliid +')');
+        validarFormulario(['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'mpnid','ipnid',  'neeid',  'capid','pprid','pumid','mdeid'], 'formulario', 'validar('+ pliid +')');
     }
 
     function submeterComSituacao(pliid, situacao) {
