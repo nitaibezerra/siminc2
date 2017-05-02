@@ -269,7 +269,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Sub-Unidade:</label>
+                    <div class="col-md-2 text-right">
+                        <label class="control-label" for="ungcod">Sub-Unidade:</label>
+                    </div>
                     <div class="col-lg-10 carregaUG">
                         <?php
                         $ungcod = $dadosPI['ungcod'];
@@ -1460,7 +1462,7 @@ DML;
         var l = $('#plicodsubacao').val();
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
-        validarFormulario(['eqdid', 'unicod', 'neeid', 'capid', 'mdeid', 'plititulo', 'plidsc', 'mpnid', 'ipnid'], 'formulario', 'validar('+ pliid +')');
+        validarFormulario(['eqdid', 'unicod', 'ungcod', 'neeid', 'capid', 'mdeid', 'plititulo', 'plidsc', 'oppid'], 'formulario', 'validar('+ pliid +')');
     }
 
     function submeterComSituacao(pliid, situacao) {

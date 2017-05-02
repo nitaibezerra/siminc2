@@ -33,7 +33,9 @@ function validarFormulario(itemsParaValidacao, formID, requisicao)
         		msg.push($item.parent().prev().children('label').text().replace(':', ''));
         		$item.parent().parent().addClass('has-error');
         	}        	
-        }         
+        } else {
+            $item.parent().parent().removeClass('has-error');
+        }
     }    
     // -- Se existir alguma mensagem, exibe para o usuário
     if (msg.length > 0) {
