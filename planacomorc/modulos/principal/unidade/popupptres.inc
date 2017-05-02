@@ -214,72 +214,10 @@ function popupDetalhe($ptrid) {
         '.$grafico->setTipo(Grafico::K_TIPO_COLUNA)->setId('graficoPtres')->setTitulo('Execução Orçamentária')->gerarGrafico($sqlGrafico).'
     </div>
     <div style="clear: both;"/>
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover">';
+
+    $html.='
         <tr>
-            <td>
-              <div style="background-color:#00ced1; color:#FFF; margin-top: 10px; padding: 5px;">
-                <b>
-                    Subações ' . $_SESSION['exercicio'] . '
-                </b>
-            </div>';
-
-    $select = <<<SELECT
-SELECT  foo.codigo AS sbacod,
-        foo.sbatitulo,
-        COALESCE(foo.dotacao, 0.00) AS dotacao,
-        COALESCE((SELECT
-            sadvalor
-        FROM
-            monitora.pi_subacaodotacao
-        WHERE
-            sbaid = foo.sbaid
-        AND ptrid = {$ptrid} ),0.00)  as dotacao_no_ptres,
-       COALESCE((
-            SELECT
-             SUM(total)
-         FROM
-             siafi.pliptrempenho
-         WHERE
-             exercicio = '{$_SESSION['exercicio']}'
-         AND SUBSTR(plicod, 2,4) = foo.sbacod
-         AND ptres = '{$dadosPtres['ptres']}'
-        ), '0.00') AS empenhado_no_ptres
-SELECT;
-    $groupby = array(
-        'foo.codigo',
-        'foo.sbatitulo',
-        'foo.dotacao',
-        'foo.sbaid',
-        'foo.empenhado',
-        'foo.sbacod'
-    );
-    $orderby = array('1');
-    $where = "AND ptr.ptrid = {$ptrid}";
-    $sqlSubacao = retornaConsultaSubacao(
-            array(
-                'SELECT' => $select,
-                'groupby' => $groupby,
-                'orderby' => $orderby,
-                'where' => $where
-            ),
-            'n'
-    );
-    $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO, Simec_Listagem::RETORNO_BUFFERIZADO);
-    $listagem->setCabecalho(array(
-        "Código",
-        "Subação",
-        "Orçamento total da Subação (R$)",
-        "Orçamento da Subação neste PTRES (R$)",
-        "Empenhado nesta Subação e neste PTRES(R$)"
-    ));
-    #ver($sqlSubacao);
-    $listagem->setQuery($sqlSubacao);
-    $listagem->addCallbackDeCampo(array(
-        'dotacao', 'dotacao_no_ptres', 'detalhado_pi_no_ptres', 'empenhado_no_ptres', 'nao_detalhado_pi_no_ptres'), 'mascaraMoeda');
-    $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
-
-    $html .= $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
-    $html.='</tr><tr>
             <td>
               <div style="background-color:#ff6347; color:#FFF; margin-top: 10px; padding: 5px;">
                 <b>
@@ -368,11 +306,9 @@ $sql_lista = <<<DML
     SELECT
         ptr.ptrid,
         ptr.ptres,
-        trim(aca.prgcod || '.' || aca.acacod || '.' || aca.unicod || '.' || aca.loccod || ' - ' || aca.acatitulo) AS descricao,
+        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) AS descricao,
         aca.unicod || ' - ' || uni.unidsc as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
-         /*COALESCE(SUM(dts.valor), 0.00) AS det_subacao,
-         (COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(SUM(dts.valor), 0.00)) AS nao_det_subacao,*/
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
         $detalhamentoPi
         COALESCE((pemp.total), 0.00) AS empenhado,
@@ -396,10 +332,22 @@ $sql_lista = <<<DML
         $where
         $whereUO
         AND ptr.ptrstatus = 'A'
-    GROUP BY ptr.ptrid, ptr.ptres,aca.prgcod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unidsc, ptr.ptrdotacao, pemp.total
+    GROUP BY
+        ptr.ptrid,
+        ptr.ptres,
+        aca.prgcod,
+        aca.acacod,
+        aca.loccod,
+        aca.acaobjetivocod,
+        ptr.plocod,
+        aca.unicod,
+        uni.unidsc,
+        aca.acatitulo,
+        ptr.ptrdotacao,
+        pemp.total
     ORDER BY ptr.ptres
 DML;
-#ver($sql_lista);
+//ver($sql_lista);
 ?>
 <html>
     <head>
@@ -409,12 +357,12 @@ DML;
             function parametrosFiltro()
             {
                 var params = {};
-                $('#modal-ptres #formulario select').each(function() {
+                $('#modal-ptres #formularioPopup select').each(function() {
                     var inputName = $(this).attr('name'),
                     inputValue = $(this).val();
                     params[inputName] = inputValue;
                 });
-                $('#modal-ptres #formulario input:hidden').each(function() {
+                $('#modal-ptres #formularioPopup input:hidden').each(function() {
                     var inputName = $(this).attr('name'),
                     inputValue = $(this).val();
                     params[inputName] = inputValue;
@@ -474,7 +422,7 @@ DML;
         <div class="col-lg-12">
             <div class="well">
                 <fieldset>
-                    <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
+                    <form id="formularioPopup" name="formularioPopup" method="post" action="" class="form-horizontal">
                         <input type="hidden" name="sbaid" value="<?=$_REQUEST['sbaid']?>">
                         <input type="hidden" name="unicod" value="<?=$_REQUEST['unicod']?>">
                         <div class="form-group">
@@ -534,7 +482,7 @@ DML;
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
             ));
         }
-        #ver($sql_lista);
+//ver($sql_lista, d);
         $listagem->setQuery($sql_lista);
         $listagem->setAcoes(array('view' => 'visualizarRegistro'));
         $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));

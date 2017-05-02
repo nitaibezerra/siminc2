@@ -478,8 +478,7 @@ DML;
                         </tr>
                         <tr>
                             <td align="right" colspan="10">
-                                <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres"
-                                       value="Selecionar Funcional/PTRES" class="btn btn-info"/>
+                                <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres" value="Selecionar Funcional/PTRES" class="btn btn-info"/>
                             </td>
                         </tr>
                     </table>
@@ -1480,7 +1479,7 @@ DML;
         
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')');
     }
-console.log('Código locão ok!');
+
     /**
      * Controla a obrigatóriedade dos campos do formulario de acordo com o enquadramento selecionado.
      * 
@@ -1528,16 +1527,22 @@ console.log('Código locão ok!');
     }
 
     function abrir_lista() {
-        $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&sbaid=' + $("#sbaid").val(), function(response) {
-            $('#modal-ptres .modal-body p').html(response);
-            $('#modal-ptres .modal-title').html('Seleção de PTRES');
-            $('#modal-ptres .btn-primary').remove();
-            $('#modal-ptres .btn-default').html('Fechar');
-            $('.modal-dialog-ptres').show();
+        // Verifica se o modal terá que carregar a tela
+        if($('#modal-ptres .modal-body p').size() <= 1){
+            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val(),
+                function(response) {
+                    $('#modal-ptres .modal-body p').html(response);
+                    $('#modal-ptres .modal-title').html('Seleção de PTRES');
+                    $('#modal-ptres .btn-default').html('Fechar');
+                    $('.modal-dialog-ptres').show();
+                    $('#modal-ptres').modal();
+                    $('#modal-ptres .chosen-select').chosen();
+                    $('#modal-ptres .chosen-container').css('width', '100%');
+                    $('.modal-footer button.btn.btn-primary').hide();
+            });
+        } else {
             $('#modal-ptres').modal();
-            $('#modal-ptres .chosen-select').chosen();
-            $('#modal-ptres .chosen-container').css('width', '100%');
-        });
+        }
     }
 
 
