@@ -750,7 +750,7 @@ DML;
                             </div>
                             <div class="form-group">
                                 <div class="col-md-2 text-right">
-                                    <label for="mdeid" class="control-label">Quantidade:</label>
+                                    <label for="quantidade" class="control-label">Quantidade:</label>
                                 </div>
                                 <div class="col-lg-10">
                                     <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="quantidade" name="quantidade" maxlength="50" size="10" />
@@ -1133,6 +1133,9 @@ DML;
     </div>
 </div>
 <script type="text/javascript">
+    
+    intEnqFinalistico = "<?php echo ENQUADRAMENTO_FINALISTICO; ?>";
+    
     $(document).ready(function() {
         
         // Evento ao mudar opção de enquadramento
@@ -1157,7 +1160,7 @@ DML;
      */
     function mudarFormularioFinalistico(codigo){
         // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
-        if(codigo != 354){
+        if(codigo != intEnqFinalistico){
             // Oculta as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').hide();
             // Apaga as opções selecionadas.
@@ -1472,7 +1475,27 @@ DML;
         var l = $('#plicodsubacao').val();
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
-        validarFormulario(['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'mpnid','ipnid',  'neeid',  'capid','pprid','pumid','mdeid'], 'formulario', 'validar('+ pliid +')');
+        
+        listaObrigatorios = definirCamposObrigatorios();
+        
+        validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')');
+    }
+console.log('Código locão ok!');
+    /**
+     * Controla a obrigatóriedade dos campos do formulario de acordo com o enquadramento selecionado.
+     * 
+     * @returns Array
+     */
+    function definirCamposObrigatorios(){
+        codigo = $('#eqdid').val();
+        // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
+        if(codigo != intEnqFinalistico){
+            listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
+        } else {
+            listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'mpnid','ipnid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
+        }
+        
+        return listaObrigatorios;
     }
 
     function submeterComSituacao(pliid, situacao) {
