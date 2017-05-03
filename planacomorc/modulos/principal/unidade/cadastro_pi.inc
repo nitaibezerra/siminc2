@@ -814,6 +814,19 @@ DML;
                                 <div class="col-md-1 text-right">
                                     <label for="mdeid" class="control-label">Selecionar:</label>
                                 </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                    $sql = <<<DML
+                        SELECT
+                            esfid AS codigo,
+                            esfdsc AS descricao
+                        FROM territorios.esfera
+                        ORDER BY
+                            descricao;
+DML;
+                                    $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                                    ?>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10">
