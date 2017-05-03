@@ -393,18 +393,6 @@ DML;
                             <td rowspan="2" nowrap><b>PTRES</b><input type="hidden" name="pliptres"></td>
                             <td rowspan="2" style="width:45%" nowrap><b>Funcional</b></td>
                             <td rowspan="2" nowrap><b>Dotação Atual PO (R$)</b></td>
-                            <td style="display:none;" colspan="2" nowrap><b>
-                                <span id="detSub">
-                                <?php
-                                if ($sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado na Subação (R$)';
-                                }if (!$sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em Subação (R$)';
-                                }if (!$dadosPI['pliid']) {
-                                    echo 'Detalhado na Subação (R$)';
-                                } ?>
-                                </span></b>
-                            </td>
                             <td colspan="2" nowrap><b>
                                 <span id="detPi">
                                 <?php
@@ -465,17 +453,6 @@ DML;
                             }
                         }
                         ?>
-                        <tr style="display: none; height:30px">
-                            <td align="right" valign="top" colspan="9"><b>TOTAL:</b></td>
-                            <td align="center" valign="top">
-                                <input type="text" name="valortotalpi" id="valortotalpi"
-                                       value="<?php echo number_format($valortotalpi, 2, ',', '.'); ?>" disabled
-                                       onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);"
-                                       class="disabled CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);"
-                                       onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
-                                       onblur="MouseBlur(this);" style="text-align:right;width:20ex" />
-                            </td>
-                        </tr>
                         <tr>
                             <td align="right" colspan="10">
                                 <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres" value="Selecionar Funcional/PTRES" class="btn btn-info"/>
@@ -1532,19 +1509,16 @@ DML;
             $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val(),
                 function(response) {
                     $('#modal-ptres .modal-body p').html(response);
-                    $('#modal-ptres .modal-title').html('Seleção de PTRES');
-                    $('#modal-ptres .btn-default').html('Fechar');
                     $('.modal-dialog-ptres').show();
                     $('#modal-ptres').modal();
                     $('#modal-ptres .chosen-select').chosen();
                     $('#modal-ptres .chosen-container').css('width', '100%');
-                    $('.modal-footer button.btn.btn-primary').hide();
             });
         } else {
             $('#modal-ptres').modal();
+//            $('#modal-ptres').show();
         }
     }
-
 
     function atualizarPrevisaoPI() {
         if (document.getElementById('capid').value) {
@@ -1745,14 +1719,13 @@ DML;
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Aviso!</h4>
+                        <h4 class="modal-title">Seleção de PTRES</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" type="button">Não</button>
-                        <button class="btn btn-primary" type="button">Sim</button>
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
                     </div>
                 </div>
             </div>

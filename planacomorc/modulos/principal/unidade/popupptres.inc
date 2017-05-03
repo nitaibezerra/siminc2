@@ -523,6 +523,12 @@ DML;
             }*/
             /* FIM CARREGANDO OS DADOS DE PTRES */
 
+            function desmarcarItem(id){
+                itemMarcado = $('table#tb_render tr#'+ id + ' span.glyphicon.glyphicon-remove');
+                $(itemMarcado).removeClass('glyphicon-remove');
+                $(itemMarcado).addClass('glyphicon-ok');
+            }
+
             function resultado(id, selecionado, adicionais) {
                 var ptres = $('tr#' + id + ' td:nth-child(3)').text();
                 if (!ptres) {
@@ -531,6 +537,15 @@ DML;
                 }
 
                 if (selecionado == false) {
+                    // Retirando a marcação da tabela do modal de opções de PTRES
+                    idTrDesmarcada = $('table#orcamento tr[id^="ptres_"]').attr('id');
+                    if(idTrDesmarcada != undefined){
+                        desmarcarItem(idTrDesmarcada.replace('ptres_', ''));
+                    }
+                    
+                    // Retira o item selecionado anteriormente, caso exista na tabela orçamento.
+                    $('table#orcamento tr[id^="ptres_"]').remove();
+                    
                     var tabelaorigem = document.getElementById('orcamento');
                     var colunaPtres = document.getElementById('ptres_' + id);
                     if (colunaPtres != null) {
@@ -603,19 +618,23 @@ DML;
                     var tabelaorigem = document.getElementById('orcamento');
 
                     tabelaorigem.deleteRow(document.getElementById('ptres_' + id).rowIndex);
-                    calculovalorPI();
-                    //jogando ids desmarcados para verificar se existem no banco, se sim deletar vinculo.
-                    ptresApagar(id);
+//                    calculovalorPI();
+//                    //jogando ids desmarcados para verificar se existem no banco, se sim deletar vinculo.
+//                    ptresApagar(id);
+                    
+                    desmarcarItem(id);
                 }
+                
+                // fecha modal após a seleção
+                $('#modal-ptres').modal('hide');
+            }
 
-                function ptresApagar(ptres) {
-                    var input = document.createElement("input");
-                    input.setAttribute("type", "hidden");
-                    input.setAttribute("name", "ids_apagar[]");
-                    input.setAttribute("value", ptres);
-                    document.getElementById("formulario").appendChild(input);
-
-                }
+            function ptresApagar(ptres) {
+                var input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "ids_apagar[]");
+                input.setAttribute("value", ptres);
+                document.getElementById("formulario").appendChild(input);
             }
 
             function detalhePtres(ptrid) {
