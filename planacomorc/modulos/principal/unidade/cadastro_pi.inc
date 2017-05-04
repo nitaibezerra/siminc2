@@ -10,11 +10,15 @@
  */
 include_once '_funcoespi.php';
 
-if ($_REQUEST['carregarComboUG'] == 'ok') {
+if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
     die();
 }
-if ($_REQUEST['carregarComboSubacaoFederais'] == 'ok') {
+if ($_REQUEST['carregarMetasPPA']) {
+    carregarMetasPPA((int)$_REQUEST['oppid'], null);
+    die();
+}
+if ($_REQUEST['carregarComboSubacaoFederais']) {
     carregarComboSubacaoUO($_REQUEST['unicod']);
     die();
 }
@@ -264,7 +268,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         $editavel = 'N';
                     }
 
-                    $db->monta_combo('unicod', $sql, $editavel, 'Selecione', 'carregarUG', null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                    $db->monta_combo('unicod', $sql, $editavel, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                     ?>
                     </div>
                 </div>
@@ -272,7 +276,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="ungcod">Sub-Unidade:</label>
                     </div>
-                    <div class="col-lg-10 carregaUG">
+                    <div class="col-lg-10 div_ungcod">
                         <?php
                         $ungcod = $dadosPI['ungcod'];
                         $ungdata = array();
@@ -489,22 +493,8 @@ DML;
                                 <div class="col-md-2 text-right">
                                     <label for="mppid" class=" control-label">Metas PPA: </label>
                                 </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = <<<DML
-                                            SELECT
-                                                mppid AS codigo,
-                                                mppcod || '-' || mppdesc AS descricao
-                                            FROM monitora.pi_metas_ppa
-                                            WHERE
-                                                mppstatus = 'A'
-                                                AND prsano = '{$_SESSION['exercicio']}'
-                                            ORDER BY
-                                                mppcod
-DML;
-                                        $mppid = $dadosPI['mppid'];
-                                        $db->monta_combo('mppid', $sql, 'S', 'Selecione', 'carregaMetaPnc', null, null, null, 'N', 'mppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mppid)? $mppid: null));
-                                    ?>
+                                <div class="col-lg-10 div_mppid">
+                                    <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -547,7 +537,7 @@ DML;
                                                 mpncod
 DML;
                                     $mpnid = $dadosPI['mpnid'];
-                                    $db->monta_combo('mpnid', $sql, 'S', 'Selecione', 'carregaIndicadorPnc', null, null, null, 'N', 'mpnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mpnid)? $mpnid: null));
+                                    $db->monta_combo('mpnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mpnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mpnid)? $mpnid: null));
                                     ?>
                                 </div>
                             </div>
@@ -1128,8 +1118,18 @@ DML;
     $(document).ready(function() {
         
         // Evento ao mudar opção de enquadramento
+        $('#unicod').change(function(){
+            carregarUG($(this).val());
+        });
+        
+        // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
+        });
+        
+        // Evento ao mudar opção de Objetivos PPA
+        $('#oppid').change(function(){
+            carregarMetasPPA($(this).val());
         });
         
         var tipoTransacao = $('tipotransacao').value;
@@ -1151,13 +1151,13 @@ DML;
         // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
         if(codigo != intEnqFinalistico){
             // Oculta as opções Meta PNC e Indicador PNC.
-            $('.grupo_pnc').hide();
+            $('.grupo_pnc').hide('slow');
             // Apaga as opções selecionadas.
             $('#mpnid').val('').trigger("chosen:updated");
             $('#ipnid').val('').trigger("chosen:updated");
         } else {
             // Mostra as opções Meta PNC e Indicador PNC.
-            $('.grupo_pnc').show();
+            $('.grupo_pnc').show('slow');
         }
     }
 
@@ -1166,10 +1166,9 @@ DML;
      */
     function carregarUG(unicod) {
         $.post(window.location + '&carregarComboUG=ok&unicod=' + unicod, function(response) {
-            $('#ungcod').remove();
-            $('.carregaUG').html(response);
+            $('#ungcod').remove('slow');
+            $('.div_ungcod').html(response);
             $(".chosen-select").chosen();
-            carregarSubacao();
         });
     }
     function carregarSubacao(unicod) {
@@ -1197,6 +1196,17 @@ DML;
                 }
             }
         );
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Subações via requisição ajax.
+     */
+    function carregarMetasPPA(codigo) {
+        $.post(window.location + '&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
+            $('#mppid').remove();
+            $('.div_mppid').html(response);
+            $(".chosen-select").chosen();
+        });
     }
 
     /**

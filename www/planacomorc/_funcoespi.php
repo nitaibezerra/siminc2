@@ -222,40 +222,24 @@ SQL;
 /**
  * Monta a combo de UGs filtrando por UO
  */
-function carregarComboUG($unicod) {
+function carregarMetasPPA($oppid, $mppid) {
     global $db;
 
-    if (in_array(PFL_GABINETE, pegaPerfilGeral($_SESSION['usucpf']))) {
-        $filtroPerfilUG = <<<DML
-AND EXISTS (SELECT 1
-               FROM planacomorc.usuarioresponsabilidade urp
-               WHERE urp.ungcod = ung.ungcod
-                 AND urp.pflcod = %d
-                 AND urp.usucpf = '%s'
-                 AND urp.rpustatus = 'A')
-DML;
-        $filtroPerfilUG = sprintf($filtroPerfilUG, PFL_GABINETE, $_SESSION['usucpf']);
-    }
+    $sql = "
+        SELECT DISTINCT
+            m.mppid AS codigo,
+            m.mppcod || '-' || m.mppdesc AS descricao
+        FROM monitora.pi_metas_ppa m
+		JOIN monitora.pi_objetivoppa_metappa om ON m.mppid = om.mppid -- SELECT * FROM monitora.pi_objetivoppa_metappa
+        WHERE
+            m.mppstatus = 'A'
+            AND m.prsano = '{$_SESSION['exercicio']}'
+            AND om.oppid = ". (int)$oppid. "
+        ORDER BY
+            descricao
+    ";
 
-    $sql = <<<DML
-SELECT ung.ungcod AS codigo,
-       ung.ungcod || ' - ' || ungabrev AS descricao
-  FROM public.unidadegestora ung
-  WHERE ung.ungstatus= 'A'
-    AND ung.unicod = '%s' {$filtroPerfilUG}
-  ORDER BY ung.unicod
-DML;
-
-    $stmt = sprintf($sql, $unicod);
-    $dados = $db->carregar($stmt);
-    if (count($dados) && $dados[0]) {
-        $infoCombo = 'Selecione';
-    } else {
-        $dados = array();
-        $infoCombo = 'Nenhuma UG encontrada';
-    }
-    //$db->monta_combo('unicod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'S', 'unicod', false);
-    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+    $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mppid)? $mppid: null));
 }
 
 /**
