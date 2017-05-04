@@ -1528,8 +1528,9 @@ DML;
                     $('#modal-ptres .chosen-container').css('width', '100%');
             });
         } else {
+            $('#formularioPopup input[name=unicod]').val($("#unicod").val());
             $('#modal-ptres').modal();
-//            $('#modal-ptres').show();
+            $('#btnPopupPtresPesquisar').click();
         }
     }
 

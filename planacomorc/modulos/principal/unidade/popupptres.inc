@@ -452,7 +452,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <input type="submit" class="btn btn-info" value="Pesquisar" name="botao" />
+                                <input type="submit" id="btnPopupPtresPesquisar" class="btn btn-info" value="Pesquisar" name="botao" />
                             </div>
                         </div>
                     </form>
