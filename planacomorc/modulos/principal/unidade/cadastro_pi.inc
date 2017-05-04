@@ -406,7 +406,7 @@ DML;
                                 </span></b>
                             </td>
                             <td colspan="2"><b>Empenho (R$)</b></td>
-                            <td rowspan="2" align="center"><b>Valor Previsto (Anual)</b></td>
+                            <td rowspan="2" align="center"><b>Valor do Projeto</b></td>
                         </tr>
                         <tr>
                             <td nowrap><b>Detalhado</b></td>
