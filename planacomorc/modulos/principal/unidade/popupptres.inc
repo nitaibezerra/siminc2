@@ -306,7 +306,7 @@ $sql_lista = <<<DML
     SELECT
         ptr.ptrid,
         ptr.ptres,
-        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) AS descricao,
+        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
         aca.unicod || ' - ' || uni.unidsc as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
@@ -573,7 +573,7 @@ DML;
 //                    celSubacaoDet.style.textAlign = "right";
 //                    var subacaoDet = $('tr#' + id + ' td:nth-child(6)').text();
 //                    celSubacaoDet.innerHTML = subacaoDet;
-//
+
 //                    var celSubacaoNaoDet = tabelaorigem.rows[linha].insertCell(3);
 //                    celSubacaoNaoDet.style.textAlign = "right";
 //                    var subacaoNaoDet = $('tr#' + id + ' td:nth-child(7)').text();
@@ -607,12 +607,10 @@ DML;
 
                     var celValorPre = tabelaorigem.rows[linha].insertCell(7);
                     celValorPre.style.textAlign = "right";
-                    celValorPre.innerHTML = '<input type="text" class="CampoEstilo normal form-control obrigatorio somar" name="plivalor[' + ptres + '][' + id + ']" size="28" '
-                            + 'onKeyUp="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);calculovalorPI()" '
-                            + 'onBlur="return verificaDisponivel(this,\'' + id + '\',\'0\')" '
+                    celValorPre.innerHTML = '<input readonly="readonly" type="text" class="CampoEstilo normal form-control " name="plivalor[' + ptres + '][' + id + ']" size="28" '
+                            + 'onchange="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);" '
                             + 'data-ptres="' + ptres + '" '
-                            + 'onmouseover="MouseOver(this)" onfocus="MouseClick(this);this.select()" '
-                            + 'onmouseout="MouseOut(this)" onblur="MouseBlur(this)" style="text-align:right;width:20ex" />';
+                            + ' />';
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');
@@ -672,7 +670,7 @@ DML;
         <div id="dialog" />
     </body>
 </html>
-<?
+<?php
 /* Fechar Conexão quando não houver rodapé. */
 $db->close();
 exit();

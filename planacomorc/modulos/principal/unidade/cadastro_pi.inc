@@ -287,7 +287,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 DML;
                             $ungdata = sprintf($sql, $ungcod);
                         }
-                        $db->monta_combo('ungcod', $ungdata, 'S', 'Selecione', 'carregarSubacao', null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                        $db->monta_combo('ungcod', $ungdata, 'S', 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                         ?>
                     </div>
                 </div>
