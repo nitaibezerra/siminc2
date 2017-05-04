@@ -472,13 +472,13 @@ DML;
                                         $sql = <<<DML
                                             SELECT
                                                 oppid AS codigo,
-                                                oppnome AS descricao
+                                                oppcod || '-' || oppnome AS descricao
                                             FROM monitora.pi_objetivo_ppa
                                             WHERE
                                                 oppstatus = 'A'
                                                 AND prsano = '{$_SESSION['exercicio']}'
                                             ORDER BY
-                                                oppnome
+                                                oppcod
 DML;
                                         $oppid = $dadosPI['oppid'];
                                         $db->monta_combo('oppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'oppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($oppid)? $oppid: null));
@@ -494,13 +494,13 @@ DML;
                                         $sql = <<<DML
                                             SELECT
                                                 mppid AS codigo,
-                                                mppdesc AS descricao
+                                                mppcod || '-' || mppdesc AS descricao
                                             FROM monitora.pi_metas_ppa
                                             WHERE
                                                 mppstatus = 'A'
                                                 AND prsano = '{$_SESSION['exercicio']}'
                                             ORDER BY
-                                                mppdesc
+                                                mppcod
 DML;
                                         $mppid = $dadosPI['mppid'];
                                         $db->monta_combo('mppid', $sql, 'S', 'Selecione', 'carregaMetaPnc', null, null, null, 'N', 'mppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mppid)? $mppid: null));
@@ -516,13 +516,13 @@ DML;
                                         $sql = <<<DML
                                             SELECT
                                                 ippid AS codigo,
-                                                ippnome AS descricao
+                                                ippcod || '-' || ippnome AS descricao
                                             FROM monitora.pi_iniciativa_ppa
                                             WHERE
                                                 ippstatus = 'A'
                                                 AND prsano = '{$_SESSION['exercicio']}'
                                             ORDER BY
-                                                ippnome
+                                                ippcod
 DML;
                                         $ippid = $dadosPI['ippid'];
                                         $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ippid)? $ippid: null));
@@ -538,13 +538,13 @@ DML;
                                         $sql = <<<DML
                                             SELECT
                                                 mpnid AS codigo,
-                                                mpnnome AS descricao
+                                                mpncod || '-' || mpnnome AS descricao
                                             FROM monitora.pi_meta_pnc
                                             WHERE
                                                 mpnstatus = 'A'
                                                 AND prsano  = '{$_SESSION['exercicio']}'
                                             ORDER BY
-                                                mpnnome
+                                                mpncod
 DML;
                                     $mpnid = $dadosPI['mpnid'];
                                     $db->monta_combo('mpnid', $sql, 'S', 'Selecione', 'carregaIndicadorPnc', null, null, null, 'N', 'mpnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mpnid)? $mpnid: null));
@@ -560,13 +560,13 @@ DML;
                                     $sql = <<<DML
                                         SELECT
                                             ipnid AS codigo,
-                                            ipndesc AS descricao
+                                            ipncod || '-' || ipndesc AS descricao
                                         FROM monitora.pi_indicador_pnc
                                         WHERE
                                             ipnstatus = 'A'
                                             AND prsano = '{$_SESSION['exercicio']}'
                                         ORDER BY
-                                            ipndesc
+                                            ipncod
 DML;
                                     $ipnid = $dadosPI['ipnid'];
                                     $db->monta_combo('ipnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ipnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ipnid)? $ipnid: null));

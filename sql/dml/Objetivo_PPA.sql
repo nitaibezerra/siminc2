@@ -28,4 +28,6 @@ FROM planointerno.ppaobjetivo
 WHERE prsano = '2017'
 ;
 
+UPDATE monitora.pi_objetivo_ppa SET oppnome = 'Não se aplica.', oppcod = '0' WHERE oppid = 11;
+
 -- COMMIT; ROLLBACK;

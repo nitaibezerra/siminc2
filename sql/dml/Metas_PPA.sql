@@ -28,4 +28,6 @@ FROM planointerno.metappa
 WHERE prsano = '2017'
 ;
 
+UPDATE monitora.pi_metas_ppa SET mppdesc = 'Não se aplica.', mppnome = 'Não se aplica.', mppcod = '0' WHERE mppid IN(13, 14);
+
 -- COMMIT; ROLLBACK;

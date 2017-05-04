@@ -99,23 +99,30 @@ CREATE TABLE monitora.pi_meta_pnc
 );
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_meta_pnc TO usr_simec;
 
--- DROP TABLE IF EXISTS monitora.pi_indicador_pnc;
+-- DROP TABLE monitora.pi_indicador_pnc;
 CREATE TABLE monitora.pi_indicador_pnc
 (
-  ipnid SERIAL NOT NULL,
+  ipnid serial NOT NULL,
   mpnid integer NOT NULL,
-  ipndesc VARCHAR(1000),
-  ipnstatus char default 'A'::character varying,
-  prsano CHAR(4),
-  PRIMARY KEY (ipnid,mpnid),
+  ipndesc character varying(1000),
+  ipnstatus character(1) DEFAULT 'A'::character varying,
+  prsano character(4),
+  ipncod character(3),
+  CONSTRAINT pi_indicador_pnc_pkey PRIMARY KEY (ipnid, mpnid),
   CONSTRAINT fk_indpnc_reference_meta FOREIGN KEY (mpnid)
-  REFERENCES monitora.pi_meta_pnc (mpnid) MATCH SIMPLE
-  ON UPDATE CASCADE ON DELETE RESTRICT,
+      REFERENCES monitora.pi_meta_pnc (mpnid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT fk_indppa_reference_programa FOREIGN KEY (prsano)
-  REFERENCES monitora.programacaoexercicio (prsano) MATCH SIMPLE
-  ON UPDATE CASCADE ON DELETE RESTRICT,
+      REFERENCES monitora.programacaoexercicio (prsano) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT ckc_ipnstatus_indpnc CHECK (ipnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
 );
+ALTER TABLE monitora.pi_indicador_pnc
+  OWNER TO postgres;
+GRANT ALL ON TABLE monitora.pi_indicador_pnc TO postgres;
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_indicador_pnc TO usr_simec;
 
 CREATE TABLE monitora.pi_produto
