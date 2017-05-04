@@ -155,7 +155,7 @@ function popupDetalhe($ptrid) {
         <td class="SubTituloDireita" width="200px">Dotação atual:</td>
         <td><b>' . number_format2($dadosPtres['dotacaoatual']) . '</b></td>
     </tr>
-    <tr>
+<!--    <tr>
         <td class="SubTituloDireita" width="200px">Detalhado em Subação:</td>
         <td style="color:' . (($dadosPtres['detalhadosubacao'] >= 0) ? 'black' : 'red') . '>
             <b>
@@ -180,7 +180,7 @@ function popupDetalhe($ptrid) {
                     </span>
             </b>
         </td>
-    </tr>
+    </tr> -->
     <tr>
         <td class="SubTituloDireita" width="200px">Empenhado do PTRES:</td>
         <td>
