@@ -50,4 +50,6 @@ WHERE
 	prsano = '2017'
 ;
 
+UPDATE territorios.esfera SET esfdsc ='Federal/Brasil'  WHERE esfdsc = 'Federal';
+
 -- COMMIT; ROLLBACK;

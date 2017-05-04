@@ -52,4 +52,6 @@ FROM planointerno.enquadramentodespesa
 WHERE prsano = '2017'
 ;
 
+UPDATE monitora.pi_enquadramentodespesa SET eqddsc = 'Emendas', eqdstatus = 'I' WHERE eqdid = 355;
+
 -- COMMIT; ROLLBACK;
