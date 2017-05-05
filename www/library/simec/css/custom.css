@@ -406,3 +406,8 @@ a.chosen-single {
 		margin-left: 10px;
 	}
 }
+
+.link {
+    cursor: pointer;
+    cursor: hand;
+}

@@ -22,6 +22,10 @@ if ($_REQUEST['carregarIndicadorPNC']) {
     carregarIndicadorPNC((int)$_REQUEST['mpnid'], null);
     die();
 }
+if ($_REQUEST['carregarSegmentoCultural']) {
+    carregarSegmentoCultural((int)$_REQUEST['mdeid'], null);
+    die();
+}
 if ($_REQUEST['carregarIniciativaPPA']) {
     carregarIniciativaPPA((int)$_REQUEST['oppid'], null);
     die();
@@ -551,32 +555,16 @@ DML;
                         <fieldset><legend>Números SNIIC </legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <input type="text" value="<?php
-                                    if ($dadosPI['plititulo']) {
-                                        echo $dadosPI['plititulo'];
-                                    }
-                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
+                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" onclick="" id="btn_selecionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
+                                    <input type="button" id="btn_adicionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                    <tr style="height: 30px;">
-                                        <td style="text-align: left;">090421131325</td>
-                                        <td style="text-align: center;">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </td>
-                                    </tr>
-                                    <tr style="height: 30px;">
-                                        <td style="text-align: left;">293983982020</td>
-                                        <td style="text-align: center;">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </td>
-                                    </tr>
-                                </table>
+                                    <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    </table>
                                 </div>
                             </div>
                         </fieldset>
@@ -587,46 +575,32 @@ DML;
                         <label for="mdeid" class="control-label">Área Cultural:</label>
                     </div>
                     <div class="col-lg-10">
-                    <?php
-                    $sql = <<<DML
-                        SELECT
-                            MAX(mdeid) AS codigo,
-                            upper(public.removeacento(mdedsc)) AS descricao
-                        FROM monitora.pi_modalidadeensino
-                        WHERE
-                            mdestatus = 'A'
-                            AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                        GROUP BY
-                            descricao
-                        ORDER BY
-                            descricao ASC
+                        <?php
+                            $sql = <<<DML
+                                SELECT
+                                    MAX(mdeid) AS codigo,
+                                    upper(public.removeacento(mdedsc)) AS descricao
+                                FROM monitora.pi_modalidadeensino
+                                WHERE
+                                    mdestatus = 'A'
+                                    AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                                GROUP BY
+                                    descricao
+                                ORDER BY
+                                    descricao ASC
 DML;
 
-                    $mdeid = $dadosPI['mdeid'];
-                    $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
-                    ?>
+                            $mdeid = $dadosPI['mdeid'];
+                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Segmento Cultural:</label>
                     </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $sql = <<<DML
-                        SELECT
-                            neeid AS codigo,
-                            needsc AS descricao
-                        FROM monitora.pi_niveletapaensino
-                        WHERE
-                            neeano = '{$_SESSION['exercicio']}'
-                            AND neestatus = 'A'
-                        ORDER BY
-                            descricao
-DML;
-                    $neeid = $dadosPI['neeid'];
-                    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($neeid) ? $neeid : null));
-                    ?>
+                    <div class="col-lg-10 div_neeid">
+                        <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
                     </div>
                 </div>
                 <div style="display:none;" class="form-group">
@@ -735,7 +709,7 @@ DML;
                                     <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" onclick="" id="btn_selecionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
+                                    <input type="button" onclick="" id="btn_selecionar_convenio" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1097,6 +1071,14 @@ DML;
     
     $(document).ready(function() {
         
+        var tipoTransacao = $('tipotransacao').value;
+        if ('-' == tipoTransacao) {
+            // -- Desabilita o restante do formulário
+            $('plititulo').disable();
+            $('plidsc').disable();
+            $('btn_selecionar_acaptres').disable();
+        }
+        
         // Evento ao mudar opção de enquadramento
         $('#unicod').change(function(){
             carregarUG($(this).val());
@@ -1118,13 +1100,31 @@ DML;
             carregarIndicadorPNC($(this).val());
         });
         
-        var tipoTransacao = $('tipotransacao').value;
-        if ('-' == tipoTransacao) {
-            // -- Desabilita o restante do formulário
-            $('plititulo').disable();
-            $('plidsc').disable();
-            $('btn_selecionar_acaptres').disable();
-        }
+        // Evento ao mudar opção de Área Cultural
+        $('#mdeid').change(function(){
+            carregarSegmentoCultural($(this).val());
+        });
+        
+        $('#input_sniic').mask('9999999999');
+        
+        $('#btn_adicionar_sniic').click(function(){
+             var trHtml = 
+                '<tr style="height: 30px;" id="tr_sniic_' + $('#input_sniic').val()+ '" >'
+                        + '<td style="text-align: left;">' + $('#input_sniic').val() + '</td>'
+                        + '<td style="text-align: center;">'
+                            + '<input type="hidden" name="lista_sniic[]" value="' + $('#input_sniic').val() + '" />'
+                            + '<span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="' + $('#input_sniic').val()+ '" ></span>'
+                        + '</td>'
+                + '</tr>';
+            $('#table_sniic').append(trHtml);
+            $('#input_sniic').val('');
+        });
+        
+        $('#table_sniic').on('click', '.btnRemoveSniic', function(){
+            var sniic = $(this).attr('data-sniic');
+            $('#tr_sniic_'+ sniic).remove();
+        });
+        
     });
     
     /**
@@ -1202,6 +1202,17 @@ DML;
         $.post(window.location + '&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
             $('#ipnid').remove();
             $('.div_ipnid').html(response);
+            $(".chosen-select").chosen();
+        });
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Segmento Cultural via requisição ajax.
+     */
+    function carregarSegmentoCultural(codigo) {
+        $.post(window.location + '&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
+            $('#neeid').remove();
+            $('.div_neeid').html(response);
             $(".chosen-select").chosen();
         });
     }

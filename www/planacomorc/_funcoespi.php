@@ -287,6 +287,27 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
 }
 
 /**
+ * Monta a combo de Segmento Cultural.
+ */
+function carregarSegmentoCultural($mdeid, $neeid) {
+    global $db;
+
+    $sql = "
+        SELECT
+            neeid AS codigo,
+            needsc AS descricao
+        FROM monitora.pi_niveletapaensino
+        WHERE
+            neeano = '{$_SESSION['exercicio']}'
+            AND neestatus = 'A'
+            AND mdeid = ". (int)$mdeid. "
+        ORDER BY
+            descricao
+    ";
+    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($neeid) ? $neeid : null));
+}
+
+/**
  *  Carrega as subações de uma UO
  */
 function carregarComboSubacao($unicod, $ungcod = null, $retornaSQL = false) {
