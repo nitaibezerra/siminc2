@@ -265,6 +265,28 @@ function carregarIniciativaPPA($oppid, $ippid) {
 }
 
 /**
+ * Monta a combo de Indicadores PNC
+ */
+function carregarIndicadorPNC($mpnid, $ipnid) {
+    global $db;
+
+    $sql = "
+        SELECT
+            ipnid AS codigo,
+            ipncod || '-' || ipndesc AS descricao
+        FROM monitora.pi_indicador_pnc
+        WHERE
+            ipnstatus = 'A'
+            AND prsano = '{$_SESSION['exercicio']}'
+            AND mpnid = ". (int)$mpnid. "
+        ORDER BY
+            ipncod
+    ";
+
+    $db->monta_combo('ipnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ipnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ipnid)? $ipnid: null));
+}
+
+/**
  *  Carrega as subações de uma UO
  */
 function carregarComboSubacao($unicod, $ungcod = null, $retornaSQL = false) {

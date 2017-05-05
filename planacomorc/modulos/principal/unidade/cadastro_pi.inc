@@ -18,6 +18,10 @@ if ($_REQUEST['carregarMetasPPA']) {
     carregarMetasPPA((int)$_REQUEST['oppid'], null);
     die();
 }
+if ($_REQUEST['carregarIndicadorPNC']) {
+    carregarIndicadorPNC((int)$_REQUEST['mpnid'], null);
+    die();
+}
 if ($_REQUEST['carregarIniciativaPPA']) {
     carregarIniciativaPPA((int)$_REQUEST['oppid'], null);
     die();
@@ -535,22 +539,8 @@ DML;
                                 <div class="col-md-2 text-right">
                                     <label for="ipnid" class="control-label">Indicador PNC: </label>
                                 </div>
-                                <div class="col-lg-10">
-                                <?php
-                                    $sql = <<<DML
-                                        SELECT
-                                            ipnid AS codigo,
-                                            ipncod || '-' || ipndesc AS descricao
-                                        FROM monitora.pi_indicador_pnc
-                                        WHERE
-                                            ipnstatus = 'A'
-                                            AND prsano = '{$_SESSION['exercicio']}'
-                                        ORDER BY
-                                            ipncod
-DML;
-                                    $ipnid = $dadosPI['ipnid'];
-                                    $db->monta_combo('ipnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ipnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ipnid)? $ipnid: null));
-                                ?>
+                                <div class="col-lg-10 div_ipnid">
+                                    <?php carregarIndicadorPNC($dadosPI['mpnid'], $dadosPI['ipnid']); ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -1123,6 +1113,11 @@ DML;
             carregarIniciativaPPA($(this).val());
         });
         
+        // Evento ao mudar opção de Metas PNC
+        $('#mpnid').change(function(){
+            carregarIndicadorPNC($(this).val());
+        });
+        
         var tipoTransacao = $('tipotransacao').value;
         if ('-' == tipoTransacao) {
             // -- Desabilita o restante do formulário
@@ -1196,6 +1191,17 @@ DML;
         $.post(window.location + '&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
+            $(".chosen-select").chosen();
+        });
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
+     */
+    function carregarIndicadorPNC(codigo) {
+        $.post(window.location + '&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
+            $('#ipnid').remove();
+            $('.div_ipnid').html(response);
             $(".chosen-select").chosen();
         });
     }
