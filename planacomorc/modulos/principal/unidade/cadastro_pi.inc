@@ -18,6 +18,10 @@ if ($_REQUEST['carregarMetasPPA']) {
     carregarMetasPPA((int)$_REQUEST['oppid'], null);
     die();
 }
+if ($_REQUEST['carregarIniciativaPPA']) {
+    carregarIniciativaPPA((int)$_REQUEST['oppid'], null);
+    die();
+}
 if ($_REQUEST['carregarComboSubacaoFederais']) {
     carregarComboSubacaoUO($_REQUEST['unicod']);
     die();
@@ -501,22 +505,8 @@ DML;
                                 <div class="col-md-2 text-right">
                                     <label for="ippid" class="control-label">Iniciativa PPA: </label>
                                 </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = <<<DML
-                                            SELECT
-                                                ippid AS codigo,
-                                                ippcod || '-' || ippnome AS descricao
-                                            FROM monitora.pi_iniciativa_ppa
-                                            WHERE
-                                                ippstatus = 'A'
-                                                AND prsano = '{$_SESSION['exercicio']}'
-                                            ORDER BY
-                                                ippcod
-DML;
-                                        $ippid = $dadosPI['ippid'];
-                                        $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ippid)? $ippid: null));
-                                    ?>
+                                <div class="col-lg-10 div_ippid">
+                                    <?php carregarIniciativaPPA($dadosPI['oppid'], $dadosPI['ippid']); ?>
                                 </div>
                             </div>
                             <div class="form-group grupo_pnc">
@@ -1130,6 +1120,7 @@ DML;
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val());
+            carregarIniciativaPPA($(this).val());
         });
         
         var tipoTransacao = $('tipotransacao').value;
@@ -1199,12 +1190,23 @@ DML;
     }
     
     /**
-     * Carrega novo conteúdo para o select de Subações via requisição ajax.
+     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
     function carregarMetasPPA(codigo) {
         $.post(window.location + '&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
+            $(".chosen-select").chosen();
+        });
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     */
+    function carregarIniciativaPPA(codigo) {
+        $.post(window.location + '&carregarIniciativaPPA=ok&oppid=' + codigo, function(response) {
+            $('#ippid').remove();
+            $('.div_ippid').html(response);
             $(".chosen-select").chosen();
         });
     }

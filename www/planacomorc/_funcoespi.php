@@ -220,7 +220,7 @@ SQL;
 }
 
 /**
- * Monta a combo de UGs filtrando por UO
+ * Monta a combo de metas PPA
  */
 function carregarMetasPPA($oppid, $mppid) {
     global $db;
@@ -240,6 +240,28 @@ function carregarMetasPPA($oppid, $mppid) {
     ";
 
     $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mppid)? $mppid: null));
+}
+
+/**
+ * Monta a combo de iniciativas PPA
+ */
+function carregarIniciativaPPA($oppid, $ippid) {
+    global $db;
+
+    $sql = "
+        SELECT
+            ippid AS codigo,
+            ippcod || '-' || ippnome AS descricao
+        FROM monitora.pi_iniciativa_ppa
+        WHERE
+            ippstatus = 'A'
+            AND prsano = '{$_SESSION['exercicio']}'
+            AND oppid = ". (int)$oppid. "
+        ORDER BY
+            ippcod
+    ";
+
+    $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ippid)? $ippid: null));
 }
 
 /**
