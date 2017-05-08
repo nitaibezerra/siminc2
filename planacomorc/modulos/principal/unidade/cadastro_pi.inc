@@ -743,14 +743,61 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Edital:</label>
+                    <label for="edital" class="col-lg-2 control-label">Edital:</label>
                     <div class="col-lg-10">
-                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
-                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        <div class="make-switch switch-mini" id="use_map_switch_edital" data-on-label="S" data-off-label="N" data-off="danger">
+                            <input type="checkbox" name="edital" id="edital" value="T" <?php echo $dadosPI['edital'] == 't' ? 'checked' : ''; ?> />
                         </div>
                     </div>
                 </div>
+                <!--Inicio campos do Edital-->
+                <div class="panel panel-default div_edital">
+                    <div class="panel-body">
+                        <fieldset><legend>Previsão de Lançamento do Edital:</legend>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label for="mes" class="control-label">Mês:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                        $sql = "
+                                            SELECT
+                                                mescod as codigo,
+                                                mesdsc as descricao
+                                            FROM public.meses 
+                                            ORDER BY
+                                                codigo
+                                        ";
+
+                                        $mes = $dadosPI['mes'];
+                                        $db->monta_combo('mes', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mes) ? $mes: null));
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right">
+                                    <label for="ano" class="control-label">Ano:</label>
+                                </div>
+                                <div class="col-lg-10">
+                                    <?php
+                                        $sql = "
+                                            SELECT
+                                                    ano AS codigo,
+                                                    ano AS descricao
+                                            FROM public.anos
+                                            ORDER BY
+                                                    descricao
+                                        ";
+
+                                        $ano = $dadosPI['ano'];
+                                        $db->monta_combo('ano', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ano', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ano) ? $ano: null));
+                                    ?>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <!--Fim Campos do Edital-->
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset><legend>Localização do Projeto</legend>
@@ -1125,7 +1172,29 @@ DML;
             $('#tr_sniic_'+ sniic).remove();
         });
         
+        $('#use_map_switch_edital label').click(function() {
+            setTimeout(function(){
+                controlarEdital($('#edital:checked').size());
+            }, 1000);
+        });
+        
+        controlarEdital($('#edital:checked').size());
+        
     });
+    
+   /**
+    * Controla ações para quando o botão edital estiver marcado ou desmarcado.
+    */
+    function controlarEdital(opcao){
+        if(opcao){
+            $('.div_edital').show('slow');
+        } else {
+            $('.div_edital').hide('slow');
+        }
+        
+//        $('#mes').trigger("chosen:updated");
+//        $('#ano').trigger("chosen:updated");
+    }
     
     /**
      * Controla a exibição do formulario de acordo com o enquadramento selecionado.
@@ -1494,8 +1563,9 @@ DML;
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
         
-        listaObrigatorios = definirCamposObrigatorios();
         
+        
+        listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')');
     }
 
