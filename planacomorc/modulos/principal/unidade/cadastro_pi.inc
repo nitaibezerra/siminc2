@@ -706,7 +706,7 @@ DML;
                         <fieldset><legend>Números De Convênio</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo"  maxlength="250" size="2" name="plititulo">
+                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" size="8" name="input_convenio" />
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" onclick="" id="btn_selecionar_convenio" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
@@ -714,19 +714,7 @@ DML;
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">090421131325</td>
-                                            <td style="text-align: center;">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">293983982020</td>
-                                            <td style="text-align: center;">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </td>
-                                        </tr>
+                                    <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                     </table>
                                 </div>
                             </div>
@@ -1171,6 +1159,38 @@ DML;
             var sniic = $(this).attr('data-sniic');
             $('#tr_sniic_'+ sniic).remove();
         });
+
+        $('#input_sniic').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_adicionar_sniic').click();
+            }
+        });
+
+        $('#input_convenio').mask('9999999999');
+
+        $('#btn_selecionar_convenio').click(function(){
+            var trHtml =
+                '<tr style="height: 30px;" id="tr_convenio_' + $('#input_convenio').val()+ '" >'
+                + '<td style="text-align: left;">' + $('#input_convenio').val() + '</td>'
+                + '<td style="text-align: center;">'
+                + '<input type="hidden" name="lista_convenio[]" value="' + $('#input_convenio').val() + '" />'
+                + '<span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="' + $('#input_convenio').val()+ '" ></span>'
+                + '</td>'
+                + '</tr>';
+            $('#table_convenio').append(trHtml);
+            $('#input_convenio').val('');
+        });
+
+        $('#table_convenio').on('click', '.btnRemoveConvenio', function(){
+            var convenio = $(this).attr('data-convenio');
+            $('#tr_convenio_'+ convenio).remove();
+        });
+
+        $('#input_convenio').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_selecionar_convenio').click();
+            }
+        });
         
         $('#use_map_switch_edital label').click(function() {
             setTimeout(function(){
@@ -1179,7 +1199,7 @@ DML;
         });
         
         controlarEdital($('#edital:checked').size());
-        
+
     });
     
    /**
@@ -1191,9 +1211,6 @@ DML;
         } else {
             $('.div_edital').hide('slow');
         }
-        
-//        $('#mes').trigger("chosen:updated");
-//        $('#ano').trigger("chosen:updated");
     }
     
     /**
