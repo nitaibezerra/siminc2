@@ -15,11 +15,11 @@
  * @param {array} itemsParaValidacao Os IDs dos itens que deverão ser validados.
  * @param {string} formID O ID do formulário que será submetido.
  * @param {string} requisicao O nome da requisição que está sendo executada.
+ * @param {array} Adiciona Mensagens personalizadas de validação.
  * @returns {undefined}
  */
-function validarFormulario(itemsParaValidacao, formID, requisicao)
+function validarFormulario(itemsParaValidacao, formID, requisicao, addMsgCustom)
 {
-	
     // -- Validando os itens do formulario obrigatorios para criar um novo pedido
     var msg = new Array();
     for (x=0; x < itemsParaValidacao.length; x++) {    	
@@ -38,14 +38,11 @@ function validarFormulario(itemsParaValidacao, formID, requisicao)
         }
     }
     
-    // Se não for adicionado convenio nem sniic. acrescenta uma msg ao erro.
-    if($('[name="lista_sniic[]"]').size() == 0){
-        msg.push('Por favor preencha ao mínimo um Número SNIIC');
+    // Adiciona Mensagens personalizadas de validação.
+    if (typeof(addMsgCustom) != "undefined"){
+        msg = msg.concat(addMsgCustom);
     }
 
-    if($('[name="lista_convenio[]"]').size() == 0){
-        msg.push('Por favor preencha ao mínimo um Número de Convênio!');
-    }
     // -- Se existir alguma mensagem, exibe para o usuário
     if (msg.length > 0) {
         var htmlMsg = '<div class="bs-callout bs-callout-danger">Antes de prosseguir, os seguintes campos devem ser preenchidos:<ul>';

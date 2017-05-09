@@ -1628,8 +1628,20 @@ DML;
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
         
+        // Msgs personalizadas de validação.
+        addMsgCustom = new Array();
+        
+        // Se não for adicionado sniic, acrescenta uma msg ao erro.
+        if($('[name="lista_sniic[]"]').size() == 0){
+            addMsgCustom.push('Por favor preencha ao mínimo um Número SNIIC');
+        }
+        // Se não for adicionado convenio, acrescenta uma msg ao erro.
+        if($('[name="lista_convenio[]"]').size() == 0){
+            addMsgCustom.push('Por favor preencha ao mínimo um Número de Convênio!');
+        }
+        
         listaObrigatorios = definirCamposObrigatorios();
-        validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')');
+        validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
     }
 
     /**
