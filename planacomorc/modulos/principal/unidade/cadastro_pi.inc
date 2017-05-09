@@ -722,19 +722,64 @@ DML;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">TED:</label>
+                    <div class="col-lg-2 text-right">
+                        <label for="ted" class="control-label">TED:</label>
+                    </div>
                     <div class="col-lg-10">
-                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
-                                   value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                        <div class="form-inline required">
+                            <div class="form-group has-feedback col-xs-2">
+                                <label class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="radio" name="ted" value="t" class="link">
+                                    </span>
+                                    <div class="form-control form-control-static input_check_s link">
+                                        Sim
+                                    </div>
+                                    <span class="glyphicon form-control-feedback "></span>
+                                </label>
+                            </div>
+                            <div class="form-group has-feedback col-xs-2">
+                                <label class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="radio" name="ted" value="f" class="link">
+                                    </span>
+                                    <div class="form-control form-control-static input_check_n link">
+                                        Não
+                                    </div>
+                                    <span class="glyphicon form-control-feedback "></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edital" class="col-lg-2 control-label">Edital:</label>
+                    <div class="col-lg-2 text-right">
+                        <label for="edital" class=" control-label">Edital:</label>
+                    </div>
                     <div class="col-lg-10">
-                        <div class="make-switch switch-mini" id="use_map_switch_edital" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="edital" id="edital" value="T" <?php echo $dadosPI['edital'] == 't' ? 'checked' : ''; ?> />
+                        <div class="form-inline required">
+                            <div class="form-group has-feedback col-xs-2">
+                                <label class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="radio" name="edital" value="t" class="link">
+                                    </span>
+                                    <div class="form-control form-control-static input_check_s link">
+                                        Sim
+                                    </div>
+                                    <span class="glyphicon form-control-feedback "></span>
+                                </label>
+                            </div>
+                            <div class="form-group has-feedback col-xs-2">
+                                <label class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="radio" name="edital" value="f" class="link">
+                                    </span>
+                                    <div class="form-control form-control-static input_check_n link">
+                                        Não
+                                    </div>
+                                    <span class="glyphicon form-control-feedback "></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1123,6 +1168,8 @@ DML;
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
         });
+        // Evento ao carregar a tela
+        mudarFormularioFinalistico($('#eqdid').val());
         
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
@@ -1195,9 +1242,10 @@ DML;
         $('#use_map_switch_edital label').click(function() {
             setTimeout(function(){
                 controlarEdital($('#edital:checked').size());
-            }, 1000);
+            }, 500); // Meio segundo
         });
         
+        // Evento ao carregar a tela
         controlarEdital($('#edital:checked').size());
 
     });
@@ -1580,8 +1628,6 @@ DML;
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
         
-        
-        
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')');
     }
@@ -1592,12 +1638,17 @@ DML;
      * @returns Array
      */
     function definirCamposObrigatorios(){
-        codigo = $('#eqdid').val();
+        var codigoEnquadramento = $('#eqdid').val();
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'ted', 'edital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
+        
         // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
-        if(codigo != intEnqFinalistico){
-            listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
-        } else {
-            listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'mpnid','ipnid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
+        if(codigoEnquadramento == intEnqFinalistico){
+            listaObrigatorios.push('mpnid', 'ipnid');
+        }
+        
+        var opcaoEdital = $('#edital:checked').size();
+        if(opcaoEdital){
+            listaObrigatorios.push('mes', 'ano');
         }
         
         return listaObrigatorios;

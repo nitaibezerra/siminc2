@@ -411,3 +411,19 @@ a.chosen-single {
     cursor: pointer;
     cursor: hand;
 }
+
+.input_check_n {
+    background-color: #d14641;
+    background-image: linear-gradient(to bottom, #bd362f, #ee5f5b);
+    background-repeat: repeat-x;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}
+
+.input_check_s {
+    background-color: #0088cc;
+    background-image: linear-gradient(to bottom, #0044cc, #0088cc);
+    background-repeat: repeat-x;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+}

@@ -25,18 +25,18 @@ function validarFormulario(itemsParaValidacao, formID, requisicao)
     for (x=0; x < itemsParaValidacao.length; x++) {    	
         // -- Selecionando o input
         var $item = $('#' + itemsParaValidacao[x]);
-        if ('' == $item.val()) { // -- validando o conteúdo do input e selecionando o label para montar msg de erro
-        	if($item.parent().prev().children('label').text().replace(':', '') == ""){         		
-        		msg.push($item.parents('div.col-md-10').prev().children('label').text().replace(':',''));
-        		$item.parents('div.col-md-10').prev().addClass('has-error');        		
-        	}else{        		
-        		msg.push($item.parent().prev().children('label').text().replace(':', ''));
-        		$item.parent().parent().addClass('has-error');
-        	}        	
+        if ('' == $item.val()) {
+            // Criticando o conteúdo do input e selecionando o label para montar msg de erro.
+            if($('label[for="'+ $item.attr('id') +'"]').text().replace(':', '') != ""){
+                msg.push($('label[for="'+ $item.attr('id') +'"]').text().replace(':', ''));
+                $('label[for="'+ $item.attr('id') +'"]').addClass('has-error');
+                $item.parent().parent().addClass('has-error');
+            }
         } else {
             $item.parent().parent().removeClass('has-error');
+            $('label[for="'+ $item.attr('id') +'"]').removeClass('has-error');
         }
-    }    
+    }
     // -- Se existir alguma mensagem, exibe para o usuário
     if (msg.length > 0) {
         var htmlMsg = '<div class="bs-callout bs-callout-danger">Antes de prosseguir, os seguintes campos devem ser preenchidos:<ul>';
