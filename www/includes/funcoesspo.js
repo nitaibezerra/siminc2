@@ -15,7 +15,7 @@
  * @param {array} itemsParaValidacao Os IDs dos itens que deverão ser validados.
  * @param {string} formID O ID do formulário que será submetido.
  * @param {string} requisicao O nome da requisição que está sendo executada.
- * @param {array} Adiciona Mensagens personalizadas de validação.
+ * @param {array} Opcional - Adiciona Mensagens personalizadas de validação.
  * @returns {undefined}
  */
 function validarFormulario(itemsParaValidacao, formID, requisicao, addMsgCustom)

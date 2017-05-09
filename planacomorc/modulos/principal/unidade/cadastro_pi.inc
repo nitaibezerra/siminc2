@@ -761,9 +761,9 @@ DML;
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="edital" value="t" class="link">
+                                        <input type="radio" name="edital" value="t" class="link element_edital">
                                     </span>
-                                    <div class="form-control form-control-static input_check_s link">
+                                    <div class="form-control form-control-static input_check_s link element_edital">
                                         Sim
                                     </div>
                                     <span class="glyphicon form-control-feedback "></span>
@@ -772,9 +772,9 @@ DML;
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="edital" value="f" class="link">
+                                        <input type="radio" name="edital" value="f" class="link element_edital">
                                     </span>
-                                    <div class="form-control form-control-static input_check_n link">
+                                    <div class="form-control form-control-static input_check_n link element_edital">
                                         Não
                                     </div>
                                     <span class="glyphicon form-control-feedback "></span>
@@ -1239,14 +1239,14 @@ DML;
             }
         });
         
-        $('#use_map_switch_edital label').click(function() {
+        $('.element_edital').click(function() {
             setTimeout(function(){
-                controlarEdital($('#edital:checked').size());
+                controlarEdital($('input[name=edital]:checked').val());
             }, 500); // Meio segundo
         });
         
         // Evento ao carregar a tela
-        controlarEdital($('#edital:checked').size());
+        controlarEdital($('input[name=edital]:checked').val());
 
     });
     
@@ -1254,7 +1254,7 @@ DML;
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
     */
     function controlarEdital(opcao){
-        if(opcao){
+        if(opcao == 't'){
             $('.div_edital').show('slow');
         } else {
             $('.div_edital').hide('slow');
@@ -1633,11 +1633,19 @@ DML;
         
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
         if($('[name="lista_sniic[]"]').size() == 0){
-            addMsgCustom.push('Por favor preencha ao mínimo um Número SNIIC');
+            addMsgCustom.push('Números SNIIC');
         }
         // Se não for adicionado convenio, acrescenta uma msg ao erro.
         if($('[name="lista_convenio[]"]').size() == 0){
-            addMsgCustom.push('Por favor preencha ao mínimo um Número de Convênio!');
+            addMsgCustom.push('Números De Convênio');
+        }
+        // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
+        if($('input[name=edital]:checked').val() == undefined || $('input[name=edital]:checked').val() == ""){
+            addMsgCustom.push('Edital');
+        }
+        // Se não for selecionado nenhuma opção para ted, o sistema acrescenta uma mensagem de erro.
+        if($('input[name=ted]:checked').val() == undefined || $('input[name=ted]:checked').val() == ""){
+            addMsgCustom.push('TED');
         }
         
         listaObrigatorios = definirCamposObrigatorios();
@@ -1658,7 +1666,7 @@ DML;
             listaObrigatorios.push('mpnid', 'ipnid');
         }
         
-        var opcaoEdital = $('#edital:checked').size();
+        var opcaoEdital = $('input[name=edital]:checked').size();
         if(opcaoEdital){
             listaObrigatorios.push('mes', 'ano');
         }
