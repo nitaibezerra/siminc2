@@ -37,6 +37,9 @@ function validarFormulario(itemsParaValidacao, formID, requisicao)
             $('label[for="'+ $item.attr('id') +'"]').removeClass('has-error');
         }
     }
+    
+    // Se não for adicionado convenio nem sniic. acrescenta uma msg ao erro.
+    
     // -- Se existir alguma mensagem, exibe para o usuário
     if (msg.length > 0) {
         var htmlMsg = '<div class="bs-callout bs-callout-danger">Antes de prosseguir, os seguintes campos devem ser preenchidos:<ul>';
