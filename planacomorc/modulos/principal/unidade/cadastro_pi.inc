@@ -559,7 +559,7 @@ DML;
                                     <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" id="btn_adicionar_sniic" value="ADICIONAR" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -710,7 +710,7 @@ DML;
                                     <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" size="8" name="input_convenio" />
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" onclick="" id="btn_selecionar_convenio" value="ADICIONAR" class="btn btn-info" style="width: 100%;"/>
+                                    <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -839,7 +839,7 @@ DML;
                                 <div class="col-md-1 text-right">
                                     <label for="mdeid" class="control-label">Selecionar:</label>
                                 </div>
-                                <div class="col-lg-10">
+                                <div class="col-lg-12">
                                     <?php
                                     $sql = <<<DML
                         SELECT
@@ -854,7 +854,7 @@ DML;
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-12">
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"><b>UF</b></td>
@@ -876,14 +876,23 @@ DML;
                                     </table>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <fieldset><legend>Responsáveis pelo Projeto</legend>
+                        <fieldset>
+                            <legend>Responsáveis pelo Projeto</legend>
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-12">
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"><b>Nome</b></td>
@@ -906,6 +915,14 @@ DML;
                                     </table>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info" style="width: 100%;" />
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
                 </div>
@@ -913,7 +930,7 @@ DML;
                     <div class="panel-body">
                         <fieldset><legend>Custeio e Capital</legend>
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-12">
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"></td>
@@ -956,7 +973,7 @@ DML;
                     <div class="panel-body">
                         <fieldset><legend>Cronogramas</legend>
                             <div class="form-group">
-                                <div class="col-lg-10">
+                                <div class="col-lg-12">
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
