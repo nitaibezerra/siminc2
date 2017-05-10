@@ -553,7 +553,7 @@ DML;
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <fieldset><legend>Números SNIIC </legend>
+                        <fieldset><legend class="legend_sniic">Números SNIIC </legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
@@ -704,7 +704,7 @@ DML;
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <fieldset><legend>Números De Convênio</legend>
+                        <fieldset><legend class="legend_convenio">Números De Convênio</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" size="8" name="input_convenio" />
@@ -1652,10 +1652,16 @@ DML;
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
         if($('[name="lista_sniic[]"]').size() == 0){
             addMsgCustom.push('Números SNIIC');
+            $('.legend_sniic').attr('style', 'color: #b94a48;');
+        } else {
+            $('.legend_sniic').attr('style','');
         }
         // Se não for adicionado convenio, acrescenta uma msg ao erro.
         if($('[name="lista_convenio[]"]').size() == 0){
             addMsgCustom.push('Números De Convênio');
+            $('.legend_convenio').attr('style', 'color: #b94a48;');
+        } else {
+            $('.legend_convenio').attr('style','');
         }
         // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
         if($('input[name=edital]:checked').val() == undefined || $('input[name=edital]:checked').val() == ""){
