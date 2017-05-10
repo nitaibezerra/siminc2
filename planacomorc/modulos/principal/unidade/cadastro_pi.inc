@@ -4,6 +4,7 @@
  * @see cadastro.inc
  * $Id: cadastro_pi.inc 101265 2015-08-14 13:05:26Z maykelbraz $
  */
+
 /**
  * Funções de apoio ao cadastro de PIs.
  * @see _funcoespi.php
@@ -1666,8 +1667,8 @@ DML;
             listaObrigatorios.push('mpnid', 'ipnid');
         }
         
-        var opcaoEdital = $('input[name=edital]:checked').size();
-        if(opcaoEdital){
+        var opcaoEdital = $('input[name=edital]:checked').val();
+        if(opcaoEdital == 't'){
             listaObrigatorios.push('mes', 'ano');
         }
         
