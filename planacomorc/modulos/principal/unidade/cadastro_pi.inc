@@ -1685,6 +1685,10 @@ DML;
         if($('input[name=ted]:checked').val() == undefined || $('input[name=ted]:checked').val() == ""){
             addMsgCustom.push('TED');
         }
+        // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
+        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+            addMsgCustom.push('Responsáveis pelo Projeto');
+        }
         
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
