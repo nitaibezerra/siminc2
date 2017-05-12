@@ -472,7 +472,7 @@ DML;
                         ?>
                         <tr>
                             <td align="right" colspan="10">
-                                <input type="button" onclick="abrir_lista();" id="btn_selecionar_acaptres" value="Selecionar Funcional/PTRES" class="btn btn-info"/>
+                                <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info"/>
                             </td>
                         </tr>
                     </table>
@@ -893,25 +893,14 @@ DML;
                             <legend>Responsáveis pelo Projeto</legend>
                             <div class="form-group">
                                 <div class="col-lg-12">
-                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"><b>Nome</b></td>
                                             <td style="text-align: left;"><b>Telefone</b></td>
                                             <td style="text-align: left;"><b>E-mail</b></td>
                                             <td style="text-align: center;"><b>Ação</b></td>
                                         </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Fulano da Silva</td>
-                                            <td style="text-align: left;">+55 61 6489465116</td>
-                                            <td style="text-align: left;">email@email.email</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Adler Adriel</td>
-                                            <td style="text-align: left;">+55 61 65156189641894</td>
-                                            <td style="text-align: left;">email@email.email</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
-                                        </tr>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -1224,7 +1213,7 @@ DML;
             var sniic = $(this).attr('data-sniic');
             $('#tr_sniic_'+ sniic).remove();
         });
-
+        
         $('#input_sniic').keypress(function(e){
             if(e.which == 13) {
                 $('#btn_adicionar_sniic').click();
@@ -1263,10 +1252,41 @@ DML;
             }, 500); // Meio segundo
         });
         
+        $('#table_responsaveis').on('click', '.btnRemoverResponsaveis', function(){
+            var cpf = $(this).attr('data-responsaveis');
+            $('.tr_responsaveis_'+ cpf).remove();
+        });
+        
         // Evento ao carregar a tela
         controlarEdital($('input[name=edital]:checked').val());
 
+        $('#btn_selecionar_functional').click(function(){
+            abrir_lista();
+        });
+        
+        $('#btn_selecionar_responsaveis').click(function(){
+            abrirModalResponsaveis();
+        });
+        
     });
+    
+    function abrirModalResponsaveis() {
+        // Verifica se o modal terá que carregar a tela.
+        if($('#modal_responsaveis .modal-body p').size() <= 1){
+            $.post('planacomorc.php?modulo=principal/unidade/pi-responsaveis&acao=A&unicod='+ $("#unicod").val(),
+                function(response) {
+                    $('#modal_responsaveis .modal-body p').html(response);
+                    $('.modal_dialog_responsaveis').show();
+                    $('#modal_responsaveis').modal();
+                    $('#modal_responsaveis .chosen-select').chosen();
+                    $('#modal_responsaveis .chosen-container').css('width', '100%');
+            });
+        } else {
+            $('#formulario_responsaveis input[name=unicod]').val($("#unicod").val());
+            $('#modal_responsaveis').modal();
+            $('#btnPopupResponsaveisPesquisar').click();
+        }
+    }
     
    /**
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
@@ -1915,19 +1935,19 @@ DML;
 
     atualizarPrevisaoPI();
 
-    function apresentaLinhasSelecionadas(tabelaOrigem, apartirDe) {
-        var val;
-        for (i = apartirDe; i < tabelaOrigem.find('tr').length; i++) {
-            val = tabelaOrigem.find('tr')[i].id.split("_");
-            // alert(val[1]);
-            if (document.getElementById(val[1])) {
-                campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
-                campo.attr('class', 'glyphicon glyphicon-trash');
-                campo.attr('title', 'Remover item');
-                campo.css('color', 'gray');
-            }
-        }
-    }
+//    function apresentaLinhasSelecionadas(tabelaOrigem, apartirDe) {
+//        var val;
+//        for (i = apartirDe; i < tabelaOrigem.find('tr').length; i++) {
+//            val = tabelaOrigem.find('tr')[i].id.split("_");
+//            // alert(val[1]);
+//            if (document.getElementById(val[1])) {
+//                campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
+//                campo.attr('class', 'glyphicon glyphicon-trash');
+//                campo.attr('title', 'Remover item');
+//                campo.css('color', 'gray');
+//            }
+//        }
+//    }
 
 </script>
 <div id="divTeste"></div>
@@ -1939,6 +1959,26 @@ DML;
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
                         <h4 class="modal-title">Seleção de PTRES</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_responsaveis" class="modal fade">
+            <div class="modal_dialog_responsaveis">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Seleção de Responsáveis</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
