@@ -834,7 +834,8 @@ DML;
                 <!--Fim Campos do Edital-->
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <fieldset><legend>Localização do Projeto</legend>
+                        <fieldset>
+                            <legend class="legend_localizacao">Localização do Projeto</legend>
                             <div class="form-group">
                                 <div class="col-md-1 text-right">
                                     <label for="mdeid" class="control-label">Selecionar:</label>
@@ -855,24 +856,13 @@ DML;
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-12">
-                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"><b>UF</b></td>
                                             <td style="text-align: left;"><b>Município</b></td>
                                             <td style="text-align: center;"></td>
-
                                         </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">DF</td>
-                                            <td style="text-align: left;">Brasília</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
-
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">MA</td>
-                                            <td style="text-align: left;">São Luiz</td>
-                                            <td style="text-align: center;"><span class="glyphicon glyphicon-trash"</td>
-                                        </tr>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -890,7 +880,7 @@ DML;
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset>
-                            <legend>Responsáveis pelo Projeto</legend>
+                            <legend class="legend_responsaveis">Responsáveis pelo Projeto</legend>
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
@@ -1252,6 +1242,11 @@ DML;
             }, 500); // Meio segundo
         });
         
+        $('#table_localizacao').on('click', '.btnRemoverLocalizacao', function(){
+            var id = $(this).attr('data-localizacao');
+            $('.tr_localizacao_'+ id).remove();
+        });
+        
         $('#table_responsaveis').on('click', '.btnRemoverResponsaveis', function(){
             var cpf = $(this).attr('data-responsaveis');
             $('.tr_responsaveis_'+ cpf).remove();
@@ -1268,12 +1263,16 @@ DML;
             abrirModalResponsaveis();
         });
         
+        $('#btn_selecionar_localizacao').click(function(){
+            abrirModalLocalizacao();
+        });
+        
     });
     
     function abrirModalResponsaveis() {
         // Verifica se o modal terá que carregar a tela.
         if($('#modal_responsaveis .modal-body p').size() <= 1){
-            $.post('planacomorc.php?modulo=principal/unidade/pi-responsaveis&acao=A&unicod='+ $("#unicod").val(),
+            $.post('planacomorc.php?modulo=principal/unidade/pi-responsaveis&acao=A&ungcod='+ $("#ungcod").val(),
                 function(response) {
                     $('#modal_responsaveis .modal-body p').html(response);
                     $('.modal_dialog_responsaveis').show();
@@ -1282,9 +1281,25 @@ DML;
                     $('#modal_responsaveis .chosen-container').css('width', '100%');
             });
         } else {
-            $('#formulario_responsaveis input[name=unicod]').val($("#unicod").val());
+            $('#formulario_responsaveis input[name=ungcod]').val($("#ungcod").val());
             $('#modal_responsaveis').modal();
             $('#btnPopupResponsaveisPesquisar').click();
+        }
+    }
+    
+    function abrirModalLocalizacao() {
+        // Verifica se o modal terá que carregar a tela.
+        if($('#modal_localizacao .modal-body p').size() <= 1){
+            $.post('planacomorc.php?modulo=principal/unidade/pi-localizacao&acao=A', function(response) {
+                    $('#modal_localizacao .modal-body p').html(response);
+                    $('.modal_dialog_localizacao').show();
+                    $('#modal_localizacao').modal();
+                    $('#modal_localizacao .chosen-select').chosen();
+                    $('#modal_localizacao .chosen-container').css('width', '100%');
+            });
+        } else {
+            $('#modal_localizacao').modal();
+            $('#btnPopupLocalizacaoPesquisar').click();
         }
     }
     
@@ -1685,16 +1700,32 @@ DML;
         }
         // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
         if($('input[name=edital]:checked').val() == undefined || $('input[name=edital]:checked').val() == ""){
+            $('label[for="edital"]').attr('style', 'color: #b94a48;');
             addMsgCustom.push('Edital');
+        } else {
+            $('label[for="edital"]').attr('style', '');
         }
         // Se não for selecionado nenhuma opção para ted, o sistema acrescenta uma mensagem de erro.
         if($('input[name=ted]:checked').val() == undefined || $('input[name=ted]:checked').val() == ""){
+            $('label[for="ted"]').attr('style', 'color: #b94a48;');
             addMsgCustom.push('TED');
+        } else {
+            $('label[for="ted"]').attr('style', '');
+        }
+        // Se não for inserido nenhuma Localização, o sistema acrescenta uma mensagem de erro.
+        if($('#table_localizacao input[name="listaLocalizacao[]"]').size() == 0){
+            $('.legend_localizacao').attr('style', 'color: #b94a48;');
+            addMsgCustom.push('Localização do Projeto');
+        } else {
+            $('.legend_localizacao').attr('style', '');
         }
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
         if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+            $('.legend_responsaveis').attr('style', 'color: #b94a48;');
             addMsgCustom.push('Responsáveis pelo Projeto');
-        }
+        } else {
+            $('.legend_responsaveis').attr('style', '');
+        }        
         
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
@@ -1989,6 +2020,26 @@ DML;
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
                         <h4 class="modal-title">Seleção de Responsáveis</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_localizacao" class="modal fade">
+            <div class="modal_dialog_localizacao">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Seleção de Localizações</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
