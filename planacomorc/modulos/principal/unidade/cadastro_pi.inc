@@ -842,24 +842,47 @@ DML;
                                 </div>
                                 <div class="col-lg-12">
                                     <?php
-                                    $sql = <<<DML
-                        SELECT
-                            esfid AS codigo,
-                            esfdsc AS descricao
-                        FROM territorios.esfera
-                        ORDER BY
-                            descricao;
-DML;
-                                    $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                                        $sql = "
+                                            SELECT
+                                                esfid AS codigo,
+                                                esfdsc AS descricao
+                                            FROM territorios.esfera
+                                            ORDER BY
+                                                descricao
+                                        ";
+                                        $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                     ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-12">
                                     <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
+                                        <tr class="tr_head">
                                             <td style="text-align: left;"><b>UF</b></td>
                                             <td style="text-align: left;"><b>Município</b></td>
+                                            <td style="text-align: center;"></td>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <table id="table_localizacao_estadual" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <tr class="tr_head">
+                                            <td style="text-align: left;"><b>UF</b></td>
+                                            <td style="text-align: left;"><b>Nome</b></td>
+                                            <td style="text-align: center;"></td>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <table id="table_localizacao_exterior" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <tr class="tr_head">
+                                            <td style="text-align: left;"><b>País</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
                                         
@@ -872,6 +895,8 @@ DML;
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
                                 </div>
                             </div>
                         </fieldset>
@@ -1143,8 +1168,13 @@ DML;
     </div>
 </div>
 <script type="text/javascript">
-    
+    // Enquadramentos
     intEnqFinalistico = "<?php echo ENQUADRAMENTO_FINALISTICO; ?>";
+    // Localizações
+    intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";
+    intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";
+    intEsfidFederalBrasil = "<?php echo ESFERA_FEDERAL_BRASIL; ?>";
+    intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
     
     $(document).ready(function() {
         
@@ -1247,6 +1277,11 @@ DML;
             $('.tr_localizacao_'+ id).remove();
         });
         
+        $('#table_localizacao_estadual').on('click', '.btnRemoverLocalizacaoEstadual', function(){
+            var id = $(this).attr('data-localizacao-estadual');
+            $('.tr_localizacao_estadual_'+ id).remove();
+        });
+        
         $('#table_responsaveis').on('click', '.btnRemoverResponsaveis', function(){
             var cpf = $(this).attr('data-responsaveis');
             $('.tr_responsaveis_'+ cpf).remove();
@@ -1267,7 +1302,65 @@ DML;
             abrirModalLocalizacao();
         });
         
+        $('#btn_selecionar_localizacao_estadual').click(function(){
+            abrirModalLocalizacaoEstadual();
+        });
+        
+        $('#esfid').change(function(){
+            controlarTipoLocalizacao($(this).val());
+        });
+        
+        controlarTipoLocalizacao($('#esfid').val());
+        
     });
+    
+    /**
+     * Controla as opções do formulario conforme a opção de tipo de localização selecionada.
+     * 
+     * @param int esfid Código da esfera preenchido pelo usuário
+     * @return VOID
+     */
+    function controlarTipoLocalizacao(esfid){
+        $('#btn_selecionar_localizacao').hide();
+        $('#btn_selecionar_localizacao_estadual').hide();
+        $('#btn_selecionar_localizacao_exterior').hide();
+        $('#table_localizacao tr').hide();
+        $('#table_localizacao_estadual tr').hide();
+        $('#table_localizacao_exterior tr').hide();
+
+        switch (esfid) {
+            // Verifica se a esfera é Estadual/DF.
+            case intEsfidEstadualDF:
+                $('#table_localizacao_estadual tr').show('slow');
+                $('#btn_selecionar_localizacao_estadual').show('slow');
+                
+                $('#table_localizacao tr').not('tr.tr_head').remove();
+                $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
+            break;
+            // Verifica se a esfera é Exterior.
+            case intEsfidExterior:
+                $('#table_localizacao_exterior tr').show('slow');
+                $('#btn_selecionar_localizacao_exterior').show('slow');
+                $('#table_localizacao tr').not('tr.tr_head').remove();
+                $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
+            break;
+            // Verifica se a esfera é Federal.
+            case intEsfidFederalBrasil:
+                $('#btn_selecionar_localizacao').hide('slow');
+                $('#table_localizacao tr').hide('slow');
+                $('#table_localizacao tr').not('tr.tr_head').remove();
+                $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
+                $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
+            break;
+            // Verifica se a esfera é Municipal.
+            case intEsfidMunicipal:
+                $('#table_localizacao tr').show('slow');
+                $('#btn_selecionar_localizacao').show('slow');
+                $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
+                $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
+            break;
+        }
+    }
     
     function abrirModalResponsaveis() {
         // Verifica se o modal terá que carregar a tela.
@@ -1300,6 +1393,22 @@ DML;
         } else {
             $('#modal_localizacao').modal();
             $('#btnPopupLocalizacaoPesquisar').click();
+        }
+    }
+    
+    function abrirModalLocalizacaoEstadual() {
+        // Verifica se o modal terá que carregar a tela.
+        if($('#modal_localizacao_estadual .modal-body p').size() <= 1){
+            $.post('planacomorc.php?modulo=principal/unidade/pi-localizacao-estadual&acao=A', function(response) {
+                    $('#modal_localizacao_estadual .modal-body p').html(response);
+                    $('.modal_dialog_localizacao_estadual').show();
+                    $('#modal_localizacao_estadual').modal();
+                    $('#modal_localizacao_estadual .chosen-select').chosen();
+                    $('#modal_localizacao_estadual .chosen-container').css('width', '100%');
+            });
+        } else {
+            $('#modal_localizacao_estadual').modal();
+            $('#btnPopupLocalizacaoEstadualPesquisar').click();
         }
     }
     
@@ -2036,6 +2145,26 @@ DML;
     <div class="col-md-12">
         <div id="modal_localizacao" class="modal fade">
             <div class="modal_dialog_localizacao">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Seleção de Localizações</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_localizacao_estadual" class="modal fade">
+            <div class="modal_dialog_localizacao_estadual">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
