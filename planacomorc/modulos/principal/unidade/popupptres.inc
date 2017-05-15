@@ -603,7 +603,7 @@ DML;
                     var celEmpenhoE = tabelaorigem.rows[linha].insertCell(6);
                     celEmpenhoE.style.textAlign = "right";
                     var empenhoE = $('tr#' + id + ' td:nth-child(10)').text();
-                    celEmpenhoE.innerHTML = empenhoE + '<input type="hidden" value="'+id+'" name="acaid['+ ptres +']">';
+                    celEmpenhoE.innerHTML = empenhoE + '<input type="hidden" name="acaid[]" value="' +ptres +'" >';
 
                     var celValorPre = tabelaorigem.rows[linha].insertCell(7);
                     celValorPre.style.textAlign = "right";

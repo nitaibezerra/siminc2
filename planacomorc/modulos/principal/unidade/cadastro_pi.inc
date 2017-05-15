@@ -402,7 +402,7 @@ DML;
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-body">
+                    <div class="panel-body legend_funcional">
                         <b>Detalhamento Orçamentário</b>
                     </div>
                     <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
@@ -1817,6 +1817,13 @@ DML;
         
         // Msgs personalizadas de validação.
         addMsgCustom = new Array();
+        
+        if($('input[name="acaid[]"]').size() == 0){
+            $('.legend_funcional').attr('style', 'color: #b94a48;');
+            addMsgCustom.push('Funcional');
+        } else {
+            $('.legend_funcional').attr('style', '');
+        }
         
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
         if($('[name="lista_sniic[]"]').size() == 0){
