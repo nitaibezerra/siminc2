@@ -894,9 +894,9 @@ DML;
                                     
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
-                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
-                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização" value="Inserir Localização" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" style="width: 100%;" />
+                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" style="width: 100%;" />
                                 </div>
                             </div>
                         </fieldset>
@@ -1282,6 +1282,11 @@ DML;
             $('.tr_localizacao_estadual_'+ id).remove();
         });
         
+        $('#table_localizacao_exterior').on('click', '.btnRemoverLocalizacaoExterior', function(){
+            var id = $(this).attr('data-localizacao-exterior');
+            $('.tr_localizacao_exterior_'+ id).remove();
+        });
+        
         $('#table_responsaveis').on('click', '.btnRemoverResponsaveis', function(){
             var cpf = $(this).attr('data-responsaveis');
             $('.tr_responsaveis_'+ cpf).remove();
@@ -1304,6 +1309,10 @@ DML;
         
         $('#btn_selecionar_localizacao_estadual').click(function(){
             abrirModalLocalizacaoEstadual();
+        });
+        
+        $('#btn_selecionar_localizacao_exterior').click(function(){
+            abrirModalLocalizacaoExterior();
         });
         
         $('#esfid').change(function(){
@@ -1409,6 +1418,22 @@ DML;
         } else {
             $('#modal_localizacao_estadual').modal();
             $('#btnPopupLocalizacaoEstadualPesquisar').click();
+        }
+    }
+    
+    function abrirModalLocalizacaoExterior() {
+        // Verifica se o modal terá que carregar a tela.
+        if($('#modal_localizacao_exterior .modal-body p').size() <= 1){
+            $.post('planacomorc.php?modulo=principal/unidade/pi-localizacao-exterior&acao=A', function(response) {
+                    $('#modal_localizacao_exterior .modal-body p').html(response);
+                    $('.modal_dialog_localizacao_exterior').show();
+                    $('#modal_localizacao_exterior').modal();
+                    $('#modal_localizacao_exterior .chosen-select').chosen();
+                    $('#modal_localizacao_exterior .chosen-container').css('width', '100%');
+            });
+        } else {
+            $('#modal_localizacao_exterior').modal();
+            $('#btnPopupLocalizacaoExteriorPesquisar').click();
         }
     }
     
@@ -2148,7 +2173,7 @@ DML;
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Seleção de Localizações</h4>
+                        <h4 class="modal-title">Seleção de Localizações Municipais</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
@@ -2168,7 +2193,27 @@ DML;
                 <div class="modal-content">
                     <div class="modal-header">
                         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Seleção de Localizações</h4>
+                        <h4 class="modal-title">Seleção de Localizações Estaduais</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_localizacao_exterior" class="modal fade">
+            <div class="modal_dialog_localizacao_exterior">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Seleção de Localizações no Exterior</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
