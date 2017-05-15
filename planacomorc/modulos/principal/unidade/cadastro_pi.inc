@@ -1846,13 +1846,49 @@ DML;
         } else {
             $('label[for="ted"]').attr('style', '');
         }
-        // Se não for inserido nenhuma Localização, o sistema acrescenta uma mensagem de erro.
-        if($('#table_localizacao input[name="listaLocalizacao[]"]').size() == 0){
+        
+        // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
+        if($('#esfid').val() == ""){
             $('.legend_localizacao').attr('style', 'color: #b94a48;');
             addMsgCustom.push('Localização do Projeto');
         } else {
-            $('.legend_localizacao').attr('style', '');
+            switch($('#esfid').val()) {
+                // Verifica se a esfera é Estadual/DF.
+                case intEsfidEstadualDF:
+                    // Verifica se existe não foi inserido item na lista de localização municipal.
+                    if($('input[name="listaLocalizacaoEstadual[]"]').size() == 0){
+                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        addMsgCustom.push('Inserir Localização do Projeto Estadual/Distrito Federal');
+                    } else {
+                        $('.legend_localizacao').attr('style', '');
+                    }
+                break;
+                // Verifica se a esfera é Exterior.
+                case intEsfidExterior:
+                    // Verifica se existe não foi inserido item na lista de localização no Exterior.
+                    if($('input[name="listaLocalizacaoExterior[]"]').size() == 0){
+                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        addMsgCustom.push('Inserir Localização do Projeto no Exterior');
+                    } else {
+                        $('.legend_localizacao').attr('style', '');
+                    }
+                break;
+                // Verifica se a esfera é Municipal.
+                case intEsfidMunicipal:
+                    // Verifica se existe não foi inserido item na lista de localização municipal.
+                    if($('input[name="listaLocalizacao[]"]').size() == 0){
+                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        addMsgCustom.push('Inserir Localização do Projeto Municipal');
+                    } else {
+                        $('.legend_localizacao').attr('style', '');
+                    }
+                break;
+                default:
+                    $('.legend_localizacao').attr('style', '');
+                break;
+            }
         }
+
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
         if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
             $('.legend_responsaveis').attr('style', 'color: #b94a48;');
