@@ -402,80 +402,81 @@ DML;
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-body legend_funcional">
-                        <b>Detalhamento Orçamentário</b>
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend class="legend_funcional">Detalhamento Orçamentário</legend>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
+                                        <tr>
+                                            <td rowspan="2" nowrap>
+                                                <b>PTRES</b>
+                                            </td>
+                                            <td rowspan="2" style="width:45%" nowrap>
+                                                <b>Funcional</b>
+                                            </td>
+                                            <td rowspan="2" nowrap>
+                                                <b>Dotação Atual PO (R$)</b>
+                                            </td>
+                                            <td colspan="2" nowrap>
+                                                <b><span id="detPi">Detalhado em PI (R$)</span></b>
+                                            </td>
+                                            <td colspan="2">
+                                                <b>Empenho (R$)</b>
+                                            </td>
+                                            <td rowspan="2" align="center">
+                                                <b>Valor do Projeto</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td nowrap><b>Detalhado</b></td>
+                                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
+                                            <td nowrap><b>Empenhado</b></td>
+                                            <td nowrap><b>Não&nbsp;Empenhado</b></td>
+                                        </tr>
+                                        <?php
+                                            if ($dadosPI['pliid']) {
+                                                $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
+                                                #ver($dadosPTRES);
+                                                if ($dadosPTRES) {
+                                                    $valortotalpi = 0;
+                                                    $cor = 1;
+                                                    foreach ($dadosPTRES as $ptres):
+                                                        ?>
+                                                        <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
+                                                            <td align="center"><?php echo $ptres['ptres']; ?></td>
+                                                            <td align="left"><?php echo $ptres['descricao']; ?></td>
+                                                            <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
+                                                            <td align="right"><?php echo $ptres['det_pi']; ?></td>
+                                                            <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
+                                                            <td align="right"><?php echo $ptres['empenhado']; ?></td>
+                                                            <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
+                                                            <td align="center">
+                                                                <?php echo 'R$ '. number_format($ptres['pipvalor'], 2, ',', '.'); ?>
+                <!--                                                <input type="text" name="plivalor" id="plivalor" value="<?php echo $ptres['pipvalor']; ?>"
+                                                                    class="normal somar CampoEstilo normal form-control obrigatorio" style="text-align:right;width:20ex" data-ptres="<?php echo $ptres['ptres']; ?>"
+                                                                    onblur="verificaDisponivel(this, '<?php echo $ptres['ptrid']; ?>', '<?php echo $ptres['pipvalor']; ?>'); " />-->
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        $cor++;
+                                                        $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
+                                                    endforeach;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info" style="width: 100%;" />
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
-                        <tr>
-                            <td rowspan="2" nowrap><b>PTRES</b><input type="hidden" name="pliptres"></td>
-                            <td rowspan="2" style="width:45%" nowrap><b>Funcional</b></td>
-                            <td rowspan="2" nowrap><b>Dotação Atual PO (R$)</b></td>
-                            <td colspan="2" nowrap><b>
-                                <span id="detPi">
-                                <?php
-                                if ($sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em PI (R$)';
-                                }if (!$sbaid && $dadosPI['pliid']) {
-                                    echo 'Detalhado em PI (R$)';
-                                }if (!$dadosPI['pliid']) {
-                                    echo 'Detalhado em PI (R$)';
-                                } ?>
-                                </span></b>
-                            </td>
-                            <td colspan="2"><b>Empenho (R$)</b></td>
-                            <td rowspan="2" align="center"><b>Valor do Projeto</b></td>
-                        </tr>
-                        <tr>
-                            <td nowrap><b>Detalhado</b></td>
-                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
-                            <td nowrap><b>Empenhado</b></td>
-                            <td nowrap><b>Não&nbsp;Empenhado</b></td>
-                        </tr>
-                        <?php
-                        if ($dadosPI['pliid']) {
-                            $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
-                            #ver($dadosPTRES);
-                            if ($dadosPTRES) {
-                                $valortotalpi = 0;
-                                $cor = 1;
-                                foreach ($dadosPTRES as $ptres):
-                                    ?>
-                                    <tr style="height:30px;"
-                                        id="ptres_<?php echo $ptres['ptrid']; ?>">
-                                        <td align="center"><?php echo $ptres['ptres']; ?></td>
-                                        <td align="left"><?php echo $ptres['descricao']; ?></td>
-                                        <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
-                                        <td align="right"><?php echo $ptres['det_subacao']; ?></td>
-                                        <td align="right"><?php echo $ptres['nao_det_subacao']; ?></td>
-                                        <td align="right"><?php echo $ptres['det_pi']; ?></td>
-                                        <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
-                                        <td align="right"><?php echo $ptres['empenhado']; ?></td>
-                                        <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
-                                        <?php /* não dar espaço entre este input e o td */ ?>
-                                        <td align="center">
-                                            <input type="text" name="plivalored[<?php echo $ptres['ptrid']; ?>]"
-                                                   id="plivalored[<?php echo $ptres['ptrid']; ?>]" value="<?php echo $ptres['pipvalor']; ?>"
-                                                   onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);calculovalorPI();"
-                                                   class="normal somar CampoEstilo normal form-control obrigatorio" onmouseover="MouseOver(this);" style="text-align:right;width:20ex"
-                                                   onfocus="MouseClick(this); this.select();" onmouseout="MouseOut(this);"
-                                                   data-ptres="<?php echo $ptres['ptres']; ?>"
-                                                   onblur="verificaDisponivel(this, '<?php echo $ptres['ptrid']; ?>', '<?php echo $ptres['pipvalor']; ?>');
-                                                           MouseBlur(this)"/>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                    $cor++;
-                                    $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
-                                endforeach;
-                            }
-                        }
-                        ?>
-                        <tr>
-                            <td align="right" colspan="10">
-                                <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info"/>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -964,8 +965,12 @@ DML;
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Valor do Projeto:</td>
-                                            <td style="text-align: left;"><input class="CampoEstilo normal form-control obrigatorio" type="text"> </td>
-                                            <td style="text-align: center;"><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td style="text-align: left;">
+                                                <input type="text" id="valor_custeio" name="valor_custeio" class="CampoEstilo normal form-control obrigatorio" onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);" />
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input type="text" id="valor_capital" name="valor_capital" class="CampoEstilo normal form-control obrigatorio" onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);" />
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -1319,9 +1324,46 @@ DML;
             controlarTipoLocalizacao($(this).val());
         });
         
+        $('#valor_custeio').keyup(function(){
+            calcularValorProjeto();
+        });
+        
+        $('#valor_capital').keyup(function(){
+            calcularValorProjeto();
+        });
+        
         controlarTipoLocalizacao($('#esfid').val());
         
     });
+    
+    /**
+     * Calcula o valor da funcional.
+     * 
+     * @returns VOID
+     */
+    function calcularValorProjeto() {
+        var valorCusteio = textToFloat($('#valor_custeio').val());
+        var valorCapital = textToFloat($('#valor_capital').val());
+        var total = valorCusteio + valorCapital;
+        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    }
+    
+   /**
+    * Transforma o valor de texto pra flutuante pra efetuar operações matematicas.
+    * 
+    * @param string text
+    * @return float numero
+    */
+    function textToFloat(text){
+        var numero = 0;
+        text = replaceAll(text, '.', '');
+        text = replaceAll(text, ',', '.');
+        if(parseFloat(text) > 0){
+            numero = parseFloat(text);
+        }
+        
+        return numero;
+    }
     
     /**
      * Controla as opções do formulario conforme a opção de tipo de localização selecionada.
@@ -2107,36 +2149,11 @@ DML;
 
     function verificaDisponivel(campo, ptrid, vlold) {
         var linha = document.getElementById('ptres_' + ptrid);
-        //valordisp = parseFloat(replaceAll(replaceAll(linha.cells[6].innerHTML, ".", ""), ",", "."));
-        //valordisp = parseFloat($(linha.cells[6]).text().replace('.','').replace(',','.'));
         valordisp = parseFloat(replaceAll(replaceAll($(linha.cells[6]).text(),'.',''),',','.'))
         valoratual = parseFloat(replaceAll(replaceAll(campo.value, ".", ""), ",", "."));
-        //valorDotacao = parseFloat(replaceAll(replaceAll(linha.cells[2].innerHTML, ".", ""), ",", "."));
         valorDotacao = parseFloat(replaceAll(replaceAll($(linha.cells[2]).text(),'.',''),',','.'))
-        mensagem = 'Para PI com Subação o valor não pode ser maior do que o valor não Detalhado em PI.';
-        /* Troca a referência caso seja sem Subação */
-        if (jQuery("input[name=semsubacao]:checked").val() == 's' || $('#tipoSubacao').val() == 's') {
-            //valorNES = parseFloat(replaceAll(replaceAll(linha.cells[4].innerHTML, ".", ""), ",", "."));
-            //valorNES = parseFloat($(linha.cells[4]).text().replace('.','').replace(',','.'));
-            valorNES = parseFloat(replaceAll(replaceAll($(linha.cells[4]).text(),'.',''),',','.'))
-            //valorNEP = parseFloat(replaceAll(replaceAll(linha.cells[6].innerHTML, ".", ""), ",", "."));
-            //valorNEP = parseFloat($(linha.cells[6]).text().replace('.','').replace(',','.'));
-            valorNEP = parseFloat(replaceAll(replaceAll($(linha.cells[6]).text(),'.',''),',','.'));
-            if (valorNES > valorNEP) {
-                valordisp = valorNEP;
-                mensagem = 'Para PI sem Subação o valor não pode ser maior do que o valor Não Detalhado em PI. ';
-            }else {
-                valordisp = valorNES;
-                mensagem = 'Para PI sem Subação o valor não pode ser maior do que o valor Não Detalhado em Subação. ';
-            }
 
-            //alert(mensagem);
-        }
-        if (valoratual > (valordisp + parseFloat(replaceAll(replaceAll(vlold, ".", ""), ",", ".")))) {
-            alert(mensagem);
-            campo.value = vlold;
-            calculovalorPI(); return false;
-        }
+        /* Troca a referência caso seja sem Subação */
         if(valoratual > valorDotacao){
             alert('O valor não pode ser maior do que o valor da Dotação Atual do PTRES.');
             $(campo).val('0');

@@ -606,11 +606,16 @@ DML;
                     celEmpenhoE.innerHTML = empenhoE + '<input type="hidden" name="acaid[]" value="' +ptres +'" >';
 
                     var celValorPre = tabelaorigem.rows[linha].insertCell(7);
-                    celValorPre.style.textAlign = "right";
-                    celValorPre.innerHTML = '<input readonly="readonly" type="text" class="CampoEstilo normal form-control " name="plivalor[' + ptres + '][' + id + ']" size="28" '
-                            + 'onchange="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);" '
-                            + 'data-ptres="' + ptres + '" '
-                            + ' />';
+                    celValorPre.style.textAlign = "center";
+                    celValorPre.id = "td_valor_projeto";
+//                    celValorPre.innerHTML = '<input readonly="readonly" type="text" class="CampoEstilo normal form-control " name="plivalor" size="28" '
+//                            + 'onchange="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);" '
+//                            + 'data-ptres="' + ptres + '" '
+//                            + ' />';
+                    celValorPre.innerHTML = '';
+                    
+                    // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
+                    calcularValorProjeto();
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');
