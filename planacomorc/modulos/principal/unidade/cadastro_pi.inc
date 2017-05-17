@@ -947,7 +947,7 @@ DML;
                                             <td style="text-align: center;" id="td_disponivel_funcional_capital" >40.000,00</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: left;">Valor do Projeto:</td>
+                                            <td id="valor_projeto" style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;">
                                                 <input type="text" id="valor_custeio" name="valor_custeio" class="CampoEstilo normal form-control obrigatorio" onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);" />
                                             </td>
@@ -1308,87 +1308,33 @@ DML;
         });
         
         $('#valor_custeio').keyup(function(){
-            atualizarValorDoProjeto();
+            calcularValorProjeto();
         });
-        
+
         $('#valor_capital').keyup(function(){
-            atualizarValorDoProjeto();
+            calcularValorProjeto();
         });
-        
+
         controlarTipoLocalizacao($('#esfid').val());
-        
+
     });
-    
+
     /**
      * Calcula o valor da funcional.
-     * 
+     *
      * @returns VOID
      */
-    function atualizarValorDoProjeto() {
-        valorDoProjeto = buscarValorDoProjeto();
-        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', valorDoProjeto.toFixed(2) ));
-        mudarCorValorProjeto();
-    }
-    
-    /**
-     * Soma o valor de capital e custeio e retorna o valor total do projeto.
-     * 
-     * @returns float Valor do projeto
-     */
-    function buscarValorDoProjeto(){
+    function calcularValorProjeto() {
         var valorCusteio = textToFloat($('#valor_custeio').val());
         var valorCapital = textToFloat($('#valor_capital').val());
-        var valorDoProjeto = valorCusteio + valorCapital;
-
-        return valorDoProjeto;
+        var total = valorCusteio + valorCapital;
+        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
-    
-    /**
-     * Soma o valor de capital e custeio e retorna o valor total disponivel.
-     * 
-     * @returns float Valor
-     */
-    function buscarValorDisponivelFuncional(){
-        var valorCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
-        var valorCapital = textToFloat($('#td_disponivel_funcional_capital').text());
-        var disponivelFuncional = valorCusteio + valorCapital;
 
-        return disponivelFuncional;
-    }
-    
-    /**
-     * Soma o valor de capital e custeio e retorna o valor total disponivel.
-     * 
-     * @returns float Valor
-     */
-    function buscarValorAutorizadoFuncional(){
-        var valorCusteio = textToFloat($('#td_autorizado_funcional_custeio').text());
-        var valorCapital = textToFloat($('#td_autorizado_funcional_capital').text());
-        var autorizadoFuncional = valorCusteio + valorCapital;
-
-        return autorizadoFuncional;
-    }
-    
-    /**
-     * Muda a cor do valor de projeto capital e custeio quando o valor disponível 
-     * da sub-unidade ou funcional for ultrapassado.
-     * 
-     * @returns VOID
-     */
     function mudarCorValorProjeto(){
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        var disponivelFuncional = buscarValorDisponivelFuncional();
-        var valorDoProjeto = buscarValorDoProjeto();
-        
-        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
-            $('#valor_custeio').addClass('validateRedText');
-            $('#valor_capital').addClass('validateRedText');
-            $('#td_valor_projeto').addClass('validateRedText');
-        } else {
-            $('#valor_custeio').removeClass('validateRedText');
-            $('#valor_capital').removeClass('validateRedText');
-            $('#td_valor_projeto').removeClass('validateRedText');
-        }
+        $('#valor_custeio').addClass('validateRedText');
+        $('#valor_capital').addClass('validateRedText');
     }
     
    /**
@@ -1987,8 +1933,22 @@ DML;
             addMsgCustom.push('Responsáveis pelo Projeto');
         } else {
             $('.legend_responsaveis').removeClass('validateRedText');
-        }        
-        
+        }
+
+        if($('#valor_custeio').val() == ""){
+            $('#valor_projeto').addClass('validateRedText');
+            addMsgCustom.push('Custeio');
+        } else {
+            $('#valor_projeto').removeClass('validateRedText');
+        }
+
+        if($('#valor_capital').val() == ""){
+            $('#valor_projeto').addClass('validateRedText');
+            addMsgCustom.push('Capital');
+        } else {
+            $('#valor_capital').removeClass('validateRedText');
+        }
+
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
     }
