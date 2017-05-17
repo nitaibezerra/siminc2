@@ -615,7 +615,7 @@ DML;
                     celValorPre.innerHTML = '';
                     
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
-                    calcularValorProjeto();
+                    atualizarValorDoProjeto();
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');

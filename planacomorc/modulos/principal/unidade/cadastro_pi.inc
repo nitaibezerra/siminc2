@@ -1308,11 +1308,11 @@ DML;
         });
         
         $('#valor_custeio').keyup(function(){
-            calcularValorProjeto();
+            atualizarValorDoProjeto();
         });
         
         $('#valor_capital').keyup(function(){
-            calcularValorProjeto();
+            atualizarValorDoProjeto();
         });
         
         controlarTipoLocalizacao($('#esfid').val());
@@ -1324,17 +1324,58 @@ DML;
      * 
      * @returns VOID
      */
-    function calcularValorProjeto() {
-        var valorCusteio = textToFloat($('#valor_custeio').val());
-        var valorCapital = textToFloat($('#valor_capital').val());
-        var total = valorCusteio + valorCapital;
-        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    function atualizarValorDoProjeto() {
+        valorDoProjeto = buscarValorDoProjeto();
+        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', valorDoProjeto.toFixed(2) ));
+        mudarCorValorProjeto();
     }
     
+    /**
+     * Soma o valor de capital e custeio e retorna o valor total do projeto.
+     * 
+     * @returns float Valor do projeto
+     */
+    function buscarValorDoProjeto(){
+        var valorCusteio = textToFloat($('#valor_custeio').val());
+        var valorCapital = textToFloat($('#valor_capital').val());
+        var valorDoProjeto = valorCusteio + valorCapital;
+
+        return valorDoProjeto;
+    }
+    
+    /**
+     * Soma o valor de capital e custeio e retorna o valor total disponivel.
+     * 
+     * @returns float Valor
+     */
+    function buscarValorDisponivelFuncional(){
+        var valorCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
+        var valorCapital = textToFloat($('#td_disponivel_funcional_capital').text());
+        var disponivelFuncional = valorCusteio + valorCapital;
+
+        return disponivelFuncional;
+    }
+    
+    /**
+     * Muda a cor do valor de projeto capital e custeio quando o valor disponível 
+     * da sub-unidade ou funcional for ultrapassado.
+     * 
+     * @returns VOID
+     */
     function mudarCorValorProjeto(){
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        $('#valor_custeio').addClass('validateRedText');
-        $('#valor_capital').addClass('validateRedText');
+        var disponivelFuncional = buscarValorDisponivelFuncional();
+        var valorDoProjeto = buscarValorDoProjeto();
+        
+        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
+            $('#valor_custeio').addClass('validateRedText');
+            $('#valor_capital').addClass('validateRedText');
+            $('#td_valor_projeto').addClass('validateRedText');
+        } else {
+            $('#valor_custeio').removeClass('validateRedText');
+            $('#valor_capital').removeClass('validateRedText');
+            $('#td_valor_projeto').removeClass('validateRedText');
+        }
     }
     
    /**
