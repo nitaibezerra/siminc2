@@ -982,7 +982,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Janeiro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -990,7 +990,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Fevereiro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -998,7 +998,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Março</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1006,7 +1006,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Abril</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1014,7 +1014,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Maio</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1022,7 +1022,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Junho</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1030,7 +1030,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Julho</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1038,7 +1038,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Agosto</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1046,7 +1046,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Setembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1054,7 +1054,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Outubro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1062,7 +1062,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Novembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1070,7 +1070,7 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Dezembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
@@ -1229,6 +1229,7 @@ DML;
         });
 
         $('#input_convenio').mask('9999999999');
+        $('#quantidade').mask('9999999999');
 
         $('#btn_selecionar_convenio').click(function(){
             var trHtml =
@@ -1315,9 +1316,46 @@ DML;
             atualizarValorDoProjeto();
         });
         
+        $('.input_fisico').keyup(function(){
+            validarCronogramaFisico();
+        });
+        
+        $('#quantidade').keyup(function(){
+            validarCronogramaFisico();
+        });
+        
         controlarTipoLocalizacao($('#esfid').val());
         
     });
+    
+    function validarCronogramaFisico(){
+        var quantidade = textToFloat($('#quantidade').val());
+        var totalFisico = buscarTotalCronogramaFisico();
+        if(totalFisico > quantidade){
+            $('input.input_fisico').each(function(data, key){
+                $(this).addClass('validateRedText');
+            });
+        } else {
+            $('input.input_fisico').each(function(data, key){
+                $(this).removeClass('validateRedText');
+            });
+        }
+    }
+    
+    /**
+     * Busca o total informado de todos os meses no cronograma fisico.
+     * 
+     * @returns float
+     */
+    function buscarTotalCronogramaFisico(){
+        var totalFisico = 0;
+        $('input.input_fisico').each(function(data, key){
+            fisico = textToFloat($(this).val());
+            totalFisico += fisico;
+        });
+        
+        return totalFisico;
+    }
     
     /**
      * Calcula o valor da funcional.
