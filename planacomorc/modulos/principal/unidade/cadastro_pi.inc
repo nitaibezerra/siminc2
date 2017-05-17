@@ -809,26 +809,6 @@ DML;
                                     ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="ano" class="control-label">Ano:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = "
-                                            SELECT
-                                                    ano AS codigo,
-                                                    ano AS descricao
-                                            FROM public.anos
-                                            ORDER BY
-                                                    descricao
-                                        ";
-
-                                        $ano = $dadosPI['ano'];
-                                        $db->monta_combo('ano', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ano', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ano) ? $ano: null));
-                                    ?>
-                                </div>
-                            </div>
                         </fieldset>
                     </div>
                 </div>
@@ -1870,44 +1850,44 @@ DML;
         addMsgCustom = new Array();
         
         if($('input[name="acaid[]"]').size() == 0){
-            $('.legend_funcional').attr('style', 'color: #b94a48;');
+            $('.legend_funcional').addClass('validateRedText');
             addMsgCustom.push('Funcional');
         } else {
-            $('.legend_funcional').attr('style', '');
+            $('.legend_funcional').removeClass('validateRedText');
         }
         
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
         if($('[name="lista_sniic[]"]').size() == 0){
             addMsgCustom.push('Números SNIIC');
-            $('.legend_sniic').attr('style', 'color: #b94a48;');
+            $('.legend_sniic').addClass('validateRedText');
         } else {
-            $('.legend_sniic').attr('style','');
+            $('.legend_sniic').removeClass('validateRedText');
         }
         // Se não for adicionado convenio, acrescenta uma msg ao erro.
         if($('[name="lista_convenio[]"]').size() == 0){
             addMsgCustom.push('Números De Convênio');
-            $('.legend_convenio').attr('style', 'color: #b94a48;');
+            $('.legend_convenio').addClass('validateRedText');
         } else {
-            $('.legend_convenio').attr('style','');
+            $('.legend_convenio').removeClass('validateRedText');
         }
         // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
         if($('input[name=edital]:checked').val() == undefined || $('input[name=edital]:checked').val() == ""){
-            $('label[for="edital"]').attr('style', 'color: #b94a48;');
+            $('label[for="edital"]').addClass('validateRedText');
             addMsgCustom.push('Edital');
         } else {
-            $('label[for="edital"]').attr('style', '');
+            $('label[for="edital"]').removeClass('validateRedText');
         }
         // Se não for selecionado nenhuma opção para ted, o sistema acrescenta uma mensagem de erro.
         if($('input[name=ted]:checked').val() == undefined || $('input[name=ted]:checked').val() == ""){
-            $('label[for="ted"]').attr('style', 'color: #b94a48;');
+            $('label[for="ted"]').addClass('validateRedText');
             addMsgCustom.push('TED');
         } else {
-            $('label[for="ted"]').attr('style', '');
+            $('label[for="ted"]').removeClass('validateRedText');
         }
         
         // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
         if($('#esfid').val() == ""){
-            $('.legend_localizacao').attr('style', 'color: #b94a48;');
+            $('.legend_localizacao').addClass('validateRedText');
             addMsgCustom.push('Localização do Projeto');
         } else {
             switch($('#esfid').val()) {
@@ -1915,44 +1895,44 @@ DML;
                 case intEsfidEstadualDF:
                     // Verifica se existe não foi inserido item na lista de localização municipal.
                     if($('input[name="listaLocalizacaoEstadual[]"]').size() == 0){
-                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        $('.legend_localizacao').addClass('validateRedText');
                         addMsgCustom.push('Inserir Localização do Projeto Estadual/Distrito Federal');
                     } else {
-                        $('.legend_localizacao').attr('style', '');
+                        $('.legend_localizacao').removeClass('validateRedText');
                     }
                 break;
                 // Verifica se a esfera é Exterior.
                 case intEsfidExterior:
                     // Verifica se existe não foi inserido item na lista de localização no Exterior.
                     if($('input[name="listaLocalizacaoExterior[]"]').size() == 0){
-                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        $('.legend_localizacao').addClass('validateRedText');
                         addMsgCustom.push('Inserir Localização do Projeto no Exterior');
                     } else {
-                        $('.legend_localizacao').attr('style', '');
+                        $('.legend_localizacao').removeClass('validateRedText');
                     }
                 break;
                 // Verifica se a esfera é Municipal.
                 case intEsfidMunicipal:
                     // Verifica se existe não foi inserido item na lista de localização municipal.
                     if($('input[name="listaLocalizacao[]"]').size() == 0){
-                        $('.legend_localizacao').attr('style', 'color: #b94a48;');
+                        $('.legend_localizacao').addClass('validateRedText');
                         addMsgCustom.push('Inserir Localização do Projeto Municipal');
                     } else {
-                        $('.legend_localizacao').attr('style', '');
+                        $('.legend_localizacao').removeClass('validateRedText');
                     }
                 break;
                 default:
-                    $('.legend_localizacao').attr('style', '');
+                    $('.legend_localizacao').removeClass('validateRedText');
                 break;
             }
         }
 
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
         if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
-            $('.legend_responsaveis').attr('style', 'color: #b94a48;');
+            $('.legend_responsaveis').addClass('validateRedText');
             addMsgCustom.push('Responsáveis pelo Projeto');
         } else {
-            $('.legend_responsaveis').attr('style', '');
+            $('.legend_responsaveis').removeClass('validateRedText');
         }        
         
         listaObrigatorios = definirCamposObrigatorios();
@@ -1975,7 +1955,7 @@ DML;
         
         var opcaoEdital = $('input[name=edital]:checked').val();
         if(opcaoEdital == 't'){
-            listaObrigatorios.push('mes', 'ano');
+            listaObrigatorios.push('mes');
         }
         
         return listaObrigatorios;
