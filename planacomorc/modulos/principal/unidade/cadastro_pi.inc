@@ -1377,6 +1377,19 @@ DML;
     }
     
     /**
+     * Soma o valor de capital e custeio e retorna o valor total disponivel.
+     * 
+     * @returns float Valor
+     */
+    function buscarValorAutorizadoFuncional(){
+        var valorCusteio = textToFloat($('#td_autorizado_funcional_custeio').text());
+        var valorCapital = textToFloat($('#td_autorizado_funcional_capital').text());
+        var autorizadoFuncional = valorCusteio + valorCapital;
+
+        return autorizadoFuncional;
+    }
+    
+    /**
      * Muda a cor do valor de projeto capital e custeio quando o valor disponível 
      * da sub-unidade ou funcional for ultrapassado.
      * 

@@ -565,9 +565,9 @@ DML;
                     celPTRES.style.textAlign = "center";
                     celPTRES.innerHTML = ptres;
 
-                    var celAcao = tabelaorigem.rows[linha].insertCell(1);
-                    var acao = $('tr#' + id + ' td:nth-child(4)').text();
-                    celAcao.innerHTML = acao;
+                    var celFuncional = tabelaorigem.rows[linha].insertCell(1);
+                    var funcional = $('tr#' + id + ' td:nth-child(4)').text();
+                    celFuncional.innerHTML = funcional;
 
 //                    var celSubacaoDet = tabelaorigem.rows[linha].insertCell(2);
 //                    celSubacaoDet.style.textAlign = "right";
@@ -579,40 +579,51 @@ DML;
 //                    var subacaoNaoDet = $('tr#' + id + ' td:nth-child(7)').text();
 //                    celSubacaoNaoDet.innerHTML = subacaoNaoDet;
 
-                    var celEmpenhoEmp = tabelaorigem.rows[linha].insertCell(2);
-                    celEmpenhoEmp.style.textAlign = "right";
-                    var empenhoEmp = $('tr#' + id + ' td:nth-child(6)').text();
-                    celEmpenhoEmp.innerHTML = empenhoEmp;
+                    var celDotacaoAtualPo = tabelaorigem.rows[linha].insertCell(2);
+                    celDotacaoAtualPo.style.textAlign = "right";
+                    var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(6)').text();
+                    celDotacaoAtualPo.innerHTML = dotacaoAtualPO;
+                    
+                    var vlrDotacaoAtualPo = textToFloat(dotacaoAtualPO);
+                    var vlrAutorizadoCusteioCapitalProvisorio = vlrDotacaoAtualPo / 2;
+                    
+                    $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+                    $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
 
+                    var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
+                    celDetalhadoPi.style.textAlign = "right";
+                    var detalhado = $('tr#' + id + ' td:nth-child(7)').text();
+                    celDetalhadoPi.innerHTML = detalhado;
 
-                    var celEmpenhoNaoEmp = tabelaorigem.rows[linha].insertCell(3);
-                    celEmpenhoNaoEmp.style.textAlign = "right";
-                    var empenhoNaoEmp = $('tr#' + id + ' td:nth-child(7)').text();
-                    celEmpenhoNaoEmp.innerHTML = empenhoNaoEmp;
+                    var celNaoDetalhadoPi = tabelaorigem.rows[linha].insertCell(4);
+                    celNaoDetalhadoPi.style.textAlign = "right";
+                    var naoDetalhado = $('tr#' + id + ' td:nth-child(8)').text();
+                    celNaoDetalhadoPi.innerHTML = naoDetalhado;
+                    
+                    var vlrNaoDetalhado = textToFloat(naoDetalhado);
+                    var vlrDisponivelCusteioCapitalProvisorio = vlrNaoDetalhado / 2;
+                    
+                    $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
+                    $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
 
-                    var celEmpenho = tabelaorigem.rows[linha].insertCell(4);
-                    celEmpenho.style.textAlign = "right";
-                    var empenho = $('tr#' + id + ' td:nth-child(8)').text();
-                    celEmpenho.innerHTML = empenho;
+                    var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
+                    CelEmpenhado.style.textAlign = "right";
+                    var empenhado = $('tr#' + id + ' td:nth-child(9)').text();
+                    CelEmpenhado.innerHTML = empenhado;
 
-                    var celNaoEmpenho = tabelaorigem.rows[linha].insertCell(5);
-                    celNaoEmpenho.style.textAlign = "right";
-                    var naoEmpenho = $('tr#' + id + ' td:nth-child(9)').text();
-                    celNaoEmpenho.innerHTML = naoEmpenho;
+                    var celNaoEmpenhado = tabelaorigem.rows[linha].insertCell(6);
+                    celNaoEmpenhado.style.textAlign = "right";
+                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(10)').text();
+                    celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="acaid[]" value="' +ptres +'" >';
 
-                    var celEmpenhoE = tabelaorigem.rows[linha].insertCell(6);
-                    celEmpenhoE.style.textAlign = "right";
-                    var empenhoE = $('tr#' + id + ' td:nth-child(10)').text();
-                    celEmpenhoE.innerHTML = empenhoE + '<input type="hidden" name="acaid[]" value="' +ptres +'" >';
-
-                    var celValorPre = tabelaorigem.rows[linha].insertCell(7);
-                    celValorPre.style.textAlign = "center";
-                    celValorPre.id = "td_valor_projeto";
+                    var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
+                    celValorDoProjeto.style.textAlign = "center";
+                    celValorDoProjeto.id = "td_valor_projeto";
 //                    celValorPre.innerHTML = '<input readonly="readonly" type="text" class="CampoEstilo normal form-control " name="plivalor" size="28" '
 //                            + 'onchange="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);" '
 //                            + 'data-ptres="' + ptres + '" '
 //                            + ' />';
-                    celValorPre.innerHTML = '';
+                    celValorDoProjeto.innerHTML = '';
                     
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();
