@@ -1229,6 +1229,7 @@ DML;
         });
 
         $('#input_convenio').mask('9999999999');
+        
         $('#quantidade').mask('9999999999');
 
         $('#btn_selecionar_convenio').click(function(){
@@ -1254,6 +1255,8 @@ DML;
                 $('#btn_selecionar_convenio').click();
             }
         });
+        
+        $('input.input_fisico').mask('9999999999');
         
         $('.element_edital').click(function() {
             setTimeout(function(){
@@ -1335,10 +1338,13 @@ DML;
             $('input.input_fisico').each(function(data, key){
                 $(this).addClass('validateRedText');
             });
+            $('label[for="quantidade"]').addClass('validateRedText');
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma fisico superior ao valor informado na Quantidade do Produto do PI. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
         } else {
             $('input.input_fisico').each(function(data, key){
                 $(this).removeClass('validateRedText');
             });
+            $('label[for="quantidade"]').removeClass('validateRedText');
         }
     }
     
