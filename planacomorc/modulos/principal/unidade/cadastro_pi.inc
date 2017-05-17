@@ -939,15 +939,17 @@ DML;
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"></td>
-                                            <td colspan="3" style="text-align: center;"><b>Total(Custeio e Capital)</b></td>
+                                            <td colspan="3" style="text-align: center;">
+                                                <b>Total(Custeio e Capital)</b>
+                                            </td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
-                                            <td colspan="3" style="text-align: center;">R$25.769.250,00</td>
+                                            <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >1.700.250,00</td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
-                                            <td colspan="3" style="text-align: center;">R$25.769.250,00</td>
+                                            <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >150.250,00</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;"></td>
@@ -956,12 +958,13 @@ DML;
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
-                                            <td style="text-align: left;">R$1.500.00,00</td>
-                                            <td style="text-align: center;">R$500.00,00</td>
-                                        </tr>                                        <tr>
+                                            <td style="text-align: left;" id="td_autorizado_funcional_custeio" >100.000,00</td>
+                                            <td style="text-align: center;" id="td_autorizado_funcional_capital" >50.000,00</td>
+                                        </tr>
+                                        <tr>
                                             <td style="text-align: left;">Saldo Disponível na Funcional:</td>
-                                            <td style="text-align: left;">R$1.500.00,00</td>
-                                            <td style="text-align: center;">R$500.00,00</td>
+                                            <td style="text-align: left;" id="td_disponivel_funcional_custeio" >90.000,00</td>
+                                            <td style="text-align: center;" id="td_disponivel_funcional_capital" >40.000,00</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Valor do Projeto:</td>
@@ -1346,6 +1349,12 @@ DML;
         var valorCapital = textToFloat($('#valor_capital').val());
         var total = valorCusteio + valorCapital;
         $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    }
+    
+    function mudarCorValorProjeto(){
+        var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
+        $('#valor_custeio').addClass('validateRedText');
+        $('#valor_capital').addClass('validateRedText');
     }
     
    /**
