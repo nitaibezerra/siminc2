@@ -66,7 +66,8 @@ function validarFormulario(itemsParaValidacao, formID, requisicao, addMsgCustom)
     }
 
     $('#requisicao').val(requisicao);
-    $('#' + formID).submit();
+//    $('#' + formID).submit();
+alert('Funcionalidade em desenvolvimento!');
 }
 
 /**

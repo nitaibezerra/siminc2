@@ -949,10 +949,10 @@ DML;
                                         <tr>
                                             <td id="valor_projeto" style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;">
-                                                <input type="text" id="valor_custeio" name="valor_custeio" class="CampoEstilo normal form-control obrigatorio" onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);" />
+                                                <input type="text" id="valor_custeio" name="valor_custeio" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                             <td style="text-align: center;">
-                                                <input type="text" id="valor_capital" name="valor_capital" class="CampoEstilo normal form-control obrigatorio" onKeyUp="this.value = mascaraglobal('###.###.###.###,##', this.value);" />
+                                                <input type="text" id="valor_capital" name="valor_capital" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                         </tr>
                                     </table>
@@ -983,106 +983,104 @@ DML;
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Janeiro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Fevereiro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Março</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Abril</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Maio</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Junho</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Julho</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Agosto</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Setembro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Outubro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Novembro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Dezembro</td>
                                             <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
+                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
                                         </tr>
                                         <tr style="height: 30px; ">
                                             <td style="text-align: left;">Total:</td>
-                                            <td>R$</td>
-                                            <td>R$</td>
-                                            <td>R$</td>
-                                            <td>R$</td>
-                                            <td>R$</td>
+                                            <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
+                                            <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_orcamentario">R$ 0,00</td>
+                                            <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_financeiro">R$ 0,00</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -1312,46 +1310,224 @@ DML;
         });
         
         $('#valor_custeio').keyup(function(){
+            this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
 
         $('#valor_capital').keyup(function(){
+            this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
         
-        $('.input_fisico').keyup(function(){
-            validarCronogramaFisico();
+        $('#quantidade').keyup(function(){
+            mudarCorCronogramaFisico();
+            avisarCronogramaFisico();
         });
         
-        $('#quantidade').keyup(function(){
-            validarCronogramaFisico();
+        $('.input_fisico').keyup(function(){
+            mudarCorCronogramaFisico();
+            avisarCronogramaFisico();
+            atualizarTotalFisico();
+        });
+        
+        $('.input_orcamentario').keyup(function(){
+            this.value = mascaraglobal('###.###.###.###,##', this.value);
+            mudarCorCronogramaOrcamentario();
+            avisarCronogramaOrcamentario();
+            atualizarTotalOrcamentario();
+        });
+        
+        $('.input_financeiro').keyup(function(){
+            this.value = mascaraglobal('###.###.###.###,##', this.value);
+            mudarCorCronogramaFinanceiro();
+            avisarCronogramaFinanceiro();
+            atualizarTotalFinanceiro();
         });
         
         controlarTipoLocalizacao($('#esfid').val());
 
     });
     
-    function validarCronogramaFisico(){
-        var quantidade = textToFloat($('#quantidade').val());
-        var totalFisico = buscarTotalCronogramaFisico();
-        if(totalFisico > quantidade){
-            $('input.input_fisico').each(function(data, key){
-                $(this).addClass('validateRedText');
-            });
-            $('label[for="quantidade"]').addClass('validateRedText');
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma fisico superior ao valor informado na Quantidade do Produto do PI. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
-        } else {
-            $('input.input_fisico').each(function(data, key){
-                $(this).removeClass('validateRedText');
-            });
-            $('label[for="quantidade"]').removeClass('validateRedText');
+    /**
+     * Exibe orientações ao usuário para preencher corretamente o Cronograma.
+     * 
+     * @returns VOID
+     */
+    function avisarCronogramaFisico(){
+        if(!validarCronogramaFisicoInferiorQuantidade()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma físico superior ao valor informado na Quantidade do Produto do PI. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
         }
     }
     
     /**
-     * Busca o total informado de todos os meses no cronograma fisico.
+     * Exibe orientações ao usuário para preencher corretamente o Cronograma.
+     * 
+     * @returns VOID
+     */
+    function avisarCronogramaOrcamentario(){
+        if(!validarCronogramaOrcamentarioInferiorValorProjeto()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma orçamentário superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma orçamentário ou aumente o Valor do Projeto.</span></p>');
+        }
+    }
+    
+    /**
+     * Exibe orientações ao usuário para preencher corretamente o Cronograma.
+     * 
+     * @returns VOID
+     */
+    function avisarCronogramaFinanceiro(){
+        if(!validarCronogramaFinanceiroInferiorValorProjeto()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma financeiro superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma financeiro ou aumente o Valor do Projeto.</span></p>');
+        }
+    }
+    
+    /**
+     * Muda a cor dos valores do cronograma Físico se o valor exceder o valor do projeto.
+     * 
+     * @returns VOID
+     */
+    function mudarCorCronogramaFisico(){
+        if(validarCronogramaFisicoInferiorQuantidade()){
+            $('input.input_fisico').removeClass('validateRedText');
+            $('#td_total_fisico').removeClass('validateRedText');
+        } else {
+            $('input.input_fisico').addClass('validateRedText');
+            $('#td_total_fisico').addClass('validateRedText');
+        }
+    }
+    
+    /**
+     * Muda a cor dos valores do cronograma orçamentário se o valor exceder o valor do projeto.
+     * 
+     * @returns VOID
+     */
+    function mudarCorCronogramaOrcamentario(){
+        if(validarCronogramaOrcamentarioInferiorValorProjeto()){
+            $('input.input_orcamentario').removeClass('validateRedText');
+            $('#td_total_orcamentario').removeClass('validateRedText');
+        } else {
+            $('input.input_orcamentario').addClass('validateRedText');
+            $('#td_total_orcamentario').addClass('validateRedText');
+        }
+    }
+    
+    /**
+     * Muda a cor dos valores do cronograma financeiro se o valor exceder o valor do projeto.
+     * 
+     * @returns VOID
+     */
+    function mudarCorCronogramaFinanceiro(){
+        if(validarCronogramaFinanceiroInferiorValorProjeto()){
+            $('input.input_financeiro').removeClass('validateRedText');
+            $('#td_total_financeiro').removeClass('validateRedText');
+        } else {
+            $('input.input_financeiro').addClass('validateRedText');
+            $('#td_total_financeiro').addClass('validateRedText');
+        }
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaFisicoPreenchido(){
+        var valido = false;
+        var totalFisico = buscarTotalCronogramaFisico();
+        
+        if(totalFisico > 0){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido com valores inferiores a Quantidade do Produto do PI.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaFisicoInferiorQuantidade(){
+        var valido = false;
+        var quantidade = textToFloat($('#quantidade').val());
+        var totalFisico = buscarTotalCronogramaFisico();
+        if(totalFisico <= quantidade){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaOrcamentarioInferiorValorProjeto(){
+        var valido = false;
+        var valorDoProjeto = buscarValorDoProjeto();
+        var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
+        
+        if(valorTotalOrcamentario <= valorDoProjeto){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaFinanceiroInferiorValorProjeto(){
+        var valido = false;
+        var valorDoProjeto = buscarValorDoProjeto();
+        var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
+        
+        if(valorTotalFinanceiro <= valorDoProjeto){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaOrcamentarioPreenchido(){
+        var valido = false;
+        var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
+        
+        if(valorTotalOrcamentario > 0){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Verifica se o cronograma está preenchido.
+     * 
+     * @returns Boolean
+     */
+    function validarCronogramaFinanceiroPreenchido(){
+        var valido = false;
+        var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
+        
+        if(valorTotalFinanceiro > 0){
+            valido = true;
+        }
+        
+        return valido;
+    }
+    
+    /**
+     * Busca o total informado de todos os meses no cronograma físico.
      * 
      * @returns float
      */
@@ -1364,6 +1540,36 @@ DML;
         
         return totalFisico;
     }
+    
+    /**
+     * Busca o total informado de todos os meses no cronograma orcamentario.
+     * 
+     * @returns float
+     */
+    function buscarTotalCronogramaOrcamentario(){
+        var totalOrcamentario = 0;
+        $('input.input_orcamentario').each(function(data, key){
+            fisico = textToFloat($(this).val());
+            totalOrcamentario += fisico;
+        });
+        
+        return totalOrcamentario;
+    }
+    
+    /**
+     * Busca o total informado de todos os meses no cronograma financeiro.
+     * 
+     * @returns float
+     */
+    function buscarTotalCronogramaFinanceiro(){
+        var totalFinanceiro = 0;
+        $('input.input_financeiro').each(function(data, key){
+            fisico = textToFloat($(this).val());
+            totalFinanceiro += fisico;
+        });
+        
+        return totalFinanceiro;
+    }
 
     /**
      * Calcula o valor da funcional.
@@ -1375,6 +1581,36 @@ DML;
         var valorCapital = textToFloat($('#valor_capital').val());
         var total = valorCusteio + valorCapital;
         $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    }
+    
+    /**
+     * Exibe o valor total do cronograma Físico na tela.
+     *
+     * @returns VOID
+     */
+    function atualizarTotalFisico() {
+        var total = buscarTotalCronogramaFisico();
+        $('#td_total_fisico').html( total.toFixed(0) );
+    }
+    
+    /**
+     * Exibe o valor total do cronograma Orçamentário na tela.
+     *
+     * @returns VOID
+     */
+    function atualizarTotalOrcamentario() {
+        var total = buscarTotalCronogramaOrcamentario();
+        $('#td_total_orcamentario').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    }
+    
+    /**
+     * Exibe o valor total do cronograma Financeiro na tela.
+     *
+     * @returns VOID
+     */
+    function atualizarTotalFinanceiro() {
+        var total = buscarTotalCronogramaFinanceiro();
+        $('#td_total_financeiro').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
 
     /**
@@ -2035,14 +2271,16 @@ DML;
         } else {
             $('.legend_responsaveis').removeClass('validateRedText');
         }
-
+        
+        // Valida se o usuário preencheu Valor do Projeto - Custeio.
         if($('#valor_custeio').val() == ""){
             $('#valor_projeto').addClass('validateRedText');
             addMsgCustom.push('Custeio');
         } else {
             $('#valor_projeto').removeClass('validateRedText');
         }
-
+        
+        // Valida se o usuário preencheu Valor do Projeto - Capital.
         if($('#valor_capital').val() == ""){
             $('#valor_projeto').addClass('validateRedText');
             addMsgCustom.push('Capital');
@@ -2050,6 +2288,10 @@ DML;
             $('#valor_capital').removeClass('validateRedText');
         }
         
+        /*
+         * 
+         * @todo Refatorar esse código de validação da parte Custeio e Capital dividindo em funções.
+         */
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
         var disponivelFuncional = buscarValorDisponivelFuncional();
         var valorDoProjeto = buscarValorDoProjeto();
@@ -2070,33 +2312,62 @@ DML;
             $('#td_valor_projeto').removeClass('validateRedText');
         }
         
-        var quantidade = textToFloat($('#quantidade').val());
-        var totalFisico = buscarTotalCronogramaFisico();
-        
         // Verifica se o cronograma físico foi preenchido.
-        if(totalFisico == 0){
-            $('input.input_fisico').each(function(data, key){
-                $(this).addClass('validateRedText');
-            });
+        if(!validarCronogramaFisicoPreenchido()){
+            $('input.input_fisico').addClass('validateRedText');
+            $('#td_total_fisico').addClass('validateRedText');
             addMsgCustom.push('Cronograma Fisíco');
         } else {
-            $('input.input_fisico').each(function(data, key){
-                $(this).removeClass('validateRedText');
-            });
+            $('input.input_fisico').removeClass('validateRedText');
+            $('#td_total_fisico').removeClass('validateRedText');
         }
         
-        // Verifica se o valor do cronograma é superior ao informado no Produto do PI.
-        if(totalFisico > quantidade){
-            $('#quantidade').addClass('validateRedText');
-            $('input.input_fisico').each(function(data, key){
-                $(this).addClass('validateRedText');
-            });
+        // Verifica se o cronograma orçamentário foi preenchido.
+        if(!validarCronogramaOrcamentarioPreenchido()){
+            $('input.input_orcamentario').addClass('validateRedText');
+            $('#td_total_orcamentario').addClass('validateRedText');
+            addMsgCustom.push('Cronograma Orçamentário');
+        } else {
+            $('input.input_orcamentario').removeClass('validateRedText');
+            $('#td_total_orcamentario').removeClass('validateRedText');
+        }
+        
+        // Verifica se o cronograma financeiro foi preenchido.
+        if(!validarCronogramaFinanceiroPreenchido()){
+            $('input.input_financeiro').addClass('validateRedText');
+            $('#td_total_financeiro').addClass('validateRedText');
+            addMsgCustom.push('Cronograma Financeiro');
+        } else {
+            $('input.input_financeiro').removeClass('validateRedText');
+            $('#td_total_financeiro').removeClass('validateRedText');
+        }
+        
+        // Verifica se o valor do cronograma Físico é superior ao informado no Produto do PI.
+        if(!validarCronogramaFisicoInferiorQuantidade()){
+            $('input.input_fisico').addClass('validateRedText');
+            $('#td_total_fisico').addClass('validateRedText');
             addMsgCustom.push('Cronograma Fisíco com valor superior ao Produto do PI');
         } else {
-            $('#quantidade').removeClass('validateRedText');
-            $('input.input_fisico').each(function(data, key){
-                $(this).removeClass('validateRedText');
-            });
+            $('input.input_fisico').removeClass('validateRedText');
+            $('#td_total_fisico').removeClass('validateRedText');
+        }
+        // Verifica se o valor do cronograma Orçamentário é superior ao valor do Projeto.
+        if(!validarCronogramaOrcamentarioInferiorValorProjeto()){
+            $('input.input_orcamentario').addClass('validateRedText');
+            $('#td_total_orcamentario').addClass('validateRedText');
+            addMsgCustom.push('Cronograma Orçamentário com valor superior ao Valor do Projeto');
+        } else {
+            $('input.input_orcamentario').removeClass('validateRedText');
+            $('#td_total_orcamentario').removeClass('validateRedText');
+        }
+        // Verifica se o valor do cronograma financeiro é superior ao valor do Projeto.
+        if(!validarCronogramaFinanceiroInferiorValorProjeto()){
+            $('input.input_financeiro').addClass('validateRedText');
+            $('#td_total_financeiro').addClass('validateRedText');
+            addMsgCustom.push('Cronograma Financeiro com valor superior ao Valor do Projeto');
+        } else {
+            $('input.input_financeiro').removeClass('validateRedText');
+            $('#td_total_financeiro').removeClass('validateRedText');
         }
 
         listaObrigatorios = definirCamposObrigatorios();
@@ -2322,20 +2593,6 @@ DML;
     }
 
     atualizarPrevisaoPI();
-
-//    function apresentaLinhasSelecionadas(tabelaOrigem, apartirDe) {
-//        var val;
-//        for (i = apartirDe; i < tabelaOrigem.find('tr').length; i++) {
-//            val = tabelaOrigem.find('tr')[i].id.split("_");
-//            // alert(val[1]);
-//            if (document.getElementById(val[1])) {
-//                campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
-//                campo.attr('class', 'glyphicon glyphicon-trash');
-//                campo.attr('title', 'Remover item');
-//                campo.css('color', 'gray');
-//            }
-//        }
-//    }
 
 </script>
 <div id="divTeste"></div>
