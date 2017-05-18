@@ -1992,6 +1992,35 @@ DML;
         } else {
             $('#valor_capital').removeClass('validateRedText');
         }
+        
+        var quantidade = textToFloat($('#quantidade').val());
+        var totalFisico = buscarTotalCronogramaFisico();
+        
+        // Verifica se o cronograma físico foi preenchido.
+        if(totalFisico == 0){
+            $('input.input_fisico').each(function(data, key){
+                $(this).addClass('validateRedText');
+            });
+            addMsgCustom.push('Cronograma Fisíco');
+        } else {
+            $('input.input_fisico').each(function(data, key){
+                $(this).removeClass('validateRedText');
+            });
+        }
+        
+        // Verifica se o valor do cronograma é superior ao informado no Produto do PI.
+        if(totalFisico > quantidade){
+            $('#quantidade').addClass('validateRedText');
+            $('input.input_fisico').each(function(data, key){
+                $(this).addClass('validateRedText');
+            });
+            addMsgCustom.push('Cronograma Fisíco com valor superior ao Produto do PI');
+        } else {
+            $('#quantidade').removeClass('validateRedText');
+            $('input.input_fisico').each(function(data, key){
+                $(this).removeClass('validateRedText');
+            });
+        }
 
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
