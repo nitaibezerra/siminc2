@@ -527,6 +527,7 @@ DML;
                                     <?php
                                         $sql = <<<DML
                                             SELECT
+                                                mpncod::NUMERIC AS ordem,
                                                 mpnid AS codigo,
                                                 mpncod || '-' || mpnnome AS descricao
                                             FROM monitora.pi_meta_pnc
@@ -534,7 +535,7 @@ DML;
                                                 mpnstatus = 'A'
                                                 AND prsano  = '{$_SESSION['exercicio']}'
                                             ORDER BY
-                                                mpncod
+                                                ordem
 DML;
                                     $mpnid = $dadosPI['mpnid'];
                                     $db->monta_combo('mpnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mpnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mpnid)? $mpnid: null));
