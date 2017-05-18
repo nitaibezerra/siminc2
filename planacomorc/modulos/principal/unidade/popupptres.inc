@@ -569,16 +569,6 @@ DML;
                     var funcional = $('tr#' + id + ' td:nth-child(4)').text();
                     celFuncional.innerHTML = funcional;
 
-//                    var celSubacaoDet = tabelaorigem.rows[linha].insertCell(2);
-//                    celSubacaoDet.style.textAlign = "right";
-//                    var subacaoDet = $('tr#' + id + ' td:nth-child(6)').text();
-//                    celSubacaoDet.innerHTML = subacaoDet;
-
-//                    var celSubacaoNaoDet = tabelaorigem.rows[linha].insertCell(3);
-//                    celSubacaoNaoDet.style.textAlign = "right";
-//                    var subacaoNaoDet = $('tr#' + id + ' td:nth-child(7)').text();
-//                    celSubacaoNaoDet.innerHTML = subacaoNaoDet;
-
                     var celDotacaoAtualPo = tabelaorigem.rows[linha].insertCell(2);
                     celDotacaoAtualPo.style.textAlign = "right";
                     var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(6)').text();
@@ -619,14 +609,11 @@ DML;
                     var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
                     celValorDoProjeto.style.textAlign = "center";
                     celValorDoProjeto.id = "td_valor_projeto";
-//                    celValorPre.innerHTML = '<input readonly="readonly" type="text" class="CampoEstilo normal form-control " name="plivalor" size="28" '
-//                            + 'onchange="this.value=mascaraglobal(\'###.###.###.###,##\',this.value);" '
-//                            + 'data-ptres="' + ptres + '" '
-//                            + ' />';
                     celValorDoProjeto.innerHTML = '';
                     
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();
+                    mudarCorValorProjeto();
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');

@@ -938,13 +938,13 @@ DML;
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
-                                            <td style="text-align: left;" id="td_autorizado_funcional_custeio" >100.000,00</td>
-                                            <td style="text-align: center;" id="td_autorizado_funcional_capital" >50.000,00</td>
+                                            <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
+                                            <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;">Saldo Disponível na Funcional:</td>
-                                            <td style="text-align: left;" id="td_disponivel_funcional_custeio" >90.000,00</td>
-                                            <td style="text-align: center;" id="td_disponivel_funcional_capital" >40.000,00</td>
+                                            <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+                                            <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                         </tr>
                                         <tr>
                                             <td id="valor_projeto" style="text-align: left;">Valor do Projeto:</td>
@@ -1312,11 +1312,13 @@ DML;
         });
         
         $('#valor_custeio').keyup(function(){
-            calcularValorProjeto();
+            atualizarValorDoProjeto();
+            mudarCorValorProjeto();
         });
 
         $('#valor_capital').keyup(function(){
-            calcularValorProjeto();
+            atualizarValorDoProjeto();
+            mudarCorValorProjeto();
         });
         
         $('.input_fisico').keyup(function(){
@@ -1368,17 +1370,72 @@ DML;
      *
      * @returns VOID
      */
-    function calcularValorProjeto() {
+    function atualizarValorDoProjeto() {
         var valorCusteio = textToFloat($('#valor_custeio').val());
         var valorCapital = textToFloat($('#valor_capital').val());
         var total = valorCusteio + valorCapital;
         $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
 
+    /**
+     * Soma o valor de capital e custeio e retorna o valor total do projeto.
+     * 
+     * @returns float Valor do projeto
+     */
+    function buscarValorDoProjeto(){
+        var valorCusteio = textToFloat($('#valor_custeio').val());
+        var valorCapital = textToFloat($('#valor_capital').val());
+        var valorDoProjeto = valorCusteio + valorCapital;
+
+        return valorDoProjeto;
+    }
+    
+    /**
+     * Soma o valor de capital e custeio e retorna o valor total disponivel.
+     * 
+     * @returns float Valor
+     */
+    function buscarValorDisponivelFuncional(){
+        var valorCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
+        var valorCapital = textToFloat($('#td_disponivel_funcional_capital').text());
+        var disponivelFuncional = valorCusteio + valorCapital;
+
+        return disponivelFuncional;
+    }
+    
+    /**
+     * Soma o valor de capital e custeio e retorna o valor total disponivel.
+     * 
+     * @returns float Valor
+     */
+    function buscarValorAutorizadoFuncional(){
+        var valorCusteio = textToFloat($('#td_autorizado_funcional_custeio').text());
+        var valorCapital = textToFloat($('#td_autorizado_funcional_capital').text());
+        var autorizadoFuncional = valorCusteio + valorCapital;
+
+        return autorizadoFuncional;
+    }
+
+    /**
+     * Muda a cor do valor de projeto capital e custeio quando o valor disponvel 
+     * da sub-unidade ou funcional for ultrapassado.
+     * 
+     * @returns VOID
+     */
     function mudarCorValorProjeto(){
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        $('#valor_custeio').addClass('validateRedText');
-        $('#valor_capital').addClass('validateRedText');
+        var disponivelFuncional = buscarValorDisponivelFuncional();
+        var valorDoProjeto = buscarValorDoProjeto();
+        
+        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
+            $('#valor_custeio').addClass('validateRedText');
+            $('#valor_capital').addClass('validateRedText');
+            $('#td_valor_projeto').addClass('validateRedText');
+        } else {
+            $('#valor_custeio').removeClass('validateRedText');
+            $('#valor_capital').removeClass('validateRedText');
+            $('#td_valor_projeto').removeClass('validateRedText');
+        }
     }
     
    /**
