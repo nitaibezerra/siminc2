@@ -626,7 +626,7 @@ DML;
                         <fieldset><legend>Produto PI:</legend>
                             <div class="form-group">
                                 <div class="col-md-2 text-right">
-                                    <label for="pprid" class="control-label">Selecionar:</label>
+                                    <label for="pprid" class="control-label">Produto:</label>
                                 </div>
                                 <div class="col-lg-10">
                                     <?php
@@ -819,7 +819,7 @@ DML;
                             <legend class="legend_localizacao">Localização do Projeto</legend>
                             <div class="form-group">
                                 <div class="col-md-2 text-right">
-                                    <label for="mdeid" class="control-label">Selecionar:</label>
+                                    <label for="esfid" class="control-label">Tipo de localização:</label>
                                 </div>
                                 <div class="col-lg-10">
                                     <?php
@@ -2048,6 +2048,26 @@ DML;
             addMsgCustom.push('Capital');
         } else {
             $('#valor_capital').removeClass('validateRedText');
+        }
+        
+        var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
+        var disponivelFuncional = buscarValorDisponivelFuncional();
+        var valorDoProjeto = buscarValorDoProjeto();
+        
+        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
+            $('#valor_custeio').addClass('validateRedText');
+            $('#valor_capital').addClass('validateRedText');
+            $('#td_valor_projeto').addClass('validateRedText');
+            if(valorDoProjeto > disponivelUnidade){
+                addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
+            }
+            if(valorDoProjeto > disponivelFuncional){
+                addMsgCustom.push('Valor do projeto superior ao limite disponível da Funcional');
+            }
+        } else {
+            $('#valor_custeio').removeClass('validateRedText');
+            $('#valor_capital').removeClass('validateRedText');
+            $('#td_valor_projeto').removeClass('validateRedText');
         }
         
         var quantidade = textToFloat($('#quantidade').val());
