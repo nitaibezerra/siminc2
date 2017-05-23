@@ -817,9 +817,10 @@ function associarLocalizacao($pliid, $dados)
 
         foreach($dados['listaLocalizacao'] as $localizacao){
             switch($dados['esfid']){
-//                case:
+                case Territorios_Model_Esfera::K_EXTERIOR:  $modelPiLocalizacao->paiid = $localizacao;  break;
+                case Territorios_Model_Esfera::K_ESTADUAL:  $modelPiLocalizacao->estuf = $localizacao;  break;
+                case Territorios_Model_Esfera::K_MUNICIPAL: $modelPiLocalizacao->muncod = $localizacao; break;
             }
-            $modelPiLocalizacao->muncod = $localizacao;
             $modelPiLocalizacao->salvar();
             $modelPiLocalizacao->pilid = null;
         }

@@ -11,6 +11,12 @@
  */
 include_once '_funcoespi.php';
 
+include_once APPRAIZ . "planacomorc\classes\Pi_Sniic.class.inc";
+include_once APPRAIZ . "planacomorc\classes\Pi_Localizacao.class.inc";
+include_once APPRAIZ . "planacomorc\classes\Pi_Convenio.class.inc";
+include_once APPRAIZ . "planacomorc\classes\Pi_Acao.class.inc";
+
+
 if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
     die();
@@ -85,7 +91,11 @@ DML;
     $whereUO = " AND {$whereUO}";
 }*/
 
+$aSniic = $aConvenio = $aLocalizacao = $aPtres = [];
 if (validaRequisicao('pliid')) { // -- Edição de PI
+
+    $pliid = $_REQUEST['pliid'];
+
     // -- Carrega dados do PI e libera apenas o titulo e a descrição para edição
     $dadosPI = carregarPI($_REQUEST['pliid']);
     $enquadramento_pi = carregarEnquadramentoPI($_REQUEST['pliid']);
@@ -94,6 +104,10 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     $ehSolicitacao = false;
     $obrigatorio = 'S';
 
+    $aSniic = (new Pi_Sniic())->recuperarTodos('*', array('pliid = ' . $pliid));
+    $aConvenio = (new Pi_Convenio())->recuperarTodos('*', array('pliid = ' . $pliid));
+    $aLocalizacao = (new Pi_Localizacao())->recuperarPorPlanoInterno($pliid, $dadosPI['esfid']);
+    
     // -- Requisição de apagar transação - Não exibe os botões do rodapé, e nem valida o formulário
     if (validaRequisicao('apagar')) {
         $tipoTransacao = '-';
@@ -582,7 +596,15 @@ DML;
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-
+                                        <?php foreach($aSniic as $sniic){ ?>
+                                            <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['pisid']; ?>" >
+                                                <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
+                                                <td style="text-align: center;">
+                                                    <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['pissniic']; ?>" />
+                                                    <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['pisid']; ?>" ></span>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </table>
                                 </div>
                             </div>
@@ -734,6 +756,15 @@ DML;
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <?php foreach($aConvenio as $convenio){ ?>
+                                            <tr style="height: 30px;" id="tr_convenio_<?php echo $convenio['pcoid']; ?>" >
+                                                <td style="text-align: left;"><?php echo $convenio['pcoconvenio']; ?></td>
+                                                <td style="text-align: center;">
+                                                    <input type="hidden" name="lista_convenio[]" value="<?php echo $convenio['pcoconvenio']; ?>" />
+                                                    <span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="<?php echo $convenio['pcoid']; ?>" ></span>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </table>
                                 </div>
                             </div>
@@ -820,7 +851,6 @@ DML;
                                             ORDER BY
                                                 codigo
                                         ";
-
                                         $mescod = $dadosPI['mescod'];
                                         $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
                                     ?>
@@ -861,6 +891,18 @@ DML;
                                             <td style="text-align: left;"><b>Município</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
+                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_MUNICIPAL){
+                                            foreach($aLocalizacao as $localizacao){ ?>
+                                                <tr style="height: 30px;" class="tr_localizacao_<?php echo $localizacao['muncod']; ?>" >
+                                                    <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
+                                                    <td style="text-align: left;"><?php echo $localizacao['mundescricao']; ?></td>
+                                                    <td style="text-align: center;">
+                                                        <input type="hidden" value="<?php echo $localizacao['muncod']; ?>" name="listaLocalizacao[]">
+                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" >
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
 
                                     </table>
                                 </div>
@@ -873,7 +915,18 @@ DML;
                                             <td style="text-align: left;"><b>Nome</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-
+                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
+                                            foreach($aLocalizacao as $localizacao){ ?>
+                                                <tr style="height: 30px;" class="tr_localizacao_estadual_<?php echo $localizacao['estuf']; ?>" >
+                                                    <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
+                                                    <td style="text-align: left;"><?php echo $localizacao['estdescricao']; ?></td>
+                                                    <td style="text-align: center;">
+                                                        <input type="hidden" value="<?php echo $localizacao['estuf']; ?>" name="listaLocalizacaoEstadual[]">
+                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" >
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
                                     </table>
                                 </div>
                             </div>
@@ -884,7 +937,17 @@ DML;
                                             <td style="text-align: left;"><b>País</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-
+                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
+                                            foreach($aLocalizacao as $localizacao){ ?>
+                                                <tr style="height: 30px;" class="tr_localizacao_exterior_<?php echo $localizacao['paiid']; ?>" >
+                                                    <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
+                                                    <td style="text-align: center;">
+                                                        <input type="hidden" value="<?php echo $localizacao['paiid']; ?>" name="listaLocalizacaoExterior[]">
+                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" >
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
                                     </table>
                                 </div>
                             </div>
