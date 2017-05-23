@@ -726,7 +726,7 @@ DML;
 
 function salvarPiComplemento($pliid, $dados)
 {
-    include_once APPRAIZ . "planacomorc\classes\Pi_Complemento.class.inc";
+    include_once APPRAIZ . "planacomorc/classes/Pi_Complemento.class.inc";
 
     $modelPiComplemento = new Pi_Complemento($dados['picid']);
     $modelPiComplemento->popularDadosObjeto($dados);
@@ -745,7 +745,7 @@ function salvarPiComplemento($pliid, $dados)
 
 function associarAcao($pliid, $dados)
 {
-    include_once APPRAIZ . "planacomorc\classes\Pi_Acao.class.inc";
+    include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
 
     // Vinculando Ações
     $modelPiAcao = new Pi_Acao();
@@ -765,7 +765,7 @@ function associarAcao($pliid, $dados)
 
 function associarConvenio($pliid, $dados)
 {
-    include_once APPRAIZ . "planacomorc\classes\Pi_Convenio.class.inc";
+    include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
 
     // Vinculando Ações
     $modelPiConvenio= new Pi_Convenio();
@@ -785,7 +785,7 @@ function associarConvenio($pliid, $dados)
 
 function associarSniic($pliid, $dados)
 {
-    include_once APPRAIZ . "planacomorc\classes\Pi_Sniic.class.inc";
+    include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
 
     // Vinculando Ações
     $modelPiSniic= new Pi_Sniic();
@@ -805,7 +805,7 @@ function associarSniic($pliid, $dados)
 
 function associarLocalizacao($pliid, $dados)
 {
-    include_once APPRAIZ . "planacomorc\classes\Pi_Localizacao.class.inc";
+    include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
 
     // Vinculando Ações
     $modelPiLocalizacao= new Pi_Localizacao();
