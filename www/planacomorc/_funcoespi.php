@@ -705,8 +705,8 @@ DML;
         //ver($dados);
 
         // Grava informações complementares
+        $pliid = $dados['pliid'];
         salvarPiComplemento($pliid, $dados);
-        ver($dados, d);
 
         // -- Inserindo as novas associações PI/PTRES
         associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
@@ -727,6 +727,7 @@ DML;
 function salvarPiComplemento($pliid, $dados)
 {
     include_once APPRAIZ . "planacomorc\classes\Pi_Complemento.class.inc";
+
     $modelPiComplemento = new Pi_Complemento($dados['picid']);
     $modelPiComplemento->popularDadosObjeto($dados);
     $modelPiComplemento->pliid = $pliid;
@@ -735,6 +736,94 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->mescod = $dados['mescod'] ? $dados['mescod'] : null;
 
     $modelPiComplemento->salvar();
+
+    associarAcao($pliid, $dados);
+    associarConvenio($pliid, $dados);
+    associarSniic($pliid, $dados);
+    associarLocalizacao($pliid, $dados);
+}
+
+function associarAcao($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc\classes\Pi_Acao.class.inc";
+
+    // Vinculando Ações
+    $modelPiAcao = new Pi_Acao();
+
+    $modelPiAcao->excluirVarios("pliid = $pliid");
+    if(isset($dados['acaid']) && is_array($dados['acaid'])){
+
+        $modelPiAcao->pliid = $pliid;
+
+        foreach($dados['acaid'] as $acaid){
+            $modelPiAcao->acaid = $acaid;
+            $modelPiAcao->salvar();
+            $modelPiAcao->piaid = null;
+        }
+    }
+}
+
+function associarConvenio($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc\classes\Pi_Convenio.class.inc";
+
+    // Vinculando Ações
+    $modelPiConvenio= new Pi_Convenio();
+
+    $modelPiConvenio->excluirVarios("pliid = $pliid");
+    if(isset($dados['lista_convenio']) && is_array($dados['lista_convenio'])){
+
+        $modelPiConvenio->pliid = $pliid;
+
+        foreach($dados['lista_convenio'] as $pcoconvenio){
+            $modelPiConvenio->pcoconvenio = $pcoconvenio;
+            $modelPiConvenio->salvar();
+            $modelPiConvenio->pcoid = null;
+        }
+    }
+}
+
+function associarSniic($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc\classes\Pi_Sniic.class.inc";
+
+    // Vinculando Ações
+    $modelPiSniic= new Pi_Sniic();
+
+    $modelPiSniic->excluirVarios("pliid = $pliid");
+    if(isset($dados['lista_sniic']) && is_array($dados['lista_sniic'])){
+
+        $modelPiSniic->pliid = $pliid;
+
+        foreach($dados['lista_sniic'] as $pissniic){
+            $modelPiSniic->pissniic = $pissniic;
+            $modelPiSniic->salvar();
+            $modelPiSniic->pisid = null;
+        }
+    }
+}
+
+function associarLocalizacao($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc\classes\Pi_Localizacao.class.inc";
+
+    // Vinculando Ações
+    $modelPiLocalizacao= new Pi_Localizacao();
+
+    $modelPiLocalizacao->excluirVarios("pliid = $pliid");
+    if(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
+
+        $modelPiLocalizacao->pliid = $pliid;
+
+        foreach($dados['listaLocalizacao'] as $localizacao){
+            switch($dados['esfid']){
+//                case:
+            }
+            $modelPiLocalizacao->muncod = $localizacao;
+            $modelPiLocalizacao->salvar();
+            $modelPiLocalizacao->pilid = null;
+        }
+    }
 }
 
 function associarPIePTRES($pliid, $pliNovosPTRES, $pliPTRESAssociados) {

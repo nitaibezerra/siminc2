@@ -582,6 +582,7 @@ DML;
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+
                                     </table>
                                 </div>
                             </div>
