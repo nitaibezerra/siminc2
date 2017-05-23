@@ -43,6 +43,7 @@ if ($_REQUEST['sbaAjax']) {
  * Processa as requições enviadas a esta página.
  * @see cadastropi_requisicoes.inc
  */
+
 require(APPRAIZ . 'planacomorc/modulos/principal/planointerno/cadastropi_requisicoes.inc');
 
 
@@ -194,6 +195,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <input type="hidden" name="evento" id="evento" value="S" />
                 <input type="hidden" name="plicod" id="plicod" value="<?= $dadosPI['plicod']; ?>" />
                 <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
+                <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
                 <input type="hidden" name="sbacod" id="sbacod" value="<?php echo $dadosPI['sbacod']; ?>" />
                 <input type="hidden" name="sbaidAnterior" id="sbaidAnterior" value="" />
                 <input type="hidden" name="ehSolicitacao" id="ehSolicitacao" value="<?php echo $ehSolicitacao; ?>" />
@@ -608,7 +610,7 @@ DML;
                 </div>
                 <div style="display:none;" class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="idCodificacao">Codificação da Unidade(livre):</label>
+                        <label class="control-label" for="plilivre">Codificação da Unidade(livre):</label>
                     </div>
                     <div class="col-lg-10">
                     <?php
@@ -666,7 +668,7 @@ DML;
                                                 descricao
 DML;
 
-                                        $mdeid = $dadosPI['pumid'];
+                                        $pumid = $dadosPI['pumid'];
                                         $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
                                     ?>
                                 </div>
@@ -676,7 +678,7 @@ DML;
                                     <label for="quantidade" class="control-label">Quantidade:</label>
                                 </div>
                                 <div class="col-lg-10">
-                                    <input type="text" value="" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="quantidade" name="quantidade" maxlength="50" size="10" />
+                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="quantidade" name="picquantidade" maxlength="50" size="10" />
                                 </div>
                             </div>
                         </fieldset>
@@ -726,14 +728,14 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-lg-2 text-right">
-                        <label for="ted" class="control-label">TED:</label>
+                        <label for="picted" class="control-label">TED:</label>
                     </div>
                     <div class="col-lg-10">
                         <div class="form-inline required">
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="ted" value="t" class="link">
+                                        <input type="radio" name="picted" value="t" class="link" <?php echo !empty($dadosPI['picted']) && 't' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
                                     </span>
                                     <div class="form-control form-control-static input_check_s link">
                                         Sim
@@ -744,7 +746,7 @@ DML;
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="ted" value="f" class="link">
+                                        <input type="radio" name="picted" value="f" class="link" <?php echo !empty($dadosPI['picted']) && 'f' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
                                     </span>
                                     <div class="form-control form-control-static input_check_n link">
                                         Não
@@ -757,14 +759,14 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-lg-2 text-right">
-                        <label for="edital" class=" control-label">Edital:</label>
+                        <label for="picedital" class=" control-label">Edital:</label>
                     </div>
                     <div class="col-lg-10">
                         <div class="form-inline required">
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="edital" value="t" class="link element_edital">
+                                        <input type="radio" name="picedital" value="t" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 't' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
                                     </span>
                                     <div class="form-control form-control-static input_check_s link element_edital">
                                         Sim
@@ -775,7 +777,7 @@ DML;
                             <div class="form-group has-feedback col-xs-2">
                                 <label class="input-group">
                                     <span class="input-group-addon">
-                                        <input type="radio" name="edital" value="f" class="link element_edital">
+                                        <input type="radio" name="picedital" value="f" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 'f' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
                                     </span>
                                     <div class="form-control form-control-static input_check_n link element_edital">
                                         Não
@@ -787,7 +789,7 @@ DML;
                     </div>
                 </div>
                 <!--Inicio campos do Edital-->
-                <div class="panel panel-default div_edital">
+                <div class="panel panel-default" id="div_edital">
                     <div class="panel-body">
                         <fieldset><legend>Previsão de Lançamento do Edital:</legend>
                             <div class="form-group">
@@ -805,8 +807,8 @@ DML;
                                                 codigo
                                         ";
 
-                                        $mes = $dadosPI['mes'];
-                                        $db->monta_combo('mes', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mes) ? $mes: null));
+                                        $mescod = $dadosPI['mescod'];
+                                        $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
                                     ?>
                                 </div>
                             </div>
@@ -832,6 +834,7 @@ DML;
                                             ORDER BY
                                                 descricao
                                         ";
+                                        $esfid = $dadosPI['esfid'];
                                         $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                     ?>
                                 </div>
@@ -844,7 +847,7 @@ DML;
                                             <td style="text-align: left;"><b>Município</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-                                        
+
                                     </table>
                                 </div>
                             </div>
@@ -856,7 +859,7 @@ DML;
                                             <td style="text-align: left;"><b>Nome</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-                                        
+
                                     </table>
                                 </div>
                             </div>
@@ -867,13 +870,13 @@ DML;
                                             <td style="text-align: left;"><b>País</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-                                        
+
                                     </table>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    
+
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" style="width: 100%;" />
@@ -897,13 +900,13 @@ DML;
                                             <td style="text-align: left;"><b>E-mail</b></td>
                                             <td style="text-align: center;"><b>Ação</b></td>
                                         </tr>
-                                        
+
                                     </table>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    
+
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info" style="width: 100%;" />
@@ -948,12 +951,12 @@ DML;
                                             <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                         </tr>
                                         <tr>
-                                            <td id="valor_projeto" style="text-align: left;">Valor do Projeto:</td>
+                                            <td id="" style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;">
-                                                <input type="text" id="valor_custeio" name="valor_custeio" class="CampoEstilo normal form-control obrigatorio" />
+                                                <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? $dadosPI['picvalorcusteio'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                             <td style="text-align: center;">
-                                                <input type="text" id="valor_capital" name="valor_capital" class="CampoEstilo normal form-control obrigatorio" />
+                                                <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? $dadosPI['picvalorcapital'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                         </tr>
                                     </table>
@@ -1146,7 +1149,8 @@ DML;
                             <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
                                 <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn-info' />
                             <?php endif; ?>
-                            <input type="button" class="btn btn-primary" name="btg" onclick="submeter('<?php echo $plicod; ?>');" value="Salvar" <?php echo $disabled; ?> />
+<!--                            <input type="button" class="btn btn-primary" name="btg" onclick="submeter('--><?php //echo $plicod; ?>//');" value="Salvar" <?php //echo $disabled; ?><!-- />-->
+                            <input type="submit" class="btn btn-primary" name="btg" value="Salvar" <?php echo $disabled; ?> />
                         <?php endif; ?>
                     </div>
                 </div>
@@ -1162,9 +1166,9 @@ DML;
     intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";
     intEsfidFederalBrasil = "<?php echo ESFERA_FEDERAL_BRASIL; ?>";
     intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
-    
+
     $(document).ready(function() {
-        
+
         var tipoTransacao = $('tipotransacao').value;
         if ('-' == tipoTransacao) {
             // -- Desabilita o restante do formulário
@@ -1172,39 +1176,39 @@ DML;
             $('plidsc').disable();
             $('btn_selecionar_acaptres').disable();
         }
-        
+
         // Evento ao mudar opção de enquadramento
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });
-        
+
         // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
         });
         // Evento ao carregar a tela
         mudarFormularioFinalistico($('#eqdid').val());
-        
+
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val());
             carregarIniciativaPPA($(this).val());
         });
-        
+
         // Evento ao mudar opção de Metas PNC
         $('#mpnid').change(function(){
             carregarIndicadorPNC($(this).val());
         });
-        
+
         // Evento ao mudar opção de Área Cultural
         $('#mdeid').change(function(){
             carregarSegmentoCultural($(this).val());
         });
-        
+
         $('#input_sniic').mask('9999999999');
-        
+
         $('#btn_adicionar_sniic').click(function(){
-             var trHtml = 
+             var trHtml =
                 '<tr style="height: 30px;" id="tr_sniic_' + $('#input_sniic').val()+ '" >'
                         + '<td style="text-align: left;">' + $('#input_sniic').val() + '</td>'
                         + '<td style="text-align: center;">'
@@ -1215,12 +1219,12 @@ DML;
             $('#table_sniic').append(trHtml);
             $('#input_sniic').val('');
         });
-        
+
         $('#table_sniic').on('click', '.btnRemoveSniic', function(){
             var sniic = $(this).attr('data-sniic');
             $('#tr_sniic_'+ sniic).remove();
         });
-        
+
         $('#input_sniic').keypress(function(e){
             if(e.which == 13) {
                 $('#btn_adicionar_sniic').click();
@@ -1228,7 +1232,7 @@ DML;
         });
 
         $('#input_convenio').mask('9999999999');
-        
+
         $('#quantidade').mask('9999999999');
 
         $('#btn_selecionar_convenio').click(function(){
@@ -1254,106 +1258,106 @@ DML;
                 $('#btn_selecionar_convenio').click();
             }
         });
-        
+
         $('input.input_fisico').mask('9999999999');
-        
+
         $('.element_edital').click(function() {
             setTimeout(function(){
                 controlarEdital($('input[name=edital]:checked').val());
             }, 500); // Meio segundo
         });
-        
+
         $('#table_localizacao').on('click', '.btnRemoverLocalizacao', function(){
             var id = $(this).attr('data-localizacao');
             $('.tr_localizacao_'+ id).remove();
         });
-        
+
         $('#table_localizacao_estadual').on('click', '.btnRemoverLocalizacaoEstadual', function(){
             var id = $(this).attr('data-localizacao-estadual');
             $('.tr_localizacao_estadual_'+ id).remove();
         });
-        
+
         $('#table_localizacao_exterior').on('click', '.btnRemoverLocalizacaoExterior', function(){
             var id = $(this).attr('data-localizacao-exterior');
             $('.tr_localizacao_exterior_'+ id).remove();
         });
-        
+
         $('#table_responsaveis').on('click', '.btnRemoverResponsaveis', function(){
             var cpf = $(this).attr('data-responsaveis');
             $('.tr_responsaveis_'+ cpf).remove();
         });
-        
+
         // Evento ao carregar a tela
         controlarEdital($('input[name=edital]:checked').val());
 
         $('#btn_selecionar_functional').click(function(){
             abrir_lista();
         });
-        
+
         $('#btn_selecionar_responsaveis').click(function(){
             abrirModalResponsaveis();
         });
-        
+
         $('#btn_selecionar_localizacao').click(function(){
             abrirModalLocalizacao();
         });
-        
+
         $('#btn_selecionar_localizacao_estadual').click(function(){
             abrirModalLocalizacaoEstadual();
         });
-        
+
         $('#btn_selecionar_localizacao_exterior').click(function(){
             abrirModalLocalizacaoExterior();
         });
-        
+
         $('#esfid').change(function(){
             controlarTipoLocalizacao($(this).val());
         });
-        
-        $('#valor_custeio').keyup(function(){
+
+        $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
 
-        $('#valor_capital').keyup(function(){
+        $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
-        
+
         $('#quantidade').keyup(function(){
             mudarCorCronogramaFisico();
             avisarCronogramaFisico();
         });
-        
+
         $('.input_fisico').keyup(function(){
             mudarCorCronogramaFisico();
             avisarCronogramaFisico();
             atualizarTotalFisico();
         });
-        
+
         $('.input_orcamentario').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             mudarCorCronogramaOrcamentario();
             avisarCronogramaOrcamentario();
             atualizarTotalOrcamentario();
         });
-        
+
         $('.input_financeiro').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             mudarCorCronogramaFinanceiro();
             avisarCronogramaFinanceiro();
             atualizarTotalFinanceiro();
         });
-        
+
         controlarTipoLocalizacao($('#esfid').val());
 
     });
-    
+
     /**
      * Exibe orientações ao usuário para preencher corretamente o Cronograma.
-     * 
+     *
      * @returns VOID
      */
     function avisarCronogramaFisico(){
@@ -1361,10 +1365,10 @@ DML;
             alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma físico superior ao valor informado na Quantidade do Produto do PI. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
         }
     }
-    
+
     /**
      * Exibe orientações ao usuário para preencher corretamente o Cronograma.
-     * 
+     *
      * @returns VOID
      */
     function avisarCronogramaOrcamentario(){
@@ -1372,10 +1376,10 @@ DML;
             alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma orçamentário superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma orçamentário ou aumente o Valor do Projeto.</span></p>');
         }
     }
-    
+
     /**
      * Exibe orientações ao usuário para preencher corretamente o Cronograma.
-     * 
+     *
      * @returns VOID
      */
     function avisarCronogramaFinanceiro(){
@@ -1383,10 +1387,10 @@ DML;
             alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma financeiro superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma financeiro ou aumente o Valor do Projeto.</span></p>');
         }
     }
-    
+
     /**
      * Muda a cor dos valores do cronograma Físico se o valor exceder o valor do projeto.
-     * 
+     *
      * @returns VOID
      */
     function mudarCorCronogramaFisico(){
@@ -1398,10 +1402,10 @@ DML;
             $('#td_total_fisico').addClass('validateRedText');
         }
     }
-    
+
     /**
      * Muda a cor dos valores do cronograma orçamentário se o valor exceder o valor do projeto.
-     * 
+     *
      * @returns VOID
      */
     function mudarCorCronogramaOrcamentario(){
@@ -1413,10 +1417,10 @@ DML;
             $('#td_total_orcamentario').addClass('validateRedText');
         }
     }
-    
+
     /**
      * Muda a cor dos valores do cronograma financeiro se o valor exceder o valor do projeto.
-     * 
+     *
      * @returns VOID
      */
     function mudarCorCronogramaFinanceiro(){
@@ -1428,26 +1432,26 @@ DML;
             $('#td_total_financeiro').addClass('validateRedText');
         }
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaFisicoPreenchido(){
         var valido = false;
         var totalFisico = buscarTotalCronogramaFisico();
-        
+
         if(totalFisico > 0){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido com valores inferiores a Quantidade do Produto do PI.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaFisicoInferiorQuantidade(){
@@ -1457,79 +1461,79 @@ DML;
         if(totalFisico <= quantidade){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaOrcamentarioInferiorValorProjeto(){
         var valido = false;
         var valorDoProjeto = buscarValorDoProjeto();
         var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
-        
+
         if(valorTotalOrcamentario <= valorDoProjeto){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaFinanceiroInferiorValorProjeto(){
         var valido = false;
         var valorDoProjeto = buscarValorDoProjeto();
         var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
-        
+
         if(valorTotalFinanceiro <= valorDoProjeto){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaOrcamentarioPreenchido(){
         var valido = false;
         var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
-        
+
         if(valorTotalOrcamentario > 0){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Verifica se o cronograma está preenchido.
-     * 
+     *
      * @returns Boolean
      */
     function validarCronogramaFinanceiroPreenchido(){
         var valido = false;
         var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
-        
+
         if(valorTotalFinanceiro > 0){
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
      * Busca o total informado de todos os meses no cronograma físico.
-     * 
+     *
      * @returns float
      */
     function buscarTotalCronogramaFisico(){
@@ -1538,13 +1542,13 @@ DML;
             fisico = textToFloat($(this).val());
             totalFisico += fisico;
         });
-        
+
         return totalFisico;
     }
-    
+
     /**
      * Busca o total informado de todos os meses no cronograma orcamentario.
-     * 
+     *
      * @returns float
      */
     function buscarTotalCronogramaOrcamentario(){
@@ -1553,13 +1557,13 @@ DML;
             fisico = textToFloat($(this).val());
             totalOrcamentario += fisico;
         });
-        
+
         return totalOrcamentario;
     }
-    
+
     /**
      * Busca o total informado de todos os meses no cronograma financeiro.
-     * 
+     *
      * @returns float
      */
     function buscarTotalCronogramaFinanceiro(){
@@ -1568,7 +1572,7 @@ DML;
             fisico = textToFloat($(this).val());
             totalFinanceiro += fisico;
         });
-        
+
         return totalFinanceiro;
     }
 
@@ -1578,12 +1582,12 @@ DML;
      * @returns VOID
      */
     function atualizarValorDoProjeto() {
-        var valorCusteio = textToFloat($('#valor_custeio').val());
-        var valorCapital = textToFloat($('#valor_capital').val());
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var valorCapital = textToFloat($('#picvalorcapital').val());
         var total = valorCusteio + valorCapital;
         $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
-    
+
     /**
      * Exibe o valor total do cronograma Físico na tela.
      *
@@ -1593,7 +1597,7 @@ DML;
         var total = buscarTotalCronogramaFisico();
         $('#td_total_fisico').html( total.toFixed(0) );
     }
-    
+
     /**
      * Exibe o valor total do cronograma Orçamentário na tela.
      *
@@ -1603,7 +1607,7 @@ DML;
         var total = buscarTotalCronogramaOrcamentario();
         $('#td_total_orcamentario').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
-    
+
     /**
      * Exibe o valor total do cronograma Financeiro na tela.
      *
@@ -1616,20 +1620,20 @@ DML;
 
     /**
      * Soma o valor de capital e custeio e retorna o valor total do projeto.
-     * 
+     *
      * @returns float Valor do projeto
      */
     function buscarValorDoProjeto(){
-        var valorCusteio = textToFloat($('#valor_custeio').val());
-        var valorCapital = textToFloat($('#valor_capital').val());
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var valorCapital = textToFloat($('#picvalorcapital').val());
         var valorDoProjeto = valorCusteio + valorCapital;
 
         return valorDoProjeto;
     }
-    
+
     /**
      * Soma o valor de capital e custeio e retorna o valor total disponivel.
-     * 
+     *
      * @returns float Valor
      */
     function buscarValorDisponivelFuncional(){
@@ -1639,10 +1643,10 @@ DML;
 
         return disponivelFuncional;
     }
-    
+
     /**
      * Soma o valor de capital e custeio e retorna o valor total disponivel.
-     * 
+     *
      * @returns float Valor
      */
     function buscarValorAutorizadoFuncional(){
@@ -1654,30 +1658,30 @@ DML;
     }
 
     /**
-     * Muda a cor do valor de projeto capital e custeio quando o valor disponvel 
+     * Muda a cor do valor de projeto capital e custeio quando o valor disponvel
      * da sub-unidade ou funcional for ultrapassado.
-     * 
+     *
      * @returns VOID
      */
     function mudarCorValorProjeto(){
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
         var disponivelFuncional = buscarValorDisponivelFuncional();
         var valorDoProjeto = buscarValorDoProjeto();
-        
+
         if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
-            $('#valor_custeio').addClass('validateRedText');
-            $('#valor_capital').addClass('validateRedText');
+            $('#picvalorcusteio').addClass('validateRedText');
+            $('#picvalorcapital').addClass('validateRedText');
             $('#td_valor_projeto').addClass('validateRedText');
         } else {
-            $('#valor_custeio').removeClass('validateRedText');
-            $('#valor_capital').removeClass('validateRedText');
+            $('#picvalorcusteio').removeClass('validateRedText');
+            $('#picvalorcapital').removeClass('validateRedText');
             $('#td_valor_projeto').removeClass('validateRedText');
         }
     }
-    
+
    /**
     * Transforma o valor de texto pra flutuante pra efetuar operações matematicas.
-    * 
+    *
     * @param string text
     * @return float numero
     */
@@ -1688,13 +1692,13 @@ DML;
         if(parseFloat(text) > 0){
             numero = parseFloat(text);
         }
-        
+
         return numero;
     }
-    
+
     /**
      * Controla as opções do formulario conforme a opção de tipo de localização selecionada.
-     * 
+     *
      * @param int esfid Código da esfera preenchido pelo usuário
      * @return VOID
      */
@@ -1711,7 +1715,7 @@ DML;
             case intEsfidEstadualDF:
                 $('#table_localizacao_estadual tr').show('slow');
                 $('#btn_selecionar_localizacao_estadual').show('slow');
-                
+
                 $('#table_localizacao tr').not('tr.tr_head').remove();
                 $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
             break;
@@ -1739,7 +1743,7 @@ DML;
             break;
         }
     }
-    
+
     function abrirModalResponsaveis() {
         // Verifica se o modal terá que carregar a tela.
         if($('#modal_responsaveis .modal-body p').size() <= 1){
@@ -1757,7 +1761,7 @@ DML;
             $('#btnPopupResponsaveisPesquisar').click();
         }
     }
-    
+
     function abrirModalLocalizacao() {
         // Verifica se o modal terá que carregar a tela.
         if($('#modal_localizacao .modal-body p').size() <= 1){
@@ -1773,7 +1777,7 @@ DML;
             $('#btnPopupLocalizacaoPesquisar').click();
         }
     }
-    
+
     function abrirModalLocalizacaoEstadual() {
         // Verifica se o modal terá que carregar a tela.
         if($('#modal_localizacao_estadual .modal-body p').size() <= 1){
@@ -1789,7 +1793,7 @@ DML;
             $('#btnPopupLocalizacaoEstadualPesquisar').click();
         }
     }
-    
+
     function abrirModalLocalizacaoExterior() {
         // Verifica se o modal terá que carregar a tela.
         if($('#modal_localizacao_exterior .modal-body p').size() <= 1){
@@ -1805,21 +1809,21 @@ DML;
             $('#btnPopupLocalizacaoExteriorPesquisar').click();
         }
     }
-    
+
    /**
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
     */
     function controlarEdital(opcao){
         if(opcao == 't'){
-            $('.div_edital').show('slow');
+            $('#div_edital').show('slow');
         } else {
-            $('.div_edital').hide('slow');
+            $('#div_edital').hide('slow');
         }
     }
-    
+
     /**
      * Controla a exibição do formulario de acordo com o enquadramento selecionado.
-     * 
+     *
      * @param integer codigo Código selecionado pelo usuário.
      * @returns VOID
      */
@@ -1873,7 +1877,7 @@ DML;
             }
         );
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
@@ -1884,7 +1888,7 @@ DML;
             $(".chosen-select").chosen();
         });
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
      */
@@ -1895,7 +1899,7 @@ DML;
             $(".chosen-select").chosen();
         });
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Segmento Cultural via requisição ajax.
      */
@@ -1906,7 +1910,7 @@ DML;
             $(".chosen-select").chosen();
         });
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
@@ -2183,17 +2187,17 @@ DML;
         var l = $('#plicodsubacao').val();
         var sub = l.length;
         $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
-        
+
         // Msgs personalizadas de validação.
         addMsgCustom = new Array();
-        
+
         if($('input[name="acaid[]"]').size() == 0){
             $('.legend_funcional').addClass('validateRedText');
             addMsgCustom.push('Funcional');
         } else {
             $('.legend_funcional').removeClass('validateRedText');
         }
-        
+
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
         if($('[name="lista_sniic[]"]').size() == 0){
             addMsgCustom.push('Números SNIIC');
@@ -2222,7 +2226,7 @@ DML;
         } else {
             $('label[for="ted"]').removeClass('validateRedText');
         }
-        
+
         // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
         if($('#esfid').val() == ""){
             $('.legend_localizacao').addClass('validateRedText');
@@ -2272,34 +2276,34 @@ DML;
         } else {
             $('.legend_responsaveis').removeClass('validateRedText');
         }
-        
+
         // Valida se o usuário preencheu Valor do Projeto - Custeio.
-        if($('#valor_custeio').val() == ""){
+        if($('#picvalorcusteio').val() == ""){
             $('#valor_projeto').addClass('validateRedText');
             addMsgCustom.push('Custeio');
         } else {
             $('#valor_projeto').removeClass('validateRedText');
         }
-        
+
         // Valida se o usuário preencheu Valor do Projeto - Capital.
-        if($('#valor_capital').val() == ""){
+        if($('#picvalorcapital').val() == ""){
             $('#valor_projeto').addClass('validateRedText');
             addMsgCustom.push('Capital');
         } else {
-            $('#valor_capital').removeClass('validateRedText');
+            $('#picvalorcapital').removeClass('validateRedText');
         }
-        
+
         /*
-         * 
+         *
          * @todo Refatorar esse código de validação da parte Custeio e Capital dividindo em funções.
          */
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
         var disponivelFuncional = buscarValorDisponivelFuncional();
         var valorDoProjeto = buscarValorDoProjeto();
-        
+
         if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
-            $('#valor_custeio').addClass('validateRedText');
-            $('#valor_capital').addClass('validateRedText');
+            $('#picvalorcusteio').addClass('validateRedText');
+            $('#picvalorcapital').addClass('validateRedText');
             $('#td_valor_projeto').addClass('validateRedText');
             if(valorDoProjeto > disponivelUnidade){
                 addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
@@ -2308,11 +2312,11 @@ DML;
                 addMsgCustom.push('Valor do projeto superior ao limite disponível da Funcional');
             }
         } else {
-            $('#valor_custeio').removeClass('validateRedText');
-            $('#valor_capital').removeClass('validateRedText');
+            $('#picvalorcusteio').removeClass('validateRedText');
+            $('#picvalorcapital').removeClass('validateRedText');
             $('#td_valor_projeto').removeClass('validateRedText');
         }
-        
+
         // Verifica se o cronograma físico foi preenchido.
         if(!validarCronogramaFisicoPreenchido()){
             $('input.input_fisico').addClass('validateRedText');
@@ -2322,7 +2326,7 @@ DML;
             $('input.input_fisico').removeClass('validateRedText');
             $('#td_total_fisico').removeClass('validateRedText');
         }
-        
+
         // Verifica se o cronograma orçamentário foi preenchido.
         if(!validarCronogramaOrcamentarioPreenchido()){
             $('input.input_orcamentario').addClass('validateRedText');
@@ -2332,7 +2336,7 @@ DML;
             $('input.input_orcamentario').removeClass('validateRedText');
             $('#td_total_orcamentario').removeClass('validateRedText');
         }
-        
+
         // Verifica se o cronograma financeiro foi preenchido.
         if(!validarCronogramaFinanceiroPreenchido()){
             $('input.input_financeiro').addClass('validateRedText');
@@ -2342,7 +2346,7 @@ DML;
             $('input.input_financeiro').removeClass('validateRedText');
             $('#td_total_financeiro').removeClass('validateRedText');
         }
-        
+
         // Verifica se o valor do cronograma Físico é superior ao informado no Produto do PI.
         if(!validarCronogramaFisicoInferiorQuantidade()){
             $('input.input_fisico').addClass('validateRedText');
@@ -2377,23 +2381,23 @@ DML;
 
     /**
      * Controla a obrigatóriedade dos campos do formulario de acordo com o enquadramento selecionado.
-     * 
+     *
      * @returns Array
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
         var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'ted', 'edital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
-        
+
         // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
         if(codigoEnquadramento == intEnqFinalistico){
             listaObrigatorios.push('mpnid', 'ipnid');
         }
-        
+
         var opcaoEdital = $('input[name=edital]:checked').val();
         if(opcaoEdital == 't'){
             listaObrigatorios.push('mes');
         }
-        
+
         return listaObrigatorios;
     }
 

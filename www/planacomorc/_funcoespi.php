@@ -281,8 +281,7 @@ function carregarMetasPPA($oppid, $mppid) {
         ORDER BY
             descricao
     ";
-
-    $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mppid)? $mppid: null));
+    $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, (isset($mppid)? $mppid: null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
@@ -304,7 +303,7 @@ function carregarIniciativaPPA($oppid, $ippid) {
             ippcod
     ";
 
-    $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ippid)? $ippid: null));
+    $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, (isset($ippid)? $ippid: null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
@@ -347,7 +346,7 @@ function carregarSegmentoCultural($mdeid, $neeid) {
         ORDER BY
             descricao
     ";
-    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($neeid) ? $neeid : null));
+    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, (isset($neeid) ? $neeid : null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
@@ -568,7 +567,6 @@ function _salvarPI_ElabrevTED($unicod, $plicod) {
 function salvarPI($dados, $comCommit = true, $criarComoAprovado = false) {
     global $db, $obrigatorias_array;
 
-
     /*
      * Ajusta o título do PI 
      */
@@ -637,6 +635,9 @@ DML;
                     $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
             $pliid = $db->pegaUm($stmt);
 
+            // Grava informações complementares
+            salvarPiComplemento($pliid, $dados);
+            
             // -- Associando o pi aos ptres
             associarPIePTRES($pliid, $dados['plivalor'], $dados['plivalored']);
             // -- Inserindo as novas associações PI/Enquadramento
@@ -681,6 +682,11 @@ DML;
             $pliidFinal = $pliid;
         }
         //ver($dados);
+
+        // Grava informações complementares
+        salvarPiComplemento($pliid, $dados);
+        ver($dados, d);
+
         // -- Inserindo as novas associações PI/PTRES
         associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
         // -- Inserindo as novas associações PI/Enquadramento
@@ -695,6 +701,19 @@ DML;
     }
 
     return $pliid;
+}
+
+function salvarPiComplemento($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc\classes\Pi_Complemento.class.inc";
+    $modelPiComplemento = new Pi_Complemento($dados['picid']);
+    $modelPiComplemento->popularDadosObjeto($dados);
+    $modelPiComplemento->pliid = $pliid;
+    $modelPiComplemento->mpnid = $dados['mpnid'] ? $dados['mpnid'] : null;
+    $modelPiComplemento->ipnid = $dados['ipnid'] ? $dados['ipnid'] : null;
+    $modelPiComplemento->mescod = $dados['mescod'] ? $dados['mescod'] : null;
+
+    $modelPiComplemento->salvar();
 }
 
 function associarPIePTRES($pliid, $pliNovosPTRES, $pliPTRESAssociados) {
@@ -1197,6 +1216,7 @@ SELECT pli.pliid,
        pli.pliano,
        pli.plicadsiafi,
        to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
+       pc.*,
        CASE plisituacao
            WHEN 'A' THEN 'Aprovado'
            WHEN 'E' THEN 'Enviado para revisao'
@@ -1211,18 +1231,13 @@ SELECT pli.pliid,
        sba.sbasigla || ' - ' AS sbasigla,
        sba.sbacod
   FROM monitora.pi_planointerno pli
-    LEFT JOIN monitora.pi_subacao sba
-      ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
-    LEFT JOIN monitora.pi_enquadramentodespesa eqd
-      ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
-    LEFT JOIN monitora.pi_niveletapaensino nee
-      ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
-    LEFT JOIN monitora.pi_categoriaapropriacao cap
-      ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
-    LEFT JOIN monitora.pi_modalidadeensino mde
-      ON (pli.mdeid = mde.mdeid)
-      --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano) -- Resolver 2014
-  WHERE pliid = %d
+    left join planacomorc.pi_complemento pc on pc.pliid = pli.pliid
+    LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
+    LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
+    LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
+    LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
+    LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano) -- Resolver 2014
+  WHERE pli.pliid = %d
 DML;
     $stmt = sprintf($sql, $pliid);
     //ver($stmt);
