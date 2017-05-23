@@ -11,11 +11,12 @@
  */
 include_once '_funcoespi.php';
 
+include_once APPRAIZ . "planacomorc/classes/Cronograma.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
-
+include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
 
 if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
@@ -1047,116 +1048,46 @@ DML;
                         <fieldset><legend>Cronogramas</legend>
                             <div class="form-group">
                                 <div class="col-lg-12">
+                                    <?php
+                                    $sql = "select mescod, mesdsc from public.meses order by mescod";
+                                    $meses = $db->carregar($sql);
+
+                                    $modelPiCronograma =  new Pi_Cronograma();
+                                    $aCronogramas = $modelPiCronograma->recuperarCronogramas();
+                                    $cronogramasAgrupado = [];
+                                    foreach($aCronogramas as $cronograma){
+                                        $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
+                                    }
+                                    ?>
                                     <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
-                                            <td style="text-align: left;"><b>Cronograma Físico</b></td>
-                                            <td colspan="2" style="text-align: center;"><b>Cronograma Orçamentário</b></td>
-                                            <td colspan="2" style="text-align: center;"><b>Cronograma Financeiro</b></td>
+                                            <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
+                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>"><b><?php echo $cronograma; ?></b></td>
+                                            <?php } ?>
                                         </tr>
                                         <tr style="height: 30px;">
-                                            <td style="text-align: left;">Previsto</td>
-                                            <td style="text-align: left;">Previsto Custeio</td>
-                                            <td style="text-align: left;">Previsto Capital</td>
-                                            <td style="text-align: left;">Previsto Custeio</td>
-                                            <td style="text-align: left;">Previsto Capital</td>
+                                            <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                                foreach($descricaoValores as $cronogramaValor){ ?>
+                                                    <td style="text-align: center;"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                <?php }
+                                            } ?>
                                         </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Janeiro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Fevereiro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Março</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Abril</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Maio</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Junho</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Julho</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Agosto</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Setembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Outubro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Novembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Dezembro</td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_fisico" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_orcamentario" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                            <td><input class="CampoEstilo normal form-control obrigatorio input_financeiro" type="text"></td>
-                                        </tr>
+                                        <?php foreach($meses as $mes){ ?>
+                                            <tr style="height: 30px;">
+                                                <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                                <?php foreach($aCronogramas as $cronogramaValor){
+                                                    switch($cronogramaValor['croid']){
+                                                        case Cronograma::K_FISICO:          $class = 'input_fisico';        break;
+                                                        case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
+                                                        case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                        default: $class = '';
+                                                    }
+                                                    ?>
+                                                    <td><input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>]" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text"></td>
+                                                <?php }?>
+                                            </tr>
+                                        <?php }?>
                                         <tr style="height: 30px; ">
                                             <td style="text-align: left;">Total:</td>
                                             <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>

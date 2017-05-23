@@ -737,10 +737,10 @@ function salvarPiComplemento($pliid, $dados)
 
     $modelPiComplemento->salvar();
 
-    associarAcao($pliid, $dados);
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
     associarLocalizacao($pliid, $dados);
+//    associarCronograma($pliid, $dados);
 }
 
 function associarAcao($pliid, $dados)
@@ -823,6 +823,30 @@ function associarLocalizacao($pliid, $dados)
             }
             $modelPiLocalizacao->salvar();
             $modelPiLocalizacao->pilid = null;
+        }
+    }
+}
+
+
+function associarCronograma($pliid, $dados)
+{
+    ver($dados, d);
+    
+    include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
+
+    // Vinculando Ações
+    $modelPiCronograma= new Pi_Cronograma();
+
+    if(isset($dados['cronograma']) && is_array($dados['cronograma'])){
+
+        $modelPiCronograma->pliid = $pliid;
+
+        foreach($dados['cronograma'] as $mescod => $cronogramaValor){
+            foreach($cronogramaValor as $crvid => $pcrvalor){
+                $modelPiCronograma->pissniic = $pissniic;
+                $modelPiCronograma->salvar();
+                $modelPiCronograma->pisid = null;
+            }
         }
     }
 }
