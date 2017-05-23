@@ -689,10 +689,10 @@ DML;
                             </div>
                             <div class="form-group">
                                 <div class="col-md-2 text-right">
-                                    <label for="quantidade" class="control-label">Quantidade:</label>
+                                    <label for="picquantidade" class="control-label">Quantidade:</label>
                                 </div>
                                 <div class="col-lg-10">
-                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="quantidade" name="picquantidade" maxlength="50" size="10" />
+                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" size="10" />
                                 </div>
                             </div>
                         </fieldset>
@@ -1163,10 +1163,8 @@ DML;
                             <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
                                 <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn-info' />
                             <?php endif; ?>
-                            <?php /*
                             <input type="button" class="btn btn-primary" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
-                            */ ?>
-                            <input type="submit" class="btn btn-primary" name="btg" value="Salvar" <?php echo $disabled; ?> />
+                            <!--<input type="submit" class="btn btn-primary" name="btg" value="Salvar" <?php echo $disabled; ?> />-->
                         <?php endif; ?>
                     </div>
                 </div>
@@ -1192,6 +1190,9 @@ DML;
             $('plidsc').disable();
             $('btn_selecionar_acaptres').disable();
         }
+
+        // Retira cor dos elementos marcados pela validação do formulário quando a validação for satisfeita(Quando o elemento for preenchido).
+        initTirarCorValidacao();
 
         // Evento ao mudar opção de enquadramento
         $('#unicod').change(function(){
@@ -1253,7 +1254,7 @@ DML;
 
         $('#input_convenio').mask('9999999999');
 
-        $('#quantidade').mask('9999999999');
+        $('#picquantidade').mask('9999999999');
 
         $('#btn_selecionar_convenio').click(function(){
             var trHtml =
@@ -1283,7 +1284,7 @@ DML;
 
         $('.element_edital').click(function() {
             setTimeout(function(){
-                controlarEdital($('input[name=edital]:checked').val());
+                controlarEdital($('input[name=picedital]:checked').val());
             }, 500); // Meio segundo
         });
 
@@ -1308,7 +1309,7 @@ DML;
         });
 
         // Evento ao carregar a tela
-        controlarEdital($('input[name=edital]:checked').val());
+        controlarEdital($('input[name=picedital]:checked').val());
 
         $('#btn_selecionar_functional').click(function(){
             abrir_lista();
@@ -1346,7 +1347,7 @@ DML;
             mudarCorValorProjeto();
         });
 
-        $('#quantidade').keyup(function(){
+        $('#picquantidade').keyup(function(){
             mudarCorCronogramaFisico();
             avisarCronogramaFisico();
         });
@@ -1374,6 +1375,34 @@ DML;
         controlarTipoLocalizacao($('#esfid').val());
 
     });
+
+    /**
+     * Retira cor dos elementos marcados pela validação do formulário quando a validação for satisfeita(Quando o elemento for preenchido).
+     * 
+     * @returns VOID
+     */
+    function initTirarCorValidacao(){
+        var listaiten = definirCamposObrigatorios();
+        listaiten.push('mpnid', 'ipnid');
+
+        $.each(listaiten , function(i , id){
+            $('#formulario').on('change', '#' + id, function(){
+                tirarCorVermelha(id);
+            });
+        });
+    }
+
+    /**
+     * Tira a Cor Vermelha da validação do label do elemento e da tag pai do elemento.
+     * 
+     * @param string id
+     * @returns VOID
+     */
+    function tirarCorVermelha(id){
+        $item = $('#' + id);
+        $($item).parent().parent().removeClass('has-error');
+        $('label[for="'+ $item.attr('id') +'"]').removeClass('has-error');
+    }
 
     /**
      * Exibe orientações ao usuário para preencher corretamente o Cronograma.
@@ -1476,7 +1505,7 @@ DML;
      */
     function validarCronogramaFisicoInferiorQuantidade(){
         var valido = false;
-        var quantidade = textToFloat($('#quantidade').val());
+        var quantidade = textToFloat($('#picquantidade').val());
         var totalFisico = buscarTotalCronogramaFisico();
         if(totalFisico <= quantidade){
             valido = true;
@@ -2249,18 +2278,18 @@ DML;
             $('.legend_convenio').removeClass('validateRedText');
         }
         // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
-        if($('input[name=edital]:checked').val() == undefined || $('input[name=edital]:checked').val() == ""){
-            $('label[for="edital"]').addClass('validateRedText');
+        if($('input[name=picedital]:checked').val() == undefined || $('input[name=picedital]:checked').val() == ""){
+            $('label[for="picedital"]').addClass('validateRedText');
             addMsgCustom.push('Edital');
         } else {
-            $('label[for="edital"]').removeClass('validateRedText');
+            $('label[for="picedital"]').removeClass('validateRedText');
         }
         // Se não for selecionado nenhuma opção para ted, o sistema acrescenta uma mensagem de erro.
-        if($('input[name=ted]:checked').val() == undefined || $('input[name=ted]:checked').val() == ""){
-            $('label[for="ted"]').addClass('validateRedText');
+        if($('input[name=picted]:checked').val() == undefined || $('input[name=picted]:checked').val() == ""){
+            $('label[for="picted"]').addClass('validateRedText');
             addMsgCustom.push('TED');
         } else {
-            $('label[for="ted"]').removeClass('validateRedText');
+            $('label[for="picted"]').removeClass('validateRedText');
         }
 
         // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
@@ -2422,14 +2451,14 @@ DML;
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'ted', 'edital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'quantidade'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'picted', 'picedital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
 
         // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
         if(codigoEnquadramento == intEnqFinalistico){
             listaObrigatorios.push('mpnid', 'ipnid');
         }
 
-        var opcaoEdital = $('input[name=edital]:checked').val();
+        var opcaoEdital = $('input[name=picedital]:checked').val();
         if(opcaoEdital == 't'){
             listaObrigatorios.push('mes');
         }
