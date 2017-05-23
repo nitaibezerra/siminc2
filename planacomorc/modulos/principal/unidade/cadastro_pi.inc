@@ -11,10 +11,10 @@
  */
 include_once '_funcoespi.php';
 
-include_once APPRAIZ . "planacomorc\classes\Pi_Sniic.class.inc";
-include_once APPRAIZ . "planacomorc\classes\Pi_Localizacao.class.inc";
-include_once APPRAIZ . "planacomorc\classes\Pi_Convenio.class.inc";
-include_once APPRAIZ . "planacomorc\classes\Pi_Acao.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
 
 
 if ($_REQUEST['carregarComboUG']) {
