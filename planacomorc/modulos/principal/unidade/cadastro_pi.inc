@@ -1163,8 +1163,8 @@ DML;
                             <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
                                 <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn-info' />
                             <?php endif; ?>
-                            <input type="button" class="btn btn-primary" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
-                            <!--<input type="submit" class="btn btn-primary" name="btg" value="Salvar" <?php echo $disabled; ?> />-->
+                            <!--<input type="button" class="btn btn-primary" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />-->
+                            <input type="submit" class="btn btn-primary" name="btg" value="Salvar" <?php echo $disabled; ?> />
                         <?php endif; ?>
                     </div>
                 </div>
