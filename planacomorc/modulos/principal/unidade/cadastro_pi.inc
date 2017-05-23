@@ -27,6 +27,19 @@ if ($_REQUEST['carregarSegmentoCultural']) {
     carregarSegmentoCultural((int)$_REQUEST['mdeid'], null);
     die();
 }
+if ($_REQUEST['carregarLimitesUnidade']) {
+    $autorizado = carregarLimiteAutorizadoSubUnidade(
+        (object) array(
+            'ungcod' => $_REQUEST['ungcod']
+    ));
+    
+    echo json_encode(
+        array(
+            'autorizado' => number_format($autorizado, 2, ',', '.'),
+            'disponivel' => number_format($autorizado, 2, ',', '.')
+    ));
+    die();
+}
 if ($_REQUEST['carregarIniciativaPPA']) {
     carregarIniciativaPPA((int)$_REQUEST['oppid'], null);
     die();
@@ -926,11 +939,11 @@ DML;
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
-                                            <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >1.700.250,00</td>
+                                            <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                         </tr>
                                         <tr style="height: 30px;">
                                             <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
-                                            <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >150.250,00</td>
+                                            <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: left;"></td>
@@ -1176,6 +1189,10 @@ DML;
         // Evento ao mudar opção de enquadramento
         $('#unicod').change(function(){
             carregarUG($(this).val());
+        });
+
+        $('div.div_ungcod').on('change', '#ungcod', function(){
+            carregarLimitesUnidade($(this).val());
         });
         
         // Evento ao mudar opção de enquadramento
@@ -1848,12 +1865,12 @@ DML;
         });
     }
     function carregarSubacao(unicod) {
-        var params = '&carregarComboSubacaoFederais=ok&unicod=' + unicod;
-        $.post(window.location + params, function(response) {
-            $('#sbaid').remove();
-            $('.cSubacao').html(response);
-            $(".chosen-select").chosen();
-        });
+//        var params = '&carregarComboSubacaoFederais=ok&unicod=' + unicod;
+//        $.post(window.location + params, function(response) {
+//            $('#sbaid').remove();
+//            $('.cSubacao').html(response);
+//            $(".chosen-select").chosen();
+//        });
     }
 
     function carregarSemSubacao(unicod) {
@@ -1882,6 +1899,22 @@ DML;
             $('#mppid').remove();
             $('.div_mppid').html(response);
             $(".chosen-select").chosen();
+        });
+    }
+    
+    /**
+     * Carrega limites da Sub-Unidade via requisição ajax.
+     */
+    function carregarLimitesUnidade(codigo) {
+        $.ajax({
+            url: window.location + '&carregarLimitesUnidade=ok',
+            type: "post",
+            data: {'ungcod': codigo},
+            dataType: 'json',
+            success: function(data){
+                $('#td_autorizado_sub_unidade').text(data.autorizado);
+                $('#td_disponivel_sub_unidade').text(data.disponivel);
+            }
         });
     }
     

@@ -259,7 +259,8 @@ DML;
         $infoCombo = 'Nenhuma UG encontrada';
     }
     //$db->monta_combo('unicod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'S', 'unicod', false);
-    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+//    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, '', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
 }
 
 /**
@@ -348,6 +349,26 @@ function carregarSegmentoCultural($mdeid, $neeid) {
             descricao
     ";
     $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($neeid) ? $neeid : null));
+}
+
+/**
+ * Retorna os dados de limites da Sub-Unidade.
+ */
+function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
+    global $db;
+
+    $sql = "
+        SELECT
+            lmuvlr
+        FROM planacomorc.unidadegestora_limite ul
+        WHERE
+            ul.lmustatus = 'A'
+            AND ul.prsano = '{$_SESSION['exercicio']}'
+            AND ul.lmuflgliberado IS TRUE
+            AND ul.ungcod = '". $parametros->ungcod. "'";
+    
+    $disponivel = $db->pegaUm($sql);
+    return $disponivel;
 }
 
 /**
