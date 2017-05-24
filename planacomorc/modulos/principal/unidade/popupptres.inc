@@ -221,7 +221,7 @@ function popupDetalhe($ptrid) {
             <td>
               <div style="background-color:#ff6347; color:#FFF; margin-top: 10px; padding: 5px;">
                 <b>
-                    PIs ' . $_SESSION['exercicio'] . '
+                    PIs subtraindo recursos do PTRES - ' . $_SESSION['exercicio'] . '
                 </b>
             </div>';
     /* Consulta  de PI */
