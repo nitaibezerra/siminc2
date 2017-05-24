@@ -127,7 +127,6 @@ HTML;
                     'Ação',
                     'Financeiro (R$)' => array(
                         'Dotação do PTRES',
-                        'Dotação da Subação',
                         'Empenhado no PI',
                         'Detalhado no PTRES')))
                 ->esconderColunas('pliid', 'ptrid', 'acaid')
@@ -176,6 +175,7 @@ function removerPi(pliid)
 }
 
 function detalhePI(pliid) {
+   $('#detalhepi .modal-body').empty();
    $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPi&pliid=" + pliid, function(html) {
        $('#detalhepi .modal-body').html(html);
        $('#detalhepi').modal();

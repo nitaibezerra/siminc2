@@ -221,7 +221,7 @@ function popupDetalhe($ptrid) {
             <td>
               <div style="background-color:#ff6347; color:#FFF; margin-top: 10px; padding: 5px;">
                 <b>
-                    PIs subtraindo recursos do PTRES - ' . $_SESSION['exercicio'] . '
+                    PIs subtraindo recursos do PTRES - ' . $_SESSION['exercicio'] . ' que possuem valores empenhados:
                 </b>
             </div>';
     /* Consulta  de PI */
@@ -658,6 +658,7 @@ DML;
             }
 
             function visualizarRegistro(ptrid) {
+                $('#modal-confirm .modal-body p').empty();
                 url = 'planacomorc.php?modulo=principal/unidade/popupptres&acao=A&detalhe=ok&ptrid=' + ptrid;
                 $.post(url, function(html) {
                     $('#modal-confirm .modal-body p').html(html);

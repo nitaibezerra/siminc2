@@ -382,9 +382,8 @@ SELECT pli.pliid,
        ptr.ptres,
        pip.ptrid,
        ptr.acaid,
-       TRIM(aca.prgcod || '.' || aca.acacod || '.' || aca.unicod || '.' || aca.loccod || ' - ' || aca.acadsc) AS descricao,
+       TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
        SUM(ptr.ptrdotacao) AS dotacaoinicial,
-       ROUND(SUM(COALESCE(sad.sadvalor, 0)), 2) AS dotacaosubacao,
        ROUND(SUM(COALESCE(sex.vlrdotacaoatual, 0.00)), 2) AS empenhado,
        pip.pipvalor as detalhadoptres
   FROM monitora.pi_planointerno pli
@@ -393,8 +392,6 @@ SELECT pli.pliid,
       ON (pip.ptrid = ptr.ptrid
           AND pli.pliano = ptr.ptrano)
     LEFT JOIN monitora.acao aca USING(acaid)
-    LEFT JOIN monitora.pi_subacaodotacao sad
-      ON(ptr.ptrid = sad.ptrid AND pli.sbaid = sad.sbaid)
     LEFT JOIN spo.siopexecucao sex
       ON (sex.ptres = ptr.ptres
           AND sex.unicod = pli.unicod
@@ -413,6 +410,9 @@ SELECT pli.pliid,
                  aca.acacod,
                  aca.unicod,
                  aca.loccod,
+                 ptr.plocod,
+                 aca.acaobjetivocod,
+                 aca.acatitulo,
                  aca.acadsc
         ORDER BY ptr.ptres
 DML;
