@@ -2281,7 +2281,7 @@ DML;
         // Msgs personalizadas de validação.
         addMsgCustom = new Array();
 
-        if($('input[name="acaid[]"]').size() == 0){
+        if($('input[name="ptrid"]').size() == 0){
             $('.legend_funcional').addClass('validateRedText');
             addMsgCustom.push('Funcional');
         } else {
