@@ -326,7 +326,7 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
             ipncod
     ";
 
-    $db->monta_combo('ipnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ipnid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($ipnid)? $ipnid: null));
+    $db->monta_combo('ipnid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ipnid', null, (isset($ipnid)? $ipnid: null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**

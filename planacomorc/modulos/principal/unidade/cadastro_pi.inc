@@ -1041,10 +1041,10 @@ DML;
                                         <tr>
                                             <td id="" style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;">
-                                                <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? $dadosPI['picvalorcusteio'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                                <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                             <td style="text-align: center;">
-                                                <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? $dadosPI['picvalorcapital'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                                <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                         </tr>
                                     </table>
@@ -1110,6 +1110,10 @@ DML;
                                                         if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
                                                             $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
                                                             $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+                                                            
+                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                            }
                                                         }
                                                         
                                                         ?>
