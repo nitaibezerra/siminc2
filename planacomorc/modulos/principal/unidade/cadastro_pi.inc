@@ -15,6 +15,7 @@ include_once APPRAIZ . "planacomorc/classes/Cronograma.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Responsavel.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
 
@@ -92,7 +93,7 @@ DML;
     $whereUO = " AND {$whereUO}";
 }*/
 
-$aSniic = $aConvenio = $aLocalizacao = $aPtres = [];
+$aSniic = $aConvenio = $aLocalizacao = $aResponsavel = [];
 if (validaRequisicao('pliid')) { // -- Edição de PI
 
     $pliid = $_REQUEST['pliid'];
@@ -108,6 +109,7 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     $aSniic = (new Pi_Sniic())->recuperarTodos('*', array('pliid = ' . $pliid));
     $aConvenio = (new Pi_Convenio())->recuperarTodos('*', array('pliid = ' . $pliid));
     $aLocalizacao = (new Pi_Localizacao())->recuperarPorPlanoInterno($pliid, $dadosPI['esfid']);
+    $aResponsavel = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
     // -- Requisição de apagar transação - Não exibe os botões do rodapé, e nem valida o formulário
     if (validaRequisicao('apagar')) {
@@ -976,7 +978,17 @@ DML;
                                             <td style="text-align: left;"><b>E-mail</b></td>
                                             <td style="text-align: center;"><b>Ação</b></td>
                                         </tr>
-
+                                        <?php foreach($aResponsavel as $responsavel){ ?>
+                                            <tr style="height: 30px;" class="tr_responsaveis_<?php echo $responsavel['pirid']; ?>" >
+                                                <td style="text-align: left;"><?php echo $responsavel['usunome']; ?></td>
+                                                <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
+                                                <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
+                                                <td style="text-align: center;">
+                                                    <input type="hidden" value="<?php echo $responsavel['pirid']; ?>" name="listaResponsaveis[]">
+                                                    <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </table>
                                 </div>
                             </div>

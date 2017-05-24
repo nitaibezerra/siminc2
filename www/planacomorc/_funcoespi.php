@@ -752,6 +752,7 @@ function salvarPiComplemento($pliid, $dados)
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
     associarLocalizacao($pliid, $dados);
+    associarResponsavel($pliid, $dados);
     associarCronograma($pliid, $dados);
 }
 
@@ -815,6 +816,27 @@ function associarSniic($pliid, $dados)
     }
 }
 
+function associarResponsavel($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc/classes/Pi_Responsavel.class.inc";
+
+    // Vinculando Responsáveis
+    $modelPiResponsavel= new Pi_Responsavel();
+
+    $modelPiResponsavel->excluirVarios("pliid = $pliid");
+    if(isset($dados['listaResponsaveis']) && is_array($dados['listaResponsaveis'])){
+
+        $modelPiResponsavel->pliid = $pliid;
+
+        foreach($dados['listaResponsaveis'] as $usucpf){
+            $modelPiResponsavel->usucpf = $usucpf;
+            $modelPiResponsavel->salvar();
+            $modelPiResponsavel->pirid = null;
+        }
+    }
+}
+
+
 function associarLocalizacao($pliid, $dados)
 {
     include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
@@ -855,7 +877,7 @@ function associarCronograma($pliid, $dados)
                     $modelPiCronograma->pliid = $pliid;
                     $modelPiCronograma->mescod = $mescod;
                     $modelPiCronograma->crvid = $crvid;
-                    $modelPiCronograma->pcrvalor = $pcrvalor['pcrvalor'] ? $pcrvalor['pcrvalor'] : null;
+                    $modelPiCronograma->pcrvalor = $pcrvalor['pcrvalor'] ? desformata_valor($pcrvalor['pcrvalor']) : null;
                     
                     $modelPiCronograma->salvar();
                     unset($modelPiCronograma);
