@@ -40,11 +40,15 @@ if ($_REQUEST['carregarLimitesUnidade']) {
         (object) array(
             'ungcod' => $_REQUEST['ungcod']
     ));
-    
+    $detalhadoSubUnidade = carregarLimiteDetalhadoSubUnidade(
+        (object) array(
+            'ungcod' => $_REQUEST['ungcod']
+    ));
+    $disponivel = ($autorizado - $detalhadoSubUnidade);
     echo json_encode(
         array(
             'autorizado' => number_format($autorizado, 2, ',', '.'),
-            'disponivel' => number_format($autorizado, 2, ',', '.')
+            'disponivel' => number_format($disponivel, 2, ',', '.')
     ));
     die();
 }
@@ -482,10 +486,12 @@ DML;
                                                             <td align="right"><?php echo $ptres['det_pi']; ?></td>
                                                             <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
                                                             <td align="right"><?php echo $ptres['empenhado']; ?></td>
-                                                            <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
-                                                            <td align="center">
-                                                                <?php echo 'R$ '. number_format($ptres['pipvalor'], 2, ',', '.'); ?>
-                                                                <input type="hidden" name="ptrid" id="ptrid" value="<?php echo $ptres['ptrid']; ?>" data-ptres="<?php echo $ptres['ptres']; ?>" />
+                                                            <td align="right">
+                                                                <?php echo $ptres['nao_empenhado']; ?>
+                                                                <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
+                                                            </td>
+                                                            <td align="center" id="td_valor_projeto">
+                                                                <?php echo 'R$ '. $ptres['pipvalor']; ?>
                                                             </td>
                                                         </tr>
                                                         <?php
@@ -984,7 +990,7 @@ DML;
                                                 <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
                                                 <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
                                                 <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $responsavel['pirid']; ?>" name="listaResponsaveis[]">
+                                                    <input type="hidden" value="<?php echo $responsavel['usucpf']; ?>" name="listaResponsaveis[]">
                                                     <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
                                                 </td>
                                             </tr>

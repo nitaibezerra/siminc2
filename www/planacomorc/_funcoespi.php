@@ -351,7 +351,10 @@ function carregarSegmentoCultural($mdeid, $neeid) {
 }
 
 /**
- * Retorna os dados de limites da Sub-Unidade.
+ * Retorna os dados de limite autorizado para a Sub-Unidade.
+ * 
+ * @param stdClass $parametros
+ * @return float Limite autorizado da Sub-Unidade.
  */
 function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
     global $db;
@@ -360,6 +363,31 @@ function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
         SELECT
             lmuvlr
         FROM planacomorc.unidadegestora_limite ul
+        WHERE
+            ul.lmustatus = 'A'
+            AND ul.prsano = '{$_SESSION['exercicio']}'
+            AND ul.lmuflgliberado IS TRUE
+            AND ul.ungcod = '". $parametros->ungcod. "'";
+    
+    $autorizado = $db->pegaUm($sql);
+    return $autorizado;
+}
+
+/**
+ * Retorna os dados de limites detalhados em PI da Sub-Unidade.
+ * 
+ * @param stdClass $parametros
+ * @return float Limite disponivel da Sub-Unidade.
+ */
+function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
+    global $db;
+
+    $sql = "
+        SELECT
+            SUM(pip.pipvalor)
+        FROM planacomorc.unidadegestora_limite ul
+            JOIN monitora.pi_planointerno pi ON(ul.ungcod = pi.ungcod AND plistatus = 'A') -- SELECT * FROM monitora.pi_planointerno
+            JOIN monitora.pi_planointernoptres pip ON pi.pliid = pip.pliid -- SELECT * FROM monitora.pi_planointernoptres
         WHERE
             ul.lmustatus = 'A'
             AND ul.prsano = '{$_SESSION['exercicio']}'
@@ -624,6 +652,7 @@ DML;
     
     # Soma valores preenchidos pelo usuário na parte de Capital e Custeio do PI
     $totalValor = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']) + str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
+    $totalValorTemplate = number_format($totalValor, 2, ',', '.');
     
     $plicod = null; //$db->PegaUm($sql);
     if (empty($dados['pliid'])) {
@@ -663,9 +692,9 @@ DML;
 
             // Grava informações complementares
             salvarPiComplemento($pliid, $dados);
-//ver(array($dados['ptres'] => $totalValor));
+//ver(array($dados['ptres'] => $totalValorTemplate));
             // -- Associando o pi aos ptres
-            associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValor));
+            associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValorTemplate));
 
             // -- Inserindo as novas associações PI/Enquadramento
             associarPIeEnquadramento($pliid, $dados['m_eqdid']);
@@ -716,7 +745,7 @@ DML;
 
         // -- Inserindo as novas associações PI/PTRES
 //        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
-        associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValor));
+        associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValorTemplate));
 
         // -- Inserindo as novas associações PI/Enquadramento
         associarPIeEnquadramento($pliidFinal, $dados['m_eqdid']);
