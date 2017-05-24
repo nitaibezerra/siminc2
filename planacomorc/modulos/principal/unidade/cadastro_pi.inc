@@ -1193,12 +1193,12 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <input type="button" class="btn btn-primary" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
-                        
                         <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
+                        <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-primary" id="btnVoltar" type="button">Voltar</a>
+                        <input type="button" class="btn btn-success" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
                         <?php if('-' != $tipoTransacao): ?>
                             <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
-                                <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn-info' />
+                                <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn btn-success' />
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
