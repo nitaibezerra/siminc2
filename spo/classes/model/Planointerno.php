@@ -323,7 +323,7 @@ DML;
 
     public static function queryGraficoFinanceiro($params)
     {
-        self::checarParametros($params, array('unicod', 'plicod', 'exercicio'));
+        self::checarParametros($params, array('unicod', 'exercicio'));
 
         $sql = <<<DML
 SELECT 'Dotação' AS descricao,

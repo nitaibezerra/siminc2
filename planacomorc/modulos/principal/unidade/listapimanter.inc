@@ -59,23 +59,21 @@ if (isset($_REQUEST['requisicao'])) {
                     <td>{$dadosPi['eqdcod']} - {$dadosPi['eqddsc']}</td>
                 </tr>
                 <tr>
-                    <th>Subação:</th>
-                    <td>{$sbacod}</td>
-                </tr>
-                <tr>
-                    <th>Nível/Etapa de Ensino:</th>
+                    <th>Segmento Cultural:</th>
                     <td>{$dadosPi['neecod']} - {$dadosPi['needsc']}</td>
                 </tr>
                 <tr>
-                    <th>Categoria de Apropriação:</th>
+                    <th>Modalidade de Pactuação:</th>
                     <td>{$dadosPi['capcod']} - {$dadosPi['capdsc']}</td>
                 </tr>
+<!--
                 <tr>
                     <th>Codificação da Unidade(livre):</th>
                     <td>{$dadosPi['plilivre']}</td>
                 </tr>
+!-->
                 <tr>
-                    <th>Modalidade de Ensino/Tema/Público:</th>
+                    <th>Área Cultural:</th>
                     <td>{$dadosPi['mdecod']} - {$dadosPi['mdedsc']}</td>
                 </tr>
                 <tr>
