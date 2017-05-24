@@ -621,6 +621,10 @@ SELECT *
     AND unicod = '{$unicod}'
     AND plistatus = 'A'
 DML;
+    
+    # Soma valores preenchidos pelo usuário na parte de Capital e Custeio do PI
+    $totalValor = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']) + str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
+    
     $plicod = null; //$db->PegaUm($sql);
     if (empty($dados['pliid'])) {
         if ($dados['plicodsubacao']) {
@@ -652,8 +656,6 @@ INSERT INTO monitora.pi_planointerno(
 ) VALUES (%d, %d, %d, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
   RETURNING pliid;
 DML;
-    # Soma valores declarados na parte de Capital e Custeio do PI
-    $totalValor = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']) + str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
 
             $stmt = sprintf(
                     $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
@@ -663,7 +665,7 @@ DML;
             salvarPiComplemento($pliid, $dados);
 //ver(array($dados['ptres'] => $totalValor));
             // -- Associando o pi aos ptres
-            associarPIePTRES($pliid, NULL, array($dados['ptres'] => $totalValor));
+            associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValor));
 
             // -- Inserindo as novas associações PI/Enquadramento
             associarPIeEnquadramento($pliid, $dados['m_eqdid']);
@@ -713,7 +715,9 @@ DML;
         salvarPiComplemento($pliid, $dados);
 
         // -- Inserindo as novas associações PI/PTRES
-        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
+//        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
+        associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValor));
+
         // -- Inserindo as novas associações PI/Enquadramento
         associarPIeEnquadramento($pliidFinal, $dados['m_eqdid']);
     }

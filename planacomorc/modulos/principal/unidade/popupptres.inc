@@ -604,7 +604,7 @@ DML;
                     var celNaoEmpenhado = tabelaorigem.rows[linha].insertCell(6);
                     celNaoEmpenhado.style.textAlign = "right";
                     var naoEmpenhado = $('tr#' + id + ' td:nth-child(10)').text();
-                    celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="ptrid" value="' +ptres +'" />';
+                    celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="ptrid" value="' +id +'" />';
 
                     var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
                     celValorDoProjeto.style.textAlign = "center";

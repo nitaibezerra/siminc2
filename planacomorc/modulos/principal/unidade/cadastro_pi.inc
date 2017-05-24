@@ -483,9 +483,7 @@ DML;
                                                             <td align="right"><?php echo $ptres['nao_empenhado']; ?></td>
                                                             <td align="center">
                                                                 <?php echo 'R$ '. number_format($ptres['pipvalor'], 2, ',', '.'); ?>
-                <!--                                                <input type="text" name="plivalor" id="plivalor" value="<?php echo $ptres['pipvalor']; ?>"
-                                                                    class="normal somar CampoEstilo normal form-control obrigatorio" style="text-align:right;width:20ex" data-ptres="<?php echo $ptres['ptres']; ?>"
-                                                                    onblur="verificaDisponivel(this, '<?php echo $ptres['ptrid']; ?>', '<?php echo $ptres['pipvalor']; ?>'); " />-->
+                                                                <input type="hidden" name="ptrid" id="ptrid" value="<?php echo $ptres['ptrid']; ?>" data-ptres="<?php echo $ptres['ptres']; ?>" />
                                                             </td>
                                                         </tr>
                                                         <?php
