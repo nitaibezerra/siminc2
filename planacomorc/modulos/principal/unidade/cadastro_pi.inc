@@ -1051,13 +1051,16 @@ DML;
                                     $meses = $db->carregar($sql);
 
                                     $modelPiCronograma =  new Pi_Cronograma();
-                                    $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
-                                    
+
                                     $piCronogramasAgrupado = [];
-                                    foreach($aPiCronograma as $piCronograma){
-                                        $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
+                                    if(!empty($dadosPI['pliid'])){
+                                        $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
+
+                                        foreach($aPiCronograma as $piCronograma){
+                                            $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
+                                        }
                                     }
-                                    
+
                                     $aCronogramas = $modelPiCronograma->recuperarCronogramas();
                                     $cronogramasAgrupado = [];
                                     foreach($aCronogramas as $cronograma){
