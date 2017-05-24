@@ -145,7 +145,7 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
         SELECT
             ptr.ptrid,
             ptr.ptres,
-            trim(aca.prgcod || '.' || aca.acacod || '.' || aca.unicod || '.' || aca.loccod || ' - ' || aca.acatitulo) AS descricao,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
             aca.unicod || ' - ' || uni.unidsc as unidsc,
             COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
             COALESCE(SUM(dts.valor), 0.00) AS det_subacao,
@@ -177,7 +177,7 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
             AND aca.prgano='{$_SESSION['exercicio']}'
             AND ptr.ptrstatus = 'A'
             $where
-        GROUP BY ptr.ptrid, ptr.ptres,aca.prgcod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unidsc, ptr.ptrdotacao, pemp.total
+        GROUP BY ptr.ptrid, ptr.ptres, aca.prgcod, aca.acaobjetivocod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unidsc, ptr.ptrdotacao, pemp.total
         ORDER BY ptr.ptres
 SQL;
     $result = is_array($result) ? $result : Array();
