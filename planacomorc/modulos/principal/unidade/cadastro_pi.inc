@@ -1238,6 +1238,9 @@ DML;
             carregarLimitesUnidade($(this).val());
         });
 
+        $('#ungcod').change();
+        atualizarSaldoFuncional();
+
         // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
@@ -1739,6 +1742,23 @@ DML;
         var autorizadoFuncional = valorCusteio + valorCapital;
 
         return autorizadoFuncional;
+    }
+
+    function atualizarSaldoFuncional(){
+        // Saldo Autorizado
+        dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
+        var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
+
+        $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+        $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+
+        // Saldo Disponível
+        naoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
+        var vlrDisponivelCusteioCapitalProvisorio = textToFloat(naoDetalhado) / 2;
+
+        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
+        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
+
     }
 
     /**
