@@ -2263,29 +2263,30 @@ DML;
     }
 
     function submeter(pliid) {
-        var codsubacao = $('#subacao').text();
+//        var codsubacao = $('#subacao').text();
 //        if ('' === codsubacao) {
 //            alert('O código da subação não pode ser deixado em branco.');
 //            return false;
 //        }
 
-        var pi = document.getElementById("enquadramento").innerHTML
-            + codsubacao
-            + document.getElementById("nivel").innerHTML
-            + document.getElementById("apropriacao").innerHTML
-            + document.getElementById("codificacao").innerHTML
-            + document.getElementById("modalidade").innerHTML;
-        $("#plicod").val(pi);
+        // O número do PI será gerado somente após a aprovação do PI pela equipe de Coordenação.
+//        var pi = document.getElementById("enquadramento").innerHTML
+//            + codsubacao
+//            + document.getElementById("nivel").innerHTML
+//            + document.getElementById("apropriacao").innerHTML
+//            + document.getElementById("codificacao").innerHTML
+//            + document.getElementById("modalidade").innerHTML;
+//        $("#plicod").val(pi);
 
-        var validado = true;
-        var l = $('#plicodsubacao').val();
-        var sub = l.length;
-        $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
+//        var validado = true;
+//        var l = $('#plicodsubacao').val();
+//        var sub = l.length;
+//        $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
 
         // Msgs personalizadas de validação.
         addMsgCustom = new Array();
 
-        if($('input[name="acaid[]"]').size() == 0){
+        if($('input[name="ptrid"]').size() == 0){
             $('.legend_funcional').addClass('validateRedText');
             addMsgCustom.push('Funcional');
         } else {
