@@ -752,6 +752,7 @@ function salvarPiComplemento($pliid, $dados)
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
     associarLocalizacao($pliid, $dados);
+    associarResponsavel($pliid, $dados);
     associarCronograma($pliid, $dados);
 }
 
@@ -815,6 +816,27 @@ function associarSniic($pliid, $dados)
     }
 }
 
+function associarResponsavel($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc/classes/Pi_Responsavel.class.inc";
+
+    // Vinculando Responsáveis
+    $modelPiResponsavel= new Pi_Responsavel();
+
+    $modelPiResponsavel->excluirVarios("pliid = $pliid");
+    if(isset($dados['listaResponsaveis']) && is_array($dados['listaResponsaveis'])){
+
+        $modelPiResponsavel->pliid = $pliid;
+
+        foreach($dados['listaResponsaveis'] as $usucpf){
+            $modelPiResponsavel->usucpf = $usucpf;
+            $modelPiResponsavel->salvar();
+            $modelPiResponsavel->pirid = null;
+        }
+    }
+}
+
+
 function associarLocalizacao($pliid, $dados)
 {
     include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
@@ -823,19 +845,27 @@ function associarLocalizacao($pliid, $dados)
     $modelPiLocalizacao= new Pi_Localizacao();
 
     $modelPiLocalizacao->excluirVarios("pliid = $pliid");
-    if(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
 
-        $modelPiLocalizacao->pliid = $pliid;
+    $dadosLocalizacao = [];
 
-        foreach($dados['listaLocalizacao'] as $localizacao){
-            switch($dados['esfid']){
-                case Territorios_Model_Esfera::K_EXTERIOR:  $modelPiLocalizacao->paiid = $localizacao;  break;
-                case Territorios_Model_Esfera::K_ESTADUAL:  $modelPiLocalizacao->estuf = $localizacao;  break;
-                case Territorios_Model_Esfera::K_MUNICIPAL: $modelPiLocalizacao->muncod = $localizacao; break;
-            }
-            $modelPiLocalizacao->salvar();
-            $modelPiLocalizacao->pilid = null;
+    if(isset($dados['listaLocalizacaoEstadual']) && is_array($dados['listaLocalizacaoEstadual'])){
+        $dadosLocalizacao = $dados['listaLocalizacaoEstadual'];
+    } elseif(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
+        $dadosLocalizacao = $dados['listaLocalizacao'];
+    }elseif(isset($dados['listaLocalizacaoExterior']) && is_array($dados['listaLocalizacaoExterior'])){
+        $dadosLocalizacao = $dados['listaLocalizacaoExterior'];
+    }
+
+    $modelPiLocalizacao->pliid = $pliid;
+    foreach($dadosLocalizacao as $localizacao){
+        switch($dados['esfid']){
+            case Territorios_Model_Esfera::K_EXTERIOR:  $modelPiLocalizacao->paiid = $localizacao;  break;
+            case Territorios_Model_Esfera::K_ESTADUAL:  $modelPiLocalizacao->estuf = $localizacao;  break;
+            case Territorios_Model_Esfera::K_MUNICIPAL: $modelPiLocalizacao->muncod = $localizacao; break;
         }
+
+        $modelPiLocalizacao->salvar();
+        $modelPiLocalizacao->pilid = null;
     }
 }
 
@@ -855,7 +885,7 @@ function associarCronograma($pliid, $dados)
                     $modelPiCronograma->pliid = $pliid;
                     $modelPiCronograma->mescod = $mescod;
                     $modelPiCronograma->crvid = $crvid;
-                    $modelPiCronograma->pcrvalor = $pcrvalor['pcrvalor'] ? $pcrvalor['pcrvalor'] : null;
+                    $modelPiCronograma->pcrvalor = $pcrvalor['pcrvalor'] ? desformata_valor($pcrvalor['pcrvalor']) : null;
                     
                     $modelPiCronograma->salvar();
                     unset($modelPiCronograma);
