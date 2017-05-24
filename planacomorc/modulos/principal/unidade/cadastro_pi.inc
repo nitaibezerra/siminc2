@@ -1053,6 +1053,13 @@ DML;
                                     $meses = $db->carregar($sql);
 
                                     $modelPiCronograma =  new Pi_Cronograma();
+                                    $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
+                                    
+                                    $piCronogramasAgrupado = [];
+                                    foreach($aPiCronograma as $piCronograma){
+                                        $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
+                                    }
+                                    
                                     $aCronogramas = $modelPiCronograma->recuperarCronogramas();
                                     $cronogramasAgrupado = [];
                                     foreach($aCronogramas as $cronograma){
@@ -1084,7 +1091,18 @@ DML;
                                                         default: $class = '';
                                                     }
                                                     ?>
-                                                    <td><input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>]" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text"></td>
+                                                    <td>
+                                                        <?php 
+                                                        $pcrid = $pcrvalor = '';
+                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+                                                        }
+                                                        
+                                                        ?>
+                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
+                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                    </td>
                                                 <?php }?>
                                             </tr>
                                         <?php }?>

@@ -621,7 +621,7 @@ SELECT *
     AND unicod = '{$unicod}'
     AND plistatus = 'A'
 DML;
-    $plicod = $db->PegaUm($sql);
+    $plicod = null; //$db->PegaUm($sql);
     if (empty($dados['pliid'])) {
         if ($dados['plicodsubacao']) {
             $subacao = strtoupper($dados['plicodsubacao']);
@@ -652,15 +652,19 @@ INSERT INTO monitora.pi_planointerno(
 ) VALUES (%d, %d, %d, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
   RETURNING pliid;
 DML;
+    # Soma valores declarados na parte de Capital e Custeio do PI
+    $totalValor = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']) + str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
+
             $stmt = sprintf(
                     $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
             $pliid = $db->pegaUm($stmt);
 
             // Grava informações complementares
             salvarPiComplemento($pliid, $dados);
-            
+//ver(array($dados['ptres'] => $totalValor));
             // -- Associando o pi aos ptres
-            associarPIePTRES($pliid, $dados['plivalor'], $dados['plivalored']);
+            associarPIePTRES($pliid, NULL, array($dados['ptres'] => $totalValor));
+
             // -- Inserindo as novas associações PI/Enquadramento
             associarPIeEnquadramento($pliid, $dados['m_eqdid']);
         } else {
@@ -728,6 +732,10 @@ function salvarPiComplemento($pliid, $dados)
 {
     include_once APPRAIZ . "planacomorc/classes/Pi_Complemento.class.inc";
 
+    # Fix - Corrigindo formato dos dados de valores orçámentários
+    $dados['picvalorcusteio'] = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']);
+    $dados['picvalorcapital'] = str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
+    
     $modelPiComplemento = new Pi_Complemento($dados['picid']);
     $modelPiComplemento->popularDadosObjeto($dados);
     $modelPiComplemento->pliid = $pliid;
@@ -740,7 +748,7 @@ function salvarPiComplemento($pliid, $dados)
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
     associarLocalizacao($pliid, $dados);
-//    associarCronograma($pliid, $dados);
+    associarCronograma($pliid, $dados);
 }
 
 function associarAcao($pliid, $dados)
@@ -829,23 +837,27 @@ function associarLocalizacao($pliid, $dados)
 
 
 function associarCronograma($pliid, $dados)
-{
-    ver($dados, d);
-    
+{       
     include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
 
     // Vinculando Ações
-    $modelPiCronograma= new Pi_Cronograma();
 
     if(isset($dados['cronograma']) && is_array($dados['cronograma'])){
-
-        $modelPiCronograma->pliid = $pliid;
-
         foreach($dados['cronograma'] as $mescod => $cronogramaValor){
             foreach($cronogramaValor as $crvid => $pcrvalor){
-                $modelPiCronograma->pissniic = $pissniic;
-                $modelPiCronograma->salvar();
-                $modelPiCronograma->pisid = null;
+                
+                $modelPiCronograma = new Pi_Cronograma($pcrvalor['pcrid']);
+                if($pcrvalor['pcrvalor']){
+                    $modelPiCronograma->pliid = $pliid;
+                    $modelPiCronograma->mescod = $mescod;
+                    $modelPiCronograma->crvid = $crvid;
+                    $modelPiCronograma->pcrvalor = $pcrvalor['pcrvalor'] ? $pcrvalor['pcrvalor'] : null;
+                    
+                    $modelPiCronograma->salvar();
+                    unset($modelPiCronograma);
+                } elseif($pcrvalor['pcrid']){
+                    $modelPiCronograma->excluir($pcrvalor['pcrid']);
+                }
             }
         }
     }

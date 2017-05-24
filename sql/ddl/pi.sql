@@ -155,3 +155,15 @@ WITH (
   OIDS=FALSE
 );
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE monitora.pi_unidade_medida TO usr_simec;
+
+
+GRANT SELECT, UPDATE ON TABLE planacomorc.pi_sniic_pisid_seq TO usr_simec;
+GRANT SELECT, UPDATE ON TABLE planacomorc.pi_localizacao_pilid_seq TO usr_simec;
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE planacomorc.pi_cronograma TO usr_simec;
+
+
+
+
+
+
