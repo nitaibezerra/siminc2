@@ -1412,7 +1412,21 @@ DML;
 
         controlarTipoLocalizacao($('#esfid').val());
 
+        mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
     });
+
+   /**
+    * Valida informações de valores do Projeto(Capital e Custeio), Fisicos, 
+    * Orçamentários e Financeiros e caso estejam com inconformidades mudam a cor pra vermelho.
+    * 
+    * @returns VOID
+    */
+    function mudarCorValoresProjetosFisicoOrcamentarioFinanceiro(){
+        mudarCorValorProjeto();
+        mudarCorCronogramaFisico();
+        mudarCorCronogramaOrcamentario();
+        mudarCorCronogramaFinanceiro();
+    }
 
     /**
      * Retira cor dos elementos marcados pela validação do formulário quando a validação for satisfeita(Quando o elemento for preenchido).
