@@ -845,19 +845,27 @@ function associarLocalizacao($pliid, $dados)
     $modelPiLocalizacao= new Pi_Localizacao();
 
     $modelPiLocalizacao->excluirVarios("pliid = $pliid");
-    if(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
 
-        $modelPiLocalizacao->pliid = $pliid;
+    $dadosLocalizacao = [];
 
-        foreach($dados['listaLocalizacao'] as $localizacao){
-            switch($dados['esfid']){
-                case Territorios_Model_Esfera::K_EXTERIOR:  $modelPiLocalizacao->paiid = $localizacao;  break;
-                case Territorios_Model_Esfera::K_ESTADUAL:  $modelPiLocalizacao->estuf = $localizacao;  break;
-                case Territorios_Model_Esfera::K_MUNICIPAL: $modelPiLocalizacao->muncod = $localizacao; break;
-            }
-            $modelPiLocalizacao->salvar();
-            $modelPiLocalizacao->pilid = null;
+    if(isset($dados['listaLocalizacaoEstadual']) && is_array($dados['listaLocalizacaoEstadual'])){
+        $dadosLocalizacao = $dados['listaLocalizacaoEstadual'];
+    } elseif(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
+        $dadosLocalizacao = $dados['listaLocalizacao'];
+    }elseif(isset($dados['listaLocalizacaoExterior']) && is_array($dados['listaLocalizacaoExterior'])){
+        $dadosLocalizacao = $dados['listaLocalizacaoExterior'];
+    }
+
+    $modelPiLocalizacao->pliid = $pliid;
+    foreach($dadosLocalizacao as $localizacao){
+        switch($dados['esfid']){
+            case Territorios_Model_Esfera::K_EXTERIOR:  $modelPiLocalizacao->paiid = $localizacao;  break;
+            case Territorios_Model_Esfera::K_ESTADUAL:  $modelPiLocalizacao->estuf = $localizacao;  break;
+            case Territorios_Model_Esfera::K_MUNICIPAL: $modelPiLocalizacao->muncod = $localizacao; break;
         }
+
+        $modelPiLocalizacao->salvar();
+        $modelPiLocalizacao->pilid = null;
     }
 }
 

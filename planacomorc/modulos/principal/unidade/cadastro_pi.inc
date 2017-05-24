@@ -938,7 +938,7 @@ DML;
                                             <td style="text-align: left;"><b>País</b></td>
                                             <td style="text-align: center;"></td>
                                         </tr>
-                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
+                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_EXTERIOR){
                                             foreach($aLocalizacao as $localizacao){ ?>
                                                 <tr style="height: 30px;" class="tr_localizacao_exterior_<?php echo $localizacao['paiid']; ?>" >
                                                     <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
