@@ -610,7 +610,22 @@ DML;
                     celValorDoProjeto.style.textAlign = "center";
                     celValorDoProjeto.id = "td_valor_projeto";
                     celValorDoProjeto.innerHTML = '';
-                    
+
+                    // Atualizando o valor do projeto automaticamente e evitando que usuário altere o objetivo.
+                    $.ajax({
+                        url: window.location + '&recuperarObjetivoPorPtres=1',
+                        type: "post",
+                        data: {'ptrid': id},
+                        async: false,
+                        success: function(oppid){
+                            if(oppid){
+                                $('#oppid').val(oppid).prop('disabled', true).trigger("chosen:updated").prop('disabled', false).change();
+                            } else {
+                                $('#oppid').val('').prop('disabled', false).trigger("chosen:updated").change();
+                            }
+                        }
+                    });
+
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();
                     mudarCorValorProjeto();

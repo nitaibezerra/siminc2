@@ -558,6 +558,18 @@ DML;
     echo implode('!@#', $arrRetorno);
 }
 
+function recuperarObjetivoPorPtres($ptrid) {
+    global $db;
+
+    $sql = "SELECT o.oppid
+                FROM monitora.ptres ptr
+                INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
+                INNER JOIN monitora.pi_objetivo_ppa o on o.oppcod = aca.acaobjetivocod
+            where ptrid = $ptrid";
+
+    return $db->pegaUm($sql);
+}
+
 /* Carregar os enquadramentos para a Subação */
 
 function carregarComboEnquadramentoPorSubacao($sbaid) {

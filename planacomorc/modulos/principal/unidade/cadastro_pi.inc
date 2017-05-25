@@ -64,6 +64,10 @@ if ($_REQUEST['sbaAjax']) {
     echo buscaDadosSubacao($_REQUEST['sbaAjax'], $_REQUEST['capidAjax']);
     die();
 }
+if ($_REQUEST['recuperarObjetivoPorPtres']) {
+    echo recuperarObjetivoPorPtres($_REQUEST['ptrid']);
+    die();
+}
 /**
  * Processa as requições enviadas a esta página.
  * @see cadastropi_requisicoes.inc
