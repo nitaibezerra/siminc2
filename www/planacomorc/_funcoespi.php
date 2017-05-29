@@ -628,22 +628,6 @@ function _salvarPI_ElabrevTED($unicod, $plicod) {
 function salvarPI($dados, $comCommit = true, $criarComoAprovado = false) {
     global $db, $obrigatorias_array;
 
-    /*
-     * Ajusta o título do PI 
-     */
-    $sql = "SELECT
-                UPPER (sbasigla) AS sigla
-            FROM
-                monitora.pi_subacao
-            WHERE
-                sbacod = '{$dados['sbacod']}'
-            AND sbaano = '{$_SESSION['exercicio']}' LIMIT 1";
-    $prefixoTitulo = $db->pegaUm($sql);
-    $titulo = explode('-', $dados['plititulo']);
-    if (trim($titulo[0]) != $prefixoTitulo) {
-        $dados['plititulo'] = $prefixoTitulo .' - '.$dados['plititulo'];
-    }
-
     $unicod = $dados['unicod'] ? $dados['unicod'] : $dados['unicod_disable'];
 
     /* Apenas para PI de Unidades */
