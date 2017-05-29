@@ -4,13 +4,13 @@ include APPRAIZ . "includes/classes_simec.inc";
 include APPRAIZ . "includes/funcoes.inc";
 include "classes/Gerador.php";
 include "classes/ModelGenerator.php";
+include "classes/FormGenerator.php";
 $db = new cls_banco();
 
 $schema = $_GET['schema'];
 $tables = $_GET['tables'];
 $gerarArquivos = $_GET['gerar_arquivos'];
 $appraiz = APPRAIZ;
-
 
 $menuEsquema = empty($schema);
 $menuTabela = empty($tables) && !empty($schema);

@@ -106,6 +106,9 @@ class Gerador
 
             $modelGenerator =  new ModelGenerator(array('prefixoClasse'=>$stPrefixoClasse, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
             $modelGenerator->gerarModel($pkData, $fkData);
+
+            $formGenerator =  new FormGenerator(array('prefixoClasse'=>$stPrefixoClasse, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
+            $formGenerator->gerar($pkData, $fkData);
         }
     }
 }
