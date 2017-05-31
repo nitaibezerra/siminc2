@@ -52,5 +52,7 @@ class Pi_Complemento extends Modelo{
                                         'picvalorcusteio' => null,
                                         'picvalorcapital' => null,
                                         'mescod' => null,
+                                        'acuid' => null,
+                                        'secid' => null,
 									  );
 }

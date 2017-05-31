@@ -523,4 +523,50 @@ class Modelo extends cls_banco{
 			return $this->$stChavePrimaria = $this->pegaUm( $sql );
 		}
 	} // Fim _inserirManterAspas()
+
+    /**
+     * Função monta_combo
+     * Esta função sobreescreve a função pai passando valores padrões.
+     * OBS: Foi alterada a ordem do parâmetro $valor para a primeira posição para facilitar a escrita do método (não foi alterada a assinatura do método pai)
+     * @since 31/05/2017
+     */
+    public function monta_combo($value = null, $var = null,$sql=null,$habil='S',$titulo='Selecione',$acao='',$opc='',$txtdica='',$size='',$obrig='N', $id = '', $return = false, $title= null, $complemento = 'class="form-control chosen-select" style="width=100%;"', $classe = null, $complementoOption = array(array('codigo'=>array(), 'complemento'=>'')), $percentual = null)
+    {
+        $pk = $this->arChavePrimaria[0];
+        $sql = $sql ? $sql : $this->recuperarSqlCombo();
+
+        parent::monta_combo($pk,$sql,$habil,$titulo,$acao,$opc,$txtdica,$size,$obrig, $pk, $return, $value, $title, $complemento, $classe, $complementoOption, $percentual);
+    }
+
+    public function recuperarSqlCombo()
+    {
+        $pk = $this->arChavePrimaria[0];
+
+        // Verifica se existe algum campo com o padrão de nomenclatura referente ao campo de descrição
+        $descricao = $status = '';
+        $aPossibilidades = ['dsc', 'desc', 'nome', 'descricao'];
+        foreach(array_keys($this->arAtributos) as $atributo){
+            if(substr($atributo, -6) == 'status'){
+                $status = $atributo;
+            }
+            if(!$descricao){
+                foreach($aPossibilidades as $possibilidade){
+                    if(substr($atributo, -(strlen($possibilidade))) == $possibilidade){
+                        $descricao = $atributo;
+                        break;
+                    }
+                }
+            }
+        }
+
+        $where = $status ? " where {$status} = 'A'" : '';
+
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+                from {$this->stNomeTabela}
+                $where
+                order by $descricao   
+        ";
+
+        return $sql;
+    }
 }

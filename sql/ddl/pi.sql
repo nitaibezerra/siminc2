@@ -362,3 +362,234 @@ COMMENT ON TABLE planacomorc.pi_sniic
 COMMENT ON COLUMN planacomorc.pi_sniic.pisid IS 'Chave Primária';
 COMMENT ON COLUMN planacomorc.pi_sniic.pliid IS 'Plano Interno - PI';
 COMMENT ON COLUMN planacomorc.pi_sniic.pissniic IS 'Número único do produto principal do sistema Mapas Culturais';
+
+
+
+-------------------- 31/05/2017 --------------------
+
+-- Table: public.objetivoppa
+
+-- DROP TABLE public.objetivoppa;
+
+CREATE TABLE public.objetivoppa
+(
+  oppid serial NOT NULL,
+  prsano character(4),
+  oppdsc character varying(1000),
+  oppnome character varying(200),
+  oppcod character varying(4),
+  oppstatus character(1) DEFAULT 'A'::character varying,
+  CONSTRAINT objetivoppa_pkey PRIMARY KEY (oppid),
+  CONSTRAINT ckc_oppstatus_objppa CHECK (oppstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.objetivoppa
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.objetivoppa TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.objetivoppa TO usr_simec;
+
+insert into public.objetivoppa
+select * from monitora.pi_objetivo_ppa
+
+-- Table: public.metappa
+
+-- DROP TABLE public.metappa;
+
+CREATE TABLE public.metappa
+(
+  mppid serial NOT NULL,
+  mppdsc character varying(1000),
+  mppcod character(4),
+  mppnome character varying(400),
+  mppstatus character(1) DEFAULT 'A'::character varying,
+  prsano character(4),
+  CONSTRAINT metappa_pkey PRIMARY KEY (mppid),
+  CONSTRAINT ckc_mppstatus_metppa CHECK (mppstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.metappa
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.metappa TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.metappa TO usr_simec;
+
+insert into public.metappa
+select * from monitora.pi_metas_ppa
+
+-- Table: public.iniciativappa
+
+-- DROP TABLE public.iniciativappa;
+
+CREATE TABLE public.iniciativappa
+(
+  ippid serial NOT NULL,
+  oppid integer NOT NULL,
+  ippdsc character varying(1000),
+  ippnome character varying(500),
+  ippcod character varying(4),
+  ippstatus character(1) DEFAULT 'A'::character varying,
+  prsano character(4),
+  CONSTRAINT pk_iniciativappa PRIMARY KEY (ippid),
+  CONSTRAINT fk_inippa_reference_opp FOREIGN KEY (oppid)
+      REFERENCES public.objetivoppa (oppid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT ckc_ippstatus_indppa CHECK (ippstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.iniciativappa
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.iniciativappa TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.iniciativappa TO usr_simec;
+
+insert into public.iniciativappa
+select * from monitora.pi_iniciativa_ppa
+
+-- Table: public.objetivometappa
+
+-- DROP TABLE public.objetivometappa;
+
+CREATE TABLE public.objetivometappa
+(
+  opmid serial NOT NULL,
+  oppid integer NOT NULL,
+  mppid integer NOT NULL,
+  mpodata timestamp without time zone NOT NULL DEFAULT now(),
+  CONSTRAINT pk_objetivometappa PRIMARY KEY (opmid),
+  CONSTRAINT fk_objetivometappa_reference_metas_ppa FOREIGN KEY (mppid)
+      REFERENCES public.metappa (mppid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_objetivometappareference_objetivo_ppa FOREIGN KEY (oppid)
+      REFERENCES public.objetivoppa (oppid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.objetivometappa
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.objetivometappa TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.objetivometappa TO usr_simec;
+
+
+
+insert into public.objetivometappa
+select * from monitora.pi_objetivoppa_metappa;
+
+-- Table: public.metapnc
+
+-- DROP TABLE public.metapnc;
+
+CREATE TABLE public.metapnc
+(
+  mpnid serial NOT NULL,
+  mpndsc character varying(1000),
+  mpnstatus character(1) DEFAULT 'A'::character varying,
+  mpncod character(4) NOT NULL,
+  mpnnome character varying(1000) NOT NULL,
+  prsano character(4),
+  CONSTRAINT metapnc_pkey PRIMARY KEY (mpnid),
+  CONSTRAINT ckc_mpnstatus_metpnc CHECK (mpnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.metapnc
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.metapnc TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.metapnc TO usr_simec;
+
+
+
+insert into public.metapnc
+select * from monitora.pi_meta_pnc;
+
+
+-- Table: public.indicadorpnc
+
+-- DROP TABLE public.indicadorpnc;
+
+CREATE TABLE public.indicadorpnc
+(
+  ipnid serial NOT NULL,
+  mpnid integer NOT NULL,
+  ipndsc character varying(1000),
+  ipnstatus character(1) DEFAULT 'A'::character varying,
+  prsano character(4),
+  ipncod character(3) DEFAULT NULL::bpchar,
+  CONSTRAINT pk_indicadorpnc PRIMARY KEY (ipnid),
+  CONSTRAINT fk_indpnc_reference_meta FOREIGN KEY (mpnid)
+      REFERENCES public.metapnc (mpnid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT ckc_ipnstatus_indpnc CHECK (ipnstatus = ANY (ARRAY['A'::bpchar, 'I'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.indicadorpnc
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.indicadorpnc TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.indicadorpnc TO usr_simec;
+
+
+insert into public.indicadorpnc
+select * from monitora.pi_indicador_pnc;
+
+-- Table: public.areacultural
+
+-- DROP TABLE public.areacultural;
+
+CREATE TABLE public.areacultural
+(
+  acuid serial NOT NULL,
+  acucod character varying(1),
+  acudsc character varying(250),
+  acuano character(4),
+  acustatus character(1) DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_areacultural PRIMARY KEY (acuid)
+)
+WITH (
+  OIDS=TRUE
+);
+ALTER TABLE public.areacultural
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.areacultural TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.areacultural TO usr_simec;
+
+insert into public.areacultural
+select * from monitora.pi_modalidadeensino
+
+
+-- Table: public.segmentocultural
+
+-- DROP TABLE public.segmentocultural;
+
+CREATE TABLE public.segmentocultural
+(
+  secid serial NOT NULL,
+  secdsc character varying(250),
+  secano character(4),
+  secstatus character(1) DEFAULT 'A'::bpchar,
+  acuid integer NOT NULL, -- Relação com a tabela de Área Cultural. public.pi_modalidadeensino
+  seccod character varying(10),
+  CONSTRAINT pk_segmentocultural PRIMARY KEY (secid),
+  CONSTRAINT fk_segmentocultural_reference_areacultural FOREIGN KEY (acuid)
+      REFERENCES public.areacultural (acuid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT
+)
+WITH (
+  OIDS=TRUE
+);
+ALTER TABLE public.segmentocultural
+  OWNER TO postgres;
+GRANT ALL ON TABLE public.segmentocultural TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE public.segmentocultural TO usr_simec;
+COMMENT ON COLUMN public.segmentocultural.acuid IS 'Relação com a tabela de Área Cultural. public.pi_modalidadeensino';
+
+
+insert into public.segmentocultural
+select * from monitora.pi_niveletapaensino;

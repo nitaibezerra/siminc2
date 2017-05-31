@@ -272,9 +272,9 @@ function carregarMetasPPA($oppid, $mppid) {
     $sql = "
         SELECT DISTINCT
             m.mppid AS codigo,
-            m.mppcod || '-' || m.mppdesc AS descricao
-        FROM monitora.pi_metas_ppa m
-		JOIN monitora.pi_objetivoppa_metappa om ON m.mppid = om.mppid -- SELECT * FROM monitora.pi_objetivoppa_metappa
+            m.mppcod || '-' || m.mppdsc AS descricao
+        FROM public.metappa m
+		JOIN public.objetivometappa om ON m.mppid = om.mppid
         WHERE
             m.mppstatus = 'A'
             AND m.prsano = '{$_SESSION['exercicio']}'
@@ -295,7 +295,7 @@ function carregarIniciativaPPA($oppid, $ippid) {
         SELECT
             ippid AS codigo,
             ippcod || '-' || ippnome AS descricao
-        FROM monitora.pi_iniciativa_ppa
+        FROM public.iniciativappa
         WHERE
             ippstatus = 'A'
             AND prsano = '{$_SESSION['exercicio']}'
@@ -316,8 +316,8 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
     $sql = "
         SELECT
             ipnid AS codigo,
-            ipncod || '-' || ipndesc AS descricao
-        FROM monitora.pi_indicador_pnc
+            ipncod || '-' || ipndsc AS descricao
+        FROM public.indicadorpnc
         WHERE
             ipnstatus = 'A'
             AND prsano = '{$_SESSION['exercicio']}'
@@ -332,22 +332,22 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
 /**
  * Monta a combo de Segmento Cultural.
  */
-function carregarSegmentoCultural($mdeid, $neeid) {
+function carregarSegmentoCultural($acuid, $secid) {
     global $db;
 
     $sql = "
         SELECT
-            neeid AS codigo,
-            needsc AS descricao
-        FROM monitora.pi_niveletapaensino
+            secid AS codigo,
+            secdsc AS descricao
+        FROM public.segmentocultural
         WHERE
-            neeano = '{$_SESSION['exercicio']}'
-            AND neestatus = 'A'
-            AND mdeid = ". (int)$mdeid. "
+            secano = '{$_SESSION['exercicio']}'
+            AND secstatus = 'A'
+            AND acuid = ". (int)$acuid. "
         ORDER BY
             descricao
     ";
-    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, (isset($neeid) ? $neeid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+    $db->monta_combo('secid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'secid', null, (isset($secid) ? $secid : null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
@@ -662,9 +662,7 @@ DML;
             $plicod = str_replace(' ', '', $plicod);
             $sql = <<<DML
 INSERT INTO monitora.pi_planointerno(
-    mdeid,
     eqdid,
-    neeid,
     capid,
     sbaid,
     plititulo,
@@ -683,7 +681,7 @@ INSERT INTO monitora.pi_planointerno(
 DML;
 
             $stmt = sprintf(
-                    $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
+                    $sql, $dados['eqdid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
             $pliid = $db->pegaUm($stmt);
 
             // Grava informações complementares
