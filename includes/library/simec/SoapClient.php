@@ -43,18 +43,19 @@ class Simec_SoapClient extends SoapClient {
 
     public function __construct($urlWSDL, Simec_SoapClient_Options $options = null, Simec_SoapClient_ClassMap $classMap = null)
     {
+        if (is_null($options)) {
+            $options = new Simec_SoapClient_Options();
+            $options->add('trace', 1);
+            $options->add('exceptions', true);
+            $options->add('cache_wsdl', WSDL_CACHE_NONE);
+        }
+        
         if(IS_PRODUCAO === FALSE){
             $options->add('stream_context', stream_context_create(array(
                 "ssl" => array(
                     "verify_peer" => FALSE,
                     "allow_self_signed" => TRUE
             ))));
-        }
-        if (is_null($options)) {
-            $options = new Simec_SoapClient_Options();
-            $options->add('trace', 1);
-            $options->add('exceptions', true);
-            $options->add('cache_wsdl', WSDL_CACHE_NONE);
         }
 
         if (!is_null($classMap)) {
