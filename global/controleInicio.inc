@@ -40,6 +40,8 @@ include_once APPRAIZ . "includes/funcoes.inc";
 include_once APPRAIZ . "includes/classes_simec.inc";
 include_once APPRAIZ . "includes/connection/adapter-connection.php";
 
+initAutoload();
+
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();
 
