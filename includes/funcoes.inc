@@ -1713,7 +1713,7 @@ function ver(){
     // Somente será exibido se não estiver logado ou o usuário for super-usuário no módulo SIS
     $exibirVer = true;
     if($_SESSION['usucpforigem']){
-        $perfis = pegaPerfilGeral(null, 4); // Módulo SIS (4)
+        $perfis = pegaPerfilGeral($_SESSION['usucpforigem'], 4); // Módulo SIS (4)
         if(!is_array($perfis) || !in_array(25, $perfis)){ //SUPER-USER do SIS (25)
             $exibirVer = false;
         }

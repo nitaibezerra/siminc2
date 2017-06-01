@@ -1421,6 +1421,7 @@ SELECT pli.pliid,
        pli.ungcod,
        pli.pliano,
        pli.plicadsiafi,
+       pli.docid,
        to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
        pc.*,
        CASE plisituacao
@@ -1883,4 +1884,19 @@ function botaoAtualizarSIAFI($pliid) {
     <br style="clear:both" />
     <button type="button" class="btn btn-primary" style="font-weight:bold" onclick="trocarSituacao('C')">Atualizado<br />no SIAFI</button>
     <?php
+}
+
+function pegarDocidPi($pliid)
+{
+    global $db;
+    $sql = "select docid from monitora.pi_planointerno where pliid = {$pliid}";
+    $docid = $db->pegaUm($sql);
+    if (!$docid) {
+        $docid = wf_cadastrarDocumento(WF_TPDID_PLANEJAMENTO_PI, "PI {$pliid}");
+
+        $db->executar("UPDATE monitora.pi_planointerno SET docid = $docid where pliid = {$pliid}");
+        $db->commit();
+    }
+
+    return $docid;
 }

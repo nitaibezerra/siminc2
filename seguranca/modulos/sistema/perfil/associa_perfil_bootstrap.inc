@@ -162,6 +162,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 $listagem = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
                 $listagem->setCabecalho ($cabecalho)
                          ->setQuery ($sql)
+                         ->setTamanhoPagina (1000)
                          ->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS)
                          ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);?>
                 <button type="button" class="btn btn-success" id="salvarMomentoCredito" onclick="validar_cadastro()">Cadastrar</button>

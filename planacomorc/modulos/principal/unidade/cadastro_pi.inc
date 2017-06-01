@@ -11,6 +11,7 @@
  */
 include_once '_funcoespi.php';
 
+require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "planacomorc/classes/Cronograma.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Localizacao.class.inc";
@@ -118,7 +119,7 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     $aConvenio = (new Pi_Convenio())->recuperarTodos('*', array('pliid = ' . $pliid));
     $aLocalizacao = (new Pi_Localizacao())->recuperarPorPlanoInterno($pliid, $dadosPI['esfid']);
     $aResponsavel = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
-    
+
     // -- Requisição de apagar transação - Não exibe os botões do rodapé, e nem valida o formulário
     if (validaRequisicao('apagar')) {
         $tipoTransacao = '-';
@@ -134,6 +135,13 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
 /* Habilita a Edição para Super Usuário */
 if ($db->testa_superuser()) {
     $habilitado = 'S';
+}
+
+if ($dadosPI['pliid'] && !$dadosPI['docid']) {
+    $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
+    $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
+} else {
+    $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 }
 
 function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
@@ -226,7 +234,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         <li class="active"><?php echo $dadosPI ? 'Alterar Plano Interno' : 'Cadastrar Plano Interno'; ?></li>
     </ol>
 </div>
-<div class="col-lg-12">
+<div class="col-lg-11 col-md-11">
     <div class="well">
         <fieldset>
             <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
@@ -301,9 +309,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                     // -- o filtro de UOs deve exibir (ao menos) a UO escolhida no momento da criação da transação,
                     // -- portanto, não deve filtrar pela UO do usuário que a está visualizando.
                     // ******* Ao carregar a listagem de PTRES, sempre filtrar pela UO selecionada, independentemente do Perfil ; *****
-                    /*if (in_array(PFL_CGO_EQUIPE_ORCAMENTARIA, $perfis) || in_array(PFL_SUPER_USUARIO, $perfis)) {
-                        $whereUO = "";
-                    }*/
+
+
+                    $wherePerfilUO = $filtroPerfilUG = '';
+                    if (in_array(PFL_SUBUNIDADE, $perfis)) {
+                        $sql = "SELECT ung.ungcod, ung.ungabrev, ungid, ung.unicod
+                                FROM planacomorc.usuarioresponsabilidade ur
+                                    inner join public.unidadegestora ung on ur.ungcod = ung.ungcod
+                                WHERE ung.ungstatus= 'A'
+                                AND ung.ungcod = '203003'
+                                and usucpf = '70276174127'
+                                and rpustatus = 'A'
+                                ORDER BY ung.unicod";
+
+                        $unidadeUsuario = $db->pegaLinha($sql);
+
+                        $wherePerfilUO  = " and unicod = '{$unidadeUsuario['unicod']}'";
+                        $dadosPI['unicod'] = $unidadeUsuario['unicod'];
+                        $dadosPI['ungcod'] = $unidadeUsuario['ungcod'];
+                    }
 
                     $sql = "
                         SELECT
@@ -312,16 +336,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                         FROM public.unidade uni
                         WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "')
                             AND uni.unistatus = 'A'
-                            {$whereUO}
+                            {$wherePerfilUO}
                         ORDER BY uni.unicod
 ";
 
                     if ($dadosPI['unicod']) {
                         $unicod = $dadosPI['unicod'];
-                        $editavel = 'N';
+                        $editavelUg = 'N';
                     }
 
-                    $db->monta_combo('unicod', $sql, $editavel, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                    $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                     ?>
                     </div>
                 </div>
@@ -339,12 +363,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                        ung.ungcod || ' - ' || ung.ungabrev AS descricao
                                   FROM public.unidadegestora ung
                                   WHERE ung.ungstatus= 'A'
-                                    AND ung.ungcod = '%s' {$filtroPerfilUG}
+                                    AND ung.ungcod = '%s' 
                                   ORDER BY ung.unicod
 DML;
                             $ungdata = sprintf($sql, $ungcod);
                         }
-                        $db->monta_combo('ungcod', $ungdata, 'S', 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                        $db->monta_combo('ungcod', $ungdata, $editavelUg, 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                         ?>
                     </div>
                 </div>
@@ -1086,17 +1110,17 @@ DML;
                                                     }
                                                     ?>
                                                     <td>
-                                                        <?php 
+                                                        <?php
                                                         $pcrid = $pcrvalor = '';
                                                         if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
                                                             $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
                                                             $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
-                                                            
+
                                                             if($cronogramaValor['croid'] != Cronograma::K_FISICO){
                                                                 $pcrvalor = number_format($pcrvalor, 2, ',', '.');
                                                             }
                                                         }
-                                                        
+
                                                         ?>
                                                         <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
                                                         <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
@@ -1182,6 +1206,11 @@ DML;
         </fieldset>
     </div>
 </div>
+<div class="row col-md-1">
+    <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
+</div>
+<div class="clearfix"></div>
+
 <script type="text/javascript">
     // Enquadramentos
     intEnqFinalistico = "<?php echo ENQUADRAMENTO_FINALISTICO; ?>";
@@ -1208,7 +1237,7 @@ DML;
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });
-        
+
         $('div.div_ungcod').on('change', '#ungcod', function(){
             carregarLimitesUnidade($(this).val());
         });
@@ -1391,9 +1420,9 @@ DML;
     });
 
    /**
-    * Valida informações de valores do Projeto(Capital e Custeio), Fisicos, 
+    * Valida informações de valores do Projeto(Capital e Custeio), Fisicos,
     * Orçamentários e Financeiros e caso estejam com inconformidades mudam a cor pra vermelho.
-    * 
+    *
     * @returns VOID
     */
     function mudarCorValoresProjetosFisicoOrcamentarioFinanceiro(){
@@ -1405,7 +1434,7 @@ DML;
 
     /**
      * Retira cor dos elementos marcados pela validação do formulário quando a validação for satisfeita(Quando o elemento for preenchido).
-     * 
+     *
      * @returns VOID
      */
     function initTirarCorValidacao(){
@@ -1421,7 +1450,7 @@ DML;
 
     /**
      * Tira a Cor Vermelha da validação do label do elemento e da tag pai do elemento.
-     * 
+     *
      * @param string id
      * @returns VOID
      */
@@ -1938,7 +1967,7 @@ DML;
      * Carrega novo conteúdo para o select de Subações via requisição ajax.
      */
     function carregarUG(unicod) {
-        $.post(window.location + '&carregarComboUG=ok&unicod=' + unicod, function(response) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarComboUG=ok&unicod=' + unicod, function(response) {
             $('#ungcod').remove('slow');
             $('.div_ungcod').html(response);
             $(".chosen-select").chosen();
@@ -1975,7 +2004,7 @@ DML;
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
     function carregarMetasPPA(codigo) {
-        $.post(window.location + '&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
             $(".chosen-select").chosen();
@@ -1987,7 +2016,7 @@ DML;
      */
     function carregarLimitesUnidade(codigo) {
         $.ajax({
-            url: window.location + '&carregarLimitesUnidade=ok',
+            url: '?modulo=principal/unidade/cadastro_pi&acao=A&carregarLimitesUnidade=ok',
             type: "post",
             data: {'ungcod': codigo},
             dataType: 'json',
@@ -1997,12 +2026,12 @@ DML;
             }
         });
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
      */
     function carregarIndicadorPNC(codigo) {
-        $.post(window.location + '&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
             $('#ipnid').remove();
             $('.div_ipnid').html(response);
             $(".chosen-select").chosen();
@@ -2013,7 +2042,7 @@ DML;
      * Carrega novo conteúdo para o select de Segmento Cultural via requisição ajax.
      */
     function carregarSegmentoCultural(codigo) {
-        $.post(window.location + '&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
             $('#neeid').remove();
             $('.div_neeid').html(response);
             $(".chosen-select").chosen();
@@ -2024,7 +2053,7 @@ DML;
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
     function carregarIniciativaPPA(codigo) {
-        $.post(window.location + '&carregarIniciativaPPA=ok&oppid=' + codigo, function(response) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarIniciativaPPA=ok&oppid=' + codigo, function(response) {
             $('#ippid').remove();
             $('.div_ippid').html(response);
             $(".chosen-select").chosen();
@@ -2245,7 +2274,7 @@ DML;
             for (var i = (document.getElementById("orcamento").rows.length - 3); i > 2; i--) {
                 document.getElementById("orcamento").deleteRow(i);
             }
-            $.post(window.location + '&sbaAjax=' + sbaid, function(response) {
+            $.post('?modulo=principal/unidade/cadastro_pi&acao=A&sbaAjax=' + sbaid, function(response) {
                 var dados = response;
                 dados = dados.split("!@#");
 

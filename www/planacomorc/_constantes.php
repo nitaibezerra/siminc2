@@ -9,15 +9,12 @@ define("APPRAIZ_SISOP", APPRAIZ."/planacomorc/modulos/principal/");
 
 define("FLUXO_MONITORAMENTOACAO", 119);
 
+define("PFL_ADMINISTRADOR", 954);
 define('PFL_SUPERUSUARIO', 955);
-define("PFL_COORDENADORACAO", 956);
-define("PFL_VALIDADORACAO", 957);
-define("PFL_CPMO", 954);
-define("PFL_CGP_GESTAO", PFL_CPMO);
-define("PFL_COORDENADORSUBACAO", 994);
-define("PFL_CONSULTA", 1009);
-define("PFL_NAO_OBRIGATORIAS", 1207);
-define("PFL_VALIDADOR_SUBSTITUTO", 1010);
+define("PFL_PLANEJAMENTO", 956);
+define("PFL_ASPAR", 957);
+define("PFL_SUBUNIDADE", 994);
+
 // -- Constantes utilizadas em: monitora/modulos/principal/planotrabalhoUN/popuphistoricoplanointernoUN.inc
 define("PFL_CGSO", 1044);
 define("PFL_GESTAO_ORCAMENTARIA", PFL_CGSO);
@@ -34,10 +31,13 @@ define("ESD_ENVIADOSIOP", 753); // -- tah errado, não corrigir
 define("ESD_FINALIZADO", 752);
 
 //--constantes workflow Fluxo de monitoramento da subação ##select * from workflow.estadodocumento where tpdid = 151#
-define("ESD_EMPREENCHIMENTO", 969);
-define("ESD_EMANALISE", 970);
-define("ESD_APROVADO", 971);
+//Tipo de Documento WORKFLOW
+define("WF_TPDID_PLANEJAMENTO_PI", 265);
 
+define("ESD_PI_CADASTRAMENTO", 1769);
+define("ESD_PI_AGUARDANDO_APROVACAO", 1770);
+define("ESD_PI_APROVADO", 1771);
+define("ESD_PI_CANCELADO", 1772);
 
 define("PREFIX_MINISTERIO_EDUCACAO", 26);
 /* Banco de dados do FINANCEIRO */

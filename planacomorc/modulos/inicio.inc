@@ -26,23 +26,16 @@ include APPRAIZ . "includes/cabecalho.inc";
 </script>
 <div style="width: 450px; float:right; ">
     <p style="color:tomato; font-weight: bold; margin-bottom: 4px;">
-        <span class="glyphicon glyphicon-asterisk"></span> Atenção, nosso módulo mudou!
+        <span class="glyphicon glyphicon-asterisk"></span> Atenção,
     </p>
     <p>
-        Agora tudo referente a <b>Acompanhamentos</b> está em um módulo <a href="/acomporc/acomporc.php?modulo=inicio&acao=C">Novo</a>.
+        Tudo referente a <b>Acompanhamentos</b> está em um módulo <a href="/acomporc/acomporc.php?modulo=inicio&acao=C">Novo</a>.
     </p>
-
-
-    <p style="font-weight: bold;font-size: 11px; margin-top: 4px;">
-        Mas não se preocupe, todos os dados e funcionalidades permanecem como antes. Em caso de dúvidas entrar em contato (<?php echo $_SESSION['email_sistema']; ?>)
-    </p>
-
 </div>
 <div style="clear:both;"></div>
 <table width="95%" class="tabela" bgcolor="#f5f5f5" border="0" cellSpacing="1" cellPadding="3" align="center">
     <tr align="center">
         <td align="center" >
-            <?php if (in_array(1207, $perfis) || in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_CPMO, $perfis)) { ?>
                 <div style=" background-color: #9370DB;" class="divGraf">
                     <center>
                         <span class="tituloCaixa" >Plano Interno</span> <br><br><br>
@@ -87,8 +80,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                     ?>
                 </div>
                 <?php
-            }
-            if (in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_CPMO, $perfis) || in_array(PFL_RELATORIO_TCU, $perfis)) {
+
+            if (in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)) {
                 ?>
                 <!--                <div style="background-color: #FF8C00;" class="divGraf">
                                     <span class="tituloCaixa" >Relatório de Gestão (TCU/CGU)</span> <br><br><br>
@@ -275,58 +268,61 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
                 ?>
             </div>
-            <div id="divTabelaApoio" class="divGraf">
-                <span class="tituloCaixa" >Tabelas de Apoio</span> <br><br><br>
-                <?php
-                $params = array();
-                $params['texto'] = 'Enquadramentos de Despesa';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadEnquadramentoDespesas&acao=A';
-                montaBotaoInicio($params);
+            <?php if (in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)) { ?>
+                <div id="divTabelaApoio" class="divGraf">
+                    <span class="tituloCaixa" >Tabelas de Apoio</span> <br><br><br>
+                    <?php
+                    $params = array();
+                    $params['texto'] = 'Enquadramentos de Despesa';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadEnquadramentoDespesas&acao=A';
+                    montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'Área Cultural';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadModalidadesEnsino&acao=A';
-                montaBotaoInicio($params);
+                    $params = array();
+                    $params['texto'] = 'Área Cultural';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadModalidadesEnsino&acao=A';
+                    montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'Seguimento Cultural';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadNivelEtapaEnsino&acao=A';
-                montaBotaoInicio($params);
+                    $params = array();
+                    $params['texto'] = 'Seguimento Cultural';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadNivelEtapaEnsino&acao=A';
+                    montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'Executor Orçamentário e Financeiro';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadExecutorOrcamentarioFinanceiro&acao=A';
-                montaBotaoInicio($params);
+                    $params = array();
+                    $params['texto'] = 'Executor Orçamentário e Financeiro';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadExecutorOrcamentarioFinanceiro&acao=A';
+                    montaBotaoInicio($params);
 
-/*              $params = array();
-                $params['texto'] = 'Gestor da Subação';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadGestorSubacao&acao=A';
-                montaBotaoInicio($params);
+    /*              $params = array();
+                    $params['texto'] = 'Gestor da Subação';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadGestorSubacao&acao=A';
+                    montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = 'Vinculação de Enquadramentos de Despesa a Subação';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/AddEnquadramentoSubacao&acao=A';
-                montaBotaoInicio($params);*/
+                    $params = array();
+                    $params['texto'] = 'Vinculação de Enquadramentos de Despesa a Subação';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/AddEnquadramentoSubacao&acao=A';
+                    montaBotaoInicio($params);*/
 
-                $params = array();
-                $params['texto'] = 'Vinculação Orçamentária da Ação Estratégica.';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/vinculacaoOrcamentaria&acao=A&listar=true';
-                montaBotaoInicio($params);
+                    $params = array();
+                    $params['texto'] = 'Vinculação Orçamentária da Ação Estratégica.';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/vinculacaoOrcamentaria&acao=A&listar=true';
+                    montaBotaoInicio($params);
 
-                $params = array();
-                $params['texto'] = ' Modalidade de Pactuação.';
-                $params['tipo'] = 'cadastrar';
-                $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadCategoriaApropriacao&acao=A&listar=true';
-                montaBotaoInicio($params);
-                ?>
-            </div>
+                    $params = array();
+                    $params['texto'] = ' Modalidade de Pactuação.';
+                    $params['tipo'] = 'cadastrar';
+                    $params['url'] = 'planacomorc.php?modulo=sistema/tabelasapoio/cadCategoriaApropriacao&acao=A&listar=true';
+                    montaBotaoInicio($params);
+                    ?>
+                </div>
+            <?php } ?>
+
             <div id="divManuais" class="divGraf">
                 <span class="tituloCaixa" >Manuais</span> <br><br><br>
                 <?php
@@ -343,7 +339,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 montaBotaoInicio($params);
                 ?>
                 <?php
-                if (in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_CPMO, $perfis)) {
+                if (in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)) {
                     $params = array();
                     $params['texto'] = 'Calendário da SPO';
                     $params['tipo'] = 'calendario';

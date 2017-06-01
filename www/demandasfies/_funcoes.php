@@ -43,7 +43,7 @@ function pegarDocidEntrega($dmeid)
 	return $docid;
 }
 
-function wf_desenhaBarraNavegacao_demandasFIES($dmdid, $docid, $dados = array(), $esdid = nulll)
+function wf_desenhaBarraNavegacao_demandasFIES($dmdid, $docid, $dados = array(), $esdid = null)
 {
 	global $db;
 	wf_desenhaBarraNavegacao($docid, $dados);
