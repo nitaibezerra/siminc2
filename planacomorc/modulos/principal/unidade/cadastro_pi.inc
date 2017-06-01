@@ -32,7 +32,7 @@ if ($_REQUEST['carregarIndicadorPNC']) {
     die();
 }
 if ($_REQUEST['carregarSegmentoCultural']) {
-    carregarSegmentoCultural((int)$_REQUEST['acuid'], null);
+    carregarSegmentoCultural((int)$_REQUEST['mdeid'], null);
     die();
 }
 if ($_REQUEST['carregarLimitesUnidade']) {
@@ -595,18 +595,35 @@ DML;
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label for="acuid" class="control-label">Área Cultural:</label>
+                        <label for="mdeid" class="control-label">Área Cultural:</label>
                     </div>
                     <div class="col-lg-10">
-                        <?php (new Public_Model_AreaCultural())->monta_combo($dadosPI['acuid']); ?>
+                        <?php
+                            $sql = <<<DML
+                                SELECT
+                                    MAX(mdeid) AS codigo,
+                                    upper(public.removeacento(mdedsc)) AS descricao
+                                FROM monitora.pi_modalidadeensino
+                                WHERE
+                                    mdestatus = 'A'
+                                    AND mdeano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                                GROUP BY
+                                    descricao
+                                ORDER BY
+                                    descricao ASC
+DML;
+
+                            $mdeid = $dadosPI['mdeid'];
+                            $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
-                        <label class="control-label" for="secid">Segmento Cultural:</label>
+                        <label class="control-label" for="neeid">Segmento Cultural:</label>
                     </div>
-                    <div class="col-lg-10 div_secid">
-                        <?php carregarSegmentoCultural($dadosPI['acuid'], $dadosPI['secid']); ?>
+                    <div class="col-lg-10 div_neeid">
+                        <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
                     </div>
                 </div>
                 <div style="display:none;" class="form-group">
@@ -1119,7 +1136,7 @@ DML;
                                     <span id="subacao"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
                                 </td>
                                 <td style="width:30px;height:20px">
-                                    <span id="nivel"><?php echo $dadosPI['seccod']; ?></span>
+                                    <span id="nivel"><?php echo $dadosPI['neecod']; ?></span>
                                 </td>
                                 <td style="width:30px;height:20px">
                                     <span id="apropriacao"><?php echo $dadosPI['capcod']; ?></span>
@@ -1128,7 +1145,7 @@ DML;
                                     <span id="codificacao"><?php echo $dadosPI['plilivre']; ?></span>
                                 </td>
                                 <td style="width:30px;height:20px">
-                                    <span id="modalidade"><?php echo $dadosPI['acucod']; ?></span>
+                                    <span id="modalidade"><?php echo $dadosPI['mdecod']; ?></span>
                                 </td>
                             </tr>
                             <tr>
@@ -1138,10 +1155,10 @@ DML;
                                             <span id="enquadramento_i"><?php echo $dadosPI['eqdcod']; ?></span>
                                             <!--//<span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? 'XXXX' : $dadosPI['sbacod']); ?></span>-->
                                             <span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
-                                            <span id="nivel_i"><?php echo $dadosPI['seccod']; ?></span>
+                                            <span id="nivel_i"><?php echo $dadosPI['neecod']; ?></span>
                                             <span id="apropriacao_i"><?php echo $dadosPI['capcod']; ?></span>
                                             <span id="codificacao_i"><?php echo $dadosPI['plilivre']; ?></span>
-                                            <span id="modalidade_i"><?php echo $dadosPI['acucod']; ?></span>
+                                            <span id="modalidade_i"><?php echo $dadosPI['mdecod']; ?></span>
                                         </div>
                                     </b>
                                 </td>
@@ -1218,7 +1235,7 @@ DML;
         });
 
         // Evento ao mudar opção de Área Cultural
-        $('#acuid').change(function(){
+        $('#mdeid').change(function(){
             carregarSegmentoCultural($(this).val());
         });
 
@@ -1996,9 +2013,9 @@ DML;
      * Carrega novo conteúdo para o select de Segmento Cultural via requisição ajax.
      */
     function carregarSegmentoCultural(codigo) {
-        $.post(window.location + '&carregarSegmentoCultural=ok&acuid=' + codigo, function(response) {
-            $('#secid').remove();
-            $('.div_secid').html(response);
+        $.post(window.location + '&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
+            $('#neeid').remove();
+            $('.div_neeid').html(response);
             $(".chosen-select").chosen();
         });
     }
@@ -2479,7 +2496,7 @@ DML;
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'picted', 'picedital', 'mppid', 'ippid', 'secid', 'capid', 'pprid', 'pumid', 'acuid', 'picquantidade'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'picted', 'picedital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
 
         // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
         if(codigoEnquadramento == intEnqFinalistico){
@@ -2557,13 +2574,13 @@ DML;
             document.getElementById("enquadramento_i").innerHTML = '';
         }
 
-        if (document.getElementById('secid').value) {
-            var nivel = document.getElementById('secid').options[document.getElementById('secid').selectedIndex].text.split(" - ");
+        if (document.getElementById('neeid').value) {
+            var nivel = document.getElementById('neeid').options[document.getElementById('neeid').selectedIndex].text.split(" - ");
             document.getElementById("nivel").innerHTML = nivel[0];
             document.getElementById("nivel_i").innerHTML = nivel[0];
         }
-        if (document.getElementById('acuid').value) {
-            var modalidade = document.getElementById('acuid').options[document.getElementById('acuid').selectedIndex].text.split(" - ");
+        if (document.getElementById('mdeid').value) {
+            var modalidade = document.getElementById('mdeid').options[document.getElementById('mdeid').selectedIndex].text.split(" - ");
             document.getElementById("modalidade").innerHTML = modalidade[0];
             document.getElementById("modalidade_i").innerHTML = modalidade[0];
         }

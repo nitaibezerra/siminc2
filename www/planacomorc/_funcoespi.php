@@ -332,22 +332,22 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
 /**
  * Monta a combo de Segmento Cultural.
  */
-function carregarSegmentoCultural($acuid, $secid) {
+function carregarSegmentoCultural($mdeid, $neeid) {
     global $db;
 
     $sql = "
         SELECT
-            secid AS codigo,
-            secdsc AS descricao
-        FROM public.segmentocultural
+            neeid AS codigo,
+            needsc AS descricao
+        FROM monitora.pi_niveletapaensino
         WHERE
-            secano = '{$_SESSION['exercicio']}'
-            AND secstatus = 'A'
-            AND acuid = ". (int)$acuid. "
+            neeano = '{$_SESSION['exercicio']}'
+            AND neestatus = 'A'
+            AND mdeid = ". (int)$mdeid. "
         ORDER BY
             descricao
     ";
-    $db->monta_combo('secid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'secid', null, (isset($secid) ? $secid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, (isset($neeid) ? $neeid : null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
@@ -564,7 +564,7 @@ function recuperarObjetivoPorPtres($ptrid) {
     $sql = "SELECT o.oppid
                 FROM monitora.ptres ptr
                 INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-                INNER JOIN monitora.pi_objetivo_ppa o on o.oppcod = aca.acaobjetivocod
+                INNER JOIN public.objetivoppa o on o.oppcod = aca.acaobjetivocod
             where ptrid = $ptrid";
 
     return $db->pegaUm($sql);
@@ -662,7 +662,9 @@ DML;
             $plicod = str_replace(' ', '', $plicod);
             $sql = <<<DML
 INSERT INTO monitora.pi_planointerno(
+    mdeid,
     eqdid,
+    neeid,
     capid,
     sbaid,
     plititulo,
@@ -681,7 +683,7 @@ INSERT INTO monitora.pi_planointerno(
 DML;
 
             $stmt = sprintf(
-                    $sql, $dados['eqdid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
+                    $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
             $pliid = $db->pegaUm($stmt);
 
             // Grava informações complementares

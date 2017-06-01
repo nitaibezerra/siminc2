@@ -593,3 +593,25 @@ COMMENT ON COLUMN public.segmentocultural.acuid IS 'Relação com a tabela de Á
 
 insert into public.segmentocultural
 select * from monitora.pi_niveletapaensino;
+
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_oppid FOREIGN KEY (oppid) REFERENCES public.objetivoppa (oppid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_mppid FOREIGN KEY (mppid) REFERENCES public.metappa (mppid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_mpnid FOREIGN KEY (mpnid) REFERENCES public.metapnc (mpnid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_ipnid FOREIGN KEY (ipnid) REFERENCES public.indicadorpnc (ipnid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_ippid FOREIGN KEY (ippid) REFERENCES public.iniciativappa (ippid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_acuid FOREIGN KEY (acuid) REFERENCES public.areacultural (acuid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE planacomorc.pi_complemento
+  ADD CONSTRAINT fk_complemento_secid FOREIGN KEY (secid) REFERENCES public.segmentocultural (secid) ON UPDATE NO ACTION ON DELETE NO ACTION;
