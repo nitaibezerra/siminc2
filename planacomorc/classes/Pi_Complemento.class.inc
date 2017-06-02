@@ -54,5 +54,7 @@ class Pi_Complemento extends Modelo{
                                         'mescod' => null,
                                         'acuid' => null,
                                         'secid' => null,
+                                        'maiid' => null,
+                                        'masid' => null,
 									  );
 }

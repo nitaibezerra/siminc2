@@ -351,6 +351,36 @@ function carregarSegmentoCultural($mdeid, $neeid) {
 }
 
 /**
+ * Monta a combo de Manutenção Item
+ */
+function carregarManutencaoItem($eqdid, $maiid) {
+    global $db;
+
+    $sql = "SELECT maiid AS codigo, mainome AS descricao
+            FROM planacomorc.manutencaoitem
+            WHERE prsano = '{$_SESSION['exercicio']}'
+            AND maistatus = 'A'
+            AND eqdid = ". (int)$eqdid. "
+            ORDER BY descricao";
+    $db->monta_combo('maiid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'maiid', null, (isset($maiid) ? $maiid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+}
+
+/**
+ * Monta a combo de Manutenção Item
+ */
+function carregarManutencaoSubItem($maiid, $masid) {
+    global $db;
+
+    $sql = "SELECT masid AS codigo, masnome AS descricao
+            FROM planacomorc.manutencaosubitem
+            WHERE prsano = '{$_SESSION['exercicio']}'
+            AND masstatus = 'A'
+            AND maiid = ". (int)$maiid. "
+            ORDER BY descricao";
+    $db->monta_combo('masid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'masid', null, (isset($masid) ? $masid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+}
+
+/**
  * Retorna os dados de limite autorizado para a Sub-Unidade.
  * 
  * @param stdClass $parametros
@@ -771,6 +801,8 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->mpnid = $dados['mpnid'] ? $dados['mpnid'] : null;
     $modelPiComplemento->ipnid = $dados['ipnid'] ? $dados['ipnid'] : null;
     $modelPiComplemento->mescod = $dados['mescod'] ? $dados['mescod'] : null;
+    $modelPiComplemento->maiid = $dados['maiid'] ? $dados['maiid'] : null;
+    $modelPiComplemento->masid = $dados['masid'] ? $dados['masid'] : null;
 
     $modelPiComplemento->salvar();
 

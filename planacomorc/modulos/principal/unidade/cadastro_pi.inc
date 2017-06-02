@@ -242,7 +242,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         <fieldset class="form-horizontal">
             <?php
             // Só permite editar se tiver em cadastramento
-            if($estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
+            if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
                 <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
                     <input type="hidden" name="evento" id="evento" value="S" />
                     <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
@@ -479,6 +479,23 @@ DML;
                     ?>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        <label class="control-label" for="neeid">Manutenção Item:</label>
+                    </div>
+                    <div class="col-lg-10 div_maiid">
+                        <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 text-right">
+                        <label class="control-label" for="neeid">Manutenção SubItem:</label>
+                    </div>
+                    <div class="col-lg-10 div_masid">
+                        <?php carregarManutencaoSubItem($dadosPI['maiid'], $dadosPI['masid']); ?>
+                    </div>
+                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <fieldset>
@@ -1207,7 +1224,7 @@ DML;
 
             <?php
             // Só permite editar se tiver em cadastramento
-            if($estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
+            if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
@@ -1284,6 +1301,11 @@ DML;
         });
 
         // Evento ao mudar opção de Área Cultural
+        $('#mdeid').change(function(){
+            carregarSegmentoCultural($(this).val());
+        });
+
+        // Evento ao mudar opção de Manutenção Item
         $('#mdeid').change(function(){
             carregarSegmentoCultural($(this).val());
         });
@@ -1453,7 +1475,7 @@ DML;
 
         mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
 
-        if('<?php echo $estadoAtual['esdid'] != ESD_PI_CADASTRAMENTO ?>'){
+        if('<?php echo (!empty($estadoAtual['esdid']) && $estadoAtual['esdid'] != ESD_PI_CADASTRAMENTO) ?>'){
             $('input, textarea, select').prop('disabled', true);
             setTimeout($('select').prop('disabled', true).trigger("chosen:updated"), 3000);
         }

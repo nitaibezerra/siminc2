@@ -645,3 +645,49 @@ GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2023 TO usr_simec;
 
 CREATE SEQUENCE monitora.seq_codigo_pi_2024;
 GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2024 TO usr_simec;
+
+
+-- Table: planacomorc.manutencaoitem
+
+-- DROP TABLE planacomorc.manutencaoitem;
+
+CREATE TABLE planacomorc.manutencaoitem
+(
+  maiid serial NOT NULL,
+  prsano character(4) NOT NULL,
+  mainome character varying(200) NOT NULL,
+  maidescricao character varying(500),
+  maistatus character(1) NOT NULL DEFAULT 'A'::bpchar,
+  eqdid integer,
+  CONSTRAINT pk_manutencaoitem PRIMARY KEY (maiid),
+  CONSTRAINT fk_manutencaoitem_reference_enquadramentodespesa FOREIGN KEY (eqdid)
+      REFERENCES monitora.pi_enquadramentodespesa (eqdid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT ckc_maistatus_manutencaoitem CHECK (maistatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
+);
+
+GRANT ALL ON TABLE planacomorc.manutencaoitem TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE planacomorc.manutencaoitem TO usr_simec;
+
+-- Table: planacomorc.manutencaosubitem
+
+-- DROP TABLE planacomorc.manutencaosubitem;
+
+CREATE TABLE planacomorc.manutencaosubitem
+(
+  masid serial NOT NULL,
+  maiid integer NOT NULL,
+  prsano character(4) NOT NULL,
+  masnome character varying(200) NOT NULL,
+  masdescricao character varying(500),
+  masstatus character(1) NOT NULL DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_manutencaosubitem PRIMARY KEY (masid),
+  CONSTRAINT fk_manutencaosubitem_reference_manutencaoitem FOREIGN KEY (maiid)
+      REFERENCES planacomorc.manutencaoitem (maiid) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT ckc_masstatus_manutencaosubitem CHECK (masstatus = ANY (ARRAY['I'::bpchar, 'A'::bpchar]))
+);
+
+
+GRANT ALL ON TABLE planacomorc.manutencaosubitem TO postgres;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE planacomorc.manutencaosubitem TO usr_simec;
