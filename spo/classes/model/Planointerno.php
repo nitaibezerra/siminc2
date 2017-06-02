@@ -271,16 +271,17 @@ DML;
         }
 
         // -- Filtros de perfil: PFL_GESTAO_ORCAMENTARIA_IFS
-        if (in_array(PFL_GESTAO_ORCAMENTARIA_IFS, $perfis)) {
+        if (in_array(PFL_SUBUNIDADE, $perfis)) {
             $sqlPerfil = <<<DML
 EXISTS (SELECT 1
          FROM planacomorc.usuarioresponsabilidade rpu
+            inner join public.unidadegestora ung on rpu.ungcod = ung.ungcod
          WHERE rpu.usucpf = '%s'
            AND rpu.pflcod = %d
            AND rpu.rpustatus = 'A'
-           AND rpu.unicod  = uni.unicod)
+           AND ung.unicod  = uni.unicod)
 DML;
-            $where['simec'][] = $where['siafi'][] = sprintf($sqlPerfil, $params['usucpf'], PFL_GESTAO_ORCAMENTARIA_IFS);
+            $where['simec'][] = $where['siafi'][] = sprintf($sqlPerfil, $params['usucpf'], PFL_SUBUNIDADE);
         }
 
         // -- Filtros de perfil: PFL_GABINETE, apenas Simec e Simec/Siafi
@@ -317,7 +318,7 @@ DML;
         if (!empty($params['descricao'])) {
             $dml->addParam('descricao', '%' . removeAcentos(str_replace("-", "", $params['descricao'])) . '%');
         }
-
+//ver($dml, d);
         return (string)$dml;
     }
 

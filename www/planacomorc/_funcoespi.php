@@ -1908,17 +1908,26 @@ function posAcaoAprovarPi($pliid)
     $dadosPI = $db->pegaLinha("select * from monitora.pi_planointerno where pliid = $pliid");
 
     if(!$dadosPI['plicod']){
-        $plicod = gerarCodigoPi($pliid);
-        $db->executar("update monitora.pi_planointerno set plicod = '$plicod' where pliid = $pliid");
+        $codigos = gerarCodigosPi($pliid);
+
+        $sql = "update monitora.pi_planointerno set 
+                    plicod = '{$codigos['plicod']}', 
+                    plilivre = '{$codigos['plilivre']}', 
+                    plicodsubacao = '{$codigos['plicodsubacao']}'
+                where pliid = $pliid";
+
+        $db->executar($sql);
         $db->commit();
     }
     return true;
 }
 
-function gerarCodigoPi($pliid)
+function gerarCodigosPi($pliid)
 {
     global $db;
-    $sql = "select eqd.eqdcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') || nee.neecod || cap.capcod || substr(pliano, 3, 2) || mde.mdecod as plicod
+
+    $sql = "select eqd.eqdcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') || nee.neecod || cap.capcod || substr(pliano, 3, 2) || mde.mdecod as plicod,
+            LPAD(currval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
             from monitora.pi_planointerno pi
                 inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pi.eqdid
                 inner join monitora.pi_niveletapaensino nee on nee.neeid = pi.neeid
@@ -1926,5 +1935,5 @@ function gerarCodigoPi($pliid)
                 inner join monitora.pi_modalidadeensino mde on mde.mdeid = pi.mdeid
             where pi.pliid = $pliid";
 
-    return $db->pegaUm($sql);
+    return $db->pegaLinha($sql);
 }

@@ -209,16 +209,17 @@ function abrirObra(obrid)
 
     // -- Where UO para perfil PFL_GESTAO_ORCAMENTARIA_IFS - utilizado no combo
     $whereUO = '';
-    if (in_array(PFL_GESTAO_ORCAMENTARIA_IFS, $perfis)) {
+    if (in_array(PFL_SUBUNIDADE, $perfis)) {
         $whereUO = <<<DML
 AND EXISTS (SELECT 1
               FROM planacomorc.usuarioresponsabilidade rpu
+                  inner join public.unidadegestora ung on rpu.ungcod = ung.ungcod
               WHERE rpu.usucpf = '%s'
                 AND rpu.pflcod = %d
                 AND rpu.rpustatus = 'A'
-                AND rpu.unicod  = uni.unicod)
+                AND uni.unicod  = ung.unicod)
 DML;
-        $whereUO = sprintf($whereUO, $_SESSION['usucpf'], PFL_GESTAO_ORCAMENTARIA_IFS);
+        $whereUO = sprintf($whereUO, $_SESSION['usucpf'], PFL_SUBUNIDADE);
     }
 
     $form = new Simec_View_Form('filtropi');

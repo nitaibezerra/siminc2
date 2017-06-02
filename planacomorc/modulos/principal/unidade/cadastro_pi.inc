@@ -324,8 +324,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 FROM planacomorc.usuarioresponsabilidade ur
                                     inner join public.unidadegestora ung on ur.ungcod = ung.ungcod
                                 WHERE ung.ungstatus= 'A'
-                                AND ung.ungcod = '203003'
-                                and usucpf = '70276174127'
+                                and usucpf = '{$_SESSION['usucpf']}'
+                                AND ur.pflcod = " . PFL_SUBUNIDADE . "
                                 and rpustatus = 'A'
                                 ORDER BY ung.unicod";
 
@@ -2345,19 +2345,19 @@ DML;
         }
 
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
-        if($('[name="lista_sniic[]"]').size() == 0){
-            addMsgCustom.push('Números SNIIC');
-            $('.legend_sniic').addClass('validateRedText');
-        } else {
-            $('.legend_sniic').removeClass('validateRedText');
-        }
+//        if($('[name="lista_sniic[]"]').size() == 0){
+//            addMsgCustom.push('Números SNIIC');
+//            $('.legend_sniic').addClass('validateRedText');
+//        } else {
+//            $('.legend_sniic').removeClass('validateRedText');
+//        }
         // Se não for adicionado convenio, acrescenta uma msg ao erro.
-        if($('[name="lista_convenio[]"]').size() == 0){
-            addMsgCustom.push('Números De Convênio');
-            $('.legend_convenio').addClass('validateRedText');
-        } else {
-            $('.legend_convenio').removeClass('validateRedText');
-        }
+//        if($('[name="lista_convenio[]"]').size() == 0){
+//            addMsgCustom.push('Números De Convênio');
+//            $('.legend_convenio').addClass('validateRedText');
+//        } else {
+//            $('.legend_convenio').removeClass('validateRedText');
+//        }
         // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
         if($('input[name=picedital]:checked').val() == undefined || $('input[name=picedital]:checked').val() == ""){
             $('label[for="picedital"]').addClass('validateRedText');
@@ -2416,12 +2416,12 @@ DML;
         }
 
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
-        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
-            $('.legend_responsaveis').addClass('validateRedText');
-            addMsgCustom.push('Responsáveis pelo Projeto');
-        } else {
-            $('.legend_responsaveis').removeClass('validateRedText');
-        }
+//        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+//            $('.legend_responsaveis').addClass('validateRedText');
+//            addMsgCustom.push('Responsáveis pelo Projeto');
+//        } else {
+//            $('.legend_responsaveis').removeClass('validateRedText');
+//        }
 
         // Valida se o usuário preencheu Valor do Projeto - Custeio.
         if($('#picvalorcusteio').val() == ""){
