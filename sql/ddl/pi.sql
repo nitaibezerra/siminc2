@@ -615,3 +615,33 @@ ALTER TABLE planacomorc.pi_complemento
 
 ALTER TABLE planacomorc.pi_complemento
   ADD CONSTRAINT fk_complemento_secid FOREIGN KEY (secid) REFERENCES public.segmentocultural (secid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+-------------------- 02/06/2017 --------------------
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2016;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2016 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2017;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2017 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2018;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2018 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2019;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2019 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2020;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2020 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2021;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2021 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2022;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2022 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2023;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2023 TO usr_simec;
+
+CREATE SEQUENCE monitora.seq_codigo_pi_2024;
+GRANT SELECT, USAGE ON SEQUENCE monitora.seq_codigo_pi_2024 TO usr_simec;

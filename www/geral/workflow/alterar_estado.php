@@ -25,6 +25,7 @@ switch ( $_SESSION['sisdiretorio'] ){
 	case 'planacomorc':
 		include_once APPRAIZ . "www/planacomorc/_constantes.php";
 		include_once APPRAIZ . "www/planacomorc/_funcoes.php";
+		include_once APPRAIZ . "www/planacomorc/_funcoespi.php";
 		include_once APPRAIZ . "www/planacomorc/_funcoesacoes.php";
 	break;
     case 'proporc':

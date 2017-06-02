@@ -227,17 +227,6 @@ DML;
     $config = array('flabel' => 'PTRES', 'multiple' => true);
     $form->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'filtroptres', $config)
         ->addInputTexto('descricao', $filtropi['descricao'], 'filtrodesc', 200, false, array('flabel' => 'Título/Descrição'))
-        ->addInputChoices('obras', array('Todos' => null, 'Sim' => 'S', 'Não' => 'N'), $filtropi['obras'], 'obras', array('flabel' => 'Relacionado a obra'))
-        ->addInputChoices('ted', array('Todos' => null, 'Sim' => 'S', 'Não' => 'N'), $filtropi['ted'], 'ted', array('flabel' => 'Relacionado ao TED'))
-        ->addInputChoices('cadastramento', array(
-            'Todos' => null,
-            'SIMEC/SIAFI' => Spo_Model_Planointerno::CADASTRADO_SIAFI_SIMEC,
-            'SIMEC' => Spo_Model_Planointerno::CADASTRADO_SIMEC,
-            'SIAFI' => Spo_Model_Planointerno::CADASTRADO_SIAFI
-        ), $filtropi['cadastramento'], 'cadastramento', array('flabel' => 'Cadastrado no'))
-        ->addInputChoices('compativel', array(
-            'Todos' => null, 'Sim' => 'S', 'Não' => 'N'
-        ), $filtropi['compativel'], 'compativel', array('flabel' => 'Compatível com SIMEC'))
         ->addBotoes(array('limpar', 'buscar', 'novo'))
         ->render();
     unset($confi);

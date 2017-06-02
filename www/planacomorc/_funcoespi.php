@@ -1900,3 +1900,31 @@ function pegarDocidPi($pliid)
 
     return $docid;
 }
+
+function posAcaoAprovarPi($pliid)
+{
+    global $db;
+
+    $dadosPI = $db->pegaLinha("select * from monitora.pi_planointerno where pliid = $pliid");
+
+    if(!$dadosPI['plicod']){
+        $plicod = gerarCodigoPi($pliid);
+        $db->executar("update monitora.pi_planointerno set plicod = '$plicod' where pliid = $pliid");
+        $db->commit();
+    }
+    return true;
+}
+
+function gerarCodigoPi($pliid)
+{
+    global $db;
+    $sql = "select eqd.eqdcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') || nee.neecod || cap.capcod || substr(pliano, 3, 2) || mde.mdecod as plicod
+            from monitora.pi_planointerno pi
+                inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pi.eqdid
+                inner join monitora.pi_niveletapaensino nee on nee.neeid = pi.neeid
+                inner join monitora.pi_categoriaapropriacao cap on cap.capid = pi.capid
+                inner join monitora.pi_modalidadeensino mde on mde.mdeid = pi.mdeid
+            where pi.pliid = $pliid";
+
+    return $db->pegaUm($sql);
+}

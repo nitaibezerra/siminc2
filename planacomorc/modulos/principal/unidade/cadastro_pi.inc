@@ -139,10 +139,8 @@ if ($db->testa_superuser()) {
 
 if ($dadosPI['pliid'] && !$dadosPI['docid']) {
     $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
-    $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
-} else {
-    $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 }
+$estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 
 function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
     global $db;
@@ -234,17 +232,14 @@ include APPRAIZ . "includes/cabecalho.inc";
         <li class="active"><?php echo $dadosPI ? 'Alterar Plano Interno' : 'Cadastrar Plano Interno'; ?></li>
     </ol>
 </div>
+
 <div class="col-lg-11 col-md-11">
     <div class="well">
         <fieldset>
             <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
                 <input type="hidden" name="evento" id="evento" value="S" />
-                <input type="hidden" name="plicod" id="plicod" value="<?= $dadosPI['plicod']; ?>" />
                 <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
                 <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
-                <input type="hidden" name="sbacod" id="sbacod" value="<?php echo $dadosPI['sbacod']; ?>" />
-                <input type="hidden" name="sbaidAnterior" id="sbaidAnterior" value="" />
-                <input type="hidden" name="ehSolicitacao" id="ehSolicitacao" value="<?php echo $ehSolicitacao; ?>" />
                 <input type="hidden" name="tipotransacao" id="tipotransacao" value="E" />
                 <input type="hidden" name="scpid" id="scpid" value="<?php echo $_REQUEST['scpid']; ?>" />
 
@@ -257,6 +252,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                 </div>
                 <?php endif; ?>
+                <?php if($dadosPI['plicod']){ ?>
+                    <div class="form-group">
+                        <div class="col-md-2 text-right">
+                            <label class="control-label" for="exercicio">Código do PI:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="form-control-static">
+                                <span style="background-color: yellow; color: red; padding: 5px;"><?php echo $dadosPI['plicod']; ?></span>
+                            </p>
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="exercicio">Exercício:</label>
