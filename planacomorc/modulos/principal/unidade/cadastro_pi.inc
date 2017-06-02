@@ -36,6 +36,14 @@ if ($_REQUEST['carregarSegmentoCultural']) {
     carregarSegmentoCultural((int)$_REQUEST['mdeid'], null);
     die();
 }
+if ($_REQUEST['carregarManutencaoItem']) {
+    carregarManutencaoItem((int)$_REQUEST['eqdid'], null);
+    die();
+}
+if ($_REQUEST['carregarManutencaoSubItem']) {
+    carregarManutencaoSubItem((int)$_REQUEST['maiid'], null);
+    die();
+}
 if ($_REQUEST['carregarLimitesUnidade']) {
     $autorizado = carregarLimiteAutorizadoSubUnidade(
         (object) array(
@@ -479,7 +487,7 @@ DML;
                     ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group grupo_manutencao">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Manutenção Item:</label>
                     </div>
@@ -487,7 +495,7 @@ DML;
                         <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group grupo_manutencao">
                     <div class="col-md-2 text-right">
                         <label class="control-label" for="neeid">Manutenção SubItem:</label>
                     </div>
@@ -1306,8 +1314,13 @@ DML;
         });
 
         // Evento ao mudar opção de Manutenção Item
-        $('#mdeid').change(function(){
-            carregarSegmentoCultural($(this).val());
+        $('#eqdid').change(function(){
+            carregarManutencaoItem($(this).val());
+        });
+
+        // Evento ao mudar opção de Manutenção SubItem
+        $('body').on('change', '#maiid', function(){
+            carregarManutencaoSubItem($(this).val());
         });
 
         $('#input_sniic').mask('9999999999');
@@ -2108,6 +2121,33 @@ DML;
         $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
             $('#neeid').remove();
             $('.div_neeid').html(response);
+            $(".chosen-select").chosen();
+        });
+    }
+
+    /**
+     * Carrega novo conteúdo para o select de Manutenção Item via requisição ajax.
+     */
+    function carregarManutencaoItem(codigo) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo, function(response) {
+            if(response){
+                $(".chosen-select").chosen();
+                $('.grupo_manutencao').show('slow');
+            } else {
+                $('.grupo_manutencao').hide('slow');
+            }
+            $('#maiid').remove();
+            $('.div_maiid').html(response);
+        });
+    }
+
+    /**
+     * Carrega novo conteúdo para o select de Manutenção SubItem via requisição ajax.
+     */
+    function carregarManutencaoSubItem(codigo) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoSubItem=ok&maiid=' + codigo, function(response) {
+            $('#masid').remove();
+            $('.div_masid').html(response);
             $(".chosen-select").chosen();
         });
     }

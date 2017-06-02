@@ -353,7 +353,7 @@ function carregarSegmentoCultural($mdeid, $neeid) {
 /**
  * Monta a combo de Manutenção Item
  */
-function carregarManutencaoItem($eqdid, $maiid) {
+function carregarManutencaoItem($eqdid, $maiid = null) {
     global $db;
 
     $sql = "SELECT maiid AS codigo, mainome AS descricao
@@ -362,13 +362,19 @@ function carregarManutencaoItem($eqdid, $maiid) {
             AND maistatus = 'A'
             AND eqdid = ". (int)$eqdid. "
             ORDER BY descricao";
-    $db->monta_combo('maiid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'maiid', null, (isset($maiid) ? $maiid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+    $dados = $db->carregar($sql);
+
+    if($dados){
+        $db->monta_combo('maiid', $dados, 'S', 'Selecione', '', null, null, null, 'N', 'maiid', null, (isset($maiid) ? $maiid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+    } else {
+        echo '';
+    }
 }
 
 /**
  * Monta a combo de Manutenção Item
  */
-function carregarManutencaoSubItem($maiid, $masid) {
+function carregarManutencaoSubItem($maiid, $masid = null) {
     global $db;
 
     $sql = "SELECT masid AS codigo, masnome AS descricao
@@ -733,10 +739,11 @@ DML;
 UPDATE monitora.pi_planointerno
   SET plititulo = '%s',
       plidsc = '%s',
+      eqdid = '%s',
      plicadsiafi = {$cadastroSIAF}
   WHERE pliid = %d
 DML;
-        $stmt = sprintf($sql, trim($dados['plititulo']), trim($dados['plidsc']), $dados['pliid']);
+        $stmt = sprintf($sql, trim($dados['plititulo']), trim($dados['plidsc']), $dados['eqdid'], $dados['pliid']);
         $db->executar($stmt);
 
         // -- Apagando os enquadramentos já associados, para uma posterior re-inserção
