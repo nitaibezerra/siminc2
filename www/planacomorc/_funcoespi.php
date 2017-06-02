@@ -1937,3 +1937,24 @@ function gerarCodigosPi($pliid)
 
     return $db->pegaLinha($sql);
 }
+
+function verificarPactuacaoConvenio($capid)
+{
+    if(!$capid){
+        return false;
+    }
+
+    global $db;
+
+    $aConvenio = [CAPCOD_CONVENIO];
+
+    $sql = "SELECT capcod FROM monitora.pi_categoriaapropriacao
+            WHERE capano = '{$_SESSION['exercicio']}'
+            AND capstatus = 'A'
+            AND capid = $capid";
+
+    $capcod = $db->pegaUm($sql);
+
+    return in_array($capcod, $aConvenio);
+
+}

@@ -78,3 +78,5 @@ define( 'ESFERA_ESTADUAL_DISTRITO_FEDERAL', 2 );
 define( 'ESFERA_MUNICIPAL', 3 );
 define( 'ESFERA_EXTERIOR', 4 );
 
+// Categoria de Apropriação
+define( 'CAPCOD_CONVENIO', 45);

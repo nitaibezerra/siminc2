@@ -69,6 +69,10 @@ if ($_REQUEST['recuperarObjetivoPorPtres']) {
     echo recuperarObjetivoPorPtres($_REQUEST['ptrid']);
     die();
 }
+if ($_REQUEST['verificarPactuacaoConvenio']) {
+    echo verificarPactuacaoConvenio($_REQUEST['capid']);
+    die();
+}
 /**
  * Processa as requições enviadas a esta página.
  * @see cadastropi_requisicoes.inc
@@ -235,14 +239,17 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="col-lg-11 col-md-11">
     <div class="well">
-        <fieldset>
-            <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
-                <input type="hidden" name="evento" id="evento" value="S" />
-                <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
-                <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
-                <input type="hidden" name="tipotransacao" id="tipotransacao" value="E" />
-                <input type="hidden" name="scpid" id="scpid" value="<?php echo $_REQUEST['scpid']; ?>" />
-
+        <fieldset class="form-horizontal">
+            <?php
+            // Só permite editar se tiver em cadastramento
+            if($estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
+                <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
+                    <input type="hidden" name="evento" id="evento" value="S" />
+                    <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
+                    <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
+                    <input type="hidden" name="tipotransacao" id="tipotransacao" value="E" />
+                    <input type="hidden" name="scpid" id="scpid" value="<?php echo $_REQUEST['scpid']; ?>" />
+            <?php } ?>
                 <?php if ($_GET['apagar']): ?>
                 <div class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label"></label>
@@ -595,35 +602,6 @@ DML;
                         </fieldset>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend class="legend_sniic">Números SNIIC </legend>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <?php foreach($aSniic as $sniic){ ?>
-                                            <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['pisid']; ?>" >
-                                                <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['pissniic']; ?>" />
-                                                    <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['pisid']; ?>" ></span>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
                 <div class="form-group">
                     <div class="col-md-2 text-right">
                         <label for="mdeid" class="control-label">Área Cultural:</label>
@@ -755,9 +733,9 @@ DML;
                         ?>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-default" id="div_siconv">
                     <div class="panel-body">
-                        <fieldset><legend class="legend_convenio">Números De Convênio</legend>
+                        <fieldset><legend class="legend_convenio">Números de Proposta SICONV</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
                                     <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" size="8" name="input_convenio" />
@@ -1017,6 +995,35 @@ DML;
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <fieldset><legend class="legend_sniic">Números SNIIC </legend>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                        <?php foreach($aSniic as $sniic){ ?>
+                                            <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['pisid']; ?>" >
+                                                <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
+                                                <td style="text-align: center;">
+                                                    <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['pissniic']; ?>" />
+                                                    <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['pisid']; ?>" ></span>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
                         <fieldset><legend>Custeio e Capital</legend>
                             <div class="form-group">
                                 <div class="col-lg-12">
@@ -1197,6 +1204,10 @@ DML;
                         </table>
                     </div>
                 </div>
+
+            <?php
+            // Só permite editar se tiver em cadastramento
+            if($estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
@@ -1209,7 +1220,9 @@ DML;
                         <?php endif; ?>
                     </div>
                 </div>
-            </form>
+
+                </form>
+            <?php } ?>
         </fieldset>
     </div>
 </div>
@@ -1421,9 +1434,30 @@ DML;
             atualizarTotalFinanceiro();
         });
 
+        $('#capid').change(function(){
+
+            $.ajax({
+                url: '?modulo=principal/unidade/cadastro_pi&acao=A&verificarPactuacaoConvenio=ok&capid='+$('#capid').val(),
+                success: function($retorno){
+                    if($retorno){
+                        $('#div_siconv').show('slow');
+                    } else {
+                        $('#div_siconv').hide('slow');
+                    }
+                }
+            });
+
+        }).change();
+
         controlarTipoLocalizacao($('#esfid').val());
 
         mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
+
+        if('<?php echo $estadoAtual['esdid'] != ESD_PI_CADASTRAMENTO ?>'){
+            $('input, textarea, select').prop('disabled', true);
+            setTimeout($('select').prop('disabled', true).trigger("chosen:updated"), 3000);
+        }
+
     });
 
    /**
