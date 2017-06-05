@@ -1056,7 +1056,7 @@ DML;
                                         <tr>
                                             <td style="text-align: left;"></td>
                                             <td colspan="3" style="text-align: center;">
-                                                <b>Total(Custeio e Capital)</b>
+                                                <b>Total (Custeio e Capital)</b>
                                             </td>
                                         </tr>
                                         <tr style="height: 30px;">
@@ -1091,6 +1091,21 @@ DML;
                                                 <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td id="" style="text-align: left;">
+                                                Valor do Projeto
+                                                <span style="color: green">Detalhado</span> /
+                                                <span style="color: red">A Detalhar</span>:
+                                            </td>
+                                            <td style="text-align: left;">
+                                                <span id="projeto_custeio_detalhado" style="color: green">0,00</span> /
+                                                <span id="projeto_custeio_detalhar" style="color: red">0,00</span>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <span id="projeto_capital_detalhado" style="color: green">0,00</span> /
+                                                <span id="projeto_capital_detalhar" style="color: red">0,00</span>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -1118,6 +1133,7 @@ DML;
                                     }
 
                                     $aCronogramas = $modelPiCronograma->recuperarCronogramas();
+                                    
                                     $cronogramasAgrupado = [];
                                     foreach($aCronogramas as $cronograma){
                                         $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
@@ -1162,7 +1178,7 @@ DML;
 
                                                         ?>
                                                         <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class . ' input_' . $cronogramaValor['crvtipo'] ?>" type="text">
                                                     </td>
                                                 <?php }?>
                                             </tr>
@@ -1434,12 +1450,14 @@ DML;
 
         $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
+            atualizarValorDetalheCusteio();
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
 
         $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
+            atualizarValorDetalheCapital();
             atualizarValorDoProjeto();
             mudarCorValorProjeto();
         });
@@ -1457,16 +1475,22 @@ DML;
 
         $('.input_orcamentario').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-            mudarCorCronogramaOrcamentario();
-            avisarCronogramaOrcamentario();
             atualizarTotalOrcamentario();
         });
 
         $('.input_financeiro').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-            mudarCorCronogramaFinanceiro();
-            avisarCronogramaFinanceiro();
             atualizarTotalFinanceiro();
+        });
+
+        $('.input_CUS').keyup(function(){
+            mudarCorCronogramaCusteio();
+            atualizarValorDetalheCusteio();
+        });
+
+        $('.input_CAP').keyup(function(){
+            mudarCorCronogramaCapital();
+            atualizarValorDetalheCapital();
         });
 
         $('#capid').change(function(){
@@ -1611,6 +1635,34 @@ DML;
         } else {
             $('input.input_financeiro').addClass('validateRedText');
             $('#td_total_financeiro').addClass('validateRedText');
+        }
+    }
+
+    /**
+     * Muda a cor dos valores do cronograma de custeio se o valor exceder o valor do projeto para custeio.
+     *
+     * @returns VOID
+     */
+    function mudarCorCronogramaCusteio(){
+        if(recuperarDiferencaCusteio() >= 0){
+            $('input.input_CUS').removeClass('validateRedText');
+        } else {
+            $('input.input_CUS').addClass('validateRedText');
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do CRONOGRAMA PARA CUSTEIO superior ao valor informado no Valor para CUSTEIO do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CUSTEIO do Projeto.</span></p>');
+        }
+    }
+
+    /**
+     * Muda a cor dos valores do cronograma de capital se o valor exceder o valor do projeto para capital.
+     *
+     * @returns VOID
+     */
+    function mudarCorCronogramaCapital(){
+        if(recuperarDiferencaCapital() >= 0){
+            $('input.input_CAP').removeClass('validateRedText');
+        } else {
+            $('input.input_CAP').addClass('validateRedText');
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do CRONOGRAMA PARA CAPITAL superior ao valor informado no Valor para CAPITAL do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CAPITAL do Projeto.</span></p>');
         }
     }
 
@@ -1767,6 +1819,56 @@ DML;
         var valorCapital = textToFloat($('#picvalorcapital').val());
         var total = valorCusteio + valorCapital;
         $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+    }
+
+    /**
+     * Atualiza o valor de custeio a detalhar do projeto
+     *
+     * @returns VOID
+     */
+    function atualizarValorDetalheCusteio() {
+        var somaCusteio = somarCampos('input_CUS');
+        var diferenca = recuperarDiferencaCusteio();
+        
+        $('#projeto_custeio_detalhado').html(number_format(somaCusteio, 2, ',', '.'));
+        $('#projeto_custeio_detalhar').html(number_format(diferenca, 2, ',', '.'));
+    }
+
+    /**
+     * Recupera a diferença dos valores de custeio do projeto com os valores de custei odo cronograma
+     *
+     * @returns VOID
+     */
+    function recuperarDiferencaCusteio() {
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var somaCusteio = somarCampos('input_CUS');
+
+        return parseFloat(valorCusteio) - parseFloat(somaCusteio);
+    }
+
+    /**
+     * Atualiza o valor de capital a detalhar do projeto
+     *
+     * @returns VOID
+     */
+    function atualizarValorDetalheCapital() {
+        var somaCapital = somarCampos('input_CAP');
+        var diferenca = recuperarDiferencaCapital();
+
+        $('#projeto_capital_detalhado').html(number_format(somaCapital, 2, ',', '.'));
+        $('#projeto_capital_detalhar').html(number_format(diferenca, 2, ',', '.'));
+    }
+
+    /**
+     * Recupera a diferença dos valores de capital do projeto com os valores de custei odo cronograma
+     *
+     * @returns VOID
+     */
+    function recuperarDiferencaCapital() {
+        var valorCapital = textToFloat($('#picvalorcapital').val());
+        var somaCapital = somarCampos('input_CAP');
+
+        return parseFloat(valorCapital) - parseFloat(somaCapital);
     }
 
     /**
