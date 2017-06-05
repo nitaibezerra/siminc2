@@ -788,7 +788,7 @@ DML;
     _salvarPI_ElabrevTED($unicod, $dados['plicod']);
 
     if ($comCommit) {
-        return $db->commit();
+        $db->commit();
     }
 
     return $pliid;

@@ -77,6 +77,7 @@ if (isset($_REQUEST['evento'])) {
         $retorno = false;
         if ('salvarPI' == $func) {
             $retorno = call_user_func_array($func, $params);
+            $href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=' . $retorno;
         } else {
             $retorno = $func($_REQUEST);
         }
@@ -89,7 +90,7 @@ if (isset($_REQUEST['evento'])) {
     $perfis = pegaPerfilGeral();
 
     if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
-        $href = 'planacomorc.php?modulo=principal/unidade/listapimanter&acao=A';
+        $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter&acao=A';
     } else {
         $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter&acao=A';
     }
