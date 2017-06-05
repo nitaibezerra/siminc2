@@ -37,7 +37,7 @@ if ($_REQUEST['carregarSegmentoCultural']) {
     die();
 }
 if ($_REQUEST['carregarManutencaoItem']) {
-    carregarManutencaoItem((int)$_REQUEST['eqdid'], null);
+    carregarManutencaoItem((int)$_REQUEST['eqdid'], $_REQUEST['maiid']);
     die();
 }
 if ($_REQUEST['carregarManutencaoSubItem']) {
@@ -1316,7 +1316,7 @@ DML;
         // Evento ao mudar opção de Manutenção Item
         $('#eqdid').change(function(){
             carregarManutencaoItem($(this).val());
-        });
+        }).change();
 
         // Evento ao mudar opção de Manutenção SubItem
         $('body').on('change', '#maiid', function(){
@@ -2129,7 +2129,8 @@ DML;
      * Carrega novo conteúdo para o select de Manutenção Item via requisição ajax.
      */
     function carregarManutencaoItem(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo, function(response) {
+        maiid = '<?php echo $dadosPI['maiid']; ?>';
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo + '&maiid=' + maiid, function(response) {
             if(response){
                 $(".chosen-select").chosen();
                 $('.grupo_manutencao').show('slow');
