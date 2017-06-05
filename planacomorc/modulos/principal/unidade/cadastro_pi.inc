@@ -1493,6 +1493,9 @@ DML;
             atualizarValorDetalheCapital();
         });
 
+        atualizarValorDetalheCusteio();
+        atualizarValorDetalheCapital();
+
         $('#capid').change(function(){
 
             $.ajax({
@@ -2701,23 +2704,21 @@ DML;
             $('input.input_fisico').removeClass('validateRedText');
             $('#td_total_fisico').removeClass('validateRedText');
         }
-        // Verifica se o valor do cronograma Orçamentário é superior ao valor do Projeto.
-        if(!validarCronogramaOrcamentarioInferiorValorProjeto()){
-            $('input.input_orcamentario').addClass('validateRedText');
-            $('#td_total_orcamentario').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Orçamentário com valor superior ao Valor do Projeto');
+
+        // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
+        if(recuperarDiferencaCusteio()){
+            $('input.input_CUS').addClass('validateRedText');
+            addMsgCustom.push('Cronograma de CUSTEIO com valor superior ao Valor do Projeto referente ao CUSTEIO');
         } else {
-            $('input.input_orcamentario').removeClass('validateRedText');
-            $('#td_total_orcamentario').removeClass('validateRedText');
+            $('input.input_CUS').removeClass('validateRedText');
         }
-        // Verifica se o valor do cronograma financeiro é superior ao valor do Projeto.
-        if(!validarCronogramaFinanceiroInferiorValorProjeto()){
-            $('input.input_financeiro').addClass('validateRedText');
-            $('#td_total_financeiro').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Financeiro com valor superior ao Valor do Projeto');
+
+        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
+        if(recuperarDiferencaCapital()){
+            $('input.input_CAP').addClass('validateRedText');
+            addMsgCustom.push('Cronograma de CAPITAL com valor superior ao Valor do Projeto referente ao CAPITAL');
         } else {
-            $('input.input_financeiro').removeClass('validateRedText');
-            $('#td_total_financeiro').removeClass('validateRedText');
+            $('input.input_CAP').removeClass('validateRedText');
         }
 
         listaObrigatorios = definirCamposObrigatorios();
