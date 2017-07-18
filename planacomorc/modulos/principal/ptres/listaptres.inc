@@ -1,9 +1,12 @@
 <?php
+
 if ($_REQUEST['ptrid']) {
     echo popup($_REQUEST['ptrid']);
     die();
 }
+
 require_once (APPRAIZ . 'includes/library/simec/Listagem.php');
+
 include APPRAIZ . 'includes/cabecalho.inc';
 
 function popup($ptrid) {
@@ -387,7 +390,14 @@ $sql_lista = <<<DML
     SELECT 
         dtl.ptrid as codigo,
         dtl.ptres,
-        trim(aca.prgcod || '.' || aca.acacod || '.' || aca.unicod || '.' || aca.loccod || ' - ' || aca.acatitulo) AS descricao,
+        TRIM(
+            aca.prgcod || '.'
+            || aca.acacod || '.'
+            || aca.loccod || '.'
+            || (CASE WHEN LENGTH(aca.acaobjetivocod) > 0 THEN aca.acaobjetivocod ELSE '-' END) || '.'
+            || (CASE WHEN LENGTH(dtl.plocod) > 0 THEN dtl.plocod ELSE '-' END) || ' - '
+            || aca.acatitulo
+	) AS descricao,
         uni.unicod || ' - ' || uni.unidsc as unidade,
         COALESCE(SUM(dtl.ptrdotacao)+0.00, 0.00) AS dotacaoinicial,
         COALESCE(SUM(dt.valor), 0.00) AS det_subacao,
@@ -417,8 +427,7 @@ $sql_lista = <<<DML
     GROUP BY dtl.ptrid,dtl.ptres,descricao,uni.unidsc, pemp.total, uni.unicod 
     ORDER BY 1
 DML;
-#$sql_lista = retornaConsultaPTRES($params, 'NOVO');
-#ver($sql_lista);
+//ver($sql_lista);
 ?>
     <script type="text/javascript" src="../includes/funcoes.js"></script>
     <div class="col-md-12">
