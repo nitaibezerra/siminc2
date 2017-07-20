@@ -1,0 +1,26 @@
+/*CSS para impressão*/
+@media print {
+    body {
+        margin: -40px 0px 0px -80px;
+        padding: -20px;
+    }
+    .wrapper {
+        margin-top: -40px;
+        padding: 0px  0px 0px 0px;
+    }
+    .ibox-content {
+        border: 0px;
+    }
+    .navbar-center, .navbar-right, .navbar-default, .navbar-minimalize, .ibox-tools {
+        display: none;
+    }
+    #materialButton {
+        display: none;
+    }
+    .noprint {
+        display: none;
+    }
+    .footer-actions {
+        display: none;
+    }
+}
