@@ -158,6 +158,10 @@ if ($_POST['simularUsuariosSistema'])
 		$_SESSION['usucpf'] = $usuario['usucpf'];
 		$_SESSION['usunome'] = $usuario['usunome'];
 		$_SESSION['usuemail'] = $usuario['usuemail'];
+		unset($_SESSION['testa_superuser']);
+		unset($_SESSION['testa_superuser_cache']);
+		unset($_SESSION['acl']);
+		unset($_SESSION['sistemas']);
 		echo 'ok';
 	}
 
@@ -237,12 +241,23 @@ $paginic = $db->pegaUm($sql);
 		<meta http-equiv='Content-Type' content='text/html; charset=ISO-8895-1'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<!-- Fonts  -->
+	<link href="/zimec/public/temas/simec/fonts/awesome/font-awesome.css?t=1.0" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/fonts/glyphicons/glyphicons.css?t=1.0" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/fonts/material/material.css?t=1.0" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/fonts/inconsolata/inconsolata.css?t=1.0" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/fonts/opensans/opensans.css?t=1.0" rel="stylesheet">
+
 		<!-- Mainly scripts -->
 		<script src="/zimec/public/temas/simec/js/jquery-1.11.3.js"></script>
 		<script src="/zimec/public/temas/simec/js/bootstrap.min.js"></script>
 		<script src="/zimec/public/temas/simec/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<script src="/estrutura/js/funcoes.js"></script>
 		<script src="/includes/funcoes.js"></script>
+
+	<!-- materialize menu lateral -->
+	<script src="/zimec/public/temas/simec/js/plugins/materialize/materialize.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/materialize/materialize.min.js"></script>
 
 		<!-- Highcharts -->
 		<script language="javascript" src="../includes/Highcharts-4.0.3/js/highcharts.js"></script>
@@ -253,24 +268,42 @@ $paginic = $db->pegaUm($sql);
 		<script src="/zimec/public/temas/simec/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 		<script src="/zimec/public/temas/simec/js/plugins/datapicker/locales/bootstrap-datepicker.pt-BR.js"></script>
 
-		<!-- Switchery -->
-		<script src="/zimec/public/temas/simec/js/plugins/switchery/switchery.js"></script>
+	<!-- jQuery UI custom -->
+	<script src="/zimec/public/temas/simec/js/jquery-ui.custom.min.js"></script>
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<!--<script src="js/html5shiv.js"></script>-->
- 		<!--<script src="js/respond.min.js"></script>-->
-		<![endif]-->
+	<!-- Flot -->
+	<script src="/zimec/public/temas/simec/js/plugins/flot/jquery.flot.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/flot/jquery.flot.pie.js"></script>
 
-		<link href="/zimec/public/temas/simec/fonts/awesome/font-awesome.css" rel="stylesheet">
-		<link href="/zimec/public/temas/simec/fonts/glyphicons/glyphicons.css" rel="stylesheet">
+	<!-- Peity -->
+	<script src="/zimec/public/temas/simec/js/plugins/peity/jquery.peity.min.js"></script>
 
-		<link href="/zimec/public/temas/simec/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Sweet Aler -->
+	<script src="/zimec/public/temas/simec/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Ion Range Slider -->
+	<script src="/zimec/public/temas/simec/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+	<!-- Textext JS -->
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.core.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.tags.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.autocomplete.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.suggestions.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.filter.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.focus.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.prompt.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.ajax.js"></script>
+	<script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.plugin.arrow.js"></script>
+
+	<link href="/zimec/public/temas/simec/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/css/bootstrap.min.css" rel="stylesheet" media="all">
 		<link href="/zimec/public/temas/simec/js/plugins/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/js/plugins/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/js/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/iCheck/custom.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/css/plugins/materialize/materialize.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/css/plugins/materialize/materialize.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
@@ -279,10 +312,14 @@ $paginic = $db->pegaUm($sql);
 		<link href="/zimec/public/temas/simec/css/plugins/ionRangeSlider/ion.rangeSlider.skinHTML5.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/ionRangeSlider/normalize.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/switchery/switchery.css" rel="stylesheet">
-
+	<link href="/zimec/public/temas/simec/css/plugins/bootstrap-tour/bootstrap-tour.min.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/summernote/summernote.css" rel="stylesheet">
-		<link href="/zimec/public/temas/simec/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.core.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.plugin.tags.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.plugin.autocomplete.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.plugin.focus.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.plugin.prompt.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/js/plugins/textext/css/textext.plugin.arrow.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/dropzone/dropzone.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/dropzone/basic.css" rel="stylesheet">
@@ -293,16 +330,29 @@ $paginic = $db->pegaUm($sql);
 		<link href="/zimec/public/temas/simec/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/nanoscroll/nanoscroller.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/plugins/jstree/style.min.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/css/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
 		<link href="/zimec/public/temas/simec/css/animate.css" rel="stylesheet">
-		<link href="/zimec/public/temas/simec/css/style.min.css" rel="stylesheet">
-		<link href="/zimec/public/temas/simec/css/simec.css" rel="stylesheet">
+	<link href="/zimec/public/temas/simec/css/style.min.css?t=1.0" rel="stylesheet" media="all">
+	<link href="/zimec/public/temas/simec/css/simec.css?t=1.0" rel="stylesheet" media="all">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+    <!--<script src="js/html5shiv.js"></script>-->
+	<!--<script src="js/respond.min.js"></script>-->
+	<!--[endif]-->
+
+	<link href="/zimec/public/temas/simec/css/print.css?t=1.0" rel="stylesheet" media="print" />
+
+	<script data-pace-options='{ "ajax": false }' src="/zimec/public/temas/simec/js/plugins/pace/pace.min.js"></script>
 	</head>
 	<body class="fixed-nav <?php echo $navBar; ?>">
-		<div id="barra-identidade" style="display: none;">
-			<div id="barra-brasil"></div>
-			<script async="" defer="" type="text/javascript" src="http://barra.brasil.gov.br/barra.js"></script>
-		</div>
-
+<script>
+	Pace.on("done", function(){
+		$("#loading").fadeOut(1500);
+	});
+	Pace.start;
+</script>
+<div class="loading-dialog" id="loading"></div>
 		<div id="wrapper">
 			<nav class="navbar-default navbar-static-side" role="navigation">
 				<div class="sidebar-collapse">
@@ -314,13 +364,13 @@ $paginic = $db->pegaUm($sql);
 					<nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
 						<div class="navbar-left">
 							<ul class="header-nav header-nav-options">
-								<li class="header-nav-brand"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 170px; padding: 5px;"></li>
+					<li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?=$_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
 								<li><a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a></li>
 							</ul>
 						</div>
-						<div class="navbar-center">
+			<div class="navbar-center hidden-xs">
 							<ul class="header-nav header-nav-options">
-								<li style="width:80%">
+					<li style="width:55%">
 									<select id="chosen-sistema" class="form-control chosen-select" data-placeholder="Selecione" onchange="javascript:changeSystem(this.value)">
 										<?php foreach ($sistemas as $sistema): ?>
 											<?php $selected = ($sistema['sisid'] == $_SESSION['sisid']) ? 'selected="selected"' : null; ?>
@@ -330,7 +380,7 @@ $paginic = $db->pegaUm($sql);
 								</li>
 								<?php if ($arrAnoExercicio && is_array($arrAnoExercicio)): ?>
 								<li style="width:20%">
-									<select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Selecione" onclick="javascript:alteraExercicio(this.value)">
+							<select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Exercicio" onclick="javascript:alteraExercicio(this.value)">
 									<?php foreach ($arrAnoExercicio as $anoExercicio): ?>
 											<option value="<?php echo $anoExercicio['codigo'] ?>"><?php echo $anoExercicio['descricao'] ?></option>
 										<?php endforeach ?>
@@ -345,7 +395,7 @@ $paginic = $db->pegaUm($sql);
 								<?php endif ?>
 							</ul>
 						</div>
-						<div class="navbar-right">
+			<div class="navbar-right hidden-xs">
 							<ul class="header-nav header-nav-profile">
 								<li class="dropdown ms-hover">
 									<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">

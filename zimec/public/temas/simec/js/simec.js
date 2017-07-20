@@ -48,6 +48,16 @@ function attachInit()
         autoclose: true
     });
 
+    $('.input-daterange').datepicker({
+        todayBtn: "linked",
+        format: 'dd/mm/yyyy',
+        language: 'pt-BR',
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     $('.summernote').summernote({
         height: 300,
         lang: 'pt-BR'
@@ -55,7 +65,7 @@ function attachInit()
 
 	// Chosen
 	var config = {
-		'.chosen-select'           : {},
+		'.chosen-select'           : {allow_single_deselect:true},
         '.chosen-select-deselect'  : {allow_single_deselect:true},
         '.chosen-select-no-single' : {disable_search_threshold:10},
         '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
@@ -84,6 +94,8 @@ function attachInit()
 	$(".tree").bind("open_node.jstree", function (event, data) { 
 		$("[data-toggle=tooltip]").tooltip();
 	});
+	
+	$('[data-toggle="tooltip"]').tooltip();
 	
 	$(":input").inputmask();
 	
@@ -252,7 +264,7 @@ function changeTheme(theme)
 function simularUsuariosSistemas(cpf) {
 	$.post(window.location.href, {simularUsuariosSistema: 'true', cpf: cpf}, function(html) {
 		if (html == 'ok') {
-			location.reload();
+			window.location='../muda_sistema.php';
 		}
 	});
 }

@@ -3,7 +3,7 @@ $modulo=$_REQUEST['modulo'] ;//
 if ($_REQUEST['act'] == 'inserir')
 {
    //verifica se existe módulo igual cadastrado
-   $sql = "select count(*) as total from menu where mnulink<>'' and sisid = ". $_SESSION['sisid'] . " and trim(mnulink)='".trim($_REQUEST['mnulink'])."'";
+   $sql = "select count(*) as total from seguranca.menu where mnulink<>'' and sisid = ". $_SESSION['sisid'] . " and trim(mnulink)='".trim($_REQUEST['mnulink'])."'";
    $RS = $db->recuperar($sql,$res);
    if ($RS['total']>0){ ?>
         <script language="JavaScript">alert('Este Menu/Módulo já se encontra cadastrado!');history.back();</script>
@@ -128,7 +128,7 @@ require_once APPRAIZ . 'includes/library/simec/Listagem.php';
  * @see _funcoesspo_componentes.php
  */
 require_once APPRAIZ . "includes/funcoesspo_componentes.php";
-include_once APPRAIZ."includes/cabecalho.inc";
+include_once APPRAIZ."includes/cabecalho_bootstrap_v3.inc";
 ?>
 <style>
 	.table {

@@ -28,16 +28,22 @@ class Simec_View_Helper_Cep extends Simec_View_Helper_Element
 
         unset($attribs['id'], $attribs['type'], $attribs['class']);
 
-        // Construindo o input
-        $xhtml = '<input'
-        		. ' data-inputmask="\'mask\': \'99.999-999\', \'clearIncomplete\': \'true\'"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . ' type="' . $type . '"'
-                . ' value="' . $value . '"'
-                . ' class="' . $class . '"'
-                . $this->_htmlAttribs($attribs)
-                . ' />';
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . $value . '</p>';
+            $config['icon'] = null;
+        } else {
+            // Construindo o input
+            $xhtml = '<input'
+                    . ' data-inputmask="\'mask\': \'99.999-999\', \'clearIncomplete\': \'true\'"'
+                    . ' name="' . $this->view->escape($name) . '"'
+                    . ' id="' . $this->view->escape($id) . '"'
+                    . ' type="' . $type . '"'
+                    . ' value="' . $value . '"'
+                    . ' class="' . $class . '"'
+                    . $this->_htmlAttribs($attribs)
+                    . ' />';
+        }
 
         return $this->buildField($xhtml, $label, $attribs, $config);
     }

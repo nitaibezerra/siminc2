@@ -50,14 +50,29 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
                 $attribs['data-placeholder'] = $attrib;
             }
         }
+        
+        unset($attribs['']);
 
+        $id = isset($attribs['id']) ? $attribs['id'] : $name;
         $attribs['class'] = isset($attribs['class']) ? 'form-control chosen-select' .  $attribs['class'] : 'form-control chosen-select';
         $attribs['data-placeholder'] = isset($attribs['data-placeholder']) ? $attribs['data-placeholder'] : 'Selecione';
-
+        
+        $config['visible'] = isset($config['visible']) ? $config['visible'] : true;
         $complemento = empty($config['texto-padrao']) ? array('' => '') : $config['texto-padrao'];
         $options = $complemento + $options;
 
-        $xhtml = $this->buildSelect($name, $value, $attribs, $options);
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+
+            $marcados = (array) $value;
+            $texto = array();
+            foreach($marcados as $marcado){
+                $texto[] = $options[$marcado];
+            }
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . implode("<br />", $texto) . '</p>';
+        } else {
+            $xhtml = $this->buildSelect($name, $value, $attribs, $options);
+        }
         return $this->buildField($xhtml, $label, $attribs, $config);
 
     }
@@ -88,6 +103,7 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
     public function buildSelect($name, $value = null, $attribs = null, $options = null, $config = array())
     {
         $info = $this->_getInfo($name, $value, $attribs, $options);
+        $help = isset($attribs['help']) ? true : false;
         extract($info); // name, id, value, attribs, options, listsep, disable
         
         // force $value to array so we can compare multiple values to multiple
@@ -125,6 +141,10 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
             $disabled = ' disabled="disabled"';
         }
 
+        if ($help) {
+        	$help = "<span class='help-block m-b-none'><i class='fa fa-question-circle' style='color: #1c84c6;'></i> {$attribs['help']}</span>";
+        }
+        
         // Build the surrounding select element first.
         $xhtml = '<select'
                 . ' name="' . $this->view->escape($name) . '"'
@@ -164,6 +184,8 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
         // add the options to the xhtml and close the select
         $xhtml .= implode("\n    ", $list) . "\n</select>";
 
+        $xhtml .= $help;
+        
         return $xhtml;
     }
 

@@ -32,16 +32,21 @@ class Simec_View_Helper_Data extends Simec_View_Helper_Element
             $value = Simec_Util::formatarData($value, Zend_Date::DATES);
         }
 
-        // Construindo o input
-        $xhtml = '<input'
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . $value . '</p>';
+            $config['icon'] = $config['date'] = null;
+        } else {
+            // Construindo o input
+            $xhtml = '<input'
                 . ' name="' . $this->view->escape($name) . '"'
                 . ' id="' . $this->view->escape($id) . '"'
                 . ' type="' . $type . '"'
                 . ' value="' . $value . '"'
-                . ' class="' . $class . '"'
+                . ' class="datemask ' . $class . '"'
                 . $this->_htmlAttribs($attribs)
                 . ' />';
-
+        }
         return $this->buildField($xhtml, $label, $attribs, $config);
     }
 }

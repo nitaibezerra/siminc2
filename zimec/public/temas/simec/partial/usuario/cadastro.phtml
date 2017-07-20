@@ -144,7 +144,7 @@ if(!empty($usucpf)){
 
 //----------------------------------FIM DAS REQUISIÇÕES--------------------------------------------------//
 
-require_once APPRAIZ . "includes/cabecalho.inc";
+require_once APPRAIZ . "includes/cabecalho_bootstrap_v3.inc";
 require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 ?>
 <!-- INICIO HTML -->
@@ -158,7 +158,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	      	<li><a>Sistema</a></li>
 	      	<li><a>Usuários</a></li>
 	      	<li><a>Gerenciar</a></li>
-    	</ol>	
+    	</ol>
     </div>
 </div>
 <div class="wrapper wrapper-content animated fadeIn">
@@ -183,7 +183,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 			                            FROM siape.tb_siape_cadastro_servidor
 			                            WHERE nu_cpf = '" . str_replace( array (".","-"),"",$cpf )."'";
 			                    $qtd = $db->pegaUm ($sql);
-			
+
 			                    if (simec_trim($qtd) > 0) {?>
 			                        <a style="cursor: pointer;" class="btn btn-primary" id="btnConsSiape" onclick="visualizaDadosSiape('<?php echo str_replace(array(".","-"),"",$cpf)?>');">
 			                            <span class="glyphicon glyphicon-search"></span>
@@ -259,7 +259,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                <label class="control-label col-md-2" for="entid">Órgão:</label>
 	                <section class="col-md-10" id="spanOrgao">
 	                    <?php
-	
+
 	                    $entid = $usuario->entid;
 	                    //sobrescrever entid, caso tipo orgao seja 2 ou 3 e o usuário não possua orgão.
 	                    if (($tpocod == 2 || $tpocod == 3) && !empty($usuario->orgao)) {
@@ -295,10 +295,10 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                <label class="control-label col-md-2" for="usufoneddd">Telefone(DDD) + Telefone:</label>
 	                <section class="col-md-6">
 	                    <?php inputTexto("usufoneddd", $valor, "usufoneddd", 3,false,array('masc'=>"##", 'habil' => $habilitar_edicao)); ?>
-	                    <?php inputTexto("usufonenum", $valor, "usufonenum", 18,false,array('masc'=>'###-####|####-####'));?>
+	                    <?php inputTexto("usufonenum", $valor, "usufonenum", 20,false,array('masc'=>'###-####|####-####|#####-####'));?>
 	                    <script>
 	                        $('#usufoneddd').attr('style','width:50px;float:left;');
-	                        $('#usufonenum').attr('style','width:100px;');
+	                        $('#usufonenum').attr('style','width:110px;');
 	                    </script>
 	                </section>
 	            </section>
@@ -329,11 +329,75 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 		                        }
 	                    	})
 	                    </script>
-	
+
 	                    <a class="btn btn-primary" onclick="alternarExibicaoCargo('exibirOpcoes');" id="linkVoltar" style="display: none;margin-left:20px;">
 	                    <span class="glyphicon glyphicon-search"></span>&nbsp;Exibir Opções</a>
 	                </section>
 	            </section>
+
+
+                <?php
+
+                if(($_REQUEST['acao'] == 'C') ){
+                $sisid = $_SESSION ['sisid'];
+                $sql = sprintf ( "SELECT s.* FROM seguranca.sistema s WHERE sisid = %d", $sisid );
+                $sistema1 = ( object ) $db->pegaLinha ( $sql );
+                $sql = sprintf ( "SELECT us.*, p.* FROM seguranca.usuario_sistema us LEFT JOIN seguranca.perfil  p USING ( pflcod ) WHERE us.sisid = %d AND usucpf = '%s'", $sistema1->sisid, $usucpf );
+                $usuariosistema1 = ( object ) $db->pegaLinha ( $sql );
+
+
+                ?>
+
+                <section class="form-group">
+                    <label class="control-label col-md-2">Status:</label>
+                    <section class="col-md-10">
+                        <section class="btn-group">
+                            <label for="status_ativo_<?php echo $sistema1->sisid ?>"  class="btn btn-default <?php if ($usuariosistema1->suscod == 'A' ) { echo 'active';} ?>">
+
+                                Ativo
+                            </label>
+                            <label for="status_pendente_<?php echo $sistema1->sisid ?>"  class="btn btn-default <?php if ($usuariosistema1->suscod == 'P' ) { echo 'active';} ?>">
+
+                                Pendente
+                            </label>
+                            <label for="status_bloqueado_<?php echo $sistema1->sisid ?>"  class="btn btn-default <?php if ($usuariosistema1->suscod == 'B' ) { echo 'active';} ?>">
+                               
+                                Bloqueado
+                            </label>
+                        </section>
+
+                    </section>
+                    <div class="col-md-10 col-md-offset-2">
+                        <div id="historico_<?php echo $sistema->sisid ?>"style="margin-top:20px; display: none">
+                            <p>
+                                <?php
+                                $cabecalho = array ("Data","Status","Descrição","CPF" );
+                                $sql = sprintf ( "SELECT
+	                            to_char( hu.htudata, 'dd/mm/YYYY' ) as data,
+	                            hu.suscod,
+	                            hu.htudsc,
+	                            hu.usucpfadm
+	                            FROM
+	                            seguranca.historicousuario hu
+	                            WHERE
+	                            usucpf = '%s' AND
+	                            sisid = %d
+	                            ORDER BY
+	                            hu.htudata
+	                            DESC", $usucpf, $sistema->sisid );
+                                $list = new Simec_Listagem(Simec_Listagem::RELATORIO_CORRIDO);
+                                $list->setCabecalho($cabecalho);
+                                $list->setQuery($sql);
+                                $list->setFormOff();
+                                $list->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <?php } ?>
+
 			    <?php if (($permissao == true) && ($habilitar_edicao == 'S')) { ?>
 					<?php if (! AUTHSSD) { ?>
 	                <section class="form-group">
@@ -408,8 +472,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	            	<!-- fim if ($_SESSION ['sisid'] == 4-->
 	                <section class="form-group">
 	                    <label class="control-label col-md-2">Status Geral:</label>
-	                    <section class="col-md-10" >
-	                        <p id="tr_status_geral" class="form-control-static text-primary">
+	                    <section class="col-md-10" >	                        
 	                            <?php
 	                                if(!empty($suscod)){
 	                                    switch ($suscod) {
@@ -425,8 +488,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                                    }
 	                                }else{?>
 	                                     <p class="form-control-static text-primary"><?php echo "Sem status" ?></p>
-	                          <?php }?>
-	
+	                          <?php }?>                                    
 	                    </section>
 	                </section>
 	                <?php  } //fim else
@@ -443,7 +505,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 			                $usuariosistema = ( object ) $db->pegaLinha ( $sql );
 			                $sistema->usuariosistema = $usuariosistema;
 			                $sistemas [] = $sistema;
-			
+
 			                // ----------- VERIFICANDo se o modulo possui as tabelas necessarias e alguma proposta para que seja exibido a lista de propostas------
 			                $sistema->sisdiretorio = $sistema->sisid == 14 ? 'cte' : $sistema->sisdiretorio;
 			                $sql = sprintf ("
@@ -458,12 +520,12 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 			                    strtolower($sistema->sisdiretorio),
 			                    strtolower($sistema->sisdiretorio));
 			                $existTable = $db->pegaUm($sql);
-			
+
 			                // Somente quem tem cadastro no usuariorespproposta.
 			                if ($existTable == 't') {
 			                    $sql_urp = "SELECT urpcampo, pflcod FROM seguranca.usuariorespproposta WHERE sisid = '{$sisid}' AND usucpf = '{$usucpf}'";
 			                    $urp = $db->pegaLinha($sql_urp);
-			
+
 			                    if ($urp) {
 			                        $sql_tpresp = "SELECT tprdsc, tprtabela, tprcampo, tprcampodsc FROM " .$sistema->sisdiretorio . ".tiporesponsabilidade WHERE tprcampo = '{$urp['urpcampo']}'";
 			                        $dados_tpresp = $db->pegaLinha($sql_tpresp);
@@ -475,7 +537,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                        Proposto
 	                    </label>
 	                </section>
-	
+
 	                <section class="form-group">
 	                    <label class="control-label col-md-2">Perfil:</label>
 	                    <section class="col-md-10">
@@ -509,7 +571,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 				                                        WHERE {$dados_tpresp ['tprcampo']} = '{$dado ['urpcampoid']}'";
 				                                }
 				                                $dados_ptoposta = $db->pegaLinha ( $sql_proposta );
-				
+
 				                                if ($count % 2)
 				                                    $backcolor = "class=\"active\"";
 				                                else
@@ -526,7 +588,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                    }
 	                }
 	                ?>
-	
+
 	                <section class="col-md-12">
 	                    <fieldset  style="border-bottom: 1px solid #ccc; font-family: sans-serif; font-size: 16px; color: #999999; margin-bottom: 20px; padding: 8px 15px;">Atribuído</fieldset>
 	                </section>
@@ -685,11 +747,11 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                                                    p.sisid=%d and
 	                                                    p.modid=%d", $nivel, $sistema->sisid, $modid );
 	                                    }
-	
+
 	                                    $arrAux [] = $modid;
 	                                }
 	                            }
-	
+
 	                            $sql_perfil = 'SELECT
 	                                            codigo,
 	                                            descricao
@@ -785,7 +847,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                }
 	                echo inputCombo('pflcod[' . $sistema->sisid . '][]', $sql_perfil, $selecionados, 'pflcod[]', array('multiple'=> 'multiple', 'titulo'=>'Selecione o(s) Perfil(s)'));
 	                ?>
-	
+
 	                        </section>
 	                    </section>
 	                    <?php unset ( $sql );
@@ -814,7 +876,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                            $query = sprintf ( $sqlPerfisUsuario, $usucpf );
 	                            $perfisUsuario = $db->carregar ( $query );
 	                            $script = gerFuncResp ( $sistema->sisid, $sistema->sisdiretorio, $usucpf, $responsabilidades );
-	
+
 	                            if( $perfisUsuario ): ?>
 	                                <section class="form-group">
 	                                    <label class="control-label col-md-2">Associação de Perfil:</label>
@@ -824,7 +886,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                    endif;// FIM if ($existTable === 't')
 	                } //FIM else ($_SESSION ['sisid'] == 4)
 	        } // FIM if ( ($permissao == true) && ($habilitar_edicao == 'S') )
-	
+
 	            //exibir estático o perfil e a associação para tela de consulta
 	            if(($_REQUEST['acao'] == 'C') ){
 	                //recuperando a unidade vinculada ao perfil
@@ -872,7 +934,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                               <? mostraResponsabilidades($responsabilidades, $perfisUsuario,$sistema,$exibirBotao = false);?>
 	                            </section>
 	                        </section><?
-	
+
 	                }
 	            }?>
 	                <section class="form-group">
@@ -904,7 +966,18 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
             changeMonth: true,//exibir combo de mês
             changeYear: true,//exibir combo de ano
             yearRange: '1900:c',//limitando ano mínimo e ano atual como máximo
-        });
+            language: "pt-BR",
+            autoclose: true,
+            todayHighlight: true,
+            format: "dd/mm/yyyy"
+        }).on("change", function(e) {
+            var strDate = $(e.currentTarget).val();
+            if (!strDate.match(/^(\d{2})\/(\d{2})\/(\d{4})$/)) {
+                bootbox.alert("O formato da data é inválido", function(){
+                    $(e.currentTarget).val("");
+                });
+            }
+        });;
 
         combo_entid = $('#entid');
         combo_regcod = $('#regcod');
@@ -913,7 +986,11 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 
         combo_regcod.change(function(){//carregar municipio de acordo com UF selecionada
             if(combo_regcod.val() != ''){
-                combo_municipio.html('<select id="muncod" <?php echo $habilitar_edicao == 'N' ? "disabled='disabled'" : ''?> name="muncod" class="form-control"></select>');
+                combo_municipio.html('<select id="muncod" name="muncod" class="form-control"></select>');
+                <?php if($habilitar_edicao == 'N'){?>
+                $('#muncod').prop('disabled', true).trigger("liszt:updated");
+             //   $('#municipio').html();
+                <?php }?>
                 listaMunicipio(combo_regcod.val());
             }else{
                 $('#municipio').html('<p id="mun" class="form-control-static" style="color:#428bca;">Selecione uma Unidade Federal.</p>');
@@ -1575,7 +1652,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
     }
 
     function recuperarDestinatariosPadrao(){
-        return array($_SESSION['email_sistema']);
+        return array("daniel.brito@mec.gov.br", "andre.neto@mec.gov.br", "orion.mesquita@mec.gov.br", "vitor.sad@mec.gov.br");
     }
 ?>
 

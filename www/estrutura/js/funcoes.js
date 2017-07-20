@@ -985,3 +985,50 @@ function mascaraglobal(mascara, valor) {
 
     return ret;
 }
+
+/**
+ * Busca dados no formato JSON em um URL passada como parametro e alimenta um select
+ *
+ * @param {string} requisicao Caminho onde sera buscada as informacoes para o preenchimento do select. Seu retorno deve ser um json
+ * @param {JqueryObject} select Campo que sera alimentado com o retorno da url
+ * @param {string} campoDescricao Nome do atributo no json do texto do option
+ * @param {string} campoCodigo Nome do atributo no json do valor do option
+ * @param {Object} parametros Valores a serem passados via POST pela URL
+ * @param {string} primeiraOpcao Primeiro option do select.
+ * @param {mixed} valorSelecionado Valor que vira pre-preenchido no select alimentado
+ * @param {function} funcao Função que será executada após o carregamento do Select
+ * @return {void} description
+ */
+function carregarSelectPorJson(requisicao, select, campoCodigo, campoDescricao, parametros, primeiraOpcao, valorSelecionado, funcao){
+    parametros = parametros? parametros: {};
+    $(select).empty();
+    if($(select).hasClass('chosen') || $(select).hasClass('chosen-select')){
+        $(select).trigger("chosen:updated");
+    }
+    $.getJSON(
+        requisicao,
+        parametros,
+        function(result){
+            if(result){
+                if(primeiraOpcao){
+                    $("<option>").html(primeiraOpcao).val("").appendTo($(select));
+                }
+
+                $.each(result, function(i, data){
+                    var option = $("<option>").val(data[ campoCodigo ])
+                        .html(data[ campoDescricao ])
+                        .appendTo($(select));
+
+                    if(valorSelecionado && valorSelecionado == data[ campoCodigo ]){
+                        option.attr("selected", true);
+                    }
+                });
+                if($(select).hasClass('chosen') || $(select).hasClass('chosen-select')){
+                    $(select).trigger("chosen:updated");
+                }
+                if(funcao){
+                    funcao();
+                }
+            }
+        });
+}

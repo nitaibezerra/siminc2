@@ -93,7 +93,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
  * @see Simec_Listagem
  */
 require_once APPRAIZ . 'includes/library/simec/Listagem.php';
-include APPRAIZ."includes/cabecalho.inc";
+include APPRAIZ."includes/cabecalho_bootstrap_v3.inc";
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-12">
@@ -231,7 +231,7 @@ include APPRAIZ."includes/cabecalho.inc";
 </table>
 <script language="JavaScript" type="text/javascript">
   function altera_aba(cod) {
-     location.href = 'proporc.php?modulo=sistema/menu/aba&acao=A&abacod_int='+cod;
+     location.href = '<?php echo $_SESSION['sisdiretorio']; ?>.php?modulo=sistema/menu/aba&acao=A&abacod_int='+cod;
   }
   
 

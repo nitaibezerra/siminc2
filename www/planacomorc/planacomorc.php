@@ -23,6 +23,9 @@ if (is_array($perfis)) {
     }
 }
 
+
+$_SESSION['sislayoutbootstrap'] = 'zimec';
+
 // -- Export de XLS automático da Listagem
 Simec_Listagem::monitorarExport($_SESSION['sisdiretorio']);
 

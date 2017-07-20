@@ -59,13 +59,14 @@ class Simec_View_Helper_Title extends Simec_View_Helper_Element
      * */
     public function pegarMenu($mnuid)
     {
-        global $db;
-        $sql = "SELECT mnuid, mnuidpai, mnudsc, mnulink
-                FROM seguranca.menu
-                WHERE mnuid = $mnuid";
+        if($mnuid != ''){
+            global $db;
+            $sql = "SELECT mnuid, mnuidpai, mnudsc, mnulink
+                    FROM seguranca.menu
+                    WHERE mnuid = $mnuid";
 
-        return $db->pegaLinha($sql);
-
+            return $db->pegaLinha($sql);
+        }
     }//end pegarMenu()
 
 
@@ -111,14 +112,15 @@ class Simec_View_Helper_Title extends Simec_View_Helper_Element
      *
      * @return titulo
      * */
-    public function buildField($xhtml, $label=null, $attribs=array())
+    public function buildField($xhtml, $label, $attribs = array(), $config = array())
     {
         // Se não possuim subtitulo.
         if ($label === '') {
             $url  = explode('=', $_SESSION['favurl']);
             $home = $url[0].'='.$_SESSION['paginainicial'];
             // Pega o mnuid da página.
-            $mnuid = $_SESSION['acl'][$_SESSION['sisid']][$_SESSION['favurl']]['mnuid'];
+            $faurl=substr($_SESSION['favurl'], 0, strpos($_SESSION['favurl'], 'acao=')+6);
+            $mnuid = $_SESSION['acl'][$_SESSION['sisid']][$faurl]['mnuid'];
             // Carrega dados da página.
             $menu = $this->pegarMenu($mnuid);
             // Completa rastro dando um array com a primeira posição preenchida.
@@ -149,13 +151,13 @@ class Simec_View_Helper_Title extends Simec_View_Helper_Element
         $html = '<div class="row wrapper border-bottom white-bg page-heading">
 	    			<div class="col-lg-12">
 	    				'.$xhtml;
-	    					
+
 	    if ($subTitle) {
 	    	$html.= '<ol class="breadcrumb">
 		    		    '.$subTitle.'
 	    			</ol>';
 	    }
-	    
+
 	    $html.= '	</div>
 	    		</div>';
 

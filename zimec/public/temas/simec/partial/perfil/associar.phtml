@@ -20,13 +20,13 @@ $modulo=$_REQUEST['modulo'] ;
 //Caso seja seja solicitada a inclusão de menus ao perfil faça
 if ($_REQUEST['act']=='cadastra' and $_POST['pflcod']<>'') {
     //Deleta-se os menus do perfil para cadastrar novamente
-    $sql = 'delete from perfilmenu where pflcod='.$_POST['pflcod'];
+    $sql = 'delete from seguranca.perfilmenu where pflcod='.$_POST['pflcod'];
     $db->executar($sql);
     $mnuid = $_POST['mnuid'];
     $nlinhas = count($mnuid)-1;
     for ($j=0; $j<=$nlinhas;$j++){
         //Cadastra-se o menu do perfil
-        $sql = "insert into perfilmenu (pflcod, mnuid, pmnstatus) VALUES (".$_POST['pflcod'].",".$mnuid[$j].",'A')";
+        $sql = "insert into seguranca.perfilmenu (pflcod, mnuid, pmnstatus) VALUES (".$_POST['pflcod'].",".$mnuid[$j].",'A')";
         $db->executar($sql);
     }
     $db -> commit();
@@ -49,7 +49,7 @@ if(!empty($_SESSION['pflcod']) && empty($pflcod)){
 }
 
 //Inclui o cabeçalho da página
-include APPRAIZ."includes/cabecalho.inc";
+include APPRAIZ."includes/cabecalho_bootstrap_v3.inc";
 /**
  * Funções de apoio ao gerenciamento do perfil.
  * @see _funcoesspo_componentes.php
@@ -91,7 +91,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                                        }
 	
 	                              //Pesquisa-se os sistemas cadastrados para montar a combo
-	                                $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
+	                                $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from seguranca.sistema order by DESCRICAO ";
 	                                //Monta a combo
 	                                //$db->monta_combo("sisid",$sql,'S',"Selecione o Sistema",'submete_sistema','');
 	                                inputCombo('sisid', $sql, $valor, 'sisid', array('habil' => 'S', 'titulo'=>'Selecione o Sistema','acao' =>'submete_sistema'));
@@ -106,7 +106,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                        <div class="col-lg-10">
 	                                <?php
 	                                 //Pesquisa os perfis cadastrados para o sistema para montar a combo
-	                                  $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from perfil where pflstatus='A' and sisid=".$sisid." order by pfldsc ";
+	                                  $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from seguranca.perfil where pflstatus='A' and sisid=".$sisid." order by pfldsc ";
 	                                  //monta a combo de perfis
 	                                  //$db->monta_combo("pflcod",$sql,'S',"Selecione o Perfil",'submete_perfil','');
 	                                  inputCombo('pflcod', $sql, $valor, 'pflcod', array('habil' => 'S', 'titulo'=>'Selecione o Perfil','acao' =>'submete_perfil'));
@@ -122,7 +122,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                            <?php
 	                              $sisid = $_SESSION['sisid'];
 	                             //Pesquisa os perfis cadastrados para o sistema para montar a combo
-	                              $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from perfil where pflstatus='A' and sisid=".$_SESSION['sisid']." order by pfldsc ";
+	                              $sql = "select pflcod as CODIGO,pfldsc as DESCRICAO from seguranca.perfil where pflstatus='A' and sisid=".$_SESSION['sisid']." order by pfldsc ";
 	                              //monta a combo de perfis
 	                              //$db->monta_combo("pflcod",$sql,'S',"Selecione o Perfil",'submete_perfil','');
 	                              inputCombo('pflcod', $sql, $valor, 'pflcod', array('habilitado' => 'S', 'titulo'=>'Selecione o Perfil','acao' =>'submete_perfil'));
@@ -154,8 +154,8 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	                            END as mnushow,
 	                            mnulink,
 	                            mnutransacao
-	                        FROM menu
-	                        LEFT JOIN perfilmenu p on menu.mnuid = p.mnuid AND p.pflcod=".$pflcod."
+	                        FROM seguranca.menu
+	                        LEFT JOIN seguranca.perfilmenu p on menu.mnuid = p.mnuid AND p.pflcod=".$pflcod."
 	                        WHERE  mnustatus = 'A' ANd menu.sisid=".$sisid."
 	                        ORDER BY mnucod";
 	
@@ -183,6 +183,10 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
            var linha = $(this);
            // alinhando a esquerda a coluna 3 (Menu/Módulo) da tabela
           linha.find('td:eq(2)').removeClass('text-center').addClass('text-left');
+        });
+        jQuery('#tb_render > tfoot > tr ').each(function() {
+           var linha = $(this);
+          linha.find('td').attr('colspan',6);
         });
     });
 

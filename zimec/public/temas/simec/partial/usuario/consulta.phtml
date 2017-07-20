@@ -34,7 +34,7 @@ if ($_REQUEST['requisicaoAjax']) {
     exit;
 }
 
-include APPRAIZ . "includes/cabecalho.inc";
+include APPRAIZ . "includes/cabecalho_bootstrap_v3.inc";
 require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 
 if ($_REQUEST['acao'] == 'A') {
@@ -488,11 +488,19 @@ DML;
 		                entidade.entnome as orgao,
 		                usuario.regcod,
 		                municipio.mundescricao,
-		                to_char(usuario.usudataatualizacao,'dd/mm/YYYY HH24:MI') as data";
+		                to_char(usuario.usudataatualizacao,'dd/mm/YYYY HH24:MI') as data,
+                                CASE 
+                                    WHEN usuariosistema.suscod = 'A' THEN 'Ativo' 
+                                    WHEN usuariosistema.suscod = 'B' THEN 'Bloqueado' 
+                                    WHEN usuariosistema.suscod = 'P' THEN 'Pendente'
+                                END as status_geral 
+
+";
 		
 		    $groupby = "usuario.usucpf, usuario.usunome, usuario.usufoneddd, usuario.usufonenum, usuario.usuemail, entidade.entid,
 		                usuario.orgao, unidadex.unidsc, cargo.cardsc, usuario.usufuncao, entidade.entnome, usuario.regcod,
-		                municipio.mundescricao, usuario.usudataatualizacao, usuario.suscod, usuario.usuchaveativacao, perfil.pflcod";
+		                municipio.mundescricao, usuario.usudataatualizacao, usuario.suscod, usuario.usuchaveativacao, perfil.pflcod,
+                                usuariosistema.suscod";
 		
 		    $sql = " SELECT DISTINCT
 		                            $campos
@@ -510,7 +518,7 @@ DML;
 					ORDER BY
 		                            nomeusuario";
 		
-		    $cabecalho = array('CPF', 'Nome Completo', 'Telefone', 'E-mail', 'Unidade', 'Cargo / Função', 'Órgão', 'UF', 'Município', 'Data da Ultima Atualização');
+		    $cabecalho = array('CPF', 'Nome Completo', 'Telefone', 'E-mail', 'Unidade', 'Cargo / Função', 'Órgão', 'UF', 'Município', 'Data da Ultima Atualização', 'Status no Módulo');
 		
 		    /* Exibe a consulta para um XLS */
 		    if ($_REQUEST['act'] == 'visualizaXls') {
@@ -530,9 +538,10 @@ DML;
 		    $listagem->setCabecalho($cabecalho);
 		    $listagem->setQuery($sql);
 		    $listagem->setAcoes(array('edit' => $funcao));
-		    $listagem->addCallbackDeCampo('cpf', 'mask');
+		    $listagem->addCallbackDeCampo('cpf', 'formatar_cpf');
+            $listagem->turnOnOrdenacao('usunome');
 		    $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
-		    $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+		    $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);                    
 		    ?>
 		</section>
 	</div>

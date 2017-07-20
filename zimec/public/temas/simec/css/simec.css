@@ -69,7 +69,7 @@
 }
 .navbar-center {
   float: left;
-  width: 30%;
+  width: 50%;
 }
 .navbar-center li {
 }
@@ -369,6 +369,12 @@
     padding: 0;
     height: 64px;
 }
+.nav-second-level li a {
+	padding-left: 25px;
+}
+.nav-third-level li a {
+	padding-left: 35px;
+}
 .chosen-drop {
 	text-align: left;
 }
@@ -387,6 +393,11 @@
 .input-group-addon span {
 	width: 15px;
 }
+.input-group-addon {
+	border-left: 1px solid #B1AFAF !important;
+	border-top: 1px solid #B1AFAF !important;
+	border-bottom: 1px solid #B1AFAF !important;
+}
 .tituloFormulario{
     padding:10px 5px 5px 20px !important;
     margin-top: 10px;
@@ -398,24 +409,45 @@
 .nav > li > a i {
 	width: 12px;
 }
-.btn-group .btn-default:hover, 
-.btn-group .btn-default:focus, 
-.btn-group .btn-default:active, 
-.btn-group .btn-default.active, 
+.btn-group .btn-default:hover,
+.btn-group .btn-default:focus,
+.btn-group .btn-default:active,
+.btn-group .btn-default.active,
 .btn-group .open .dropdown-toggle.btn-default {
 	background-color: #18a689;
     border-color: #18a689;
     color: #FFFFFF;
 }
-.btn-group .btn-primary:hover, 
-.btn-group .btn-primary:focus, 
-.btn-group .btn-primary:active, 
-.btn-group .btn-primary.active, 
+.btn-group .btn-primary:hover,
+.btn-group .btn-primary:focus,
+.btn-group .btn-primary:active,
+.btn-group .btn-primary.active,
 .btn-group .open .dropdown-toggle.btn-primary {
     background-color: gray;
     border-color: gray;
     color: #FFFFFF;
 }
+
+/*
+    Corre��o para os bot�es do elemento radio do tipo Sim e N�o apare�am da cor
+    cinza quando desativado e verde quando ativado.
+    label.btn.btn-primary.active
+*/
+/*
+    Corre��o para os bot�es do elemento radio do tipo Sim e N�o apare�am da cor
+    cinza quando desativado e verde quando ativado.
+    label.btn.btn-primary.active
+*/
+label.btn.btn-primary {
+    background-color: gray;
+    border-color: gray;
+}
+
+label.btn.btn-primary.active {
+    background-color: #1ab394 !important;
+    border-color: #1ab394 !important;
+}
+
 .navbar-listagem {
 	margin-top: -62px;
 	float: right;
@@ -423,4 +455,154 @@
 }
 section .form-group .btn-group {
 	margin-left: 15px;
+}
+.form-actions {
+	padding-left: 10px;
+}
+.padding-bottom-5 {
+	padding-bottom: 5px;
+}
+.padding-bottom-10 {
+	padding-bottom: 10px;
+}
+.danger {
+    color: #EF5352 !important;
+}
+.primary {
+	color: #1c84c6 !important
+}
+-webkit-baseline-.info {
+	color: #23c6c8 !important;
+}
+.warning {
+	color: #F8AC59 !important;
+}
+.success {
+	color: #1ab394 !important;
+}
+.database-info {
+	display: block;
+	vertical-align: -webkit-baseline-middle;
+	color: #fff;
+}
+
+.form-control, .single-line, 
+.checkbox label::before, 
+.radio label::before, 
+.chosen-choices {
+	border: 1px solid #B1AFAF !important;
+	opacity: 1 !important;
+}
+
+.form-control[disabled], 
+.form-control[readonly], 
+fieldset[disabled] .form-control, 
+.chosen-disabled .chosen-choices {
+	border: 1px solid #B1AFAF !important;
+}
+
+.chosen-disabled, 
+.chosen-disabled .chosen-choices {
+	background: #eee;
+	opacity: 1 !important;
+}
+
+.chosen-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    zoom: 1;
+    *display: inline;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.ui-widget-content, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	border: 1px solid #B1AFAF !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background: #1c84c6;
+	border: 1px solid #1c84c6 !important;
+	border-radius: 10px;
+}
+
+.ui-slider-range {
+	background: #1c84c6 !important;
+}
+
+.tour-step-background {
+  background: transparent !important;
+}
+
+.popover[class*="tour-"] {
+  z-index: 1200;
+}
+
+.nav.tour-step-backdrop {
+  z-index: 1200;
+  background: #fff !important;
+}
+
+.popover[class*="tour-"] {
+  z-index: 1200;
+}
+
+.popover-title {
+  font-size: 16px; 
+  font-weight: bold
+}
+
+.popover-content {
+  font-size: 14px;
+}
+
+.tour-backdrop {
+  opacity: 0.3 !important;
+}
+
+@media (max-width: 1024px) {
+  .navbar-right {
+    width: 25%;
+  }
+  .header-nav-profile .dropdown .profile-info {
+    width: 75%;
+  }
+  ul.header-nav.header-nav-options li:nth-child(2) {
+    width: 40% !important;
+  }
+}
+
+.ibox-footer {
+  padding: 10px 15px 8px 25px;
+}
+
+.btn-campo{
+    background-color: #fff !important;
+    color: #666 !important;
+}
+
+label.btn.btn-campo.active{
+    color: #fff !important;
+}
+
+@media print
+{
+    #tarja-aviso-19358 {
+        display: none !important;
+    }
+
+    #msg_ambiente {
+        display: none !important;
+    }
+
+    #nao_imprimir {
+        display: none !important;
+    }
+
+   .nav {
+        display: none !important;
+    }
 }

@@ -27,13 +27,19 @@ class Simec_View_Helper_Textarea extends Simec_View_Helper_Element
 
         $value = simec_stripslashes($value);
         // Construindo o input
-        $xhtml = '<textarea'
+
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . nl2br($value) . '</p>';
+        } else {
+            $xhtml = '<textarea'
                 . ' name="' . $this->view->escape($name) . '"'
                 . ' id="' . $this->view->escape($id) . '"'
                 . ' type="' . $type . '"'
                 . ' class="' . $class . '"'
                 . $this->_htmlAttribs($attribs)
                 . ">$value</textarea>";
+        }
 
         return $this->buildField($xhtml, $label, $attribs, $config);
     }

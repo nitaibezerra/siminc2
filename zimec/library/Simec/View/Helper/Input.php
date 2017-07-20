@@ -25,25 +25,32 @@ class Simec_View_Helper_Input extends Simec_View_Helper_Element
         
         $config['label-for'] = isset($config['label-for']) ? $config['label-for'] : $id;
         $config['visible'] = isset($config['visible']) ? $config['visible'] : true;
-
+        
         if($value && strpos($class, 'data') !== false){
             $value = Simec_Util::formatarData($value, Zend_Date::DATES);
         }
 
-        unset($attribs['id'], $attribs['type'], $attribs['class']);
-
-        // Construindo o input
-        $xhtml = '<input'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . ' type="' . $type . '"'
-                . ' value="' . $value . '"'
-                . ' class="' . $class . '"'
-                . $this->_htmlAttribs($attribs)
-                . ' />';
-        
         if ($help) {
-        	$xhtml.= "<span class='help-block m-b-none'><i class='fa fa-question-circle' style='color: #1c84c6;'></i> {$attribs['help']}</span>";
+        	$help = "<span class='help-block m-b-none'><i class='fa fa-question-circle' style='color: #1c84c6;'></i> {$attribs['help']}</span>";
+        }
+        
+        unset($attribs['id'], $attribs['type'], $attribs['class'], $attribs['help'], $attribs['']);
+
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . $value . '</p>';
+        } else {
+            // Construindo o input
+            $xhtml = '<input'
+                    . ' name="' . $this->view->escape($name) . '"'
+                    . ' id="' . $this->view->escape($id) . '"'
+                    . ' type="' . $type . '"'
+                    . ' value="' . $value . '"'
+                    . ' class="' . $class . '"'
+                    . $this->_htmlAttribs($attribs)
+                    . ' />';
+
+            $xhtml.= $help;
         }
 
         return $this->buildField($xhtml, $label, $attribs, $config);

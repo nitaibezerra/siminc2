@@ -17,7 +17,6 @@ class Simec_View_Helper_Email extends Simec_View_Helper_Element
                 unset($attribs[$chave]);
             }
         }
-
         $id = isset($attribs['id']) ? $attribs['id'] : $name;
         $type = isset($attribs['type']) ? $attribs['type'] : 'text';
         $class = isset($attribs['class']) ? 'form-control cep ' .  $attribs['class'] : 'form-control email';
@@ -26,18 +25,24 @@ class Simec_View_Helper_Email extends Simec_View_Helper_Element
         $config['icon'] = $config['icon'] ? $config['icon'] : 'fa fa-envelope';
         $config['label-for'] = isset($config['label-for']) ? $config['label-for'] : $id;
 
-        unset($attribs['id'], $attribs['type'], $attribs['class']);
+        unset($attribs['id'], $attribs['type'], $attribs['class'], $attribs['']);
 
-        // Construindo o input
-        $xhtml = '<input'
-        		. ' data-alias="\'email\'"'
-                . ' name="' . $this->view->escape($name) . '"'
-                . ' id="' . $this->view->escape($id) . '"'
-                . ' type="' . $type . '"'
-                . ' value="' . $value . '"'
-                . ' class="' . $class . '"'
-                . $this->_htmlAttribs($attribs)
-                . ' />';
+        $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
+        if(!$podeEditar || $podeEditar==='N'){
+            $xhtml = '<p class="form-control-static" id="' . $id . '">' . $value . '</p>';
+            $config['icon'] = null;
+        } else {
+            // Construindo o input
+            $xhtml = '<input'
+                    . ' data-alias="\'email\'"'
+                    . ' name="' . $this->view->escape($name) . '"'
+                    . ' id="' . $this->view->escape($id) . '"'
+                    . ' type="' . $type . '"'
+                    . ' value="' . $value . '"'
+                    . ' class="' . $class . '"'
+                    . $this->_htmlAttribs($attribs)
+                    . ' />';
+        }
 
         return $this->buildField($xhtml, $label, $attribs, $config);
     }

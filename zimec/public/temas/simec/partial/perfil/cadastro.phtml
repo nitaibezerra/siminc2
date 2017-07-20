@@ -204,7 +204,7 @@ $caminhoAtualJs = substr($caminhoAtual, 0, $posicaoCaminhoJs);
  * Cabeçalho simec.
  * @see cabecalho.inc
  */
-include APPRAIZ . "includes/cabecalho.inc";
+include APPRAIZ . "includes/cabecalho_bootstrap_v3.inc";
 /**
  * Funções de apoio ao gerenciamento do perfil.
  * @see _funcoesspo_componentes.php
@@ -356,7 +356,6 @@ require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 	
 	
 	                    if (json.pflinddelegar === 't') {
-	//                      $('#pflinddelegar_n').removeAttr('checked');
 	                        jQuery('#pflinddelegar_n').attr('checked', false);
 	                        jQuery('#pflinddelegar_n').parent().removeClass("active");
 	                        jQuery('#pflinddelegar_s').attr('checked', true);
@@ -438,7 +437,7 @@ require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 	                sisid AS codigo,
 	                sisdsc AS descricao
 	        FROM
-	                sistema
+	                seguranca.sistema
 	        ORDER BY
 	                descricao";
 	
@@ -572,6 +571,7 @@ require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 	</div>
 </div>
 <!--<div id="listaPerfis">-->
+<div class="wrapper wrapper-content animated fadeIn">
 <div class="row">
 <?php
 $sql = "SELECT
@@ -622,4 +622,5 @@ $listagem->setCabecalho($cabecalho)
 
 $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 ?>
+</div>
 </div>

@@ -3,7 +3,7 @@
 		            	<strong>Data:</strong> <?= date("d/m/Y - H:i:s") ?> | 
 		            	<strong>Último acesso</strong> <?= formata_data( $_SESSION['usuacesso'] ); ?>
 		            </div>
-		            <div>
+		            <div class="pull-left footer-actions">
 		                <a href="javascript:abrirRegras(<?=$_SESSION['mnuid']; ?>);"><strong><i class="fa fa-book"></i> Visualizar Regras</strong></a> | 
 		            	<a href="javascript:abrirUsuariosOnline();"><strong><i class="fa fa-user"></i> <?= $_SESSION['qtdusuariosonline'][$_SESSION['sisid']];?> Usuários On-Line</strong></a>
 		            </div>
@@ -427,6 +427,13 @@ unset($_SESSION['mensagem_carregar']);
 <!-- NanoScroller -->
 <script src="/zimec/public/temas/simec/js/plugins/nanoscroll/jquery.nanoscroller.min.js"></script>
 
+<!-- FullCalendar -->
+<script src="/zimec/public/temas/simec/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="/zimec/public/temas/simec/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- Switchery -->
+<script src="/zimec/public/temas/simec/js/plugins/switchery/switchery.js"></script>
+
 <!-- JsTree -->
 <script src="/zimec/public/temas/simec/js/plugins/jstree/jstree.min.js"></script>
 
@@ -466,6 +473,10 @@ unset($_SESSION['mensagem_carregar']);
 <script src="/zimec/public/temas/simec/js/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="/zimec/public/temas/simec/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
+<!-- Bootstrap Tour -->
+<script src="/zimec/public/temas/simec/js/plugins/bootstrap-tour/bootstrap-tour.min.js"></script>
+<script src="/zimec/public/temas/simec/js/plugins/bootstrap-tour/bootstrap-tour-standalone.min.js"></script>
+
 <!-- Gritter -->
 <script src="/zimec/public/temas/simec/js/plugins/gritter/jquery.gritter.min.js"></script>
 
@@ -487,6 +498,7 @@ unset($_SESSION['mensagem_carregar']);
 <script src="/zimec/public/temas/simec/js/theme.js"></script>
 <script src="/zimec/public/temas/simec/js/simec.js"></script>
 <script src="/zimec/public/temas/simec/js/simec-eventos.js"></script>
+<script src="/zimec/public/temas/simec/js/simec-mascaras.js"></script>
 
 <script>
 $(document).ready(function() {
@@ -494,24 +506,8 @@ $(document).ready(function() {
 		simularUsuariosSistemas('<?php echo $_SESSION['usucpforigem']?>');
 	});
 
-    if('<?php echo !empty($mensagemCarregar) ?>'){
-        swal({title: "", text: "<?php echo $mensagemCarregar['text']; ?>", type: "<?php echo $mensagemCarregar['type']; ?>"});
-    }
-
-    $("#btUser").click(function(){
-        $(".mensagensAvisos").hide("slow");
-        url = window.location.href;
-        $.get(url,{limparAvisos:"true"},function(response){});
-    });
-
-    $(".confirmarAviso").click(function(e){
-        e.preventDefault();
-        url = $(this).attr('href');
-        bootbox.confirm('Deseja abrir a localização da referência agora? <br> Trabalhos não salvos serão perdidos.', function(opcao){
-            if(opcao){
-                location.href = url;
-            }
-        });
-    });
+    <?php if (!empty($mensagemCarregar) && isset($mensagemCarregar['text'])) { ?>
+        swal({title: "", text: "<?php echo str_replace(array("\n", "\r"), '', $mensagemCarregar['text']); ?>", type: "<?php echo $mensagemCarregar['type']; ?>", html: true});
+    <?php } ?>
 });
 </script>

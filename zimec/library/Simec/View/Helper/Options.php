@@ -9,38 +9,49 @@ class Simec_View_Helper_Options extends Simec_View_Helper_Element
 {
     public function options($name, $label = null, $value = null, $options = null, $attribs = null, $config = array())
     {
-        $id = isset($attribs['id']) ? $attribs['id'] : $name;
+        $value = (array)$value;
+
+        // Array veio do método carregar
+        if(!empty($value) && is_array(current($value)) && count(current($value)) == 1){
+            $valores = array();
+            foreach($value as $valor){
+                $valores[] = current($valor);
+            }
+            $value = $valores;
+        }
+
+        foreach($attribs as $chave => $attrib){
+            if(is_numeric($chave)){
+                $attribs[$attrib] = $attrib;
+                unset($attribs[$chave]);
+            }
+        }
+
         $type = isset($attribs['type']) ? $attribs['type'] : 'radio';
-        $config['label-for'] = isset($config['label-for']) ? $config['label-for'] : $id;
         $style = isset($config['style']) ? $config['style'] : 'button';
         $help = isset($attribs['help']) ? true : false;
-        
+        $disabled = $attribs['disabled'] == 'disabled' ? 'disabled' : '';
+
         switch ($style) {
             case ('inline'):
-                $xhtml = '<div>';
-                foreach ($options as $valor => $descricao) {
-                    $xhtml .= ' <label class="' . $type . '-inline">
-                                    ' . $this->montarInput($name, $valor, $descricao, $attribs, $config) . '
-                                </label>';
-                }
-                $xhtml .= '</div>';
-                break;
             case ('lista'):
-                $xhtml = '<div>';
+                $classeTipo = $type . '-' . $style;
+            	$xhtml = '';
                 foreach ($options as $valor => $descricao) {
-                    $xhtml .= ' <div class="' . $type . '">
-                                    <label>
-                                        ' . $this->montarInput($name, $valor, $descricao, $attribs, $config) . '
-                                    </label>
-                                </div>';
+                	$id = isset($attribs['id']) ? $attribs['id'] : $name . '-' . $valor;
+                    $attribs['checked'] = in_array($valor, $value) ? 'checked' : null;
+                	$xhtml.= '<div class="' . $type . ' ' . $classeTipo . ' ' . $disabled . '">';
+                    $xhtml.= $this->montarInput($name, $valor, null, $attribs, $config);
+                	$xhtml.= '<label for="' . $id . '">' . $descricao . '</label>';
+                	$xhtml.= '</div>';
                 }
-                $xhtml .= '</div>';
                 break;
             default:
                 $xhtml = '<div class="btn-group" data-toggle="buttons">';
                 foreach ($options as $valor => $descricao) {
-                    $marcado = $value == $valor ? ' active' : '';
-                    $xhtml .= ' <label class="btn btn-primary'. $marcado.'">
+                    $marcado = in_array($valor, $value) ? ' active' : '';
+                    $attribs['checked'] = in_array($valor, $value) ? 'checked' : null;
+                    $xhtml .= ' <label class="btn btn-primary btn-campo'. $marcado . ' ' . $disabled . '">
                                     ' . $this->montarInput($name, $valor, $descricao, $attribs, $config) . '
                                 </label>';
                 }
@@ -51,29 +62,40 @@ class Simec_View_Helper_Options extends Simec_View_Helper_Element
         if ($help) {
         	$xhtml.= "<span class='help-block m-b-none'><i class='fa fa-question-circle' style='color: #1c84c6;'></i> {$attribs['help']}</span>";
         }
-        
+
         return $this->_build($xhtml, $label, $config);
     }
 
     protected function montarInput($name, $valor, $descricao, $attribs = null, $config = null)
     {
-        $id = isset($attribs['id']) ? $attribs['id'] : $name;
+        $attribs = (array) $attribs;
+
+        foreach($attribs as $chave => $attrib){
+            if(is_numeric($chave)){
+                $attribs[$attrib] = $attrib;
+                unset($attribs[$chave]);
+            }
+        }
+
+        $id = isset($attribs['id']) ? $attribs['id'] : $name . '-' . $valor;
         $type = isset($attribs['type']) ? $attribs['type'] : 'radio';
-        $required = is_array($config) && in_array('required', $config) ? 'required="required"' : '';
-        $class = isset($attribs['class']) ? 'form-control ' .  $attribs['class'] : '';
-        
-        unset($attribs['id'], $attribs['type'], $attribs['class'], $attribs['help'], $attribs[0]);
+        $checked = isset($attribs['checked']) && $attribs['checked'] ? 'checked="checked"' : '';
+        $class = isset($attribs['class']) ? 'class="form-control ' .  $attribs['class'] . '"' : '';
+        $required = is_array($attribs) && in_array('required', $attribs) ? 'required="required"' : '';
+
+        unset($attribs['id'], $attribs['type'], $attribs['class'], $attribs['help'], $attribs['checked']);
 
 		$xhtml = '<input'
         	   . ' name="' . $this->view->escape($name) . '"'
         	   . ' id="' . $this->view->escape($id) . '"'
         	   . ' type="' . $type . '"'
         	   . ' value="' . $valor . '"'
-        	   . ' class="' . $class . '"'
+               . ' ' . $checked . ' '
+        	   . ' ' . $class . ' '
         	   . ' ' . $required . ' '
         	   . $this->_htmlAttribs($attribs)
         	   . " />" . $descricao;
-        
+
         return $xhtml;
     }
 
@@ -81,18 +103,18 @@ class Simec_View_Helper_Options extends Simec_View_Helper_Element
     {
         $icon = !empty($config['icon']) ? '<span class="input-group-addon"><span class="glyphicon glyphicon-' . $config['icon'] . '"></span></span></span>' : null;
         $help = !empty($config['help']) ? '<span class="input-group-addon help-tooltip" data-toggle="tooltip" data-placement="left" title="' . $config['help'] . '"><span class="glyphicon glyphicon-question-sign"></span></span>' : null;
-        $labelSize = !empty($config['label-size']) ? $config['label-size'] : 2;
-        $inputSize = !empty($config['input-size']) ? $config['input-size'] : 10;
-        
+        $labelSize = !empty($config['label-size']) ? $config['label-size'] : 3;
+        $inputSize = !empty($config['input-size']) ? $config['input-size'] : 9;
+
         if(isset($config['formTipo']) && $config['formTipo'] == Simec_View_Helper::K_FORM_TIPO_VERTICAL){
         	$classLabel = '';
-        	$classInput = ' ' . $date;
+        	$classInput = ' ';
         } else if ($labelSize || $inputSize) {
         	$classLabel = "col-sm-{$labelSize} col-md-{$labelSize} col-lg-{$labelSize} control-label";
-        	$classInput = "col-sm-{$inputSize} col-md-{$inputSize} col-lg-{$inputSize} " . $date;
+        	$classInput = "col-sm-{$inputSize} col-md-{$inputSize} col-lg-{$inputSize} ";
         } else {
-        	$classLabel = 'col-sm-2 col-md-2 col-lg-2 control-label';
-        	$classInput = 'col-sm-10 col-md-10 col-lg-10 ' . $date;
+        	$classLabel = 'col-sm-3 col-md-3 col-lg-3 control-label';
+        	$classInput = 'col-sm-9 col-md-9 col-lg-9 ';
         }
 
         if ($icon || $help) {
