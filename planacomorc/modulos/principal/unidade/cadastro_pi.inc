@@ -730,7 +730,7 @@ DML;
                                     <label for="picquantidade" class="control-label">Quantidade:</label>
                                 </div>
                                 <div class="col-lg-10">
-                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" size="10" />
+                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal inteiro form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" />
                                 </div>
                             </div>
                         </fieldset>
@@ -763,7 +763,7 @@ DML;
                         <fieldset><legend class="legend_convenio">Números de Proposta SICONV</legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" size="8" name="input_convenio" />
+                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
@@ -1023,7 +1023,7 @@ DML;
                         <fieldset><legend class="legend_sniic">Números SNIIC </legend>
                             <div class="form-group">
                                 <div class="col-lg-10">
-                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal form-control" title="Número SNIIC" id="input_sniic"  maxlength="10" size="8" name="input_sniic" />
+                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
@@ -1158,7 +1158,7 @@ DML;
                                                 <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
                                                 <?php foreach($aCronogramas as $cronogramaValor){
                                                     switch($cronogramaValor['croid']){
-                                                        case Cronograma::K_FISICO:          $class = 'input_fisico';        break;
+                                                        case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
                                                         case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
                                                         case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
                                                         default: $class = '';
@@ -1310,6 +1310,7 @@ DML;
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
         });
+        
         // Evento ao carregar a tela
         mudarFormularioFinalistico($('#eqdid').val());
 
@@ -1339,8 +1340,6 @@ DML;
             carregarManutencaoSubItem($(this).val());
         });
 
-        $('#input_sniic').mask('9999999999');
-
         $('#btn_adicionar_sniic').click(function(){
              var trHtml =
                 '<tr style="height: 30px;" id="tr_sniic_' + $('#input_sniic').val()+ '" >'
@@ -1365,10 +1364,6 @@ DML;
             }
         });
 
-        $('#input_convenio').mask('9999999999');
-
-        $('#picquantidade').mask('9999999999');
-
         $('#btn_selecionar_convenio').click(function(){
             var trHtml =
                 '<tr style="height: 30px;" id="tr_convenio_' + $('#input_convenio').val()+ '" >'
@@ -1392,8 +1387,6 @@ DML;
                 $('#btn_selecionar_convenio').click();
             }
         });
-
-        $('input.input_fisico').mask('9999999999');
 
         $('.element_edital').click(function() {
             setTimeout(function(){
