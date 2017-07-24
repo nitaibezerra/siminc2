@@ -1086,24 +1086,11 @@ DML;
                                             <td id="" style="text-align: left;">Valor do Projeto:</td>
                                             <td style="text-align: left;">
                                                 <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                                <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
                                             </td>
                                             <td style="text-align: center;">
                                                 <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="" style="text-align: left;">
-                                                Valor do Projeto
-                                                <span style="color: green">Detalhado</span> /
-                                                <span style="color: red">A Detalhar</span>:
-                                            </td>
-                                            <td style="text-align: left;">
-                                                <span id="projeto_custeio_detalhado" style="color: green">0,00</span> /
-                                                <span id="projeto_custeio_detalhar" style="color: red">0,00</span>
-                                            </td>
-                                            <td style="text-align: center;">
-                                                <span id="projeto_capital_detalhado" style="color: green">0,00</span> /
-                                                <span id="projeto_capital_detalhar" style="color: red">0,00</span>
+                                                <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
                                             </td>
                                         </tr>
                                     </table>
@@ -1909,6 +1896,19 @@ DML;
 
         return valorDoProjeto;
     }
+    
+    /**
+     * Soma o valor de capital e custeio e retorna o valor base total do projeto.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorBaseDoProjeto(){
+        var valorCusteio = textToFloat($('#vlrPiCusteio').val());
+        var valorCapital = textToFloat($('#vlrPiCapital').val());
+        var valorBaseDoProjeto = valorCusteio + valorCapital;
+
+        return valorBaseDoProjeto;
+    }
 
     /**
      * Soma o valor de capital e custeio e retorna o valor total disponivel.
@@ -1945,12 +1945,21 @@ DML;
         $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
 
         // Saldo Disponível
-        naoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
-        var vlrDisponivelCusteioCapitalProvisorio = textToFloat(naoDetalhado) / 2;
+        var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
+        var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
 
-        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
-        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
+        // Valores já gravados na base e separados pra esse PI/Projeto
+        $('#vlrPiCusteio').val('');
+        $('#vlrPiCapital').val('');
+        // Valores informados pelo usuário em tempo real para esse PI/Projeto
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var valorCapital = textToFloat($('#picvalorcapital').val());
+        
+        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio - valorCusteio;
+        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio - valorCapital;
 
+        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
+        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
     }
 
     /**
@@ -2196,7 +2205,11 @@ DML;
             dataType: 'json',
             success: function(data){
                 $('#td_autorizado_sub_unidade').text(data.autorizado);
-                $('#td_disponivel_sub_unidade').text(data.disponivel);
+                var fltDisponivelUnidade = textToFloat(data.disponivel);
+                var fltBaseProjeto = buscarValorBaseDoProjeto();
+                var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
+                $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2) ));
+//                $('#td_disponivel_sub_unidade').text(data.disponivel); // antigo código com bug na alteração
             }
         });
     }
@@ -2770,21 +2783,33 @@ DML;
     }
 
     function abrir_lista() {
-        // Verifica se o modal terá que carregar a tela
+        // Verifica se o modal terá que recarregar a tela.
         if($('#modal-ptres .modal-body p').size() <= 1){
-            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val(),
-                function(response) {
-                    $('#modal-ptres .modal-body p').html(response);
-                    $('.modal-dialog-ptres').show();
-                    $('#modal-ptres').modal();
-                    $('#modal-ptres .chosen-select').chosen();
-                    $('#modal-ptres .chosen-container').css('width', '100%');
+            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
+                $('#modal-ptres .modal-body p').html(response);
+                $('.modal-dialog-ptres').show();
+                $('#modal-ptres').modal();
+                $('#modal-ptres .chosen-select').chosen();
+                $('#modal-ptres .chosen-container').css('width', '100%');
             });
         } else {
             $('#formularioPopup input[name=unicod]').val($("#unicod").val());
             $('#modal-ptres').modal();
             $('#btnPopupPtresPesquisar').click();
         }
+    }
+    
+    function visualizarRegistro(ptrid) {
+        $('#modal-confirm .modal-body p').empty();
+        url = 'planacomorc.php?modulo=principal/unidade/popupptres&acao=A&detalhe=ok&ptrid=' + ptrid;
+        $.post(url, function(html) {
+            $('#modal-confirm .modal-body p').html(html);
+            $('#modal-confirm .modal-title').html('Detalhamento PTRES');
+            $('#modal-confirm .btn-primary').remove();
+            $('#modal-confirm .btn-default').html('Fechar');
+            $('.modal-dialog').show();
+            $('#modal-confirm').modal();
+        });
     }
 
     function atualizarPrevisaoPI() {

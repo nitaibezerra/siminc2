@@ -279,12 +279,16 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
 $perfis = pegaPerfilGeral();
 if (in_array(PFL_GESTAO_ORCAMENTARIA_IFS, $perfis)) {
     $sqlUO = <<<DML
-EXISTS (SELECT 1
-         FROM planacomorc.usuarioresponsabilidade rpu
-         WHERE rpu.usucpf = '%s'
-           AND rpu.pflcod = %d
-           AND rpu.rpustatus = 'A'
-           AND rpu.unicod  = uni.unicod)
+        EXISTS (
+            SELECT
+                1
+            FROM planacomorc.usuarioresponsabilidade rpu
+            WHERE
+                rpu.usucpf = '%s'
+                AND rpu.pflcod = %d
+                AND rpu.rpustatus = 'A'
+                AND rpu.unicod  = uni.unicod
+        )
 DML;
     $whereUO = sprintf($sqlUO, $_SESSION['usucpf'], PFL_GESTAO_ORCAMENTARIA_IFS);
     $whereUO = " AND {$whereUO}";
@@ -296,7 +300,14 @@ $where .= $_POST['prgcod'] ? "AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($_POST
 $where .= $_POST['acacod'] ? "AND UPPER(aca.acacod) LIKE('%" . strtoupper($_POST['acacod']) . "%')" : '';
 $where .= $_REQUEST['unicod'] ? " AND aca.unicod = '{$_REQUEST['unicod']}'" : '';
 $where .= $_POST['buscalivre'] ? "AND (trim(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ilike('%" . $_POST['buscalivre'] . "%') OR dtl.ptres ilike '%" . $_POST['buscalivre'] . "%')" : '';
-
+if($_REQUEST['no_ptrid']){
+    if(is_array($_REQUEST['no_ptrid'])){
+        $where .= " AND ptr.ptrid NOT IN('". join($_REQUEST['no_ptrid'], "','"). "')";
+    } else {
+        $where .= " AND ptr.ptrid != ". (int)$_REQUEST['no_ptrid'];
+    }
+}
+//ver($where);
 /* Modifica a conta para o limite de detalhamento */
 $detalhamentoPi = "(COALESCE(ptr.ptrdotacao, 0.00) - COALESCE(SUM(pip.pipvalor), 0.00)) AS nao_det_pi,";
 if($_REQUEST['sbaid'] && $_REQUEST['sbaid'] != 'null'){
@@ -423,8 +434,9 @@ DML;
             <div class="well">
                 <fieldset>
                     <form id="formularioPopup" name="formularioPopup" method="post" action="" class="form-horizontal">
-                        <input type="hidden" name="sbaid" value="<?=$_REQUEST['sbaid']?>">
-                        <input type="hidden" name="unicod" value="<?=$_REQUEST['unicod']?>">
+                        <input type="hidden" name="sbaid" value="<?= $_REQUEST['sbaid'] ?>">
+                        <input type="hidden" name="unicod" value="<?= $_REQUEST['unicod'] ?>">
+                        <input type="hidden" name="no_ptrid" value="<?= $_REQUEST['no_ptrid'] ?>">
                         <div class="form-group">
                             <label for="inputUnidade" class="col-lg-2 control-label">Programa:</label>
                             <div class="col-lg-10">
@@ -669,19 +681,6 @@ DML;
                             height: 400
                         });
                     }
-                });
-            }
-
-            function visualizarRegistro(ptrid) {
-                $('#modal-confirm .modal-body p').empty();
-                url = 'planacomorc.php?modulo=principal/unidade/popupptres&acao=A&detalhe=ok&ptrid=' + ptrid;
-                $.post(url, function(html) {
-                    $('#modal-confirm .modal-body p').html(html);
-                    $('#modal-confirm .modal-title').html('Detalhamento PTRES');
-                    $('#modal-confirm .btn-primary').remove();
-                    $('#modal-confirm .btn-default').html('Fechar');
-                    $('.modal-dialog').show();
-                    $('#modal-confirm').modal();
                 });
             }
 
