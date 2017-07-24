@@ -547,8 +547,12 @@ DML;
                                                     foreach ($dadosPTRES as $ptres):
                                                         ?>
                                                         <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
-                                                            <td align="center"><?php echo $ptres['ptres']; ?></td>
-                                                            <td align="left"><?php echo $ptres['descricao']; ?></td>
+                                                            <td align="center">
+                                                                <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
+                                                            </td>
+                                                            <td align="left">
+                                                                <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
+                                                            </td>
                                                             <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
                                                             <td align="right"><?php echo $ptres['det_pi']; ?></td>
                                                             <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
@@ -1471,6 +1475,11 @@ DML;
         $('.input_CAP').keyup(function(){
             mudarCorCronogramaCapital();
             atualizarValorDetalheCapital();
+        });
+            
+        $('#orcamento').on('click', '.btnVisualizarDetalhes', function(){
+            var ptrid = $(this).attr('ptrid');
+            visualizarRegistro(ptrid);
         });
 
         atualizarValorDetalheCusteio();

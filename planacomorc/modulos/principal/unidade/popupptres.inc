@@ -575,11 +575,11 @@ DML;
                     // setando o ptres
                     var celPTRES = tabelaorigem.rows[linha].insertCell(0);
                     celPTRES.style.textAlign = "center";
-                    celPTRES.innerHTML = ptres;
+                    celPTRES.innerHTML = '<span class="link btnVisualizarDetalhes" ptrid="'+ id+'" >'+ ptres+ '</span>';
 
                     var celFuncional = tabelaorigem.rows[linha].insertCell(1);
                     var funcional = $('tr#' + id + ' td:nth-child(4)').text();
-                    celFuncional.innerHTML = funcional;
+                    celFuncional.innerHTML = '<span class="link btnVisualizarDetalhes" ptrid="'+ id+'" >'+ funcional+ '</span>';
 
                     var celDotacaoAtualPo = tabelaorigem.rows[linha].insertCell(2);
                     celDotacaoAtualPo.style.textAlign = "right";
