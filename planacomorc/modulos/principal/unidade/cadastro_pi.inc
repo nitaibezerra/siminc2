@@ -552,6 +552,8 @@ DML;
                                             $cor = 1;
                                             foreach ($dadosPTRES as $ptres):
                                                 ?>
+                                                <input type="hidden" id="piDetalhado" value="<?php echo $ptres['det_pi']; ?>" />
+                                                <input type="hidden" id="piNaoDetalhado" value="<?php echo $ptres['nao_det_pi']; ?>" />
                                                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                                                     <td align="center">
                                                         <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
@@ -560,8 +562,12 @@ DML;
                                                         <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
                                                     </td>
                                                     <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
-                                                    <td align="right"><?php echo $ptres['det_pi']; ?></td>
-                                                    <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
+                                                    <td align="right" id="td_pi_detalhado">
+                                                        <?php echo $ptres['det_pi']; ?>
+                                                    </td>
+                                                    <td align="right" id="td_pi_nao_detalhado">
+                                                        <?php echo $ptres['nao_det_pi']; ?>
+                                                    </td>
                                                     <td align="right"><?php echo $ptres['empenhado']; ?></td>
                                                     <td align="right">
                                                         <?php echo $ptres['nao_empenhado']; ?>
@@ -1486,6 +1492,8 @@ DML;
             this.value = mascaraglobal('###.###.###.###,##', this.value);
 //            atualizarValorDetalheCusteio();
             atualizarValorDoProjeto();
+            atualizarValorDetalhado();
+            atualizarValorNaoDetalhado();
             atualizarValorLimiteDisponivelUnidade();
             atualizarValorLimiteDisponivelFuncionalCusteio();
             mudarCorValorProjeto();
@@ -1495,6 +1503,8 @@ DML;
             this.value = mascaraglobal('###.###.###.###,##', this.value);
 //            atualizarValorDetalheCapital();
             atualizarValorDoProjeto();
+            atualizarValorDetalhado();
+            atualizarValorNaoDetalhado();
             atualizarValorLimiteDisponivelUnidade();
             atualizarValorLimiteDisponivelFuncionalCapital();
             mudarCorValorProjeto();
@@ -1887,6 +1897,32 @@ DML;
 
         var fltValorLimiteDisponivelFuncional = (fltValorBaseLimiteDisponivelFuncional - fltValorDoProjeto);
         $('#td_disponivel_funcional_capital').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
+    }
+    
+    /**
+     * Calcula e exibi na tela o valor detalhado da funcional.
+     * 
+     * @returns VOID
+     */
+    function atualizarValorDetalhado() {
+        var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
+        var fltValorDoProjeto = buscarValorDoProjeto();
+        var fltValorDetalhado = textToFloat($('#piDetalhado').val());
+        var fltValorDetalhadoAtual = (fltValorDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
+        $('#td_pi_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorDetalhadoAtual.toFixed(2)));
+    }
+    
+    /**
+     * Calcula e exibi na tela o valor não detalhado da funcional.
+     * 
+     * @returns VOID
+     */
+    function atualizarValorNaoDetalhado() {
+        var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
+        var fltValorDoProjeto = buscarValorDoProjeto();
+        var fltValorBaseNaoDetalhado = textToFloat($('#piNaoDetalhado').val());
+        var fltValorNaoDetalhadoAtual = (fltValorBaseNaoDetalhado - (fltValorDoProjeto - fltValorBaseDoProjeto));
+        $('#td_pi_nao_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorNaoDetalhadoAtual.toFixed(2)));
     }
     
     /**
