@@ -1,5 +1,5 @@
 *{
-    font-size: 98% !important;
+    /*font-size: 98% !important;*/
 }
 
 .ibox-action {
@@ -639,4 +639,9 @@ label.btn.btn-campo.active{
 }
 .ibox-content{
     border-color: rgba(84, 179, 163, 0.31);
+}
+
+.page-heading h2{
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
