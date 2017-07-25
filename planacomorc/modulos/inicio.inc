@@ -67,6 +67,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                     montaBotaoInicio($params);
 
                     $params = array();
+                    $params['texto'] = 'Criar por Proposta';
+                    $params['tipo'] = 'listar';
+                    $params['url'] = 'planacomorc.php?modulo=principal/unidade/listar_propostas_pi&acao=A';
+                    montaBotaoInicio($params);
+
+                    $params = array();
                     $params['texto'] = 'Lista de PTRES';
                     $params['tipo'] = 'listar';
                     $params['url'] = 'planacomorc.php?modulo=principal/unidade/listaptres&acao=A';

@@ -1,3 +1,7 @@
+*{
+    font-size: 98% !important;
+}
+
 .ibox-action {
 	-moz-border-bottom-colors: none;
 	-moz-border-left-colors: none;
@@ -607,7 +611,6 @@ label.btn.btn-campo.active{
     }
 }
 
-
 .link {
     cursor: pointer;
     cursor: hand;
@@ -633,3 +636,9 @@ label.btn.btn-campo.active{
     color: #b94a48 !important;
 }
 
+.ibox-title{
+    border-color: #54b3a3;
+}
+.ibox-content{
+    border-color: rgba(84, 179, 163, 0.31);
+}

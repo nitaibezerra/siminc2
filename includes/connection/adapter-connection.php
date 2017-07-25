@@ -170,8 +170,21 @@ class adapterConnection {
      */
     public static function pddeinterativo(){
         global $configDbPddeinterativo;
-        
+
         self::getInstance()->loadConfig($configDbPddeinterativo)->loadDb()->open();
+        return self::$instance;
+    }
+
+    /**
+     * Configura banco de acordo com as configurações gerais do sistema para acessar o PDDEInterativo
+     *
+     * @global stdclass $configDbOldSiminc
+     * @return adapterConnection
+     */
+    public static function oldSiminc(){
+        global $configDbOldSiminc;
+
+        self::getInstance()->loadConfig($configDbOldSiminc)->loadDb()->open();
         return self::$instance;
     }
 

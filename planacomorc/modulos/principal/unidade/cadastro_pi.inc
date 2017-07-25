@@ -19,6 +19,7 @@ include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Responsavel.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
+include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
@@ -88,7 +89,6 @@ if ($_REQUEST['verificarPactuacaoConvenio']) {
 
 require(APPRAIZ . 'planacomorc/modulos/principal/planointerno/cadastropi_requisicoes.inc');
 
-
 // -- Identificando se o usuário atual faz parte do CGSO/CPMO
 $pulaSolicitacao = pulaSolicitacao();
 
@@ -142,7 +142,8 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     // -- S: deixa o formulário aberto para edição e liga as regras de validação - edição de
     // -- informações para confirmar a transação.
     $dadosPI = carregarTransacao($_REQUEST['scpid']);
-} else { // -- Criação de uma nova transação de cadastro de PI
+} elseif ($_REQUEST['replicarProposta']) {
+    $dadosPI = (new Pi_PlanoInterno())->recuperarDadosPropostasSiminc($_REQUEST['replicarProposta']);
 }
 /* Habilita a Edição para Super Usuário */
 if ($db->testa_superuser()) {
@@ -238,6 +239,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <div class="row col-md-12">
+
     <ol class="breadcrumb">
         <li><a href="<?php echo MODULO; ?>.php?modulo=inicio&acao=C"><?php echo $_SESSION['sisabrev']; ?></a></li>
         <li><a href="<?php echo MODULO; ?>.php?modulo=principal/unidade/listapimanter&acao=A">Plano Interno</a></li>
@@ -245,97 +247,112 @@ include APPRAIZ . "includes/cabecalho.inc";
     </ol>
 </div>
 
-<div class="col-lg-11 col-md-11">
-    <div class="well">
-        <fieldset class="form-horizontal">
-            <?php
-            // Só permite editar se tiver em cadastramento
-            if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
-                <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
-                    <input type="hidden" name="evento" id="evento" value="S" />
-                    <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
-                    <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
-                    <input type="hidden" name="tipotransacao" id="tipotransacao" value="E" />
-                    <input type="hidden" name="scpid" id="scpid" value="<?php echo $_REQUEST['scpid']; ?>" />
-            <?php } ?>
-                <?php if ($_GET['apagar']): ?>
+<form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
+    <input type="hidden" name="evento" id="evento" value="S" />
+    <input type="hidden" name="pliid" id="pliid" value="<?= $_REQUEST['pliid']; ?>" />
+    <input type="hidden" name="picid" id="picid" value="<?= $dadosPI['picid']; ?>" />
+    <input type="hidden" name="tipotransacao" id="tipotransacao" value="E" />
+    <input type="hidden" name="scpid" id="scpid" value="<?php echo $_REQUEST['scpid']; ?>" />
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <?php if ($_GET['apagar']): ?>
                 <div class="form-group">
                     <label for="inputUnidade" class="col-lg-2 control-label"></label>
-                    <div class="col-lg-10">
+                    <div class="col-lg-9">
                         <input type="button" class="btn btn-danger" name="btassociar4" id="btassociar4" value="APAGAR"
-                            onclick="removerpi();" />
+                               onclick="removerpi();" />
                     </div>
                 </div>
-                <?php endif; ?>
-                <?php if($dadosPI['plicod']){ ?>
-                    <div class="form-group">
-                        <div class="col-md-2 text-right">
-                            <label class="control-label" for="exercicio">Código do PI:</label>
-                        </div>
-                        <div class="col-lg-10">
-                            <p class="form-control-static">
-                                <span style="background-color: yellow; color: red; padding: 5px;"><?php echo $dadosPI['plicod']; ?></span>
-                            </p>
-                        </div>
-                    </div>
-                <?php } ?>
+            <?php endif; ?>
+            <?php if($dadosPI['plicod']){ ?>
                 <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="exercicio">Exercício:</label>
+                    <div class="col-md-3 text-right">
+                        <label class="control-label" for="exercicio">Código do PI:</label>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-9">
                         <p class="form-control-static">
-                        <?php echo!empty($dadosPI['pliano']) ? $dadosPI['pliano'] : $_SESSION['exercicio']; ?>
+                            <span style="background-color: yellow; color: red; padding: 5px;"><?php echo $dadosPI['plicod']; ?></span>
                         </p>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Dados do Plano interno</legend>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label class="control-label" for="plititulo">Título:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <input type="text" value="<?php
-                                    if ($dadosPI['plititulo']) {
-                                        echo $dadosPI['plititulo'];
+            <?php } ?>
+            <div class="form-group">
+                <div class="col-md-3 text-right">
+                    <label class="control-label" for="exercicio">Exercício:</label>
+                </div>
+                <div class="col-lg-9">
+                    <p class="form-control-static">
+                        <?php echo!empty($dadosPI['pliano']) ? $dadosPI['pliano'] : $_SESSION['exercicio']; ?>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Dados do Plano Interno</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="plititulo">Título:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input type="text" value="<?php
+                            if ($dadosPI['plititulo']) {
+                                echo $dadosPI['plititulo'];
+                            }
+                            ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
+                        </div>
+                        <div class="col-lg-9">
+                                <textarea class="obrigatorio txareanormal form-control"  rows="10" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
+                                    if ($dadosPI['plidsc']) {
+                                        echo $dadosPI['plidsc'];
                                     }
-                                    ?>" class="CampoEstilo normal form-control obrigatorio" title="" id="plititulo" value="" maxlength="250" size="2" name="plititulo">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <textarea class="obrigatorio txareanormal form-control"  rows="2" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
-                                        if ($dadosPI['plidsc']) {
-                                            echo $dadosPI['plidsc'];
-                                        }
-                                        ?></textarea>
-                                </div>
-                            </div>
-                        </fieldset>
+                                    ?></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="unicod">Unidade Solicitante:</label>
-                    </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $obrigatorias = UNIDADES_OBRIGATORIAS;
-                    // -- Se a requisição tiver um scpid, quer dizer que a tela foi aberta para homologar uma
-                    // -- solicitação de PI, ou para ver uma transação executada anteriormente. Nos dois casos,
-                    // -- o filtro de UOs deve exibir (ao menos) a UO escolhida no momento da criação da transação,
-                    // -- portanto, não deve filtrar pela UO do usuário que a está visualizando.
-                    // ******* Ao carregar a listagem de PTRES, sempre filtrar pela UO selecionada, independentemente do Perfil ; *****
+            </div>
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Identificação</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="unicod">Unidade Solicitante:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $obrigatorias = UNIDADES_OBRIGATORIAS;
+                            // -- Se a requisição tiver um scpid, quer dizer que a tela foi aberta para homologar uma
+                            // -- solicitação de PI, ou para ver uma transação executada anteriormente. Nos dois casos,
+                            // -- o filtro de UOs deve exibir (ao menos) a UO escolhida no momento da criação da transação,
+                            // -- portanto, não deve filtrar pela UO do usuário que a está visualizando.
+                            // ******* Ao carregar a listagem de PTRES, sempre filtrar pela UO selecionada, independentemente do Perfil ; *****
 
 
-                    $wherePerfilUO = $filtroPerfilUG = '';
-                    if (in_array(PFL_SUBUNIDADE, $perfis)) {
-                        $sql = "SELECT ung.ungcod, ung.ungabrev, ungid, ung.unicod
+                            $wherePerfilUO = $filtroPerfilUG = '';
+                            if (in_array(PFL_SUBUNIDADE, $perfis)) {
+                                $sql = "SELECT ung.ungcod, ung.ungabrev, ungid, ung.unicod
                                 FROM planacomorc.usuarioresponsabilidade ur
                                     inner join public.unidadegestora ung on ur.ungcod = ung.ungcod
                                 WHERE ung.ungstatus= 'A'
@@ -344,14 +361,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 and rpustatus = 'A'
                                 ORDER BY ung.unicod";
 
-                        $unidadeUsuario = $db->pegaLinha($sql);
+                                $unidadeUsuario = $db->pegaLinha($sql);
 
-                        $wherePerfilUO  = " and unicod = '{$unidadeUsuario['unicod']}'";
-                        $dadosPI['unicod'] = $unidadeUsuario['unicod'];
-                        $dadosPI['ungcod'] = $unidadeUsuario['ungcod'];
-                    }
+                                $wherePerfilUO  = " and unicod = '{$unidadeUsuario['unicod']}'";
+                                $dadosPI['unicod'] = $unidadeUsuario['unicod'];
+                                $dadosPI['ungcod'] = $unidadeUsuario['ungcod'];
+                            }
 
-                    $sql = "
+                            $sql = "
                         SELECT
                             uni.unicod AS codigo,
                             uni.unicod || ' - ' || unidsc AS descricao
@@ -362,25 +379,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                         ORDER BY uni.unicod
 ";
 
-                    if ($dadosPI['unicod']) {
-                        $unicod = $dadosPI['unicod'];
-                        $editavelUg = 'N';
-                    }
+                            if ($dadosPI['unicod']) {
+                                $unicod = $dadosPI['unicod'];
+                                $editavelUg = 'N';
+                            }
 
-                    $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
-                    ?>
+                            $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="ungcod">Sub-Unidade:</label>
-                    </div>
-                    <div class="col-lg-10 div_ungcod">
-                        <?php
-                        $ungcod = $dadosPI['ungcod'];
-                        $ungdata = array();
-                        if (!empty($ungcod)) {
-                            $sql = <<<DML
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="ungcod">Sub-Unidade:</label>
+                        </div>
+                        <div class="col-lg-9 div_ungcod">
+                            <?php
+                            $ungcod = $dadosPI['ungcod'];
+                            $ungdata = array();
+                            if (!empty($ungcod)) {
+                                $sql = <<<DML
                                 SELECT ung.ungcod AS codigo,
                                        ung.ungcod || ' - ' || ung.ungabrev AS descricao
                                   FROM public.unidadegestora ung
@@ -388,90 +405,90 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     AND ung.ungcod = '%s' 
                                   ORDER BY ung.unicod
 DML;
-                            $ungdata = sprintf($sql, $ungcod);
-                        }
-                        $db->monta_combo('ungcod', $ungdata, $editavelUg, 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
-                        ?>
+                                $ungdata = sprintf($sql, $ungcod);
+                            }
+                            $db->monta_combo('ungcod', $ungdata, $editavelUg, 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div style="display: none;" class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Subação:</label>
-                    <div class="col-lg-10 carregaSubacao">
-                    <?php if (!$dadosPI['pliid']) { ?>
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default">
-                                <input type="radio" name="semsubacao"
-                                       id="semsubacao"
-                                       value="s" onchange="subacao(this.value)"/>Sem Subação
-                            </label>
-                            <label class="btn btn-default active">
-                                <input type="radio" name="semsubacao"
-                                       id="semsubacao"
-                                       value="c" onchange="subacao(this.value)" />Com Subação
-                            </label>
-                        </div>
-                        <?php } ?>
-                        <div id="cSubacao" class="cSubacao" style="display: block">
-                        <?php
-                        $sbaid = $dadosPI['sbaid'];
-                        $sbadata = array();
+                    <div style="display: none;" class="form-group">
+                        <label for="inputUnidade" class="col-lg-2 control-label">Subação:</label>
+                        <div class="col-lg-9 carregaSubacao">
+                            <?php if (!$dadosPI['pliid']) { ?>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="semsubacao"
+                                               id="semsubacao"
+                                               value="s" onchange="subacao(this.value)"/>Sem Subação
+                                    </label>
+                                    <label class="btn btn-default active">
+                                        <input type="radio" name="semsubacao"
+                                               id="semsubacao"
+                                               value="c" onchange="subacao(this.value)" />Com Subação
+                                    </label>
+                                </div>
+                            <?php } ?>
+                            <div id="cSubacao" class="cSubacao" style="display: block">
+                                <?php
+                                $sbaid = $dadosPI['sbaid'];
+                                $sbadata = array();
 
-                        if (!empty($unicod)) {
-                            $sbadata = carregarComboSubacaoUO($unicod, $retornaSQL = true);
-                        }
-                        if ($sbaid && $dadosPI['pliid']) {
-                            $db->monta_combo('sbaid', $sbadata, $habilitado, 'Selecione', 'selecionarsubacao', null, null, 400, 'N', 'sbaid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($dadosPi['sbaid']) ? $dadosPi['sbaid'] : null));
-                            $sbadata = '';
-                        }
-                        if (!$dadosPI['pliid']) {
-                            $db->monta_combo('sbaid', $sbadata, $habilitado, 'Selecione', 'selecionarsubacao', null, null, 400, 'N', 'sbaid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($dadosPi['sbaid']) ? $dadosPi['sbaid'] : null));
-                            $sbadata = '';
-                        } else {
-                        ?>
-                            <div  style="display:none"> <select name="sbaid" id="sbaid"></select></div> <?php
-                        }
-                        $plicodsubacao = substr($dadosPI['plicod'], 1, 4);
-                        ?>
-                        </div>
-                        <div id="sSubacao" style="display:
+                                if (!empty($unicod)) {
+                                    $sbadata = carregarComboSubacaoUO($unicod, $retornaSQL = true);
+                                }
+                                if ($sbaid && $dadosPI['pliid']) {
+                                    $db->monta_combo('sbaid', $sbadata, $habilitado, 'Selecione', 'selecionarsubacao', null, null, 400, 'N', 'sbaid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($dadosPi['sbaid']) ? $dadosPi['sbaid'] : null));
+                                    $sbadata = '';
+                                }
+                                if (!$dadosPI['pliid']) {
+                                    $db->monta_combo('sbaid', $sbadata, $habilitado, 'Selecione', 'selecionarsubacao', null, null, 400, 'N', 'sbaid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($dadosPi['sbaid']) ? $dadosPi['sbaid'] : null));
+                                    $sbadata = '';
+                                } else {
+                                    ?>
+                                    <div  style="display:none"> <select name="sbaid" id="sbaid"></select></div> <?php
+                                }
+                                $plicodsubacao = substr($dadosPI['plicod'], 1, 4);
+                                ?>
+                            </div>
+                            <div id="sSubacao" style="display:
                             <?php
                             if (!$sbaid && $dadosPI['pliid']) {
                                 echo 'block';
                                 $tipoSubacao = 's';
                             } else {
                                 echo 'none';
-                                 $tipoSubacao = 'c';
+                                $tipoSubacao = 'c';
                             }
                             ?>">
-                            <input type="hidden" name="tipoSubacao" id="tipoSubacao" value="<?php echo $tipoSubacao;?>">
-                            <div class="input-group">
-                                <span class="input-group-addon"><strong>Código Livre (4 dígitos):</strong></span>
-                                <input type="text" name="plicodsubacao" class="CampoEstilo normal form-control obrigatorio" id="plicodsubacao" maxlength="4" onblur="semSubacao();
+                                <input type="hidden" name="tipoSubacao" id="tipoSubacao" value="<?php echo $tipoSubacao;?>">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><strong>Código Livre (4 dígitos):</strong></span>
+                                    <input type="text" name="plicodsubacao" class="CampoEstilo normal form-control obrigatorio" id="plicodsubacao" maxlength="4" onblur="semSubacao();
                                 contar();" <?php
                                     if (!$sbaid && $dadosPI['pliid']) {
                                         echo "value=\"" . $dadosPI['plicodsubacao'] . "\" readonly='readonly' class='disabled'";
                                     }
-                                ?>>
+                                    ?>>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div style="display: none;" class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Cadastrado SIAFI:</label>
-                    <div class="col-lg-10">
-                        <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
-                            <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
-                                value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                    <div style="display: none;" class="form-group">
+                        <label for="inputUnidade" class="col-lg-2 control-label">Cadastrado SIAFI:</label>
+                        <div class="col-lg-9">
+                            <div class="make-switch switch-mini" data-on-label="S" data-off-label="N" data-off="danger">
+                                <input type="checkbox" name="plicadsiafi" id="plicadsiafi"
+                                       value="T" <?php echo $dadosPI['plicadsiafi'] == 't' ? 'checked' : ''; ?> />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="eqdid">Enquadramento da Despesa:</label>
-                    </div>
-                    <div class="col-lg-10 carregaEnq">
-                    <?php
-                        $sql = <<<DML
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="eqdid">Enquadramento da Despesa:</label>
+                        </div>
+                        <div class="col-lg-9 carregaEnq">
+                            <?php
+                            $sql = <<<DML
                             SELECT
                                 eqdid AS codigo,
                                 eqddsc AS descricao
@@ -482,161 +499,245 @@ DML;
                             ORDER BY
                                 eqddsc
 DML;
-                        $eqdid = $dadosPI['eqdid'];
-                        $db->monta_combo('eqdid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
-                    ?>
+                            $eqdid = $dadosPI['eqdid'];
+                            $db->monta_combo('eqdid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group grupo_manutencao">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="neeid">Manutenção Item:</label>
+                    <div class="form-group grupo_manutencao">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="neeid">Manutenção Item:</label>
+                        </div>
+                        <div class="col-lg-9 div_maiid">
+                            <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
+                        </div>
                     </div>
-                    <div class="col-lg-10 div_maiid">
-                        <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
+                    <div class="form-group grupo_manutencao">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="neeid">Manutenção SubItem:</label>
+                        </div>
+                        <div class="col-lg-9 div_masid">
+                            <?php carregarManutencaoSubItem($dadosPI['maiid'], $dadosPI['masid']); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group grupo_manutencao">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="neeid">Manutenção SubItem:</label>
-                    </div>
-                    <div class="col-lg-10 div_masid">
-                        <?php carregarManutencaoSubItem($dadosPI['maiid'], $dadosPI['masid']); ?>
-                    </div>
-                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset>
-                            <legend class="legend_funcional">Detalhamento Orçamentário</legend>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
-                                        <tr>
-                                            <td rowspan="2" nowrap>
-                                                <b>PTRES</b>
-                                            </td>
-                                            <td rowspan="2" style="width:45%" nowrap>
-                                                <b>Funcional</b>
-                                            </td>
-                                            <td rowspan="2" nowrap>
-                                                <b>Dotação Atual PO (R$)</b>
-                                            </td>
-                                            <td colspan="2" nowrap>
-                                                <b><span id="detPi">Detalhado em PI (R$)</span></b>
-                                            </td>
-                                            <td colspan="2">
-                                                <b>Empenho (R$)</b>
-                                            </td>
-                                            <td rowspan="2" align="center">
-                                                <b>Valor do Projeto</b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td nowrap><b>Detalhado</b></td>
-                                            <td nowrap><b>Não&nbsp;Detalhado</b></td>
-                                            <td nowrap><b>Empenhado</b></td>
-                                            <td nowrap><b>Não&nbsp;Empenhado</b></td>
-                                        </tr>
-                                        <?php
-                                            if ($dadosPI['pliid']) {
-                                                $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
-                                                #ver($dadosPTRES);
-                                                if ($dadosPTRES) {
-                                                    $valortotalpi = 0;
-                                                    $cor = 1;
-                                                    foreach ($dadosPTRES as $ptres):
-                                                        ?>
-                                                        <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
-                                                            <td align="center">
-                                                                <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
-                                                            </td>
-                                                            <td align="left">
-                                                                <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
-                                                            </td>
-                                                            <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
-                                                            <td align="right"><?php echo $ptres['det_pi']; ?></td>
-                                                            <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
-                                                            <td align="right"><?php echo $ptres['empenhado']; ?></td>
-                                                            <td align="right">
-                                                                <?php echo $ptres['nao_empenhado']; ?>
-                                                                <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
-                                                            </td>
-                                                            <td align="center" id="td_valor_projeto">
-                                                                <?php echo 'R$ '. $ptres['pipvalor']; ?>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                        $cor++;
-                                                        $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
-                                                    endforeach;
-                                                }
-                                            }
-                                        ?>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info" style="width: 100%;" />
-                                </div>
-                            </div>
-                        </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalhamento Orçamentário</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
+                                <tr>
+                                    <td rowspan="2" nowrap>
+                                        <b>PTRES</b>
+                                    </td>
+                                    <td rowspan="2" style="width:45%" nowrap>
+                                        <b>Funcional</b>
+                                    </td>
+                                    <td rowspan="2" nowrap>
+                                        <b>Dotação Atual PO (R$)</b>
+                                    </td>
+                                    <td colspan="2" nowrap>
+                                        <b><span id="detPi">Detalhado em PI (R$)</span></b>
+                                    </td>
+                                    <td colspan="2">
+                                        <b>Empenho (R$)</b>
+                                    </td>
+                                    <td rowspan="2" align="center">
+                                        <b>Valor do Projeto</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap><b>Detalhado</b></td>
+                                    <td nowrap><b>Não&nbsp;Detalhado</b></td>
+                                    <td nowrap><b>Empenhado</b></td>
+                                    <td nowrap><b>Não&nbsp;Empenhado</b></td>
+                                </tr>
+                                <?php
+                                if ($dadosPI['pliid']) {
+                                    $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
+                                    #ver($dadosPTRES);
+                                    if ($dadosPTRES) {
+                                        $valortotalpi = 0;
+                                        $cor = 1;
+                                        foreach ($dadosPTRES as $ptres):
+                                            ?>
+                                            <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
+                                                <td align="center">
+                                                    <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
+                                                </td>
+                                                <td align="left">
+                                                    <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
+                                                </td>
+                                                <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
+                                                <td align="right"><?php echo $ptres['det_pi']; ?></td>
+                                                <td align="right"><?php echo $ptres['nao_det_pi']; ?></td>
+                                                <td align="right"><?php echo $ptres['empenhado']; ?></td>
+                                                <td align="right">
+                                                    <?php echo $ptres['nao_empenhado']; ?>
+                                                    <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
+                                                </td>
+                                                <td align="center" id="td_valor_projeto">
+                                                    <?php echo 'R$ '. $ptres['pipvalor']; ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $cor++;
+                                            $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
+                                        endforeach;
+                                    }
+                                }
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9">
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info" style="width: 100%;" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Metas </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="oppid" class=" control-label">Objetivo PPA:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php (new Public_Model_ObjetivoPpa())->monta_combo($dadosPI['oppid']); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="mppid" class=" control-label">Metas PPA: </label>
+                        </div>
+                        <div class="col-lg-9 div_mppid">
+                            <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="ippid" class="control-label">Iniciativa PPA: </label>
+                        </div>
+                        <div class="col-lg-9 div_ippid">
+                            <?php carregarIniciativaPPA($dadosPI['oppid'], $dadosPI['ippid']); ?>
+                        </div>
+                    </div>
+                    <div class="form-group grupo_pnc">
+                        <div class="col-md-3 text-right">
+                            <label for="mpnid" class="control-label">Meta PNC: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php (new Public_Model_MetaPnc())->monta_combo($dadosPI['mpnid']); ?>
+                        </div>
+                    </div>
+                    <div class="form-group grupo_pnc">
+                        <div class="col-md-3 text-right">
+                            <label for="ipnid" class="control-label">Indicador PNC: </label>
+                        </div>
+                        <div class="col-lg-9 div_ipnid">
+                            <?php carregarIndicadorPNC($dadosPI['mpnid'], $dadosPI['ipnid']); ?>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Metas</legend>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                <label for="oppid" class=" control-label">Objetivo PPA:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php (new Public_Model_ObjetivoPpa())->monta_combo($dadosPI['oppid']); ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="mppid" class=" control-label">Metas PPA: </label>
-                                </div>
-                                <div class="col-lg-10 div_mppid">
-                                    <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="ippid" class="control-label">Iniciativa PPA: </label>
-                                </div>
-                                <div class="col-lg-10 div_ippid">
-                                    <?php carregarIniciativaPPA($dadosPI['oppid'], $dadosPI['ippid']); ?>
-                                </div>
-                            </div>
-                            <div class="form-group grupo_pnc">
-                                <div class="col-md-2 text-right">
-                                    <label for="mpnid" class="control-label">Meta PNC: </label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php (new Public_Model_MetaPnc())->monta_combo($dadosPI['mpnid']); ?>
-                                </div>
-                            </div>
-                            <div class="form-group grupo_pnc">
-                                <div class="col-md-2 text-right">
-                                    <label for="ipnid" class="control-label">Indicador PNC: </label>
-                                </div>
-                                <div class="col-lg-10 div_ipnid">
-                                    <?php carregarIndicadorPNC($dadosPI['mpnid'], $dadosPI['ipnid']); ?>
-                                </div>
-                            </div>
-                        </fieldset>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Produto PI:</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="pprid" class="control-label">Produto:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $sql = <<<DML
+                                            SELECT
+                                                pprid AS codigo,
+                                                pprnome AS descricao
+                                            FROM monitora.pi_produto
+                                            WHERE
+                                                prsano = '{$_SESSION['exercicio']}'
+                                                AND pprstatus = 'A'
+                                            ORDER BY
+                                                descricao
+DML;
+
+                            $pprid = $dadosPI['pprid'];
+                            $db->monta_combo('pprid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="pumid" class="control-label">Unidade de Medida:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $sql = <<<DML
+                                            SELECT
+                                                pumid AS codigo,
+                                                pumdescricao AS descricao
+                                            FROM monitora.pi_unidade_medida 
+                                            WHERE
+                                                prsano = '{$_SESSION['exercicio']}'
+                                                AND pumstatus = 'A'
+                                            ORDER BY
+                                                descricao
+DML;
+
+                            $pumid = $dadosPI['pumid'];
+                            $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="picquantidade" class="control-label">Quantidade:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal inteiro form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" />
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label for="mdeid" class="control-label">Área Cultural:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <?php
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Informações Complementares:</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="mdeid" class="control-label">Área Cultural:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
                             $sql = <<<DML
                                 SELECT
                                     MAX(mdeid) AS codigo,
@@ -653,100 +754,40 @@ DML;
 
                             $mdeid = $dadosPI['mdeid'];
                             $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
-                        ?>
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="neeid">Segmento Cultural:</label>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="neeid">Segmento Cultural:</label>
+                        </div>
+                        <div class="col-lg-9 div_neeid">
+                            <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
+                        </div>
                     </div>
-                    <div class="col-lg-10 div_neeid">
-                        <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
+                    <div style="display:none;" class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="plilivre">Codificação da Unidade(livre):</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $plilivre = $dadosPI['plilivre'] ? $dadosPI['plilivre'] : '';
+                            $opcoes = array(
+                                'evtkeyup' => 'atualizarCodigoLivre();atualizarPrevisaoPI();',
+                                'size' => 10
+                            );
+                            inputTexto('plilivre', $plilivre, 'idCodificacao', 2, false, $opcoes);
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div style="display:none;" class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="plilivre">Codificação da Unidade(livre):</label>
-                    </div>
-                    <div class="col-lg-10">
-                    <?php
-                    $plilivre = $dadosPI['plilivre'] ? $dadosPI['plilivre'] : '';
-                    $opcoes = array(
-                        'evtkeyup' => 'atualizarCodigoLivre();atualizarPrevisaoPI();',
-                        'size' => 10
-                    );
-                    inputTexto('plilivre', $plilivre, 'idCodificacao', 2, false, $opcoes);
-                    ?>
-                    </div>
-                </div>
 
-            <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Produto PI:</legend>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="pprid" class="control-label">Produto:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = <<<DML
-                                            SELECT
-                                                pprid AS codigo,
-                                                pprnome AS descricao
-                                            FROM monitora.pi_produto
-                                            WHERE
-                                                prsano = '{$_SESSION['exercicio']}'
-                                                AND pprstatus = 'A'
-                                            ORDER BY
-                                                descricao
-DML;
-
-                                        $pprid = $dadosPI['pprid'];
-                                        $db->monta_combo('pprid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="pumid" class="control-label">Unidade de Medida:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = <<<DML
-                                            SELECT
-                                                pumid AS codigo,
-                                                pumdescricao AS descricao
-                                            FROM monitora.pi_unidade_medida 
-                                            WHERE
-                                                prsano = '{$_SESSION['exercicio']}'
-                                                AND pumstatus = 'A'
-                                            ORDER BY
-                                                descricao
-DML;
-
-                                        $pumid = $dadosPI['pumid'];
-                                        $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="picquantidade" class="control-label">Quantidade:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal inteiro form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" />
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2 text-right">
-                        <label class="control-label" for="capid">Modalidade de Pactuação:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <?php
-                        $sql = <<<DML
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label" for="capid">Modalidade de Pactuação:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $sql = <<<DML
                         SELECT
                             capid AS codigo,
                             capdsc AS descricao
@@ -757,112 +798,112 @@ DML;
                         ORDER BY
                             descricao
 DML;
-                        $capid = $dadosPI['capid'];
-                        $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($capid) ? $capid : null));
-                        ?>
+                            $capid = $dadosPI['capid'];
+                            $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($capid) ? $capid : null));
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div class="panel panel-default" id="div_siconv">
-                    <div class="panel-body">
-                        <fieldset><legend class="legend_convenio">Números de Proposta SICONV</legend>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
+                    <div class="panel panel-default" id="div_siconv">
+                        <div class="panel-body">
+                            <fieldset><legend class="legend_convenio">Números de Proposta SICONV</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-9">
+                                        <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
+                                    </div>
                                 </div>
-                                <div class="col-lg-2">
-                                    <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
+                                <div class="form-group">
+                                    <div class="col-lg-9">
+                                        <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                            <?php foreach($aConvenio as $convenio){ ?>
+                                                <tr style="height: 30px;" id="tr_convenio_<?php echo $convenio['pcoid']; ?>" >
+                                                    <td style="text-align: left;"><?php echo $convenio['pcoconvenio']; ?></td>
+                                                    <td style="text-align: center;">
+                                                        <input type="hidden" name="lista_convenio[]" value="<?php echo $convenio['pcoconvenio']; ?>" />
+                                                        <span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="<?php echo $convenio['pcoid']; ?>" ></span>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <?php foreach($aConvenio as $convenio){ ?>
-                                            <tr style="height: 30px;" id="tr_convenio_<?php echo $convenio['pcoid']; ?>" >
-                                                <td style="text-align: left;"><?php echo $convenio['pcoconvenio']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" name="lista_convenio[]" value="<?php echo $convenio['pcoconvenio']; ?>" />
-                                                    <span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="<?php echo $convenio['pcoid']; ?>" ></span>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </fieldset>
+                            </fieldset>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-2 text-right">
-                        <label for="picted" class="control-label">TED:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="form-inline required">
-                            <div class="form-group has-feedback col-xs-2">
-                                <label class="input-group">
+                    <div class="form-group">
+                        <div class="col-lg-2 text-right">
+                            <label for="picted" class="control-label">TED:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="form-inline required">
+                                <div class="form-group has-feedback col-xs-2">
+                                    <label class="input-group">
                                     <span class="input-group-addon">
                                         <input type="radio" name="picted" value="t" class="link" <?php echo !empty($dadosPI['picted']) && 't' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
                                     </span>
-                                    <div class="form-control form-control-static input_check_s link">
-                                        Sim
-                                    </div>
-                                    <span class="glyphicon form-control-feedback "></span>
-                                </label>
-                            </div>
-                            <div class="form-group has-feedback col-xs-2">
-                                <label class="input-group">
+                                        <div class="form-control form-control-static input_check_s link">
+                                            Sim
+                                        </div>
+                                        <span class="glyphicon form-control-feedback "></span>
+                                    </label>
+                                </div>
+                                <div class="form-group has-feedback col-xs-2">
+                                    <label class="input-group">
                                     <span class="input-group-addon">
                                         <input type="radio" name="picted" value="f" class="link" <?php echo !empty($dadosPI['picted']) && 'f' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
                                     </span>
-                                    <div class="form-control form-control-static input_check_n link">
-                                        Não
-                                    </div>
-                                    <span class="glyphicon form-control-feedback "></span>
-                                </label>
+                                        <div class="form-control form-control-static input_check_n link">
+                                            Não
+                                        </div>
+                                        <span class="glyphicon form-control-feedback "></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-2 text-right">
-                        <label for="picedital" class=" control-label">Edital:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="form-inline required">
-                            <div class="form-group has-feedback col-xs-2">
-                                <label class="input-group">
+                    <div class="form-group">
+                        <div class="col-lg-2 text-right">
+                            <label for="picedital" class=" control-label">Edital:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="form-inline required">
+                                <div class="form-group has-feedback col-xs-2">
+                                    <label class="input-group">
                                     <span class="input-group-addon">
                                         <input type="radio" name="picedital" value="t" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 't' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
                                     </span>
-                                    <div class="form-control form-control-static input_check_s link element_edital">
-                                        Sim
-                                    </div>
-                                    <span class="glyphicon form-control-feedback "></span>
-                                </label>
-                            </div>
-                            <div class="form-group has-feedback col-xs-2">
-                                <label class="input-group">
+                                        <div class="form-control form-control-static input_check_s link element_edital">
+                                            Sim
+                                        </div>
+                                        <span class="glyphicon form-control-feedback "></span>
+                                    </label>
+                                </div>
+                                <div class="form-group has-feedback col-xs-2">
+                                    <label class="input-group">
                                     <span class="input-group-addon">
                                         <input type="radio" name="picedital" value="f" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 'f' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
                                     </span>
-                                    <div class="form-control form-control-static input_check_n link element_edital">
-                                        Não
-                                    </div>
-                                    <span class="glyphicon form-control-feedback "></span>
-                                </label>
+                                        <div class="form-control form-control-static input_check_n link element_edital">
+                                            Não
+                                        </div>
+                                        <span class="glyphicon form-control-feedback "></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--Inicio campos do Edital-->
-                <div class="panel panel-default" id="div_edital">
-                    <div class="panel-body">
-                        <fieldset><legend>Previsão de Lançamento do Edital:</legend>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="mes" class="control-label">Mês:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php
+                    <!--Inicio campos do Edital-->
+                    <div class="panel panel-default" id="div_edital">
+                        <div class="panel-body">
+                            <fieldset><legend>Previsão de Lançamento do Edital:</legend>
+                                <div class="form-group">
+                                    <div class="col-md-3 text-right">
+                                        <label for="mes" class="control-label">Mês:</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <?php
                                         $sql = "
                                             SELECT
                                                 mescod as codigo,
@@ -873,24 +914,32 @@ DML;
                                         ";
                                         $mescod = $dadosPI['mescod'];
                                         $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
-                                    ?>
+                                        ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
+                            </fieldset>
+                        </div>
                     </div>
+
+
                 </div>
-                <!--Fim Campos do Edital-->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset>
-                            <legend class="legend_localizacao">Localização do Projeto</legend>
-                            <div class="form-group">
-                                <div class="col-md-2 text-right">
-                                    <label for="esfid" class="control-label">Tipo de localização:</label>
-                                </div>
-                                <div class="col-lg-10">
-                                    <?php
-                                        $sql = "
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Localização do Projeto</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label for="esfid" class="control-label">Tipo de localização:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <?php
+                            $sql = "
                                             SELECT
                                                 esfid AS codigo,
                                                 esfdsc AS descricao
@@ -898,370 +947,388 @@ DML;
                                             ORDER BY
                                                 descricao
                                         ";
-                                        $esfid = $dadosPI['esfid'];
-                                        $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr class="tr_head">
-                                            <td style="text-align: left;"><b>UF</b></td>
-                                            <td style="text-align: left;"><b>Município</b></td>
-                                            <td style="text-align: center;"></td>
-                                        </tr>
-                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_MUNICIPAL){
-                                            foreach($aLocalizacao as $localizacao){ ?>
-                                                <tr style="height: 30px;" class="tr_localizacao_<?php echo $localizacao['muncod']; ?>" >
-                                                    <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
-                                                    <td style="text-align: left;"><?php echo $localizacao['mundescricao']; ?></td>
-                                                    <td style="text-align: center;">
-                                                        <input type="hidden" value="<?php echo $localizacao['muncod']; ?>" name="listaLocalizacao[]">
-                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" >
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_localizacao_estadual" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr class="tr_head">
-                                            <td style="text-align: left;"><b>UF</b></td>
-                                            <td style="text-align: left;"><b>Nome</b></td>
-                                            <td style="text-align: center;"></td>
-                                        </tr>
-                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
-                                            foreach($aLocalizacao as $localizacao){ ?>
-                                                <tr style="height: 30px;" class="tr_localizacao_estadual_<?php echo $localizacao['estuf']; ?>" >
-                                                    <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
-                                                    <td style="text-align: left;"><?php echo $localizacao['estdescricao']; ?></td>
-                                                    <td style="text-align: center;">
-                                                        <input type="hidden" value="<?php echo $localizacao['estuf']; ?>" name="listaLocalizacaoEstadual[]">
-                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" >
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_localizacao_exterior" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr class="tr_head">
-                                            <td style="text-align: left;"><b>País</b></td>
-                                            <td style="text-align: center;"></td>
-                                        </tr>
-                                        <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_EXTERIOR){
-                                            foreach($aLocalizacao as $localizacao){ ?>
-                                                <tr style="height: 30px;" class="tr_localizacao_exterior_<?php echo $localizacao['paiid']; ?>" >
-                                                    <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
-                                                    <td style="text-align: center;">
-                                                        <input type="hidden" value="<?php echo $localizacao['paiid']; ?>" name="listaLocalizacaoExterior[]">
-                                                        <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" >
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" style="width: 100%;" />
-                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" style="width: 100%;" />
-                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" style="width: 100%;" />
-                                </div>
-                            </div>
-                        </fieldset>
+                            $esfid = $dadosPI['esfid'];
+                            $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                            ?>
+                        </div>
                     </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset>
-                            <legend class="legend_responsaveis">Responsáveis pelo Projeto</legend>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
-                                            <td style="text-align: left;"><b>Nome</b></td>
-                                            <td style="text-align: left;"><b>Telefone</b></td>
-                                            <td style="text-align: left;"><b>E-mail</b></td>
-                                            <td style="text-align: center;"><b>Ação</b></td>
-                                        </tr>
-                                        <?php foreach($aResponsavel as $responsavel){ ?>
-                                            <tr style="height: 30px;" class="tr_responsaveis_<?php echo $responsavel['pirid']; ?>" >
-                                                <td style="text-align: left;"><?php echo $responsavel['usunome']; ?></td>
-                                                <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
-                                                <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $responsavel['usucpf']; ?>" name="listaResponsaveis[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info" style="width: 100%;" />
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend class="legend_sniic">Números SNIIC </legend>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <?php foreach($aSniic as $sniic){ ?>
-                                            <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['pisid']; ?>" >
-                                                <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['pissniic']; ?>" />
-                                                    <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['pisid']; ?>" ></span>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Custeio e Capital</legend>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
-                                            <td style="text-align: left;"></td>
-                                            <td colspan="3" style="text-align: center;">
-                                                <b>Total (Custeio e Capital)</b>
-                                            </td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
-                                            <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
-                                            <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;"></td>
-                                            <td style="text-align: left;"><b>Custeio </b></td>
-                                            <td style="text-align: center;"><b>Capital</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
-                                            <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
-                                            <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;">Saldo Disponível na Funcional:</td>
-                                            <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
-                                            <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="" style="text-align: left;">Valor do Projeto:</td>
-                                            <td style="text-align: left;">
-                                                <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                                <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
-                                            </td>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr class="tr_head">
+                                    <td style="text-align: left;"><b>UF</b></td>
+                                    <td style="text-align: left;"><b>Município</b></td>
+                                    <td style="text-align: center;"></td>
+                                </tr>
+                                <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_MUNICIPAL){
+                                    foreach($aLocalizacao as $localizacao){ ?>
+                                        <tr style="height: 30px;" class="tr_localizacao_<?php echo $localizacao['muncod']; ?>" >
+                                            <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
+                                            <td style="text-align: left;"><?php echo $localizacao['mundescricao']; ?></td>
                                             <td style="text-align: center;">
-                                                <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                                <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
+                                                <input type="hidden" value="<?php echo $localizacao['muncod']; ?>" name="listaLocalizacao[]">
+                                                <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" >
                                             </td>
                                         </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </fieldset>
+                                    <?php }
+                                } ?>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table id="table_localizacao_estadual" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr class="tr_head">
+                                    <td style="text-align: left;"><b>UF</b></td>
+                                    <td style="text-align: left;"><b>Nome</b></td>
+                                    <td style="text-align: center;"></td>
+                                </tr>
+                                <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
+                                    foreach($aLocalizacao as $localizacao){ ?>
+                                        <tr style="height: 30px;" class="tr_localizacao_estadual_<?php echo $localizacao['estuf']; ?>" >
+                                            <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
+                                            <td style="text-align: left;"><?php echo $localizacao['estdescricao']; ?></td>
+                                            <td style="text-align: center;">
+                                                <input type="hidden" value="<?php echo $localizacao['estuf']; ?>" name="listaLocalizacaoEstadual[]">
+                                                <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" >
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } ?>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table id="table_localizacao_exterior" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr class="tr_head">
+                                    <td style="text-align: left;"><b>País</b></td>
+                                    <td style="text-align: center;"></td>
+                                </tr>
+                                <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_EXTERIOR){
+                                    foreach($aLocalizacao as $localizacao){ ?>
+                                        <tr style="height: 30px;" class="tr_localizacao_exterior_<?php echo $localizacao['paiid']; ?>" >
+                                            <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
+                                            <td style="text-align: center;">
+                                                <input type="hidden" value="<?php echo $localizacao['paiid']; ?>" name="listaLocalizacaoExterior[]">
+                                                <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" >
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } ?>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9">
+
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" style="width: 100%;" />
+                            <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" style="width: 100%;" />
+                            <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" style="width: 100%;" />
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <fieldset><legend>Cronogramas</legend>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <?php
-                                    $sql = "select mescod, mesdsc from public.meses order by mescod";
-                                    $meses = $db->carregar($sql);
+            </div>
 
-                                    $modelPiCronograma =  new Pi_Cronograma();
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Responsáveis pelo Projeto</h5>
+                </div>
+                <div class="ibox-content">
 
-                                    $piCronogramasAgrupado = [];
-                                    if(!empty($dadosPI['pliid'])){
-                                        $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr>
+                                    <td style="text-align: left;"><b>Nome</b></td>
+                                    <td style="text-align: left;"><b>Telefone</b></td>
+                                    <td style="text-align: left;"><b>E-mail</b></td>
+                                    <td style="text-align: center;"><b>Ação</b></td>
+                                </tr>
+                                <?php foreach($aResponsavel as $responsavel){ ?>
+                                    <tr style="height: 30px;" class="tr_responsaveis_<?php echo $responsavel['pirid']; ?>" >
+                                        <td style="text-align: left;"><?php echo $responsavel['usunome']; ?></td>
+                                        <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
+                                        <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
+                                        <td style="text-align: center;">
+                                            <input type="hidden" value="<?php echo $responsavel['usucpf']; ?>" name="listaResponsaveis[]">
+                                            <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9">
 
-                                        foreach($aPiCronograma as $piCronograma){
-                                            $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
-                                        }
-                                    }
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info" style="width: 100%;" />
+                        </div>
+                    </div>
 
-                                    $aCronogramas = $modelPiCronograma->recuperarCronogramas();
-                                    
-                                    $cronogramasAgrupado = [];
-                                    foreach($aCronogramas as $cronograma){
-                                        $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
-                                    }
-                                    ?>
-                                    <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
-                                            <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
-                                            <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
-                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>"><b><?php echo $cronograma; ?></b></td>
-                                            <?php } ?>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                                foreach($descricaoValores as $cronogramaValor){ ?>
-                                                    <td style="text-align: center;"><?php echo $cronogramaValor['crvdsc']; ?></td>
-                                                <?php }
-                                            } ?>
-                                        </tr>
-                                        <?php foreach($meses as $mes){ ?>
-                                            <tr style="height: 30px;">
-                                                <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
-                                                <?php foreach($aCronogramas as $cronogramaValor){
-                                                    switch($cronogramaValor['croid']){
-                                                        case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
-                                                        case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
-                                                        case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
-                                                        default: $class = '';
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Números SNIIC</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-lg-9">
+                            <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" id="btn_adicionar_sniic" value="Adicionar" class="btn btn-info" style="width: 100%;" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9">
+                            <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <?php foreach($aSniic as $sniic){ ?>
+                                    <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['pisid']; ?>" >
+                                        <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
+                                        <td style="text-align: center;">
+                                            <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['pissniic']; ?>" />
+                                            <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['pisid']; ?>" ></span>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Custeio e Capital</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr>
+                                    <td style="text-align: left;"></td>
+                                    <td colspan="3" style="text-align: center;">
+                                        <b>Total (Custeio e Capital)</b>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
+                                    <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
+                                    <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: left;"><b>Custeio </b></td>
+                                    <td style="text-align: center;"><b>Capital</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
+                                    <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
+                                    <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;">Saldo Disponível na Funcional:</td>
+                                    <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+                                    <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+                                </tr>
+                                <tr>
+                                    <td id="" style="text-align: left;">Valor do Projeto:</td>
+                                    <td style="text-align: left;">
+                                        <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                        <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                        <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Cronogramas </h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <?php
+                            $sql = "select mescod, mesdsc from public.meses order by mescod";
+                            $meses = $db->carregar($sql);
+
+                            $modelPiCronograma =  new Pi_Cronograma();
+
+                            $piCronogramasAgrupado = [];
+                            if(!empty($dadosPI['pliid'])){
+                                $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
+
+                                foreach($aPiCronograma as $piCronograma){
+                                    $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
+                                }
+                            }
+
+                            $aCronogramas = $modelPiCronograma->recuperarCronogramas();
+
+                            $cronogramasAgrupado = [];
+                            foreach($aCronogramas as $cronograma){
+                                $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
+                            }
+                            ?>
+                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <tr>
+                                    <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
+                                    <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
+                                        <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>"><b><?php echo $cronograma; ?></b></td>
+                                    <?php } ?>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                        foreach($descricaoValores as $cronogramaValor){ ?>
+                                            <td style="text-align: center;"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                        <?php }
+                                    } ?>
+                                </tr>
+                                <?php foreach($meses as $mes){ ?>
+                                    <tr style="height: 30px;">
+                                        <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                        <?php foreach($aCronogramas as $cronogramaValor){
+                                            switch($cronogramaValor['croid']){
+                                                case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
+                                                case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
+                                                case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                default: $class = '';
+                                            }
+                                            ?>
+                                            <td>
+                                                <?php
+                                                $pcrid = $pcrvalor = '';
+                                                if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                    $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                    $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+
+                                                    if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                        $pcrvalor = number_format($pcrvalor, 2, ',', '.');
                                                     }
-                                                    ?>
-                                                    <td>
-                                                        <?php
-                                                        $pcrid = $pcrvalor = '';
-                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
-                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
-                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+                                                }
 
-                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
-                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
-                                                            }
-                                                        }
-
-                                                        ?>
-                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                        <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class . ' input_' . $cronogramaValor['crvtipo'] ?>" type="text">
-                                                    </td>
-                                                <?php }?>
-                                            </tr>
+                                                ?>
+                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
+                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class . ' input_' . $cronogramaValor['crvtipo'] ?>" type="text">
+                                            </td>
                                         <?php }?>
-                                        <tr style="height: 30px; ">
-                                            <td style="text-align: left;">Total:</td>
-                                            <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
-                                            <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_orcamentario">R$ 0,00</td>
-                                            <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_financeiro">R$ 0,00</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </fieldset>
+                                    </tr>
+                                <?php }?>
+                                <tr style="height: 30px; ">
+                                    <td style="text-align: left;">Total:</td>
+                                    <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
+                                    <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_orcamentario">R$ 0,00</td>
+                                    <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_financeiro">R$ 0,00</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div style="display: none;" class="form-group">
-                    <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
-                    <div class="col-lg-10">
-                        <table class="table table-striped table-bordered table-hover">
-                            <tr style="text-align:center">
-                                <td style="width:30px;height:20px"><b>Enquadramento</b></td>
-                                <td colspan="3"><b>Sequencial</b></td>
-                                <td style="width:30px;height:20px"><b>Segmento</b></td>
-                                <td style="width:30px;height:20px"><b>Pactuação</b></td>
-                                <td style="width:30px;height:20px"><b>Codificação</b></td>
-                                <td style="width:30px;height:20px"><b>Área</b></td>
-                            </tr>
-                            <tr style="text-align:center">
-                                <td style="width:30px;height:20px">
-                                    <span id="enquadramento"><?php echo $dadosPI['eqdcod']; ?></span>
-                                </td>
-                                <td style="width:30px;height:20px" colspan="3">
-                                    <span id="subacao"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
-                                </td>
-                                <td style="width:30px;height:20px">
-                                    <span id="nivel"><?php echo $dadosPI['neecod']; ?></span>
-                                </td>
-                                <td style="width:30px;height:20px">
-                                    <span id="apropriacao"><?php echo $dadosPI['capcod']; ?></span>
-                                </td>
-                                <td style="width:30px;height:20px">
-                                    <span id="codificacao"><?php echo $dadosPI['plilivre']; ?></span>
-                                </td>
-                                <td style="width:30px;height:20px">
-                                    <span id="modalidade"><?php echo $dadosPI['mdecod']; ?></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="8" align="center">
-                                    <b>Código PI / SIAFI:
-                                        <div id="codigoPi" style="display:inline;">
-                                            <span id="enquadramento_i"><?php echo $dadosPI['eqdcod']; ?></span>
-                                            <!--//<span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? 'XXXX' : $dadosPI['sbacod']); ?></span>-->
-                                            <span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
-                                            <span id="nivel_i"><?php echo $dadosPI['neecod']; ?></span>
-                                            <span id="apropriacao_i"><?php echo $dadosPI['capcod']; ?></span>
-                                            <span id="codificacao_i"><?php echo $dadosPI['plilivre']; ?></span>
-                                            <span id="modalidade_i"><?php echo $dadosPI['mdecod']; ?></span>
-                                        </div>
-                                    </b>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
 
-            <?php
-            // Só permite editar se tiver em cadastramento
-            if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
-                        <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-primary" id="btnVoltar" type="button">Voltar</a>
-                        <input type="button" class="btn btn-success" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
-                        <?php if('-' != $tipoTransacao): ?>
-                            <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
-                                <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn btn-success' />
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    </div>
                 </div>
-
-                </form>
-            <?php } ?>
-        </fieldset>
+            </div>
+        </div>
     </div>
-</div>
-<div class="row col-md-1">
-    <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
-</div>
-<div class="clearfix"></div>
+
+    <div style="display: none;" class="form-group">
+        <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
+        <div class="col-lg-9">
+            <table class="table table-striped table-bordered table-hover">
+                <tr style="text-align:center">
+                    <td style="width:30px;height:20px"><b>Enquadramento</b></td>
+                    <td colspan="3"><b>Sequencial</b></td>
+                    <td style="width:30px;height:20px"><b>Segmento</b></td>
+                    <td style="width:30px;height:20px"><b>Pactuação</b></td>
+                    <td style="width:30px;height:20px"><b>Codificação</b></td>
+                    <td style="width:30px;height:20px"><b>Área</b></td>
+                </tr>
+                <tr style="text-align:center">
+                    <td style="width:30px;height:20px">
+                        <span id="enquadramento"><?php echo $dadosPI['eqdcod']; ?></span>
+                    </td>
+                    <td style="width:30px;height:20px" colspan="3">
+                        <span id="subacao"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
+                    </td>
+                    <td style="width:30px;height:20px">
+                        <span id="nivel"><?php echo $dadosPI['neecod']; ?></span>
+                    </td>
+                    <td style="width:30px;height:20px">
+                        <span id="apropriacao"><?php echo $dadosPI['capcod']; ?></span>
+                    </td>
+                    <td style="width:30px;height:20px">
+                        <span id="codificacao"><?php echo $dadosPI['plilivre']; ?></span>
+                    </td>
+                    <td style="width:30px;height:20px">
+                        <span id="modalidade"><?php echo $dadosPI['mdecod']; ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" align="center">
+                        <b>Código PI / SIAFI:
+                            <div id="codigoPi" style="display:inline;">
+                                <span id="enquadramento_i"><?php echo $dadosPI['eqdcod']; ?></span>
+                                <!--//<span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? 'XXXX' : $dadosPI['sbacod']); ?></span>-->
+                                <span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
+                                <span id="nivel_i"><?php echo $dadosPI['neecod']; ?></span>
+                                <span id="apropriacao_i"><?php echo $dadosPI['capcod']; ?></span>
+                                <span id="codificacao_i"><?php echo $dadosPI['plilivre']; ?></span>
+                                <span id="modalidade_i"><?php echo $dadosPI['mdecod']; ?></span>
+                            </div>
+                        </b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <?php
+    // Só permite editar se tiver em cadastramento
+    if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
+        <div class="form-group">
+            <div class="text-center">
+                <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
+                <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-primary" id="btnVoltar" type="button">Voltar</a>
+                <input type="button" class="btn btn-success" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
+                <?php if('-' != $tipoTransacao): ?>
+                    <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
+                        <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn btn-success' />
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </form>
+    <?php } ?>
+
+    <div class="clearfix">&nbsp;</div>
 
 <script type="text/javascript">
     // Enquadramentos
@@ -1301,7 +1368,7 @@ DML;
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
         });
-        
+
         // Evento ao carregar a tela
         mudarFormularioFinalistico($('#eqdid').val());
 
@@ -1475,11 +1542,6 @@ DML;
         $('.input_CAP').keyup(function(){
             mudarCorCronogramaCapital();
             atualizarValorDetalheCapital();
-        });
-            
-        $('#orcamento').on('click', '.btnVisualizarDetalhes', function(){
-            var ptrid = $(this).attr('ptrid');
-            visualizarRegistro(ptrid);
         });
 
         atualizarValorDetalheCusteio();
@@ -1905,7 +1967,7 @@ DML;
 
         return valorDoProjeto;
     }
-    
+
     /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
      *
@@ -2899,7 +2961,7 @@ DML;
             $('#detPi').html('Detalhado em PI (R$)');
             $('#prefixotitulo').parent().css('display','none');
             $('#plititulo').parent().removeClass('col-lg-9');
-            $('#plititulo').parent().addClass('col-lg-10');
+            $('#plititulo').parent().addClass('col-lg-9');
             $('#tipoSubacao').val('s');
         } else {
             $('#cSubacao').css("display", "block");
@@ -2907,7 +2969,7 @@ DML;
             $('#detSub').html('Detalhado na Subação (R$)');
             $('#detPi').html('Detalhado em PI na Subação (R$)');
             $('#prefixotitulo').parent().css('display','block');
-            $('#plititulo').parent().removeClass('col-lg-10');
+            $('#plititulo').parent().removeClass('col-lg-9');
             $('#plititulo').parent().addClass('col-lg-9');
             $('#tipoSubacao').val('c');
         }
