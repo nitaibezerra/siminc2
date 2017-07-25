@@ -1068,7 +1068,10 @@ DML;
                                             <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                         </tr>
                                         <tr style="height: 30px;">
-                                            <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
+                                            <td style="text-align: left;">
+                                                Limite Disponível na Sub-Unidade:
+                                                <input id="VlrSUDisponivel" type="hidden" value="" />
+                                            </td>
                                             <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
                                         </tr>
                                         <tr>
@@ -1082,7 +1085,11 @@ DML;
                                             <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: left;">Saldo Disponível na Funcional:</td>
+                                            <td style="text-align: left;">
+                                                Saldo Disponível na Funcional:
+                                                <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
+                                                <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
+                                            </td>
                                             <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
                                             <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                         </tr>
@@ -1434,15 +1441,19 @@ DML;
 
         $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-            atualizarValorDetalheCusteio();
+//            atualizarValorDetalheCusteio();
             atualizarValorDoProjeto();
+            atualizarValorLimiteDisponivelUnidade();
+            atualizarValorLimiteDisponivelFuncionalCusteio();
             mudarCorValorProjeto();
         });
 
         $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-            atualizarValorDetalheCapital();
+//            atualizarValorDetalheCapital();
             atualizarValorDoProjeto();
+            atualizarValorLimiteDisponivelUnidade();
+            atualizarValorLimiteDisponivelFuncionalCapital();
             mudarCorValorProjeto();
         });
 
@@ -1802,8 +1813,47 @@ DML;
     }
 
     /**
+     * Calcula e exibi na tela o valor disponivel na Sub-Unidade.
+     * 
+     * @returns VOID
+     */
+    function atualizarValorLimiteDisponivelUnidade() {
+        var fltValorDoProjeto = buscarValorDoProjeto();
+        var fltValorBaseLimiteDisponivelUnidade = buscarValorBaseLimiteDisponivelUnidade();
+
+        var fltValorLimiteDisponivelUnidade = (fltValorBaseLimiteDisponivelUnidade - fltValorDoProjeto);
+        $('#td_disponivel_sub_unidade').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelUnidade.toFixed(2)));
+    }
+    
+    /**
+     * Calcula e exibi na tela o valor disponivel na funcional de custeio.
+     * 
+     * @returns VOID
+     */
+    function atualizarValorLimiteDisponivelFuncionalCusteio() {
+        var fltValorDoProjeto = buscarValorDoProjeto();
+        var fltValorBaseLimiteDisponivelFuncional = buscarValorBaseLimiteDisponivelFuncionalCusteio();
+
+        var fltValorLimiteDisponivelFuncional = (fltValorBaseLimiteDisponivelFuncional - fltValorDoProjeto);
+        $('#td_disponivel_funcional_custeio').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
+    }
+    
+    /**
+     * Calcula e exibi na tela o valor disponivel na funcional de capital.
+     * 
+     * @returns VOID
+     */
+    function atualizarValorLimiteDisponivelFuncionalCapital() {
+        var fltValorDoProjeto = buscarValorDoProjeto();
+        var fltValorBaseLimiteDisponivelFuncional = buscarValorBaseLimiteDisponivelFuncionalCapital();
+
+        var fltValorLimiteDisponivelFuncional = (fltValorBaseLimiteDisponivelFuncional - fltValorDoProjeto);
+        $('#td_disponivel_funcional_capital').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
+    }
+    
+    /**
      * Calcula o valor da funcional.
-     *
+     * 
      * @returns VOID
      */
     function atualizarValorDoProjeto() {
@@ -1907,6 +1957,42 @@ DML;
     }
     
     /**
+     * Busca o valor base disponivel na unidade.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorBaseLimiteDisponivelUnidade(){
+        var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').text());
+        var valorBaseProjeto = buscarValorBaseDoProjeto();
+        
+        return (valorBaseLimiteDisponivelUnidade - valorBaseProjeto);
+    }
+    
+    /**
+     * Busca o valor base disponivel na funcional custeio.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorBaseLimiteDisponivelFuncionalCusteio(){
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').text());
+        var valorBaseProjeto = buscarValorBaseDoProjeto();
+        
+        return (valorBaseLimiteDisponivel - valorBaseProjeto);
+    }
+    
+    /**
+     * Busca o valor base disponivel na funcional capital.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorBaseLimiteDisponivelFuncionalCapital(){
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').text());
+        var valorBaseProjeto = buscarValorBaseDoProjeto();
+        
+        return (valorBaseLimiteDisponivel - valorBaseProjeto);
+    }
+    
+    /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
      *
      * @returns float Valor do projeto
@@ -1921,7 +2007,7 @@ DML;
 
     /**
      * Soma o valor de capital e custeio e retorna o valor total disponivel.
-     *
+     * @todo considerar valor inicial base pra dimininuir antes de somar ao valor disponivel custeio e capita.
      * @returns float Valor
      */
     function buscarValorDisponivelFuncional(){
@@ -1957,9 +2043,6 @@ DML;
         var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
         var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
 
-        // Valores já gravados na base e separados pra esse PI/Projeto
-        $('#vlrPiCusteio').val('');
-        $('#vlrPiCapital').val('');
         // Valores informados pelo usuário em tempo real para esse PI/Projeto
         var valorCusteio = textToFloat($('#picvalorcusteio').val());
         var valorCapital = textToFloat($('#picvalorcapital').val());
@@ -2218,7 +2301,8 @@ DML;
                 var fltBaseProjeto = buscarValorBaseDoProjeto();
                 var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
                 $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2) ));
-//                $('#td_disponivel_sub_unidade').text(data.disponivel); // antigo código com bug na alteração
+                $('#VlrSUDisponivel').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2) ));
+
             }
         });
     }

@@ -641,6 +641,10 @@ DML;
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();
                     mudarCorValorProjeto();
+                    
+                    // Valores já gravados na base e separados pra esse PI/Projeto
+                    $('#vlrPiCusteio').val('');
+                    $('#vlrPiCapital').val('');
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');
