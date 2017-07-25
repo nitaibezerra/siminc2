@@ -1,3 +1,5 @@
+                <div class="clearfix" style="margin-top: 10px;">&nbsp;</div>
+
 				<div class="footer">
 		            <div class="pull-right">
 		            	<strong>Data:</strong> <?= date("d/m/Y - H:i:s") ?> | 
