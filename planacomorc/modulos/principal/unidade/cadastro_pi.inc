@@ -1323,12 +1323,9 @@ DML;
                 <?php endif; ?>
             </div>
         </div>
-        <div class="clearfix"></div>
 
     </form>
     <?php } ?>
-
-    <div class="clearfix">&nbsp;</div>
 
 <script type="text/javascript">
     // Enquadramentos
