@@ -1036,42 +1036,6 @@ DML;
                                                 <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
                                             </td>
                                         </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
-                                            <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
-                                        </tr>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;">
-                                                Limite Disponível na Sub-Unidade:
-                                                <input id="VlrSUDisponivel" type="hidden" value="" />
-                                            </td>
-                                            <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;"></td>
-                                            <td style="text-align: left;"><b>Custeio </b></td>
-                                            <td style="text-align: center;"><b>Capital</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
-                                            <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
-                                            <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left;">
-                                                Saldo Disponível na Funcional:
-                                                <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
-                                                <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
-                                            </td>
-                                            <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
-                                            <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="" style="text-align: left;">Valor do Projeto:</td>
-                                            <td style="text-align: left;">
-                                                <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                                <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
-                                            </td>
                                     <?php } ?>
                                 </table>
                             </div>
@@ -1144,7 +1108,10 @@ DML;
                                         <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                     </tr>
                                     <tr style="height: 30px;">
-                                        <td style="text-align: left;">Limite Disponível na Sub-Unidade:</td>
+                                        <td style="text-align: left;">
+                                            Limite Disponível na Sub-Unidade:
+                                            <input id="VlrSUDisponivel" type="hidden" value="" />
+                                        </td>
                                         <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
                                     </tr>
                                     <tr>
@@ -1158,7 +1125,11 @@ DML;
                                         <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left;">Saldo Disponível na Funcional:</td>
+                                        <td style="text-align: left;">
+                                            Saldo Disponível na Funcional:
+                                            <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
+                                            <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
+                                        </td>
                                         <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
                                         <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                     </tr>
