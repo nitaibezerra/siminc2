@@ -2076,8 +2076,8 @@ DML;
 
         $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
         $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
-        $('#VlrFuncionalDisponivelCapital').val(valorDisponivelCusteio.toFixed(2));
-        $('#VlrFuncionalDisponivelCusteio').val(valorDisponivelCapital.toFixed(2));
+        $('#VlrFuncionalDisponivelCapital').val(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2)));
+        $('#VlrFuncionalDisponivelCusteio').val(mascaraglobal('###.###.###.###,##',valorDisponivelCapital.toFixed(2)));
     }
 
     /**
