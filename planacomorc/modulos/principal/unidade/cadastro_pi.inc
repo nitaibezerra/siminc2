@@ -1879,10 +1879,16 @@ DML;
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCusteio() {
-        var fltValorDoProjeto = buscarValorDoProjeto();
-        var fltValorBaseLimiteDisponivelFuncional = buscarValorBaseLimiteDisponivelFuncionalCusteio();
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').text());
+        var valorBaseLimiteProjetoCusteio = textToFloat($('#vlrPiCusteio').val());
+        var valorProjetoCusteio = textToFloat($('#picvalorcusteio').val());
 
-        var fltValorLimiteDisponivelFuncional = (fltValorBaseLimiteDisponivelFuncional - fltValorDoProjeto);
+        if(valorProjetoCusteio < valorBaseLimiteProjetoCusteio){
+            valorCusteio = (valorBaseLimiteProjetoCusteio - valorProjetoCusteio);
+        } else {
+            valorCusteio = (valorProjetoCusteio - valorBaseLimiteProjetoCusteio);
+        }
+        var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
         $('#td_disponivel_funcional_custeio').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
     }
     
@@ -1892,10 +1898,16 @@ DML;
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCapital() {
-        var fltValorDoProjeto = buscarValorDoProjeto();
-        var fltValorBaseLimiteDisponivelFuncional = buscarValorBaseLimiteDisponivelFuncionalCapital();
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').text());
+        var valorBaseLimiteProjetoCapital = textToFloat($('#vlrPiCapital').val());
+        var valorProjetoCapital = textToFloat($('#picvalorcapital').val());
 
-        var fltValorLimiteDisponivelFuncional = (fltValorBaseLimiteDisponivelFuncional - fltValorDoProjeto);
+        if(valorProjetoCapital < valorBaseLimiteProjetoCapital){
+            valorCapital = (valorBaseLimiteProjetoCapital - valorProjetoCapital);
+        } else {
+            valorCapital = (valorProjetoCapital - valorBaseLimiteProjetoCapital);
+        }
+        var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
         $('#td_disponivel_funcional_capital').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
     }
     
@@ -2043,30 +2055,6 @@ DML;
     }
     
     /**
-     * Busca o valor base disponivel na funcional custeio.
-     *
-     * @returns float Valor do projeto
-     */
-    function buscarValorBaseLimiteDisponivelFuncionalCusteio(){
-        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').text());
-        var valorBaseProjeto = buscarValorBaseDoProjeto();
-        
-        return (valorBaseLimiteDisponivel - valorBaseProjeto);
-    }
-    
-    /**
-     * Busca o valor base disponivel na funcional capital.
-     *
-     * @returns float Valor do projeto
-     */
-    function buscarValorBaseLimiteDisponivelFuncionalCapital(){
-        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').text());
-        var valorBaseProjeto = buscarValorBaseDoProjeto();
-        
-        return (valorBaseLimiteDisponivel - valorBaseProjeto);
-    }
-    
-    /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
      *
      * @returns float Valor do projeto
@@ -2118,14 +2106,16 @@ DML;
         var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
 
         // Valores informados pelo usuário em tempo real para esse PI/Projeto
-        var valorCusteio = textToFloat($('#picvalorcusteio').val());
-        var valorCapital = textToFloat($('#picvalorcapital').val());
+//        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+//        var valorCapital = textToFloat($('#picvalorcapital').val());
         
-        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio - valorCusteio;
-        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio - valorCapital;
+        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
+        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
 
         $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
         $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
+        $('#VlrFuncionalDisponivelCapital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
+        $('#VlrFuncionalDisponivelCusteio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
     }
 
     /**
