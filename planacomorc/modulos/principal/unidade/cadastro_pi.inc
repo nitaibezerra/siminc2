@@ -587,11 +587,9 @@ DML;
                                 </table>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-9">
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info" style="width: 100%;" />
+                        <div class="form-group text-right">
+                            <div class="col-lg-12">
+                                <input type="button" id="btn_selecionar_functional" value="Selecionar Funcional/PTRES" class="btn btn-info" />
                             </div>
                         </div>
 
@@ -789,106 +787,58 @@ DML;
                         </div>
                         <div class="panel panel-default" id="div_siconv">
                             <div class="panel-body">
-                                <fieldset><legend class="legend_convenio">Números de Proposta SICONV</legend>
-                                    <div class="form-group">
-                                        <div class="col-lg-9">
-                                            <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
-                                        </div>
+                                Números de Proposta SICONV
+                                <div class="form-group">
+                                    <div class="col-lg-9">
+                                        <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-9">
-                                            <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                                <?php foreach($aConvenio as $convenio){ ?>
-                                                    <tr style="height: 30px;" id="tr_convenio_<?php echo $convenio['pcoid']; ?>" >
-                                                        <td style="text-align: left;"><?php echo $convenio['pcoconvenio']; ?></td>
-                                                        <td style="text-align: center;">
-                                                            <input type="hidden" name="lista_convenio[]" value="<?php echo $convenio['pcoconvenio']; ?>" />
-                                                            <span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="<?php echo $convenio['pcoid']; ?>" ></span>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </table>
-                                        </div>
+                                    <div class="col-lg-2">
+                                        <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
                                     </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-2 text-right">
-                                <label for="picted" class="control-label">TED:</label>
-                            </div>
-                            <div class="col-lg-9">
-                                <div class="form-inline required">
-                                    <div class="form-group has-feedback col-xs-2">
-                                        <label class="input-group">
-                                        <span class="input-group-addon">
-                                            <input type="radio" name="picted" value="t" class="link" <?php echo !empty($dadosPI['picted']) && 't' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
-                                        </span>
-                                            <div class="form-control form-control-static input_check_s link">
-                                                Sim
-                                            </div>
-                                            <span class="glyphicon form-control-feedback "></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-group has-feedback col-xs-2">
-                                        <label class="input-group">
-                                        <span class="input-group-addon">
-                                            <input type="radio" name="picted" value="f" class="link" <?php echo !empty($dadosPI['picted']) && 'f' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?>>
-                                        </span>
-                                            <div class="form-control form-control-static input_check_n link">
-                                                Não
-                                            </div>
-                                            <span class="glyphicon form-control-feedback "></span>
-                                        </label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-9">
+                                        <table id="table_convenio" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                            <?php foreach($aConvenio as $convenio){ ?>
+                                                <tr style="height: 30px;" id="tr_convenio_<?php echo $convenio['pcoid']; ?>" >
+                                                    <td style="text-align: left;"><?php echo $convenio['pcoconvenio']; ?></td>
+                                                    <td style="text-align: center;">
+                                                        <input type="hidden" name="lista_convenio[]" value="<?php echo $convenio['pcoconvenio']; ?>" />
+                                                        <span class="glyphicon glyphicon-trash link btnRemoveConvenio" data-convenio="<?php echo $convenio['pcoid']; ?>" ></span>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <div class="col-lg-2 text-right">
-                                <label for="picedital" class=" control-label">Edital:</label>
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="picted">TED:</label>
                             </div>
                             <div class="col-lg-9">
-                                <div class="form-inline required">
-                                    <div class="form-group has-feedback col-xs-2">
-                                        <label class="input-group">
-                                        <span class="input-group-addon">
-                                            <input type="radio" name="picedital" value="t" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 't' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
-                                        </span>
-                                            <div class="form-control form-control-static input_check_s link element_edital">
-                                                Sim
-                                            </div>
-                                            <span class="glyphicon form-control-feedback "></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-group has-feedback col-xs-2">
-                                        <label class="input-group">
-                                        <span class="input-group-addon">
-                                            <input type="radio" name="picedital" value="f" class="link element_edital" <?php echo !empty($dadosPI['picedital']) && 'f' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?>>
-                                        </span>
-                                            <div class="form-control form-control-static input_check_n link element_edital">
-                                                Não
-                                            </div>
-                                            <span class="glyphicon form-control-feedback "></span>
-                                        </label>
-                                    </div>
-                                </div>
+                                <input type="checkbox" name="picted" id="picted" value="t" class="js-switch" <?php echo !empty($dadosPI['picted']) && 't' == $dadosPI['picted'] ? 'checked="checked"' : ''; ?> />
                             </div>
                         </div>
-                        <!--Inicio campos do Edital-->
-                        <div class="panel panel-default" id="div_edital">
-                            <div class="panel-body">
-                                <fieldset><legend>Previsão de Lançamento do Edital:</legend>
-                                    <div class="form-group">
-                                        <div class="col-md-3 text-right">
-                                            <label for="mes" class="control-label">Mês:</label>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <?php
-                                            $sql = "
+
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="picedital">Edital:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="checkbox" name="picedital" id="picedital" value="t" class="js-switch element_edital" <?php echo !empty($dadosPI['picedital']) && 't' == $dadosPI['picedital'] ? 'checked="checked"' : ''; ?> />
+                            </div>
+                        </div>
+
+                        <div class="form-group"  id="div_edital">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="mes">Prev. Lançamento Edital:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <?php
+                                $sql = "
                                                 SELECT
                                                     mescod as codigo,
                                                     mesdsc as descricao
@@ -896,15 +846,11 @@ DML;
                                                 ORDER BY
                                                     codigo
                                             ";
-                                            $mescod = $dadosPI['mescod'];
-                                            $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
-                                            ?>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                                $mescod = $dadosPI['mescod'];
+                                $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
+                                ?>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -1004,14 +950,13 @@ DML;
                                 </table>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-9">
-
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" style="width: 100%;" />
-                                <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" style="width: 100%;" />
-                                <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" style="width: 100%;" />
+                        <div class="form-group text-right">
+                            <div class="col-lg-12">
+                                <div class="text-right">
+                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" />
+                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" />
+                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1046,12 +991,9 @@ DML;
                                 </table>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-9">
-
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info" style="width: 100%;" />
+                        <div class="form-group text-right">
+                            <div class="col-lg-12">
+                                <input type="button" id="btn_selecionar_responsaveis" title="Inserir Responsáveis" value="Inserir Responsáveis" class="btn btn-info"/>
                             </div>
                         </div>
 
@@ -1435,10 +1377,8 @@ DML;
             }
         });
 
-        $('.element_edital').click(function() {
-            setTimeout(function(){
-                controlarEdital($('input[name=picedital]:checked').val());
-            }, 500); // Meio segundo
+        $('#picedital').change(function() {
+                controlarEdital($('#picedital').is(':checked'));
         });
 
         $('#table_localizacao').on('click', '.btnRemoverLocalizacao', function(){
@@ -1462,7 +1402,7 @@ DML;
         });
 
         // Evento ao carregar a tela
-        controlarEdital($('input[name=picedital]:checked').val());
+        controlarEdital($('#picedital').is(':checked'));
 
         $('#btn_selecionar_functional').click(function(){
             abrir_lista();
@@ -1862,14 +1802,14 @@ DML;
 
     /**
      * Calcula e exibi na tela o valor disponivel na Sub-Unidade.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelUnidade() {
         var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').val());
         var valorBaseProjeto = buscarValorBaseDoProjeto();
         var valorProjeto = buscarValorDoProjeto();
-        
+
         if(valorProjeto < valorBaseProjeto){
             valorDiferenca = (valorBaseProjeto - valorProjeto);
         } else {
@@ -1879,10 +1819,10 @@ DML;
         var fltValorLimiteDisponivelUnidade = (valorBaseLimiteDisponivelUnidade - valorDiferenca);
         $('#td_disponivel_sub_unidade').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelUnidade.toFixed(2)));
     }
-    
+
     /**
      * Calcula e exibi na tela o valor disponivel na funcional de custeio.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCusteio() {
@@ -1898,10 +1838,10 @@ DML;
         var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
         $('#td_disponivel_funcional_custeio').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
     }
-    
+
     /**
      * Calcula e exibi na tela o valor disponivel na funcional de capital.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCapital() {
@@ -1917,10 +1857,10 @@ DML;
         var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
         $('#td_disponivel_funcional_capital').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
     }
-    
+
     /**
      * Calcula e exibi na tela o valor detalhado da funcional.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorDetalhado() {
@@ -1930,10 +1870,10 @@ DML;
         var fltValorDetalhadoAtual = (fltValorDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
         $('#td_pi_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorDetalhadoAtual.toFixed(2)));
     }
-    
+
     /**
      * Calcula e exibi na tela o valor não detalhado da funcional.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorNaoDetalhado() {
@@ -1943,10 +1883,10 @@ DML;
         var fltValorNaoDetalhadoAtual = (fltValorBaseNaoDetalhado - (fltValorDoProjeto - fltValorBaseDoProjeto));
         $('#td_pi_nao_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorNaoDetalhadoAtual.toFixed(2)));
     }
-    
+
     /**
      * Calcula o valor da funcional.
-     * 
+     *
      * @returns VOID
      */
     function atualizarValorDoProjeto() {
@@ -1964,7 +1904,7 @@ DML;
     function atualizarValorDetalheCusteio() {
         var somaCusteio = somarCampos('input_CUS');
         var diferenca = recuperarDiferencaCusteio();
-        
+
         $('#projeto_custeio_detalhado').html(number_format(somaCusteio, 2, ',', '.'));
         $('#projeto_custeio_detalhar').html(number_format(diferenca, 2, ',', '.'));
     }
@@ -2048,6 +1988,8 @@ DML;
 
         return valorDoProjeto;
     }
+
+
     
     /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
@@ -2103,7 +2045,7 @@ DML;
         // Valores informados pelo usuário em tempo real para esse PI/Projeto
 //        var valorCusteio = textToFloat($('#picvalorcusteio').val());
 //        var valorCapital = textToFloat($('#picvalorcapital').val());
-        
+
         var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
         var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
 
@@ -2270,7 +2212,7 @@ DML;
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
     */
     function controlarEdital(opcao){
-        if(opcao == 't'){
+        if(opcao == true){
             $('#div_edital').show('slow');
         } else {
             $('#div_edital').hide('slow');
@@ -2717,20 +2659,6 @@ DML;
 //        } else {
 //            $('.legend_convenio').removeClass('validateRedText');
 //        }
-        // Se não for selecionado nenhuma opção para edital, o sistema acrescenta uma mensagem de erro.
-        if($('input[name=picedital]:checked').val() == undefined || $('input[name=picedital]:checked').val() == ""){
-            $('label[for="picedital"]').addClass('validateRedText');
-            addMsgCustom.push('Edital');
-        } else {
-            $('label[for="picedital"]').removeClass('validateRedText');
-        }
-        // Se não for selecionado nenhuma opção para ted, o sistema acrescenta uma mensagem de erro.
-        if($('input[name=picted]:checked').val() == undefined || $('input[name=picted]:checked').val() == ""){
-            $('label[for="picted"]').addClass('validateRedText');
-            addMsgCustom.push('TED');
-        } else {
-            $('label[for="picted"]').removeClass('validateRedText');
-        }
 
         // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
         if($('#esfid').val() == ""){
@@ -2889,15 +2817,14 @@ DML;
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'picted', 'picedital', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
 
         // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
         if(codigoEnquadramento == intEnqFinalistico){
             listaObrigatorios.push('mpnid', 'ipnid');
         }
 
-        var opcaoEdital = $('input[name=picedital]:checked').val();
-        if(opcaoEdital == 't'){
+        if($('#picedital').is(':checked')){
             listaObrigatorios.push('mes');
         }
 
@@ -2949,7 +2876,7 @@ DML;
             $('#btnPopupPtresPesquisar').click();
         }
     }
-    
+
     function visualizarRegistro(ptrid) {
         $('#modal-confirm .modal-body p').empty();
         url = 'planacomorc.php?modulo=principal/unidade/popupptres&acao=A&detalhe=ok&ptrid=' + ptrid;
