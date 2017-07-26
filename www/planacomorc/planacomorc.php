@@ -24,6 +24,7 @@ if (is_array($perfis)) {
 }
 
 
+$simec = new Simec_View_Helper();
 $_SESSION['sislayoutbootstrap'] = 'zimec';
 
 // -- Export de XLS automático da Listagem
