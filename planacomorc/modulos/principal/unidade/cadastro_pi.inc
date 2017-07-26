@@ -1869,6 +1869,7 @@ DML;
         var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
         var fltValorDoProjeto = buscarValorDoProjeto();
         var fltValorDetalhado = textToFloat($('#piDetalhado').val());
+        
         var fltValorDetalhadoAtual = (fltValorDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
         $('#td_pi_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorDetalhadoAtual.toFixed(2)));
     }
@@ -1882,6 +1883,7 @@ DML;
         var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
         var fltValorDoProjeto = buscarValorDoProjeto();
         var fltValorBaseNaoDetalhado = textToFloat($('#piNaoDetalhado').val());
+        
         var fltValorNaoDetalhadoAtual = (fltValorBaseNaoDetalhado - (fltValorDoProjeto - fltValorBaseDoProjeto));
         $('#td_pi_nao_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorNaoDetalhadoAtual.toFixed(2)));
     }
@@ -1991,8 +1993,6 @@ DML;
         return valorDoProjeto;
     }
 
-
-    
     /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
      *

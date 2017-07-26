@@ -594,13 +594,19 @@ DML;
 
                     var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
                     celDetalhadoPi.style.textAlign = "right";
+                    celDetalhadoPi.id = "td_pi_detalhado";
                     var detalhado = $('tr#' + id + ' td:nth-child(7)').text();
                     celDetalhadoPi.innerHTML = detalhado;
 
+                    $('#piDetalhado').val(detalhado);
+
                     var celNaoDetalhadoPi = tabelaorigem.rows[linha].insertCell(4);
                     celNaoDetalhadoPi.style.textAlign = "right";
+                    celNaoDetalhadoPi.id = "td_pi_nao_detalhado";
                     var naoDetalhado = $('tr#' + id + ' td:nth-child(8)').text();
                     celNaoDetalhadoPi.innerHTML = naoDetalhado;
+                    
+                    $('#piNaoDetalhado').val(naoDetalhado);
                     
                     var vlrNaoDetalhado = textToFloat(naoDetalhado);
                     var vlrDisponivelCusteioCapitalProvisorio = vlrNaoDetalhado / 2;
@@ -640,6 +646,12 @@ DML;
                             }
                         }
                     });
+                    
+                    var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').val());
+                    var valorBaseProjeto = buscarValorBaseDoProjeto();
+                    
+                    var vlrBaseLimiteDisponivelUnidade = valorBaseLimiteDisponivelUnidade + valorBaseProjeto;
+                    $('#VlrSUDisponivel').val(mascaraglobal('###.###.###.###,##', vlrBaseLimiteDisponivelUnidade.toFixed(2)));
 
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();
@@ -651,6 +663,9 @@ DML;
                     
                     atualizarValorLimiteDisponivelFuncionalCapital();
                     atualizarValorLimiteDisponivelFuncionalCusteio();
+                    atualizarValorDetalhado();
+                    atualizarValorNaoDetalhado();
+                    atualizarValorLimiteDisponivelUnidade();
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');
