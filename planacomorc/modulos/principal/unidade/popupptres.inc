@@ -605,8 +605,11 @@ DML;
                     var vlrNaoDetalhado = textToFloat(naoDetalhado);
                     var vlrDisponivelCusteioCapitalProvisorio = vlrNaoDetalhado / 2;
                     
-                    $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
-                    $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2) ));
+                    $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
+                    $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
+                    
+                    $('#VlrFuncionalDisponivelCapital').val(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
+                    $('#VlrFuncionalDisponivelCusteio').val(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
 
                     var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
                     CelEmpenhado.style.textAlign = "right";

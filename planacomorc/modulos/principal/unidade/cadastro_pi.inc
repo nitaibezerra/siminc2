@@ -551,9 +551,9 @@ DML;
                                             $valortotalpi = 0;
                                             $cor = 1;
                                             foreach ($dadosPTRES as $ptres):
+                                                $vlrPiDetalhado = $ptres['det_pi'];
+                                                $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
                                                 ?>
-                                                <input type="hidden" id="piDetalhado" value="<?php echo $ptres['det_pi']; ?>" />
-                                                <input type="hidden" id="piNaoDetalhado" value="<?php echo $ptres['nao_det_pi']; ?>" />
                                                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                                                     <td align="center">
                                                         <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
@@ -585,6 +585,8 @@ DML;
                                     }
                                     ?>
                                 </table>
+                                <input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
+                                <input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -1351,7 +1353,7 @@ DML;
         });
 
         $('#ungcod').change();
-        atualizarSaldoFuncional();
+        carregarSaldoFuncional();
 
         // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
@@ -1886,7 +1888,7 @@ DML;
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCusteio() {
-        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').text());
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').val());
         var valorBaseLimiteProjetoCusteio = textToFloat($('#vlrPiCusteio').val());
         var valorProjetoCusteio = textToFloat($('#picvalorcusteio').val());
 
@@ -1905,7 +1907,7 @@ DML;
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCapital() {
-        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').text());
+        var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').val());
         var valorBaseLimiteProjetoCapital = textToFloat($('#vlrPiCapital').val());
         var valorProjetoCapital = textToFloat($('#picvalorcapital').val());
 
@@ -2109,8 +2111,31 @@ DML;
 
         $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
         $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
-        $('#VlrFuncionalDisponivelCapital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
-        $('#VlrFuncionalDisponivelCusteio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
+    }
+    
+    function carregarSaldoFuncional(){
+        // Saldo Autorizado
+        dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
+        var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
+
+        $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+        $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+
+        // Saldo Disponível
+        var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
+        var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
+
+        // Valores informados pelo usuário em tempo real para esse PI/Projeto
+//        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+//        var valorCapital = textToFloat($('#picvalorcapital').val());
+        
+        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
+        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
+
+        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
+        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
+        $('#VlrFuncionalDisponivelCapital').val(valorDisponivelCusteio.toFixed(2));
+        $('#VlrFuncionalDisponivelCusteio').val(valorDisponivelCapital.toFixed(2));
     }
 
     /**
