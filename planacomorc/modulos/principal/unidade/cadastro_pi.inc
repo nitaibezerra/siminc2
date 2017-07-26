@@ -1866,10 +1866,17 @@ DML;
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelUnidade() {
-        var fltValorDoProjeto = buscarValorDoProjeto();
-        var fltValorBaseLimiteDisponivelUnidade = buscarValorBaseLimiteDisponivelUnidade();
+        var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').val());
+        var valorBaseProjeto = buscarValorBaseDoProjeto();
+        var valorProjeto = buscarValorDoProjeto();
+        
+        if(valorProjeto < valorBaseProjeto){
+            valorDiferenca = (valorBaseProjeto - valorProjeto);
+        } else {
+            valorDiferenca = (valorProjeto - valorBaseProjeto);
+        }
 
-        var fltValorLimiteDisponivelUnidade = (fltValorBaseLimiteDisponivelUnidade - fltValorDoProjeto);
+        var fltValorLimiteDisponivelUnidade = (valorBaseLimiteDisponivelUnidade - valorDiferenca);
         $('#td_disponivel_sub_unidade').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelUnidade.toFixed(2)));
     }
     
@@ -2040,18 +2047,6 @@ DML;
         var valorDoProjeto = valorCusteio + valorCapital;
 
         return valorDoProjeto;
-    }
-
-    /**
-     * Busca o valor base disponivel na unidade.
-     *
-     * @returns float Valor do projeto
-     */
-    function buscarValorBaseLimiteDisponivelUnidade(){
-        var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').text());
-        var valorBaseProjeto = buscarValorBaseDoProjeto();
-        
-        return (valorBaseLimiteDisponivelUnidade - valorBaseProjeto);
     }
     
     /**
@@ -2364,9 +2359,8 @@ DML;
                 var fltDisponivelUnidade = textToFloat(data.disponivel);
                 var fltBaseProjeto = buscarValorBaseDoProjeto();
                 var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
-                $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2) ));
-                $('#VlrSUDisponivel').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2) ));
-
+                $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
+                $('#VlrSUDisponivel').val(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
             }
         });
     }
