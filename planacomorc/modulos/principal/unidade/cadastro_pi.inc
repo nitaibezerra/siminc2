@@ -1293,6 +1293,10 @@ DML;
         $('div.div_ungcod').on('change', '#ungcod', function(){
             carregarLimitesUnidade($(this).val());
         });
+        
+        $('#orcamento').on('click', '.btnVisualizarDetalhes', function(){
+            visualizarRegistro($(this).attr('ptrid'));
+        });
 
         $('#ungcod').change();
         carregarSaldoFuncional();
