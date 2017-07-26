@@ -648,6 +648,9 @@ DML;
                     // Valores já gravados na base e separados pra esse PI/Projeto
                     $('#vlrPiCusteio').val('');
                     $('#vlrPiCapital').val('');
+                    
+                    atualizarValorLimiteDisponivelFuncionalCapital();
+                    atualizarValorLimiteDisponivelFuncionalCusteio();
 
                 } else {
                     var tabelaorigem = document.getElementById('orcamento');
