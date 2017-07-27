@@ -1436,7 +1436,6 @@ DML;
 
         $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-//            atualizarValorDetalheCusteio();
             atualizarValorDoProjeto();
             atualizarValorDetalhado();
             atualizarValorNaoDetalhado();
@@ -1447,7 +1446,6 @@ DML;
 
         $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
-//            atualizarValorDetalheCapital();
             atualizarValorDoProjeto();
             atualizarValorDetalhado();
             atualizarValorNaoDetalhado();
@@ -1513,6 +1511,10 @@ DML;
             $('input, textarea, select').prop('disabled', true);
             setTimeout($('select').prop('disabled', true).trigger("chosen:updated"), 3000);
         }
+
+        atualizarTotalFisico();
+        atualizarTotalOrcamentario();
+        atualizarTotalFinanceiro();
 
     });
 
