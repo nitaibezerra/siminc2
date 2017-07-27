@@ -496,6 +496,10 @@ unset($_SESSION['mensagem_carregar']);
 <!-- Sweet Aler -->
 <script src="/zimec/public/temas/simec/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+
+<!-- Typehead -->
+<script src="/zimec/public/temas/simec/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
 <!-- SIMEC -->
 <script src="/zimec/public/temas/simec/js/theme.js"></script>
 <script src="/zimec/public/temas/simec/js/simec.js"></script>
@@ -504,6 +508,20 @@ unset($_SESSION['mensagem_carregar']);
 
 <script>
 $(document).ready(function() {
+    var $input = $(".typeahead");
+    $input.typeahead({
+        source: <?php echo $_SESSION['acesso-rapido'][$_SESSION['sisid']] ?>,
+        autoSelect: true
+    });
+    $input.change(function() {
+        var current = $input.typeahead("getActive");
+        if (current) {
+            if (current.mnulink) {
+                window.location.href = current.mnulink;
+            }
+        }
+    });
+
 	$('#voltar_usuario_origem').click(function() {
 		simularUsuariosSistemas('<?php echo $_SESSION['usucpforigem']?>');
 	});

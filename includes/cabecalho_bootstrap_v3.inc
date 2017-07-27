@@ -201,8 +201,10 @@ if (!$_SESSION['exercicioaberto'] && $_SESSION['sisexercicio'] == 't' && $tabela
 	$sql = sprintf("SELECT prsexercicioaberto FROM %s.programacaoexercicio WHERE prsano = '%s'", $_SESSION['sisdiretorio'], $_SESSION['exercicio']);
 	$_SESSION['exercicioaberto'] = $db->pegaUm($sql);
 }
+
 // altera o ano de exercício (caso o usuário solicite)
 if ($_REQUEST['exercicio'] AND $_SESSION['exercicio'] != $_REQUEST['exercicio']) {
+
 
 	if ($arrAnoExercicio) {
 		foreach ($arrAnoExercicio as $anoExercicio) {
@@ -238,7 +240,7 @@ $paginic = $db->pegaUm($sql);
 <html>
 	<head>
 		<title>SIMEC - Sistema Integrado de Monitoramento Execução e Controle</title>
-		<meta http-equiv='Content-Type' content='text/html; charset=ISO-8895-1'>
+		<meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Fonts  -->
@@ -364,13 +366,27 @@ $paginic = $db->pegaUm($sql);
 					<nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
 						<div class="navbar-left">
 							<ul class="header-nav header-nav-options">
-					<li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?=$_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
+					            <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?=$_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
 								<li><a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a></li>
 							</ul>
 						</div>
-			<div class="navbar-center hidden-xs">
+			            <div class="navbar-center hidden-xs">
+                            <form id="setperfil" name="setperfil" action="<?= $_SESSION['sisarquivo'] ?>.php?modulo=<?= $paginic ?>" method="post">
+                                <input type="hidden" id="exercicio" name="exercicio" value=""  class="form-control" />
+                            </form>
+                            <script>
+                                $(function(){
+                                    $('#chosen-exercicio').change(function(){
+                                        $('#exercicio').val($(this).val());
+                                        document.getElementById('setperfil').submit();
+                                    });
+                                })
+                            </script>
 							<ul class="header-nav header-nav-options">
-					<li style="width:55%">
+					            <li style="width:30%">
+                                    <input type="text" class="form-control typeahead" placeholder="Digite aqui o que procura">
+								</li>
+					            <li style="width:45%">
 									<select id="chosen-sistema" class="form-control chosen-select" data-placeholder="Selecione" onchange="javascript:changeSystem(this.value)">
 										<?php foreach ($sistemas as $sistema): ?>
 											<?php $selected = ($sistema['sisid'] == $_SESSION['sisid']) ? 'selected="selected"' : null; ?>
@@ -379,18 +395,12 @@ $paginic = $db->pegaUm($sql);
 									</select>
 								</li>
 								<?php if ($arrAnoExercicio && is_array($arrAnoExercicio)): ?>
-								<li style="width:20%">
-							<select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Exercicio" onclick="javascript:alteraExercicio(this.value)">
-									<?php foreach ($arrAnoExercicio as $anoExercicio): ?>
-											<option value="<?php echo $anoExercicio['codigo'] ?>"><?php echo $anoExercicio['descricao'] ?></option>
+								<li style="width:100px%">
+							        <select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Exercicio">
+									    <?php foreach ($arrAnoExercicio as $anoExercicio): ?>
+											<option value="<?php echo $anoExercicio['codigo'] ?>" <?php echo $_SESSION['exercicio'] == $anoExercicio['codigo'] ? 'selected="selected"' : ''; ?>><?php echo $anoExercicio['descricao'] ?></option>
 										<?php endforeach ?>
 									</select>
-									<script>
-										function alteraExercicio(id) {
-											$('#exercicio').val(id);
-											document.getElementById('setperfil').submit();
-										}
-									</script>
 								</li>
 								<?php endif ?>
 							</ul>

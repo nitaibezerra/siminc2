@@ -27,6 +27,32 @@ if (! strpos ( $url, 'favorito' )) {
 $posicao = strpos ( $url, '&acao=' );
 $url = substr ( $url, 0, $posicao + 7 );
 
+function recuperarAcessoRapido($mnuidpai = null, &$aAcessoRapido, $dadosMenu = ''){
+    global $db;
+    $where = $mnuidpai ? "and  mnuidpai = $mnuidpai" : 'and mnuidpai is null ';
+
+    $sql = "select mnu.mnuid, mnu.mnudsc, trim(mnu.mnulink) as mnulink, mnuidpai
+            from seguranca.perfilusuario pfu, seguranca.perfil pfl, seguranca.menu mnu, seguranca.perfilmenu pfm  
+            where pfu.pflcod = pfl.pflcod 
+            and mnu.mnuid = pfm.mnuid 
+            and pfm.pflcod = pfl.pflcod 
+            and pfu.usucpf = '{$_SESSION ['usucpf']}' 
+            and pfl.sisid = {$_SESSION ['sisid']}
+            $where
+            order by mnu.mnudsc";
+
+    $dados = $db->carregar($sql);
+
+    if($dados){
+        foreach ($dados as $dado) {
+            $dado['name'] = $dadosMenu ? $dadosMenu['name'] . ' - ' . $dado['mnudsc'] : $dado['mnudsc'];
+            recuperarAcessoRapido($dado['mnuid'], $aAcessoRapido, $dado);
+        }
+    } else {
+        $aAcessoRapido[] = $dadosMenu;
+    }
+}
+
 if (!isset($_SESSION['acl'][$_SESSION['sisid']]))
 {
 	// buscar na tabela de menu um registro cujo link seja igual à url
@@ -43,7 +69,13 @@ if (!isset($_SESSION['acl'][$_SESSION['sisid']]))
 			$acls[$menu['mnulink']] = $menu;
 		}
 	}
+
 	$_SESSION['acl'][$_SESSION['sisid']] = $acls;
+
+    $aAcessoRapido = [];
+    recuperarAcessoRapido(null, $aAcessoRapido);
+	$_SESSION['acesso-rapido'][$_SESSION['sisid']] = json_encode(simec_utf8_encode_recursive($aAcessoRapido));
+
 }
 
 $saida = $_SESSION['acl'][$_SESSION ['sisid']][$url];
