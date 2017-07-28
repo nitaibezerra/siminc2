@@ -1160,23 +1160,38 @@ DML;
                                                 ?>
                                                 <td>
                                                     <?php
-                                                    $pcrid = $pcrvalor = '';
-                                                    if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
-                                                        $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
-                                                        $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+                                                        $pcrid = $pcrvalor = '';
+                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
 
-                                                        if($cronogramaValor['croid'] != Cronograma::K_FISICO){
-                                                            $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                            }
                                                         }
-                                                    }
+                                                        
+                                                        switch ($cronogramaValor['crvid']) {
+                                                            case Cronograma::ORCAMENTO_CUSTEIO:
+                                                                $class .= ' custeio';
+                                                            break;
+                                                            case Cronograma::FINANCEIRO_CUSTEIO:
+                                                                $class .= ' custeio';
+                                                            break;
+                                                            case Cronograma::ORCAMENTO_CAPITAL:
+                                                                $class .= ' capital';
+                                                            break;
+                                                            case Cronograma::FINANCEIRO_CAPITAL:
+                                                                $class .= ' capital';
+                                                            break;
+                                                        }
 
                                                     ?>
                                                     <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class . ' input_' . $cronogramaValor['crvtipo'] ?>" type="text">
+                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
                                                 </td>
                                             <?php }?>
                                         </tr>
-                                    <?php }?>
+                                    <?php } ?>
                                     <tr style="height: 30px; ">
                                         <td style="text-align: left;">Total:</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
@@ -1469,24 +1484,27 @@ DML;
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarTotalOrcamentario();
         });
+        
+        $('.input_orcamentario.custeio').keyup(function(){
+            mudarCorCronogramaOrcamentarioCusteio();
+        });
+        
+        $('.input_orcamentario.capital').keyup(function(){
+            mudarCorCronogramaOrcamentarioCapital();
+        });
+        
+        $('.input_financeiro.custeio').keyup(function(){
+            mudarCorCronogramaFinanceiroCusteio();
+        });
+        
+        $('.input_financeiro.capital').keyup(function(){
+            mudarCorCronogramaFinanceiroCapital();
+        });
 
         $('.input_financeiro').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarTotalFinanceiro();
         });
-
-        $('.input_CUS').keyup(function(){
-            mudarCorCronogramaCusteio();
-            atualizarValorDetalheCusteio();
-        });
-
-        $('.input_CAP').keyup(function(){
-            mudarCorCronogramaCapital();
-            atualizarValorDetalheCapital();
-        });
-
-        atualizarValorDetalheCusteio();
-        atualizarValorDetalheCapital();
 
         $('#capid').change(function(){
 
@@ -1518,6 +1536,23 @@ DML;
 
     });
 
+    /**
+     * Muda a cor dos valores do cronograma de custeio se o valor exceder o valor do projeto para custeio.
+     *
+     * @returns VOID
+     */
+    function mudarCorCronogramaOrcamentarioCusteio(){
+        var valorCusteio = textToFloat($('#vlrPiCusteio').val());
+        var valorTotalCusteioCronograma = buscarTotalCusteioCronogramaOrcamentario();
+        
+        if(valorTotalCusteioCronograma > valorCusteio){
+            $('.input_orcamentario.custeio').addClass('validateRedText');
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não é possível salvar o formulário com a soma de todos os valores preenchidos no CRONOGRAMA PARA CUSTEIO superior ao valor informado no Valor para CUSTEIO do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CUSTEIO do Projeto.</span></p>');
+        } else {
+            $('.input_orcamentario.custeio').removeClass('validateRedText');
+        }
+    }
+
    /**
     * Valida informações de valores do Projeto(Capital e Custeio), Fisicos,
     * Orçamentários e Financeiros e caso estejam com inconformidades mudam a cor pra vermelho.
@@ -1527,8 +1562,10 @@ DML;
     function mudarCorValoresProjetosFisicoOrcamentarioFinanceiro(){
         mudarCorValorProjeto();
         mudarCorCronogramaFisico();
-        mudarCorCronogramaOrcamentario();
-        mudarCorCronogramaFinanceiro();
+        mudarCorCronogramaOrcamentarioCusteio();
+        mudarCorCronogramaOrcamentarioCapital();
+        mudarCorCronogramaFinanceiroCusteio();
+        mudarCorCronogramaFinanceiroCapital();
     }
 
     /**
@@ -1575,7 +1612,7 @@ DML;
      *
      * @returns VOID
      */
-    function avisarCronogramaOrcamentario(){
+    function avisarCronogramaOrcamentarioCusteio(){
         if(!validarCronogramaOrcamentarioInferiorValorProjeto()){
             alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma orçamentário superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma orçamentário ou aumente o Valor do Projeto.</span></p>');
         }
@@ -1608,17 +1645,32 @@ DML;
     }
 
     /**
-     * Muda a cor dos valores do cronograma orçamentário se o valor exceder o valor do projeto.
+     * Muda a cor dos valores das colunas de Custeio do cronograma orçamentário se o valor exceder o valor do projeto.
      *
      * @returns VOID
      */
-    function mudarCorCronogramaOrcamentario(){
-        if(validarCronogramaOrcamentarioInferiorValorProjeto()){
-            $('input.input_orcamentario').removeClass('validateRedText');
-            $('#td_total_orcamentario').removeClass('validateRedText');
+    function mudarCorCronogramaOrcamentarioCusteio(){
+        if(validarCronogramaOrcamentarioInferiorValorProjetoCusteio()){
+            $('.input_orcamentario.custeio').removeClass('validateRedText');
+            $('#td_total_orcamentario_custeio').removeClass('validateRedText');
         } else {
-            $('input.input_orcamentario').addClass('validateRedText');
-            $('#td_total_orcamentario').addClass('validateRedText');
+            $('.input_orcamentario.custeio').addClass('validateRedText');
+            $('#td_total_orcamentario_custeio').addClass('validateRedText');
+        }
+    }
+    
+    /**
+     * Muda a cor dos valores das colunas de Capital do cronograma orçamentário se o valor exceder o valor do projeto.
+     *
+     * @returns VOID
+     */
+    function mudarCorCronogramaOrcamentarioCapital(){
+        if(validarCronogramaOrcamentarioInferiorValorProjetoCapital()){
+            $('.input_orcamentario.capital').removeClass('validateRedText');
+            $('#td_total_orcamentario_capital').removeClass('validateRedText');
+        } else {
+            $('.input_orcamentario.capital').addClass('validateRedText');
+            $('#td_total_orcamentario_capital').addClass('validateRedText');
         }
     }
 
@@ -1627,41 +1679,28 @@ DML;
      *
      * @returns VOID
      */
-    function mudarCorCronogramaFinanceiro(){
-        if(validarCronogramaFinanceiroInferiorValorProjeto()){
-            $('input.input_financeiro').removeClass('validateRedText');
-            $('#td_total_financeiro').removeClass('validateRedText');
+    function mudarCorCronogramaFinanceiroCusteio(){
+        if(validarCronogramaFinanceiroInferiorValorProjetoCusteio()){
+            $('.input_financeiro.custeio').removeClass('validateRedText');
+            $('#td_total_financeiro_custeio').removeClass('validateRedText');
         } else {
-            $('input.input_financeiro').addClass('validateRedText');
-            $('#td_total_financeiro').addClass('validateRedText');
+            $('.input_financeiro.custeio').addClass('validateRedText');
+            $('#td_total_financeiro_custeio').addClass('validateRedText');
         }
     }
-
+    
     /**
-     * Muda a cor dos valores do cronograma de custeio se o valor exceder o valor do projeto para custeio.
+     * Muda a cor dos valores do cronograma financeiro se o valor exceder o valor do projeto.
      *
      * @returns VOID
      */
-    function mudarCorCronogramaCusteio(){
-        if(recuperarDiferencaCusteio() >= 0){
-            $('input.input_CUS').removeClass('validateRedText');
+    function mudarCorCronogramaFinanceiroCapital(){
+        if(validarCronogramaFinanceiroInferiorValorProjetoCapital()){
+            $('.input_financeiro.capital').removeClass('validateRedText');
+            $('#td_total_financeiro_capital').removeClass('validateRedText');
         } else {
-            $('input.input_CUS').addClass('validateRedText');
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do CRONOGRAMA PARA CUSTEIO superior ao valor informado no Valor para CUSTEIO do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CUSTEIO do Projeto.</span></p>');
-        }
-    }
-
-    /**
-     * Muda a cor dos valores do cronograma de capital se o valor exceder o valor do projeto para capital.
-     *
-     * @returns VOID
-     */
-    function mudarCorCronogramaCapital(){
-        if(recuperarDiferencaCapital() >= 0){
-            $('input.input_CAP').removeClass('validateRedText');
-        } else {
-            $('input.input_CAP').addClass('validateRedText');
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do CRONOGRAMA PARA CAPITAL superior ao valor informado no Valor para CAPITAL do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CAPITAL do Projeto.</span></p>');
+            $('.input_financeiro.capital').addClass('validateRedText');
+            $('#td_total_financeiro_capital').addClass('validateRedText');
         }
     }
 
@@ -1698,14 +1737,31 @@ DML;
     }
 
     /**
-     * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
+     * Verifica se a coluna de custeio do cronograma está preenchido com valores inferiores ao valor do projeto.
      *
      * @returns Boolean
      */
-    function validarCronogramaOrcamentarioInferiorValorProjeto(){
+    function validarCronogramaOrcamentarioInferiorValorProjetoCusteio(){
         var valido = false;
-        var valorDoProjeto = buscarValorDoProjeto();
-        var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
+        var valorDoProjeto = textToFloat($('#picvalorcusteio').val());
+        var valorTotalOrcamentario = buscarTotalCusteioCronogramaOrcamentario();
+
+        if(valorTotalOrcamentario <= valorDoProjeto){
+            valido = true;
+        }
+
+        return valido;
+    }
+    
+    /**
+     * Verifica se a coluna de capital do cronograma está preenchido com valores inferiores ao valor do projeto.
+     *
+     * @returns Boolean
+     */
+    function validarCronogramaOrcamentarioInferiorValorProjetoCapital(){
+        var valido = false;
+        var valorDoProjeto = textToFloat($('#picvalorcapital').val());
+        var valorTotalOrcamentario = buscarTotalCapitalCronogramaOrcamentario();
 
         if(valorTotalOrcamentario <= valorDoProjeto){
             valido = true;
@@ -1715,14 +1771,31 @@ DML;
     }
 
     /**
-     * Verifica se o cronograma está preenchido com valores inferiores ao valor do projeto.
+     * Verifica se a coluna de custeio do cronograma está preenchido com valores inferiores ao valor do projeto.
      *
      * @returns Boolean
      */
-    function validarCronogramaFinanceiroInferiorValorProjeto(){
+    function validarCronogramaFinanceiroInferiorValorProjetoCusteio(){
         var valido = false;
-        var valorDoProjeto = buscarValorDoProjeto();
-        var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
+        var valorDoProjeto = textToFloat($('#picvalorcusteio').val());
+        var valorTotalFinanceiro = buscarTotalCusteioCronogramaFinanceiro();
+
+        if(valorTotalFinanceiro <= valorDoProjeto){
+            valido = true;
+        }
+
+        return valido;
+    }
+    
+    /**
+     * Verifica se a coluna de capital do cronograma está preenchido com valores inferiores ao valor do projeto.
+     *
+     * @returns Boolean
+     */
+    function validarCronogramaFinanceiroInferiorValorProjetoCapital(){
+        var valido = false;
+        var valorDoProjeto = textToFloat($('#picvalorcapital').val());
+        var valorTotalFinanceiro = buscarTotalCapitalCronogramaFinanceiro();
 
         if(valorTotalFinanceiro <= valorDoProjeto){
             valido = true;
@@ -1738,7 +1811,10 @@ DML;
      */
     function validarCronogramaOrcamentarioPreenchido(){
         var valido = false;
-        var valorTotalOrcamentario = buscarTotalCronogramaOrcamentario();
+        var custeio = buscarTotalCusteioCronogramaOrcamentario();
+        var capital = buscarTotalCapitalCronogramaOrcamentario();
+        
+        valorTotalOrcamentario = custeio + capital;
 
         if(valorTotalOrcamentario > 0){
             valido = true;
@@ -1754,7 +1830,10 @@ DML;
      */
     function validarCronogramaFinanceiroPreenchido(){
         var valido = false;
-        var valorTotalFinanceiro = buscarTotalCronogramaFinanceiro();
+        var custeio = buscarTotalCusteioCronogramaFinanceiro();
+        var capital = buscarTotalCapitalCronogramaFinanceiro();
+        
+        valorTotalFinanceiro = custeio + capital;
 
         if(valorTotalFinanceiro > 0){
             valido = true;
@@ -1771,38 +1850,68 @@ DML;
     function buscarTotalCronogramaFisico(){
         var totalFisico = 0;
         $('input.input_fisico').each(function(data, key){
-            fisico = textToFloat($(this).val());
-            totalFisico += fisico;
+            var valorMesFisico = textToFloat($(this).val());
+            totalFisico += valorMesFisico;
         });
 
         return totalFisico;
     }
 
     /**
-     * Busca o total informado de todos os meses no cronograma orcamentario.
+     * Busca o total de custeio informado de todos os meses no cronograma orcamentario.
      *
      * @returns float
      */
-    function buscarTotalCronogramaOrcamentario(){
+    function buscarTotalCusteioCronogramaOrcamentario(){
         var totalOrcamentario = 0;
-        $('input.input_orcamentario').each(function(data, key){
-            fisico = textToFloat($(this).val());
-            totalOrcamentario += fisico;
+        $('input.input_orcamentario.custeio').each(function(data, key){
+            var valorMesOrcamento = textToFloat($(this).val());
+            totalOrcamentario += valorMesOrcamento;
+        });
+
+        return totalOrcamentario;
+    }
+    
+    /**
+     * Busca o total de capital informado de todos os meses no cronograma orcamentario.
+     *
+     * @returns float
+     */
+    function buscarTotalCapitalCronogramaOrcamentario(){
+        var totalOrcamentario = 0;
+        $('input.input_orcamentario.capital').each(function(data, key){
+            var valorMesOrcamento = textToFloat($(this).val());
+            totalOrcamentario += valorMesOrcamento;
         });
 
         return totalOrcamentario;
     }
 
     /**
-     * Busca o total informado de todos os meses no cronograma financeiro.
+     * Busca o total de custeio informado de todos os meses no cronograma financeiro.
      *
      * @returns float
      */
-    function buscarTotalCronogramaFinanceiro(){
+    function buscarTotalCusteioCronogramaFinanceiro(){
         var totalFinanceiro = 0;
-        $('input.input_financeiro').each(function(data, key){
-            fisico = textToFloat($(this).val());
-            totalFinanceiro += fisico;
+        $('input.input_financeiro.custeio').each(function(data, key){
+            var valorMesFinanceiro = textToFloat($(this).val());
+            totalFinanceiro += valorMesFinanceiro;
+        });
+
+        return totalFinanceiro;
+    }
+    
+    /**
+     * Busca o total de capital informado de todos os meses no cronograma financeiro.
+     *
+     * @returns float
+     */
+    function buscarTotalCapitalCronogramaFinanceiro(){
+        var totalFinanceiro = 0;
+        $('input.input_financeiro.capital').each(function(data, key){
+            var valorMesFinanceiro = textToFloat($(this).val());
+            totalFinanceiro += valorMesFinanceiro;
         });
 
         return totalFinanceiro;
@@ -1907,56 +2016,6 @@ DML;
     }
 
     /**
-     * Atualiza o valor de custeio a detalhar do projeto
-     *
-     * @returns VOID
-     */
-    function atualizarValorDetalheCusteio() {
-        var somaCusteio = somarCampos('input_CUS');
-        var diferenca = recuperarDiferencaCusteio();
-
-        $('#projeto_custeio_detalhado').html(number_format(somaCusteio, 2, ',', '.'));
-        $('#projeto_custeio_detalhar').html(number_format(diferenca, 2, ',', '.'));
-    }
-
-    /**
-     * Recupera a diferença dos valores de custeio do projeto com os valores de custei odo cronograma
-     *
-     * @returns VOID
-     */
-    function recuperarDiferencaCusteio() {
-        var valorCusteio = textToFloat($('#picvalorcusteio').val());
-        var somaCusteio = somarCampos('input_CUS');
-
-        return parseFloat(valorCusteio) - parseFloat(somaCusteio);
-    }
-
-    /**
-     * Atualiza o valor de capital a detalhar do projeto
-     *
-     * @returns VOID
-     */
-    function atualizarValorDetalheCapital() {
-        var somaCapital = somarCampos('input_CAP');
-        var diferenca = recuperarDiferencaCapital();
-
-        $('#projeto_capital_detalhado').html(number_format(somaCapital, 2, ',', '.'));
-        $('#projeto_capital_detalhar').html(number_format(diferenca, 2, ',', '.'));
-    }
-
-    /**
-     * Recupera a diferença dos valores de capital do projeto com os valores de custei odo cronograma
-     *
-     * @returns VOID
-     */
-    function recuperarDiferencaCapital() {
-        var valorCapital = textToFloat($('#picvalorcapital').val());
-        var somaCapital = somarCampos('input_CAP');
-
-        return parseFloat(valorCapital) - parseFloat(somaCapital);
-    }
-
-    /**
      * Exibe o valor total do cronograma Físico na tela.
      *
      * @returns VOID
@@ -1972,7 +2031,9 @@ DML;
      * @returns VOID
      */
     function atualizarTotalOrcamentario() {
-        var total = buscarTotalCronogramaOrcamentario();
+        var custeio = buscarTotalCusteioCronogramaOrcamentario();
+        var capital = buscarTotalCapitalCronogramaOrcamentario();
+        var total = custeio + capital;
         $('#td_total_orcamentario').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
 
@@ -1982,7 +2043,9 @@ DML;
      * @returns VOID
      */
     function atualizarTotalFinanceiro() {
-        var total = buscarTotalCronogramaFinanceiro();
+        var custeio = buscarTotalCusteioCronogramaFinanceiro();
+        var capital = buscarTotalCapitalCronogramaFinanceiro();
+        var total = custeio + capital;
         $('#td_total_financeiro').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
     }
 
@@ -2050,10 +2113,6 @@ DML;
         var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
         var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
 
-        // Valores informados pelo usuário em tempo real para esse PI/Projeto
-//        var valorCusteio = textToFloat($('#picvalorcusteio').val());
-//        var valorCapital = textToFloat($('#picvalorcapital').val());
-
         var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
         var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
 
@@ -2072,10 +2131,6 @@ DML;
         // Saldo Disponível
         var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
         var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
-
-        // Valores informados pelo usuário em tempo real para esse PI/Projeto
-//        var valorCusteio = textToFloat($('#picvalorcusteio').val());
-//        var valorCapital = textToFloat($('#picvalorcapital').val());
         
         var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
         var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;

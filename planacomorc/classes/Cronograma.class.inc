@@ -19,7 +19,11 @@ class Cronograma extends Modelo{
     const K_FISICO          = 1;
     const K_ORCAMENTARIO    = 2;
     const K_FINANCEIRO      = 3;
-
+    
+    const ORCAMENTO_CUSTEIO = 2;
+    const ORCAMENTO_CAPITAL = 3;
+    const FINANCEIRO_CUSTEIO = 4;
+    const FINANCEIRO_CAPITAL = 5;
 
     /**
      * Nome da tabela especificada
