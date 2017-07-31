@@ -1487,18 +1487,22 @@ DML;
         
         $('.input_orcamentario.custeio').keyup(function(){
             mudarCorCronogramaOrcamentarioCusteio();
+            avisarCronogramaOrcamentarioSuperiorCusteio();
         });
         
         $('.input_orcamentario.capital').keyup(function(){
             mudarCorCronogramaOrcamentarioCapital();
+            avisarCronogramaOrcamentarioSuperiorCapital();
         });
         
         $('.input_financeiro.custeio').keyup(function(){
             mudarCorCronogramaFinanceiroCusteio();
+            avisarCronogramaFinanceiroSuperiorCusteio();
         });
         
         $('.input_financeiro.capital').keyup(function(){
             mudarCorCronogramaFinanceiroCapital();
+            avisarCronogramaFinanceiroSuperiorCapital();
         });
 
         $('.input_financeiro').keyup(function(){
@@ -1523,8 +1527,6 @@ DML;
 
         controlarTipoLocalizacao($('#esfid').val());
 
-        mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
-
         if('<?php echo (!empty($estadoAtual['esdid']) && $estadoAtual['esdid'] != ESD_PI_CADASTRAMENTO) ?>'){
             $('input, textarea, select').prop('disabled', true);
             setTimeout($('select').prop('disabled', true).trigger("chosen:updated"), 3000);
@@ -1533,25 +1535,10 @@ DML;
         atualizarTotalFisico();
         atualizarTotalOrcamentario();
         atualizarTotalFinanceiro();
+        
+        mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
 
     });
-
-    /**
-     * Muda a cor dos valores do cronograma de custeio se o valor exceder o valor do projeto para custeio.
-     *
-     * @returns VOID
-     */
-    function mudarCorCronogramaOrcamentarioCusteio(){
-        var valorCusteio = textToFloat($('#vlrPiCusteio').val());
-        var valorTotalCusteioCronograma = buscarTotalCusteioCronogramaOrcamentario();
-        
-        if(valorTotalCusteioCronograma > valorCusteio){
-            $('.input_orcamentario.custeio').addClass('validateRedText');
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não é possível salvar o formulário com a soma de todos os valores preenchidos no CRONOGRAMA PARA CUSTEIO superior ao valor informado no Valor para CUSTEIO do Projeto. <br /><br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os referentes valores ou aumente o Valor de CUSTEIO do Projeto.</span></p>');
-        } else {
-            $('.input_orcamentario.custeio').removeClass('validateRedText');
-        }
-    }
 
    /**
     * Valida informações de valores do Projeto(Capital e Custeio), Fisicos,
@@ -1560,7 +1547,6 @@ DML;
     * @returns VOID
     */
     function mudarCorValoresProjetosFisicoOrcamentarioFinanceiro(){
-        mudarCorValorProjeto();
         mudarCorCronogramaFisico();
         mudarCorCronogramaOrcamentarioCusteio();
         mudarCorCronogramaOrcamentarioCapital();
@@ -1612,21 +1598,111 @@ DML;
      *
      * @returns VOID
      */
-    function avisarCronogramaOrcamentarioCusteio(){
-        if(!validarCronogramaOrcamentarioInferiorValorProjeto()){
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma orçamentário superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma orçamentário ou aumente o Valor do Projeto.</span></p>');
+    function avisarCronogramaOrcamentarioSuperiorCusteio(){
+        if(!validarCronogramaOrcamentarioSuperiorValorProjetoCusteio()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores de CUSTEIO preenchidos nos meses do cronograma orçamentário superior ao valor informado no campo de CUSTEIO do Valor do Projeto.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nos campos de CUSTEIO do cronograma orçamentário ou aumente o valor de CUSTEIO do Valor do Projeto.</span></p>');
         }
     }
-
+    
+   /**
+    * Valida se o valor preenchido no cronograma orçamentário é inferior ou igual ao valor declarado em custeio para o valor do projeto.
+    * 
+    * @return boolean
+    */
+    function validarCronogramaOrcamentarioSuperiorValorProjetoCusteio(){
+        var resultado = false;
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var valorTotalCusteioCronograma = buscarTotalCusteioCronogramaOrcamentario();
+        
+        if(valorTotalCusteioCronograma <= valorCusteio){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
     /**
      * Exibe orientações ao usuário para preencher corretamente o Cronograma.
      *
      * @returns VOID
      */
-    function avisarCronogramaFinanceiro(){
-        if(!validarCronogramaFinanceiroInferiorValorProjeto()){
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma financeiro superior ao valor informado no Valor do Projeto. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nas colunas do cronograma financeiro ou aumente o Valor do Projeto.</span></p>');
+    function avisarCronogramaOrcamentarioSuperiorCapital(){
+        if(!validarCronogramaOrcamentarioSuperiorValorProjetoCapital()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores de CAPITAL preenchidos nos meses do cronograma orçamentário superior ao valor informado no campo de CAPITAL do Valor do Projeto.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nos campos de CAPITAL do cronograma orçamentário ou aumente o valor de CAPITAL do Valor do Projeto.</span></p>');
         }
+    }
+    
+   /**
+    * Valida se o valor preenchido no cronograma orçamentário é inferior ou igual ao valor declarado em custeio para o valor do projeto.
+    * 
+    * @return boolean
+    */
+    function validarCronogramaOrcamentarioSuperiorValorProjetoCapital(){
+        var resultado = false;
+        var valorCapital = textToFloat($('#picvalorcapital').val());
+        var valorTotalCapitalCronograma = buscarTotalCapitalCronogramaOrcamentario();
+        
+        if(valorTotalCapitalCronograma <= valorCapital){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Exibe orientações ao usuário para preencher corretamente o Cronograma.
+     *
+     * @returns VOID
+     */
+    function avisarCronogramaFinanceiroSuperiorCapital(){
+        if(!validarCronogramaFinanceiroSuperiorValorProjetoCapital()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores de CAPITAL preenchidos nos meses do cronograma financeiro superior ao valor informado no campo de CAPITAL do Valor do Projeto.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nos campos de CAPITAL do cronograma financeiro ou aumente o valor de CAPITAL do Valor do Projeto.</span></p>');
+        }
+    }
+    
+   /**
+    * Valida se o valor preenchido no cronograma orçamentário é inferior ou igual ao valor declarado em custeio para o valor do projeto.
+    * 
+    * @return boolean
+    */
+    function validarCronogramaFinanceiroSuperiorValorProjetoCapital(){
+        var resultado = false;
+        var valorCapital = textToFloat($('#picvalorcapital').val());
+        var valorTotalCapitalCronograma = buscarTotalCapitalCronogramaFinanceiro();
+        
+        if(valorTotalCapitalCronograma <= valorCapital){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Exibe orientações ao usuário para preencher corretamente o Cronograma.
+     *
+     * @returns VOID
+     */
+    function avisarCronogramaFinanceiroSuperiorCusteio(){
+        if(!validarCronogramaFinanceiroSuperiorValorProjetoCusteio()){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores de CUSTEIO preenchidos nos meses do cronograma financeiro superior ao valor informado no campo de CUSTEIO do Valor do Projeto.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados nos campos de CUSTEIO do cronograma financeiro ou aumente o valor de CUSTEIO do Valor do Projeto.</span></p>');
+        }
+    }
+    
+   /**
+    * Valida se o valor preenchido no cronograma orçamentário é inferior ou igual ao valor declarado em custeio para o valor do projeto.
+    * 
+    * @return boolean
+    */
+    function validarCronogramaFinanceiroSuperiorValorProjetoCusteio(){
+        var resultado = false;
+        var valorCusteio = textToFloat($('#picvalorcusteio').val());
+        var valorTotalCusteioCronograma = buscarTotalCusteioCronogramaFinanceiro();
+        
+        if(valorTotalCusteioCronograma <= valorCusteio){
+            resultado = true;
+        }
+        
+        return resultado;
     }
 
     /**
@@ -2389,6 +2465,8 @@ DML;
                 var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
                 $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
                 $('#VlrSUDisponivel').val(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
+                
+                mudarCorValorProjeto();
             }
         });
     }
