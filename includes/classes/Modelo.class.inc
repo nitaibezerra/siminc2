@@ -569,4 +569,28 @@ class Modelo extends cls_banco{
 
         return $sql;
     }
+
+    public function realizarCarga($dados = array(), $utf8_decode = false)
+    {
+        $this->popularDadosObjeto((array)$dados, $utf8_decode);
+
+        $arCampos  = array();
+        $arValores = array();
+        $arSimbolos = array();
+
+        foreach( $this->arAtributos as $campo => $valor ){
+
+            if( $valor !== null ){
+                $arCampos[]  = $campo;
+                $arValores[] = trim( pg_escape_string( $valor ) );
+            }
+        }
+
+        if( count( $arValores ) ){
+            $sql = " insert into $this->stNomeTabela ( ". implode( ', ', $arCampos   ) ." )
+											  values ( '". implode( "', '", $arValores ) ."' ) ";
+            return $this->executar($sql);
+        }
+        return false;
+    } // Fim _inserir()
 }

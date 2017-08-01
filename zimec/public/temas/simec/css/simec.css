@@ -452,7 +452,8 @@ label.btn.btn-primary.active {
     border-color: #1ab394 !important;
 }
 
-.navbar-listagem {
+.busca-listagem {
+    clear: both;
 	position: relative;
 }
 section .form-group .btn-group {

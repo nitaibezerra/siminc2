@@ -98,7 +98,7 @@ class Simec_Listagem_Renderer_Html_Toolbar
         $html = $this->renderModalQuery();
 
         $html .= <<<HTML
-<nav class="navbar navbar-default navbar-listagem" role="navigation">
+<nav class="busca-listagem" role="navigation">
 HTML;
         $itens = $this->itens;
 
