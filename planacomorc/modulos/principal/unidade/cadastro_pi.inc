@@ -1195,8 +1195,10 @@ DML;
                                     <tr style="height: 30px; ">
                                         <td style="text-align: left;">Total:</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
-                                        <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_orcamentario">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" colspan="2" id="td_total_financeiro">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital">R$ 0,00</td>
                                     </tr>
                                 </table>
                             </div>
@@ -2109,8 +2111,8 @@ DML;
     function atualizarTotalOrcamentario() {
         var custeio = buscarTotalCusteioCronogramaOrcamentario();
         var capital = buscarTotalCapitalCronogramaOrcamentario();
-        var total = custeio + capital;
-        $('#td_total_orcamentario').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+        $('#td_total_orcamentario_custeio').html('R$ '+ mascaraglobal('###.###.###.###,##', custeio.toFixed(2)));
+        $('#td_total_orcamentario_capital').html('R$ '+ mascaraglobal('###.###.###.###,##', capital.toFixed(2)));
     }
 
     /**
@@ -2121,8 +2123,8 @@ DML;
     function atualizarTotalFinanceiro() {
         var custeio = buscarTotalCusteioCronogramaFinanceiro();
         var capital = buscarTotalCapitalCronogramaFinanceiro();
-        var total = custeio + capital;
-        $('#td_total_financeiro').html('R$ '+ mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+        $('#td_total_financeiro_custeio').html('R$ '+ mascaraglobal('###.###.###.###,##', custeio.toFixed(2)));
+        $('#td_total_financeiro_capital').html('R$ '+ mascaraglobal('###.###.###.###,##', capital.toFixed(2)));
     }
 
     /**
@@ -2927,11 +2929,13 @@ DML;
         // Verifica se o cronograma orçamentário foi preenchido.
         if(!validarCronogramaOrcamentarioPreenchido()){
             $('input.input_orcamentario').addClass('validateRedText');
-            $('#td_total_orcamentario').addClass('validateRedText');
+            $('#td_total_orcamentario_custeio').addClass('validateRedText');
+            $('#td_total_orcamentario_capital').addClass('validateRedText');
             addMsgCustom.push('Cronograma Orçamentário');
         } else {
             $('input.input_orcamentario').removeClass('validateRedText');
-            $('#td_total_orcamentario').removeClass('validateRedText');
+            $('#td_total_orcamentario_custeio').removeClass('validateRedText');
+            $('#td_total_orcamentario_capital').removeClass('validateRedText');
         }
 
         // Verifica se o cronograma financeiro foi preenchido.
