@@ -1591,7 +1591,7 @@ DML;
      */
     function avisarCronogramaFisico(){
         if(!validarCronogramaFisicoInferiorQuantidade()){
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma físico superior ao valor informado na Quantidade do Produto do PI. <br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível salvar o formulário com a soma de todos os valores preenchidos nos meses do cronograma físico superior ao valor informado na Quantidade do Produto do PI.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, diminua os valores informados na coluna do cronograma físico ou aumente a Quantidade no Produto do PI.</span></p>');
         }
     }
 
@@ -1799,7 +1799,7 @@ DML;
     }
 
     /**
-     * Verifica se o cronograma está preenchido com valores inferiores a Quantidade do Produto do PI.
+     * Verifica se o cronograma está preenchido com valores superiores a Quantidade do Produto do PI.
      *
      * @returns Boolean
      */
@@ -2948,34 +2948,135 @@ DML;
             $('#td_total_financeiro').removeClass('validateRedText');
         }
 
-        // Verifica se o valor do cronograma Físico é superior ao informado no Produto do PI.
-        if(!validarCronogramaFisicoInferiorQuantidade()){
+        // Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
+        if(!validarCronogramaFisicoIgualQuantidade()){
             $('input.input_fisico').addClass('validateRedText');
             $('#td_total_fisico').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Fisíco com valor superior ao Produto do PI');
+            addMsgCustom.push('Soma dos valores do Cronograma Fisíco está diferente da quantidade informada para o Produto do PI');
         } else {
             $('input.input_fisico').removeClass('validateRedText');
             $('#td_total_fisico').removeClass('validateRedText');
         }
 
         // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
-        if(recuperarDiferencaCusteio()){
-            $('input.input_CUS').addClass('validateRedText');
-            addMsgCustom.push('Cronograma de CUSTEIO com valor superior ao Valor do Projeto referente ao CUSTEIO');
+        if(!validarCronogramaOrcamentarioCusteioIgualValorProjeto()){
+            $('.input_orcamentario.custeio').addClass('validateRedText');
+            addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Orçamentário diferente do valor de CUSTEIO do Valor do Projeto');
         } else {
-            $('input.input_CUS').removeClass('validateRedText');
+            $('.input_orcamentario.custeio').removeClass('validateRedText');
+        }
+        
+        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
+        if(!validarCronogramaOrcamentarioCapitalIgualValorProjeto()){
+            $('.input_orcamentario.capital').addClass('validateRedText');
+            addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Orçamentário diferente do valor de CAPITAL do Valor do Projeto');
+        } else {
+            $('.input_orcamentario.capital').removeClass('validateRedText');
         }
 
-        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
-        if(recuperarDiferencaCapital()){
-            $('input.input_CAP').addClass('validateRedText');
-            addMsgCustom.push('Cronograma de CAPITAL com valor superior ao Valor do Projeto referente ao CAPITAL');
+        // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
+        if(!validarCronogramaFinanceiroCusteioIgualValorProjeto()){
+            $('.input_financeiro.custeio').addClass('validateRedText');
+            addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Financeiro diferente do valor de CUSTEIO do Valor do Projeto');
         } else {
-            $('input.input_CAP').removeClass('validateRedText');
+            $('.input_financeiro.custeio').removeClass('validateRedText');
+        }
+        
+        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
+        if(!validarCronogramaFinanceiroCapitalIgualValorProjeto()){
+            $('.input_financeiro.custeio').addClass('validateRedText');
+            addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Financeiro diferente do valor de CAPITAL do Valor do Projeto');
+        } else {
+            $('.input_financeiro.custeio').removeClass('validateRedText');
         }
 
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
+    }
+
+    /**
+     * Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
+     * 
+     * @returns {Boolean}
+     */
+    function validarCronogramaFisicoIgualQuantidade(){
+        var resultado = false;
+        var qtdCronograma = buscarTotalCronogramaFisico();
+        var qtdProdutoPi = textToFloat($('#picquantidade').val());
+        
+        if(qtdCronograma == qtdProdutoPi){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Verifica se o valor do cronograma Orcamentario é igual ao informado no valor do projeto.
+     * 
+     * @returns {Boolean}
+     */
+    function validarCronogramaOrcamentarioCusteioIgualValorProjeto(){
+        var resultado = false;
+        var vlrCronograma = buscarTotalCusteioCronogramaOrcamentario();
+        var vlorProjeto = textToFloat($('#picvalorcusteio').val());
+        
+        if(vlrCronograma == vlorProjeto){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Verifica se o valor do cronograma Orcamentario é igual ao informado no valor do projeto.
+     * 
+     * @returns {Boolean}
+     */
+    function validarCronogramaOrcamentarioCapitalIgualValorProjeto(){
+        var resultado = false;
+        var vlrCronograma = buscarTotalCapitalCronogramaOrcamentario();
+        var vlorProjeto = textToFloat($('#picvalorcapital').val());
+        
+        if(vlrCronograma == vlorProjeto){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+
+    /**
+     * Verifica se o valor do cronograma Financeiro é igual ao informado no valor do projeto.
+     * 
+     * @returns {Boolean}
+     */
+    function validarCronogramaFinanceiroCusteioIgualValorProjeto(){
+        var resultado = false;
+        var vlrCronograma = buscarTotalCusteioCronogramaFinanceiro();
+        var vlorProjeto = textToFloat($('#picvalorcusteio').val());
+        
+        if(vlrCronograma == vlorProjeto){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+
+    /**
+     * Verifica se o valor do cronograma Financeiro é igual ao informado no valor do projeto.
+     * 
+     * @returns {Boolean}
+     */
+    function validarCronogramaFinanceiroCapitalIgualValorProjeto(){
+        var resultado = false;
+        var vlrCronograma = buscarTotalCapitalCronogramaFinanceiro()
+        var vlorProjeto = textToFloat($('#picvalorcapital').val());
+        
+        if(vlrCronograma == vlorProjeto){
+            resultado = true;
+        }
+        
+        return resultado;
     }
 
     /**
