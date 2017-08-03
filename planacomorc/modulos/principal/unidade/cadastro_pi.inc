@@ -965,7 +965,7 @@ DML;
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Responsáveis pelo Projeto</h5>
+                        <h5 class="legend_responsaveis">Responsáveis pelo Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -2868,12 +2868,12 @@ DML;
         }
 
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
-//        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
-//            $('.legend_responsaveis').addClass('validateRedText');
-//            addMsgCustom.push('Responsáveis pelo Projeto');
-//        } else {
-//            $('.legend_responsaveis').removeClass('validateRedText');
-//        }
+        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+            $('.legend_responsaveis').addClass('validateRedText');
+            addMsgCustom.push('Responsáveis pelo Projeto');
+        } else {
+            $('.legend_responsaveis').removeClass('validateRedText');
+        }
 
         // Valida se o usuário preencheu Valor do Projeto - Custeio.
         if($('#picvalorcusteio').val() == ""){
