@@ -682,20 +682,20 @@ DML;
                             </div>
                             <div class="col-lg-9">
                                 <?php
-                                $sql = <<<DML
-                                                SELECT
-                                                    pumid AS codigo,
-                                                    pumdescricao AS descricao
-                                                FROM monitora.pi_unidade_medida 
-                                                WHERE
-                                                    prsano = '{$_SESSION['exercicio']}'
-                                                    AND pumstatus = 'A'
-                                                ORDER BY
-                                                    descricao
-DML;
+                                    $sql = "
+                                        SELECT
+                                            pumid AS codigo,
+                                            pumdescricao AS descricao
+                                        FROM monitora.pi_unidade_medida
+                                        WHERE
+                                            prsano = '{$_SESSION['exercicio']}'
+                                            AND pumstatus = 'A'
+                                        ORDER BY
+                                            descricao
+                                    ";
 
-                                $pumid = $dadosPI['pumid'];
-                                $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
+                                    $pumid = !empty($dadosPI['pumid'])? $dadosPI['pumid']: '3';
+                                    $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
                                 ?>
                             </div>
                         </div>
