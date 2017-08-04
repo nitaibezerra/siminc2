@@ -294,7 +294,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <label class="control-label" for="plidsc">Descrição / Finalidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
-                                    <textarea class="obrigatorio txareanormal form-control"  rows="10" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
+                                    <textarea class="obrigatorio txareanormal form-control"  rows="10" cols="60" name="plidsc" id="plidsc" maxlength="1000"><?php
                                         if ($dadosPI['plidsc']) {
                                             echo $dadosPI['plidsc'];
                                         }
