@@ -646,3 +646,8 @@ label.btn.btn-campo.active{
     margin-top: 15px;
     margin-bottom: 10px;
 }
+
+.campo-obrigatorio {
+    color: #ff0000 !important;
+}
+

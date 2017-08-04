@@ -277,10 +277,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <h5>Dados do Plano Interno</h5>
                     </div>
                     <div class="ibox-content">
-
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="plititulo">Título:</label>
+                                <label class="control-label" for="plititulo">Título: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <input type="text" value="<?php
@@ -292,7 +291,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="plidsc">Descrição / Finalidade:</label>
+                                <label class="control-label" for="plidsc">Descrição / Finalidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                     <textarea class="obrigatorio txareanormal form-control"  rows="10" cols="60" name="plidsc" id="plidsc" maxlength="900"><?php
@@ -316,7 +315,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="unicod">Unidade Solicitante:</label>
+                                <label class="control-label" for="unicod">Unidade Solicitante: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -368,7 +367,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="ungcod">Sub-Unidade:</label>
+                                <label class="control-label" for="ungcod">Sub-Unidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_ungcod">
                                 <?php
@@ -462,7 +461,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="eqdid">Enquadramento da Despesa:</label>
+                                <label class="control-label" for="eqdid">Enquadramento da Despesa: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 carregaEnq">
                                 <?php
@@ -484,7 +483,7 @@ DML;
                         </div>
                         <div class="form-group grupo_manutencao">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="neeid">Manutenção Item:</label>
+                                <label class="control-label" for="maiid">Manutenção Item: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_maiid">
                                 <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
@@ -492,7 +491,7 @@ DML;
                         </div>
                         <div class="form-group grupo_manutencao">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="neeid">Manutenção SubItem:</label>
+                                <label class="control-label" for="masid">Manutenção SubItem: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_masid">
                                 <?php carregarManutencaoSubItem($dadosPI['maiid'], $dadosPI['masid']); ?>
@@ -510,7 +509,7 @@ DML;
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Detalhamento Orçamentário</h5>
+                        <h5>Detalhamento Orçamentário <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -608,7 +607,7 @@ DML;
                     <div class="ibox-content">
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="oppid" class=" control-label">Objetivo PPA:</label>
+                                <label for="oppid" class=" control-label">Objetivo PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php (new Public_Model_ObjetivoPpa())->monta_combo($dadosPI['oppid']); ?>
@@ -616,7 +615,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="mppid" class=" control-label">Metas PPA: </label>
+                                <label for="mppid" class=" control-label">Metas PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_mppid">
                                 <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
@@ -624,7 +623,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="ippid" class="control-label">Iniciativa PPA: </label>
+                                <label for="ippid" class="control-label">Iniciativa PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_ippid">
                                 <?php carregarIniciativaPPA($dadosPI['oppid'], $dadosPI['ippid']); ?>
@@ -656,7 +655,7 @@ DML;
                     <div class="ibox-content">
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="pprid" class="control-label">Produto:</label>
+                                <label for="pprid" class="control-label">Produto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -679,7 +678,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="pumid" class="control-label">Unidade de Medida:</label>
+                                <label for="pumid" class="control-label">Unidade de Medida: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -702,7 +701,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="picquantidade" class="control-label">Quantidade:</label>
+                                <label for="picquantidade" class="control-label">Quantidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <input type="text" value="<?php echo !empty($dadosPI['picquantidade']) ? $dadosPI['picquantidade'] : ''; ?>" class="CampoEstilo normal inteiro form-control obrigatorio" title="Quantidade" id="picquantidade" name="picquantidade" maxlength="50" />
@@ -718,7 +717,7 @@ DML;
                     <div class="ibox-content">
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="mdeid" class="control-label">Área Cultural:</label>
+                                <label for="mdeid" class="control-label">Área Cultural: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -767,7 +766,7 @@ DML;
 
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="capid">Modalidade de Pactuação:</label>
+                                <label class="control-label" for="capid">Modalidade de Pactuação: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -862,7 +861,7 @@ DML;
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Localização do Projeto</h5>
+                        <h5>Localização do Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
                         <div class="form-group">
@@ -966,7 +965,7 @@ DML;
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Responsáveis pelo Projeto</h5>
+                        <h5 class="legend_responsaveis">Responsáveis pelo Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -1084,7 +1083,7 @@ DML;
                                         <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                     </tr>
                                     <tr>
-                                        <td id="" style="text-align: left;">Valor do Projeto:</td>
+                                        <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                         <td style="text-align: left;">
                                             <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                             <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
@@ -1105,7 +1104,7 @@ DML;
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Cronogramas </h5>
+                        <h5>Cronogramas <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -2869,12 +2868,12 @@ DML;
         }
 
         // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
-//        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
-//            $('.legend_responsaveis').addClass('validateRedText');
-//            addMsgCustom.push('Responsáveis pelo Projeto');
-//        } else {
-//            $('.legend_responsaveis').removeClass('validateRedText');
-//        }
+        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+            $('.legend_responsaveis').addClass('validateRedText');
+            addMsgCustom.push('Responsáveis pelo Projeto');
+        } else {
+            $('.legend_responsaveis').removeClass('validateRedText');
+        }
 
         // Valida se o usuário preencheu Valor do Projeto - Custeio.
         if($('#picvalorcusteio').val() == ""){
