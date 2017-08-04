@@ -504,6 +504,7 @@ DML;
 
             <div class="col-md-1">
                 <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
+                <div id="div_comentario_estado_atual" style="display: none;"><?php echo wf_pegarComentarioEstadoAtual($dadosPI['docid']); ?></div>
             </div>
 
             <div class="col-sm-12">
@@ -1289,6 +1290,20 @@ DML;
     intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
 
     $(document).ready(function() {
+
+        var strComentarioEstadoAtual = $('#div_comentario_estado_atual').html();
+
+        if(strComentarioEstadoAtual != ""){
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: false
+                };
+                toastr.success(strComentarioEstadoAtual, 'Enviado para correção');
+            }, 1300);
+        }
 
         var tipoTransacao = $('tipotransacao').value;
         if ('-' == tipoTransacao) {

@@ -500,6 +500,9 @@ unset($_SESSION['mensagem_carregar']);
 <!-- Typehead -->
 <script src="/zimec/public/temas/simec/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 
+<!-- Toastr -->
+<script src="/zimec/public/temas/simec/js/plugins/toastr/toastr.min.js"></script>
+
 <!-- SIMEC -->
 <script src="/zimec/public/temas/simec/js/theme.js"></script>
 <script src="/zimec/public/temas/simec/js/simec.js"></script>
