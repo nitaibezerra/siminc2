@@ -28,7 +28,7 @@ function validarFormulario(itemsParaValidacao, formID, requisicao, addMsgCustom)
         if ('' == $item.val()) {
             // Criticando o conteúdo do input e selecionando o label para montar msg de erro.
             if($('label[for="'+ $item.attr('id') +'"]').text().replace(':', '') != ""){
-                msg.push($('label[for="'+ $item.attr('id') +'"]').text().replace(':', '').replace('*', ''));
+                msg.push($('label[for="'+ $item.attr('id') +'"]').text().replace(':', '').replace(' *', ''));
                 $('label[for="'+ $item.attr('id') +'"]').addClass('has-error');
                 $item.parent().parent().addClass('has-error');
             }
