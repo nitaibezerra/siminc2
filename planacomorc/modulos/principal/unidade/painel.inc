@@ -19,59 +19,96 @@ include APPRAIZ . "includes/cabecalho.inc";
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
 ?>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Pagamentos por Unidades</h5>
-        </div>
-        <div class="ibox-content">
-            <?php
-            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
-            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-            $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-            ?>
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Painel de Acompanhamento</h2>
     </div>
+</div>
 
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Painel de Acompanhamento</h5>
-        </div>
-        <div class="ibox-content">
-
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>Ações</th>
-                        <th>PI</th>
-                        <th>Sub-Unidade</th>
-                        <th>Funcional</th>
-                        <th>PTRES</th>
-                        <th>Vl. Autorizado</th>
-                        <th>Vl. Pago</th>
-                        <th>Vl. Liquidar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($aPropostas as $dados){ ?>
-                            <tr>
-                                <td>
-                                    <a href="javascript: detalhePI('<?php echo $dados['pliid']; ?>')"><span class="fa fa-plus-circle" title="Criar PI"></span></a>
-                                </td>
-                                <td><?php echo $dados['planointerno']; ?></td>
-                                <td><?php echo $dados['unidadeorcamentaria']; ?></td>
-                                <td><?php echo $dados['acao']; ?></td>
-                                <td><?php echo $dados['numeroptres']; ?></td>
-                                <td class="text-right"><?php echo number_format($dados['autorizado'], 0, ',', '.'); ?></td>
-                                <td class="text-right"><?php echo number_format($dados['pago'], 0, ',', '.'); ?></td>
-                                <td class="text-right"><?php echo number_format($dados['empenhadoaliquidar'], 0, ',', '.'); ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Valores por Unidades</h5>
+                </div>
+                <div class="ibox-content">
+                    <?php
+                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
+                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                    $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                    ?>
+                </div>
             </div>
+        </div>
 
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+            	<div class="ibox-title">
+            		<h5>Valores Autorizados por Unidade</h5>
+            	</div>
+            	<div class="ibox-content">
+                    <?php
+                    $estatistica = $oPlanoInterno->recuperarEstatisticaUnidade(2017);
+                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
+                    ?>
+            	</div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+            	<div class="ibox-title">
+            		<h5>PI's por Unidade</h5>
+            	</div>
+            	<div class="ibox-content">
+                    <?php
+                    $estatistica = $oPlanoInterno->recuperarEstatisticaPiUnidade(2017);
+                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
+                    ?>
+            	</div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Acompanhamento de Plano Interno</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" >
+                            <thead>
+                            <tr>
+                                <th>PI</th>
+                                <th>Sub-Unidade</th>
+                                <th>Funcional</th>
+                                <th>PTRES</th>
+                                <th>Vl. Autorizado</th>
+                                <th>Vl. Pago</th>
+                                <th>Vl. Liquidar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($aPropostas as $dados){ ?>
+                                <tr>
+                                    <td><?php echo $dados['planointerno']; ?></td>
+                                    <td><?php echo $dados['unidadeorcamentaria']; ?></td>
+                                    <td><?php echo $dados['acao']; ?></td>
+                                    <td><?php echo $dados['numeroptres']; ?></td>
+                                    <td class="text-right"><?php echo number_format($dados['autorizado'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format($dados['pago'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format($dados['empenhadoaliquidar'], 0, ',', '.'); ?></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

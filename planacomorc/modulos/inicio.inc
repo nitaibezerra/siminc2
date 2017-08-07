@@ -33,6 +33,95 @@ include APPRAIZ . "includes/cabecalho.inc";
     </p>
 </div>
 <div style="clear:both;"></div>
+
+<!--<div class="row">-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>Plano Interno</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!--                <table class="table table-striped table-hover table-condensed">-->
+<!--                    <tbody>-->
+<!--                    <tr>-->
+<!--                        <td><a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">Lista de PI</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">Cadastrar PI</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><a href="planacomorc.php?modulo=principal/unidade/listar_propostas_pi&acao=A">Criar PI por Proposta</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><a href="planacomorc.php?modulo=principal/unidade/listaptres&acao=A">Lista de PTRES</a></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td><a href="../planacomorc/manual_simec_subacoes_e_pis_unidades.pdf">Manual de Cadastro de PI e Subações (Instituições Federais)</a></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>Ações 2016</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!---->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>PTRES 2016</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!---->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>Tabelas de Apoio</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!---->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>Manuais</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!---->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-3">-->
+<!--        <div class="ibox float-e-margins">-->
+<!--        	<div class="ibox-title">-->
+<!--        		<h5>Comunicados</h5>-->
+<!--        	</div>-->
+<!--        	<div class="ibox-content">-->
+<!---->
+<!---->
+<!--        	</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 <table width="95%" class="tabela" bgcolor="#f5f5f5" border="0" cellSpacing="1" cellPadding="3" align="center">
     <tr align="center">
         <td align="center" >
@@ -53,6 +142,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                     $params['tipo'] = 'cadastrar';
                     $params['url'] = 'planacomorc.php?modulo=principal/unidade/cadastro_subacoes&acao=A';
                     montaBotaoInicio($params);*/
+
+                    $params = array();
+                    $params['texto'] = 'Painel';
+                    $params['tipo'] = 'listar';
+                    $params['url'] = 'planacomorc.php?modulo=principal/unidade/painel&acao=A';
+                    montaBotaoInicio($params);
 
                     $params = array();
                     $params['texto'] = 'Lista de PI';

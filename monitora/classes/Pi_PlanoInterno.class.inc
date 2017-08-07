@@ -227,4 +227,36 @@ class Pi_PlanoInterno extends Modelo{
         $dados = adapterConnection::oldSiminc()->carregar($sql);
         return $dados ? $dados : [];
     }
+
+    public function recuperarEstatisticaUnidade($exercicio, $aFiltro = [])
+    {
+        $sql = "select uno.unosigla descricao, sum(e.autorizado::decimal) valor
+                from wssof.ws_execucaoorcamentariadto e
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                group by uno.unosigla
+                order by descricao";
+
+        // Carregando dados da base de dados do SIMINC antigo
+        $dados = adapterConnection::oldSiminc()->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
+    public function recuperarEstatisticaPiUnidade($exercicio, $aFiltro = [])
+    {
+        $sql = "select uno.unosigla descricao, count(distinct e.planointerno) valor
+                from wssof.ws_execucaoorcamentariadto e
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                group by uno.unosigla
+                order by descricao;";
+
+        // Carregando dados da base de dados do SIMINC antigo
+        $dados = adapterConnection::oldSiminc()->carregar($sql);
+        return $dados ? $dados : [];
+    }
 }
