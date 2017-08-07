@@ -27,7 +27,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
         <div class="ibox-content">
             <?php
             $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
-            $grafico = new Grafico(Grafico::K_TIPO_COLUNA);
+            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
             $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
             ?>
         </div>
