@@ -172,4 +172,59 @@ class Pi_PlanoInterno extends Modelo{
         
         return $dadosPI;
     }
+
+    public function recuperarExecucaoOrcamentaria($exercicio, $aFiltro = [])
+    {
+        $sql = "select e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario, e.planointerno, e.numeroptres, count(*)
+                    , sum(e.autorizado::decimal) autorizado, sum(e.bloqueadoremanejamento::decimal) bloqueadoremanejamento, sum(e.bloqueadosof::decimal) bloqueadosof
+                    , sum(e.creditocontidosof::decimal) creditocontidosof, sum(e.disponivel::decimal) disponivel, sum(e.dotatual::decimal) dotatual
+                    , sum(e.dotinicialsiafi::decimal) dotinicialsiafi, sum(e.dotacaoantecipada::decimal) dotacaoantecipada, sum(e.dotacaoinicial::decimal) dotacaoinicial
+                    , sum(e.empliquidado::decimal) empliquidado, sum(e.empenhadoaliquidar::decimal) empenhadoaliquidar, sum(e.indisponivel::decimal) indisponivel, sum(e.pago::decimal) pago
+                from wssof.ws_execucaoorcamentariadto e
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                -- and e.unidadeorcamentaria = '42206'
+                --and e.planointerno = '7CNM0020001'
+                group by e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario, e.planointerno, e.numeroptres
+                order by e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario";
+
+        // Carregando dados da base de dados do SIMINC antigo
+        $dados = adapterConnection::oldSiminc()->carregar($sql);
+
+        return $dados ? $dados : [];
+    }
+
+    public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
+    {
+        $sql = "select 1 ordem, 'Autorizado' as descricao, uno.unosigla categoria, sum(e.autorizado::decimal) valor
+                from wssof.ws_execucaoorcamentariadto e
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                group by uno.unosigla
+                union all
+                select 2, 'Pago', uno.unosigla, sum(e.pago::decimal) pago
+                from wssof.ws_execucaoorcamentariadto e
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                group by uno.unosigla
+                union all
+                select 3, 'A Liquidar', uno.unosigla, sum(e.empenhadoaliquidar::decimal)
+                from wssof.ws_execucaoorcamentariadto e
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                where e.planointerno is not null
+                and e.anoexercicio = '$exercicio'
+                and e.anoreferencia = '$exercicio'
+                group by uno.unosigla                
+                order by ordem, descricao, categoria
+                ";
+
+        // Carregando dados da base de dados do SIMINC antigo
+        $dados = adapterConnection::oldSiminc()->carregar($sql);
+        return $dados ? $dados : [];
+    }
 }
