@@ -374,13 +374,14 @@ class Modelo extends cls_banco{
 		}
 	}
 
-	public function popularDadosObjeto( $arDados = null ){
+	public function popularDadosObjeto( $arDados = null, $utf8_decode = false ){
 
-		$arDados = $arDados ? $arDados : $_REQUEST;
+        $arDados = $arDados ? array_change_key_case($arDados, CASE_LOWER) : $_REQUEST;
 		foreach( $this->arAtributos as $campo => $valor){
 
 			if( key_exists( $campo, $arDados ) ){
 				$this->$campo = $arDados[$campo];
+                $this->$campo = ($utf8_decode && is_string($arDados[$campo])) ? utf8_decode($arDados[$campo]) : $arDados[$campo];
 			}
 		}
 

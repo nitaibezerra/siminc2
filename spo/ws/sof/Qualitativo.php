@@ -189,12 +189,13 @@ class Spo_Ws_Sof_Qualitativo extends Spo_Ws_Sof
 	 * @return obterIniciativasPorObjetivoResponse
 	 * @throws Exception invalid function signature message
 	 */
-	public function obterIniciativasPorObjetivo($mixed = null) {
+	public function obterIniciativasPorObjetivo($obterIniciativasPorObjetivo) {
 		$validParameters = array(
-			"(obterIniciativasPorObjetivo)",
+			"(ObterIniciativasPorObjetivo)",
 		);
 		$args = func_get_args();
 		$this->_checkArguments($args, $validParameters);
+        $obterIniciativasPorObjetivo->credencial = $this->credenciais;
 		return $this->getSoapClient()->call("obterIniciativasPorObjetivo", $args);
 	}
 
@@ -243,12 +244,14 @@ class Spo_Ws_Sof_Qualitativo extends Spo_Ws_Sof
 	 * @return obterMetasPorObjetivoResponse
 	 * @throws Exception invalid function signature message
 	 */
-	public function obterMetasPorObjetivo($mixed = null) {
+	public function obterMetasPorObjetivo($obterMetasPorObjetivo = null) {
 		$validParameters = array(
-			"(obterMetasPorObjetivo)",
+			"(ObterMetasPorObjetivo)",
 		);
 		$args = func_get_args();
 		$this->_checkArguments($args, $validParameters);
+        $obterMetasPorObjetivo->credencial = $this->credenciais;
+
 		return $this->getSoapClient()->call("obterMetasPorObjetivo", $args);
 	}
 
@@ -282,12 +285,13 @@ class Spo_Ws_Sof_Qualitativo extends Spo_Ws_Sof
 	 * @return obterObjetivosPorProgramaResponse
 	 * @throws Exception invalid function signature message
 	 */
-	public function obterObjetivosPorPrograma($mixed = null) {
+	public function obterObjetivosPorPrograma(ObterObjetivosPorPrograma $obterObjetivosPorPrograma) {
 		$validParameters = array(
-			"(obterObjetivosPorPrograma)",
+			"(ObterObjetivosPorPrograma)",
 		);
 		$args = func_get_args();
 		$this->_checkArguments($args, $validParameters);
+        $obterObjetivosPorPrograma->credencial = $this->credenciais;
 		return $this->getSoapClient()->call("obterObjetivosPorPrograma", $args);
 	}
 
@@ -375,12 +379,14 @@ class Spo_Ws_Sof_Qualitativo extends Spo_Ws_Sof
 	 * @return obterProgramasPorOrgaoResponse
 	 * @throws Exception invalid function signature message
 	 */
-	public function obterProgramasPorOrgao($mixed = null) {
+	public function obterProgramasPorOrgao(ObterProgramasPorOrgao $obterProgramasPorOrgao = null) {
 		$validParameters = array(
-			"(obterProgramasPorOrgao)",
+			"(ObterProgramasPorOrgao)",
 		);
 		$args = func_get_args();
 		$this->_checkArguments($args, $validParameters);
+
+        $obterProgramasPorOrgao->credencial = $this->credenciais;
 		return $this->getSoapClient()->call("obterProgramasPorOrgao", $args);
 	}
 
