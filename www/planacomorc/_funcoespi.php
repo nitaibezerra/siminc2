@@ -1960,6 +1960,9 @@ function posAcaoAprovarPi($pliid)
         $db->executar($sql);
         $db->commit();
     }
+    
+    enviarEmailAprovado($pliid);
+
     return true;
 }
 

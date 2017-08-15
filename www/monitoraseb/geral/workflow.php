@@ -642,15 +642,22 @@ function wf_pegarUltimoUsuarioModificacao( $docid )
 	if ( !array_key_exists( $docid, $usuario ) )
 	{
 		$sql = "
-			select
-				u.usucpf,
-				u.usunome
-			from workflow.historicodocumento hd
-				inner join seguranca.usuario u on u.usucpf = hd.usucpf
-			where
-				docid = " . $docid . "
-			order by hd.htddata desc
-			limit 1
+                    SELECT
+                        u.usucpf,
+                        u.usunome,
+                        u.usuemail,
+                        CASE WHEN LENGTH(u.usufoneddd) > 0 THEN
+                            '(' || u.usufoneddd || ')' || u.usufonenum
+                        ELSE
+                            NULL
+                        END AS telefone
+                    FROM workflow.historicodocumento hd
+                        JOIN seguranca.usuario u on u.usucpf = hd.usucpf
+                    WHERE
+                        docid = " . $docid . "
+                    ORDER BY
+                        hd.htddata DESC
+                    LIMIT 1
 		";
 		$usuarioTemp = $db->recuperar( $sql );
 		$usuario[$docid] = $usuarioTemp ? $usuarioTemp : array();
