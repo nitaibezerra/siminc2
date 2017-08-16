@@ -253,6 +253,202 @@ function carregarTabelasApoio($params, $map, $fm) {
 }
 
 /**
+ * Obter programas por órgão
+ */
+function obterProgramasPorOrgao($exercicio, $orgao, $momento) {
+    global $db;
+
+    header("Keep-Alive: timeout=9999, max=9999");
+    set_time_limit(0);
+
+    try {
+        $ws = new Spo_Ws_Sof_Qualitativo($params['log'] ? 'spo' : null);
+
+        $obterProgramasPorOrgao = new ObterProgramasPorOrgao();
+        $obterProgramasPorOrgao->exercicio = $exercicio;
+        $obterProgramasPorOrgao->codigoOrgao = $orgao;
+        $obterProgramasPorOrgao->codigoMomento = $momento;
+
+        $return = $ws->obterProgramasPorOrgao($obterProgramasPorOrgao)->return;
+
+        if ($return->mensagensErro){
+            throw new Exception($return->mensagensErro);
+        }
+
+        $resultados = $return->registros;
+
+        if ($resultados) {
+            include_once  APPRAIZ . 'wssof/classes/Ws_ProgramasDto.inc';
+            foreach ($resultados as $resultado) {
+                $model = new Wssof_Ws_ProgramasDto();
+                $model->realizarCarga($resultado);
+                $model->commit();
+                unset($model);
+            }
+        }
+
+        return true;
+    } catch (Exception $e) {
+        $db->rollback();
+        return false;
+    }
+}
+
+/**
+ * Obter Objetivos por Programa
+ */
+function obterObjetivosPorPrograma($exercicio, $momento) {
+    global $db;
+
+    header("Keep-Alive: timeout=9999, max=9999");
+    set_time_limit(0);
+
+    include_once  APPRAIZ . 'wssof/classes/Ws_ProgramasDto.inc';
+    $modelProgramasDto = new Wssof_Ws_ProgramasDto();
+
+    $programas = $modelProgramasDto->recuperarTodos('codigoprograma', ["exercicio = '$exercicio'", "codigomomento = '$momento'"]);
+
+    try {
+        $ws = new Spo_Ws_Sof_Qualitativo($params['log'] ? 'spo' : null);
+
+        if(count($programas)){
+            $obterObjetivosPorPrograma = new ObterObjetivosPorPrograma();
+            $obterObjetivosPorPrograma->exercicio = $exercicio;
+            $obterObjetivosPorPrograma->codigoMomento = $momento;
+            foreach($programas as $programa){
+                $obterObjetivosPorPrograma->codigoPrograma = $programa['codigoprograma'];
+
+                $return = $ws->obterObjetivosPorPrograma($obterObjetivosPorPrograma)->return;
+
+                if ($return->mensagensErro){
+                    throw new Exception($return->mensagensErro);
+                }
+
+                $resultados = $return->registros;
+
+                if ($resultados) {
+                    include_once  APPRAIZ . 'wssof/classes/Ws_ObjetivosDto.inc';
+                    foreach ($resultados as $resultado) {
+                        $model = new Wssof_Ws_ObjetivosDto();
+                        $model->realizarCarga($resultado);
+                        $model->commit();
+                        unset($model);
+                    }
+                }
+            }
+        }
+        return true;
+    } catch (Exception $e) {
+        $db->rollback();
+        return false;
+    }
+}
+
+/**
+ * Obter Objetivos por Programa
+ */
+function obterIniciativasPorObjetivo($exercicio, $momento) {
+    global $db;
+
+    header("Keep-Alive: timeout=9999, max=9999");
+    set_time_limit(0);
+
+    include_once  APPRAIZ . 'wssof/classes/Ws_ObjetivosDto.inc';
+    $modelObjetivosDto = new Wssof_Ws_ObjetivosDto();
+
+    $objetivos = $modelObjetivosDto->recuperarTodos('codigoobjetivo, codigoprograma', ["exercicio = '$exercicio'", "codigomomento = '$momento'"]);
+    
+    try {
+        $ws = new Spo_Ws_Sof_Qualitativo($params['log'] ? 'spo' : null);
+
+        if(count($objetivos)){
+            $obterIniciativasPorObjetivo = new ObterIniciativasPorObjetivo();
+            $obterIniciativasPorObjetivo->exercicio = $exercicio;
+            $obterIniciativasPorObjetivo->codigoMomento = $momento;
+            foreach($objetivos as $objetivo){
+                $obterIniciativasPorObjetivo->codigoPrograma = $objetivo['codigoprograma'];
+                $obterIniciativasPorObjetivo->codigoObjetivo = $objetivo['codigoobjetivo'];
+
+                $return = $ws->obterIniciativasPorObjetivo($obterIniciativasPorObjetivo)->return;
+
+                if ($return->mensagensErro){
+                    throw new Exception($return->mensagensErro);
+                }
+
+                $resultados = $return->registros;
+
+                if ($resultados) {
+                    include_once  APPRAIZ . 'wssof/classes/Ws_IniciativasDto.inc';
+                    foreach ($resultados as $resultado) {
+                        $model = new Wssof_Ws_IniciativasDto();
+                        $model->realizarCarga($resultado);
+                        $model->commit();
+                        unset($model);
+                    }
+                }
+            }
+        }
+        return true;
+    } catch (Exception $e) {
+        $db->rollback();
+        return false;
+    }
+}
+
+/**
+ * Obter Metas por Objetivo
+ */
+function obterMetasPorObjetivo($exercicio, $momento) {
+    global $db;
+
+    header("Keep-Alive: timeout=9999, max=9999");
+    set_time_limit(0);
+
+    include_once  APPRAIZ . 'wssof/classes/Ws_ObjetivosDto.inc';
+    $modelObjetivosDto = new Wssof_Ws_ObjetivosDto();
+
+    $objetivos = $modelObjetivosDto->recuperarTodos('codigoobjetivo, codigoprograma', ["exercicio = '$exercicio'", "codigomomento = '$momento'"]);
+
+    try {
+        $ws = new Spo_Ws_Sof_Qualitativo($params['log'] ? 'spo' : null);
+
+        if(count($objetivos)){
+            $obterMetasPorObjetivo = new ObterMetasPorObjetivo();
+            $obterMetasPorObjetivo->exercicio = $exercicio;
+            $obterMetasPorObjetivo->codigoMomento = $momento;
+            foreach($objetivos as $objetivo){
+
+                $obterMetasPorObjetivo->codigoPrograma = $objetivo['codigoprograma'];
+                $obterMetasPorObjetivo->codigoObjetivo = $objetivo['codigoobjetivo'];
+
+//ver($return, $obterMetasPorObjetivo, d);
+                $return = $ws->obterMetasPorObjetivo($obterMetasPorObjetivo)->return;
+
+                if ($return->mensagensErro){
+                    throw new Exception($return->mensagensErro);
+                }
+
+                $resultados = $return->registros;
+
+                if ($resultados) {
+                    include_once  APPRAIZ . 'wssof/classes/Ws_MetasDto.inc';
+                    foreach ($resultados as $resultado) {
+                        $model = new Wssof_Ws_MetasDto();
+                        $model->realizarCarga($resultado);
+                        $model->commit();
+                        unset($model);
+                    }
+                }
+            }
+        }
+        return true;
+    } catch (Exception $e) {
+        $db->rollback();
+        return false;
+    }
+}
+
+/**
  * Consulta os ações em um exercicio de determinada unidade.
  *
  * @global cls_banco $db
