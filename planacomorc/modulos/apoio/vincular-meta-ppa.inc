@@ -7,13 +7,9 @@ switch ($_REQUEST['req']){
         die;
 }
 
-$oMetaPpa = new Public_Model_MetaPpa();
-$oMetaPnc = new Public_Model_MetaPnc();
-$oSubUnidadeOrcamentaria = new Public_Model_SubUnidadeOrcamentaria();
-
-$aMetaPpa = $oMetaPpa->recuperarTodos('*', ["prsano = '2018'", "mppstatus = 'A'"], 'mppcod');
-$aMetaPnc = $oMetaPnc->recuperarTodos('mpnid, mpncod, mpnnome', ["prsano = '2018'", "mpnstatus = 'A'"], 'mpncod');
-$aSubUnidadeOrcamentaria = simec_preparar_array($oSubUnidadeOrcamentaria->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '2018'", "suostatus = 'A'"], 'descricao'));
+$aMetaPpa = (new Public_Model_MetaPpa())->recuperarTodos('*', ["prsano = '2018'", "mppstatus = 'A'"], 'mppcod');
+$aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '2018'", "suostatus = 'A'"], 'descricao'));
+$aVinculos = (new Spo_Model_SubUnidadeMetaPpa())->recuperarPorExercicio($_SESSION['exercicio']);
 
 /**
  * Cabeçalho padrão do simec.
@@ -44,15 +40,20 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <table class="table table-striped table-bordered table-hover dataTables" >
                                 <thead>
                                 <tr>
-                                    <th>Meta PPA</th>
+                                    <th width="50%">Meta PPA</th>
                                     <th>Sub-Unidade</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach($aMetaPpa as $dados){ ?>
                                     <tr>
-                                        <td width="50%"><?php echo $dados['mppcod'] . ' - ' . $dados['mppnome']; ?></td>
-                                        <td><?php echo $simec->select("vinculos[{$dados['mppid']}][]", null, null, $aSubUnidadeOrcamentaria); ?></td>
+                                        <td><?php echo $dados['mppcod'] . ' - ' . $dados['mppnome']; ?></td>
+                                        <td>
+                                            <?php
+                                            $vinculados = !empty($aVinculos[$dados['mppid']]) ?  $aVinculos[$dados['mppid']]: [];
+                                            echo $simec->select("vinculos[{$dados['mppid']}][]", null, $vinculados, $aSubUnidadeOrcamentaria, null, ['input-size'=>12]);
+                                            ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -70,16 +71,3 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
-
-<script>
-    $(function(){
-        $('.dataTables-example').DataTable({
-            pageLength: 100,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            "language": {
-                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
-            }
-        });
-    })
-</script>

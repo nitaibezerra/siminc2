@@ -41,7 +41,19 @@ class Spo_Model_SubUnidadeMetaPpa extends Modelo
 
     public function excluirPorExercicio($exercicio)
     {
-        $sql = "delete from spo.subunidademetappa where mppid in (select mppid from public.metappa where prsano = '{$exercicio}');";
+        $sql = "delete from spo.subunidademetappa where mppid in (select mppid from public.metappa where prsano = '{$exercicio}')";
         return $this->executar($sql);
+    }
+
+    public function recuperarPorExercicio($exercicio)
+    {
+        $sql = "select * from spo.subunidademetappa where mppid in (select mppid from public.metappa where prsano = '{$exercicio}')";
+        $dados = $this->carregar($sql);
+
+        $dadosAgrupados = [];
+        foreach($dados as $dado){
+            $dadosAgrupados[$dado['mppid']][] = $dado['suoid'];
+        }
+        return $dadosAgrupados;
     }
 }

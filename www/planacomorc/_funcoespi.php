@@ -240,14 +240,13 @@ DML;
     }
 
     $sql = <<<DML
-        SELECT
-            ung.ungcod AS codigo,
-            ung.ungcod || ' - ' || ungabrev AS descricao
-        FROM public.unidadegestora ung
-        WHERE ung.ungstatus= 'A'
-            AND ung.unicod = '%s' {$filtroPerfilUG}
-        ORDER BY
-            ung.unicod
+            SELECT suo.suocod AS codigo, suo.suocod || ' - ' || suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE suo.suostatus = 'A'
+            and suo.prsano = '{$_SESSION['exercicio']}'
+            AND suo.unocod = '%s' 
+            {$filtroPerfilUG}
+            ORDER BY suo.suonome;
 DML;
 
     $stmt = sprintf($sql, $unicod);
