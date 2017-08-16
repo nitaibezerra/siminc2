@@ -267,21 +267,17 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                                     $unidadeUsuario = $db->pegaLinha($sql);
 
-                                    $wherePerfilUO  = " and unicod = '{$unidadeUsuario['unicod']}'";
+                                    $wherePerfilUO  = " and unocod = '{$unidadeUsuario['unicod']}'";
                                     $dadosPI['unicod'] = $unidadeUsuario['unicod'];
                                     $dadosPI['ungcod'] = $unidadeUsuario['ungcod'];
                                 }
 
-                                $sql = "
-                            SELECT
-                                uni.unicod AS codigo,
-                                uni.unicod || ' - ' || unidsc AS descricao
-                            FROM public.unidade uni
-                            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "')
-                                AND uni.unistatus = 'A'
-                                {$wherePerfilUO}
-                            ORDER BY uni.unicod
-    ";
+                                $sql = "SELECT uni.unocod AS codigo, uni.unocod || ' - ' || unonome AS descricao
+                                        FROM public.unidadeorcamentaria uni
+                                        WHERE uni.prsano = '{$_SESSION['exercicio']}'
+                                        AND uni.unostatus = 'A'
+                                        $wherePerfilUO
+                                        order by unonome";
 
                                 if ($dadosPI['unicod']) {
                                     $unicod = $dadosPI['unicod'];
@@ -302,12 +298,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 $ungdata = array();
                                 if (!empty($ungcod)) {
                                     $sql = <<<DML
-                                    SELECT ung.ungcod AS codigo,
-                                           ung.ungcod || ' - ' || ung.ungabrev AS descricao
-                                      FROM public.unidadegestora ung
-                                      WHERE ung.ungstatus= 'A'
-                                        AND ung.ungcod = '%s' 
-                                      ORDER BY ung.unicod
+                                    SELECT suo.suocod AS codigo, suo.suocod || ' - ' || suonome AS descricao
+                                    FROM public.vw_subunidadeorcamentaria suo
+                                    WHERE suo.suostatus = 'A'
+                                    and suo.prsano = '{$_SESSION['exercicio']}'
+                                    AND suo.suocod = '%s';                                    
 DML;
                                     $ungdata = sprintf($sql, $ungcod);
                                 }
