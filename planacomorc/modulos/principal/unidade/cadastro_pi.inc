@@ -1478,6 +1478,38 @@ DML;
 
     });
 
+    /**
+     * Atualiza o Titulo do PI conforme a opção selecionada em Manutenção Item.
+     * 
+     * @returns VOID
+     */
+    function atualizarTitulo(){
+        var titulo = $('#maiid :checked').text();
+        var enquadramento = $('#eqdid').val();
+        // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
+        if(enquadramento != intEnqFinalistico){
+            if(titulo != ''){
+                $('#plititulo').val(titulo);
+            }
+        }
+    }
+    
+    /**
+     * Atualiza a descrição do PI conforme a opção selecionada em Manutenção Subitem.
+     * 
+     * @returns VOID
+     */
+    function atualizarDescricao(){
+        var descricao = $('#masid :checked').text();
+        var enquadramento = $('#eqdid').val();
+        // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
+        if(enquadramento != intEnqFinalistico){
+            if(descricao != ''){
+                $('#plidsc').val(descricao);
+            }
+        }
+    }
+
    /**
     * Valida informações de valores do Projeto(Capital e Custeio), Fisicos,
     * Orçamentários e Financeiros e caso estejam com inconformidades mudam a cor pra vermelho.
