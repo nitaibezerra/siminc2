@@ -1,41 +1,30 @@
 <?php
-/**
- * Classe de mapeamento da entidade monitora.ptres.
- *
- * $Id: Ptres.php 100401 2015-07-22 21:06:58Z maykelbraz $
- */
 
-/**
- * Mapeamento da entidade monitora.ptres.
- *
- * @see Modelo
- */
-class Spo_Model_SubUnidadeMetaPnc extends Modelo
+class Spo_Controller_SubUnidadeMetaPnc
 {
-    /**
-     * Nome da tabela especificada
-     * @var string
-     * @access protected
-     */
-    protected $stNomeTabela = 'spo.subunidademetapnc';
+    public function salvar($dados)
+    {
+        $url = 'planacomorc.php?modulo=apoio/vincular-meta-pnc&acao=A';
 
-    /**
-     * Chave primaria.
-     * @var array
-     * @access protected
-     */
-    protected $arChavePrimaria = array(
-        'smcid',
-    );
+        try {
+            $oModel = new Spo_Model_SubUnidadeMetaPnc();
+            $oModel->excluirPorExercicio($_SESSION['exercicio']);
 
-    /**
-     * Atributos
-     * @var array
-     * @access protected
-     */
-    protected $arAtributos = array(
-        'smcid' => null,
-        'suoid' => null,
-        'mppid' => null,
-    );
+            if(isset($dados['vinculos']) && is_array($dados['vinculos'])){
+                foreach($dados['vinculos'] as $mpnid => $vinculos){
+                    foreach($vinculos as $suoid){
+                        $oModel->mpnid = $mpnid;
+                        $oModel->suoid = $suoid;
+                        $oModel->salvar();
+                        $oModel->smcid = null;
+                    }
+                }
+            }
+            $oModel->commit();
+            simec_redirecionar($url, 'success');
+        } catch (Exception $e){
+            $prefeitura->rollback();
+            simec_redirecionar($url, 'error');
+        }
+    } //end salvar()
 }

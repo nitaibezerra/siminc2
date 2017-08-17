@@ -36,6 +36,25 @@ class Spo_Model_SubUnidadeMetaPnc extends Modelo
     protected $arAtributos = array(
         'smcid' => null,
         'suoid' => null,
-        'mppid' => null,
+        'mpnid' => null,
     );
+
+    public function excluirPorExercicio($exercicio)
+    {
+        $sql = "delete from spo.subunidademetapnc where mpnid in (select mpnid from public.metapnc where prsano = '{$exercicio}')";
+        return $this->executar($sql);
+    }
+
+    public function recuperarPorExercicio($exercicio)
+    {
+        $sql = "select * from spo.subunidademetapnc where mpnid in (select mpnid from public.metapnc where prsano = '{$exercicio}')";
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $dadosAgrupados = [];
+        foreach($dados as $dado){
+            $dadosAgrupados[$dado['mpnid']][] = $dado['suoid'];
+        }
+        return $dadosAgrupados;
+    }
 }
