@@ -259,8 +259,8 @@
         controlarTipoLocalizacao($('#esfid').val());
 
         if(strEsdPiCadastramento){
-            $('input, textarea, select').prop('disabled', true);
-            setTimeout($('select').prop('disabled', true).trigger("chosen:updated"), 3000);
+            $('#formulario input, #formulario textarea, #formulario select').prop('disabled', true);
+            setTimeout($('#formulario select').prop('disabled', true).trigger("chosen:updated"), 3000);
         }
 
         atualizarTotalFisico();
