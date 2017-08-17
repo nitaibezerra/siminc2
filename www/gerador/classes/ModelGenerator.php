@@ -288,7 +288,7 @@ PHP;
     {
         $this->nomeClasse = ucFirst($this->tabela);
 
-        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/{$this->nomeClasse}{$this->extensao}", "w+")) {
+        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/model/{$this->nomeClasse}{$this->extensao}", "w+")) {
             return false;
         }
 
@@ -310,9 +310,9 @@ PHP;
         $stringClass .= $this->getIncludes();
         $stringClass .= $this->getNomeClasse();
         $stringClass .= $this->getAtributos($pkData, $fkData);
-        $stringClass .= $this->getValidacao();
-        $stringClass .= $this->getGravar($pkData);
-        $stringClass .= $this->getExcluir();
+//        $stringClass .= $this->getValidacao();
+//        $stringClass .= $this->getGravar($pkData);
+//        $stringClass .= $this->getExcluir();
 
         $stringClass .=  <<<PHP
 \n}//end Class

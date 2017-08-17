@@ -104,11 +104,17 @@ class Gerador
             $pkData = $this->getPrimaryKeys($tabela);
             $fkData = $this->getForeignKeys($tabela);
 
+            $controller = ucfirst($pkData[0]['table_schema']) . '_Controller_' . ucfirst(str_replace(['_'], [''], $pkData[0]['table_name']));
+            $model = ucfirst($pkData[0]['table_schema']) . '_Model_' . ucfirst(str_replace(['_'], [''], $pkData[0]['table_name']));
+
             $modelGenerator =  new ModelGenerator(array('prefixoClasse'=>$stPrefixoClasse, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
             $modelGenerator->gerarModel($pkData, $fkData);
 
-            $formGenerator =  new FormGenerator(array('prefixoClasse'=>$stPrefixoClasse, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
+            $formGenerator =  new FormGenerator(array('controller'=>$controller, 'model'=>$model, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
             $formGenerator->gerar($pkData, $fkData);
+
+            $controllerGenerator =  new ControllerGenerator(array('controller'=>$controller, 'model'=>$model, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
+            $controllerGenerator->gerar($pkData, $fkData);
         }
     }
 }

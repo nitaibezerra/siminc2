@@ -5,6 +5,7 @@ include APPRAIZ . "includes/funcoes.inc";
 include "classes/Gerador.php";
 include "classes/ModelGenerator.php";
 include "classes/FormGenerator.php";
+include "classes/ControllerGenerator.php";
 $db = new cls_banco();
 
 $schema = $_GET['schema'];

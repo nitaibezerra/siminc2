@@ -266,7 +266,7 @@ PHP;
     {
         $this->nomeClasse = ucFirst($this->tabela);
 
-        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/{$this->tabela}{$this->extensao}", "w+")) {
+        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/form/{$this->tabela}{$this->extensao}", "w+")) {
             return false;
         }
 
@@ -283,84 +283,78 @@ PHP;
 
     public function getCodigo($pkData, $fkData)
     {
-        $tabela = ucFirst($this->tabela);
+        $tabela = ucFirst(str_replace(['_'], [''], $this->tabela));
         $codigo = <<<PHP
 <?php
-include_once APPRAIZ .'{$this->schema}/classes/{$this->prefixoClasse}{$tabela}{$this->extensao}';
 
-\$model{$tabela} = new {$tabela}(\$_REQUEST['{$pkData[0]['column_name']}']);
-
-// -- Mensagens para a interface do usuário
-\$fm = new Simec_Helper_FlashMessage('demandasfies/demandas');
-switch (\$_REQUEST['action']) {
+switch (\$_REQUEST['req']) {
 	case 'salvar':
-
-		\$model{$tabela}->popularDadosObjeto();
-		\$camposNulos = array();
-
-		\$sucesso = \$model{$tabela}->salvar(null, null, \$camposNulos);
-		\$modelDemanda->commit();
-
-		\$msg = \$sucesso ? 'Operação realizada com sucesso!' : 'Ocorreu um erro ao processar operação.';
-		\$tipo = \$sucesso ? Simec_Helper_FlashMessage::SUCESSO : Simec_Helper_FlashMessage::ERRO;
-
-		\$url .= '&dmdid=' . \$model{$tabela}->{$pkData[0]['column_name']};
-
-		ob_clean();
-		\$fm->addMensagem(\$msg, \$tipo);
-		header("Location: {\$url}");
-
+        \$c{$tabela} = new {$this->controller}();
+        \$c{$tabela}->salvar(\$_REQUEST);
 		die;
 }
+
+\$m{$tabela} = new {$this->model}(\$_REQUEST['{$pkData[0]['column_name']}']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="page-header">
-            <h3 id="forms"><?php echo \$model{$tabela}->{$pkData[0]['column_name']} ? 'Código: ' . \$model{$tabela}->{$pkData[0]['column_name']} : 'Novo'; ?></h3>
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><?php echo \$m{$tabela}->{$pkData[0]['column_name']} ? 'Código: ' . \$m{$tabela}->{$pkData[0]['column_name']} : 'Novo'; ?></h2>
     </div>
 </div>
-<div class="row">
-    <div class="row col-md-7">
-        <form id="form-save" method="post" class="form-horizontal">
-            <input name="action" type="hidden" value="salvar">
-            <input name="{$pkData[0]['column_name']}" id="{$pkData[0]['column_name']}" type="hidden" value="<?php echo \$model{$tabela}->{$pkData[0]['column_name']}; ?>">
-            
-            <div class="well">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{$tabela}</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="formulario" name="formulario" method="post" class="form-horizontal">
+                        <input type="hidden" name="req" id="req" value="salvar" />
+                        <input name="{$pkData[0]['column_name']}" id="{$pkData[0]['column_name']}" type="hidden" value="<?php echo \$m{$tabela}->{$pkData[0]['column_name']}; ?>">
+                        
+                        <?php     
 PHP;
         foreach ($this->atributos as $srAtributo) {
 
-            $required = 'NO' == $srAtributo['is_nullable'] ? 'required="required"': '';
-            ver($srAtributo);
+            if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
+
+            $required = 'NO' == $srAtributo['is_nullable'] ? ", ['required']": null;
+
+            switch ($srAtributo['data_type']){
+                case 'integer':
+                    $campo = '
+                        echo $simec->input(\'' . $srAtributo['column_name'] . '\');';
+                default:
+                    $campo = '
+                        echo $simec->input(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . $required . ');';
+            }
 
             $codigo .= <<<PHP
-                
-                <div class="form-group">
-                    <label for="{$srAtributo['column_name']}" class="col-lg-4 col-md-4 control-label">{$srAtributo['column_name']}:</label>
-                    <div class="col-lg-8 col-md-8">
-                        <input type="text" id="{$srAtributo['column_name']}" name="{$srAtributo['column_name']}" class="form-control" value="<?php echo \$model{$tabela}->{$srAtributo['column_name']}; ?>" $required />
-                    </div>                
-                </div>
+                    {$campo}
 PHP;
         }
-
         $codigo .= <<<PHP
-            
+                        
+                        ?>
+                        
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
+                                <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                            </div>
+                        </div>                        
+                    </form>
+                </div>
             </div>
-            <div>
-                <button title="Salvar" class="btn btn-success" id="btn-salvar" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Salvar </button>
-                <a title="Voltar" class="btn btn-danger" href="/demandasfies/demandasfies.php?modulo=inicio&acao=C"><span class="glyphicon glyphicon-hand-left"></span> Voltar</a>
-            </div>            
-        </form>
+        </div>
     </div>
 </div>
 PHP;
-
-
-
         return $codigo;
     }
 }
