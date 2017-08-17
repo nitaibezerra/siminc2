@@ -23,7 +23,7 @@ class Spo_Controller_SubUnidadeMetaPnc
             $oModel->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
-            $prefeitura->rollback();
+            $oModel->rollback();
             simec_redirecionar($url, 'error');
         }
     } //end salvar()

@@ -301,7 +301,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2><?php echo \$m{$tabela}->{$pkData[0]['column_name']} ? 'Código: ' . \$m{$tabela}->{$pkData[0]['column_name']} : 'Novo'; ?></h2>
+        <h2><?php echo \$titulo_modulo; ?></h2>
     </div>
 </div>
 
@@ -310,7 +310,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{$tabela}</h5>
+                    <h5>Dados Gerais</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
@@ -328,7 +328,12 @@ PHP;
             switch ($srAtributo['data_type']){
                 case 'integer':
                     $campo = '
-                        echo $simec->input(\'' . $srAtributo['column_name'] . '\');';
+                        echo $simec->input(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . $required . ');';
+                    break;
+                case 'boolean':
+                    $campo = '
+                        echo $simec->radio(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . ', [\'t\'=>\'Sim\', \'f\'=>\'Não\']' . $required . ');';
+                    break;
                 default:
                     $campo = '
                         echo $simec->input(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . $required . ');';

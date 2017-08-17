@@ -19,8 +19,16 @@ $(document).ready(function(){
         	}
         }
     });
-	
-	
+
+    $('.dataTables').DataTable({
+        pageLength: 100,
+        responsive: true,
+        dom: '<"html5buttons"B>lTfgitp',
+        "language": {
+            "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
+        }
+    });
+
     $('.slim-scroll').slimscroll({
         height: '300px'
     });

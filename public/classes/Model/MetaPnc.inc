@@ -62,16 +62,33 @@ class Public_Model_MetaPnc extends Modelo
         'prsano' => null,
     );
 
-    public function recuperarSqlCombo()
+    public function recuperarSqlCombo($dados = null)
     {
-        return "SELECT
-                    mpncod::NUMERIC AS ordem,
-                    mpnid AS codigo,
-                    mpncod || '-' || mpnnome AS descricao
-                FROM public.metapnc
-                WHERE mpnstatus = 'A'
-                AND prsano  = '{$_SESSION['exercicio']}'
+        $join = '';
+        if(!empty($dados['suocod'])){
+            $join = "inner join (
+                        select smc.mpnid
+                        from spo.subunidademetapnc smc
+                                inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smc.suoid and suo.prsano = '{$_SESSION['exercicio']}'
+                        where suo.suocod = '{$dados['suocod']}'
+                        union all 
+                        select mpn.mpnid from public.metapnc mpn
+                                left join spo.subunidademetapnc smc on smc.mpnid = mpn.mpnid
+                        where mpn.prsano = '{$_SESSION['exercicio']}'       
+                        and smc.mpnid is null              
+                    ) smc on smc.mpnid = mpn.mpnid";
+        }
+
+        $sql = "SELECT
+                    mpn.mpncod::NUMERIC AS ordem,
+                    mpn.mpnid AS codigo,
+                    mpn.mpncod || ' - ' || mpn.mpnnome AS descricao
+                FROM public.metapnc mpn
+                $join
+                WHERE mpn.mpnstatus = 'A'
+                AND mpn.prsano  = '{$_SESSION['exercicio']}'
                 ORDER BY ordem";
+        return $sql;
     }
 
 }//end Class

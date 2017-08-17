@@ -38,6 +38,7 @@
 
         $('div.div_ungcod').on('change', '#ungcod', function(){
             carregarLimitesUnidade($(this).val());
+            carregarMetaPNC($(this).val());
         });
         
         $('#orcamento').on('click', '.btnVisualizarDetalhes', function(){
@@ -57,12 +58,12 @@
 
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
-            carregarMetasPPA($(this).val());
+            carregarMetasPPA($(this).val(), null, $('#ungcod').val());
             carregarIniciativaPPA($(this).val());
         });
 
         // Evento ao mudar opção de Metas PNC
-        $('#mpnid').change(function(){
+        $('div.div_mpnid').on('change', '#mpnid', function(){
             carregarIndicadorPNC($(this).val());
         });
 
@@ -1203,8 +1204,8 @@
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
-    function carregarMetasPPA(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetasPPA=ok&oppid=' + codigo, function(response) {
+    function carregarMetasPPA(oppid, mppid, suocod) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetasPPA=ok&oppid=' + oppid + '&suocod=' + suocod, function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
             $(".chosen-select").chosen();
@@ -1230,6 +1231,17 @@
                 
                 mudarCorValorProjeto();
             }
+        });
+    }
+
+    /**
+     * Carrega novo conteúdo para o select de metas PNC via requisição ajax.
+     */
+    function carregarMetaPNC(codigo) {
+        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetaPNC=ok&suocod=' + codigo, function(response) {
+            $('#mpnid').remove();
+            $('.div_mpnid').html(response);
+            $(".chosen-select").chosen();
         });
     }
 

@@ -539,7 +539,7 @@ class Modelo extends cls_banco{
         parent::monta_combo($pk,$sql,$habil,$titulo,$acao,$opc,$txtdica,$size,$obrig, $pk, $return, $value, $title, $complemento, $classe, $complementoOption, $percentual);
     }
 
-    public function recuperarSqlCombo()
+    public function recuperarSqlCombo($dados = null)
     {
         $pk = $this->arChavePrimaria[0];
 

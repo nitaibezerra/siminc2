@@ -26,7 +26,11 @@ if ($_REQUEST['carregarComboUG']) {
     die();
 }
 if ($_REQUEST['carregarMetasPPA']) {
-    carregarMetasPPA((int)$_REQUEST['oppid'], null);
+    carregarMetasPPA((int)$_REQUEST['oppid'], null, $_REQUEST['suocod']);
+    die();
+}
+if ($_REQUEST['carregarMetaPNC']) {
+    carregarMetaPNC($_REQUEST['suocod'], $_REQUEST['mpnid']);
     die();
 }
 if ($_REQUEST['carregarIndicadorPNC']) {
@@ -170,7 +174,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Cadastro de PI <?php echo!empty($dadosPI['plicod']) ? '<span style="color: red; padding: 5px;">(' . $dadosPI['plicod'] . ')</span>' : ''; ?></h2>
-        <span>Exercício: <?php echo!empty($dadosPI['pliano']) ? $dadosPI['pliano'] : $_SESSION['exercicio']; ?></span>
+        <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
     </div>
 </div>
 
@@ -557,8 +561,8 @@ DML;
                             <div class="col-md-3 text-right">
                                 <label for="mpnid" class="control-label">Meta PNC: </label>
                             </div>
-                            <div class="col-lg-9">
-                                <?php (new Public_Model_MetaPnc())->monta_combo($dadosPI['mpnid']); ?>
+                            <div class="col-lg-9 div_mpnid">
+                                <?php carregarMetaPNC($dadosPI['ungcod'], $dadosPI['mpnid']); ?>
                             </div>
                         </div>
                         <div class="form-group grupo_pnc">

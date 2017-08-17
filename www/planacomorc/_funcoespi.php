@@ -265,8 +265,23 @@ DML;
 /**
  * Monta a combo de metas PPA
  */
-function carregarMetasPPA($oppid, $mppid) {
+function carregarMetasPPA($oppid, $mppid, $suocod = null) {
     global $db;
+
+    $join = '';
+    if($suocod){
+        $join = "inner join (
+                    select smp.mppid 
+                    from spo.subunidademetappa smp
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smp.suoid and suo.prsano = '{$_SESSION['exercicio']}'
+                    where suo.suocod = '$suocod'                    
+                    union all
+                    select mpp.mppid from public.metappa mpp
+                            left join spo.subunidademetappa smp on smp.mppid = mpp.mppid
+                    where mpp.prsano = '{$_SESSION['exercicio']}'       
+                    and smp.mppid is null               
+                ) smp on smp.mppid = om.mppid";
+    }
 
     $sql = "
         SELECT DISTINCT
@@ -274,6 +289,7 @@ function carregarMetasPPA($oppid, $mppid) {
             m.mppcod || '-' || m.mppdsc AS descricao
         FROM public.metappa m
 		JOIN public.objetivometappa om ON m.mppid = om.mppid
+        $join
         WHERE
             m.mppstatus = 'A'
             AND m.prsano = '{$_SESSION['exercicio']}'
@@ -304,6 +320,14 @@ function carregarIniciativaPPA($oppid, $ippid) {
     ";
 
     $db->monta_combo('ippid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ippid', null, (isset($ippid)? $ippid: null), null, 'class="form-control chosen-select" style="width=100%;"');
+}
+
+/**
+ * Monta a combo de Metas PNC
+ */
+function carregarMetaPNC($suocod, $mpnid) {
+    $mMetaPnc = new Public_Model_MetaPnc();
+    $mMetaPnc->monta_combo($mpnid, null, $mMetaPnc->recuperarSqlCombo(['suocod'=>$suocod]));
 }
 
 /**
