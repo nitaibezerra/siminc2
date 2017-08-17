@@ -1185,7 +1185,7 @@ DML;
 
     <?php
     // Só permite editar se tiver em cadastramento
-    if(empty($estadoAtual['esdid']) || $estadoAtual['esdid'] == ESD_PI_CADASTRAMENTO){ ?>
+    if(empty($estadoAtual['esdid']) || in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))){ ?>
         <div class="form-group">
             <div class="text-center">
                 <button class="btn btn-warning" type="reset" onclick="window.location = window.location;">Limpar</button>
@@ -1315,7 +1315,7 @@ DML;
     intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
     // Manutenção item
     intMaiid = '<?php echo $dadosPI['maiid']; ?>';
-    strEsdPiCadastramento = '<?php echo (!empty($estadoAtual['esdid']) && $estadoAtual['esdid'] != ESD_PI_CADASTRAMENTO) ?>';
+    strEsdPiCadastramento = '<?php echo (!empty($estadoAtual['esdid']) && !in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))) ?>';
 
     $(document).ready(function() {
         
