@@ -7,8 +7,8 @@ switch ($_REQUEST['req']){
         die;
 }
 
-$aMetaPpa = (new Public_Model_MetaPpa())->recuperarTodos('*', ["prsano = '2018'", "mppstatus = 'A'"], 'mppcod');
-$aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '2018'", "suostatus = 'A'"], 'descricao'));
+$aMetaPpa = (new Public_Model_MetaPpa())->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "mppstatus = 'A'"], 'mppcod');
+$aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
 $aVinculos = (new Spo_Model_SubUnidadeMetaPpa())->recuperarPorExercicio($_SESSION['exercicio']);
 
 /**
@@ -62,7 +62,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="form-group">
                             <div class="text-center">
                                 <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
-                                <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                                <a href="planacomorc.php?modulo=inicio&acao=C" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
                             </div>
                         </div>
                     </form>

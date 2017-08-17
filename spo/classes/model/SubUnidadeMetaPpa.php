@@ -49,6 +49,7 @@ class Spo_Model_SubUnidadeMetaPpa extends Modelo
     {
         $sql = "select * from spo.subunidademetappa where mppid in (select mppid from public.metappa where prsano = '{$exercicio}')";
         $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
 
         $dadosAgrupados = [];
         foreach($dados as $dado){

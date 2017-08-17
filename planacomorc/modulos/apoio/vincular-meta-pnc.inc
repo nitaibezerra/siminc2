@@ -1,27 +1,26 @@
-vincular-meta-ppa.inc<?php
+<?php
 
-include_once APPRAIZ . "includes/library/simec/Grafico.php";
+switch ($_REQUEST['req']){
+    case 'salvar':
+        $cMetaPnc = new Spo_Controller_SubUnidadeMetaPnc();
+        $cMetaPnc->salvar($_REQUEST);
+        die;
+}
 
-include_once '_funcoespi.php';
-
-require_once APPRAIZ . 'includes/workflow.php';
-include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
-
-$oPlanoInterno = new Pi_PlanoInterno();
+$aMetaPnc = (new Public_Model_MetaPnc())->recuperarTodos("*, lpad(mpncod, 2, '0') as codigo", ["prsano = '{$_SESSION['exercicio']}'", "mpnstatus = 'A'"], 'codigo');
+$aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+$aVinculos = (new Spo_Model_SubUnidadeMetaPnc())->recuperarPorExercicio($_SESSION['exercicio']);
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
 
-// @TODO - Retirar ano fico de 2017 e colocar $_SESSION['exercicio'];
-
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Painel de Acompanhamento</h2>
+        <h2>Víncular Metas PNC com Sub-Unidade Orçamentária</h2>
     </div>
 </div>
 
@@ -30,112 +29,44 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Valores por Unidades</h5>
+                    <h5>Metas PNC</h5>
                 </div>
                 <div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
-                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-                    ?>
-                </div>
-            </div>
-        </div>
+                    <form id="formulario" name="formulario" method="post" class="form-horizontal">
+                        <input type="hidden" name="req" id="req" value="salvar" />
 
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>Valores Autorizados por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>PI's por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPiUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Acompanhamento de Plano Interno</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables-example" >
-                            <thead>
-                            <tr>
-                                <th>PI</th>
-                                <th>Sub-Unidade</th>
-                                <th>Funcional</th>
-                                <th>PTRES</th>
-                                <th>Vl. Autorizado</th>
-                                <th>Vl. Pago</th>
-                                <th>Vl. Liquidar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($aPropostas as $dados){ ?>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables" >
+                                <thead>
                                 <tr>
-                                    <td><?php echo $dados['planointerno']; ?></td>
-                                    <td><?php echo $dados['unidadeorcamentaria']; ?></td>
-                                    <td><?php echo $dados['acao']; ?></td>
-                                    <td><?php echo $dados['numeroptres']; ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['autorizado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['pago'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['empenhadoaliquidar'], 0, ',', '.'); ?></td>
+                                    <th width="50%">Meta PNC</th>
+                                    <th>Sub-Unidade</th>
                                 </tr>
-                            <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-
+                                </thead>
+                                <tbody>
+                                <?php foreach($aMetaPnc as $dados){ ?>
+                                    <tr>
+                                        <td><?php echo $dados['mpncod'] . ' - ' . $dados['mpnnome']; ?></td>
+                                        <td>
+                                            <?php
+                                            $vinculados = !empty($aVinculos[$dados['mpnid']]) ?  $aVinculos[$dados['mpnid']]: [];
+                                            echo $simec->select("vinculos[{$dados['mpnid']}][]", null, $vinculados, $aSubUnidadeOrcamentaria, null, ['input-size'=>12]);
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
+                                <a href="planacomorc.php?modulo=inicio&acao=C" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php
-// -- popup de detalhamento do PI
-bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
-?>
-
-<script>
-    $(document).ready(function(){
-        $('.dataTables-example').DataTable({
-            pageLength: 100,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            "language": {
-                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
-            }
-        });
-    });
-
-    function detalhePI(pliid) {
-        $('#detalhepi .modal-body').empty();
-        $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPi&pliid=" + pliid, function(html) {
-            $('#detalhepi .modal-body').html(html);
-            $('#detalhepi').modal();
-        });
-    }
-
-</script>
