@@ -1176,7 +1176,7 @@
      */
     function mudarFormularioFinalistico(codigo){
         // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
-        if(codigo != intEnqFinalistico){
+        if(codigo != "" && codigo != intEnqFinalistico){
             // Oculta as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').hide('slow');
             // Apaga as opções selecionadas.
