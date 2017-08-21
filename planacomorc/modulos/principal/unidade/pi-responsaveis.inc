@@ -6,7 +6,7 @@
 
     # Filtros
     $where = '';
-//    $where .= $_REQUEST['ungcod'] ? " AND rpu.ungcod = '{$_REQUEST['ungcod']}'": NULL;
+    $where .= $_REQUEST['ungcod'] ? " AND rpu.ungcod = '{$_REQUEST['ungcod']}'": NULL;
     $where .= $_REQUEST['nome'] ? " AND u.usunome ILIKE('%" . utf8_decode($_REQUEST['nome']) . "%')": NULL;
     $where .= $_REQUEST['email'] ? " AND u.usuemail ILIKE('%" . $_REQUEST['email'] . "%')": NULL;
 
