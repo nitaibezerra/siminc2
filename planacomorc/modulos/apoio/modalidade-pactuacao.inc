@@ -1,6 +1,6 @@
 <?php
 
-$aCategoriaApropriacao = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'", "capano = '{$_SESSION['exercicio']}'"]);
+$aCategoriaApropriacao = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'", "capano = '{$_SESSION['exercicio']}'"], 'capdsc');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -25,8 +25,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
-                            <tr>
-                                <th>Ações</th>
+                            <tr class="text-center">
+                                <th width="10%">Ações</th>
                                 <th>Código</th>
                                 <th>Descrição</th>
                                 <th>SICONV</th>
@@ -35,10 +35,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tbody>
                             <?php foreach($aCategoriaApropriacao as $dados){ ?>
                                 <tr>
-                                    <td><?php echo $dados['capcod']; ?></td>
-                                    <td><?php echo $dados['capcod']; ?></td>
+                                    <td class="text-center">
+                                        <a title="Alterar" href="planacomorc.php?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=<?php echo $dados['capid']; ?>"><i class="fa fa-pencil"></i></a>
+                                    </td>
+                                    <td class="text-center"><?php echo $dados['capcod']; ?></td>
                                     <td><?php echo $dados['capdsc']; ?></td>
-                                    <td><?php echo $dados['capsiconv'] == 't' ? 'Sim' : 'Não'; ?></td>
+                                    <td class="text-center"><?php echo $dados['capsiconv'] == 't' ? 'Sim' : 'Não'; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>

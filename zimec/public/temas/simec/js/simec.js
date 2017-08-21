@@ -32,6 +32,24 @@ $(document).ready(function(){
     $('.slim-scroll').slimscroll({
         height: '300px'
     });
+
+    $('.link-excluir').click(function(){
+        href = $(this).attr('href');
+        swal({
+            title: "Atenção!",
+            text: "Deseja realmente excluir o registro?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sim, estou certo!",
+            closeOnConfirm: false
+        },
+        function(){
+            window.location.href = href;
+        });
+
+        return false;
+    });
 });
 
 $(window).scroll(function() {

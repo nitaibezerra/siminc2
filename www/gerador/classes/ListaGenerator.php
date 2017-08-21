@@ -6,7 +6,7 @@
  * Date: 06/10/2015
  * Time: 11:40
  */
-class FormGenerator
+class ListaGenerator
 {
     public $schema;
     public $prefixoClasse;
@@ -266,7 +266,7 @@ PHP;
     {
         $this->nomeClasse = ucFirst($this->tabela);
 
-        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/form/{$this->tabela}{$this->extensao}", "w+")) {
+        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/lista/{$this->tabela}{$this->extensao}", "w+")) {
             return false;
         }
 
@@ -283,27 +283,30 @@ PHP;
 
     public function getCodigo($pkData, $fkData)
     {
+
+        $aFiltroCampo = [];
+        foreach ($this->atributos as $srAtributo) {
+            if(false !== strpos($srAtributo['column_name'], 'status')){
+//                $aFiltroCampo[] = '"capstatus = \'A\'"';
+            }
+            if($srAtributo['column_name'] == 'prsano'){
+                $aFiltroCampo[] = '"capano = \'{$_SESSION[\'exercicio\']}\'"';
+            }
+        }
+
+        $aFiltroCampo = count($aFiltroCampo) ? '\'*\' , [' . implode(', ',$aFiltroCampo) . ']' : '';
+
         $tabela = ucFirst(str_replace(['_'], [''], $this->tabela));
         $codigo = <<<PHP
 <?php
 
-\$c{$tabela} = new {$this->controller}();
-switch (\$_REQUEST['req']) {
-	case 'salvar':
-        \$c{$tabela}->salvar(\$_REQUEST);
-		die;
-	case 'salvar':
-        \$c{$tabela}->excluir(\$_REQUEST['{$pkData[0]['column_name']}']);
-		die;
-}
-
-\$m{$tabela} = new {$this->model}(\$_REQUEST['{$pkData[0]['column_name']}']);
+\$a{$this->tabela} = (new {$this->model})->recuperarTodos({$aFiltroCampo});
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <h2><?php echo \$titulo_modulo; ?></h2>
     </div>
 </div>
@@ -316,59 +319,61 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <h5>Dados Gerais</h5>
                 </div>
                 <div class="ibox-content">
-                    <form id="formulario" name="formulario" method="post" class="form-horizontal">
-                        <input type="hidden" name="req" id="req" value="salvar" />
-                        <input name="{$pkData[0]['column_name']}" id="{$pkData[0]['column_name']}" type="hidden" value="<?php echo \$m{$tabela}->{$pkData[0]['column_name']}; ?>">
-                        
-                        <?php     
+                    
+                    <a class="btn btn-small btn-warning" href="?modulo=apoio/arquivo-form&acao=A">Novo</a>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables" >
+                            <thead>
+                            <tr class="text-center">
+                                <th width="10%">Ações</th>
+
 PHP;
-        
+
         foreach ($this->atributos as $srAtributo) {
 
             if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
 
-            $aAtributosCampo = [];
-            if('YES' == $srAtributo['is_nullable']){
-                $aAtributosCampo[] = "'required'";
-            }
-            if($srAtributo['character_maximum_length']){
-                $aAtributosCampo[] = "'maxlength' => " . $srAtributo['character_maximum_length'];
-            }
-
-            $sAtributosCampo = count($aAtributosCampo) ? ', [' . implode(', ',$aAtributosCampo) . ']' : '';
-            
-            switch ($srAtributo['data_type']){
-                case 'integer':
-                    $campo = '
-                        echo $simec->input(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . $sAtributosCampo . ');';
-                    break;
-                case 'boolean':
-                    $campo = '
-                        echo $simec->radio(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . ', [\'t\'=>\'Sim\', \'f\'=>\'Não\']' . $sAtributosCampo . ');';
-                    break;
-                default:
-                    $campo = '
-                        echo $simec->input(\'' . $srAtributo['column_name'] . '\', \'' . $srAtributo['column_name'] . '\', $m' . $tabela . '->' . $srAtributo['column_name'] . $sAtributosCampo . ');';
-            }
-
             $codigo .= <<<PHP
-                    {$campo}
+                                <th>{$srAtributo['column_name']}</th>
+
 PHP;
         }
         $codigo .= <<<PHP
-                        
-                        ?>
-                        
-                        <div class="form-group">
-                            <div class="text-center">
-                                <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <a href="?modulo=apoio/arquivo-listagem&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                <?php if(\$m{$tabela}->{$pkData[0]['column_name']}){ ?>
-                                    <a href="?modulo=apoio/arquivo&acao=A&req=excluir&{$pkData[0]['column_name']}=<?php echo \$m{$tabela}->{$pkData[0]['column_name']}; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                <?php } ?>                                
-                            </div>
-                        </div>                        
-                    </form>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach(\$a{$this->tabela} as \$dados){ ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <a title="Alterar" href="planacomorc.php?modulo=apoio/arquivo-form&acao=A&{$pkData[0]['column_name']}=<?php echo \$dados['{$pkData[0]['column_name']}']; ?>"><i class="fa fa-pencil"></i></a>
+                                    </td>
+
+PHP;
+
+        foreach ($this->atributos as $srAtributo) {
+
+            if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
+
+            switch ($srAtributo['data_type']){
+                case 'integer':
+                    $class = '';
+                    break;
+                default:
+                    $class = '';
+            }
+
+            $codigo .= <<<PHP
+                                    <td><?php echo \$dados['{$srAtributo['column_name']}']; ?></td>
+
+PHP;
+        }
+        $codigo .= <<<PHP
+                                </tr>
+                            <?php } ?>        
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -115,6 +115,9 @@ class Gerador
 
             $controllerGenerator =  new ControllerGenerator(array('controller'=>$controller, 'model'=>$model, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
             $controllerGenerator->gerar($pkData, $fkData);
+
+            $listaGenerator =  new ListaGenerator(array('lista'=>$lista, 'model'=>$model, 'extensao'=> $stExtensao, 'tabela'=> $tabela, 'atributos'=> $atributos, 'schema'=> $this->stSchema));
+            $listaGenerator->gerar($pkData, $fkData);
         }
     }
 }

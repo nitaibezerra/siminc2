@@ -651,3 +651,10 @@ label.btn.btn-campo.active{
     color: #ff0000 !important;
 }
 
+tr.text-center th, tr.text-center td{
+    text-align: center;
+}
+
+tr.text-right th, tr.text-right td{
+    text-align: right;
+}

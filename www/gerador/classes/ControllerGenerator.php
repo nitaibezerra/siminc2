@@ -76,9 +76,18 @@ class ControllerGenerator
         $tabela = ucFirst(str_replace(['_'], [''], $this->tabela));
 
         $nulos = '';
+        $ano = $status = false;
+
         foreach ($this->atributos as $srAtributo) {
             if($srAtributo['is_nullable'] == 'YES'){
                 $nulos .= "'" . $srAtributo['column_name'] . "', ";
+            }
+            if($srAtributo['column_name'] == 'prsano'){
+                $ano = '$m' . $tabela . '->' . $srAtributo['column_name'] . ' = $m' . $tabela . '->' . $srAtributo['column_name'] . ' ? $m' . $tabela . '->' . $srAtributo['column_name'] . ' : $_SESSION[\'exercicio\'];
+                ';
+            }
+            if(false !== strpos($srAtributo['column_name'], 'status')){
+                $status = true;
             }
         }
 
@@ -87,14 +96,38 @@ class ControllerGenerator
 
 class {$this->controller}
 {
-    public function salvar($dados)
+    public function salvar(\$dados)
     {
         \$url = '?modulo=apoio/arquivo&acao=A';
 
         try {
-            \$m{$tabela} = new {$this->model}(\$_REQUEST['{$pkData[0]['column_name']}']);
-            \$m{$tabela}->popularDadosObjeto();
+            \$m{$tabela} = new {$this->model}(\$dados['{$pkData[0]['column_name']}']);
+            \$m{$tabela}->popularDadosObjeto(\$dados);
+            {$ano}
             \$m{$tabela}->salvar(null, null, [{$nulos}]);
+            \$m{$tabela}->commit();
+            simec_redirecionar(\$url, 'success');
+        } catch (Exception \$e){
+            \$m{$tabela}->rollback();
+            simec_redirecionar(\$url, 'error');
+        }
+    } //end salvar()
+    
+    public function excluir(\${$pkData[0]['column_name']})
+    {
+        \$url = '?modulo=apoio/arquivo&acao=A';
+
+        try {
+            \$m{$tabela} = new {$this->model}(\${$pkData[0]['column_name']});
+            
+            if(\$m{$tabela}->existeVinculo()){
+                \$mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
+                \$url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . \$m{$tabela}->{$pkData[0]['column_name']};
+                simec_redirecionar(\$url, 'error', \$mensagem);
+            }            
+            
+            \$m{$tabela}->status = 'I';
+            \$m{$tabela}->salvar();
             \$m{$tabela}->commit();
             simec_redirecionar(\$url, 'success');
         } catch (Exception \$e){

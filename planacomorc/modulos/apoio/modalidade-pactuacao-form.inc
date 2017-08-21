@@ -1,9 +1,12 @@
 <?php
 
+$cCategoriaApropriacao = new Monitora_Controller_CategoriaApropriacao();
 switch ($_REQUEST['req']) {
     case 'salvar':
-        $cCategoriaApropriacao = new Monitora_Controller_CategoriaApropriacao();
         $cCategoriaApropriacao->salvar($_REQUEST);
+        die;
+    case 'excluir':
+        $cCategoriaApropriacao->excluir($_REQUEST['capid']);
         die;
 }
 
@@ -31,15 +34,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="capid" id="capid" type="hidden" value="<?php echo $mCategoriaApropriacao->capid; ?>">
 
                         <?php
-                        echo $simec->input('capcod', 'Código', $mCategoriaApropriacao->capcod);
-                        echo $simec->input('capdsc', 'Descrição', $mCategoriaApropriacao->capdsc);
+                        echo $simec->input('capcod', 'Código', $mCategoriaApropriacao->capcod, ['required', 'maxlength' => 2]);
+                        echo $simec->input('capdsc', 'Descrição', $mCategoriaApropriacao->capdsc, ['required', 'maxlength' => 250]);
                         echo $simec->radio('capsiconv', 'Identifica SICONV', $mCategoriaApropriacao->capsiconv, ['t'=>'Sim', 'f'=>'Não']);
                         ?>
 
                         <div class="form-group">
                             <div class="text-center">
-                                <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
-                                <a href="?modulo=apoio/modalidade-pactuacao&acao=A" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                <a href="?modulo=apoio/modalidade-pactuacao&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                <?php if($mCategoriaApropriacao->capid){ ?>
+                                    <a href="?modulo=apoio/modalidade-pactuacao-form&acao=A&req=excluir&capid=<?php echo $mCategoriaApropriacao->capid; ?>" class="btn btn-danger link-excluir" id="btnExcluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                <?php } ?>
                             </div>
                         </div>
                     </form>

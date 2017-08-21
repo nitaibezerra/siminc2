@@ -6,6 +6,7 @@ include "classes/Gerador.php";
 include "classes/ModelGenerator.php";
 include "classes/FormGenerator.php";
 include "classes/ControllerGenerator.php";
+include "classes/ListaGenerator.php";
 $db = new cls_banco();
 
 $schema = $_GET['schema'];

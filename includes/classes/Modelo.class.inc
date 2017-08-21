@@ -465,6 +465,11 @@ class Modelo extends cls_banco{
         $this->validarCampos($dados);
     }
 
+    public function existeVinculo($dados = null)
+    {
+        return false;
+    }
+
     public function getCamposValidacao($dados = array())
     {
         return array();

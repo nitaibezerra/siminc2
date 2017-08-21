@@ -62,5 +62,11 @@ class Monitora_Model_CategoriaApropriacao extends Modelo
         'capsiconv' => null,
     );
 
+    public function existeVinculo($dados = null)
+    {
+        $sql = "select count(*) qtd from monitora.pi_planointerno pli where capid = {$this->capid}";
+        return $this->pegaUm($sql);
+    }
+
 }//end Class
 ?>
