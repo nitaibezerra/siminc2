@@ -1182,15 +1182,9 @@
             // Apaga as opções selecionadas.
             $('#mpnid').val('').trigger("chosen:updated");
             $('#ipnid').val('').trigger("chosen:updated");
-            // Desabilita a opção de modificar os campos de Título e Descrição.
-            $('[name=plititulo]').attr('readonly', 'readonly');
-            $('[name=plidsc]').attr('readonly', 'readonly');
         } else {
             // Mostra as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').show('slow');
-            // Habilita a opção de modificar os campos de Título e Descrição.
-            $('[name=plititulo]').removeAttr('readonly');
-            $('[name=plidsc]').removeAttr('readonly');
         }
     }
 
@@ -1305,10 +1299,18 @@
             if(response){
                 $(".chosen-select").chosen();
                 $('.grupo_manutencao').show('slow');
+
+                // Desabilita a opção de modificar os campos de Título e Descrição.
+                $('[name=plititulo]').val('').attr('readonly', 'readonly');
+                $('[name=plidsc]').val('').attr('readonly', 'readonly');
             } else {
                 $('.grupo_manutencao').hide('slow');
+                // Habilita a opção de modificar os campos de Título e Descrição.
+                $('[name=plititulo]').val('').removeAttr('readonly');
+                $('[name=plidsc]').val('').removeAttr('readonly');
             }
             $('#maiid').remove();
+            $('#masid').val('').trigger("chosen:updated");
             $('.div_maiid').html(response);
         });
     }
