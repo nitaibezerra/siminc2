@@ -259,4 +259,13 @@ class Pi_PlanoInterno extends Modelo{
         $dados = adapterConnection::oldSiminc()->carregar($sql);
         return $dados ? $dados : [];
     }
+
+    public function alterarCodigoPi($plicod)
+    {
+        $this->plicod = $plicod;
+        $this->salvar();
+        $this->commit();
+
+        echo $this->plicod;
+    }
 }

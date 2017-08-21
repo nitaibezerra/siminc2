@@ -86,6 +86,11 @@ if ($_REQUEST['verificarPactuacaoConvenio']) {
     echo verificarPactuacaoConvenio($_REQUEST['capid']);
     die();
 }
+if ($_REQUEST['alterarCodigoPi']) {
+    $dadosPI = (new Pi_PlanoInterno($_REQUEST['pliid']))->alterarCodigoPi($_REQUEST['plicod']);
+    die();
+}
+
 /**
  * Processa as requições enviadas a esta página.
  * @see cadastropi_requisicoes.inc
@@ -173,7 +178,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Cadastro de PI <?php echo!empty($dadosPI['plicod']) ? '<span style="color: red; padding: 5px;">(' . $dadosPI['plicod'] . ')</span>' : ''; ?></h2>
+        <h2>
+            Cadastro de PI
+            <?php if(!empty($dadosPI['plicod'])){
+                echo '<span style="color: red; padding: 5px;" id="span-plicod">(' . $dadosPI['plicod'] . ')</span>';
+                echo '<input type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
+            } ?>
+        </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
     </div>
 </div>
@@ -1060,7 +1071,7 @@ DML;
                                     $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
                                 }
                                 ?>
-                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
                                     <tr>
                                         <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
                                         <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>

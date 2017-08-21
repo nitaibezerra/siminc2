@@ -1993,13 +1993,9 @@ function gerarCodigosPi($pliid)
 {
     global $db;
 
-    $sql = "select eqd.eqdcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') || nee.neecod || cap.capcod || substr(pliano, 3, 2) || mde.mdecod as plicod,
-            LPAD(currval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
+    $sql = "select  substr(pliano, 3, 2) || pi.ungcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 3, '0') as plicod,
+                    LPAD(currval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
             from monitora.pi_planointerno pi
-                inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pi.eqdid
-                inner join monitora.pi_niveletapaensino nee on nee.neeid = pi.neeid
-                inner join monitora.pi_categoriaapropriacao cap on cap.capid = pi.capid
-                inner join monitora.pi_modalidadeensino mde on mde.mdeid = pi.mdeid
             where pi.pliid = $pliid";
 
     return $db->pegaLinha($sql);
@@ -2013,15 +2009,13 @@ function verificarPactuacaoConvenio($capid)
 
     global $db;
 
-    $aConvenio = [CAPCOD_CONVENIO];
-
-    $sql = "SELECT capcod FROM monitora.pi_categoriaapropriacao
+    $sql = "SELECT count(*) FROM monitora.pi_categoriaapropriacao
             WHERE capano = '{$_SESSION['exercicio']}'
             AND capstatus = 'A'
-            AND capid = $capid";
+            AND capid = $capid
+            AND capsiconv = 't'";
+    
+    return $db->pegaUm($sql);
 
-    $capcod = $db->pegaUm($sql);
-
-    return in_array($capcod, $aConvenio);
 
 }

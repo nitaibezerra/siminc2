@@ -658,3 +658,8 @@ tr.text-center th, tr.text-center td{
 tr.text-right th, tr.text-right td{
     text-align: right;
 }
+
+.table-input .form-control, .single-line{
+    padding: 3px 6px;
+    font-size: 12px
+}
