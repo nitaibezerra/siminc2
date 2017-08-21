@@ -302,12 +302,8 @@
      */
     function atualizarTitulo(){
         var titulo = $('#maiid :checked').text();
-        var enquadramento = $('#eqdid').val();
-        // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
-        if(enquadramento != intEnqFinalistico){
-            if(titulo != ''){
-                $('#plititulo').val(titulo);
-            }
+        if(titulo != ''){
+            $('#plititulo').val(titulo);
         }
     }
     
@@ -318,12 +314,8 @@
      */
     function atualizarDescricao(){
         var descricao = $('#masid :checked').text();
-        var enquadramento = $('#eqdid').val();
-        // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
-        if(enquadramento != intEnqFinalistico){
-            if(descricao != ''){
-                $('#plidsc').val(descricao);
-            }
+        if(descricao != ''){
+            $('#plidsc').val(descricao);
         }
     }
 
@@ -1175,7 +1167,7 @@
      * @returns VOID
      */
     function mudarFormularioFinalistico(codigo){
-        // Se o código for diferente 354 - Finalistico, o sistema oculta as opções PNC.
+        // Se o código for diferente de Finalistico, o sistema oculta as opções PNC.
         if(codigo != "" && codigo != intEnqFinalistico){
             // Oculta as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').hide('slow');
@@ -1891,7 +1883,12 @@
         var codigoEnquadramento = $('#eqdid').val();
         var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
 
-        // Se o código for diferente 354 - Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
+        // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
+        if($('#maiid option').size() > 0){
+            listaObrigatorios.push('maiid', 'masid');
+        }
+
+        // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
         if(codigoEnquadramento == intEnqFinalistico){
             listaObrigatorios.push('mpnid', 'ipnid');
         }

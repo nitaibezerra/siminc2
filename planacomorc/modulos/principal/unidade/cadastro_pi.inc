@@ -163,7 +163,7 @@ if ($dadosPI['pliid'] && !$dadosPI['docid']) {
     $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
 }
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
-
+$codigoEnquadramentoFinalistico = buscarCodigoEnquadramentoFinalistico((int)$_SESSION['exercicio']);
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
@@ -1321,7 +1321,7 @@ DML;
 
 <script type="text/javascript">
     // Enquadramentos
-    intEnqFinalistico = "<?php echo ENQUADRAMENTO_FINALISTICO; ?>";
+    intEnqFinalistico = "<?php echo $codigoEnquadramentoFinalistico; ?>";
     // Localizações
     intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";
     intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";

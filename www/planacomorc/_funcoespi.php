@@ -1537,6 +1537,23 @@ DML;
     return $dados;
 }
 
+function buscarCodigoEnquadramentoFinalistico($exercicio) {
+    global $db;
+
+    $sql = "
+        SELECT
+            eqdid AS codigoFinalistico
+        FROM monitora.pi_enquadramentodespesa
+        WHERE
+            eqdstatus = 'A'
+            AND eqdano = '". (int)$exercicio. "'
+            AND eqdcod = 'F'
+    ";
+    
+    $codigoFinalistico = $db->pegaUm($sql);
+    return $codigoFinalistico;
+}
+
 function inativarPI($dados) {
     global $db;
     $sql = <<<DML
