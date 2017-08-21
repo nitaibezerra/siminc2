@@ -80,6 +80,12 @@
         // Evento ao mudar opção de Manutenção SubItem
         $('body').on('change', '#maiid', function(){
             carregarManutencaoSubItem($(this).val());
+            atualizarTitulo();
+        });
+        
+        // Evento ao mudar opção de Manutenção SubItem
+        $('body').on('change', '#masid', function(){
+            atualizarDescricao();
         });
 
         $('#btn_adicionar_sniic').click(function(){
@@ -1158,9 +1164,15 @@
             // Apaga as opções selecionadas.
             $('#mpnid').val('').trigger("chosen:updated");
             $('#ipnid').val('').trigger("chosen:updated");
+            // Desabilita a opção de modificar os campos de Título e Descrição.
+            $('[name=plititulo]').attr('readonly', 'readonly');
+            $('[name=plidsc]').attr('readonly', 'readonly');
         } else {
             // Mostra as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').show('slow');
+            // Habilita a opção de modificar os campos de Título e Descrição.
+            $('[name=plititulo]').removeAttr('readonly');
+            $('[name=plidsc]').removeAttr('readonly');
         }
     }
 
