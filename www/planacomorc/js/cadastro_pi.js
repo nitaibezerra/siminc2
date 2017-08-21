@@ -55,6 +55,7 @@
 
         // Evento ao carregar a tela
         mudarFormularioFinalistico($('#eqdid').val());
+        formatarTelaEnquadramentoComManutencaoItem();
 
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
@@ -75,7 +76,7 @@
         // Evento ao mudar opção de Manutenção Item
         $('#eqdid').change(function(){
             carregarManutencaoItem($(this).val());
-        }).change();
+        });
 
         // Evento ao mudar opção de Manutenção SubItem
         $('body').on('change', '#maiid', function(){
@@ -1288,23 +1289,33 @@
      */
     function carregarManutencaoItem(codigo) {
         $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo + '&maiid=' + intMaiid, function(response) {
-            if(response){
-                $(".chosen-select").chosen();
-                $('.grupo_manutencao').show('slow');
-
-                // Desabilita a opção de modificar os campos de Título e Descrição.
-                $('[name=plititulo]').val('').attr('readonly', 'readonly');
-                $('[name=plidsc]').val('').attr('readonly', 'readonly');
-            } else {
-                $('.grupo_manutencao').hide('slow');
-                // Habilita a opção de modificar os campos de Título e Descrição.
-                $('[name=plititulo]').val('').removeAttr('readonly');
-                $('[name=plidsc]').val('').removeAttr('readonly');
-            }
             $('#maiid').remove();
             $('#masid').val('').trigger("chosen:updated");
             $('.div_maiid').html(response);
+            formatarTelaEnquadramentoComManutencaoItem();
         });
+    }
+    
+    function formatarTelaEnquadramentoComManutencaoItem(){
+        // Verifica se o usuário já estiver preenchido o enquadramento(Caso de formulário de cadastro de novo PI).
+        if($('#eqdid').val() != ""){
+            // Se existir itens de manutenção oculta campos do formulário 
+            if($('#maiid option').size() > 0){
+                $('.grupo_manutencao').show('slow');
+                // Desabilita a opção de modificar os campos de Título e Descrição.
+                $('[name=plititulo]').attr('readonly', 'readonly');
+                $('[name=plidsc]').attr('readonly', 'readonly');
+                // Oculta os campos de metas PPA e PNC
+                $('.div_metas_ppa_pnc').hide('slow');
+            } else {
+                $('.grupo_manutencao').hide('slow');
+                // Habilita a opção de modificar os campos de Título e Descrição.
+                $('[name=plititulo]').removeAttr('readonly');
+                $('[name=plidsc]').removeAttr('readonly');
+                // Exibe os campos de metas PPA e PNC
+                $('.div_metas_ppa_pnc').show('slow');
+            }
+        }
     }
 
     /**
@@ -1881,11 +1892,14 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'oppid', 'mppid', 'ippid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
 
         // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
         if($('#maiid option').size() > 0){
             listaObrigatorios.push('maiid', 'masid');
+        // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
+        } else {
+            listaObrigatorios.push('oppid', 'mppid', 'ippid');
         }
 
         // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.

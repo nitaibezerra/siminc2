@@ -539,7 +539,7 @@ DML;
 
             <div class="col-md-6">
 
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins div_metas_ppa_pnc">
                     <div class="ibox-title">
                         <h5>Metas </h5>
                     </div>
@@ -570,7 +570,7 @@ DML;
                         </div>
                         <div class="form-group grupo_pnc">
                             <div class="col-md-3 text-right">
-                                <label for="mpnid" class="control-label">Meta PNC: </label>
+                                <label for="mpnid" class="control-label">Meta PNC: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_mpnid">
                                 <?php carregarMetaPNC($dadosPI['ungcod'], $dadosPI['mpnid']); ?>
@@ -578,7 +578,7 @@ DML;
                         </div>
                         <div class="form-group grupo_pnc">
                             <div class="col-md-3 text-right">
-                                <label for="ipnid" class="control-label">Indicador PNC: </label>
+                                <label for="ipnid" class="control-label">Indicador PNC: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_ipnid">
                                 <?php carregarIndicadorPNC($dadosPI['mpnid'], $dadosPI['ipnid']); ?>
