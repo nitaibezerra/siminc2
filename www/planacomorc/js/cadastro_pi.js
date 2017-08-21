@@ -248,6 +248,24 @@
             atualizarTotalFinanceiro();
         });
 
+        // Evento ao mudar clicar no código do PI
+        $('#span-plicod').click(function(){
+            var codPi = $('#span-plicod').html();
+            $('#span-plicod').hide();
+            $('#plicod').show().focus();
+        });
+
+        // Evento ao alterar o valor do código do PI
+        $('#plicod').change(function(){
+            $('#span-plicod').load('?modulo=principal/unidade/cadastro_pi&acao=A&alterarCodigoPi=ok&pliid='+$('#pliid').val() + '&plicod=' + $('#plicod').val());
+        });
+
+        // Evento ao mudar sair do campo de código do PI
+        $('#plicod').blur(function(){
+            $('#plicod').hide();
+            $('#span-plicod').show();
+        });
+
         $('#capid').change(function(){
 
             $.ajax({
