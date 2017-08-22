@@ -587,7 +587,7 @@ DML;
                     </div>
                 </div>
 
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins div_produto_pi">
                     <div class="ibox-title">
                         <h5>Produto PI:</h5>
                     </div>

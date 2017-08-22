@@ -1307,6 +1307,8 @@
                 $('[name=plidsc]').attr('readonly', 'readonly');
                 // Oculta os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').hide('slow');
+                // Oculta os campos do Produto do PI
+                $('.div_produto_pi').hide('slow');
             } else {
                 $('.grupo_manutencao').hide('slow');
                 // Habilita a opção de modificar os campos de Título e Descrição.
@@ -1314,6 +1316,8 @@
                 $('[name=plidsc]').removeAttr('readonly');
                 // Exibe os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').show('slow');
+                // Exibe os campos do Produto do PI
+                $('.div_produto_pi').show('slow');
             }
         }
     }
@@ -1892,14 +1896,14 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'pprid', 'pumid', 'mdeid', 'picquantidade'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'mdeid'];
 
         // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
         if($('#maiid option').size() > 0){
             listaObrigatorios.push('maiid', 'masid');
         // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
         } else {
-            listaObrigatorios.push('oppid', 'mppid', 'ippid');
+            listaObrigatorios.push('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade');
         }
 
         // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
