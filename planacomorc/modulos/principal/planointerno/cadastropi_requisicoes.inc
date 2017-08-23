@@ -52,7 +52,7 @@ if ($_REQUEST['carregarComboEnquadramentoPorSubacao']) {
 	carregarComboEnquadramentoPorSubacao($_POST['sbaid']);
 	exit;
 }
-
+//salvarPI($dados);
 // -- Salvando o novo PI
 if (isset($_REQUEST['evento'])) {
     $func = '';

@@ -1050,7 +1050,7 @@ DML;
                         <div class="form-group">
                             <div class="col-lg-12">
                                 <?php
-                                $sql = "select mescod, mesdsc from public.meses order by mescod";
+                                $sql = "SELECT mescod, mesdsc FROM public.meses ORDER BY mescod";
                                 $meses = $db->carregar($sql);
 
                                 $modelPiCronograma =  new Pi_Cronograma();
@@ -1073,17 +1073,30 @@ DML;
                                 ?>
                                 <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
                                     <tr>
-                                        <td rowspan="2" style="text-align: center;"><b>Mês</b></td>
-                                        <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
-                                            <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>"><b><?php echo $cronograma; ?></b></td>
-                                        <?php } ?>
+                                        <td rowspan="2" style="text-align: center;">
+                                            <b>Mês</b>
+                                        </td>
+                                        <?php 
+                                            $colunaCronograma = 0;
+                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                        ?>
+                                            <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo ($colunaCronograma == 0? 'td_cronograma_fisico': NULL); ?>"><b><?php echo $cronograma; ?></b></td>
+                                        <?php
+                                            $colunaCronograma++;
+                                        }
+                                        ?>
                                     </tr>
                                     <tr style="height: 30px;">
-                                        <?php foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                            foreach($descricaoValores as $cronogramaValor){ ?>
-                                                <td style="text-align: center;"><?php echo $cronogramaValor['crvdsc']; ?></td>
-                                            <?php }
-                                        } ?>
+                                        <?php
+                                            $colunaCronograma = 0;
+                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                                foreach($descricaoValores as $cronogramaValor){ ?>
+                                                    <td style="text-align: center;" class="<?php echo ($colunaCronograma == 0? 'td_cronograma_fisico': NULL); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                            <?php
+                                                    $colunaCronograma++;
+                                                }
+                                        }
+                                        ?>
                                     </tr>
                                     <?php foreach($meses as $mes){ ?>
                                         <tr style="height: 30px;">
@@ -1096,7 +1109,7 @@ DML;
                                                     default: $class = '';
                                                 }
                                                 ?>
-                                                <td>
+                                            <td class="<?php echo ($cronogramaValor['croid'] == Cronograma::K_FISICO? 'td_cronograma_fisico': NULL); ?>">
                                                     <?php
                                                         $pcrid = $pcrvalor = '';
                                                         if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
@@ -1127,12 +1140,12 @@ DML;
                                                     <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
                                                     <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
                                                 </td>
-                                            <?php }?>
+                                            <?php } ?>
                                         </tr>
                                     <?php } ?>
                                     <tr style="height: 30px; ">
                                         <td style="text-align: left;">Total:</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_fisico">0</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio">R$ 0,00</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital">R$ 0,00</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio">R$ 0,00</td>

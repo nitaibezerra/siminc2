@@ -1307,8 +1307,20 @@
                 $('[name=plidsc]').attr('readonly', 'readonly');
                 // Oculta os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').hide('slow');
+                $('#oppid').val('').trigger("chosen:updated");
+                $('#mppid').val('').trigger("chosen:updated");
+                $('#ippid').val('').trigger("chosen:updated");
+                $('#mpnid').val('').trigger("chosen:updated");
+                $('#ipnid').val('').trigger("chosen:updated");
                 // Oculta os campos do Produto do PI
                 $('.div_produto_pi').hide('slow');
+                $('#pprid').val('').trigger("chosen:updated");
+                $('#pumid').val('').trigger("chosen:updated");
+                $('#picquantidade').val('');
+                // Oculta as colunas e campos do Cronograma Físico
+                $('.td_cronograma_fisico').hide('slow');
+                // Apaga os dados do cronograma Físico
+                $('.input_fisico').val('');
             } else {
                 $('.grupo_manutencao').hide('slow');
                 // Habilita a opção de modificar os campos de Título e Descrição.
@@ -1318,6 +1330,9 @@
                 $('.div_metas_ppa_pnc').show('slow');
                 // Exibe os campos do Produto do PI
                 $('.div_produto_pi').show('slow');
+                $('#pumid').val(3).trigger("chosen:updated"); // Deixa default selecionado para opção Unidade.
+                // Exibe as colunas e campos do Cronograma Físico
+                $('.td_cronograma_fisico').show('slow');
             }
         }
     }
@@ -1727,13 +1742,15 @@
         }
 
         // Verifica se o cronograma físico foi preenchido.
-        if(!validarCronogramaFisicoPreenchido()){
-            $('input.input_fisico').addClass('validateRedText');
-            $('#td_total_fisico').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Fisíco');
-        } else {
-            $('input.input_fisico').removeClass('validateRedText');
-            $('#td_total_fisico').removeClass('validateRedText');
+        if($('#maiid option').size() == 0){
+            if(!validarCronogramaFisicoPreenchido()){
+                $('input.input_fisico').addClass('validateRedText');
+                $('#td_total_fisico').addClass('validateRedText');
+                addMsgCustom.push('Cronograma Fisíco');
+            } else {
+                $('input.input_fisico').removeClass('validateRedText');
+                $('#td_total_fisico').removeClass('validateRedText');
+            }
         }
 
         // Verifica se o cronograma orçamentário foi preenchido.

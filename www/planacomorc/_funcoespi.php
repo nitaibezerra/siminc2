@@ -836,7 +836,7 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->picted = $dados['picted'] == 't' ? 't' : 'f';
     $modelPiComplemento->picedital = $dados['picedital'] == 't' ? 't' : 'f';
 
-    $modelPiComplemento->salvar();
+    $modelPiComplemento->salvar(NULL, NULL, array('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade'));
 
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
