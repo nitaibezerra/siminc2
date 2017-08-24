@@ -37,7 +37,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input type="hidden" name="req" id="req" value="salvar" />
 
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover dataTables" >
+                            <table class="table table-striped table-bordered table-hover" >
                                 <thead>
                                 <tr>
                                     <th width="50%">Meta PPA</th>

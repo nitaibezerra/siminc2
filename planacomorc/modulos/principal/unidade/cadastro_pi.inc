@@ -326,6 +326,10 @@ DML;
                                 ?>
                             </div>
                         </div>
+                        <?php
+                        $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+                        echo $simec->select("delegacao[]", 'Sub-Unidades Delegadas', $vinculados, $aSubUnidadeOrcamentaria);
+                        ?>
                         <div style="display: none;" class="form-group">
                             <label for="inputUnidade" class="col-lg-2 control-label">Subação:</label>
                             <div class="col-lg-9 carregaSubacao">
@@ -1213,20 +1217,14 @@ DML;
 
         <div class="form-group">
             <div class="text-center">
-                <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-primary" id="btnVoltar" type="button">Voltar</a>
                 <?php
                 // Só permite editar se tiver em cadastramento
                 if(empty($estadoAtual['esdid']) || in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))){ ?>
-                    <input type="button" class="btn btn-success" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" value="Salvar" <?php echo $disabled; ?> />
-                    <?php if('-' != $tipoTransacao): ?>
-                        <?php if ($_POST['pliid'] && $plisituacao == 'E'): ?>
-                            <input type="button" value="Enviar para Homologação" onclick="vincular('R', '<?php echo $_POST['pliid']; ?>')" style="cursor:pointer" class='btn btn-success' />
-                        <?php endif; ?>
-                    <?php endif; ?>
+                    <button class="btn btn-primary" type="button" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" <?php echo $disabled; ?>><i class="fa fa-check"></i>&nbsp;Salvar</button>
                 <?php } ?>
+                <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
             </div>
         </div>
-        
     </form>
 </div>
 

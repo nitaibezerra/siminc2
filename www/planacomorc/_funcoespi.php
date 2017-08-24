@@ -747,6 +747,7 @@ DML;
 
             // Grava informações complementares
             salvarPiComplemento($pliid, $dados);
+
 //ver(array($dados['ptres'] => $totalValorTemplate));
             // -- Associando o pi aos ptres
             associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValorTemplate));
@@ -843,6 +844,25 @@ function salvarPiComplemento($pliid, $dados)
     associarLocalizacao($pliid, $dados);
     associarResponsavel($pliid, $dados);
     associarCronograma($pliid, $dados);
+    associarDelegacao($pliid, $dados);
+}
+
+function associarDelegacao($pliid, $dados)
+{
+    $mDelegacao = new Planacomorc_Model_PiDelegacao();
+    $mDelegacao->excluirVarios("pliid = '$pliid'");
+    
+    if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
+
+        $mDelegacao->pliid = $pliid;
+
+        foreach($dados['delegacao'] as $suoid){
+            $mDelegacao->suoid = $suoid;
+            $mDelegacao->salvar();
+            
+            $mDelegacao->pdeid = null;
+        }
+    }
 }
 
 function associarAcao($pliid, $dados)
