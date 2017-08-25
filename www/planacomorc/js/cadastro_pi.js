@@ -256,6 +256,10 @@
             $('#plicod').show().focus();
         });
 
+        $('#pprid').change(function(){
+            formatarTelaProdutoNaoAplica($(this).val());
+        });
+
         // Evento ao alterar o valor do código do PI
         $('#plicod').change(function(){
             $('#span-plicod').load('?modulo=principal/unidade/cadastro_pi&acao=A&alterarCodigoPi=ok&pliid='+$('#pliid').val() + '&plicod=' + $('#plicod').val());
@@ -294,6 +298,32 @@
         atualizarTotalFinanceiro();
         
         mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
+        
+        formatarTelaProdutoNaoAplica($('#pprid').val());
+    }
+
+    /**
+     * Formata a tela para não exibir Unidade, quantidade e cronograma físico quando o usuário
+     * selecionar "Não se aplica" ou opções de mesmo sentido.
+     * 
+     * @returns VOID
+     */
+    function formatarTelaProdutoNaoAplica(codigo){
+        if(codigo == intProdNaoAplica){
+            $('.div_unidade_medida').hide('slow');
+            $('#pumid').val('').trigger("chosen:updated");
+            $('.div_quantidade_produto').hide('slow');
+            $('#picquantidade').val('');
+            // Oculta as colunas e campos do Cronograma Físico
+            $('.td_cronograma_fisico').hide('slow');
+            // Apaga os dados do cronograma Físico
+            $('.input_fisico').val('');
+        } else {
+            $('.div_unidade_medida').show();
+            $('.div_quantidade_produto').show();
+            // Exibe as colunas e campos do Cronograma Físico
+            $('.td_cronograma_fisico').show();
+        }
     }
 
     /**
@@ -1741,16 +1771,33 @@
             $('#td_valor_projeto').removeClass('validateRedText');
         }
 
-        // Verifica se o cronograma físico foi preenchido.
+        // Verifica se o usuário escolheu um enquadramento que não tem item de manutenção para verificar a validação do cronograma físico.
         if($('#maiid option').size() == 0){
-            if(!validarCronogramaFisicoPreenchido()){
-                $('input.input_fisico').addClass('validateRedText');
-                $('#td_total_fisico').addClass('validateRedText');
-                addMsgCustom.push('Cronograma Fisíco');
-            } else {
-                $('input.input_fisico').removeClass('validateRedText');
-                $('#td_total_fisico').removeClass('validateRedText');
+            
+            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
+            if($('#pprid').val() != intProdNaoAplica ){
+
+                // Verifica se o cronograma físico foi preenchido.
+                if(!validarCronogramaFisicoPreenchido()){
+                    $('input.input_fisico').addClass('validateRedText');
+                    $('#td_total_fisico').addClass('validateRedText');
+                    addMsgCustom.push('Cronograma Fisíco');
+                } else {
+                    $('input.input_fisico').removeClass('validateRedText');
+                    $('#td_total_fisico').removeClass('validateRedText');
+                }
+
+                // Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
+                if(!validarCronogramaFisicoIgualQuantidade()){
+                    $('input.input_fisico').addClass('validateRedText');
+                    $('#td_total_fisico').addClass('validateRedText');
+                    addMsgCustom.push('Soma dos valores do Cronograma Fisíco está diferente da quantidade informada para o Produto do PI');
+                } else {
+                    $('input.input_fisico').removeClass('validateRedText');
+                    $('#td_total_fisico').removeClass('validateRedText');
+                }
             }
+
         }
 
         // Verifica se o cronograma orçamentário foi preenchido.
@@ -1773,16 +1820,6 @@
         } else {
             $('input.input_financeiro').removeClass('validateRedText');
             $('#td_total_financeiro').removeClass('validateRedText');
-        }
-
-        // Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
-        if(!validarCronogramaFisicoIgualQuantidade()){
-            $('input.input_fisico').addClass('validateRedText');
-            $('#td_total_fisico').addClass('validateRedText');
-            addMsgCustom.push('Soma dos valores do Cronograma Fisíco está diferente da quantidade informada para o Produto do PI');
-        } else {
-            $('input.input_fisico').removeClass('validateRedText');
-            $('#td_total_fisico').removeClass('validateRedText');
         }
 
         // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
@@ -1920,7 +1957,12 @@
             listaObrigatorios.push('maiid', 'masid');
         // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
         } else {
-            listaObrigatorios.push('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade');
+            listaObrigatorios.push('oppid', 'mppid', 'ippid', 'pprid');
+            
+            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
+            if($('#pprid').val() != intProdNaoAplica ){
+                listaObrigatorios.push('pumid', 'picquantidade');
+            }
         }
 
         // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.

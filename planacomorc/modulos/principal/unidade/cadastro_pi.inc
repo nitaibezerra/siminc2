@@ -164,6 +164,7 @@ if ($dadosPI['pliid'] && !$dadosPI['docid']) {
 }
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 $codigoEnquadramentoFinalistico = buscarCodigoEnquadramentoFinalistico((int)$_SESSION['exercicio']);
+$codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
@@ -602,24 +603,24 @@ DML;
                             </div>
                             <div class="col-lg-9">
                                 <?php
-                                $sql = <<<DML
-                                                SELECT
-                                                    pprid AS codigo,
-                                                    pprnome AS descricao
-                                                FROM monitora.pi_produto
-                                                WHERE
-                                                    prsano = '{$_SESSION['exercicio']}'
-                                                    AND pprstatus = 'A'
-                                                ORDER BY
-                                                    descricao
-DML;
+                                    $sql = "
+                                        SELECT
+                                            pprid AS codigo,
+                                            pprnome AS descricao
+                                        FROM monitora.pi_produto
+                                        WHERE
+                                            prsano = '{$_SESSION['exercicio']}'
+                                            AND pprstatus = 'A'
+                                        ORDER BY
+                                            descricao
+                                    ";
 
-                                $pprid = $dadosPI['pprid'];
-                                $db->monta_combo('pprid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
+                                    $pprid = $dadosPI['pprid'];
+                                    $db->monta_combo('pprid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
                                 ?>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group div_unidade_medida">
                             <div class="col-md-3 text-right">
                                 <label for="pumid" class="control-label">Unidade de Medida: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -642,7 +643,7 @@ DML;
                                 ?>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group div_quantidade_produto">
                             <div class="col-md-3 text-right">
                                 <label for="picquantidade" class="control-label">Quantidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -1333,6 +1334,7 @@ DML;
 <script type="text/javascript">
     // Enquadramentos
     intEnqFinalistico = "<?php echo $codigoEnquadramentoFinalistico; ?>";
+    intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
     // Localizações
     intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";
     intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";

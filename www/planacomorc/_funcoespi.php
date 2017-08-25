@@ -1574,6 +1574,23 @@ function buscarCodigoEnquadramentoFinalistico($exercicio) {
     return $codigoFinalistico;
 }
 
+function buscarCodigoProdutoNaoAplica($exercicio) {
+    global $db;
+
+    $sql = "
+        SELECT
+            pprid AS codigo
+        FROM monitora.pi_produto
+        WHERE
+            prsano = '". (int)$exercicio. "'
+            AND pprstatus = 'A'
+            AND tipo = 'N'
+    ";
+    
+    $codigo = $db->pegaUm($sql);
+    return $codigo;
+}
+
 function inativarPI($dados) {
     global $db;
     $sql = <<<DML
