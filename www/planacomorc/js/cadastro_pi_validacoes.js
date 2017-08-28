@@ -13,7 +13,7 @@
             listaObrigatorios.push('maiid', 'masid');
         // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
         } else {
-            listaObrigatorios.push('oppid', 'mppid', 'ippid', 'pprid');
+            listaObrigatorios.push('oppid', 'mppid', 'pprid');
             
             // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
             if($('#pprid').val() != intProdNaoAplica ){

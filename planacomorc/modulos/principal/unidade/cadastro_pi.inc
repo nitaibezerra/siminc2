@@ -569,7 +569,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label for="ippid" class="control-label">Iniciativa PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label for="ippid" class="control-label">Iniciativa PPA: </label>
                             </div>
                             <div class="col-lg-9 div_ippid">
                                 <?php carregarIniciativaPPA($dadosPI['oppid'], $dadosPI['ippid']); ?>
