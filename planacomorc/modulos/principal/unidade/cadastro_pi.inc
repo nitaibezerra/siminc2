@@ -175,7 +175,9 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script language="JavaScript" src="../includes/funcoesspo.js"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi.js"></script>
+<script src="js/cadastro_pi_funcoes.js"></script>
+<script src="js/cadastro_pi_validacoes.js"></script>
+<script src="js/cadastro_pi_init.js"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -420,7 +422,7 @@ DML;
                                     eqddsc
 DML;
                                 $eqdid = $dadosPI['eqdid'];
-                                $db->monta_combo('eqdid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
+                                $db->monta_combo('eqdid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
                                 ?>
                             </div>
                         </div>
@@ -616,7 +618,7 @@ DML;
                                     ";
 
                                     $pprid = $dadosPI['pprid'];
-                                    $db->monta_combo('pprid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
+                                    $db->monta_combo('pprid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
                                 ?>
                             </div>
                         </div>
@@ -639,7 +641,7 @@ DML;
                                     ";
 
                                     $pumid = !empty($dadosPI['pumid'])? $dadosPI['pumid']: '3';
-                                    $db->monta_combo('pumid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
+                                    $db->monta_combo('pumid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
                                 ?>
                             </div>
                         </div>
@@ -680,7 +682,7 @@ DML;
 DML;
 
                                 $mdeid = $dadosPI['mdeid'];
-                                $db->monta_combo('mdeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
+                                $db->monta_combo('mdeid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'mdeid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mdeid) ? $mdeid : null));
                                 ?>
                             </div>
                         </div>
@@ -700,7 +702,7 @@ DML;
                                 <?php
                                 $plilivre = $dadosPI['plilivre'] ? $dadosPI['plilivre'] : '';
                                 $opcoes = array(
-                                    'evtkeyup' => 'atualizarCodigoLivre();atualizarPrevisaoPI();',
+                                    'evtkeyup' => 'atualizarCodigoLivre();',
                                     'size' => 10
                                 );
                                 inputTexto('plilivre', $plilivre, 'idCodificacao', 2, false, $opcoes);
@@ -726,7 +728,7 @@ DML;
                                 descricao
 DML;
                                 $capid = $dadosPI['capid'];
-                                $db->monta_combo('capid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($capid) ? $capid : null));
+                                $db->monta_combo('capid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'capid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($capid) ? $capid : null));
                                 ?>
                             </div>
                         </div>
