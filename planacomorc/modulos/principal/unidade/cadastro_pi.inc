@@ -19,7 +19,34 @@ include_once APPRAIZ . "planacomorc/classes/Pi_Convenio.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Responsavel.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Acao.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
+include_once APPRAIZ . "planacomorc/classes/Pi_Anexo.class.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
+
+//ver($_POST, $_FILES, $_REQUEST, d);
+
+if($_REQUEST['uploadAnexo']){
+    $campos = array(
+        'angdsc'       => "'{$_REQUEST['arqdescricao']}'",
+        'angtip'       => "'PI'",
+        'angtipoanexo' => "'D'",
+        'angano'       => "'{$_SESSION['exercicio']}'"
+    );
+    $file = new FilesSimec('anexogeral', $campos, 'planacomorc');
+    if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
+        echo simec_json_encode(array(
+            'arqid' => $file->getIdArquivo(),
+            'arqnome' => $_FILES['file']['name'],
+            'arqdescricao' => $_REQUEST['arqdescricao']
+        ));
+        die();
+    }else{
+        echo simec_json_encode(array(
+            'error' => 1,
+            'errorMensage' => 'Não foi possível enviar o arquivo!'
+        ));
+        die();
+    }
+}
 
 if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
@@ -123,7 +150,7 @@ DML;
     $whereUO = " AND {$whereUO}";
 }*/
 
-$aSniic = $aConvenio = $aLocalizacao = $aResponsavel = [];
+$listaDeAnexos = $aSniic = $aConvenio = $aLocalizacao = $aResponsavel = [];
 if (validaRequisicao('pliid')) { // -- Edição de PI
 
     $pliid = $_REQUEST['pliid'];
@@ -140,6 +167,7 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     $aConvenio = (new Pi_Convenio())->recuperarTodos('*', array('pliid = ' . $pliid));
     $aLocalizacao = (new Pi_Localizacao())->recuperarPorPlanoInterno($pliid, $dadosPI['esfid']);
     $aResponsavel = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    $listaDeAnexos = (new Pi_Anexo())->recuperarPorPlanoInterno($pliid);
 
     // -- Requisição de apagar transação - Não exibe os botões do rodapé, e nem valida o formulário
     if (validaRequisicao('apagar')) {
@@ -844,7 +872,7 @@ DML;
                                                 <td style="text-align: left;"><?php echo $localizacao['mundescricao']; ?></td>
                                                 <td style="text-align: center;">
                                                     <input type="hidden" value="<?php echo $localizacao['muncod']; ?>" name="listaLocalizacao[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" >
+                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" />
                                                 </td>
                                             </tr>
                                         <?php }
@@ -868,7 +896,7 @@ DML;
                                                 <td style="text-align: left;"><?php echo $localizacao['estdescricao']; ?></td>
                                                 <td style="text-align: center;">
                                                     <input type="hidden" value="<?php echo $localizacao['estuf']; ?>" name="listaLocalizacaoEstadual[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" >
+                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" />
                                                 </td>
                                             </tr>
                                         <?php }
@@ -889,7 +917,7 @@ DML;
                                                 <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
                                                 <td style="text-align: center;">
                                                     <input type="hidden" value="<?php echo $localizacao['paiid']; ?>" name="listaLocalizacaoExterior[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" >
+                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" />
                                                 </td>
                                             </tr>
                                         <?php }
@@ -931,7 +959,7 @@ DML;
                                             <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
                                             <td style="text-align: center;">
                                                 <input type="hidden" value="<?php echo $responsavel['usucpf']; ?>" name="listaResponsaveis[]">
-                                                <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" >
+                                                <span class="glyphicon glyphicon-trash btnRemoverResponsaveis link" data-responsaveis="<?php echo $responsavel['pirid']; ?>" />
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -1045,7 +1073,42 @@ DML;
                     </div>
                 </div>
 
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Anexos</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    <tr>
+                                        <td style="text-align: left;"><b>Nome do arquivo</b></td>
+                                        <td style="text-align: left;"><b>Descrição</b></td>
+                                        <td style="text-align: center;"><b>Ação</b></td>
+                                    </tr>
+                                    <?php foreach($listaDeAnexos as $anexo){ ?>
+                                        <tr style="height: 30px;" class="tr_anexo_<?php echo $anexo['arqid']; ?>" >
+                                            <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
+                                            <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
+                                            <td style="text-align: center;">
+                                                <input type="hidden" value="<?php echo $anexo['arqid']; ?>" name="listaAnexos[]">
+                                                <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos="<?php echo $anexo['arqid']; ?>" />
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <div class="col-lg-12">
+                                <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
+
             <div class="col-md-6">
 
                 <div class="ibox float-e-margins">
@@ -1323,6 +1386,36 @@ DML;
                     </div>
                     <div class="modal-body">
                         <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_upload" class="modal fade">
+            <div class="modal_dialog_upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&uploadAnexo=1" id="formularioAnexo" name="formularioAnexo">
+                            <div class="form-group">
+                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                </div>
+                            </div>
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>

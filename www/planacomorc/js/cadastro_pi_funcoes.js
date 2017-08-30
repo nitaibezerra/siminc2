@@ -877,6 +877,25 @@
         }
     }
 
+    function abrirModalUpload() {
+        $('.modal_dialog_upload').show();
+        $('#modal_upload').modal();
+        $('#modal_upload .chosen-container').css('width', '100%');
+    }
+
+    function inserirNovoAnexo(json){
+        var trHtml = '<tr style="height: 30px;" class="tr_anexos_'+ json.arqid +'" >'
+            + '                    <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('+ json.arqid+ '); return false;" >'+ json.arqnome +'</a></td>'
+            + '                    <td style="text-align: left;">'+ json.arqdescricao +'</td>'
+            + '                    <td style="text-align: center;">'
+            + '                         <input type="hidden" value="'+ json.arqid +'" name="listaAnexos[]">'
+            + '                         <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo '+ json.arqnome+ '" data-anexos="'+ json.arqid +'" >'
+            + '                    </td>'
+            + '                </tr>'
+        ;
+        $('#table_anexos').append(trHtml);
+    }
+
    /**
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
     */

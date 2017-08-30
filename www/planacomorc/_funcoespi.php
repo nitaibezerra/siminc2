@@ -843,8 +843,9 @@ function salvarPiComplemento($pliid, $dados)
     associarSniic($pliid, $dados);
     associarLocalizacao($pliid, $dados);
     associarResponsavel($pliid, $dados);
+    associarAnexos($pliid, $dados);
     associarCronograma($pliid, $dados);
-    associarDelegacao($pliid, $dados);
+//    associarDelegacao($pliid, $dados); // comentado pq estava dando erro em desenvolvimento por não existir a classe. @todo enviar o arquivo pro repositorio.
 }
 
 function associarDelegacao($pliid, $dados)
@@ -945,6 +946,25 @@ function associarResponsavel($pliid, $dados)
     }
 }
 
+function associarAnexos($pliid, $dados)
+{
+    include_once APPRAIZ . "planacomorc/classes/Pi_Anexo.class.inc";
+    
+    $modelPiAnexo = new Pi_Anexo();
+    
+    # Excluindo vinculo de anexos
+    $modelPiAnexo->excluirVarios("pliid = $pliid");
+    
+    if(isset($dados['listaAnexos']) && is_array($dados['listaAnexos'])){
+        # Vinculando Anexos
+        $modelPiAnexo->pliid = $pliid;
+        foreach($dados['listaAnexos'] as $arqid){
+            $modelPiAnexo->arqid = $arqid;
+            $modelPiAnexo->salvar();
+            $modelPiAnexo->piaid = null;
+        }
+    }
+}
 
 function associarLocalizacao($pliid, $dados)
 {

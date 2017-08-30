@@ -160,6 +160,11 @@
             var cpf = $(this).attr('data-responsaveis');
             $('.tr_responsaveis_'+ cpf).remove();
         });
+        
+        $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
+            var id = $(this).attr('data-anexos');
+            $('.tr_anexos_'+ id).remove();
+        });
 
         // Evento ao carregar a tela
         controlarEdital($('#picedital').is(':checked'));
@@ -183,6 +188,49 @@
         $('#btn_selecionar_localizacao_exterior').click(function(){
             abrirModalLocalizacaoExterior();
         });
+        
+        $('#btn_inserir_anexos').click(function(){
+            abrirModalUpload();
+        });
+        
+        $('#btnSalvarAnexo').click(function(){
+            $('#formularioAnexo').submit();
+        });
+
+        // Evento de terminar de carregar arquivos
+        Dropzone.options.formularioAnexo = {
+            init: function() {
+                
+                this.on("success", function(file, response){
+                    var jsonResponse = $.parseJSON(response);
+                    inserirNovoAnexo(jsonResponse);
+//                    console.log(jsonResponse.arqid);
+//                    console.log(jsonResponse.arqnome);
+//                    console.log(jsonResponse.arqdescricao);
+                });
+
+                this.on("queuecomplete", function(file){
+
+                    // Armazena o objeto Dropzone para chamar métodos
+                    objFormularioAnexo = this;
+                    // Chama mensagem de sucesso
+                    swal({
+                      title: "",
+                      text: "Arquivos salvos com sucesso!",
+                      timer: 2000,
+                      showConfirmButton: false,
+                      type: "success"
+                    }, function(){
+                        // Fecha o swal alert
+                        swal.close();
+                        // limpa campo de upload
+                        objFormularioAnexo.removeAllFiles();
+                        // fecha modal após a seleção
+                        $('#modal_upload').modal('hide');
+                    });
+                });
+            }
+        };
 
         $('#esfid').change(function(){
             controlarTipoLocalizacao($(this).val());
