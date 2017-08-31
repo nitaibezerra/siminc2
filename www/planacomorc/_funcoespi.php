@@ -845,14 +845,14 @@ function salvarPiComplemento($pliid, $dados)
     associarResponsavel($pliid, $dados);
     associarAnexos($pliid, $dados);
     associarCronograma($pliid, $dados);
-//    associarDelegacao($pliid, $dados); // comentado pq estava dando erro em desenvolvimento por não existir a classe. @todo enviar o arquivo pro repositorio.
+    associarDelegacao($pliid, $dados); // comentado pq estava dando erro em desenvolvimento por não existir a classe. @todo enviar o arquivo pro repositorio.
 }
 
 function associarDelegacao($pliid, $dados)
 {
     $mDelegacao = new Planacomorc_Model_PiDelegacao();
     $mDelegacao->excluirVarios("pliid = '$pliid'");
-    
+
     if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
 
         $mDelegacao->pliid = $pliid;

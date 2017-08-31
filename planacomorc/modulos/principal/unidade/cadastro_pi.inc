@@ -168,6 +168,7 @@ if (validaRequisicao('pliid')) { // -- Edição de PI
     $aLocalizacao = (new Pi_Localizacao())->recuperarPorPlanoInterno($pliid, $dadosPI['esfid']);
     $aResponsavel = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     $listaDeAnexos = (new Pi_Anexo())->recuperarPorPlanoInterno($pliid);
+    $listaSubUnidadesDelegadas = (new Planacomorc_Model_PiDelegacao())->recuperarIdPorPlanoInterno($pliid, $_SESSION['exercicio']);
 
     // -- Requisição de apagar transação - Não exibe os botões do rodapé, e nem valida o formulário
     if (validaRequisicao('apagar')) {
@@ -359,7 +360,7 @@ DML;
                         </div>
                         <?php
                         $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
-                        echo $simec->select("delegacao[]", 'Sub-Unidades Delegadas', $vinculados, $aSubUnidadeOrcamentaria);
+                        echo $simec->select("delegacao[]", 'Sub-Unidades Delegadas', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
                         ?>
                         <div style="display: none;" class="form-group">
                             <label for="inputUnidade" class="col-lg-2 control-label">Subação:</label>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe de mapeamento da entidade planacomorc.pi_delegacao
  *
@@ -10,9 +11,7 @@
  * @link     no link
  */
 
-
 require_once APPRAIZ .'includes/classes/Modelo.class.inc';
-
 
 /**
  * Planacomorc_Model_Pi_delegacao
@@ -61,5 +60,46 @@ class Planacomorc_Model_PiDelegacao extends Modelo
         'suoid' => null,
     );
 
+    public function recuperarPorPlanoInterno($pliid, $exercicio)
+    {
+        $sql = "
+            SELECT
+                suo.suoid AS codigo,
+                suo.suocod || ' - ' || suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN planacomorc.pi_delegacao pd ON(suo.suoid = pd.suoid)
+            WHERE
+                suo.suostatus = 'A'
+                AND pliid = ". (int)$pliid. "
+                AND suo.prsano = '". (int)$exercicio. "'
+        ";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+    
+    public function recuperarIdPorPlanoInterno($pliid, $exercicio)
+    {
+        $sql = "
+            SELECT
+                suo.suoid
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN planacomorc.pi_delegacao pd ON(suo.suoid = pd.suoid)
+            WHERE
+                suo.suostatus = 'A'
+                AND pliid = ". (int)$pliid. "
+                AND suo.prsano = '". (int)$exercicio. "'
+        ";
+
+        $dados = $this->carregar($sql);
+        $dados ? $dados : [];
+        
+        $listaId = [];
+        foreach($dados as $dado){
+            $listaId[] = $dado['suoid'];
+        }
+        return $listaId;
+    }
+    
 }//end Class
 ?>
