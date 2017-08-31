@@ -1088,7 +1088,7 @@ DML;
                                         <td style="text-align: center;"><b>Ação</b></td>
                                     </tr>
                                     <?php foreach($listaDeAnexos as $anexo){ ?>
-                                        <tr style="height: 30px;" class="tr_anexo_<?php echo $anexo['arqid']; ?>" >
+                                        <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
                                             <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
                                             <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
                                             <td style="text-align: center;">
