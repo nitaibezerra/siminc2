@@ -1230,58 +1230,6 @@ DML;
                 </div>
             </div>
         </div>
-
-        <div style="display: none;" class="form-group">
-            <label for="inputUnidade" class="col-lg-2 control-label">Previsão PI:</label>
-            <div class="col-lg-9">
-                <table class="table table-striped table-bordered table-hover">
-                    <tr style="text-align:center">
-                        <td style="width:30px;height:20px"><b>Enquadramento</b></td>
-                        <td colspan="3"><b>Sequencial</b></td>
-                        <td style="width:30px;height:20px"><b>Segmento</b></td>
-                        <td style="width:30px;height:20px"><b>Pactuação</b></td>
-                        <td style="width:30px;height:20px"><b>Codificação</b></td>
-                        <td style="width:30px;height:20px"><b>Área</b></td>
-                    </tr>
-                    <tr style="text-align:center">
-                        <td style="width:30px;height:20px">
-                            <span id="enquadramento"><?php echo $dadosPI['eqdcod']; ?></span>
-                        </td>
-                        <td style="width:30px;height:20px" colspan="3">
-                            <span id="subacao"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
-                        </td>
-                        <td style="width:30px;height:20px">
-                            <span id="nivel"><?php echo $dadosPI['neecod']; ?></span>
-                        </td>
-                        <td style="width:30px;height:20px">
-                            <span id="apropriacao"><?php echo $dadosPI['capcod']; ?></span>
-                        </td>
-                        <td style="width:30px;height:20px">
-                            <span id="codificacao"><?php echo $dadosPI['plilivre']; ?></span>
-                        </td>
-                        <td style="width:30px;height:20px">
-                            <span id="modalidade"><?php echo $dadosPI['mdecod']; ?></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8" align="center">
-                            <b>Código PI / SIAFI:
-                                <div id="codigoPi" style="display:inline;">
-                                    <span id="enquadramento_i"><?php echo $dadosPI['eqdcod']; ?></span>
-                                    <!--//<span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? 'XXXX' : $dadosPI['sbacod']); ?></span>-->
-                                    <span id="subacao_i"><?php echo (empty($dadosPI['sbacod']) ? $dadosPI['plicodsubacao'] : $dadosPI['sbacod']); ?></span>
-                                    <span id="nivel_i"><?php echo $dadosPI['neecod']; ?></span>
-                                    <span id="apropriacao_i"><?php echo $dadosPI['capcod']; ?></span>
-                                    <span id="codificacao_i"><?php echo $dadosPI['plilivre']; ?></span>
-                                    <span id="modalidade_i"><?php echo $dadosPI['mdecod']; ?></span>
-                                </div>
-                            </b>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="text-center">
                 <?php
@@ -1295,7 +1243,6 @@ DML;
     </form>
 </div>
 
-<div id="divTeste"></div>
 <div class="row">
     <div class="col-md-12">
         <div id="modal-ptres" class="modal fade">

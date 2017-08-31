@@ -52,6 +52,15 @@ if ($_REQUEST['carregarComboEnquadramentoPorSubacao']) {
 	carregarComboEnquadramentoPorSubacao($_POST['sbaid']);
 	exit;
 }
+
+$perfis = pegaPerfilGeral();
+
+if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
+    $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter&acao=A';
+} else {
+    $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter&acao=A';
+}
+
 //salvarPI($dados);
 // -- Salvando o novo PI
 if (isset($_REQUEST['evento'])) {
@@ -72,7 +81,7 @@ if (isset($_REQUEST['evento'])) {
             break;
     }
     if (!$func) {
-        $msg = 'Sua requisição é inválida.';
+        simec_redirecionar($href, 'error');
     } else {
         $retorno = false;
         if ('salvarPI' == $func) {
@@ -82,23 +91,11 @@ if (isset($_REQUEST['evento'])) {
             $retorno = $func($_REQUEST);
         }
         if ($retorno) {
-            $msg = 'Sua requisição foi executada com sucesso.';
+            simec_redirecionar($href, 'success');
         } else {
-            $msg = 'Não foi possível realizar sua requisição.';
+            simec_redirecionar($href, 'error');
         }
     }
-    $perfis = pegaPerfilGeral();
-
-    if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
-        $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter&acao=A';
-    } else {
-        $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter&acao=A';
-    }
-?>
-<script type="text/javascript">
-    alert('<?php echo $msg; ?>');
-    window.location.href="<?php echo $href; ?>";
-</script>
-<?php
+    
     exit;
 }
