@@ -92,7 +92,7 @@ class Planacomorc_Model_PiDelegacao extends Modelo
         ";
 
         $dados = $this->carregar($sql);
-        $dados ? $dados : [];
+        $dados = $dados ? $dados : [];
         
         $listaId = [];
         foreach($dados as $dado){
