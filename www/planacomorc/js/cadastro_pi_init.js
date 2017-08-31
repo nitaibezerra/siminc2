@@ -45,7 +45,7 @@
             visualizarRegistro($(this).attr('ptrid'));
         });
 
-        $('#ungcod').change();
+        carregarLimitesUnidade($('#ungcod').val());
         carregarSaldoFuncional();
 
         // Evento ao mudar opção de enquadramento
