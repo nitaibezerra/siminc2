@@ -194,11 +194,14 @@ if ($dadosPI['pliid'] && !$dadosPI['docid']) {
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 $codigoEnquadramentoFinalistico = buscarCodigoEnquadramentoFinalistico((int)$_SESSION['exercicio']);
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
+$listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
+//ver($listaEqdidReduzido, d);
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
+
 ?>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
 <script language="JavaScript" src="../includes/funcoesspo.js"></script>
@@ -439,19 +442,19 @@ DML;
                             </div>
                             <div class="col-lg-9 carregaEnq">
                                 <?php
-                                $sql = <<<DML
-                                SELECT
-                                    eqdid AS codigo,
-                                    eqddsc AS descricao
-                                FROM monitora.pi_enquadramentodespesa
-                                WHERE
-                                    eqdstatus = 'A'
-                                    AND eqdano = '{$_SESSION['exercicio']}'
-                                ORDER BY
-                                    eqddsc
+                                    $sql = <<<DML
+                                        SELECT
+                                            eqdid AS codigo,
+                                            eqddsc AS descricao
+                                        FROM monitora.pi_enquadramentodespesa
+                                        WHERE
+                                            eqdstatus = 'A'
+                                            AND eqdano = '{$_SESSION['exercicio']}'
+                                        ORDER BY
+                                            eqddsc
 DML;
-                                $eqdid = $dadosPI['eqdid'];
-                                $db->monta_combo('eqdid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
+                                    $eqdid = $dadosPI['eqdid'];
+                                    $db->monta_combo('eqdid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
                                 ?>
                             </div>
                         </div>
@@ -1386,6 +1389,7 @@ DML;
     // Manutenção item
     intMaiid = '<?php echo $dadosPI['maiid']; ?>';
     strEsdPiCadastramento = '<?php echo (!empty($estadoAtual['esdid']) && !in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))) ?>';
+    listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
 
     $(document).ready(function() {
         

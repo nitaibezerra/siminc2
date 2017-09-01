@@ -390,7 +390,7 @@ function carregarManutencaoItem($eqdid, $maiid = null) {
     if($dados){
         $db->monta_combo('maiid', $dados, 'S', 'Selecione', '', null, null, null, 'N', 'maiid', null, (isset($maiid) ? $maiid : null), null, 'class="form-control chosen-select" style="width=100%;"');
     } else {
-        echo '';
+        $db->monta_combo('maiid', array(), 'S', 'Selecione', '', null, null, null, 'N', 'maiid', null, (isset($maiid) ? $maiid : null), null, 'class="form-control chosen-select" style="width=100%;"');
     }
 }
 
@@ -400,12 +400,18 @@ function carregarManutencaoItem($eqdid, $maiid = null) {
 function carregarManutencaoSubItem($maiid, $masid = null) {
     global $db;
 
-    $sql = "SELECT masid AS codigo, masnome AS descricao
-            FROM planacomorc.manutencaosubitem
-            WHERE prsano = '{$_SESSION['exercicio']}'
+    $sql = "
+        SELECT
+            masid AS codigo,
+            masnome AS descricao
+        FROM planacomorc.manutencaosubitem
+        WHERE
+            prsano = '{$_SESSION['exercicio']}'
             AND masstatus = 'A'
             AND maiid = ". (int)$maiid. "
-            ORDER BY descricao";
+        ORDER BY
+            descricao";
+//ver($sql,d);
     $db->monta_combo('masid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'masid', null, (isset($masid) ? $masid : null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
@@ -1609,6 +1615,29 @@ function buscarCodigoProdutoNaoAplica($exercicio) {
     
     $codigo = $db->pegaUm($sql);
     return $codigo;
+}
+
+function buscarListaCodigoEnquadramentoReduzido($exercicio) {
+    $lista = array();
+    global $db;
+    $sql = "
+        SELECT
+            eqdid
+        FROM monitora.pi_enquadramentodespesa
+        WHERE
+            eqdstatus = 'A'
+            AND eqdstreduzido = 'S'
+            AND eqdano = '". (int)$exercicio. "'
+    ";
+    
+    $listaConsulta = $db->carregar($sql);
+    if($listaConsulta){
+        foreach($listaConsulta as $interacao => $enquadramento){
+            $lista[] = $enquadramento['eqdid'];
+        }
+    }
+    
+    return $lista;
 }
 
 function inativarPI($dados) {

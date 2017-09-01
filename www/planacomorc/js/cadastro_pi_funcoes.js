@@ -810,6 +810,20 @@
             break;
         }
     }
+    
+    /**
+     * Verifica se o formulário é reduzido ou completo.
+     * 
+     * @returns boolean retorna true se o formulário for reduzido.
+     */
+    function verificarFormularioReduzido(){
+        var resultado = false;
+        if($.inArray($('#eqdid').val(), listaEqdReduzido) >= 0){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
 
     function abrirModalResponsaveis() {
         // Verifica se o modal terá que carregar a tela.
@@ -1010,21 +1024,42 @@
     function carregarManutencaoItem(codigo) {
         $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo + '&maiid=' + intMaiid, function(response) {
             $('#maiid').remove();
+            $('#masid option').not('option[value=""]').remove();
             $('#masid').val('').trigger("chosen:updated");
             $('.div_maiid').html(response);
             formatarTelaEnquadramentoComManutencaoItem();
         });
     }
     
+    /**
+     * Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
+     * 
+     * @returns VOID
+     */
+    function exibirOpcoesItemManutencao(){
+        if($('#maiid option').not('option[value=""]').size() > 0){
+            $('.grupo_manutencao').show('slow');
+            // Desabilita a opção de modificar os campos de Título e Descrição.
+            $('[name=plititulo]').attr('readonly', 'readonly');
+            $('[name=plidsc]').attr('readonly', 'readonly');
+        } else {
+            $('.grupo_manutencao').hide('slow');
+            // Habilita a opção de modificar os campos de Título e Descrição.
+            $('[name=plititulo]').removeAttr('readonly');
+            $('[name=plidsc]').removeAttr('readonly');
+        }
+    }
+    
     function formatarTelaEnquadramentoComManutencaoItem(){
         // Verifica se o usuário já estiver preenchido o enquadramento(Caso de formulário de cadastro de novo PI).
         if($('#eqdid').val() != ""){
-            // Se existir itens de manutenção oculta campos do formulário 
-            if($('#maiid option').size() > 0){
-                $('.grupo_manutencao').show('slow');
-                // Desabilita a opção de modificar os campos de Título e Descrição.
-                $('[name=plititulo]').attr('readonly', 'readonly');
-                $('[name=plidsc]').attr('readonly', 'readonly');
+            
+            // Se for formulário reduzido
+            if(verificarFormularioReduzido() > 0){
+
+                // Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
+                exibirOpcoesItemManutencao();
+                
                 // Oculta os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').hide('slow');
                 $('#oppid').val('').trigger("chosen:updated");
@@ -1042,10 +1077,9 @@
                 // Apaga os dados do cronograma Físico
                 $('.input_fisico').val('');
             } else {
-                $('.grupo_manutencao').hide('slow');
-                // Habilita a opção de modificar os campos de Título e Descrição.
-                $('[name=plititulo]').removeAttr('readonly');
-                $('[name=plidsc]').removeAttr('readonly');
+                // Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
+                exibirOpcoesItemManutencao();
+                
                 // Exibe os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').show('slow');
                 // Exibe os campos do Produto do PI
