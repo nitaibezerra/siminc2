@@ -824,6 +824,20 @@
         
         return resultado;
     }
+    
+    /**
+     * Verifica se o formulário é Não Orçamentário.
+     * 
+     * @returns boolean retorna true se o formulário for Não Orçamentário.
+     */
+    function verificarFormularioNaoOrcamentario(){
+        var resultado = false;
+        if($('#eqdid').val() == intEnqNaoOrcamentario){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
 
     function abrirModalResponsaveis() {
         // Verifica se o modal terá que carregar a tela.
@@ -922,22 +936,51 @@
     }
 
     /**
-     * Controla a exibição do formulario de acordo com o enquadramento selecionado.
+     * Controla a exibição do formulario se o enquadramento for finalistico.
      *
      * @param integer codigo Código selecionado pelo usuário.
      * @returns VOID
      */
     function mudarFormularioFinalistico(codigo){
-        // Se o código for diferente de Finalistico, o sistema oculta as opções PNC.
-        if(codigo != "" && codigo != intEnqFinalistico){
-            // Oculta as opções Meta PNC e Indicador PNC.
+        // Se o código for Finalistico, o sistema exibe as opções PNC.
+        if(codigo == intEnqFinalistico){
+            // Exibe as opções Meta PNC e Indicador PNC.
+            $('.grupo_pnc').show('slow');
+        } else {
+            // Oculta e apaga as opções Meta PNC e Indicador PNC.
             $('.grupo_pnc').hide('slow');
             // Apaga as opções selecionadas.
             $('#mpnid').val('').trigger("chosen:updated");
             $('#ipnid').val('').trigger("chosen:updated");
+        }
+    }
+    
+    /**
+     * Controla a exibição do formulario se o enquadramento for não orçamentário.
+     *
+     * @param integer codigo Código selecionado pelo usuário.
+     * @returns VOID
+     */
+    function mudarFormularioNaoOrcamentario(codigo){
+        // Se o código for Não Orçamentário, o sistema não exibe as opções PTRES(Funcional), Valor do Projeto, Cronograma Orçamentário e Financeiro.
+        if(codigo == intEnqNaoOrcamentario){
+            // Oculta a opções PTRES(Funcional).
+            $('.div_ptres').hide('slow');
+            // Oculta o quadro de Custeio e Capital com a opção de Valor do Projeto.
+            $('.div_custeio_capital').hide('slow');
+            // Oculta as colunas e campos do Cronograma Orçamentário.
+            $('.td_cronograma_orcamentario').hide('slow');
+            // Oculta as colunas e campos do Cronograma Financeiro.
+            $('.td_cronograma_financeiro').hide('slow');
         } else {
-            // Mostra as opções Meta PNC e Indicador PNC.
-            $('.grupo_pnc').show('slow');
+            // Exibe a opções PTRES(Funcional).
+            $('.div_ptres').show('slow');
+            // Exibe o quadro de Custeio e Capital com a opção de Valor do Projeto.
+            $('.div_custeio_capital').show('slow');
+            // Exibe as colunas e campos do Cronograma Orçamentário.
+            $('.td_cronograma_orcamentario').show('slow');
+            // Exibe as colunas e campos do Cronograma Financeiro.
+            $('.td_cronograma_financeiro').show('slow');
         }
     }
 

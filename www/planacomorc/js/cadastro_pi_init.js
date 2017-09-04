@@ -51,10 +51,12 @@
         // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
+            mudarFormularioNaoOrcamentario($(this).val());
         });
 
         // Evento ao carregar a tela
         mudarFormularioFinalistico($('#eqdid').val());
+        mudarFormularioNaoOrcamentario($('#eqdid').val());
         formatarTelaEnquadramentoComManutencaoItem();
 
         // Evento ao mudar opção de Objetivos PPA

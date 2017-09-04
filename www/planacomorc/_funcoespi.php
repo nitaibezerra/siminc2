@@ -754,9 +754,10 @@ DML;
             // Grava informações complementares
             salvarPiComplemento($pliid, $dados);
 
-//ver(array($dados['ptres'] => $totalValorTemplate));
-            // -- Associando o pi aos ptres
-            associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValorTemplate));
+            if($dados['ptrid']){
+                // -- Associando o pi aos ptres
+                associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValorTemplate));
+            }
 
             // -- Inserindo as novas associações PI/Enquadramento
             associarPIeEnquadramento($pliid, $dados['m_eqdid']);
@@ -805,10 +806,12 @@ DML;
         // Grava informações complementares
         $pliid = $dados['pliid'];
         salvarPiComplemento($pliid, $dados);
-
+        
+        if($dados['ptrid']){
         // -- Inserindo as novas associações PI/PTRES
 //        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
-        associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValorTemplate));
+            associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValorTemplate));
+        }
 
         // -- Inserindo as novas associações PI/Enquadramento
         associarPIeEnquadramento($pliidFinal, $dados['m_eqdid']);
@@ -829,8 +832,8 @@ function salvarPiComplemento($pliid, $dados)
     include_once APPRAIZ . "planacomorc/classes/Pi_Complemento.class.inc";
 
     # Fix - Corrigindo formato dos dados de valores orçámentários
-    $dados['picvalorcusteio'] = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']);
-    $dados['picvalorcapital'] = str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
+    $dados['picvalorcusteio'] = $dados['picvalorcusteio']? str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']): NULL;
+    $dados['picvalorcapital'] = $dados['picvalorcapital']? str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']): NULL;
     
     $modelPiComplemento = new Pi_Complemento($dados['picid']);
     $modelPiComplemento->popularDadosObjeto($dados);
@@ -843,7 +846,7 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->picted = $dados['picted'] == 't' ? 't' : 'f';
     $modelPiComplemento->picedital = $dados['picedital'] == 't' ? 't' : 'f';
 
-    $modelPiComplemento->salvar(NULL, NULL, array('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade'));
+    $modelPiComplemento->salvar(NULL, NULL, array('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade', 'picvalorcusteio', 'picvalorcapital'));
 
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
@@ -1583,7 +1586,43 @@ DML;
     return $dados;
 }
 
-function buscarCodigoEnquadramentoFinalistico($exercicio) {
+/**
+ * Busca nome da classe de acordo com o número da coluna do cronograma.
+ * 
+ * @param integer $numeroColuna
+ * @return string
+ */
+function buscarClasseCronograma($numeroColuna, $cabecalho = FALSE){
+    if($cabecalho === TRUE){
+        $numeroColuna++;
+    }
+    $classTdCronograma = '';
+    switch ($numeroColuna) {
+        case Cronograma::K_FISICO:
+            $classTdCronograma = 'td_cronograma_fisico';
+        break;
+        case Cronograma::K_ORCAMENTARIO:
+            $classTdCronograma = 'td_cronograma_orcamentario';
+        break;
+        case Cronograma::K_FINANCEIRO:
+            $classTdCronograma = 'td_cronograma_financeiro';
+        break;
+        default:
+            $classTdCronograma = 'td_cronograma_financeiro';
+        break;
+    }
+    return $classTdCronograma;
+}
+
+/**
+ * Busca enquadramento por ano do exercício e código.
+ * 
+ * @global cls_banco $db
+ * @param integer $exercicio
+ * @param string $codigo
+ * @return integer
+ */
+function buscarCodigoEnquadramento($exercicio, $codigo) {
     global $db;
 
     $sql = "
@@ -1593,7 +1632,7 @@ function buscarCodigoEnquadramentoFinalistico($exercicio) {
         WHERE
             eqdstatus = 'A'
             AND eqdano = '". (int)$exercicio. "'
-            AND eqdcod = 'F'
+            AND eqdcod = '". pg_escape_string($codigo). "'
     ";
     
     $codigoFinalistico = $db->pegaUm($sql);

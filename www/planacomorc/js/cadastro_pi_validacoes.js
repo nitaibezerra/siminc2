@@ -1,70 +1,16 @@
 
-    /**
-     * Controla a obrigatóriedade dos campos do formulario de acordo com o enquadramento selecionado.
-     *
-     * @returns Array
-     */
-    function definirCamposObrigatorios(){
-        var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'mdeid'];
-
-        // Verifica se o formulário é reduzido ou completo.
-        if(verificarFormularioReduzido()){
-            // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
-            if($('#maiid option').not('option[value=""]').size() > 0){
-                listaObrigatorios.push('maiid', 'masid');
-            // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
-            }
-        } else {
-            listaObrigatorios.push('oppid', 'mppid', 'pprid');
-
-            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
-            if($('#pprid').val() != intProdNaoAplica ){
-                listaObrigatorios.push('pumid', 'picquantidade');
-            }
-        }
-
-        // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
-        if(codigoEnquadramento == intEnqFinalistico){
-            listaObrigatorios.push('mpnid', 'ipnid');
-        }
-
-        if($('#picedital').is(':checked')){
-            listaObrigatorios.push('mes');
-        }
-
-        return listaObrigatorios;
-    }
-
     function submeter(pliid) {
-//        var codsubacao = $('#subacao').text();
-//        if ('' === codsubacao) {
-//            alert('O código da subação não pode ser deixado em branco.');
-//            return false;
-//        }
-
-//        O número do PI será gerado somente após a aprovação do PI pela equipe de Coordenação.
-//        var pi = document.getElementById("enquadramento").innerHTML
-//            + codsubacao
-//            + document.getElementById("nivel").innerHTML
-//            + document.getElementById("apropriacao").innerHTML
-//            + document.getElementById("codificacao").innerHTML
-//            + document.getElementById("modalidade").innerHTML;
-//        $("#plicod").val(pi);
-//
-//        var validado = true;
-//        var l = $('#plicodsubacao').val();
-//        var sub = l.length;
-//        $('plititulo').value = $('prefixotitulo').textContent + $('plititulo').value;
 
         // Msgs personalizadas de validação.
         addMsgCustom = new Array();
 
-        if($('input[name="ptrid"]').size() == 0){
-            $('.legend_funcional').addClass('validateRedText');
-            addMsgCustom.push('Funcional');
-        } else {
-            $('.legend_funcional').removeClass('validateRedText');
+        if(!verificarFormularioNaoOrcamentario()){
+            if($('input[name="ptrid"]').size() == 0){
+                $('.legend_funcional').addClass('validateRedText');
+                addMsgCustom.push('PTRES(Funcional)');
+            } else {
+                $('.legend_funcional').removeClass('validateRedText');
+            }
         }
 
         // Se não for adicionado sniic, acrescenta uma msg ao erro.
@@ -132,20 +78,22 @@
             $('.legend_responsaveis').removeClass('validateRedText');
         }
 
-        // Valida se o usuário preencheu Valor do Projeto - Custeio.
-        if($('#picvalorcusteio').val() == ""){
-            $('#valor_projeto').addClass('validateRedText');
-            addMsgCustom.push('Custeio');
-        } else {
-            $('#valor_projeto').removeClass('validateRedText');
-        }
+        if(!verificarFormularioNaoOrcamentario()){
+            // Valida se o usuário preencheu Valor do Projeto - Custeio.
+            if($('#picvalorcusteio').val() == ""){
+                $('#valor_projeto').addClass('validateRedText');
+                addMsgCustom.push('Custeio');
+            } else {
+                $('#valor_projeto').removeClass('validateRedText');
+            }
 
-        // Valida se o usuário preencheu Valor do Projeto - Capital.
-        if($('#picvalorcapital').val() == ""){
-            $('#valor_projeto').addClass('validateRedText');
-            addMsgCustom.push('Capital');
-        } else {
-            $('#picvalorcapital').removeClass('validateRedText');
+            // Valida se o usuário preencheu Valor do Projeto - Capital.
+            if($('#picvalorcapital').val() == ""){
+                $('#valor_projeto').addClass('validateRedText');
+                addMsgCustom.push('Capital');
+            } else {
+                $('#picvalorcapital').removeClass('validateRedText');
+            }
         }
 
         /*
@@ -172,7 +120,7 @@
             $('#td_valor_projeto').removeClass('validateRedText');
         }
 
-        // Verifica se o usuário escolheu um enquadramento que não tem item de manutenção para verificar a validação do cronograma físico.
+        // Verifica se o usuário escolheu um enquadramento que é do tipo formulario reduzido para verificar a validação do cronograma físico.
         if(!verificarFormularioReduzido()){
 
             // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
@@ -198,63 +146,101 @@
                     $('#td_total_fisico').removeClass('validateRedText');
                 }
             }
-
         }
 
-        // Verifica se o cronograma orçamentário foi preenchido.
-        if(!validarCronogramaOrcamentarioPreenchido()){
-            $('input.input_orcamentario').addClass('validateRedText');
-            $('#td_total_orcamentario_custeio').addClass('validateRedText');
-            $('#td_total_orcamentario_capital').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Orçamentário');
-        } else {
-            $('input.input_orcamentario').removeClass('validateRedText');
-            $('#td_total_orcamentario_custeio').removeClass('validateRedText');
-            $('#td_total_orcamentario_capital').removeClass('validateRedText');
-        }
+        if(!verificarFormularioNaoOrcamentario()){
+            // Verifica se o cronograma orçamentário foi preenchido.
+            if(!validarCronogramaOrcamentarioPreenchido()){
+                $('input.input_orcamentario').addClass('validateRedText');
+                $('#td_total_orcamentario_custeio').addClass('validateRedText');
+                $('#td_total_orcamentario_capital').addClass('validateRedText');
+                addMsgCustom.push('Cronograma Orçamentário');
+            } else {
+                $('input.input_orcamentario').removeClass('validateRedText');
+                $('#td_total_orcamentario_custeio').removeClass('validateRedText');
+                $('#td_total_orcamentario_capital').removeClass('validateRedText');
+            }
 
-        // Verifica se o cronograma financeiro foi preenchido.
-        if(!validarCronogramaFinanceiroPreenchido()){
-            $('input.input_financeiro').addClass('validateRedText');
-            $('#td_total_financeiro').addClass('validateRedText');
-            addMsgCustom.push('Cronograma Financeiro');
-        } else {
-            $('input.input_financeiro').removeClass('validateRedText');
-            $('#td_total_financeiro').removeClass('validateRedText');
-        }
+            // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
+            if(!validarCronogramaOrcamentarioCusteioIgualValorProjeto()){
+                $('.input_orcamentario.custeio').addClass('validateRedText');
+                addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Orçamentário diferente do valor de CUSTEIO do Valor do Projeto');
+            } else {
+                $('.input_orcamentario.custeio').removeClass('validateRedText');
+            }
 
-        // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
-        if(!validarCronogramaOrcamentarioCusteioIgualValorProjeto()){
-            $('.input_orcamentario.custeio').addClass('validateRedText');
-            addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Orçamentário diferente do valor de CUSTEIO do Valor do Projeto');
-        } else {
-            $('.input_orcamentario.custeio').removeClass('validateRedText');
-        }
+            // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
+            if(!validarCronogramaOrcamentarioCapitalIgualValorProjeto()){
+                $('.input_orcamentario.capital').addClass('validateRedText');
+                addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Orçamentário diferente do valor de CAPITAL do Valor do Projeto');
+            } else {
+                $('.input_orcamentario.capital').removeClass('validateRedText');
+            }
+            
+            // Verifica se o cronograma financeiro foi preenchido.
+            if(!validarCronogramaFinanceiroPreenchido()){
+                $('input.input_financeiro').addClass('validateRedText');
+                $('#td_total_financeiro').addClass('validateRedText');
+                addMsgCustom.push('Cronograma Financeiro');
+            } else {
+                $('input.input_financeiro').removeClass('validateRedText');
+                $('#td_total_financeiro').removeClass('validateRedText');
+            }
 
-        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
-        if(!validarCronogramaOrcamentarioCapitalIgualValorProjeto()){
-            $('.input_orcamentario.capital').addClass('validateRedText');
-            addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Orçamentário diferente do valor de CAPITAL do Valor do Projeto');
-        } else {
-            $('.input_orcamentario.capital').removeClass('validateRedText');
-        }
+            // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
+            if(!validarCronogramaFinanceiroCusteioIgualValorProjeto()){
+                $('.input_financeiro.custeio').addClass('validateRedText');
+                addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Financeiro diferente do valor de CUSTEIO do Valor do Projeto');
+            } else {
+                $('.input_financeiro.custeio').removeClass('validateRedText');
+            }
 
-        // Verifica se o valor do cronograma CUSTEIO é superior ao valor do Projeto.
-        if(!validarCronogramaFinanceiroCusteioIgualValorProjeto()){
-            $('.input_financeiro.custeio').addClass('validateRedText');
-            addMsgCustom.push('Soma dos valores de CUSTEIO do Cronograma Financeiro diferente do valor de CUSTEIO do Valor do Projeto');
-        } else {
-            $('.input_financeiro.custeio').removeClass('validateRedText');
-        }
-
-        // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
-        if(!validarCronogramaFinanceiroCapitalIgualValorProjeto()){
-            $('.input_financeiro.custeio').addClass('validateRedText');
-            addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Financeiro diferente do valor de CAPITAL do Valor do Projeto');
-        } else {
-            $('.input_financeiro.custeio').removeClass('validateRedText');
+            // Verifica se o valor do cronograma CAPITAL é superior ao valor do Projeto.
+            if(!validarCronogramaFinanceiroCapitalIgualValorProjeto()){
+                $('.input_financeiro.custeio').addClass('validateRedText');
+                addMsgCustom.push('Soma dos valores de CAPITAL do Cronograma Financeiro diferente do valor de CAPITAL do Valor do Projeto');
+            } else {
+                $('.input_financeiro.custeio').removeClass('validateRedText');
+            }
         }
 
         listaObrigatorios = definirCamposObrigatorios();
         validarFormulario(listaObrigatorios, 'formulario', 'validar('+ pliid +')', addMsgCustom);
+    }
+
+    /**
+     * Controla a obrigatóriedade dos campos do formulario de acordo com o enquadramento selecionado.
+     *
+     * @returns Array
+     */
+    function definirCamposObrigatorios(){
+        var codigoEnquadramento = $('#eqdid').val();
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'mdeid'];
+
+        // Verifica se o formulário é reduzido ou completo.
+        if(verificarFormularioReduzido()){
+            // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
+            if($('#maiid option').not('option[value=""]').size() > 0){
+                listaObrigatorios.push('maiid', 'masid');
+            // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
+            }
+        } else {
+            listaObrigatorios.push('oppid', 'mppid', 'pprid');
+
+            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
+            if($('#pprid').val() != intProdNaoAplica ){
+                listaObrigatorios.push('pumid', 'picquantidade');
+            }
+        }
+
+        // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
+        if(codigoEnquadramento == intEnqFinalistico){
+            listaObrigatorios.push('mpnid', 'ipnid');
+        }
+
+        if($('#picedital').is(':checked')){
+            listaObrigatorios.push('mes');
+        }
+
+        return listaObrigatorios;
     }

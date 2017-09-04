@@ -192,7 +192,8 @@ if ($dadosPI['pliid'] && !$dadosPI['docid']) {
     $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
 }
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
-$codigoEnquadramentoFinalistico = buscarCodigoEnquadramentoFinalistico((int)$_SESSION['exercicio']);
+$codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'F');
+$codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'N');
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
 //ver($listaEqdidReduzido, d);
@@ -272,11 +273,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <label class="control-label" for="plidsc">Descrição / Finalidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
-                                    <textarea class="obrigatorio txareanormal form-control"  rows="10" cols="60" name="plidsc" id="plidsc" maxlength="1000"><?php
-                                        if ($dadosPI['plidsc']) {
-                                            echo $dadosPI['plidsc'];
-                                        }
-                                        ?></textarea>
+                                <textarea class="obrigatorio txareanormal form-control" rows="6" cols="60" name="plidsc" id="plidsc" maxlength="1000"><?php
+                                    if ($dadosPI['plidsc']) {
+                                        echo $dadosPI['plidsc'];
+                                    }
+                                    ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -484,7 +485,7 @@ DML;
                 <div id="div_comentario_estado_atual" style="display: none;"><?php echo wf_pegarComentarioEstadoAtual($dadosPI['docid']); ?></div>
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12 div_ptres">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Detalhamento Orçamentário <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
@@ -1014,7 +1015,7 @@ DML;
 
             <div class="clearfix"></div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 div_custeio_capital">
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -1152,9 +1153,8 @@ DML;
                                         </td>
                                         <?php 
                                             $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                        ?>
-                                            <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo ($colunaCronograma == 0? 'td_cronograma_fisico': NULL); ?>"><b><?php echo $cronograma; ?></b></td>
+                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
+                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
                                         <?php
                                             $colunaCronograma++;
                                         }
@@ -1164,8 +1164,9 @@ DML;
                                         <?php
                                             $colunaCronograma = 0;
                                             foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                                foreach($descricaoValores as $cronogramaValor){ ?>
-                                                    <td style="text-align: center;" class="<?php echo ($colunaCronograma == 0? 'td_cronograma_fisico': NULL); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                foreach($descricaoValores as $cronogramaValor){
+                                            ?>
+                                                <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
                                             <?php
                                                     $colunaCronograma++;
                                                 }
@@ -1183,7 +1184,7 @@ DML;
                                                     default: $class = '';
                                                 }
                                                 ?>
-                                            <td class="<?php echo ($cronogramaValor['croid'] == Cronograma::K_FISICO? 'td_cronograma_fisico': NULL); ?>">
+                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
                                                     <?php
                                                         $pcrid = $pcrvalor = '';
                                                         if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
@@ -1220,10 +1221,10 @@ DML;
                                     <tr style="height: 30px; ">
                                         <td style="text-align: left;">Total:</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio" class="td_cronograma_orcamentario">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital" class="td_cronograma_orcamentario">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio" class="td_cronograma_financeiro">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital" class="td_cronograma_financeiro">R$ 0,00</td>
                                     </tr>
                                 </table>
                             </div>
@@ -1380,6 +1381,7 @@ DML;
 <script type="text/javascript">
     // Enquadramentos
     intEnqFinalistico = "<?php echo $codigoEnquadramentoFinalistico; ?>";
+    intEnqNaoOrcamentario = "<?php echo $codigoEnquadramentoNaoOrcamentario; ?>";
     intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
     // Localizações
     intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";
