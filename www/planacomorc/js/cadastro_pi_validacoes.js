@@ -8,13 +8,16 @@
         var codigoEnquadramento = $('#eqdid').val();
         var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'neeid', 'capid', 'mdeid'];
 
-        // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
-        if($('#maiid option').size() > 0){
-            listaObrigatorios.push('maiid', 'masid');
-        // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
+        // Verifica se o formulário é reduzido ou completo.
+        if(verificarFormularioReduzido()){
+            // Se o formulário possui opções de manutenção item o sistema define como obrigatório o preenchimento dos itens de manutenção.
+            if($('#maiid option').not('option[value=""]').size() > 0){
+                listaObrigatorios.push('maiid', 'masid');
+            // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
+            }
         } else {
             listaObrigatorios.push('oppid', 'mppid', 'pprid');
-            
+
             // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
             if($('#pprid').val() != intProdNaoAplica ){
                 listaObrigatorios.push('pumid', 'picquantidade');
@@ -170,7 +173,7 @@
         }
 
         // Verifica se o usuário escolheu um enquadramento que não tem item de manutenção para verificar a validação do cronograma físico.
-        if($('#maiid option').size() == 0){
+        if(!verificarFormularioReduzido()){
 
             // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
             if($('#pprid').val() != intProdNaoAplica ){
