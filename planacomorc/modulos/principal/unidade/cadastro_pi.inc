@@ -721,7 +721,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="neeid">Segmento Cultural:</label>
+                                <label class="control-label" for="neeid">Segmento Cultural: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_neeid">
                                 <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
