@@ -1,141 +1,144 @@
-vincular-meta-ppa.inc<?php
+<?php
 
-include_once APPRAIZ . "includes/library/simec/Grafico.php";
+$mPtresSubunidade = new Spo_Model_PtresSubunidade();
 
-include_once '_funcoespi.php';
+switch ($_REQUEST['req']){
+    case 'vincular':
+        $mPtresSubunidade->popularDadosObjeto()->salvar();
+        $mPtresSubunidade->commit();
+        die;
+    case 'desvincular':
+        $mPtresSubunidade->excluirVarios("ptrid = {$_REQUEST['ptrid']} and suoid = {$_REQUEST['suoid']}");
+        $mPtresSubunidade->commit();
+        die;
+}
 
-require_once APPRAIZ . 'includes/workflow.php';
-include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
+$aVinculos = $mPtresSubunidade->recuperarPorExercicio($_SESSION['exercicio']);
 
-$oPlanoInterno = new Pi_PlanoInterno();
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
 
-// @TODO - Retirar ano fico de 2017 e colocar $_SESSION['exercicio'];
-
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
 ?>
+
+<style>
+    .table *{
+        font-size: 12px;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+        padding: 5px;
+        padding-top: 8px;
+    }
+</style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Painel de Acompanhamento</h2>
+        <h2>Vincular PTRES com Sub-Unidade Orçamentária</h2>
     </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Valores por Unidades</h5>
-                </div>
-                <div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
-                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-                    ?>
-                </div>
-            </div>
-        </div>
+    <div class="row" id="listagem">
 
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>Valores Autorizados por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
-            </div>
-        </div>
+        <style>
+            .marcado{background-color:#C1FFC1!important}
+            .remover{display:none}
+        </style>
 
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>PI's por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPiUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
-            </div>
-        </div>
+        <script type="text/javascript" lang="JavaScript">
+            jQuery(document).ready(function(){
+                jQuery.expr[':'].contains = function(a, i, m) {
+                    return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+                };
+
+                jQuery("#textFind").keyup(function()
+                {
+                    jQuery('#listagem table tbody tr td').removeClass('marcado');
+                    jQuery('#listagem table tbody tr').removeClass('remover');
+                    stringPesquisa = jQuery("#textFind").val();
+
+                    console.log(stringPesquisa)
+
+                    if (stringPesquisa) {
+                        jQuery('#listagem table tbody tr td:contains(' + stringPesquisa + ')').addClass('marcado');
+                        jQuery('#listagem table tbody tr:not(:contains(' + stringPesquisa + '))').addClass('remover');
+                    }
+                });
+            });
+        </script>
 
         <div class="col-md-12">
+            <input class="normal form-control" type="text" id="textFind" placeholder="Digite aqui o que procura" style="width: 100%; margin-bottom: 10px;" />
+        </div>
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Acompanhamento de Plano Interno</h5>
-                </div>
-                <div class="ibox-content">
+        <?php
 
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables-example" >
-                            <thead>
-                            <tr>
-                                <th>PI</th>
-                                <th>Sub-Unidade</th>
-                                <th>Funcional</th>
-                                <th>PTRES</th>
-                                <th>Vl. Autorizado</th>
-                                <th>Vl. Pago</th>
-                                <th>Vl. Liquidar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($aPropostas as $dados){ ?>
-                                <tr>
-                                    <td><?php echo $dados['planointerno']; ?></td>
-                                    <td><?php echo $dados['unidadeorcamentaria']; ?></td>
-                                    <td><?php echo $dados['acao']; ?></td>
-                                    <td><?php echo $dados['numeroptres']; ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['autorizado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['pago'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dados['empenhadoaliquidar'], 0, ',', '.'); ?></td>
-                                </tr>
-                            <?php } ?>
-                            </tbody>
-                        </table>
+        $aBlocos = [
+            'D' => 'Administração Direta',
+            'V' => 'Vinculadas',
+            'F' => 'Fundo Nacional da Cultura',
+        ];
+        foreach ($aBlocos as $tipo => $descricao) { ?>
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $descricao; ?></h5>
                     </div>
+                    <div class="ibox-content">
+                        <form id="formulario" name="formulario" method="post" class="form-horizontal">
+                            <input type="hidden" name="req" id="req" value="salvar" />
 
+                            <div class="table-responsive">
+                                <?php
+                                $aPtresSubunidade = (new Spo_Model_Ptres())->recuperarPtresSubunidade($_SESSION['exercicio'], $tipo);
+                                ?>
+                                <table class="table table-striped table-bordered table-hover" >
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Ação</th>
+                                        <th>Prog.a</th>
+                                        <th>Local.</th>
+                                        <th>P.O.</th>
+                                        <th>Subunidade Orçamentária</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($aPtresSubunidade as $dados){ ?>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="vincular" data-ptrid="<?php echo $dados['ptrid']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo (!empty($aVinculos[$dados['ptrid']]) && in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) ? 'checked' : '' ; ?> />
+                                            </td>
+                                            <td><?php echo $dados['acacod']; ?></td>
+                                            <td><?php echo $dados['prgcod']; ?></td>
+                                            <td><?php echo $dados['loccod']; ?></td>
+                                            <td><?php echo $dados['plocod']; ?></td>
+                                            <td><?php echo $dados['unosigla'] . ' - ' . $dados['suonome']; ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </div>
 
-<?php
-// -- popup de detalhamento do PI
-bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
-?>
-
 <script>
-    $(document).ready(function(){
-        $('.dataTables-example').DataTable({
-            pageLength: 100,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            "language": {
-                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
-            }
+    $(function(){
+        $('.vincular').click(function(){
+            var acao = $(this).is(':checked') ? 'vincular' : 'desvincular';
+            var ptrid = $(this).data('ptrid');
+            var suoid = $(this).data('suoid');
+            $.ajax({
+                url: 'planacomorc.php?modulo=apoio/vincular-ptres&acao=A&req=' + acao + '&ptrid=' + ptrid + '&suoid=' + suoid
+            });
         });
-    });
-
-    function detalhePI(pliid) {
-        $('#detalhepi .modal-body').empty();
-        $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPi&pliid=" + pliid, function(html) {
-            $('#detalhepi .modal-body').html(html);
-            $('#detalhepi').modal();
-        });
-    }
-
+    })
 </script>

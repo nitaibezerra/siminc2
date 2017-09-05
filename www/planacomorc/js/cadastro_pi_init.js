@@ -299,12 +299,14 @@
             atualizarTotalFinanceiro();
         });
 
-        // Evento ao mudar clicar no código do PI
-        $('#span-plicod').click(function(){
-            var codPi = $('#span-plicod').html();
-            $('#span-plicod').hide();
-            $('#plicod').show().focus();
-        });
+        if(isAdmin){
+            // Evento ao mudar clicar no código do PI
+            $('#span-plicod').click(function(){
+                var codPi = $('#span-plicod').html();
+                $('#span-plicod').hide();
+                $('#plicod').show().focus();
+            });
+        }
 
         $('#pprid').change(function(){
             formatarTelaProdutoNaoAplica($(this).val());

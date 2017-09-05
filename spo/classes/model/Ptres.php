@@ -82,4 +82,37 @@ SELECT pt.ptrid AS codigo,
   ORDER BY 1
 DML;
     }
+
+    public function recuperarPtresSubunidade($prsano, $tipo = null)
+    {
+        switch ($tipo){
+            // Somente Vinculadas
+            case 'V':
+                $where = "and uo.unocod not in ('42101', '42902', '74912')";
+                break;
+            // Somente Administração Direta
+            case 'D':
+                $where = "and uo.unocod in ('42101')";
+                break;
+            // Somente Fundo
+            case 'F':
+                $where = "and uo.unocod in ('42902', '74912')";
+                break;
+            // Todas
+            default:
+                $where = '';
+        }
+
+        $sql = "select  p.ptrid, p.ptres, p.acaid, p.ptrano, p.funcod, p.sfucod, p.prgcod, p.acacod, p.loccod, p.plocod, p.esfcod,  
+                        uo.unocod, uo.unonome, uo.suocod, uo.suonome, uo.unofundo, uo.suosigla, uo.unosigla, uo.unoid, uo.suoid
+                from monitora.ptres p
+                        inner join public.vw_subunidadeorcamentaria uo on uo.unocod = p.unicod and uo.prsano = '$prsano' and uo.suostatus = 'A'
+                where ptrano = '$prsano'
+                and p.ptrstatus = 'A'
+                $where
+                order by uo.unofundo, uo.unonome, uo.suonome, p.acacod, p.prgcod, p.loccod, p.plocod";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
 }

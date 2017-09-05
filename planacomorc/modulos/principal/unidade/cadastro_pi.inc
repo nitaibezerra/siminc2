@@ -1393,6 +1393,9 @@ DML;
     strEsdPiCadastramento = '<?php echo (!empty($estadoAtual['esdid']) && !in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))) ?>';
     listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
 
+    // Permissão Admin
+    isAdmin = '<?php echo (in_array(PFL_ADMINISTRADOR, $perfis) || in_array(PFL_SUPERUSUARIO, $perfis)); ?>';
+
     $(document).ready(function() {
         
         // Ações efetuadas quando a tela de cadastro de PI é iniciada.
