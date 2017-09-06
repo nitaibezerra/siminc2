@@ -115,6 +115,54 @@
             }
         });
 
+        $('#btn_adicionar_sei').click(function(){
+             var trHtml =
+                '<tr style="height: 30px;" id="tr_sei_' + $('#input_sei').val()+ '" >'
+                        + '<td style="text-align: left;">' + $('#input_sei').val() + '</td>'
+                        + '<td style="text-align: center;">'
+                            + '<input type="hidden" name="lista_sei[]" value="' + $('#input_sei').val() + '" />'
+                            + '<span class="glyphicon glyphicon-trash link btnRemoveSei" data-sei="' + $('#input_sei').val()+ '" ></span>'
+                        + '</td>'
+                + '</tr>';
+            $('#table_sei').append(trHtml);
+            $('#input_sei').val('');
+        });
+
+        $('#table_sei').on('click', '.btnRemoveSei', function(){
+            var sei = $(this).attr('data-sei');
+            $('#tr_sei_'+ sei).remove();
+        });
+
+        $('#input_sei').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_adicionar_sei').click();
+            }
+        });
+
+        $('#btn_adicionar_pronac').click(function(){
+             var trHtml =
+                '<tr style="height: 30px;" id="tr_pronac_' + $('#input_pronac').val()+ '" >'
+                        + '<td style="text-align: left;">' + $('#input_pronac').val() + '</td>'
+                        + '<td style="text-align: center;">'
+                            + '<input type="hidden" name="lista_pronac[]" value="' + $('#input_pronac').val() + '" />'
+                            + '<span class="glyphicon glyphicon-trash link btnRemovePronac" data-pronac="' + $('#input_pronac').val()+ '" ></span>'
+                        + '</td>'
+                + '</tr>';
+            $('#table_pronac').append(trHtml);
+            $('#input_pronac').val('');
+        });
+
+        $('#table_pronac').on('click', '.btnRemovePronac', function(){
+            var pronac = $(this).attr('data-pronac');
+            $('#tr_pronac_'+ pronac).remove();
+        });
+
+        $('#input_pronac').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_adicionar_pronac').click();
+            }
+        });
+
         $('#btn_selecionar_convenio').click(function(){
             var trHtml =
                 '<tr style="height: 30px;" id="tr_convenio_' + $('#input_convenio').val()+ '" >'

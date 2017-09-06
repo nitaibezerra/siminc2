@@ -850,6 +850,8 @@ function salvarPiComplemento($pliid, $dados)
 
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);
+    associarSei($pliid, $dados);
+    associarPronac($pliid, $dados);
     associarLocalizacao($pliid, $dados);
     associarResponsavel($pliid, $dados);
     associarAnexos($pliid, $dados);
@@ -931,6 +933,42 @@ function associarSniic($pliid, $dados)
             $modelPiSniic->pissniic = $pissniic;
             $modelPiSniic->salvar();
             $modelPiSniic->pisid = null;
+        }
+    }
+}
+
+function associarSei($pliid, $dados)
+{
+    // Vinculando Ações
+    $modelPiSei= new Planacomorc_Model_PiSei();
+
+    $modelPiSei->excluirVarios("pliid = $pliid");
+    if(isset($dados['lista_sei']) && is_array($dados['lista_sei'])){
+
+        $modelPiSei->pliid = $pliid;
+
+        foreach($dados['lista_sei'] as $psesei){
+            $modelPiSei->psesei = $psesei;
+            $modelPiSei->salvar();
+            $modelPiSei->pseid = null;
+        }
+    }
+}
+
+function associarPronac($pliid, $dados)
+{
+    // Vinculando Ações
+    $modelPiPronac= new Planacomorc_Model_PiPronac();
+
+    $modelPiPronac->excluirVarios("pliid = $pliid");
+    if(isset($dados['lista_pronac']) && is_array($dados['lista_pronac'])){
+
+        $modelPiPronac->pliid = $pliid;
+
+        foreach($dados['lista_pronac'] as $pprpronac){
+            $modelPiPronac->pprpronac = $pprpronac;
+            $modelPiPronac->salvar();
+            $modelPiPronac->pprid = null;
         }
     }
 }
