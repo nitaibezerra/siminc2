@@ -299,7 +299,9 @@ $where .= $_REQUEST['sbaid'] && $_REQUEST['sbaid'] != 'null' ? " AND ptr.ptrid I
 $where .= $_POST['prgcod'] ? "AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($_POST['prgcod']) . "%')" : '';
 $where .= $_POST['acacod'] ? "AND UPPER(aca.acacod) LIKE('%" . strtoupper($_POST['acacod']) . "%')" : '';
 $where .= $_REQUEST['unicod'] ? " AND aca.unicod = '{$_REQUEST['unicod']}'" : '';
+$where .= $_REQUEST['ungcod'] ? " and suo.suocod = '{$_REQUEST['ungcod']}' and suo.prsano = '{$_SESSION['exercicio']}' " : '';
 $where .= $_POST['buscalivre'] ? "AND (trim(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ilike('%" . $_POST['buscalivre'] . "%') OR dtl.ptres ilike '%" . $_POST['buscalivre'] . "%')" : '';
+
 if($_REQUEST['no_ptrid']){
     if(is_array($_REQUEST['no_ptrid'])){
         $where .= " AND ptr.ptrid NOT IN('". join($_REQUEST['no_ptrid'], "','"). "')";
@@ -327,6 +329,8 @@ $sql_lista = <<<DML
     FROM monitora.ptres ptr
     INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
     INNER JOIN public.unidade uni on aca.unicod = uni.unicod
+    LEFT JOIN spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
+    LEFT JOIN public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid    
     LEFT JOIN (SELECT pip2.ptrid, pipvalor  FROM monitora.pi_planointernoptres pip2 JOIN monitora.pi_planointerno USING (pliid) WHERE plistatus ='A') pip on ptr.ptrid = pip.ptrid
     LEFT JOIN (SELECT ptrid, SUM(sadvalor) AS valor
         FROM monitora.pi_subacaodotacao
@@ -358,7 +362,7 @@ $sql_lista = <<<DML
         pemp.total
     ORDER BY ptr.ptres
 DML;
-//ver($sql_lista);
+
 ?>
 <html>
     <head>
@@ -494,7 +498,7 @@ DML;
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
             ));
         }
-//ver($sql_lista, d);
+
         $listagem->setQuery($sql_lista);
         $listagem->setAcoes(array('view' => 'visualizarRegistro'));
         $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));

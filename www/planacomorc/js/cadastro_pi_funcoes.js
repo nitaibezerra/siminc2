@@ -1273,7 +1273,7 @@
     function abrir_lista() {
         // Verifica se o modal terá que recarregar a tela.
         if($('#modal-ptres .modal-body p').size() <= 1){
-            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
+            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
                 $('#modal-ptres .modal-body p').html(response);
                 $('.modal-dialog-ptres').show();
                 $('#modal-ptres').modal();
