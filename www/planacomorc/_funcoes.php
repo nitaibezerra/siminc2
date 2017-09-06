@@ -1455,7 +1455,7 @@ SQL;
     return array();
 }
 
-function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
+function buscarPTRESdoPIInstituicoes($pliid, $sbaid, $ptrid) {
     global $db;
 
     #  ver($sbaid);
@@ -1469,13 +1469,16 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
     /* Filtros */
     $where .= $sbaid ? " AND dtp.ptrid IN (SELECT ptrid FROM monitora.pi_subacaodotacao WHERE sbaid = '" . $sbaid . "')" : '';
     $where .= $pliid ? " AND pip.pliid = $pliid " : "";
+    $where .= $ptrid ? " AND ptr.ptrid = $ptrid " : "";
+
+    $valorSelect = $pliid ? "(SELECT pipvalor FROM monitora.pi_planointernoptres JOIN monitora.pi_planointerno USING(pliid) WHERE ptrid = ptr.ptrid AND pliid = {$pliid} {$filtroSubacao} ) as pipvalor" : '0 as valor';
 
     $sql = <<<SQL
         SELECT
             ptr.ptrid,
             ptr.ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
-            aca.unicod || ' - ' || uni.unidsc as unidsc,
+            aca.unicod || ' - ' || uni.unonome as unidsc,
             COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
             COALESCE(SUM(dts.valor), 0.00) AS det_subacao,
             (COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(SUM(dts.valor), 0.00)) AS nao_det_subacao,
@@ -1483,10 +1486,10 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
             {$campoNaoDetPi}
             COALESCE((pemp.total), 0.00) AS empenhado,
             COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
-            (SELECT pipvalor FROM monitora.pi_planointernoptres JOIN monitora.pi_planointerno USING(pliid) WHERE ptrid = ptr.ptrid AND pliid = {$pliid} {$filtroSubacao} ) as pipvalor
+            $valorSelect
         FROM monitora.ptres ptr
         INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-        INNER JOIN public.unidade uni on aca.unicod = uni.unicod
+        INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod
         LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
         LEFT JOIN (
             SELECT ptrid, SUM(sadvalor) AS valor
@@ -1506,11 +1509,11 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid) {
             AND aca.prgano='{$_SESSION['exercicio']}'
             AND ptr.ptrstatus = 'A'
             $where
-        GROUP BY ptr.ptrid, ptr.ptres, aca.prgcod, aca.acaobjetivocod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unidsc, ptr.ptrdotacao, pemp.total
+        GROUP BY ptr.ptrid, ptr.ptres, aca.prgcod, aca.acaobjetivocod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unonome, ptr.ptrdotacao, pemp.total
         ORDER BY ptr.ptres
 SQL;
     $result = is_array($result) ? $result : Array();
-    #ver($sql);
+
     $result = $db->carregar($sql);
     if (is_array($result)) {
         foreach ($result as $key => $_) {

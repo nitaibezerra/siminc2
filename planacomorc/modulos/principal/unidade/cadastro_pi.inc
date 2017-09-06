@@ -522,8 +522,8 @@ DML;
                                         <td nowrap><b>Não&nbsp;Empenhado</b></td>
                                     </tr>
                                     <?php
-                                    if ($dadosPI['pliid']) {
-                                        $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], 'N');
+                                    if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
+                                        $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], $dadosPI['ptrid']);
                                         #ver($dadosPTRES);
                                         if ($dadosPTRES) {
                                             $valortotalpi = 0;

@@ -70,7 +70,7 @@ class Pi_PlanoInterno extends Modelo{
                 JOIN planointerno.ppamomentounidade pmu ON ppi.pmuid = pmu.pmuid AND pmu.pmustatus = 'A' AND pmu.prsano = '$exercicio'
                 JOIN planointerno.subunidadeorcamentaria suo ON suo.suoid = pmu.suoid AND suo.suostatus = 'A'
                 JOIN planointerno.momento mom ON mom.momid = pmu.momid AND mom.momstatus = 'A'
-                left JOIN planointerno.vw_funcional fun ON fun.pmuid = pmu.pmuid
+                left JOIN planointerno.vw_funcional_2016 fun ON fun.pmuid = pmu.pmuid
                 JOIN planointerno.enquadramentodespesa eqd ON eqd.eqdid = ppi.eqdid AND eqd.eqdstatus = 'A'
                 LEFT JOIN planointerno.areacultural are ON are.areid = ppi.areid AND are.arestatus = 'A'
                 JOIN planointerno.produtopi pri ON pri.priid = ppi.priid AND pri.pristatus = 'A'
@@ -106,7 +106,7 @@ class Pi_PlanoInterno extends Modelo{
     {
         $sql = "select  ppi.*, pmu.prsano, uno.unoid, uno.unonome, uno.unocod, suo.suoid, suo.suonome, suo.suocod, aca.acaid, aca.acacod, prg.prgid, prg.prgcod, loc.locid, loc.loccod, plo.ploid, plo.plocod,
                         eqd.eqdnome, mai.mainome, masnome, obj.objid, obj.objcod, objnome, ini.iniid, ini.inicod, ini.ininome, mpp.mppid, mpp.mppcod, mpp.mppnome, mpn.mpnid, mpn.mpncod, mpn.mpnnome, 
-                        are.areid, arenome, pri.priid, pri.prinome, ump.umpid, ump.umpnome, eqd.eqdsigla
+                        are.areid, arenome, pri.priid, pri.prinome, ump.umpid, ump.umpnome, eqd.eqdsigla, are.aresigla
                 from planointerno.propostapi ppi
                         INNER JOIN planointerno.ppamomentounidade pmu ON ppi.pmuid = pmu.pmuid AND pmu.pmustatus = 'A'
                         INNER JOIN planointerno.ppaacao aca on aca.acaid = pmu.acaid and aca.acastatus = 'A'
@@ -130,6 +130,8 @@ class Pi_PlanoInterno extends Modelo{
         // Carregando dados da base de dados do SIMINC antigo
         $dadosProposta = adapterConnection::oldSiminc()->pegaLinha($sql);
         
+//        ver($dadosProposta, $sql, d);
+        
         $dadosPI = [
             'plititulo' => $dadosProposta['ppinome'],
             'plidsc' => $dadosProposta['ppidescricao'],
@@ -145,16 +147,20 @@ class Pi_PlanoInterno extends Modelo{
         $dadosPI['eqdid'] = $this->pegaUm("select eqdid from monitora.pi_enquadramentodespesa eqd where eqdcod = '{$dadosProposta['eqdsigla']}' and eqd.eqdano = '{$dadosProposta['prsano']}' and eqd.eqdstatus = 'A'");
         $dadosPI['maiid'] = $this->pegaUm("select maiid from planacomorc.manutencaoitem mai where upper(mai.mainome) = upper('{$dadosProposta['mainome']}') and mai.prsano = '{$dadosProposta['prsano']}' and mai.maistatus = 'A'");
         $dadosPI['masid'] = $this->pegaUm("select masid from planacomorc.manutencaosubitem mas where upper(mas.masnome) = upper('{$dadosProposta['masnome']}') and mas.prsano = '{$dadosProposta['prsano']}' and mas.masstatus = 'A'");
-//        $dadosPI['mppid'] = $this->pegaUm("select mppid from public.metappa mpp where mpp.mppcod = '{$dadosProposta['mppcod']}' and mpp.prsano = '{$dadosProposta['prsano']}' and mpp.mppstatus = 'A'");
-        $dadosPI['mpnid'] = $this->pegaUm("select mpnid from public.metapnc mpn where mpn.mpncod = '{$dadosProposta['mpncod']}' and mpn.prsano = '{$dadosProposta['prsano']}' and mpn.mpnstatus = 'A'");
+        $dadosPI['mppid'] = $this->pegaUm("select mppid from public.metappa mpp where mpp.mppcod = '{$dadosProposta['mppcod']}' and mpp.prsano = '{$dadosProposta['prsano']}' and mpp.mppstatus = 'A'");
         $dadosPI['mdeid'] = $this->pegaUm("select mdeid from monitora.pi_modalidadeensino mde where upper(mdedsc) = upper('{$dadosProposta['arenome']}') and mde.mdeano = '{$dadosProposta['prsano']}' and mde.mdestatus = 'A'");
         $dadosPI['pprid'] = $this->pegaUm("select pprid from monitora.pi_produto ppr where upper(ppr.pprnome) = upper('{$dadosProposta['prinome']}') and prsano = '{$dadosProposta['prsano']}' and ppr.pprstatus = 'A'");
         $dadosPI['pumid'] = $this->pegaUm("select pumid from monitora.pi_unidade_medida pum where upper(pum.pumnome) = upper('{$dadosProposta['umpnome']}') and pum.prsano = '{$dadosProposta['prsano']}' and pum.pumstatus = 'A'");
         $dadosPI['oppid'] = $this->pegaUm("select oppid from public.objetivoppa opp where opp.oppcod = '{$dadosProposta['objcod']}' and opp.prsano = '{$dadosProposta['prsano']}' and opp.oppstatus = 'A'");
         $dadosPI['ippid'] = $this->pegaUm("select ippid from public.iniciativappa ipp where ipp.ippcod = '{$dadosProposta['inicod']}' and ipp.prsano = '{$dadosProposta['prsano']}' and ipp.ippstatus = 'A'");
 
+        $MetaPnc = $this->pegaLinha("select mpnid, ipnid from public.indicadorpnc ipn where ipn.ipncod = '" . trim($dadosProposta['mpncod']) . "' and ipn.prsano = '{$dadosProposta['prsano']}' and ipn.ipnstatus = 'A'");
+
+        $dadosPI['mpnid'] = $MetaPnc['mpnid'];
+        $dadosPI['ipnid'] = $MetaPnc['ipnid'];
+
         // Recuperando PTRES
-        $sql = "select * 
+        $sql = "select ptrid 
                 from monitora.ptres ptr
                 where ptr.acacod = '{$dadosProposta['acacod']}'
                 and ptr.prgcod = '{$dadosProposta['prgcod']}'
@@ -164,12 +170,8 @@ class Pi_PlanoInterno extends Modelo{
                 and ptr.ptrano = '{$dadosProposta['prsano']}'
                 and ptr.ptrstatus = 'A'";
         
-//        ver($sql, d);
+        $dadosPI['ptrid'] = $this->pegaUm($sql);
 
-        $dadosPI['ptrid'] = $this->carregar($sql);
-
-//        ver($dadosProposta, $dadosPI, $this->getDados(), d);
-        
         return $dadosPI;
     }
 

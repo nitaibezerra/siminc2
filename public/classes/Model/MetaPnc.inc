@@ -71,7 +71,7 @@ class Public_Model_MetaPnc extends Modelo
                         from spo.subunidademetapnc smc
                                 inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smc.suoid and suo.prsano = '{$_SESSION['exercicio']}'
                         where suo.suocod = '{$dados['suocod']}'
-                        union all 
+                        union 
                         select mpn.mpnid from public.metapnc mpn
                                 left join spo.subunidademetapnc smc on smc.mpnid = mpn.mpnid
                         where mpn.prsano = '{$_SESSION['exercicio']}'       
@@ -88,6 +88,7 @@ class Public_Model_MetaPnc extends Modelo
                 WHERE mpn.mpnstatus = 'A'
                 AND mpn.prsano  = '{$_SESSION['exercicio']}'
                 ORDER BY ordem";
+        
         return $sql;
     }
 
