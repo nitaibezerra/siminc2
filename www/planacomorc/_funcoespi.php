@@ -691,6 +691,7 @@ function _salvarPI_ElabrevTED($unicod, $plicod) {
  * @return type bool|integer
  */
 function salvarPI($dados, $comCommit = true, $criarComoAprovado = false) {
+
     global $db, $obrigatorias_array;
 
     $unicod = $dados['unicod'] ? $dados['unicod'] : $dados['unicod_disable'];
@@ -766,6 +767,17 @@ DML;
             die();
         }
     } else {
+
+
+        $mPiPlanoInterno = new Pi_PlanoInterno($dados['pliid']);
+        $perfis = pegaPerfilGeral();
+        $estadoAtual = wf_pegarEstadoAtual($mPiPlanoInterno->docid);
+
+
+        $podeEditar = $mPiPlanoInterno->verificarPermissaoEditar($estadoAtual, $perfis);
+
+        if($podeEditar){
+
         $sql = <<<DML
 UPDATE monitora.pi_planointerno
   SET plititulo = '%s',
@@ -806,7 +818,7 @@ DML;
         // Grava informações complementares
         $pliid = $dados['pliid'];
         salvarPiComplemento($pliid, $dados);
-        
+
         if($dados['ptrid']){
         // -- Inserindo as novas associações PI/PTRES
 //        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
@@ -815,6 +827,15 @@ DML;
 
         // -- Inserindo as novas associações PI/Enquadramento
         associarPIeEnquadramento($pliidFinal, $dados['m_eqdid']);
+
+        } else {
+            $pliid = $dados['pliid'];
+
+            associarConvenio($pliid, $dados);
+            associarSniic($pliid, $dados);
+            associarSei($pliid, $dados);
+            associarPronac($pliid, $dados);
+        }
     }
 
     //Salva PI na base do Elabrev para Termos de Cooperação pertencentes ao FNDE
@@ -856,7 +877,7 @@ function salvarPiComplemento($pliid, $dados)
     associarResponsavel($pliid, $dados);
     associarAnexos($pliid, $dados);
     associarCronograma($pliid, $dados);
-    associarDelegacao($pliid, $dados); // comentado pq estava dando erro em desenvolvimento por não existir a classe. @todo enviar o arquivo pro repositorio.
+    associarDelegacao($pliid, $dados);
 }
 
 function associarDelegacao($pliid, $dados)
@@ -903,8 +924,8 @@ function associarConvenio($pliid, $dados)
 
     // Vinculando Ações
     $modelPiConvenio= new Pi_Convenio();
-
     $modelPiConvenio->excluirVarios("pliid = $pliid");
+
     if(isset($dados['lista_convenio']) && is_array($dados['lista_convenio'])){
 
         $modelPiConvenio->pliid = $pliid;
@@ -923,8 +944,8 @@ function associarSniic($pliid, $dados)
 
     // Vinculando Ações
     $modelPiSniic= new Pi_Sniic();
-
     $modelPiSniic->excluirVarios("pliid = $pliid");
+
     if(isset($dados['lista_sniic']) && is_array($dados['lista_sniic'])){
 
         $modelPiSniic->pliid = $pliid;
@@ -941,8 +962,8 @@ function associarSei($pliid, $dados)
 {
     // Vinculando Ações
     $modelPiSei= new Planacomorc_Model_PiSei();
-
     $modelPiSei->excluirVarios("pliid = $pliid");
+
     if(isset($dados['lista_sei']) && is_array($dados['lista_sei'])){
 
         $modelPiSei->pliid = $pliid;
@@ -959,8 +980,8 @@ function associarPronac($pliid, $dados)
 {
     // Vinculando Ações
     $modelPiPronac= new Planacomorc_Model_PiPronac();
-
     $modelPiPronac->excluirVarios("pliid = $pliid");
+
     if(isset($dados['lista_pronac']) && is_array($dados['lista_pronac'])){
 
         $modelPiPronac->pliid = $pliid;

@@ -388,9 +388,15 @@
 
         controlarTipoLocalizacao($('#esfid').val());
 
-        if(strEsdPiCadastramento){
+        if(!podeEditar){
+            // Desabilitando todos os inputs, textareas e selects
             $('#formulario input, #formulario textarea, #formulario select').prop('disabled', true);
             setTimeout($('#formulario select').prop('disabled', true).trigger("chosen:updated"), 3000);
+
+            // Habilitando campos específicos que poderão ser alterados a qualquer momento
+            $('#btn_adicionar_sniic, #input_sniic, #btn_adicionar_sei, #input_sei, ' +
+              '#btn_adicionar_pronac, #input_pronac, #btn_selecionar_convenio, #input_convenio, ' +
+              '#evento, #pliid, [name="lista_sniic[]"], [name="lista_sei[]"], [name="lista_pronac[]"], [name="lista_convenio[]"]').prop('disabled', false);
         }
 
         atualizarTotalFisico();

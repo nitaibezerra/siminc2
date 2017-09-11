@@ -22,8 +22,6 @@ include_once APPRAIZ . "planacomorc/classes/Pi_Cronograma.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Anexo.class.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
-//ver($_POST, $_FILES, $_REQUEST, d);
-
 if($_REQUEST['uploadAnexo']){
     $campos = array(
         'angdsc'       => "'{$_REQUEST['arqdescricao']}'",
@@ -198,7 +196,10 @@ $codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exer
 $codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'N');
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
-//ver($listaEqdidReduzido, d);
+
+$mPiPlanoInterno = new Pi_PlanoInterno();
+$podeEditar = $mPiPlanoInterno->verificarPermissaoEditar($estadoAtual, $perfis);
+
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
@@ -1295,11 +1296,7 @@ DML;
         </div>
         <div class="form-group">
             <div class="text-center">
-                <?php
-                // Só permite editar se tiver em cadastramento
-                if(empty($estadoAtual['esdid']) || in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))){ ?>
-                    <button class="btn btn-primary" type="button" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" <?php echo $disabled; ?>><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                <?php } ?>
+                <button class="btn btn-primary" type="button" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" <?php echo $disabled; ?>><i class="fa fa-check"></i>&nbsp;Salvar</button>
                 <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
             </div>
         </div>
@@ -1449,14 +1446,17 @@ DML;
     intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
     // Manutenção item
     intMaiid = '<?php echo $dadosPI['maiid']; ?>';
-    strEsdPiCadastramento = '<?php echo (!empty($estadoAtual['esdid']) && !in_array($estadoAtual['esdid'], array(ESD_PI_CADASTRAMENTO, ESD_PI_AGUARDANDO_CORRECAO))) ?>';
+
     listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
 
     // Permissão Admin
     isAdmin = '<?php echo (in_array(PFL_ADMINISTRADOR, $perfis) || in_array(PFL_SUPERUSUARIO, $perfis)); ?>';
 
+    // Permissão para Editar
+    podeEditar = '<?php echo $podeEditar; ?>';
+
     $(document).ready(function() {
-        
+
         // Ações efetuadas quando a tela de cadastro de PI é iniciada.
         initCadastroPi();
 

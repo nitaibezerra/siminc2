@@ -41,6 +41,7 @@ class Pi_PlanoInterno extends Modelo{
 									  	'unicod' => null, 
 									  	'ungcod' => null, 
 									  	'pliano' => null, 
+									  	'docid' => null,
 									  );
 
     public function recuperarPropostasSiminc($exercicio, $aFiltro)
@@ -269,5 +270,18 @@ class Pi_PlanoInterno extends Modelo{
         $this->commit();
 
         echo $this->plicod;
+    }
+
+    public function verificarPermissaoEditar($estadoAtual, $perfis)
+    {
+
+        switch ($estadoAtual['esdid']){
+            case ESD_PI_APROVADO:
+            case ESD_PI_CANCELADO:
+            case ESD_PI_AGUARDANDO_APROVACAO:
+                return (bool)count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]));
+        }
+
+        return true;
     }
 }
