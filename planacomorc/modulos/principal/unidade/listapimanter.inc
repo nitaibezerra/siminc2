@@ -73,31 +73,31 @@ DML;
 
             )))
             ->turnOnPesquisator()
-            ->setFormFiltros('filtropi')
-            ->esconderColunas('unidsc', 'valido')
+//            ->setFormFiltros('filtropi')
+//            ->esconderColunas('unidsc', 'valido')
             ->setCabecalho(array(
-                'Código', 'Título', 'Unidade', 'Obras', 'TED', 'Cadastrado?', 'Orçamento do PI (R$)' => array(
-                    'Orçamento total', 'Empenhado total', 'Não empenhado total'
+                'id', 'Código', 'Sub-Unidade', 'SUO Delegada', 'Título', 'PTRES', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
+                    'Custeio', 'Capital', 'Total', 'Empenhado', 'Pago', 'Liquidado'
                 )))
-            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
-            ->addCallbackDeCampo('plititulo', 'formatarTituloPI')
-            ->addCallbackDeCampo('obrid', 'formatarObrid')
-            ->addCallbackDeCampo('tcpid', 'formatarTcpid')
-            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
-            ->addCallbackDeCampo(array('vlrdotacao', 'vlrempenhado', 'vlrnaoempenhado'), 'mascaraMoeda')
+//            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
+//            ->addCallbackDeCampo('plititulo', 'formatarTituloPI')
+//            ->addCallbackDeCampo('obrid', 'formatarObrid')
+//            ->addCallbackDeCampo('tcpid', 'formatarTcpid')
+//            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
+            ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
             ->addAcao('edit', 'alterarPi')
-            ->setAcaoComoCondicional('edit', array(
-                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
-                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')
-            ))
+//            ->setAcaoComoCondicional('edit', array(
+//                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
+//                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')
+//            ))
             ->addAcao('delete', 'removerPi')
-            ->setAcaoComoCondicional('delete', array(array(
-                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
-            )))
+//            ->setAcaoComoCondicional('delete', array(array(
+//                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
+//            )))
             ->addAcao('view', 'detalhePI')
-            ->setAcaoComoCondicional('view', array(array(
-                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
-            )))
+//            ->setAcaoComoCondicional('view', array(array(
+//                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
+//            )))
             ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 
         // -- popup de detalhamento do PI

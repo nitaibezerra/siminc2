@@ -88,52 +88,67 @@ class Spo_Model_Planointerno extends Modelo
         $sql = "
             SELECT
                 pli.pliid::VARCHAR AS pliid,
-                pli.plicod,
+                pli.pliid::VARCHAR AS id,
+                pli.plicod codigo_pi,
+                pli.ungcod || '-' || suo.suonome AS sub_unidade,
+		COALESCE((
+			SELECT
+				pd.pliid
+			FROM public.vw_subunidadeorcamentaria suo
+				JOIN planacomorc.pi_delegacao pd ON(suo.suoid = pd.suoid)
+			WHERE
+				suo.suostatus = 'A'
+				AND pliid = pli.pliid
+				AND suo.prsano = pli.pliano
+                        LIMIT 1
+		), 0) AS delegadas,
                 COALESCE(pli.plititulo, 'N/A') AS plititulo,
-                uni.unicod,
-                uni.unidsc,
-                COALESCE(pli.obrid::VARCHAR, 'N/A') AS obrid,
-                ARRAY_TO_JSON(ARRAY_AGG(DISTINCT poc.tcpid))::VARCHAR AS tcpid,
-                CASE WHEN pli.plicadsiafi = 't' THEN
-                    1 -- cadastrado no SIAFI E SIMEC
-                WHEN COALESCE(pli.plicadsiafi, 'f') = 'f' THEN
-                    2 -- cadastrado no SIMEC
-                ELSE
-                    4 -- não identificado
-                END AS cadastramento,
-                pli.pliano,
                 ptr.ptres,
-                SUM(COALESCE (ppt.pipvalor, 0.00)) AS vlrdotacao,
-                SUM(COALESCE (sex.vlrempenhado, 0.00)) AS vlrempenhado,
-                (sum(COALESCE (sex.vlrdotacaoatual, 0.00) - COALESCE (sex.vlrempenhado, 0.00))) AS vlrnaoempenhado
-            FROM monitora.pi_planointerno pli
-                JOIN public.unidade uni USING(unicod)
+                TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) AS funcional,
+		ed.esddsc AS situacao,
+		pc.picvalorcusteio AS custeio,
+		pc.picvalorcapital AS capital,
+		(sum(COALESCE(pc.picvalorcusteio, 0.00) + COALESCE(pc.picvalorcapital, 0.00))) AS total,
+                SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
+		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
+                SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado
+            FROM monitora.pi_planointerno pli -- SELECT docid, * FROM monitora.pi_planointerno
+		JOIN planacomorc.pi_complemento pc USING(pliid) -- SELECT * FROM planacomorc.pi_complemento
+                JOIN public.vw_subunidadeorcamentaria suo ON( -- SELECT * FROM public.vw_subunidadeorcamentaria
+                    suo.suostatus = 'A'
+                    AND pli.unicod = suo.unocod
+                    AND pli.ungcod = suo.suocod
+                    AND suo.prsano = pli.pliano
+		) -- SELECT * FROM public.vw_subunidadeorcamentaria
                 LEFT JOIN monitora.pi_planointernoptres ppt USING(pliid)
-                LEFT JOIN monitora.ptres ptr ON(
+                LEFT JOIN monitora.ptres ptr ON( -- SELECT * FROM monitora.ptres
                     ppt.ptrid = ptr.ptrid
                     AND pli.pliano = ptr.ptrano)
-                LEFT JOIN spo.siopexecucao sex ON(
+	        LEFT JOIN monitora.acao aca on ptr.acaid = aca.acaid
+                LEFT JOIN spo.siopexecucao sex ON( -- SELECT * FROM spo.siopexecucao
                     pli.unicod = sex.unicod
                     AND pli.plicod = sex.plicod
                     AND pli.pliano = sex.exercicio
                     AND ptr.ptres = sex.ptres)
-                LEFT JOIN ted.previsaoorcamentaria poc USING(pliid)
+		LEFT JOIN workflow.documento wd ON(pli.docid = wd.docid) -- SELECT * FROM workflow.documento 
+		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid) -- SELECT esddsc,* FROM workflow.estadodocumento
             WHERE
                 pli.pliano = '". (int)$filtros->exercicio. "'
                 AND pli.plistatus = 'A'
             GROUP BY
                 pli.pliid,
                 pli.plicod,
+                sub_unidade,
                 pli.plititulo,
-                uni.unicod,
-                uni.unidsc,
-                pli.obrid,
-                pli.plicadsiafi,
-                pli.pliano,
-                ptr.ptres
+                ptr.ptres,
+                funcional,
+                situacao,
+                custeio,
+                capital
             ORDER BY
                 pli.plicod
         ";
+//ver($sql,d);
         return $sql;
     }
     
