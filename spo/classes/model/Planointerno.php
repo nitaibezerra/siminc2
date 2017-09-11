@@ -78,6 +78,65 @@ class Spo_Model_Planointerno extends Modelo
         'plicadsiafi' => null,
     );
 
+    /**
+     * Cria sql da lista principal de PIs.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function listar(stdClass $filtros){
+        $sql = "
+            SELECT
+                pli.pliid::VARCHAR AS pliid,
+                pli.plicod,
+                COALESCE(pli.plititulo, 'N/A') AS plititulo,
+                uni.unicod,
+                uni.unidsc,
+                COALESCE(pli.obrid::VARCHAR, 'N/A') AS obrid,
+                ARRAY_TO_JSON(ARRAY_AGG(DISTINCT poc.tcpid))::VARCHAR AS tcpid,
+                CASE WHEN pli.plicadsiafi = 't' THEN
+                    1 -- cadastrado no SIAFI E SIMEC
+                WHEN COALESCE(pli.plicadsiafi, 'f') = 'f' THEN
+                    2 -- cadastrado no SIMEC
+                ELSE
+                    4 -- não identificado
+                END AS cadastramento,
+                pli.pliano,
+                ptr.ptres,
+                SUM(COALESCE (ppt.pipvalor, 0.00)) AS vlrdotacao,
+                SUM(COALESCE (sex.vlrempenhado, 0.00)) AS vlrempenhado,
+                (sum(COALESCE (sex.vlrdotacaoatual, 0.00) - COALESCE (sex.vlrempenhado, 0.00))) AS vlrnaoempenhado
+            FROM monitora.pi_planointerno pli
+                JOIN public.unidade uni USING(unicod)
+                LEFT JOIN monitora.pi_planointernoptres ppt USING(pliid)
+                LEFT JOIN monitora.ptres ptr ON(
+                    ppt.ptrid = ptr.ptrid
+                    AND pli.pliano = ptr.ptrano)
+                LEFT JOIN spo.siopexecucao sex ON(
+                    pli.unicod = sex.unicod
+                    AND pli.plicod = sex.plicod
+                    AND pli.pliano = sex.exercicio
+                    AND ptr.ptres = sex.ptres)
+                LEFT JOIN ted.previsaoorcamentaria poc USING(pliid)
+            WHERE
+                pli.pliano = '". (int)$filtros->exercicio. "'
+                AND pli.plistatus = 'A'
+            GROUP BY
+                pli.pliid,
+                pli.plicod,
+                pli.plititulo,
+                uni.unicod,
+                uni.unidsc,
+                pli.obrid,
+                pli.plicadsiafi,
+                pli.pliano,
+                ptr.ptres
+            ORDER BY
+                pli.plicod
+        ";
+        return $sql;
+    }
+    
     public static function queryInstituicoesFederais(array $params, $obrigatorias = false, $perfis = array())
     {
         self::checarParametros($params, array('exercicio'));
