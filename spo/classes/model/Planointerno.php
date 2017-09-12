@@ -88,12 +88,13 @@ class Spo_Model_Planointerno extends Modelo
         $where = "";
         
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
-        if($filtros->listaSubUnidadeUsuario){
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario($filtros);
+        if($listaSubUnidadeUsuario){
             $where .= "
                 AND (
-                    pli.ungcod::INTEGER IN(". join(',', $filtros->listaSubUnidadeUsuario). ")
+                    pli.ungcod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ")
                     OR 
-                    pdsuo.suocod::INTEGER IN(". join(',', $filtros->listaSubUnidadeUsuario). ")
+                    pdsuo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ")
                 )
             ";
         }

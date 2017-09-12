@@ -69,18 +69,10 @@ DML;
             $_REQUEST['filtropi']?$_REQUEST['filtropi']:array(),
             array('exercicio' => $_SESSION['exercicio'], 'usucpf' => $_SESSION['usucpf'])
         );
-        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array(
-            'exercicio' => $_SESSION['exercicio'],
-            'usucpf' => $_SESSION['usucpf']
-            ));
-//ver($listaSubUnidadeUsuario, d);
-//ver(Spo_Model_Planointerno::queryInstituicoesFederais($params, true, $perfis),d);
-//    $list->setQuery(Spo_Model_Planointerno::queryInstituicoesFederais($params, true, $perfis))
+
         $list->setQuery(Spo_Model_Planointerno::listar((object) array(
             'exercicio' => $_SESSION['exercicio'],
-            'usucpf' => $_SESSION['usucpf'],
-            'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
-//            'perfis' => $perfis
+            'usucpf' => $_SESSION['usucpf']
             )))
             ->turnOnPesquisator()
 //            ->setFormFiltros('filtropi')
