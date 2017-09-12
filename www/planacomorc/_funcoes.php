@@ -2943,6 +2943,42 @@ HTML;
     return alinharEsquerda($plititulo);
 }
 
+function exibirIconeDelegadas($pliid){
+    $strIcone = "";
+    if($pliid){
+        $strIcone = "<a href='#' title='Visualizar Sub-Unidades Delegadas' class='a_listar_delegadas' data-pi='". (int)$pliid. "'><span class='btn btn-primary btn-sm fa fa-handshake-o'></span></a>";
+    }
+    
+    return $strIcone;
+}
+
+/**
+ * 
+ * @return array
+ */
+function buscarSubUnidadeUsuario(stdClass $filtros){
+    global $db;
+    $listaSubUnidadeUsuario = array();
+    $sql = "
+        SELECT
+            suo.suocod
+        FROM planacomorc.usuarioresponsabilidade rpu
+            JOIN public.vw_subunidadeorcamentaria suo ON rpu.ungcod = suo.suocod
+        WHERE
+            rpu.rpustatus = 'A'
+            AND rpu.usucpf = '". pg_escape_string($filtros->usucpf). "'
+    ";
+//ver($sql,d);
+    $resultado = $db->carregar($sql);
+    if($resultado){
+        foreach($resultado as $contador => $subUnidade){
+            $listaSubUnidadeUsuario[] = $subUnidade['suocod'];
+        }
+    }
+    
+    return $listaSubUnidadeUsuario;
+}
+
 function formatarObrid($obrid)
 {
     if ('N/A' == $obrid) {

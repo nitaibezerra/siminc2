@@ -77,6 +77,29 @@ class Spo_Model_Planointerno extends Modelo
         'pliano' => null,
         'plicadsiafi' => null,
     );
+    
+    /**
+     * Monta filtros para a consulta do método listar.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function montarFiltro(stdClass $filtros){
+        $where = "";
+        
+        # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
+        if($filtros->listaSubUnidadeUsuario){
+            $where .= "
+                AND (
+                    pli.ungcod::INTEGER IN(". join(',', $filtros->listaSubUnidadeUsuario). ")
+                    OR 
+                    pdsuo.suocod::INTEGER IN(". join(',', $filtros->listaSubUnidadeUsuario). ")
+                )
+            ";
+        }
+        
+        return $where;
+    }
 
     /**
      * Cria sql da lista principal de PIs.
@@ -85,23 +108,15 @@ class Spo_Model_Planointerno extends Modelo
      * @return string
      */
     public static function listar(stdClass $filtros){
+        $where = self::montarFiltro($filtros);
+//ver($where,d);
         $sql = "
             SELECT
                 pli.pliid::VARCHAR AS pliid,
                 pli.pliid::VARCHAR AS id,
                 pli.plicod codigo_pi,
                 pli.ungcod || '-' || suo.suonome AS sub_unidade,
-		COALESCE((
-			SELECT
-				pd.pliid
-			FROM public.vw_subunidadeorcamentaria suo
-				JOIN planacomorc.pi_delegacao pd ON(suo.suoid = pd.suoid)
-			WHERE
-				suo.suostatus = 'A'
-				AND pliid = pli.pliid
-				AND suo.prsano = pli.pliano
-                        LIMIT 1
-		), 0) AS delegadas,
+		pd.pliid AS delegadas,
                 COALESCE(pli.plititulo, 'N/A') AS plititulo,
                 ptr.ptres,
                 TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) AS funcional,
@@ -112,33 +127,37 @@ class Spo_Model_Planointerno extends Modelo
                 SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
 		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
                 SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado
-            FROM monitora.pi_planointerno pli -- SELECT docid, * FROM monitora.pi_planointerno
-		JOIN planacomorc.pi_complemento pc USING(pliid) -- SELECT * FROM planacomorc.pi_complemento
-                JOIN public.vw_subunidadeorcamentaria suo ON( -- SELECT * FROM public.vw_subunidadeorcamentaria
+            FROM monitora.pi_planointerno pli
+		JOIN planacomorc.pi_complemento pc USING(pliid)
+                JOIN public.vw_subunidadeorcamentaria suo ON(
                     suo.suostatus = 'A'
                     AND pli.unicod = suo.unocod
                     AND pli.ungcod = suo.suocod
                     AND suo.prsano = pli.pliano
-		) -- SELECT * FROM public.vw_subunidadeorcamentaria
+		)
                 LEFT JOIN monitora.pi_planointernoptres ppt USING(pliid)
-                LEFT JOIN monitora.ptres ptr ON( -- SELECT * FROM monitora.ptres
+                LEFT JOIN monitora.ptres ptr ON(
                     ppt.ptrid = ptr.ptrid
                     AND pli.pliano = ptr.ptrano)
 	        LEFT JOIN monitora.acao aca on ptr.acaid = aca.acaid
-                LEFT JOIN spo.siopexecucao sex ON( -- SELECT * FROM spo.siopexecucao
+                LEFT JOIN spo.siopexecucao sex ON(
                     pli.unicod = sex.unicod
                     AND pli.plicod = sex.plicod
                     AND pli.pliano = sex.exercicio
                     AND ptr.ptres = sex.ptres)
-		LEFT JOIN workflow.documento wd ON(pli.docid = wd.docid) -- SELECT * FROM workflow.documento 
-		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid) -- SELECT esddsc,* FROM workflow.estadodocumento
+		LEFT JOIN workflow.documento wd ON(pli.docid = wd.docid)
+		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
+		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
+		LEFT JOIN public.vw_subunidadeorcamentaria pdsuo ON(pd.suoid = pdsuo.suoid)
             WHERE
-                pli.pliano = '". (int)$filtros->exercicio. "'
-                AND pli.plistatus = 'A'
+                pli.plistatus = 'A'
+                AND pli.pliano = '". (int)$filtros->exercicio. "'
+                $where
             GROUP BY
                 pli.pliid,
                 pli.plicod,
                 sub_unidade,
+                delegadas,
                 pli.plititulo,
                 ptr.ptres,
                 funcional,
@@ -152,6 +171,29 @@ class Spo_Model_Planointerno extends Modelo
         return $sql;
     }
     
+    /**
+     * Busca Sub-Unidades do PI.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function buscarSubUnidades(stdClass $filtros){
+        $sql = "
+            SELECT DISTINCT
+--                suo.suoid,
+                suo.unocod || ' - ' || suo.unonome AS unidade,
+                suo.suocod || ' - ' || suo.suonome ||  '(' || suo.suosigla || ')' AS sub_unidade
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN planacomorc.pi_delegacao pd ON(suo.suoid = pd.suoid)
+            WHERE
+                suo.suostatus = 'A'
+                AND pliid = '". (int)$filtros->pliid. "'
+                AND suo.prsano = '". (int)$filtros->exercicio. "'
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+
     public static function queryInstituicoesFederais(array $params, $obrigatorias = false, $perfis = array())
     {
         self::checarParametros($params, array('exercicio'));

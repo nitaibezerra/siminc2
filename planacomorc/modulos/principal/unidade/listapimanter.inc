@@ -13,6 +13,10 @@
                 include_once APPRAIZ . "planacomorc/modulos/principal/unidade/detalhes.inc";
                 die();
             break;
+            case 'detalharPiDelegadas':
+                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/sub-unidades-delegadas.inc";
+                die();
+            break;
         }
     }
 
@@ -65,12 +69,18 @@ DML;
             $_REQUEST['filtropi']?$_REQUEST['filtropi']:array(),
             array('exercicio' => $_SESSION['exercicio'], 'usucpf' => $_SESSION['usucpf'])
         );
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array(
+            'exercicio' => $_SESSION['exercicio'],
+            'usucpf' => $_SESSION['usucpf']
+            ));
+//ver($listaSubUnidadeUsuario, d);
 //ver(Spo_Model_Planointerno::queryInstituicoesFederais($params, true, $perfis),d);
 //    $list->setQuery(Spo_Model_Planointerno::queryInstituicoesFederais($params, true, $perfis))
         $list->setQuery(Spo_Model_Planointerno::listar((object) array(
             'exercicio' => $_SESSION['exercicio'],
-
-
+            'usucpf' => $_SESSION['usucpf'],
+            'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
+//            'perfis' => $perfis
             )))
             ->turnOnPesquisator()
 //            ->setFormFiltros('filtropi')
@@ -82,7 +92,7 @@ DML;
 //            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
 //            ->addCallbackDeCampo('plititulo', 'formatarTituloPI')
 //            ->addCallbackDeCampo('obrid', 'formatarObrid')
-//            ->addCallbackDeCampo('tcpid', 'formatarTcpid')
+            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
 //            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
             ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
             ->addAcao('edit', 'alterarPi')
@@ -100,8 +110,11 @@ DML;
 //            )))
             ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 
-        // -- popup de detalhamento do PI
+        # Popup de detalhamento do PI
         bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
+
+        # Popup com lista de Unidades delegadas
+        bootstrapPopup('Dados do Plano Interno', 'detalhePiDelegadas', '', array('fechar'), array('tamanho' => 'lg'));
     ?>
 </div>
 

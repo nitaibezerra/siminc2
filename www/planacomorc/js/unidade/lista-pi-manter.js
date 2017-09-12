@@ -15,7 +15,26 @@
         $('.abrir-ted').click(function(){
             abrirTED($(this).attr('data-tcpid'));
         });
+        
+        $('.a_listar_delegadas').click(function(){
+            var pliid = $(this).attr('data-pi');
+            abrirPopupDelegadas(pliid);
+        });
 
+    }
+    
+    /**
+     * Abre popup com lista de Sub-Unidades delegadas.
+     * 
+     * @param integer pliid
+     * @returns VOID 
+     */
+    function abrirPopupDelegadas(pliid) {
+       $('#detalhePiDelegadas .modal-body').empty();
+       $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPiDelegadas&pliid=" + pliid, function(html) {
+           $('#detalhePiDelegadas .modal-body').html(html);
+           $('#detalhePiDelegadas').modal();
+       });
     }
 
     function onFiltropiNovo()
