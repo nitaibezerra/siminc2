@@ -2953,6 +2953,7 @@ function exibirIconeDelegadas($pliid){
 }
 
 /**
+ * Busca Sub-Unidades vinculadas ao usuário.
  * 
  * @return array
  */
