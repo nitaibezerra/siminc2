@@ -909,7 +909,6 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 <script type="text/javascript" defer="defer">
     //function que carrega as combos Unidade Federal, Municipio e Tipo de Órgão
     jQuery(function(){
-        jQuery.datepicker.regional[ 'pt-BR' ];
         jQuery("#usudatanascimento").datepicker({
             changeMonth: true,//exibir combo de mês
             changeYear: true,//exibir combo de ano
