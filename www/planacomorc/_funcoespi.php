@@ -225,18 +225,18 @@ SQL;
 function carregarComboUG($unicod) {
     global $db;
 
-    if (in_array(PFL_GABINETE, pegaPerfilGeral($_SESSION['usucpf']))) {
+    if (in_array(PFL_SUBUNIDADE, pegaPerfilGeral($_SESSION['usucpf']))) {
         $filtroPerfilUG = <<<DML
             AND EXISTS (
                 SELECT 1
                 FROM planacomorc.usuarioresponsabilidade urp
                 WHERE
-                    urp.ungcod = ung.ungcod
-                    AND urp.pflcod = %d
+                    urp.ungcod = suo.suocod
+                    AND urp.pflcod = '%s'
                     AND urp.usucpf = '%s'
                     AND urp.rpustatus = 'A')
 DML;
-        $filtroPerfilUG = sprintf($filtroPerfilUG, PFL_GABINETE, $_SESSION['usucpf']);
+        $filtroPerfilUG = sprintf($filtroPerfilUG, PFL_SUBUNIDADE, $_SESSION['usucpf']);
     }
 
     $sql = <<<DML
@@ -250,12 +250,13 @@ DML;
 DML;
 
     $stmt = sprintf($sql, $unicod);
+    
     $dados = $db->carregar($stmt);
     if (count($dados) && $dados[0]) {
         $infoCombo = 'Selecione';
     } else {
         $dados = array();
-        $infoCombo = 'Nenhuma UG encontrada';
+        $infoCombo = 'Selecione uma unidade';
     }
     //$db->monta_combo('unicod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'S', 'unicod', false);
 //    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);

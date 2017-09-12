@@ -308,23 +308,35 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 // -- portanto, não deve filtrar pela UO do usuário que a está visualizando.
                                 // ******* Ao carregar a listagem de PTRES, sempre filtrar pela UO selecionada, independentemente do Perfil ; *****
 
-
                                 $wherePerfilUO = $filtroPerfilUG = '';
                                 if (in_array(PFL_SUBUNIDADE, $perfis)) {
-                                    $sql = "SELECT ung.ungcod, ung.ungabrev, ungid, ung.unicod
-                                    FROM planacomorc.usuarioresponsabilidade ur
-                                        inner join public.unidadegestora ung on ur.ungcod = ung.ungcod
-                                    WHERE ung.ungstatus= 'A'
-                                    and usucpf = '{$_SESSION['usucpf']}'
-                                    AND ur.pflcod = " . PFL_SUBUNIDADE . "
-                                    and rpustatus = 'A'
-                                    ORDER BY ung.unicod";
 
-                                    $unidadeUsuario = $db->pegaLinha($sql);
+                                    $sql = "SELECT distinct suo.suoid, suo.suocod, suo.unoid, suo.unocod, suo.unofundo
+                                            FROM planacomorc.usuarioresponsabilidade ur
+                                                    inner join public.vw_subunidadeorcamentaria suo on suo.suocod = ur.ungcod
+                                            WHERE suo.suostatus = 'A'
+                                            and usucpf = '{$_SESSION['usucpf']}'
+                                            AND ur.pflcod = '" . PFL_SUBUNIDADE . "'
+                                            and suo.prsano = '{$_SESSION['exercicio']}'
+                                            and rpustatus = 'A'
+                                            ORDER BY suo.unocod";
 
-                                    $wherePerfilUO  = " and unocod = '{$unidadeUsuario['unicod']}'";
-                                    $dadosPI['unicod'] = $unidadeUsuario['unicod'];
-                                    $dadosPI['ungcod'] = $unidadeUsuario['ungcod'];
+                                    $dadosUsuario = $db->carregar($sql);
+
+                                    $unidadeUsuario = [];
+                                    foreach ($dadosUsuario as $dadoUsuario){
+                                        $unidadeUsuario['unidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+                                        $unidadeUsuario['subunidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+
+                                        // Agrupando por FNC
+                                        $unidadeUsuario['unocod'][$dadoUsuario['unofundo']][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+                                        $unidadeUsuario['suocod'][$dadoUsuario['unofundo']][$dadoUsuario['suocod']] = $dadoUsuario['suocod'];
+                                    }
+
+                                    $wherePerfilUO  = " and unocod in ('" . implode("', '", $unidadeUsuario['unidades']) . "')";
+
+                                    $dadosPI['unicod'] = $unicod = (1 == count($unidadeUsuario['unocod']['f'])) ? current($unidadeUsuario['unocod']['f']) : '';
+                                    $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['f'])) ? current($unidadeUsuario['suocod']['f']) : '';
                                 }
 
                                 $sql = "SELECT uni.unocod AS codigo, uni.unocod || ' - ' || unonome AS descricao
@@ -334,8 +346,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         $wherePerfilUO
                                         order by unonome";
 
-                                if ($dadosPI['unicod']) {
-                                    $unicod = $dadosPI['unicod'];
+                                if ($dadosPI['unicod'] && $dadosPI['pliid']) {
                                     $editavelUg = 'N';
                                 }
 
@@ -350,18 +361,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-lg-9 div_ungcod">
                                 <?php
                                 $ungcod = $dadosPI['ungcod'];
-                                $ungdata = array();
-                                if (!empty($ungcod)) {
-                                    $sql = <<<DML
-                                    SELECT suo.suocod AS codigo, suo.suocod || ' - ' || suonome AS descricao
-                                    FROM public.vw_subunidadeorcamentaria suo
-                                    WHERE suo.suostatus = 'A'
-                                    and suo.prsano = '{$_SESSION['exercicio']}'
-                                    AND suo.suocod = '%s';                                    
-DML;
-                                    $ungdata = sprintf($sql, $ungcod);
-                                }
-                                $db->monta_combo('ungcod', $ungdata, $editavelUg, 'Selecione', null, null, null, null, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                                carregarComboUG($dadosPI['unicod']);
                                 ?>
                             </div>
                         </div>
