@@ -54,28 +54,33 @@ DML;
         }
 
         $form = new Simec_View_Form('filtropi');
-        $form->addInputTexto('planointerno', $filtropi['planointerno'], 'filtropi', 11, false, array('flabel' => 'Plano interno'))
-            ->addInputCombo('unicod', Spo_Model_Unidade::queryCombo(true, $whereUO), $filtropi['unicod'], 'filtrounicod', array('flabel' => 'Unidade'));
-        $config = array('flabel' => 'PTRES', 'multiple' => true);
-        $form->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'filtroptres', $config)
+        $form
+            ->addInputTexto('plicod', $filtropi['plicod'], 'plicod', 11, false, array('flabel' => 'Código PI'))
+            ->addInputCombo('unicod', Spo_Model_Unidade::queryCombo(true, $whereUO), $filtropi['unicod'], 'filtrounicod', array('flabel' => 'Unidade', 'multiple' => 'true'))
+            ->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'filtroptres', array('flabel' => 'PTRES', 'multiple' => true))
             ->addInputTexto('descricao', $filtropi['descricao'], 'filtrodesc', 200, false, array('flabel' => 'Título/Descrição'))
             ->addBotoes(array('limpar', 'buscar', 'novo'))
             ->render();
-        unset($confi);
 
         // -- Lista de PIs
         $list = new Simec_Listagem();
         $params = array_merge(
             $_REQUEST['filtropi']?$_REQUEST['filtropi']:array(),
-            array('exercicio' => $_SESSION['exercicio'], 'usucpf' => $_SESSION['usucpf'])
+            array(
+                'exercicio' => $_SESSION['exercicio'],
+                'usucpf' => $_SESSION['usucpf'])
         );
-
+//ver($_REQUEST['filtropi']);
         $list->setQuery(Spo_Model_Planointerno::listar((object) array(
             'exercicio' => $_SESSION['exercicio'],
-            'usucpf' => $_SESSION['usucpf']
+            'usucpf' => $_SESSION['usucpf'],
+            'plicod' => $_REQUEST['filtropi']['plicod'],
+            'unicod' => $_REQUEST['filtropi']['unicod'],
+            'ptres' => $_REQUEST['filtropi']['ptres'],
+            'descricao' => $_REQUEST['filtropi']['descricao']
             )))
             ->turnOnPesquisator()
-//            ->setFormFiltros('filtropi')
+            ->setFormFiltros('filtropi')
 //            ->esconderColunas('unidsc', 'valido')
             ->setCabecalho(array(
                 'id', 'Código', 'Sub-Unidade', 'SUO Delegada', 'Título', 'PTRES', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(

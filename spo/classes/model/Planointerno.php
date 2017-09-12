@@ -86,7 +86,30 @@ class Spo_Model_Planointerno extends Modelo
      */
     public static function montarFiltro(stdClass $filtros){
         $where = "";
-        
+//ver($filtros);
+//
+        # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
+        $where .= self::montarFiltroSubUnidadeUsuario($filtros);
+        # Código do PI.
+        $where .= $filtros->plicod? "AND pli.plicod = '". pg_escape_string($filtros->plicod). "' ": NULL;
+        # Unidade Orçamentária.
+        $where .= $filtros->unicod? "AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
+        # PTRES - Plano de trabalho resumido.
+        $where .= $filtros->ptres? "AND ptr.ptres::INTEGER IN(". join(',', $filtros->ptres). ") ": NULL;
+        # Título ou Descrição.
+        $where .= $filtros->descricao? "AND ( pli.plititulo ILIKE('%". pg_escape_string($filtros->descricao). "%') OR pli.plidsc ILIKE('%". pg_escape_string($filtros->descricao). "%') ) ": NULL;
+//ver($where);
+        return $where;
+    }
+    
+    /**
+     * Monta o filtro de Sub-Unidades vinculadas aos perfis do Usuário da sessão.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function montarFiltroSubUnidadeUsuario(stdClass $filtros){
+        $where = "";
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario($filtros);
         if($listaSubUnidadeUsuario){
@@ -168,7 +191,7 @@ class Spo_Model_Planointerno extends Modelo
             ORDER BY
                 pli.plicod
         ";
-//ver($sql,d);
+//ver($sql);
         return $sql;
     }
     
