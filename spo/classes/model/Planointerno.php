@@ -87,13 +87,14 @@ class Spo_Model_Planointerno extends Modelo
     public static function montarFiltro(stdClass $filtros){
         $where = "";
 //ver($filtros);
-//
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
         $where .= self::montarFiltroSubUnidadeUsuario($filtros);
         # Código do PI.
         $where .= $filtros->plicod? "AND pli.plicod = '". pg_escape_string($filtros->plicod). "' ": NULL;
         # Unidade Orçamentária.
         $where .= $filtros->unicod? "AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
+        # Sub-Unidade Orçamentária.
+        $where .= $filtros->ungcod? "AND pli.ungcod::INTEGER IN(". join(',', $filtros->ungcod). ") ": NULL;
         # PTRES - Plano de trabalho resumido.
         $where .= $filtros->ptres? "AND ptr.ptres::INTEGER IN(". join(',', $filtros->ptres). ") ": NULL;
         # Título ou Descrição.

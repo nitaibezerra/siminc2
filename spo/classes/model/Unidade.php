@@ -114,4 +114,26 @@ class Spo_Model_Unidade extends Modelo
                 {$obrigatorias}
             ORDER BY uni.unicod";
     }
+    
+    /**
+     * Monta consulta para retornar Sub-Unidades.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function queryComboSubUnidade(stdClass $filtro)
+    {
+        return "
+            SELECT
+                suo.suocod AS codigo,
+                suo.suocod || ' - ' || suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.prsano::INTEGER = ". (int)$filtro->exercicio. "
+                {$filtro->whereUO}
+            ORDER BY
+                suo.suonome
+        ";
+    }
 }

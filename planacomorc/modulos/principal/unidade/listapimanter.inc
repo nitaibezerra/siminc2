@@ -6,6 +6,8 @@
      *
      * @filesource
      */
+//    include_once '_funcoespi.php';
+
     $requisicao = $_REQUEST['requisicao'];
     if($requisicao) {
         switch ($requisicao) {
@@ -56,11 +58,14 @@ DML;
         $form = new Simec_View_Form('filtropi');
         $form
             ->addInputTexto('plicod', $filtropi['plicod'], 'plicod', 11, false, array('flabel' => 'Código PI'))
-            ->addInputCombo('unicod', Spo_Model_Unidade::queryCombo(true, $whereUO), $filtropi['unicod'], 'filtrounicod', array('flabel' => 'Unidade', 'multiple' => 'true'))
-            ->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'filtroptres', array('flabel' => 'PTRES', 'multiple' => true))
-            ->addInputTexto('descricao', $filtropi['descricao'], 'filtrodesc', 200, false, array('flabel' => 'Título/Descrição'))
+            ->addInputCombo('unicod', Spo_Model_Unidade::queryCombo(true, $whereUO), $filtropi['unicod'], 'unicod', array('flabel' => 'Unidade', 'multiple' => 'true'))
+            ->addInputCombo('ungcod', Spo_Model_Unidade::queryComboSubUnidade((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), $filtropi['ungcod'], 'ungcod', array('flabel' => 'Sub-Unidade', 'multiple' => 'true'))
+            ->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'ptres', array('flabel' => 'PTRES', 'multiple' => true))
+            ->addInputTexto('descricao', $filtropi['descricao'], 'descricao', 200, false, array('flabel' => 'Título/Descrição'))
             ->addBotoes(array('limpar', 'buscar', 'novo'))
             ->render();
+        
+//inputCombo($whereUO, $dados, $form, $id, $opcoes);
 
         // -- Lista de PIs
         $list = new Simec_Listagem();
@@ -76,6 +81,7 @@ DML;
             'usucpf' => $_SESSION['usucpf'],
             'plicod' => $_REQUEST['filtropi']['plicod'],
             'unicod' => $_REQUEST['filtropi']['unicod'],
+            'ungcod' => $_REQUEST['filtropi']['ungcod'],
             'ptres' => $_REQUEST['filtropi']['ptres'],
             'descricao' => $_REQUEST['filtropi']['descricao']
             )))
