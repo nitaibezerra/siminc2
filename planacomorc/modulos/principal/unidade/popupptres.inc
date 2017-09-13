@@ -320,7 +320,7 @@ $sql_lista = <<<DML
         ptr.ptrid,
         ptr.ptres,
         TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
-        aca.unicod || ' - ' || uni.unidsc as unidsc,
+        aca.unicod || ' - ' || uni.unonome as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
         $detalhamentoPi
@@ -328,7 +328,7 @@ $sql_lista = <<<DML
         COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado
     FROM monitora.ptres ptr
     INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-    INNER JOIN public.unidade uni on aca.unicod = uni.unicod
+    INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '2018'
     LEFT JOIN spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
     LEFT JOIN public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid    
     LEFT JOIN (SELECT pip2.ptrid, pipvalor  FROM monitora.pi_planointernoptres pip2 JOIN monitora.pi_planointerno USING (pliid) WHERE plistatus ='A') pip on ptr.ptrid = pip.ptrid
@@ -356,7 +356,7 @@ $sql_lista = <<<DML
         aca.acaobjetivocod,
         ptr.plocod,
         aca.unicod,
-        uni.unidsc,
+        uni.unonome,
         aca.acatitulo,
         ptr.ptrdotacao,
         pemp.total

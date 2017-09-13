@@ -335,8 +335,12 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                                     $wherePerfilUO  = " and unocod in ('" . implode("', '", $unidadeUsuario['unidades']) . "')";
 
-                                    $dadosPI['unicod'] = $unicod = (1 == count($unidadeUsuario['unocod']['f'])) ? current($unidadeUsuario['unocod']['f']) : '';
-                                    $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['f'])) ? current($unidadeUsuario['suocod']['f']) : '';
+                                    if(empty($dadosPI['unicod'])){
+                                        $dadosPI['unicod'] = (1 == count($unidadeUsuario['unocod']['f'])) ? current($unidadeUsuario['unocod']['f']) : '';
+                                    }
+                                    if(empty($dadosPI['ungcod'])){
+                                        $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['f'])) ? current($unidadeUsuario['suocod']['f']) : '';
+                                    }
                                 }
 
                                 $sql = "SELECT uni.unocod AS codigo, uni.unocod || ' - ' || unonome AS descricao
@@ -346,11 +350,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         $wherePerfilUO
                                         order by unonome";
 
-                                if ($dadosPI['unicod'] && $dadosPI['pliid']) {
-                                    $editavelUg = 'N';
-                                }
+                                $editavelUg = ($dadosPI['unicod'] && $dadosPI['pliid']) ? 'N' : 'S';
 
-                                $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($unicod) ? $unicod : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                                $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($dadosPI['unicod']) ? $dadosPI['unicod'] : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                 ?>
                             </div>
                         </div>
@@ -361,7 +363,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-lg-9 div_ungcod">
                                 <?php
                                 $ungcod = $dadosPI['ungcod'];
-                                carregarComboUG($dadosPI['unicod']);
+                                carregarComboUG($dadosPI['unicod'], $editavelUg);
                                 ?>
                             </div>
                         </div>
@@ -391,8 +393,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     $sbaid = $dadosPI['sbaid'];
                                     $sbadata = array();
 
-                                    if (!empty($unicod)) {
-                                        $sbadata = carregarComboSubacaoUO($unicod, $retornaSQL = true);
+                                    if (!empty($dadosPI['unicod'])) {
+                                        $sbadata = carregarComboSubacaoUO($dadosPI['unicod'], $retornaSQL = true);
                                     }
                                     if ($sbaid && $dadosPI['pliid']) {
                                         $db->monta_combo('sbaid', $sbadata, $habilitado, 'Selecione', 'selecionarsubacao', null, null, 400, 'N', 'sbaid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($dadosPi['sbaid']) ? $dadosPi['sbaid'] : null));
@@ -462,7 +464,7 @@ DML;
                                 ?>
                             </div>
                         </div>
-                        <div class="form-group grupo_manutencao">
+                        <div class="form-group grupo_manutencao" style="display: none;">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="maiid">Manutenção Item: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -470,7 +472,7 @@ DML;
                                 <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
                             </div>
                         </div>
-                        <div class="form-group grupo_manutencao">
+                        <div class="form-group grupo_manutencao" style="display: none;">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="masid">Manutenção SubItem: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -531,6 +533,7 @@ DML;
                                         if ($dadosPTRES) {
                                             $valortotalpi = 0;
                                             $cor = 1;
+                                            
                                             foreach ($dadosPTRES as $ptres):
                                                 $vlrPiDetalhado = $ptres['det_pi'];
                                                 $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
@@ -676,7 +679,7 @@ DML;
                                             descricao
                                     ";
 
-                                    $pumid = !empty($dadosPI['pumid'])? $dadosPI['pumid']: '3';
+                                    $pumid = !empty($dadosPI['pumid'])? $dadosPI['pumid']: '9';
                                     $db->monta_combo('pumid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pumid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pumid) ? $pumid: null));
                                 ?>
                             </div>
