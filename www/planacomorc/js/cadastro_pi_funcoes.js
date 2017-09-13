@@ -1127,7 +1127,6 @@
                 $('.div_metas_ppa_pnc').show('slow');
                 // Exibe os campos do Produto do PI
                 $('.div_produto_pi').show('slow');
-                $('#pumid').val(3).trigger("chosen:updated"); // Deixa default selecionado para opção Unidade.
                 // Exibe as colunas e campos do Cronograma Físico
                 $('.td_cronograma_fisico').show('slow');
             }

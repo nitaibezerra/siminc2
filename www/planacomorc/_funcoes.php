@@ -1489,7 +1489,7 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid, $ptrid) {
             $valorSelect
         FROM monitora.ptres ptr
         INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-        INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod
+        INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '{$_SESSION['exercicio']}'
         LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
         LEFT JOIN (
             SELECT ptrid, SUM(sadvalor) AS valor

@@ -30,7 +30,7 @@
 
 <script src="js/unidade/lista-pi-manter.js"></script>
 
-<div class="row col-md-12">
+<div class="row col-md-12" style="margin-bottom: 30px;">
     <?php
         $bc = new Simec_View_Breadcrumb();
         $bc->add('Unidades Orçamentárias')->add('Planos Internos')->render();

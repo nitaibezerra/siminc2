@@ -222,7 +222,7 @@ SQL;
 /**
  * Monta a combo de UGs filtrando por UO
  */
-function carregarComboUG($unicod) {
+function carregarComboUG($unicod, $editavel = 'S') {
     global $db;
 
     if (in_array(PFL_SUBUNIDADE, pegaPerfilGeral($_SESSION['usucpf']))) {
@@ -260,7 +260,7 @@ DML;
     }
     //$db->monta_combo('unicod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'S', 'unicod', false);
 //    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
-    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, '', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+    $db->monta_combo('ungcod', $dados, $editavel, $infoCombo, '', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
 }
 
 /**
@@ -629,8 +629,8 @@ function recuperarObjetivoPorPtres($ptrid) {
 
     $sql = "SELECT o.oppid
                 FROM monitora.ptres ptr
-                INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-                INNER JOIN public.objetivoppa o on o.oppcod = aca.acaobjetivocod
+                INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid and aca.prgano = ptr.ptrano
+                INNER JOIN public.objetivoppa o on o.oppcod = aca.acaobjetivocod and o.prsano = ptr.ptrano
             where ptrid = $ptrid";
 
     return $db->pegaUm($sql);
