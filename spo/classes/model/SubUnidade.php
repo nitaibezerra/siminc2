@@ -136,23 +136,4 @@ class Spo_Model_Unidade extends Modelo
                 suo.suonome
         ";
     }
-    
-    /**
-     * Monta consulta para retornar Estados.
-     * 
-     * @todo Refatorar constantes e colocar método em classe correta[PRAZO CURTO]
-     * @param stdClass $filtro
-     * @return string
-     */
-    public static function queryComboEstados(stdClass $filtro)
-    {
-        return "
-            SELECT DISTINCT
-                    esdid AS codigo,
-                    esddsc AS descricao
-            FROM workflow.estadodocumento
-            WHERE
-                tpdid = 265;
-        ";
-    }
 }

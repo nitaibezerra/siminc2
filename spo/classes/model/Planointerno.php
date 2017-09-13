@@ -90,15 +90,23 @@ class Spo_Model_Planointerno extends Modelo
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
         $where .= self::montarFiltroSubUnidadeUsuario($filtros);
         # Código do PI.
-        $where .= $filtros->plicod? "AND pli.plicod = '". pg_escape_string($filtros->plicod). "' ": NULL;
+        $where .= $filtros->plicod? "\n AND pli.plicod = '". pg_escape_string($filtros->plicod). "' ": NULL;
         # Unidade Orçamentária.
-        $where .= $filtros->unicod? "AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
+        $where .= $filtros->unicod? "\n AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
         # Sub-Unidade Orçamentária.
-        $where .= $filtros->ungcod? "AND pli.ungcod::INTEGER IN(". join(',', $filtros->ungcod). ") ": NULL;
+        $where .= $filtros->ungcod? "\n AND pli.ungcod::INTEGER IN(". join(',', $filtros->ungcod). ") ": NULL;
         # PTRES - Plano de trabalho resumido.
-        $where .= $filtros->ptres? "AND ptr.ptres::INTEGER IN(". join(',', $filtros->ptres). ") ": NULL;
+        $where .= $filtros->ptres? "\n AND ptr.ptres::INTEGER IN(". join(',', $filtros->ptres). ") ": NULL;
         # Título ou Descrição.
-        $where .= $filtros->descricao? "AND ( pli.plititulo ILIKE('%". pg_escape_string($filtros->descricao). "%') OR pli.plidsc ILIKE('%". pg_escape_string($filtros->descricao). "%') ) ": NULL;
+        $where .= $filtros->descricao? "\n AND ( pli.plititulo ILIKE('%". pg_escape_string($filtros->descricao). "%') OR pli.plidsc ILIKE('%". pg_escape_string($filtros->descricao). "%') ) ": NULL;
+        # Enquadramento.
+        $where .= $filtros->eqdid? "\n AND pli.eqdid::INTEGER IN(". join(',', $filtros->eqdid). ") ": NULL;
+        # Opção da Situação.
+        $where .= $filtros->esdid? "\n AND ed.esdid::INTEGER IN(". join(',', $filtros->esdid). ") ": NULL;
+        # Descrição da situação.
+        $where .= $filtros->esddsc? "\n AND ed.esddsc ILIKE('%". pg_escape_string($filtros->esddsc). "%') ": NULL;
+        # Emenda.
+        $where .= $filtros->pliemenda? "\n AND pli.pliemenda = '". pg_escape_string($filtros->pliemenda). "' ": NULL;
 //ver($where);
         return $where;
     }
@@ -114,8 +122,7 @@ class Spo_Model_Planointerno extends Modelo
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario($filtros);
         if($listaSubUnidadeUsuario){
-            $where .= "
-                AND (
+            $where .= "\n AND (
                     pli.ungcod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ")
                     OR 
                     pdsuo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ")

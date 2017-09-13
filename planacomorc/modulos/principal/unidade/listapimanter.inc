@@ -62,11 +62,21 @@ DML;
             ->addInputCombo('ungcod', Spo_Model_Unidade::queryComboSubUnidade((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), $filtropi['ungcod'], 'ungcod', array('flabel' => 'Sub-Unidade', 'multiple' => 'true'))
             ->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'ptres', array('flabel' => 'PTRES', 'multiple' => true))
             ->addInputTexto('descricao', $filtropi['descricao'], 'descricao', 200, false, array('flabel' => 'Título/Descrição'))
+            ->addInputCombo('eqdid', Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), $filtropi['eqdid'], 'eqdid', array('flabel' => 'Enquadramento da Despesa', 'multiple' => 'true'))
+            ->addChoices('Emenda', 'pliemenda', array('Sim' => 't', 'Não' => 'f', 'Todos' => ''))
+//            ->addInputChoices('pliemenda', null, $filtropi['pliemenda'], 'Emenda')
+//            ->addInputTexto('esddsc', $filtropi['esddsc'], 'esddsc', 200, false, array('flabel' => 'Situação'))
+            ->addInputCombo('esdid', Spo_Model_Unidade::queryComboEstados((object)array()), $filtropi['esdid'], 'esdid', array('flabel' => 'Situação', 'multiple' => 'true'))
             ->addBotoes(array('limpar', 'buscar', 'novo'))
             ->render();
-        
+//Simec_View_Form::addChoices();
 //inputCombo($whereUO, $dados, $form, $id, $opcoes);
 
+//SELECT DISTINCT
+//	esdid AS codigo,
+//	esddsc AS descricao
+//FROM workflow.estadodocumento WHERE tpdid = 265;
+        
         // -- Lista de PIs
         $list = new Simec_Listagem();
         $params = array_merge(
@@ -83,6 +93,10 @@ DML;
             'unicod' => $_REQUEST['filtropi']['unicod'],
             'ungcod' => $_REQUEST['filtropi']['ungcod'],
             'ptres' => $_REQUEST['filtropi']['ptres'],
+            'eqdid' => $_REQUEST['filtropi']['eqdid'],
+            'esddsc' => $_REQUEST['filtropi']['esddsc'],
+            'esdid' => $_REQUEST['filtropi']['esdid'],
+            'pliemenda' => $_REQUEST['filtropi']['pliemenda'],
             'descricao' => $_REQUEST['filtropi']['descricao']
             )))
             ->turnOnPesquisator()

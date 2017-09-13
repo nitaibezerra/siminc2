@@ -115,4 +115,25 @@ DML;
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+    
+    /**
+     * Monta consulta para retornar Enquadramento.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function queryComboEnquadramento(stdClass $filtro)
+    {
+        return "
+            SELECT
+                eqdid AS codigo,
+                eqddsc AS descricao
+            FROM monitora.pi_enquadramentodespesa
+            WHERE
+                eqdstatus = 'A'
+                AND eqdano::INTEGER = ". (int)$filtro->exercicio. "
+            ORDER BY
+                eqddsc
+        ";
+    }
 }
