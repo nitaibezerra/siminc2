@@ -593,8 +593,8 @@ DML;
                     var vlrDotacaoAtualPo = textToFloat(dotacaoAtualPO);
                     var vlrAutorizadoCusteioCapitalProvisorio = vlrDotacaoAtualPo / 2;
                     
-                    $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
-                    $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+                    $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+                    $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
 
                     var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
                     celDetalhadoPi.style.textAlign = "right";
@@ -615,11 +615,11 @@ DML;
                     var vlrNaoDetalhado = textToFloat(naoDetalhado);
                     var vlrDisponivelCusteioCapitalProvisorio = vlrNaoDetalhado / 2;
                     
-                    $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
-                    $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
+                    $('#td_disponivel_funcional_custeio').text(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+                    $('#td_disponivel_funcional_capital').text(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
                     
-                    $('#VlrFuncionalDisponivelCapital').val(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
-                    $('#VlrFuncionalDisponivelCusteio').val(mascaraglobal('###.###.###.###,##', vlrDisponivelCusteioCapitalProvisorio.toFixed(2)));
+                    $('#VlrFuncionalDisponivelCapital').val(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+                    $('#VlrFuncionalDisponivelCusteio').val(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
 
                     var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
                     CelEmpenhado.style.textAlign = "right";
@@ -655,7 +655,7 @@ DML;
                     var valorBaseProjeto = buscarValorBaseDoProjeto();
                     
                     var vlrBaseLimiteDisponivelUnidade = valorBaseLimiteDisponivelUnidade + valorBaseProjeto;
-                    $('#VlrSUDisponivel').val(mascaraglobal('###.###.###.###,##', vlrBaseLimiteDisponivelUnidade.toFixed(2)));
+                    $('#VlrSUDisponivel').val(number_format(vlrBaseLimiteDisponivelUnidade.toFixed(2), 2, ',', '.'));
 
                     // Calcula valor do projeto declarado pelo usuário e informa na coluna valor do projeto.
                     atualizarValorDoProjeto();

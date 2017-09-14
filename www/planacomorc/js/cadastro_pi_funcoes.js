@@ -517,7 +517,7 @@
         }
 
         var fltValorLimiteDisponivelUnidade = (valorBaseLimiteDisponivelUnidade - valorDiferenca);
-        $('#td_disponivel_sub_unidade').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelUnidade.toFixed(2)));
+        $('#td_disponivel_sub_unidade').html(number_format(fltValorLimiteDisponivelUnidade.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -536,7 +536,7 @@
             valorCusteio = (valorProjetoCusteio - valorBaseLimiteProjetoCusteio);
         }
         var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
-        $('#td_disponivel_funcional_custeio').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
+        $('#td_disponivel_funcional_custeio').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -555,7 +555,7 @@
             valorCapital = (valorProjetoCapital - valorBaseLimiteProjetoCapital);
         }
         var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
-        $('#td_disponivel_funcional_capital').html(mascaraglobal('###.###.###.###,##', fltValorLimiteDisponivelFuncional.toFixed(2)));
+        $('#td_disponivel_funcional_capital').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -569,7 +569,7 @@
         var fltValorDetalhado = textToFloat($('#piDetalhado').val());
         
         var fltValorDetalhadoAtual = (fltValorDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
-        $('#td_pi_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorDetalhadoAtual.toFixed(2)));
+        $('#td_pi_detalhado').html(number_format(fltValorDetalhadoAtual.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -583,7 +583,7 @@
         var fltValorBaseNaoDetalhado = textToFloat($('#piNaoDetalhado').val());
         
         var fltValorNaoDetalhadoAtual = (fltValorBaseNaoDetalhado - (fltValorDoProjeto - fltValorBaseDoProjeto));
-        $('#td_pi_nao_detalhado').html(mascaraglobal('###.###.###.###,##', fltValorNaoDetalhadoAtual.toFixed(2)));
+        $('#td_pi_nao_detalhado').html(number_format(fltValorNaoDetalhadoAtual.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -595,7 +595,7 @@
         var valorCusteio = textToFloat($('#picvalorcusteio').val());
         var valorCapital = textToFloat($('#picvalorcapital').val());
         var total = valorCusteio + valorCapital;
-        $('#td_valor_projeto').html(mascaraglobal('###.###.###.###,##', total.toFixed(2) ));
+        $('#td_valor_projeto').html(number_format(total.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -616,8 +616,8 @@
     function atualizarTotalOrcamentario() {
         var custeio = buscarTotalCusteioCronogramaOrcamentario();
         var capital = buscarTotalCapitalCronogramaOrcamentario();
-        $('#td_total_orcamentario_custeio').html('R$ '+ mascaraglobal('###.###.###.###,##', custeio.toFixed(2)));
-        $('#td_total_orcamentario_capital').html('R$ '+ mascaraglobal('###.###.###.###,##', capital.toFixed(2)));
+        $('#td_total_orcamentario_custeio').html('R$ '+ number_format(custeio.toFixed(2), 2, ',', '.'));
+        $('#td_total_orcamentario_capital').html('R$ '+ number_format(capital.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -628,8 +628,8 @@
     function atualizarTotalFinanceiro() {
         var custeio = buscarTotalCusteioCronogramaFinanceiro();
         var capital = buscarTotalCapitalCronogramaFinanceiro();
-        $('#td_total_financeiro_custeio').html('R$ '+ mascaraglobal('###.###.###.###,##', custeio.toFixed(2)));
-        $('#td_total_financeiro_capital').html('R$ '+ mascaraglobal('###.###.###.###,##', capital.toFixed(2)));
+        $('#td_total_financeiro_custeio').html('R$ '+ number_format(custeio.toFixed(2), 2, ',', '.'));
+        $('#td_total_financeiro_capital').html('R$ '+ number_format(capital.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -689,8 +689,8 @@
         dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
         var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
 
-        $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
-        $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+        $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+        $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
 
         // Saldo Disponível
         var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
@@ -699,8 +699,8 @@
         var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
         var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
 
-        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
-        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
+        $('#td_disponivel_funcional_custeio').text(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
+        $('#td_disponivel_funcional_capital').text(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
     }
     
     function carregarSaldoFuncional(){
@@ -708,8 +708,8 @@
         dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
         var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
 
-        $('#td_autorizado_funcional_custeio').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
-        $('#td_autorizado_funcional_capital').text(mascaraglobal('###.###.###.###,##', vlrAutorizadoCusteioCapitalProvisorio.toFixed(2) ));
+        $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+        $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
 
         // Saldo Disponível
         var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
@@ -718,10 +718,10 @@
         var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
         var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
 
-        $('#td_disponivel_funcional_custeio').text(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2) ));
-        $('#td_disponivel_funcional_capital').text(mascaraglobal('###.###.###.###,##', valorDisponivelCapital.toFixed(2) ));
-        $('#VlrFuncionalDisponivelCapital').val(mascaraglobal('###.###.###.###,##', valorDisponivelCusteio.toFixed(2)));
-        $('#VlrFuncionalDisponivelCusteio').val(mascaraglobal('###.###.###.###,##',valorDisponivelCapital.toFixed(2)));
+        $('#td_disponivel_funcional_custeio').text(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
+        $('#td_disponivel_funcional_capital').text(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
+        $('#VlrFuncionalDisponivelCapital').val(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
+        $('#VlrFuncionalDisponivelCusteio').val(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
     }
 
     /**
@@ -1020,8 +1020,8 @@
                 var fltDisponivelUnidade = textToFloat(data.disponivel);
                 var fltBaseProjeto = buscarValorBaseDoProjeto();
                 var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
-                $('#td_disponivel_sub_unidade').text(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
-                $('#VlrSUDisponivel').val(mascaraglobal('###.###.###.###,##', fltDisponivel.toFixed(2)));
+                $('#td_disponivel_sub_unidade').text(number_format(fltDisponivel.toFixed(2), 2, ',', '.'));
+                $('#VlrSUDisponivel').val(number_format(fltDisponivel.toFixed(2), 2, ',', '.'));
                 
                 mudarCorValorProjeto();
             }
