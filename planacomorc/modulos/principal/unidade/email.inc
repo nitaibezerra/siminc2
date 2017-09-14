@@ -229,7 +229,7 @@ $textoEmail = "
                                                                                                                     <td valign='middle' style='vertical-align: middle;'>
                                                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                                                             <div class='contentEditable' style='text-align: left;font-weight: light; color:#555555;font-size:26;line-height: 39px;font-family: Helvetica Neue;'>
-                                                                                                                                <img dfsrc='http://siminc2.cultura.gov.br/zimec/public/img/logo-simec.png'>
+                                                                                                                                <img src='http://siminc2.cultura.gov.br/zimec/public/img/logo-simec.png'>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </td>
