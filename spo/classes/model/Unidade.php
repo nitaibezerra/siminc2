@@ -104,7 +104,7 @@ class Spo_Model_Unidade extends Modelo
             $obrigatorias = '';
         }
 
-        return "
+        $sql = "
             SELECT uni.unicod AS codigo,
                 uni.unicod || ' - ' || unidsc AS descricao
             FROM public.unidade uni
@@ -113,6 +113,8 @@ class Spo_Model_Unidade extends Modelo
                 {$whereUO}
                 {$obrigatorias}
             ORDER BY uni.unicod";
+//ver($sql,d);
+        return $sql;
     }
     
     /**

@@ -123,7 +123,7 @@ class Spo_Model_Unidade extends Modelo
      */
     public static function queryComboSubUnidade(stdClass $filtro)
     {
-        return "
+        $sql = "
             SELECT
                 suo.suocod AS codigo,
                 suo.suocod || ' - ' || suonome AS descricao
@@ -135,5 +135,7 @@ class Spo_Model_Unidade extends Modelo
             ORDER BY
                 suo.suonome
         ";
+//ver($sql,d);
+        return $sql;
     }
 }

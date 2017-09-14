@@ -1,4 +1,5 @@
 <?php
+
     /**
      * Tela de listagem de PI cadastrados no sistema.
      *
@@ -6,9 +7,10 @@
      *
      * @filesource
      */
-//    include_once '_funcoespi.php';
 
     $requisicao = $_REQUEST['requisicao'];
+    $filtropi = $_REQUEST;
+    
     if($requisicao) {
         switch ($requisicao) {
             case 'detalharPi':
@@ -30,12 +32,9 @@
 
 <script src="js/unidade/lista-pi-manter.js"></script>
 
-<div class="row col-md-12" style="margin-bottom: 30px;">
     <?php
         $bc = new Simec_View_Breadcrumb();
         $bc->add('Unidades Orçamentárias')->add('Planos Internos')->render();
-
-        $filtropi = $_REQUEST['filtropi'];
 
         // -- Where UO para perfil PFL_GESTAO_ORCAMENTARIA_IFS - utilizado no combo
         $whereUO = '';
@@ -55,51 +54,59 @@
 //DML;
 //            $whereUO = sprintf($whereUO, $_SESSION['usucpf'], PFL_SUBUNIDADE);
         }
-
-        $form = new Simec_View_Form('filtropi');
-        $form
-            ->addInputTexto('plicod', $filtropi['plicod'], 'plicod', 11, false, array('flabel' => 'Código PI'))
-            ->addInputCombo('unicod', Spo_Model_Unidade::queryCombo(true, $whereUO), $filtropi['unicod'], 'unicod', array('flabel' => 'Unidade', 'multiple' => 'true'))
-            ->addInputCombo('ungcod', Spo_Model_Unidade::queryComboSubUnidade((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), $filtropi['ungcod'], 'ungcod', array('flabel' => 'Sub-Unidade', 'multiple' => 'true'))
-            ->addInputCombo('ptres', Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), $filtropi['ptres'], 'ptres', array('flabel' => 'PTRES', 'multiple' => true))
-            ->addInputTexto('descricao', $filtropi['descricao'], 'descricao', 200, false, array('flabel' => 'Título/Descrição'))
-            ->addInputCombo('eqdid', Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), $filtropi['eqdid'], 'eqdid', array('flabel' => 'Enquadramento da Despesa', 'multiple' => 'true'))
-            ->addChoices('Emenda', 'pliemenda', array('Sim' => 't', 'Não' => 'f', 'Todos' => ''))
-//            ->addInputChoices('pliemenda', null, $filtropi['pliemenda'], 'Emenda')
-//            ->addInputTexto('esddsc', $filtropi['esddsc'], 'esddsc', 200, false, array('flabel' => 'Situação'))
-            ->addInputCombo('esdid', Spo_Model_Unidade::queryComboEstados((object)array()), $filtropi['esdid'], 'esdid', array('flabel' => 'Situação', 'multiple' => 'true'))
-            ->addBotoes(array('limpar', 'buscar', 'novo'))
-            ->render();
-//Simec_View_Form::addChoices();
-//inputCombo($whereUO, $dados, $form, $id, $opcoes);
-
-//SELECT DISTINCT
-//	esdid AS codigo,
-//	esddsc AS descricao
-//FROM workflow.estadodocumento WHERE tpdid = 265;
         
-        // -- Lista de PIs
+    ?>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Pesquisa avançada por PI</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
+                        <input name="" id="filtropi_requisicao" value="" type="hidden">
+
+                        <?php
+                            echo $simec->input('plicod', 'Código do PI', $filtropi['plicod'], ['maxlength' => 11]);
+                            echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo(true, $whereUO), array('multiple' => 'true'));
+                            echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), array('multiple' => 'true'));
+                            echo $simec->select('ptres', 'PTRES', $filtropi['ptres'], Spo_Model_Unidade::queryComboSubUnidade((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), array('multiple' => 'true'));
+                            echo $simec->input('descricao', 'Título/Descrição', $filtropi['descricao'], ['maxlength' => 200]);
+                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtropi['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), array('multiple' => 'true'));
+                            echo $simec->radio('pliemenda', 'Emenda', $filtropi['pliemenda'], array('t' => 'Sim', 'f' => 'Não', '' => 'Todos'));
+                            echo $simec->select('esdid', 'Situação', $filtropi['esdid'], Spo_Model_Unidade::queryComboEstados((object)array()), array('multiple' => 'true'));
+                        ?>
+
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-warning btn-limpar" type="reset">
+                                    <span class="glyphicon glyphicon-remove-circle"></span> Limpar
+                                </button>
+                                <button class="btn btn-primary btn-buscar" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button class="btn btn-success btn-novo" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Novo
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div class="row col-md-12" style="margin-bottom: 30px;">
+    <?php
+        # Lista de PIs
+        $filtropi['exercicio'] = $_SESSION['exercicio'];
+        $filtropi['usucpf'] = $_SESSION['usucpf'];
         $list = new Simec_Listagem();
-        $params = array_merge(
-            $_REQUEST['filtropi']?$_REQUEST['filtropi']:array(),
-            array(
-                'exercicio' => $_SESSION['exercicio'],
-                'usucpf' => $_SESSION['usucpf'])
-        );
-//ver($_REQUEST['filtropi']);
-        $list->setQuery(Spo_Model_Planointerno::listar((object) array(
-            'exercicio' => $_SESSION['exercicio'],
-            'usucpf' => $_SESSION['usucpf'],
-            'plicod' => $_REQUEST['filtropi']['plicod'],
-            'unicod' => $_REQUEST['filtropi']['unicod'],
-            'ungcod' => $_REQUEST['filtropi']['ungcod'],
-            'ptres' => $_REQUEST['filtropi']['ptres'],
-            'eqdid' => $_REQUEST['filtropi']['eqdid'],
-            'esddsc' => $_REQUEST['filtropi']['esddsc'],
-            'esdid' => $_REQUEST['filtropi']['esdid'],
-            'pliemenda' => $_REQUEST['filtropi']['pliemenda'],
-            'descricao' => $_REQUEST['filtropi']['descricao']
-            )))
+        $list->setQuery(Spo_Model_Planointerno::listar((object) $filtropi))
             ->turnOnPesquisator()
             ->setFormFiltros('filtropi')
 //            ->esconderColunas('unidsc', 'valido')
