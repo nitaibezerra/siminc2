@@ -60,27 +60,34 @@ class Spo_Model_Ptres extends Modelo
         'esfcod' => null,
     );
 
-    public static function queryCombo($exercicio, $obrigatorias = false)
+    public static function queryCombo(stdClass $filtro)
     {
-        if ($obrigatorias) {
-            $obrigatorias = ' AND aca.unicod NOT IN(' . Spo_Model_Unidade::getObrigatorias(true) . ')';
-        } else {
-            $obrigatorias = '';
+        $where = '';
+        if($filtro->listaSubUnidadeUsuario){
+            $where = "\n                AND suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ";
         }
-
-        return <<<DML
-SELECT pt.ptrid AS codigo,
-       '(PTRES:'||pt.ptres||') - '|| aca.unicod ||'.'|| aca.prgcod ||'.'|| aca.acacod AS descricao
-  FROM monitora.ptres pt
-    INNER JOIN monitora.acao aca USING(acaid)
-  WHERE aca.prgano = '{$exercicio}'
-    AND pt.ptrano = '{$exercicio}'
-    AND aca.acasnrap = false
-    {$obrigatorias}
-  GROUP BY codigo,
-           descricao
-  ORDER BY 1
-DML;
+        
+        $sql = "
+            SELECT
+                pt.ptrid AS codigo,
+                '(PTRES:'||pt.ptres||') - '|| aca.unicod ||'.'|| aca.prgcod ||'.'|| aca.acacod AS descricao
+            FROM monitora.ptres pt
+                JOIN monitora.acao aca USING(acaid)
+                LEFT JOIN spo.ptressubunidade ps USING(ptrid) -- SELECT * FROM spo.ptressubunidade
+                LEFT JOIN public.vw_subunidadeorcamentaria suo USING(suoid) -- SELECT * FROM public.vw_subunidadeorcamentaria
+            WHERE
+                aca.prgano::INTEGER = ". (int)$filtro->exercicio. "
+                AND pt.ptrano::INTEGER = ". (int)$filtro->exercicio. "
+                AND aca.acasnrap = false
+                {$where}
+            GROUP BY
+                codigo,
+                descricao
+            ORDER BY
+                1
+        ";
+//ver($sql,d);
+        return $sql;
     }
 
     public function recuperarPtresSubunidade($prsano, $tipo = null)
