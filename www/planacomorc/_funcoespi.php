@@ -2195,9 +2195,21 @@ function gerarCodigosPi($pliid)
 {
     global $db;
 
-    $sql = "select  substr(pliano, 3, 2) || pi.ungcod || LPAD(nextval('monitora.seq_codigo_pi_'|| pliano)::text, 3, '0') as plicod,
-                    LPAD(currval('monitora.seq_codigo_pi_'|| pliano)::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
+    /********************************************************************************************************
+    *        Regra para formação do Código do PI está em /docs/planacomorc/Estrutura_Codigo_PI.xlsx         *
+    ********************************************************************************************************/
+
+    $sql = "select  substr(pliano, 3, 2) || 
+                    case when pi.pliemenda = true then 'E' else eqd.eqdcod end || 
+                    LPAD(pi.pliid::text, 5, '0') || 
+                    suo.suocodigopi || 
+                    case when pic.picted = true then 'T' else cap.capcod end as plicod,
+                    LPAD(pi.pliid::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
             from monitora.pi_planointerno pi
+                    inner join planacomorc.pi_complemento pic on pic.pliid = pi.pliid
+                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pi.eqdid
+                    inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pi.ungcod and suo.unocod = pi.unicod and suo.prsano = pi.pliano
+                    inner join monitora.pi_categoriaapropriacao cap on cap.capid = pi.capid
             where pi.pliid = $pliid";
 
     return $db->pegaLinha($sql);
