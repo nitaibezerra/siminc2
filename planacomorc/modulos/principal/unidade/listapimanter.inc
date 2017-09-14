@@ -32,28 +32,12 @@
 
 <script src="js/unidade/lista-pi-manter.js"></script>
 
-    <?php
+<?php
 
-        // -- Where UO para perfil PFL_GESTAO_ORCAMENTARIA_IFS - utilizado no combo
-        $whereUO = '';
-        if (in_array(PFL_SUBUNIDADE, $perfis)) {
-//            $whereUO = <<<DML
-//                AND EXISTS (
-//                    SELECT
-//                        1
-//                    FROM planacomorc.usuarioresponsabilidade rpu
-//                        JOIN public.unidadegestora ung on rpu.ungcod = ung.ungcod
-//                    WHERE
-//                        rpu.usucpf = '%s'
-//                        AND rpu.pflcod = %d
-//                        AND rpu.rpustatus = 'A'
-//                        AND uni.unocod  = ung.unocod
-//                )
-//DML;
-//            $whereUO = sprintf($whereUO, $_SESSION['usucpf'], PFL_SUBUNIDADE);
-        }
-        
-    ?>
+    # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
+?>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -68,13 +52,18 @@
 
                         <?php
                             echo $simec->input('plicod', 'Código do PI', $filtropi['plicod'], ['maxlength' => 11]);
-                            echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo(true, $whereUO), array('multiple' => 'true'));
-                            echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), array('multiple' => 'true'));
-                            echo $simec->select('ptres', 'PTRES', $filtropi['ptres'], Spo_Model_Unidade::queryComboSubUnidade((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), array('multiple' => 'true'));
+                            # Se o usuário tiver Sub-Unidades vinculadas ao seu perfil o sistema não mostra opção de selecionar UO.
+                            if (!$listaSubUnidadeUsuario) {
+                                echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo(true), array('multiple' => 'true'));
+                            }
+                            echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                                'exercicio' => $_SESSION['exercicio'],
+                                'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
+                            echo $simec->select('ptres', 'PTRES', $filtropi['ptres'], Spo_Model_Ptres::queryCombo($_SESSION['exercicio'], true), array('multiple' => 'true'));
                             echo $simec->input('descricao', 'Título/Descrição', $filtropi['descricao'], ['maxlength' => 200]);
-                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtropi['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'], 'whereUO' => $whereUO)), array('multiple' => 'true'));
-                            echo $simec->radio('pliemenda', 'Emenda', (!$filtropi['pliemenda']? '': $filtropi['pliemenda']), array('t' => 'Sim', 'f' => 'Não', '' => 'Todos'));
-                            echo $simec->select('esdid', 'Situação', $filtropi['esdid'], Spo_Model_Unidade::queryComboEstados((object)array()), array('multiple' => 'true'));
+                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtropi['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'])), array('multiple' => 'true'));
+                            echo $simec->radio('pliemenda', 'Emenda', (!$filtropi['pliemenda'] ? '' : $filtropi['pliemenda']), array('t' => 'Sim', 'f' => 'Não', '' => 'Todos'));
+                            echo $simec->select('esdid', 'Situação', $filtropi['esdid'], Spo_Model_Unidade::queryComboEstados((object) array()), array('multiple' => 'true'));
                         ?>
 
                         <div class="form-group">
@@ -91,6 +80,7 @@
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

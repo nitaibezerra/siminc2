@@ -112,5 +112,36 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         return $resultado ? $resultado : array();
     }
 
+    /**
+     * Monta consulta para retornar Sub-Unidades.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function queryCombo(stdClass $filtro)
+    {
+//ver($filtro,d);
+        $where = '';
+        if($filtro->listaSubUnidadeUsuario){
+            $where = "\n                AND suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ";
+        }
+        
+        $sql = "
+            SELECT
+                suo.suoid,
+                suo.suocod AS codigo,
+                suo.suocod || ' - ' || suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.prsano::INTEGER = ". (int)$filtro->exercicio. "
+                $where
+            ORDER BY
+                suo.suonome
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+    
 }//end Class
 ?>

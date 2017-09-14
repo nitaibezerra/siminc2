@@ -16,6 +16,14 @@
             abrirTED($(this).attr('data-tcpid'));
         });
         
+        $('.btn-limpar').click(function(){
+            window.document.location.href = '';
+        });
+        
+        $('.btn-novo').click(function(){
+            window.document.location.href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
+        });
+        
         $('.a_listar_delegadas').click(function(){
             var pliid = $(this).attr('data-pi');
             abrirPopupDelegadas(pliid);

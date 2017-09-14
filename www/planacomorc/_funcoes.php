@@ -2961,7 +2961,7 @@ function buscarSubUnidadeUsuario(stdClass $filtros){
     global $db;
     $listaSubUnidadeUsuario = array();
     $sql = "
-        SELECT
+        SELECT DISTINCT
             suo.suocod
         FROM planacomorc.usuarioresponsabilidade rpu
             JOIN public.vw_subunidadeorcamentaria suo ON rpu.ungcod = suo.suocod
