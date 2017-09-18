@@ -20,8 +20,15 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-4">
         <h2>Painel de Acompanhamento</h2>
+    </div>
+    <div class="col-lg-8">
+        <div style="padding-top: 10px;" class="text-right">
+            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A"><i class="fa fa-list"></i> Lista de PI</a>
+            <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A"><i class="fa fa-plus-circle"></i> Novo PI</a>
+            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
+        </div>
     </div>
 </div>
 
