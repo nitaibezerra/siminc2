@@ -340,7 +340,7 @@
                                     <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_MUNICIPAL): ?>
                                     <tr>
                                         <td>
-                                            <b>localização(ões):</b>
+                                            <b>Localizações:</b>
                                         </td>
                                         <td align="left">
                                             <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
@@ -396,6 +396,40 @@
                                         </td>
                                     </tr>
                                     <?php endif; ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-10">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Responsáveis do Projeto</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td>
+                                            <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                <tr>
+                                                    <td style="text-align: left;"><b>Nome</b></td>
+                                                    <td style="text-align: left;"><b>Telefone</b></td>
+                                                    <td style="text-align: left;"><b>E-mail</b></td>
+                                                </tr>
+                                                <?php foreach($aResponsavel as $responsavel){ ?>
+                                                    <tr style="height: 30px;" class="tr_responsaveis_<?php echo $responsavel['pirid']; ?>" >
+                                                        <td style="text-align: left;"><?php echo $responsavel['usunome']; ?></td>
+                                                        <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
+                                                        <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
