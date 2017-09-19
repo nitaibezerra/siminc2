@@ -27,6 +27,7 @@
         $('.a_listar_delegadas').click(function(){
             var pliid = $(this).attr('data-pi');
             abrirPopupDelegadas(pliid);
+            return false;
         });
 
     }
@@ -64,12 +65,31 @@
         });
     }
 
-    function detalhePI(pliid) {
+    /**
+     * Exibe popup com Detalhes do pi e Gráfico.
+     * 
+     * @returns VOID
+     */
+    function exibirGrafico(pliid) {
        $('#detalhepi .modal-body').empty();
-       $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPi&pliid=" + pliid, function(html) {
-           $('#detalhepi .modal-body').html(html);
-           $('#detalhepi').modal();
+       $.post(
+            "planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=exibirGrafico&pliid=" + pliid,
+            function(html) {
+                $('#detalhepi .modal-body').html(html);
+                $('#detalhepi').modal();
        });
+    }
+    
+    /**
+     * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
+     * 
+     * @returns VOID
+     */
+    function exibirEspelhoPi(pliid){
+        window.open(
+            'planacomorc.php?modulo=principal/unidade/espelho-pi&acao=A&acao=A&pliid='+ pliid,
+            'popup_espelho_pi',
+            'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
     }
 
     /*

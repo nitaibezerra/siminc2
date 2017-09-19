@@ -13,10 +13,14 @@
     
     if($requisicao) {
         switch ($requisicao) {
-            case 'detalharPi':
-                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/detalhes.inc";
+            case 'exibirGrafico':
+                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/grafico-pi-dotacao.inc";
                 die();
             break;
+//            case 'exibirEspelhoPi':
+//                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/espelho-pi.inc";
+//                die();
+//            break;
             case 'detalharPiDelegadas':
                 include_once APPRAIZ . "planacomorc/modulos/principal/unidade/sub-unidades-delegadas.inc";
                 die();
@@ -119,7 +123,8 @@
 //            ->setAcaoComoCondicional('delete', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))
-            ->addAcao('view', 'detalhePI')
+            ->addAcao('chart', 'exibirGrafico')
+            ->addAcao('view', 'exibirEspelhoPi')
 //            ->setAcaoComoCondicional('view', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))

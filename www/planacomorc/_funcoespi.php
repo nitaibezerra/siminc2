@@ -1575,52 +1575,139 @@ function carregarPI($pliid) {
     global $db;
 
     $sql = <<<DML
-SELECT pli.pliid,
-       pli.mdeid,
-       mde.mdecod,
-       pli.eqdid,
-       eqd.eqdcod,
-       pli.neeid,
-       nee.neecod,
-       pli.capid,
-       cap.capcod,
-       pli.sbaid,
-       pli.plititulo,
-       pli.plicodsubacao,
-       pli.plicod,
-       pli.plilivre,
-       pli.plidsc,
-       pli.unicod,
-       pli.ungcod,
-       pli.pliano,
-       pli.plicadsiafi,
-       pli.docid,
-       to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
-       pc.*,
-       CASE plisituacao
-           WHEN 'A' THEN 'Aprovado'
-           WHEN 'E' THEN 'Enviado para revisao'
-           WHEN 'P' THEN 'Pendente'
-           WHEN 'C' THEN 'Cadastrado no SIAFI'
-           WHEN 'R' THEN 'Revisado'
-           WHEN 'H' THEN 'Homologado'
-           WHEN 'T' THEN '<span style="color:red">Cadastrado no SIAFI</span>'
-             ELSE 'Tendencioso'
-         END AS plisituacao,
-       sba.sbaid,
-       sba.sbasigla || ' - ' AS sbasigla,
-       sba.sbacod
-  FROM monitora.pi_planointerno pli
-    left join planacomorc.pi_complemento pc on pc.pliid = pli.pliid
-    LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
-    LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
-    LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
-    LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
-    LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano) -- Resolver 2014
-  WHERE pli.pliid = %d
+        SELECT
+            pli.pliid,
+            pli.mdeid,
+            mde.mdecod,
+            pli.eqdid,
+            eqd.eqdcod,
+            pli.neeid,
+            nee.neecod,
+            pli.capid,
+            cap.capcod,
+            pli.sbaid,
+            pli.plititulo,
+            pli.plicodsubacao,
+            pli.plicod,
+            pli.plilivre,
+            pli.plidsc,
+            pli.unicod,
+            pli.ungcod,
+            pli.pliano,
+            pli.plicadsiafi,
+            pli.docid,
+            to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
+            pc.*,
+            CASE plisituacao
+                WHEN 'A' THEN 'Aprovado'
+                WHEN 'E' THEN 'Enviado para revisao'
+                WHEN 'P' THEN 'Pendente'
+                WHEN 'C' THEN 'Cadastrado no SIAFI'
+                WHEN 'R' THEN 'Revisado'
+                WHEN 'H' THEN 'Homologado'
+                WHEN 'T' THEN '<span style="color:red">Cadastrado no SIAFI</span>'
+            ELSE 'Tendencioso'
+            END AS plisituacao,
+            sba.sbaid,
+            sba.sbasigla || ' - ' AS sbasigla,
+            sba.sbacod
+        FROM monitora.pi_planointerno pli
+            LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
+            LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
+            LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
+            LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
+            LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
+            LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano)
+        WHERE
+            pli.pliid = %d
 DML;
     $stmt = sprintf($sql, $pliid);
-    //ver($stmt);
+//ver($stmt);
+    return $db->pegaLinha($stmt);
+}
+
+
+function carregarPiComDetalhes(stdclass $filtros) {
+    global $db;
+
+    $sql = <<<DML
+        SELECT
+            pli.pliid,
+            pli.mdeid,
+            suo.unonome || '(' || suo.unosigla || ')' AS unidade,
+            suo.suonome || '(' || suo.suosigla || ')' AS sub_unidade,
+            mde.mdecod,
+            pli.eqdid,
+            eqd.eqddsc,
+            opp.oppcod || ' - ' || opp.oppnome AS objetivo,
+            m.mppcod || ' - ' || m.mppdsc AS meta,
+            i.ippcod || ' - ' || i.ippnome AS iniciativa,
+            mpn.mpncod || ' - ' || mpn.mpnnome AS meta_pnc,
+            ipn.ipncod || ' - ' || ipn.ipndsc AS iniciativa_pnc,
+            ptr.prgcod || ' - ' || ptr.prgdsc AS programa,
+            ptr.acacod || ' - ' || ptr.acatitulo AS acao,
+            ptr.loccod || ' - ' || ptr.locdsc AS localizador,
+            ptr.plocod || ' - ' || ptr.acatitulo AS po,
+            ptr.ptres AS ptres,
+            pprnome AS produto,
+            pum.pumdescricao AS unidade_medida,
+            cap.capdsc AS modalidade_pactuacao,
+            esf.esfdsc AS tipo_localizacao,
+            pli.pliemenda,
+            eqd.eqdcod,
+            pli.neeid,
+            nee.neecod,
+            pli.capid,
+            cap.capcod,
+            pli.sbaid,
+            pli.plititulo,
+            pli.plicodsubacao,
+            pli.plicod,
+            pli.plilivre,
+            pli.plidsc,
+            pli.unicod,
+            pli.ungcod,
+            pli.pliano,
+            pli.plicadsiafi,
+            pli.docid,
+            to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
+            pc.*,
+            CASE plisituacao
+                WHEN 'A' THEN 'Aprovado'
+                WHEN 'E' THEN 'Enviado para revisao'
+                WHEN 'P' THEN 'Pendente'
+                WHEN 'C' THEN 'Cadastrado no SIAFI'
+                WHEN 'R' THEN 'Revisado'
+                WHEN 'H' THEN 'Homologado'
+                WHEN 'T' THEN '<span style="color:red">Cadastrado no SIAFI</span>'
+            ELSE 'Tendencioso'
+            END AS plisituacao,
+            sba.sbaid,
+            sba.sbasigla || ' - ' AS sbasigla,
+            sba.sbacod
+        FROM monitora.pi_planointerno pli
+            LEFT JOIN monitora.pi_planointernoptres pip ON pli.pliid = pip.pliid
+            LEFT JOIN monitora.vw_ptres ptr ON pip.ptrid = ptr.ptrid
+            LEFT JOIN planacomorc.pi_complemento pc ON pc.pliid = pli.pliid
+            LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
+            LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
+            LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
+            LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
+            LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid)
+            LEFT JOIN public.vw_subunidadeorcamentaria suo ON suo.suocod = pli.ungcod AND suo.prsano = pli.pliano
+            LEFT JOIN public.objetivoppa opp ON pc.oppid = opp.oppid
+            LEFT JOIN public.metappa m ON pc.mppid = m.mppid AND m.prsano = pli.pliano
+            LEFT JOIN public.iniciativappa i ON pc.ippid = i.ippid AND i.prsano = pli.pliano
+            LEFT JOIN public.metapnc mpn ON pc.mpnid = mpn.mpnid
+            LEFT JOIN public.indicadorpnc ipn ON pc.ipnid = ipn.ipnid
+            LEFT JOIN monitora.pi_produto ppr ON pc.pprid = ppr.pprid AND ppr.prsano = pli.pliano
+            LEFT JOIN monitora.pi_unidade_medida pum ON pc.pumid = pum.pumid
+            LEFT JOIN territorios.esfera esf ON pc.esfid = esf.esfid
+        WHERE
+            pli.pliid = %d
+DML;
+    $stmt = sprintf($sql, $filtros->pliid);
+//ver($stmt);
     return $db->pegaLinha($stmt);
 }
 
