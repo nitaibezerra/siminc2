@@ -35,24 +35,103 @@
     $aResponsavel = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     $listaDeAnexos = (new Pi_Anexo())->recuperarPorPlanoInterno($pliid);
     $listaSubUnidadesDelegadas = (new Planacomorc_Model_PiDelegacao())->recuperarIdPorPlanoInterno($pliid, $_SESSION['exercicio']);
-//    if ($dadosPI['pliid'] && !$dadosPI['docid']) {
-//        $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
-//    }
+
     $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
-//    $codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'F');
-//    $codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'N');
-//    $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
-//    $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
 
     # Desativa Mudança de exercicio, menus, opções de usuário e etc do Cabeçalho padrão do SIMEC.
     $cabecalhoPopup = TRUE;
-//    include APPRAIZ . "includes/cabecalho.inc";
-//    include APPRAIZ . "includes/cabecalho_bootstrap_v3.inc";
     include APPRAIZ . "includes/cabecalho_bootstrap_v3_popup.inc";
 
-//ver($dadosPI);
+    $autorizadoSubUnidade = carregarLimiteAutorizadoSubUnidade(
+        (object) array(
+            'ungcod' => $dadosPI['ungcod']
+    ));
+    $detalhadoSubUnidade = carregarLimiteDetalhadoSubUnidade(
+        (object) array(
+            'ungcod' => $dadosPI['ungcod']
+    ));
+    $disponivelSubUnidade = ($autorizadoSubUnidade - $detalhadoSubUnidade);
+//ver($autorizadoSubUnidade, $detalhadoSubUnidade);
+//ver($dadosPI['ungcod'],d);
 
 ?>
+
+<script src="js/cadastro_pi_funcoes.js"></script>
+<!--
+    @todo REFATORAR
+    DETALHES FINANCEIROS DA FUNCIONAL APENAS PARA EXECUTAR OS CALCULOS AUTOMATICOS VIA JS VIDE carregarSaldoFuncional();
+-->
+<table id="orcamento" style="display: none;" class="table table-hover table-bordered table-hover">
+    <tr>
+        <td rowspan="2" nowrap>
+            <b>PTRES</b>
+        </td>
+        <td rowspan="2" style="width:45%" nowrap>
+            <b>Funcional</b>
+        </td>
+        <td rowspan="2" nowrap>
+            <b>Dotação Atual PO (R$)</b>
+        </td>
+        <td colspan="2" nowrap>
+            <b><span id="detPi">Detalhado em PI (R$)</span></b>
+        </td>
+        <td colspan="2">
+            <b>Empenho (R$)</b>
+        </td>
+        <td rowspan="2" align="center">
+            <b>Valor do Projeto</b>
+        </td>
+    </tr>
+    <tr>
+        <td nowrap><b>Detalhado</b></td>
+        <td nowrap><b>Não&nbsp;Detalhado</b></td>
+        <td nowrap><b>Empenhado</b></td>
+        <td nowrap><b>Não&nbsp;Empenhado</b></td>
+    </tr>
+    <?php
+        $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], $dadosPI['ptrid']);
+        #ver($dadosPTRES);
+        if ($dadosPTRES) {
+            $valortotalpi = 0;
+            $cor = 1;
+
+            foreach ($dadosPTRES as $ptres):
+                $vlrPiDetalhado = $ptres['det_pi'];
+                $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
+                ?>
+                <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
+                    <td align="center">
+                        <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
+                    </td>
+                    <td align="left">
+                        <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
+                    </td>
+                    <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
+                    <td align="right" id="td_pi_detalhado">
+                        <?php echo $ptres['det_pi']; ?>
+                    </td>
+                    <td align="right" id="td_pi_nao_detalhado">
+                        <?php echo $ptres['nao_det_pi']; ?>
+                    </td>
+                    <td align="right"><?php echo $ptres['empenhado']; ?></td>
+                    <td align="right">
+                        <?php echo $ptres['nao_empenhado']; ?>
+                        <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
+                    </td>
+                    <td align="center" id="td_valor_projeto">
+                        <?php echo 'R$ '. $ptres['pipvalor']; ?>
+                    </td>
+                </tr>
+                <?php
+                $cor++;
+                $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
+            endforeach;
+        }
+    ?>
+</table>
+<input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
+<input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />
+
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
@@ -436,7 +515,144 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="col-sm-10">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Vinculações Eventuais do Projeto</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td>
+                                            <b>Números SNIIC:</b>
+                                        </td>
+                                        <td>
+                                            <b>Número SEI:</b>
+                                        </td>
+                                        <td>
+                                            <b>Número Pronac:</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                <?php foreach($aSniic as $sniic){ ?>
+                                                    <tr>
+                                                        <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                <?php foreach($aSei as $sei){ ?>
+                                                    <tr>
+                                                        <td style="text-align: left;"><?php echo $sei['psesei']; ?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                <?php foreach($aPronac as $pronac){ ?>
+                                                    <tr>
+                                                        <td style="text-align: left;"><?php echo $pronac['pprpronac']; ?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-10">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Valores</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td>
+                                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                <tr>
+                                                    <td style="text-align: left;"></td>
+                                                    <td colspan="3" style="text-align: center;">
+                                                        <b>Total (Custeio e Capital)</b>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
+                                                    <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >
+                                                        <?php echo number_format($autorizadoSubUnidade, 2, ',', '.') ?>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <td style="text-align: left;">
+                                                        Limite Disponível na Sub-Unidade:
+                                                        <input id="VlrSUDisponivel" type="hidden" value="" />
+                                                    </td>
+                                                    <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >
+                                                        <?php echo number_format($disponivelSubUnidade, 2, ',', '.') ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;"></td>
+                                                    <td style="text-align: left;"><b>Custeio </b></td>
+                                                    <td style="text-align: center;"><b>Capital</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
+                                                    <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
+                                                    <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">
+                                                        Saldo Disponível na Funcional:
+                                                        <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
+                                                        <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
+                                                    </td>
+                                                    <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+                                                    <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
+                                                    <td style="text-align: left;">
+                                                        <?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>
+                                                        <input style="display: none;" type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                                        <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
+                                                    </td>
+                                                    <td style="text-align: center;">
+                                                        <?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>
+                                                        <input style="display: none;" type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
+                                                        <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        carregarSaldoFuncional();
+    });
+</script>
