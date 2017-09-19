@@ -284,4 +284,177 @@ class Pi_PlanoInterno extends Modelo{
 
         return true;
     }
+
+    public function getDadosGerais($exercicio)
+    {
+        $sql = "select  pli.pliid, 'ID Origem' id, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
+
+                        (select array_to_string(array(
+                                select distinct s.unonome 
+                                from planacomorc.pi_delegacao d 
+                                        inner join public.vw_subunidadeorcamentaria s on s.suoid = d.suoid
+                                where d.pliid = pli.pliid
+                        ), '; ')) unodelegada,
+
+                        (select array_to_string(array(
+                                select distinct s.suonome 
+                                from planacomorc.pi_delegacao d 
+                                        inner join public.vw_subunidadeorcamentaria s on s.suoid = d.suoid
+                                where d.pliid = pli.pliid
+                        ), '; ')) suodelegada,
+                        
+                        eqd.eqddsc, mai.mainome, mas.masnome, ptr.prgcod, ptr.prgdsc, opp.oppcod, opp.oppnome, ipp.ippcod, ipp.ippnome, 
+                        ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, 'PO' po, ptr.ptres,
+                        mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
+                        'Programa Minc' as prog, pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc, 
+                        'Unidade Executora' un, 'Meta MinC' met, 'Prioridade Ministerial' pri, 
+                        case when pli.pliemenda = true then 'Sim' else 'Não' end as pliemenda,
+                        'Tipo de autor' tipoautor, 'Partido' partido, 'Autor' autor,
+                        case when pic.picedital = true then 'Sim' else 'Não' end as picedital, esf.esfdsc,
+                        
+                        case 
+                                when pic.esfid in (1, 2, 3) then 'Brasil'
+                                else pic.esfid::char
+                        end as pais,                                       
+                        
+                        case 
+                                when pic.esfid = 2 then 
+                                        (select array_to_string(array(
+                                                select distinct e.estdescricao
+                                                from planacomorc.pi_localizacao l 
+                                                        inner join territorios.estado e on e.estuf = l.estuf
+                                                where l.pliid = pli.pliid                                
+                                        ), '; '))      
+                                when pic.esfid = 3 then 
+                                        (select array_to_string(array(
+                                                select distinct e.estdescricao
+                                                from planacomorc.pi_localizacao l 
+                                                        inner join territorios.municipio m on m.muncod = l.muncod
+                                                        inner join territorios.estado e on e.estuf = m.estuf
+                                                where l.pliid = pli.pliid                               
+                                        ), '; '))                                              
+                                else ''
+                        end estado,              
+                        
+                        (select array_to_string(array(
+                                select distinct m.mundescricao
+                                from planacomorc.pi_localizacao l 
+                                        inner join territorios.municipio m on m.muncod = l.muncod
+                                        inner join territorios.estado e on e.estuf = m.estuf
+                                where l.pliid = pli.pliid                           
+                        ), '; ')) municipio,
+                                                
+                        'Abrangência' abr, ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
+                        'Exercício Futuro' a,
+                        'Exercício Futuro - Valor' b,
+                        'Exercício Futuro - Justificativa' c,
+                        
+                        -- Cronograma Físico
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '01' and pcr.pliid = pli.pliid) fisico_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '02' and pcr.pliid = pli.pliid) fisico_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '03' and pcr.pliid = pli.pliid) fisico_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '04' and pcr.pliid = pli.pliid) fisico_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '05' and pcr.pliid = pli.pliid) fisico_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '06' and pcr.pliid = pli.pliid) fisico_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '07' and pcr.pliid = pli.pliid) fisico_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '08' and pcr.pliid = pli.pliid) fisico_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '09' and pcr.pliid = pli.pliid) fisico_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '10' and pcr.pliid = pli.pliid) fisico_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '11' and pcr.pliid = pli.pliid) fisico_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '12' and pcr.pliid = pli.pliid) fisico_12,
+                        
+                        -- Cronograma Financeiro Capital
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '01' and pcr.pliid = pli.pliid) fin_capital_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '02' and pcr.pliid = pli.pliid) fin_capital_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '03' and pcr.pliid = pli.pliid) fin_capital_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '04' and pcr.pliid = pli.pliid) fin_capital_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '05' and pcr.pliid = pli.pliid) fin_capital_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '06' and pcr.pliid = pli.pliid) fin_capital_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '07' and pcr.pliid = pli.pliid) fin_capital_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '08' and pcr.pliid = pli.pliid) fin_capital_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '09' and pcr.pliid = pli.pliid) fin_capital_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '10' and pcr.pliid = pli.pliid) fin_capital_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '11' and pcr.pliid = pli.pliid) fin_capital_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '12' and pcr.pliid = pli.pliid) fin_capital_12,
+                        
+                        -- Cronograma Financeiro Custeio
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '01' and pcr.pliid = pli.pliid) fin_custeio_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '02' and pcr.pliid = pli.pliid) fin_custeio_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '03' and pcr.pliid = pli.pliid) fin_custeio_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '04' and pcr.pliid = pli.pliid) fin_custeio_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '05' and pcr.pliid = pli.pliid) fin_custeio_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '06' and pcr.pliid = pli.pliid) fin_custeio_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '07' and pcr.pliid = pli.pliid) fin_custeio_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '08' and pcr.pliid = pli.pliid) fin_custeio_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '09' and pcr.pliid = pli.pliid) fin_custeio_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '10' and pcr.pliid = pli.pliid) fin_custeio_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '11' and pcr.pliid = pli.pliid) fin_custeio_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '12' and pcr.pliid = pli.pliid) fin_custeio_12,        
+                           
+                
+                        -- Cronograma Orçamentário Capital
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '01' and pcr.pliid = pli.pliid) orc_capital_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '02' and pcr.pliid = pli.pliid) orc_capital_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '03' and pcr.pliid = pli.pliid) orc_capital_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '04' and pcr.pliid = pli.pliid) orc_capital_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '05' and pcr.pliid = pli.pliid) orc_capital_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '06' and pcr.pliid = pli.pliid) orc_capital_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '07' and pcr.pliid = pli.pliid) orc_capital_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '08' and pcr.pliid = pli.pliid) orc_capital_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '09' and pcr.pliid = pli.pliid) orc_capital_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '10' and pcr.pliid = pli.pliid) orc_capital_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '11' and pcr.pliid = pli.pliid) orc_capital_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '12' and pcr.pliid = pli.pliid) orc_capital_12,
+                                                                                                                                         
+                        -- Cronograma Orçamentário Custeio                                                                               
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '01' and pcr.pliid = pli.pliid) orc_custeio_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '02' and pcr.pliid = pli.pliid) orc_custeio_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '03' and pcr.pliid = pli.pliid) orc_custeio_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '04' and pcr.pliid = pli.pliid) orc_custeio_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '05' and pcr.pliid = pli.pliid) orc_custeio_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '06' and pcr.pliid = pli.pliid) orc_custeio_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '07' and pcr.pliid = pli.pliid) orc_custeio_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '08' and pcr.pliid = pli.pliid) orc_custeio_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '09' and pcr.pliid = pli.pliid) orc_custeio_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '10' and pcr.pliid = pli.pliid) orc_custeio_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '11' and pcr.pliid = pli.pliid) orc_custeio_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '12' and pcr.pliid = pli.pliid) orc_custeio_12,         
+                           
+                        vlrempenhado, vlrliquidado, vlrpago
+                           
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                        inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
+                        left join planacomorc.manutencaoitem mai on mai.maiid = pic.maiid
+                        left join planacomorc.manutencaosubitem mas on mas.masid = pic.masid
+                        left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                        left join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid and ptr.ptrano = pli.pliano
+                        left join public.objetivoppa opp on opp.oppid = pic.oppid
+                        left join public.iniciativappa ipp on ipp.ippid = pic.ippid
+                        left join monitora.pi_modalidadeensino mde on mde.mdeid = pli.mdeid
+                        left join monitora.pi_niveletapaensino nee on nee.neeid = pli.neeid
+                        left join public.metappa mpp on mpp.mppid = pic.mppid
+                        left join public.metapnc mpn on mpn.mpnid = pic.mpnid                        
+                        left join monitora.pi_categoriaapropriacao cap on cap.capid = pli.capid
+                        left join monitora.pi_produto ppr on ppr.pprid = pic.pprid
+                        left join monitora.pi_unidade_medida pum on pum.pumid = pic.pumid        
+                        left join workflow.documento doc on doc.docid = pli.docid
+                        left join workflow.estadodocumento esd on esd.esdid = doc.esdid
+                        left join territorios.esfera esf on esf.esfid = pic.esfid
+                        left join (
+                                select sex.exercicio, sex.plicod, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
+                                from spo.siopexecucao sex
+                                where coalesce(sex.plicod, '') != ''
+                                group by sex.exercicio, sex.plicod                                
+                        ) sex on sex.plicod = pli.plicod and sex.exercicio = pli.pliano
+                
+                -- where pli.pliano = '$exercicio'
+                ";
+
+//        ver($sql);
+        
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
 }
