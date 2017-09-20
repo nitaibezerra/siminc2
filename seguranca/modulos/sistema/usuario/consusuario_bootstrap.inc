@@ -472,39 +472,54 @@ DML;
         $funcao = "consultar_usu";
     }
 
-    $campos = " usuario.usucpf,
-                usuario.usucpf as cpf,
-                usuario.usunome as nomeusuario,
-                '(' || usuario.usufoneddd || ') ' || usuario.usufonenum as fone ,
-                usuario.usuemail,
-                CASE WHEN entidade.entid = 390402 THEN trim(usuario.orgao) ELSE trim(unidadex.unidsc) END as unidsc,
-                COALESCE(cargo.cardsc,'')||' / '||COALESCE(usuario.usufuncao,'') as cargo,
-                entidade.entnome as orgao,
-                usuario.regcod,
-                municipio.mundescricao,
-                to_char(usuario.usudataatualizacao,'dd/mm/YYYY HH24:MI') as data";
+    $campos = "
+        usuario.usucpf,
+        usuario.usucpf AS cpf,
+        usuario.usunome AS nomeusuario,
+        '(' || usuario.usufoneddd || ') ' || usuario.usufonenum AS fone,
+        CASE WHEN entidade.entid = 390402 THEN trim(usuario.orgao) ELSE trim(unidadex.unidsc) END AS unidsc,
+        '<section class=\"btn-group\">' ||
+        CASE WHEN usuario.suscod = 'A' THEN
+            '<label class=\"btn btn-default active\">Ativo</label>'
+        WHEN usuario.suscod = 'P' THEN
+            '<label class=\"btn btn-warning active\">Pendente</label>'
+        WHEN usuario.suscod = 'B' THEN
+            '<label class=\"btn btn-danger active\">Bloqueado</label>'
+        ELSE
+            '<label class=\"btn btn-danger active\">Inativo</label>'
+        END ||
+        '</section>' AS status,
+        to_char(usuario.usudataatualizacao,'dd/mm/YYYY HH24:MI') AS data
+    ";
 
     $groupby = "usuario.usucpf, usuario.usunome, usuario.usufoneddd, usuario.usufonenum, usuario.usuemail, entidade.entid,
                 usuario.orgao, unidadex.unidsc, cargo.cardsc, usuario.usufuncao, entidade.entnome, usuario.regcod,
                 municipio.mundescricao, usuario.usudataatualizacao, usuario.suscod, usuario.usuchaveativacao, perfil.pflcod";
 
-    $sql = " SELECT DISTINCT
-                            $campos
-			FROM
-                            " . $oin_sql . "
-			left join  territorios.municipio municipio on municipio.muncod = usuario.muncod
-			inner join seguranca.usuario_sistema usuariosistema on usuario.usucpf = usuariosistema.usucpf
-			left join  entidade.entidade entidade on usuario.entid = entidade.entid
-			left join  public.cargo cargo on cargo.carid = usuario.carid
-			$innerResponsabilidade
-			WHERE
-                            usunome is not null $texto $andPerfilPermissao
-			GROUP BY
-                            $groupby
-			ORDER BY
-                            nomeusuario";
+    $sql = "
+        SELECT DISTINCT
+            $campos
+        FROM
+            " . $oin_sql . "
+            left join  territorios.municipio municipio on municipio.muncod = usuario.muncod
+            inner join seguranca.usuario_sistema usuariosistema on usuario.usucpf = usuariosistema.usucpf
+            left join  entidade.entidade entidade on usuario.entid = entidade.entid
+            left join  public.cargo cargo on cargo.carid = usuario.carid
+            $innerResponsabilidade
+        WHERE
+            usunome is not null $texto $andPerfilPermissao
+        GROUP BY
+            $groupby
+        ORDER BY
+            nomeusuario";
 
-    $cabecalho = array('CPF', 'Nome Completo', 'Telefone', 'E-mail', 'Unidade', 'Cargo / Função', 'Órgão', 'UF', 'Município', 'Data da Ultima Atualização');
+    $cabecalho = array(
+        'CPF',
+        'Nome Completo',
+        'Telefone',
+        'Unidade',
+        'Status',
+        'Data da Ultima Atualização');
 
     /* Exibe a consulta para um XLS */
     if ($_REQUEST['act'] == 'visualizaXls') {
@@ -528,4 +543,5 @@ DML;
     $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
     $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
     ?>
+
 </section>
