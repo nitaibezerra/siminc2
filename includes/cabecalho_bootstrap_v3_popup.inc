@@ -164,20 +164,18 @@ $navBar = $_COOKIE['navbar']=='false' ? 'mini-navbar' : null;
                             </ul>
                         </div>
                         <?php if($configLayout->impressao): ?>
-                        <ul class="nav navbar-top-links navbar-right">
-                            <?php if($configLayout->impressao->data): ?>
-                            <li>
-                                <span class="m-r-sm text-muted welcome-message">Hora da impressão: <?php echo date('Y-m-d h:i'); ?></span>
-                            </li>
-                            <?php endif; ?>
-                            <?php if($configLayout->impressao->usuario): ?>
-                            <li>
-                                <a href="javascript:;return false;">
-                                    <i class="fa fa-sign-in"></i> Impresso por: <?php echo $_SESSION['usunome']; ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
-                        </ul>
+                            <ul class="nav navbar-top-links navbar-right">
+                                <?php if($configLayout->impressao->usuario): ?>
+                                <li>
+                                    <span style="color: #fff;"><i class="fa fa-sign-in"></i> Impresso por: <?php echo $_SESSION['usunome']; ?></span>
+                                </li>
+                                <?php endif; ?>
+                                <?php if($configLayout->impressao->data): ?>
+                                <li>
+                                    <span style="color: #fff;">Em: <?php echo date('d/m/Y'); ?></span>
+                                </li>
+                                <?php endif; ?>
+                            </ul>
                         <?php endif; ?>
                     </nav>
                 </div>
