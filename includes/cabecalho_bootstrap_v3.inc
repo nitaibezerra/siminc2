@@ -352,116 +352,117 @@ $paginic = $db->pegaUm($sql);
 
     </head>
     <body class="fixed-nav <?php echo $navBar; ?>">
-<script>
-	Pace.on("done", function(){
-		$("#loading").fadeOut(1500);
-	});
-	Pace.start;
-</script>
-<div class="loading-dialog" id="loading"></div>
-		<div id="wrapper">
-			<nav class="navbar-default navbar-static-side" role="navigation">
-				<div class="sidebar-collapse">
-					<?php echo $menuHtml ?>
-				</div>
-			</nav>
-			<div id="page-wrapper" class="gray-bg">
-				<div class="row border-bottom">
-					<nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
-						<div class="navbar-left">
-							<ul class="header-nav header-nav-options">
-					            <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?=$_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
-								<li><a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a></li>
-							</ul>
-						</div>
-			            <div class="navbar-center hidden-xs">
-                            <form id="setperfil" name="setperfil" action="<?= $_SESSION['sisarquivo'] ?>.php?modulo=<?= $paginic ?>" method="post">
-                                <input type="hidden" id="exercicio" name="exercicio" value=""  class="form-control" />
-                            </form>
-                            <script>
-                                $(function(){
-                                    $('#chosen-exercicio').change(function(){
-                                        $('#exercicio').val($(this).val());
-                                        document.getElementById('setperfil').submit();
-                                    });
-                                })
-                            </script>
-							<ul class="header-nav header-nav-options">
-					            <li style="width:30%">
-                                    <input type="text" class="form-control typeahead" placeholder="Digite aqui o que procura">
-								</li>
-					            <li style="width:45%">
-									<select id="chosen-sistema" class="form-control chosen-select" data-placeholder="Selecione" onchange="javascript:changeSystem(this.value)">
-										<?php foreach ($sistemas as $sistema): ?>
-											<?php $selected = ($sistema['sisid'] == $_SESSION['sisid']) ? 'selected="selected"' : null; ?>
-											<option <?php echo $selected; ?> value="<?php echo $sistema['sisid'] ?>"><?php echo $sistema['sisabrev'] ?></option>
-										<?php endforeach ?>
-									</select>
-								</li>
-								<?php if ($arrAnoExercicio && is_array($arrAnoExercicio)): ?>
-								<li style="width:100px%">
-							        <select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Exercicio">
-									    <?php foreach ($arrAnoExercicio as $anoExercicio): ?>
-											<option value="<?php echo $anoExercicio['codigo'] ?>" <?php echo $_SESSION['exercicio'] == $anoExercicio['codigo'] ? 'selected="selected"' : ''; ?>><?php echo $anoExercicio['descricao'] ?></option>
-										<?php endforeach ?>
-									</select>
-								</li>
-								<?php endif ?>
-							</ul>
-						</div>
-			<div class="navbar-right hidden-xs">
-							<ul class="header-nav header-nav-profile">
-								<li class="dropdown ms-hover">
-									<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-										<img alt="image" class="profile-pic" src="/seguranca/imagemperfil.php">
-										<span class="profile-info">
-											<?php echo $_SESSION['usunome']; ?>
-											<small><?php echo $_SESSION['usufuncao']; ?></small>
-										</span>
-									</a>
-									<ul class="dropdown-menu animation-dock">
-										<?php if ($_SESSION['superuser'] == 1): ?>
-											<li class="dropdown-header">Super Usuário</li>
-										<?php else: ?>
-											<li class="dropdown-header">Opções Usuário</li>
-										<?php endif; ?>
-										<?php if ($_SESSION['superuser'] == 1 || $_SESSION['usucpf'] != $_SESSION['usucpforigem'] || $exibirSimular == true || $db->testa_uma() || $_SESSION['usuuma']): ?>
-										<li>
-											<?php if ($_SESSION['usucpf'] == $_SESSION['usucpforigem']): ?>
-												<a data-toggle="modal" id="btSimularUsuario">
-													<i class="glyphicon glyphicon-eye-open"></i> Simular Usuário
-												</a>
-											<?php else: ?>
-												<a id="voltar_usuario_origem">
-													<i  class="glyphicon glyphicon-eye-close"></i> Voltar Usuário
-												</a>
-											<?php endif; ?>
-										</li>
-										<?php endif; ?>
-										<li>
-											<a id="btUser" data-toggle="modal" data-target="#modal-user">
-												<i class="glyphicon glyphicon-wrench"></i> Gerenciar seus dados
-											</a>
-										</li>
-										<?php if ($_SESSION['superuser'] == 1 || $exibirGraficoWorflow == true): ?>
-										<li>
-				 							<?php $sql = "select tpdid from workflow.tipodocumento where sisid = '{$_SESSION['sisid']}'"; ?>
-											<?php $tipoDocumento = $db->pegaUm($sql); ?>
-											<?php if ($tipoDocumento): ?>
-											<a data-toggle="modal" id="btPainelWorkflow">
-												<i class="glyphicon glyphicon-stats"></i> Painel do workflow
-											</a>
-											<?php endif ?>
-										</li>
-										<?php endif; ?>
-										<li class="divider"></li>
-										<li>
-											<a onclick="javascript:window.location.href = '/logout.php'">
-												<i class="fa fa-sign-out"></i> Sair
-											</a>
-										</li>
-									</ul><!--end .dropdown-menu -->
-								</li><!--end .dropdown -->
-							</ul>
-						</nav>
-					</div>
+    <script>
+            Pace.on("done", function(){
+                    $("#loading").fadeOut(1500);
+            });
+            Pace.start;
+    </script>
+    <div class="loading-dialog" id="loading"></div>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <?php echo $menuHtml ?>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
+                     <div class="navbar-left">
+                        <ul class="header-nav header-nav-options">
+                            <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?= $_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
+                            <li><a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="navbar-center hidden-xs">
+                        <form id="setperfil" name="setperfil" action="<?= $_SESSION['sisarquivo'] ?>.php?modulo=<?= $paginic ?>" method="post">
+                            <input type="hidden" id="exercicio" name="exercicio" value=""  class="form-control" />
+                        </form>
+                        <script>
+                            $(function(){
+                                $('#chosen-exercicio').change(function(){
+                                    $('#exercicio').val($(this).val());
+                                    document.getElementById('setperfil').submit();
+                                });
+                            })
+                        </script>
+                        <ul class="header-nav header-nav-options">
+                            <li style="width:30%">
+                                <input type="text" class="form-control typeahead" placeholder="Digite aqui o que procura">
+                            </li>
+                            <li style="width:45%">
+                                <select id="chosen-sistema" class="form-control chosen-select" data-placeholder="Selecione" onchange="javascript:changeSystem(this.value)">
+                                    <?php foreach ($sistemas as $sistema): ?>
+                                        <?php $selected = ($sistema['sisid'] == $_SESSION['sisid']) ? 'selected="selected"' : null; ?>
+                                        <option <?php echo $selected; ?> value="<?php echo $sistema['sisid'] ?>"><?php echo $sistema['sisabrev'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </li>
+                            <?php if ($arrAnoExercicio && is_array($arrAnoExercicio)): ?>
+                                <li style="width:100px%">
+                                    <select id="chosen-exercicio" class="form-control chosen-select" data-placeholder="Exercicio">
+                                        <?php foreach ($arrAnoExercicio as $anoExercicio): ?>
+                                            <option value="<?php echo $anoExercicio['codigo'] ?>" <?php echo $_SESSION['exercicio'] == $anoExercicio['codigo'] ? 'selected="selected"' : ''; ?>><?php echo $anoExercicio['descricao'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </li>
+                            <?php endif ?>
+                        </ul>
+                    </div>
+                    <div class="navbar-right hidden-xs">
+                        <ul class="header-nav header-nav-profile">
+                            <li class="dropdown ms-hover">
+                                <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                                    <img alt="image" class="profile-pic" src="/seguranca/imagemperfil.php">
+                                    <span class="profile-info">
+                                        <?php echo $_SESSION['usunome']; ?>
+                                        <small><?php echo $_SESSION['usufuncao']; ?></small>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu animation-dock">
+                                    <?php if ($_SESSION['superuser'] == 1): ?>
+                                        <li class="dropdown-header">Super Usuário</li>
+                                    <?php else: ?>
+                                        <li class="dropdown-header">Opções Usuário</li>
+                                    <?php endif; ?>
+                                    <?php if ($_SESSION['superuser'] == 1 || $_SESSION['usucpf'] != $_SESSION['usucpforigem'] || $exibirSimular == true || $db->testa_uma() || $_SESSION['usuuma']): ?>
+                                        <li>
+                                            <?php if ($_SESSION['usucpf'] == $_SESSION['usucpforigem']): ?>
+                                                <a data-toggle="modal" id="btSimularUsuario">
+                                                    <i class="glyphicon glyphicon-eye-open"></i> Simular Usuário
+                                                </a>
+                                            <?php else: ?>
+                                                <a id="voltar_usuario_origem">
+                                                    <i  class="glyphicon glyphicon-eye-close"></i> Voltar Usuário
+                                                </a>
+                                            <?php endif; ?>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li>
+                                        <a id="btUser" data-toggle="modal" data-target="#modal-user">
+                                            <i class="glyphicon glyphicon-wrench"></i> Gerenciar seus dados
+                                        </a>
+                                    </li>
+                                    <?php if ($_SESSION['superuser'] == 1 || $exibirGraficoWorflow == true): ?>
+                                        <li>
+                                            <?php $sql = "select tpdid from workflow.tipodocumento where sisid = '{$_SESSION['sisid']}'"; ?>
+                                            <?php $tipoDocumento = $db->pegaUm($sql); ?>
+                                            <?php if ($tipoDocumento): ?>
+                                                <a data-toggle="modal" id="btPainelWorkflow">
+                                                    <i class="glyphicon glyphicon-stats"></i> Painel do workflow
+                                                </a>
+                                            <?php endif ?>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a onclick="javascript:window.location.href = '/logout.php'">
+                                            <i class="fa fa-sign-out"></i> Sair
+                                        </a>
+                                    </li>
+                                </ul><!--end .dropdown-menu -->
+                            </li><!--end .dropdown -->
+                        </ul>
+                    </div>
+                </nav>
+            </div>

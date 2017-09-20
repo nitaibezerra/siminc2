@@ -39,7 +39,8 @@
     $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 
     # Desativa Mudança de exercicio, menus, opções de usuário e etc do Cabeçalho padrão do SIMEC.
-    $cabecalhoPopup = TRUE;
+    $configLayout = new stdClass();
+    $configLayout->impressao = (object) array('data' => TRUE, 'usuario' => TRUE);
     include APPRAIZ . "includes/cabecalho_bootstrap_v3_popup.inc";
 
     $autorizadoSubUnidade = carregarLimiteAutorizadoSubUnidade(
@@ -217,6 +218,17 @@
             </div>
 
             <div class="col-md-2">
+
+                <br />
+                <br />
+                
+                <button class="btn btn-primary" type="button" id="btnImprimir">
+                    <i class="fa fa-print"></i>&nbsp;Imprimir
+                </button>
+                
+                <br />
+                <br />
+                
                 <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
             </div>
             
@@ -951,5 +963,10 @@
         atualizarTotalFisico();
         atualizarTotalOrcamentario();
         atualizarTotalFinanceiro();
+        
+        $('#btnImprimir').click(function(){
+            window.print();
+        });
+        
     });
 </script>

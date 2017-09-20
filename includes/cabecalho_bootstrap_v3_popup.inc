@@ -163,6 +163,22 @@ $navBar = $_COOKIE['navbar']=='false' ? 'mini-navbar' : null;
                                 <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?= $_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
                             </ul>
                         </div>
+                        <?php if($configLayout->impressao): ?>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <?php if($configLayout->impressao->data): ?>
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message">Hora da impressão: <?php echo date('Y-m-d h:i'); ?></span>
+                            </li>
+                            <?php endif; ?>
+                            <?php if($configLayout->impressao->usuario): ?>
+                            <li>
+                                <a href="javascript:;return false;">
+                                    <i class="fa fa-sign-in"></i> Impresso por: <?php echo $_SESSION['usunome']; ?>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                        </ul>
+                        <?php endif; ?>
                     </nav>
                 </div>
             
