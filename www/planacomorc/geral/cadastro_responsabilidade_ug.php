@@ -49,7 +49,7 @@ $pflcod = $_REQUEST['pflcod'];
 <html>
 <head>
 <META http-equiv="Pragma" content="no-cache">
-<title>Definição de responsabilidades - Unidade Gestora</title>
+<title>Definição de responsabilidades - Sub-Unidade</title>
 <script language="JavaScript" src="/includes/funcoes.js"></script>
 <script language="javascript" type="text/javascript" src="/includes/JQuery/jquery-ui-1.8.4.custom/js/jquery-1.4.2.min.js"></script>
 <script src="../js/planacomorc.js"></script>
@@ -96,7 +96,7 @@ function marcarAcao(obj) {
 </script>
 <div style="overflow:auto;width:496px;height:350px;border:2px solid #ececec;background-color:white">
 <?php
-monta_titulo('Definição de responsabilidades - Unidade Gestora', '');
+monta_titulo('Definição de responsabilidades - Sub-Unidade', '');
 
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do ungcod selecionado previamente.
@@ -115,7 +115,7 @@ ORDER BY
     ung.ungcod
 ";
 
-$cabecalho = array('', 'UG - Descrição');
+$cabecalho = array('', 'Sub-Unidade - Descrição');
 //echo "<pre>"; var_dump($sql); die;
 $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
 ?>

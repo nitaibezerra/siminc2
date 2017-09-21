@@ -290,7 +290,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 </section>
             </section>
             <section class="form-group">
-                <label class="control-label col-md-2" for="ungcod">Unidade Gestora:</label>
+                <label class="control-label col-md-2" for="ungcod">Sub-Unidade:</label>
                 <section class="col-md-10" id="unidade_gestora">
                 <?php
                     $funcoesBootstrap->carrega_unidade_gestora_bootstrap($unicod, $editavel, $usuario->usucpf);
@@ -827,7 +827,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                             if( $perfisUsuario ): ?>
                                 <section class="form-group">
                                     <label class="control-label col-md-2">Associação de Perfil:</label>
-                                     <? mostraResponsabilidades($responsabilidades, $perfisUsuario, $sistema, $exibirBotao = true); ?>
+                                     <?php mostraResponsabilidades($responsabilidades, $perfisUsuario, $sistema, $exibirBotao = true); ?>
                                 </section>
                             <?php endif;
                     endif;// FIM if ($existTable === 't')
@@ -878,7 +878,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                         <section class="form-group">
                             <label class="control-label col-md-2">Associação de Perfil:</label>
                             <section class="col-md-10">
-                               <? mostraResponsabilidades($responsabilidades, $perfisUsuario,$sistema,$exibirBotao = false);?>
+                               <?php mostraResponsabilidades($responsabilidades, $perfisUsuario,$sistema,$exibirBotao = false);?>
                             </section>
                         </section><?
 

@@ -529,11 +529,11 @@ function mostraResponsabilidades($responsabilidades = array(), $perfisUsuario, $
                     <th colspan="<?=$colspan?>">Responsabilidades</th>
                 </tr>
                 <tr class="active">
-                    <?foreach ($responsabilidades as $responsabilidade):
+                    <?php foreach ($responsabilidades as $responsabilidade):
                     echo <<<HTML
                         <th>{$responsabilidade["tprdsc"]}</th>
 HTML;
-                    endforeach;?>
+                    endforeach; ?>
                 </tr>
             </thead>
             <tbody style="background-color:white;">

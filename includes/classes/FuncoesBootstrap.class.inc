@@ -191,7 +191,7 @@ class FuncoesBootstrap{
                 if(!$unicod || trim($unicod) == "")
                     echo '<p id="ungcod" class="form-control-static" style="color:#428bca;">Selecione uma Unidade Orçamentária.</p>';
                 else
-                    echo '<p id="ungcod" class="form-control-static" style="color:#f0ad4e;">Esta Unidade Orçamentária não possui uma Unidade Gestora.</p>';
+                    echo '<p id="ungcod" class="form-control-static" style="color:#f0ad4e;">Esta Unidade Orçamentária não possui uma Sub-Unidade.</p>';
             }            
         }
     }
