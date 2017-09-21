@@ -1,4 +1,4 @@
-<?
+<?php
 /*
   Sistema Simec
   Setor responsável: SPO-MEC
@@ -18,7 +18,7 @@ $usucpf = $_REQUEST["usucpf"];
 $pflcod = $_REQUEST["pflcod"];
 
 if (!$pflcod && !$usucpf) {
-    ?><font color="red">Requisição inválida</font><?
+    ?><font color="red">Requisição inválida</font><?php
     exit();
 }
 
@@ -78,16 +78,19 @@ if (!$responsabilidadesPerfil || @count($responsabilidadesPerfil) < 1) {
                 break;
             case 'G': // Unidade gestora
                 $aca_prg = 'unidades gestoras associadas';
-                $sqlRespUsuario = <<<DML
-SELECT ung.ungcod AS codigo,
-       ung.ungcod || ' - ' || ung.ungdsc AS descricao,
-       ur.rpustatus AS status
-  FROM planacomorc.usuarioresponsabilidade ur
-    INNER JOIN public.unidadegestora ung USING(ungcod)
-  WHERE ur.usucpf = '%s'
-    AND ur.pflcod = '%s'
-    AND ur.rpustatus = 'A'
-DML;
+                $sqlRespUsuario = "
+                    SELECT
+                        ung.suocod AS codigo,
+                        ung.suocod || ' - ' || ung.suonome AS descricao,
+                        ur.rpustatus AS status
+                    FROM planacomorc.usuarioresponsabilidade ur
+                        JOIN public.vw_subunidadeorcamentaria ung ON(ur.ungcod = ung.suocod)
+                    WHERE
+                        ur.rpustatus = 'A'
+                        AND ung.prsano = '". (int)$_SESSION['exercicio']. "'
+                        AND ur.usucpf = '%s'
+                        AND ur.pflcod = '%s'
+";
                 break;
             case 'O': // Unidade gestora
                 $aca_prg = 'unidades orçamentárias associadas';
@@ -149,7 +152,7 @@ DML;
                     <td colspan="4" align="right" style="color:000000;border-top: 2px solid #000000;">Total: (<?= @count($respUsuario) ?>)</td>
                 </tr>
             </table>
-            <?
+            <?php
         }
     }
 }

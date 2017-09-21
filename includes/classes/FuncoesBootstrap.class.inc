@@ -158,15 +158,18 @@ class FuncoesBootstrap{
         if ( $editavel == 'N' ){
             $sql = "
                 SELECT
-                    ug.ungcod AS codigo,
-                    ug.ungcod||' - '||ug.ungdsc as descricao
-                FROM unidadegestora ug
-                INNER JOIN seguranca.usuario su ON ug.ungcod = su.ungcod
-                WHERE ungstatus = 'A' 
-                    AND unitpocod = 'U' 
+                    ug.suocod AS codigo,
+                    ug.suocod || ' - ' || ug.suonome as descricao
+                FROM public.vw_subunidadeorcamentaria ug
+                    JOIN seguranca.usuario su ON ug.suocod = su.ungcod
+                WHERE
+                    ug.suostatus = 'A' 
+                    AND ug.prsano = '". (int)$_SESSION['exercicio']. "'
                     AND su.unicod = '".$unicod."' 
-                    AND usucpf = '".$usucpf."'
-                ORDER BY ungdsc";
+                    AND su.usucpf = '".$usucpf."'
+                ORDER BY
+                    suonome";
+//ver($sql,d);
             inputCombo("ungcod", $sql, $valor, "ungcod",array('habil'=>$editavel));
         }else {	
             /*
@@ -178,13 +181,16 @@ class FuncoesBootstrap{
 
             $sql = "
                 SELECT
-                    ungcod AS codigo,
-                    ungcod||' - '||ungdsc as descricao
-                FROM unidadegestora
-                WHERE ungstatus = 'A' 
-                    AND unitpocod = 'U' 
-                    AND unicod = '".$unicod."'
-                ORDER BY ungdsc";
+                    suocod AS codigo,
+                    suocod || ' - ' || suonome as descricao
+                FROM public.vw_subunidadeorcamentaria
+                WHERE
+                    suostatus = 'A'
+                    AND prsano = '". (int)$_SESSION['exercicio']. "'
+                    AND unocod = '".$unicod."'
+                ORDER BY
+                    suonome";
+            
             if($db->carregar($sql)){
                 inputCombo("ungcod", $sql, $valor, "ungcod");
             }else{

@@ -101,20 +101,20 @@ monta_titulo('Definição de responsabilidades - Sub-Unidade', '');
 // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
 // -- com base nisso, é adicionado o atributo checked ao combo do ungcod selecionado previamente.
 $sql = "
-SELECT
-    '<input type=\"checkbox\" name=\"ungcod\" id=\"chk_' || ung.ungcod || '\" value=\"' || ung.ungcod || '\" '
-    || 'onclick=\"marcarAcao(this)\"'
-    || CASE WHEN urp.rpuid IS NOT NULL AND urp.rpustatus = 'A' THEN ' checked' ELSE '' END || '>' AS ungcod,
-    ung.ungcod || ' - ' || ung.ungdsc AS descricao
-FROM public.unidadegestora ung
-    LEFT JOIN planacomorc.usuarioresponsabilidade urp ON urp.ungcod = ung.ungcod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
-WHERE
-    ung.ungstatus = 'A'
-    AND ung.unicod IN(". UNIDADES_OBRIGATORIAS. ")
-ORDER BY
-    ung.ungcod
+    SELECT DISTINCT
+        '<input type=\"checkbox\" name=\"suocod\" id=\"chk_' || ung.suocod || '\" value=\"' || ung.suocod || '\" '
+        || 'onclick=\"marcarAcao(this)\"'
+        || CASE WHEN urp.rpuid IS NOT NULL AND urp.rpustatus = 'A' THEN ' checked' ELSE '' END || '>' AS suocod,
+        ung.suocod || ' - ' || ung.suonome AS descricao
+    FROM public.vw_subunidadeorcamentaria ung
+        LEFT JOIN planacomorc.usuarioresponsabilidade urp ON urp.ungcod = ung.suocod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
+    WHERE
+        ung.suostatus = 'A'
+        AND ung.prsano = '". (int)$_SESSION['exercicio']. "'
+    ORDER BY
+        descricao
 ";
-
+//ver($sql,d);
 $cabecalho = array('', 'Sub-Unidade - Descrição');
 //echo "<pre>"; var_dump($sql); die;
 $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
@@ -126,22 +126,25 @@ $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
 <input type="hidden" name="requisicao" value="gravarResponsabilidadeAcao">
 <select multiple size="8" name="usuacaresp[]" id="usuacaresp" style="width:500px;" class="CampoEstilo">
 <?php
-$sql = <<<DML
-SELECT ung.ungcod AS codigo,
-       ung.ungcod || ' - ' || ung.ungdsc AS descricao
-  FROM planacomorc.usuarioresponsabilidade ur
-    INNER JOIN public.unidadegestora ung USING(ungcod)
-  WHERE ur.usucpf = '{$usucpf}'
-    AND ur.pflcod = '{$pflcod}'
-    AND ur.rpustatus = 'A'
-DML;
-$usuarioresponsabilidade = $db->carregar($sql);
+    $sql = "
+        SELECT DISTINCT
+            ung.suocod AS codigo,
+            ung.suocod || ' - ' || ung.suonome AS descricao
+        FROM planacomorc.usuarioresponsabilidade ur
+            JOIN public.vw_subunidadeorcamentaria ung USING(suocod)
+        WHERE
+            ur.rpustatus = 'A'
+            AND ung.prsano = '". (int)$_SESSION['exercicio']. "'
+            AND ur.usucpf = '{$usucpf}'
+            AND ur.pflcod = '{$pflcod}'
+    ";
+    $usuarioresponsabilidade = $db->carregar($sql);
 
-if($usuarioresponsabilidade[0]) {
-	foreach($usuarioresponsabilidade as $ur) {
-		echo '<option value="'.$ur['codigo'].'">'.$ur['descricao'].'</option>';
-	}
-}
+    if($usuarioresponsabilidade[0]) {
+            foreach($usuarioresponsabilidade as $ur) {
+                    echo '<option value="'.$ur['codigo'].'">'.$ur['descricao'].'</option>';
+            }
+    }
 ?>
 </select>
 </form>
