@@ -162,49 +162,7 @@ if ($_REQUEST['usucpf'] && $_REQUEST['modulo'] && $_REQUEST['varaux'] == '1') {
 
 		                    			foreach($sistemas as $sistema)
 		                    			{
-		                    				$sql = "SELECT
-		                    							m.modid AS codigo,
-		                    							m.modtitulo as descricao
-		                    						FROM
-		                    							seguranca.modulo m
-		                    						WHERE
-		                    							m.sisid = {$sistema['codigo']}
-		                    							AND m.modstatus = 'A'";
-		                    				$modulos = $db->carregar($sql);
-
-		                    				if( $modulos )
-		                    				{
-		                    					$select .= '<optgroup id="'.$sistema['codigo'].'" label="'.$sistema['descricao'].'">';
-		                    					foreach($modulos as $modulo)
-		                    					{
-		                    						$selected = '';
-		                    						if( $modid )
-		                    						{
-		                    							if( $modid == $modulo['codigo'] )
-		                    							{
-		                    								$selected = 'selected="selected"';
-		                    							}
-		                    						}
-		                    						$select .= '<option value="'.$modulo['codigo'].'" '.$selected.'>'.$modulo['descricao'].'</option>';
-		                    					}
-		                    					$select .= '</optgroup>';
-		                    				}
-		                    				else
-		                    				{
-		                    					$selected = '';
-
-		                    					if( !$modid && $sisid )
-		                    					{
-		                    						if( $sisid == $sistema['codigo'] )
-		                    						{
-		                    							$selected = 'selected="selected"';
-		                    						}
-		                    					}
-		
-		                    					$select .= '<optgroup id="" label="'.$sistema['descricao'].'">';
-		                    					$select .= '<option value="'.$sistema['codigo'].'" '.$selected.'>'.$sistema['descricao'].'</option>';
-		                    					$select .= '</optgroup>';
-		                    				}
+                                            $select .= '<option value="'.$sistema['codigo'].'"' . ($sisid == $sistema['codigo'] ? 'selected' : '') .'>'.$sistema['descricao'].'</option>';
 		                    			}
 		                    			$select .= '</select>';
 		                    		}
