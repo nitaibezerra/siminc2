@@ -370,8 +370,9 @@ $paginic = $db->pegaUm($sql);
                 <nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
                      <div class="navbar-left">
                         <ul class="header-nav header-nav-options">
-                            <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?= $_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>
-                            <li><a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a></li>
+                            <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?= $_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';">
+                                <img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;">
+                            </li>
                         </ul>
                     </div>
                     <div class="navbar-center hidden-xs">
@@ -387,6 +388,9 @@ $paginic = $db->pegaUm($sql);
                             })
                         </script>
                         <ul class="header-nav header-nav-options">
+                            <li>
+                                <a class="navbar-minimalize btn btn-primary" href="#"><i class="fa fa-bars"></i></a>
+                            </li>
                             <li style="width:30%">
                                 <input type="text" class="form-control typeahead" placeholder="Digite aqui o que procura">
                             </li>
