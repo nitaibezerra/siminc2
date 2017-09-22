@@ -342,7 +342,7 @@ jQuery(function () {
      * @since: 26/09/2013
      */
     jQuery('.marcar-todos').click(function () {
-        jQuery('.' + jQuery(this).attr('marcar')).attr('checked', jQuery(this).attr('checked'));
+        jQuery('.' + jQuery(this).attr('marcar')).prop('checked', jQuery(this).prop('checked'));
     });
 
     /*
