@@ -33,7 +33,7 @@
         // Retira cor dos elementos marcados pela validação do formulário quando a validação for satisfeita(Quando o elemento for preenchido).
         initTirarCorValidacao();
 
-        // Evento ao mudar opção de enquadramento
+        // Evento ao mudar opção de UO
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });

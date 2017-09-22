@@ -240,7 +240,9 @@ DML;
     }
 
     $sql = <<<DML
-            SELECT suo.suocod AS codigo, suo.suocod || ' - ' || suonome AS descricao
+            SELECT
+                suo.suocod AS codigo,
+                suo.suocod || ' - ' || suonome AS descricao
             FROM public.vw_subunidadeorcamentaria suo
             WHERE suo.suostatus = 'A'
             and suo.prsano = '{$_SESSION['exercicio']}'

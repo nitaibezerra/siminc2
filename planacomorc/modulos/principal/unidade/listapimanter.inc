@@ -11,21 +11,42 @@
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_REQUEST;
     
+    # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));    
+    
     if($requisicao) {
         switch ($requisicao) {
             case 'exibirGrafico':
                 include_once APPRAIZ . "planacomorc/modulos/principal/unidade/grafico-pi-dotacao.inc";
                 die();
             break;
-//            case 'exibirEspelhoPi':
-//                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/espelho-pi.inc";
-//                die();
-//            break;
+            case 'carregarComboUG':
+                echo montarComboUG((object) array(
+                    'ungcod' => $filtropi['ungcod'],
+                    'exercicio' => $_SESSION['exercicio'],
+                    'unicod' => $_REQUEST['unicod'],
+                    'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
+                ));
+                die();
+            break;
             case 'detalharPiDelegadas':
                 include_once APPRAIZ . "planacomorc/modulos/principal/unidade/sub-unidades-delegadas.inc";
                 die();
             break;
         }
+    }
+    
+    /**
+     * Monta a combo de UGs filtrando por UO
+     */
+//    function montarComboUG($unicod, $editavel = 'S') {
+    function montarComboUG(stdClass $filtros) {
+        global $simec;
+
+        return $simec->select('ungcod', 'Sub-Unidade', $filtros->ungcod, Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+            'exercicio' => $filtros->exercicio,
+            'unicod' => $filtros->unicod,
+            'listaSubUnidadeUsuario' => $filtros->listaSubUnidadeUsuario)), array('multiple' => 'true'));
     }
 
     /**
@@ -40,13 +61,6 @@
         font-size: 1em !important;
     }*/
 </style>
-
-<?php
-
-    # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-
-?>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -65,9 +79,11 @@
                             if (!$listaSubUnidadeUsuario) {
                                 echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo(true), array('multiple' => 'true'));
                             }
+                            echo '<div id=div_ungcod >';
                             echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                                 'exercicio' => $_SESSION['exercicio'],
                                 'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
+                            echo '</div>';
                             echo $simec->select('ptres', 'PTRES', $filtropi['ptres'], Spo_Model_Ptres::queryCombo((object) array(
                                 'exercicio' => $_SESSION['exercicio'],
                                 'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));

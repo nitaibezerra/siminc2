@@ -985,7 +985,7 @@
     }
 
     /**
-     * Carrega novo conteúdo para o select de Subações via requisição ajax.
+     * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
      */
     function carregarUG(unicod) {
         $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarComboUG=ok&unicod=' + unicod, function(response) {
