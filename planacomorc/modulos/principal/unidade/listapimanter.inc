@@ -35,6 +35,11 @@
 ?>
 
 <script src="js/unidade/lista-pi-manter.js"></script>
+<style>
+/*    .tabela-listagem {
+        font-size: 1em !important;
+    }*/
+</style>
 
 <?php
 
@@ -96,6 +101,16 @@
     
 <div class="row col-md-12" style="margin-bottom: 30px;">
     <?php
+    
+        function exibirLinkEspelho($pliid){
+            $strIcone = "";
+            if($pliid){
+                $strIcone = "<a href='#' title='Exibir detalhes do Plano Interno(Espelho)' class='a_espelho' data-pi='". (int)$pliid. "'>". (int) $pliid. "</a>";
+            }
+
+            return $strIcone;
+        }
+
         # Lista de PIs
         $filtropi['exercicio'] = $_SESSION['exercicio'];
         $filtropi['usucpf'] = $_SESSION['usucpf'];
@@ -105,13 +120,14 @@
             ->setFormFiltros('filtropi')
 //            ->esconderColunas('unidsc', 'valido')
             ->setCabecalho(array(
-                'id', 'Código', 'Sub-Unidade', 'SUO Delegada', 'Título', 'PTRES', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
-                    'Custeio', 'Capital', 'Total', 'Empenhado', 'Pago', 'Liquidado'
+                'id', 'Código', 'Sub-Unidade', 'Título', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
+                    'Custeio', 'Capital', 'Empenhado', 'Pago', 'Liquidado'
                 )))
+            ->addCallbackDeCampo('id', 'exibirLinkEspelho')
 //            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
 //            ->addCallbackDeCampo('plititulo', 'formatarTituloPI')
 //            ->addCallbackDeCampo('obrid', 'formatarObrid')
-            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
+//            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
 //            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
             ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
             ->addAcao('edit', 'alterarPi')
@@ -123,8 +139,8 @@
 //            ->setAcaoComoCondicional('delete', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))
-            ->addAcao('chart', 'exibirGrafico')
-            ->addAcao('view', 'exibirEspelhoPi')
+//            ->addAcao('chart', 'exibirGrafico')
+//            ->addAcao('view', 'exibirEspelhoPi')
 //            ->setAcaoComoCondicional('view', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))

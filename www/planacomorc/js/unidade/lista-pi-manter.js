@@ -29,6 +29,12 @@
             abrirPopupDelegadas(pliid);
             return false;
         });
+        
+        $('.a_espelho').click(function(){
+            var pliid = $(this).attr('data-pi');
+            exibirEspelhoPi(pliid);
+            return false;
+        });
 
     }
     
