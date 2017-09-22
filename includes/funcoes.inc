@@ -3236,6 +3236,31 @@ function carrega_unidade_gestora($unicod, $editavel, $usucpf){
 	}
 }
 
+function carrega_subunidade_orcamentaria($unicod, $exercicio){
+
+	global $db;
+
+	if($unicod){
+
+        $sql = "SELECT suocod AS codigo, suocod ||' - '|| suonome as descricao
+                FROM public.vw_subunidadeorcamentaria
+                WHERE unocod = '".$unicod."'
+                and prsano = '$exercicio'
+                ORDER BY suonome";
+
+        $dados = $db->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $ungcod = 1 == count($dados) ? $dados[0]['codigo'] : null;
+
+        if(count($dados)){
+            $db->monta_combo("ungcod",$sql,$editavel,"&nbsp;",'','','', '', 'S', 'ungcod', '', $ungcod);
+        }else{
+            echo '<font style="color: #909090;">Esta unidade não possui uma Unidade Orçamentária.</font>';
+        }
+    }
+}
+
 /**
  * Função que monta o cabecalho padrão com o brasão brasileiro
  * utilizado nos relatórios do SIMEC

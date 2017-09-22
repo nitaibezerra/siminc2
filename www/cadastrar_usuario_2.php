@@ -84,7 +84,7 @@ if( $_REQUEST["ajax"] == 2 ){
 }
 
 if( $_REQUEST["ajax"] == 3 ){
-	carrega_unidade_gestora($_REQUEST["unicod"], $editavel, $usuario->usucpf);
+    carrega_subunidade_orcamentaria($_REQUEST["unicod"], date('Y'));
 	die;
 }
 
@@ -117,7 +117,7 @@ $usufoneddd = $_REQUEST['usufoneddd'];
 $usufonenum = $_REQUEST['usufonenum'];
 
 // Verifica a entidade
-$entid      = isset($_REQUEST['entid']) ? $_REQUEST['entid'] : 'null';
+$entid      = isset($_REQUEST['entid']) ? $_REQUEST['entid'] : null;
 $entid 		= $entid == 999999 ? 'null' : $entid;
 
 // captura os dados do formulário
@@ -348,14 +348,14 @@ if ( $_POST['formulario'] ) {
 		$sql = sprintf(
 				"INSERT INTO seguranca.usuario (
 					usucpf, usunome, usuemail, usufoneddd, usufonenum,
-					usufuncao, carid, entid, unicod, usuchaveativacao, regcod,
+					usufuncao, carid, unicod, usuchaveativacao, regcod,
 					ususexo, ungcod, ususenha, suscod, orgao,
 					muncod, tpocod
 				) values (
 					'%s', '%s', '%s', '%s', '%s',
-					'%s', '%s', %s, '%s', '%s',
 					'%s', '%s', '%s', '%s', '%s',
-					'%s', '%s', %s
+					'%s', '%s', '%s', '%s', '%s',
+					'%s', %s
 				)",
 		$cpf,
 		str_to_upper( $usunome ),
@@ -364,12 +364,11 @@ if ( $_POST['formulario'] ) {
 		$usufonenum,
 		$usufuncao,
 		$carid,
-		$entid,
 		$unicod,
 		'f',
 		$regcod,
 		$ususexo,
-		$ungcod,
+        $_POST['ungcod_disable'],
 		md5_encrypt_senha( $senhageral, '' ),
 		'P',
 		$orgao,
@@ -810,10 +809,10 @@ font {
 							<?php if ( $sistema->sisid ) : ?>
 							<div class="form-group">
 								<div class="col-sm-12">
-                   					<div class="sistema-texto">
+                   					<div class="sistema-texto"  style="text-align: justify">
                    						<h2><?php echo $sistema->sisdsc ?></h2><br/>
                    						<p><?php echo $sistema->sisfinalidade ?></p>
-                   						<ul>
+                   						<ul style="margin-top: 10px;">
                    							<li><i class="fa fa-bullseye"></i>&nbsp;&nbsp;&nbsp;Público-Alvo: <?php echo $sistema->sispublico ?><br></li>
                    							<li><i class="fa fa-cubes"></i> Sistemas Relacionados: <?php echo $sistema->sisrelacionado ?></li>
                    						</ul>
@@ -877,12 +876,14 @@ font {
 									<div class="control-input">
 										<?php
 						    				$sql = "SELECT regcod AS codigo, regcod||' - '||descricaouf AS descricao FROM uf WHERE codigoibgeuf IS NOT NULL ORDER BY 2";
+                                            $regcod = $regcod ? $regcod : $configPadrao->estufPadrao;
+                                            $muncod = $muncod ? $muncod : $configPadrao->muncodPadrao;
 					    					$db->monta_combo("regcod",$sql,$editavel,"&nbsp;",'listar_municipios','', '', '', 'S', 'regcod','','','','','chosen-select');
 					    				?>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<div class="col-sm-12">
 									<div class="control-label">
@@ -901,7 +902,7 @@ font {
 						    								estuf = '{$regcod}'
 						    							ORDER BY
 						    								mundescricao ASC";
-						    					
+
 						    					$db->monta_combo("muncod", $sql, 'S', 'Selecione um município', '', '', '', '200', 'S', 'muncod','','','','','chosen-select');
 						    				}
 						    				else
@@ -935,7 +936,7 @@ font {
 						    							INNER JOIN seguranca.usuario u ON u.entid = e.entid
 						    							WHERE u.usucpf = '{$usuario->usucpf}' AND tp.tpostatus='A'";
 						    					$descricao_tipo = "";
-						
+
 						    					if( ! $db->carregar($sql) )
 						    					{
 						    						$sql = "SELECT
@@ -944,7 +945,7 @@ font {
 						    							FROM
 						    								public.tipoorgao
 						    							WHERE tpostatus='A'";
-	
+
 						    						$editavelTipoOrgao = 'S';
 						    						$descricao_tipo = "&nbsp;";
 						    					}
@@ -957,62 +958,19 @@ font {
 						    							FROM
 						    								public.tipoorgao
 						    							WHERE tpostatus='A'";
-						
+
 						    					$descricao_tipo = "&nbsp;";
+						    					$tpocod = $tpocod ? $tpocod : $configPadrao->tpocodPadrao;
 						    				}
-						
+
 						    				$editavelTipoOrgao = ($editavelTipoOrgao) ? $editavelTipoOrgao : $editavel;
-						
+
 						    				$db->monta_combo("tpocod",$sql,$editavelTipoOrgao,$descricao_tipo,'carrega_orgao','','','170','S','tpocod','','','','','chosen-select');
 					    				?>
 									</div>
 								</div>
 							</div>
-							
-							<div class="form-group">
-								<div class="col-sm-12">
-									<div class="control-label">
-										<label for="orgao">Órgão:</label>
-									</div>
-									<div class="control-input">
-	                                    <span id="spanOrgao">
-										<?php
-			    					 		if ( $tpocod == 3 && !empty($usuario->orgao) ){
-			    					 			$entid = 999999;
-			    					 		}
-			
-			    					 		if( $usuario->usucpf )
-			    							{
-			    								$sql = "SELECT
-			    											u.entid as codigo,
-			    											CASE WHEN ee.entorgcod is not null THEN ee.entorgcod ||' - '|| ee.entnome
-			    											ELSE ee.entnome END AS descricao
-			    										FROM
-			    											seguranca.usuario u
-			    										INNER JOIN
-			    											entidade.entidade ee ON
-			    											ee.entid = u.entid
-			    										WHERE
-			    											u.usucpf = '{$usuario->usucpf}' AND
-			    											ee.entorgcod <> '73000'";
-			
-			    								if( ! $db->carregar($sql) )
-			    								{
-			    									$editavelOrgao = 'S';
-			    									$editavelUO = 'S';
-			    									$editavelUG = 'S';
-			    								}
-			    							}
-			
-			    							$editavelOrgao = ($editavelOrgao) ? $editavelOrgao : $editavel;
-	
-			    							carrega_orgao($editavelOrgao, $usuario->usucpf);
-			    					 	?>
-	                                    </span>
-									</div>
-								</div>
-							</div>
-							
+
 							<div class="form-group">
 								<div class="col-sm-12">
 									<div class="control-label">
@@ -1021,13 +979,12 @@ font {
 									<div class="control-input">
 	                                    <span id="unidade">
 										<?php
-			    							if ( $entid == 'null' ){
-			    								$entid = '';
-			    							}
-			    							
-			    							$editavelUO = ($editavelUO) ? $editavelUO : $editavel;
-			
-			    							carrega_unidade($entid, $editavelUO, $usuario->usucpf);
+                                        $sql = "select unocod as codigo, unonome descricao
+                                                from public.unidadeorcamentaria uno
+                                                where prsano = '" . date('Y') . "'
+                                                order by descricao";
+
+                                        $db->monta_combo("unicod",$sql,$editavel,"&nbsp;",'ajax_unidade_gestora', '', '','','S','unicod','','','','','chosen-select');
 			    						?>
 	                                    </span>
 									</div>
@@ -1043,8 +1000,8 @@ font {
 	                                    <span id="unidade_gestora">
 										<?php
 			    							$editavelUG = ($editavelUG) ? $editavelUG : $editavel;
-			
-			    							carrega_unidade_gestora($unicod, $editavelUG, $usuario->usucpf);
+
+                                        carrega_subunidade_orcamentaria($unicod, date('Y'));
 			    						?>
 	                                    </span>
 									</div>
@@ -1108,6 +1065,7 @@ font {
 				    						}else{
 				    							$sql = "select carid as codigo, cardsc as descricao from public.cargo where carid not in (26, 27) order by cardsc";
 				    							$db->monta_combo( "carid", $sql, 'S', 'Selecione', 'alternarExibicaoCargo', '', '', '', 'N', "carid", '','','','class="form-control"' );
+				    							echo campo_texto('usufuncao','S',$editavel,'',50,100,'','', '', '', '', 'class="form-control" id="usufuncao"');
 				    						}
 				    					?>
 				    				</div>
@@ -1158,8 +1116,8 @@ font {
 		jQuery('#pflcod').chosen({ width: '50%' });
 		jQuery('#tpocod').chosen({ width: '50%' });
 		jQuery('#regcod').chosen({ width: '50%' });
-		jQuery('#entid').chosen({ width: '100%' });
-		jQuery('#muncod').chosen({ width: '100%' });
+		jQuery('#entid').chosen({ width: '50%' });
+		jQuery('#muncod').chosen({ width: '50%' });
 		jQuery('#carid').chosen({ width: '100%' });
 		jQuery('.chosen-select').chosen();
 	});
@@ -1422,25 +1380,22 @@ font {
         return validacao;
     }
 
+    document.formulario.usufuncao.style.display = 'none'
     function alternarExibicaoCargo( tipo ){
 
         var carid = document.getElementById( 'carid' );
         var usufuncao = document.getElementById( 'usufuncao' );
         var link = document.getElementById( 'linkVoltar' );
 
-
-        if( tipo != 'exibirOpcoes' ){
-            if( carid.value == 9 || carid.value == ''){
-                usufuncao.style.display = "";
-                //usufuncao.className = "";
-                link.style.display = "";
-                carid.style.display = "none";
-                //link.className = "";
-            }
-        }
-        else{
-            usufuncao.style.display = "none";
-            usufuncao.value = "";
+        if( carid.value == 9 || carid.value == ''){
+            usufuncao.style.display = "";
+            //usufuncao.className = "";
+            link.style.display = "";
+            carid.style.display = "none";
+            //link.className = "";
+        } else{
+            document.formulario.usufuncao.style.display = 'none'
+            document.formulario.usufuncao.value = ''
             link.style.display = "none";
             //link.className = "objetoOculto";
             carid.style.display = "";

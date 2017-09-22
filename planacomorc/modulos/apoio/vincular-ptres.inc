@@ -98,7 +98,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <table class="table table-striped table-bordered table-hover" >
                                     <thead>
                                     <tr class="text-center">
-                                        <th>#</th>
+                                        <th><input type="checkbox" class="marcar-todos-ptres" marcar="check_<?php echo $tipo; ?>" checked></th>
                                         <th>Ação</th>
                                         <th>Prog.a</th>
                                         <th>Local.</th>
@@ -110,7 +110,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <?php foreach($aPtresSubunidade as $dados){ ?>
                                         <tr>
                                             <td>
-                                                <input type="checkbox" class="vincular" data-ptrid="<?php echo $dados['ptrid']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo (!empty($aVinculos[$dados['ptrid']]) && in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) ? 'checked' : '' ; ?> />
+                                                <input type="checkbox" class="vincular check_<?php echo $tipo; ?>" data-ptrid="<?php echo $dados['ptrid']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo (!empty($aVinculos[$dados['ptrid']]) && in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) ? 'checked' : '' ; ?> />
                                             </td>
                                             <td><?php echo $dados['acacod']; ?></td>
                                             <td><?php echo $dados['prgcod']; ?></td>
@@ -138,6 +138,15 @@ include APPRAIZ . "includes/cabecalho.inc";
             var suoid = $(this).data('suoid');
             $.ajax({
                 url: 'planacomorc.php?modulo=apoio/vincular-ptres&acao=A&req=' + acao + '&ptrid=' + ptrid + '&suoid=' + suoid
+            });
+        });
+
+        jQuery('.marcar-todos-ptres').click(function () {
+            var marcado = jQuery(this).prop('checked');
+            jQuery('tr:visible .' + jQuery(this).attr('marcar')).each(function(index, obj){
+                if($(obj).prop('checked') != marcado){
+                    $(obj).click();
+                }
             });
         });
     })
