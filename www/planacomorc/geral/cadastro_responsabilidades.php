@@ -79,7 +79,7 @@ if (!$responsabilidadesPerfil || @count($responsabilidadesPerfil) < 1) {
             case 'G': // Unidade gestora
                 $aca_prg = 'unidades gestoras associadas';
                 $sqlRespUsuario = "
-                    SELECT
+                    SELECT DISTINCT
                         ung.suocod AS codigo,
                         ung.suocod || ' - ' || ung.suonome AS descricao,
                         ur.rpustatus AS status
