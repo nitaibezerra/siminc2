@@ -1,4 +1,13 @@
 <?php
+
+
+// Redireciona o usuário para a página incial de acordo com perfil
+$perfis = pegaPerfilGeral();
+
+if(count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]))){
+    simec_redirecionar('planacomorc.php?modulo=principal/unidade/painel&acao=A');
+}
+
 /**
  * Tela inicial do módulo planacomorc com o menu de opções disponíveis no sistema.
  * $Id: inicio.inc 103493 2015-10-08 19:31:03Z werteralmeida $
@@ -284,13 +293,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 //                    $params['tipo'] = 'acompanhamento';
 //                    $params['url'] = 'planacomorc.php?modulo=principal/subacoes/listasubacoes&acao=A';
 //                    montaBotaoInicio($params);
-//                    
+//
 //                    $params = array();
 //                    $params['texto'] = 'Central de Acompanhamento';
 //                    $params['tipo'] = 'central';
 //                    $params['url'] = 'planacomorc.php?modulo=principal/subacoes/centralacompanhamento&acao=A';
 //                    montaBotaoInicio($params);
-//                    
+//
 //                    $params = array();
 //                    $params['texto'] = 'Produtos das Subações';
 //                    $params['tipo'] = 'listar';
@@ -301,7 +310,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 //                    $params['tipo'] = 'questionario';
 //                    $params['url'] = 'planacomorc.php?modulo=principal/questionariosubacoes/listaquestionario&acao=A';
 //                    montaBotaoInicio($params);
-//                    
+//
                 $params = array();
                 $params['texto'] = 'Solicitação de Remanejamento de Subação';
                 $params['tipo'] = 'processo';

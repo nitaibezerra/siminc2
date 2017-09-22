@@ -20,6 +20,8 @@
             }, 1300);
         }
 
+        $('#input_sei').mask('99999.999999/9999-99');
+
         var tipoTransacao = $('tipotransacao').value;
         if ('-' == tipoTransacao) {
             // -- Desabilita o restante do formulário

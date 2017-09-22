@@ -992,11 +992,11 @@ DML;
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 Números SNIIC
                                 <div class="form-group">
                                     <div class="col-md-10" style="padding-right: 3px;">
-                                        <input type="text" placeholder="Adicione um número" value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
+                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
                                     </div>
                                     <div class="col-lg-1" style="padding-left: 0;">
                                         <input type="button" id="btn_adicionar_sniic" value="+" class="btn btn-info" />
@@ -1018,11 +1018,11 @@ DML;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                Número SEI
+                            <div class="col-md-5">
+                                Número do Processo
                                 <div class="form-group">
                                     <div class="col-md-10" style="padding-right: 3px;">
-                                        <input type="text" placeholder="Adicione um número" value="" class="CampoEstilo inteiro normal form-control" title="Número SEI" id="input_sei" maxlength="10" name="input_sei" />
+                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo normal form-control" title="Número SEI" id="input_sei" name="input_sei" />
                                     </div>
                                     <div class="col-lg-1" style="padding-left: 0;">
                                         <input type="button" id="btn_adicionar_sei" value="+" class="btn btn-info" />
@@ -1048,7 +1048,7 @@ DML;
                                 Número Pronac
                                 <div class="form-group">
                                     <div class="col-md-10" style="padding-right: 3px;">
-                                        <input type="text" placeholder="Adicione um número" value="" class="CampoEstilo inteiro normal form-control" title="Número PRONAC" id="input_pronac" maxlength="10" name="input_pronac" />
+                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo normal form-control" title="Número PRONAC" id="input_pronac" name="input_pronac" />
                                     </div>
                                     <div class="col-lg-1" style="padding-left: 0;">
                                         <input type="button" id="btn_adicionar_pronac" value="+" class="btn btn-info" />
