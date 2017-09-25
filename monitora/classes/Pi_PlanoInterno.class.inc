@@ -287,7 +287,7 @@ class Pi_PlanoInterno extends Modelo{
 
     public function getDadosGerais($exercicio)
     {
-        $sql = "select  pli.pliid, 'ID Origem' id, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
+        $sql = "select  pli.pliid, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
 
                         (select array_to_string(array(
                                 select distinct s.unonome 
@@ -306,10 +306,8 @@ class Pi_PlanoInterno extends Modelo{
                         eqd.eqddsc, mai.mainome, mas.masnome, ptr.prgcod, ptr.prgdsc, opp.oppcod, opp.oppnome, ipp.ippcod, ipp.ippnome, 
                         ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, 'PO' po, ptr.ptres,
                         mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
-                        'Programa Minc' as prog, pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc, 
-                        'Unidade Executora' un, 'Meta MinC' met, 'Prioridade Ministerial' pri, 
+                        pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc, 
                         case when pli.pliemenda = true then 'Sim' else 'Não' end as pliemenda,
-                        'Tipo de autor' tipoautor, 'Partido' partido, 'Autor' autor,
                         case when pic.picedital = true then 'Sim' else 'Não' end as picedital, esf.esfdsc,
                         
                         case 
@@ -344,10 +342,7 @@ class Pi_PlanoInterno extends Modelo{
                                 where l.pliid = pli.pliid                           
                         ), '; ')) municipio,
                                                 
-                        'Abrangência' abr, ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
-                        'Exercício Futuro' a,
-                        'Exercício Futuro - Valor' b,
-                        'Exercício Futuro - Justificativa' c,
+                        ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
                         
                         -- Cronograma Físico
                         (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '01' and pcr.pliid = pli.pliid) fisico_1,
