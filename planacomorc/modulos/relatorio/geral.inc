@@ -2,11 +2,11 @@
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 $cabecalho = [
-    'ID Planejamento', 'ID Origem', 'Situação', 'Código', 'Código da Unidade', 'Unidade', 'Código da Sub-Unidade', 'Sub-Unidade', 'Unidade Delegada', 'Sub-Unidade Delegada', 'Enquadramento',
+    'ID Planejamento', 'Situação', 'Código', 'Código da Unidade', 'Unidade', 'Código da Sub-Unidade', 'Sub-Unidade', 'Unidade Delegada', 'Sub-Unidade Delegada', 'Enquadramento',
     'Item de Manutenção', 'Subitem de Manutenção', 'Código do Programa', 'Programa', 'Código do Objetivo', 'Objetivo', 'Código da Iniciativa', 'Iniciativa', 'Código da Ação', 'Ação', 'Código do Localizador',
-    'Localizador', 'Código do PO', 'Plano Orçamentário', 'PTRES', 'Área', 'Meta PNC', 'Meta PPA', 'Programa MinC', 'Título', 'Descrição', 'Segmento Cultural', 'Tipo de Instrumento / Modalidade de Pactuação',
-    'Unidade Executora', 'Meta MinC', 'Prioridade Ministerial', 'Emenda parlamentar', 'Tipo de autor', 'Partido', 'Autor', 'Forma de execução - Edital', 'Localização da ação', 'País', 'Unidade Federativa',
-    'Município', 'Abrangência', 'Produto PI', 'Unidade de Medida', 'Meta Física', 'Valor Total', 'Valor Total Custeio', 'Valor Total Capital', 'Exercício Futuro', 'Exercício Futuro - Valor', 'Exercício Futuro - Justificativa',
+    'Localizador', 'Código do PO', 'Plano Orçamentário', 'PTRES', 'Área', 'Meta PNC', 'Meta PPA', 'Título', 'Descrição', 'Segmento Cultural', 'Tipo de Instrumento / Modalidade de Pactuação',
+    'Emenda parlamentar', 'Forma de execução - Edital', 'Localização da ação', 'País', 'Unidade Federativa',
+    'Município', 'Produto PI', 'Unidade de Medida', 'Meta Física', 'Valor Total', 'Valor Total Custeio', 'Valor Total Capital',
 
     'Cronograma Físico<br />Capital Janeiro', 'Cronograma Físico<br />Capital Fevereivo', 'Cronograma Físico<br />Capital Março', 'Cronograma Físico<br />Capital Abril',
     'Cronograma Físico<br />Capital Maio', 'Cronograma Físico<br />Capital Junho', 'Cronograma Físico<br />Capital Julho', 'Cronograma Físico<br />Capital Agosto',
@@ -29,10 +29,10 @@ $cabecalho = [
     'Cronograma Orçamentário<br />Custeio Setembro', 'Cronograma Orçamentário<br />Custeio Outubro', 'Cronograma Orçamentário<br />Custeio Novembro', 'Cronograma Orçamentário<br />Custeio Dezembro',
 
     'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
-
 ];
 
 $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio']);
+
 ?>
 
 <table width="100%" cellspacing="0">
