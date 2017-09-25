@@ -994,7 +994,7 @@ font {
 							<div class="form-group">
 								<div class="col-sm-12">
 									<div class="control-label">
-										<label for="unicod">Unidade Gestora:</label>
+										<label for="unicod">Subunidade Orçamentária:</label>
 									</div>
 									<div class="control-input">
 	                                    <span id="unidade_gestora">
