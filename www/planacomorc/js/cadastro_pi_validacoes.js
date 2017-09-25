@@ -79,20 +79,12 @@
         }
 
         if(!verificarFormularioNaoOrcamentario()){
-            // Valida se o usuário preencheu Valor do Projeto - Custeio.
-            if($('#picvalorcusteio').val() == ""){
+            // Valida se o usuário preencheu ou o valor de capital ou de custeio(Valor do Projeto).
+            if(buscarValorDoProjeto() <= 0){
                 $('#valor_projeto').addClass('validateRedText');
-                addMsgCustom.push('Custeio');
+                addMsgCustom.push('Valor do Projeto(Custeio ou Capital)');
             } else {
                 $('#valor_projeto').removeClass('validateRedText');
-            }
-
-            // Valida se o usuário preencheu Valor do Projeto - Capital.
-            if($('#picvalorcapital').val() == ""){
-                $('#valor_projeto').addClass('validateRedText');
-                addMsgCustom.push('Capital');
-            } else {
-                $('#picvalorcapital').removeClass('validateRedText');
             }
         }
 
@@ -244,3 +236,4 @@
 
         return listaObrigatorios;
     }
+
