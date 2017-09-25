@@ -38,15 +38,22 @@
     
     /**
      * Monta a combo de UGs filtrando por UO
+     * 
+     * @param $filtros 
+     * @return VOID
      */
-//    function montarComboUG($unicod, $editavel = 'S') {
     function montarComboUG(stdClass $filtros) {
         global $simec;
 
-        return $simec->select('ungcod', 'Sub-Unidade', $filtros->ungcod, Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
-            'exercicio' => $filtros->exercicio,
-            'unicod' => $filtros->unicod,
-            'listaSubUnidadeUsuario' => $filtros->listaSubUnidadeUsuario)), array('multiple' => 'true'));
+        return $simec->select(
+            'ungcod',
+            'Sub-Unidade',
+            $filtros->ungcod,
+            Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                'exercicio' => $filtros->exercicio,
+                'unicod' => $filtros->unicod,
+                'listaSubUnidadeUsuario' => $filtros->listaSubUnidadeUsuario)),
+            array('multiple' => 'true'));
     }
 
     /**
