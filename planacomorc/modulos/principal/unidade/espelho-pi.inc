@@ -502,7 +502,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td colspan="2">
                                             <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                                 <tr>
                                                     <td style="text-align: left;"></td>
@@ -589,7 +589,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td cospan="2">
+                                        <td colspan="2">
                                             <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
                                                 <tr>
                                                     <td rowspan="2" style="text-align: center;">
