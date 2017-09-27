@@ -506,8 +506,11 @@
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelUnidade() {
+        // Valor que veio da Base de Dados.
         var valorBaseLimiteDisponivelUnidade = textToFloat($('#VlrSUDisponivel').val());
+        // Valor que veio da Base de Dados.
         var valorBaseProjeto = buscarValorBaseDoProjeto();
+        // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjeto = buscarValorDoProjeto();
 
         if(valorProjeto < valorBaseProjeto){
@@ -526,8 +529,11 @@
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCusteio() {
+        // Valor que veio da Base de Dados.
         var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCusteio').val());
+        // Valor que veio da Base de Dados.
         var valorBaseLimiteProjetoCusteio = textToFloat($('#vlrPiCusteio').val());
+        // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjetoCusteio = textToFloat($('#picvalorcusteio').val());
 
         if(valorProjetoCusteio < valorBaseLimiteProjetoCusteio){
@@ -545,8 +551,11 @@
      * @returns VOID
      */
     function atualizarValorLimiteDisponivelFuncionalCapital() {
+        // Valor que veio da Base de Dados.
         var valorBaseLimiteDisponivel = textToFloat($('#VlrFuncionalDisponivelCapital').val());
+        // Valor que veio da Base de Dados.
         var valorBaseLimiteProjetoCapital = textToFloat($('#vlrPiCapital').val());
+        // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjetoCapital = textToFloat($('#picvalorcapital').val());
 
         if(valorProjetoCapital < valorBaseLimiteProjetoCapital){
@@ -564,11 +573,14 @@
      * @returns VOID
      */
     function atualizarValorDetalhado() {
+        // Valor que veio da Base de Dados.
         var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
+        // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var fltValorDoProjeto = buscarValorDoProjeto();
-        var fltValorDetalhado = textToFloat($('#piDetalhado').val());
+        // Valor que veio da Base de Dados.
+        var fltValorBaseDetalhado = textToFloat($('#piDetalhado').val());
         
-        var fltValorDetalhadoAtual = (fltValorDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
+        var fltValorDetalhadoAtual = (fltValorBaseDetalhado - fltValorBaseDoProjeto) + fltValorDoProjeto;
         $('#td_pi_detalhado').html(number_format(fltValorDetalhadoAtual.toFixed(2), 2, ',', '.'));
     }
 
@@ -578,8 +590,11 @@
      * @returns VOID
      */
     function atualizarValorNaoDetalhado() {
+        // Valor que veio da Base de Dados.
         var fltValorBaseDoProjeto = buscarValorBaseDoProjeto();
+        // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var fltValorDoProjeto = buscarValorDoProjeto();
+        // Valor que veio da Base de Dados.
         var fltValorBaseNaoDetalhado = textToFloat($('#piNaoDetalhado').val());
         
         var fltValorNaoDetalhadoAtual = (fltValorBaseNaoDetalhado - (fltValorDoProjeto - fltValorBaseDoProjeto));
@@ -684,44 +699,34 @@
         return autorizadoFuncional;
     }
 
+    /**
+     * 
+     * @todo refatorar valores mocados
+     */
     function atualizarSaldoFuncional(){
-        // Saldo Autorizado
-        dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
-        var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
+        /**
+         * implements in popupptres o import desses dados ao selecionar a funcional.
+         */
+        $('#td_autorizado_funcional_custeio').text($('#ptresCusteio').val());
+        $('#td_autorizado_funcional_capital').text($('#ptresCapital').val());
 
-        $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-        $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-
-        // Saldo Disponível
-        var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
-        var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
-
-        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
-        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
-
-        $('#td_disponivel_funcional_custeio').text(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
-        $('#td_disponivel_funcional_capital').text(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
+        $('#td_disponivel_funcional_custeio').text($('#piNaoDetalhadoCusteio').val());
+        $('#td_disponivel_funcional_capital').text($('#piNaoDetalhadoCapital').val());
     }
     
+    /**
+     * 
+     * @todo refatorar valores mocados
+     */
     function carregarSaldoFuncional(){
-        // Saldo Autorizado
-        dotacaoAtualPO = $('tr[id^=ptres_] td:nth-child(3)').eq(0).text();
-        var vlrAutorizadoCusteioCapitalProvisorio = textToFloat(dotacaoAtualPO) / 2;
+        $('#td_autorizado_funcional_custeio').text($('#ptresCusteio').val());
+        $('#td_autorizado_funcional_capital').text($('#ptresCapital').val());
 
-        $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-        $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+        $('#td_disponivel_funcional_custeio').text($('#piNaoDetalhadoCusteio').val());
+        $('#td_disponivel_funcional_capital').text($('#piNaoDetalhadoCapital').val());
 
-        // Saldo Disponível
-        var textNaoDetalhado = $('tr[id^=ptres_] td:nth-child(5)').eq(0).text();
-        var vlrNaoDetalhadoCusteioCapitalProvisorio = textToFloat(textNaoDetalhado) / 2;
-        
-        var valorDisponivelCusteio = vlrNaoDetalhadoCusteioCapitalProvisorio;
-        var valorDisponivelCapital = vlrNaoDetalhadoCusteioCapitalProvisorio;
-
-        $('#td_disponivel_funcional_custeio').text(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
-        $('#td_disponivel_funcional_capital').text(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
-        $('#VlrFuncionalDisponivelCapital').val(number_format(valorDisponivelCusteio.toFixed(2), 2, ',', '.'));
-        $('#VlrFuncionalDisponivelCusteio').val(number_format(valorDisponivelCapital.toFixed(2), 2, ',', '.'));
+        $('#VlrFuncionalDisponivelCapital').val($('#piNaoDetalhadoCapital').val());
+        $('#VlrFuncionalDisponivelCusteio').val($('#piNaoDetalhadoCusteio').val());
     }
 
     /**
@@ -732,20 +737,22 @@
      */
     function mudarCorValorProjeto(){
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        var disponivelFuncional = buscarValorDisponivelFuncional();
-        var valorDoProjeto = buscarValorDoProjeto();
-
-        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
+        var disponivelFuncionalCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
+        var disponivelFuncionalCapital = textToFloat($('#td_disponivel_funcional_capital').text());
+        
+        if(disponivelUnidade < 0 || disponivelFuncionalCusteio < 0){
             $('#picvalorcusteio').addClass('validateRedText');
-            $('#picvalorcapital').addClass('validateRedText');
-            $('#td_valor_projeto').addClass('validateRedText');
         } else {
             $('#picvalorcusteio').removeClass('validateRedText');
+        }
+        
+        if(disponivelUnidade < 0 || disponivelFuncionalCapital < 0){
+            $('#picvalorcapital').addClass('validateRedText');
+        } else {
             $('#picvalorcapital').removeClass('validateRedText');
-            $('#td_valor_projeto').removeClass('validateRedText');
         }
     }
-
+    
    /**
     * Transforma o valor de texto pra flutuante pra efetuar operações matematicas.
     *
@@ -756,7 +763,7 @@
         var numero = 0;
         text = replaceAll(text, '.', '');
         text = replaceAll(text, ',', '.');
-        if(parseFloat(text) > 0){
+        if(!isNaN(parseFloat(text))){
             numero = parseFloat(text);
         }
 
@@ -1017,12 +1024,9 @@
             dataType: 'json',
             success: function(data){
                 $('#td_autorizado_sub_unidade').text(data.autorizado);
-                var fltDisponivelUnidade = textToFloat(data.disponivel);
-                var fltBaseProjeto = buscarValorBaseDoProjeto();
-                var fltDisponivel = (fltDisponivelUnidade - fltBaseProjeto) + buscarValorDoProjeto();
-                $('#td_disponivel_sub_unidade').text(number_format(fltDisponivel.toFixed(2), 2, ',', '.'));
-                $('#VlrSUDisponivel').val(number_format(fltDisponivel.toFixed(2), 2, ',', '.'));
+                $('#VlrSUDisponivel').val(data.disponivel);
                 
+                atualizarValorLimiteDisponivelUnidade();
                 mudarCorValorProjeto();
             }
         });

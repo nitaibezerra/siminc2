@@ -86,6 +86,11 @@
             } else {
                 $('#valor_projeto').removeClass('validateRedText');
             }
+            
+            // Valida se o valor do projeto pra Custeio não foi superior ao valor disponivel de Custeio da funcional.
+            // implements here...
+            // Valida se o valor do projeto pra Custeio não foi superior ao valor disponivel de Custeio da funcional.
+            // implements here...
         }
 
         /*

@@ -214,6 +214,15 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script src="js/cadastro_pi_funcoes.js"></script>
 <script src="js/cadastro_pi_validacoes.js"></script>
 <script src="js/cadastro_pi_init.js"></script>
+<style>
+    autorizadocapital {
+        display: none;
+    }
+    
+    autorizadocusteio {
+        display: none;
+    }
+</style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -528,7 +537,10 @@ DML;
                                     </tr>
                                     <?php
                                     if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
-                                        $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], $dadosPI['ptrid']);
+                                        $dadosPTRES = buscarPTRES((object) array(
+                                            'exercicio' => $_SESSION['exercicio'],
+                                            'pliid' => $dadosPI['pliid'],
+                                            'ptrid' => $dadosPI['ptrid']));
                                         #ver($dadosPTRES);
                                         if ($dadosPTRES) {
                                             $valortotalpi = 0;
@@ -536,7 +548,13 @@ DML;
                                             
                                             foreach ($dadosPTRES as $ptres):
                                                 $vlrPiDetalhado = $ptres['det_pi'];
+                                                $vlrPiDetalhadoCusteio = $ptres['det_pi_custeio'];
+                                                $vlrPiDetalhadoCapital = $ptres['det_pi_capital'];
+                                                $vlrPtresCusteio = $ptres['ptrdotacaocusteio'];
+                                                $vlrPtresCapital = $ptres['ptrdotacaocapital'];
                                                 $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
+                                                $vlrPiNaoDetalhadoCusteio = $ptres['nao_det_pi_custeio'];
+                                                $vlrPiNaoDetalhadoCapital = $ptres['nao_det_pi_capital'];
                                                 ?>
                                                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                                                     <td align="center">
@@ -569,8 +587,16 @@ DML;
                                     }
                                     ?>
                                 </table>
+                                
+                                <input type="hidden" id="ptresCusteio" value="<?php echo $vlrPtresCusteio; ?>" />
+                                <input type="hidden" id="ptresCapital" value="<?php echo $vlrPtresCapital; ?>" />
                                 <input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
+                                <input type="hidden" id="piDetalhadoCusteio" value="<?php echo $vlrPiDetalhadoCusteio; ?>" />
+                                <input type="hidden" id="piDetalhadoCapital" value="<?php echo $vlrPiDetalhadoCapital; ?>" />
+                                <input type="hidden" id="piNaoDetalhadoCusteio" value="<?php echo $vlrPiNaoDetalhadoCusteio; ?>" />
+                                <input type="hidden" id="piNaoDetalhadoCapital" value="<?php echo $vlrPiNaoDetalhadoCapital; ?>" />
                                 <input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />
+                                
                             </div>
                         </div>
                         <div class="form-group text-right">
@@ -1128,11 +1154,11 @@ DML;
                                         <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                         <td style="text-align: left;">
                                             <input type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                            <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
+                                            <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) && !$_REQUEST['replicarProposta']? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
                                         </td>
                                         <td style="text-align: center;">
                                             <input type="text" id="picvalorcapital" name="picvalorcapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
-                                            <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) ? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
+                                            <input type="hidden" id="vlrPiCapital" value="<?php echo !empty($dadosPI['picvalorcapital']) && !$_REQUEST['replicarProposta']? number_format($dadosPI['picvalorcapital'], 2, ',', '.') : ''; ?>" />
                                         </td>
                                     </tr>
                                 </table>
@@ -1457,6 +1483,8 @@ DML;
 
     // Permissão para Editar
     podeEditar = '<?php echo $podeEditar; ?>';
+    
+    ppiid = '<?php echo isset($_REQUEST['replicarProposta'])? $_REQUEST['replicarProposta']: 0; ?>';
 
     $(document).ready(function() {
 
@@ -1464,6 +1492,5 @@ DML;
         initCadastroPi();
 
     });
-
 
 </script>

@@ -1455,6 +1455,103 @@ SQL;
     return array();
 }
 
+//function buscarPTRES($pliid, $ptrid) {
+
+/**
+ * Buscar a funcional do Plano Interno.
+ * 
+ * @global cls_banco $db
+ * @param stdClass $filtros
+ * @return array
+ */
+function buscarPTRES(stdClass $filtros) {
+    global $db;
+
+    # Filtros.
+    $where .= $filtros->pliid ? " AND pip.pliid = $filtros->pliid " : "";
+    $where .= $filtros->ptrid ? " AND ptr.ptrid = $filtros->ptrid " : "";
+
+    $sql = <<<SQL
+        SELECT
+            ptr.ptrid,
+            ptr.ptres,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
+            aca.unicod || ' - ' || uni.unonome as unidsc,
+            COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
+            COALESCE(ptr.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
+            COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
+            COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
+	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
+	    COALESCE(SUM(dtp.capital), 0.00) AS det_pi_capital,
+            (COALESCE(ptr.ptrdotacao, 0.00) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
+            (COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
+            (COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
+            COALESCE((pemp.total), 0.00) AS empenhado,
+            COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
+            pip.pipvalor
+        FROM monitora.ptres ptr
+            JOIN monitora.acao aca on ptr.acaid = aca.acaid
+            JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod AND uni.prsano = aca.prgano
+            LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
+            LEFT JOIN (
+                SELECT
+                    pip.ptrid,
+                    SUM(pipvalor) AS valor,
+                    SUM(picvalorcusteio) AS custeio,
+                    SUM(picvalorcapital) AS capital
+                FROM monitora.pi_planointernoptres pip
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                    JOIN planacomorc.pi_complemento pc USING(pliid)
+                WHERE
+                    plistatus  = 'A'
+                GROUP BY
+                    ptrid) dtp ON dtp.ptrid = ptr.ptrid
+            LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+        WHERE
+            aca.acasnrap = FALSE
+            AND aca.prgano = '{$filtros->exercicio}'
+            AND ptr.ptrstatus = 'A'
+            $where
+        GROUP BY
+            ptr.ptrid,
+            ptr.ptres,
+            aca.prgcod,
+            aca.acaobjetivocod,
+            aca.acacod,
+            aca.unicod,
+            aca.loccod,
+            aca.acatitulo,
+            uni.unonome,
+            ptr.ptrdotacao,
+            pip.pipvalor,
+            pemp.total
+        ORDER BY
+            ptr.ptres
+SQL;
+    $result = is_array($result) ? $result : Array();
+//ver($sql,d);
+    $result = $db->carregar($sql);
+    if (is_array($result)) {
+        foreach ($result as $key => $_) {
+            $result[$key]['dotacaoatual'] = mascaraMoeda($result[$key]['dotacaoatual'], false);
+            $result[$key]['det_pi'] = mascaraMoeda($result[$key]['det_pi'], false);
+            $result[$key]['det_pi_custeio'] = mascaraMoeda($result[$key]['det_pi_custeio'], false);
+            $result[$key]['det_pi_capital'] = mascaraMoeda($result[$key]['det_pi_capital'], false);
+            $result[$key]['ptrdotacaocusteio'] = mascaraMoeda($result[$key]['ptrdotacaocusteio'], false);
+            $result[$key]['ptrdotacaocapital'] = mascaraMoeda($result[$key]['ptrdotacaocapital'], false);
+            $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
+            $result[$key]['nao_det_pi_custeio'] = mascaraMoeda($result[$key]['nao_det_pi_custeio'], false);
+            $result[$key]['nao_det_pi_capital'] = mascaraMoeda($result[$key]['nao_det_pi_capital'], false);
+            $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
+            $result[$key]['nao_empenhado'] = mascaraMoeda($result[$key]['nao_empenhado'], false);
+            # Não formatado - para soma na interface
+            $result[$key]['pipvalor_'] = $result[$key]['pipvalor'];
+            $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
+        }
+    }
+    return $result;
+}
+
 function buscarPTRESdoPIInstituicoes($pliid, $sbaid, $ptrid) {
     global $db;
 
@@ -1488,32 +1585,52 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid, $ptrid) {
             COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
             $valorSelect
         FROM monitora.ptres ptr
-        INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-        INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '{$_SESSION['exercicio']}'
-        LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
-        LEFT JOIN (
-            SELECT ptrid, SUM(sadvalor) AS valor
-            FROM monitora.pi_subacaodotacao
-            WHERE 1=1 {$filtroSubacao}
-            GROUP BY ptrid) dts ON dts.ptrid = ptr.ptrid
-        LEFT JOIN (
-            SELECT pip.ptrid, SUM(pipvalor) AS valor
-            FROM monitora.pi_planointernoptres pip
-            JOIN monitora.pi_planointerno pli using (pliid)
-            WHERE plistatus  = 'A'
-                {$filtroSubacao}
-            GROUP BY ptrid) dtp ON dtp.ptrid = ptr.ptrid
-        LEFT JOIN siafi.uo_ptrempenho pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
-        WHERE aca.acasnrap = FALSE
-            AND aca.unicod NOT IN('26101','26291', '26290', '26298', '26443', '74902', '73107')
-            AND aca.prgano='{$_SESSION['exercicio']}'
+            JOIN monitora.acao aca on ptr.acaid = aca.acaid
+            JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod AND uni.prsano = aca.prgano
+            LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
+            LEFT JOIN (
+                SELECT
+                    ptrid,
+                    SUM(sadvalor) AS valor
+                FROM monitora.pi_subacaodotacao
+                WHERE
+                    1=1
+                    {$filtroSubacao}
+                GROUP BY ptrid) dts ON dts.ptrid = ptr.ptrid
+            LEFT JOIN (
+                SELECT
+                    pip.ptrid,
+                    SUM(pipvalor) AS valor
+                FROM monitora.pi_planointernoptres pip
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                WHERE
+                    plistatus  = 'A'
+                    {$filtroSubacao}
+                GROUP BY
+                    ptrid) dtp ON dtp.ptrid = ptr.ptrid
+            LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+        WHERE
+            aca.acasnrap = FALSE
+            AND aca.prgano = '{$_SESSION['exercicio']}'
             AND ptr.ptrstatus = 'A'
             $where
-        GROUP BY ptr.ptrid, ptr.ptres, aca.prgcod, aca.acaobjetivocod, aca.acacod,aca.unicod,aca.loccod,aca.acatitulo,uni.unonome, ptr.ptrdotacao, pemp.total
-        ORDER BY ptr.ptres
+        GROUP BY
+            ptr.ptrid,
+            ptr.ptres,
+            aca.prgcod,
+            aca.acaobjetivocod,
+            aca.acacod,
+            aca.unicod,
+            aca.loccod,
+            aca.acatitulo,
+            uni.unonome,
+            ptr.ptrdotacao,
+            pemp.total
+        ORDER BY
+            ptr.ptres
 SQL;
     $result = is_array($result) ? $result : Array();
-
+//ver($sql,d);
     $result = $db->carregar($sql);
     if (is_array($result)) {
         foreach ($result as $key => $_) {

@@ -310,20 +310,17 @@ if($_REQUEST['no_ptrid']){
     }
 }
 //ver($where);
-/* Modifica a conta para o limite de detalhamento */
-$detalhamentoPi = "(COALESCE(ptr.ptrdotacao, 0.00) - COALESCE(SUM(pip.pipvalor), 0.00)) AS nao_det_pi,";
-if($_REQUEST['sbaid'] && $_REQUEST['sbaid'] != 'null'){
-    $detalhamentoPi = "(COALESCE(SUM(dts.valor), 0.00) - COALESCE(SUM(pip.pipvalor), 0.00)) AS nao_det_pi,";
-}
+
 $sql_lista = <<<DML
     SELECT
         ptr.ptrid,
-        ptr.ptres,
+        ptr.ptres || '<autorizadocusteio>' || COALESCE(SUM(ptr.ptrdotacaocusteio), 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(SUM(ptr.ptrdotacaocapital), 0.00) || '</autorizadocapital>' AS ptres,
         TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
         aca.unicod || ' - ' || uni.unonome as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
-        $detalhamentoPi
+        (COALESCE(SUM(ptr.ptrdotacaocusteio), 0.00) - COALESCE(SUM(pip.custeio), 0.00)) AS nao_det_pi_custeio,
+        (COALESCE(SUM(ptr.ptrdotacaocapital), 0.00) - COALESCE(SUM(pip.capital), 0.00)) AS nao_det_pi_capital,
         COALESCE((pemp.total), 0.00) AS empenhado,
         COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado
     FROM monitora.ptres ptr
@@ -331,19 +328,36 @@ $sql_lista = <<<DML
     INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '2018'
     LEFT JOIN spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
     LEFT JOIN public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid    
-    LEFT JOIN (SELECT pip2.ptrid, pipvalor  FROM monitora.pi_planointernoptres pip2 JOIN monitora.pi_planointerno USING (pliid) WHERE plistatus ='A') pip on ptr.ptrid = pip.ptrid
-    LEFT JOIN (SELECT ptrid, SUM(sadvalor) AS valor
-        FROM monitora.pi_subacaodotacao
-        GROUP BY ptrid) dts ON dts.ptrid = ptr.ptrid
     LEFT JOIN (
-        SELECT ex.unicod, ex.ptres, ex.exercicio, sum(ex.vlrempenhado) AS total
+        SELECT
+            pip2.ptrid,
+            SUM(pipvalor) AS pipvalor,
+            SUM(picvalorcusteio) AS custeio,
+            SUM(picvalorcapital) AS capital
+        FROM monitora.pi_planointernoptres pip2
+            JOIN monitora.pi_planointerno USING(pliid)
+            JOIN planacomorc.pi_complemento pc USING(pliid)
+        WHERE
+            plistatus = 'A'
+        GROUP BY
+            pip2.ptrid
+    ) pip on ptr.ptrid = pip.ptrid
+    LEFT JOIN (
+        SELECT
+            ex.unicod,
+            ex.ptres,
+            ex.exercicio,
+            sum(ex.vlrempenhado) AS total
         FROM spo.siopexecucao ex
-        WHERE ex.unicod  NOT IN('26101','26291', '26290', '26298', '26443', '74902', '73107')
-            AND ex.exercicio = '{$_SESSION['exercicio']}'
-        GROUP BY ex.unicod, ex.ptres, ex.exercicio
+        WHERE
+            ex.exercicio = '{$_SESSION['exercicio']}'
+        GROUP BY
+            ex.unicod,
+            ex.ptres,
+            ex.exercicio
         ) pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
-    WHERE ptr.ptrano = '{$_SESSION['exercicio']}'
-        AND aca.unicod NOT IN('26101','26291', '26290', '26298', '26443', '74902', '73107')
+    WHERE
+        ptr.ptrano = '{$_SESSION['exercicio']}'
         $where
         $whereUO
         AND ptr.ptrstatus = 'A'
@@ -362,7 +376,7 @@ $sql_lista = <<<DML
         pemp.total
     ORDER BY ptr.ptres
 DML;
-
+//ver($sql_lista, d);
 ?>
 <html>
     <head>
@@ -445,10 +459,16 @@ DML;
                             <label for="inputUnidade" class="col-lg-2 control-label">Programa:</label>
                             <div class="col-lg-10">
                                 <?php
-                                $sql = "SELECT p.prgcod as codigo, (p.prgcod || ' - ' || p.prgdsc) as descricao
-			FROM monitora.programa p
-			WHERE p.prgano = '" . $_SESSION['exercicio'] . "' ORDER BY prgcod";
-                                $db->monta_combo('prgcod', $sql, 'S', 'Selecione', 'carregaAcao', null, null, 400, 'N', 'prgcod', null, (isset($_POST['prgcod']) ? $_POST['prgcod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+                                    $sql = "
+                                        SELECT
+                                            p.prgcod as codigo,
+                                            (p.prgcod || ' - ' || p.prgdsc) as descricao
+                                        FROM monitora.programa p
+                                        WHERE
+                                            p.prgano = '" . $_SESSION['exercicio'] . "'
+                                        ORDER BY
+                                            prgcod";
+                                    $db->monta_combo('prgcod', $sql, 'S', 'Selecione', 'carregaAcao', null, null, 400, 'N', 'prgcod', null, (isset($_POST['prgcod']) ? $_POST['prgcod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
                                 ?>
                             </div>
                         </div>
@@ -457,12 +477,22 @@ DML;
                             <label for="inputUnidade" class="col-lg-2 control-label">Funcional:</label>
                             <div class="col-lg-10 comboAcao">
                                 <?php
-                                $sql = "SELECT ac.acacod as codigo, (ac.acacod || ' - ' || ac.acadsc) as descricao
- 			FROM monitora.acao ac
- 			WHERE ac.unicod IS NOT NULL AND ac.prgano = '" . $_SESSION['exercicio'] . "' AND ac.acastatus = 'A' AND ac.acasnrap = false
- 			GROUP BY ac.acacod, ac.acadsc
- 			ORDER BY ac.acacod";
-                                $db->monta_combo('acacod', $sql, 'S', 'Selecione', '', null, null, 400, 'N', 'acacod', null, (isset($_POST['acacod']) ? $_POST['acacod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+                                    $sql = "
+                                        SELECT
+                                            ac.acacod as codigo,
+                                            (ac.acacod || ' - ' || ac.acadsc) as descricao
+                                        FROM monitora.acao ac
+                                        WHERE
+                                            ac.unicod IS NOT NULL
+                                            AND ac.prgano = '" . $_SESSION['exercicio'] . "'
+                                            AND ac.acastatus = 'A'
+                                            AND ac.acasnrap = FALSE
+                                        GROUP BY
+                                            ac.acacod,
+                                            ac.acadsc
+                                        ORDER BY
+                                            ac.acacod";
+                                    $db->monta_combo('acacod', $sql, 'S', 'Selecione', '', null, null, 400, 'N', 'acacod', null, (isset($_POST['acacod']) ? $_POST['acacod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
                                 ?>
                             </div>
                         </div>
@@ -484,7 +514,6 @@ DML;
                 "Funcional",
                 "Unidade Solicitante",
                 "Dotação&nbsp;Atual&nbsp; PO (R$)",
-//                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
             ));
         } else {
@@ -493,8 +522,10 @@ DML;
                 "Funcional",
                 "Unidade Solicitante",
                 "Dotação&nbsp;Atual&nbsp; PO (R$)",
-//                '<center>Subação (R$)</center>' => array('Detalhado', 'Não Detalhado'),
-                '<center>Detalhado em PI (R$)</center>' => array('Detalhado', 'Não Detalhado'),
+                '<center>Detalhado em PI (R$)</center>' => array(
+                    'Detalhado',
+                    'Não Detalhado Custeio',
+                    'Não Detalhado Capital'),
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
             ));
         }
@@ -504,7 +535,16 @@ DML;
         $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));
         $listagem->setIdLinha();
         $listagem->addCallbackDeCampo(array(
-            'dotacaoatual', 'det_subacao', 'nao_det_subacao' , 'det_pi', 'nao_det_pi', 'empenhado', 'nao_empenhado', 'saldo'), 'mascaraMoeda');
+            'dotacaoatual',
+            'det_subacao',
+            'nao_det_subacao',
+            'det_pi',
+            'nao_det_pi',
+            'nao_det_pi_custeio',
+            'nao_det_pi_capital',
+            'empenhado',
+            'nao_empenhado',
+            'saldo'), 'mascaraMoeda');
         $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
         $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
         ?>
@@ -590,11 +630,11 @@ DML;
                     var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(6)').text();
                     celDotacaoAtualPo.innerHTML = dotacaoAtualPO;
                     
-                    var vlrDotacaoAtualPo = textToFloat(dotacaoAtualPO);
-                    var vlrAutorizadoCusteioCapitalProvisorio = vlrDotacaoAtualPo / 2;
+                    var vlrAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(3) autorizadocusteio').text());
+                    var vlrAutorizadoCapital = textToFloat($('tr#' + id + ' td:nth-child(3) autorizadocapital').text());
                     
-                    $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-                    $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+                    $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
+                    $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
 
                     var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
                     celDetalhadoPi.style.textAlign = "right";
@@ -607,28 +647,25 @@ DML;
                     var celNaoDetalhadoPi = tabelaorigem.rows[linha].insertCell(4);
                     celNaoDetalhadoPi.style.textAlign = "right";
                     celNaoDetalhadoPi.id = "td_pi_nao_detalhado";
-                    var naoDetalhado = $('tr#' + id + ' td:nth-child(8)').text();
-                    celNaoDetalhadoPi.innerHTML = naoDetalhado;
-                    
-                    $('#piNaoDetalhado').val(naoDetalhado);
-                    
-                    var vlrNaoDetalhado = textToFloat(naoDetalhado);
-                    var vlrDisponivelCusteioCapitalProvisorio = vlrNaoDetalhado / 2;
-                    
-                    $('#td_disponivel_funcional_custeio').text(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-                    $('#td_disponivel_funcional_capital').text(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-                    
-                    $('#VlrFuncionalDisponivelCapital').val(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
-                    $('#VlrFuncionalDisponivelCusteio').val(number_format(vlrDisponivelCusteioCapitalProvisorio.toFixed(2), 2, ',', '.'));
+                    var naoDetalhadoCusteio = $('tr#' + id + ' td:nth-child(8)').text();
+                    var naoDetalhadoCapital = $('tr#' + id + ' td:nth-child(9)').text();
+                    var naoDetalhado = textToFloat(naoDetalhadoCusteio) + textToFloat(naoDetalhadoCapital);
+                    celNaoDetalhadoPi.innerHTML = number_format(naoDetalhado.toFixed(2), 2, ',', '.');
+                    $('#piNaoDetalhado').val(number_format(naoDetalhado.toFixed(2), 2, ',', '.'));
+
+                    $('#td_disponivel_funcional_custeio').text(naoDetalhadoCusteio);
+                    $('#td_disponivel_funcional_capital').text(naoDetalhadoCapital);
+                    $('#VlrFuncionalDisponivelCusteio').val(naoDetalhadoCusteio);
+                    $('#VlrFuncionalDisponivelCapital').val(naoDetalhadoCapital);
 
                     var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
                     CelEmpenhado.style.textAlign = "right";
-                    var empenhado = $('tr#' + id + ' td:nth-child(9)').text();
+                    var empenhado = $('tr#' + id + ' td:nth-child(10)').text();
                     CelEmpenhado.innerHTML = empenhado;
 
                     var celNaoEmpenhado = tabelaorigem.rows[linha].insertCell(6);
                     celNaoEmpenhado.style.textAlign = "right";
-                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(10)').text();
+                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(11)').text();
                     celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="ptrid" value="' +id +'" />';
 
                     var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
@@ -662,8 +699,16 @@ DML;
                     mudarCorValorProjeto();
                     
                     // Valores já gravados na base e separados pra esse PI/Projeto
+                    /**
+                     * @todo verificar se é necessario subtrair pelo valor anterior da funcional 
+                     */
                     $('#vlrPiCusteio').val('');
                     $('#vlrPiCapital').val('');
+                    
+                    $('#ptresCusteio').val(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
+                    $('#ptresCapital').val(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
+                    $('#piNaoDetalhadoCusteio').val(naoDetalhadoCusteio);
+                    $('#piNaoDetalhadoCapital').val(naoDetalhadoCapital);
                     
                     atualizarValorLimiteDisponivelFuncionalCapital();
                     atualizarValorLimiteDisponivelFuncionalCusteio();

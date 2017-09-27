@@ -408,4 +408,15 @@
         mudarCorValoresProjetosFisicoOrcamentarioFinanceiro();
         
         formatarTelaProdutoNaoAplica($('#pprid').val());
+        
+        // Efetua calculos financeiros de limites para o caso de pi por replica de proposta.
+        if(ppiid > 0){
+            atualizarValorDoProjeto();
+            atualizarValorDetalhado();
+            atualizarValorNaoDetalhado();
+            atualizarValorLimiteDisponivelFuncionalCapital();
+            atualizarValorLimiteDisponivelFuncionalCusteio();
+            mudarCorValorProjeto();
+        }
+
     }
