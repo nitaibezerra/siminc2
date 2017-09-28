@@ -144,18 +144,15 @@
     <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
         <div class="row">
 
-<!--            <div class="col-sm-12">
-                <div class="ibox float-e-margins text-right">
-
-                        Impresso por: <?php echo $_SESSION['usunome']; ?>
-                        &nbsp;
-                        Em: <?php echo date('d/m/Y'); ?>
-
-                </div>
-            </div>-->
-
             <div class="col-sm-10">
                 <div class="ibox float-e-margins">
+                    <div class="ibox-heading text-right">
+                        <h7>
+                            Impresso por: <?php echo $_SESSION['usunome']; ?>
+                            <br />
+                            Em: <?php echo date('d/m/Y'); ?>
+                        </h7>
+                    </div>
                     <div class="ibox-title">
                         <h5>Plano Interno</h5>
                     </div>
@@ -182,6 +179,14 @@
                                         </td>
                                         <td align="left">
                                             <span><?php echo $dadosPI['plicod']; ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Estado Atual:</b>
+                                        </td>
+                                        <td align="left">
+                                            <span><?php echo $estadoAtual['esddsc']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -445,7 +450,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td colspan="2">
                                             <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                                 <tr>
                                                     <td style="text-align: left;"><b>Nome</b></td>
@@ -549,7 +554,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
-                                                    <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
+                                                    <td style="text-align: center;" id="td_autorizado_funcional_custeio" >0,00</td>
                                                     <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
                                                 </tr>
                                                 <tr>
@@ -558,12 +563,12 @@
                                                         <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
                                                         <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
                                                     </td>
-                                                    <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+                                                    <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0,00</td>
                                                     <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                                                 </tr>
                                                 <tr>
                                                     <td id="" style="text-align: left;">Valor do Projeto:</td>
-                                                    <td style="text-align: left;">
+                                                    <td style="text-align: center;">
                                                         <?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>
                                                         <input style="display: none;" type="text" id="picvalorcusteio" name="picvalorcusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" class="CampoEstilo normal form-control obrigatorio" />
                                                         <input type="hidden" id="vlrPiCusteio" value="<?php echo !empty($dadosPI['picvalorcusteio']) ? number_format($dadosPI['picvalorcusteio'], 2, ',', '.') : ''; ?>" />
@@ -577,6 +582,9 @@
                                             </table>
                                         </td>
                                     </tr>
+                                </table>
+                                
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always;" class="table table-hover table-bordered table-hover" >
                                     <tr>
                                         <td colspan="2" class="td_titulo_espelho">
                                             <b>Cronogramas</b>
@@ -646,7 +654,7 @@
                                                             }
                                                             
                                                             ?>
-                                                        <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
+                                                        <td class="text-center <?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
                                                                 <?php
                                                                     $pcrid = $pcrvalor = '';
                                                                     if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
@@ -701,24 +709,16 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
-                
-                Impresso por: <?php echo $_SESSION['usunome']; ?>
+            <div class="col-md-2 noprint">
+                <button class="btn btn-primary" type="button" id="btnImprimir">
+                    <i class="fa fa-print"></i>&nbsp;Imprimir
+                </button>                
                 <br />
-                Em: <?php echo date('d/m/Y'); ?>
                 <br />
                 <br />
-                
-                <div id="div_btn_imprimir" class="noprint">
-                    <button class="btn btn-primary" type="button" id="btnImprimir">
-                        <i class="fa fa-print"></i>&nbsp;Imprimir
-                    </button>                
-                    <br />
-                    <br />
-                </div>
-                <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
+                <br />
             </div>
-            
+
         </div>
     </form>
 </div>
