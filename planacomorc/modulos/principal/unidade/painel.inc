@@ -8,15 +8,23 @@ require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 $oPlanoInterno = new Pi_PlanoInterno();
+
+switch ($_REQUEST['req']) {
+    case 'detalhe-subunidade':
+        $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
+        die;
+    case 'detalhe-funcional':
+        $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
+        die;
+}
+
 /**
  * Cabeçalho padrão do simec.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
 
-// @TODO - Retirar ano fico de 2017 e colocar $_SESSION['exercicio'];
-
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
+$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio']);
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -92,6 +100,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
                                 <th colspan="2">Custeio</th>
                                 <th colspan="2">Capital</th>
                                 <th colspan="2">Total</th>
+                                <th rowspan="2">Limite Sub.</th>
                             </tr>
                             <tr class="text-center">
                                 <th>Dotação</th>
@@ -107,7 +116,11 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
                                 $dado = $dados['detalhe'][0];
                                 ?>
                                 <tr class="info">
-                                    <td><?php echo $dado['suonome'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?></td>
+                                    <td>
+                                        <span class="detalhe-subunidade" data-suoid="<?php echo $dado['suoid']; ?>">
+                                            <?php echo $dado['suonome'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?>
+                                        </span>
+                                    </td>
 
                                     <td class="text-right"><?php echo number_format($dados['dotacaoCusteio'], 0, ',', '.'); ?></td>
                                     <?php $disponivel = $dados['dotacaoCusteio'] - $dados['planejadoCusteio']; ?>
@@ -126,10 +139,19 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
                                     <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dados['totalPlanejado'], 0, ',', '.'); ?>
                                     </td>
+
+                                    <?php $disponivel = $dado['lmuvlr'] - $dados['totalPlanejado']; ?>
+                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                        <?php echo number_format($dado['lmuvlr'], 0, ',', '.'); ?>
+                                    </td>
                                 </tr>
                                 <?php foreach($dados['detalhe'] as $dado){ ?>
                                     <tr class="tr_<?php echo $dado['suocod']; ?>">
-                                        <td><?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?></td>
+                                        <td>
+                                            <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
+                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?>
+                                            </span>
+                                        </td>
 
                                         <td class="text-right"><?php echo number_format($dado['ptrdotacao_custeio'], 0, ',', '.'); ?></td>
                                         <?php $disponivel = $dado['ptrdotacao_custeio'] - $dado['picvalorcusteio']; ?>
@@ -148,6 +170,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
                                         <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                             <?php echo number_format(($dado['picvalorcusteio'] + $dado['picvalorcapital']), 0, ',', '.'); ?>
                                         </td>
+                                        <td class="text-center"> - </td>
                                     </tr>
                                 <?php } ?>
                             <?php } ?>
@@ -163,19 +186,21 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(2017, $aFiltro);
 
 <?php
 // -- popup de detalhamento do PI
-bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
+bootstrapPopup("PI's da Subunidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
+bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
 ?>
 
 <script>
     $(document).ready(function(){
 
-        function detalhePI(pliid) {
-            $('#detalhepi .modal-body').empty();
-            $.post("planacomorc.php?modulo=principal/unidade/listapimanter&acao=A&requisicao=detalharPi&pliid=" + pliid, function(html) {
-                $('#detalhepi .modal-body').html(html);
-                $('#detalhepi').modal();
-            });
-        }
-    });
+        $('.detalhe-subunidade').click(function(){
+            $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid=' + $(this).data('suoid'));
+            $('#detalhe-subunidade').modal();
+        });
 
+        $('.detalhe-funcional').click(function(){
+            $('#detalhe-funcional .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-funcional&ptrid=' + $(this).data('ptrid'));
+            $('#detalhe-funcional').modal();
+        });
+    });
 </script>
