@@ -147,7 +147,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
                                 </tr>
                                 <?php foreach($dados['detalhe'] as $dado){ ?>
                                     <tr class="tr_<?php echo $dado['suocod']; ?>">
-                                        <td>
+                                        <td style="padding-left: 30px;">
                                             <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
                                                 <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?>
                                             </span>

@@ -182,23 +182,6 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarExecucaoOrcamentaria($exercicio, $aFiltro = [])
     {
-        $sql = "select e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario, e.planointerno, e.numeroptres, count(*)
-                    , sum(e.autorizado::decimal) autorizado, sum(e.bloqueadoremanejamento::decimal) bloqueadoremanejamento, sum(e.bloqueadosof::decimal) bloqueadosof
-                    , sum(e.creditocontidosof::decimal) creditocontidosof, sum(e.disponivel::decimal) disponivel, sum(e.dotatual::decimal) dotatual
-                    , sum(e.dotinicialsiafi::decimal) dotinicialsiafi, sum(e.dotacaoantecipada::decimal) dotacaoantecipada, sum(e.dotacaoinicial::decimal) dotacaoinicial
-                    , sum(e.empliquidado::decimal) empliquidado, sum(e.empenhadoaliquidar::decimal) empenhadoaliquidar, sum(e.indisponivel::decimal) indisponivel, sum(e.pago::decimal) pago
-                from wssof.ws_execucaoorcamentariadto e
-                where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
-                -- and e.unidadeorcamentaria = '42206'
-                --and e.planointerno = '7CNM0020001'
-                group by e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario, e.planointerno, e.numeroptres
-                order by e.unidadeorcamentaria, e.acao, e.localizador, e.programa, e.planoorcamentario";
-
-        // Carregando dados da base de dados do SIMINC antigo
-        $dados = adapterConnection::oldSiminc()->carregar($sql);
-
         $sql = "select  suo.suoid, suo.unoid, suo.unocod, suo.unonome, suo.suocod, suo.suonome, pli.pliano, ptr.funcional, ptr.acatitulo, ptr.ptrid, lmu.lmuvlr, 
                         sum(pic.picvalorcapital) picvalorcapital, sum(pic.picvalorcusteio) picvalorcusteio, 
                         sum(ptr.ptrdotacao)/2 ptrdotacao_capital, sum(ptr.ptrdotacao)/2 ptrdotacao_custeio
@@ -223,7 +206,7 @@ class Pi_PlanoInterno extends Modelo{
             $dadosAgrupados[$dado['suocod']]['planejadoCapital'] += $dado['picvalorcapital'];
             $dadosAgrupados[$dado['suocod']]['planejadoCusteio'] += $dado['picvalorcusteio'];
             $dadosAgrupados[$dado['suocod']]['totalDotacao'] += ($dadosAgrupados[$dado['suocod']]['dotacaoCapital'] + $dadosAgrupados[$dado['suocod']]['dotacaoCusteio']);
-            $dadosAgrupados[$dado['suocod']]['totalPlanejado'] += ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
+            $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
         }
         
         return $dadosAgrupados;
