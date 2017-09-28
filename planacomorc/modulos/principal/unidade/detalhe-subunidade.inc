@@ -12,7 +12,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
             <div class="ibox-content">
                 <?php if(count($dadosPi)){ ?>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover " >
+                        <table class="table table-bordered table-striped table-hover " >
                             <thead>
                             <tr class="text-center">
                                 <th>Id</th>
@@ -25,18 +25,30 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($dadosPi as $dado){ ?>
+                            <?php
+                            $total['custeio'] = $total['capital'] = 0;
+                            foreach($dadosPi as $dado){
+                                $total['custeio'] += $dado['picvalorcusteio'];
+                                $total['capital'] += $dado['picvalorcapital'];
+                                ?>
                                 <tr>
                                     <td><?php echo $dado['pliid']; ?></td>
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>
                                     <td><?php echo $dado['funcional']; ?></td>
                                     <td><?php echo $dado['eqddsc']; ?></td>
-                                    <td class="text-right"><?php echo number_format2($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format2($dado['picvalorcapital'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
+                            <tfooter>
+                            <tr>
+                                <th colspan="5">TOTAL</th>
+                                <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
+                                <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
+                            </tr>
+                            </tfooter>
                         </table>
                     </div>
                 <?php } else {
