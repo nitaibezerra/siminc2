@@ -149,7 +149,7 @@
                     <div class="ibox-heading">
                         <div class="form-group">
                             <div class="col-sm-4 text-left">
-                                <button class="btn btn-primary" type="button" id="btnImprimir">
+                                <button class="btn btn-primary noprint" type="button" id="btnImprimir">
                                     <i class="fa fa-print"></i>&nbsp;Imprimir
                                 </button>
                             </div>
