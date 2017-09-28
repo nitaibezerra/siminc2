@@ -143,7 +143,7 @@ else
 <?php endif  ?>
 <html>
 	<head>
-		<meta name="description" content="SIMEC - Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
+		<meta name="description" content="<?php echo NOME_SISTEMA; ?>, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
 		<meta name="keywords" content="SIMEC, MEC, PDE, Ministério da Educação, Analistas: ,Cristiano Cabral, Adonias Malosso, Gilberto Xavier">
 		<META NAME="Author" CONTENT="Cristiano Cabral, cristiano.cabral@gmail.com">
 		<meta name="audience" content="all">
@@ -163,7 +163,7 @@ else
 				<br><img src="../imagens/wait.gif" border="0" align="middle"> Aguarde! Carregando Dados...<br><br>
 			</div>
 		</center>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script language="JavaScript" src="../includes/funcoes.js"></script>
         <link href="/library/simec/css/css_reset.css" rel="stylesheet">
         <link href="/library/simec/css/barra_brasil.css" rel="stylesheet">

@@ -103,7 +103,7 @@ $strSQL = "
 ?>
 <html>
     <head>
-        <meta name="description" content="SIMEC - Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
+        <meta name="description" content="<?php echo NOME_SISTEMA; ?>, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
         <meta name="keywords" content="SIMEC, MEC, PDE, Ministério da Educação, Analistas: Cristiano Cabral, Adonias Malosso, Gilberto Xavier">
         <META name="Author" content="Cristiano Cabral, cristiano.cabral@gmail.com">
         <meta name="audience" content="all">

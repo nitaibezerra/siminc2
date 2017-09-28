@@ -165,7 +165,7 @@ $titulo_guia = $titulo_guia ? $titulo_guia : 'PROFE/INEP - Guia de Distribuição'
 					<td width="50" valign="top" rowspan="2">
 						<img width="45" height="45" border="0" src="../imagens/brasao.gif">
 					</td>
-					<td valign="middle" nowrap="" height="1" align="left" style="padding:5px 0 0 0;">			SIMEC - Sistema Integrado de Monitoramento Execução e Controle<br>			MEC / SE - Secretaria Executiva <br>		</td>
+					<td valign="middle" nowrap="" height="1" align="left" style="padding:5px 0 0 0;">			<?php echo NOME_SISTEMA; ?><br>			MEC / SE - Secretaria Executiva <br>		</td>
 					<td valign="middle" height="1" align="right" style="padding:5px 0 0 0;"><a href="javascript: window.print();"><img border="0" height="20px;" src="../imagens/print2.gif"></a><br>			Impresso por: <b><?=$db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf = '".$_SESSION['usucpf']."'")?></b><br>			Hora da Impressão:<?=date('d/m/Y - H:m:i')?><br>		</td>	
 				</tr>
 				<tr>		

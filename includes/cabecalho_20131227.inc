@@ -130,7 +130,7 @@ else{
 			Finalidade: Exibir Cabeçalho com funções gerais do sistema. Permitir o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério
 			Última modificação: 28/08/2006
 		-->
-		<meta name="description" content="SIMEC - Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
+		<meta name="description" content="<?php echo NOME_SISTEMA; ?>, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
 		<meta name="keywords" content="SIMEC, MEC, PDE, Ministério da Educação, Analistas: ,Cristiano Cabral, Adonias Malosso, Gilberto Xavier">
 		<META NAME="Author" CONTENT="Cristiano Cabral, cristiano.cabral@gmail.com">
 		<meta name="audience" content="all">
@@ -144,7 +144,7 @@ else{
 			</div>
 		</center>
 		<?php //ob_flush(); flush(); ?>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		
 		<script language="JavaScript" src="../includes/funcoes.js"></script>
 		 

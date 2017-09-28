@@ -1,4 +1,4 @@
-<?
+<?php
 class RelatorioQuestionarioFederal{
 	private $g;
 	private $q;
@@ -215,7 +215,7 @@ class RelatorioQuestionarioFederal{
 					</td>
 					<td nowrap align="left" valign="top" height="1" style="padding:5px 0 0 0;">
 						<font style="font-size:11px;">
-							SIMEC - Sistema Integrado de Monitoramento Execução e Controle<br/>
+							'. NOME_SISTEMA. '<br/>
 							'.$_SESSION['sisdsc'].'
 						</font>
 					</td>
