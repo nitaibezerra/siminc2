@@ -30,7 +30,7 @@
      */
     function atualizarTitulo(){
         var titulo = $('#maiid :checked').text();
-        if(titulo != ''){
+        if(titulo != '' && titulo != 'Selecione'){
             $('#plititulo').val(titulo);
         }
     }
@@ -42,7 +42,7 @@
      */
     function atualizarDescricao(){
         var descricao = $('#masid :checked').text();
-        if(descricao != ''){
+        if(descricao != '' && descricao != 'Selecione'){
             $('#plidsc').val(descricao);
         }
     }

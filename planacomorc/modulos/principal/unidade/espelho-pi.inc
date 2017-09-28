@@ -140,12 +140,17 @@
             <div class="col-sm-10">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Dados do Planejamento</h5>
+                        <h5>Plano Interno</h5>
                     </div>
                     <div class="ibox-content">
                         <div class="form-group">
                             <div class="col-lg-12">
                                 <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Dados do Planejamento</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>ID do Projeto:</b>
@@ -210,37 +215,11 @@
                                             <span><?php echo $dadosPI['iniciativa_pnc']; ?></span>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-
-                <br />
-                <br />
-                
-                <button class="btn btn-primary" type="button" id="btnImprimir">
-                    <i class="fa fa-print"></i>&nbsp;Imprimir
-                </button>
-                
-                <br />
-                <br />
-                
-                <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Funcional Programática</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Funcional Programática</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>Programa:</b>
@@ -297,22 +276,11 @@
                                             <span><?php echo $dadosPI['ptres']? $dadosPI['ptres']: NULL; ?></span>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>&nbsp;</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>&nbsp;</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>Título:</b>
@@ -348,22 +316,11 @@
                                             <span><?php echo $dadosPI['modalidade_pactuacao']; ?></span>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Forma de Execução</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Forma de Execução</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>Edital:</b>
@@ -380,46 +337,24 @@
                                             <span><?php echo $dadosPI['picted'] == 't'? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Emenda</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Emenda</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
-                                            <b>Edital:</b>
+                                            <b>Emenda:</b>
                                         </td>
                                         <td align="left">
                                             <span><?php echo $dadosPI['pliemenda'] == 't'? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Localização do Projeto</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Localização do Projeto</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <b>Tipo de localização:</b>
@@ -487,22 +422,11 @@
                                         </td>
                                     </tr>
                                     <?php endif; ?>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Responsáveis do Projeto</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Responsáveis do Projeto</b>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <table id="table_responsaveis" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
@@ -521,80 +445,64 @@
                                             </table>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Vinculações Eventuais do Projeto</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
                                     <tr>
-                                        <td>
-                                            <b>Números SNIIC:</b>
-                                        </td>
-                                        <td>
-                                            <b>Número SEI:</b>
-                                        </td>
-                                        <td>
-                                            <b>Número Pronac:</b>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Vinculações Eventuais do Projeto</b>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                                <?php foreach($aSniic as $sniic){ ?>
-                                                    <tr>
-                                                        <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </table>
-                                        </td>
-                                        <td>
-                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                                <?php foreach($aSei as $sei){ ?>
-                                                    <tr>
-                                                        <td style="text-align: left;"><?php echo $sei['psesei']; ?></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </table>
-                                        </td>
-                                        <td>
-                                            <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                                <?php foreach($aPronac as $pronac){ ?>
-                                                    <tr>
-                                                        <td style="text-align: left;"><?php echo $pronac['pprpronac']; ?></td>
-                                                    </tr>
-                                                <?php } ?>
+                                        <td colspan="2">
+                                            <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
+                                                <tr>
+                                                    <td>
+                                                        <b>Números SNIIC:</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Número SEI:</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Número Pronac:</b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                            <?php foreach($aSniic as $sniic){ ?>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><?php echo $sniic['pissniic']; ?></td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </td>
+                                                    <td>
+                                                        <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                            <?php foreach($aSei as $sei){ ?>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><?php echo $sei['psesei']; ?></td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </td>
+                                                    <td>
+                                                        <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                            <?php foreach($aPronac as $pronac){ ?>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><?php echo $pronac['pprpronac']; ?></td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Valores</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
                                     <tr>
-                                        <td>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Valores</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
                                             <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                                 <tr>
                                                     <td style="text-align: left;"></td>
@@ -652,6 +560,294 @@
                                             </table>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: left; background-color: #c0c0c0c0">
+                                            <b>Cronogramas</b>
+                                            <?php
+                                                $sql = "SELECT mescod, mesdsc FROM public.meses ORDER BY mescod";
+                                                $meses = $db->carregar($sql);
+
+                                                $modelPiCronograma =  new Pi_Cronograma();
+
+                                                $piCronogramasAgrupado = [];
+                                                if(!empty($dadosPI['pliid'])){
+                                                    $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
+
+                                                    foreach($aPiCronograma as $piCronograma){
+                                                        $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
+                                                    }
+                                                }
+
+                                                $aCronogramas = $modelPiCronograma->recuperarCronogramas();
+
+                                                $cronogramasAgrupado = [];
+                                                foreach($aCronogramas as $cronograma){
+                                                    $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
+                                                }
+
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
+                                                <tr>
+                                                    <td rowspan="2" style="text-align: center;">
+                                                        <b>Mês</b>
+                                                    </td>
+                                                    <?php 
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
+                                                            <?php if($cronograma == 'Cronograma Físico'): ?>
+                                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
+                                                            <?php endif; ?>
+                                                    <?php
+                                                        $colunaCronograma++;
+                                                        }
+                                                    ?>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <?php
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                                            if($cronograma == 'Cronograma Físico'):
+                                                                foreach($descricaoValores as $cronogramaValor){
+                                                        ?>
+                                                            <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                        <?php
+                                                                    $colunaCronograma++;
+                                                                }
+                                                            endif;
+                                                    }
+                                                    ?>
+                                                </tr>
+                                                <?php foreach($meses as $mes){ ?>
+                                                    <tr style="height: 30px;">
+                                                        <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                                        <?php foreach($aCronogramas as $cronogramaValor){
+                                                            switch($cronogramaValor['croid']){
+                                                                case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
+                                                                case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
+                                                                case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                                default: $class = '';
+                                                            }
+                                                            if($cronogramaValor['croid'] == Cronograma::K_FISICO):
+                                                            ?>
+                                                        <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
+                                                                <?php
+                                                                    $pcrid = $pcrvalor = '';
+                                                                    if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                                        $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                                        $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+
+                                                                        if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                                            $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                                        }
+                                                                    }
+
+                                                                    switch ($cronogramaValor['crvid']) {
+                                                                        case Cronograma::ORCAMENTO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::ORCAMENTO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                    }
+
+                                                                ?>
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                            </td>
+                                                        <?php
+                                                            endif;
+                                                        } ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                <tr style="height: 30px; ">
+                                                    <td style="text-align: left;">Total:</td>
+                                                    <td style="font-weight: bold; text-align: center;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
+                                                </tr>
+                                            </table>
+
+                                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
+                                                <tr>
+                                                    <td rowspan="2" style="text-align: center;">
+                                                        <b>Mês</b>
+                                                    </td>
+                                                    <?php 
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
+                                                            <?php if($cronograma == 'Cronograma Orçamentário'): ?>
+                                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
+                                                            <?php endif; ?>
+                                                    <?php
+                                                        $colunaCronograma++;
+                                                        }
+                                                    ?>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <?php
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                                            if($cronograma == 'Cronograma Orçamentário'):
+                                                                foreach($descricaoValores as $cronogramaValor){
+                                                        ?>
+                                                            <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                        <?php
+                                                                    $colunaCronograma++;
+                                                                }
+                                                            endif;
+                                                    }
+                                                    ?>
+                                                </tr>
+                                                <?php foreach($meses as $mes){ ?>
+                                                    <tr style="height: 30px;">
+                                                        <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                                        <?php foreach($aCronogramas as $cronogramaValor){
+                                                            switch($cronogramaValor['croid']){
+                                                                case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
+                                                                case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
+                                                                case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                                default: $class = '';
+                                                            }
+                                                            if($cronogramaValor['croid'] == Cronograma::K_ORCAMENTARIO):
+                                                            ?>
+                                                        <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
+                                                                <?php
+                                                                    $pcrid = $pcrvalor = '';
+                                                                    if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                                        $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                                        $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+
+                                                                        if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                                            $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                                        }
+                                                                    }
+
+                                                                    switch ($cronogramaValor['crvid']) {
+                                                                        case Cronograma::ORCAMENTO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::ORCAMENTO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                    }
+
+                                                                ?>
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                            </td>
+                                                        <?php
+                                                            endif;
+                                                        } ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                <tr style="height: 30px; ">
+                                                    <td style="text-align: left;">Total:</td>
+                                                    <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio" class="td_cronograma_orcamentario">R$ 0,00</td>
+                                                    <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital" class="td_cronograma_orcamentario">R$ 0,00</td>
+                                                </tr>
+                                            </table>
+
+                                            <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
+                                                <tr>
+                                                    <td rowspan="2" style="text-align: center;">
+                                                        <b>Mês</b>
+                                                    </td>
+                                                    <?php 
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
+                                                            <?php if($cronograma == 'Cronograma Financeiro'): ?>
+                                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
+                                                            <?php endif; ?>
+                                                    <?php
+                                                        $colunaCronograma++;
+                                                        }
+                                                    ?>
+                                                </tr>
+                                                <tr style="height: 30px;">
+                                                    <?php
+                                                        $colunaCronograma = 0;
+                                                        foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
+                                                            if($cronograma == 'Cronograma Financeiro'):
+                                                                foreach($descricaoValores as $cronogramaValor){
+                                                        ?>
+                                                            <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                        <?php
+                                                                    $colunaCronograma++;
+                                                                }
+                                                            endif;
+                                                    }
+                                                    ?>
+                                                </tr>
+                                                <?php foreach($meses as $mes){ ?>
+                                                    <tr style="height: 30px;">
+                                                        <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                                        <?php foreach($aCronogramas as $cronogramaValor){
+                                                            switch($cronogramaValor['croid']){
+                                                                case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
+                                                                case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
+                                                                case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                                default: $class = '';
+                                                            }
+                                                            if($cronogramaValor['croid'] == Cronograma::K_FINANCEIRO):
+                                                            ?>
+                                                        <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
+                                                                <?php
+                                                                    $pcrid = $pcrvalor = '';
+                                                                    if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
+                                                                        $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
+                                                                        $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
+
+                                                                        if($cronogramaValor['croid'] != Cronograma::K_FISICO){
+                                                                            $pcrvalor = number_format($pcrvalor, 2, ',', '.');
+                                                                        }
+                                                                    }
+
+                                                                    switch ($cronogramaValor['crvid']) {
+                                                                        case Cronograma::ORCAMENTO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CUSTEIO:
+                                                                            $class .= ' custeio';
+                                                                        break;
+                                                                        case Cronograma::ORCAMENTO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                        case Cronograma::FINANCEIRO_CAPITAL:
+                                                                            $class .= ' capital';
+                                                                        break;
+                                                                    }
+
+                                                                ?>
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
+                                                                <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                            </td>
+                                                        <?php
+                                                            endif;
+                                                        } ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                <tr style="height: 30px; ">
+                                                    <td style="text-align: left;">Total:</td>
+                                                    <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio" class="td_cronograma_financeiro">R$ 0,00</td>
+                                                    <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital" class="td_cronograma_financeiro">R$ 0,00</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -659,298 +855,15 @@
                 </div>
             </div>
 
-            <div class="col-sm-10">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Cronogramas</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <?php
-                                    $sql = "SELECT mescod, mesdsc FROM public.meses ORDER BY mescod";
-                                    $meses = $db->carregar($sql);
-
-                                    $modelPiCronograma =  new Pi_Cronograma();
-
-                                    $piCronogramasAgrupado = [];
-                                    if(!empty($dadosPI['pliid'])){
-                                        $aPiCronograma = $modelPiCronograma->recuperarTodos('*', array('pliid = ' . $dadosPI['pliid']));
-
-                                        foreach($aPiCronograma as $piCronograma){
-                                            $piCronogramasAgrupado[$piCronograma['mescod']][$piCronograma['crvid']] = $piCronograma;
-                                        }
-                                    }
-
-                                    $aCronogramas = $modelPiCronograma->recuperarCronogramas();
-
-                                    $cronogramasAgrupado = [];
-                                    foreach($aCronogramas as $cronograma){
-                                        $cronogramasAgrupado[$cronograma['crodsc']][] = $cronograma;
-                                    }
-
-                                ?>
-                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
-                                    <tr>
-                                        <td rowspan="2" style="text-align: center;">
-                                            <b>Mês</b>
-                                        </td>
-                                        <?php 
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
-                                                <?php if($cronograma == 'Cronograma Físico'): ?>
-                                                    <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
-                                                <?php endif; ?>
-                                        <?php
-                                            $colunaCronograma++;
-                                            }
-                                        ?>
-                                    </tr>
-                                    <tr style="height: 30px;">
-                                        <?php
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                                if($cronograma == 'Cronograma Físico'):
-                                                    foreach($descricaoValores as $cronogramaValor){
-                                            ?>
-                                                <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
-                                            <?php
-                                                        $colunaCronograma++;
-                                                    }
-                                                endif;
-                                        }
-                                        ?>
-                                    </tr>
-                                    <?php foreach($meses as $mes){ ?>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
-                                            <?php foreach($aCronogramas as $cronogramaValor){
-                                                switch($cronogramaValor['croid']){
-                                                    case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
-                                                    case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
-                                                    case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
-                                                    default: $class = '';
-                                                }
-                                                if($cronogramaValor['croid'] == Cronograma::K_FISICO):
-                                                ?>
-                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
-                                                    <?php
-                                                        $pcrid = $pcrvalor = '';
-                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
-                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
-                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
-
-                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
-                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
-                                                            }
-                                                        }
-                                                        
-                                                        switch ($cronogramaValor['crvid']) {
-                                                            case Cronograma::ORCAMENTO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::ORCAMENTO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                        }
-
-                                                    ?>
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
-                                                </td>
-                                            <?php
-                                                endif;
-                                            } ?>
-                                        </tr>
-                                    <?php } ?>
-                                    <tr style="height: 30px; ">
-                                        <td style="text-align: left;">Total:</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
-                                    </tr>
-                                </table>
-                                
-                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
-                                    <tr>
-                                        <td rowspan="2" style="text-align: center;">
-                                            <b>Mês</b>
-                                        </td>
-                                        <?php 
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
-                                                <?php if($cronograma == 'Cronograma Orçamentário'): ?>
-                                                    <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
-                                                <?php endif; ?>
-                                        <?php
-                                            $colunaCronograma++;
-                                            }
-                                        ?>
-                                    </tr>
-                                    <tr style="height: 30px;">
-                                        <?php
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                                if($cronograma == 'Cronograma Orçamentário'):
-                                                    foreach($descricaoValores as $cronogramaValor){
-                                            ?>
-                                                <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
-                                            <?php
-                                                        $colunaCronograma++;
-                                                    }
-                                                endif;
-                                        }
-                                        ?>
-                                    </tr>
-                                    <?php foreach($meses as $mes){ ?>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
-                                            <?php foreach($aCronogramas as $cronogramaValor){
-                                                switch($cronogramaValor['croid']){
-                                                    case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
-                                                    case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
-                                                    case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
-                                                    default: $class = '';
-                                                }
-                                                if($cronogramaValor['croid'] == Cronograma::K_ORCAMENTARIO):
-                                                ?>
-                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
-                                                    <?php
-                                                        $pcrid = $pcrvalor = '';
-                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
-                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
-                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
-
-                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
-                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
-                                                            }
-                                                        }
-                                                        
-                                                        switch ($cronogramaValor['crvid']) {
-                                                            case Cronograma::ORCAMENTO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::ORCAMENTO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                        }
-
-                                                    ?>
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
-                                                </td>
-                                            <?php
-                                                endif;
-                                            } ?>
-                                        </tr>
-                                    <?php } ?>
-                                    <tr style="height: 30px; ">
-                                        <td style="text-align: left;">Total:</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio" class="td_cronograma_orcamentario">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital" class="td_cronograma_orcamentario">R$ 0,00</td>
-                                    </tr>
-                                </table>
-                                
-                                <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
-                                    <tr>
-                                        <td rowspan="2" style="text-align: center;">
-                                            <b>Mês</b>
-                                        </td>
-                                        <?php 
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){?>
-                                                <?php if($cronograma == 'Cronograma Financeiro'): ?>
-                                                    <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
-                                                <?php endif; ?>
-                                        <?php
-                                            $colunaCronograma++;
-                                            }
-                                        ?>
-                                    </tr>
-                                    <tr style="height: 30px;">
-                                        <?php
-                                            $colunaCronograma = 0;
-                                            foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
-                                                if($cronograma == 'Cronograma Financeiro'):
-                                                    foreach($descricaoValores as $cronogramaValor){
-                                            ?>
-                                                <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
-                                            <?php
-                                                        $colunaCronograma++;
-                                                    }
-                                                endif;
-                                        }
-                                        ?>
-                                    </tr>
-                                    <?php foreach($meses as $mes){ ?>
-                                        <tr style="height: 30px;">
-                                            <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
-                                            <?php foreach($aCronogramas as $cronogramaValor){
-                                                switch($cronogramaValor['croid']){
-                                                    case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
-                                                    case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
-                                                    case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
-                                                    default: $class = '';
-                                                }
-                                                if($cronogramaValor['croid'] == Cronograma::K_FINANCEIRO):
-                                                ?>
-                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
-                                                    <?php
-                                                        $pcrid = $pcrvalor = '';
-                                                        if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
-                                                            $pcrid = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrid'];
-                                                            $pcrvalor = $piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']]['pcrvalor'];
-
-                                                            if($cronogramaValor['croid'] != Cronograma::K_FISICO){
-                                                                $pcrvalor = number_format($pcrvalor, 2, ',', '.');
-                                                            }
-                                                        }
-                                                        
-                                                        switch ($cronogramaValor['crvid']) {
-                                                            case Cronograma::ORCAMENTO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CUSTEIO:
-                                                                $class .= ' custeio';
-                                                            break;
-                                                            case Cronograma::ORCAMENTO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                            case Cronograma::FINANCEIRO_CAPITAL:
-                                                                $class .= ' capital';
-                                                            break;
-                                                        }
-
-                                                    ?>
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
-                                                    <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
-                                                </td>
-                                            <?php
-                                                endif;
-                                            } ?>
-                                        </tr>
-                                    <?php } ?>
-                                    <tr style="height: 30px; ">
-                                        <td style="text-align: left;">Total:</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio" class="td_cronograma_financeiro">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital" class="td_cronograma_financeiro">R$ 0,00</td>
-                                    </tr>
-                                </table>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-2">
+                <br />
+                <br />
+                <button class="btn btn-primary" type="button" id="btnImprimir">
+                    <i class="fa fa-print"></i>&nbsp;Imprimir
+                </button>                
+                <br />
+                <br />
+                <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
             </div>
             
         </div>

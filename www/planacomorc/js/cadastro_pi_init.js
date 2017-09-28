@@ -417,6 +417,9 @@
             atualizarValorLimiteDisponivelFuncionalCapital();
             atualizarValorLimiteDisponivelFuncionalCusteio();
             mudarCorValorProjeto();
+            
+            atualizarTitulo();
+            atualizarDescricao();
         }
 
     }
