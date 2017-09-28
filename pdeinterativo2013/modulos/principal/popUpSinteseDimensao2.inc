@@ -7,7 +7,7 @@ if( !$_SESSION['pdeinterativo2013_vars']['pdeid'] ){
 ?>
 <html>
 	<head>
-		<title>SIMEC - Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 		<link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>

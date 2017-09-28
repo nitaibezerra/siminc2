@@ -17,7 +17,7 @@ $arrTheme = array ( 'ameliaa' , 'cerulean' , 'cosmo' , 'cyborg' , 'flatly' , 'jo
 
 <html>
     <head>
-        <title>SIMEC - Sistema Integrado de Monitoramento Execução e Controle</title>
+        <title><?php echo NOME_SISTEMA; ?></title>
         <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

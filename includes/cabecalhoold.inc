@@ -48,7 +48,7 @@ $sql = "";
 <DIV id="aguarde" style="background-color:#ffffff;position:absolute;color:#000033;top:50%;left:30%;border:2px solid #cccccc; width:300;font-size:12px;"><br><img src="../imagens/wait.gif" border="0" align="middle"> Aguarde! Carregando Dados...<br><br></DIV>
 </center>
 <?flush();?>
-<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+<title><?php echo NOME_SISTEMA; ?></title>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
 <link rel='stylesheet' type='text/css' href='../includes/listagem.css'>

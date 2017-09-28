@@ -1,4 +1,9 @@
 <?php
+
+    define('SIGLA_SISTEMA', 'SIMINC2');
+    define('DESCRICAO_SISTEMA', 'Sistema Integrado do Ministério da Cultura');
+    define('NOME_SISTEMA', SIGLA_SISTEMA. ' - '. DESCRICAO_SISTEMA);
+
     global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
 
     /**

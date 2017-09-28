@@ -487,7 +487,7 @@ if($entidades) {
 	$PDF->SetX(2.5);
 	$PDF->Cell(6,0,'MEC - Ministério da Educação',0,'P');
 	$PDF->SetX(2.5);
-	$PDF->Cell(6,0.5,'SIMEC - Sistema Integrado de Monitoramento Execução e Controle',0,'P');
+	$PDF->Cell(6,0.5,NOME_SISTEMA,0,'P');
 	$PDF->SetX(2.5);
 	$PDF->Cell(6,1,'PDDE EDUCAÇÃO INTEGRAL',0,'P');
 	

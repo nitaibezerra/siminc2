@@ -14,7 +14,7 @@ include_once APPRAIZ . "includes/classes_simec.inc";
 
 <html>
 	<head>
-		<title>SIMEC - Sistema Integrado de Monitoramento Execução e Controle do Ministério da Educação, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas</title>
+		<title><?php echo NOME_SISTEMA; ?>, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas</title>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 		<link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>
