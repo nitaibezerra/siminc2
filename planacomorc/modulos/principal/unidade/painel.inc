@@ -59,39 +59,11 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
                 </div>
                 <div class="ibox-content">
                     <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento(2017);
+                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
                     $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setColors("'#FFD700', '#55BF3B', '#FF6A6A'")->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                     ?>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>Valores Autorizados por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>PI's por Unidade</h5>
-            	</div>
-            	<div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPiUnidade(2017);
-                    $grafico->setTipo(Grafico::K_TIPO_PIZZA)->gerarGrafico($estatistica);
-                    ?>
-            	</div>
             </div>
         </div>
 
