@@ -56,6 +56,11 @@
 //ver($dadosPI['ungcod'],d);
 
 ?>
+<style>
+    .input_fisico, .input_orcamentario, .input_financeiro {
+        display: none;
+    }
+</style>
 
 <script src="js/cadastro_pi_funcoes.js"></script>
 <!--
@@ -663,6 +668,7 @@
                                                                 ?>
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                                <?php echo $pcrvalor; ?>
                                                             </td>
                                                         <?php
                                                             endif;
@@ -748,6 +754,7 @@
                                                                 ?>
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                                <?php echo $pcrvalor; ?>
                                                             </td>
                                                         <?php
                                                             endif;
@@ -834,6 +841,7 @@
                                                                 ?>
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrid]" value="<?php echo $pcrid; ?>" type="hidden">
                                                                 <input name="cronograma[<?php echo $mes['mescod']; ?>][<?php echo $cronogramaValor['crvid']; ?>][pcrvalor]" value="<?php echo $pcrvalor; ?>" class="CampoEstilo normal form-control obrigatorio <?php echo $class ?>" type="text">
+                                                                <?php echo $pcrvalor; ?>
                                                             </td>
                                                         <?php
                                                             endif;
@@ -856,13 +864,15 @@
             </div>
 
             <div class="col-md-2">
-                <br />
-                <br />
-                <button class="btn btn-primary" type="button" id="btnImprimir">
-                    <i class="fa fa-print"></i>&nbsp;Imprimir
-                </button>                
-                <br />
-                <br />
+                <div id="div_btn_imprimir" class="noprint">
+                    <br />
+                    <br />
+                    <button class="btn btn-primary" type="button" id="btnImprimir">
+                        <i class="fa fa-print"></i>&nbsp;Imprimir
+                    </button>                
+                    <br />
+                    <br />
+                </div>
                 <?php wf_desenhaBarraNavegacao($dadosPI['docid'], array('pliid' => $dadosPI['pliid'])); ?>
             </div>
             
