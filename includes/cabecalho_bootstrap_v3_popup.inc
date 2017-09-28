@@ -155,7 +155,7 @@ $navBar = $_COOKIE['navbar']=='false' ? 'mini-navbar' : null;
         <div class="loading-dialog" id="loading"></div>
         
         <div id="wrapper">
-            <div id="page-wrapper" class="gray-bg">
+            <div id="page-wrapper" class="gray-bg" style="margin-left: 0;">
                 <div class="row border-bottom">
                     <nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
                         <div class="navbar-left">
