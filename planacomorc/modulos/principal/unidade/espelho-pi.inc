@@ -144,14 +144,23 @@
     <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
         <div class="row">
 
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-heading text-right">
-                        <h7>
-                            Impresso por: <?php echo $_SESSION['usunome']; ?>
-                            <br />
-                            Em: <?php echo date('d/m/Y'); ?>
-                        </h7>
+                    <div class="ibox-heading">
+                        <div class="form-group">
+                            <div class="col-sm-4 text-left">
+                                <button class="btn btn-primary" type="button" id="btnImprimir">
+                                    <i class="fa fa-print"></i>&nbsp;Imprimir
+                                </button>
+                            </div>
+                            <div class="col-sm-8 text-right">
+                                <h7>
+                                    Impresso por: <?php echo $_SESSION['usunome']; ?>
+                                    <br />
+                                    Em: <?php echo date('d/m/Y'); ?>
+                                </h7>
+                            </div>
+                        </div>
                     </div>
                     <div class="ibox-title">
                         <h5>Plano Interno</h5>
@@ -708,17 +717,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2 noprint">
-                <button class="btn btn-primary" type="button" id="btnImprimir">
-                    <i class="fa fa-print"></i>&nbsp;Imprimir
-                </button>                
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
-
         </div>
     </form>
 </div>
