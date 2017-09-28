@@ -22,6 +22,7 @@ $dado = count($dados) ? current($dados) : [];
                                 <th>Enquadramento</th>
                                 <th>Custeio</th>
                                 <th>Capital</th>
+                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,7 @@ $dado = count($dados) ? current($dados) : [];
                                     <td><?php echo $dado['eqddsc']; ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format(($dado['picvalorcusteio'] + $dado['picvalorcapital']), 0, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -47,6 +49,7 @@ $dado = count($dados) ? current($dados) : [];
                                     <th colspan="5">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>
                                 </tr>
                             </tfooter>
                         </table>
