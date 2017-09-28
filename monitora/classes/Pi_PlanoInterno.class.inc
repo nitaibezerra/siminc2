@@ -1,7 +1,11 @@
 <?php
 	
 class Pi_PlanoInterno extends Modelo{
-	
+
+    const K_TIPO_DETALHE_PTRES      = 'PT';
+    const K_TIPO_DETALHE_PI         = 'PI';
+    const K_TIPO_DETALHE_DELEGADO   = 'DL';
+
     /**
      * Nome da tabela especificada
      * @var string
@@ -195,7 +199,34 @@ class Pi_PlanoInterno extends Modelo{
         // Carregando dados da base de dados do SIMINC antigo
         $dados = adapterConnection::oldSiminc()->carregar($sql);
 
-        return $dados ? $dados : [];
+        $sql = "select  suo.suoid, suo.unoid, suo.unocod, suo.unonome, suo.suocod, suo.suonome, pli.pliano, ptr.funcional, ptr.acatitulo, ptr.ptrid, lmu.lmuvlr, 
+                        sum(pic.picvalorcapital) picvalorcapital, sum(pic.picvalorcusteio) picvalorcusteio, 
+                        sum(ptr.ptrdotacao)/2 ptrdotacao_capital, sum(ptr.ptrdotacao)/2 ptrdotacao_custeio
+                from monitora.pi_planointerno pli
+                    inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                    inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                    inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
+                    inner join monitora.vw_ptres ptr on ptr.ptrid = pip.ptrid
+                    left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = pli.ungcod and lmu.lmustatus = 'A' and lmu.prsano = pli.pliano      
+                where pli.pliano = '$exercicio'      
+                group by suo.suoid, suo.unoid, suo.unocod, suo.unonome, suo.suocod, suo.suonome, pli.pliano, ptr.funcional, ptr.acatitulo, ptr.ptrid, lmu.lmuvlr
+                order by suo.unonome, suo.suonome, ptr.funcional
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+        $dadosAgrupados = [];
+        foreach ($dados as $dado){
+            $dadosAgrupados[$dado['suocod']]['detalhe'][] = $dado;
+            $dadosAgrupados[$dado['suocod']]['dotacaoCapital'] += $dado['ptrdotacao_capital'];
+            $dadosAgrupados[$dado['suocod']]['dotacaoCusteio'] += $dado['ptrdotacao_custeio'];
+            $dadosAgrupados[$dado['suocod']]['planejadoCapital'] += $dado['picvalorcapital'];
+            $dadosAgrupados[$dado['suocod']]['planejadoCusteio'] += $dado['picvalorcusteio'];
+            $dadosAgrupados[$dado['suocod']]['totalDotacao'] += ($dadosAgrupados[$dado['suocod']]['dotacaoCapital'] + $dadosAgrupados[$dado['suocod']]['dotacaoCusteio']);
+            $dadosAgrupados[$dado['suocod']]['totalPlanejado'] += ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
+        }
+        
+        return $dadosAgrupados;
     }
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
@@ -449,6 +480,56 @@ class Pi_PlanoInterno extends Modelo{
 
 //        ver($sql);
         
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
+    public function getCorPainelPorValorDisponivel($valorDisponivel)
+    {
+        if($valorDisponivel > 0) return 'blue';
+
+        if($valorDisponivel < 0) return 'red';
+
+        return 'green';
+    }
+
+    public function recuperarPiPorSubunidade($suoid)
+    {
+        $dadosPi = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_PI);
+        $dadosDelegado = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_DELEGADO);
+
+        include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-subunidade.inc';
+    }
+
+    public function recuperarPiPorFuncional($ptrid)
+    {
+        $dados = $this->recuperarDadosDetalhe($ptrid, self::K_TIPO_DETALHE_PTRES);
+
+        include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
+    }
+
+    public function recuperarDadosDetalhe($id, $tipo)
+    {
+        $where = '';
+        switch ($tipo){
+            case self::K_TIPO_DETALHE_PTRES:    $where = " and ptr.ptrid = '$id'"; break;
+            case self::K_TIPO_DETALHE_PI:       $where = " and suo.suoid = '$id'"; break;
+            case self::K_TIPO_DETALHE_DELEGADO: $where = " and pde.suoid = '$id'"; break;
+        }
+
+        $sql = "select  distinct pli.pliid, pli.plititulo, pli.plicod, pli.pliemenda, pic.picted, pic.picedital, pic.picvalorcapital, pic.picvalorcusteio, 
+                        suo.suocod, suo.suonome, suo.unocod, suo.unonome, suo.unosigla, ptr.funcional, ptr.acatitulo, ptr.ptrdotacao, eqd.eqddsc
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        left join planacomorc.pi_delegacao pde on pde.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                        inner join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                        inner join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid and ptr.ptrano = pli.pliano
+                        left join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
+                where pli.plistatus = 'A'        
+                $where
+                ";
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
