@@ -119,10 +119,36 @@ function DownloadArquivoInfo($arqid){
 
     <!-- Add Media helper (this is optional) -->
     <script type="text/javascript" src="library/fancybox-2.1.5/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+    <style>
+
+        .panel-login{
+            margin-top: 50px;
+        }
+
+        .panel-login hr{
+            margin-bottom: 0;
+        }
+
+        .panel-body{
+            padding-bottom: 10px;
+        }
+
+        .panel-login input.form-control{
+            height: 50px;
+        }
+
+        .panel-login input.form-control{
+            height: 50px;
+        }
+
+
+
+    </style>
+
 </head>
 
 <body class="page-index">
-   <?php require_once 'navegacao.php'; ?>
 
     <!-- Login -->
     <section id="login" class="login">
@@ -138,9 +164,9 @@ function DownloadArquivoInfo($arqid){
 			<?php $_SESSION['MSG_AVISO'] = array(); ?>
 		
 			<div class="col-md-4 col-md-offset-4">
-				<div class="panel panel-default">
+				<div class="panel-login">
 					<div class="panel-heading">
-						<span class="glyphicon glyphicon-lock"></span> Login
+                        <img src="estrutura/temas/default/img/logo-siminc2.png" class="img-responsive" width="200">
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal" role="form" method="post" action="">
@@ -167,21 +193,22 @@ function DownloadArquivoInfo($arqid){
 									<input type="password" class="form-control" name="ususenha" id="ususenha" placeHolder="Senha" required="">
 								</div>
 							</div>
-							<div class="form-group" style="font-size: 14px;">
-								<div class="col-sm-7">
-									<i class="fa fa-key"></i> <a href="recupera_senha.php" style="color: #c8c5c5">Esqueci minha senha?</a>
+							<div class="form-group" style="font-size: 16px;">
+								<div class="col-sm-7" style="margin-top: 3px">
+									<i class="fa fa-key"></i> <a href="recupera_senha.php" style="color: #fff">Esqueci minha senha?</a>
 								</div>
 								<div class="col-sm-5 text-right">
-									<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Acessar</button>
+									<button style="background-color: #1da589; border-color: #1da589;" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Acessar</button>
 								</div>
 							</div>
 						</form>
+                           <hr>
 					</div>
-					<div class="panel-footer text-center" style="font-size: 14px;">
+					<div class=" text-center" style="font-size: 14px;">
 					   <div class="btn-group">
 							Não tem acesso ainda?&nbsp;
 							<i class="fa fa-user"></i> 
-							<a href="cadastrar_usuario.php" id="btn-cadastro" style="color: #c8c5c5">Solicitar acesso</a>
+							<a href="cadastrar_usuario.php" id="btn-cadastro" style="color: #fff">Solicitar acesso</a>
 						</div>
 					</div>
 				</div>
