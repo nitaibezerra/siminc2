@@ -111,7 +111,6 @@ if ($_REQUEST['usucpf'] && $_REQUEST['modulo'] && $_REQUEST['varaux'] == '1') {
 </head>
 
 <body class="page-index">
-    <?php require_once 'navegacao.php'; ?>
 
 	<?php if( strlen($mensagens) > 5 ) : ?>
 		<div class="error_msg"><? echo (($mensagens)?$mensagens:""); ?></div>

@@ -122,6 +122,10 @@ function DownloadArquivoInfo($arqid){
 
     <style>
 
+        body{
+            height: auto;
+        }
+
         .panel-login{
             margin-top: 50px;
         }
@@ -193,7 +197,7 @@ function DownloadArquivoInfo($arqid){
 									<input type="password" class="form-control" name="ususenha" id="ususenha" placeHolder="Senha" required="">
 								</div>
 							</div>
-							<div class="form-group" style="font-size: 16px;">
+							<div class="form-group" style="font-size: 14px;">
 								<div class="col-sm-7" style="margin-top: 3px">
 									<i class="fa fa-key"></i> <a href="recupera_senha.php" style="color: #fff">Esqueci minha senha?</a>
 								</div>

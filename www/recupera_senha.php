@@ -151,8 +151,7 @@
     <script type="text/javascript" src="library/fancybox-2.1.5/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 </head>
 <body class="page-index">
-    <?php require_once 'navegacao.php'; ?>
-    
+
 	<?php if ( $_SESSION['MSG_AVISO'] ): ?>
 		<div class="col-md-4 col-md-offset-4">
 			<div class="alert alert-danger" style="font-size: 14px; line-height: 20px;">

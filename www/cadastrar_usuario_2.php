@@ -707,7 +707,6 @@ font {
 }
 </style>
 <body class="page-index">
-	<?php require_once 'navegacao.php'; ?>
 
 	<!-- Login -->
     <section id="register" class="register" style="padding-top: 10px">
