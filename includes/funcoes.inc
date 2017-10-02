@@ -5190,7 +5190,8 @@ function montaMenuBootstrap($menus = array()) {
 	$arrayIcons = array(
 		'Relatórios' => 'fa fa-line-chart',
 		'Principal' => 'fa fa-th-large',
-		'Sistema' => 'fa fa-gears'
+		'Sistema' => 'fa fa-user-circle',
+		'Apoio' => 'fa fa-gears'
 	);
 
 	foreach ($menus as $nivel1) {
