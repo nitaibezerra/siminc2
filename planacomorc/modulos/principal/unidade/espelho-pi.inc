@@ -163,7 +163,16 @@
                         </div>
                     </div>
                     <div class="ibox-title">
-                        <h5>Plano Interno</h5>
+                        <h5>Plano Interno
+                        <?php if($dadosPI['plicod']): ?>
+                            <span style="color: red; padding: 5px;" id="span-plicod">(<?php echo $dadosPI['plicod']; ?>)</span>
+                        <?php else: ?>
+                            <span style="padding: 5px;" id="span-plicod">(<?php echo $dadosPI['pliid']; ?>)</span>
+                        <?php endif; ?>
+                        <?php if($estadoAtual['esddsc']): ?>
+                            <span style="padding: 5px;" id="span-plicod"><?php echo $estadoAtual['esddsc']; ?></span>
+                        <?php endif; ?>
+                        </h5>
                     </div>
                     <div class="ibox-content">
                         <div class="form-group">
@@ -188,14 +197,6 @@
                                         </td>
                                         <td align="left">
                                             <span><?php echo $dadosPI['plicod']; ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Estado Atual:</b>
-                                        </td>
-                                        <td align="left">
-                                            <span><?php echo $estadoAtual['esddsc']; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -527,6 +528,9 @@
                                             </table>
                                         </td>
                                     </tr>
+                                </table>
+                                
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always;" class="table table-hover table-bordered table-hover" >
                                     <tr>
                                         <td colspan="2" class="td_titulo_espelho">
                                             <b>Valores</b>
@@ -591,9 +595,6 @@
                                             </table>
                                         </td>
                                     </tr>
-                                </table>
-                                
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always;" class="table table-hover table-bordered table-hover" >
                                     <tr>
                                         <td colspan="2" class="td_titulo_espelho">
                                             <b>Cronogramas</b>
