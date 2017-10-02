@@ -98,23 +98,28 @@
          * @todo Refatorar esse código de validação da parte Custeio e Capital dividindo em funções.
          */
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        var disponivelFuncional = buscarValorDisponivelFuncional();
-        var valorDoProjeto = buscarValorDoProjeto();
+        var disponivelFuncionalCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
+        var disponivelFuncionalCapital = textToFloat($('#td_disponivel_funcional_capital').text());
 
-        if(valorDoProjeto > disponivelUnidade || valorDoProjeto > disponivelFuncional){
+        if(disponivelUnidade < 0){
             $('#picvalorcusteio').addClass('validateRedText');
             $('#picvalorcapital').addClass('validateRedText');
-            $('#td_valor_projeto').addClass('validateRedText');
-            if(valorDoProjeto > disponivelUnidade){
+            if(disponivelUnidade < 0){
                 addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
             }
-            if(valorDoProjeto > disponivelFuncional){
-                addMsgCustom.push('Valor do projeto superior ao limite disponível da Funcional');
+        } else if(disponivelFuncionalCusteio < 0 || disponivelFuncionalCapital < 0) {
+            if(disponivelFuncionalCusteio < 0){
+                $('#picvalorcusteio').addClass('validateRedText');
+                addMsgCustom.push('Valor de Custeio do projeto superior ao limite disponível da Funcional');
+            }
+            
+            if(disponivelFuncionalCapital < 0){
+                $('#picvalorcapital').addClass('validateRedText');
+                addMsgCustom.push('Valor de Capital do projeto superior ao limite disponível da Funcional');
             }
         } else {
             $('#picvalorcusteio').removeClass('validateRedText');
             $('#picvalorcapital').removeClass('validateRedText');
-            $('#td_valor_projeto').removeClass('validateRedText');
         }
 
         // Verifica se o usuário escolheu um enquadramento que é do tipo formulario reduzido para verificar a validação do cronograma físico.
