@@ -54,6 +54,7 @@
         $('#eqdid').change(function(){
             mudarFormularioFinalistico($(this).val());
             mudarFormularioNaoOrcamentario($(this).val());
+            carregarManutencaoItem($(this).val());
         });
 
         // Evento ao carregar a tela
@@ -75,11 +76,6 @@
         // Evento ao mudar opção de Área Cultural
         $('#mdeid').change(function(){
             carregarSegmentoCultural($(this).val());
-        });
-
-        // Evento ao mudar opção de Manutenção Item
-        $('#eqdid').change(function(){
-            carregarManutencaoItem($(this).val());
         });
 
         // Evento ao mudar opção de Manutenção SubItem
