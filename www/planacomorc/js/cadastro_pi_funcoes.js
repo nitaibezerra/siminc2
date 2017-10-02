@@ -1084,9 +1084,16 @@
      * @returns VOID
      */
     function exibirOpcoesItemManutencao(){
+        var manutencaoItem = $('#maiid :checked').text();
+//        var descricao = $('#masid :checked').text();
+        
         if($('#maiid option').not('option[value=""]').size() > 0){
             $('.grupo_manutencao').show('slow');
             // Desabilita a opção de modificar os campos de Título e Descrição.
+            if($('#pliid').val() == ""){
+                $('[name=plititulo]').val('');
+                $('[name=plidsc]').val('');
+            }
             $('[name=plititulo]').attr('readonly', 'readonly');
             $('[name=plidsc]').attr('readonly', 'readonly');
         } else {

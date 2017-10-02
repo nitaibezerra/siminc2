@@ -804,7 +804,7 @@ DML;
                                     <div class="col-lg-9">
                                         <input type="text" placeholder="Digite um número e clique em adicionar." value="" class="CampoEstilo normal inteiro form-control" title="Número de Convênio" id="input_convenio"  maxlength="10" name="input_convenio" />
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-3">
                                         <input type="button"  id="btn_selecionar_convenio" value="Adicionar" class="btn btn-info" style="width: 100%;"/>
                                     </div>
                                 </div>

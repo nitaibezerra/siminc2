@@ -373,7 +373,7 @@ function carregarSegmentoCultural($mdeid, $neeid) {
         ORDER BY
             descricao
     ";
-    $db->monta_combo('neeid', $sql, 'S', 'Selecione', 'atualizarPrevisaoPI', null, null, null, 'N', 'neeid', null, (isset($neeid) ? $neeid : null), null, 'class="form-control chosen-select" style="width=100%;"');
+    $db->monta_combo('neeid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'neeid', null, (isset($neeid) ? $neeid : null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
 /**
