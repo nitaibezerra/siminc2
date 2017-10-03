@@ -240,21 +240,22 @@ class Pi_PlanoInterno extends Modelo{
                 order by ordem, descricao, categoria
                 ";
 
-        $sql = "select distinct 2 ordem, 'Limite' as descricao, suo.suosigla categoria, suo.unosigla, coalesce(lmu.lmuvlr, 0)::decimal valor
+        $sql = "select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
                 where suo.prsano = '$exercicio'
                 and suo.unofundo = false
+                group by ordem, descricao, categoria
                 union all
-                select distinct 3 ordem, 'Planejado' as descricao, suo.suosigla categoria, suo.unosigla, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
+                select distinct 3 ordem, 'Planejado' as descricao, suo.unosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
                          left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 where suo.prsano = '$exercicio'
                 and suo.unofundo = false
-                group by ordem, descricao, categoria, suo.unosigla
+                group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Empenhado' as descricao, suo.suosigla categoria, suo.unosigla, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
+                select distinct 4 ordem, 'Empenhado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -262,9 +263,9 @@ class Pi_PlanoInterno extends Modelo{
                          left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 and suo.unofundo = false
-                group by ordem, descricao, categoria, suo.unosigla
+                group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Pago' as descricao, suo.suosigla categoria, suo.unosigla, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                select distinct 4 ordem, 'Pago' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -272,9 +273,9 @@ class Pi_PlanoInterno extends Modelo{
                          left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 and suo.unofundo = false
-                group by ordem, descricao, categoria, suo.unosigla
+                group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Liquidado' as descricao, suo.suosigla categoria, suo.unosigla, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                select distinct 4 ordem, 'Liquidado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -282,9 +283,9 @@ class Pi_PlanoInterno extends Modelo{
                          left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 and suo.unofundo = false
-                group by ordem, descricao, categoria, suo.unosigla
+                group by ordem, descricao, categoria
                 
-                order by ordem, unosigla, categoria
+                order by ordem, categoria
                 ";
 
         $dados = $this->carregar($sql);
