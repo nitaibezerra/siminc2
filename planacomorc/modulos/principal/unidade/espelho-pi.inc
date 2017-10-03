@@ -57,7 +57,7 @@
     .input_fisico, .input_orcamentario, .input_financeiro {
         display: none;
     }
-    .td_titulo_espelho {
+    .titulo_espelho {
         text-align: center;
         background-color: #c0c0c0c0 !important;
     }
@@ -178,8 +178,8 @@
                         <div class="form-group">
                             <div class="col-lg-12">
                                 <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid" class="table table-hover table-bordered table-hover" >
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Dados do Planejamento</b>
                                         </td>
                                     </tr>
@@ -247,8 +247,8 @@
                                             <span><?php echo $dadosPI['iniciativa_pnc']; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Funcional Programática</b>
                                         </td>
                                     </tr>
@@ -308,8 +308,8 @@
                                             <span><?php echo $dadosPI['ptres']? $dadosPI['ptres']: NULL; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>&nbsp;</b>
                                         </td>
                                     </tr>
@@ -348,8 +348,8 @@
                                             <span><?php echo $dadosPI['modalidade_pactuacao']; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Forma de Execução</b>
                                         </td>
                                     </tr>
@@ -369,8 +369,8 @@
                                             <span><?php echo $dadosPI['picted'] == 't'? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Emenda</b>
                                         </td>
                                     </tr>
@@ -382,8 +382,8 @@
                                             <span><?php echo $dadosPI['pliemenda'] == 't'? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Localização do Projeto</b>
                                         </td>
                                     </tr>
@@ -454,8 +454,8 @@
                                         </td>
                                     </tr>
                                     <?php endif; ?>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Responsáveis do Projeto</b>
                                         </td>
                                     </tr>
@@ -477,8 +477,8 @@
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Vinculações Eventuais do Projeto</b>
                                         </td>
                                     </tr>
@@ -531,8 +531,8 @@
                                 </table>
                                 
                                 <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always;" class="table table-hover table-bordered table-hover" >
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Valores</b>
                                         </td>
                                     </tr>
@@ -562,7 +562,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;"></td>
-                                                    <td style="text-align: left;"><b>Custeio </b></td>
+                                                    <td style="text-align: center;"><b>Custeio </b></td>
                                                     <td style="text-align: center;"><b>Capital</b></td>
                                                 </tr>
                                                 <tr>
@@ -595,8 +595,8 @@
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" class="td_titulo_espelho">
+                                    <tr class="titulo_espelho">
+                                        <td colspan="2">
                                             <b>Cronogramas</b>
                                             <?php
                                                 $sql = "SELECT mescod, mesdsc FROM public.meses ORDER BY mescod";

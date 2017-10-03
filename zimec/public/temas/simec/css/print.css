@@ -1,9 +1,10 @@
-/*CSS para impressão*/
+/*CSS para impressao*/
 @media print {
     body {
         margin: 0px 0px 0px 0px;
         padding: -20px;
         font-size: 8px !important;
+        line-height: 13px;
     }
     .wrapper {
         margin-top: 0px;
@@ -25,19 +26,39 @@
         display: none;
     }
     
-    /*
-        Espaçamento das células das tabelas.
-    */
+
     .table > tfoot > tr > td {
         padding: 3px;
+        border: 0 !important;
+        border-bottom: 1px solid #c0c0c0 !important;
     }
     .table > thead > tr > td {
         padding: 3px;
+        border: 0 !important;
+        /*border-bottom: 1px solid #c0c0c0 !important;*/
     }
     .table > tbody > tr > td {
         padding: 3px;
+        border: 0 !important;
+        border-bottom: 1px solid #c0c0c0 !important;
     }
     .table > tr > td {
         padding: 3px;
+        border: 0 !important;
+        border-bottom: 1px solid #c0c0c0 !important;
+    }
+    tr.titulo_espelho {
+        border: 0 !important;
+    }
+    tr.titulo_espelho td {
+        border: 0 !important;
+        font-weight: lighter;
+        box-shadow: inset 0 0 0 1000px #c0c0c0 !important;
+    }
+    tr.titulo_espelho td b {
+        color: #000 !important;
+        font-weight: lighter;
+        font-size: 12px;
     }
 }
+
