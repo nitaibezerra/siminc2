@@ -310,7 +310,7 @@
                                     </tr>
                                     <tr class="titulo_espelho">
                                         <td colspan="2">
-                                            <b>&nbsp;</b>
+                                            <b>Dados do Plano Interno</b>
                                         </td>
                                     </tr>
                                     <tr>
