@@ -182,19 +182,58 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarExecucaoOrcamentaria($exercicio, $aFiltro = [])
     {
-        $sql = "select  suo.suoid, suo.unoid, suo.unocod, suo.unonome, suo.suocod, suo.suonome, pli.pliano, ptr.funcional, ptr.acatitulo, ptr.ptrid, lmu.lmuvlr, 
-                        sum(pic.picvalorcapital) picvalorcapital, sum(pic.picvalorcusteio) picvalorcusteio, 
-                        sum(ptr.ptrdotacao)/2 ptrdotacao_capital, sum(ptr.ptrdotacao)/2 ptrdotacao_custeio
-                from monitora.pi_planointerno pli
-                    inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                    inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
-                    inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
-                    inner join monitora.vw_ptres ptr on ptr.ptrid = pip.ptrid
-                    left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = pli.ungcod and lmu.lmustatus = 'A' and lmu.prsano = pli.pliano      
-                where pli.pliano = '$exercicio'      
-                group by suo.suoid, suo.unoid, suo.unocod, suo.unonome, suo.suocod, suo.suonome, pli.pliano, ptr.funcional, ptr.acatitulo, ptr.ptrid, lmu.lmuvlr
-                order by suo.unonome, suo.suonome, ptr.funcional
-                ";
+        $sql = "
+            SELECT
+                suo.suoid,
+                suo.unoid,
+                suo.unocod,
+                suo.unosigla,
+                suo.unonome,
+                suo.suosigla,
+                suo.suocod,
+                suo.suonome,
+                pli.pliano,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.ptrid,
+                lmu.lmuvlr,
+                sum(pic.picvalorcapital) picvalorcapital,
+                sum(pic.picvalorcusteio) picvalorcusteio,
+                sum(ptr.ptrdotacao) / 2 ptrdotacao_capital,
+                sum(ptr.ptrdotacao) / 2 ptrdotacao_custeio
+            FROM monitora.pi_planointerno pli
+                JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
+                JOIN public.vw_subunidadeorcamentaria suo ON(
+                    suo.suocod = pli.ungcod
+                    AND suo.unocod = pli.unicod
+                    AND suo.prsano = pli.pliano)
+                JOIN monitora.pi_planointernoptres pip ON pip.pliid = pli.pliid
+                JOIN monitora.vw_ptres ptr ON ptr.ptrid = pip.ptrid
+                LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
+                    lmu.ungcod = pli.ungcod
+                    AND lmu.lmustatus = 'A'
+                    AND lmu.prsano = pli.pliano)
+            WHERE
+                pli.pliano = '". (int)$exercicio. "'
+            GROUP BY
+                suo.suoid,
+                suo.unoid,
+                suo.unocod,
+                suo.unosigla,
+                suo.unonome,
+                suo.suocod,
+                suo.suonome,
+                suo.suosigla,
+                pli.pliano,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.ptrid,
+                lmu.lmuvlr
+            ORDER BY
+                suo.unonome,
+                suo.suonome,
+                ptr.funcional
+        ";
 
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
