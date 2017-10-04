@@ -37,7 +37,8 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
     }
     
     .primary {
-        background-color: #e7eaec;
+        /*background-color: #e7eaec;*/
+        background-color: #f5f5f6;
     }
 </style>
 
