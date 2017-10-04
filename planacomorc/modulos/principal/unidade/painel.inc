@@ -83,7 +83,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
                             <thead>
                             <tr class="text-center">
                                 <th rowspan="2">
-                                    <i class="fa fa-plus detalhar-todos"></i>&nbsp;&nbsp;Subunidade
+                                    <i class="fa fa-plus detalhar-todos link"></i>&nbsp;&nbsp;Subunidade
                                 </th>
                                 <th colspan="2">Custeio</th>
                                 <th colspan="2">Capital</th>
@@ -105,7 +105,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
                                 ?>
                                 <tr class="primary">
                                     <td>
-                                        <i class="fa fa-plus detalhar-linha" data-suoid="<?php echo $dado['suoid']; ?>"></i>&nbsp;&nbsp;
+                                        <i class="fa fa-plus detalhar-linha link" data-suoid="<?php echo $dado['suoid']; ?>"></i>&nbsp;&nbsp;
                                         <span class="detalhe-subunidade" data-suoid="<?php echo $dado['suoid']; ?>">
                                             <?php echo $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?>
                                         </span>
