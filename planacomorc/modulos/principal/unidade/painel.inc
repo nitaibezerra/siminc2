@@ -36,9 +36,8 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
         cursor: help;
     }
     
-    .primary {
-        /*background-color: #e7eaec;*/
-        background-color: #f5f5f6;
+    .primary, table thead tr th {
+        background-color: #e7eaec !important;
     }
 </style>
 
