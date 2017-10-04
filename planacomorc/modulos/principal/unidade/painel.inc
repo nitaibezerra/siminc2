@@ -35,6 +35,10 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
     .title-disponivel{
         cursor: help;
     }
+    
+    .primary {
+        background-color: #e7eaec;
+    }
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -78,7 +82,9 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($_SESSION['exercicio
                         <table class="table table-bordered table-hover " >
                             <thead>
                             <tr class="text-center">
-                                <th rowspan="2"><i class="fa fa-plus detalhar-todos"></i>&nbsp;&nbsp;Subunidade</th>
+                                <th rowspan="2">
+                                    <i class="fa fa-plus detalhar-todos"></i>&nbsp;&nbsp;Subunidade
+                                </th>
                                 <th colspan="2">Custeio</th>
                                 <th colspan="2">Capital</th>
                                 <th colspan="2">Total</th>
