@@ -48,7 +48,7 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-        <h2>Painel de Acompanhamento</h2>
+        <h2>Painel de Acompanhamento FNC</h2>
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
