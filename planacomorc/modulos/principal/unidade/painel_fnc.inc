@@ -24,10 +24,9 @@ switch ($_REQUEST['req']) {
  */
 include APPRAIZ . "includes/cabecalho.inc";
 
-
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
     "pli.pliano = '". $_SESSION['exercicio']. "'",
-    "suo.unocod != '". UNIDADEORCAMENTARIA_SUOCOD_FNC."'"
+    'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC
 ));
 
 ?>
@@ -48,11 +47,11 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-        <h2>Painel de Acompanhamento</h2>
+        <h2>Painel de Acompanhamento FNC</h2>
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>
+            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel&acao=A"><i class="fa fa-area-chart"></i> Painel </a>
             <div class="btn-group">
                 <button data-toggle="dropdown" class="btn btn-danger dropdown-toggle">
                     <i class="fa fa-list"></i> Lista de PI <span class="caret"></span>
@@ -80,26 +79,26 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+<!--        <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Valores por Unidades</h5>
                 </div>
                 <div class="ibox-content">
                     <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
-                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+//                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
+//                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+//                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                     ?>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div class="col-md-12">
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Acompanhamento de Plano Interno</h5>
+                    <h5>Acompanhamento de Plano Interno FNC</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">

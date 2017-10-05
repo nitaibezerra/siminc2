@@ -3161,3 +3161,13 @@ HTML;
     }
     return sprintf($template, $cor, $texto);
 }
+
+function exibirLinkEspelho($pliid){
+    $strIcone = "";
+    if($pliid){
+        $strIcone = "<a href='#' title='Exibir detalhes do Plano Interno(Espelho)' class='a_espelho' data-pi='". (int)$pliid. "'>". (int) $pliid. "</a>";
+    }
+
+    return $strIcone;
+}
+

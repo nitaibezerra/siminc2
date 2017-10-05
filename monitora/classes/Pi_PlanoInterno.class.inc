@@ -179,9 +179,19 @@ class Pi_PlanoInterno extends Modelo{
 
         return $dadosPI;
     }
-
-    public function recuperarExecucaoOrcamentaria($exercicio, $aFiltro = [])
+    
+    /**
+     * Busca lista de PI.
+     * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
+     * 
+     * @param integer $exercicio
+     * @param array $aFiltro
+     * @return array
+     */
+    public function recuperarExecucaoOrcamentaria($aFiltro = [])
     {
+        $where = $this->montarFiltros($aFiltro);
+
         $sql = "
             SELECT
                 suo.suoid,
@@ -214,7 +224,7 @@ class Pi_PlanoInterno extends Modelo{
                     AND lmu.lmustatus = 'A'
                     AND lmu.prsano = pli.pliano)
             WHERE
-                pli.pliano = '". (int)$exercicio. "'
+                {$where}
             GROUP BY
                 suo.suoid,
                 suo.unoid,
@@ -234,7 +244,7 @@ class Pi_PlanoInterno extends Modelo{
                 suo.suonome,
                 ptr.funcional
         ";
-
+//ver($sql,d);
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];
