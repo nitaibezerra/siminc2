@@ -179,17 +179,18 @@ class Pi_PlanoInterno extends Modelo{
 
         return $dadosPI;
     }
-    
+
     /**
      * Busca lista de PI.
      * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
-     * 
+     *
      * @param integer $exercicio
      * @param array $aFiltro
      * @return array
      */
     public function recuperarExecucaoOrcamentaria($aFiltro = [])
     {
+        $aFiltro[] = "suo.suostatus = 'A'";
         $where = $this->montarFiltros($aFiltro);
 
         $sql = "
@@ -211,19 +212,14 @@ class Pi_PlanoInterno extends Modelo{
                 sum(pic.picvalorcusteio) picvalorcusteio,
                 sum(ptr.ptrdotacao) / 2 ptrdotacao_capital,
                 sum(ptr.ptrdotacao) / 2 ptrdotacao_custeio
-            FROM monitora.pi_planointerno pli
-                JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
-                JOIN public.vw_subunidadeorcamentaria suo ON(
-                    suo.suocod = pli.ungcod
-                    AND suo.unocod = pli.unicod
-                    AND suo.prsano = pli.pliano)
-                JOIN monitora.pi_planointernoptres pip ON pip.pliid = pli.pliid
-                JOIN monitora.vw_ptres ptr ON ptr.ptrid = pip.ptrid
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
-                    lmu.ungcod = pli.ungcod
-                    AND lmu.lmustatus = 'A'
-                    AND lmu.prsano = pli.pliano)
-            WHERE
+            from public.vw_subunidadeorcamentaria suo
+                inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid
+                left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid
+                left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod and lmu.lmustatus = 'A' and lmu.prsano = suo.prsano
+            where 
                 {$where}
             GROUP BY
                 suo.suoid,
@@ -244,7 +240,7 @@ class Pi_PlanoInterno extends Modelo{
                 suo.suonome,
                 ptr.funcional
         ";
-//ver($sql,d);
+
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];
@@ -263,32 +259,6 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
     {
-        $sql = "select 1 ordem, 'Autorizado' as descricao, uno.unosigla categoria, sum(e.autorizado::decimal) valor
-                from wssof.ws_execucaoorcamentariadto e
-                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
-                where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
-                group by uno.unosigla
-                union all
-                select 2, 'Pago', uno.unosigla, sum(e.pago::decimal) pago
-                from wssof.ws_execucaoorcamentariadto e
-                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
-                where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
-                group by uno.unosigla
-                union all
-                select 3, 'A Liquidar', uno.unosigla, sum(e.empenhadoaliquidar::decimal)
-                from wssof.ws_execucaoorcamentariadto e
-                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
-                where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
-                group by uno.unosigla                
-                order by ordem, descricao, categoria
-                ";
-
         $sql = "select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
