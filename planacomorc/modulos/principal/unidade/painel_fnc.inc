@@ -26,7 +26,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
     "pli.pliano = '". $_SESSION['exercicio']. "'",
-    'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC
+    'suo.unofundo = TRUE'
 ));
 
 ?>
@@ -40,18 +40,19 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
         cursor: help;
     }
     
-    .primary, table thead tr th {
-        background-color: #e7eaec !important;
+    .linha_subunidade {
+        background-color: rgba(241, 246, 215, 0.3) !important;
+        font-weight: bold;
     }
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
-        <h2>Painel de Acompanhamento FNC</h2>
+        <h2>Painel de Acompanhamento</h2>
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel&acao=A"><i class="fa fa-area-chart"></i> Painel </a>
+            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>
             <div class="btn-group">
                 <button data-toggle="dropdown" class="btn btn-danger dropdown-toggle">
                     <i class="fa fa-list"></i> Lista de PI <span class="caret"></span>
@@ -86,9 +87,9 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
                 </div>
                 <div class="ibox-content">
                     <?php
-//                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
-//                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-//                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
+                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                     ?>
                 </div>
             </div>
@@ -98,36 +99,36 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Acompanhamento de Plano Interno FNC</h5>
+                    <h5>Acompanhamento de Plano Interno</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover " >
+                        <table class="table table-bordered table-hover" >
                             <thead>
                             <tr class="text-center">
-                                <th rowspan="2">
+                                <th rowspan="2" style="border-right: 1px black solid;">
                                     <i class="fa fa-plus detalhar-todos link"></i>&nbsp;&nbsp;Subunidade
                                 </th>
-                                <th colspan="2">Custeio</th>
-                                <th colspan="2">Capital</th>
-                                <th colspan="2">Total</th>
-                                <th rowspan="2">Limite Sub.</th>
+                                <th colspan="2" style="border-right: 1px black solid;">Custeio</th>
+                                <th colspan="2" style="border-right: 1px black solid;">Capital</th>
+                                <th colspan="2" style="border-right: 1px black solid;">Total</th>
+                                <th rowspan="2" style="border-right: 1px black solid;">Limite</th>
                             </tr>
                             <tr class="text-center">
                                 <th>Dotação</th>
-                                <th>Planejado</th>
+                                <th style="border-right: 1px black solid;">Planejado</th>
                                 <th>Dotação</th>
-                                <th>Planejado</th>
+                                <th style="border-right: 1px black solid;">Planejado</th>
                                 <th>Dotação</th>
-                                <th>Planejado</th>
+                                <th style="border-right: 1px black solid;">Planejado</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($aPropostas as $dados){
                                 $dado = $dados['detalhe'][0];
                                 ?>
-                                <tr class="primary">
-                                    <td>
+                                <tr class="linha_subunidade">
+                                    <td style="border-right: 1px black solid;">
                                         <i class="fa fa-plus detalhar-linha link" data-suoid="<?php echo $dado['suoid']; ?>"></i>&nbsp;&nbsp;
                                         <span class="detalhe-subunidade" data-suoid="<?php echo $dado['suoid']; ?>">
                                             <?php echo $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?>
@@ -136,30 +137,30 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
                                     <td class="text-right"><?php echo number_format($dados['dotacaoCusteio'], 0, ',', '.'); ?></td>
                                     <?php $disponivel = $dados['dotacaoCusteio'] - $dados['planejadoCusteio']; ?>
-                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dados['planejadoCusteio'], 0, ',', '.'); ?>
                                     </td>
 
                                     <td class="text-right"><?php echo number_format($dados['dotacaoCapital'], 0, ',', '.'); ?></td>
                                     <?php $disponivel = $dados['dotacaoCapital'] - $dados['planejadoCapital']; ?>
-                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dados['planejadoCapital'], 0, ',', '.'); ?>
                                     </td>
 
                                     <td class="text-right"><?php echo number_format($dados['totalDotacao'], 0, ',', '.'); ?></td>
                                     <?php $disponivel = $dados['totalDotacao'] - $dados['totalPlanejado']; ?>
-                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dados['totalPlanejado'], 0, ',', '.'); ?>
                                     </td>
 
                                     <?php $disponivel = $dado['lmuvlr'] - $dados['totalPlanejado']; ?>
-                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dado['lmuvlr'], 0, ',', '.'); ?>
                                     </td>
                                 </tr>
                                 <?php foreach($dados['detalhe'] as $dado){ ?>
                                     <tr class="tr_<?php echo $dado['suoid']; ?> tr_detalhe" style="display: none;">
-                                        <td style="padding-left: 30px;">
+                                        <td style="padding-left: 30px; border-right: 1px black solid;" >
                                             <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
                                                 <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?>
                                             </span>
@@ -167,22 +168,22 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
                                         <td class="text-right"><?php echo number_format($dado['ptrdotacao_custeio'], 0, ',', '.'); ?></td>
                                         <?php $disponivel = $dado['ptrdotacao_custeio'] - $dado['picvalorcusteio']; ?>
-                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                             <?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?>
                                         </td>
 
                                         <td class="text-right"><?php echo number_format($dado['ptrdotacao_capital'], 0, ',', '.'); ?></td>
                                         <?php $disponivel = $dado['ptrdotacao_capital'] - $dado['picvalorcapital']; ?>
-                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                             <?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?>
                                         </td>
 
                                         <td class="text-right"><?php echo number_format(($dado['ptrdotacao_custeio'] + $dado['ptrdotacao_capital']), 0, ',', '.'); ?></td>
                                         <?php $disponivel = ($dado['ptrdotacao_custeio'] + $dado['ptrdotacao_capital']) - ($dado['picvalorcusteio'] + $dado['picvalorcapital']); ?>
-                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
+                                        <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                             <?php echo number_format(($dado['picvalorcusteio'] + $dado['picvalorcapital']), 0, ',', '.'); ?>
                                         </td>
-                                        <td class="text-center"> - </td>
+                                        <td class="text-center" style="border-right: 1px black solid;"> - </td>
                                     </tr>
                                 <?php } ?>
                             <?php } ?>
