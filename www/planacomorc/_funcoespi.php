@@ -222,7 +222,7 @@ SQL;
 /**
  * Monta a combo de UGs filtrando por UO
  */
-function carregarComboUG($unicod, $editavel = 'S') {
+function carregarComboUG($unicod, $editavel = 'S', $fnc = 'FALSE') {
     global $db;
 
     if (in_array(PFL_SUBUNIDADE, pegaPerfilGeral($_SESSION['usucpf']))) {
@@ -240,19 +240,22 @@ DML;
     }
 
     $sql = <<<DML
-            SELECT
+            SELECT DISTINCT
                 suo.suocod AS codigo,
                 suo.suocod || ' - ' || suonome AS descricao
             FROM public.vw_subunidadeorcamentaria suo
-            WHERE suo.suostatus = 'A'
-            and suo.prsano = '{$_SESSION['exercicio']}'
-            AND suo.unocod = '%s' 
-            {$filtroPerfilUG}
-            ORDER BY suo.suonome;
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.prsano = '{$_SESSION['exercicio']}'
+                AND suo.unocod = '%s' 
+                AND suo.unofundo = {$fnc}
+                {$filtroPerfilUG}
+            ORDER BY
+                descricao
 DML;
 
     $stmt = sprintf($sql, $unicod);
-    
+//ver($stmt, d);
     $dados = $db->carregar($stmt);
     if (count($dados) && $dados[0]) {
         $infoCombo = 'Selecione';
@@ -260,8 +263,7 @@ DML;
         $dados = array();
         $infoCombo = 'Selecione uma unidade';
     }
-    //$db->monta_combo('unicod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'S', 'unicod', false);
-//    $db->monta_combo('ungcod', $dados, 'S', $infoCombo, 'carregarSubacao', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
+
     $db->monta_combo('ungcod', $dados, $editavel, $infoCombo, '', null, null, 240, 'N', 'ungcod', null, (isset($ungcod) ? $ungcod : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
 }
 

@@ -352,12 +352,19 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     }
                                 }
 
-                                $sql = "SELECT uni.unocod AS codigo, uni.unocod || ' - ' || unonome AS descricao
-                                        FROM public.unidadeorcamentaria uni
-                                        WHERE uni.prsano = '{$_SESSION['exercicio']}'
-                                        AND uni.unostatus = 'A'
+                                $sql = "
+                                    SELECT DISTINCT
+                                        suo.unocod AS codigo,
+                                        suo.unocod || ' - ' || suo.unonome AS descricao
+                                    FROM public.vw_subunidadeorcamentaria suo
+                                    WHERE
+                                        suo.prsano = '{$_SESSION['exercicio']}'
+                                        AND suo.suostatus = 'A'
+                                        AND suo.unofundo = FALSE
                                         $wherePerfilUO
-                                        order by unonome";
+                                    ORDER BY
+                                        descricao
+                                ";
 
                                 $editavelUg = ($dadosPI['unicod'] && $dadosPI['pliid']) ? 'N' : 'S';
 
@@ -1483,6 +1490,10 @@ DML;
 
     // Permissão para Editar
     podeEditar = '<?php echo $podeEditar; ?>';
+    
+    fnc = false;
+    
+    urlPagina = '?modulo=principal/unidade/cadastro_pi&acao=A';
     
     ppiid = '<?php echo isset($_REQUEST['replicarProposta'])? $_REQUEST['replicarProposta']: 0; ?>';
 

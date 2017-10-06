@@ -995,7 +995,7 @@
      * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
      */
     function carregarUG(unicod) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarComboUG=ok&unicod=' + unicod, function(response) {
+        $.post(urlPagina+ '&carregarComboUG=ok&unicod='+ unicod+ '&fnc='+ (fnc? 'TRUE': 'FALSE'), function(response) {
             $('#ungcod').remove('slow');
             $('.div_ungcod').html(response);
             $(".chosen-select").chosen();
@@ -1006,7 +1006,7 @@
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
     function carregarMetasPPA(oppid, mppid, suocod) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetasPPA=ok&oppid=' + oppid + '&suocod=' + suocod, function(response) {
+        $.post(urlPagina+ '&carregarMetasPPA=ok&oppid=' + oppid + '&suocod=' + suocod, function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
             $(".chosen-select").chosen();
@@ -1018,7 +1018,7 @@
      */
     function carregarLimitesUnidade(codigo) {
         $.ajax({
-            url: '?modulo=principal/unidade/cadastro_pi&acao=A&carregarLimitesUnidade=ok',
+            url: urlPagina+ '&carregarLimitesUnidade=ok',
             type: "post",
             data: {'ungcod': codigo},
             dataType: 'json',
@@ -1036,7 +1036,7 @@
      * Carrega novo conteúdo para o select de metas PNC via requisição ajax.
      */
     function carregarMetaPNC(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarMetaPNC=ok&suocod=' + codigo, function(response) {
+        $.post(urlPagina+ '&carregarMetaPNC=ok&suocod=' + codigo, function(response) {
             $('#mpnid').remove();
             $('.div_mpnid').html(response);
             $(".chosen-select").chosen();
@@ -1047,7 +1047,7 @@
      * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
      */
     function carregarIndicadorPNC(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
+        $.post(urlPagina+ '&carregarIndicadorPNC=ok&mpnid=' + codigo, function(response) {
             $('#ipnid').remove();
             $('.div_ipnid').html(response);
             $(".chosen-select").chosen();
@@ -1058,7 +1058,7 @@
      * Carrega novo conteúdo para o select de Segmento Cultural via requisição ajax.
      */
     function carregarSegmentoCultural(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
+        $.post(urlPagina+ '&carregarSegmentoCultural=ok&mdeid=' + codigo, function(response) {
             $('#neeid').remove();
             $('.div_neeid').html(response);
             $(".chosen-select").chosen();
@@ -1069,7 +1069,7 @@
      * Carrega novo conteúdo para o select de Manutenção Item via requisição ajax.
      */
     function carregarManutencaoItem(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoItem=ok&eqdid=' + codigo + '&maiid=' + intMaiid, function(response) {
+        $.post(urlPagina+ '&carregarManutencaoItem=ok&eqdid=' + codigo + '&maiid=' + intMaiid, function(response) {
             $('#maiid').remove();
             $('#masid option').not('option[value=""]').remove();
             $('#masid').val('').trigger("chosen:updated");
@@ -1148,7 +1148,7 @@
      * Carrega novo conteúdo para o select de Manutenção SubItem via requisição ajax.
      */
     function carregarManutencaoSubItem(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarManutencaoSubItem=ok&maiid=' + codigo, function(response) {
+        $.post(urlPagina+ '&carregarManutencaoSubItem=ok&maiid=' + codigo, function(response) {
             $('#masid').remove();
             $('.div_masid').html(response);
             $(".chosen-select").chosen();
@@ -1159,7 +1159,7 @@
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
     function carregarIniciativaPPA(codigo) {
-        $.post('?modulo=principal/unidade/cadastro_pi&acao=A&carregarIniciativaPPA=ok&oppid=' + codigo, function(response) {
+        $.post(urlPagina+ '&carregarIniciativaPPA=ok&oppid=' + codigo, function(response) {
             $('#ippid').remove();
             $('.div_ippid').html(response);
             $(".chosen-select").chosen();

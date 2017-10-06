@@ -47,7 +47,7 @@ if($_REQUEST['uploadAnexo']){
 }
 
 if ($_REQUEST['carregarComboUG']) {
-    echo carregarComboUG($_REQUEST['unicod']);
+    echo carregarComboUG($_REQUEST['unicod'], null, $_REQUEST['fnc']);
     die();
 }
 if ($_REQUEST['carregarMetasPPA']) {
@@ -352,15 +352,20 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     }
                                 }
 
-                                $sql = "SELECT uni.unocod AS codigo, uni.unocod || ' - ' || unonome AS descricao
-                                        FROM public.unidadeorcamentaria uni
-                                        WHERE uni.prsano = '{$_SESSION['exercicio']}'
-                                        AND uni.unostatus = 'A'
+                                $sql = "
+                                    SELECT DISTINCT
+                                        suo.unocod AS codigo,
+                                        suo.unocod || ' - ' || suo.unonome AS descricao
+                                    FROM public.vw_subunidadeorcamentaria suo
+                                    WHERE
+                                        suo.prsano = '{$_SESSION['exercicio']}'
+                                        AND suo.suostatus = 'A'
+                                        AND suo.unofundo = TRUE
                                         $wherePerfilUO
-                                        order by unonome";
-
+                                    ORDER BY
+                                        descricao
+                                ";
                                 $editavelUg = ($dadosPI['unicod'] && $dadosPI['pliid']) ? 'N' : 'S';
-
                                 $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($dadosPI['unicod']) ? $dadosPI['unicod'] : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                 ?>
                             </div>
@@ -372,7 +377,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-lg-9 div_ungcod">
                                 <?php
                                 $ungcod = $dadosPI['ungcod'];
-                                carregarComboUG($dadosPI['unicod'], $editavelUg);
+                                carregarComboUG($dadosPI['unicod'], $editavelUg, 'TRUE');
                                 ?>
                             </div>
                         </div>
@@ -1484,7 +1489,11 @@ DML;
     // Permissão para Editar
     podeEditar = '<?php echo $podeEditar; ?>';
     
+    fnc = true;
+    
     ppiid = '<?php echo isset($_REQUEST['replicarProposta'])? $_REQUEST['replicarProposta']: 0; ?>';
+
+    urlPagina = '?modulo=principal/unidade/cadastro_pi_fnc&acao=A';
 
     $(document).ready(function() {
 

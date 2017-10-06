@@ -360,7 +360,7 @@
 
         // Evento ao alterar o valor do código do PI
         $('#plicod').change(function(){
-            $('#span-plicod').load('?modulo=principal/unidade/cadastro_pi&acao=A&alterarCodigoPi=ok&pliid='+$('#pliid').val() + '&plicod=' + $('#plicod').val());
+            $('#span-plicod').load(urlPagina+ '&alterarCodigoPi=ok&pliid='+$('#pliid').val() + '&plicod=' + $('#plicod').val());
         });
 
         // Evento ao mudar sair do campo de código do PI
@@ -372,7 +372,7 @@
         $('#capid').change(function(){
 
             $.ajax({
-                url: '?modulo=principal/unidade/cadastro_pi&acao=A&verificarPactuacaoConvenio=ok&capid='+$('#capid').val(),
+                url: urlPagina+ '&verificarPactuacaoConvenio=ok&capid='+$('#capid').val(),
                 success: function($retorno){
                     if($retorno){
                         $('#div_siconv').show('slow');
