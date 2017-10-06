@@ -128,6 +128,9 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         if($filtro->unicod){
             $where = "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
         }
+        if($filtro->unofundo){
+            $where = "\n                AND suo.unofundo = ". $filtro->unofundo;
+        }
         
         $sql = "
             SELECT

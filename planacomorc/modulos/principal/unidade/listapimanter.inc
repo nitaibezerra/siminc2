@@ -90,6 +90,7 @@
                             }
                             echo '<div id=div_ungcod >';
                             echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                                'unofundo' => 'FALSE',
                                 'exercicio' => $_SESSION['exercicio'],
                                 'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
                             echo '</div>';
