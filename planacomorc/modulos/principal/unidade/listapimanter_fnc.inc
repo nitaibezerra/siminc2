@@ -111,7 +111,7 @@
                                 <button class="btn btn-primary btn-buscar" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Buscar
                                 </button>
-                                <button class="btn btn-success btn-novo" type="button">
+                                <button class="btn btn-success btn-novo-fnc" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     Novo
                                 </button>
@@ -148,7 +148,7 @@
 //            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
 //            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
             ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
-            ->addAcao('edit', 'alterarPi')
+            ->addAcao('edit', 'alterarPiFnc')
 //            ->setAcaoComoCondicional('edit', array(
 //                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
 //                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')

@@ -24,6 +24,10 @@
             window.document.location.href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
         });
         
+        $('.btn-novo-fnc').click(function(){
+            window.document.location.href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A';
+        });
+        
         $('.a_listar_delegadas').click(function(){
             var pliid = $(this).attr('data-pi');
             abrirPopupDelegadas(pliid);
@@ -77,6 +81,11 @@
     function alterarPi(pliid)
     {
         window.location.assign('planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=' + pliid);
+    }
+    
+    function alterarPiFnc(pliid)
+    {
+        window.location.assign('planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A&pliid=' + pliid);
     }
 
     function removerPi(pliid)
