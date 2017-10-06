@@ -107,6 +107,8 @@ class Spo_Model_Planointerno extends Modelo
         $where .= $filtros->esddsc? "\n AND ed.esddsc ILIKE('%". pg_escape_string($filtros->esddsc). "%') ": NULL;
         # Emenda.
         $where .= $filtros->pliemenda? "\n AND pli.pliemenda = '". pg_escape_string($filtros->pliemenda). "' ": NULL;
+        # FNC
+        $where .= $filtros->unofundo? "\n AND suo.unofundo = ". $filtros->unofundo: NULL;
 //ver($where);
         return $where;
     }

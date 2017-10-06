@@ -96,23 +96,21 @@ class Spo_Model_Unidade extends Modelo
         return self::$obrigatorias;
     }
 
-    public static function queryCombo($obrigatorias = false, $whereUO = '')
+    public static function queryCombo(stdClass $filtro)
     {
-        if ($obrigatorias) {
-            $obrigatorias = ' AND uni.unicod NOT IN(' . self::getObrigatorias(true) . ')';
-        } else {
-            $obrigatorias = '';
-        }
-
+        $filtro->unostatus = 'A';
+        $where = self::montarFiltros((array)$filtro);
+        
         $sql = "
-            SELECT uni.unicod AS codigo,
-                uni.unicod || ' - ' || unidsc AS descricao
-            FROM public.unidade uni
-            WHERE (uni.orgcod = '". CODIGO_ORGAO_SISTEMA. "' OR uni.unicod IN('74902', '73107'))
-                AND uni.unistatus = 'A'
-                {$whereUO}
-                {$obrigatorias}
-            ORDER BY uni.unicod";
+            SELECT DISTINCT
+                suo.unocod AS codigo,
+                suo.unocod || ' - ' || unonome AS descricao
+            FROM vw_subunidadeorcamentaria suo
+            WHERE
+                {$where}
+            ORDER BY
+                codigo
+        ";
 //ver($sql,d);
         return $sql;
     }

@@ -624,7 +624,7 @@ class Modelo extends cls_banco {
         if($where){
             $filtros = "\n WHERE";
         }
-        $listaFiltros = $this->montarListaFiltros($aFiltro);
+        $listaFiltros = self::montarListaFiltros($aFiltro);
         $filtros .= join("\n AND ", $listaFiltros);
         
         return $filtros;

@@ -84,7 +84,9 @@
                             echo $simec->input('plicod', 'Código do PI', $filtropi['plicod'], ['maxlength' => 11]);
                             # Se o usuário tiver Sub-Unidades vinculadas ao seu perfil o sistema não mostra opção de selecionar UO.
                             if (!$listaSubUnidadeUsuario) {
-                                echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo(true), array('multiple' => 'true'));
+                                echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
+                                    'suo.unofundo = FALSE')), array('multiple' => 'true'));
                             }
                             echo '<div id=div_ungcod >';
                             echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
@@ -128,6 +130,7 @@
         # Lista de PIs
         $filtropi['exercicio'] = $_SESSION['exercicio'];
         $filtropi['usucpf'] = $_SESSION['usucpf'];
+        $filtropi['unofundo'] = 'FALSE';
         $list = new Simec_Listagem();
         $list->setQuery(Spo_Model_Planointerno::listar((object) $filtropi))
             ->turnOnPesquisator()
