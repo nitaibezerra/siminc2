@@ -11,8 +11,14 @@
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_REQUEST;
     
+    $sqlListaUO = Spo_Model_Unidade::queryCombo((object)array(
+        'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
+        'suo.unofundo = TRUE'));
+
+    $listaUO = $db->carregar($sqlListaUO);
+    
     # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));    
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
     
     if($requisicao) {
         switch ($requisicao) {
@@ -83,10 +89,8 @@
                         <?php
                             echo $simec->input('plicod', 'Código do PI', $filtropi['plicod'], ['maxlength' => 11]);
                             # Se o usuário tiver Sub-Unidades vinculadas ao seu perfil o sistema não mostra opção de selecionar UO.
-                            if (!$listaSubUnidadeUsuario) {
-                                echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
-                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
-                                    'suo.unofundo = TRUE')), array('multiple' => 'true'));
+                            if(!$listaSubUnidadeUsuario) {
+                                echo $simec->select('unicod', 'Unidade', current($listaUO), $sqlListaUO, array('multiple' => 'true'));
                             }
                             echo '<div id=div_ungcod >';
                             echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
