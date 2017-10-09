@@ -148,8 +148,8 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
                                         <?php echo number_format($dados['planejadoCapital'], 0, ',', '.'); ?>
                                     </td>
 
-                                    <td class="text-right"><?php echo number_format($dados['totalDotacao'], 0, ',', '.'); ?></td>
-                                    <?php $disponivel = $dados['totalDotacao'] - $dados['totalPlanejado']; ?>
+                                    <td class="text-right"><?php echo number_format(($dados['dotacaoCusteio'] + $dados['dotacaoCapital']), 0, ',', '.'); ?></td>
+                                    <?php $disponivel = ($dados['dotacaoCusteio'] + $dados['dotacaoCapital']) - $dados['totalPlanejado']; ?>
                                     <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                         <?php echo number_format($dados['totalPlanejado'], 0, ',', '.'); ?>
                                     </td>

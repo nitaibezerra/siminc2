@@ -95,7 +95,7 @@ class Spo_Model_Ptres extends Modelo
         switch ($tipo){
             // Somente Vinculadas
             case 'V':
-                $where = "and uo.unocod not in ('42101', '42902', '74912')";
+                $where = "and uo.unocod not in ('42101', '42902')";
                 break;
             // Somente Administração Direta
             case 'D':
@@ -103,7 +103,7 @@ class Spo_Model_Ptres extends Modelo
                 break;
             // Somente Fundo
             case 'F':
-                $where = "and uo.unocod in ('42902', '74912')";
+                $where = "and uo.unocod in ('42902')";
                 break;
             // Todas
             default:

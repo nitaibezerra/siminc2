@@ -71,6 +71,7 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
                         left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
                 where suo.unostatus = 'A'
                 and suo.prsano = '$exercicio'
+                and suo.unofundo = false
                 order by suo.unofundo, suo.unonome, suo.suonome;";
         
         $dados = $this->carregar($sql);

@@ -250,7 +250,6 @@ class Pi_PlanoInterno extends Modelo{
             $dadosAgrupados[$dado['suocod']]['dotacaoCusteio'] += $dado['ptrdotacao_custeio'];
             $dadosAgrupados[$dado['suocod']]['planejadoCapital'] += $dado['picvalorcapital'];
             $dadosAgrupados[$dado['suocod']]['planejadoCusteio'] += $dado['picvalorcusteio'];
-            $dadosAgrupados[$dado['suocod']]['totalDotacao'] += ($dadosAgrupados[$dado['suocod']]['dotacaoCapital'] + $dadosAgrupados[$dado['suocod']]['dotacaoCusteio']);
             $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
         }
         
