@@ -117,7 +117,7 @@ $sql = sprintf(
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Connection" content="Keep-Alive">
 		<meta http-equiv="Expires" content="-1">
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script language="JavaScript" src="../includes/prototype.js"></script>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>
 		<script language="javascript" type="text/javascript" src="../includes/funcoes.js"></script>

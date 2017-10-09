@@ -36,7 +36,7 @@ if($_REQUEST['requisicao']=='verRelatoExperiencia') {
 	?>
 	<html>
 	<head>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script language="JavaScript" src="../includes/funcoes.js"></script>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 		<link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>
@@ -70,7 +70,7 @@ if($_REQUEST['requisicao']=='verRelatoExperiencia') {
 ?>
 <html>
 <head>
-	<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+	<title><?php echo NOME_SISTEMA; ?></title>
 	<script language="JavaScript" src="../includes/funcoes.js"></script>
 	<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 	<link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>

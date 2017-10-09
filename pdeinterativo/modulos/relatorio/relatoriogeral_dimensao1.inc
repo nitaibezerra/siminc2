@@ -30,7 +30,7 @@ echo '<table width="100%" border="0" cellpadding="0" cellspacing="0"  style="bor
 	  <tr bgcolor="#ffffff"> 
 	  <td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td>
 	  <td height="20" nowrap>
-  	  SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação<br>
+  	  '. NOME_SISTEMA. '<br>
 	  Ministério da Educação / Secretaria de Educação Básica<br>
 	  PDEInterativo<br>
 	  1. Indicadores e Taxas

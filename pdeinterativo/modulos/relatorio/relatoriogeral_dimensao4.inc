@@ -60,7 +60,7 @@ if($_REQUEST['xls'] == 0){
 		  <tr bgcolor="#ffffff"> 
 		  <td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td>
 		  <td height="20" nowrap>
-	  	  SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação<br>
+	  	  '. NOME_SISTEMA. '<br>
 		  Ministério da Educação / Secretaria de Educação Básica<br>
 		  PDEInterativo<br>
 		  4. Gestão

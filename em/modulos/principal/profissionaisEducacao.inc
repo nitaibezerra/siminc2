@@ -57,7 +57,7 @@ if(checkPerfil(array(PERFIL_SUPER_USUARIO, PERFIL_CADASTRADOR)) && in_array($esd
 ?>
 <html>
 	<head>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script type="text/javascript" src="../includes/funcoes.js"></script>	    	    
 	    <script type="text/javascript" src="/includes/estouvivo.js"></script>	    
 	    <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>

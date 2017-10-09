@@ -120,7 +120,7 @@ $strSQL = "
         <script src="../library/chosen-1.0.0/docsupport/prism.js" type="text/javascript"></script>
         <link href="../library/chosen-1.0.0/chosen.css" rel="stylesheet" media="screen" >
         <!-- End Bootstrap CSS -->
-        <title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+        <title><?php echo NOME_SISTEMA; ?></title>
         <script language="JavaScript" src="../includes/funcoes.js"></script>
         <link href="/library/simec/css/css_reset.css" rel="stylesheet">
 

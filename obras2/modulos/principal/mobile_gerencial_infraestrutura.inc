@@ -94,7 +94,7 @@ $dadosResumoEmp = $empreendimento->dadosResumo( $empid );
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+    <title><?php echo NOME_SISTEMA; ?></title>
 <!--    <link rel="stylesheet"  href="/includes/jquery-mobile/jquery.mobile-1.0.1.min.css" />-->
 <!--    <link rel="stylesheet"  href="/includes/jquery-mobile/jqm-docs.css" />-->
 <!--    <script src="/includes/jquery-mobile/jquery.js"></script>-->

@@ -36,7 +36,7 @@ monta_titulo( "UF's de Atendimento", "" );
 
 <html>
 	<head>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script language="JavaScript" src="../../includes/funcoes.js"></script>
 		<script type="text/javascript" src="/includes/JQuery/jquery.js"></script>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>

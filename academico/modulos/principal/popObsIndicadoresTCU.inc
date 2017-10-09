@@ -20,7 +20,7 @@ $bloqueado = $permissoes['gravar']==1 ? "" :  "disabled";
 
 <html>
 	<head>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script type="text/javascript" src="../includes/funcoes.js"></script>
 	    <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 	    <link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>

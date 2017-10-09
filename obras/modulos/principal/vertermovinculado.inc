@@ -22,7 +22,7 @@ monta_titulo( "Termo de Ajuste Vinculado", "");
 	    <meta http-equiv="Pragma" content="no-cache">
 	    <meta http-equiv="Connection" content="Keep-Alive">
 	    <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
-	    <title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+	    <title><?php echo NOME_SISTEMA; ?></title>
 		<script type="text/javascript" src="../includes/funcoes.js"></script>
 	    <script type="text/javascript" src="/includes/estouvivo.js"></script>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>

@@ -116,7 +116,7 @@ if (!array_key_exists('entid', $_REQUEST)) {
 		<meta http-equiv="Cache-Control" content="no-cache">
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Expires" content="-1">
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		
 		<script language="JavaScript" src="../includes/funcoes.js"></script>
 		<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>

@@ -384,7 +384,7 @@ $paginic = $db->pegaUm($sql);
             <tr bgcolor="#ffffff">
                 <td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td>
                 <td height="20" nowrap>
-                    SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação<br>
+                    <?php echo NOME_SISTEMA; ?><br>
                     Ministério da Educação / SE - Secretaria Executiva<br>
                     DTI - Diretoria de Tecnologia da Informação<br>
                 </td>

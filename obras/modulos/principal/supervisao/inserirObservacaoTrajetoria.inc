@@ -7,7 +7,7 @@ monta_titulo( "Observação da Trajetória", "" );
 
 <html>
 	<head>
-		<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script language="javascript"> 
 		tmt_Move_WindowX = (screen.width - 510 ) / 2; 
 		tmt_Move_WindowY = (screen.height - 500 ) / 2; 

@@ -138,7 +138,7 @@ foreach ($arRealizadoFinal as $k => $v ){
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+	<title><?php echo NOME_SISTEMA; ?></title>
 
 	<link type="text/css" href="/includes/jquery-ui-1.8.18.custom/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
 

@@ -131,7 +131,7 @@ foreach ($dados as $key => $value){
 	}
 }
 
-monta_titulo( 'SIMEC - Tabelas de Apoio', 'Identificador da Base Salarial' );
+monta_titulo( SIGLA_SISTEMA. ' - Tabelas de Apoio', 'Identificador da Base Salarial' );
 ?>
 <style>
 @CHARSET "ISO-8859-1";

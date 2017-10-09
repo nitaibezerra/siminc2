@@ -77,7 +77,7 @@ function alterarCacheParametro($dados)
 	?>
 	<html>
 		<head>
-			<title>SIMEC- Sistema Integrado de Monitoramento do Ministério da Educação</title>
+			<title><?php echo NOME_SISTEMA; ?></title>
 			<script type="text/javascript" src="../includes/funcoes.js"></script>
 		    <script type="text/javascript" src="../includes/JQuery/jquery-ui-1.8.4.custom/js/jquery-1.4.2.min.js"></script>
 		    <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
