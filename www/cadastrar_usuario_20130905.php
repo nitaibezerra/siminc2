@@ -117,7 +117,7 @@ function ImprimeStatus(texto){
 		
 		<form id="formTheme" action="" method="post" >
 		Tema: 
-			<select class="select_ylw" name="theme_simec" title="Tema do SIMEC" onchange="alteraTema(this.value)" >
+			<select class="select_ylw" name="theme_simec" title="Tema do <?php echo SIGLA_SISTEMA; ?>" onchange="alteraTema(this.value)" >
 		            <?php include(APPRAIZ."www/listaTemas.php") ?>
 	        </select>
 		     <?

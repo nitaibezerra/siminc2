@@ -53,7 +53,7 @@ monta_titulo( 'Importa Convênio SIAFI', '' );
 			<tr>
 				<td colspan="2" style="text-align: center;">
 					<input type="button" name="btnCarregar" id="btnCarregar" value="Carregar dados do Arquivo" onclick="carregaArquivo();">
-					&nbsp;&nbsp;&nbsp;<input type="button" name="btnUpdate" id="btnUpdate" value="Atualizar N° convênio no SIMEC" onclick="atualizarConvenio();">
+					&nbsp;&nbsp;&nbsp;<input type="button" name="btnUpdate" id="btnUpdate" value="Atualizar N° convênio no <?php echo SIGLA_SISTEMA; ?>" onclick="atualizarConvenio();">
 				</td>
 			</tr>
 			<tr>
