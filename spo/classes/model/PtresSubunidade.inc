@@ -70,6 +70,7 @@ class Spo_Model_PtresSubunidade extends Modelo
                 and p.ptrstatus = 'A'";
 
         $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
 
         $dadosAgrupados = [];
         foreach($dados as $dado){
