@@ -137,7 +137,7 @@ function enviarEmailEstadoDocumento($docid)
             $e = new EmailAgendado();
             $e->setTitle($assunto);
             $e->setText($conteudo);
-            $e->setName("SIMEC");
+            $e->setName(SIGLA_SISTEMA);
             $e->setEmailOrigem($_SESSION['email_sistema']);
             $e->setEmailsDestino($arrEmail);
             $e->enviarEmails();
@@ -10433,7 +10433,7 @@ function alertaPerfilEmail($aveid)
     $e = new EmailAgendado();
     $e->setTitle($titulo);
     $e->setText($texto);
-    $e->setName("SIMEC");
+    $e->setName(SIGLA_SISTEMA);
     $e->setEmailOrigem($_SESSION['email_sistema']);
     $e->setEmailsDestino($arrEmail);
     $e->enviarEmails();
@@ -10631,7 +10631,7 @@ function alertaPerfilEmailSBS($sbsid)
     $e = new EmailAgendado();
     $e->setTitle($titulo);
     $e->setText($texto);
-    $e->setName("SIMEC");
+    $e->setName(SIGLA_SISTEMA);
     $e->setEmailOrigem($_SESSION['email_sistema']);
     $e->setEmailsDestino($arrEmail);
     $e->enviarEmails();
@@ -13292,7 +13292,7 @@ function enviarEmailTramiteGm()
         $e = new EmailAgendado();
         $e->setTitle($assunto);
         $e->setText($conteudo);
-        $e->setName("SIMEC");
+        $e->setName(SIGLA_SISTEMA);
         $e->setEmailOrigem$_SESSION['email_sistema']);
         $e->setEmailsDestino($arrEmail);
         $e->enviarEmails();
@@ -13331,7 +13331,7 @@ function enviarEmailTramiteSetec()
         $e = new EmailAgendado();
         $e->setTitle($assunto);
         $e->setText($conteudo);
-        $e->setName("SIMEC");
+        $e->setName(SIGLA_SISTEMA);
         $e->setEmailOrigem($_SESSION['email_sistema']);
         $e->setEmailsDestino($arrEmail);
         $e->enviarEmails();

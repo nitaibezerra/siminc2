@@ -1,7 +1,7 @@
 <?php
 include  APPRAIZ."includes/cabecalho.inc";
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
 
 $mensagem = 
 $turnome  = 

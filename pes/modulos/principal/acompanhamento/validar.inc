@@ -221,7 +221,7 @@ switch ($_POST['action']) :
                         <br />
                         Atenciosamente,
                         <br />
-                        Equipe Esplanada Sustentável - SIMEC";
+                        Equipe Esplanada Sustentável - ". SIGLA_SISTEMA;
 
                 // Envia email aos destinatarios
                 enviar_email($emailsReme, $emailsDest, 'Acompanhamento de Despesas', $txt , null , array($_SESSION['email_sistema']));

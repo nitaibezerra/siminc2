@@ -68,7 +68,7 @@ function enviarEmailTramitacao($dmdid, $esdid = null)
 		$esddsc = $modelDemanda->pegaUm($sql);
 
 		$esddsc = $esddsc ? $esddsc : 'Retornado à área demandante';
-		$paransEmail['remetente'] = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
+		$paransEmail['remetente'] = array("nome" => SIGLA_SISTEMA, "email" => "noreply@mec.gov.br");
 		$paransEmail['assunto'] = "[Demandas FIES] Tramitação de Demanda (DE: '{$estadoAtual['esddsc']}' PARA: '{$esddsc}')";
 
 		$paransEmail['mensagem'] = "<pre>Prezados,
@@ -497,7 +497,7 @@ function enviarEmailTramitacaoEntrega($dmeid, $esdid)
 	$modelDemanda = new Demanda($modelDemandaEntrega->dmdid);
 	$acjDesc = $modelDemanda->getTipoAcaoDescricao($modelDemanda->acjid);
 
-	$paransEmail['remetente'] = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
+	$paransEmail['remetente'] = array("nome" => SIGLA_SISTEMA, "email" => "noreply@mec.gov.br");
 	$paransEmail['assunto'] = "[Demandas FIES] Entrega {$modelDemandaEntrega->dmeid} Aprovada";
 	$paransEmail['mensagem'] = "<pre>Prezados,
 A entrega <span style='color: red;'>{$modelDemandaEntrega->dmeid} - {$modelDemandaEntrega->dmedsc}</span> foi aprovada.

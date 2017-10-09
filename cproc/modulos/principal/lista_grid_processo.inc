@@ -117,7 +117,7 @@
             <td class="subtituloDireita" width="20%" colspan="2">Nº Controle SIMEC:</td>
             <td>
                 <?PHP
-                    echo campo_texto('prcid', 'N', 'S', 'Nº Controle SIMEC', '46', '25', '', '', '', '', '', 'id="prcid"', '', '', '');
+                    echo campo_texto('prcid', 'N', 'S', 'Nº Controle ' SIGLA_SISTEMA, '46', '25', '', '', '', '', '', 'id="prcid"', '', '', '');
                 ?>
             </td>
         </tr>

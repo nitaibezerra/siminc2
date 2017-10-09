@@ -159,7 +159,7 @@ $abas->adicionarAba('solicitacao', 'Solicação', dirname(__FILE__) . "/novasolici
     ))->definirAbaDefault('solicitacao');
 
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

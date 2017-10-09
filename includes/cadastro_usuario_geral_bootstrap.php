@@ -1502,7 +1502,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	$dados = $db->pegaLinha ($sql);
 
 	$remetente = array (
-            "nome" => "SIMEC",
+            "nome" => SIGLA_SISTEMA,
             "email" => "noreply@mec.gov.br"
 	);
 	$destinatarios = recuperarDestinatariosPadrao ();
@@ -1539,7 +1539,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	}
 
 	$remetente = array (
-            "nome" => "SIMEC",
+            "nome" => SIGLA_SISTEMA,
             "email" => "noreply@mec.gov.br"
 	);
 	$destinatarios = recuperarDestinatariosPadrao ();

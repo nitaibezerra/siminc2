@@ -170,7 +170,7 @@ class Declaracao_Pagamento extends Modelo{
 				</table>
     			<table class="tabela" cellpadding="3" cellspacing="1" align="center" width="100%" style="font-size:10px;border: 1px solid black;margin-top:5px;">
 					<tr><td><b>7. Informações Complementares</b></td></tr>
-					<tr><td>Emitido eletrônicamente pelo SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação, gerado em '.date('d/m/Y H:i:s').', número de autenticação:&nbsp;'.$_SESSION['maismedicos']['declaracao_pagamento']['cod_autenticacao'].'</td></tr>
+					<tr><td>Emitido eletrônicamente pelo <?php echo NOME_SISTEMA; ?>, gerado em '.date('d/m/Y H:i:s').', número de autenticação:&nbsp;'.$_SESSION['maismedicos']['declaracao_pagamento']['cod_autenticacao'].'</td></tr>
 				</table>
     			<table class="tabela" cellpadding="3" cellspacing="1" align="center" width="100%" style="font-size:10px;border: 1px solid black;margin-top:5px;">
 					<tr><td colspan="2"><b>8. Responsável pelas Informações</b></td></tr>

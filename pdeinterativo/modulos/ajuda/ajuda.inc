@@ -27,7 +27,7 @@ if(is_array($saida)) {foreach($saida as $k=>$v) ${$k}=$v;}
 
 <html>
 <head>
-	<title>Ajuda do SIMEC</title>
+	<title>Ajuda do <?php echo SIGLA_SISTEMA; ?></title>
 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
 <link rel='stylesheet' type='text/css' href='../includes/listagem.css'>
 <script language="javascript" type="text/javascript" src="../includes/tiny_mce.js"></script>

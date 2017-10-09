@@ -34,7 +34,7 @@ else
   $assunto = $_REQUEST['assunto'];
   $mensagem = $_REQUEST['email'];
   $email = $db->pegaUm( "select sisemail as codigo from seguranca.sistema where sisid = ".$_SESSION['sisid']."");
-  email('Administradores do SIMEC', $email, $assunto, $mensagem);
+  email('Administradores do ' SIGLA_SISTEMA, $email, $assunto, $mensagem);
   ?>
       <script>
          alert('Email enviado com sucesso. Esta janela será fechada.')

@@ -423,7 +423,7 @@ class SupervisaoMi extends Modelo {
                     </html>
                     ';
         
-            $assunto            = "SIMEC - TRAMITAÇÃO DE SUPERVISÃO EMPRESA MI - ID ".$smiid." - Tramitada";
+            $assunto            = SIGLA_SISTEMA. " - TRAMITAÇÃO DE SUPERVISÃO EMPRESA MI - ID ".$smiid." - Tramitada";
             $conteudo           = $html;
             
             $dados = array(

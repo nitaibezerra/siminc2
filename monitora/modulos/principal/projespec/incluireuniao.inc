@@ -36,7 +36,7 @@ function atualiza_participante($id, $usucpfs )
 			
 			// envia email para o interessado
 			
-        $assunto = 'SIMEC- Marcação de reunião';
+        $assunto = SIGLA_SISTEMA. '- Marcação de reunião';
 		$sexo = 'Prezado Sr.  ';
 		if ($sexolancador=='F') $sexolanc='Sra. '; else $sexolanc='Sr. '; 
 		$sql="select ususexo,usunome,usuemail from seguranca.usuario where usucpf='".$usucpf."'";

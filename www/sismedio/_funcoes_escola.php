@@ -65,7 +65,7 @@ function inserirGestorEscolaGerenciamento($dados) {
 	
 	if($dados['reenviarsenha']=="S") {
 			
-		$remetente = array("nome" => "SIMEC - MÓDULO SISMÉDIO","email" => $dados['usuemail']);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISMÉDIO","email" => $dados['usuemail']);
 		$destinatario = $dados['usuemail'];
 		$usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['usucpf'])."'");
 		$assunto = "Cadastro no SIMEC - MÓDULO SISMÉDIO";

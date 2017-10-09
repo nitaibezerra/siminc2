@@ -7,7 +7,7 @@ class AtualizarEmpenhoPagamento extends Modelo {
     /**
      * Nome do Remetente do E-mail
      */
-    const NOME_REMETENTE = 'EQUIPE SIMEC';
+    const NOME_REMETENTE = 'EQUIPE ' SIGLA_SISTEMA;
 
     /**
      * E-mail de envio
@@ -89,7 +89,7 @@ class AtualizarEmpenhoPagamento extends Modelo {
     }
     
     public function enviarEmailConfirmacao(){
-        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> 'SIMEC'));
+        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> SIGLA_SISTEMA));
         $strHtml = $this->getHtmlEmail();
         enviar_email(
             array(

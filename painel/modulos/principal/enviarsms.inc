@@ -13,7 +13,7 @@ if($_REQUEST['acao'] == "enviarsms") {
 		
 		foreach($encaminhados as $encam) {
 			if(strlen($encam['telefone']) == 10) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC',	'target' => '55'.$encam['telefone'], 'body' => $_REQUEST['mensagem'], 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA,	'target' => '55'.$encam['telefone'], 'body' => $_REQUEST['mensagem'], 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
 			}
 		}
 	}

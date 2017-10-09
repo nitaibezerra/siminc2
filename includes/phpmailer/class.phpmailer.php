@@ -64,7 +64,7 @@ class PHPMailer
      * Sets the From name of the message.
      * @var string
      */
-    var $FromName           = "SIMEC - Root User";
+    var $FromName           = SIGLA_SISTEMA. " - Root User";
 
     /**
      * Sets the Sender email (Return-Path) of the message.  If not empty,

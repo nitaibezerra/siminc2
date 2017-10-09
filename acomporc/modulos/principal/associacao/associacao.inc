@@ -49,7 +49,7 @@ if (isset($_POST['requisicao']) || !empty($_POST['requisicao'])) {
 $prfid = $_REQUEST['periodo'];
 $gerenciador = new Acomporc_Service_Gerenciador(Acomporc_Service_Gerenciador::CONTROLLER_ASSOCIACAO_ASSOCIACAO,$tipo);
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

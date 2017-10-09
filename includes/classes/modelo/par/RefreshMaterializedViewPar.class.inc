@@ -7,7 +7,7 @@ class RefreshMaterializedViewPar extends Modelo {
     /**
      * Nome do Remetente do E-mail
      */
-    const NOME_REMETENTE = 'EQUIPE SIMEC';
+    const NOME_REMETENTE = 'EQUIPE ' SIGLA_SISTEMA;
 
     /**
      * E-mail de envio
@@ -47,7 +47,7 @@ class RefreshMaterializedViewPar extends Modelo {
     }
     
     public function enviarEmail($assunto = '', $msg = ''){
-        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> 'SIMEC'));
+        $arrEmail = array(array('usuemail'=> $_SESSION['email_sistema'], 'usunome'=> SIGLA_SISTEMA));
         $strHtml = $this->getHtmlEmail($msg);
         enviar_email(
             array(

@@ -1849,7 +1849,7 @@ padding-left: 5px
 	include  APPRAIZ."includes/cabecalho.inc";
 	echo '<br>';
 	
-	$titulo = "SIMEC Maps";
+	$titulo = SIGLA_SISTEMA. " Maps";
 	monta_titulo( $titulo, '' );
 
 ?>

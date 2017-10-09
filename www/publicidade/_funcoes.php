@@ -125,7 +125,7 @@ function listaGeral($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -259,7 +259,7 @@ function listaSolicitante($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -407,7 +407,7 @@ function listaFornecedor($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -543,7 +543,7 @@ function listaCategoriaDetalhada($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -691,7 +691,7 @@ function listaCampanhaDetalhada($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -835,7 +835,7 @@ function listaCampanha($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -949,7 +949,7 @@ function listaSituacao($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -1202,7 +1202,7 @@ function listaServicos($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -1336,7 +1336,7 @@ function listaCategoria($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>
@@ -1477,7 +1477,7 @@ function listaPUP($dados, $tipoRelatorio) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> '. NOME_SISTEMA. ' </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>

@@ -1241,7 +1241,7 @@ function enviarEmailAlteracaoValores($aValores, $entcodigo)
     $emailsDest = array();
 
 
-    $emailsReme = array('nome' => 'SIMEC - ' . $_SESSION['usunome'], 'email' => $_SESSION['usuemail']);
+    $emailsReme = array('nome' => SIGLA_SISTEMA. ' - ' . $_SESSION['usunome'], 'email' => $_SESSION['usuemail']);
 
 
     $sql = "SELECT usunome, usuemail FROM pes.usuarioresponsabilidade usr
@@ -1299,10 +1299,10 @@ function enviarEmailAlteracaoValores($aValores, $entcodigo)
                 <br />
                 Atenciosamente,
                 <br />
-                Equipe Esplanada Sustentável - SIMEC";
+                Equipe Esplanada Sustentável - ". SIGLA_SISTEMA;
 
         // Envia email aos destinatarios
-        enviar_email($emailsReme, $emailsDest, 'SIMEC - Valores validados alterados', $txt , null , array($_SESSION['email_sistema']));
+        enviar_email($emailsReme, $emailsDest, SIGLA_SISTEMA. ' - Valores validados alterados', $txt , null , array($_SESSION['email_sistema']));
     }
 }
 

@@ -201,7 +201,7 @@ foreach ( $pendencias as $itemUsu )
 	
 	global $data;
 	
-	$assunto = "Atualização de informações no SIMEC";
+	$assunto = "Atualização de informações no ". SIGLA_SISTEMA;
 	
 	$mensagem = <<<EOT
 		<p align="center">
@@ -269,7 +269,7 @@ EOT;
 		"<br/>" .
 		"<font style=\"color: #909090;\">" .
 			"--<br/>" .
-			"SIMEC - Sistema Integrado de Planejamento Orçamento e Finanças<br/>" .
+			SIGLA_SISTEMA. " - Sistema Integrado de Planejamento Orçamento e Finanças<br/>" .
 			"Ministério da Educação<br/>" .
 			"http://simec.mec.gov.br<br/>" .
 			"e-mail: ". $_SESSION['email_sistema']. "<br/>" .

@@ -37,7 +37,7 @@ $cabecalho = '<table width="100%" border="0" cellpadding="0" cellspacing="0" cla
 				.'	<tr bgcolor="#ffffff">' 	
 				.'		<td valign="top" width="50" rowspan="2"><img src="../imagens/brasao.gif" width="45" height="45" border="0"></td>'			
 				.'		<td nowrap align="left" valign="middle" height="1" style="padding:5px 0 0 0;">'				
-				.'			SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>'				
+				.'			'. NOME_SISTEMA. '<br/>'				
 				.'			Ministério da Educação <br />'
 				.'			Secretaria Executiva<br />'
 				.'			Subsecretaria de Assuntos Administrativos<br />'

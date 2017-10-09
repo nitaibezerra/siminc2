@@ -133,7 +133,7 @@ if (date('i') == '05' || isset($_GET['skip']))
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Agendamento de scripts - Iniciando scripts";
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Agendamento de scripts";
 	
 	ob_start();
@@ -194,7 +194,7 @@ if (date('i') == '05' || isset($_GET['skip']))
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Agendamento de scripts";
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Agendamento de scripts";
 	$mensagem->Body .= "Envio da mensagem em ".(getmicrotime() - $inicio)." segundos<br/><br/>";
 	$mensagem->Body .= $log;

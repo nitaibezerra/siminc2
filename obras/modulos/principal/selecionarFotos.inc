@@ -14,7 +14,7 @@ monta_titulo( "Galeria de Fotos", "");
 ?>
 <html>
 	<head>
-		<title>SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 		<script type="text/javascript">
 
 			function salvaFotosSelecionadas(){

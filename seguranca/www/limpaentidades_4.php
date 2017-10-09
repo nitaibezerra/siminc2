@@ -107,7 +107,7 @@ $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "LIMPA ENTIDADES 4";
 $mensagem->From 		= $_SESSION['email_sistema'];
-$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 $mensagem->Subject = "Limpando entidades 4";
 $mensagem->Body = $HTML;
 $mensagem->IsHTML( true );

@@ -34,8 +34,8 @@ function salvaPDF( $id, $mostraReuni, $mostraTotal, $aritensR, $aritensT ){
 	
 	$PDF = new FPDF( 'P','cm','A4' ); //documento em formato de retrato, medido em cm e no tamanho A4
 	$PDF -> SetMargins(1, 1, 1); // margem esquerda = 3 , superior = 3 e direita = 2.
-	$PDF -> SetAuthor('SIMEC'); //informando o autor do documento.
-	$PDF -> SetTitle('SIMEC'); //informando o título do documento.
+	$PDF -> SetAuthor(SIGLA_SISTEMA); //informando o autor do documento.
+	$PDF -> SetTitle(SIGLA_SISTEMA); //informando o título do documento.
 	$PDF -> AddPage(); //adicionando um nova página
 	
 	/*

@@ -759,7 +759,7 @@ function ativaUsuarioPDEInterativo( $dados, $pflcod, $entid = null , $tpocod = n
 	
 
 	// envia o email de confirmação da conta aprovada
-	$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 	$destinatario = $usuemail;
 	$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";
 	$conteudo = "
@@ -996,7 +996,7 @@ function ativaUsuarioPDEInterativo2012( $dados, $pflcod, $entid = null , $tpocod
 	
 
 	// envia o email de confirmação da conta aprovada
-	$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 	$destinatario = $usuemail;
 	$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";
 	$conteudo = "
@@ -2168,7 +2168,7 @@ function excluirMembroConsulta()
 	// envia o email
 	$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 	$usu = $db->pegaLinha($sql);
-	$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 	$destinatario = $usu['usuemail'];
 	$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 	$conteudo .= sprintf(
@@ -2215,7 +2215,7 @@ function excluirDirigente()
 		// envia o email
 		$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 		$usu = $db->pegaLinha($sql);
-		$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 		$destinatario = $usu['usuemail'];
 		$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 		$conteudo .= sprintf(
@@ -2268,7 +2268,7 @@ function excluirEquipeApoio()
 		// envia o email
 		$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 		$usu = $db->pegaLinha($sql);
-		$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 		$destinatario = $usu['usuemail'];
 		$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 		$conteudo .= sprintf(
@@ -2321,7 +2321,7 @@ function excluirCoordenador()
 		// envia o email
 		$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 		$usu = $db->pegaLinha($sql);
-		$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 		$destinatario = $usu['usuemail'];
 		$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 		$conteudo .= sprintf(
@@ -2374,7 +2374,7 @@ function excluirMembroComite()
 		// envia o email
 		$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 		$usu = $db->pegaLinha($sql);
-		$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 		$destinatario = $usu['usuemail'];
 		$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 		$conteudo .= sprintf(
@@ -3686,7 +3686,7 @@ function excluirDiretor()
 	// envia o email
 	$sql = "select usunome,usuemail from seguranca.usuario where usucpf = '$usucpf'";
 	$usu = $db->pegaLinha($sql);
-	$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 	$destinatario = $usu['usuemail'];
 	$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";	
 	$conteudo .= sprintf(
@@ -3847,7 +3847,7 @@ function confirmaDadosDiretor()
 	$usunome = $db->pegaUm($sql);
 	$db->commit();
 	
-	$remetente = array("nome" => "SIMEC - MÓDULO PDE-INTERATIVO","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PDE-INTERATIVO","email" => $usuemail);
 	$destinatario = $usuemail;
 	$assunto = "Cadastro no SIMEC - MÓDULO PDE-INTERATIVO";
 	$conteudo = "

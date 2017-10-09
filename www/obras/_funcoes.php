@@ -7030,7 +7030,7 @@ function obrEnviaEmailEmpresa( $gpdid, $epcid ){
 	global $db;
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	// destinatário
 	$sql = "SELECT 
@@ -7164,7 +7164,7 @@ function obrEnviaEmailMonitoramento( $gpdid ){
 	global $db;
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	// destinatário
 	$destinatario = array("email" => $_SESSION['email_sistema']);
@@ -7321,7 +7321,7 @@ function obrEnviaEmailSupervisaoFinalizada( $gpdid ){
 
 	
 	// remetente
-	$remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
 	
 	
 	// destinatário
@@ -9212,7 +9212,7 @@ function gerarExtratoObrasHTML($halid, $arrayTmp = ''){
 				
 	$html .= '<html>
 				<head>
-					<title>SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação</title>
+					<title><?php echo NOME_SISTEMA; ?></title>
 					<script type="text/javascript" src="../includes/funcoes.js"></script>
 				    <script type="text/javascript" src="../includes/prototype.js"></script>
 				    <script type="text/javascript" src="../includes/entidades.js"></script>

@@ -41,7 +41,7 @@ $campos	= array("cnvid"		=>763
 				);	
 $file = new FilesSimec("convenioxml", $campos ,"cte");			
 if($_FILES["Arquivo"]){
-	$arquivoSalvo = $file->setUpload("gravação de arquivo do XML de convênio entre SAPE e SIMEC");
+	$arquivoSalvo = $file->setUpload("gravação de arquivo do XML de convênio entre SAPE e ". SIGLA_SISTEMA);
 	if($arquivoSalvo){
 		echo '<script type="text/javascript"> alert(" Sucesso.");</script>';
 	}

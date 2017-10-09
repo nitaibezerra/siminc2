@@ -62,7 +62,7 @@ if ('detalhes' == $abaAtiva) {
 }
 
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

@@ -41,7 +41,7 @@
 <br>
 
 <?PHP
-	$titul = 'Auditoria Interna do SIMEC';
+	$titul = 'Auditoria Interna do ' SIGLA_SISTEMA;
 	monta_titulo($titulo_modulo, $titul);
 ?>
 <script type="text/javascript" src="../includes/calendario.js"></script>

@@ -340,7 +340,7 @@ function envioEmailGenericoEscolasExterior( $eexid = null, $docid = null ){
 	// return true;
 	// ver($estadoAnterior['aedid'],d);
 
-	$assunto = "Tramitação em Escolas Exterior - SIMEC";
+	$assunto = "Tramitação em Escolas Exterior - ". SIGLA_SISTEMA;
 	$conteudo = "Mensagem: <br> ------ <br>" . $comentario."<br> ------- <br>";
 	$conteudo .= "<br><br>Ação: ".$acao['aeddscrealizar']." ";
 	$destinatarios = array();
@@ -493,7 +493,7 @@ function envioEmailGenericoEscolasExterior( $eexid = null, $docid = null ){
 	// ver($destinatarios,d);
 
 	$copia_oculta = array();
-    $remetente     = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+    $remetente     = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 	$retorno = enviar_email($remetente, $destinatarios, $assunto, $conteudo);
     return $retorno;
 }

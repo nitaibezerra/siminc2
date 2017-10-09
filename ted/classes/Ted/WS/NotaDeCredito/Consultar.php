@@ -115,7 +115,7 @@ class Ted_WS_NotaDeCredito_Consultar
     {
         $xmlSigefNC = new SimpleXMLElement('<?xml version="1.0" encoding="ISO-8859-1"?><request></request>');
         $header = $xmlSigefNC->addChild('header');
-        $header->addChild('app', 'SIMEC');
+        $header->addChild('app', SIGLA_SISTEMA);
         $header->addChild('version', '1.4.1');
         $header->addChild('created', date('c'));
         $body = $xmlSigefNC->addChild('body');

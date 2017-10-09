@@ -233,7 +233,7 @@ class WSAlteracoesOrcamentariasEmendas{
 							O próximo passo é o preenchimento, até 03/07/'.date(Y).' no SIMEC/Emendas da iniciativa, dos dados do responsável pela elaboração do PTA e, quando se tratar de prefeitura e secretaria estadual, da vinculação da subação.<br>
 							Qualquer dúvida, tratar com a ASPAR do MEC (2022-7899/7896/7894)';
 							
-						$remetente = array('nome' => 'SIMEC - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
+						$remetente = array('nome' => SIGLA_SISTEMA. ' - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
 						
 						if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
 							$email = $db->pegaUm("select a.autemail from emenda.autor a where a.autcod = '{$v->codigoParlamentar}'");
@@ -241,7 +241,7 @@ class WSAlteracoesOrcamentariasEmendas{
 							$email = $_SESSION['email_sistema'];
 						}
 						if( !empty($email) ){
-							$retorno = enviar_email($remetente, array($email), 'SIMEC - EMENDAS', $conteudo, $cc, null);
+							$retorno = enviar_email($remetente, array($email), SIGLA_SISTEMA. ' - EMENDAS', $conteudo, $cc, null);
 							$boEnviado = true;
 						}
 					}

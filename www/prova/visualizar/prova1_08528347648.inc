@@ -1,7 +1,7 @@
 <?php
 include  APPRAIZ."includes/cabecalho.inc";
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Questão 01 - Liste as informações solicitadas' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Questão 01 - Liste as informações solicitadas' );
 
 /*
  * DICAS (Caso não queira perder tempo):

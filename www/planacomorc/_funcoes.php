@@ -3134,11 +3134,11 @@ HTML;
     switch ($cadastramento) {
         case Spo_Model_Planointerno::CADASTRADO_SIAFI_SIMEC:
             $cor = 'success';
-            $texto = 'SIMEC/SIAFI';
+            $texto = SIGLA_SISTEMA. '/SIAFI';
             break;
         case Spo_Model_Planointerno::CADASTRADO_SIMEC:
             $cor = 'default';
-            $texto = 'SIMEC';
+            $texto = SIGLA_SISTEMA;
             break;
         case Spo_Model_Planointerno::CADASTRADO_SIAFI:
             $cor = 'warning';

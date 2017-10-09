@@ -388,7 +388,7 @@ class Par3_Controller_InstrumentoUnidadeEntidade extends Controle
             $arrDados['tenid']		= 7;
 
             if (!$usuario->recuperarPorCPF($arrDados['entcpf'])) {
-                throw new \Exception("Este CPF não possui cadastro no SIMEC");
+                throw new \Exception("Este CPF não possui cadastro no ". SIGLA_SISTEMA);
             }
 
             if ($nutricionista != $arrDados['entcnpj']) {

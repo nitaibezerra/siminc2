@@ -512,7 +512,7 @@ function email($paraquem, $paraonde, $assunto, $message, $cc='',$cco='', $from='
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'];
+	$mensagem->FromName		= SIGLA_SISTEMA. " - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'];
 
 	//$mensagem->AddReplyTo($_SESSION['email_sistema']);
 	//$mensagem->AddReplyTo($_SESSION["usuemail"]);
@@ -555,7 +555,7 @@ function email($paraquem, $paraonde, $assunto, $message, $cc='',$cco='', $from='
 	$res=$db->pegalinha($sql);
 	if(is_array($res)) foreach($res as $k=>$v) ${$k}=$v;
 	//$message=strip_tags($message);
-	$dequem = "SIMEC - $usunome - $unidsc - $orgdsc"; //trim($_SESSION['sigla']);
+	$dequem = SIGLA_SISTEMA. " - $usunome - $unidsc - $orgdsc"; //trim($_SESSION['sigla']);
 	$deonde = "$usuemail;simec@mec.gov.br";//$_SESSION['ittemail'];
 	$headers = "Return-Path: simec@mec.gov.br\n";
 	$headers .= "Reply-To: simec@mec.gov.br\n";
@@ -582,7 +582,7 @@ function email_pessoal($dequem,$deonde, $paraonde, $assunto, $message, $cc='',$c
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC - " . $dequem;
+	$mensagem->FromName		= SIGLA_SISTEMA. " - " . $dequem;
 	$mensagem->AddReplyTo("noreply@mec.gov.br");
 	$mensagem->From = $deonde;
 	$mensagem->AddAddress( $paraonde );
@@ -607,13 +607,13 @@ function email_pessoal($dequem,$deonde, $paraonde, $assunto, $message, $cc='',$c
 	}
 	return $mensagem->Send();
 	/*
-	 // $dequem = 'SIMEC'; //trim($_SESSION['sigla']);
+	 // $dequem = SIGLA_SISTEMA; //trim($_SESSION['sigla']);
 	 // $deonde = $_SESSION['email_sistema'];//$_SESSION['ittemail'];
 	 $headers = "Return-Path: simec@mec.gov.br\n";
 	 $headers .= "X-Sender: simec@mec.gov.br\n";
 	 $headers .= "Reply-To: simec@mec.gov.br\n";
 	 $headers .= "Content-type: text/html;\n";
-	 $headers .= "From: \"".'SIMEC - '.$dequem."\" <".$deonde.">\n";
+	 $headers .= "From: \"".SIGLA_SISTEMA. ' - '.$dequem."\" <".$deonde.">\n";
 	 $headers .= "X-Mailer: PHP 5.1\n";
 	 if ($cc) $headers .= "Cc:$cc\n";
 	 if ($cco) $headers .= "Bcc:$cco\n";
@@ -730,7 +730,7 @@ function enviar_email_usuario( $remetente, $destinatario, $assunto, $conteudo, $
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
 	$mensagem->From 		= $remetente;
-	$mensagem->FromName 	= "SIMEC - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'];
+	$mensagem->FromName 	= SIGLA_SISTEMA. " - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'];
 	$mensagem->AddAddress( $destinatario );
 	$mensagem->Subject 		= $assunto;
 	$mensagem->Body 		= $conteudo;
@@ -3277,7 +3277,7 @@ function monta_cabecalho_relatorio( $largura ){
 				.'	<tr bgcolor="#ffffff">'
 				.'		<td valign="top" width="50" rowspan="2"><img src="../imagens/brasao.gif" width="45" height="45" border="0"></td>'
 				.'		<td nowrap align="left" valign="middle" height="1" style="padding:5px 0 0 0;">'
-				.'			SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>'
+				.'			'. NOME_SISTEMA. '<br/>'
 //				.'			Acompanhamento da Execução Orçamentária<br/>'
 				.'			MEC / SE - Secretaria Executiva <br />'
 				.'		</td>'
@@ -4711,7 +4711,7 @@ function recuperarUsuarioReceita($cpf)
 
 function enviarEmailUsuarioInvalido($cpf, $mensagem = '')
 {
-    $remetente     = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+    $remetente     = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
     $destinatarios = array($_SESSION['email_sistema']);
 
     $assunto = "Tentativa de entrar no sistema com CPF inválido";

@@ -65,7 +65,7 @@ if (isset($_POST['requisicao']) && !empty($_POST['requisicao'])) {
 // -- Indica se os dados dos formulários da tela podem ser editados
 $podeEditarDados = podeEditar($dados['acao']['esdid']);
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

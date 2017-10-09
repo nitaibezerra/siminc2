@@ -27,7 +27,7 @@ $mail->SMTPAuth = true; // ATIVA O SMTP AUTENTICADO
 $mail->Username = "yyy@xxx.gov.br"; //EMAIL PARA SMTP AUTENTICADO (pode ser qualquer conta de email do seu domínio)
 $mail->Password = "zzzzzzz"; //SENHA DO EMAIL PARA SMTP AUTENTICADO
 $mail->From = "zzz@xxx.gov.br"; //E-MAIL DO REMETENTE
-$mail->FromName = "SIMEC"; //NOME DO REMETENTE
+$mail->FromName = SIGLA_SISTEMA; //NOME DO REMETENTE
 $mail->IsHTML(true); //ATIVA MENSAGEM NO FORMATO HTML
 $mail->Subject = "ERRO CONEXÃO COM BANCO DE DADOS"; //ASSUNTO DA MENSAGEM
 

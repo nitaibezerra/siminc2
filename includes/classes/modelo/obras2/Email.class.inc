@@ -977,7 +977,7 @@ DML;
             </html>
         ';
 
-        $assunto = "SIMEC - DEMANDA - Nº {$info['dmdid']} - ".strtoupper($assunto);
+        $assunto = SIGLA_SISTEMA. " - DEMANDA - Nº {$info['dmdid']} - ".strtoupper($assunto);
         $conteudo = $html;
         $destinatario = array($info['usuemailsolicitante'],$info['usuemailcadastro'],$info['usuemailresponsavel']);
         if(!in_array($_SESSION['usuemail'], $destinatario)) {
@@ -1789,7 +1789,7 @@ DML;
                     </html>
                     ';
 
-            $assunto = "SIMEC - ORDEM DE SERVICO - Nº {$osmid} - Tramitada";
+            $assunto = SIGLA_SISTEMA. " - ORDEM DE SERVICO - Nº {$osmid} - Tramitada";
             $conteudo = $html;
             $destinatario = array($email_responsavel);
             $possui_responsavel = true;
@@ -1926,7 +1926,7 @@ DML;
                     </html>
                     ';
 
-            $assunto = "SIMEC - ORDEM DE SERVICO - Nº {$osmid} - Tramitada - Obra: " . $obrid;
+            $assunto = SIGLA_SISTEMA. " - ORDEM DE SERVICO - Nº {$osmid} - Tramitada - Obra: " . $obrid;
             $conteudo = $html;
             $destinatario = array($email_responsavel);
 
@@ -2186,7 +2186,7 @@ DML;
                             </table>
                         </body>
                     </html>',
-            'emlassunto' => 'SIMEC - OBRA ID ' . $obra->obrid . ' (' . $obra->obrnome . ') - MUDANÇA DE ENDEREÇO POR SUPERVISÃO',
+            'emlassunto' => SIGLA_SISTEMA. ' - OBRA ID ' . $obra->obrid . ' (' . $obra->obrnome . ') - MUDANÇA DE ENDEREÇO POR SUPERVISÃO',
             'temid' => 6,
             'emlregistroatividade' => true,
             'obrid' => $obrid
@@ -2269,7 +2269,7 @@ DML;
                             </table>
                         </body>
                     </html>',
-            'emlassunto' => 'SIMEC - Relatório Mensal - Painel FNDE / Relatório de Validações',
+            'emlassunto' => SIGLA_SISTEMA. ' - Relatório Mensal - Painel FNDE / Relatório de Validações',
             'temid' => 7,
             'emlregistroatividade' => 'false',
             'obrid' => null

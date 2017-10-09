@@ -4167,7 +4167,7 @@ function enviarEmailTramite(){
 
     $remetente = array("nome" => "Sistema Cessão/Prorrogação Servidor", "email" => $_SESSION['email_sistema']);
     $destinatario = $arrrEmail;
-    $assunto = "Tramitação de Processo - Gestão Pessoas - SIMEC";
+    $assunto = "Tramitação de Processo - Gestão Pessoas - ". SIGLA_SISTEMA;
     $conteudo = "
         <b>Tramitação de Processo - Gestão Pessoas - SIMEC</b>
         <p>

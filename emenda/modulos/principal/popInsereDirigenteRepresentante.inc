@@ -34,7 +34,7 @@ if($_REQUEST['opt'] == 'salvarRegistro') {
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Connection" content="Keep-Alive">
     <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
-    <title>SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação</title>
+    <title><?php echo NOME_SISTEMA; ?></title>
     <script type="text/javascript" src="../includes/funcoes.js"></script>
     <script type="text/javascript" src="../includes/prototype.js"></script>
     <script type="text/javascript" src="../includes/entidades.js"></script>

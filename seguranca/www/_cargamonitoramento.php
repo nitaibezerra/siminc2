@@ -330,7 +330,7 @@ $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "SISTEMA DE CARGA NO MONITORAMENTO";
 $mensagem->From 		= $_SESSION['email_sistema'];
-$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC" );
+$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA );
 $mensagem->Subject = "Carga no monitoramento";
 $mensagem->Body = $HTML;
 $mensagem->IsHTML( true );

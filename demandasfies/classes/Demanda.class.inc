@@ -673,7 +673,7 @@ FROM demandasfies.demanda d
 
 	public function getParansEmailAlteracaoDataArea($dataAntiga, $dataNova, $reajustificativa, $areaSelecionada)
 	{
-		$paransEmail['remetente'] = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
+		$paransEmail['remetente'] = array("nome" => SIGLA_SISTEMA, "email" => "noreply@mec.gov.br");
 		$paransEmail['assunto'] = "[Demandas FIES] Mudança do PRAZO da Área de {$dataAntiga} para {$dataNova} )";
 
 		$paransEmail['mensagem'] = "<pre>Prezados,

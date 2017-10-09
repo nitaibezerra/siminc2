@@ -238,13 +238,13 @@ function enviaEmailFolhaPagamento($stConteudo, $arEmail)
 		$mensagem->Mailer       = "smtp";
 		
 		$mensagem->From     	= 'noReply@mec.gov.br';
-		$mensagem->FromName 	= 'SIMEC';
+		$mensagem->FromName 	= SIGLA_SISTEMA;
 			
 		foreach($arEmail as $email){
 			$mensagem->AddAddress( $email['email'], $email['nome'] );
 		}
 		
-		$mensagem->Subject 		= 'SIMEC - Mais Médicos - Folha de pagamento'; //assunto
+		$mensagem->Subject 		= SIGLA_SISTEMA. ' - Mais Médicos - Folha de pagamento'; //assunto
 		$mensagem->Body 		= $stConteudo; //conteudo
 		$mensagem->IsHTML( true );
 		$mensagem->Send();

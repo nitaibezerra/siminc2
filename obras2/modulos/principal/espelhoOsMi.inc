@@ -39,7 +39,7 @@ $_SESSION['tomid'] = (count($os_sond)>0)?2:((count($os_exec)>0)?1:((count($os_im
 ?>
 <html>
     <head>
-        <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+        <title> <?php echo NOME_SISTEMA; ?> </title>
     </head>
     <script type="text/javascript" src="/includes/funcoes.js"></script>
     <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>

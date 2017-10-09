@@ -77,7 +77,7 @@ if($_REQUEST['exibirpdf'] || $_REQUEST['exibirmemo']){
 						<tr bgcolor="#ffffff">
 								<td valign="top" width="50" rowspan="2"><img src="../imagens/brasao.gif" width="45" height="45" border="0"></td>
 								<td nowrap align="left" valign="middle" height="1" style="padding:5px 0 0 0;">
-									SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação<br>
+									'. NOME_SISTEMA. '<br>
 									Ministério da Educação / SE - Secretaria Executiva<br>
 									DTI - Diretoria de Tecnologia da Informação
 								</td>		

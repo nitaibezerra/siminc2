@@ -99,7 +99,7 @@ $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "MONITORAMENTO DE DETALHES ENTIDADES";
 $mensagem->From 		= $_SESSION['email_sistema'];
-$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 $mensagem->Subject = "Monitoramento de detalhes entidades";
 $mensagem->Body = $htmlemail;
 $mensagem->IsHTML( true );

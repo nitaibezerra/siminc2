@@ -18,6 +18,6 @@ if( $_SESSION['baselogin'] == 'simec_desenvolvimento' ){
 }
 
 define('REMETENTE_EMAIL', 'tarefa@mec.gov.br');
-define('REMETENTE_NOME',  'SIMEC - Módulo de Gestão de Tarefas');
+define('REMETENTE_NOME',  SIGLA_SISTEMA. ' - Módulo de Gestão de Tarefas');
 
 ?>

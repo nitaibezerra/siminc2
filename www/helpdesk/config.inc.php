@@ -26,10 +26,10 @@ define('PHPST_UPLOAD_RELATIVE_PATH', 'http://simec-d/helpdesk/upload/');
 define('PHPST_MAIL_TO', $_SESSION['email_sistema']);
 
 // This is the name that will appear on email notifications
-define('PHPST_MAIL_NAME', 'HelpDesk SIMEC');
+define('PHPST_MAIL_NAME', 'HelpDesk ' SIGLA_SISTEMA);
 
 // This is the subject that will appear on email notifications
-define('PHPST_MAIL_SUBJECT', 'Novo Chamado HelpDesk SIMEC');
+define('PHPST_MAIL_SUBJECT', 'Novo Chamado HelpDesk ' SIGLA_SISTEMA);
 
 // Choose your email method
 // Sets the send method for all the mailings
@@ -46,13 +46,13 @@ define('PHPST_MAIL_SENDMETHOD', 'mail');
 define('PHPST_MAIL_SOCKETFROM', $_SESSION['email_sistema']);
 
 // name to appear in from field
-define('PHPST_MAIL_SOCKETFROMNAME', 'HelpDesk SIMEC');
+define('PHPST_MAIL_SOCKETFROMNAME', 'HelpDesk ' SIGLA_SISTEMA);
 
 // email address to reply to
 define('PHPST_MAIL_SOCKETREPLY', $_SESSION['email_sistema']);
 
 // name for reply email
-define('PHPST_MAIL_SOCKETREPLYNAME', 'RE HelpDesk SIMEC');
+define('PHPST_MAIL_SOCKETREPLYNAME', 'RE HelpDesk ' SIGLA_SISTEMA);
 
 // smtp host to send the emails via the smtp socket
 // this may simply be mec-35-006

@@ -146,7 +146,7 @@ DML;
           ob_start();
           echo '<pre>';
           var_dump($retornoDTO);
-          enviar_email(array('nome' => "SIMEC", 'email' => $_SESSION['email_sistema']),
+          enviar_email(array('nome' => SIGLA_SISTEMA, 'email' => $_SESSION['email_sistema']),
                   array($_SESSION['email_sistema']), 'Resposta da Requisição à SOF', ob_get_contents());
           ob_end_clean();
       }

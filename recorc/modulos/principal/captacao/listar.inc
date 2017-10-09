@@ -83,13 +83,13 @@ DML;
             );
 
             $ws = new Spo_Ws_Sof_Receita('spo', Spo_Ws_Sof_Receita::PRODUCTION);
-            $retorno = $ws->captarBaseExterna($dados['codcaptacaosiop'], 'SIMEC', array($dados));
+            $retorno = $ws->captarBaseExterna($dados['codcaptacaosiop'], SIGLA_SISTEMA, array($dados));
 
             // -- Primeira tentativa de envio - registro completo
             if (!$retorno->return->sucesso && 'Nada a alterar' !== $retorno->return->mensagensErro) {
 
                 // -- Segunda tentativa de envio - sem subnatureza (fonte)
-                $retorno = $ws->captarBaseExterna($dados['codcaptacaosiop'], 'SIMEC', array($dados), true);
+                $retorno = $ws->captarBaseExterna($dados['codcaptacaosiop'], SIGLA_SISTEMA, array($dados), true);
                 if (!$retorno->return->sucesso && 'Nada a alterar' !== $retorno->return->mensagensErro) {
 
                     processaRetornoSiop($retorno->return->mensagensErro, $dados['capid']);

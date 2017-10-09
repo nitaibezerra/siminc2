@@ -19,7 +19,7 @@ include APPRAIZ."includes/cabecalho.inc";
 ?>
 <br>
 <?
-$titul = 'Auditoria Interna do SIMEC';
+$titul = 'Auditoria Interna do ' SIGLA_SISTEMA;
 monta_titulo($titulo_modulo,$titul);
 ?>
 <script language="JavaScript" src="../includes/calendario.js"></script>

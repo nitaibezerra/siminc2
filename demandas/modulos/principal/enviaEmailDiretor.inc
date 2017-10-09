@@ -3,7 +3,7 @@
 	$emailCopia = '';
 
 	// Seta remetente
-	$remetente = array("nome"=>"SIMEC - PROGRAMA ATLETA NA ESCOLA", "email"=>$_SESSION['email_sistema']);
+	$remetente = array("nome"=>SIGLA_SISTEMA. " - PROGRAMA ATLETA NA ESCOLA", "email"=>$_SESSION['email_sistema']);
 
 	// Pega email TÉCNICO e ANO
 	$sql = "Select ateid, usucpf, usunome, lower(usuemail) as usuemail from carga.atletaemail where usuemail <> ''";

@@ -1738,7 +1738,7 @@ function enviarEmailTramite($arrDestinatarios){
 
     $remetente = array("nome" => "Sistema de Gestão de Documentos", "email" => $_SESSION['email_sistema']);
     $destinatario = $arrDestinatarios;
-    $assunto = "Tramitação de Processo - Gestão de Documentos - SIMEC";
+    $assunto = "Tramitação de Processo - Gestão de Documentos - ". SIGLA_SISTEMA;
     $conteudo = "
         <b>Tramitação de Processo - Gestão de Documentos - SIMEC</b>
         <p>

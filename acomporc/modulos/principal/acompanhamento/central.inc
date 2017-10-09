@@ -17,7 +17,7 @@ $tipo = $_REQUEST['tipo'];
 $gerenciador = new Acomporc_Service_Gerenciador(Acomporc_Service_Gerenciador::CONTROLLER_ACOMPANHAMENTO_CENTRAL,$tipo);
 
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

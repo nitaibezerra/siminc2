@@ -239,7 +239,7 @@ XML;
 				$mensagem->Mailer       = "smtp";
 				$mensagem->FromName		= "Conta Corrente Atualizadas";
 				$mensagem->From 		= $_SESSION['email_sistema'];
-				$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+				$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 				$mensagem->Subject = "Conta Corrente Atualizadas";
 				
 				$mensagem->Body = $conteudo;

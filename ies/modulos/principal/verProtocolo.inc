@@ -26,7 +26,7 @@ $dados = $db->pegaLinha( $sql );
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação</title>
+		<title><?php echo NOME_SISTEMA; ?></title>
 	    <script type="text/javascript" src="../includes/funcoes.js"></script>
 	    <script type="text/javascript" src="../includes/prototype.js"></script>
 	    <script type="text/javascript" src="../includes/entidades.js"></script>

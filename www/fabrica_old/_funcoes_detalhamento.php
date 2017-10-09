@@ -142,12 +142,12 @@ function inserirDetalhamentoSolicitacaoServico( $dados ) {
         	$conteudo .= "<p>Qtd. estimada de UST: <strong> {$dados['odsqtdpfestimada']} </strong></p>";
         }
         
-        $assunto = "SIMEC - Fábrica - Aviso de criação de Ordem de Serviço";
+        $assunto = SIGLA_SISTEMA. " - Fábrica - Aviso de criação de Ordem de Serviço";
 
         $remetente = array( );
         $destinatarios = array( );
         $remetente['email'] = "noreply@mec.gov.br";
-        $remetente['nome']  = "SIMEC";
+        $remetente['nome']  = SIGLA_SISTEMA;
 
         $sqlPrepostoSquadra = "SELECT usu.usuemail
                                 FROM seguranca.usuario usu

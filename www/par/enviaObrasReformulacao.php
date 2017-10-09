@@ -223,7 +223,7 @@ foreach( $arrObras as $obra ){
 	}
 	// 	$email = Array($_SESSION['email_sistema']);
 	if( $entemail ){
-// 		enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
+// 		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
 	}
 
 

@@ -1850,7 +1850,7 @@ class Restricao extends Modelo {
                 </html>
                 ';
         
-            $assunto            = "SIMEC - RESTRIÇÕES E INCONFORMIDADES - ID ".$rstid." - Tramitada";
+            $assunto            = SIGLA_SISTEMA. " - RESTRIÇÕES E INCONFORMIDADES - ID ".$rstid." - Tramitada";
             $conteudo           = $html;
             
             $dados = array(

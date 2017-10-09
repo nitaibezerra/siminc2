@@ -1418,7 +1418,7 @@ PARTIAL_XML;
 
 	// -- Dadas da requisição comuns a todas as NC
 	$dadosIdentificacaoHeader = array(
-        'app' => 'SIMEC',
+        'app' => SIGLA_SISTEMA,
         'version' => 1,
         'created' => date('c'),
         'usuario' => $dados['sigefusername'],

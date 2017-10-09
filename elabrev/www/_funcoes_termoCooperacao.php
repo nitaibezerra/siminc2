@@ -5311,7 +5311,7 @@ PARTIAL_XML;
 
     // -- Dadas da requisição comuns a todas as NC
     $dadosIdentificacaoHeader = array(
-        'app' => 'SIMEC',
+        'app' => SIGLA_SISTEMA,
         'version' => 1,
         'created' => date('c'),
         'usuario' => $dados['wsusuario'],
@@ -5453,7 +5453,7 @@ function consultar_sigef_nc($identificador) {
 
     $xmlSigefNC = new SimpleXMLElement('<?xml version="1.0" encoding="ISO-8859-1"?><request></request>');
     $header = $xmlSigefNC->addChild('header');
-    $header->addChild('app', 'SIMEC');
+    $header->addChild('app', SIGLA_SISTEMA);
     $header->addChild('version', '1.4.1');
     $header->addChild('created', date('c'));
     $body = $xmlSigefNC->addChild('body');

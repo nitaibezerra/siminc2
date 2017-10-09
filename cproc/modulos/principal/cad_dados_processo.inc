@@ -284,7 +284,7 @@ if( $_GET['excluirpraid'] ){
 			            <td class="subtituloDireita" width="20%" colspan="2">Nº Controle SIMEC:</td>
 			            <td>
 			                <?php
-			                    echo campo_texto('prcid', 'S', 'N', 'Nº Controle SIMEC', '51', '25', '', '', '', '', '', 'id="prcid"', '', '', '');
+			                    echo campo_texto('prcid', 'S', 'N', 'Nº Controle ' SIGLA_SISTEMA, '51', '25', '', '', '', '', '', 'id="prcid"', '', '', '');
 			                ?>
 			            </td>
 			

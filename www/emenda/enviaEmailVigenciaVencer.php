@@ -72,7 +72,7 @@ foreach ($arrRegistro as $dias => $arrValor) {
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "Atualiza Entidades Emenda";
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Convênio que estão vencendo em ".$dias." dias";
 	$corpoemail = 'Nº do PTA:<br>'.implode('<br>', $arrPtrcod);
 	

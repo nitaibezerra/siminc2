@@ -24,7 +24,7 @@ $topo = "<table width='100%'>
 			</tr>
 		 </table>";
 
-monta_titulo( "Monitoramento dos módulos do SIMEC", $topo);
+monta_titulo( "Monitoramento dos módulos do ". SIGLA_SISTEMA, $topo);
 
 ?>
 <html>

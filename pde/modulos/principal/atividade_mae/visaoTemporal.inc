@@ -127,7 +127,7 @@ if($_REQUEST['requisicao'] == 'telaAcompanhamentoValidacao') {
 <html>
 	<head>
 		<meta name="description" content="<?php echo NOME_SISTEMA; ?>, Permite o Monitoramento Físico e Financeiro e a Avaliação das Ações e Programas do Ministério dentre outras atividades estratégicas">
-		<meta name="keywords" content="SIMEC, MEC, PDE, Ministério da Educação, Analistas: ,Cristiano Cabral, Adonias Malosso, Gilberto Xavier">
+		<meta name="keywords" content="<?php echo SIGLA_SISTEMA; ?>, MEC, PDE, Ministério da Educação, Analistas: ,Cristiano Cabral, Adonias Malosso, Gilberto Xavier">
 		<META NAME="Author" CONTENT="Cristiano Cabral, cristiano.cabral@gmail.com">
 		<meta name="audience" content="all">
 		<meta http-equiv="Cache-Control" content="no-cache">

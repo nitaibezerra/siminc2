@@ -1740,7 +1740,7 @@ function enviaSms()
             '556184028014', // André
         );
 
-        $conteudo = "SIMEC: Banco de dados lento. Mais de 100 queries em execução.";
+        $conteudo = SIGLA_SISTEMA. ": Banco de dados lento. Mais de 100 queries em execução.";
 
         $sms = new Sms();
         $sms->enviarSms($aCelularEnvio, $conteudo, null, 4);

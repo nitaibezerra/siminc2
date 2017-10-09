@@ -89,7 +89,7 @@ function executarPagamento($dados) {
 	$soma = ($totalpagamento+$valor);
 	
 	if( round($soma,2) > round($totalempenho,2) ) {
-		die("SIMEC INFORMA : Total de pagamento esta maior que o valor do empenho");
+		die(SIGLA_SISTEMA. " INFORMA : Total de pagamento esta maior que o valor do empenho");
 	}
 	
 	$res_cc = consultarContaCorrente($dados);

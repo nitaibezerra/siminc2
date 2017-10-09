@@ -341,7 +341,7 @@ function inserirCoordenadorIESGerenciamento($dados) {
    	
  	if($dados['reenviarsenha']=="S") {
  		
- 		$remetente = array("nome" => "SIMEC - MÓDULO SISPACTO","email" => $dados['iusemailprincipal']);
+ 		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISPACTO","email" => $dados['iusemailprincipal']);
  		$destinatario = $dados['iusemailprincipal'];
  		$usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['iuscpf'])."'");
  		$assunto = "Cadastro no SIMEC - MÓDULO SISPACTO";
@@ -1726,9 +1726,9 @@ function posDevolverCoordenadorIES() {
 		
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
-		$mensagem->FromName		= "SIMEC";
+		$mensagem->FromName		= SIGLA_SISTEMA;
 		$mensagem->From 		= "noreply@mec.gov.br";
-		$mensagem->Subject 		= "SIMEC - SISPACTO - Devolução do Projeto para alterações";
+		$mensagem->Subject 		= SIGLA_SISTEMA. " - SISPACTO - Devolução do Projeto para alterações";
 		
 		$mensagem->AddAddress( $identificacaousuario['iusemailprincipal'], $identificacaousuario['iusnome'] );
 		$mensagem->AddAddress( $_SESSION['email_sistema'] );

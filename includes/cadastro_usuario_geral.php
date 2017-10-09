@@ -2466,7 +2466,7 @@ function enviarEmailSuperUser($usucpf, $pflcod)
             AND pu.pflcod = '{$pflcod}' ";
         $dados = $db->pegaLinha($sql);
 
-        $remetente = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
+        $remetente = array("nome" => SIGLA_SISTEMA, "email" => "noreply@mec.gov.br");
         $destinatarios = recuperarDestinatariosPadrao();
 
         $assunto = "Novo super-usuário atribuído ({$dados['sisabrev']})";
@@ -2504,7 +2504,7 @@ function enviarAlteracaoSuperUser($dados, $tipo)
 {
     if (IS_PRODUCAO) {
 
-        $remetente = array("nome" => "SIMEC", "email" => "noreply@mec.gov.br");
+        $remetente = array("nome" => SIGLA_SISTEMA, "email" => "noreply@mec.gov.br");
         $destinatarios = recuperarDestinatariosPadrao();
 
         $assunto = "Tentativa de alteração de super-usuário";

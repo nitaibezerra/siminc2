@@ -158,7 +158,7 @@ function carregarResponsavel() {
    		success: function(msg){
    		if(msg=="naopossuisimec") {
 			jQuery('#nomeresponsavel').val('');
-			jQuery('#img_cpf_validado').html('<img src=../imagens/valida2.gif border=0> CPF não consta no SIMEC');
+			jQuery('#img_cpf_validado').html('<img src=../imagens/valida2.gif border=0> CPF não consta no ' SIGLA_SISTEMA);
    		} else {
 			jQuery('#nomeresponsavel').val(msg);
 			jQuery('#img_cpf_validado').html('<img src=../imagens/valida1.gif border=0> CPF validado');

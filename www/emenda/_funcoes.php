@@ -5398,7 +5398,7 @@ Para esclarecimento de dúvidas técnicas quanto aos itens de equipamento, tratar 
 			$complementoConteudo = '<p><b>Prezado(a),</b></p>
 									Para emenda '.$dados["emecod"].' foi indicado a seguinte entidade:<br><br>'.montaCorpoEmailEntidade($dadosEmail);
 	
-			$remetente = array('nome' => 'SIMEC - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
+			$remetente = array('nome' => SIGLA_SISTEMA. ' - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
 			//$cc = "barbara.silva@fnde.gov.br";
 			
 			if ( !empty($dados["edeid"]) ){
@@ -5429,9 +5429,9 @@ Para esclarecimento de dúvidas técnicas quanto aos itens de equipamento, tratar 
 	
 								//if($edeemailenviado != 't' && $_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
 								
-								$retorno = enviar_email($remetente, array($dados["edemailresp"]), 'SIMEC - EMENDAS', $conteudo, $cc, null);
+								$retorno = enviar_email($remetente, array($dados["edemailresp"]), SIGLA_SISTEMA. ' - EMENDAS', $conteudo, $cc, null);
 								if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
-									$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
+									$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), SIGLA_SISTEMA. ' - EMENDAS', $complementoConteudo, $cc, null);
 								} else {
 									$retornoPlano = true;
 								}
@@ -5469,8 +5469,8 @@ Para esclarecimento de dúvidas técnicas quanto aos itens de equipamento, tratar 
 					//if($edeemailenviado == 'f' && $_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao"){
 					
 					if($_SESSION['baselogin'] != "simec_desenvolvimento" && $_SESSION['baselogin'] != "simec_espelho_producao" ){
-						$retorno = enviar_email($remetente, array($dados["edemailresp"]), 'SIMEC - EMENDAS', $conteudo, $cc, null);
-						$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), 'SIMEC - EMENDAS', $complementoConteudo, $cc, null);
+						$retorno = enviar_email($remetente, array($dados["edemailresp"]), SIGLA_SISTEMA. ' - EMENDAS', $conteudo, $cc, null);
+						$retornoPlano = enviar_email($remetente, array($_SESSION['email_sistema']), SIGLA_SISTEMA. ' - EMENDAS', $complementoConteudo, $cc, null);
 					} else {
 						$retornoPlano = true;
 						$retorno = true;
@@ -5717,7 +5717,7 @@ function ativaUsuarioAutomatico( $dados, $enbid = null ){
 
 
 	// envia o email de confirmação da conta aprovada
-	$remetente = array("nome" => "SIMEC - MÓDULO EMENDAS","email" => $usuemail);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO EMENDAS","email" => $usuemail);
 	$destinatario = $usuemail;
 	$assunto = "Cadastro no SIMEC - MÓDULO EMENDAS";
 	$conteudo = "
@@ -7472,7 +7472,7 @@ function enviaEmailEntidade($ptrid, $tipo, $situacao){
 						and usr.rpustatus = 'A'";
 
 		$strEmailTo = $db->carregarColuna($sql);
-		$strAssunto = "SIMEC - Emenda";
+		$strAssunto = SIGLA_SISTEMA. " - Emenda";
 
 		return enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 	}
@@ -7502,7 +7502,7 @@ function enviaEmailSituacaoEmpenho($ptrid){
 	$ptrcod = pegaNumPTA( $ptrid );
 
 	$strMensagem = "O plano de trabalho nº $ptrcod/{$_SESSION['exercicio']} foi disponibilizado para empenho em ".date('d/m/Y h:i:s').".";
-	$strAssunto = 'SIMEC - Emenda';
+	$strAssunto = SIGLA_SISTEMA. ' - Emenda';
 	return enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 }
 
@@ -7524,7 +7524,7 @@ function enviaEmailSituacaoConvenio($ptrid){
 	$ptrcod = pegaNumPTA( $ptrid );
 
 	$strMensagem = "O plano de trabalho nº $ptrcod/{$_SESSION['exercicio']} foi disponibilizado para convênio em ".date('d/m/Y h:i:s').".";
-	$strAssunto = 'SIMEC - Emenda';
+	$strAssunto = SIGLA_SISTEMA. ' - Emenda';
 	return enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 }
 
@@ -7537,7 +7537,7 @@ function enviaEmailSituacaoConvenio($ptrid){
 function enviaEmailPerfilUnidade($url, $ptrid, $tipo = null){
 	global $db;
 
-	$strAssunto = "SIMEC - Emenda";
+	$strAssunto = SIGLA_SISTEMA. " - Emenda";
 	if( strstr($url, "emenda.php?modulo=principal/analiseDadosPTA&acao=A") || $tipo == 'M' ){
 		$pflcod = ANALISTA_MERITO;
 		$tipo = 'M';
@@ -7638,7 +7638,7 @@ function enviaEmailEntidadeConvenio( $url, $ptrid, $mailid = null ){
 	$strEmailTo = $db->carregarColuna($sql);
 	$strEmailTo = $strEmailTo ? $strEmailTo : array();
 
-	$strAssunto = "SIMEC - Emenda";
+	$strAssunto = SIGLA_SISTEMA. " - Emenda";
 	//include_once APPRAIZ . 'includes/Email.php';
 	//$boEmail = new Email();
 
@@ -7688,7 +7688,7 @@ function enviaEmailEntidadeConvenio( $url, $ptrid, $mailid = null ){
 function enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo, $anexos = array()){
 	global $db;
 
-	$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+	$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 
 	if( $strEmailTo ){
 		if ( $_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){

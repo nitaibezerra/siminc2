@@ -192,7 +192,7 @@ $db->cria_aba( ABA_CAD_PROCESSO, $url, '', $arMnuid );
 	            <td class="subtituloDireita" colspan="2">Nº do Processo:</td>
 	            <td>
 	                <?php
-	                    echo campo_texto('prcnumsidoc_campo', 'S', 'N', 'Nº Controle SIMEC', '51', '25', '####.######/####-##', '', '', '', '', 'id="prcid_campo"', '', $processo['prcnumsidoc'], '');
+	                    echo campo_texto('prcnumsidoc_campo', 'S', 'N', 'Nº Controle ' SIGLA_SISTEMA, '51', '25', '####.######/####-##', '', '', '', '', 'id="prcid_campo"', '', $processo['prcnumsidoc'], '');
 	                ?>
 	            </td>
 	        </tr>

@@ -267,7 +267,7 @@ class Profissionais extends Modelo{
 		
 		$para = $dados['email'];
 		
-		$assunto = 'Cadastro SIMEC';
+		$assunto = 'Cadastro ' SIGLA_SISTEMA;
 		
 		$funcao = $dados['funcao']=='T' ? 'Tutor' : 'Supervisor';
 		
@@ -307,7 +307,7 @@ class Profissionais extends Modelo{
 		$mensagem->persistencia = $db;
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
-		$mensagem->FromName		= "SIMEC - Mais Médicos";
+		$mensagem->FromName		= SIGLA_SISTEMA. " - Mais Médicos";
 		$mensagem->From 		= $_SESSION['email_sistema'];
 		$mensagem->AddAddress($para[0], $para[1]);
 		$mensagem->Subject = $assunto;

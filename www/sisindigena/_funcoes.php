@@ -374,7 +374,7 @@ function reiniciarSenha($dados) {
 	
 	$arrUsu = $db->pegaLinha("SELECT usunome, usuemail FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['usucpf'])."'");
 	
-	$remetente = array("nome" => "SIMEC - MÓDULO SISINDÍGENA","email" => $arrUsu['usuemail']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISINDÍGENA","email" => $arrUsu['usuemail']);
  	$destinatario = $arrUsu['usuemail'];
  	$usunome = $arrUsu['usunome'];
  	
@@ -866,7 +866,7 @@ function ativarEquipe($dados) {
     				$db->executar($sql);
 			    }
 			    
-		 		$remetente = array("nome" => "SIMEC - MÓDULO SISINDÍGENA","email" => $identificacaousuario['iusemailprincipal']);
+		 		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISINDÍGENA","email" => $identificacaousuario['iusemailprincipal']);
  				$destinatario = $identificacaousuario['iusemailprincipal'];
  				$usunome = $identificacaousuario['iusnome'];
  				$assunto = "Cadastro no SIMEC - MÓDULO SISINDÍGENA";
@@ -4334,9 +4334,9 @@ function posDevolverCoordenadorIES() {
 		
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
-		$mensagem->FromName		= "SIMEC";
+		$mensagem->FromName		= SIGLA_SISTEMA;
 		$mensagem->From 		= "noreply@mec.gov.br";
-		$mensagem->Subject 		= "SIMEC - SISINDIGENA - Devolução do Cadastramento para alterações";
+		$mensagem->Subject 		= SIGLA_SISTEMA. " - SISINDIGENA - Devolução do Cadastramento para alterações";
 		
 		$mensagem->AddAddress( $identificacaousuario['iusemailprincipal'], $identificacaousuario['iusnome'] );
 		$mensagem->AddAddress( $_SESSION['email_sistema'] );

@@ -631,7 +631,7 @@ if($_REQUEST['fecharjanela']==true) {
 	$mensagem->Mailer       = "smtp";
 	$mensagem->FromName		= "SISTEMA DE PROCESSAMENTO DE AGENDAMENTOS";
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Processamento dos agendamentos";
 	
 	ob_start();

@@ -200,7 +200,7 @@ Atenciosamente,
 Equipe SIMEC/PAR.
 </pre>";
 					
-					$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+					$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 					$strMensagem = html_entity_decode($strMensagem);
 						
 					
@@ -383,7 +383,7 @@ Equipe SIMEC/PAR.
 </pre>";
 					
 					
-				$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+				$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 				$strMensagem = html_entity_decode($strMensagem);
 				$strEmailTo = $email;
 				
@@ -820,7 +820,7 @@ Equipe SIMEC/PAR.
 			}
 
 
-				$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+				$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 				$strMensagem = html_entity_decode($strMensagem);
 					
 				

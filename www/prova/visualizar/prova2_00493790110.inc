@@ -5,7 +5,7 @@ include  APPRAIZ."includes/cabecalho.inc";
 if(isset($_SESSION['message'])) { echo "<div style='padding:10px; color:#990000; text-align:center'><h3>" . $_SESSION['message'] . "</h3></div>"; unset($_SESSION['message']); }
 
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
 
 /*
  * DICAS:

@@ -120,7 +120,7 @@ class ExceptionHandler {
         $assunto = 'Erro no Simec ' . date ( "d-m-Y H:i:s" ) . " - " . $_SESSION ['ambiente'];
 
         $aDestinatarios = carregarUsuariosSessao();
-        $remetente     = array("nome"=>"SIMEC - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'], "email"=>"noreply@mec.gov.br");
+        $remetente     = array("nome"=>SIGLA_SISTEMA. " - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'], "email"=>"noreply@mec.gov.br");
         $destinatarios = !empty($aDestinatarios[$_SESSION['sisid']]) ? $aDestinatarios[$_SESSION['sisid']] : array_keys($aDestinatarios['todos']);
 
         simec_email($remetente, $destinatarios, $assunto, $msgLog);

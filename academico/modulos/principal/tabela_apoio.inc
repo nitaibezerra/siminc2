@@ -91,7 +91,7 @@ foreach ($dados as $key => $value){
 	}
 }
 
-monta_titulo( 'SIMEC - Tabelas de Apoio', 'Índice de Impacto Financeiro' );
+monta_titulo( SIGLA_SISTEMA. ' - Tabelas de Apoio', 'Índice de Impacto Financeiro' );
 
 ?>
 <style>

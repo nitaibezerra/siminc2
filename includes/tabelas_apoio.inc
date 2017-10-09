@@ -169,7 +169,7 @@ if($_REQUEST["submetido"]) {
 }
 
 echo "<br>";
-monta_titulo( 'SIMEC - Tabelas de Apoio', $_SESSION["sisdsc"] );
+monta_titulo( SIGLA_SISTEMA. ' - Tabelas de Apoio', $_SESSION["sisdsc"] );
 
 ?>
 

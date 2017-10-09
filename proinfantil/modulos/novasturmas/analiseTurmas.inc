@@ -209,7 +209,7 @@ apresentada no Simec como "em dilig&ecirc;ncia".</p>
 <p>Atenciosamente,&nbsp;</p>
 <p>Minist&eacute;rio da Educa&ccedil;&atilde;o</p>';
 						
-						enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $arEmail, $assunto, $conteudo, $cc, $cco );
+						enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $arEmail, $assunto, $conteudo, $cc, $cco );
 					}
 					$retorno = '1';
 				} else {

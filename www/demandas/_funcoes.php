@@ -7427,7 +7427,7 @@ function enviaEmailReservaAud($evaid,$acao) {
 
 	$dado = (array) $db->pegaLinha($sql);
 
-	$remetente = array("nome"=>"SIMEC - MÓDULO DE RESERVA DE AUDITÓRIO", "email"=>$_SESSION['email_sistema']);
+	$remetente = array("nome"=>SIGLA_SISTEMA. " - MÓDULO DE RESERVA DE AUDITÓRIO", "email"=>$_SESSION['email_sistema']);
 	//$remetente = $dado['usuemail'];
 	$destinatario = $dado['usuemail'];
 	$emailCopia = $_SESSION['email_sistema'];

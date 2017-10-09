@@ -1,7 +1,7 @@
 <?php
 include  APPRAIZ."includes/cabecalho.inc";
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Questão 01 - Alimente a tabela com as informações solicitadas' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Questão 01 - Alimente a tabela com as informações solicitadas' );
 
 $sql = "SELECT t.turnome, t.qtdalu, p.pronome,
 			TO_CHAR(turdtabr,'dd/mm/YYYY') as turdtabr,

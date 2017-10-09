@@ -210,7 +210,7 @@ include APPRAIZ ."includes/cabecalho.inc";
 echo '<br>';
 
 /* montando cabeçalho */
-monta_titulo( "Monitoramento dos módulos do SIMEC", "");
+monta_titulo( "Monitoramento dos módulos do ". SIGLA_SISTEMA, "");
 
 
 ?>

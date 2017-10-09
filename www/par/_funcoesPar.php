@@ -1289,9 +1289,9 @@ Somente o(a) SECRETÁRIO(A) DE EDUCAÇÃO DO ESTADO poderá fazer a validação do Ter
 		$assunto = 'MEC/FNDE - Documento(s) para validação ';
 
 		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-			//enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
+			//enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
 		} else {
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
 		}
 	}
 }
@@ -1320,9 +1320,9 @@ Somente o(a) SECRETÁRIO(A) DE EDUCAÇÃO DO ESTADO poderá fazer a validação do Ter
 		$assunto = 'MEC/FNDE - Documento(s) para validação ';
 
 		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
-			//enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
+			//enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
 		} else {
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
 		}
 	}
 }
@@ -8025,7 +8025,7 @@ function wf_pos_diligenciaRefurmulaPreObra_miparaconvencional( $preid ){
 	
 	$email = $arrDados['entemail'];
 	
-	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
+	enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
 	
 	return true;
 }
@@ -8218,7 +8218,7 @@ function wf_pos_refurmulaPreObra_miparaconvencional( $preid ){
 	if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
 		$email = array($_SESSION['email_sistema']);
 	}
-	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
+	enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $texto, $cc, $cco );
 	
 	return true;
 }
@@ -9007,7 +9007,7 @@ function enviaEmailFimReformulacao( $sbaid ){
 
 	$email = 'par@fnde.gov.br';
 
-	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
+	enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
 
 	return true;
 }
@@ -9119,7 +9119,7 @@ function enviaEmailDiligenciaSubacao( $inuid, $sbaid ){
 
 	foreach($arDadosUsuarios as $dados){
 		$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-		enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 	}
 	return true;
 }
@@ -9270,7 +9270,7 @@ Equipe PAR
 		
 	
 		$strAssunto = $servicoTitulo;
-		$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+		$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 		$strMensagem = html_entity_decode($strMensagem);
 			
 		if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
@@ -9370,7 +9370,7 @@ function enviaEmailRecusaReprogramacao( $dopid , $tipo = 'prazo', $parecer = '',
 		}
 	}
 	
-	$remetente = array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br');
+	$remetente = array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br');
 	
 	
 	if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
@@ -9456,7 +9456,7 @@ function enviaEmailInuidFaltandoCargaSubacao( $arrInuid ){
 				Endereço eletrônico: planodemetas@mec.gov.br';
 
 	$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+	enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 	return true;
 }
 
@@ -9502,7 +9502,7 @@ function enviaEmailInuidPiPtres( $arrInuid ){
 				Endereço eletrônico: planodemetas@mec.gov.br';
 
 	$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-	enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+	enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 	return true;
 }
 
@@ -9567,11 +9567,11 @@ function enviaEmailPlanodeMetasSubacaoReformulacao( $inuid, $sbaid ){
 
 	if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
 		$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-		enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
 	} else {
 		foreach($arDadosUsuarios as $dados){
 			$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 		}
 	}
 	return true;
@@ -9638,12 +9638,12 @@ function enviaEmailPlanodeMetasObrasReformulacao( $inuid, $preid ){
 
 	if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
 		$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-		enviar_email(array('nome'=>'SIMEC - OBRAS PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - OBRAS PAR', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $conteudo, $cc, $cco );
 	} else {
 		if( is_array($arDadosUsuarios) ){
 			foreach($arDadosUsuarios as $dados){
 				$remetente = array('nome'=>$dados['usunome'], 'email'=>$_SESSION['email_sistema']);
-				enviar_email(array('nome'=>'SIMEC - OBRAS PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+				enviar_email(array('nome'=>SIGLA_SISTEMA. ' - OBRAS PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 			}
 		}
 	}
@@ -13237,7 +13237,7 @@ function enviaEmailMI( $terid, $arrObras ){
 	global $db;
 
 
-	$arDadosUsuarios = array(0 => array('nome'=>'SIMEC', 'usuemail'=>$_SESSION['email_sistema']));
+	$arDadosUsuarios = array(0 => array('nome'=>SIGLA_SISTEMA, 'usuemail'=>$_SESSION['email_sistema']));
 	//$arDadosUsuarios = $db->carregar( $sql );
 	$arDadosUsuarios = $arDadosUsuarios ? $arDadosUsuarios : array();
 
@@ -13260,7 +13260,7 @@ function enviaEmailMI( $terid, $arrObras ){
 				<p>Caso não possua acesso ao sistema SIMEC, entre em contato com o FNDE no fone (61)9999-9999.</p>';
 
 	foreach($arDadosUsuarios as $dados){
-		$resultado = enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+		$resultado = enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 	}
 	return $resultado;
 }
@@ -13487,7 +13487,7 @@ Equipe do PAR
 		}	
 		
 			
-		$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+		$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 			
 		$strMensagem = html_entity_decode($strMensagem);
 
@@ -13558,7 +13558,7 @@ function enviaEmailReprogramacao( $tipo, $dopid, $prazo = '' , $subacoes = array
 
 	$email = 'par@fnde.gov.br';
 
-	$resultado = enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
+	$resultado = enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $email, $assunto, $conteudo, $cc, $cco );
 	return $resultado;
 }
 
@@ -13617,7 +13617,7 @@ function enviaEmailLiberacaoReprogramacao( $inuid, $subacoes ){
 	$conteudo .= '</p>';
 
 	foreach($arDadosUsuarios as $dados){
-		enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 	}
 	return true;
 }
@@ -14635,8 +14635,8 @@ function enviaEmailNovoTermo($dopid, $tipoReq = 'novo')
 			<br>
 			Equipe PAR "; 
 			// . $dopTexto
-			$strAssunto = "Termo de compromisso nº {$numDoc} disponível para validação no SIMEC";	
-			$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+			$strAssunto = "Termo de compromisso nº {$numDoc} disponível para validação no ". SIGLA_SISTEMA;	
+			$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 			$strMensagem = html_entity_decode($strMensagem);
 			
 			if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
@@ -14800,8 +14800,8 @@ function enviaEmailNovoTermoObrasPAR($dopid, $tipoReq = 'novo')
 			<br>
 			Equipe PAR "; 
 			// . $dopTexto
-			$strAssunto = "Termo de compromisso nº {$numDoc} disponível para validação no SIMEC";	
-			$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+			$strAssunto = "Termo de compromisso nº {$numDoc} disponível para validação no ". SIGLA_SISTEMA;	
+			$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 			$strMensagem = html_entity_decode($strMensagem);
 			
 			if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
@@ -14967,8 +14967,8 @@ function enviaEmailNovoTermoPAC($terid, $tipoReq = 'novo')
 							<br>
 							Equipe PAR "; 
 	
-			$strAssunto = "Termo de compromisso nº $numDoc disponível para validação no SIMEC";	
-			$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+			$strAssunto = "Termo de compromisso nº $numDoc disponível para validação no ". SIGLA_SISTEMA;	
+			$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 			$strMensagem = html_entity_decode($strMensagem);
 			
 			if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
@@ -15785,8 +15785,8 @@ XML;
 									<b>Processo:</b> ".$nu_processo."<br/>
 									<b>Histórico:</b> ".$method."<br/>
 									<b>Sistema:</b> ".$sistema."</span>";
-			$assunto  = "SIMEC - Histórico SIGEF";
-			enviar_email(array('nome'=>'SIMEC - Histórico', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $html ); */
+			$assunto  = SIGLA_SISTEMA. " - Histórico SIGEF";
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - Histórico', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $html ); */
 		}
 	} catch (Exception $e) {
 		$erroMSG = str_replace(array(chr(13),chr(10)), ' ',$e->getMessage());
@@ -15797,8 +15797,8 @@ XML;
 					<b>Histórico:</b> ".$method."<br/>
 					<b>Sistema:</b> ".$sistema."</span>";
 		
-		$assunto  = "SIMEC - Histórico SIGEF";
-		enviar_email(array('nome'=>'SIMEC - Histórico', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $html );
+		$assunto  = SIGLA_SISTEMA. " - Histórico SIGEF";
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - Histórico', 'email'=>'noreply@mec.gov.br'), $_SESSION['email_sistema'], $assunto, $html );
 	}
 	
 	return $aParametros;
@@ -18587,7 +18587,7 @@ Equipe do PAR
 					$strMensagem = $texto;
 					// . $dopTexto
 					$strAssunto = "Prorrogação da obra '{$nomeObra}' recusada ";
-					$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+					$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 					$strMensagem = html_entity_decode($strMensagem);
 						
 					if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" )
@@ -18847,10 +18847,10 @@ function verificaExecucaoFisicaObras( $dados ){
 			}
 
 			if( (float)$vrlDisponivel < 1 ){
-				echo "SIMEC INFORMA : ".$dadospre['descricao']." não foi homologada";
+				echo SIGLA_SISTEMA. " INFORMA : ".$dadospre['descricao']." não foi homologada";
 			} else {
 				if( (float)$vlrInformado > (float)$vrlDisponivel ){
-					echo "SIMEC INFORMA : O valor informado <b>R$ ".simec_number_format( $vlrInformado, 2, ',', '.' )."</b> para a obra: <b>".$dadospre['descricao']."</b>, utrapassa o valor disponivel: <b>R$ ".simec_number_format( $vrlDisponivel, 2, ',', '.' )."</b>";
+					echo SIGLA_SISTEMA. " INFORMA : O valor informado <b>R$ ".simec_number_format( $vlrInformado, 2, ',', '.' )."</b> para a obra: <b>".$dadospre['descricao']."</b>, utrapassa o valor disponivel: <b>R$ ".simec_number_format( $vrlDisponivel, 2, ',', '.' )."</b>";
 				}
 			}
 		}
@@ -19199,7 +19199,7 @@ function validaAnaliseObrasMIConvencional( $post ){
 				</body>
 			</html>';
 			$strAssunto = "Processo {$arProcesso['pronumeroprocesso']} em Diligência";
-			$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+			$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 			
 			if($_SERVER['HTTP_HOST'] == "simec-d" || $_SERVER['HTTP_HOST'] == "simec-d.mec.gov.br"){
 				$strEmailTo = array($_SESSION['email_sistema']);

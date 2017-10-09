@@ -117,7 +117,7 @@ if (isset($_GET['requisicao']) || !empty($_GET['requisicao'])) {
 }
 
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require APPRAIZ . 'includes/cabecalho.inc';

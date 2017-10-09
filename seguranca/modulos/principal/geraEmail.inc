@@ -1,5 +1,5 @@
 <?php
-			$remetente = array('nome'=>'SIMEC', 'email'=>$_SESSION['email_sistema']);
+			$remetente = array('nome'=>SIGLA_SISTEMA, 'email'=>$_SESSION['email_sistema']);
 //			$assunto  = "URGENTE - Reabertura de prazo para envio de obras do PAC 2";   CASO 1 e 2
 //			$assunto  = "[SIMEC]Informativo PAR 2010 - Obras aprovadas (PAC 2)";        CASO 3 e 4
 			$assunto  = "[SIMEC]Informativo PAR 2010 - Obras arquivadas (PAC 2)";

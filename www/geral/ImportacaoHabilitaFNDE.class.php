@@ -37,14 +37,14 @@ class importacaoHabilitaFNDE {
 		$this->hencnpj = array();
 
 		//extrair os arquivos .zip
-		//enviar_email(array("nome" => "SIMEC EMENDAS","email" => $_SESSION['email_sistema']), $_SESSION['email_sistema'], "Start do script", "TESTE", $_SESSION['email_sistema']);
+		//enviar_email(array("nome" => SIGLA_SISTEMA. " EMENDAS","email" => $_SESSION['email_sistema']), $_SESSION['email_sistema'], "Start do script", "TESTE", $_SESSION['email_sistema']);
 		$arquivoZip = $this->retornaArquivosDiretorio($diretorio, 'zip');
 		/*ob_start();
         echo "<pre>";
 		print_r($arquivoZip);
         $saida = ob_get_contents();
         ob_clean();
-        enviar_email(array("nome" => "SIMEC EMENDAS","email" => $_SESSION['email_sistema']), $_SESSION['email_sistema'], "1º Passo do script", $saida, $_SESSION['email_sistema']);*/
+        enviar_email(array("nome" => SIGLA_SISTEMA. " EMENDAS","email" => $_SESSION['email_sistema']), $_SESSION['email_sistema'], "1º Passo do script", $saida, $_SESSION['email_sistema']);*/
 		
 		if($arquivoZip){
 			foreach($arquivoZip as $listar){

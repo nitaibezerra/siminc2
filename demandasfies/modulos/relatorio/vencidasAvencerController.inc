@@ -141,7 +141,7 @@ function html2Pdf($html)
 						<img src='{$src}' width='60'>
 					</td>
 					<td>
-						SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação<br>
+						". NOME_SISTEMA. "<br>
 						Ministério da Educação / SE - Secretaria Executiva<br>
 						Sistema - Demandas FIES
 					</td>

@@ -385,7 +385,7 @@ function reiniciarSenha($dados) {
 	
 	$arrUsu = $db->pegaLinha("SELECT usunome, usuemail FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['usucpf'])."'");
 	
-	$remetente = array("nome" => "SIMEC - MÓDULO SISPACTO","email" => $arrUsu['usuemail']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISPACTO","email" => $arrUsu['usuemail']);
  	$destinatario = $arrUsu['usuemail'];
  	$usunome = $arrUsu['usunome'];
  	
@@ -915,7 +915,7 @@ function ativarEquipe($dados) {
     				$db->executar($sql);
 			    }
 			    
-		 		$remetente = array("nome" => "SIMEC - MÓDULO SISPACTO","email" => $identificacaousuario['iusemailprincipal']);
+		 		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISPACTO","email" => $identificacaousuario['iusemailprincipal']);
  				$destinatario = $identificacaousuario['iusemailprincipal'];
  				$usunome = $identificacaousuario['iusnome'];
  				$assunto = "Cadastro no SIMEC - MÓDULO SISPACTO";

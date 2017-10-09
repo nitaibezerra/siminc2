@@ -6,7 +6,7 @@ echo'<br>';
 global $db;
 
 //echo montarAbasArray(criaAbaPar(), "par.php?modulo=principal/listaEstados&acao=A");
-$titulo_modulo = "Ajustes SIGARP x SIMEC";
+$titulo_modulo = "Ajustes SIGARP x ". SIGLA_SISTEMA;
 monta_titulo($titulo_modulo, ''); 
 
 ?>

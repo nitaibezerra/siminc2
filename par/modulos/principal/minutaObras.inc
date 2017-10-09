@@ -15,7 +15,7 @@ if( $_POST['requisicao'] == 'email' ){
 				
 		$strMensagem = pegaTermoCompromissoArquivo( $_REQUEST['dopid'], '' );
 		
-		$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+		$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 		$strMensagem = html_entity_decode($strMensagem);
 		if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" ){
 			$retorno = true;

@@ -10,7 +10,7 @@ if (isset($_GET['gerarDOU']) && ($_GET['gerarDOU'] == 'true')) {
     $extrato = new ExtratoDOU();
     $html = $extrato->getSigle();
     if (!$html) {
-        echo 'Houve uma falha ao tentar gerar o extrato, favor contacte a equipe do SIMEC';
+        echo 'Houve uma falha ao tentar gerar o extrato, favor contacte a equipe do ' SIGLA_SISTEMA;
     } else {
         $documento = new HtmlToPdf($html);
         $documento->setTitle('Termo de Execução Descentralizada - Extrato DOU em: '.date('d-m-Y H:i:s'));

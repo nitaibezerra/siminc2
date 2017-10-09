@@ -38,7 +38,7 @@ function atualiza_interessado($id, $usucpfs,$msgid )
 		 	
 			// envia email para o interessado
 			
-        $assunto = 'SIMEC- Aviso importante!';
+        $assunto = SIGLA_SISTEMA. '- Aviso importante!';
 		$sexo = 'Prezado Sr.  ';
 		if ($sexolancador=='F') $sexolanc='Sra. '; else $sexolanc='Sr. '; 
 		$sql="select ususexo,usunome,usuemail from seguranca.usuario where usucpf='".$usucpf."'";

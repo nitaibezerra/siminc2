@@ -61,7 +61,7 @@ $listaAbas[] = array("descricao" => "Justificativa", "link" => "{$urlBaseDasAbas
 $podeEditarDados = podeEditar($dados['acao']['esdid']);
 
 /**
- * Cabecalho padrão do SIMEC.
+ * Cabecalho padrão do Sistema.
  * @see cabecalho.inc
  */
 require(APPRAIZ . 'includes/cabecalho.inc');

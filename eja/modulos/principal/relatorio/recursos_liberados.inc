@@ -94,7 +94,7 @@ if ($_REQUEST['tiporelatorio']) {
      }
 
   </style>
-                <title> SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação </title>
+                <title> <?php echo NOME_SISTEMA; ?> </title>
                 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">
                 <link rel="stylesheet" type="text/css" href="../includes/listagem.css">
                 <body>

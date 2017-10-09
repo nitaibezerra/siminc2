@@ -469,7 +469,7 @@ XML;
 */
 		//Regra alterada a pedido do Julio no dia 08/11/2012.
 		$strEmailTo		= array(0 => 'lucia.pereira@fnde.gov.br',1 => 'ana@fnde.gov.br');
-		$remetente 		= array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+		$remetente 		= array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 		$strAssunto 	= 'EMISSÃO DE NOTA DE EMPENHO';
 		$strMensagem	= 'O processo '.$this->numeroProcesso.' tem subações disponíveis.';
 		$anexos 		= array();

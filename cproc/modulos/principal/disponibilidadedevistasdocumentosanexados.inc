@@ -76,7 +76,7 @@ monta_titulo( 'Anexo de Documentos de Vistas Disponibilizadas', '' );
             <td class="subtituloDireita">Nº do Processo:</td>
             <td>
                 <?php
-                    echo campo_texto('prcnumsidoc_campo', 'S', 'N', 'Nº Controle SIMEC', '51', '25', '####.######/####-##', '', '', '', '', 'id="prcid_campo"', '', $processo['prcnumsidoc'], '');
+                    echo campo_texto('prcnumsidoc_campo', 'S', 'N', 'Nº Controle ' SIGLA_SISTEMA, '51', '25', '####.######/####-##', '', '', '', '', 'id="prcid_campo"', '', $processo['prcnumsidoc'], '');
                 ?>
             </td>
         </tr>

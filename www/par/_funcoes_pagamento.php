@@ -790,7 +790,7 @@ function executarPagamento($dados) {
 	}
 	
 	if( sizeof($arrRetornoNE[$empnumerooriginal]) > $totPag ){
-		die("SIMEC INFORMA : Processo bloqueado para pagamento!");
+		die(SIGLA_SISTEMA. " INFORMA : Processo bloqueado para pagamento!");
 	} else {
 	
 		$valor = str_replace(array(".",","),array("","."),$dados['valorpagamento']);
@@ -800,7 +800,7 @@ function executarPagamento($dados) {
 		$soma = ($totalpagamento+$valor);
 		
 		if( round($soma,2) > round($totalempenho,2) ) {
-			die("SIMEC INFORMA : Total de pagamento esta maior que o valor do empenho");
+			die(SIGLA_SISTEMA. " INFORMA : Total de pagamento esta maior que o valor do empenho");
 		}
 	
 		/*if($dados['preid']) {
@@ -845,7 +845,7 @@ function executarPagamento($dados) {
 					case "2":
 						$arrPtoidMI = Array(43, 42, 44, 45);
 						if( $dadospre['homologacao']=="nao" && !in_array($dadospre['ptoid'], $arrPtoidMI) ) {
-							die("SIMEC INFORMA : ".$dadospre['descricao']." não foi homologada");
+							die(SIGLA_SISTEMA. " INFORMA : ".$dadospre['descricao']." não foi homologada");
 						}
 						break;
 				}

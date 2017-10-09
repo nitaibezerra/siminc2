@@ -269,7 +269,7 @@ if ($count % 2){
 		</td>
 		<td nowrap align="left" valign="top" height="1" style="padding:5px 0 0 0;">
 			<font style="font-size:11px;">
-				SIMEC- Sistema Integrado de Monitoramento Execução e Controle<br/>
+				<?php echo NOME_SISTEMA; ?><br/>
 				Acompanhamento da Execução Orçamentária<br/>
 				MEC / SE - Secretaria Executiva <br />
 				SPO - Subsecretaria de Planejamento e Orçamento

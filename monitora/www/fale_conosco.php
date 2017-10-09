@@ -36,7 +36,7 @@ else
   $assunto = $_REQUEST['assunto'];
   $mensagem = $_REQUEST['email'];
   $email = $_SESSION['ittemail'];
-  email('Administradores do SIMEC', $email, $assunto, $mensagem);
+  email('Administradores do ' SIGLA_SISTEMA, $email, $assunto, $mensagem);
   ?>
       <script>
          alert('Email enviado com sucesso. Esta janela será fechada.')

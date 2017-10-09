@@ -244,7 +244,7 @@ function executarPagamento($dados) {
 	$totalpagamento = $db->pegaUm("SELECT SUM(pagvalorparcela) FROM cte.pagamento WHERE empid='".$dados['empid']."' AND pagstatus='A'");
 	$totalempenho   = $db->pegaUm("SELECT empvalorempenho FROM cte.empenho WHERE empid='".$dados['empid']."'");
 	if(($totalpagamento+$valor) > $totalempenho) {
-		die("SIMEC INFORMA : Total de pagamento esta maior que o valor do empenho");
+		die(SIGLA_SISTEMA. " INFORMA : Total de pagamento esta maior que o valor do empenho");
 	}
 	
 	if($dados['preid']) {
@@ -278,17 +278,17 @@ function executarPagamento($dados) {
 			switch($dados['pagparcela']) {
 				case "2":
 					if($dadospre['homologacao']=="nao") {
-						die("SIMEC INFORMA : ".$dadospre['descricao']." não foi homologada");
+						die(SIGLA_SISTEMA. " INFORMA : ".$dadospre['descricao']." não foi homologada");
 					}
 					break;
 				case "3":
 					if($dadospre['execucao25']=="nao") {
-						die("SIMEC INFORMA : ".$dadospre['descricao']." não foi executada 25%");
+						die(SIGLA_SISTEMA. " INFORMA : ".$dadospre['descricao']." não foi executada 25%");
 					}
 					break;
 				case "4":
 					if($dadospre['execucao50']=="nao") {
-						die("SIMEC INFORMA : ".$dadospre['descricao']." não foi executada 50%");
+						die(SIGLA_SISTEMA. " INFORMA : ".$dadospre['descricao']." não foi executada 50%");
 					}
 					break;
 			}

@@ -17,7 +17,7 @@ define('Cor_Sucesso',"#336633");
 
 //Matrix de Erros do Sistema
   $ErroImport = array();
-  $ErroImport[1] = "Erro de lay-out: Quando os arquivos de lay-out (Ref) não possuírem os campos necessários para o SIMEC";
+  $ErroImport[1] = "Erro de lay-out: Quando os arquivos de lay-out (Ref) não possuírem os campos necessários para o ". SIGLA_SISTEMA;
   $ErroImport[2] = "Erro por falta do caractere final de arquivo: quando o arquivo texto não possui o caractere final de arquivo"; //ok
   $ErroImport[3] = "Inconsistência de dados: quando os arquivos estão inconsistentes, por exemplo, quando o saldo contábil referencia-se a uma nota de empenho que não existe no sistema.";//N\A
   $ErroImport[4] = "Erro de arquivo corrompido";//N\A

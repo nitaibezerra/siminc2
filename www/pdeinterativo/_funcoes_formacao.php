@@ -1302,7 +1302,7 @@ function enviarEmail( $pdeid ){
 					
 					Secretaria de Educação Básica/ MEC";
 			
-		enviar_email(array('nome'=>'SIMEC - Plano de Formação Continuada', 'email'=>'noreply@mec.gov.br'), $docente['pfdemail'], $assunto, $conteudo, $cc, $cco );
+		enviar_email(array('nome'=>SIGLA_SISTEMA. ' - Plano de Formação Continuada', 'email'=>'noreply@mec.gov.br'), $docente['pfdemail'], $assunto, $conteudo, $cc, $cco );
 	}
 	
 	return true;

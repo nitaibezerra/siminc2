@@ -1089,7 +1089,7 @@ function enviar_email_altera_estado($docid) {
     $destinatario = trim($owner['usuemail']);
     $remetente = array(
         'email' => trim($_SESSION['usuemail']),
-        'nome' => 'SIMEC'
+        'nome' => SIGLA_SISTEMA
     );
     $cc = $cco = '';
 

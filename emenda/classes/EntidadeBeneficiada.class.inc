@@ -222,7 +222,7 @@ class EntidadeBeneficiada extends cls_banco{
 				    $filtro";
 					
 		return parent::carregarColuna($sql);
-		/*$strAssunto = "SIMEC - Emenda";
+		/*$strAssunto = SIGLA_SISTEMA. " - Emenda";
 		$strMensagem = '';
 		
 		return enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);*/

@@ -167,7 +167,7 @@ if($_REQUEST['requisicao']== 'validacaoNutricionista')
 					
 						$strAssunto = "Aviso de desvinculação de nutricionista";
 					
-						$remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+						$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 							
 						$strMensagem =
 						"

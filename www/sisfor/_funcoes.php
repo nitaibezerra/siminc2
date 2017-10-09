@@ -36,11 +36,11 @@ function reenviarSenha($post, $pflcod, $senha) {
 
     $arrUsu = $db->pegaLinha("SELECT usunome, usuemail FROM seguranca.usuario WHERE usucpf = '{$iuscpf}'");
 
-    $remetente = array("nome" => "SIMEC - MÓDULO SISFOR", "email" => $arrUsu['usuemail']);
+    $remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISFOR", "email" => $arrUsu['usuemail']);
     $destinatario = $arrUsu['usuemail'];
     $usunome = $arrUsu['usunome'];
 
-    $remetente = array("nome" => "SIMEC - MÓDULO SISFOR", "email" => $iusemailprincipal);
+    $remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISFOR", "email" => $iusemailprincipal);
     $destinatario = $iusemailprincipal;
     $usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf = '{$iuscpf}'");
     $assunto = "Cadastro no SIMEC - MÓDULO SISFOR";
@@ -255,7 +255,7 @@ function inserirCoordenador($post, $pflcod) {
         $db->executar($sql);
         $db->commit();
 
-        $remetente = array("nome" => "SIMEC - MÓDULO SISFOR", "email" => $iusemailprincipal);
+        $remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISFOR", "email" => $iusemailprincipal);
         $destinatario = $iusemailprincipal;
         $usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf = '{$iuscpf}'");
         $assunto = "Cadastro no SIMEC - MÓDULO SISFOR";
@@ -4465,7 +4465,7 @@ function ativarEquipe($dados) {
 			    
 			    $db->executar("UPDATE sisfor.identificacaousuario SET iusstatus='A' WHERE iuscpf='".str_replace(array(".","-"),array(""),$cpf)."'");
 			    
-		 		$remetente = array("nome" => "SIMEC - MÓDULO SISFOR","email" => $identificacaousuario['iusemailprincipal']);
+		 		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISFOR","email" => $identificacaousuario['iusemailprincipal']);
  				$destinatario = $identificacaousuario['iusemailprincipal'];
  				$usunome = $identificacaousuario['iusnome'];
  				$assunto = "Cadastro no SIMEC - MÓDULO SISFOR";
@@ -5190,9 +5190,9 @@ function notificarCoordenadorLocal($sifid) {
 
         $mensagem->Host = "localhost";
         $mensagem->Mailer = "smtp";
-        $mensagem->FromName = "SIMEC";
+        $mensagem->FromName = SIGLA_SISTEMA;
         $mensagem->From = "noreply@mec.gov.br";
-        $mensagem->Subject = "SIMEC - SISFOR - Retornando para elaboração";
+        $mensagem->Subject = SIGLA_SISTEMA. " - SISFOR - Retornando para elaboração";
 
         $mensagem->AddAddress($foo['email'], $foo['nome']);
 
@@ -5213,9 +5213,9 @@ function notificarCoordenadorLocal($sifid) {
 
         $mensagem->Host = "localhost";
         $mensagem->Mailer = "smtp";
-        $mensagem->FromName = "SIMEC";
+        $mensagem->FromName = SIGLA_SISTEMA;
         $mensagem->From = "noreply@mec.gov.br";
-        $mensagem->Subject = "SIMEC - SISFOR - Tramitação no curso";
+        $mensagem->Subject = SIGLA_SISTEMA. " - SISFOR - Tramitação no curso";
 
         $mensagem->AddAddress($foo['emailcontato'], $foo['nomecontato']);
 
@@ -6442,7 +6442,7 @@ function reiniciarSenha($dados) {
 
 	$arrUsu = $db->pegaLinha("SELECT usunome, usuemail FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['usucpf'])."'");
 
-	$remetente = array("nome" => "SIMEC - MÓDULO SISFOR","email" => $arrUsu['usuemail']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISFOR","email" => $arrUsu['usuemail']);
 	$destinatario = $arrUsu['usuemail'];
 	$usunome = $arrUsu['usunome'];
 

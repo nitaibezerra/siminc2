@@ -262,7 +262,7 @@ DML;
         echo '<pre>';
         var_dump($oWsParam);
         enviar_email(
-            array('nome' => "SIMEC", 'email' => $_SESSION['email_sistema']),
+            array('nome' => SIGLA_SISTEMA, 'email' => $_SESSION['email_sistema']),
             array($_SESSION['email_sistema']),
             'Requisição à SOF',
             ob_get_contents());

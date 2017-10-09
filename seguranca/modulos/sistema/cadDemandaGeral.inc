@@ -100,7 +100,7 @@ function salvaDemanda(){
 	42;"SIMEC OBRAS";"SIMEC - Módulo de Monitoramento de Obras"
 	43;"SIMEC PDEESCOLA";"SIMEC - Módulo Escola - PDE-Escola"
 	205;"PSE";"Programa Saúde na Escola"
-	207;"SIMEC";"Sistema de Monitoramento Estratégico"
+	207;SIGLA_SISTEMA;"Sistema de Monitoramento Estratégico"
 	232;"SIMEC - PAINEL";"Painel de Controle"
 	235;"SIMEC EVENTOS";"SIMEC - Módulo Administrativo - Eventos"
 	236;"Rede Federal";"Rede Federal"

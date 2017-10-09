@@ -208,7 +208,7 @@ if($_SERVER['HTTP_HOST'] == 'simec.mec.gov.br'){
 	//Dados WS
 	define("WS_USUARIO",'c60e624c3b7ae3fe6c2987ae3bf1f017');
 	define("WS_SENHA",'d3ad683319bdbba570f1205cf9a2c965');
-	define("WS_CLIENTE",'SIMEC');
+	define("WS_CLIENTE",SIGLA_SISTEMA);
 	define("WS_WSDL",'http://sisfies.mec.gov.br/service/abatimento?wsdl');
 // 	define("WS_WSDL_FIES",'http://freire.mec.gov.br/services');
 	define("WS_WSDL_FIES",'http://freire.capes.gov.br/services');
@@ -235,14 +235,14 @@ if($_SERVER['HTTP_HOST'] == 'simec.mec.gov.br'){
 	//Dados WS
 // 	define("WS_USUARIO",'c60e624c3b7ae3fe6c2987ae3bf1f017');
 // 	define("WS_SENHA",'d3ad683319bdbba570f1205cf9a2c965');
-// 	define("WS_CLIENTE",'SIMEC');
+// 	define("WS_CLIENTE",SIGLA_SISTEMA);
 // 	define("WS_WSDL",'http://sisfies.mec.gov.br/service/abatimento?wsdl');
 	
 	
 	
 	define("WS_USUARIO",'c60e624c3b7ae3fe6c2987ae3bf1f017');
 	define("WS_SENHA",'d3ad683319bdbba570f1205cf9a2c965');
-	define("WS_CLIENTE",'SIMEC');
+	define("WS_CLIENTE",SIGLA_SISTEMA);
 	define("WS_WSDL",'http://sisfieshmg.mec.gov.br/service/abatimento?wsdl');
 // 	define("WS_WSDL_FIES",'http://freire.mec.gov.br/services');
 	define("WS_WSDL_FIES",'http://freire.capes.gov.br/services');

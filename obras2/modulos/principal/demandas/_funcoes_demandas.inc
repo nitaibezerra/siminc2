@@ -380,7 +380,7 @@ function enviarEmailNotificacao($dados, $dadosSolicitante, $dmdid = '', $arquivo
         $dmdid = '';
     }
 
-    $remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+    $remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 
     $destinatarios = array($dadosSolicitante['usuemail']);
 

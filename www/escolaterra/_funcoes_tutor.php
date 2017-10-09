@@ -79,7 +79,7 @@ function inserirProfessores($dados) {
    	
 	if($dados['reenviarsenha']=="S") {
 		
-		$remetente = array("nome" => "SIMEC - MÓDULO ESCOLA DA TERRA","email" => $dados['iusemailprincipal']);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO ESCOLA DA TERRA","email" => $dados['iusemailprincipal']);
 		$destinatario = $dados['iusemailprincipal'];
 		$usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['iuscpf'])."'");
 		$assunto = "Cadastro no SIMEC - MÓDULO ESCOLA DA TERRA";

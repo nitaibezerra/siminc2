@@ -582,14 +582,14 @@ if($_REQUEST['enviar']){
 					.'</center>'.$corpo.
 			'</html>';
 
-	$titulo = "SIMEC - Relatório de Pendências de checklist do SISU";
+	$titulo = SIGLA_SISTEMA. " - Relatório de Pendências de checklist do SISU";
 	require_once(APPRAIZ . 'includes/classes/EmailAgendado.class.inc');
 
 	if(is_array($arrEmail)){
 		$e = new EmailAgendado();
 		$e->setTitle($titulo);
 		$e->setText($html);
-		$e->setName("SIMEC");
+		$e->setName(SIGLA_SISTEMA);
 		$e->setEmailOrigem($_SESSION['email_sistema']);
 		$e->setEmailsDestino($arrEmail);
 		$e->enviarEmails();
@@ -607,7 +607,7 @@ if($_REQUEST['enviar']){
 		$e = new EmailAgendado();
 		$e->setTitle($titulo);
 		$e->setText($html);
-		$e->setName("SIMEC");
+		$e->setName(SIGLA_SISTEMA);
 		$e->setEmailOrigem($_SESSION['email_sistema']);
 //		$e->setEmailsDestino(Array(''));
 		$e->setEmailsDestino(Array('jane.diehl@inep.gov.br'));

@@ -1,7 +1,7 @@
 <?php
 include  APPRAIZ."includes/cabecalho.inc";
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Identificação' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Identificação' );
 
 if( $_POST['requisicao'] == 'Salvar' ){
 	global $db;

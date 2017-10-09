@@ -348,7 +348,7 @@ if($_REQUEST['relatorio']=='planilhaobras') {
 				ORDER BY
 					peo.estuf, mun.mundescricao";
 //	ver($sql,$filtro,d);
-	$cabecalho = array("Tipo de Obra","Nº Protocolo SIMEC","UF","Proponente","Município Beneficiado","Cod IBGE","Grupo PAC","Tipo de Projeto","Valor Proposto (R$)","Terreno próximo Obras do PAC","Terreno próximo Minha Casa Minha Vida","Situação da Análise do FNDE","Motivo do indeferimento","Relatorio de Vistoria Terreno","Fotos do terreno","Planilha Orçamentária","Cronograma Físico-Financeiro","Estudo de Demanda","Planta de Localização do Terreno","Planta de Situação do Terreno","Planta de Locação da Obra","Levantamento Planialtimétrico","Dominialidade do Terreno","Declaração de Fornecimento de Infraestrutura","Declaração de Compatibilidade de Fundação","Escola com Mais Educação (Quadra)","Esfera","Ano de Seleção");
+	$cabecalho = array("Tipo de Obra","Nº Protocolo ". SIGLA_SISTEMA,"UF","Proponente","Município Beneficiado","Cod IBGE","Grupo PAC","Tipo de Projeto","Valor Proposto (R$)","Terreno próximo Obras do PAC","Terreno próximo Minha Casa Minha Vida","Situação da Análise do FNDE","Motivo do indeferimento","Relatorio de Vistoria Terreno","Fotos do terreno","Planilha Orçamentária","Cronograma Físico-Financeiro","Estudo de Demanda","Planta de Localização do Terreno","Planta de Situação do Terreno","Planta de Locação da Obra","Levantamento Planialtimétrico","Dominialidade do Terreno","Declaração de Fornecimento de Infraestrutura","Declaração de Compatibilidade de Fundação","Escola com Mais Educação (Quadra)","Esfera","Ano de Seleção");
 	$dados = $db->carregar($sql);
 
 	if($dados[0]) {

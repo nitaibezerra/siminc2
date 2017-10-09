@@ -185,7 +185,7 @@ foreach ( $pendencias as $itemUsu )
 	}
 	$nome = $itemUsu['usunome'];
 	
-	$assunto = "Atualização de informações no SIMEC";
+	$assunto = "Atualização de informações no ". SIGLA_SISTEMA;
 	
 	$mensagem = <<<EOT
 		<p align="center">

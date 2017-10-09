@@ -63,7 +63,7 @@ function inserirsolicitacao($dados) {
 		
 		foreach($assessores_sec_exe as $ase) {
 			if(strlen($ase['telefone']) == 10) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => '55'.$ase['telefone'], 'body' => ' Painel - Uma solicitação de '.$tipdesc.' foi cadastrada no SIMEC com o código '.$solid.'. Favor acessar o sistema para realizar o atendimento.', 'ID' => substr($ase['respid'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => '55'.$ase['telefone'], 'body' => ' Painel - Uma solicitação de '.$tipdesc.' foi cadastrada no SIMEC com o código '.$solid.'. Favor acessar o sistema para realizar o atendimento.', 'ID' => substr($ase['respid'],0,6).date("Ymdhis")));
 			}
 		}
 	}
@@ -79,14 +79,14 @@ function inserirsolicitacao($dados) {
 	$mensagem = new PHPMailer();
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC - Painel";
+	$mensagem->FromName		= SIGLA_SISTEMA. " - Painel";
 	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($assessores_sec_exe[0]) {
 		foreach($assessores_sec_exe as $ase) {
 			$mensagem->AddAddress($ase['respemail'], $ase['respnome']);
 		}
-		$mensagem->Subject = "SIMEC - Painel - Solicitação de ".$tipdesc;
+		$mensagem->Subject = SIGLA_SISTEMA. " - Painel - Solicitação de ".$tipdesc;
 		$mensagem->Body = "O código da solicitação de <b>".$tipdesc."</b> é: <b>".$solid."</b>. Favor acessar o módulo Painel do sistema SIMEC para realizar o atendimento.";
 		$mensagem->IsHTML( true );
 		$mensagem->Send();
@@ -204,7 +204,7 @@ function inserirencaminhamento($dados) {
 			$sql = "INSERT INTO painel.encaminhados(encid, respid) VALUES ('".$encid."', '".$encam['respid']."');";
 			$db->executar($sql);
 			if(strlen($encam['telefone']) == 10) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC',	'target' => '55'.$encam['telefone'], 'body' => ' Painel - Um encaminhamento de '.$tipdesc.' foi cadastrado no SIMEC com o código '.$dados['solid'].'.'.$encid.'. Favor acessar o sistema para realizar o atendimento.', 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA,	'target' => '55'.$encam['telefone'], 'body' => ' Painel - Um encaminhamento de '.$tipdesc.' foi cadastrado no SIMEC com o código '.$dados['solid'].'.'.$encid.'. Favor acessar o sistema para realizar o atendimento.', 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
 			}
 		}
 	}
@@ -222,12 +222,12 @@ function inserirencaminhamento($dados) {
 		$mensagem->persistencia = $db;
 		$mensagem->Host         = "localhost";
 		$mensagem->Mailer       = "smtp";
-		$mensagem->FromName		= "SIMEC - Painel";
+		$mensagem->FromName		= SIGLA_SISTEMA. " - Painel";
 		$mensagem->From 		= $_SESSION['email_sistema'];
 		foreach($encaminhados as $encam) {
 			$mensagem->AddAddress($encam['respemail'], $encam['respnome']);
 		}
-		$mensagem->Subject = "SIMEC - Painel - Encaminhamento de ".$tipdesc;
+		$mensagem->Subject = SIGLA_SISTEMA. " - Painel - Encaminhamento de ".$tipdesc;
 		$mensagem->Body = "O código do encaminhamento de ".$tipdesc." é:  ".$dados['solid'].'.'.$encid.". Favor acessar o módulo Painel do sistema SIMEC para realizar o atendimento.";
 		$mensagem->IsHTML( true );
 		$mensagem->Send();
@@ -321,7 +321,7 @@ function inseriratendimento($dados) {
 		
 		foreach($assessores_sec_exe as $ase) {
 			if(strlen($ase['telefone']) == 10) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => '55'.$ase['telefone'], 'body' => ' Painel - O encaminhamento de '.$dsol['tipdesc'].'  com o código '.$dsol['solid'].'.'.$dsol['encid'].' foi respondido. Favor acessar o módulo Painel do sistema SIMEC para realizar o atendimento.', 'ID' => substr($ase['respid'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => '55'.$ase['telefone'], 'body' => ' Painel - O encaminhamento de '.$dsol['tipdesc'].'  com o código '.$dsol['solid'].'.'.$dsol['encid'].' foi respondido. Favor acessar o módulo Painel do sistema SIMEC para realizar o atendimento.', 'ID' => substr($ase['respid'],0,6).date("Ymdhis")));
 			}
 		}
 	}
@@ -337,14 +337,14 @@ function inseriratendimento($dados) {
 	$mensagem = new PHPMailer();
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC - Painel";
+	$mensagem->FromName		= SIGLA_SISTEMA. " - Painel";
 	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($assessores_sec_exe[0]) {
 		foreach($assessores_sec_exe as $ase) {
 			$mensagem->AddAddress($ase['respemail'], $ase['respnome']);
 		}
-		$mensagem->Subject = "SIMEC - Painel – Resposta do encaminhamento de ".$dsol['tipdesc'];
+		$mensagem->Subject = SIGLA_SISTEMA. " - Painel – Resposta do encaminhamento de ".$dsol['tipdesc'];
 		$mensagem->Body = "O encaminhamento de ".$dsol['tipdesc']." com o código ".$dsol['solid'].'.'.$dsol['encid']." foi respondido. Favor acessar o módulo Painel do sistema SIMEC para realizar o atendimento.
 		";
 		$mensagem->IsHTML( true );
@@ -437,7 +437,7 @@ function inserirresposta($dados) {
 	    die('<h2>Constructor error</h2><pre>' . $err . '</pre>');
 	}
 	if($dadosusus[$usucpfsol]) {
-		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => $dadosusus[$usucpfsol], 'body' => 'Solicitação finalizada', 'ID' => substr($usucpfsol,0,6).date("Ymdhis")));
+		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => $dadosusus[$usucpfsol], 'body' => 'Solicitação finalizada', 'ID' => substr($usucpfsol,0,6).date("Ymdhis")));
 	}
 	*/
 	/*
@@ -455,9 +455,9 @@ function inserirresposta($dados) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC";
+	$mensagem->FromName		= SIGLA_SISTEMA;
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Solicitação atendida";
 	$mensagem->Body = "Solicitação respondida com sucesso";
 	$mensagem->IsHTML( true );

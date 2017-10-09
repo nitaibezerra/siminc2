@@ -208,14 +208,14 @@
 
                     $PDF = new FPDF('L', 'cm', "A4");
                     $PDF->SetMargins(0.3, 1, 0);
-                    $PDF->SetAuthor('SIMEC');
-                    $PDF->SetTitle('SIMEC');
+                    $PDF->SetAuthor(SIGLA_SISTEMA);
+                    $PDF->SetTitle(SIGLA_SISTEMA);
                     $PDF->AddPage();
 
                     #inicio do cabeçalho
                     $PDF->SetFont('Arial', 'B', 6);
 
-                    $PDF->Cell(6, 0.3, 'SIMEC - Sistema de Integrado de Planejamento, Orçamento e Finanças', 0, 'L');
+                    $PDF->Cell(6, 0.3, SIGLA_SISTEMA. ' - Sistema de Integrado de Planejamento, Orçamento e Finanças', 0, 'L');
                     $PDF->Cell(22.5, 0.3, $data, 0, 'L', 'R');
                     $PDF->ln(0.3);
                     $PDF->Cell(6, 0.3, 'Ministério da Educação - MEC', 0, 'L');

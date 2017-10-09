@@ -349,7 +349,7 @@ if ( $_POST['formulario'] ) {
 
 		// envia o email de confirmação caso a conta seja aprovada
 		//if ( $email_aprovacao) {
-		$remetente = array("nome" => "SIMEC","email" => $usuariod->usuemail);
+		$remetente = array("nome" => SIGLA_SISTEMA,"email" => $usuariod->usuemail);
 		$destinatario = $usuariod->usuemail;
 		$assunto = "Aprovação do Cadastro no Simec - Módulo Gestão de Pessoas";
 		$conteudo = "

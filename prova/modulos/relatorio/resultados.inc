@@ -1,7 +1,7 @@
 <?php
 include  APPRAIZ."includes/cabecalho.inc";
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Resultados' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Resultados' );
 
 /*
  * DICAS:

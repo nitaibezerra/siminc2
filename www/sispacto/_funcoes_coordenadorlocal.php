@@ -949,7 +949,7 @@ function inserirCoordenadorLocalGerenciamento($dados) {
    	}
    	
 	if($dados['reenviarsenha']=="S") {
-		$remetente = array("nome" => "SIMEC - MÓDULO SISPACTO","email" => $dados['iusemailprincipal']);
+		$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO SISPACTO","email" => $dados['iusemailprincipal']);
 		$destinatario = $dados['iusemailprincipal'];
 		$usunome = $db->pegaUm("SELECT usunome FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['iuscpf'])."'");
 		$assunto = "Cadastro no SIMEC - MÓDULO SISPACTO";

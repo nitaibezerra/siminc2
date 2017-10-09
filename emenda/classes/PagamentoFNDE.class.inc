@@ -907,7 +907,7 @@ XML;
 				$mensagem->Mailer       = "smtp";
 				$mensagem->FromName		= "Empenhos Atualizadas";
 				$mensagem->From 		= $_SESSION['email_sistema'];
-				$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+				$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 				$mensagem->Subject = "Empenhos Atualizadas";
 				
 				$mensagem->Body = $conteudo;

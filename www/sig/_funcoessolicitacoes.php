@@ -65,7 +65,7 @@ function inserirsolicitacao($dados) {
 	if($perfilusuario[0]) {
 		foreach($perfilusuario as $pfu) {
 			if($dadosusus[$pfu['usucpf']]) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => $pfu['usucelfone'], 'body' => 'Uma nova solicitação foi inserido no SIMEC, favor encaminhar para providências', 'ID' => substr($pfu['usucpf'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => $pfu['usucelfone'], 'body' => 'Uma nova solicitação foi inserido no SIMEC, favor encaminhar para providências', 'ID' => substr($pfu['usucpf'],0,6).date("Ymdhis")));
 			}
 		}
 	}
@@ -82,12 +82,12 @@ function inserirsolicitacao($dados) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC";
+	$mensagem->FromName		= SIGLA_SISTEMA;
 	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($perfilusuario[0]) {
 		foreach($perfilusuario as $pfu) {
-			$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+			$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 		}
 	}
 	
@@ -232,7 +232,7 @@ function inserirencaminhamento($dados) {
 	    			VALUES ('".$encid."', '".$encam['usucpf']."');";
 			$db->executar($sql);
 			if($dadosusus[$encam['usucpf']]) {
-				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC',	'target' => $dadosusus[$encam['usucpf']], 'body' => 'Uma solicitação foi encaminhada para você, favor tomar providências', 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
+				$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA,	'target' => $dadosusus[$encam['usucpf']], 'body' => 'Uma solicitação foi encaminhada para você, favor tomar providências', 'ID' => substr($encam['usucpf'],0,6).date("Ymdhis")));
 			}
 		}
 	}
@@ -249,13 +249,13 @@ function inserirencaminhamento($dados) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC";
+	$mensagem->FromName		= SIGLA_SISTEMA;
 	$mensagem->From 		= $_SESSION['email_sistema'];
 	
 	if($encaminhados[0]) {
 		foreach($encaminhados as $encam) {
 			if($dadosusus[$pfu['usucpf']]) {
-				$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+				$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 				$mensagem->AddAddress("priscila.vilaca@mec.gov.br", "Priscila Vilaça");
 			}
 		}
@@ -348,7 +348,7 @@ function inseriratendimento($dados) {
 	    die('<h2>Constructor error</h2><pre>' . $err . '</pre>');
 	}
 	if($dadosusus[$encam['usucpf']]) {
-		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => $dadosusus[$usucpfenc], 'body' => 'Solicitação encaminhada foi respondida', 'ID' => substr($usucpfenc,0,6).date("Ymdhis")));
+		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => $dadosusus[$usucpfenc], 'body' => 'Solicitação encaminhada foi respondida', 'ID' => substr($usucpfenc,0,6).date("Ymdhis")));
 	}
 	/*
 	 * Enviando SMS
@@ -363,9 +363,9 @@ function inseriratendimento($dados) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC";
+	$mensagem->FromName		= SIGLA_SISTEMA;
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Atendimento efetuado";
 	$mensagem->Body = "Atendimento foi efetuado";
 	$mensagem->IsHTML( true );
@@ -458,7 +458,7 @@ function inserirresposta($dados) {
 	    die('<h2>Constructor error</h2><pre>' . $err . '</pre>');
 	}
 	if($dadosusus[$usucpfsol]) {
-		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => 'SIMEC', 'target' => $dadosusus[$usucpfsol], 'body' => 'Solicitação finalizada', 'ID' => substr($usucpfsol,0,6).date("Ymdhis")));
+		$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => false, 'sender' => SIGLA_SISTEMA, 'target' => $dadosusus[$usucpfsol], 'body' => 'Solicitação finalizada', 'ID' => substr($usucpfsol,0,6).date("Ymdhis")));
 	}
 	/*
 	 * Enviando SMS
@@ -474,9 +474,9 @@ function inserirresposta($dados) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC";
+	$mensagem->FromName		= SIGLA_SISTEMA;
 	$mensagem->From 		= $_SESSION['email_sistema'];
-	$mensagem->AddAddress($_SESSION['email_sistema'], "SIMEC");
+	$mensagem->AddAddress($_SESSION['email_sistema'], SIGLA_SISTEMA);
 	$mensagem->Subject = "Solicitação atendida";
 	$mensagem->Body = "Solicitação respondida com sucesso";
 	$mensagem->IsHTML( true );

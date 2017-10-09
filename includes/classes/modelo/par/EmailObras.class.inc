@@ -8,7 +8,7 @@ class EmailObras extends Modelo {
     /**
      * Nome do Remetente do E-mail
      */
-    const NOME_REMETENTE = 'EQUIPE SIMEC';
+    const NOME_REMETENTE = 'EQUIPE ' SIGLA_SISTEMA;
 
     /**
      * E-mail de envio

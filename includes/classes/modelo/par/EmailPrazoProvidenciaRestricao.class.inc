@@ -5,7 +5,7 @@
  */
 class EmailPrazoProvidenciaRestricao extends Modelo{
     
-    const NOME_REMETENTE = 'EQUIPE SIMEC';
+    const NOME_REMETENTE = 'EQUIPE ' SIGLA_SISTEMA;
     const EMAIL_REMETENTE = 'noreply@mec.gov.br';
 
     public function enviarEmailPrazoProvidenciaRestricao(){

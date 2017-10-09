@@ -77,7 +77,7 @@ function inserirCoordenadorEstadual($dados) {
    		
    	}
 		
-	$remetente = array("nome" => "SIMEC - MÓDULO ESCOLA DA TERRA","email" => $dados['iusemailprincipal']);
+	$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO ESCOLA DA TERRA","email" => $dados['iusemailprincipal']);
 	$destinatario = $dados['iusemailprincipal'];
 	$arrUsr = $db->pegaLinha("SELECT usunome, ususenha FROM seguranca.usuario WHERE usucpf='".str_replace(array(".","-"),array(""),$dados['iuscpf'])."'");
 	$usunome  = $arrUsr['usunome'];

@@ -2893,7 +2893,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi cadastrado no SIMEC e enviado para análise e aprovação do comitê de eventos.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -2909,7 +2909,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br>
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi cadastrado no SIMEC foi aprovado pelo comitê de eventos.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -2925,7 +2925,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi lançado de forma preliminar.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -2941,7 +2941,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi  lançado de forma definitiva.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -2957,7 +2957,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi cadastrado no SIMEC sendo necessária a preparação da  emissão da CDO.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -2973,7 +2973,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		está apto para emissão da CDO.<br><br>		
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';	
@@ -2989,7 +2989,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		está apto para impressão dos documentos relativos ao evento<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';
@@ -3005,7 +3005,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br>  
 		Informamos que o evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" a ser realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		está apto para emissão da Nota de Empenho e Ordem de Serviço.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';	
@@ -3021,7 +3021,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que a Nota Fiscal relativa ao evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi realizado e a correspondente NF foi emitida para pagamento.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';	
@@ -3037,7 +3037,7 @@ function enviarEmailPorEstadoWorkflow(){
 		<b>Prezados Senhores,</b><br><br> 
 		Informamos que o pagamento da Nota fiscal relativa ao evento nº '.$_SESSION['eveid'].' - "'.$rs['evetitulo'].'" realizado no período de '.$rs['evedatainicio'].' à '.$rs['evedatafim'].',<br>
 		foi realizado.<br><br>
-		<a href="http://simec.mec.gov.br/" title="Acessar o SIMEC">Clique Aqui para acessar o SIMEC.</a><br><br> 
+		<a href="http://simec.mec.gov.br/" title="Acessar o ". SIGLA_SISTEMA>Clique Aqui para acessar o SIMEC.</a><br><br> 
 		Atenciosamente,<br><br>
 		SIMEC - Módulo de Eventos<br>
 		';	

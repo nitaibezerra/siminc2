@@ -4995,7 +4995,7 @@ function enviaEmailDiligenciaPAR( $preid ){
 
 	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
 
-	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - SIMEC";
+	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - ". SIGLA_SISTEMA;
 
 	$conteudo = "<p>Senhor(a) Dirigente Municipal,</p>
 
@@ -5023,7 +5023,7 @@ function enviaEmailDiligenciaPAR( $preid ){
 // 		enviar_email($remetente, '', $assunto, $conteudo, $cc, $cco );
 	} else {
 		foreach($arDadosUsuarios as $dados) {
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 		}
 	}
 
@@ -5170,7 +5170,7 @@ function enviaEmailDiligenciaProinfancia( $preid ){
 
 	$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
 
-	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - SIMEC";
+	$assunto  = "Em diligência - {$arDadosObra['predescricao']} - ". SIGLA_SISTEMA;
 
 	$conteudo = "<p>Senhor(a) Dirigente $dirigente,</p>
 
@@ -5233,14 +5233,14 @@ function enviaEmailDiligenciaProinfancia( $preid ){
 	} else {
 		foreach($arDadosUsuarios as $dados){
 
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados['usuemail'], $assunto, $conteudo, $cc, $cco );
 		}
 
 		$arCopias = array($_SESSION['email_sistema']);
 
 		foreach($arCopias as $dados){
 
-			enviar_email(array('nome'=>'SIMEC - PAR', 'email'=>'noreply@mec.gov.br'), $dados, $assunto, $conteudo, $cc, $cco );
+			enviar_email(array('nome'=>SIGLA_SISTEMA. ' - PAR', 'email'=>'noreply@mec.gov.br'), $dados, $assunto, $conteudo, $cc, $cco );
 
 		}
 	}
@@ -7155,7 +7155,7 @@ function regraEnviaEmail(){
 	if(!$_SESSION['par']['adpid']) return false;
 	if(!$_SESSION['par']['prgid']) return false;
 
-	$remetente = array("nome"=>"SIMEC - PAR", "email"=>$_SESSION['email_sistema']);
+	$remetente = array("nome"=>SIGLA_SISTEMA. " - PAR", "email"=>$_SESSION['email_sistema']);
 
 
 
@@ -11498,7 +11498,7 @@ function enviarEmailNotificacao($dados, $dadosSolicitante, $dmdid = '', $arquivo
         $dmdid = '';
     }
 
-    $remetente = array("nome"=>"SIMEC", "email"=>"noreply@mec.gov.br");
+    $remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
 
     $destinatarios = array($dadosSolicitante['usuemail']);
 
@@ -12659,7 +12659,7 @@ function ativarConselheiroFundeb($arrRegistro) {
 				$db->executar($sql);
 			}
 			 
-			$remetente = array("nome" => "SIMEC - MÓDULO PAR","email" => $v['email']);
+			$remetente = array("nome" => SIGLA_SISTEMA. " - MÓDULO PAR","email" => $v['email']);
 			$destinatario = $v['email'];
 			$usunome = $v['conselheiro'];
 			$assunto = "Cadastro no SIMEC - MÓDULO PAR";

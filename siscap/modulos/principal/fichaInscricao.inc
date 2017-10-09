@@ -38,7 +38,7 @@ if( $_POST['requisicao'] == 'salvar' ){
 		$arCurso = $arCurso ? $arCurso : array();
 		extract( $arCurso );
 
-		$remetente = array('nome' => 'SIMEC', 'email' => 'noreply@simec.gov.br');
+		$remetente = array('nome' => SIGLA_SISTEMA, 'email' => 'noreply@simec.gov.br');
 		$destinatario = $_POST['aluemailchefia'];
 		
 		if( !empty($destinatario) ){
@@ -70,7 +70,7 @@ if( $_POST['requisicao'] == 'salvar' ){
 						<p>Coordenação de Capacitação e Desenvolvimento de Pessoas</p>";
 						
 			
-			if(enviar_email( $remetente, $destinatario, 'SIMEC - SISCAP', $conteudo )){
+			if(enviar_email( $remetente, $destinatario, SIGLA_SISTEMA. ' - SISCAP', $conteudo )){
 				echo '<script>
 						alert("Incrição efetuada com sucesso!");
 						window.location.href = "siscap.php?modulo=principal/cronogramaCurso&acao=A";

@@ -63,7 +63,7 @@ if($dados[0]) {
 	$mensagem->persistencia = $db;
 	$mensagem->Host         = "localhost";
 	$mensagem->Mailer       = "smtp";
-	$mensagem->FromName		= "SIMEC - Lembrete automático";
+	$mensagem->FromName		= SIGLA_SISTEMA. " - Lembrete automático";
 	$mensagem->From 		= $_SESSION['email_sistema'];
 	$mensagem->Subject      = "Obras desatualizadas no SIMEC - Módulos de obras";
 	$mensagem->IsHTML( true );
@@ -73,7 +73,7 @@ if($dados[0]) {
 	foreach($dados as $key => $d) {
 		
 		if(strlen($d['telefone1']) == 10) {
-			$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => true, 'sender' => 'SIMEC', 'target' => '55'.$d['telefone1'], 'body' => 'Existem '.$d['num'].' obras da '.$d['entsig'].' sob sua responsabilidade desatualizadas, acesse simec.mec.gov.br e proceda a atualização. MEC', 'ID' => substr($d['dirid'],0,6).date("Ymdhis")));
+			$envio = $client->call('sendMessage', array('user' => 'inep', 'password' => 'tmmjee', 'testMode' => true, 'sender' => SIGLA_SISTEMA, 'target' => '55'.$d['telefone1'], 'body' => 'Existem '.$d['num'].' obras da '.$d['entsig'].' sob sua responsabilidade desatualizadas, acesse simec.mec.gov.br e proceda a atualização. MEC', 'ID' => substr($d['dirid'],0,6).date("Ymdhis")));
 		}
 		
 		$_LOG .= $d['dirnome']." >> ";

@@ -81,7 +81,7 @@ include "includes/erros.inc";
 <? include "cabecalho.php";?>
 <br>
 <?
-$titulo_modulo='SIMEC - Recuperação de Senha';
+$titulo_modulo=SIGLA_SISTEMA. ' - Recuperação de Senha';
 $subtitulo_modulo='Digite seu CPF e pressione o bot&atilde;o: "Lembrar Senha". 
 		<br> O Sistema enviará um e-mail para você contendo uma nova senha de acesso.';
 monta_titulo($titulo_modulo,$subtitulo_modulo);

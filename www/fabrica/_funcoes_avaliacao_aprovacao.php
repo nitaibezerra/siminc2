@@ -156,12 +156,12 @@ function salvarOSContagemPF( $dados ) {
                 $conteudo .= "<p>Previsão de início: <strong> {$dados['odsdtprevinicio']} </strong></p>";
                 $conteudo .= "<p>Tipo de Ordem de Serviço: <strong> {$tipoOrdem['tosdsc']} </strong></p>";
 
-                $assunto = "SIMEC - Fábrica - Aviso de criação de Ordem de Serviço";
+                $assunto = SIGLA_SISTEMA. " - Fábrica - Aviso de criação de Ordem de Serviço";
 
                 $remetente = array( );
                 $destinatarios = array( );
                 $remetente['email'] = "noreply@mec.gov.br";
-                $remetente['nome']  = "SIMEC";
+                $remetente['nome']  = SIGLA_SISTEMA;
 
                 $sqlPrepostoSquadra = "SELECT usu.usuemail
                     FROM seguranca.usuario usu

@@ -37,7 +37,7 @@ if( trim($_REQUEST['requisicao']) == 'filtraemail' ){
 	$strEmailTo = $strEmailTo ? $strEmailTo : array();
 	$requisicao = 'entidade';
 }
-$strAssunto = ($post['strAssunto'] ? $post['strAssunto'] : "SIMEC - Emenda");
+$strAssunto = ($post['strAssunto'] ? $post['strAssunto'] : SIGLA_SISTEMA. " - Emenda");
 
 if ($_REQUEST['email']){
 	

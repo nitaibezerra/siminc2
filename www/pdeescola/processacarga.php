@@ -156,7 +156,7 @@ $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "SISTEMA DE CARGA";
 $mensagem->From 		= $_SESSION['email_sistema'];
-$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 $mensagem->Subject = "Carga do daniel chegou no fim";
 $mensagem->Body = $HTML;
 $mensagem->IsHTML( true );

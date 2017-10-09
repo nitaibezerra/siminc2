@@ -37,10 +37,10 @@ foreach ($arrDados as $v) {
 		O próximo passo é o preenchimento, até <b>09/07/'.date(Y).'</b> no SIMEC/Emendas da iniciativa, dos dados do responsável pela elaboração do PTA e, quando se tratar de prefeitura e secretaria estadual, da vinculação da subação.<br>
 		Qualquer dúvida, tratar com a ASPAR do MEC (2022-7899/7896/7894)';
 	
-	$remetente = array('nome' => 'SIMEC - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
+	$remetente = array('nome' => SIGLA_SISTEMA. ' - MÓDULO EMENDAS', 'email' => 'noreply@simec.gov.br');
 	$email = $v['autemail'];
 	
 	if( !empty($email) ){
-		enviar_email($remetente, array($email), 'SIMEC - EMENDAS', $conteudo, $cc, null);
+		enviar_email($remetente, array($email), SIGLA_SISTEMA. ' - EMENDAS', $conteudo, $cc, null);
 	}
 }

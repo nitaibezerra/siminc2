@@ -245,14 +245,14 @@ function salvarItemMonitoramento($dados) {
 		
 		//Adiciona o e-mail do usuário no array de e-mail, se não houver nenhum
 		$arrEmail 	= is_array($arrEmail) ? $arrEmail : array($dadosusu['usuemail']);
-		$titulo		= "SIMEC - Monitoramento Estratégico - Aviso de validação/invalidação de metas do item de checklist";
+		$titulo		= SIGLA_SISTEMA. " - Monitoramento Estratégico - Aviso de validação/invalidação de metas do item de checklist";
 		require_once(APPRAIZ . 'includes/classes/EmailAgendado.class.inc');
 		//verifica se existe texto para enviar
 // 		if($html) {
 // 			$e = new EmailAgendado();
 // 			$e->setTitle($titulo);
 // 			$e->setText($html);
-// 			$e->setName("SIMEC");
+// 			$e->setName(SIGLA_SISTEMA);
 // 			$e->setEmailOrigem($_SESSION['email_sistema']);
 // 			$e->setEmailsDestino($arrEmail);
 // 			$e->enviarEmails();

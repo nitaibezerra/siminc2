@@ -5,7 +5,7 @@ if (isset($_GET['message']) && !empty($_GET['message'])) {
 	echo "<div style='color:blue; font-weight: bold; font-size: 20pt; width:100%; text-align:center;'>Operação realizada com sucesso</div>";
 }
 echo'<br>';
-monta_titulo( "Prova SIMEC", 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
+monta_titulo( "Prova ". SIGLA_SISTEMA, 'Questão 02 - Crie uma tela de cadastro de novas turmas' );
 
 /*
  * DICAS:

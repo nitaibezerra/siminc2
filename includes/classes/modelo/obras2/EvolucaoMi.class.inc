@@ -2100,7 +2100,7 @@ class EvolucaoMi extends Modelo {
                 </html>
                 ';
         
-            $assunto            = "SIMEC - TRAMITA플O DE EVOLU플O MI - ID ".$emiid." - Tramitada";
+            $assunto            = SIGLA_SISTEMA. " - TRAMITA플O DE EVOLU플O MI - ID ".$emiid." - Tramitada";
             $conteudo           = $html;
             
             $dados = array(

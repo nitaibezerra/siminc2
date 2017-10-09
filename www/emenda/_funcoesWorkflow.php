@@ -208,7 +208,7 @@ function insereAnaliseTecnicaElaboracao( $ptrid ){
 	$db->commit();
 	$ptrcod = pegaNumPTA( $ptrid );
 	$strMensagem = "O plano de trabalho nº $ptrcod/{$_SESSION['exercicio']} foi corrigido e retornado para Análise Técnica em ".date('d/m/Y h:i:s').".";
-	$strAssunto = 'SIMEC - Emenda';
+	$strAssunto = SIGLA_SISTEMA. ' - Emenda';
 	$strEmailTo = $arrAnalise['usuemail'];
 	enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 	
@@ -623,7 +623,7 @@ function enviaEmailMovimentacao($url, $ptrid){
 	$sql = "SELECT enbid FROM emenda.planotrabalho WHERE ptrid = $ptrid";
 	$enbid = $db->pegaUm($sql);
 
-	$strAssunto = 'SIMEC - Emenda';
+	$strAssunto = SIGLA_SISTEMA. ' - Emenda';
 
 	$sql = "SELECT
 				usu.usuemail
@@ -2057,7 +2057,7 @@ function enviaEmailEntidadeReformulacao($url, $ptrid){
 					and usr.rpustatus = 'A'";
 			
 		$strEmailTo = $db->carregarColuna($sql);
-		$strAssunto = "SIMEC - Emenda";
+		$strAssunto = SIGLA_SISTEMA. " - Emenda";
 
 		return enviaEmailAnalise($strAssunto, $strMensagem, $strEmailTo);
 	}

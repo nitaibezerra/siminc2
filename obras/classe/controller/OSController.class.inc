@@ -777,7 +777,7 @@ class OSController extends Controller{
 		?>
 		<html>
 			<head>
-				<title>SIMEC - Sistema Integrado de Monitoramento do Ministério da Educação</title>
+				<title><?php echo NOME_SISTEMA; ?></title>
 				<script language="JavaScript" src="../../includes/funcoes.js"></script>
 				<!--<script type="text/javascript" src="../includes/JQuery/jquery2.js"></script>-->
 				<script type="text/javascript" src="../includes/JQuery/jquery-1.4.2.js"></script>

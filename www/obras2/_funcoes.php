@@ -64,7 +64,7 @@ function enviaEmailChiavicatti($file) {
 
     $destinatario = array();
     $destinatario[] = array(
-        'usunome' => 'SIMEC',
+        'usunome' => SIGLA_SISTEMA,
         'usuemail' => $_SESSION['email_sistema']
     );
     $destinatario[] = array(
@@ -2810,8 +2810,8 @@ function carregaEmpresaAndListaObra(array $param = array()) {
 			</table>";
 
         // remetente
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
-        $assunto = "SIMEC - ORDEM DE SERVICO - Nº {$sosnum} - ENVIADA";
+        $remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+        $assunto = SIGLA_SISTEMA. " - ORDEM DE SERVICO - Nº {$sosnum} - ENVIADA";
         $conteudo = $html;
 
         $enviado = enviar_email($remetente, $destinatario, $assunto, $conteudo);
@@ -5422,7 +5422,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         $usuarios = array();
         extract(pegaDadosDesbloqueio($pdoid));
 
-        $assunto = "SIMEC.OBRAS2 - Pedido de desbloqueio ($deferimento) - Obra $descricao";
+        $assunto = SIGLA_SISTEMA. ".OBRAS2 - Pedido de desbloqueio ($deferimento) - Obra $descricao";
         $conteudo = "
         <table>
             <tr><td><b>Pedido de desbloqueio - ($deferimento)</b></td></tr>
@@ -5456,7 +5456,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         <tr><td>Realizado em $desdata por $usunomedesbloqueio</td></tr>
         </table>
     ";
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+        $remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
 
         $usuarios[] = $usucpfpedido;
@@ -5471,7 +5471,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         $usuarios = array();
         extract(pegaDadosSolicitacao($slcid));
 
-        $assunto = "SIMEC.OBRAS2 - Pedido de desbloqueio ($deferimento) - Obra $descricao";
+        $assunto = SIGLA_SISTEMA. ".OBRAS2 - Pedido de desbloqueio ($deferimento) - Obra $descricao";
         $conteudo = "
             <table>
                 <tr><td><b>Pedido de desbloqueio - ($deferimento)</b></td></tr>
@@ -5506,7 +5506,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
             <tr><td>Realizado em $dsldata por $usunomedesbloqueio</td></tr>
             </table>
         ";
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+        $remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
 
         $usuarios[] = $usucpfpedido;
@@ -5521,7 +5521,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         $usuarios = array('', '');
         extract(pegaDadosDesbloqueio($pdoid));
 
-        $assunto = "SIMEC.OBRAS2 - Pedido de desbloqueio - Obra $descricao";
+        $assunto = SIGLA_SISTEMA. ".OBRAS2 - Pedido de desbloqueio - Obra $descricao";
         $conteudo = "
         <table>
             <tr><td><b>Pedido de desbloqueio</b></td></tr>
@@ -5536,7 +5536,7 @@ function carregaEmpresaAndListaObra(array $param = array()) {
         </table>
     ";
 
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+        $remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
         $destinatarios = array();
         $usuarios = pegaUsuarios($usuarios);
 
@@ -8247,8 +8247,8 @@ ur.pflcod as perfil
     ";
         $obrInfo = $db->pegaUm($sql);
 
-        $remetente = array("nome" => "SIMEC - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
-        $assunto = "SIMEC - Ordem de serviço aceita - Obra {$obrid} - {$obra->obrnome} - {$obrInfo['mundescricao']}/{$obrInfo['estuf']}";
+        $remetente = array("nome" => SIGLA_SISTEMA. " - Monitoramento de Obras", "email" => $_SESSION['email_sistema']);
+        $assunto = SIGLA_SISTEMA. " - Ordem de serviço aceita - Obra {$obrid} - {$obra->obrnome} - {$obrInfo['mundescricao']}/{$obrInfo['estuf']}";
 
         $sql = " SELECT em.orgid FROM obras2.empreendimento em INNER JOIN obras2.obras o ON o.obrid = {$obrid} AND o.empid = em.empid ";
         $orgid = $db->pegaUm($sql);
@@ -9375,7 +9375,7 @@ ur.pflcod as perfil
 
                         $destinatario = array();
                         $destinatario[] = array(
-                            'usunome' => 'SIMEC',
+                            'usunome' => SIGLA_SISTEMA,
                             'usuemail' => $_SESSION['email_sistema']
                         );
 

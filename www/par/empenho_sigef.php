@@ -199,7 +199,7 @@ $mensagem->Host         = "localhost";
 $mensagem->Mailer       = "smtp";
 $mensagem->FromName		= "SCRIPT AUTOMATICO";
 $mensagem->From 		= $_SESSION['email_sistema'];
-$mensagem->AddAddress( $_SESSION['email_sistema'], "SIMEC" );
+$mensagem->AddAddress( $_SESSION['email_sistema'], SIGLA_SISTEMA );
 $mensagem->Subject = "Atualização do PAR - Empenho do SIGEF";
 $mensagem->Body = "<p>A atualização dos Empenhos foram realizados com sucesso! ".date("d/m/Y h:i:s")."</p>
 				   <p>O tempo de execução das atualizações foi de ".$Tfinal." segundos</p>";

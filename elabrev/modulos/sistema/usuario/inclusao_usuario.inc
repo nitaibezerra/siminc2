@@ -76,7 +76,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro)))
 	if ($_REQUEST['ususexo'] == 'F') $sexo = 'Prezada Sra. ';
         $mensagem = $sexo. strtoupper($_REQUEST['usunome']).',<br><br>'.$ittemail_inclusao_usuario.' '.$ittemail.' ou nos telefones:'.$ittddd.' - '.$itttelefone1.' ou '.$itttelefone2. ' Fax '.$ittfax.'<br><br>';
         email(strtoupper($_REQUEST['usunome']), $_REQUEST['usuemail'], $assunto, $mensagem);
-        email('Administrador do SIMEC-UMA',$GLOBALS["email_sistema"],'Solicitação de cadastro','O usuário <br> CPF:'.corrige_cpf($_REQUEST['usucpf']).'  '.str_to_upper($_REQUEST['usunome']).'<br>E-mail:'.$_REQUEST['usuemail'].'<br>Telefone: '.$_REQUEST['usufoneddd'].'-'.$_REQUEST['usufonenum'].'<br>Órgão:'.$registro['orgdsc'].' / '.$registro['unidsc'].' / '.$registro['ungdsc'].'<br> Acaba de solicitar sua inclusão no cadastro do SIMEC');
+        email('Administrador do SIMEC-UMA',$GLOBALS["email_sistema"],'Solicitação de cadastro','O usuário <br> CPF:'.corrige_cpf($_REQUEST['usucpf']).'  '.str_to_upper($_REQUEST['usunome']).'<br>E-mail:'.$_REQUEST['usuemail'].'<br>Telefone: '.$_REQUEST['usufoneddd'].'-'.$_REQUEST['usufonenum'].'<br>Órgão:'.$registro['orgdsc'].' / '.$registro['unidsc'].' / '.$registro['ungdsc'].'<br> Acaba de solicitar sua inclusão no cadastro do ' SIGLA_SISTEMA);
     $db->sucesso($modulo);
 }
 

@@ -69,7 +69,7 @@ define("ID_RELATORIO_HOMOLOGACAO", 14);
 define("ID_TERMO_ADITIVO", 15);
 
 define('REMETENTE_WORKFLOW_EMAIL', $_SESSION['email_sistema']);
-define('REMETENTE_WORKFLOW_NOME', 'SIMEC-MódulodeEventos');
+define('REMETENTE_WORKFLOW_NOME', SIGLA_SISTEMA. '-MódulodeEventos');
 
 define('WF_TPDID_COMPRAS', 6);
 define('WF_TPDID_EVENTOS', 36);

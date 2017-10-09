@@ -158,7 +158,7 @@ class DepuradorCodigo extends FirePHP  {
 	    $dbug->log($this->TempoQueryMaisPesada, 'Tempo total da consulta mais pesada (Query)');
 
 	    if($existemPendencia){
-	    	$dbug->group('Query fora do padrão SIMEC', array( 	'Collapsed' => false,  
+	    	$dbug->group('Query fora do padrão ' SIGLA_SISTEMA, array( 	'Collapsed' => false,  
 	        						                            'Color' => 'red'));
 	    	$dbug->table("Query fora do padrão SIMEC ", $this->listaQueryInaceitaveis);
 	    }

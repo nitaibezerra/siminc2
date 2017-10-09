@@ -165,12 +165,12 @@ function atualizarAnaliseSolicitacaoServico($dados) {
 		$conteudo .= "<p>Previsão de término: <strong> {$dados['ansprevtermino']} </strong></p>";
 		$conteudo .= "<p>Descrição: <strong> {$dados['ansdsc']} </strong></p>";
 		
-		$assunto = "SIMEC - Fábrica - Aviso de criação da Solicitação de Serviço";
+		$assunto = SIGLA_SISTEMA. " - Fábrica - Aviso de criação da Solicitação de Serviço";
 		
 		$remetente          = array();
 		$destinatarios      = array();
 		$remetente['email'] = "noreply@mec.gov.br";
-		$remetente['nome']  = "SIMEC";
+		$remetente['nome']  = SIGLA_SISTEMA;
 		
 		$sqlPrepostoSquadra = "SELECT usu.usuemail
                     FROM seguranca.usuario usu

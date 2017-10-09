@@ -733,7 +733,7 @@ class RemessaCabecalho extends Modelo{
 				$mensagem->Mailer       = "smtp";
 	   					
 				$mensagem->From     = 'noReply@mec.gov.br';
-				$mensagem->FromName = 'SIMEC';
+				$mensagem->FromName = SIGLA_SISTEMA;
 
 				if(in_array($_SESSION['baselogin'], array('simec_desenvolvimento', 'simec_espelho_producao'))){
 					$mensagem->AddAddress( 'henrique.couto@ebserh.gov.br', 'Henrique Xavier Couto'  );
@@ -743,7 +743,7 @@ class RemessaCabecalho extends Modelo{
 					$mensagem->AddAddress( $arDados['email'], $arDados['nome']  );
 				}
 				
-				$mensagem->Subject = 'SIMEC - Mais Médicos - Bolsa '.ucwords($arDados['tipobolsa']); //assunto
+				$mensagem->Subject = SIGLA_SISTEMA. ' - Mais Médicos - Bolsa '.ucwords($arDados['tipobolsa']); //assunto
 				$mensagem->Body = $conteudo; //conteudo
 				$mensagem->IsHTML( true );
 				
