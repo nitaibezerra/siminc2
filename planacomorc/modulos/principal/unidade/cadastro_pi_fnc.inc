@@ -134,6 +134,14 @@ $dadosPI = array();
 
 $perfis = pegaPerfilGeral();
 
+$sqlListaUO = Spo_Model_Unidade::queryCombo((object)array(
+    'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
+    'suo.unofundo = TRUE'));
+
+$listaUO = $db->carregar($sqlListaUO);
+$uoFnc = current($listaUO);
+$codigoUoFnc = $uoFnc['codigo'];
+
 // ******* Ao carregar a listagem de PTRES, sempre filtrar pela UO selecionada, independentemente do Perfil ; *****
 /*if (in_array(PFL_GESTAO_ORCAMENTARIA_IFS, $perfis)) {
     $sqlUO = <<<DML
@@ -366,7 +374,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         descricao
                                 ";
                                 $editavelUg = ($dadosPI['unicod'] && $dadosPI['pliid']) ? 'N' : 'S';
-                                $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($dadosPI['unicod']) ? $dadosPI['unicod'] : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
+                                $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($dadosPI['unicod'])? $dadosPI['unicod']: current($listaUO)), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                 ?>
                             </div>
                         </div>
@@ -377,7 +385,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-lg-9 div_ungcod">
                                 <?php
                                 $ungcod = $dadosPI['ungcod'];
-                                carregarComboUG($dadosPI['unicod'], $editavelUg, 'TRUE');
+                                carregarComboUG((isset($dadosPI['unicod'])? $dadosPI['unicod']: $codigoUoFnc), $editavelUg, 'TRUE');
                                 ?>
                             </div>
                         </div>
