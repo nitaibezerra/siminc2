@@ -70,7 +70,7 @@
 		$sql = "select ittemail from public.instituicao where ittstatus = 'A'";
 		$remetente = $db->pegaUm( $sql );
 		$destinatario = $usuario->usuemail;
-		$assunto = "Simec - Recuperação de Senha";
+		$assunto = SIGLA_SISTEMA. " - Recuperação de Senha";
 	    $conteudo = sprintf(
 	    	"%s %s<br/>Sua senha foi alterada para %s<br>Ao se conectar, altere esta senha para a sua senha preferida.",
 	    	$usuario->ususexo == 'F' ?  'Prezada Sra.': 'Prezado Sr.',

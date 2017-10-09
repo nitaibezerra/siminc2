@@ -642,9 +642,9 @@ function enviar_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$c
 		$mensagem->AddReplyTo($remetente['email'],$remetente['nome']);
 		$mensagem->FromName = $remetente['nome'];
 	} elseif($remetente != '') {
-		$mensagem->FromName = is_array($remetente) ? $remetente['nome'] : "Administrador SIMEC";
+		$mensagem->FromName = is_array($remetente) ? $remetente['nome'] : "Administrador ". SIGLA_SISTEMA;
 	} else {
-		$mensagem->FromName = "Administrador SIMEC";
+		$mensagem->FromName = "Administrador ". SIGLA_SISTEMA;
 	}
 	/* FIM regras*/
 
