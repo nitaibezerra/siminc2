@@ -58,7 +58,7 @@ if ( $traid != 'null' ){
 // verifica o tipo de requisicao da tela ( inserção / atualização )
 $requisicao = $traid != 'null' ? 'atualiza' : 'cadastra';
 
-// cabeçalho padrão do SIMEC
+// Cabeçalho padrão do sistema
 include APPRAIZ . 'includes/cabecalho.inc';
 include APPRAIZ . 'includes/Agrupador.php';
 

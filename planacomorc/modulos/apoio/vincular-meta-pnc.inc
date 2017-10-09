@@ -11,7 +11,7 @@ $aMetaPnc = (new Public_Model_MetaPnc())->recuperarTodos("*, lpad(mpncod, 2, '0'
 $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
 $aVinculos = (new Spo_Model_SubUnidadeMetaPnc())->recuperarPorExercicio($_SESSION['exercicio']);
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

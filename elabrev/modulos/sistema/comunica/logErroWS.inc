@@ -1,5 +1,5 @@
 <?
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 monta_titulo('Comunicação de Dados - SIOP', 'Log Erro WS');
 

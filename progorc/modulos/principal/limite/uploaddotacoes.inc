@@ -155,7 +155,7 @@ DML;
 
 
 /**
- * Cabeçalho do SIMEC
+ * Cabeçalho do sistema
  */
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

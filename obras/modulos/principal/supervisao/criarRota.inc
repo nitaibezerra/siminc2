@@ -43,7 +43,7 @@ if( $_REQUEST["rotid"] || $_SESSION["obras"]["rotid"] ){
 // verifica os perfis do usuário
 $obrMec = possuiPerfil( array( PERFIL_SAA, PERFIL_ADMINISTRADOR ) );
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include_once APPRAIZ . "includes/cabecalho.inc";
 
 // Monta as abas

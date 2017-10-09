@@ -10,7 +10,7 @@ switch( $_REQUEST["requisicao"] ){
 	
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include_once APPRAIZ . "includes/cabecalho.inc";
 
 // Monta as abas

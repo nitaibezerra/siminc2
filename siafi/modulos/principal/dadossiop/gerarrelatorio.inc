@@ -73,7 +73,7 @@ if (($_GET['action'] == 'apagar') && isset($_GET['cexid']) && is_numeric($_GET['
 }
 
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . 'includes/cabecalho.inc';

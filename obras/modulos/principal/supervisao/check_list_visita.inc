@@ -433,7 +433,7 @@ if( isset($_POST['chkobsmec']) && isset($_POST['chksituacao']) && isset($_POST['
 	exit();
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 
 echo "<br>";

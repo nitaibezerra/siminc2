@@ -33,7 +33,7 @@ if (isset($_REQUEST['requisicao']) && 'remanejamentoDePI' == $_REQUEST['requisic
 }
 
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

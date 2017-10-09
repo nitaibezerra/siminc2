@@ -19,7 +19,7 @@ switch ($_REQUEST['req']) {
 }
 
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

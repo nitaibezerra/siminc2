@@ -63,7 +63,7 @@
     }
 
     /**
-     * Cabeçalho padrão do Simec.
+     * Cabeçalho padrão do sistema.
      */
     include APPRAIZ . "includes/cabecalho.inc";
 ?>

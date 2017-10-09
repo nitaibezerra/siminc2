@@ -19,7 +19,7 @@ include_once APPRAIZ . "includes/library/simec/Helper/FlashMessage.php";
 $fm = new Simec_Helper_FlashMessage('planacomorc/relgestao');
 
 /**
- * Cabecalho do SIMEC.
+ * Cabecalho do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

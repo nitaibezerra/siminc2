@@ -77,7 +77,7 @@ if (isset($_POST['requisicao']) && 'consultar-acoes' == $_POST['requisicao']) {
 }
 
 /**
- * Cabecalho do SIMEC.
+ * Cabecalho do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

@@ -20,7 +20,7 @@ if (!empty($_POST) && isset($_POST['requisicao'])) {
 }
 
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  */
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

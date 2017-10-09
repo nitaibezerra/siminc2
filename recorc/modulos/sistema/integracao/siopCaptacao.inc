@@ -6,7 +6,7 @@
  */
 
 /**
- * Cabecalho do SIMEC.
+ * Cabecalho do sistema.
  * @see cabecalho.inc
  */
 include_once APPRAIZ . "includes/cabecalho.inc";

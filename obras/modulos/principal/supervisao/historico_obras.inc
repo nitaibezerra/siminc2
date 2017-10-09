@@ -21,7 +21,7 @@ if( !$_SESSION["obra"]['obrid'] ){
        exit;
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 <script type="text/javascript" src="../includes/JQuery/jquery-1.4.2.js"></script>

@@ -69,7 +69,7 @@ if (isset($_POST['requisicao']) && 'consultarExecucaoOrcamentaria' == $_POST['re
 }
 
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  */
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

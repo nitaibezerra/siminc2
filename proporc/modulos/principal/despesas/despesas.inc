@@ -117,7 +117,7 @@ if (empty($prfref->prfid)) {
 }
 
 /**
- * Cabecalho do SIMEC.
+ * Cabecalho do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

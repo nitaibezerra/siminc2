@@ -91,7 +91,7 @@ foreach ($periodoFormulario as $chave => $valor) {
 unset($foraPeriodoPreenchimento, $sql);
 
 /**
- * Cabecalho padrão do SiMEC.
+ * Cabecalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

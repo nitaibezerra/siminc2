@@ -285,7 +285,7 @@ $configMasc = array('masc' => '###.###.###.###.###') + $configClasse;
 $permissoesRld = consultarPermissoes($rlgid);
 
 /**
- * Cabeçalho padrão do SIMEC.
+ * Cabeçalho padrão do sistema.
  * @See cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

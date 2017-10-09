@@ -104,7 +104,7 @@ switch ($abas->getAbaAtiva()) {
 $abas->definirAbaDefault('visualizar');
 
 /**
- * Cabeçalho padrão do SIMEC.
+ * Cabeçalho padrão do sistema.
  * @uses cabecalho.inc
  */
 require_once APPRAIZ . 'includes/cabecalho.inc';

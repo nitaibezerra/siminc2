@@ -60,7 +60,7 @@ if( !$entid ){
 // Busca a unidade pai do Campus
 //$unidade = $_REQUEST['entidunidade'] ? $entid : $autoriazacaoconcursos->buscaentidade($entid);
 
-// Cabeçalho padrão do simec
+// Cabeçalho padrão do sistema
 require_once APPRAIZ . "includes/cabecalho.inc";
 echo '<br/>';
 

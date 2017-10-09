@@ -209,7 +209,7 @@ $mPiPlanoInterno = new Pi_PlanoInterno();
 $podeEditar = $mPiPlanoInterno->verificarPermissaoEditar($estadoAtual, $perfis);
 
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

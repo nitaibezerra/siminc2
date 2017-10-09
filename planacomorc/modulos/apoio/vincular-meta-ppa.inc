@@ -12,7 +12,7 @@ $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrca
 $aVinculos = (new Spo_Model_SubUnidadeMetaPpa())->recuperarPorExercicio($_SESSION['exercicio']);
 
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

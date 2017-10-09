@@ -6,7 +6,7 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 $oPlanoInterno = new Pi_PlanoInterno();
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

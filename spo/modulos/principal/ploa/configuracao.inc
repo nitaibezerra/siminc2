@@ -38,7 +38,7 @@ $prfref = new Proporc_Model_Periodoreferencia();
 $prfref->carregarAtual();
 
 /**
- * Cabeçalho padrão do SIMEC.
+ * Cabeçalho padrão do sistema.
  * @uses cabecalho.inc
  */
 require_once(APPRAIZ . 'includes/cabecalho.inc');

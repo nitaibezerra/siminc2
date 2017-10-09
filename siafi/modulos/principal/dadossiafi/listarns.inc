@@ -16,7 +16,7 @@ if (isset($_REQUEST['requisicao']) && !empty($_REQUEST['requisicao'])) {
 }
 
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

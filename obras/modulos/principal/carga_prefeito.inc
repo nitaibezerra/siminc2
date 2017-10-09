@@ -99,7 +99,7 @@ if($_POST['consultarPrefeito']){
 	exit();
 }
 
-// cabeçalho padrão do SIMEC
+// Cabeçalho padrão do sistema
 include APPRAIZ . 'includes/cabecalho.inc';
 
 // monta o título da tela

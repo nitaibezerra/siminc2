@@ -4,7 +4,7 @@
  * $Id: inicio.inc 82784 2014-07-14 12:43:18Z werteralmeida $
  */
 /**
- * Cabecalho do SIMEC.
+ * Cabecalho do sistema.
  * @see cabecalho.inc
  */
 //$perfis = pegaPerfilGeral();

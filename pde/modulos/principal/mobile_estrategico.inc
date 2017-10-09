@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 	<head> 
-	<title>SIMEC - Mobile</title> 
+	<title><?php echo SIGLA_SISTEMA; ?> - Mobile</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="/includes/jquery.mobile-1.0.1/jquery.mobile-1.0.1.min.css" />
 	<script src="/includes/jquery.mobile-1.0.1/jquery-1.7.1.min.js"></script>	

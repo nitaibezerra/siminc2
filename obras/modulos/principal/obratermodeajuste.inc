@@ -97,7 +97,7 @@ if ( $_REQUEST["carga"] ){
 	
 }
 
-// cabeçalho padrão do SIMEC
+// Cabeçalho padrão do sistema
 include APPRAIZ . 'includes/cabecalho.inc';
 include APPRAIZ . 'includes/Agrupador.php';
 

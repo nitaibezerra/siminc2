@@ -29,7 +29,7 @@ if ( $_POST['operacao'] == 'excluir' && $_POST['orsid'] ){
 	die;
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 
 // Monta as abas

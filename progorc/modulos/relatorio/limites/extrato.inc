@@ -13,7 +13,7 @@ if ($_REQUEST['requisicao'] == 'exportarXLS') {
     $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 }
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

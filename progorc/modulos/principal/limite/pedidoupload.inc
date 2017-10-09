@@ -182,7 +182,7 @@ if (isset($_POST['action'])) {
 }
 
 /**
- * Cabeçalho do SIMEC
+ * Cabeçalho do sistema
  */
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

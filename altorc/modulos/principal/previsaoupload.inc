@@ -1,6 +1,6 @@
 <?php
 /**
- * Cabeçalho do SIMEC
+ * Cabeçalho do sistema
  */
 include_once APPRAIZ . "includes/classes/fileSimec.class.inc";
 include APPRAIZ . "includes/cabecalho.inc";

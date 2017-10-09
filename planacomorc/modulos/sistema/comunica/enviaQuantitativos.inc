@@ -202,7 +202,7 @@ if (isset($_POST['codigomomento']) && count($_POST['acaid_cadastrarAcompanhament
     }
 }
 
-// -- Cabeçalho padrão do SIMEC
+// -- Cabeçalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 
 ?>

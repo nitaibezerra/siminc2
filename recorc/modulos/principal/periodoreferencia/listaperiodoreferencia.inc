@@ -31,7 +31,7 @@ if (chaveTemValor($_REQUEST, 'action')) {
 }
 
 /**
- * Cabeçalho do SIMEC
+ * Cabeçalho do sistema
  */
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

@@ -1,5 +1,5 @@
 <?php
-	// Cabeçalho padrão do SIMEC
+	// Cabeçalho padrão do sistema
 	include  APPRAIZ."includes/cabecalho.inc";
 	if(!$_SESSION["obra"]["obrid"]){
 	?>

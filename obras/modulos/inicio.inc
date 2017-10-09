@@ -203,7 +203,7 @@ if ( !possuiPerfil( PERFIL_ADMINISTRADOR ) ) {
 	}
 }
 
-// Cabeçalho padrão do SIMEC
+// Cabeçalho padrão do sistema
 include  APPRAIZ."includes/cabecalho.inc";
 
 

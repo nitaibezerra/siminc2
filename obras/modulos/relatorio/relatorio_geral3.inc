@@ -359,7 +359,7 @@ if( isset($_POST['relatorio']) ){
 	exit();
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 print "<br/>";
 monta_titulo( "Relatório de Supervisão", "" );

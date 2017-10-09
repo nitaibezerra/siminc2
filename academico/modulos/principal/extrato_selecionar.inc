@@ -13,7 +13,7 @@ require_once APPRAIZ . "includes/ActiveRecord/ActiveRecord.php";
 require_once APPRAIZ . "includes/ActiveRecord/classes/Endereco.php";
 require_once APPRAIZ . "includes/ActiveRecord/classes/Entidade.php";
 
-// Cabeçalho padrão do simec
+// Cabeçalho padrão do sistema
 require_once APPRAIZ . "includes/cabecalho.inc";
 echo "<br/>";
 

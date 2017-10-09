@@ -31,7 +31,7 @@ require_once APPRAIZ . 'includes/library/simec/Listagem.php';
 require_once APPRAIZ . 'planacomorc/classes/Questionario.class.inc';
 
 /**
- * Cabecalho padrão do simec.
+ * Cabecalho padrão do sistema.
  *
  * @see cabecalho.inc
  */

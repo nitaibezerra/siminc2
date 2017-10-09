@@ -47,7 +47,7 @@ if($_REQUEST['requisicao'] == 'gerararquivo') {
 
 //include APPRAIZ . 'includes/nusoap/lib/nusoap.php';
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 
 ?>

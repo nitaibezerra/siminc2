@@ -16,7 +16,7 @@ switch ($_REQUEST['req']){
 $aVinculos = $mPtresSubunidade->recuperarPorExercicio($_SESSION['exercicio']);
 
 /**
- * Cabeçalho padrão do simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

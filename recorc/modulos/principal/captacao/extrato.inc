@@ -24,7 +24,7 @@ if ($_REQUEST['requisicao'] == 'exportarXLS') {
     die();
 }
 /**
- * Cabeçalho padrão do Simec.
+ * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";

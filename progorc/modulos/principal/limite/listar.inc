@@ -4,7 +4,7 @@
  * @version $Id: listar.inc 102361 2015-09-11 18:50:20Z maykelbraz $
  */
 /**
- * Cabeçalho padrão do SIMEC.
+ * Cabeçalho padrão do sistema.
  */
 include APPRAIZ . "includes/cabecalho.inc";
 /**

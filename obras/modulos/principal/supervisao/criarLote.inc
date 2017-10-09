@@ -236,7 +236,7 @@ if($_SESSION["obras"]["gpdid"] || $_REQUEST["gpdid"] ){
 	$dataTramitacao = $db->pegaUm($sql);
 	
 }	
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 // Monta as abas
 print "<br/>";

@@ -6,7 +6,7 @@ if ( $_REQUEST["inusituacaoadesao"] ){
 	
 }
 
-// inclui o cabeçalho padrão do SIMEC
+// inclui o Cabeçalho padrão do sistema
 include  APPRAIZ."includes/cabecalho.inc";
 include_once APPRAIZ . "includes/workflow.php";
 print "<br/>";

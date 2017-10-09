@@ -19,7 +19,7 @@ switch( $_REQUEST["requisicao"] ){
 	
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 include APPRAIZ . "includes/Agrupador.php";
 

@@ -315,7 +315,7 @@ if ($_POST['operacao'] == 'salvar'){
 	die("<script>alert('{$msg}'); location.href='?modulo=principal/supervisao/cadOS&acao=A&gpdid={$_POST['gpdid']}';</script>");
 }
 
-// cabecalho padrão do SIMEC
+// Cabecalho padrão do sistema
 include APPRAIZ . "includes/cabecalho.inc";
 
 // Monta as abas
