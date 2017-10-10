@@ -2277,7 +2277,7 @@ function infromaTiErroArquivoAnexoConjur( $dadosDoInforme ){
 			public.arquivo.arqid => {$dadosDoInforme['arqid']}<br/>
 		<br/>
 		Atenciosamente,<br/>
-		Equipe SIMEC. ";
+		Equipe ". SIGLA_SISTEMA. ". ";
 
 	$sql = " select u.usunome, u.usuemail
 			 from seguranca.usuario u

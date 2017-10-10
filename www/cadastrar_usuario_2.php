@@ -547,7 +547,7 @@ if ( $_POST['formulario'] ) {
     Telefone: ({$_POST['usufoneddd']}) {$_POST['usufonenum']}
 
     Atenciosamente,
-    Equipe SIMEC.
+    Equipe ". SIGLA_SISTEMA. ".
     </pre>
     ";
 

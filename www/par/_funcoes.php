@@ -3648,7 +3648,7 @@ function verifica_pendencias_preObra( $preid )
 	$ptoid = $db->pegaUm( $sql );
 
 	if( $oPreObra->verificaArquivoCorrompido( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	//Carrega Dados Preenchimento
@@ -4049,7 +4049,7 @@ function verificaWFpreObra($preid)
 	*/
 
 	if( $oPreObra->verificaArquivoCorrompido( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$qrpid = pegaQrpidPAC( $preid, 43 );
@@ -4211,7 +4211,7 @@ function verificaArquivarWFpreObra($preid)
 	$oSubacaoControle = new SubacaoControle();
 
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Etenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Etenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 	return true;
 }
@@ -4611,7 +4611,7 @@ function verificaCondicaoIndeferimento( $qrpid )
 	$preid = $db->pegaUm($sql);
 	$preid = $preid ? $preid : $_SESSION['par']['preid'];
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$sql = "SELECT
@@ -4679,7 +4679,7 @@ function verificaCondicaoDeferimento( $qrpid ){
 	$preid = $db->pegaUm($sql);
 	$preid = $preid ? $preid : $_SESSION['par']['preid'];
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$sql = "SELECT
@@ -4747,7 +4747,7 @@ function verificaCondicaoDiligencia( $qrpid ){
 	$preid = $db->pegaUm($sql);
 	$preid = $preid ? $preid : $_SESSION['par']['preid'];
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$sql = "SELECT
@@ -4813,7 +4813,7 @@ function verificaCondicaoIndeferimentoInicial( $preid ){
 	}
 
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$sql = "SELECT
@@ -4834,7 +4834,7 @@ function verificaCondicaoAnaliseInicial( $preid ){
 	global $db;
 
 	if( !pendenciaArquivo( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 	$sql = "SELECT
@@ -5342,7 +5342,7 @@ function verificaPeriodoEnviarDiligencia( $preid )
 	$oPreObra = new PreObra();
 
 	if( $oPreObra->verificaArquivoCorrompido( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}
 
 // 	$sql = "SELECT dioqtddia, diodata FROM par.diligenciaobra WHERE dioativo = 't' AND preid = ".$preid;
@@ -5460,7 +5460,7 @@ function pendenciaArquivoCadastramentoWF( $preid ){
 	$oPreObra = new PreObra();
 
 	if( !$oPreObra->verificaArquivoValidado( $preid )  && !$oPreObra->verificaArquivoCorrompido( $preid ) ){
-		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.';
+		return 'Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão \\\'Substituir\\\' , nas abas \\\'Cadastro de fotos do terreno\\\', \\\'Documentos Anexos\\\' e \\\'Projetos - Tipo A\\\', se houver. Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe '. SIGLA_SISTEMA. '/PAR.';
 	}else{
 		$sql = "SELECT dioqtddia, diodata FROM par.diligenciaobra WHERE dioativo = 't' AND preid = ".$preid;
 		$dados = $db->pegaLinha( $sql );
@@ -11522,7 +11522,7 @@ function enviarEmailNotificacao($dados, $dadosSolicitante, $dmdid = '', $arquivo
         <p>
             Atenciosamente,
             <br/>
-            Equipe SIMEC.
+            Equipe ". SIGLA_SISTEMA. ".
         </p>
         <p>
             <small>

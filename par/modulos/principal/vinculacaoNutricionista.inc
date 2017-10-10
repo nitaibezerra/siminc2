@@ -179,7 +179,7 @@ está de acordo com os parâmetros numéricos definidos na Resolução CFN nº 465/201
 http://simec.mec.gov.br
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 
 </pre>";
 						if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" )

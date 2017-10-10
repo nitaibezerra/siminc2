@@ -2493,7 +2493,7 @@ Link para verificação do usuário: http://simec.mec.gov.br/seguranca/seguranca.ph
 Qualquer dúvida, entrar em contato com o gestor do módulo.
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe ". SIGLA_SISTEMA. ".
 </pre>
 ";
         $retorno = enviar_email($remetente, $destinatarios, $assunto, $mensagem);

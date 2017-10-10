@@ -81,7 +81,7 @@ Passou do estado '<b style='color: red;'>{$estadoAtual['esddsc']}</b>' para : '<
 Para maiores detalhes, favor entrar no SIMEC, módulo Demandas FIES em http://simec.mec.gov.br.
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe ". SIGLA_SISTEMA. ".
 </pre>
 ";
 		enviarEmailDemandasFies($esdid, $dmdid, $paransEmail);
@@ -509,7 +509,7 @@ Pertencente a demanda <span style='color: red;'>{$modelDemandaEntrega->dmdid}</s
 Para maiores detalhes, favor entrar no SIMEC, módulo Demandas FIES em http://simec.mec.gov.br.
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe ". SIGLA_SISTEMA. ".
 </pre>
 ";
 	enviarEmailDemandasFies($esdid, $modelDemandaEntrega->dmdid, $paransEmail);

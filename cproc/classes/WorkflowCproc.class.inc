@@ -382,7 +382,7 @@ class WorkflowCproc
 
 
 		$assunto = "Impressão, assinatura e numeração do documento";
-		$conteudo = $_POST['cmddsc'] . "<br/><br/>Atenciosamente,<br/>Equipe SIMEC. ";
+		$conteudo = $_POST['cmddsc'] . "<br/><br/>Atenciosamente,<br/>Equipe ". SIGLA_SISTEMA. ". ";
 
 		return enviar_email( $remetente, $destinatario, $assunto, $conteudo);
 	}

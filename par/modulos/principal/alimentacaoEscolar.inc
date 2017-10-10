@@ -197,7 +197,7 @@ $strMensagem =
 	Informamos que você foi desvinculado do Quadro Técnico de nutricionistas do Programa Nacional de Alimentação Escolar no {$tipoEsfera} de {$unidade}.
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 </pre>";
 					
 					$remetente = array("nome"=>SIGLA_SISTEMA, "email"=>"noreply@mec.gov.br");
@@ -379,7 +379,7 @@ você atua nesta função clicando no botão \"Validar\".  Caso não atue nesta funçã
 http://simec.mec.gov.br 
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 </pre>";
 					
 					
@@ -789,7 +789,7 @@ Usuário: {$duncpf}
 Senha: {$senhageral}	
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 </pre>";
 			}
 			else 
@@ -814,7 +814,7 @@ Endereço eletrônico: planodemetas@mec.gov.br
 http://simec.mec.gov.br
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 </pre>";
 			
 			}

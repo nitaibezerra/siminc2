@@ -284,7 +284,7 @@ Observe se o número de nutricionistas vinculados ao seu  {$esfera} está de acord
 http://simec.mec.gov.br
 
 Atenciosamente,
-Equipe SIMEC/PAR.
+Equipe ". SIGLA_SISTEMA. "/PAR.
 </pre>";			
 				if( $_SERVER['HTTP_HOST'] == "simec-local" || $_SERVER['HTTP_HOST'] == "localhost" )
 				{		

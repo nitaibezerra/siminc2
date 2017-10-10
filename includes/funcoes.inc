@@ -4720,7 +4720,7 @@ function enviarEmailUsuarioInvalido($cpf, $mensagem = '')
 Houve uma tentativa de entrar no sistema com CPF {$cpf}, porém o web-service com a receita rejeitou o mesmo com a mensagem: " . utf8_decode($mensagem) . "
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe ". SIGLA_SISTEMA. ".
 </pre>
 ";
     return enviar_email($remetente, $destinatarios, $assunto, $mensagem);

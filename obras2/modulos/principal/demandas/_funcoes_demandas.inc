@@ -404,7 +404,7 @@ function enviarEmailNotificacao($dados, $dadosSolicitante, $dmdid = '', $arquivo
         <p>
             Atenciosamente,
             <br/>
-            Equipe SIMEC.
+            Equipe ". SIGLA_SISTEMA. ".
         </p>
         <p>
             <small>

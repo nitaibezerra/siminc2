@@ -123,7 +123,7 @@ foreach($arrUsu as $u){
 	}
 	$html.= '</table><br />';
 	$html.= 'Atenciosamente,<br /><br />
-	Equipe SIMEC<br /><br />
+	Equipe '. SIGLA_SISTEMA. '<br /><br />
 	Obs.: Este é um email automático enviado pelo sistema, favor não responder.</div>';
 	echo $html."<br/><br/>";
 	$e->setText($html);

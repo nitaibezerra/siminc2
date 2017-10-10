@@ -685,7 +685,7 @@ Justificativa: {$reajustificativa}
 Para maiores detalhes, favor entrar no SIMEC, módulo Demandas FIES em http://simec.mec.gov.br.
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe ". SIGLA_SISTEMA. ".
 </pre>
         ";
 
