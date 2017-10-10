@@ -45,7 +45,7 @@ $celid = $_REQUEST['celid'];
 
 <html>
 <head>
-<title>SIMEC - Associar Sistemas</title>
+<title><?php echo SIGLA_SISTEMA; ?> - Associar Sistemas</title>
 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 <link rel='stylesheet' type='text/css' href='../includes/listagem.css'/>
 </head>

@@ -499,7 +499,7 @@ if (possui_perfil(PFLCOD_GESTOR_MEC) || possui_perfil(PFLCOD_SUPER_USUARIO)) {
             <table width="100%">
                 <tr>
                     <td style="text-align: center">
-                        <h4>DADOS A SEREM COMPILADOS DO SIMEC</h4>
+                        <h4>DADOS A SEREM COMPILADOS DO <?php echo SIGLA_SISTEMA; ?></h4>
                     </td>
                 </tr>
             </table>
@@ -978,7 +978,7 @@ if (possui_perfil(PFLCOD_GESTOR_MEC) || possui_perfil(PFLCOD_SUPER_USUARIO)) {
                 <table width="100%">
                     <tr>
                         <td style="text-align: center">
-                            <h4>DADOS A SEREM INSERIDOS PELA ENTIDADE NO SIMEC</h4>
+                            <h4>DADOS A SEREM INSERIDOS PELA ENTIDADE NO <?php echo SIGLA_SISTEMA; ?></h4>
                         </td>
                     </tr>
                 </table>

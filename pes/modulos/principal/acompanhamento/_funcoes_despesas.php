@@ -1510,10 +1510,10 @@ function montaTabelaConsolidadoUOSemAE($unicod, $entcodigo, $tidcodigo = null)
                     <strong>SIAFI (R$)</strong>
                 </td>
                 <td colspan="2" onmouseout="this.bgColor='';" onmouseover="this.bgColor='#c0c0c0';" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" class="title">
-                    <strong>SIMEC - PES (R$)</strong>
+                    <strong><?php echo SIGLA_SISTEMA; ?> - PES (R$)</strong>
                 </td>
                 <td colspan="2" rowspan="2" onmouseout="this.bgColor='';" onmouseover="this.bgColor='#c0c0c0';" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" class="title">
-                    <strong>COMPARATIVO<br />SIMEC/SIAFI</strong>
+                    <strong>COMPARATIVO<br /><?php echo SIGLA_SISTEMA; ?>/SIAFI</strong>
                 </td>
             </tr>
             <tr align="center">
@@ -1766,10 +1766,10 @@ function montaTabelaConsolidadoUO($unicod, $entcodigo, $tidcodigo = null)
                     <strong>SIAFI (R$)</strong>
                 </td>
                 <td colspan="4" onmouseout="this.bgColor='';" onmouseover="this.bgColor='#c0c0c0';" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" class="title">
-                    <strong>SIMEC - PES (R$)</strong>
+                    <strong><?php echo SIGLA_SISTEMA; ?> - PES (R$)</strong>
                 </td>
                 <td colspan="2" rowspan="2" onmouseout="this.bgColor='';" onmouseover="this.bgColor='#c0c0c0';" style="border-right: 1px solid #c0c0c0; border-bottom: 1px solid #c0c0c0; border-left: 1px solid #ffffff;" class="title">
-                    <strong>COMPARATIVO<br />SIMEC/SIAFI</strong>
+                    <strong>COMPARATIVO<br /><?php echo SIGLA_SISTEMA; ?>/SIAFI</strong>
                 </td>
             </tr>
             <tr align="center">

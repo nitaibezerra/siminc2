@@ -106,7 +106,7 @@ where usustatus='A' and u.usucpf not in (select pu.usucpf from seguranca.perfilu
 <script language="JavaScript">function setpfl(){document.setperfil.submit();}</script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="notscreen"  style="border-bottom: 1px solid;">
   <tr bgcolor="#ffffff"> 
-    <td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td><td height="20" nowrap>SIMEC - Sistema Integrado de Monitoramento do MEC<br>
+    <td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td><td height="20" nowrap><?php echo SIGLA_SISTEMA; ?> - Sistema Integrado de Monitoramento do MEC<br>
 	Ministério da Educação / SE - Secretaria Executiva<br>
 	SPO - Subsecretaria de Planejamento e Orçamento<br>	
 	</td>

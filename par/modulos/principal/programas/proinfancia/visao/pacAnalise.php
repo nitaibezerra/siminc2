@@ -304,7 +304,7 @@ $arperfil = pegaArrayPerfil($_SESSION['usucpf']);
 				Prezada(o) Usuaria(o) - Esta obra contém arquivos corrompidos. <br>
 				Favor anexar novamente os documentos ou fotos anexados em vermelho clicando no botão 'Substituir' ,<br> 
 				nas abas 'Cadastro de fotos do terreno', 'Documentos Anexos' e 'Projetos - Tipo A', se houver. <br>
-				Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe SIMEC/PAR.
+				Posteriormente, tramitar a obra para analise do FNDE - Atenciosamente - Equipe <?php echo SIGLA_SISTEMA; ?>/PAR.
 			</td>
 		</tr>
 	<?php 

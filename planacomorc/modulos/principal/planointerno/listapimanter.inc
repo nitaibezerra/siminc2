@@ -601,7 +601,7 @@ $db->monta_combo('unidade', $sql, 'S', 'Selecione', null, null, null, null, 'N',
                         <button class="btn btn-warning" type="reset" onclick="reload()">Limpar</button>
                         <button class="btn btn-primary" id="buscar" type="button" onclick="enviar()">Buscar</button>
                         <button class="btn btn-info" type="button" onclick="location.href = 'planacomorc.php?modulo=principal/planointerno/cadastro&acao=A'" value="Cadastrar">Cadastrar</button>
-                        <button class="btn btn-success" type="button" onclick="enviarApenasEmpenhados()" value="Listar PIs com Empenho e não cadastrados no SIMEC (26.000)">Listar PIs com Empenho e não cadastrados no SIMEC (26.000)</button>
+                        <button class="btn btn-success" type="button" onclick="enviarApenasEmpenhados()" value="Listar PIs com Empenho e não cadastrados no SIMEC (26.000)">Listar PIs com Empenho e não cadastrados no <?php echo SIGLA_SISTEMA; ?> (26.000)</button>
                     </div>
                 </div>
             </form>

@@ -375,7 +375,7 @@
         <td>
 <p>Esta tela permite gerenciar os acessos ou a substituição de todos os bolsistas. Para tanto, basta marcar o membro da equipe (clicando no checkbox) e clicar em alguns dos botões situados no final da lista, podendo ativar ou bloquear os acesso. Existem basicamente 4 situações de acesso:</p>
 <p>Ativo - usuário esta autorizado a acessar o sistema;<br>
-Pendente - usuário solicitou acesso pela página principal do SIMEC, e está aguardando confirmação;<br>
+Pendente - usuário solicitou acesso pela página principal do <?php echo SIGLA_SISTEMA; ?>, e está aguardando confirmação;<br>
 Bloqueado - usuário esta bloqueado, podendo ser pelo excesso de tentativas (5 tentativas de acesso) ou foi bloqueado por alguém com perfil superior;<br>
 Não cadastrado - usuário não possui acesso ao SisFor. É possível visualizar o histórico do gerenciamento clicando no ícone colorido da situação.<br>
 </p>

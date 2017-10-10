@@ -141,7 +141,7 @@ $os 	= new Supervisao_Os( $sosid );
 							<b>3 - Histórico  apresentado</b> 
 						</p>
 						<p>
-							As informações levantadas quando da Supervisão estão lançadas no  SIMEC - Sistema 
+							As informações levantadas quando da Supervisão estão lançadas no  <?php echo SIGLA_SISTEMA; ?> - Sistema 
 							Integrado de Monitoramento, Execução e Controle do Ministério da Educação, no Módulo 
 							Monitoramento de Obras, na Aba Vistoria, no campo  Relatório Técnico de Supervisão, conforme 
 							Manual do Usuário do Sistema.
@@ -195,7 +195,7 @@ $os 	= new Supervisao_Os( $sosid );
 						</p>
 						<p>
 							<b>
-								VALIDAÇÃO DA  EMPRESA CONTRATADA, via SIMEC:
+								VALIDAÇÃO DA  EMPRESA CONTRATADA, via <?php echo SIGLA_SISTEMA; ?>:
 							</b>
                                                         <br />
                             <?

@@ -46,7 +46,7 @@
    </td>
    </tr>
    <tr>
-   <td align="right" bgcolor="#2A4159"><font color="#FFFFFF" size="1">SIMEC - Ministério da Educação - Sistema em Desenvolvimento</font></td>
+   <td align="right" bgcolor="#2A4159"><font color="#FFFFFF" size="1"><?php echo SIGLA_SISTEMA; ?> - Ministério da Educação - Sistema em Desenvolvimento</font></td>
 	</tr>
 </table>
 

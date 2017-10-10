@@ -35,7 +35,7 @@
 					</p>
 					<br />
 					<p style="text-align:justify;">	
-						É importante destacar que somente o CPF do diretor cadastrado no SIMEC terá o acesso liberado, portanto é imprescindível que os dados cadastrais do diretor e da escola estejam atualizados no SIMEC. Assim que o MEC finalizar a relação dos diretores cadastrados, você receberá uma mensagem eletrônica para que a escola proceda ao cadastramento no Sistema do Segundo Tempo.
+						É importante destacar que somente o CPF do diretor cadastrado no <?php echo SIGLA_SISTEMA; ?> terá o acesso liberado, portanto é imprescindível que os dados cadastrais do diretor e da escola estejam atualizados no <?php echo SIGLA_SISTEMA; ?>. Assim que o MEC finalizar a relação dos diretores cadastrados, você receberá uma mensagem eletrônica para que a escola proceda ao cadastramento no Sistema do Segundo Tempo.
 						Estamos à disposição para esclarecimentos por e-mail segundotempo_maisedu@esporte.com.br ou pelos telefones (61) 3217-9490/9691/1490/1465.
 					</p>
 					<br />

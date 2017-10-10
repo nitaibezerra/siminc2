@@ -95,8 +95,8 @@ if(($db->testa_superuser() || in_array(PDEINT_PERFIL_EQUIPE_MEC,$perfis)) && $es
 	<td class="blue">
 	<p>A inclusão ou exclusão de problemas modifica o respectivo Plano de Ação. Não esqueça de revisar também as estratégias, ações, itens e valores programados, se necessário.</p>
 	<p>Parabéns! Vocês acabaram de concluir a elaboração do Plano de Desenvolvimento da <?=$_SESSION['pdeinterativo_vars']['pdenome'] ?>. Leia com cuidado tudo o que foi descrito e, se concordar, clique em “Enviar para o Comitê”. Caso discorde de alguma parte, retorne aos Planos de Ação ou ao Diagnóstico e faça os ajustes, até construir um plano que o Grupo de Trabalho concorde e que a escola se identifique.</p> 
-	<p>Lembre-se: depois de enviar o plano para o Comitê, ele não poderá ser alterado, exceto se o Comitê devolve-lo, também via SIMEC, e solicitar algum ajuste. Caso contrário, o mesmo seguirá para análise do MEC, que também poderá solicitar alterações ou validar e solicitar a transferência dos recursos ao FNDE.</p>
-	<p>Portanto, fique atento(a) às próximas etapas! Acesse periodicamente o SIMEC/ PDE Interativo e veja, na tela principal, em que fase o plano se encontra. O Ministério da Educação parabeniza a equipe pelo esforço e deseja sorte na execução, monitoramento e avaliação sistemática do plano!</p>
+	<p>Lembre-se: depois de enviar o plano para o Comitê, ele não poderá ser alterado, exceto se o Comitê devolve-lo, também via <?php echo SIGLA_SISTEMA; ?>, e solicitar algum ajuste. Caso contrário, o mesmo seguirá para análise do MEC, que também poderá solicitar alterações ou validar e solicitar a transferência dos recursos ao FNDE.</p>
+	<p>Portanto, fique atento(a) às próximas etapas! Acesse periodicamente o <?php echo SIGLA_SISTEMA; ?>/ PDE Interativo e veja, na tela principal, em que fase o plano se encontra. O Ministério da Educação parabeniza a equipe pelo esforço e deseja sorte na execução, monitoramento e avaliação sistemática do plano!</p>
 	</td>
 </tr>
 <? if($flagMEC): ?>

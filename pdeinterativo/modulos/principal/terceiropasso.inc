@@ -112,7 +112,7 @@ if( $grtconcluido == 't' )
 			<br />
 			As principais atribuições dos técnicos das secretárias responsáveis pelo planejamento estratégico das escolas são: i) prestar assistência técnica na elaboração e execução dos programas federais e; ii) analisar e emitir parecer para o MEC acerca dos planos de todas as escolas de sua rede (estadual ou municipal) com base em critérios técnicos, pedagógicos e financeiros. Por isso, é imprescindível que os técnicos das secretarias visitem as escolas e conheçam bem os programas federais.
 			<br /><br />
-			<b>Lembre-se:</b> Para o MEC, os técnicos que acessam este módulo do SIMEC representam a palavra da Secretaria de Educação, de modo que, ao encaminhar o plano para o Ministério, entende-se que o mesmo foi efetivamente aprovado pela Secretária. Por esta razão, recomenda-se que esta equipe seja designada formalmente pelo(a) dirigente de Educação, por meio de um decreto, portaria ou qualquer outro instrumento que caracterize a criação deste grupo.
+			<b>Lembre-se:</b> Para o MEC, os técnicos que acessam este módulo do <?php echo SIGLA_SISTEMA; ?> representam a palavra da Secretaria de Educação, de modo que, ao encaminhar o plano para o Ministério, entende-se que o mesmo foi efetivamente aprovado pela Secretária. Por esta razão, recomenda-se que esta equipe seja designada formalmente pelo(a) dirigente de Educação, por meio de um decreto, portaria ou qualquer outro instrumento que caracterize a criação deste grupo.
 			<br /><br />
 			No link <b>“Principal” > “Documentos Comitês”</b> é possível fazer o download do documento enviado pela Secretaria de Educação para o MEC.
 			<br /><br />

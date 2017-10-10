@@ -95,7 +95,7 @@ $(function(){
 	    					<br>
 					    	<p> 
 								IV - constituem obrigações da PROPONENTE:<br/>
-								a) solicitar ao gestor do projeto senha e login do SIMEC;<br/>
+								a) solicitar ao gestor do projeto senha e login do <?php echo SIGLA_SISTEMA; ?>;<br/>
 								b) solicitar à UG concedente senha e login do SIGEFWEB, no caso de recursos enviados pelo FNDE;<br/>
 								c) promover a execução do objeto do Termo na forma e prazos estabelecidos no Plano de Trabalho;<br/>
 								d) aplicar os recursos discriminados exclusivamente na consecução do objeto deste Termo;<br/>
@@ -128,7 +128,7 @@ $(function(){
 					    	<br>
 					    	<p> 
 								III - constituem obrigações da PROPONENTE:<br/>
-								a) solicitar ao gestor do projeto senha e login do SIMEC;<br/>
+								a) solicitar ao gestor do projeto senha e login do <?php echo SIGLA_SISTEMA; ?>;<br/>
 								b) solicitar à UG concedente senha e login do SIGEFWEB, no caso de recursos enviados pelo FNDE;<br/>
 								c) promover a execução do objeto do Termo na forma e prazos estabelecidos no Plano de Trabalho;<br/>
 								d) aplicar os recursos discriminados exclusivamente na consecução do objeto deste Termo;<br/>

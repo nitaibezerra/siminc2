@@ -134,13 +134,13 @@
                                 II - PERÍODO ESTABELECIDO PARA A REALIZAÇÃO DA ADESÃO
                             </p>
                             <p style="font-size: 12px; text-align: justify;">
-                                A adesão do estado, Distrito Federal ou município será permitida no Sistema Integrado de Monitoramento, Execução e Controle do Ministério da Educação (SIMEC) a partir do dia 17/12/2013, no portal eletrônico <a href="http://simec.mec.gov.br" target="_blank">http://simec.mec.gov.br</a> , que ficará aberto por 30 dias, a contar da data de abertura.
+                                A adesão do estado, Distrito Federal ou município será permitida no Sistema Integrado de Monitoramento, Execução e Controle do Ministério da Educação (<?php echo SIGLA_SISTEMA; ?>) a partir do dia 17/12/2013, no portal eletrônico <a href="http://simec.mec.gov.br" target="_blank">http://simec.mec.gov.br</a> , que ficará aberto por 30 dias, a contar da data de abertura.
                             </p>
                             <p style="font-size: 13px; font-weight: bold; text-align: left;">
                                 III - PROCEDIMENTOS PARA A ADESÃO - PASSO A PASSO
                             </p>
                             <p style="font-size: 12px; text-align: justify;">
-                                <b>Passo 01 - Acessar o SIMEC, pelo endereço eletrônico</b> <a href="http://simec.mec.gov.br" target="_blank">http://simec.mec.gov.br,</a> <b>clique na Aba PAR e aparecerá a primeira tela.</b>
+                                <b>Passo 01 - Acessar o <?php echo SIGLA_SISTEMA; ?>, pelo endereço eletrônico</b> <a href="http://simec.mec.gov.br" target="_blank">http://simec.mec.gov.br,</a> <b>clique na Aba PAR e aparecerá a primeira tela.</b>
                             </p>
                             <p style="font-size: 12px; text-align: justify; font-weight: bold;">
                                 Passo 02 - Na mesma tela, tela inical, Clicar o ícone: Financiamento de Novas Turmas de Educação de Jovens e Adultos

@@ -11,7 +11,7 @@
 	  include "includes/classes_simec.inc";
       include "includes/funcoes.inc";
 ?>
-<title>Manutenção do SIMEC</title>
+<title>Manutenção do <?php echo SIGLA_SISTEMA; ?></title>
 <script language="JavaScript" src="includes/funcoes.js"></script>
 <body>
 <link rel="stylesheet" type="text/css" href="includes/Estilo.css">
@@ -21,8 +21,8 @@
 
 ?>
 <br>
-<?
-$titulo_modulo='O Sistema SIMEC está temporariamente em manutenção';
+<?php
+$titulo_modulo='O Sistema '. SIGLA_SISTEMA. ' está temporariamente em manutenção';
 $subtitulo_modulo='Por favor, aguarde alguns minutos.<br>';
 monta_titulo($titulo_modulo,$subtitulo_modulo);
 ?>

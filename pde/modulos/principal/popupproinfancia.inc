@@ -103,7 +103,7 @@
 		<td class="titulo_pagina" >
 			<div>
 				<img style="float:left" src="../imagens/icones/icons/control.png" style="vertical-align:middle;"  />
-				<div style="float:left" class="titulo_box" >SIMEC<br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
+				<div style="float:left" class="titulo_box" ><?php echo SIGLA_SISTEMA; ?><br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
 			</div>
 			<div style="float:right;cursor:pointer;" onclick="window.close();">
 				<img src="../imagens/icones/icons/Refresh.png" style="vertical-align:middle;" />

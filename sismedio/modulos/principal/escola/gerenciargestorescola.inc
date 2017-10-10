@@ -125,7 +125,7 @@ function inserirGestorEscolaGerenciamento() {
 	<td class="SubTituloDireita" width="25%">Orientações</td>
 	<td>
 	<p>Para alterar o gestor da Escola é necessário remover o atual para que possa ser inserido um novo CPF.</p>
-	<p>Caso esta pessoa nunca tenha acessado o SIMEC, a senha padrão criada será <b>simecdti</b>. Caso este usuário já tenha acessado o SIMEC, a senha continuará a mesma.</p>
+	<p>Caso esta pessoa nunca tenha acessado o <?php echo SIGLA_SISTEMA; ?>, a senha padrão criada será <b>simecdti</b>. Caso este usuário já tenha acessado o <?php echo SIGLA_SISTEMA; ?>, a senha continuará a mesma.</p>
 	</td>
 </tr>
 <tr>

@@ -290,7 +290,7 @@ function carregaUsuario_() {
 	<td class="SubTituloDireita" width="25%">Orientações</td>
 	<td>
 	<p>Para substituir o Coordenador Local do Pacto é necessário remover o atual e inserir os dados do(a) novo(a) Coordenador(a).</p>
-	<p>Para acessar o SisPacto, a pessoa indicada que já tem acesso ao SIMEC pode acessar este sistema com a mesma senha utilizada para outros módulos do SIMEC. Caso a pessoa não tenha acesso a nenhum módulo do SIMEC, então a senha inicial de acesso será “simecdti” e deverá ser trocada no primeiro acesso para outra de fácil memorização.</p>
+	<p>Para acessar o SisPacto, a pessoa indicada que já tem acesso ao <?php echo SIGLA_SISTEMA; ?> pode acessar este sistema com a mesma senha utilizada para outros módulos do <?php echo SIGLA_SISTEMA; ?>. Caso a pessoa não tenha acesso a nenhum módulo do <?php echo SIGLA_SISTEMA; ?>, então a senha inicial de acesso será “simecdti” e deverá ser trocada no primeiro acesso para outra de fácil memorização.</p>
 	<p>Lembre-se: os Coordenadores Locais só conseguem acessar o SisPacto quando o seu cadastro foi concluído pela Equipe do PAR – Aprovação. Em caso de dúvida, consulte o Manual de Orientações.</p>
 	</td>
 </tr>

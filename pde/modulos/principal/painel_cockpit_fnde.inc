@@ -2,7 +2,7 @@
 <html lang="pt-BR" xml:lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>SIMEC - Monitoramento Estratégico</title>
+	<title><?php echo SIGLA_SISTEMA; ?> - Monitoramento Estratégico</title>
 	<link href="./cockpit/barra_do_governo/css/barra_do_governo.css" rel="stylesheet" media="screen" type="text/css" />
 	<link rel="stylesheet" type="text/css" media="all" href="./cockpit/css/principal_fnde.css">
 	<link href="./cockpit/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>

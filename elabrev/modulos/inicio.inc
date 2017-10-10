@@ -185,8 +185,8 @@ if ($_SESSION['elabrev']['cooid']) {
 <!--        De acordo com o art. 6� da Portaria n� 549, de 16 de abril de 2013, � 1�, o <i>�rg�o ou entidade recebedora dos recursos dever� encaminhar ao concedente relat�rio de cumprimento do objeto pactuado at� 60 dias do t�rmino do prazo para cumprimento do objeto estabelecido no Termo de Execu��o Descentralizada.
             Ainda no mesmo artigo, em seu � 3�, a celebra��o de novos termos de execu��o descentralizado com o �rg�o ou entidade recebedora dos recursos descentralizados ficar� condicionada a comprova��o de entrega do relat�rio de cumprimento do objeto, ap�s transcorrido o prazo estabelecido no par�grafo primeiro deste artigo.</i>
         <br/>
-        <b><br/>Alertamos assim que aquelas institui��es que celebraram termos de execu��o descentralizado em 2013 no SIMEC devem realizar o preenchimento e entrega do relat�rio de cumprimento de objeto no prazo indicado, evitando que sejam bloqueados novos repasses conforme previsto no � 3� supracitado.
-            <br/><br/>Ressaltamos ainda que o preenchimento do relat�rio tamb�m � feito via SIMEC, da mesma forma como � celebrado o termo de execu��o descentralizada. O relat�rio deve ser inserido pela Equipe T�cnica da entidade proponente, passando novamente pela valida��o do gestor or�ament�rio e do representante legal.
+        <b><br/>Alertamos assim que aquelas institui��es que celebraram termos de execu��o descentralizado em 2013 no <?php echo SIGLA_SISTEMA; ?> devem realizar o preenchimento e entrega do relat�rio de cumprimento de objeto no prazo indicado, evitando que sejam bloqueados novos repasses conforme previsto no � 3� supracitado.
+            <br/><br/>Ressaltamos ainda que o preenchimento do relat�rio tamb�m � feito via <?php echo SIGLA_SISTEMA; ?>, da mesma forma como � celebrado o termo de execu��o descentralizada. O relat�rio deve ser inserido pela Equipe T�cnica da entidade proponente, passando novamente pela valida��o do gestor or�ament�rio e do representante legal.
             Em seguida o termo chega � secretaria que analisou aquele termo, que poder� enviar para dilig�ncia ou emitir parecer e finalizar o termo.
         </b>-->
         
@@ -393,12 +393,12 @@ if ($_SESSION['elabrev']['cooid']) {
     <br/><br/>
     A partir do dia <b>06/05/2015</b> estar� no ar um <b>novo m�dulo</b> para o lan�amento dos Termos de Execu��o Descentralizada, contendo tamb�m todos os termos j� registrados.
     <br/>
-    O SIMEC ir� redirecionar autom�ticamente o usu�rio ao clicar nos menus para esta finalidade.
+    O <?php echo SIGLA_SISTEMA; ?> ir� redirecionar autom�ticamente o usu�rio ao clicar nos menus para esta finalidade.
     <br/>
     Todos os dados e perfis ser�o migrados. Caso encontre algum problema, entre em contato com a CGSO.
     <br/>
     <br/>
-    Equipe SIMEC.
+    Equipe <?php echo SIGLA_SISTEMA; ?>.
     </div>
 
     <table cellpadding="2" cellspacing="0" align="center" border="0">
@@ -537,7 +537,7 @@ if ($_SESSION['elabrev']['cooid']) {
 
                 <p style="text-align: justify;">Senhor Dirigente,</p>
 
-                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionar� um plant�o nesta SPO/MEC somente por meio do endere�o eletr�nico <?php echo $_SESSION['email_sistema']; ?>, com a finalidade de esclarecer d�vidas atinentes � inclus�o no SIMEC do detalhamento dos limites para o PLOA 2014. </p>
+                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionar� um plant�o nesta SPO/MEC somente por meio do endere�o eletr�nico <?php echo $_SESSION['email_sistema']; ?>, com a finalidade de esclarecer d�vidas atinentes � inclus�o no <?php echo SIGLA_SISTEMA; ?> do detalhamento dos limites para o PLOA 2014. </p>
 
                 <p style="text-align: justify;"><br>Atenciosamente,<br><br><strong>Wagner Vilas Boas de Souza<br>
                         Subsecret&aacute;rio de Planejamento e Or&ccedil;amento

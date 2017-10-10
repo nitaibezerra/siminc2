@@ -108,7 +108,7 @@ jQuery(document).ready(function(){
 
 
 			<tr class="cpf cnpj">
-				<td class="SubTituloDireita" width="20%">Ocorreu alteração da anteriormente cadastrada no SIMEC?</td>
+				<td class="SubTituloDireita" width="20%">Ocorreu alteração da anteriormente cadastrada no <?php echo SIGLA_SISTEMA; ?>?</td>
 				<td>
 					&nbsp; <input type="radio" name="alteracao" id="alteracao" value="t" class="parceiro1" <?= (($monocorreualteracaodaicp == "t") ? "checked" : ""); ?> <?= $habilita=='N' ? 'disabled="disabled"' : ''; ?>> SIM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="radio" name="alteracao" id="alteracao" value="f" class="parceiro1" <?= (($monocorreualteracaodaicp == "f") ? "checked" : ($monocorreualteracaodaicp == '') ? "checked" : ""); ?> <?= $habilita=='N' ? 'disabled="disabled"' : ''; ?>> NÃO

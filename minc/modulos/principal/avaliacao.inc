@@ -862,7 +862,7 @@ require_once APPRAIZ . 'includes/classes/entidades.class.inc';
 					públicos na ativa e entidades públicas não podem receber recursos do PDDE/ FNDE, sob risco de impedimento da vinculação da escola e/ ou da administração pública local, ao PDDE/ FNDE. 
 					Os cronogramas de execução deverão ser revistos. Recomenda-se replanejamento e inicio imediato das atividades, uma vez disponibilizada a primeira parcela recursos para desenvolvimento dos 
 					Planos de Atividades. Durante a execução do Plano de Atividade Cultural é indispensável que as escolas atualizem o uso dos recursos repassados por meio da aba “Monitoramento”, que será 
-					disponibilizada em breve no módulo “Mais Cultura” do SIMEC. Caso necessário, as atividades poderão ser estendidas ao próximo ano letivo, contudo, deve-se atentar às normas PDDE/ FNDE para 
+					disponibilizada em breve no módulo “Mais Cultura” do <?php echo SIGLA_SISTEMA; ?>. Caso necessário, as atividades poderão ser estendidas ao próximo ano letivo, contudo, deve-se atentar às normas PDDE/ FNDE para 
 					uso dos recursos no ano exercício em que foram repassados, sob pena de redução dos mesmos no ano seguinte. <strong>Desse modo, recomenda-se que o replanejamento dos das atividades considere meios de 
 					fazer uso dos recursos, acordando e, se possível, adianto compras e possíveis pagamentos de serviços tão logo os recursos seja disponibilizados, sem prejuízo de atendimento as regras PDDE/ FNDE 
 					para uso dos mesmos (Resolução PDDE/ FNDE n° 10 de 18/04/2013).</strong>

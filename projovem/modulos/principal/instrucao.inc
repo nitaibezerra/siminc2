@@ -152,7 +152,7 @@ style='font-size:11.0pt'><o:p>&nbsp;</o:p></span></p>
 
  <li class=MsoNormal style='text-align:justify;mso-list:l1 level1 lfo2;
      tab-stops:list 36.0pt'><span style='font-size:11.0pt'>No momento de
-     cadastramento dos candidatos no SIMEC, a Secretaria de Educação poderá
+     cadastramento dos candidatos no <?php echo SIGLA_SISTEMA; ?>, a Secretaria de Educação poderá
      inserir até duas vezes o número total de vagas disponibilizadas, uma vez
      que nem todos os inscritos cumprirão os requisitos mínimos (ser
      funcionário efetivo, possuir curso superior e encontrar-se em exercício na

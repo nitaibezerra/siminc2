@@ -892,7 +892,7 @@ if($_REQUEST['requisicao'] == 'carregaEstrategiasPNE'){
 					<img src="../imagens/icones/icons/control.png" style="vertical-align:middle;" alt="" title="" />
 				</td>
 				<td  align="left" style="cursor:pointer;" onclick="window.location='estrategico.php?modulo=principal/atividade_estrategico/projetos&acao=A';">					
-					<font size="+2"><b>SIMEC</b></font><br/>
+					<font size="+2"><b><?php echo SIGLA_SISTEMA; ?></b></font><br/>
 					Monitoramento Estratégico
 				</td>
 			</tr>

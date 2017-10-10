@@ -151,7 +151,7 @@ $processo = substr($arProcesso['processo'],0,5) . ".".substr($arProcesso['proces
 ?>
 <html>
 	<head>
-		<title>SIMEC - Alterar Dados Empenho</title>
+		<title><?php echo SIGLA_SISTEMA; ?> - Alterar Dados Empenho</title>
         <meta http-equiv='Content-Type' content='text/html; charset=ISO-8895-1'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript" src="../includes/JQuery/jquery-1.4.2.js"></script>

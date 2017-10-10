@@ -12,7 +12,7 @@ include "config.inc";
 include APPRAIZ."includes/classes_simec.inc";
 include APPRAIZ."includes/funcoes.inc";
 ?>
-<title>Manutenção do SIMEC</title>
+<title>Manutenção do <?php echo SIGLA_SISTEMA; ?></title>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
 <body>
 <link rel="stylesheet" type="text/css" href="../includes/Estilo.css">

@@ -292,7 +292,7 @@ function montaArrayVistoria (){
 
                                     <div style="font-size: 14px">
                                         <div>
-                                            <p>Em razão das novas regras de transferência de recursos aos municípios, estados e Distrito Federal, o FNDE, com escopo de aprimorar o processo de integração entre os entes federados e esta Autarquia, criou ferramenta no módulo Obras 2.0 (SIMEC), na qual ocorrerá a solicitação do desembolso. Segue abaixo documentos:</p>
+                                            <p>Em razão das novas regras de transferência de recursos aos municípios, estados e Distrito Federal, o FNDE, com escopo de aprimorar o processo de integração entre os entes federados e esta Autarquia, criou ferramenta no módulo Obras 2.0 (<?php echo SIGLA_SISTEMA; ?>), na qual ocorrerá a solicitação do desembolso. Segue abaixo documentos:</p>
                                             <p><a style="font-size:14x; color:#FF0101;" href="/obras2/tutorial/oficio_circular_01_2015_CGIMP_DIGAP_FNDE_MEC.pdf"><img src="/imagens/salvar.png" border="0"> Ofício Circular 01/2015 CGIMP/DIGAP/FNDE/MEC - Clique AQUI</a></p>
                                             <p><a style="font-size:14px; color:#FF0101;" href="/obras2/tutorial/manual_para_solicitar_desembolso.pdf"><img src="/imagens/salvar.png" border="0"> Manual de Solicitação de Desembolso - Clique AQUI</a></p>
                                         </div>
@@ -592,7 +592,7 @@ function montaArrayVistoria (){
                                         Fiscal (Supervisao da Obra)
                                     </div>
                                     <div>
-                                        <div><a class="" target="_blank" href="/obras2/tutorial/manual_modulo_monitoramento_de_obras_2_0_gestor_fiscal_25_03_2014.pdf" ><img src="/imagens/salvar.png" border="0"> 1° Manual SIMEC Obras 2</a></div>
+                                        <div><a class="" target="_blank" href="/obras2/tutorial/manual_modulo_monitoramento_de_obras_2_0_gestor_fiscal_25_03_2014.pdf" ><img src="/imagens/salvar.png" border="0"> 1° Manual <?php echo SIGLA_SISTEMA; ?> Obras 2</a></div>
                                     </div>
                                     <div>
                                         <div><a class="" target="_blank" href="/obras2/tutorial/Simec_2_0_MI_-_Emissao_e_Aceite_de_OS.pdf" ><img src="/imagens/salvar.png" border="0"> 2° Emissão e Aceite de Ordem de Serviço - Obras MI</a></div>
@@ -793,12 +793,12 @@ function montaArrayVistoria (){
             <td>2022-5200/5402/5199/5202</td>
         </tr>
         <tr>
-            <td>Preenchimento SIMEC-Obras 2.0</td>
+            <td>Preenchimento <?php echo SIGLA_SISTEMA; ?>-Obras 2.0</td>
             <td>atendimento.monitora@fnde.gov.br</td>
             <td>2022-5200/5402/5199/5203</td>
         </tr>
         <tr>
-            <td>Preenchimento SIMEC-PAR</td>
+            <td>Preenchimento <?php echo SIGLA_SISTEMA; ?>-PAR</td>
             <td>par@fnde.gov.br</td>
             <td>2022-5935/5915/5922/5854/5978</td>
         </tr>
@@ -1029,7 +1029,7 @@ function pegaTermoVencendoObras($dias_inicio, $dias_fim){
 
         <div class="" style="font-size: 14px; color: #002A6C; font-weight: bold;">
             <div>
-                <p>Em razão das novas regras de transferência de recursos aos municípios, estados e Distrito Federal, o FNDE, com escopo de aprimorar o processo de integração entre os entes federados e esta Autarquia, criou ferramenta no módulo Obras 2.0 (SIMEC), na qual ocorrerá a solicitação do desembolso. Segue abaixo documentos:</p>
+                <p>Em razão das novas regras de transferência de recursos aos municípios, estados e Distrito Federal, o FNDE, com escopo de aprimorar o processo de integração entre os entes federados e esta Autarquia, criou ferramenta no módulo Obras 2.0 (<?php echo SIGLA_SISTEMA; ?>), na qual ocorrerá a solicitação do desembolso. Segue abaixo documentos:</p>
                 <p></p>
                 <p><a style="font-size:14x; color:#FF0101;" href="/obras2/tutorial/oficio_circular_01_2015_CGIMP_DIGAP_FNDE_MEC.pdf"><img src="/imagens/salvar.png" border="0"> Ofício Circular 01/2015 CGIMP/DIGAP/FNDE/MEC - Clique AQUI</a></p>
                 <p><a style="font-size:14px; color:#FF0101;" href="/obras2/tutorial/manual_para_solicitar_desembolso.pdf"><img src="/imagens/salvar.png" border="0"> Manual de Solicitação de Desembolso - Clique AQUI</a></p>

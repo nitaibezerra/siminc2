@@ -146,7 +146,7 @@
 
                                         <!--
                                         <p style="font-size: 12px; text-align: justify; font-weight: bold;">
-                                            1 - Acessar o SIMEC por meio do seguinte endereço eletrônico: http://simec.mec.gov.br ;
+                                            1 - Acessar o <?php echo SIGLA_SISTEMA; ?> por meio do seguinte endereço eletrônico: http://simec.mec.gov.br ;
                                         </p>
                                         <p style="font-size: 12px; text-align: justify; font-weight: bold;">
                                             2 - Informe o CPF e a Senha do(a) Prefeito(a) ou do(a) Secretário(a) Estadual de Educação;
@@ -194,7 +194,7 @@
                                         <br>
 
                                         <p style="font-size: 12px; text-align: justify; font-weight: bold;">
-                                            3 - Se a opção for por "Iniciar Processo", a tela abaixo será aberta. Se a opção for por "Cancelar Processo", a Adesão será inicializada. Se a opção for "Sair", o Sistema encaminhará o usuário para a página principal do SIMEC;
+                                            3 - Se a opção for por "Iniciar Processo", a tela abaixo será aberta. Se a opção for por "Cancelar Processo", a Adesão será inicializada. Se a opção for "Sair", o Sistema encaminhará o usuário para a página principal do <?php echo SIGLA_SISTEMA; ?>;
                                         </p>
                                         <p style="font-size: 12px; text-align: justify; font-weight: bold;">
                                             4 - Ao "Iniciar Processo", aparecerá a seguinte tela:

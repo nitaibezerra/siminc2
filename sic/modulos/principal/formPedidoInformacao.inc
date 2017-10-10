@@ -1156,7 +1156,7 @@ return op2;
 		if($db->testa_superuser()||in_array(SIC_PERFIL_CADASTRADOR, $perfis)||in_array(SIC_PERFIL_ADMINISTRADOR, $perfis)){
 		?>
 		<tr>
-			<td class="subtituloDireita">Cadastrador SIMEC:</td>
+			<td class="subtituloDireita">Cadastrador <?php echo SIGLA_SISTEMA; ?>:</td>
 			<td>
 				<?php
 				if($slcid){

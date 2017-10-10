@@ -62,7 +62,7 @@ function carregarQtdTurmas_<?=PFL_ORIENTADORESTUDO ?>(filtroconsulta) {
 					
 				});
 				</script>
-				<p align="center">Resumo acesso dos usuários ao SIMEC</p>
+				<p align="center">Resumo acesso dos usuários ao <?php echo SIGLA_SISTEMA; ?></p>
 				<div id="acessousuario"><img src="../imagens/carregando.gif" align="absmiddle"> Carregando...</div>
 				<hr>
 				<p align="center">Municípios que não fecharam as turmas</p>

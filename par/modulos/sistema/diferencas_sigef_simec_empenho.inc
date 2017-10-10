@@ -74,9 +74,9 @@ $db->cria_aba( $abacod_tela, $url, '' );
 		</td>
 	</tr>
 	<tr>
-		<td class="subtitulodireita">Empenho SIMEC/SIGEF:</td>
+		<td class="subtitulodireita">Empenho <?php echo SIGLA_SISTEMA; ?>/SIGEF:</td>
 		<td colspan="3">
-			<input type="radio" value="S" id="sequencialexiste" name="sequencialexiste" <? if($_REQUEST["sequencialexiste"] == "S") { echo "checked"; } ?> /> Empenhos que não existem no SIMEC<br>
+			<input type="radio" value="S" id="sequencialexiste" name="sequencialexiste" <? if($_REQUEST["sequencialexiste"] == "S") { echo "checked"; } ?> /> Empenhos que não existem no <?php echo SIGLA_SISTEMA; ?><br>
 			<input type="radio" value="N" id="sequencialexiste" name="sequencialexiste" <? if( ($_REQUEST["sequencialexiste"] == "N" || $_REQUEST["sequencialexiste"] == '') ) { echo "checked"; } ?> /> Todos
 		</td>
 	</tr>
@@ -214,7 +214,7 @@ $arrProcesso = $arrProcesso ? $arrProcesso : array();
 			<td align="center" class="title" width="05%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Ano</strong></td>
 			<td align="center" class="title" width="05%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>UF</strong></td>
 			<td align="center" class="title" width="10%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Município/Estado</strong></td>
-			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Empenho SIMEC</strong></td>
+			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Empenho <?php echo SIGLA_SISTEMA; ?></strong></td>
 			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Empenho SIGEF</strong></td>
 		</tr>
 	</thead>

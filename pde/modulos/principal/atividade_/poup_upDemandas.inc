@@ -427,7 +427,7 @@ $usucpf = $_REQUEST['usucpf'] ? $_REQUEST['usucpf'] : $_SESSION['usucpf'];
 </script>
 <html>
     <head>
-        <title>SIMEC - Exportar Dados</title>
+        <title><?php echo SIGLA_SISTEMA; ?> - Exportar Dados</title>
         <link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
         <link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>
     </head>

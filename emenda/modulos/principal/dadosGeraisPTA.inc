@@ -35,7 +35,7 @@ extract($arDados);
 	<input type="hidden" name="requisicao" id="requisicao" value=""> 
 	<table id="tblform" class="tabela" width="95%" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
 		<tr>
-			<td class="SubTituloDireita" style="text-align: center;" colspan="2"><b>PLANO DE TRABALHO SIMPLIFICADO (para indicação de viabilidade de execução no Mod de Emendas do SIMEC)</b></td>
+			<td class="SubTituloDireita" style="text-align: center;" colspan="2"><b>PLANO DE TRABALHO SIMPLIFICADO (para indicação de viabilidade de execução no Mod de Emendas do <?php echo SIGLA_SISTEMA; ?>)</b></td>
 		</tr>
 		<tr>
 			<td class="SubTituloDireita" width="20%">Identificação (Título / Objeto da despesa):</td>

@@ -225,7 +225,7 @@ if($_REQUEST['gerarPdf']){
                     <div style="cursor:pointer;" onclick="window.location='/maismedicos/transparenciaPagamentos.php';">
                         <img style="float:left" src="../imagens/icones/icons/control.png" style="vertical-align:middle;"  />
                         <div style="float:left" class="titulo_box" >
-                        	SIMEC<br/>
+                        	<?php echo SIGLA_SISTEMA; ?><br/>
                         	<span class="subtitulo_box" >Mais Médicos</span>
                         </div>
                     </div>

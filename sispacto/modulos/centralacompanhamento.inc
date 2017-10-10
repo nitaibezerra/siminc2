@@ -770,7 +770,7 @@ ORDER BY 1
 	</tr>
 	<tr>
 		<td valign="top">
-		<p align="center">Acesso dos usuários ao SIMEC</p>
+		<p align="center">Acesso dos usuários ao <?php echo SIGLA_SISTEMA; ?></p>
 		<p align="center"><?
 	    $sql = "SELECT uncid as codigo, uninome as descricao FROM sispacto.universidadecadastro un INNER JOIN sispacto.universidade uni ON uni.uniid = un.uniid ORDER BY uni.uninome";
 	    $db->monta_combo('uncid', $sql, 'S', 'TODAS', 'selecionarUniversidadeAcesso', '', '', '', 'N', 'uncid','', $_REQUEST['uncid']); 

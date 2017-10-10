@@ -408,7 +408,7 @@ function excluirPagamento(pboid) {
 		<tr>
 			<td class="SubTituloDireita" style="font-size:x-small;">Perfil da Bolsa:</td>
 			<td style="font-size:x-small;"><?=(($tipoperfil['pfldsc'])?$tipoperfil['pfldsc']:"Não possui") ?></td>
-			<td class="SubTituloDireita" style="font-size:x-small;">Perfil no SIMEC:</td>
+			<td class="SubTituloDireita" style="font-size:x-small;">Perfil no <?php echo SIGLA_SISTEMA; ?>:</td>
 			<td style="font-size:x-small;"><?=(($perfilsimec)?implode(", ",$perfilsimec):"Não possui") ?></td>
 		</tr>
 		<tr>

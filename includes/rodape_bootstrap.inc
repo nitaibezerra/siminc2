@@ -391,7 +391,7 @@
                 </div>
                 <div class="col-md-4 text-right">
                     <address>
-                        SIMEC - Fale Conosco Manual	| Tx.: 0,2015s / 0,34
+                        <?php echo SIGLA_SISTEMA; ?> - Fale Conosco Manual	| Tx.: 0,2015s / 0,34
                     </address>
                 </div>
                 <br style="clear:both" />

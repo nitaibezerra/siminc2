@@ -19,7 +19,7 @@
 	?>
 	<table class="listagem" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center" width="100%">
 	<tr>
-		<td class="SubTituloEsquerda" width="80%">1. Ativar tutores no SIMEC</td>
+		<td class="SubTituloEsquerda" width="80%">1. Ativar tutores no <?php echo SIGLA_SISTEMA; ?></td>
 		<td><?=(($tot_eq==$tot_eq_at)?"<span style=\"color:blue;font-size:15px;\"><b>CONCLUÍDO ({$tot_eq_at}/$tot_eq)":"<span style=\"color:red;font-size:15px;\"><b>PENDENTE ({$tot_eq_at}/$tot_eq)") ?></b></span></td>
 	</tr>
 	</table>

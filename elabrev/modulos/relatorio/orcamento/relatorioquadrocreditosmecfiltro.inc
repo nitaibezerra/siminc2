@@ -53,7 +53,7 @@ if($_REQUEST["_dadosEnvio"] &&  $_REQUEST["usuario_sidor"] && $_REQUEST["senha_s
 	$totalAcao = 0;
 	$linhaAnterior = array();
 	?>
-	<pre>Speed Includator Orçamentator - Módulo de exportação de dados orçamentários do SIMEC para SIDOR</pre>
+	<pre>Speed Includator Orçamentator - Módulo de exportação de dados orçamentários do <?php echo SIGLA_SISTEMA; ?> para SIDOR</pre>
 	<?
 	foreach($dados as $linha) {
 		try {
@@ -129,7 +129,7 @@ if($_REQUEST["_dadosEnvio"] &&  $_REQUEST["usuario_sidor"] && $_REQUEST["senha_s
 	$tx = getmicrotimesidor() - $inicioTx;
 	?>
 	<pre>Dados incluídos em <?=number_format($tx, "5", ",", ".")?> segundos :: Executado em <?=date("d/m/Y H:i:s")?></pre>
-	<pre><a href="Javascript:history.back(-3)">Voltar para o SIMEC</a></pre>
+	<pre><a href="Javascript:history.back(-3)">Voltar para o <?php echo SIGLA_SISTEMA; ?></a></pre>
 	<?
 	exit();
 }

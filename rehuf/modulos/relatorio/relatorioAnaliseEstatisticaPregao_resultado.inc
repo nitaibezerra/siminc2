@@ -79,7 +79,7 @@ $entidades = $db->carregar ( $sql );
                              <img src="../imagens/brasao.gif" width="45" height="45" border="0">
                            <?php }else{ echo "&nbsp;"; }?></td>
 			<td nowrap="" align="left" valign="middle" height="1"
-				style="padding: 5px 0 0 0;">SIMEC- Sistema Integrado do Ministério
+				style="padding: 5px 0 0 0;"><?php echo SIGLA_SISTEMA; ?>- Sistema Integrado do Ministério
 				da Educação<br> MEC / SE - Secretaria Executiva <br>
 			</td>
 			<td align="right" valign="middle" height="1"

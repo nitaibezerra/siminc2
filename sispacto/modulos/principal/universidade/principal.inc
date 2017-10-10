@@ -28,7 +28,7 @@ function selecionarPeriodoReferencia(fpbid) {
 			<table width="100%">
 			<tr>
 				<td width="50%" valign="top">
-				<p align="center">Resumo acesso dos usuários ao SIMEC</p>
+				<p align="center">Resumo acesso dos usuários ao <?php echo SIGLA_SISTEMA; ?></p>
 				<?
 				exibirAcessoUsuarioSimec(array('uncid'=>$_SESSION['sispacto']['universidade']['uncid']));
 				?>

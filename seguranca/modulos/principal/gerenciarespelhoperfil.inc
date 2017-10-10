@@ -470,7 +470,7 @@ if($espelhoperfil){
 
 <table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3"	align="center">
 <tr>
-	<td class='SubTituloDireita' width="25%" >Sistema Master - <input onclick="mudaServidorMaster('simec')" type="radio" <?php echo !$espelhoperfil['servidormaster'] || $espelhoperfil['servidormaster'] == "simec" ? "checked='checked'" : "" ?> name="rdo_servidor_master" value="simec" />SIMEC <input <?php echo $espelhoperfil['servidormaster'] == "pdeinterativo" ? "checked='checked'" : "" ?> onclick="mudaServidorMaster('pdeinterativo')" type="radio" name="rdo_servidor_master" value="pdeinterativo" disabled />PDE Interativo:</td>
+	<td class='SubTituloDireita' width="25%" >Sistema Master - <input onclick="mudaServidorMaster('simec')" type="radio" <?php echo !$espelhoperfil['servidormaster'] || $espelhoperfil['servidormaster'] == "simec" ? "checked='checked'" : "" ?> name="rdo_servidor_master" value="simec" /><?php echo SIGLA_SISTEMA; ?> <input <?php echo $espelhoperfil['servidormaster'] == "pdeinterativo" ? "checked='checked'" : "" ?> onclick="mudaServidorMaster('pdeinterativo')" type="radio" name="rdo_servidor_master" value="pdeinterativo" disabled />PDE Interativo:</td>
 	<td id="td_sistema_master">
 	<?
 	$sql = "SELECT sisid as codigo, sisabrev as descricao FROM seguranca.sistema WHERE sisstatus='A' order by sisabrev";
@@ -487,7 +487,7 @@ if($espelhoperfil){
 	<td id="td_perfilmaster"><b>Selecione sistema master</b></td>
 </tr>
 <tr>
-	<td class='SubTituloDireita'>Sistema Slave - <input onclick="mudaServidorSlave('simec')" type="radio" <?php echo !$espelhoperfil['servidorslave'] || $espelhoperfil['servidorslave'] == "simec" ? "checked='checked'" : "" ?> name="rdo_servidor_slave" value="simec" />SIMEC <input <?php echo $espelhoperfil['servidorslave'] == "pdeinterativo" ? "checked='checked'" : "" ?> onclick="mudaServidorSlave('pdeinterativo')" type="radio" name="rdo_servidor_slave" value="pdeinterativo" />PDE Interativo:</td>
+	<td class='SubTituloDireita'>Sistema Slave - <input onclick="mudaServidorSlave('simec')" type="radio" <?php echo !$espelhoperfil['servidorslave'] || $espelhoperfil['servidorslave'] == "simec" ? "checked='checked'" : "" ?> name="rdo_servidor_slave" value="simec" /><?php echo SIGLA_SISTEMA; ?> <input <?php echo $espelhoperfil['servidorslave'] == "pdeinterativo" ? "checked='checked'" : "" ?> onclick="mudaServidorSlave('pdeinterativo')" type="radio" name="rdo_servidor_slave" value="pdeinterativo" />PDE Interativo:</td>
 	<td id="td_sistema_slave">
 	<?
 	$sql = "SELECT sisid as codigo, sisabrev as descricao FROM seguranca.sistema WHERE sisstatus='A' order by sisabrev";

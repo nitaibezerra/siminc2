@@ -11,7 +11,7 @@
 			Em caso de dúvida, favor entrar em contato no 
 			e-mail: <a href="mailto:<?php echo $_SESSION['email_sistema']; ?>"><?php echo $_SESSION['email_sistema']; ?></a>.</p>
 			<p>&nbsp;</p><br/>
-			<p>Equipe Mais Médicos/SIMEC</p>
+			<p>Equipe Mais Médicos/<?php echo SIGLA_SISTEMA; ?></p>
 
 		</td>
 	</tr>

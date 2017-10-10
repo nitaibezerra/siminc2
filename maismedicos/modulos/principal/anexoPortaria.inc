@@ -74,7 +74,7 @@ if($uniid){
 
 <p>I - Indicar um tutor acadêmico que iniciará suas atividades a partir da assinatura do presente termo e, no mínimo, três tutores que comporão cadastro reserva;</p>
 <p>II - Indicar a unidade responsável pela avaliação e autorização de pagamento das bolsas de tutoria e supervisão acadêmicas;</p>
-<p>III - Cadastrar via sistema SIMEC, no módulo rede federal, por meio do endereço eletrônico http://simec.mec.gov.br, os tutores indicados e a unidade de avaliação e autorização de pagamento de bolsas;</p>
+<p>III - Cadastrar via sistema <?php echo SIGLA_SISTEMA; ?>, no módulo rede federal, por meio do endereço eletrônico http://simec.mec.gov.br, os tutores indicados e a unidade de avaliação e autorização de pagamento de bolsas;</p>
 <p>IV - Definir mecanismo de avaliação e autorização de pagamento das bolsas de tutoria e supervisão.</p>
 <p>V - Firmar, em caso de validação, termo de adesão com o Ministério da Educação.</p> 
 

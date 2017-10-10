@@ -1528,7 +1528,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 	Qualquer dúvida, entrar em contato com o gestor do módulo.
 
 	Atenciosamente,
-	Equipe SIMEC.
+	Equipe <?php echo SIGLA_SISTEMA; ?>.
 	</pre>
 	";
 	$retorno = enviar_email ( $remetente, $destinatarios, $assunto, $mensagem );
@@ -1577,7 +1577,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
         Qualquer dúvida, entrar em contato com o gestor do módulo.
 
         Atenciosamente,
-        Equipe SIMEC.
+        Equipe <?php echo SIGLA_SISTEMA; ?>.
         </pre>
         ";
         return enviar_email($remetente, $destinatarios, $assunto, $mensagem);

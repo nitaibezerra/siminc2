@@ -117,7 +117,7 @@
 	
 		<div class="div_topo" style="float:left;text-align:left;">
 	        <img style="float:left" src="/imagens/icones/icons/control.png" style="vertical-align:middle;"  />
-		    <br/>SIMEC<br/>
+		    <br/><?php echo SIGLA_SISTEMA; ?><br/>
 		    Monitoramento Estratégico
 		</div>
 		<div class="div_topo" style="float:right;text-align:right;">
@@ -156,7 +156,7 @@
 			<tr>
 				<td class="div_topo">
 					<img style="float:left" src="/imagens/icones/icons/control.png" style="vertical-align:middle;"  />
-			        <br/>SIMEC<br/>
+			        <br/><?php echo SIGLA_SISTEMA; ?><br/>
 			        Monitoramento Estratégico
 				</td>
 				<td></td>				

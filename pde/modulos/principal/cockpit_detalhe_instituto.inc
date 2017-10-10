@@ -219,7 +219,7 @@ if(isset($_REQUEST['detalhe_redefederal14'])){
             <div style="cursor:pointer;" onclick="window.location='estrategico.php?modulo=principal/atividade_estrategico/projetos&acao=A';">
         <?php } ?>
             <img style="float:left" src="../imagens/icones/icons/control.png" style="vertical-align:middle;"  />
-        	<div style="float:left" class="titulo_box" >SIMEC<br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
+        	<div style="float:left" class="titulo_box" ><?php echo SIGLA_SISTEMA; ?><br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
 		</div>
 		<img width="40px" style="float:right;cursor:pointer;" onclick="history.back(-1);"  src="cockpit/images/voltar.png" style="vertical-align:middle;" />
 		<div style="float:right;cursor:pointer;" onclick="window.location='estrategico.php?modulo=principal/cockpit_detalhe_instituto&acao=A&entid=<?=$_REQUEST['entid'] ?>';">

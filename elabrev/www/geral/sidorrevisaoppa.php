@@ -1,4 +1,4 @@
-<pre>Extreme Speed Includator Revisator PPAtor - Módulo de exportação de dados da Revisão Orçamentária do SIMEC para SIDOR</pre>
+<pre>Extreme Speed Includator Revisator PPAtor - Módulo de exportação de dados da Revisão Orçamentária do <?php echo SIGLA_SISTEMA; ?> para SIDOR</pre>
 <?php
 /**
  * Script de comunicao com o SIDOR para carga da revisão do PPA

@@ -24,9 +24,9 @@ de Registro de Preços; (detalhes - link)
 vencedoras das Atas de Registro de Preços, cujas obras ainda não tenham iniciadas.
 
 	Os municípios enquadrados no item A não precisam encaminhar ofício de solicitação ao FNDE, pois
-as ações serão encaminhas automaticamente para o processo de reformulação no SIMEC, módulo PAR.
+as ações serão encaminhas automaticamente para o processo de reformulação no <?php echo SIGLA_SISTEMA; ?>, módulo PAR.
 
-	Os municípios que se enquadram no item B, devem inserir o distrato no SIMEC-módulo Obras 2.0, 
+	Os municípios que se enquadram no item B, devem inserir o distrato no <?php echo SIGLA_SISTEMA; ?>-módulo Obras 2.0, 
 aba Documentos  e encaminhar e-mail comunicando o fato para o e-mail  reformulação_cgest@fnde.gov.br.
 (detalhes - link)
 

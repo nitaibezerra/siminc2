@@ -700,7 +700,7 @@ if($_REQUEST['aba']=='projeto') :
 	</tr>
 	<tr>
 		<td valign="top">
-		<p align="center">Acesso dos usuários ao SIMEC</p>
+		<p align="center">Acesso dos usuários ao <?php echo SIGLA_SISTEMA; ?></p>
 		<p align="center"><?
 	    $sql = "SELECT uncid as codigo, uninome as descricao FROM sisindigena2.universidadecadastro un INNER JOIN sisindigena2.universidade uni ON uni.uniid = un.uniid ORDER BY uni.uninome";
 	    $db->monta_combo('uncid', $sql, 'S', 'TODAS', 'selecionarUniversidadeAcesso', '', '', '', 'N', 'uncid','', $_REQUEST['uncid']); 

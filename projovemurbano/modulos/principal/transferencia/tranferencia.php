@@ -75,7 +75,7 @@ function intrucaoAno_2012(){
 
                                 <p>De 19 de dezembro de 2011 a 16 de janeiro de 2012:</p>
                                 <p>1.	Indicar um Coordenador Geral do Projovem Urbano deste estado, escolhido entre os profissionais do quadro efetivo da Secretária de Educação ou selecionado e contratado com recursos próprios (ver <a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>);</p>
-                                <p>2.	Solicitar o cadastro do Coordenador Geral  no módulo Projovem Urbano do SIMEC para o preenchimento do Plano de Implementação, conforme as instruções do SIMEC e as determinações da Resolução n° /2011 – <a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>;</p>
+                                <p>2.	Solicitar o cadastro do Coordenador Geral  no módulo Projovem Urbano do <?php echo SIGLA_SISTEMA; ?> para o preenchimento do Plano de Implementação, conforme as instruções do <?php echo SIGLA_SISTEMA; ?> e as determinações da Resolução n° /2011 – <a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>;</p>
                                 <p>3.	Analisar e validar o Plano de Implementação que deverá estar devidamente preenchido e finalizado para a análise da SECADI;</p>
                                 <p>4.	Imprimir e assinar o Plano de Implementação, após a aprovação desta secretaria, e enviá-lo para o endereço:</p>
                                 <p>
@@ -110,7 +110,7 @@ function intrucaoAno_2012(){
 
                                 <p>De 19 de dezembro de 2011 a 16 de janeiro de 2012:</p>
                                 <p>1.	Indicar um Coordenador Geral do Projovem Urbano deste município, escolhido entre os profissionais do quadro efetivo da Secretária de Educação ou selecionado e contratado com recursos próprios (<a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>);</p>
-                                <p>2.	Solicitar o cadastro do Coordenador Geral no módulo Projovem Urbano do SIMEC para o preenchimento do Plano de Implementação, conforme as instruções do SIMEC e as determinações da Resolução n° /2011 – <a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>;</p>
+                                <p>2.	Solicitar o cadastro do Coordenador Geral no módulo Projovem Urbano do <?php echo SIGLA_SISTEMA; ?> para o preenchimento do Plano de Implementação, conforme as instruções do <?php echo SIGLA_SISTEMA; ?> e as determinações da Resolução n° /2011 – <a href="http://www.fnde.gov.br/index.php/legis-resolucoes" target="_blank">Resolução CD/FNDE Nº 60, de 9 de novembro de 2011</a>;</p>
                                 <p>3.	Analisar e validar o Plano de Implementação que deverá estar devidamente preenchido e finalizado para a análise da SECADI;</p>
                                 <p>4.	Imprimir e assinar o Plano de Implementação, após a aprovação desta secretaria, e enviá-lo para o endereço:</p>
                                 <p>
@@ -155,7 +155,7 @@ function intrucaoAno_2013(){
 
 						<p>A adesão ao Projovem Urbano para a edição 2013 foi pactuada com os Senhores, 
                         	por meio de Termo de Adesão anexado à mensagem eletrônica e posteriormente encaminhado a esta DPEJUV/MEC. 
-                        	Agora esta adesão deverá ser formalizada através do SIMEC - módulo Projovem Urbano.</p>
+                        	Agora esta adesão deverá ser formalizada através do <?php echo SIGLA_SISTEMA; ?> - módulo Projovem Urbano.</p>
 
                        	<p>Para tanto, deverão ser adotados os seguintes procedimentos:</p>
                                 

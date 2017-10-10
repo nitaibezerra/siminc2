@@ -495,7 +495,7 @@ function removerSubacao( sbaid, el )
 				<tr> 
 					<td><img src="../imagens/brasao.gif" width="50" height="50" border="0"></td>
 					<td height="20" nowrap>
-						<b>SIMEC</b>- Sistema Integrado de Ministério da Educação<br>
+						<b><?php echo SIGLA_SISTEMA; ?></b>- Sistema Integrado de Ministério da Educação<br>
 						Ministério da Educação / SE - Secretaria Executiva<br>
 						<b>.:: PAR Analítico do Estado:  <?=$estado?></b><br>	
 					</td>

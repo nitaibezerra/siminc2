@@ -29,7 +29,7 @@ function acessarLista(){
 	
 		<center><h3>Seja bem-vindo ao Sinafor!<h3></h3></center>
 		 
-		<p>O Sistema Nacional de Formação é o módulo do SIMEC no qual as Secretarias de Educação realizam a priorização e 
+		<p>O Sistema Nacional de Formação é o módulo do <?php echo SIGLA_SISTEMA; ?> no qual as Secretarias de Educação realizam a priorização e 
 		validação dos Planos de Formação elaborado pelas escolas no módulo PDE Interativo.</p> 
 		
 		<p>Esta etapa do novo fluxo de demanda e oferta de formação serve para que a direção da Rede de Ensino defina escolas 

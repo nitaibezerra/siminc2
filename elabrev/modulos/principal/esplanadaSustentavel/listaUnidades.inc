@@ -14,7 +14,7 @@ if(!$_POST){
 			</p>
 			<b>
 				<br> Atenciosamente,
-				<br> Equipe SIMEC.
+				<br> Equipe <?php echo SIGLA_SISTEMA; ?>.
 			</b>		
 		</div>
 	";

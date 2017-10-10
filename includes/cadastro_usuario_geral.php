@@ -2540,7 +2540,7 @@ Link para verificação do usuário: http://simec.mec.gov.br/seguranca/seguranca.ph
 Qualquer dúvida, entrar em contato com o gestor do módulo.
 
 Atenciosamente,
-Equipe SIMEC.
+Equipe <?php echo SIGLA_SISTEMA; ?>.
 </pre>
 ";
         return enviar_email($remetente, $destinatarios, $assunto, $mensagem);

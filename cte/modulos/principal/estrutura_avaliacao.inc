@@ -1775,7 +1775,7 @@ if ($possuiPerfil && $estado_documento["esdid"] == CTE_ESTADO_FNDE) {
 		</tr>
 		<tr style="text-align:center;">
 			<td style="font-size:7pt; text-align:center;">
-	        	<a href="javascript:void(0);" onclick="return deletarNumProcessos();" title="Deletar Convênio e números de processos.">Deletar Convênio e números de processos no SIMEC.</a>
+	        	<a href="javascript:void(0);" onclick="return deletarNumProcessos();" title="Deletar Convênio e números de processos.">Deletar Convênio e números de processos no <?php echo SIGLA_SISTEMA; ?>.</a>
 			</td>
 		</tr>
 	

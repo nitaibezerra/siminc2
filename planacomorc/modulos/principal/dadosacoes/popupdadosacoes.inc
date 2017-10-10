@@ -18,7 +18,7 @@
                                 Por favor descreva abaixo da forma mais detalhada possível qual valor está incorreto e, 
                                 se possível, informe o valor correto para que possamos identificar a fonte do erro e efetuar a correção. <br/><br/> 
                                 Deste já agradecemos. <br/><br/> 
-                                Equipe SIMEC.<br><br>
+                                Equipe <?php echo SIGLA_SISTEMA; ?>.<br><br>
                             </div>
                         </div>
                         <div>

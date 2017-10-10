@@ -63,7 +63,7 @@ function intrucao(){
                                 <p>
                                 
                                 <p>-  Indicar o Coordenador Geral do Programa dessa localidade, escolhido entre os profissionais do quadro efetivo da Secretária de Educação ou selecionado/contratado (Resolução CD/FNDE/MEC Nº 11, de 16 de abril de 2014).
-					            <p>-  Solicitar o cadastro do Coordenador Geral no módulo Projovem Urbano do SIMEC para o preenchimento do Plano de Implementação, conforme as instruções do SIMEC e as determinações da Resolução CD/FNDE/MEC Nº 11, de 16 de abril de 2014
+					            <p>-  Solicitar o cadastro do Coordenador Geral no módulo Projovem Urbano do <?php echo SIGLA_SISTEMA; ?> para o preenchimento do Plano de Implementação, conforme as instruções do <?php echo SIGLA_SISTEMA; ?> e as determinações da Resolução CD/FNDE/MEC Nº 11, de 16 de abril de 2014
 					            <p>-  Analisar e enviar o Plano de Implementação que deverá estar devidamente preenchido e finalizado para a análise da DPEJUV/SECADI.
 					            <p>-  Imprimir e assinar o Plano de Implementação, após a validação desta Diretoria, e enviá-lo para o seguinte endereço:
 					           <p> 

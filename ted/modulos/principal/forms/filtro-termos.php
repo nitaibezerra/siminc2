@@ -11,7 +11,7 @@
 
     <div class="form-group ">
         
-        <label class="control-label col-md-2" for="tcpid">Número do TED SIMEC:</label>
+        <label class="control-label col-md-2" for="tcpid">Número do TED <?php echo SIGLA_SISTEMA; ?>:</label>
         
         <div class="col-md-10">
             <?= $this->element->tcpid; ?>

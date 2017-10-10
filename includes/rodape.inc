@@ -76,7 +76,7 @@ if (file_exists(realpath(APPRAIZ . $_SESSION['sisdiretorio'] . "/modulos/" . $_R
 							<?endif; ?>
 							<td align="right" height="15">
 
-									SIMEC | &nbsp;&nbsp; <a href="javascript:janela('/geral/fale_conosco.php?uc=<?= $_SESSION['usucpf']; ?>',550,600)">Fale Conosco</a>
+									<?php echo SIGLA_SISTEMA; ?> | &nbsp;&nbsp; <a href="javascript:janela('/geral/fale_conosco.php?uc=<?= $_SESSION['usucpf']; ?>',550,600)">Fale Conosco</a>
 									 &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <?= $linkmanual; ?> | &nbsp;&nbsp; Tx<?php echo $cache_sistema ?>.: <?= number_format( ( getmicrotime() - $Tinicio ), 4, ',', '.' ); ?>s
 
 							</td>

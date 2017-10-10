@@ -71,7 +71,7 @@ include APPRAIZ . 'pde/www/_funcoes_cockpit.php';
 		<td class="titulo_pagina" >
 		<div style="cursor:pointer;" onclick="window.location='estrategico.php?modulo=principal/atividade_estrategico/projetos&acao=A';">
             <img style="float:left" src="../imagens/icones/icons/control.png" style="vertical-align:middle;"  />
-        	<div style="float:left" class="titulo_box" >SIMEC<br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
+        	<div style="float:left" class="titulo_box" ><?php echo SIGLA_SISTEMA; ?><br/><span class="subtitulo_box" >Monitoramento Estratégico</span></div>
 		</div>
 		<div style="float:right;cursor:pointer;" onclick="window.location='estrategico.php?modulo=principal/cockpit_enem_producao&acao=A';">
 			<img src="../imagens/icones/icons/Refresh.png" style="vertical-align:middle;" />

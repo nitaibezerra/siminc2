@@ -255,7 +255,7 @@ $arEmpid 		 = $osObra->listaEmpidPorOs( $sosid );
 				<tr>
 			        <td colspan="3">
 			        	<p>Tendo em vista as informações abaixo, solicito execução da presente OS.</p>
-						<p>a) O planejamento dos serviços objeto desta OS foi analisado e aprovado e consta dos registros do SIMEC.<br> 
+						<p>a) O planejamento dos serviços objeto desta OS foi analisado e aprovado e consta dos registros do <?php echo SIGLA_SISTEMA; ?>.<br> 
 						b) Consta disponibilidade orçamentária na unidade gestora, conforme notas de empenho.</p>
 			        </td>
 			    </tr>

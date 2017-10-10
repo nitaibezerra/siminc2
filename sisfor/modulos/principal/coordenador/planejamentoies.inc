@@ -201,7 +201,7 @@ monta_titulo('Planejamento',$cies); ?>
 			</p>		
 			<p align="justify" style="line-height: 17px;">
 				O Coordenador Institucional também deverá indicar o nome do Coordenador de cada curso clicando no ícone <img border="0" style="cursor:pointer;" src="../imagens/usuario.gif" title="COORDENADOR CURSO">  e informando, na janela aberta, o CPF e o e-mail do responsável (o SisFor fará a validação do nome conforme consta no cadastro de CPFs da Receita Federal). Não esqueça de verificar se a opção "Ativar coordenador no SisFor" está selecionada. Caso deseje 
-				substituir um Coordenador de curso, clique primeiro em "Remover Coordenador do curso" e confirme. Em seguida, cadastre o coordenador atual repetindo os procedimentos iniciais. Para os usuários que nunca utilizaram o SIMEC, a senha inicial é “simecdti”. Para quem já acessa, a senha de acesso é a mesma.
+				substituir um Coordenador de curso, clique primeiro em "Remover Coordenador do curso" e confirme. Em seguida, cadastre o coordenador atual repetindo os procedimentos iniciais. Para os usuários que nunca utilizaram o <?php echo SIGLA_SISTEMA; ?>, a senha inicial é “simecdti”. Para quem já acessa, a senha de acesso é a mesma.
 			</p>
 			<p align="justify" style="line-height: 17px;">
 				O terceiro quadro permite à Instituição propor ao MEC a realização de outros cursos e atividades relacionadas à formação de profissionais do magistério. Para acrescentar uma proposta de curso, indique se é um curso do Catálogo do MEC ou fora do Catálogo. No primeiro caso, selecione o curso que a IES deseja ofertar, indique o número de vagas pretendidas e o valor estimado (indicando no campo correspondente o valor proveniente da LOA 2014 e a parte 

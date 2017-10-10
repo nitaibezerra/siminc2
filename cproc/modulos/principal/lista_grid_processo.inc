@@ -114,7 +114,7 @@
     <input type="hidden" id="tipo" name="tipo" value=""/>
     <table class="tabela" align="center" bgcolor="#f5f5f5" cellspacing="1" cellpadding="3" border="0">
         <tr>
-            <td class="subtituloDireita" width="20%" colspan="2">Nº Controle SIMEC:</td>
+            <td class="subtituloDireita" width="20%" colspan="2">Nº Controle <?php echo SIGLA_SISTEMA; ?>:</td>
             <td>
                 <?PHP
                     echo campo_texto('prcid', 'N', 'S', 'Nº Controle ' SIGLA_SISTEMA, '46', '25', '', '', '', '', '', 'id="prcid"', '', '', '');

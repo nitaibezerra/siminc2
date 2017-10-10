@@ -442,7 +442,7 @@ else{
 		<tr>
 			<td style="background: rgb(238, 238, 238)" colspan='3'>
 				<br>
-			     <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O modo de responsabilidade do PSE será a partir de assinatura de Termo de Compromisso entre as Secretarias Municipais de Saúde e de Educação, com metas pactuadas de implementação das ações e a transferência dos recursos <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vinculada ao alcance das metas que serão monitoradas por meio do SIMEC.</b>
+			     <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O modo de responsabilidade do PSE será a partir de assinatura de Termo de Compromisso entre as Secretarias Municipais de Saúde e de Educação, com metas pactuadas de implementação das ações e a transferência dos recursos <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vinculada ao alcance das metas que serão monitoradas por meio do <?php echo SIGLA_SISTEMA; ?>.</b>
 			     <br><br>
 			</td>
 		</tr>

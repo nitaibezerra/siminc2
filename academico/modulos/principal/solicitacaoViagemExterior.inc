@@ -697,7 +697,7 @@ function exibeMinuta(aveid)
 		<?php if(!verificaEmailReitorPorEntid($_SESSION['academico']['entid'])): ?>
 			<tr>
 				<td colspan="2" class="center bold">
-					<img src="../imagens/atencao.png" class="img_middle" /> Para solicitar viagens para o exterior é necessário que o Reitor esteja cadastrado. Por favor, cadastre o Reitor da Instituição no SIMEC.
+					<img src="../imagens/atencao.png" class="img_middle" /> Para solicitar viagens para o exterior é necessário que o Reitor esteja cadastrado. Por favor, cadastre o Reitor da Instituição no <?php echo SIGLA_SISTEMA; ?>.
 				</td>
 			</tr>
 		<?php endif; ?>

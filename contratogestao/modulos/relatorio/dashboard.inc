@@ -75,7 +75,7 @@ $arrSubprocessos = array();
                      onclick="window.location = 'contratogestao.php?modulo=principal/contratos&acao=C';">
                     <img style="float:left" src="../imagens/icones/icons/control.png" style="vertical-align:middle;"/>
 
-                    <div style="float:left" class="titulo_box">SIMEC<br/><span class="subtitulo_box">Monitoramento Estratégico</span>
+                    <div style="float:left" class="titulo_box"><?php echo SIGLA_SISTEMA; ?><br/><span class="subtitulo_box">Monitoramento Estratégico</span>
                     </div>
                 </div>
                 <img width="40px" style="float:right;cursor:pointer;" onclick="history.back(-1);"

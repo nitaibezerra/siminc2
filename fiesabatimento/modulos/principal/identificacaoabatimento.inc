@@ -432,7 +432,7 @@ jQuery(document).ready(function(){
 		<td class="SubTituloDireita">Declaração :</td>
 		<td>
 			<p>Você está no ultimo passo para garantir o seu beneficio. </p>
-			<p>Clicando no botão abaixo o SIMEC enviará uma requisição para o sistema bancário solicitando o abatimento devido 
+			<p>Clicando no botão abaixo o <?php echo SIGLA_SISTEMA; ?> enviará uma requisição para o sistema bancário solicitando o abatimento devido 
 				em seu contrato e, se for o caso, a suspenção da cobrança das parcelas mensais.</p>
 		</td>
 	</tr>

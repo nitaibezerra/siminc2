@@ -297,7 +297,7 @@ $arrProcesso = $arrProcesso ? $arrProcesso : array();
 			<td align="center" class="title" width="05%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Ano</strong></td>
 			<td align="center" class="title" width="05%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>UF</strong></td>
 			<td align="center" class="title" width="10%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Município/Estado</strong></td>
-			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Pagamento SIMEC</strong></td>
+			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Pagamento <?php echo SIGLA_SISTEMA; ?></strong></td>
 			<td align="center" class="title" width="35%" onmouseover="this.bgColor='#c0c0c0';" onmouseout="this.bgColor='';" <?=$estiloCaption ?>><strong>Pagamento SIGEF</strong></td>
 		</tr>
 	</thead>

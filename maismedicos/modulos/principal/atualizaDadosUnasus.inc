@@ -251,7 +251,7 @@ monta_titulo($linha1, $linha2);
 				Puxa as respostas de um formulário específico via WS do UNASUS, informar o códico do formulário no campo abaixo.<br/>
 				<input type="text" name="idpublicarformulario" size="10"/>
 				<input type="checkbox" name="todasrespostas" value="true"/>&nbsp;Todas respostas UNASUS&nbsp;
-				<input type="checkbox" name="puxarrespostassimec" value="true"/>&nbsp;Todas respostas SIMEC
+				<input type="checkbox" name="puxarrespostassimec" value="true"/>&nbsp;Todas respostas <?php echo SIGLA_SISTEMA; ?>
 			</td>
 		</tr>
 	<?php endif; ?>
@@ -260,7 +260,7 @@ monta_titulo($linha1, $linha2);
 		<td class="subtitulodireita" align="center" valign="top"><center><input type="button" class="btnRodarRotina" value="Executar" id="/maismedicos/maismedicos.php?modulo=principal/atualizaDadosUnasus&acao=A&req=importaUsuariosBolsistas" /></center></td>
 		<td>
 			<b>Importa usuários tutores e supervisores</b><br/>
-			Importa os bolsistas (tutores e supervisores) do UNASUS e insere os usuários e responsabilidades no SIMEC.<br/>
+			Importa os bolsistas (tutores e supervisores) do UNASUS e insere os usuários e responsabilidades no <?php echo SIGLA_SISTEMA; ?>.<br/>
 			<input type="checkbox" name="enviaremail" value="true"/>&nbsp;Envia e-mail do cadastro&nbsp;
 			<input type="checkbox" name="comitarusuario" value="true"/>&nbsp;Comitar&nbsp;
 		</td>
