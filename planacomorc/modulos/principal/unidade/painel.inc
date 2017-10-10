@@ -26,7 +26,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
-    "pli.pliano = '". $_SESSION['exercicio']. "'",
+    "suo.prsano = '". $_SESSION['exercicio']. "'",
     'suo.unofundo = false'
 ));
 

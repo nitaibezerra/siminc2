@@ -214,7 +214,7 @@ class Pi_PlanoInterno extends Modelo{
                 sum(ptr.ptrdotacao) / 2 ptrdotacao_custeio
             from public.vw_subunidadeorcamentaria suo
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid
+                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano
                 left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
                 left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid
                 left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
