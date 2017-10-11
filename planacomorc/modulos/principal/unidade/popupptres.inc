@@ -586,7 +586,9 @@ DML;
             }
 
             function resultado(id, selecionado, adicionais) {
-                var ptres = $('tr#' + id + ' td:nth-child(3)').text();
+                var colHtmlPtres = $('tr#' + id + ' td:nth-child(3)').html();
+                var ptres = colHtmlPtres.substr(0, colHtmlPtres.search('<'));
+
                 if (!ptres) {
                     alert('Não existe PTRES. Entre em contato com o administrador do sistema.');
                     return false;
