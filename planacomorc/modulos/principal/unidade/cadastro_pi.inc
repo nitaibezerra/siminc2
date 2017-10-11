@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tela de cadastro de PIs
  * @see cadastro.inc
@@ -524,7 +525,7 @@ DML;
                                             <b>Funcional</b>
                                         </td>
                                         <td rowspan="2" nowrap>
-                                            <b>Dotação Atual PO (R$)</b>
+                                            <b>Dotação Atual(R$)</b>
                                         </td>
                                         <td colspan="2" nowrap>
                                             <b><span id="detPi">Detalhado em PI (R$)</span></b>
