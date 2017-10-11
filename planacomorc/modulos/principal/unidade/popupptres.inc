@@ -513,7 +513,7 @@ DML;
                 "PTRES",
                 "Funcional",
                 "Unidade Solicitante",
-                "Dotação&nbsp;Atual&nbsp; PO (R$)",
+                "Dotação Atual(R$)",
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
             ));
         } else {
@@ -521,7 +521,7 @@ DML;
                 "PTRES",
                 "Funcional",
                 "Unidade Solicitante",
-                "Dotação&nbsp;Atual&nbsp; PO (R$)",
+                "Dotação Atual(R$)",
                 '<center>Detalhado em PI (R$)</center>' => array(
                     'Detalhado',
                     'Não Detalhado Custeio',
@@ -618,7 +618,7 @@ DML;
 
                     // setando o ptres
                     var celPTRES = tabelaorigem.rows[linha].insertCell(0);
-                    celPTRES.style.textAlign = "center";
+                    celPTRES.style.textAlign = "center"; 
                     celPTRES.innerHTML = '<span class="link btnVisualizarDetalhes" ptrid="'+ id+'" >'+ ptres+ '</span>';
 
                     var celFuncional = tabelaorigem.rows[linha].insertCell(1);
