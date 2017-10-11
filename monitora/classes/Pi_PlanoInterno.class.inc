@@ -216,7 +216,7 @@ class Pi_PlanoInterno extends Modelo{
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
                 inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano
                 left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid
+                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid and pli.ungcod = suo.suocod and pli.unicod = suo.unocod
                 left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod and lmu.lmustatus = 'A' and lmu.prsano = suo.prsano
             where 
