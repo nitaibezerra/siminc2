@@ -314,15 +314,15 @@ if($_REQUEST['no_ptrid']){
 $sql_lista = <<<DML
     SELECT
         ptr.ptrid,
-        ptr.ptres || '<autorizadocusteio>' || COALESCE(SUM(ptr.ptrdotacaocusteio), 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(SUM(ptr.ptrdotacaocapital), 0.00) || '</autorizadocapital>' AS ptres,
+        ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
         TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
         aca.unicod || ' - ' || uni.unonome as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
-        (COALESCE(SUM(ptr.ptrdotacaocusteio), 0.00) - COALESCE(SUM(pip.custeio), 0.00)) AS nao_det_pi_custeio,
-        (COALESCE(SUM(ptr.ptrdotacaocapital), 0.00) - COALESCE(SUM(pip.capital), 0.00)) AS nao_det_pi_capital,
+        (COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00)) AS nao_det_pi_custeio,
+        (COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00)) AS nao_det_pi_capital,
         COALESCE((pemp.total), 0.00) AS empenhado,
-        COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado
+        COALESCE(ptr.ptrdotacao, 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado
     FROM monitora.ptres ptr
     INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
     INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '2018'
