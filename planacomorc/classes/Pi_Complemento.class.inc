@@ -49,6 +49,7 @@ class Pi_Complemento extends Modelo{
         'picted' => null,
         'picedital' => null,
         'esfid' => null,
+        'picpublico' => null,
         'picexecucao' => null,
         'picvalorcusteio' => null,
         'picvalorcapital' => null,

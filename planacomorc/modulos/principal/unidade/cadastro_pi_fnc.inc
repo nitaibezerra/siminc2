@@ -11,6 +11,8 @@
  */
 include_once '_funcoespi.php';
 
+$sufixoOrigemRequisicao = '_fnc';
+
 require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "planacomorc/classes/Cronograma.class.inc";
 include_once APPRAIZ . "planacomorc/classes/Pi_Sniic.class.inc";
@@ -293,11 +295,15 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <label class="control-label" for="plidsc">Descrição / Finalidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
-                                <textarea class="obrigatorio txareanormal form-control" rows="6" cols="60" name="plidsc" id="plidsc" maxlength="1000"><?php
-                                    if ($dadosPI['plidsc']) {
-                                        echo $dadosPI['plidsc'];
-                                    }
-                                    ?></textarea>
+                                <textarea class="obrigatorio txareanormal form-control" rows="6" cols="60" name="plidsc" id="plidsc" maxlength="1000"><?php echo $dadosPI['plidsc']? $dadosPI['plidsc']: NULL; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="picpublico">Público alvo:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <textarea class="txareanormal form-control" rows="6" cols="60" name="picpublico" id="picpublico" maxlength="1000"><?php echo $dadosPI['picpublico']? $dadosPI['picpublico']: NULL; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -813,7 +819,7 @@ DML;
                                 <label for="picexecucao" class="control-label">Percentual de Execução:</label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao']) ? $dadosPI['picexecucao'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
+                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao']) ? $dadosPI['picexecucao'] : ''; ?>" class="CampoEstilo normal form-control" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
                             </div>
                         </div>
 
@@ -1279,7 +1285,7 @@ DML;
         <div class="form-group">
             <div class="text-center">
                 <button class="btn btn-primary" type="button" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" <?php echo $disabled; ?>><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                <a href="planacomorc.php?modulo=principal/unidade/listapimanter_fnc&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
             </div>
         </div>
     </form>

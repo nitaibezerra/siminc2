@@ -56,9 +56,9 @@ if ($_REQUEST['carregarComboEnquadramentoPorSubacao']) {
 $perfis = pegaPerfilGeral();
 
 if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
-    $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter&acao=A';
+    $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
 } else {
-    $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter&acao=A';
+    $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
 }
 
 //salvarPI($dados);
@@ -87,7 +87,7 @@ if (isset($_REQUEST['evento'])) {
         if ('salvarPI' == $func) {
             $retorno = call_user_func_array($func, $params);
 //salvarPI($params);
-            $href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=' . $retorno;
+            $href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi'. $sufixoOrigemRequisicao. '&acao=A&pliid=' . $retorno;
         } else {
             $retorno = $func($_REQUEST);
         }
