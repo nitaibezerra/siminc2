@@ -315,6 +315,10 @@
             atualizarTotalFisico();
         });
 
+        $('#picexecucao').keyup(function(){
+            this.value = mascaraglobal('##,##', this.value);
+        });
+        
         $('.input_orcamentario').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarTotalOrcamentario();

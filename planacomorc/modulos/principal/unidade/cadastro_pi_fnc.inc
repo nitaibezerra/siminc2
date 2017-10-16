@@ -808,6 +808,15 @@ DML;
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label for="picexecucao" class="control-label">Percentual de Execução:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao']) ? $dadosPI['picexecucao'] : ''; ?>" class="CampoEstilo normal form-control obrigatorio" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

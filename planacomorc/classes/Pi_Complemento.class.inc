@@ -35,26 +35,28 @@ class Pi_Complemento extends Modelo{
      * @var array
      * @access protected
      */
-    protected $arAtributos     = array(
-                                        'picid' => null,
-                                        'pliid' => null,
-                                        'oppid' => null,
-                                        'mppid' => null,
-                                        'ippid' => null,
-                                        'mpnid' => null,
-                                        'ipnid' => null,
-                                        'pprid' => null,
-                                        'pumid' => null,
-                                        'picquantidade' => null,
-                                        'picted' => null,
-                                        'picedital' => null,
-                                        'esfid' => null,
-                                        'picvalorcusteio' => null,
-                                        'picvalorcapital' => null,
-                                        'mescod' => null,
-                                        'acuid' => null,
-                                        'secid' => null,
-                                        'maiid' => null,
-                                        'masid' => null,
-									  );
+    protected $arAtributos = array(
+        'picid' => null,
+        'pliid' => null,
+        'oppid' => null,
+        'mppid' => null,
+        'ippid' => null,
+        'mpnid' => null,
+        'ipnid' => null,
+        'pprid' => null,
+        'pumid' => null,
+        'picquantidade' => null,
+        'picted' => null,
+        'picedital' => null,
+        'esfid' => null,
+        'picexecucao' => null,
+        'picvalorcusteio' => null,
+        'picvalorcapital' => null,
+        'mescod' => null,
+        'acuid' => null,
+        'secid' => null,
+        'maiid' => null,
+        'masid' => null,
+    );
+
 }

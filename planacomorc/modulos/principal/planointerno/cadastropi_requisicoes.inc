@@ -86,6 +86,7 @@ if (isset($_REQUEST['evento'])) {
         $retorno = false;
         if ('salvarPI' == $func) {
             $retorno = call_user_func_array($func, $params);
+//salvarPI($params);
             $href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=' . $retorno;
         } else {
             $retorno = $func($_REQUEST);

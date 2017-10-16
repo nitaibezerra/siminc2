@@ -869,10 +869,11 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->mescod = $dados['mescod'] ? $dados['mescod'] : null;
     $modelPiComplemento->maiid = $dados['maiid'] ? $dados['maiid'] : null;
     $modelPiComplemento->masid = $dados['masid'] ? $dados['masid'] : null;
+    $modelPiComplemento->picexecucao = $pcrvalor['picexecucao'] ? desformata_valor($pcrvalor['picexecucao']) : null;
     $modelPiComplemento->picted = $dados['picted'] == 't' ? 't' : 'f';
     $modelPiComplemento->picedital = $dados['picedital'] == 't' ? 't' : 'f';
 
-    $modelPiComplemento->salvar(NULL, NULL, array('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade', 'picvalorcusteio', 'picvalorcapital'));
+    $modelPiComplemento->salvar(NULL, NULL, array('oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picquantidade', 'picexecucao', 'picvalorcusteio', 'picvalorcapital'));
 
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);

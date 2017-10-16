@@ -13,21 +13,6 @@
             }
         }
 
-        // Se não for adicionado sniic, acrescenta uma msg ao erro.
-    //        if($('[name="lista_sniic[]"]').size() == 0){
-    //            addMsgCustom.push('Números SNIIC');
-    //            $('.legend_sniic').addClass('validateRedText');
-    //        } else {
-    //            $('.legend_sniic').removeClass('validateRedText');
-    //        }
-        // Se não for adicionado convenio, acrescenta uma msg ao erro.
-    //        if($('[name="lista_convenio[]"]').size() == 0){
-    //            addMsgCustom.push('Números De Convênio');
-    //            $('.legend_convenio').addClass('validateRedText');
-    //        } else {
-    //            $('.legend_convenio').removeClass('validateRedText');
-    //        }
-
         // Se não for selecionado nenhum tipo de localização, o sistema acrescenta uma mensagem de erro.
         if($('#esfid').val() == ""){
             $('.legend_localizacao').addClass('validateRedText');
