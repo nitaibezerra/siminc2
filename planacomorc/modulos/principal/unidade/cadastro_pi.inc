@@ -555,14 +555,14 @@ DML;
                                             $cor = 1;
                                             
                                             foreach ($dadosPTRES as $ptres):
-                                                $vlrPiDetalhado = $ptres['det_pi'];
-                                                $vlrPiDetalhadoCusteio = $ptres['det_pi_custeio'];
-                                                $vlrPiDetalhadoCapital = $ptres['det_pi_capital'];
-                                                $vlrPtresCusteio = $ptres['ptrdotacaocusteio'];
-                                                $vlrPtresCapital = $ptres['ptrdotacaocapital'];
-                                                $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
-                                                $vlrPiNaoDetalhadoCusteio = $ptres['nao_det_pi_custeio'];
-                                                $vlrPiNaoDetalhadoCapital = $ptres['nao_det_pi_capital'];
+                                                $vlrPiDetalhado = strip_tags($ptres['det_pi']);
+                                                $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
+                                                $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
+                                                $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
+                                                $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
+                                                $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
+                                                $vlrPiNaoDetalhadoCusteio = strip_tags($ptres['nao_det_pi_custeio']);
+                                                $vlrPiNaoDetalhadoCapital = strip_tags($ptres['nao_det_pi_capital']);
                                                 ?>
                                                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                                                     <td align="center">

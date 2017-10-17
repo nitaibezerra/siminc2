@@ -497,14 +497,14 @@ DML;
                                             $cor = 1;
                                             
                                             foreach ($dadosPTRES as $ptres):
-                                                $vlrPiDetalhado = $ptres['det_pi'];
-                                                $vlrPiDetalhadoCusteio = $ptres['det_pi_custeio'];
-                                                $vlrPiDetalhadoCapital = $ptres['det_pi_capital'];
-                                                $vlrPtresCusteio = $ptres['ptrdotacaocusteio'];
-                                                $vlrPtresCapital = $ptres['ptrdotacaocapital'];
-                                                $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
-                                                $vlrPiNaoDetalhadoCusteio = $ptres['nao_det_pi_custeio'];
-                                                $vlrPiNaoDetalhadoCapital = $ptres['nao_det_pi_capital'];
+                                                $vlrPiDetalhado = strip_tags($ptres['det_pi']);
+                                                $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
+                                                $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
+                                                $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
+                                                $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
+                                                $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
+                                                $vlrPiNaoDetalhadoCusteio = strip_tags($ptres['nao_det_pi_custeio']);
+                                                $vlrPiNaoDetalhadoCapital = strip_tags($ptres['nao_det_pi_capital']);
                                                 ?>
                                                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                                                     <td align="center">
@@ -819,7 +819,16 @@ DML;
                                 <label for="picexecucao" class="control-label">Percentual de Execução:</label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao']) ? $dadosPI['picexecucao'] : ''; ?>" class="CampoEstilo normal form-control" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
+                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao'])? number_format($dadosPI['picexecucao'], 2, ',', '.'): ''; ?>" class="CampoEstilo normal form-control" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label for="picpriorizacao" class="control-label">Grau de priorização:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="text" value="<?php echo !empty($dadosPI['picpriorizacao']) ? $dadosPI['picpriorizacao'] : ''; ?>" class="CampoEstilo normal inteiro form-control" title="Grau de priorização para unidade" id="picpriorizacao" name="picpriorizacao" maxlength="2" />
                             </div>
                         </div>
 
