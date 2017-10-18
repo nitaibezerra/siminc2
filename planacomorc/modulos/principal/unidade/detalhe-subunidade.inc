@@ -7,7 +7,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
     <div class="col-md-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5><?php echo count($dado) ? $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')' : "PI's da Subunidade"; ?></h5>
+                <h5><?php echo count($dado) ? $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')' : "PI's da Unidade"; ?></h5>
             </div>
             <div class="ibox-content">
                 <?php if(count($dadosPi)){ ?>
@@ -55,7 +55,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                         </table>
                     </div>
                 <?php } else {
-                    echo '<div class="alert alert-danger">Não há PI vinculado a esta Subunidade</div>';
+                    echo '<div class="alert alert-danger">Não há PI vinculado a esta Unidade</div>';
                 } ?>
             </div>
         </div>
@@ -96,7 +96,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                         </table>
                     </div>
                 <?php } else {
-                    echo '<div class="alert alert-danger">Não há PI delegado a esta Subunidade</div>';
+                    echo '<div class="alert alert-danger">Não há PI delegado a esta Unidade</div>';
                 } ?>
             </div>
         </div>

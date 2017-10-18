@@ -18,7 +18,7 @@ $dado = count($dados) ? current($dados) : [];
                                 <th>Id</th>
                                 <th>Código</th>
                                 <th>Título</th>
-                                <th>Subunidade</th>
+                                <th>Unidade</th>
                                 <th>Enquadramento</th>
                                 <th>Custeio</th>
                                 <th>Capital</th>

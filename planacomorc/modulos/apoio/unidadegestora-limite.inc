@@ -64,7 +64,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th>Unidade</th>
-                                <th>Subunidade</th>
+                                <th>Unidade</th>
                                 <th>Limite</th>
                             </tr>
                             </thead>

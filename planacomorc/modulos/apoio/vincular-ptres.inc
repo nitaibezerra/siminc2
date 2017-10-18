@@ -103,7 +103,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <th>Prog.a</th>
                                         <th>Local.</th>
                                         <th>P.O.</th>
-                                        <th>Subunidade Orçamentária</th>
+                                        <th>Unidade</th>
                                     </tr>
                                     </thead>
                                     <tbody>

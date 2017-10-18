@@ -121,7 +121,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th rowspan="2" style="border-right: 1px black solid;">
-                                    <i class="fa fa-plus detalhar-todos link"></i>&nbsp;&nbsp;Subunidade
+                                    <i class="fa fa-plus detalhar-todos link"></i>&nbsp;&nbsp;Unidade
                                 </th>
                                 <th colspan="2" style="border-right: 1px black solid;">Custeio</th>
                                 <th colspan="2" style="border-right: 1px black solid;">Capital</th>
@@ -213,7 +213,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <?php
 // -- popup de detalhamento do PI
-bootstrapPopup("PI's da Subunidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
+bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
 bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
 ?>
 
