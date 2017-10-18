@@ -14,8 +14,8 @@
         SELECT DISTINCT
             rpu.usucpf,
             u.usunome,
-            u.usuemail,
-            (CASE WHEN LENGTH(u.usufoneddd) > 0 THEN '(' || u.usufoneddd || ')' ELSE '' END) || u.usufonenum
+            (CASE WHEN LENGTH(u.usufoneddd) > 0 THEN '(' || u.usufoneddd || ')' ELSE '' END) || u.usufonenum,
+            u.usuemail
         FROM planacomorc.usuarioresponsabilidade rpu
             JOIN seguranca.usuario u ON rpu.usucpf = u.usucpf-- SELECT * FROM seguranca.usuario
         WHERE
