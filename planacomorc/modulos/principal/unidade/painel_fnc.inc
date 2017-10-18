@@ -68,7 +68,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <i class="fa fa-list"></i> Lista de PI <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">Lista de PIs Convencionais</a></li>
+                    <li><a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">Lista de PIs</a></li>
                     <li class="divider"></li>
                     <li><a href="planacomorc.php?modulo=principal/unidade/listapimanter_fnc&acao=A">Lista de PIs do FNC</a></li>
                 </ul>
