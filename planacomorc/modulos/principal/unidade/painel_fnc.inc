@@ -75,12 +75,12 @@ include APPRAIZ . "includes/cabecalho.inc";
             </div>
             <div class="btn-group">
                 <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle">
-                    <i class="fa fa-plus-circle"></i> Novo PI <span class="caret"></span>
+                    <i class="fa fa-plus-circle"></i> Criar PI <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">Novo PI Convencional</a></li>
+                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">Criar PI</a></li>
                     <li class="divider"></li>
-                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A">Novo PI do FNC</a></li>
+                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A">Criar PI do FNC</a></li>
                 </ul>
             </div>
             <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
