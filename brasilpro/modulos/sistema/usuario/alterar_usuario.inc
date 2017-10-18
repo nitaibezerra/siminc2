@@ -1,6 +1,6 @@
 <?php
 
-		define( 'SENHA_PADRAO', 'simecspo' );
+		define( 'SENHA_PADRAO', 'siminc123' );
 		//implementando ação do ajax de montagem do combo de municipios
 		if(isset($_REQUEST['servico']) &&  $_REQUEST['servico']== 'listar_mun'){	
 			$sql = "SELECT muncod, mundescricao as mundsc 
@@ -282,7 +282,7 @@
 	<tr id="tr_senha">
 		<td align='right' class="subtitulodireita">Senha:</td>
 		<td><input id="senha" type="checkbox" name="senha" /> <label
-			for="senha">Alterar a senha do usuário para a senha padrão: <b>simecspo</b>.</label>
+			for="senha">Alterar a senha do usuário para a senha padrão: <b><?php echo SENHA_PADRAO; ?></b>.</label>
 		</td>
 	</tr>
 	<?php if( in_array( 'geral', $configuracao ) ): ?>

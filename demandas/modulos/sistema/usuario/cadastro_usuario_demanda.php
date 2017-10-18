@@ -69,7 +69,7 @@ header( "Pragma: no-cache" );
 
 
 
-		define( 'SENHA_PADRAO', 'simecdti' );
+		define( 'SENHA_PADRAO', 'siminc123' );
 
 		if(isset($_REQUEST['servico']) &&  $_REQUEST['servico']== 'listar_mun'){	
 			$sql = "SELECT muncod, mundescricao as mundsc 
@@ -557,7 +557,7 @@ header( "Pragma: no-cache" );
 		<tr id="tr_senha">
 			<td align='right' class="subtitulodireita">Senha:</td>
 			<td><input id="senha" type="checkbox" name="senha" /> <label
-				for="senha">Alterar a senha do usuário para a senha padrão: <b>simecdti</b>.</label>
+				for="senha">Alterar a senha do usuário para a senha padrão: <b><?php echo SENHA_PADRAO; ?></b>.</label>
 			</td>
 		</tr>
 	<?php

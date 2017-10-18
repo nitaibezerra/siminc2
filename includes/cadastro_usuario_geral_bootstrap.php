@@ -17,7 +17,7 @@ include_once APPRAIZ . 'www/proporc/_funcoescadastrousuario.php';
 include_once( APPRAIZ . "includes/classes/FuncoesBootstrap.class.inc" );
 
 //CONSTANTES
-define ( 'SENHA_PADRAO', 'simecdti' );
+define ( 'SENHA_PADRAO', 'siminc123' );
 
 $arrStatus = array ('A' => 'Ativo','B' => 'Bloqueado','P' => 'Pendente');
 $acao = $_REQUEST ['acao'];
@@ -344,7 +344,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 <section class="form-group">
                     <label class="control-label col-md-2">Senha:</label>
                     <section class="col-md-10">
-                        <label class="form-control-static" style="font-weight:lighter;"><input id="senha" type="checkbox" name="senha" style="vertical-align:bottom;"/>&nbsp;Alterar a senha do usuário para a senha padrão: <b class="text-danger">simecdti</b>.</label>
+                        <label class="form-control-static" style="font-weight:lighter;"><input id="senha" type="checkbox" name="senha" style="vertical-align:bottom;"/>&nbsp;Alterar a senha do usuário para a senha padrão: <b class="text-danger"><?php echo SENHA_PADRAO; ?></b>.</label>
                     </section>
                 </section>
     <?php
