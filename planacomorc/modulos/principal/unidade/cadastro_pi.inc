@@ -1145,7 +1145,7 @@ DML;
                                         <td style="text-align: center;"><b>Capital</b></td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left;">Saldo Autorizado na Funcional:</td>
+                                        <td style="text-align: left;">Autorizado na Funcional:</td>
                                         <td style="text-align: left;" id="td_autorizado_funcional_custeio" >0,00</td>
                                         <td style="text-align: center;" id="td_autorizado_funcional_capital" >0,00</td>
                                     </tr>
