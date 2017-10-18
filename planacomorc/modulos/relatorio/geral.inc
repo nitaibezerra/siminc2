@@ -2,7 +2,7 @@
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 $cabecalho = [
-    'ID Planejamento', 'Situação', 'Código', 'Código da Unidade', 'Unidade', 'Código da Sub-Unidade', 'Sub-Unidade', 'Unidade Delegada', 'Sub-Unidade Delegada', 'Enquadramento',
+    'ID Planejamento', 'Situação', 'Código', 'Código da UO', 'UO', 'Código da Unidade', 'Unidade', 'Unidade Delegada', 'Unidade Delegada', 'Enquadramento',
     'Item de Manutenção', 'Subitem de Manutenção', 'Código do Programa', 'Programa', 'Código do Objetivo', 'Objetivo', 'Código da Iniciativa', 'Iniciativa', 'Código da Ação', 'Ação', 'Código do Localizador',
     'Localizador', 'Código do PO', 'Plano Orçamentário', 'PTRES', 'Área', 'Meta PNC', 'Meta PPA', 'Título', 'Descrição', 'Segmento Cultural', 'Tipo de Instrumento / Modalidade de Pactuação',
     'Emenda parlamentar', 'Forma de execução - Edital', 'Localização da ação', 'País', 'Unidade Federativa',

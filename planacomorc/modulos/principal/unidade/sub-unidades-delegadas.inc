@@ -92,7 +92,7 @@ $list->setQuery(Spo_Model_Planointerno::buscarSubUnidades((object) array(
 //    ->setId('list-ptres')
     ->setCabecalho(array(
         'Unidade Orçamentária',
-        'Sub-Unidade'))
+        'Unidade'))
 //    ->esconderColunas('pliid', 'ptrid', 'acaid')
 //    ->addCallbackDeCampo(
 //        array('dotacaoinicial', 'dotacaosubacao', 'empenhado', 'detalhadoptres'),

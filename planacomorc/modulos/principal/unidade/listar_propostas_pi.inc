@@ -28,7 +28,7 @@ $aPropostas = $oPlanoInterno->recuperarPropostasSiminc($_SESSION['exercicio'], $
                     <th>Ações</th>
                     <th>Funcional</th>
                     <th>Unidade</th>
-                    <th>Sub-Unidade</th>
+                    <th>Unidade</th>
                     <th>Enq. Despesa</th>
                     <th>Qtd. Física</th>
                     <th>Vl. Custeio</th>

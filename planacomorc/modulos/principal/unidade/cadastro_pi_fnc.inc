@@ -386,7 +386,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="ungcod">Sub-Unidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="ungcod">Unidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_ungcod">
                                 <?php
@@ -1089,12 +1089,12 @@ DML;
                                         </td>
                                     </tr>
                                     <tr style="height: 30px;">
-                                        <td style="text-align: left;">Limite Autorizado na Sub-Unidade: </td>
+                                        <td style="text-align: left;">Limite Autorizado na Unidade: </td>
                                         <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td style="text-align: left;">
-                                            Limite Disponível na Sub-Unidade:
+                                            Limite Disponível na Unidade:
                                             <input id="VlrSUDisponivel" type="hidden" value="" />
                                         </td>
                                         <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>

@@ -596,7 +596,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label">Sub-Unidade:</label>
+                        <label for="inputUnidade" class="col-lg-2 control-label">Unidade:</label>
                         <div class="col-lg-10 carregaUG">
                             <?php
                             $ungcod = $dadosPI['ungcod'];
@@ -1097,7 +1097,7 @@ DML;
             msg += "<li>O preenchimento do campo Unidade Orçamentária é obrigatório.</li>";
         }
         if (!$('#ungcod').val()) {
-            msg += "<li>O preenchimento do campo Sub-Unidade é obrigatório.</li>";
+            msg += "<li>O preenchimento do campo Unidade é obrigatório.</li>";
         }
         if (!$('#sbaid').val()) {
             msg += "<li>O preenchimento do campo Subação é obrigatório.</li>";

@@ -53,7 +53,7 @@
 
         return $simec->select(
             'ungcod',
-            'Sub-Unidade',
+            'Unidade',
             $filtros->ungcod,
             Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                 'exercicio' => $filtros->exercicio,
@@ -93,7 +93,7 @@
                                 echo $simec->select('unicod', 'Unidade', current($listaUO), $sqlListaUO, array('multiple' => 'true'));
                             }
                             echo '<div id=div_ungcod >';
-                            echo $simec->select('ungcod', 'Sub-Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                            echo $simec->select('ungcod', 'Unidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                                 'unofundo' => 'TRUE',
                                 'exercicio' => $_SESSION['exercicio'],
                                 'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
@@ -142,7 +142,7 @@
             ->setFormFiltros('filtropi')
 //            ->esconderColunas('unidsc', 'valido')
             ->setCabecalho(array(
-                'id', 'Código', 'Sub-Unidade', 'Título', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
+                'id', 'Código', 'Unidade', 'Título', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
                     'Custeio', 'Capital', 'Empenhado', 'Pago', 'Liquidado'
                 )))
             ->addCallbackDeCampo('id', 'exibirLinkEspelho')

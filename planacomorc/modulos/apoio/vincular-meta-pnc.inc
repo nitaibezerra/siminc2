@@ -20,7 +20,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Víncular Metas PNC com Sub-Unidade Orçamentária</h2>
+        <h2>Víncular Metas PNC com Unidade</h2>
     </div>
 </div>
 
@@ -40,7 +40,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <thead>
                                 <tr>
                                     <th width="50%">Meta PNC</th>
-                                    <th>Sub-Unidade</th>
+                                    <th>Unidade</th>
                                 </tr>
                                 </thead>
                                 <tbody>
