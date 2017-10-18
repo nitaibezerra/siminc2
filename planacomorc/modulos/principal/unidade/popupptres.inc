@@ -316,7 +316,7 @@ $sql_lista = <<<DML
         ptr.ptrid,
         ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
         TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
-        aca.unicod || ' - ' || uni.unonome as unidsc,
+--        aca.unicod || ' - ' || uni.unonome as unidsc,
         COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
         (COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00)) AS nao_det_pi_custeio,
@@ -512,7 +512,6 @@ DML;
             $listagem->setCabecalho(array(
                 "PTRES",
                 "Funcional",
-                "Unidade Solicitante",
                 "Dotação Atual(R$)",
                 '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
             ));
@@ -520,7 +519,6 @@ DML;
             $listagem->setCabecalho(array(
                 "PTRES",
                 "Funcional",
-                "Unidade Solicitante",
                 "Dotação Atual(R$)",
                 '<center>Detalhado em PI (R$)</center>' => array(
                     'Detalhado',
@@ -629,7 +627,7 @@ DML;
 
                     var celDotacaoAtualPo = tabelaorigem.rows[linha].insertCell(2);
                     celDotacaoAtualPo.style.textAlign = "right";
-                    var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(6)').text();
+                    var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(5)').text();
                     celDotacaoAtualPo.innerHTML = dotacaoAtualPO;
                     
                     var vlrAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(3) autorizadocusteio').text());
@@ -641,7 +639,7 @@ DML;
                     var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
                     celDetalhadoPi.style.textAlign = "right";
                     celDetalhadoPi.id = "td_pi_detalhado";
-                    var detalhado = $('tr#' + id + ' td:nth-child(7)').text();
+                    var detalhado = $('tr#' + id + ' td:nth-child(6)').text();
                     celDetalhadoPi.innerHTML = detalhado;
 
                     $('#piDetalhado').val(detalhado);
@@ -649,8 +647,8 @@ DML;
                     var celNaoDetalhadoPi = tabelaorigem.rows[linha].insertCell(4);
                     celNaoDetalhadoPi.style.textAlign = "right";
                     celNaoDetalhadoPi.id = "td_pi_nao_detalhado";
-                    var naoDetalhadoCusteio = $('tr#' + id + ' td:nth-child(8)').text();
-                    var naoDetalhadoCapital = $('tr#' + id + ' td:nth-child(9)').text();
+                    var naoDetalhadoCusteio = $('tr#' + id + ' td:nth-child(7)').text();
+                    var naoDetalhadoCapital = $('tr#' + id + ' td:nth-child(8)').text();
                     var naoDetalhado = textToFloat(naoDetalhadoCusteio) + textToFloat(naoDetalhadoCapital);
                     celNaoDetalhadoPi.innerHTML = number_format(naoDetalhado.toFixed(2), 2, ',', '.');
                     $('#piNaoDetalhado').val(number_format(naoDetalhado.toFixed(2), 2, ',', '.'));
@@ -662,12 +660,12 @@ DML;
 
                     var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
                     CelEmpenhado.style.textAlign = "right";
-                    var empenhado = $('tr#' + id + ' td:nth-child(10)').text();
+                    var empenhado = $('tr#' + id + ' td:nth-child(9)').text();
                     CelEmpenhado.innerHTML = empenhado;
 
                     var celNaoEmpenhado = tabelaorigem.rows[linha].insertCell(6);
                     celNaoEmpenhado.style.textAlign = "right";
-                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(11)').text();
+                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(10)').text();
                     celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="ptrid" value="' +id +'" />';
 
                     var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
