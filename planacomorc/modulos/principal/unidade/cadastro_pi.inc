@@ -1141,7 +1141,7 @@ DML;
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;"></td>
-                                        <td style="text-align: left;"><b>Custeio </b></td>
+                                        <td style="text-align: center;"><b>Custeio </b></td>
                                         <td style="text-align: center;"><b>Capital</b></td>
                                     </tr>
                                     <tr>
