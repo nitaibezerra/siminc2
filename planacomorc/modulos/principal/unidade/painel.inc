@@ -7,6 +7,9 @@ include_once '_funcoespi.php';
 require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+# Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
 $oPlanoInterno = new Pi_PlanoInterno();
 
 switch ($_REQUEST['req']) {
@@ -18,17 +21,24 @@ switch ($_REQUEST['req']) {
         die;
 }
 
+$filtros = array(
+    "suo.prsano = '". $_SESSION['exercicio']. "'",
+    'suo.unofundo = FALSE',
+);
+# Filtro por Subunidades do perfil do usuário logado.
+if($listaSubUnidadeUsuario){
+    $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
+}
+$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+//var_dump($aPropostas);
+//die('painel');
+
 /**
  * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
 
-
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
-    "suo.prsano = '". $_SESSION['exercicio']. "'",
-    'suo.unofundo = false'
-));
 
 ?>
 
@@ -81,20 +91,23 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Valores por Unidades</h5>
-                </div>
-                <div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
-                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-                    ?>
+
+        <?php if (!$listaSubUnidadeUsuario): ?>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Valores por Unidades</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
+                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <div class="col-md-12">
 

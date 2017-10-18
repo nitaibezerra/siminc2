@@ -240,7 +240,8 @@ class Pi_PlanoInterno extends Modelo{
                 suo.suonome,
                 ptr.funcional
         ";
-
+//var_dump($sql);
+//die('Pi_Planointerno.class.inc');
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];

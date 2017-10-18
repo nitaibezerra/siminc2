@@ -7,6 +7,9 @@ include_once '_funcoespi.php';
 require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+# Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
 $oPlanoInterno = new Pi_PlanoInterno();
 
 switch ($_REQUEST['req']) {
@@ -18,16 +21,23 @@ switch ($_REQUEST['req']) {
         die;
 }
 
+$filtros = array(
+    "suo.prsano = '". $_SESSION['exercicio']. "'",
+    'suo.unofundo = TRUE',
+);
+# Filtro por Subunidades do perfil do usuário logado.
+if($listaSubUnidadeUsuario){
+    $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
+}
+$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+//var_dump($aPropostas);
+//die('painel');
+
 /**
  * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
-
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria(array(
-    "pli.pliano = '". $_SESSION['exercicio']. "'",
-    'suo.unofundo = TRUE'
-));
 
 ?>
 

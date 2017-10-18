@@ -3,13 +3,14 @@
 // Redireciona o usuário para a página incial de acordo com perfil
 $perfis = pegaPerfilGeral();
 
-if(count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]))){
+//if(count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]))){
+    # Todos os perfis são redirecionados para a nova tela de Painel
     $urlPainel = 'planacomorc.php?modulo=principal/unidade/painel&acao=A';
     if($_REQUEST['exercicio']){
         $urlPainel .= '&exercicio='. $_REQUEST['exercicio'];
     }
     simec_redirecionar($urlPainel);
-}
+//}
 
 /**
  * Tela inicial do módulo planacomorc com o menu de opções disponíveis no sistema.

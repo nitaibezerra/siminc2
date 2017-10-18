@@ -12,7 +12,7 @@
     $filtropi = $_REQUEST;
     
     # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));    
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
     
     if($requisicao) {
         switch ($requisicao) {
