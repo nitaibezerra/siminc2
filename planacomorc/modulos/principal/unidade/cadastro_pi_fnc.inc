@@ -425,7 +425,7 @@ DML;
                         </div>
                         <div class="form-group grupo_manutencao" style="display: none;">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="maiid">Manutenção Item: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="maiid">Item: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_maiid">
                                 <?php carregarManutencaoItem($dadosPI['eqdid'], $dadosPI['maiid']); ?>
@@ -433,7 +433,7 @@ DML;
                         </div>
                         <div class="form-group grupo_manutencao" style="display: none;">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="masid">Manutenção SubItem: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="masid">SubItem: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_masid">
                                 <?php carregarManutencaoSubItem($dadosPI['maiid'], $dadosPI['masid']); ?>
