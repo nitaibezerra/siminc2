@@ -99,8 +99,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <thead>
                                     <tr class="text-center">
                                         <th><input type="checkbox" class="marcar-todos-ptres" marcar="check_<?php echo $tipo; ?>" checked></th>
-                                        <th>Ação</th>
                                         <th>Prog.a</th>
+                                        <th>Ação</th>
                                         <th>Local.</th>
                                         <th>P.O.</th>
                                         <th>Unidade</th>
@@ -112,8 +112,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <td>
                                                 <input type="checkbox" class="vincular check_<?php echo $tipo; ?>" data-ptrid="<?php echo $dados['ptrid']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo (!empty($aVinculos[$dados['ptrid']]) && in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) ? 'checked' : '' ; ?> />
                                             </td>
-                                            <td><?php echo $dados['acacod']; ?></td>
                                             <td><?php echo $dados['prgcod']; ?></td>
+                                            <td><?php echo $dados['acacod']; ?></td>
                                             <td><?php echo $dados['loccod']; ?></td>
                                             <td><?php echo $dados['plocod']; ?></td>
                                             <td><?php echo $dados['unosigla'] . ' - ' . $dados['suonome']; ?></td>
