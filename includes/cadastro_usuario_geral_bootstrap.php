@@ -277,7 +277,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 </section>
             </section>
             <section class="form-group">
-                <label class="col-md-2 control-label" for="unicod">Unidade Orçamentária:</label>
+                <label class="col-md-2 control-label" for="unicod">UO:</label>
                 <section class="col-md-10" id="spanUnidade">
                     <?php
                     $unicod = $usuario->unicod;
@@ -290,7 +290,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 </section>
             </section>
             <section class="form-group">
-                <label class="control-label col-md-2" for="ungcod">Sub-Unidade:</label>
+                <label class="control-label col-md-2" for="ungcod">Unidade:</label>
                 <section class="col-md-10" id="unidade_gestora">
                 <?php
                     $funcoesBootstrap->carrega_unidade_gestora_bootstrap($unicod, $editavel, $usuario->usucpf);

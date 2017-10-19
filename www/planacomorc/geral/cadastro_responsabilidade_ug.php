@@ -49,7 +49,7 @@ $pflcod = $_REQUEST['pflcod'];
 <html>
     <head>
         <META http-equiv="Pragma" content="no-cache">
-        <title>Definição de responsabilidades - Sub-Unidade</title>
+        <title>Definição de responsabilidades - Unidades</title>
         <script language="JavaScript" src="/includes/funcoes.js"></script>
         <script language="javascript" type="text/javascript" src="/includes/JQuery/jquery-ui-1.8.4.custom/js/jquery-1.4.2.min.js"></script>
         <script src="../js/planacomorc.js"></script>
@@ -99,7 +99,7 @@ $pflcod = $_REQUEST['pflcod'];
         <div style="overflow:auto;width:496px;height:350px;border:2px solid #ececec;background-color:white">
         <?php
 
-            monta_titulo('Definição de responsabilidades - Sub-Unidade', '');
+            monta_titulo('Definição de responsabilidades - Unidades', '');
 
             // -- É feita uma verificação no SQL para saber se aquele ungcod já foi escolhido previamente
             // -- com base nisso, é adicionado o atributo checked ao combo do ungcod selecionado previamente.
@@ -118,7 +118,7 @@ $pflcod = $_REQUEST['pflcod'];
                     descricao
             ";
             //ver($sql,d);
-            $cabecalho = array('', 'Sub-Unidade - Descrição');
+            $cabecalho = array('', 'Unidade - Descrição');
             //echo "<pre>"; var_dump($sql); die;
             $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
         ?>

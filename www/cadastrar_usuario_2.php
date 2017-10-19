@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * Sistema Integrado de Monitoramento do Ministério da Educação
  * Desenvolvedor: Desenvolvedores Simec
@@ -973,7 +974,7 @@ font {
 							<div class="form-group">
 								<div class="col-sm-12">
 									<div class="control-label">
-										<label for="unicod">Unidade Orçamentária:</label>
+										<label for="unicod">UO:</label>
 									</div>
 									<div class="control-input">
 	                                    <span id="unidade">
@@ -993,7 +994,7 @@ font {
 							<div class="form-group">
 								<div class="col-sm-12">
 									<div class="control-label">
-										<label for="unicod">Subunidade Orçamentária:</label>
+										<label for="unicod">Unidade:</label>
 									</div>
 									<div class="control-input">
 	                                    <span id="unidade_gestora">
