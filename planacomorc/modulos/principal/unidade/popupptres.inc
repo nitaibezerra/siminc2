@@ -4,7 +4,7 @@
  *
  */
 if ($_REQUEST['detalhe']) {
-    echo popupDetalhe($_REQUEST['ptrid']);
+    include APPRAIZ . "planacomorc/modulos/principal/unidade/modal-ptres-grafico.inc";
     die();
 }
 
@@ -528,7 +528,6 @@ DML;
         }
 
         $listagem->setQuery($sql_lista);
-        $listagem->setAcoes(array('view' => 'visualizarRegistro'));
         $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));
         $listagem->setIdLinha();
         $listagem->addCallbackDeCampo(array(
@@ -583,7 +582,7 @@ DML;
             }
 
             function resultado(id, selecionado, adicionais) {
-                var colHtmlPtres = $('tr#' + id + ' td:nth-child(3)').html();
+                var colHtmlPtres = $('tr#' + id + ' td:nth-child(2)').html();
                 var ptres = colHtmlPtres.substr(0, colHtmlPtres.search('<'));
 
                 if (!ptres) {
@@ -621,16 +620,16 @@ DML;
                     celPTRES.innerHTML = '<span class="link btnVisualizarDetalhes" ptrid="'+ id+'" >'+ ptres+ '</span>';
 
                     var celFuncional = tabelaorigem.rows[linha].insertCell(1);
-                    var funcional = $('tr#' + id + ' td:nth-child(4)').text();
+                    var funcional = $('tr#' + id + ' td:nth-child(3)').text();
                     celFuncional.innerHTML = '<span class="link btnVisualizarDetalhes" ptrid="'+ id+'" >'+ funcional+ '</span>';
 
                     var celDotacaoAtualPo = tabelaorigem.rows[linha].insertCell(2);
                     celDotacaoAtualPo.style.textAlign = "right";
-                    var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(5)').text();
+                    var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(4)').text();
                     celDotacaoAtualPo.innerHTML = dotacaoAtualPO;
                     
-                    var vlrAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(3) autorizadocusteio').text());
-                    var vlrAutorizadoCapital = textToFloat($('tr#' + id + ' td:nth-child(3) autorizadocapital').text());
+                    var vlrAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(2) autorizadocusteio').text());
+                    var vlrAutorizadoCapital = textToFloat($('tr#' + id + ' td:nth-child(2) autorizadocapital').text());
                     
                     $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
                     $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
@@ -638,7 +637,7 @@ DML;
                     var celDetalhadoPi = tabelaorigem.rows[linha].insertCell(3);
                     celDetalhadoPi.style.textAlign = "right";
                     celDetalhadoPi.id = "td_pi_detalhado";
-                    var detalhado = $('tr#' + id + ' td:nth-child(6)').text();
+                    var detalhado = $('tr#' + id + ' td:nth-child(5)').text();
                     celDetalhadoPi.innerHTML = detalhado;
 
                     $('#piDetalhado').val(detalhado);
@@ -646,8 +645,8 @@ DML;
                     var celNaoDetalhadoPi = tabelaorigem.rows[linha].insertCell(4);
                     celNaoDetalhadoPi.style.textAlign = "right";
                     celNaoDetalhadoPi.id = "td_pi_nao_detalhado";
-                    var naoDetalhadoCusteio = $('tr#' + id + ' td:nth-child(7)').text();
-                    var naoDetalhadoCapital = $('tr#' + id + ' td:nth-child(8)').text();
+                    var naoDetalhadoCusteio = $('tr#' + id + ' td:nth-child(6)').text();
+                    var naoDetalhadoCapital = $('tr#' + id + ' td:nth-child(7)').text();
                     var naoDetalhado = textToFloat(naoDetalhadoCusteio) + textToFloat(naoDetalhadoCapital);
                     celNaoDetalhadoPi.innerHTML = number_format(naoDetalhado.toFixed(2), 2, ',', '.');
                     $('#piNaoDetalhado').val(number_format(naoDetalhado.toFixed(2), 2, ',', '.'));
@@ -659,12 +658,12 @@ DML;
 
                     var CelEmpenhado = tabelaorigem.rows[linha].insertCell(5);
                     CelEmpenhado.style.textAlign = "right";
-                    var empenhado = $('tr#' + id + ' td:nth-child(9)').text();
+                    var empenhado = $('tr#' + id + ' td:nth-child(8)').text();
                     CelEmpenhado.innerHTML = empenhado;
 
                     var celNaoEmpenhado = tabelaorigem.rows[linha].insertCell(6);
                     celNaoEmpenhado.style.textAlign = "right";
-                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(10)').text();
+                    var naoEmpenhado = $('tr#' + id + ' td:nth-child(9)').text();
                     celNaoEmpenhado.innerHTML = naoEmpenhado + '<input type="hidden" name="ptrid" value="' +id +'" />';
 
                     var celValorDoProjeto = tabelaorigem.rows[linha].insertCell(7);
