@@ -190,7 +190,7 @@ if ($db->testa_superuser()) {
 }
 
 if ($dadosPI['pliid'] && !$dadosPI['docid']) {
-    $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid']);
+    $dadosPI['docid'] = pegarDocidPi($dadosPI['pliid'], WF_TPDID_PLANEJAMENTO_PI);
 }
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 $codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'F');

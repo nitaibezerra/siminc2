@@ -2245,13 +2245,13 @@ function botaoAtualizarSIAFI($pliid) {
     <?php
 }
 
-function pegarDocidPi($pliid)
+function pegarDocidPi($pliid, $tipoFluxo)
 {
     global $db;
     $sql = "select docid from monitora.pi_planointerno where pliid = {$pliid}";
     $docid = $db->pegaUm($sql);
     if (!$docid) {
-        $docid = wf_cadastrarDocumento(WF_TPDID_PLANEJAMENTO_PI, "PI {$pliid}");
+        $docid = wf_cadastrarDocumento($tipoFluxo, "PI {$pliid}");
 
         $db->executar("UPDATE monitora.pi_planointerno SET docid = $docid where pliid = {$pliid}");
         $db->commit();

@@ -645,9 +645,9 @@ class Modelo extends cls_banco {
                 } else {
                     if(is_array($valor)){
                         $strValor = "'". join("','", $valor). "'";
-                        $listaFiltros[] = $campo. "::CHARACTER IN(". $strValor. ")";
+                        $listaFiltros[] = $campo. " IN(". $strValor. ")";
                     } else {
-                        $listaFiltros[] = $campo. "::CHARACTER = '". pg_escape_string($valor). "'";
+                        $listaFiltros[] = $campo. " = '". pg_escape_string($valor). "'";
                     }
                 }
             }

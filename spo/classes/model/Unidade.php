@@ -146,13 +146,19 @@ class Spo_Model_Unidade extends Modelo
      */
     public static function queryComboEstados(stdClass $filtro)
     {
-        return "
+//ver((array)$filtro,d);
+        # Filtros
+        $where = self::montarFiltros((array)$filtro);
+        
+        $sql = "
             SELECT DISTINCT
-                    esdid AS codigo,
-                    esddsc AS descricao
+                esdid AS codigo,
+                esddsc AS descricao
             FROM workflow.estadodocumento
             WHERE
-                tpdid = 265;
+                $where
         ";
+//ver($sql,d);
+        return $sql;
     }
 }
