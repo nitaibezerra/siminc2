@@ -15,6 +15,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                         <table class="table table-bordered table-striped table-hover " >
                             <thead>
                             <tr class="text-center">
+                                <th>Ações</th>
                                 <th>Id</th>
                                 <th>Código</th>
                                 <th>Título</th>
@@ -33,6 +34,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                 $total['capital'] += $dado['picvalorcapital'];
                                 ?>
                                 <tr>
+                                    <td class="text-center"><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=<?php echo $dado['pliid']; ?>" class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></a></td>
                                     <td><?php echo $dado['pliid']; ?></td>
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>

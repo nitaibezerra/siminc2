@@ -63,28 +63,10 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>
-            <div class="btn-group">
-                <button data-toggle="dropdown" class="btn btn-danger dropdown-toggle">
-                    <i class="fa fa-list"></i> Lista de PI <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">Lista de PIs</a></li>
-                    <li class="divider"></li>
-                    <li><a href="planacomorc.php?modulo=principal/unidade/listapimanter_fnc&acao=A">Lista de PIs do FNC</a></li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle">
-                    <i class="fa fa-plus-circle"></i> Criar PI <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">Criar PI</a></li>
-                    <li class="divider"></li>
-                    <li><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A">Criar PI do FNC</a></li>
-                </ul>
-            </div>
-            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
+<!--            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>-->
+            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A"><i class="fa fa-list"></i> Lista de PI</a>
+            <a class="btn btn-success" href=""planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A"><i class="fa fa-plus-circle"></i> Criar PI</a>
+<!--            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>-->
         </div>
     </div>
 </div>
