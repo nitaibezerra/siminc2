@@ -48,7 +48,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                             </tbody>
                             <tfooter>
                             <tr>
-                                <th colspan="5">TOTAL</th>
+                                <th colspan="6">TOTAL</th>
                                 <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
                                 <th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>
