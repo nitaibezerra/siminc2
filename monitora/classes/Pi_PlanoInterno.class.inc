@@ -367,6 +367,15 @@ class Pi_PlanoInterno extends Modelo{
 
     public function getDadosGerais($exercicio)
     {
+
+        $where = " pli.pliano = '$exercicio' ";
+
+        # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+        if(count($listaSubUnidadeUsuario)){
+            $where .= " and suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
+        }
+        
         $sql = "select  pli.pliid, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
 
                         (select array_to_string(array(
@@ -524,11 +533,9 @@ class Pi_PlanoInterno extends Modelo{
                                 group by sex.exercicio, sex.plicod                                
                         ) sex on sex.plicod = pli.plicod and sex.exercicio = pli.pliano
                 
-                -- where pli.pliano = '$exercicio'
+                where $where
                 ";
 
-//        ver($sql);
-        
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
