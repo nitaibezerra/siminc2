@@ -405,7 +405,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                             <div class="col-lg-9 carregaEnq">
                                 <?php
-                                    $sql = <<<DML
+                                    $sql = "
                                         SELECT
                                             eqdid AS codigo,
                                             eqddsc AS descricao
@@ -413,13 +413,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         WHERE
                                             eqdstatus = 'A'
                                             AND eqdano = '{$_SESSION['exercicio']}'
-                                            AND eqdcod = 'F'
                                         ORDER BY
                                             eqddsc
-DML;
-                                    $eqdidFinalistico = $db->pegaUm($sql);
-                                    $eqdid = $eqdidFinalistico;
-                                    $db->monta_combo('eqdid', $sql, 'S', '', '', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($eqdid) ? $eqdid : null));
+                                    ";
+                                    $eqdid = $dadosPI['eqdid']? $dadosPI['eqdid']: $codigoEnquadramentoFinalistico;
+                                    $db->monta_combo('eqdid', $sql, 'S', '', '', null, null, null, 'N', 'eqdid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                 ?>
                             </div>
                         </div>
@@ -632,7 +630,7 @@ DML;
                                             descricao
                                     ";
 
-                                    $pprid = $dadosPI['pprid'];
+                                    $eqdid = $dadosPI['eqdid'];
                                     $db->monta_combo('pprid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
                                 ?>
                             </div>
@@ -1089,12 +1087,12 @@ DML;
                                         </td>
                                     </tr>
                                     <tr style="height: 30px;">
-                                        <td style="text-align: left;">Limite Autorizado na Unidade: </td>
+                                        <td style="text-align: left;">Limite Geral FNC: </td>
                                         <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td style="text-align: left;">
-                                            Limite Disponível na Unidade:
+                                            Limite Disponível FNC:
                                             <input id="VlrSUDisponivel" type="hidden" value="" />
                                         </td>
                                         <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
@@ -1111,7 +1109,7 @@ DML;
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;">
-                                            Saldo Disponível na Funcional:
+                                            Já cadastrado na funcional pela Unidade:
                                             <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
                                             <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
                                         </td>
