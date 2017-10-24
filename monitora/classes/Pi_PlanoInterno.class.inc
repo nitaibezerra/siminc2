@@ -52,7 +52,14 @@ class Pi_PlanoInterno extends Modelo{
     {
         $where = [];
         if(!empty($aFiltro['uno'])){
-            $where[] = "uno.unoid = {$aFiltro['uno']}";
+            $where[] = " and uno.unoid = {$aFiltro['uno']}";
+        }
+
+        # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+        
+        if(count($listaSubUnidadeUsuario)){
+            $where[] = " and  suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
         }
 
         $sql = "SELECT  ppi.ppiid, uno.unonome, suo.suonome, mom.momnome, fun.funcionalcampobusca, 
@@ -99,7 +106,7 @@ class Pi_PlanoInterno extends Modelo{
                 ) dpisoma ON dpisoma.ppiid = ppi.ppiid
                 WHERE mom.momid = (select momid from planointerno.momento where prsano = '$exercicio' and momstatus = 'A' order by momid limit 1)
                 AND  ppi.ppistatus = 'A'"
-                . implode(' and ', $where) .
+                . implode(' ', $where) .
                 "order by uno.unonome, suo.suonome";
 
         // Carregando dados da base de dados do SIMINC antigo
