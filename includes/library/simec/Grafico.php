@@ -475,6 +475,21 @@ class Grafico {
                     legend: <?php echo json_encode($this->legenda); ?>,
                     <?php } ?>
 
+                    <?php if($this->event): ?>
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                events: {
+                                    <?php foreach ($this->event as $key => $value) :?>
+                                        <?php echo $key ?>: function (event) {
+                                            <?php echo $value ?>
+                                        }
+                                    <?php endforeach; ?>
+                                }
+                            }
+                        },
+                    <?php endif; ?>
+
                     <?php if($this->tipo == self::K_TIPO_PIZZA){ ?>
                     plotOptions: {
                         pie: {
@@ -491,7 +506,7 @@ class Grafico {
                                 format: '{point.percentage:.2f}%</b>',
                                 showInLegend: true
                             },showInLegend: true,
-                            
+
                              <?php if($this->event): ?>
                                 events: {
                                     <?php foreach ($this->event as $key => $value) :?>

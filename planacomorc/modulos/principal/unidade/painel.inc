@@ -1,5 +1,4 @@
 <?php
-
 include_once APPRAIZ . "includes/library/simec/Grafico.php";
 
 include_once '_funcoespi.php';
@@ -18,6 +17,9 @@ switch ($_REQUEST['req']) {
         die;
     case 'detalhe-funcional':
         $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
+        die;
+    case 'detalhe-grafico':
+        $oPlanoInterno->recuperarDetalhesValoresGrafico($_REQUEST['unosigla']);
         die;
 }
 
@@ -41,6 +43,12 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 
 ?>
+<script>
+    function exibirModalDetalheGrafico(unosigla){
+        $('#detalhe-grafico .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-grafico&unosigla=' + unosigla);
+        $('#detalhe-grafico').modal();
+    }
+</script>
 
 <style>
     .detalhe-subunidade, .detalhe-funcional{
@@ -50,7 +58,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     .title-disponivel{
         cursor: help;
     }
-    
+
     .linha_subunidade {
         background-color: rgba(241, 246, 215, 0.3) !important;
         font-weight: bold;
@@ -84,7 +92,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
+                                ->gerarGrafico($estatistica);
                         ?>
                     </div>
                 </div>
@@ -197,6 +207,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 // -- popup de detalhamento do PI
 bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
 bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
+bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), array('tamanho' => 'lg'));
 ?>
 
 <script>
@@ -238,4 +249,5 @@ bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), ar
             }
         });
     });
+
 </script>

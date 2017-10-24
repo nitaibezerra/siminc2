@@ -259,7 +259,15 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
     {
-        $sql = "select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.unosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano        
+                where suo.prsano = '$exercicio'
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
                 where suo.prsano = '$exercicio'
@@ -301,6 +309,76 @@ class Pi_PlanoInterno extends Modelo{
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
                          left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                
+                order by ordem, categoria
+                ";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
+    public function recuperarEstatisticaPagamentoDetalhe($exercicio, $unosigla)
+    {
+        $where = " and suo.unosigla = '$unosigla' ";
+
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.suosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano        
+                where suo.prsano = '$exercicio'
+                $where
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 2 ordem, 'Limite' as descricao, suo.suosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
+                where suo.prsano = '$exercicio'
+                $where
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 3 ordem, 'Planejado' as descricao, suo.suosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                where suo.prsano = '$exercicio'
+                $where
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 4 ordem, 'Empenhado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 4 ordem, 'Pago' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
+                and suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 4 ordem, 'Liquidado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
                 and suo.unofundo = false
                 group by ordem, descricao, categoria
                 
@@ -562,6 +640,15 @@ class Pi_PlanoInterno extends Modelo{
         $dados = $this->recuperarDadosDetalhe($ptrid, self::K_TIPO_DETALHE_PTRES);
 
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
+    }
+
+    public function recuperarDetalhesValoresGrafico($unosigla)
+    {
+        $estatistica = $this->recuperarEstatisticaPagamentoDetalhe($_SESSION['exercicio'], $unosigla);
+
+        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                ->gerarGrafico($estatistica);
     }
 
     public function recuperarDadosDetalhe($id, $tipo)
