@@ -9,6 +9,8 @@ $storage = DIRFILES . "/seguranca/usuario/";
 $sql = "SELECT entid FROM seguranca.usuario WHERE usucpf = '" . $_SESSION['usucpf'] . "'";
 $entid = $db->pegaUm($sql);
 
+$entid = $entid ? $entid : 0;
+
 $sql = "SELECT arqid FROM entidade.fotoentidade WHERE entid = '" . $entid . "' AND fotbox = 'perfil' ORDER BY fotordem DESC LIMIT 1";
 $id = $db->pegaUm($sql);
 
