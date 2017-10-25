@@ -1211,8 +1211,8 @@
         var resultado = false;
         var vlrCronograma = buscarTotalCusteioCronogramaOrcamentario();
         var vlorProjeto = textToFloat($('#picvalorcusteio').val());
-        
-        if(vlrCronograma == vlorProjeto){
+
+        if(number_format(vlrCronograma, 2, '.', '') == number_format(vlorProjeto, 2, '.', '')){
             resultado = true;
         }
         
@@ -1228,8 +1228,8 @@
         var resultado = false;
         var vlrCronograma = buscarTotalCapitalCronogramaOrcamentario();
         var vlorProjeto = textToFloat($('#picvalorcapital').val());
-        
-        if(vlrCronograma == vlorProjeto){
+
+        if(number_format(vlrCronograma, 2, '.', '') == number_format(vlorProjeto, 2, '.', '')){
             resultado = true;
         }
         
@@ -1245,8 +1245,8 @@
         var resultado = false;
         var vlrCronograma = buscarTotalCusteioCronogramaFinanceiro();
         var vlorProjeto = textToFloat($('#picvalorcusteio').val());
-        
-        if(vlrCronograma == vlorProjeto){
+
+        if(number_format(vlrCronograma, 2, '.', '') == number_format(vlorProjeto, 2, '.', '')){
             resultado = true;
         }
         
@@ -1262,8 +1262,8 @@
         var resultado = false;
         var vlrCronograma = buscarTotalCapitalCronogramaFinanceiro()
         var vlorProjeto = textToFloat($('#picvalorcapital').val());
-        
-        if(vlrCronograma == vlorProjeto){
+
+        if(number_format(vlrCronograma, 2, '.', '') == number_format(vlorProjeto, 2, '.', '')){
             resultado = true;
         }
         
