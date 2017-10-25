@@ -88,7 +88,7 @@ class Public_Model_MetaPnc extends Modelo
                 WHERE mpn.mpnstatus = 'A'
                 AND mpn.prsano  = '{$_SESSION['exercicio']}'
                 ORDER BY ordem";
-        
+
         return $sql;
     }
 

@@ -226,7 +226,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-5">
         <h2>
             Cadastro de PI
             <?php if(!empty($dadosPI['plicod'])){
@@ -235,6 +235,11 @@ include APPRAIZ . "includes/cabecalho.inc";
             } ?>
         </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+    </div>
+    <div class="col-lg-7">
+        <div style="padding-top: 10px;" class="text-right">
+            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listar_propostas_pi&acao=A"><i class="fa fa-plus-circle"></i> Criar PI por Proposta</a>
+        </div>
     </div>
 </div>
 
@@ -329,6 +334,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             AND ur.pflcod = '" . PFL_SUBUNIDADE . "'
                                             and suo.prsano = '{$_SESSION['exercicio']}'
                                             and rpustatus = 'A'
+                                            and unofundo = 'f'
                                             ORDER BY suo.unocod";
 
                                     $dadosUsuario = $db->carregar($sql);
@@ -368,7 +374,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 ";
 
                                 $editavelUg = ($dadosPI['unicod'] && $dadosPI['pliid']) ? 'N' : 'S';
-
                                 $db->monta_combo('unicod', $sql, $editavelUg, 'Selecione', null, null, null, null, 'N', 'unicod', null, (isset($dadosPI['unicod']) ? $dadosPI['unicod'] : null), null, 'class="form-control chosen-select" style="width=100%;"', null, null);
                                 ?>
                             </div>

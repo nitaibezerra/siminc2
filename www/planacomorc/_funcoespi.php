@@ -291,7 +291,7 @@ function carregarMetasPPA($oppid, $mppid, $suocod = null) {
     $sql = "
         SELECT DISTINCT
             m.mppid AS codigo,
-            m.mppcod || '-' || m.mppdsc AS descricao
+            m.mppcod || ' - ' || m.mppdsc AS descricao
         FROM public.metappa m
 		JOIN public.objetivometappa om ON m.mppid = om.mppid
         $join
@@ -314,7 +314,7 @@ function carregarIniciativaPPA($oppid, $ippid) {
     $sql = "
         SELECT
             ippid AS codigo,
-            ippcod || '-' || ippnome AS descricao
+            ippcod || ' - ' || ippnome AS descricao
         FROM public.iniciativappa
         WHERE
             ippstatus = 'A'
@@ -344,7 +344,7 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
     $sql = "
         SELECT
             ipnid AS codigo,
-            ipncod || '-' || ipndsc AS descricao
+            ipncod || ' - ' || ipndsc AS descricao
         FROM public.indicadorpnc
         WHERE
             ipnstatus = 'A'

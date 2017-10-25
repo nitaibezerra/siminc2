@@ -342,6 +342,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             AND ur.pflcod = '" . PFL_SUBUNIDADE . "'
                                             and suo.prsano = '{$_SESSION['exercicio']}'
                                             and rpustatus = 'A'
+                                            and unofundo = 't'
                                             ORDER BY suo.unocod";
 
                                     $dadosUsuario = $db->carregar($sql);
