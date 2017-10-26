@@ -217,8 +217,8 @@ class Pi_PlanoInterno extends Modelo{
                 lmu.lmuvlr,
                 sum(pic.picvalorcapital) picvalorcapital,
                 sum(pic.picvalorcusteio) picvalorcusteio,
-                sum(ptr.ptrdotacaocapital) ptrdotacao_capital,
-                sum(ptr.ptrdotacaocusteio) ptrdotacao_custeio
+                sum(psu.ptrdotacaocapital) ptrdotacao_capital,
+                sum(psu.ptrdotacaocusteio) ptrdotacao_custeio
             from public.vw_subunidadeorcamentaria suo
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
                 inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
