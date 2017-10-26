@@ -55,7 +55,7 @@ $dado = count($dados) ? current($dados) : [];
                                 </tr>
                             <?php } ?>
                             </tbody>
-                            <tfooter>
+                            <tfoot>
                                 <tr>
                                     <th colspan="4">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
@@ -65,7 +65,7 @@ $dado = count($dados) ? current($dados) : [];
                                     <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
                                 </tr>
-                            </tfooter>
+                            </tfoot>
                         </table>
                     </div>
                 <?php } else {

@@ -49,17 +49,17 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                 </tr>
                             <?php } ?>
                             </tbody>
-                            <tfooter>
-                            <tr>
-                                <th colspan="4">TOTAL</th>
-                                <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
-                                <!--<th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
-                                <th class="text-right"><?php echo number_format($total['empenhado'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
-                                <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
-                            </tr>
-                            </tfooter>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4">TOTAL</th>
+                                    <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
+                                    <!--<th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
+                                    <th class="text-right"><?php echo number_format($total['empenhado'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 <?php } else {

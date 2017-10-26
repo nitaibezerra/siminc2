@@ -1292,6 +1292,7 @@
             });
         } else {
             $('#formularioPopup input[name=unicod]').val($("#unicod").val());
+            $('#formularioPopup input[name=ungcod]').val($("#ungcod").val());
             $('#modal-ptres').modal();
             $('#btnPopupPtresPesquisar').click();
         }
