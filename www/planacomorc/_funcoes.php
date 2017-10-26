@@ -1477,19 +1477,19 @@ function buscarPTRES(stdClass $filtros) {
             ptr.ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
             aca.unicod || ' - ' || uni.unonome as unidsc,
-            COALESCE(ptr.ptrdotacao, 0.00) AS dotacaoatual,
-            COALESCE(ptr.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
-            COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
+            SUM(COALESCE(ptr.ptrdotacao, 0.00)) AS dotacaoatual,
+            SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) AS ptrdotacaocusteio,
+            SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) AS ptrdotacaocapital,
             COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
 	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
 	    COALESCE(SUM(dtp.capital), 0.00) AS det_pi_capital,
-            (COALESCE(ptr.ptrdotacao, 0.00) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
-            (COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
-            (COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
+            (SUM(COALESCE(ptr.ptrdotacao, 0.00)) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
+            (SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
+            (SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
             COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
             pip.pipvalor
-        FROM monitora.ptres ptr
+        FROM monitora.vw_ptres ptr
             JOIN monitora.acao aca on ptr.acaid = aca.acaid
             JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod AND uni.prsano = aca.prgano
             LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
@@ -1520,9 +1520,9 @@ function buscarPTRES(stdClass $filtros) {
             aca.acacod,
             aca.unicod,
             aca.loccod,
+            ptr.plocod,
             aca.acatitulo,
             uni.unonome,
-            ptr.ptrdotacao,
             pip.pipvalor,
             pemp.total
         ORDER BY
