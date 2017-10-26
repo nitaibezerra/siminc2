@@ -52,14 +52,14 @@ class Pi_PlanoInterno extends Modelo{
     {
         $where = [];
         if(!empty($aFiltro['uno'])){
-            $where[] = " and uno.unoid = {$aFiltro['uno']}";
+            $where[] = " AND uno.unoid = {$aFiltro['uno']}";
         }
 
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
         
         if(count($listaSubUnidadeUsuario)){
-            $where[] = " and  suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
+            $where[] = " AND  suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
         }
 
         $sql = "SELECT  ppi.ppiid, uno.unonome, suo.suonome, mom.momnome, fun.funcionalcampobusca, 
@@ -104,7 +104,7 @@ class Pi_PlanoInterno extends Modelo{
                         WHERE dpistatus = 'A'
                         GROUP BY ppiid
                 ) dpisoma ON dpisoma.ppiid = ppi.ppiid
-                WHERE mom.momid = (select momid from planointerno.momento where prsano = '$exercicio' and momstatus = 'A' order by momid limit 1)
+                WHERE mom.momid = (select momid from planointerno.momento where prsano = '$exercicio' AND momstatus = 'A' order by momid limit 1)
                 AND  ppi.ppistatus = 'A'"
                 . implode(' ', $where) .
                 "order by uno.unonome, suo.suonome";
@@ -121,22 +121,22 @@ class Pi_PlanoInterno extends Modelo{
                         are.areid, arenome, pri.priid, pri.prinome, ump.umpid, ump.umpnome, eqd.eqdsigla, are.aresigla
                 from planointerno.propostapi ppi
                         INNER JOIN planointerno.ppamomentounidade pmu ON ppi.pmuid = pmu.pmuid AND pmu.pmustatus = 'A'
-                        INNER JOIN planointerno.ppaacao aca on aca.acaid = pmu.acaid and aca.acastatus = 'A'
-                        INNER JOIN planointerno.ppaprograma prg on prg.prgid = pmu.prgid and prg.prgstatus = 'A'        
-                        INNER JOIN planointerno.ppalocalizador loc on loc.locid = pmu.locid and loc.locstatus = 'A'
-                        INNER JOIN planointerno.ppaplanoorcamentario plo on plo.ploid = pmu.ploid and plo.plostatus = 'A'
+                        INNER JOIN planointerno.ppaacao aca on aca.acaid = pmu.acaid AND aca.acastatus = 'A'
+                        INNER JOIN planointerno.ppaprograma prg on prg.prgid = pmu.prgid AND prg.prgstatus = 'A'        
+                        INNER JOIN planointerno.ppalocalizador loc on loc.locid = pmu.locid AND loc.locstatus = 'A'
+                        INNER JOIN planointerno.ppaplanoorcamentario plo on plo.ploid = pmu.ploid AND plo.plostatus = 'A'
                         INNER JOIN planointerno.subunidadeorcamentaria suo ON suo.suoid = pmu.suoid AND suo.suostatus = 'A'
                         INNER JOIN planointerno.unidadeorcamentaria uno ON uno.unoid = suo.unoid AND uno.unostatus = 'A'
                         INNER JOIN planointerno.enquadramentodespesa eqd ON eqd.eqdid = ppi.eqdid AND eqd.eqdstatus = 'A'
                         LEFT JOIN planointerno.areacultural are ON are.areid = ppi.areid AND are.arestatus = 'A'
                         LEFT JOIN planointerno.produtopi pri ON pri.priid = ppi.priid AND pri.pristatus = 'A'
                         LEFT JOIN planointerno.unidademedidapi ump ON ump.umpid = ppi.umpid AND ump.umpstatus = 'A'        
-                        LEFT JOIN planointerno.manutencaoitem mai ON mai.maiid = ppi.maiid and mai.maistatus = 'A'
-                        LEFT JOIN planointerno.manutencaosubitem mas on mas.masid = ppi.masid and mas.masstatus = 'A'
-                        LEFT JOIN planointerno.ppaobjetivo obj on obj.objid = pmu.objid and obj.objstatus = 'A'
-                        LEFT JOIN planointerno.ppainiciativa ini on ini.iniid = pmu.iniid and ini.inistatus = 'A'
-                        LEFT JOIN planointerno.metappa mpp on mpp.mppid = ppi.mppid and mpp.mppstatus = 'A'
-                        LEFT JOIN planointerno.metapnc mpn on mpn.mpnid = ppi.mpnid and mpn.mpnstatus = 'A'        
+                        LEFT JOIN planointerno.manutencaoitem mai ON mai.maiid = ppi.maiid AND mai.maistatus = 'A'
+                        LEFT JOIN planointerno.manutencaosubitem mas on mas.masid = ppi.masid AND mas.masstatus = 'A'
+                        LEFT JOIN planointerno.ppaobjetivo obj on obj.objid = pmu.objid AND obj.objstatus = 'A'
+                        LEFT JOIN planointerno.ppainiciativa ini on ini.iniid = pmu.iniid AND ini.inistatus = 'A'
+                        LEFT JOIN planointerno.metappa mpp on mpp.mppid = ppi.mppid AND mpp.mppstatus = 'A'
+                        LEFT JOIN planointerno.metapnc mpn on mpn.mpnid = ppi.mpnid AND mpn.mpnstatus = 'A'        
                 where ppi.ppiid = $ppiid";
 
         // Carregando dados da base de dados do SIMINC antigo
@@ -156,17 +156,17 @@ class Pi_PlanoInterno extends Modelo{
         ];
 
         // Carregando dados do SIMINC 2 de acordo com dados do SIMINC antigo
-        $dadosPI['eqdid'] = $this->pegaUm("select eqdid from monitora.pi_enquadramentodespesa eqd where eqdcod = '{$dadosProposta['eqdsigla']}' and eqd.eqdano = '{$dadosProposta['prsano']}' and eqd.eqdstatus = 'A'");
-        $dadosPI['maiid'] = $this->pegaUm("select maiid from planacomorc.manutencaoitem mai where upper(mai.mainome) = upper('{$dadosProposta['mainome']}') and mai.prsano = '{$dadosProposta['prsano']}' and mai.maistatus = 'A'");
-        $dadosPI['masid'] = $this->pegaUm("select masid from planacomorc.manutencaosubitem mas where upper(mas.masnome) = upper('{$dadosProposta['masnome']}') and mas.prsano = '{$dadosProposta['prsano']}' and mas.masstatus = 'A'");
-        $dadosPI['mppid'] = $this->pegaUm("select mppid from public.metappa mpp where mpp.mppcod = '{$dadosProposta['mppcod']}' and mpp.prsano = '{$dadosProposta['prsano']}' and mpp.mppstatus = 'A'");
-        $dadosPI['mdeid'] = $this->pegaUm("select mdeid from monitora.pi_modalidadeensino mde where upper(mdedsc) = upper('{$dadosProposta['arenome']}') and mde.mdeano = '{$dadosProposta['prsano']}' and mde.mdestatus = 'A'");
-        $dadosPI['pprid'] = $this->pegaUm("select pprid from monitora.pi_produto ppr where upper(ppr.pprnome) = upper('{$dadosProposta['prinome']}') and prsano = '{$dadosProposta['prsano']}' and ppr.pprstatus = 'A'");
-        $dadosPI['pumid'] = $this->pegaUm("select pumid from monitora.pi_unidade_medida pum where upper(pum.pumnome) = upper('{$dadosProposta['umpnome']}') and pum.prsano = '{$dadosProposta['prsano']}' and pum.pumstatus = 'A'");
-        $dadosPI['oppid'] = $this->pegaUm("select oppid from public.objetivoppa opp where opp.oppcod = '{$dadosProposta['objcod']}' and opp.prsano = '{$dadosProposta['prsano']}' and opp.oppstatus = 'A'");
-        $dadosPI['ippid'] = $this->pegaUm("select ippid from public.iniciativappa ipp where ipp.ippcod = '{$dadosProposta['inicod']}' and ipp.prsano = '{$dadosProposta['prsano']}' and ipp.ippstatus = 'A'");
+        $dadosPI['eqdid'] = $this->pegaUm("select eqdid from monitora.pi_enquadramentodespesa eqd where eqdcod = '{$dadosProposta['eqdsigla']}' AND eqd.eqdano = '{$dadosProposta['prsano']}' AND eqd.eqdstatus = 'A'");
+        $dadosPI['maiid'] = $this->pegaUm("select maiid from planacomorc.manutencaoitem mai where upper(mai.mainome) = upper('{$dadosProposta['mainome']}') AND mai.prsano = '{$dadosProposta['prsano']}' AND mai.maistatus = 'A'");
+        $dadosPI['masid'] = $this->pegaUm("select masid from planacomorc.manutencaosubitem mas where upper(mas.masnome) = upper('{$dadosProposta['masnome']}') AND mas.prsano = '{$dadosProposta['prsano']}' AND mas.masstatus = 'A'");
+        $dadosPI['mppid'] = $this->pegaUm("select mppid from public.metappa mpp where mpp.mppcod = '{$dadosProposta['mppcod']}' AND mpp.prsano = '{$dadosProposta['prsano']}' AND mpp.mppstatus = 'A'");
+        $dadosPI['mdeid'] = $this->pegaUm("select mdeid from monitora.pi_modalidadeensino mde where upper(mdedsc) = upper('{$dadosProposta['arenome']}') AND mde.mdeano = '{$dadosProposta['prsano']}' AND mde.mdestatus = 'A'");
+        $dadosPI['pprid'] = $this->pegaUm("select pprid from monitora.pi_produto ppr where upper(ppr.pprnome) = upper('{$dadosProposta['prinome']}') AND prsano = '{$dadosProposta['prsano']}' AND ppr.pprstatus = 'A'");
+        $dadosPI['pumid'] = $this->pegaUm("select pumid from monitora.pi_unidade_medida pum where upper(pum.pumnome) = upper('{$dadosProposta['umpnome']}') AND pum.prsano = '{$dadosProposta['prsano']}' AND pum.pumstatus = 'A'");
+        $dadosPI['oppid'] = $this->pegaUm("select oppid from public.objetivoppa opp where opp.oppcod = '{$dadosProposta['objcod']}' AND opp.prsano = '{$dadosProposta['prsano']}' AND opp.oppstatus = 'A'");
+        $dadosPI['ippid'] = $this->pegaUm("select ippid from public.iniciativappa ipp where ipp.ippcod = '{$dadosProposta['inicod']}' AND ipp.prsano = '{$dadosProposta['prsano']}' AND ipp.ippstatus = 'A'");
 
-        $MetaPnc = $this->pegaLinha("select mpnid, ipnid from public.indicadorpnc ipn where ipn.ipncod = '" . trim($dadosProposta['mpncod']) . "' and ipn.prsano = '{$dadosProposta['prsano']}' and ipn.ipnstatus = 'A'");
+        $MetaPnc = $this->pegaLinha("select mpnid, ipnid from public.indicadorpnc ipn where ipn.ipncod = '" . trim($dadosProposta['mpncod']) . "' AND ipn.prsano = '{$dadosProposta['prsano']}' AND ipn.ipnstatus = 'A'");
 
         $dadosPI['mpnid'] = $MetaPnc['mpnid'];
         $dadosPI['ipnid'] = $MetaPnc['ipnid'];
@@ -175,12 +175,12 @@ class Pi_PlanoInterno extends Modelo{
         $sql = "select ptrid 
                 from monitora.ptres ptr
                 where ptr.acacod = '{$dadosProposta['acacod']}'
-                and ptr.prgcod = '{$dadosProposta['prgcod']}'
-                and ptr.loccod = '{$dadosProposta['loccod']}'
-                and ptr.unicod = '{$dadosProposta['unocod']}'
-                and ptr.plocod = '{$dadosProposta['plocod']}'
-                and ptr.ptrano = '{$dadosProposta['prsano']}'
-                and ptr.ptrstatus = 'A'";
+                AND ptr.prgcod = '{$dadosProposta['prgcod']}'
+                AND ptr.loccod = '{$dadosProposta['loccod']}'
+                AND ptr.unicod = '{$dadosProposta['unocod']}'
+                AND ptr.plocod = '{$dadosProposta['plocod']}'
+                AND ptr.ptrano = '{$dadosProposta['prsano']}'
+                AND ptr.ptrstatus = 'A'";
         
         $dadosPI['ptrid'] = $this->pegaUm($sql);
 
@@ -221,11 +221,11 @@ class Pi_PlanoInterno extends Modelo{
                 sum(ptr.ptrdotacaocusteio) ptrdotacao_custeio
             from public.vw_subunidadeorcamentaria suo
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano
+                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
                 left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid and pli.ungcod = suo.suocod and pli.unicod = suo.unocod
+                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod
                 left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod and lmu.lmustatus = 'A' and lmu.prsano = suo.prsano
+                left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             where 
                 {$where}
             GROUP BY
@@ -269,54 +269,54 @@ class Pi_PlanoInterno extends Modelo{
         $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.unosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano        
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
-                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
+                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod AND suo.prsano = lmu.prsano
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 3 ordem, 'Planejado' as descricao, suo.unosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Empenhado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Pago' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Liquidado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 
                 order by ordem, categoria
@@ -328,65 +328,65 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarEstatisticaPagamentoDetalhe($exercicio, $unosigla)
     {
-        $where = " and suo.unosigla = '$unosigla' ";
+        $where = " AND suo.unosigla = '$unosigla' ";
 
         $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.suosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid and ptr.ptrano = suo.prsano        
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 2 ordem, 'Limite' as descricao, suo.suosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
                 from public.vw_subunidadeorcamentaria suo 
-                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
+                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod AND suo.prsano = lmu.prsano
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 3 ordem, 'Planejado' as descricao, suo.suosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Empenhado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Pago' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
                 select distinct 4 ordem, 'Liquidado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
-                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.pliano = suo.prsano
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
                          left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
-                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres and sec.exercicio = ptr.ptrano
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 where suo.prsano = '$exercicio'
                 $where
-                and suo.unofundo = false
+                AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 
                 order by ordem, categoria
@@ -400,10 +400,10 @@ class Pi_PlanoInterno extends Modelo{
     {
         $sql = "select uno.unosigla descricao, sum(e.autorizado::decimal) valor
                 from wssof.ws_execucaoorcamentariadto e
-                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria AND uno.prsano = '$exercicio'
                 where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
+                AND e.anoexercicio = '$exercicio'
+                AND e.anoreferencia = '$exercicio'
                 group by uno.unosigla
                 order by descricao";
 
@@ -416,10 +416,10 @@ class Pi_PlanoInterno extends Modelo{
     {
         $sql = "select uno.unosigla descricao, count(distinct e.planointerno) valor
                 from wssof.ws_execucaoorcamentariadto e
-                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria and uno.prsano = '$exercicio'
+                        inner join planointerno.unidadeorcamentaria uno on unocod = e.unidadeorcamentaria AND uno.prsano = '$exercicio'
                 where e.planointerno is not null
-                and e.anoexercicio = '$exercicio'
-                and e.anoreferencia = '$exercicio'
+                AND e.anoexercicio = '$exercicio'
+                AND e.anoreferencia = '$exercicio'
                 group by uno.unosigla
                 order by descricao;";
 
@@ -458,7 +458,7 @@ class Pi_PlanoInterno extends Modelo{
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
         if(count($listaSubUnidadeUsuario)){
-            $where .= " and suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
+            $where .= " AND suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
         }
         
         $sql = "select  pli.pliid, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
@@ -519,86 +519,86 @@ class Pi_PlanoInterno extends Modelo{
                         ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
                         
                         -- Cronograma Físico
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '01' and pcr.pliid = pli.pliid) fisico_1,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '02' and pcr.pliid = pli.pliid) fisico_2,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '03' and pcr.pliid = pli.pliid) fisico_3,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '04' and pcr.pliid = pli.pliid) fisico_4,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '05' and pcr.pliid = pli.pliid) fisico_5,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '06' and pcr.pliid = pli.pliid) fisico_6,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '07' and pcr.pliid = pli.pliid) fisico_7,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '08' and pcr.pliid = pli.pliid) fisico_8,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '09' and pcr.pliid = pli.pliid) fisico_9,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '10' and pcr.pliid = pli.pliid) fisico_10,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '11' and pcr.pliid = pli.pliid) fisico_11,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 and mescod = '12' and pcr.pliid = pli.pliid) fisico_12,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '01' AND pcr.pliid = pli.pliid) fisico_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '02' AND pcr.pliid = pli.pliid) fisico_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '03' AND pcr.pliid = pli.pliid) fisico_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '04' AND pcr.pliid = pli.pliid) fisico_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '05' AND pcr.pliid = pli.pliid) fisico_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '06' AND pcr.pliid = pli.pliid) fisico_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '07' AND pcr.pliid = pli.pliid) fisico_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '08' AND pcr.pliid = pli.pliid) fisico_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '09' AND pcr.pliid = pli.pliid) fisico_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '10' AND pcr.pliid = pli.pliid) fisico_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '11' AND pcr.pliid = pli.pliid) fisico_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '12' AND pcr.pliid = pli.pliid) fisico_12,
                         
                         -- Cronograma Financeiro Capital
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '01' and pcr.pliid = pli.pliid) fin_capital_1,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '02' and pcr.pliid = pli.pliid) fin_capital_2,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '03' and pcr.pliid = pli.pliid) fin_capital_3,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '04' and pcr.pliid = pli.pliid) fin_capital_4,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '05' and pcr.pliid = pli.pliid) fin_capital_5,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '06' and pcr.pliid = pli.pliid) fin_capital_6,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '07' and pcr.pliid = pli.pliid) fin_capital_7,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '08' and pcr.pliid = pli.pliid) fin_capital_8,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '09' and pcr.pliid = pli.pliid) fin_capital_9,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '10' and pcr.pliid = pli.pliid) fin_capital_10,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '11' and pcr.pliid = pli.pliid) fin_capital_11,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 and mescod = '12' and pcr.pliid = pli.pliid) fin_capital_12,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '01' AND pcr.pliid = pli.pliid) fin_capital_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '02' AND pcr.pliid = pli.pliid) fin_capital_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '03' AND pcr.pliid = pli.pliid) fin_capital_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '04' AND pcr.pliid = pli.pliid) fin_capital_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '05' AND pcr.pliid = pli.pliid) fin_capital_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '06' AND pcr.pliid = pli.pliid) fin_capital_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '07' AND pcr.pliid = pli.pliid) fin_capital_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '08' AND pcr.pliid = pli.pliid) fin_capital_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '09' AND pcr.pliid = pli.pliid) fin_capital_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '10' AND pcr.pliid = pli.pliid) fin_capital_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '11' AND pcr.pliid = pli.pliid) fin_capital_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 5 AND mescod = '12' AND pcr.pliid = pli.pliid) fin_capital_12,
                         
                         -- Cronograma Financeiro Custeio
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '01' and pcr.pliid = pli.pliid) fin_custeio_1,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '02' and pcr.pliid = pli.pliid) fin_custeio_2,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '03' and pcr.pliid = pli.pliid) fin_custeio_3,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '04' and pcr.pliid = pli.pliid) fin_custeio_4,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '05' and pcr.pliid = pli.pliid) fin_custeio_5,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '06' and pcr.pliid = pli.pliid) fin_custeio_6,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '07' and pcr.pliid = pli.pliid) fin_custeio_7,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '08' and pcr.pliid = pli.pliid) fin_custeio_8,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '09' and pcr.pliid = pli.pliid) fin_custeio_9,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '10' and pcr.pliid = pli.pliid) fin_custeio_10,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '11' and pcr.pliid = pli.pliid) fin_custeio_11,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 and mescod = '12' and pcr.pliid = pli.pliid) fin_custeio_12,        
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '01' AND pcr.pliid = pli.pliid) fin_custeio_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '02' AND pcr.pliid = pli.pliid) fin_custeio_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '03' AND pcr.pliid = pli.pliid) fin_custeio_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '04' AND pcr.pliid = pli.pliid) fin_custeio_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '05' AND pcr.pliid = pli.pliid) fin_custeio_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '06' AND pcr.pliid = pli.pliid) fin_custeio_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '07' AND pcr.pliid = pli.pliid) fin_custeio_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '08' AND pcr.pliid = pli.pliid) fin_custeio_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '09' AND pcr.pliid = pli.pliid) fin_custeio_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '10' AND pcr.pliid = pli.pliid) fin_custeio_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '11' AND pcr.pliid = pli.pliid) fin_custeio_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 4 AND mescod = '12' AND pcr.pliid = pli.pliid) fin_custeio_12,        
                            
                 
                         -- Cronograma Orçamentário Capital
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '01' and pcr.pliid = pli.pliid) orc_capital_1,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '02' and pcr.pliid = pli.pliid) orc_capital_2,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '03' and pcr.pliid = pli.pliid) orc_capital_3,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '04' and pcr.pliid = pli.pliid) orc_capital_4,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '05' and pcr.pliid = pli.pliid) orc_capital_5,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '06' and pcr.pliid = pli.pliid) orc_capital_6,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '07' and pcr.pliid = pli.pliid) orc_capital_7,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '08' and pcr.pliid = pli.pliid) orc_capital_8,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '09' and pcr.pliid = pli.pliid) orc_capital_9,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '10' and pcr.pliid = pli.pliid) orc_capital_10,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '11' and pcr.pliid = pli.pliid) orc_capital_11,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 and mescod = '12' and pcr.pliid = pli.pliid) orc_capital_12,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '01' AND pcr.pliid = pli.pliid) orc_capital_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '02' AND pcr.pliid = pli.pliid) orc_capital_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '03' AND pcr.pliid = pli.pliid) orc_capital_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '04' AND pcr.pliid = pli.pliid) orc_capital_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '05' AND pcr.pliid = pli.pliid) orc_capital_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '06' AND pcr.pliid = pli.pliid) orc_capital_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '07' AND pcr.pliid = pli.pliid) orc_capital_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '08' AND pcr.pliid = pli.pliid) orc_capital_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '09' AND pcr.pliid = pli.pliid) orc_capital_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '10' AND pcr.pliid = pli.pliid) orc_capital_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '11' AND pcr.pliid = pli.pliid) orc_capital_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 3 AND mescod = '12' AND pcr.pliid = pli.pliid) orc_capital_12,
                                                                                                                                          
                         -- Cronograma Orçamentário Custeio                                                                               
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '01' and pcr.pliid = pli.pliid) orc_custeio_1,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '02' and pcr.pliid = pli.pliid) orc_custeio_2,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '03' and pcr.pliid = pli.pliid) orc_custeio_3,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '04' and pcr.pliid = pli.pliid) orc_custeio_4,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '05' and pcr.pliid = pli.pliid) orc_custeio_5,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '06' and pcr.pliid = pli.pliid) orc_custeio_6,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '07' and pcr.pliid = pli.pliid) orc_custeio_7,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '08' and pcr.pliid = pli.pliid) orc_custeio_8,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '09' and pcr.pliid = pli.pliid) orc_custeio_9,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '10' and pcr.pliid = pli.pliid) orc_custeio_10,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '11' and pcr.pliid = pli.pliid) orc_custeio_11,
-                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 and mescod = '12' and pcr.pliid = pli.pliid) orc_custeio_12,         
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '01' AND pcr.pliid = pli.pliid) orc_custeio_1,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '02' AND pcr.pliid = pli.pliid) orc_custeio_2,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '03' AND pcr.pliid = pli.pliid) orc_custeio_3,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '04' AND pcr.pliid = pli.pliid) orc_custeio_4,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '05' AND pcr.pliid = pli.pliid) orc_custeio_5,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '06' AND pcr.pliid = pli.pliid) orc_custeio_6,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '07' AND pcr.pliid = pli.pliid) orc_custeio_7,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '08' AND pcr.pliid = pli.pliid) orc_custeio_8,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '09' AND pcr.pliid = pli.pliid) orc_custeio_9,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '10' AND pcr.pliid = pli.pliid) orc_custeio_10,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '11' AND pcr.pliid = pli.pliid) orc_custeio_11,
+                        (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '12' AND pcr.pliid = pli.pliid) orc_custeio_12,         
                            
                         vlrempenhado, vlrliquidado, vlrpago
                            
                 from monitora.pi_planointerno pli
                         inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod AND suo.unocod = pli.unicod AND suo.prsano = pli.pliano
                         inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
                         left join planacomorc.manutencaoitem mai on mai.maiid = pic.maiid
                         left join planacomorc.manutencaosubitem mas on mas.masid = pic.masid
                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
-                        left join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid and ptr.ptrano = pli.pliano
+                        left join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid AND ptr.ptrano = pli.pliano
                         left join public.objetivoppa opp on opp.oppid = pic.oppid
                         left join public.iniciativappa ipp on ipp.ippid = pic.ippid
                         left join monitora.pi_modalidadeensino mde on mde.mdeid = pli.mdeid
@@ -616,7 +616,7 @@ class Pi_PlanoInterno extends Modelo{
                                 from spo.siopexecucao sex
                                 where coalesce(sex.plicod, '') != ''
                                 group by sex.exercicio, sex.plicod                                
-                        ) sex on sex.plicod = pli.plicod and sex.exercicio = pli.pliano
+                        ) sex on sex.plicod = pli.plicod AND sex.exercicio = pli.pliano
                 
                 where $where
                 ";
@@ -662,24 +662,68 @@ class Pi_PlanoInterno extends Modelo{
     {
         $where = '';
         switch ($tipo){
-            case self::K_TIPO_DETALHE_PTRES:    $where = " and ptr.ptrid = '$id'"; break;
-            case self::K_TIPO_DETALHE_PI:       $where = " and suo.suoid = '$id'"; break;
-            case self::K_TIPO_DETALHE_DELEGADO: $where = " and pde.suoid = '$id'"; break;
+            case self::K_TIPO_DETALHE_PTRES:    $where = " AND ptr.ptrid = '$id'"; break;
+            case self::K_TIPO_DETALHE_PI:       $where = " AND suo.suoid = '$id'"; break;
+            case self::K_TIPO_DETALHE_DELEGADO: $where = " AND pde.suoid = '$id'"; break;
         }
 
-        $sql = "select  distinct pli.pliid, pli.plititulo, pli.plicod, pli.pliemenda, pic.picted, pic.picedital, pic.picvalorcapital, pic.picvalorcusteio, 
-                        suo.suocod, suo.suonome, suo.unocod, suo.unonome, suo.unosigla, ptr.funcional, ptr.acatitulo, ptr.ptrdotacao, eqd.eqddsc
-                from monitora.pi_planointerno pli
-                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                        left join planacomorc.pi_delegacao pde on pde.pliid = pli.pliid
-                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
-                        inner join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
-                        inner join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid and ptr.ptrano = pli.pliano
-                        left join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
-                where pli.plistatus = 'A'        
+        $sql = "
+            SELECT
+                pli.pliid,
+                pli.plititulo,
+                pli.plicod,
+                pli.pliemenda,
+                pic.picted,
+                pic.picedital,
+                pic.picvalorcapital,
+                pic.picvalorcusteio,
+		SUM(COALESCE(ex.vlrempenhado,0)) AS empenhado,
+		SUM(COALESCE(ex.vlrliquidado,0)) AS liquidado,
+		SUM(COALESCE(ex.vlrpago,0)) AS pago,
+                suo.suocod,
+                suo.suonome,
+                suo.unocod,
+                suo.unonome,
+                suo.unosigla,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.ptrdotacao,
+                eqd.eqddsc
+            FROM
+                monitora.pi_planointerno pli
+                INNER JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
+                LEFT JOIN planacomorc.pi_delegacao pde ON pde.pliid = pli.pliid
+                INNER JOIN public.vw_subunidadeorcamentaria suo ON suo.suocod = pli.ungcod
+                    AND suo.unocod = pli.unicod
+                    AND suo.prsano = pli.pliano
+                INNER JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
+                INNER JOIN monitora.vw_ptres ptr ON ptr.ptrid = ppt.ptrid
+                    AND ptr.ptrano = pli.pliano
+                LEFT JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pli.eqdid
+                LEFT JOIN spo.siopexecucao ex ON(ptr.ptres = ex.ptres)
+            WHERE
+                pli.plistatus = 'A'       
                 $where
-                ";
-
+            GROUP BY
+                pli.pliid,
+                pli.plititulo,
+                pli.plicod,
+                pli.pliemenda,
+                pic.picted,
+                pic.picedital,
+                pic.picvalorcapital,
+                pic.picvalorcusteio,
+                suo.suocod,
+                suo.suonome,
+                suo.unocod,
+                suo.unonome,
+                suo.unosigla,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.ptrdotacao,
+                eqd.eqddsc
+            ";
+//ver($sql,d);
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
