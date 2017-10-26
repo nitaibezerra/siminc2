@@ -1108,14 +1108,18 @@
         // Verifica se o usuário já estiver preenchido o enquadramento(Caso de formulário de cadastro de novo PI).
         if($('#eqdid').val() != ""){
             
-            // Se for formulário reduzido
-            if(verificarFormularioReduzido() > 0){
+            // Se for formulário é reduzido.
+            if(verificarFormularioReduzido()){
 
                 // Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
                 exibirOpcoesItemManutencao();
                 
                 // Oculta os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').hide('slow');
+                $('#div_area_cultural').hide('slow');
+                $('#div_segmento_cultural').hide('slow');
+                $('#mdeid').val('').trigger("chosen:updated");
+                $('#neeid').val('').trigger("chosen:updated");
                 $('#oppid').val('').trigger("chosen:updated");
                 $('#mppid').val('').trigger("chosen:updated");
                 $('#ippid').val('').trigger("chosen:updated");
@@ -1136,6 +1140,8 @@
                 
                 // Exibe os campos de metas PPA e PNC
                 $('.div_metas_ppa_pnc').show('slow');
+                $('#div_area_cultural').show('slow');
+                $('#div_segmento_cultural').show('slow');
                 // Exibe os campos do Produto do PI
                 $('.div_produto_pi').show('slow');
                 // Exibe as colunas e campos do Cronograma Físico

@@ -675,7 +675,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <h5>Informações Complementares:</h5>
                     </div>
                     <div class="ibox-content">
-                        <div class="form-group">
+                        <div class="form-group" id="div_area_cultural">
                             <div class="col-md-3 text-right">
                                 <label for="mdeid" class="control-label">Área Cultural: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -700,7 +700,7 @@ DML;
                                 ?>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="div_segmento_cultural">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="neeid">Segmento Cultural: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
@@ -708,22 +708,6 @@ DML;
                                 <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
                             </div>
                         </div>
-                        <div style="display:none;" class="form-group">
-                            <div class="col-md-3 text-right">
-                                <label class="control-label" for="plilivre">Codificação da Unidade(livre):</label>
-                            </div>
-                            <div class="col-lg-9">
-                                <?php
-                                $plilivre = $dadosPI['plilivre'] ? $dadosPI['plilivre'] : '';
-                                $opcoes = array(
-                                    'evtkeyup' => 'atualizarCodigoLivre();',
-                                    'size' => 10
-                                );
-                                inputTexto('plilivre', $plilivre, 'idCodificacao', 2, false, $opcoes);
-                                ?>
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="capid">Modalidade de Pactuação: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
