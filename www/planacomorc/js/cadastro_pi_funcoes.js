@@ -1281,20 +1281,24 @@
     }
 
     function abrir_lista() {
-        // Verifica se o modal terá que recarregar a tela.
-        if($('#modal-ptres .modal-body p').size() <= 1){
-            $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
-                $('#modal-ptres .modal-body p').html(response);
-                $('.modal-dialog-ptres').show();
+        if($("#ungcod").val() != ""){
+            // Verifica se o modal terá que recarregar a tela.
+            if($('#modal-ptres .modal-body p').size() <= 1){
+                $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
+                    $('#modal-ptres .modal-body p').html(response);
+                    $('.modal-dialog-ptres').show();
+                    $('#modal-ptres').modal();
+                    $('#modal-ptres .chosen-select').chosen();
+                    $('#modal-ptres .chosen-container').css('width', '100%');
+                });
+            } else {
+                $('#formularioPopup input[name=unicod]').val($("#unicod").val());
+                $('#formularioPopup input[name=ungcod]').val($("#ungcod").val());
                 $('#modal-ptres').modal();
-                $('#modal-ptres .chosen-select').chosen();
-                $('#modal-ptres .chosen-container').css('width', '100%');
-            });
+                $('#btnPopupPtresPesquisar').click();
+            }
         } else {
-            $('#formularioPopup input[name=unicod]').val($("#unicod").val());
-            $('#formularioPopup input[name=ungcod]').val($("#ungcod").val());
-            $('#modal-ptres').modal();
-            $('#btnPopupPtresPesquisar').click();
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível selecionar uma funcional sem informar a Unidade.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, selecione uma unidade e tente novamente.</span></p>');
         }
     }
 
