@@ -78,7 +78,7 @@
 	if ( !$sistema->sisid ) {
 		//dbg( $sql );
 		//dbg( $sistema, 1 );
-		$db->insucesso( 'Você não tem permissão de acesso neste módulo.' );
+		$db->insucesso(utf8_encode('Você não tem permissão de acesso neste módulo.'));
 	}
 
 	// carrega os dados do módulo para sessão
