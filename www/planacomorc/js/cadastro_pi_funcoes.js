@@ -941,26 +941,6 @@
             $('#div_edital').hide('slow');
         }
     }
-
-    /**
-     * Controla a exibição do formulario se o enquadramento for finalistico.
-     *
-     * @param integer codigo Código selecionado pelo usuário.
-     * @returns VOID
-     */
-    function mudarFormularioFinalistico(codigo){
-        // Se o código for Finalistico, o sistema exibe as opções PNC.
-        if(codigo == intEnqFinalistico){
-            // Exibe as opções Meta PNC e Indicador PNC.
-            $('.grupo_pnc').show('slow');
-        } else {
-            // Oculta e apaga as opções Meta PNC e Indicador PNC.
-            $('.grupo_pnc').hide('slow');
-            // Apaga as opções selecionadas.
-            $('#mpnid').val('').trigger("chosen:updated");
-            $('#ipnid').val('').trigger("chosen:updated");
-        }
-    }
     
     /**
      * Controla a exibição do formulario se o enquadramento for não orçamentário.

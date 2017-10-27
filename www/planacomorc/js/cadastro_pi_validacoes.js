@@ -202,7 +202,7 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'capid'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'mpnid', 'ipnid', 'capid'];
 
         // Verifica se o formulário é reduzido ou completo.
         if(verificarFormularioReduzido()){
@@ -218,11 +218,6 @@
             if($('#pprid').val() != intProdNaoAplica ){
                 listaObrigatorios.push('pumid', 'picquantidade');
             }
-        }
-
-        // Se o código for diferente de Finalistico, o sistema não define como obrigatório o preenchimento das opções PNC.
-        if(codigoEnquadramento == intEnqFinalistico){
-            listaObrigatorios.push('mpnid', 'ipnid');
         }
 
         if($('#picedital').is(':checked')){
