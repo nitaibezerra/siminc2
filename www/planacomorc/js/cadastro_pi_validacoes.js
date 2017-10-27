@@ -202,7 +202,7 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'mpnid', 'ipnid', 'capid'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'capid'];
 
         // Verifica se o formulário é reduzido ou completo.
         if(verificarFormularioReduzido()){
@@ -212,7 +212,7 @@
             // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
             }
         } else {
-            listaObrigatorios.push('oppid', 'mppid', 'pprid', 'mdeid', 'neeid');
+            listaObrigatorios.push('oppid', 'mppid', 'pprid', 'mdeid', 'neeid', 'mpnid', 'ipnid');
 
             // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
             if($('#pprid').val() != intProdNaoAplica ){
