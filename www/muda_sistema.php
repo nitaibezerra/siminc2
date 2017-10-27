@@ -28,33 +28,47 @@
 	// abre conexão com o servidor de banco de dados
 	$db = new cls_banco();
 	
-	$sisid = $_REQUEST['sisid'];
+	$sisid = $_REQUEST['sisid']? $_REQUEST['sisid']: $_SESSION['sisid'];
 	$cpf = $_SESSION['usucpf'];
 	$_SESSION['usunome'] = $db->pegaUm( "SELECT usunome FROM seguranca.usuario WHERe usucpf = '". $cpf ."'" );
 	
-	
 	// obtém os dados do módulo
-	$sql = sprintf(
-		"SELECT
-			s.sisid, s.sisdiretorio, s.sisarquivo, s.sisdsc, s.sisurl, s.sisabrev, s.sisexercicio, s.paginainicial, p.pflnivel AS usunivel, us.susdataultacesso, us.suscod, s.sisarquivo, s.sissnalertaajuda, s.sislayoutbootstrap
-			FROM seguranca.usuario u
-			INNER JOIN seguranca.perfilusuario pu USING ( usucpf )
-			INNER JOIN seguranca.perfil p ON pu.pflcod = p.pflcod
-			INNER JOIN seguranca.sistema s ON p.sisid = s.sisid
-			INNER JOIN seguranca.usuario_sistema us ON s.sisid = us.sisid AND u.usucpf = us.usucpf
-		WHERE
-			s.sisid = %d AND
-			u.usucpf = '%s' AND
-			us.suscod = 'A' AND
-			p.pflstatus = 'A' AND
-			u.suscod = 'A'
-		ORDER BY p.pflnivel
-		LIMIT 1",
-		$sisid,
-		$cpf
+	$sql = sprintf("
+            SELECT
+                s.sisid,
+                s.sisdiretorio,
+                s.sisarquivo,
+                s.sisdsc,
+                s.sisurl,
+                s.sisabrev,
+                s.sisexercicio,
+                s.paginainicial,
+                p.pflnivel AS usunivel,
+                us.susdataultacesso,
+                us.suscod,
+                s.sisarquivo,
+                s.sissnalertaajuda,
+                s.sislayoutbootstrap
+            FROM seguranca.usuario u
+                JOIN seguranca.perfilusuario pu USING ( usucpf )
+                JOIN seguranca.perfil p ON pu.pflcod = p.pflcod
+                JOIN seguranca.sistema s ON p.sisid = s.sisid
+                JOIN seguranca.usuario_sistema us ON(s.sisid = us.sisid AND u.usucpf = us.usucpf)
+            WHERE
+                s.sisid = %d AND
+                u.usucpf = '%s' AND
+                us.suscod = 'A' AND
+                p.pflstatus = 'A' AND
+                u.suscod = 'A'
+            ORDER BY
+                p.pflnivel
+            LIMIT 1",
+            $sisid,
+            $cpf
 	);
+//ver($sql);
 	$sistema = (object) $db->pegaLinha( $sql );
-
+//ver($sistema,d);
 	if ( !$sistema ) {
 		$_SESSION['MSG_AVISO'][] = "Sua sessão expirou.";
 		header( "Location: login.php" );
