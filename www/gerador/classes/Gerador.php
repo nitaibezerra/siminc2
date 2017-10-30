@@ -44,6 +44,7 @@ class Gerador
         );
 
         $data = $this->db->carregar($sql);
+        $data = $data ? $data : [];
         $arTabelas = array();
         foreach ($data as $arResultado) {
             $table_name = $arResultado["table_name"];

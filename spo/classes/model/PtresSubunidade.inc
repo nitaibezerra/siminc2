@@ -59,6 +59,8 @@ class Spo_Model_PtresSubunidade extends Modelo
         'psuid' => null,
         'ptrid' => null,
         'suoid' => null,
+        'ptrdotacaocusteio' => null,
+        'ptrdotacaocapital' => null,
     );
 
     public function recuperarPorExercicio($exercicio)

@@ -215,6 +215,8 @@ class Pi_PlanoInterno extends Modelo{
                 ptr.acatitulo,
                 ptr.ptrid,
                 lmu.lmuvlr,
+                lmu.lmuid,
+                psu.psuid,
                 sum(pic.picvalorcapital) picvalorcapital,
                 sum(pic.picvalorcusteio) picvalorcusteio,
                 sum(psu.ptrdotacaocapital) ptrdotacao_capital,
@@ -241,7 +243,9 @@ class Pi_PlanoInterno extends Modelo{
                 ptr.funcional,
                 ptr.acatitulo,
                 ptr.ptrid,
-                lmu.lmuvlr
+                lmu.lmuvlr,
+                lmu.lmuid,
+                psu.psuid
             ORDER BY
                 suo.unonome,
                 suo.suonome,
