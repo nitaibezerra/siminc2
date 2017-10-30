@@ -217,10 +217,10 @@ class Pi_PlanoInterno extends Modelo{
                 lmu.lmuvlr,
                 lmu.lmuid,
                 psu.psuid,
+                psu.ptrdotacaocapital ptrdotacao_capital,
+                psu.ptrdotacaocusteio ptrdotacao_custeio,                
                 sum(pic.picvalorcapital) picvalorcapital,
-                sum(pic.picvalorcusteio) picvalorcusteio,
-                sum(psu.ptrdotacaocapital) ptrdotacao_capital,
-                sum(psu.ptrdotacaocusteio) ptrdotacao_custeio
+                sum(pic.picvalorcusteio) picvalorcusteio
             from public.vw_subunidadeorcamentaria suo
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
                 inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
@@ -245,14 +245,15 @@ class Pi_PlanoInterno extends Modelo{
                 ptr.ptrid,
                 lmu.lmuvlr,
                 lmu.lmuid,
-                psu.psuid
+                psu.psuid,
+                ptrdotacao_capital,
+                ptrdotacao_custeio
             ORDER BY
                 suo.unonome,
                 suo.suonome,
                 ptr.funcional
         ";
-//var_dump($sql);
-//die('Pi_Planointerno.class.inc');
+
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];
