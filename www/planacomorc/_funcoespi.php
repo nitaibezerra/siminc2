@@ -720,7 +720,11 @@ DML;
     # Soma valores preenchidos pelo usuário na parte de Capital e Custeio do PI
     $totalValor = str_replace(array('.', ','), array('', '.'), $dados['picvalorcusteio']) + str_replace(array('.', ','), array('', '.'), $dados['picvalorcapital']);
     $totalValorTemplate = number_format($totalValor, 2, ',', '.');
-    
+
+
+    $dados['mdeid'] = $dados['mdeid'] ? $dados['mdeid'] : 'null';
+    $dados['neeid'] = $dados['neeid'] ? $dados['neeid'] : 'null';
+
     $plicod = null; //$db->PegaUm($sql);
     if (empty($dados['pliid'])) {
         if ($dados['plicodsubacao']) {
@@ -749,10 +753,10 @@ INSERT INTO monitora.pi_planointerno(
     pliano,
     plisituacao,
     plicadsiafi
-) VALUES (%d, %d, %d, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
+) VALUES (%s, %d, %s, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
   RETURNING pliid;
 DML;
-
+            
             $stmt = sprintf(
                     $sql, $dados['mdeid'], $dados['eqdid'], $dados['neeid'], $dados['capid'], $dados['sbaid'], str_replace(array("'"), ' ', $dados['plititulo']), $subacao, $plicod, $dados['plilivre'], str_replace(array("'"), ' ', $dados['plidsc']), $_SESSION['usucpf'], $unicod, $dados['ungcod'], $_SESSION['exercicio'], ($criarComoAprovado ? 'A' : 'H'), $cadastroSIAF);
             $pliid = $db->pegaUm($stmt);
