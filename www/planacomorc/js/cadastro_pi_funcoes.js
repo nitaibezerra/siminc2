@@ -513,11 +513,11 @@
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjeto = buscarValorDoProjeto();
 
-        if(valorProjeto < valorBaseProjeto){
-            valorDiferenca = (valorBaseProjeto - valorProjeto);
-        } else {
+//        if(valorProjeto < valorBaseProjeto){
+//            valorDiferenca = (valorBaseProjeto - valorProjeto);
+//        } else {
             valorDiferenca = (valorProjeto - valorBaseProjeto);
-        }
+//        }
 
         var fltValorLimiteDisponivelUnidade = (valorBaseLimiteDisponivelUnidade - valorDiferenca);
         $('#td_disponivel_sub_unidade').html(number_format(fltValorLimiteDisponivelUnidade.toFixed(2), 2, ',', '.'));

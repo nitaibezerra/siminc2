@@ -85,26 +85,31 @@
         var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
         var disponivelFuncionalCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
         var disponivelFuncionalCapital = textToFloat($('#td_disponivel_funcional_capital').text());
-
-        if(disponivelUnidade < 0){
-            $('#picvalorcusteio').addClass('validateRedText');
-            $('#picvalorcapital').addClass('validateRedText');
+        
+        
+        // Se o usuário estiver abaixando o valor em relação ao valor salvo na base de dados o sistema não valida se o valor ultrapassou o limite permitindo ajuste entre os PIs.
+        if(!(buscarValorBaseDoProjeto() > buscarValorDoProjeto())){
+            // Verifica se o valor do projeto é superior ao limite disponível da Subunidade
             if(disponivelUnidade < 0){
-                addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
-            }
-        } else if(disponivelFuncionalCusteio < 0 || disponivelFuncionalCapital < 0) {
-            if(disponivelFuncionalCusteio < 0){
                 $('#picvalorcusteio').addClass('validateRedText');
-                addMsgCustom.push('Valor de Custeio do projeto superior ao limite disponível da Funcional');
-            }
-            
-            if(disponivelFuncionalCapital < 0){
                 $('#picvalorcapital').addClass('validateRedText');
-                addMsgCustom.push('Valor de Capital do projeto superior ao limite disponível da Funcional');
+                if(disponivelUnidade < 0){
+                    addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
+                }
+            } else if(disponivelFuncionalCusteio < 0 || disponivelFuncionalCapital < 0) {
+                if(disponivelFuncionalCusteio < 0){
+                    $('#picvalorcusteio').addClass('validateRedText');
+                    addMsgCustom.push('Valor de Custeio do projeto superior ao limite disponível da Funcional');
+                }
+
+                if(disponivelFuncionalCapital < 0){
+                    $('#picvalorcapital').addClass('validateRedText');
+                    addMsgCustom.push('Valor de Capital do projeto superior ao limite disponível da Funcional');
+                }
+            } else {
+                $('#picvalorcusteio').removeClass('validateRedText');
+                $('#picvalorcapital').removeClass('validateRedText');
             }
-        } else {
-            $('#picvalorcusteio').removeClass('validateRedText');
-            $('#picvalorcapital').removeClass('validateRedText');
         }
 
         // Verifica se o usuário escolheu um enquadramento que é do tipo formulario reduzido para verificar a validação do cronograma físico.
