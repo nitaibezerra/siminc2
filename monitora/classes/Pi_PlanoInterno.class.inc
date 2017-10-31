@@ -62,7 +62,7 @@ class Pi_PlanoInterno extends Modelo{
             $where[] = " AND  suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
         }
 
-        $sql = "SELECT  ppi.ppiid, uno.unonome, suo.suonome, mom.momnome, fun.funcionalcampobusca, 
+        $sql = "SELECT  ppi.ppiid, ppi.ppinome, ppi.ppidescricao, uno.unonome, suo.suonome, mom.momnome, fun.funcionalcampobusca, 
                         CASE 
                                 WHEN NOT ppi.maiid IS NULL THEN COALESCE(ppi.ppinome,mai.mainome)
                                 ELSE ppi.ppinome
@@ -271,7 +271,7 @@ class Pi_PlanoInterno extends Modelo{
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
     {
-        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.unosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.unosigla categoria, (sum(coalesce(psu.ptrdotacaocusteio, 0)::decimal) + sum(coalesce(psu.ptrdotacaocapital, 0)::decimal)) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join spo.ptressubunidade psu on psu.suoid = suo.suoid
                         left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
@@ -335,7 +335,7 @@ class Pi_PlanoInterno extends Modelo{
     {
         $where = " AND suo.unosigla = '$unosigla' ";
 
-        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.suosigla categoria, sum(coalesce(ptr.ptrdotacao, 0)::decimal) valor
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.suosigla categoria, (sum(coalesce(psu.ptrdotacaocusteio, 0)::decimal) + sum(coalesce(psu.ptrdotacaocapital, 0)::decimal)) valor
                 from public.vw_subunidadeorcamentaria suo 
                         left join spo.ptressubunidade psu on psu.suoid = suo.suoid
                         left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
