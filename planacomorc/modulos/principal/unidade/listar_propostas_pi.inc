@@ -27,6 +27,7 @@ $aPropostas = $oPlanoInterno->recuperarPropostasSiminc($_SESSION['exercicio'], $
                 <tr>
                     <th>Ações</th>
                     <th>Funcional</th>
+                    <th>Título</th>
                     <th>UO</th>
                     <th>Unidade</th>
                     <th>Enq. Despesa</th>
@@ -43,6 +44,7 @@ $aPropostas = $oPlanoInterno->recuperarPropostasSiminc($_SESSION['exercicio'], $
                                 <a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&replicarProposta=<?php echo $dados['ppiid']; ?>"><span class="fa fa-plus-circle" title="Criar PI"></span></a>
                             </td>
                             <td><?php echo substr($dados['funcionalcampobusca'], 0, strpos($dados['funcionalcampobusca'], ' - ')); ?></td>
+                            <td><?php echo $dados['ppinome']; ?></td>
                             <td><?php echo $dados['unonome']; ?></td>
                             <td><?php echo $dados['suonome']; ?></td>
                             <td><?php echo $dados['eqdnome']; ?></td>
