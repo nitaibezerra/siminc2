@@ -77,10 +77,12 @@ if ($_REQUEST['carregarManutencaoSubItem']) {
     die();
 }
 if ($_REQUEST['carregarLimitesUnidade']) {
-    $autorizado = carregarLimiteAutorizadoSubUnidade(
-        (object) array(
-            'ungcod' => $_REQUEST['ungcod']
-    ));
+    # MOC de dados temporario pedido pelo Cliente.
+    $autorizado = 500000000.00;
+//    $autorizado = carregarLimiteAutorizadoSubUnidade(
+//        (object) array(
+//            'ungcod' => $_REQUEST['ungcod']
+//    ));
     $detalhadoSubUnidade = carregarLimiteDetalhadoSubUnidade(
         (object) array(
             'ungcod' => $_REQUEST['ungcod']
