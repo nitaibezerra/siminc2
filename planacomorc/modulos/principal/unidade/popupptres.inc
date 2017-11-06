@@ -69,7 +69,7 @@ $sql_lista = <<<DML
     SELECT
         ptr.ptrid,
         ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
-        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
+        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || ': ' || ptr.plodsc AS descricao,
         SUM(COALESCE(ptr.ptrdotacao, 0.00)) AS dotacaoatual,
         COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
         SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
