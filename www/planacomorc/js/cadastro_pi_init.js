@@ -184,7 +184,7 @@
         });
 
         $('#picedital').change(function() {
-                controlarEdital($('#picedital').is(':checked'));
+            controlarEdital($('#picedital').is(':checked'));
         });
 
         $('#table_localizacao').on('click', '.btnRemoverLocalizacao', function(){

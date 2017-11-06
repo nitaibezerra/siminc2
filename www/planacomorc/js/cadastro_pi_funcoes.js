@@ -935,7 +935,7 @@
     * Controla ações para quando o botão edital estiver marcado ou desmarcado.
     */
     function controlarEdital(opcao){
-        if(opcao == true){
+        if(opcao === true){
             $('#div_edital').show('slow');
         } else {
             $('#div_edital').hide('slow');
@@ -1088,7 +1088,7 @@
         // Verifica se o usuário já estiver preenchido o enquadramento(Caso de formulário de cadastro de novo PI).
         if($('#eqdid').val() != ""){
             
-            // Se for formulário é reduzido.
+            // Se o for formulário é reduzido.
             if(verificarFormularioReduzido()){
 
                 // Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
@@ -1098,6 +1098,7 @@
                 $('.div_metas_ppa_pnc').hide('slow');
                 $('#div_area_cultural').hide('slow');
                 $('#div_segmento_cultural').hide('slow');
+                $('#div_botao_edital').hide('slow');
                 $('#mdeid').val('').trigger("chosen:updated");
                 $('#neeid').val('').trigger("chosen:updated");
                 $('#oppid').val('').trigger("chosen:updated");
@@ -1122,6 +1123,7 @@
                 $('.div_metas_ppa_pnc').show('slow');
                 $('#div_area_cultural').show('slow');
                 $('#div_segmento_cultural').show('slow');
+                $('#div_botao_edital').show('slow');
                 // Exibe os campos do Produto do PI
                 $('.div_produto_pi').show('slow');
                 // Exibe as colunas e campos do Cronograma Físico

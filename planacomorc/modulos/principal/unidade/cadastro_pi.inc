@@ -761,7 +761,7 @@ DML;
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="div_botao_edital">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="picedital">Edital:</label>
                             </div>
