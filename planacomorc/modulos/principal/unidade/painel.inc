@@ -168,7 +168,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <tr class="tr_<?php echo $dado['suoid']; ?> tr_detalhe" style="display: none;">
                                         <td style="padding-left: 30px; border-right: 1px black solid;" >
                                             <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
-                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ': ' . $dado['acatitulo']; ?>
+                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ': ' . $dado['plodsc']; ?>
                                             </span>
                                         </td>
 
