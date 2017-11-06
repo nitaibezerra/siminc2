@@ -314,7 +314,9 @@
         });
 
         $('#picexecucao').keyup(function(){
-            this.value = mascaraglobal('##,##', this.value);
+            if(parseInt(this.value) > 100){
+                this.value = '';
+            }
         });
         
         $('.input_orcamentario').keyup(function(){

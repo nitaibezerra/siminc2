@@ -803,7 +803,7 @@ DML;
                                 <label for="picexecucao" class="control-label">% Execução c/ Ente Federado:</label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" value="<?php echo !empty($dadosPI['picexecucao'])? number_format($dadosPI['picexecucao'], 2, ',', '.'): ''; ?>" class="CampoEstilo normal form-control" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" maxlength="6" />
+                                <input type="number" min="0" max="100" maxlength="3" value="<?php echo !empty($dadosPI['picexecucao'])? (int)$dadosPI['picexecucao']: ''; ?>" class="CampoEstilo normal form-control" title="Valor do percentual de execução do projeto." id="picexecucao" name="picexecucao" />
                             </div>
                         </div>
                         
