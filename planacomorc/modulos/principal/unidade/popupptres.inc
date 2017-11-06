@@ -29,32 +29,12 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
     exit;
 }
 
-/* Filtro para a UO */
-$perfis = pegaPerfilGeral();
-if (in_array(PFL_GESTAO_ORCAMENTARIA_IFS, $perfis)) {
-    $sqlUO = <<<DML
-        EXISTS (
-            SELECT
-                1
-            FROM planacomorc.usuarioresponsabilidade rpu
-            WHERE
-                rpu.usucpf = '%s'
-                AND rpu.pflcod = %d
-                AND rpu.rpustatus = 'A'
-                AND rpu.unicod  = uni.unicod
-        )
-DML;
-    $whereUO = sprintf($sqlUO, $_SESSION['usucpf'], PFL_GESTAO_ORCAMENTARIA_IFS);
-    $whereUO = " AND {$whereUO}";
-}
-
 // verificando se é undidade ou unidade gestora
-$where .= $_REQUEST['sbaid'] && $_REQUEST['sbaid'] != 'null' ? " AND ptr.ptrid IN (SELECT ptrid FROM monitora.pi_subacaodotacao WHERE sbaid = " . $_REQUEST['sbaid'] . ")" : '';
-$where .= $_POST['prgcod'] ? "AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($_POST['prgcod']) . "%')" : '';
-$where .= $_POST['acacod'] ? "AND UPPER(aca.acacod) LIKE('%" . strtoupper($_POST['acacod']) . "%')" : '';
-$where .= $_REQUEST['unicod'] ? " AND aca.unicod = '{$_REQUEST['unicod']}'" : '';
-$where .= $_REQUEST['ungcod'] ? " and suo.suocod = '{$_REQUEST['ungcod']}' and suo.prsano = '{$_SESSION['exercicio']}' " : '';
-$where .= $_POST['buscalivre'] ? "AND (trim(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ilike('%" . $_POST['buscalivre'] . "%') OR dtl.ptres ilike '%" . $_POST['buscalivre'] . "%')" : '';
+$where .= $_POST['prgcod']? "AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($_POST['prgcod']) . "%')" : '';
+$where .= $_POST['acacod']? "AND UPPER(aca.acacod) LIKE('%" . strtoupper($_POST['acacod']) . "%')" : '';
+$where .= $_REQUEST['unicod']? " AND aca.unicod = '{$_REQUEST['unicod']}'" : '';
+$where .= $_REQUEST['ungcod']? " AND uni.suocod = '{$_REQUEST['ungcod']}' ": '';
+$where .= $_POST['buscalivre']? "AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $_POST['buscalivre'] . "%') OR dtl.ptres ILIKE '%" . $_POST['buscalivre'] . "%')": '';
 
 if($_REQUEST['no_ptrid']){
     if(is_array($_REQUEST['no_ptrid'])){
@@ -77,10 +57,9 @@ $sql_lista = <<<DML
         COALESCE((pemp.total), 0.00) AS empenhado,
         SUM(COALESCE(ptr.ptrdotacao, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
     FROM monitora.ptres ptr
-    INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid
-    INNER JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod and prsano = '2018'
-    LEFT JOIN spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
-    LEFT JOIN public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid    
+        JOIN monitora.acao aca on ptr.acaid = aca.acaid
+        JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
+        JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
     LEFT JOIN (
         SELECT
             pip2.ptrid,
@@ -112,7 +91,6 @@ $sql_lista = <<<DML
     WHERE
         ptr.ptrano = '{$_SESSION['exercicio']}'
         $where
-        $whereUO
         AND ptr.ptrstatus = 'A'
     GROUP BY
         ptr.ptrid,
@@ -126,9 +104,10 @@ $sql_lista = <<<DML
         uni.unonome,
         aca.acatitulo,
         pemp.total
-    ORDER BY ptr.ptres
+    ORDER BY
+        ptr.ptres
 DML;
-//ver($sql_lista, d);
+ver($sql_lista);
 ?>
 <html>
     <head>
