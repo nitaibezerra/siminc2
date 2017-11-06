@@ -1455,21 +1455,20 @@ SQL;
     return array();
 }
 
-//function buscarPTRES($pliid, $ptrid) {
-
 /**
  * Buscar a funcional do Plano Interno.
  * 
  * @global cls_banco $db
  * @param stdClass $filtros
+ * @todo Melhorar performance da consulta pois a mesma já sofreu várias manutenções devido a várias mudanças do sistema e precisa ser refatorada.
  * @return array
  */
 function buscarPTRES(stdClass $filtros) {
     global $db;
 
     # Filtros.
-    $where .= $filtros->pliid ? " AND pip.pliid = $filtros->pliid " : "";
-    $where .= $filtros->ptrid ? " AND ptr.ptrid = $filtros->ptrid " : "";
+    $where .= $filtros->pliid? " AND pip.pliid = $filtros->pliid ": NULL;
+    $where .= $filtros->ptrid? " AND ptr.ptrid = $filtros->ptrid ": NULL;
 
     $sql = <<<SQL
         SELECT
@@ -1477,33 +1476,35 @@ function buscarPTRES(stdClass $filtros) {
             ptr.ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
             aca.unicod || ' - ' || uni.unonome as unidsc,
-            SUM(COALESCE(ptr.ptrdotacao, 0.00)) AS dotacaoatual,
-            SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) AS ptrdotacaocusteio,
-            SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) AS ptrdotacaocapital,
+            (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) AS dotacaoatual,
+            COALESCE(psu.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
+            COALESCE(psu.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
             COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
 	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
 	    COALESCE(SUM(dtp.capital), 0.00) AS det_pi_capital,
-            (SUM(COALESCE(ptr.ptrdotacao, 0.00)) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
-            (SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
-            (SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
+            ((COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
+            (COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
+            (COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
-            COALESCE(SUM(ptr.ptrdotacao), 0.00) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
+            (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
             pip.pipvalor
-        FROM monitora.vw_ptres ptr
-            JOIN monitora.acao aca on ptr.acaid = aca.acaid
-            JOIN public.unidadeorcamentaria uni on aca.unicod = uni.unocod AND uni.prsano = aca.prgano
-            LEFT JOIN monitora.pi_planointernoptres pip on ptr.ptrid = pip.ptrid
+        FROM monitora.ptres ptr
+	    JOIN monitora.pi_planointernoptres pip ON(ptr.ptrid = pip.ptrid)
+	    JOIN monitora.pi_planointerno pi ON(pip.pliid = pi.pliid)
+            JOIN monitora.acao aca ON(ptr.acaid = aca.acaid)
+            JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND uni.suocod = pi.ungcod AND uni.prsano = aca.prgano) -- SELECT * FROM public.vw_subunidadeorcamentaria
+            JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
             LEFT JOIN (
                 SELECT
                     pip.ptrid,
-                    SUM(pipvalor) AS valor,
-                    SUM(picvalorcusteio) AS custeio,
-                    SUM(picvalorcapital) AS capital
+                    SUM(COALESCE(picvalorcusteio, 0.00) + COALESCE(picvalorcapital, 0.00)) AS valor,
+                    SUM(COALESCE(picvalorcusteio, 0.00)) AS custeio,
+                    SUM(COALESCE(picvalorcapital, 0.00)) AS capital
                 FROM monitora.pi_planointernoptres pip
                     JOIN monitora.pi_planointerno pli USING(pliid)
                     JOIN planacomorc.pi_complemento pc USING(pliid)
                 WHERE
-                    plistatus  = 'A'
+                    plistatus = 'A'
                 GROUP BY
                     ptrid) dtp ON dtp.ptrid = ptr.ptrid
             LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
@@ -1515,6 +1516,8 @@ function buscarPTRES(stdClass $filtros) {
         GROUP BY
             ptr.ptrid,
             ptr.ptres,
+            psu.ptrdotacaocusteio,
+            psu.ptrdotacaocapital,
             aca.prgcod,
             aca.acaobjetivocod,
             aca.acacod,
@@ -1528,6 +1531,7 @@ function buscarPTRES(stdClass $filtros) {
         ORDER BY
             ptr.ptres
 SQL;
+
     $result = is_array($result) ? $result : Array();
 //ver($sql,d);
     $result = $db->carregar($sql);

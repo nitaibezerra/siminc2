@@ -490,9 +490,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
                                         $dadosPTRES = buscarPTRES((object) array(
                                             'exercicio' => $_SESSION['exercicio'],
-                                            'pliid' => $dadosPI['pliid'],
-                                            'ptrid' => $dadosPI['ptrid']));
-                                        #ver($dadosPTRES);
+                                            'pliid' => $dadosPI['pliid']));
+//ver($dadosPTRES);
                                         if ($dadosPTRES) {
                                             $valortotalpi = 0;
                                             $cor = 1;
