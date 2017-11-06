@@ -444,6 +444,95 @@ function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
 }
 
 /**
+ * Monta o SQL da consulta de funcional para as subunidades.
+ * 
+ * @param stdClass $filtros "$filtros->exercicio" O Exercício é obrigatório.
+ * @return string
+ */
+function montarSqlBuscarFuncional(stdClass $filtros) {
+    $where = NULL;
+    
+    # Filtros
+    $where .= $filtros->prgcod? "\n AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($filtros->prgcod) . "%')" : NULL;
+    $where .= $filtros->acacod? "\n AND UPPER(aca.acacod) LIKE('%" . strtoupper($filtros->acacod) . "%')" : NULL;
+    $where .= $filtros->unicod? "\n AND aca.unicod = '{$filtros->unicod}'" : NULL;
+    $where .= $filtros->ungcod? "\n AND uni.suocod = '{$filtros->ungcod}'": NULL;
+    $where .= $filtros->buscalivre? "\n AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $filtros->buscalivre . "%') OR dtl.ptres ILIKE '%" . $filtros->buscalivre . "%')": NULL;
+    if($filtros->no_ptrid){
+        if(is_array($filtros->no_ptrid)){
+            $where .= "\n AND ptr.ptrid NOT IN('". join($filtros->no_ptrid, "','"). "')";
+        } else {
+            $where .= "\n AND ptr.ptrid != ". (int)$filtros->no_ptrid;
+        }
+    }
+    
+    $sql = "
+        SELECT
+              ptr.ptrid,
+              ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
+              TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || ': ' || ptr.plodsc AS descricao,
+              SUM(COALESCE(ptr.ptrdotacao, 0.00)) AS dotacaoatual,
+              COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
+              SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
+              SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
+              COALESCE((pemp.total), 0.00) AS empenhado,
+              SUM(COALESCE(ptr.ptrdotacao, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
+          FROM monitora.ptres ptr
+              JOIN monitora.acao aca on ptr.acaid = aca.acaid
+              JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
+              JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
+          LEFT JOIN (
+              SELECT
+                  pip2.ptrid,
+                  SUM(pipvalor) AS pipvalor,
+                  SUM(picvalorcusteio) AS custeio,
+                  SUM(picvalorcapital) AS capital
+              FROM monitora.pi_planointernoptres pip2
+                  JOIN monitora.pi_planointerno USING(pliid)
+                  JOIN planacomorc.pi_complemento pc USING(pliid)
+              WHERE
+                  plistatus = 'A'
+              GROUP BY
+                  pip2.ptrid
+          ) pip on ptr.ptrid = pip.ptrid
+          LEFT JOIN (
+              SELECT
+                  ex.unicod,
+                  ex.ptres,
+                  ex.exercicio,
+                  sum(ex.vlrempenhado) AS total
+              FROM spo.siopexecucao ex
+              WHERE
+                  ex.exercicio = '{$filtros->exercicio}'
+              GROUP BY
+                  ex.unicod,
+                  ex.ptres,
+                  ex.exercicio
+              ) pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+          WHERE
+                ptr.ptrstatus = 'A'
+                AND ptr.ptrano = '{$filtros->exercicio}'
+                $where
+          GROUP BY
+              ptr.ptrid,
+              ptr.ptres,
+              aca.prgcod,
+              aca.acacod,
+              aca.loccod,
+              aca.acaobjetivocod,
+              ptr.plocod,
+              aca.unicod,
+              uni.unonome,
+              aca.acatitulo,
+              pemp.total
+          ORDER BY
+              ptr.ptres
+    ";
+    
+    return $sql;
+}
+
+/**
  * Retorna os dados de limites detalhados em PI da Sub-Unidade.
  * 
  * @param stdClass $parametros
@@ -456,11 +545,11 @@ function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
         SELECT
             SUM(pip.pipvalor)
         FROM planacomorc.unidadegestora_limite ul
-            JOIN monitora.pi_planointerno pi ON(ul.ungcod = pi.ungcod AND plistatus = 'A') -- SELECT * FROM monitora.pi_planointerno
-            JOIN monitora.pi_planointernoptres pip ON pi.pliid = pip.pliid -- SELECT * FROM monitora.pi_planointernoptres
+            JOIN monitora.pi_planointerno pi ON(ul.ungcod = pi.ungcod AND plistatus = 'A')
+            JOIN monitora.pi_planointernoptres pip ON pi.pliid = pip.pliid
         WHERE
             ul.lmustatus = 'A'
-            AND ul.prsano = '{$_SESSION['exercicio']}'
+            AND ul.prsano = '{$_SESSION['exercicio']}
             AND ul.lmuflgliberado IS TRUE
             AND ul.ungcod = '". $parametros->ungcod. "'";
     

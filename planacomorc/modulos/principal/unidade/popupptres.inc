@@ -29,85 +29,16 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
     exit;
 }
 
-// verificando se é undidade ou unidade gestora
-$where .= $_POST['prgcod']? "AND UPPER(ptr.prgcod) LIKE('%" . strtoupper($_POST['prgcod']) . "%')" : '';
-$where .= $_POST['acacod']? "AND UPPER(aca.acacod) LIKE('%" . strtoupper($_POST['acacod']) . "%')" : '';
-$where .= $_REQUEST['unicod']? " AND aca.unicod = '{$_REQUEST['unicod']}'" : '';
-$where .= $_REQUEST['ungcod']? " AND uni.suocod = '{$_REQUEST['ungcod']}' ": '';
-$where .= $_POST['buscalivre']? "AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $_POST['buscalivre'] . "%') OR dtl.ptres ILIKE '%" . $_POST['buscalivre'] . "%')": '';
-
-if($_REQUEST['no_ptrid']){
-    if(is_array($_REQUEST['no_ptrid'])){
-        $where .= " AND ptr.ptrid NOT IN('". join($_REQUEST['no_ptrid'], "','"). "')";
-    } else {
-        $where .= " AND ptr.ptrid != ". (int)$_REQUEST['no_ptrid'];
-    }
-}
-//ver($where);
-
-$sql_lista = <<<DML
-    SELECT
-        ptr.ptrid,
-        ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
-        TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || ': ' || ptr.plodsc AS descricao,
-        SUM(COALESCE(ptr.ptrdotacao, 0.00)) AS dotacaoatual,
-        COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
-        SUM(COALESCE(ptr.ptrdotacaocusteio, 0.00)) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
-        SUM(COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
-        COALESCE((pemp.total), 0.00) AS empenhado,
-        SUM(COALESCE(ptr.ptrdotacao, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
-    FROM monitora.ptres ptr
-        JOIN monitora.acao aca on ptr.acaid = aca.acaid
-        JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
-        JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
-    LEFT JOIN (
-        SELECT
-            pip2.ptrid,
-            SUM(pipvalor) AS pipvalor,
-            SUM(picvalorcusteio) AS custeio,
-            SUM(picvalorcapital) AS capital
-        FROM monitora.pi_planointernoptres pip2
-            JOIN monitora.pi_planointerno USING(pliid)
-            JOIN planacomorc.pi_complemento pc USING(pliid)
-        WHERE
-            plistatus = 'A'
-        GROUP BY
-            pip2.ptrid
-    ) pip on ptr.ptrid = pip.ptrid
-    LEFT JOIN (
-        SELECT
-            ex.unicod,
-            ex.ptres,
-            ex.exercicio,
-            sum(ex.vlrempenhado) AS total
-        FROM spo.siopexecucao ex
-        WHERE
-            ex.exercicio = '{$_SESSION['exercicio']}'
-        GROUP BY
-            ex.unicod,
-            ex.ptres,
-            ex.exercicio
-        ) pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
-    WHERE
-        ptr.ptrano = '{$_SESSION['exercicio']}'
-        $where
-        AND ptr.ptrstatus = 'A'
-    GROUP BY
-        ptr.ptrid,
-        ptr.ptres,
-        aca.prgcod,
-        aca.acacod,
-        aca.loccod,
-        aca.acaobjetivocod,
-        ptr.plocod,
-        aca.unicod,
-        uni.unonome,
-        aca.acatitulo,
-        pemp.total
-    ORDER BY
-        ptr.ptres
-DML;
-ver($sql_lista);
+$sql_lista = montarSqlBuscarFuncional((object)array(
+    'exercicio' => $_SESSION['exercicio'],
+    'prgcod' => $_REQUEST['prgcod'],
+    'acacod' => $_REQUEST['acacod'],
+    'unicod' => $_REQUEST['unicod'],
+    'ungcod' => $_REQUEST['ungcod'],
+    'no_ptrid' => $_REQUEST['no_ptrid'],
+    'buscalivre' => $_REQUEST['buscalivre'],
+));
+//ver($sql_lista);
 ?>
 <html>
     <head>
