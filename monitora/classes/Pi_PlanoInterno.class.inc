@@ -306,7 +306,7 @@ class Pi_PlanoInterno extends Modelo{
                 AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Pago' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                select distinct 6 ordem, 'Pago' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -316,7 +316,7 @@ class Pi_PlanoInterno extends Modelo{
                 AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Liquidado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                select distinct 5 ordem, 'Liquidado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -374,7 +374,7 @@ class Pi_PlanoInterno extends Modelo{
                 AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Pago' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                select distinct 6 ordem, 'Pago' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -385,7 +385,7 @@ class Pi_PlanoInterno extends Modelo{
                 AND suo.unofundo = false
                 group by ordem, descricao, categoria
                 union all
-                select distinct 4 ordem, 'Liquidado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                select distinct 5 ordem, 'Liquidado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
                 from public.vw_subunidadeorcamentaria suo 
                          left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                          left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
