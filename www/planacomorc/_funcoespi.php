@@ -551,7 +551,7 @@ function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
             JOIN monitora.pi_planointernoptres pip ON pi.pliid = pip.pliid
         WHERE
             ul.lmustatus = 'A'
-            AND ul.prsano = '{$_SESSION['exercicio']}
+            AND ul.prsano = '{$_SESSION['exercicio']}'
             AND ul.lmuflgliberado IS TRUE
             AND ul.ungcod = '". $parametros->ungcod. "'";
     
