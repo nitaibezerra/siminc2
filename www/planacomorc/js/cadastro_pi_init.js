@@ -285,21 +285,25 @@
         $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
-            atualizarValorDetalhado();
-            atualizarValorNaoDetalhado();
-            atualizarValorLimiteDisponivelUnidade();
-            atualizarValorLimiteDisponivelFuncionalCusteio();
-            mudarCorValorProjeto();
+            if(fnc === false){
+                atualizarValorDetalhado();
+                atualizarValorNaoDetalhado();
+                atualizarValorLimiteDisponivelUnidade();
+                atualizarValorLimiteDisponivelFuncionalCusteio();
+                mudarCorValorProjeto();
+            }
         });
 
         $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
-            atualizarValorDetalhado();
-            atualizarValorNaoDetalhado();
-            atualizarValorLimiteDisponivelUnidade();
-            atualizarValorLimiteDisponivelFuncionalCapital();
-            mudarCorValorProjeto();
+            if(fnc === false){
+                atualizarValorDetalhado();
+                atualizarValorNaoDetalhado();
+                atualizarValorLimiteDisponivelUnidade();
+                atualizarValorLimiteDisponivelFuncionalCapital();
+                mudarCorValorProjeto();
+            }
         });
 
         $('#picquantidade').keyup(function(){
