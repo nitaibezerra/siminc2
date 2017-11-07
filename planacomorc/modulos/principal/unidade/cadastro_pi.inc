@@ -482,8 +482,10 @@ DML;
                                         $dadosPTRES = buscarPTRES((object) array(
                                             'exercicio' => $_SESSION['exercicio'],
                                             'pliid' => $dadosPI['pliid'],
-                                            'ptrid' => $dadosPI['ptrid']));
-                                        #ver($dadosPTRES);
+                                            'ptrid' => $dadosPI['ptrid'],
+                                            'importar' => ($_REQUEST['replicarProposta']? TRUE: FALSE)
+                                        ));
+//ver($dadosPTRES);
                                         if ($dadosPTRES) {
                                             $valortotalpi = 0;
                                             $cor = 1;

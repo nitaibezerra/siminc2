@@ -1469,6 +1469,10 @@ function buscarPTRES(stdClass $filtros) {
     # Filtros.
     $where .= $filtros->pliid? " AND pip.pliid = $filtros->pliid ": NULL;
     $where .= $filtros->ptrid? " AND ptr.ptrid = $filtros->ptrid ": NULL;
+    
+    # Configuração da consulta pra atender a funcionalidade de Importacao do SIMINC1.
+    $colunaPipValor = $filtros->importar? "0 AS pipvalor": "pip.pipvalor AS pipvalor";
+    $colunaAgrupadaPipValor = $filtros->importar? NULL: "pip.pipvalor,";
 
     $sql = <<<SQL
         SELECT
@@ -1487,7 +1491,7 @@ function buscarPTRES(stdClass $filtros) {
             (COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
             (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
-            pip.pipvalor
+            $colunaPipValor
         FROM monitora.ptres ptr
 	    JOIN monitora.pi_planointernoptres pip ON(ptr.ptrid = pip.ptrid)
 	    JOIN monitora.pi_planointerno pi ON(pip.pliid = pi.pliid)
@@ -1526,7 +1530,7 @@ function buscarPTRES(stdClass $filtros) {
             ptr.plocod,
             aca.acatitulo,
             uni.unonome,
-            pip.pipvalor,
+            $colunaAgrupadaPipValor
             pemp.total
         ORDER BY
             ptr.ptres
