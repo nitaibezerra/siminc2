@@ -103,7 +103,17 @@ class Spo_Model_Ptres extends Modelo
                 break;
             // Somente Fundo
             case 'F':
-                $where = "and uo.unocod in ('42902')";
+                $where = "and uo.unocod in ('42902') 
+                          and uo.unofundo = false
+                          union all
+                          select distinct p.ptrid, p.ptres, p.acaid, p.ptrano, p.funcod, p.sfucod, p.prgcod, p.acacod, p.loccod, p.plocod, p.esfcod,  
+                                  uo.unocod, uo.unonome, uo.unocod, uo.unonome,  uo.unofundo, uo.unosigla, uo.unosigla, uo.unoid, uo.unoid
+                          from monitora.ptres p
+                                  inner join public.vw_subunidadeorcamentaria uo on uo.unocod = p.unicod and uo.prsano = '2018' and uo.suostatus = 'A'
+                          where ptrano = '$prsano'
+                          and p.ptrstatus = 'A'
+                          and uo.unocod in ('42902')
+                          and uo.unofundo = true";
                 break;
             // Todas
             default:
@@ -117,7 +127,7 @@ class Spo_Model_Ptres extends Modelo
                 where ptrano = '$prsano'
                 and p.ptrstatus = 'A'
                 $where
-                order by uo.unofundo, uo.unonome, uo.suonome, p.acacod, p.prgcod, p.loccod, p.plocod";
+                order by unofundo, unonome, suonome, acacod, prgcod, loccod, plocod";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];

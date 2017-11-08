@@ -4,12 +4,10 @@ $mPtresSubunidade = new Spo_Model_PtresSubunidade();
 
 switch ($_REQUEST['req']){
     case 'vincular':
-        $mPtresSubunidade->popularDadosObjeto()->salvar();
-        $mPtresSubunidade->commit();
+        $mPtresSubunidade->vincularPtres($_REQUEST);
         die;
     case 'desvincular':
-        $mPtresSubunidade->excluirVarios("ptrid = {$_REQUEST['ptrid']} and suoid = {$_REQUEST['suoid']}");
-        $mPtresSubunidade->commit();
+        $mPtresSubunidade->desvincularPtres($_REQUEST);
         die;
 }
 
@@ -110,7 +108,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <?php foreach($aPtresSubunidade as $dados){ ?>
                                         <tr>
                                             <td>
-                                                <input type="checkbox" class="vincular check_<?php echo $tipo; ?>" data-ptrid="<?php echo $dados['ptrid']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo (!empty($aVinculos[$dados['ptrid']]) && in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) ? 'checked' : '' ; ?> />
+                                                <?php $checked = (!empty($aVinculos[$dados['ptrid']]) && (in_array($dados['suoid'], $aVinculos[$dados['ptrid']])) || isset($aVinculos[$dados['ptrid']]['t'])) ? 'checked' : '' ; ?>
+                                                <input type="checkbox" class="vincular check_<?php echo $tipo; ?>" data-ptrid="<?php echo $dados['ptrid']; ?>" data-unofundo="<?php echo $dados['unofundo']; ?>" data-suoid="<?php echo $dados['suoid']; ?>" <?php echo $checked; ?> />
                                             </td>
                                             <td><?php echo $dados['prgcod']; ?></td>
                                             <td><?php echo $dados['acacod']; ?></td>
@@ -136,8 +135,9 @@ include APPRAIZ . "includes/cabecalho.inc";
             var acao = $(this).is(':checked') ? 'vincular' : 'desvincular';
             var ptrid = $(this).data('ptrid');
             var suoid = $(this).data('suoid');
+            var unofundo = $(this).data('unofundo');
             $.ajax({
-                url: 'planacomorc.php?modulo=apoio/vincular-ptres&acao=A&req=' + acao + '&ptrid=' + ptrid + '&suoid=' + suoid
+                url: 'planacomorc.php?modulo=apoio/vincular-ptres&acao=A&req=' + acao + '&ptrid=' + ptrid + '&suoid=' + suoid + '&unofundo=' + unofundo
             });
         });
 
