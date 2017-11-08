@@ -470,7 +470,7 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
         SELECT
             ptr.ptrid,
             ptr.ptres || '<autorizadocusteio>' || COALESCE(psu.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(psu.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
-            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || ': ' || ptr.plodsc AS descricao,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END AS descricao,
             COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
             COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
