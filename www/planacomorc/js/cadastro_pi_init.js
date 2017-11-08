@@ -47,7 +47,9 @@
             visualizarRegistro($(this).attr('ptrid'));
         });
 
+        // Calcula valores Autorizado e Disponivel da Subunidade no quadro de Custeio e Capital
         carregarLimitesUnidade($('#ungcod').val());
+        // Calcula valores Autorizado e Disponivel da funcional no quadro de Custeio e Capital
         carregarSaldoFuncional();
 
         // Evento ao mudar opção de enquadramento
