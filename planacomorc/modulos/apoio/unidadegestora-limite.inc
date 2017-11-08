@@ -42,6 +42,7 @@ if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+$aFnc = $oPlanoInterno->recuperarExecucaoOrcamentariaFnc();
 //var_dump($aPropostas);
 //die('painel');
 
@@ -101,6 +102,21 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             </thead>
                             <tbody>
+
+                            <?php foreach($aFnc as $dado){ ?>
+                                <tr class="linha_subunidade" style="background-color: #ffe6e1 !important;">
+                                    <td style="border-right: 1px black solid;">
+                                        <?php echo $dado['unosigla'] . ' - ' . $dado['unonome'] . ' (' . $dado['unocod'] . ')'; ?>
+                                    </td>
+                                    <td class="text-center" style="border-right: 1px black solid;"> - </td>
+                                    <td class="text-center" style="border-right: 1px black solid;"> - </td>
+                                    <td class="text-center" style="border-right: 1px black solid;"> - </td>
+                                    <td style="border-right: 1px black solid;" class="text-right">
+                                        <input name="limites" type="text" class="input_valor salvar-limite-fnc" value="<?php echo $dado['lmuvlr']; ?>" data-unoid="<?php echo $dado['unoid']; ?>" data-lmuid="<?php echo $dado['lmuid']; ?>" >
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
                             <?php foreach($aPropostas as $dados){
                                 $dado = $dados['detalhe'][0];
                                 ?>
@@ -200,6 +216,15 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
             var lmuid = $(this).data('lmuid');
             $.ajax({
                 url: 'planacomorc.php?modulo=apoio/unidadegestora-limite&acao=A&req=salvar&lmuvlr=' + lmuvlr + '&ungcod=' + ungcod + '&lmuid=' + lmuid
+            });
+        });
+
+        $('.salvar-limite-fnc').change(function(){
+            var lmuvlr = $(this).val() ? str_replace(['.', ','], ['', '.'], $(this).val()) : 0;
+            var unoid = $(this).data('unoid');
+            var lmuid = $(this).data('lmuid');
+            $.ajax({
+                url: 'planacomorc.php?modulo=apoio/unidadegestora-limite&acao=A&req=salvar&lmuvlr=' + lmuvlr + '&unoid=' + unoid + '&lmuid=' + lmuid
             });
         });
 

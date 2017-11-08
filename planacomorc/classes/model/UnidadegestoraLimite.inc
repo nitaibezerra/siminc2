@@ -62,6 +62,7 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
         'lmuflgliberado' => null,
         'prsano' => null,
         'ungcod' => null,
+        'unoid' => null,
     );
 
     public function recuperarLimites($exercicio)
