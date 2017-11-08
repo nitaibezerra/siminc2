@@ -1,65 +1,66 @@
 <?php
-	
-class Pi_PlanoInterno extends Modelo{
 
-    const K_TIPO_DETALHE_PTRES      = 'PT';
-    const K_TIPO_DETALHE_PI         = 'PI';
-    const K_TIPO_DETALHE_DELEGADO   = 'DL';
+class Pi_PlanoInterno extends Modelo
+{
+
+    const K_TIPO_DETALHE_PTRES = 'PT';
+    const K_TIPO_DETALHE_PI = 'PI';
+    const K_TIPO_DETALHE_DELEGADO = 'DL';
 
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = "monitora.pi_planointerno";	
+    protected $stNomeTabela = "monitora.pi_planointerno";
 
     /**
      * Chave primaria.
      * @var array
      * @access protected
      */
-    protected $arChavePrimaria = array( "pliid" );
+    protected $arChavePrimaria = array("pliid");
 
     /**
      * Atributos
      * @var array
      * @access protected
-     */    
-    protected $arAtributos     = array(
-									  	'pliid' => null, 
-									  	'mdeid' => null, 
-									  	'eqdid' => null, 
-									  	'neeid' => null, 
-									  	'capid' => null, 
-									  	'sbaid' => null, 
-									  	'obrid' => null, 
-									  	'plisituacao' => null, 
-									  	'plititulo' => null, 
-									  	'plidata' => null, 
-									  	'plistatus' => null, 
-									  	'plicodsubacao' => null, 
-									  	'plicod' => null, 
-									  	'plilivre' => null, 
-									  	'plidsc' => null, 
-									  	'usucpf' => null, 
-									  	'unicod' => null, 
-									  	'ungcod' => null, 
-									  	'pliano' => null, 
-									  	'docid' => null,
-									  );
+     */
+    protected $arAtributos = array(
+        'pliid' => null,
+        'mdeid' => null,
+        'eqdid' => null,
+        'neeid' => null,
+        'capid' => null,
+        'sbaid' => null,
+        'obrid' => null,
+        'plisituacao' => null,
+        'plititulo' => null,
+        'plidata' => null,
+        'plistatus' => null,
+        'plicodsubacao' => null,
+        'plicod' => null,
+        'plilivre' => null,
+        'plidsc' => null,
+        'usucpf' => null,
+        'unicod' => null,
+        'ungcod' => null,
+        'pliano' => null,
+        'docid' => null,
+    );
 
     public function recuperarPropostasSiminc($exercicio, $aFiltro)
     {
         $where = [];
-        if(!empty($aFiltro['uno'])){
+        if (!empty($aFiltro['uno'])) {
             $where[] = " AND uno.unoid = {$aFiltro['uno']}";
         }
 
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-        
-        if(count($listaSubUnidadeUsuario)){
-            $where[] = " AND  suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));
+
+        if (count($listaSubUnidadeUsuario)) {
+            $where[] = " AND  suo.suocod IN('" . join("','", $listaSubUnidadeUsuario) . "') ";
         }
 
         $sql = "SELECT  ppi.ppiid, ppi.ppinome, ppi.ppidescricao, uno.unonome, suo.suonome, mom.momnome, fun.funcionalcampobusca, 
@@ -106,8 +107,8 @@ class Pi_PlanoInterno extends Modelo{
                 ) dpisoma ON dpisoma.ppiid = ppi.ppiid
                 WHERE mom.momid = (select momid from planointerno.momento where prsano = '$exercicio' AND momstatus = 'A' order by momid limit 1)
                 AND  ppi.ppistatus = 'A'"
-                . implode(' ', $where) .
-                "order by uno.unonome, suo.suonome";
+            . implode(' ', $where) .
+            "order by uno.unonome, suo.suonome";
 
         // Carregando dados da base de dados do SIMINC antigo
         $dados = adapterConnection::oldSiminc()->carregar($sql);
@@ -141,9 +142,9 @@ class Pi_PlanoInterno extends Modelo{
 
         // Carregando dados da base de dados do SIMINC antigo
         $dadosProposta = adapterConnection::oldSiminc()->pegaLinha($sql);
-        
+
 //        ver($dadosProposta, $sql, d);
-        
+
         $dadosPI = [
             'plititulo' => $dadosProposta['ppinome'],
             'plidsc' => $dadosProposta['ppidescricao'],
@@ -181,7 +182,7 @@ class Pi_PlanoInterno extends Modelo{
                 AND ptr.plocod = '{$dadosProposta['plocod']}'
                 AND ptr.ptrano = '{$dadosProposta['prsano']}'
                 AND ptr.ptrstatus = 'A'";
-        
+
         $dadosPI['ptrid'] = $this->pegaUm($sql);
 
         return $dadosPI;
@@ -259,7 +260,7 @@ class Pi_PlanoInterno extends Modelo{
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];
-        foreach ($dados as $dado){
+        foreach ($dados as $dado) {
             $dadosAgrupados[$dado['suocod']]['detalhe'][] = $dado;
             $dadosAgrupados[$dado['suocod']]['dotacaoCapital'] += $dado['ptrdotacao_capital'];
             $dadosAgrupados[$dado['suocod']]['dotacaoCusteio'] += $dado['ptrdotacao_custeio'];
@@ -267,8 +268,23 @@ class Pi_PlanoInterno extends Modelo{
             $dadosAgrupados[$dado['suocod']]['planejadoCusteio'] += $dado['picvalorcusteio'];
             $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
         }
-        
+
         return $dadosAgrupados;
+    }
+
+    public function recuperarExecucaoOrcamentariaFnc()
+    {
+        $sql = "SELECT distinct suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid
+                from public.vw_subunidadeorcamentaria suo
+                        inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                        left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                where suo.suostatus = 'A'
+                and suo.unofundo = 't' 
+                and suo.prsano = '{$_SESSION['exercicio']}'                
+                ORDER BY suo.unonome";
+
+        $dados = $this->carregar($sql);
+        return  $dados ? $dados : [];
     }
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
@@ -447,7 +463,7 @@ class Pi_PlanoInterno extends Modelo{
     public function verificarPermissaoEditar($estadoAtual, $perfis)
     {
 
-        switch ($estadoAtual['esdid']){
+        switch ($estadoAtual['esdid']) {
             case ESD_PI_APROVADO:
             case ESD_PI_CANCELADO:
             case ESD_PI_AGUARDANDO_APROVACAO:
@@ -463,11 +479,11 @@ class Pi_PlanoInterno extends Modelo{
         $where = " pli.pliano = '$exercicio' ";
 
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-        if(count($listaSubUnidadeUsuario)){
-            $where .= " AND suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "') ";
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));
+        if (count($listaSubUnidadeUsuario)) {
+            $where .= " AND suo.suocod IN('" . join("','", $listaSubUnidadeUsuario) . "') ";
         }
-        
+
         $sql = "select  pli.pliid, esd.esddsc, pli.plicod, suo.unocod, suo.unonome, suo.suocod, suo.suonome, 
 
                         (select array_to_string(array(
@@ -634,9 +650,9 @@ class Pi_PlanoInterno extends Modelo{
 
     public function getCorPainelPorValorDisponivel($valorDisponivel)
     {
-        if($valorDisponivel > 0) return 'blue';
+        if ($valorDisponivel > 0) return 'blue';
 
-        if($valorDisponivel < 0) return 'red';
+        if ($valorDisponivel < 0) return 'red';
 
         return 'green';
     }
@@ -662,16 +678,22 @@ class Pi_PlanoInterno extends Modelo{
 
         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                ->gerarGrafico($estatistica);
+            ->gerarGrafico($estatistica);
     }
 
     public function recuperarDadosDetalhe($id, $tipo)
     {
         $where = '';
-        switch ($tipo){
-            case self::K_TIPO_DETALHE_PTRES:    $where = " AND ptr.ptrid = '$id'"; break;
-            case self::K_TIPO_DETALHE_PI:       $where = " AND suo.suoid = '$id'"; break;
-            case self::K_TIPO_DETALHE_DELEGADO: $where = " AND pde.suoid = '$id'"; break;
+        switch ($tipo) {
+            case self::K_TIPO_DETALHE_PTRES:
+                $where = " AND ptr.ptrid = '$id'";
+                break;
+            case self::K_TIPO_DETALHE_PI:
+                $where = " AND suo.suoid = '$id'";
+                break;
+            case self::K_TIPO_DETALHE_DELEGADO:
+                $where = " AND pde.suoid = '$id'";
+                break;
         }
 
         $sql = "
