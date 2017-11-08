@@ -123,13 +123,20 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                                 <?php
                                     $sql = "
                                         SELECT
-                                            p.prgcod as codigo,
-                                            (p.prgcod || ' - ' || p.prgdsc) as descricao
-                                        FROM monitora.programa p
+                                            opcao.prgcod AS codigo,
+                                            opcao.prgcod || ' - ' || opcao.prgdsc AS descricao
+                                        FROM monitora.vw_ptres opcao
                                         WHERE
-                                            p.prgano = '" . $_SESSION['exercicio'] . "'
+                                            opcao.prgdsc IS NOT NULL
+                                            AND ptrano = '". $_SESSION['exercicio']. "'
+                                            AND unicod = '". $_REQUEST['unicod']. "'
+                                        GROUP BY
+                                            codigo,
+                                            descricao
                                         ORDER BY
-                                            prgcod";
+                                            codigo,
+                                            descricao
+                                    ";
                                     $db->monta_combo('prgcod', $sql, 'S', 'Selecione', 'carregaAcao', null, null, 400, 'N', 'prgcod', null, (isset($_POST['prgcod']) ? $_POST['prgcod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
                                 ?>
                             </div>
@@ -141,19 +148,18 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                                 <?php
                                     $sql = "
                                         SELECT
-                                            ac.acacod as codigo,
-                                            (ac.acacod || ' - ' || ac.acadsc) as descricao
-                                        FROM monitora.acao ac
+                                            opcao.acacod AS codigo,
+                                            opcao.acacod || ' - ' || opcao.acatitulo AS descricao
+                                        FROM monitora.vw_ptres opcao
                                         WHERE
-                                            ac.unicod IS NOT NULL
-                                            AND ac.prgano = '" . $_SESSION['exercicio'] . "'
-                                            AND ac.acastatus = 'A'
-                                            AND ac.acasnrap = FALSE
+                                            ptrano = '". $_SESSION['exercicio']. "'
+                                            AND unicod = '". $_REQUEST['unicod']. "'
                                         GROUP BY
-                                            ac.acacod,
-                                            ac.acadsc
+                                            codigo,
+                                            descricao
                                         ORDER BY
-                                            ac.acacod";
+                                            codigo
+                                    ";
                                     $db->monta_combo('acacod', $sql, 'S', 'Selecione', '', null, null, 400, 'N', 'acacod', null, (isset($_POST['acacod']) ? $_POST['acacod'] : null), null, 'class="form-control chosen-select" style="width=100%;""', null, null);
                                 ?>
                             </div>
