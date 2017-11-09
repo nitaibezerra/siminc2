@@ -6,12 +6,15 @@ if (isAjax() && isset($_POST['comboacao'])) {
     $where = NULL;
     $where .= $_REQUEST['unicod']? "\n AND unicod = '". $_REQUEST['unicod']. "'": NULL;
     $where .= $_REQUEST['prgcod']? "\n AND prgcod = '". $_REQUEST['prgcod']. "'": NULL;
+    $where .= $_REQUEST['ungcod']? "\n AND suocod = '". $_REQUEST['ungcod']. "'": NULL;
     
     $sql = "
         SELECT
             opcao.acacod AS codigo,
             opcao.acacod || ' - ' || opcao.acatitulo AS descricao
         FROM monitora.vw_ptres opcao
+            JOIN spo.ptressubunidade psu ON(opcao.ptrid = psu.ptrid)
+            JOIN public.vw_subunidadeorcamentaria uni ON(uni.suoid = psu.suoid AND opcao.unicod = uni.unocod)
         WHERE
             ptrano = '". $_SESSION['exercicio']. "'
             $where

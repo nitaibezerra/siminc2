@@ -126,10 +126,13 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                                             opcao.prgcod AS codigo,
                                             opcao.prgcod || ' - ' || opcao.prgdsc AS descricao
                                         FROM monitora.vw_ptres opcao
+                                            JOIN spo.ptressubunidade psu ON(opcao.ptrid = psu.ptrid)
+                                            JOIN public.vw_subunidadeorcamentaria uni ON(uni.suoid = psu.suoid AND opcao.unicod = uni.unocod)
                                         WHERE
                                             opcao.prgdsc IS NOT NULL
                                             AND ptrano = '". $_SESSION['exercicio']. "'
                                             AND unicod = '". $_REQUEST['unicod']. "'
+                                            AND suocod = '". $_REQUEST['ungcod']. "'
                                         GROUP BY
                                             codigo,
                                             descricao
@@ -151,9 +154,12 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                                             opcao.acacod AS codigo,
                                             opcao.acacod || ' - ' || opcao.acatitulo AS descricao
                                         FROM monitora.vw_ptres opcao
+                                            JOIN spo.ptressubunidade psu ON(opcao.ptrid = psu.ptrid)
+                                            JOIN public.vw_subunidadeorcamentaria uni ON(uni.suoid = psu.suoid AND opcao.unicod = uni.unocod)
                                         WHERE
                                             ptrano = '". $_SESSION['exercicio']. "'
                                             AND unicod = '". $_REQUEST['unicod']. "'
+                                            AND suocod = '". $_REQUEST['ungcod']. "'
                                         GROUP BY
                                             codigo,
                                             descricao
