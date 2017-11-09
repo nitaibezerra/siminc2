@@ -484,10 +484,10 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
         LEFT JOIN (
             SELECT
                 pip2.ptrid,
-                SUM(pipvalor) AS pipvalor,
-                SUM(picvalorcusteio) AS custeio,
-                SUM(picvalorcapital) AS capital
-            FROM monitora.pi_planointernoptres pip2
+                (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS pipvalor,
+                SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
+                SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
+            FROM monitora.pi_planointernoptres pip2 -- SELECT * FROM monitora.pi_planointernoptres pip2
                 JOIN monitora.pi_planointerno USING(pliid)
                 JOIN planacomorc.pi_complemento pc USING(pliid)
             WHERE

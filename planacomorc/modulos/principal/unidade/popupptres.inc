@@ -38,7 +38,7 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
     'no_ptrid' => $_REQUEST['no_ptrid'],
     'buscalivre' => $_REQUEST['buscalivre'],
 ));
-//ver($sql_lista);
+ver($sql_lista);
 ?>
 
         <div class="col-lg-12">
