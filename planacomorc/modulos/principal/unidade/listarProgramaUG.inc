@@ -2,19 +2,27 @@
 require_once APPRAIZ . "www/planacomorc/_funcoes.php";
 require_once APPRAIZ . "www/planacomorc/_constantes.php";
 
-if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
+if (isAjax() && isset($_POST['comboacao'])) {
+    $where = NULL;
+    $where .= $_REQUEST['unicod']? "\n AND unicod = '". $_REQUEST['unicod']. "'": NULL;
+    $where .= $_REQUEST['prgcod']? "\n AND prgcod = '". $_REQUEST['prgcod']. "'": NULL;
     
-    $sql = "SELECT ac.acacod as codigo, (ac.acacod || ' - ' || ac.acadsc) as descricao
-            FROM monitora.acao ac 
-            WHERE 
-                ac.unicod IS NOT NULL AND 
-                ac.prgano = '".$_SESSION['exercicio']."' AND 
-                ac.acastatus = 'A' AND 
-                ac.acasnrap = false AND
-                ac.prgcod = '".(int)$_POST['prgcod']."'
-            GROUP BY ac.acacod, ac.acadsc 
-            ORDER BY ac.acacod";
-    $db->monta_combo('acacod', $sql, 'S', 'Selecione','','','',400); 
+    $sql = "
+        SELECT
+            opcao.acacod AS codigo,
+            opcao.acacod || ' - ' || opcao.acatitulo AS descricao
+        FROM monitora.vw_ptres opcao
+        WHERE
+            ptrano = '". $_SESSION['exercicio']. "'
+            $where
+        GROUP BY
+            codigo,
+            descricao
+        ORDER BY
+            codigo
+    ";
+//ver($sql);
+    $db->monta_combo('acacod', $sql, 'S', 'Selecione','','','',400);
     exit;
 }
 

@@ -220,7 +220,12 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                     url:url,
                     type: 'POST',
                     async: false,
-                    data: {prgcod: prgcod, comboacao:true},
+                    data: {
+                        prgcod: prgcod,
+                        unicod: $('#unicod').val(),
+                        ungcod: $('#ungcod').val(),
+                        comboacao:true
+                    },
                     success: function(html) {
                         $('.comboAcao').html(html);
                         $(".chosen-select").chosen();
