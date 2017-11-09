@@ -218,7 +218,7 @@
         controlarEdital($('#picedital').is(':checked'));
 
         $('#btn_selecionar_functional').click(function(){
-            abrir_lista();
+            mostrarPopupPtres();
         });
 
         $('#btn_selecionar_responsaveis').click(function(){

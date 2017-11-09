@@ -1268,11 +1268,16 @@
         return (str);
     }
 
-    function abrir_lista() {
+    function mostrarPopupPtres() {
+        var urlPopup = 'planacomorc.php?modulo=principal/unidade/popupptres&acao=A';
+        if(fnc === true){
+            urlPopup += '&fnc=1';
+        }
+        
         if($("#ungcod").val() != ""){
             // Verifica se o modal terá que recarregar a tela.
             if($('#modal-ptres .modal-body p').size() <= 1){
-                $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
+                $.post(urlPopup+ '&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
                     $('#modal-ptres .modal-body p').html(response);
                     $('.modal-dialog-ptres').show();
                     $('#modal-ptres').modal();
@@ -1282,6 +1287,7 @@
             } else {
                 $('#formularioPopup input[name=unicod]').val($("#unicod").val());
                 $('#formularioPopup input[name=ungcod]').val($("#ungcod").val());
+                $('#formularioPopup input[name=no_ptrid]').val($('input[name=ptrid]').val());
                 $('#modal-ptres').modal();
                 $('#btnPopupPtresPesquisar').click();
             }

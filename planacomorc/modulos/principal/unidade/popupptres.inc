@@ -40,76 +40,7 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
 ));
 //ver($sql_lista);
 ?>
-<html>
-    <head>
-        <script src="/library/chosen-1.0.0/chosen.jquery.js" type="text/javascript"></script>
-        <link href="../library/chosen-1.0.0/chosen.css" rel="stylesheet"  media="screen" >
-        <script type="text/javascript" lang="JavaScript">
-            function parametrosFiltro()
-            {
-                var params = {};
-                $('#modal-ptres #formularioPopup select').each(function() {
-                    var inputName = $(this).attr('name'),
-                    inputValue = $(this).val();
-                    params[inputName] = inputValue;
-                });
-                $('#modal-ptres #formularioPopup input:hidden').each(function() {
-                    var inputName = $(this).attr('name'),
-                    inputValue = $(this).val();
-                    params[inputName] = inputValue;
-                });
-                return params;
-            }
 
-            function atualizaListagemPTRES(params){
-                $('#modal-ptres .modal-body').html('');
-                $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n', params, function(response) {
-                    $('#modal-ptres .modal-body').html(response);
-                    //console.log(response);
-                    delegatePaginacao();
-                    $('#modal-ptres .chosen-select').chosen();
-                    $('#modal-ptres .chosen-container').css('width', '100%');
-                });
-            }
-
-            function delegatePaginacao(){
-                $('.container-listing').on('click', 'li[class="pgd-item"]:not(".disabled")', function() {
-                    // -- definindo a nova página
-                    var novaPagina = $(this).attr('data-pagina');
-                    var params = parametrosFiltro();
-                    params['listagem[p]'] = novaPagina;
-                    atualizaListagemPTRES(params);
-                });
-            }
-
-            function apresentaLinhasSelecionadas(tabelaOrigem, apartirDe) {
-                var val;
-                for (i = apartirDe; i < tabelaOrigem.find('tr').length; i++) {
-                    val = tabelaOrigem.find('tr')[i].id.split("_");
-                    //alert(val);
-                    if (document.getElementById(val[1])) {
-                        campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
-                        //alert(campo);
-                        campo.attr('class', 'glyphicon glyphicon-remove');
-                        campo.attr('title', 'Remover item');
-                        campo.css('color', 'gray');
-                    }
-                }
-            }
-
-            $(document).ready(function(){
-                apresentaLinhasSelecionadas($('#orcamento'), 2);
-
-                $('#modal-ptres .btn-info').click(function(e) {
-                    e.stopPropagation();
-                    var params = parametrosFiltro();
-                    atualizaListagemPTRES(params);
-                    return false;
-                });
-            });
-        </script>
-    </head>
-    <body>
         <div class="col-lg-12">
             <div class="well">
                 <fieldset>
@@ -219,7 +150,19 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
         $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
         $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
         ?>
+        <div id="dialog" />
         <script type="text/javascript">
+            $(document).ready(function(){
+                apresentaLinhasSelecionadas($('#orcamento'), 2);
+
+                $('#modal-ptres .btn-info').click(function(e) {
+                    e.stopPropagation();
+                    var params = parametrosFiltro();
+                    atualizaListagemPTRES(params);
+                    return false;
+                });
+            });
+            
             function carregaAcao(prgcod) {
                 url = "planacomorc.php?modulo=principal/unidade/listarProgramaUG&acao=A";
                 $.ajax({
@@ -436,10 +379,60 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
                 });
             }
 
+            function parametrosFiltro()
+            {
+                var params = {};
+                $('#modal-ptres #formularioPopup select').each(function() {
+                    var inputName = $(this).attr('name'),
+                    inputValue = $(this).val();
+                    params[inputName] = inputValue;
+                });
+                $('#modal-ptres #formularioPopup input:hidden').each(function() {
+                    var inputName = $(this).attr('name'),
+                    inputValue = $(this).val();
+                    params[inputName] = inputValue;
+                });
+                return params;
+            }
+
+            function atualizaListagemPTRES(params){
+                $('#modal-ptres .modal-body').html('');
+                $.post('planacomorc.php?modulo=principal/unidade/popupptres&acao=A&obrigatorio=n', params, function(response) {
+                    $('#modal-ptres .modal-body').html(response);
+                    //console.log(response);
+                    delegatePaginacao();
+                    $('#modal-ptres .chosen-select').chosen();
+                    $('#modal-ptres .chosen-container').css('width', '100%');
+                });
+            }
+
+            function delegatePaginacao(){
+                $('.container-listing').on('click', 'li[class="pgd-item"]:not(".disabled")', function() {
+                    // -- definindo a nova página
+                    var novaPagina = $(this).attr('data-pagina');
+                    var params = parametrosFiltro();
+                    params['listagem[p]'] = novaPagina;
+                    atualizaListagemPTRES(params);
+                });
+            }
+
+            function apresentaLinhasSelecionadas(tabelaOrigem, apartirDe) {
+                var val;
+                for (i = apartirDe; i < tabelaOrigem.find('tr').length; i++) {
+                    val = tabelaOrigem.find('tr')[i].id.split("_");
+                    //alert(val);
+                    if (document.getElementById(val[1])) {
+                        campo = $('tr#' + val[1] + ' td:nth-child(2)').find('span');
+                        //alert(campo);
+                        campo.attr('class', 'glyphicon glyphicon-remove');
+                        campo.attr('title', 'Remover item');
+                        campo.css('color', 'gray');
+                    }
+                }
+            }
+            
         </script>
-        <div id="dialog" />
-    </body>
-</html>
+
 <?php
 /* Fechar Conexão quando não houver rodapé. */
 $db->close();
