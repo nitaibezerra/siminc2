@@ -492,14 +492,14 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
     $sql = "
         SELECT
             ptr.ptrid,
-            ptr.ptres || '<autorizadocusteio>' || COALESCE(psu.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(psu.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
+            ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END AS descricao,
-            COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00) AS dotacaoatual,
+            COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
-            COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
-            COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
+            COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
+            COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
-            (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
+            (COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
         FROM monitora.ptres ptr
             JOIN monitora.acao aca ON(ptr.acaid = aca.acaid)
             JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
@@ -538,8 +538,8 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
         GROUP BY
             ptr.ptrid,
             ptr.ptres,
-            psu.ptrdotacaocusteio,
-            psu.ptrdotacaocapital,
+            ptr.ptrdotacaocusteio,
+            ptr.ptrdotacaocapital,
             aca.prgcod,
             aca.acacod,
             aca.loccod,
