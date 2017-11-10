@@ -438,7 +438,30 @@ function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
             AND ul.prsano = '{$_SESSION['exercicio']}'
             AND ul.lmuflgliberado IS TRUE
             AND ul.ungcod = '". $parametros->ungcod. "'";
-    
+
+    $autorizado = $db->pegaUm($sql);
+    return $autorizado;
+}
+
+/**
+ * Retorna os dados de limite autorizado para a Sub-Unidade.
+ * 
+ * @param stdClass $parametros
+ * @return float Limite autorizado da Sub-Unidade.
+ */
+function carregarLimiteAutorizadoUnidadeFnc(stdClass $parametros) {
+    global $db;
+
+    $sql = "
+        SELECT
+            lmuvlr
+        FROM planacomorc.unidadegestora_limite ul
+        WHERE
+            ul.lmustatus = 'A'
+            AND ul.prsano = '{$parametros->exercicio}'
+            AND ul.unoid IS NOT NULL
+    ";
+
     $autorizado = $db->pegaUm($sql);
     return $autorizado;
 }
@@ -487,7 +510,7 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
                 (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS pipvalor,
                 SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
                 SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
-            FROM monitora.pi_planointernoptres pip2 -- SELECT * FROM monitora.pi_planointernoptres pip2
+            FROM monitora.pi_planointernoptres pip2
                 JOIN monitora.pi_planointerno USING(pliid)
                 JOIN planacomorc.pi_complemento pc USING(pliid)
             WHERE
@@ -511,8 +534,7 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
             ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
             ptr.ptrstatus = 'A'
-            AND ptr.ptrano = '{$filtros->exercicio}'
-            $where
+            AND ptr.ptrano = '{$filtros->exercicio}' $where
         GROUP BY
             ptr.ptrid,
             ptr.ptres,
@@ -557,6 +579,42 @@ function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
     
     $disponivel = $db->pegaUm($sql);
     return $disponivel;
+}
+
+/**
+ * Retorna os dados de limites detalhados em PI da Sub-Unidade.
+ * 
+ * @param stdClass $parametros
+ * @return float Limite disponivel da Sub-Unidade.
+ */
+function carregarLimiteDetalhadoUnidadeFnc(stdClass $parametros) {
+    global $db;
+
+    $sql = "
+        SELECT
+            suo.unoid,
+            COALESCE((SUM(COALESCE(pc.picvalorcusteio, 0.00) + COALESCE(pc.picvalorcapital, 0.00))), 0.00) AS total
+        FROM monitora.pi_planointerno pli
+            JOIN planacomorc.pi_complemento pc USING(pliid)
+            JOIN public.vw_subunidadeorcamentaria suo ON( -- SELECT * FROM public.vw_subunidadeorcamentaria suo
+                suo.suostatus = 'A'
+                AND pli.unicod = suo.unocod
+                AND pli.ungcod = suo.suocod
+                AND suo.prsano = pli.pliano
+            )
+            JOIN workflow.documento wd ON(pli.docid = wd.docid)
+            JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
+        WHERE
+            unofundo IS TRUE
+            AND pli.plistatus = 'A'
+            AND pli.pliano = '{$parametros->exercicio}'
+            AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
+        GROUP BY
+            suo.unoid
+    ";
+    
+    $resultado = $db->pegaLinha($sql);
+    return $resultado['total'];
 }
 
 /**

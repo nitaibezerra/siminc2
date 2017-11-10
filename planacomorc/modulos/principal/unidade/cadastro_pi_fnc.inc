@@ -77,15 +77,15 @@ if ($_REQUEST['carregarManutencaoSubItem']) {
     die();
 }
 if ($_REQUEST['carregarLimitesUnidade']) {
-    # MOC de dados temporario pedido pelo Cliente.
-    $autorizado = 500000000.00;
-//    $autorizado = carregarLimiteAutorizadoSubUnidade(
-//        (object) array(
-//            'ungcod' => $_REQUEST['ungcod']
-//    ));
-    $detalhadoSubUnidade = carregarLimiteDetalhadoSubUnidade(
+    # Busca limite da Unidade
+    $autorizado = carregarLimiteAutorizadoUnidadeFnc(
         (object) array(
-            'ungcod' => $_REQUEST['ungcod']
+            'exercicio' => $_SESSION['exercicio']
+    ));
+    # Busca limite já detalhado e aprovado na Unidade
+    $detalhadoSubUnidade = carregarLimiteDetalhadoUnidadeFnc(
+        (object) array(
+            'exercicio' => $_SESSION['exercicio']
     ));
     $disponivel = ($autorizado - $detalhadoSubUnidade);
     echo json_encode(
@@ -487,56 +487,56 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <td nowrap><b>Não&nbsp;Empenhado</b></td>
                                     </tr>
                                     <?php
-                                    if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
-                                        $dadosPTRES = buscarPTRES((object) array(
-                                            'exercicio' => $_SESSION['exercicio'],
-                                            'pliid' => $dadosPI['pliid'],
-                                            'importar' => ($_REQUEST['replicarProposta']? TRUE: FALSE)
-                                        ));
-//ver($dadosPTRES);
-                                        if ($dadosPTRES) {
-                                            $valortotalpi = 0;
-                                            $cor = 1;
-                                            
-                                            foreach ($dadosPTRES as $ptres):
-                                                $vlrPiDetalhado = strip_tags($ptres['det_pi']);
-                                                $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
-                                                $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
-                                                $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
-                                                $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
-                                                $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
-                                                $vlrPiNaoDetalhadoCusteio = strip_tags($ptres['nao_det_pi_custeio']);
-                                                $vlrPiNaoDetalhadoCapital = strip_tags($ptres['nao_det_pi_capital']);
-                                                ?>
-                                                <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
-                                                    <td align="center">
-                                                        <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
-                                                    </td>
-                                                    <td align="left">
-                                                        <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
-                                                    </td>
-                                                    <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
-                                                    <td align="right" id="td_pi_detalhado">
-                                                        <?php echo $ptres['det_pi']; ?>
-                                                    </td>
-                                                    <td align="right" id="td_pi_nao_detalhado">
-                                                        <?php echo $ptres['nao_det_pi']; ?>
-                                                    </td>
-                                                    <td align="right"><?php echo $ptres['empenhado']; ?></td>
-                                                    <td align="right">
-                                                        <?php echo $ptres['nao_empenhado']; ?>
-                                                        <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
-                                                    </td>
-                                                    <td align="center" id="td_valor_projeto">
-                                                        <?php echo 'R$ '. $ptres['pipvalor']; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php
-                                                $cor++;
-                                                $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
-                                            endforeach;
+                                        if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
+                                            $dadosPTRES = buscarPTRES((object) array(
+                                                'exercicio' => $_SESSION['exercicio'],
+                                                'pliid' => $dadosPI['pliid'],
+                                                'importar' => ($_REQUEST['replicarProposta']? TRUE: FALSE)
+                                            ));
+    //ver($dadosPTRES);
+                                            if($dadosPTRES) {
+                                                $valortotalpi = 0;
+                                                $cor = 1;
+
+                                                foreach ($dadosPTRES as $ptres):
+                                                    $vlrPiDetalhado = strip_tags($ptres['det_pi']);
+                                                    $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
+                                                    $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
+                                                    $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
+                                                    $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
+                                                    $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
+                                                    $vlrPiNaoDetalhadoCusteio = strip_tags($ptres['nao_det_pi_custeio']);
+                                                    $vlrPiNaoDetalhadoCapital = strip_tags($ptres['nao_det_pi_capital']);
+                                                    ?>
+                                                    <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
+                                                        <td align="center">
+                                                            <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['ptres']; ?></span>
+                                                        </td>
+                                                        <td align="left">
+                                                            <span class="link btnVisualizarDetalhes" ptrid="<?php echo $ptres['ptrid']; ?>" ><?php echo $ptres['descricao']; ?></span>
+                                                        </td>
+                                                        <td align="right"><?php echo $ptres['dotacaoatual']; ?></td>
+                                                        <td align="right" id="td_pi_detalhado">
+                                                            <?php echo $ptres['det_pi']; ?>
+                                                        </td>
+                                                        <td align="right" id="td_pi_nao_detalhado">
+                                                            <?php echo $ptres['nao_det_pi']; ?>
+                                                        </td>
+                                                        <td align="right"><?php echo $ptres['empenhado']; ?></td>
+                                                        <td align="right">
+                                                            <?php echo $ptres['nao_empenhado']; ?>
+                                                            <input type="hidden" name="ptrid" value="<?php echo $ptres['ptrid']; ?>" />
+                                                        </td>
+                                                        <td align="center" id="td_valor_projeto">
+                                                            <?php echo 'R$ '. $ptres['pipvalor']; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                    $cor++;
+                                                    $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
+                                                endforeach;
+                                            }
                                         }
-                                    }
                                     ?>
                                 </table>
                                 
