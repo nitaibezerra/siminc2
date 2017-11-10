@@ -29,15 +29,27 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
     exit;
 }
 
-$sql_lista = montarSqlBuscarFuncional((object)array(
-    'exercicio' => $_SESSION['exercicio'],
-    'prgcod' => $_REQUEST['prgcod'],
-    'acacod' => $_REQUEST['acacod'],
-    'unicod' => $_REQUEST['unicod'],
-    'ungcod' => $_REQUEST['ungcod'],
-    'no_ptrid' => $_REQUEST['no_ptrid'],
-    'buscalivre' => $_REQUEST['buscalivre'],
-));
+if($_REQUEST['fnc']){
+    $sql_lista = montarSqlBuscarFuncionalFnc((object)array(
+        'exercicio' => $_SESSION['exercicio'],
+        'prgcod' => $_REQUEST['prgcod'],
+        'acacod' => $_REQUEST['acacod'],
+        'unicod' => $_REQUEST['unicod'],
+        'ungcod' => $_REQUEST['ungcod'],
+        'no_ptrid' => $_REQUEST['no_ptrid'],
+        'buscalivre' => $_REQUEST['buscalivre'],
+    ));
+} else {
+    $sql_lista = montarSqlBuscarFuncional((object)array(
+        'exercicio' => $_SESSION['exercicio'],
+        'prgcod' => $_REQUEST['prgcod'],
+        'acacod' => $_REQUEST['acacod'],
+        'unicod' => $_REQUEST['unicod'],
+        'ungcod' => $_REQUEST['ungcod'],
+        'no_ptrid' => $_REQUEST['no_ptrid'],
+        'buscalivre' => $_REQUEST['buscalivre'],
+    ));
+}
 //ver($sql_lista); 
 ?>
 
@@ -45,6 +57,7 @@ $sql_lista = montarSqlBuscarFuncional((object)array(
             <div class="well">
                 <fieldset>
                     <form id="formularioPopup" name="formularioPopup" method="post" action="" class="form-horizontal">
+                        <input type="hidden" name="fnc" value="<?= $_REQUEST['fnc'] ?>">
                         <input type="hidden" name="unicod" value="<?= $_REQUEST['unicod'] ?>">
                         <input type="hidden" name="ungcod" value="<?= $_REQUEST['ungcod'] ?>">
                         <input type="hidden" name="no_ptrid" value="<?= $_REQUEST['no_ptrid'] ?>">
