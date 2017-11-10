@@ -488,7 +488,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </tr>
                                     <?php
                                         if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
-                                            $dadosPTRES = buscarPTRES((object) array(
+                                            $dadosPTRES = buscarPtresFnc((object) array(
                                                 'exercicio' => $_SESSION['exercicio'],
                                                 'pliid' => $dadosPI['pliid'],
                                                 'importar' => ($_REQUEST['replicarProposta']? TRUE: FALSE)

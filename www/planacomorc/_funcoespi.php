@@ -585,7 +585,7 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
             ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END AS descricao,
             COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00) AS dotacaoatual,
-            COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
+            COALESCE(SUM(pip.total), 0.00) AS det_pi,
             COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
             COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
@@ -597,14 +597,18 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
         LEFT JOIN (
             SELECT
                 pip2.ptrid,
-                (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS pipvalor,
+                (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
                 SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
                 SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
             FROM monitora.pi_planointernoptres pip2
-                JOIN monitora.pi_planointerno USING(pliid)
+                JOIN monitora.pi_planointerno pli USING(pliid)
                 JOIN planacomorc.pi_complemento pc USING(pliid)
+                JOIN workflow.documento wd ON(pli.docid = wd.docid)
+                JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
             WHERE
-                plistatus = 'A'
+                pli.plistatus = 'A'
+		AND pli.pliano = '{$filtros->exercicio}'
+		AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
             GROUP BY
                 pip2.ptrid
         ) pip ON(ptr.ptrid = pip.ptrid)

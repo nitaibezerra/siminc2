@@ -1539,24 +1539,128 @@ SQL;
     $result = is_array($result) ? $result : Array();
 //ver($sql,d);
     $result = $db->carregar($sql);
-    if (is_array($result)) {
-        foreach ($result as $key => $_) {
-            $result[$key]['dotacaoatual'] = mascaraMoeda($result[$key]['dotacaoatual'], false);
-            $result[$key]['det_pi'] = mascaraMoeda($result[$key]['det_pi'], false);
-            $result[$key]['det_pi_custeio'] = mascaraMoeda($result[$key]['det_pi_custeio'], false);
-            $result[$key]['det_pi_capital'] = mascaraMoeda($result[$key]['det_pi_capital'], false);
-            $result[$key]['ptrdotacaocusteio'] = mascaraMoeda($result[$key]['ptrdotacaocusteio'], false);
-            $result[$key]['ptrdotacaocapital'] = mascaraMoeda($result[$key]['ptrdotacaocapital'], false);
-            $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
-            $result[$key]['nao_det_pi_custeio'] = mascaraMoeda($result[$key]['nao_det_pi_custeio'], false);
-            $result[$key]['nao_det_pi_capital'] = mascaraMoeda($result[$key]['nao_det_pi_capital'], false);
-            $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
-            $result[$key]['nao_empenhado'] = mascaraMoeda($result[$key]['nao_empenhado'], false);
-            # Não formatado - para soma na interface
-            $result[$key]['pipvalor_'] = $result[$key]['pipvalor'];
-            $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
-        }
+    if(is_array($result)) {
+        $result = formatarValoresFuncional($result);
     }
+    return $result;
+}
+
+/**
+ * Buscar a funcional do Plano Interno FNC.
+ * 
+ * @global cls_banco $db
+ * @param stdClass $filtros
+ * @todo Melhorar performance da consulta pois a mesma já sofreu várias manutenções devido a várias mudanças do sistema e precisa ser refatorada.
+ * @return array
+ */
+function buscarPtresFnc(stdClass $filtros) {
+    global $db;
+
+    # Filtros.
+    $where .= $filtros->pliid? " AND pip.pliid = $filtros->pliid ": NULL;
+    $where .= $filtros->ptrid? " AND ptr.ptrid = $filtros->ptrid ": NULL;
+    
+    # Configuração da consulta pra atender a funcionalidade de Importacao do SIMINC1.
+    $colunaPipValor = $filtros->importar? "0 AS pipvalor": "pip.pipvalor AS pipvalor";
+    $colunaAgrupadaPipValor = $filtros->importar? NULL: "pip.pipvalor,";
+
+    $sql = "
+        SELECT
+            ptr.ptrid,
+            ptr.ptres,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
+            aca.unicod || ' - ' || uni.unonome as unidsc,
+            (COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) AS dotacaoatual,
+            COALESCE(ptr.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
+            COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
+            COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
+	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
+	    COALESCE(SUM(dtp.capital), 0.00) AS det_pi_capital,
+            ((COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(SUM(dtp.valor), 0.00)) AS nao_det_pi,
+            (COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(dtp.custeio), 0.00)) AS nao_det_pi_custeio,
+            (COALESCE(ptr.ptrdotacaocapital, 0.00) - COALESCE(SUM(dtp.capital), 0.00)) AS nao_det_pi_capital,
+            COALESCE((pemp.total), 0.00) AS empenhado,
+            (COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado,
+            $colunaPipValor
+        FROM monitora.ptres ptr
+	    JOIN monitora.pi_planointernoptres pip ON(ptr.ptrid = pip.ptrid)
+	    JOIN monitora.pi_planointerno pi ON(pip.pliid = pi.pliid)
+            JOIN monitora.acao aca ON(ptr.acaid = aca.acaid)
+            JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND uni.suocod = pi.ungcod AND uni.prsano = aca.prgano) -- SELECT * FROM public.vw_subunidadeorcamentaria
+            JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
+            LEFT JOIN (
+                SELECT
+                    pip.ptrid,
+                    SUM(COALESCE(picvalorcusteio, 0.00) + COALESCE(picvalorcapital, 0.00)) AS valor,
+                    SUM(COALESCE(picvalorcusteio, 0.00)) AS custeio,
+                    SUM(COALESCE(picvalorcapital, 0.00)) AS capital
+                FROM monitora.pi_planointernoptres pip
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                    JOIN planacomorc.pi_complemento pc USING(pliid)
+                    JOIN workflow.documento wd ON(pli.docid = wd.docid)
+                    JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '{$filtros->exercicio}'
+                    AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
+                GROUP BY
+                    ptrid) dtp ON dtp.ptrid = ptr.ptrid
+            LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+        WHERE
+            aca.acasnrap = FALSE
+            AND aca.prgano = '{$filtros->exercicio}'
+            AND ptr.ptrstatus = 'A'
+            $where
+        GROUP BY
+            ptr.ptrid,
+            ptr.ptres,
+            ptr.ptrdotacaocusteio,
+            ptr.ptrdotacaocapital,
+            aca.prgcod,
+            aca.acaobjetivocod,
+            aca.acacod,
+            aca.unicod,
+            aca.loccod,
+            ptr.plocod,
+            aca.acatitulo,
+            uni.unonome,
+            $colunaAgrupadaPipValor
+            pemp.total
+        ORDER BY
+            ptr.ptres
+    ";
+
+//ver($sql,d);
+    $result = $db->carregar($sql);
+    if(is_array($result)) {
+        $result = formatarValoresFuncional($result);
+    }
+    return $result;
+}
+
+/**
+ * Formata os principais dados monetarios da consulta de funcionais.
+ * 
+ * @param array $result
+ */
+function formatarValoresFuncional($result){
+    foreach($result as $key => $_){
+        $result[$key]['dotacaoatual'] = mascaraMoeda($result[$key]['dotacaoatual'], false);
+        $result[$key]['det_pi'] = mascaraMoeda($result[$key]['det_pi'], false);
+        $result[$key]['det_pi_custeio'] = mascaraMoeda($result[$key]['det_pi_custeio'], false);
+        $result[$key]['det_pi_capital'] = mascaraMoeda($result[$key]['det_pi_capital'], false);
+        $result[$key]['ptrdotacaocusteio'] = mascaraMoeda($result[$key]['ptrdotacaocusteio'], false);
+        $result[$key]['ptrdotacaocapital'] = mascaraMoeda($result[$key]['ptrdotacaocapital'], false);
+        $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
+        $result[$key]['nao_det_pi_custeio'] = mascaraMoeda($result[$key]['nao_det_pi_custeio'], false);
+        $result[$key]['nao_det_pi_capital'] = mascaraMoeda($result[$key]['nao_det_pi_capital'], false);
+        $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
+        $result[$key]['nao_empenhado'] = mascaraMoeda($result[$key]['nao_empenhado'], false);
+        # Não formatado - para soma na interface
+        $result[$key]['pipvalor_'] = $result[$key]['pipvalor'];
+        $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
+    }
+    
     return $result;
 }
 
