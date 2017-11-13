@@ -1101,8 +1101,10 @@ DML;
                                             <input id="VlrFuncionalDisponivelCusteio" type="hidden" value="" />
                                             <input id="VlrFuncionalDisponivelCapital" type="hidden" value="" />
                                         </td>
-                                        <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
-                                        <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+<td style="display: none; text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+<td style="display: none; text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+                                        <td style="text-align: left;" id="td_ja_autorizado_funcional_custeio" >0,00</td>
+                                        <td style="text-align: center;" id="td_ja_autorizado_funcional_capital" >0,00</td>
                                     </tr>
                                     <tr>
                                         <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>

@@ -287,24 +287,28 @@
         $('#picvalorcusteio').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
+            atualizarValorDetalhado();
+            atualizarValorNaoDetalhado();
+            atualizarValorLimiteDisponivelUnidade();
             if(fnc === false){
-                atualizarValorDetalhado();
-                atualizarValorNaoDetalhado();
-                atualizarValorLimiteDisponivelUnidade();
                 atualizarValorLimiteDisponivelFuncionalCusteio();
                 mudarCorValorProjeto();
+            } else {
+                atualizarValorJaCadastradoFuncionalCusteio();
             }
         });
 
         $('#picvalorcapital').keyup(function(){
             this.value = mascaraglobal('###.###.###.###,##', this.value);
             atualizarValorDoProjeto();
+            atualizarValorDetalhado();
+            atualizarValorNaoDetalhado();
+            atualizarValorLimiteDisponivelUnidade();
             if(fnc === false){
-                atualizarValorDetalhado();
-                atualizarValorNaoDetalhado();
-                atualizarValorLimiteDisponivelUnidade();
                 atualizarValorLimiteDisponivelFuncionalCapital();
                 mudarCorValorProjeto();
+            } else {
+                atualizarValorJaCadastradoFuncionalCapital();
             }
         });
 
