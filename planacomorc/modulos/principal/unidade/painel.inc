@@ -92,9 +92,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
-                                ->gerarGrafico($estatistica);
+                        $grafico
+                            ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
+                            ->gerarGrafico($estatistica);
                         ?>
                     </div>
                 </div>

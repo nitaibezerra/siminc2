@@ -150,16 +150,13 @@ class Spo_Model_Planointerno extends Modelo
                 pli.pliid::VARCHAR AS id,
                 '<a href=\"#\" title=\"Exibir detalhes do Plano Interno(Espelho)\" class=\"a_espelho\" data-pi=\"' || pli.pliid || '\">' || pli.plicod || '</a>' AS codigo_pi,
                 pli.ungcod || '-' || suo.suonome AS sub_unidade,
---		pd.pliid AS delegadas,
                 '<a href=\"#\" title=\"Exibir detalhes do Plano Interno(Espelho)\" class=\"a_espelho\" data-pi=\"' || pli.pliid || '\">' || COALESCE(pli.plititulo, 'N/A') || '</a>' AS plititulo,
---                ptr.ptres,
                 TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) AS funcional,
 		ed.esddsc AS situacao,
 		pc.picvalorcusteio AS custeio,
 		pc.picvalorcapital AS capital,
---		(sum(COALESCE(pc.picvalorcusteio, 0.00) + COALESCE(pc.picvalorcapital, 0.00))) AS total,
                 SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
-		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
+                SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
                 SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado
             FROM monitora.pi_planointerno pli
 		JOIN planacomorc.pi_complemento pc USING(pliid)
@@ -191,9 +188,7 @@ class Spo_Model_Planointerno extends Modelo
                 pli.pliid,
                 pli.plicod,
                 sub_unidade,
---                delegadas,
                 pli.plititulo,
---                ptr.ptres,
                 funcional,
                 situacao,
                 custeio,
