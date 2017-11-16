@@ -289,258 +289,132 @@ class Pi_PlanoInterno extends Modelo
 
     public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
     {
-        $sql = "
-            SELECT DISTINCT
-                1 AS ordem,
-                'Dotação' AS descricao,
-                suo.unosigla AS categoria,
-                (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
-                LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
-                AND ptr.ptrano = suo.prsano
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                2 AS ordem,
-                'Limite' AS descricao,
-                suo.unosigla AS categoria,
-                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
-                AND suo.prsano = lmu.prsano
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                3 AS ordem,
-                'Planejado' AS descricao,
-                suo.unosigla AS categoria,
-                sum(COALESCE (pic.picvalorcapital, 0) + COALESCE (pic.picvalorcusteio, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                4 AS ordem,
-                'Empenhado' AS descricao,
-                suo.unosigla AS categoria,
-                sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                5 AS ordem,
-                'Pago' AS descricao,
-                suo.unosigla AS categoria,
-                sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                6 AS ordem,
-                'Liquidado' AS descricao,
-                suo.unosigla AS categoria,
-                sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            ORDER BY
-                ordem,
-                categoria
-        ";
-//ver($sql,d);
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.unosigla categoria, (sum(coalesce(psu.ptrdotacaocusteio, 0)::decimal) + sum(coalesce(psu.ptrdotacaocapital, 0)::decimal)) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 2 ordem, 'Limite' as descricao, suo.unosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod AND suo.prsano = lmu.prsano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 3 ordem, 'Planejado' as descricao, suo.unosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 4 ordem, 'Empenhado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 6 ordem, 'Pago' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 5 ordem, 'Liquidado' as descricao, suo.unosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                
+                order by ordem, categoria
+                ";
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
 
     public function recuperarEstatisticaPagamentoDetalhe($exercicio, $unosigla)
     {
-        $filtro = "AND suo.unosigla = '{$unosigla}'";
+        $where = " AND suo.unosigla = '$unosigla' ";
 
-        $sql = "
-            SELECT DISTINCT
-                1 AS ordem,
-                'Dotação' AS descricao,
-                suo.suosigla AS categoria,
-                (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
-                LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
-                AND ptr.ptrano = suo.prsano
-            WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                2 AS ordem,
-                'Limite' AS descricao,
-                suo.suosigla AS categoria,
-                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
-                AND suo.prsano = lmu.prsano
-            WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                3 AS ordem,
-                'Planejado' AS descricao,
-                suo.suosigla AS categoria,
-                sum(COALESCE (pic.picvalorcapital, 0) + COALESCE (pic.picvalorcusteio, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
-            WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                4 AS ordem,
-                'Empenhado' AS descricao,
-                suo.suosigla AS categoria,
-                sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                5 AS ordem,
-                'Pago' AS descricao,
-                suo.suosigla AS categoria,
-                sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '$exercicio'
-                {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            UNION ALL
-            SELECT DISTINCT
-                6 AS ordem,
-                'Liquidado' AS descricao,
-                suo.suosigla AS categoria,
-                sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON pli.ungcod = suo.suocod
-                AND pli.pliano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
-                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
-                AND sec.exercicio = ptr.ptrano
-            WHERE
-                suo.prsano = '$exercicio'
-                {$filtro}
-                AND suo.unofundo = FALSE
-            GROUP BY
-                ordem,
-                descricao,
-                categoria
-            ORDER BY
-                ordem,
-                categoria
-        ";
-//ver($sql,d);
+        $sql = "select distinct 1 ordem, 'Dotação' as descricao, suo.suosigla categoria, (sum(coalesce(psu.ptrdotacaocusteio, 0)::decimal) + sum(coalesce(psu.ptrdotacaocapital, 0)::decimal)) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                        left join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano        
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 2 ordem, 'Limite' as descricao, suo.suosigla categoria, sum(coalesce(lmu.lmuvlr, 0)::decimal) valor
+                from public.vw_subunidadeorcamentaria suo 
+                        left join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod AND suo.prsano = lmu.prsano
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 3 ordem, 'Planejado' as descricao, suo.suosigla categoria, sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 4 ordem, 'Empenhado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrempenhado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 6 ordem, 'Pago' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrpago, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                union all
+                select distinct 5 ordem, 'Liquidado' as descricao, suo.suosigla categoria, sum(coalesce(sec.vlrliquidado, 0))::decimal valor
+                from public.vw_subunidadeorcamentaria suo 
+                         left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                         left join monitora.ptres ptr on ptr.ptrid = ppt.ptrid
+                         left join spo.siopexecucao sec on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                where suo.prsano = '$exercicio'
+                $where
+                AND suo.unofundo = false
+                group by ordem, descricao, categoria
+                
+                order by ordem, categoria
+                ";
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }

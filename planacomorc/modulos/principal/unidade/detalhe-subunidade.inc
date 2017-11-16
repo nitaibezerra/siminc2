@@ -22,8 +22,8 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                 <th>Custeio</th>
                                 <th>Capital</th>
                                 <th>Empenhado</th>
-                                <th>Pago</th>
                                 <th>Liquidado</th>
+                                <th>Pago</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,8 +44,8 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['empenhado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['pago'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['liquidado'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo number_format($dado['pago'], 0, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -56,8 +56,8 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
                                     <!--<th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
                                     <th class="text-right"><?php echo number_format($total['empenhado'], 0, ',', '.'); ?></th>
-                                    <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
                                 </tr>
                             </tfoot>
                         </table>

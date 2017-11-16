@@ -143,7 +143,7 @@
 //            ->esconderColunas('unidsc', 'valido')
             ->setCabecalho(array(
                 'id', 'Código', 'Unidade', 'Título', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
-                    'Custeio', 'Capital', 'Empenhado', 'Liquidado', 'Pago'
+                    'Custeio', 'Capital', 'Empenhado', 'Pago', 'Liquidado'
                 )))
             ->addCallbackDeCampo('id', 'exibirLinkEspelho')
 //            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
