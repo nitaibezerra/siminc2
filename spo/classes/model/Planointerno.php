@@ -159,8 +159,8 @@ class Spo_Model_Planointerno extends Modelo
 		pc.picvalorcapital AS capital,
 --		(sum(COALESCE(pc.picvalorcusteio, 0.00) + COALESCE(pc.picvalorcapital, 0.00))) AS total,
                 SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
-		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
-                SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado
+                SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado,
+		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago
             FROM monitora.pi_planointerno pli
 		JOIN planacomorc.pi_complemento pc USING(pliid)
                 JOIN public.vw_subunidadeorcamentaria suo ON(
