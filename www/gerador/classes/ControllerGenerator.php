@@ -56,7 +56,7 @@ class ControllerGenerator
     {
         $this->nomeClasse = ucFirst($this->tabela);
 
-        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/controller/{$this->tabela}{$this->extensao}", "w+")) {
+        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/controller/{$this->nomeClasse}{$this->extensao}", "w+")) {
             return false;
         }
 
@@ -87,7 +87,7 @@ class ControllerGenerator
                 ';
             }
             if(false !== strpos($srAtributo['column_name'], 'status')){
-                $status = true;
+                $status = $srAtributo['column_name'];
             }
         }
 
@@ -98,7 +98,7 @@ class {$this->controller}
 {
     public function salvar(\$dados)
     {
-        \$url = '?modulo=apoio/arquivo&acao=A';
+        \$url = '?modulo=apoio/{$this->tabela}&acao=A';
 
         try {
             \$m{$tabela} = new {$this->model}(\$dados['{$pkData[0]['column_name']}']);
@@ -115,7 +115,7 @@ class {$this->controller}
     
     public function excluir(\${$pkData[0]['column_name']})
     {
-        \$url = '?modulo=apoio/arquivo&acao=A';
+        \$url = '?modulo=apoio/{$this->tabela}&acao=A';
 
         try {
             \$m{$tabela} = new {$this->model}(\${$pkData[0]['column_name']});
@@ -126,7 +126,7 @@ class {$this->controller}
                 simec_redirecionar(\$url, 'error', \$mensagem);
             }            
             
-            \$m{$tabela}->status = 'I';
+            \$m{$tabela}->{$status} = 'I';
             \$m{$tabela}->salvar();
             \$m{$tabela}->commit();
             simec_redirecionar(\$url, 'success');

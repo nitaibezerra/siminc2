@@ -266,7 +266,7 @@ PHP;
     {
         $this->nomeClasse = ucFirst($this->tabela);
 
-        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/form/{$this->tabela}{$this->extensao}", "w+")) {
+        if (!$arquivo = fopen(APPRAIZ . "www/gerador/arquivos_gerados/form/{$this->tabela}_form{$this->extensao}", "w+")) {
             return false;
         }
 
@@ -292,7 +292,7 @@ switch (\$_REQUEST['req']) {
 	case 'salvar':
         \$c{$tabela}->salvar(\$_REQUEST);
 		die;
-	case 'salvar':
+	case 'excluir':
         \$c{$tabela}->excluir(\$_REQUEST['{$pkData[0]['column_name']}']);
 		die;
 }
@@ -326,6 +326,7 @@ PHP;
         foreach ($this->atributos as $srAtributo) {
 
             if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
+            if(substr($srAtributo['column_name'], -6) == 'status') continue;
 
             $aAtributosCampo = [];
             if('YES' == $srAtributo['is_nullable']){
@@ -362,9 +363,9 @@ PHP;
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <a href="?modulo=apoio/arquivo-listagem&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                <a href="?modulo=apoio/{$this->tabela}&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                 <?php if(\$m{$tabela}->{$pkData[0]['column_name']}){ ?>
-                                    <a href="?modulo=apoio/arquivo&acao=A&req=excluir&{$pkData[0]['column_name']}=<?php echo \$m{$tabela}->{$pkData[0]['column_name']}; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                    <a href="?modulo=apoio/{$this->tabela}_form&acao=A&req=excluir&{$pkData[0]['column_name']}=<?php echo \$m{$tabela}->{$pkData[0]['column_name']}; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
                                 <?php } ?>                                
                             </div>
                         </div>                        

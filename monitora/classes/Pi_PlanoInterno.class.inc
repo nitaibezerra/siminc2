@@ -626,7 +626,7 @@ class Pi_PlanoInterno extends Modelo
                                 where d.pliid = pli.pliid
                         ), '; ')) suodelegada,
                         
-                        eqd.eqddsc, mai.mainome, mas.masnome, ptr.prgcod, ptr.prgdsc, opp.oppcod, opp.oppnome, ipp.ippcod, ipp.ippnome, 
+                        eqd.eqddsc, rp.rpcod || ' - ' || rp.redsc as resultadoprimario, mai.mainome, mas.masnome, ptr.prgcod, ptr.prgdsc, opp.oppcod, opp.oppnome, ipp.ippcod, ipp.ippnome, 
                         ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, 'PO' po, ptr.ptres,
                         mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
                         pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc, 
@@ -744,6 +744,7 @@ class Pi_PlanoInterno extends Modelo
                         inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod AND suo.unocod = pli.unicod AND suo.prsano = pli.pliano
                         inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
+                        left join planacomorc.resultadoprimario rp on rp.rpcod = eqd.eqdrp
                         left join planacomorc.manutencaoitem mai on mai.maiid = pic.maiid
                         left join planacomorc.manutencaosubitem mas on mas.masid = pic.masid
                         left join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
@@ -843,7 +844,8 @@ class Pi_PlanoInterno extends Modelo
                 ptr.funcional,
                 ptr.acatitulo,
                 ptr.ptrdotacao,
-                eqd.eqddsc
+                eqd.eqddsc,
+                eqd.eqdrp
             FROM
                 monitora.pi_planointerno pli
                 INNER JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
@@ -876,7 +878,8 @@ class Pi_PlanoInterno extends Modelo
                 ptr.funcional,
                 ptr.acatitulo,
                 ptr.ptrdotacao,
-                eqd.eqddsc
+                eqd.eqddsc,
+                eqd.eqdrp
             ";
 //ver($sql,d);
         $dados = $this->carregar($sql);

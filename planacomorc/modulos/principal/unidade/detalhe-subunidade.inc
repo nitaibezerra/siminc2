@@ -19,6 +19,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                 <th>Id</th>
                                 <th>Código</th>
                                 <th>Título</th>
+                                <th>RP</th>
                                 <th>Custeio</th>
                                 <th>Capital</th>
                                 <th>Empenhado</th>
@@ -41,6 +42,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                                     <td><?php echo $dado['pliid']; ?></td>
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>
+                                    <td class="text-center"><?php echo $dado['eqdrp']; ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['empenhado'], 0, ',', '.'); ?></td>
@@ -51,7 +53,7 @@ $dado = count($dadosPi) ? current($dadosPi) : [];
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="4">TOTAL</th>
+                                    <th colspan="5">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
                                     <!--<th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->

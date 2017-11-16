@@ -300,7 +300,7 @@ PHP;
         $codigo = <<<PHP
 <?php
 
-\$a{$this->tabela} = (new {$this->model})->recuperarTodos({$aFiltroCampo});
+\$a{$tabela} = (new {$this->model})->recuperarTodos({$aFiltroCampo});
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -320,7 +320,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="ibox-content">
                     
-                    <a class="btn btn-small btn-warning" href="?modulo=apoio/arquivo-form&acao=A">Novo</a>
+                    <a class="btn btn-small btn-warning" href="?modulo=apoio/{$this->tabela}_form&acao=A">Novo</a>
                     
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
@@ -333,6 +333,7 @@ PHP;
         foreach ($this->atributos as $srAtributo) {
 
             if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
+            if(substr($srAtributo['column_name'], -6) == 'status') continue;
 
             $codigo .= <<<PHP
                                 <th>{$srAtributo['column_name']}</th>
@@ -343,10 +344,10 @@ PHP;
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach(\$a{$this->tabela} as \$dados){ ?>
+                            <?php foreach(\$a{$tabela} as \$dados){ ?>
                                 <tr>
                                     <td class="text-center">
-                                        <a title="Alterar" href="planacomorc.php?modulo=apoio/arquivo-form&acao=A&{$pkData[0]['column_name']}=<?php echo \$dados['{$pkData[0]['column_name']}']; ?>"><i class="fa fa-pencil"></i></a>
+                                        <a title="Alterar" href="?modulo=apoio/{$this->tabela}_form&acao=A&{$pkData[0]['column_name']}=<?php echo \$dados['{$pkData[0]['column_name']}']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
 
 PHP;
@@ -354,6 +355,7 @@ PHP;
         foreach ($this->atributos as $srAtributo) {
 
             if($srAtributo['column_name'] == $pkData[0]['column_name']) continue;
+            if(substr($srAtributo['column_name'], -6) == 'status') continue;
 
             switch ($srAtributo['data_type']){
                 case 'integer':

@@ -19,6 +19,7 @@ $dado = count($dados) ? current($dados) : [];
                                 <th>Id</th>
                                 <th>Código</th>
                                 <th>Título</th>
+                                <th>RP</th>
 <!--                                <th>Unidade</th>
                                 <th>Enquadramento</th>-->
                                 <th>Custeio</th>
@@ -44,6 +45,7 @@ $dado = count($dados) ? current($dados) : [];
                                     <td><?php echo $dado['pliid']; ?></td>
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>
+                                    <td class="text-center"><?php echo $dado['eqdrp']; ?></td>
 <!--                                    <td><?php echo $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?></td>
                                     <td><?php echo $dado['eqddsc']; ?></td>-->
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
@@ -57,7 +59,7 @@ $dado = count($dados) ? current($dados) : [];
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="4">TOTAL</th>
+                                    <th colspan="5">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
 <!--                                    <th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
