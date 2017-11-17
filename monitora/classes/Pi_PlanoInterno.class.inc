@@ -421,7 +421,7 @@ class Pi_PlanoInterno extends Modelo
         $sql = "
             SELECT DISTINCT
                 1 AS ordem,
-                'Dotao' AS descricao,
+                'Dotação' AS descricao,
                 suo.suosigla AS categoria,
                 (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
             FROM
