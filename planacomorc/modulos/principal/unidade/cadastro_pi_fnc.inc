@@ -502,6 +502,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                     $vlrPiDetalhado = strip_tags($ptres['det_pi']);
                                                     $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
                                                     $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
+                                                    $vlrPiCadastradoCusteio = strip_tags($ptres['cadastradocusteio']);
+                                                    $vlrPiCadastradoCapital = strip_tags($ptres['cadastradocapital']);
                                                     $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
                                                     $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
                                                     $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
@@ -545,6 +547,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
                                 <input type="hidden" id="piDetalhadoCusteio" value="<?php echo $vlrPiDetalhadoCusteio; ?>" />
                                 <input type="hidden" id="piDetalhadoCapital" value="<?php echo $vlrPiDetalhadoCapital; ?>" />
+                                <input type="hidden" id="piCadastradoCusteio" value="<?php echo $vlrPiCadastradoCusteio; ?>" />
+                                <input type="hidden" id="piCadastradoCapital" value="<?php echo $vlrPiCadastradoCapital; ?>" />
                                 <input type="hidden" id="piNaoDetalhadoCusteio" value="<?php echo $vlrPiNaoDetalhadoCusteio; ?>" />
                                 <input type="hidden" id="piNaoDetalhadoCapital" value="<?php echo $vlrPiNaoDetalhadoCapital; ?>" />
                                 <input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />

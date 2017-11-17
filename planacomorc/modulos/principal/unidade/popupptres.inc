@@ -14,17 +14,22 @@ require_once APPRAIZ . "www/planacomorc/_constantes.php";
 require_once APPRAIZ . "www/planacomorc/_funcoespi.php";
 
 if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
-
-    $sql = "SELECT ac.acacod as codigo, (ac.acacod || ' - ' || ac.acadsc) as descricao
-            FROM monitora.acao ac
-            WHERE
-                ac.unicod IS NOT NULL AND
-                ac.prgano = '" . $_SESSION['exercicio'] . "' AND
-                ac.acastatus = 'A' AND
-                ac.acasnrap = false AND
-                ac.prgcod = '" . (int) $_POST['prgcod'] . "'
-            GROUP BY ac.acacod, ac.acadsc
-            ORDER BY ac.acacod";
+    $sql = "
+        SELECT
+            ac.acacod AS codigo,
+            (ac.acacod || ' - ' || ac.acadsc) AS descricao
+        FROM monitora.acao ac
+        WHERE
+            ac.unicod IS NOT NULL
+            AND ac.prgano = '" . $_SESSION['exercicio'] . "'
+            AND ac.acastatus = 'A'
+            AND ac.acasnrap = false
+            AND ac.prgcod = '" . (int) $_POST['prgcod'] . "'
+        GROUP BY
+            ac.acacod,
+            ac.acadsc
+        ORDER BY
+            ac.acacod";
     $db->monta_combo('acacod', $sql, 'S', 'Selecione', '', '', '', 400);
     exit;
 }

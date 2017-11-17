@@ -574,7 +574,7 @@
      */
     function atualizarValorJaCadastradoFuncionalCusteio() {
         // Valor que veio da Base de Dados.
-        var valorBaseDetalhadoFuncional = textToFloat($('#piDetalhadoCusteio').val());
+        var valorBaseCadastradoFuncional = textToFloat($('#piCadastradoCusteio').val());
         // Valor que veio da Base de Dados.
         var valorBaseProjetoCusteio = textToFloat($('#vlrPiCusteio').val());
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
@@ -588,7 +588,7 @@
         } else {
             valorCusteio = (valorProjetoCusteio - valorBaseProjetoCusteio);
         }
-        var fltValorLimiteDisponivelFuncional = (valorBaseDetalhadoFuncional + valorCusteio);
+        var fltValorLimiteDisponivelFuncional = (valorBaseCadastradoFuncional + valorCusteio);
         $('#td_ja_autorizado_funcional_custeio').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
     
@@ -599,7 +599,7 @@
      */
     function atualizarValorJaCadastradoFuncionalCapital() {
         // Valor que veio da Base de Dados.
-        var valorBaseDetalhadoFuncional = textToFloat($('#piDetalhadoCapital').val());
+        var valorBaseCadastradoFuncional = textToFloat($('#piCadastradoCapital').val());
         // Valor que veio da Base de Dados.
         var valorBaseProjetoCapital = textToFloat($('#vlrPiCapital').val());
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
@@ -612,7 +612,7 @@
         } else {
             valorCapital = (valorProjetoCapital - valorBaseProjetoCapital);
         }
-        var fltValorLimiteDisponivelFuncional = (valorBaseDetalhadoFuncional + valorCapital);
+        var fltValorLimiteDisponivelFuncional = (valorBaseCadastradoFuncional + valorCapital);
         $('#td_ja_autorizado_funcional_capital').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
 
@@ -763,8 +763,8 @@
         $('#td_disponivel_funcional_capital').text($('#piNaoDetalhadoCapital').val());
         
         // Caso de FNC o sistema atualiza os valores de já cadastrado na funcional.
-        $('#td_ja_autorizado_funcional_custeio').text($('#piDetalhadoCusteio').val());
-        $('#td_ja_autorizado_funcional_capital').text($('#piDetalhadoCapital').val());
+        $('#td_ja_autorizado_funcional_custeio').text($('#piCadastradoCusteio').val());
+        $('#td_ja_autorizado_funcional_capital').text($('#piCadastradoCapital').val());
     }
     
     /**
@@ -782,8 +782,8 @@
         $('#VlrFuncionalDisponivelCusteio').val($('#piNaoDetalhadoCusteio').val());
         
         // Caso de FNC o sistema atualiza os valores de já cadastrado na funcional.
-        $('#td_ja_autorizado_funcional_custeio').text($('#piDetalhadoCusteio').val());
-        $('#td_ja_autorizado_funcional_capital').text($('#piDetalhadoCapital').val());
+        $('#td_ja_autorizado_funcional_custeio').text($('#piCadastradoCusteio').val());
+        $('#td_ja_autorizado_funcional_capital').text($('#piCadastradoCapital').val());
     }
 
     /**

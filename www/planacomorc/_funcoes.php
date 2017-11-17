@@ -1571,7 +1571,9 @@ function buscarPtresFnc(stdClass $filtros) {
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo AS descricao,
             aca.unicod || ' - ' || uni.unonome as unidsc,
             (COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) AS dotacaoatual,
-            COALESCE(ptr.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
+            COALESCE(cadastrado.custeio, 0.00) AS cadastradocusteio,
+            COALESCE(cadastrado.capital, 0.00) AS cadastradocapital,
+            COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
             COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
             COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
 	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
@@ -1604,7 +1606,23 @@ function buscarPtresFnc(stdClass $filtros) {
                     AND pli.pliano = '{$filtros->exercicio}'
                     AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
                 GROUP BY
-                    ptrid) dtp ON dtp.ptrid = ptr.ptrid
+                    ptrid
+            ) dtp ON dtp.ptrid = ptr.ptrid
+            LEFT JOIN (
+                SELECT
+                    pip2.ptrid,
+                    (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
+                    SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
+                    SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
+                FROM monitora.pi_planointernoptres pip2
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                    JOIN planacomorc.pi_complemento pc USING(pliid)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '{$filtros->exercicio}'
+                GROUP BY
+                    pip2.ptrid
+            ) cadastrado ON(ptr.ptrid = cadastrado.ptrid)
             LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
             aca.acasnrap = FALSE
@@ -1616,6 +1634,8 @@ function buscarPtresFnc(stdClass $filtros) {
             ptr.ptres,
             ptr.ptrdotacaocusteio,
             ptr.ptrdotacaocapital,
+            cadastradocusteio,
+            cadastradocapital,
             aca.prgcod,
             aca.acaobjetivocod,
             aca.acacod,
@@ -1651,6 +1671,8 @@ function formatarValoresFuncional($result){
         $result[$key]['det_pi_capital'] = mascaraMoeda($result[$key]['det_pi_capital'], false);
         $result[$key]['ptrdotacaocusteio'] = mascaraMoeda($result[$key]['ptrdotacaocusteio'], false);
         $result[$key]['ptrdotacaocapital'] = mascaraMoeda($result[$key]['ptrdotacaocapital'], false);
+        $result[$key]['cadastradocusteio'] = mascaraMoeda($result[$key]['cadastradocusteio'], false);
+        $result[$key]['cadastradocapital'] = mascaraMoeda($result[$key]['cadastradocapital'], false);
         $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
         $result[$key]['nao_det_pi_custeio'] = mascaraMoeda($result[$key]['nao_det_pi_custeio'], false);
         $result[$key]['nao_det_pi_capital'] = mascaraMoeda($result[$key]['nao_det_pi_capital'], false);

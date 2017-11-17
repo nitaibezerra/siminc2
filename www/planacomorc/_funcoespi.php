@@ -582,7 +582,12 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
     $sql = "
         SELECT
             ptr.ptrid,
-            ptr.ptres || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
+            ptr.ptres
+            || '<autorizadocusteio>' || COALESCE(ptr.ptrdotacaocusteio, 0.00) || '</autorizadocusteio>'
+            || '<autorizadocapital>' || COALESCE(ptr.ptrdotacaocapital, 0.00) || '</autorizadocapital>'
+            || '<cadastradocusteio>' || COALESCE(cadastrado.custeio, 0.00) || '</cadastradocusteio>'
+            || '<cadastradocapital>' || COALESCE(cadastrado.capital, 0.00) || '</cadastradocapital>'
+            AS ptres,
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END AS descricao,
             COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.total), 0.00) AS det_pi,
@@ -594,38 +599,53 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
             JOIN monitora.acao aca ON(ptr.acaid = aca.acaid)
             JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
             JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
-        LEFT JOIN (
-            SELECT
-                pip2.ptrid,
-                (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
-                SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
-                SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
-            FROM monitora.pi_planointernoptres pip2
-                JOIN monitora.pi_planointerno pli USING(pliid)
-                JOIN planacomorc.pi_complemento pc USING(pliid)
-                JOIN workflow.documento wd ON(pli.docid = wd.docid)
-                JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
-            WHERE
-                pli.plistatus = 'A'
-		AND pli.pliano = '{$filtros->exercicio}'
-		AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
-            GROUP BY
-                pip2.ptrid
-        ) pip ON(ptr.ptrid = pip.ptrid)
-        LEFT JOIN (
-            SELECT
-                ex.unicod,
-                ex.ptres,
-                ex.exercicio,
-                sum(ex.vlrempenhado) AS total
-            FROM spo.siopexecucao ex
-            WHERE
-                ex.exercicio = '{$filtros->exercicio}'
-            GROUP BY
-                ex.unicod,
-                ex.ptres,
-                ex.exercicio
-            ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+            LEFT JOIN (
+                SELECT
+                    pip2.ptrid,
+                    (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
+                    SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
+                    SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
+                FROM monitora.pi_planointernoptres pip2
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                    JOIN planacomorc.pi_complemento pc USING(pliid)
+                    JOIN workflow.documento wd ON(pli.docid = wd.docid)
+                    JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '{$filtros->exercicio}'
+                    AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
+                GROUP BY
+                    pip2.ptrid
+            ) pip ON(ptr.ptrid = pip.ptrid)
+            LEFT JOIN (
+                SELECT
+                    pip2.ptrid,
+                    (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
+                    SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
+                    SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
+                FROM monitora.pi_planointernoptres pip2
+                    JOIN monitora.pi_planointerno pli USING(pliid)
+                    JOIN planacomorc.pi_complemento pc USING(pliid)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '{$filtros->exercicio}'
+                GROUP BY
+                    pip2.ptrid
+            ) cadastrado ON(ptr.ptrid = cadastrado.ptrid)
+            LEFT JOIN (
+                SELECT
+                    ex.unicod,
+                    ex.ptres,
+                    ex.exercicio,
+                    sum(ex.vlrempenhado) AS total
+                FROM spo.siopexecucao ex
+                WHERE
+                    ex.exercicio = '{$filtros->exercicio}'
+                GROUP BY
+                    ex.unicod,
+                    ex.ptres,
+                    ex.exercicio
+                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
             ptr.ptrstatus = 'A'
             AND ptr.ptrano = '{$filtros->exercicio}' $where
@@ -634,6 +654,8 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
             ptr.ptres,
             ptr.ptrdotacaocusteio,
             ptr.ptrdotacaocapital,
+            cadastrado.custeio,
+            cadastrado.capital,
             aca.prgcod,
             aca.acacod,
             aca.loccod,
@@ -646,7 +668,7 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
         ORDER BY
             ptr.ptres
     ";
-    
+//ver($sql,d);
     return $sql;
 }
 
