@@ -664,6 +664,42 @@ class Pi_PlanoInterno extends Modelo
                                         inner join territorios.estado e on e.estuf = m.estuf
                                 where l.pliid = pli.pliid                           
                         ), '; ')) municipio,
+                        
+                        (select array_to_string(array(
+                                select distinct usu.usunome || ' - ' || replace(to_char(usu.usucpf::numeric, '000:000:000-00'), ':', '.') || ' (' || usu.usufoneddd || ' ' || usu.usufonenum || ' - ' || usu.usuemail || ')'
+                                from planacomorc.pi_responsavel pir                
+                                        inner join seguranca.usuario usu on usu.usucpf = pir.usucpf
+                                where pir.pliid = pli.pliid                           
+                        ), '; ')) usuario,                        
+                        
+                        case when pic.picted then 'Sim' else 'Não' end ted,
+                        case when pic.picedital then 'Sim' else 'Não' end edital,                        
+                        mes.mesdsc,
+                                                                        
+                        (select array_to_string(array(
+                               select distinct pco.pcoconvenio
+                                from planacomorc.pi_convenio pco
+                                where pco.pliid = pli.pliid                           
+                        ), '; ')) convenio,                          
+                        
+                        (select array_to_string(array(
+                               select distinct pis.pissniic
+                                from planacomorc.pi_sniic pis
+                                where pis.pliid = pli.pliid                           
+                        ), '; ')) sniic,                      
+                                             
+                        (select array_to_string(array(
+                               select distinct pse.psesei
+                                from planacomorc.pi_sei pse
+                                where pse.pliid = pli.pliid                           
+                        ), '; ')) sei,   
+                        
+                     
+                        (select array_to_string(array(
+                               select distinct ppr.pprpronac
+                                from planacomorc.pi_pronac ppr
+                                where ppr.pliid = pli.pliid                           
+                        ), '; ')) pronac,                          
                                                 
                         ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
                         
@@ -761,6 +797,7 @@ class Pi_PlanoInterno extends Modelo
                         left join workflow.documento doc on doc.docid = pli.docid
                         left join workflow.estadodocumento esd on esd.esdid = doc.esdid
                         left join territorios.esfera esf on esf.esfid = pic.esfid
+                        left join public.meses mes on mes.mescod = pic.mescod
                         left join (
                                 select sex.exercicio, sex.plicod, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
                                 from spo.siopexecucao sex

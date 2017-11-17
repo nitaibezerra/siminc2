@@ -5,8 +5,8 @@ $cabecalho = [
     'ID Planejamento', 'Situação', 'Código', 'Código da UO', 'UO', 'Código da Unidade', 'Unidade', 'Unidade Delegada', 'Unidade Delegada', 'Enquadramento', 'RP - Resultado Primário',
     'Item de Manutenção', 'Subitem de Manutenção', 'Código do Programa', 'Programa', 'Código do Objetivo', 'Objetivo', 'Código da Iniciativa', 'Iniciativa', 'Código da Ação', 'Ação', 'Código do Localizador',
     'Localizador', 'Código do PO', 'Plano Orçamentário', 'PTRES', 'Área', 'Meta PNC', 'Meta PPA', 'Título', 'Descrição', 'Segmento Cultural', 'Tipo de Instrumento / Modalidade de Pactuação',
-    'Emenda parlamentar', 'Forma de execução - Edital', 'Localização da ação', 'País', 'Unidade Federativa',
-    'Município', 'Produto PI', 'Unidade de Medida', 'Meta Física', 'Valor Total', 'Valor Total Custeio', 'Valor Total Capital',
+    'Emenda parlamentar', 'Forma de execução - Edital', 'Localização da ação', 'País', 'Unidade Federativa', 'Município', 'Responsável', 'TED', 'Edital', 'Previsão Edital',
+    'Convênio', 'SNIIC', 'Processo', 'PRONAC', 'Produto PI', 'Unidade de Medida', 'Meta Física', 'Valor Total', 'Valor Total Custeio', 'Valor Total Capital',
 
     'Cronograma Físico<br />Capital Janeiro', 'Cronograma Físico<br />Capital Fevereivo', 'Cronograma Físico<br />Capital Março', 'Cronograma Físico<br />Capital Abril',
     'Cronograma Físico<br />Capital Maio', 'Cronograma Físico<br />Capital Junho', 'Cronograma Físico<br />Capital Julho', 'Cronograma Físico<br />Capital Agosto',
@@ -54,8 +54,8 @@ $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio']);
     </tbody>
 <?php
 
-header( 'Content-Type: application/vnd.ms-excel' );
-header( 'Expires: 0' );
-header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-header( 'Content-Disposition: attachment; filename="siminc_detalhamentos_' . date("YmdHi") . '.xls"' );
+//header( 'Content-Type: application/vnd.ms-excel' );
+//header( 'Expires: 0' );
+//header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+//header( 'Content-Disposition: attachment; filename="siminc_detalhamentos_' . date("YmdHi") . '.xls"' );
 die;
