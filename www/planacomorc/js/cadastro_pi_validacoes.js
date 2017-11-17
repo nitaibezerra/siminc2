@@ -94,7 +94,11 @@
                 $('#picvalorcusteio').addClass('validateRedText');
                 $('#picvalorcapital').addClass('validateRedText');
                 if(disponivelUnidade < 0){
-                    addMsgCustom.push('Valor do projeto superior ao limite disponível da Sub-Unidade');
+                    if(fnc === true){
+                        addMsgCustom.push('Valor do projeto superior ao limite disponível do FNC');
+                    } else {
+                        addMsgCustom.push('Valor do projeto superior ao limite disponível da Unidade');
+                    }
                 }
             } else if(disponivelFuncionalCusteio < 0 || disponivelFuncionalCapital < 0) {
                 if(disponivelFuncionalCusteio < 0){
