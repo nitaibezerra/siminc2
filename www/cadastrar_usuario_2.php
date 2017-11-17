@@ -70,7 +70,7 @@ if( $_REQUEST["ajax"] == 1 ){
 				  </font>';
 		die;
 	}
-	$tpocod = $_REQUEST["tpocod"];
+	$tpocod = $_REQUEST["tpocod"]? $_REQUEST["tpocod"]: 1;
 	$muncod = $_REQUEST["muncod"];
 	$regcod = $_REQUEST["regcod"];
 
@@ -917,7 +917,7 @@ font {
 								</div>
 							</div>
 							
-							<div class="form-group">
+                                                        <div class="form-group" style="display: none;">
 								<div class="col-sm-12">
 									<div class="control-label">
 										<label for="tpocod">Tipo do Órgão</label>
@@ -964,7 +964,7 @@ font {
 						    				}
 
 						    				$editavelTipoOrgao = ($editavelTipoOrgao) ? $editavelTipoOrgao : $editavel;
-
+                                                                                $tpocod = 1;
 						    				$db->monta_combo("tpocod",$sql,$editavelTipoOrgao,$descricao_tipo,'carrega_orgao','','','170','S','tpocod','','','','','chosen-select');
 					    				?>
 									</div>
