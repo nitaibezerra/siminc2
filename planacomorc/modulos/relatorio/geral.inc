@@ -54,8 +54,8 @@ $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio']);
     </tbody>
 <?php
 
-//header( 'Content-Type: application/vnd.ms-excel' );
-//header( 'Expires: 0' );
-//header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-//header( 'Content-Disposition: attachment; filename="siminc_detalhamentos_' . date("YmdHi") . '.xls"' );
+header( 'Content-Type: application/vnd.ms-excel' );
+header( 'Expires: 0' );
+header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+header( 'Content-Disposition: attachment; filename="siminc_detalhamentos_' . date("YmdHi") . '.xls"' );
 die;
