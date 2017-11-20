@@ -574,7 +574,7 @@
      */
     function atualizarValorJaCadastradoFuncionalCusteio() {
         // Valor que veio da Base de Dados.
-        var valorBaseCadastradoFuncional = textToFloat($('#piCadastradoCusteio').val());
+        var valorBaseCadastradoFuncional = textToFloat($('#ptresCadastradoCusteio').val());
         // Valor que veio da Base de Dados.
         var valorBaseProjetoCusteio = textToFloat($('#vlrPiCusteio').val());
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
@@ -599,7 +599,7 @@
      */
     function atualizarValorJaCadastradoFuncionalCapital() {
         // Valor que veio da Base de Dados.
-        var valorBaseCadastradoFuncional = textToFloat($('#piCadastradoCapital').val());
+        var valorBaseCadastradoFuncional = textToFloat($('#ptresCadastradoCapital').val());
         // Valor que veio da Base de Dados.
         var valorBaseProjetoCapital = textToFloat($('#vlrPiCapital').val());
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
@@ -763,8 +763,8 @@
         $('#td_disponivel_funcional_capital').text($('#piNaoDetalhadoCapital').val());
         
         // Caso de FNC o sistema atualiza os valores de já cadastrado na funcional.
-        $('#td_ja_autorizado_funcional_custeio').text($('#piCadastradoCusteio').val());
-        $('#td_ja_autorizado_funcional_capital').text($('#piCadastradoCapital').val());
+        $('#td_ja_autorizado_funcional_custeio').text($('#ptresCadastradoCusteio').val());
+        $('#td_ja_autorizado_funcional_capital').text($('#ptresCadastradoCapital').val());
     }
     
     /**
@@ -782,8 +782,8 @@
         $('#VlrFuncionalDisponivelCusteio').val($('#piNaoDetalhadoCusteio').val());
         
         // Caso de FNC o sistema atualiza os valores de já cadastrado na funcional.
-        $('#td_ja_autorizado_funcional_custeio').text($('#piCadastradoCusteio').val());
-        $('#td_ja_autorizado_funcional_capital').text($('#piCadastradoCapital').val());
+        $('#td_ja_autorizado_funcional_custeio').text($('#ptresCadastradoCusteio').val());
+        $('#td_ja_autorizado_funcional_capital').text($('#ptresCadastradoCapital').val());
     }
 
     /**
