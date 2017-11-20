@@ -66,7 +66,23 @@ class Emendas_Model_Emenda extends Modelo
         'emeimpositiva' => null,
         'autid' => null,
         'prsano' => null,
+        'emestatus' => null,
     );
+
+    public function recuperarListagem($exercicio)
+    {
+        $sql = "select  eme.emeid, eme.emenumero, eme.unoid, eme.acaid, eme.emeimpositiva, eme.autid, eme.prsano, uno.unocod || ' - ' || uno.unonome unonome, 
+                        aut.autnome, aut.autcod, aca.acacod, aca.prgcod || '.' || aca.acacod || '.' || aca.acaobjetivocod || '.' || aca.loccod || ' - ' || aca.acatitulo funcional
+                from emendas.emenda eme
+                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid
+                    inner join emendas.autor aut on aut.autid  = eme.autid
+                    inner join monitora.acao aca on aca.acaid = eme.acaid
+                where eme.emestatus = 'A'        
+                and eme.prsano = '$exercicio'";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
 
 }//end Class
 ?>
