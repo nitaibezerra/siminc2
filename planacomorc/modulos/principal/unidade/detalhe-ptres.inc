@@ -1,7 +1,7 @@
 <?php
-$dado = count($dados) ? current($dados) : [];
+    $dado = count($dados) ? current($dados) : [];
+    $urlBaseCadastro = $tipoPi = 'fnc'? 'planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A': 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
 ?>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -41,7 +41,9 @@ $dado = count($dados) ? current($dados) : [];
                                 $total['liquidado'] += $dado['liquidado'];
                                 ?>
                                 <tr>
-                                    <td class="text-center"><a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&pliid=<?php echo $dado['pliid']; ?>" class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></a></td>
+                                    <td class="text-center">
+                                        <a href="<?php echo $urlBaseCadastro; ?>&pliid=<?php echo $dado['pliid']; ?>" class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></a>
+                                    </td>
                                     <td><?php echo $dado['pliid']; ?></td>
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>
