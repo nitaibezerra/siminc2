@@ -30,8 +30,6 @@ if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
-//var_dump($aPropostas);
-//die('painel');
 
 /**
  * Cabeçalho padrão do sistema.
@@ -72,20 +70,26 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-<!--        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Valores por Unidades</h5>
-                </div>
-                <div class="ibox-content">
-                    <?php
-                    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
-                    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                    $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-                    ?>
+
+        <?php if (!$listaSubUnidadeUsuario): ?>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Valores por Unidades</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                                'exercicio' => $_SESSION['exercicio'],
+                                'unofundo' => 'TRUE'));
+                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                            $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                ->gerarGrafico($estatistica);
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>-->
+        <?php endif; ?>
 
         <div class="col-md-12">
 

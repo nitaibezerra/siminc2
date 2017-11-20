@@ -287,7 +287,13 @@ class Pi_PlanoInterno extends Modelo
         return  $dados ? $dados : [];
     }
 
-    public function recuperarEstatisticaPagamento($exercicio, $aFiltro = [])
+    /**
+     * Busca Unidades com estatistica de orçamento e valores de pagamento.
+     * 
+     * @param stdClass $filtro
+     * @return array
+     */
+    public function recuperarEstatisticaPagamento(stdClass $filtro)
     {
         $sql = "
             SELECT DISTINCT
@@ -301,8 +307,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
                 AND ptr.ptrano = suo.prsano
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -318,8 +324,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
                 AND suo.prsano = lmu.prsano
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -336,8 +342,8 @@ class Pi_PlanoInterno extends Modelo
                 AND pli.pliano = suo.prsano
                 LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -357,8 +363,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -378,8 +384,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -399,8 +405,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '{$exercicio}'
-                AND suo.unofundo = FALSE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
             GROUP BY
                 ordem,
                 descricao,
@@ -414,9 +420,15 @@ class Pi_PlanoInterno extends Modelo
         return $dados ? $dados : [];
     }
 
-    public function recuperarEstatisticaPagamentoDetalhe($exercicio, $unosigla)
+    /**
+     * Busca Subunidades por UO com estatistica de orçamento e valores de pagamento.
+     * 
+     * @param stdClass $filtro
+     * @return array
+     */
+    public function recuperarEstatisticaPagamentoDetalhe(stdClass $filtro)
     {
-        $filtro = "AND suo.unosigla = '{$unosigla}'";
+        $filtroUO = $filtro->unosigla? "AND suo.unosigla = '{$filtro->unosigla}'": NULL;
 
         $sql = "
             SELECT DISTINCT
@@ -430,8 +442,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
                 AND ptr.ptrano = suo.prsano
             WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -447,8 +459,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
                 AND suo.prsano = lmu.prsano
             WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -465,8 +477,8 @@ class Pi_PlanoInterno extends Modelo
                 AND pli.pliano = suo.prsano
                 LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
             WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -486,8 +498,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '$exercicio' {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -507,9 +519,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '$exercicio'
-                {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -529,9 +540,8 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
                 AND sec.exercicio = ptr.ptrano
             WHERE
-                suo.prsano = '$exercicio'
-                {$filtro}
-                AND suo.unofundo = FALSE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
             GROUP BY
                 ordem,
                 descricao,
@@ -838,8 +848,10 @@ class Pi_PlanoInterno extends Modelo
 
     public function recuperarDetalhesValoresGrafico($unosigla)
     {
-        $estatistica = $this->recuperarEstatisticaPagamentoDetalhe($_SESSION['exercicio'], $unosigla);
-
+        $estatistica = $this->recuperarEstatisticaPagamentoDetalhe((object) array(
+            'exercicio' => $_SESSION['exercicio'],
+            'unosigla' => $unosigla,
+            'unofundo' => 'FALSE'));
         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
             ->gerarGrafico($estatistica);

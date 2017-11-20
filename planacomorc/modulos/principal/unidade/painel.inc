@@ -32,15 +32,12 @@ if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
 $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
-//var_dump($aPropostas);
-//die('painel');
 
 /**
  * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
-
 
 ?>
 <script>
@@ -90,9 +87,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento($_SESSION['exercicio']);
-                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
+                                'exercicio' => $_SESSION['exercicio'],
+                                'unofundo' => 'FALSE'
+                            ));
+                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                            $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
                                 ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
                                 ->gerarGrafico($estatistica);
                         ?>
