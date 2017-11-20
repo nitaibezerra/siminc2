@@ -290,7 +290,7 @@ PHP;
 //                $aFiltroCampo[] = '"capstatus = \'A\'"';
             }
             if($srAtributo['column_name'] == 'prsano'){
-                $aFiltroCampo[] = '"capano = \'{$_SESSION[\'exercicio\']}\'"';
+                $aFiltroCampo[] = '"prsano = \'{$_SESSION[\'exercicio\']}\'"';
             }
         }
 
