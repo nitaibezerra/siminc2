@@ -556,17 +556,19 @@ class Modelo extends cls_banco {
         parent::monta_combo($pk, $sql, $habil, $titulo, $acao, $opc, $txtdica, $size, $obrig, $pk, $return, $value, $title, $complemento, $classe, $complementoOption, $percentual);
     }
 
-    public function recuperarSqlCombo($dados = null) {
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
         $pk = $this->arChavePrimaria[0];
 
-        // Verifica se existe algum campo com o padrão de nomenclatura referente ao campo de descrição
-        $descricao = $status = '';
-        $aPossibilidades = ['dsc', 'desc', 'nome', 'descricao'];
         foreach (array_keys($this->arAtributos) as $atributo) {
             if (substr($atributo, -6) == 'status') {
-                $status = $atributo;
+                $where[] = "{$atributo} = 'A'";
+            } elseif (substr($atributo, -3) == 'ano') {
+                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
             }
-            if (!$descricao) {
+            if ($descricao) {
+                $descricao = implode(" || ' - ' || ", (array)$descricao);
+            } else {
+                $aPossibilidades = ['dsc', 'desc', 'nome', 'descricao'];
                 foreach ($aPossibilidades as $possibilidade) {
                     if (substr($atributo, -(strlen($possibilidade))) == $possibilidade) {
                         $descricao = $atributo;
@@ -575,13 +577,13 @@ class Modelo extends cls_banco {
                 }
             }
         }
-
-        $where = $status ? " where {$status} = 'A'" : '';
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
         $sql = "select {$pk} AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela}
                 $where
-                order by $descricao   
+                order by $order   
         ";
 
         return $sql;

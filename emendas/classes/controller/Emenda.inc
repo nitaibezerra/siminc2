@@ -4,7 +4,7 @@ class Emendas_Controller_Emenda
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/emenda&acao=A';
+        $url = '?modulo=principal/emenda&acao=A';
 
         try {
             $mEmenda = new Emendas_Model_Emenda($dados['emeid']);
@@ -22,7 +22,7 @@ class Emendas_Controller_Emenda
     
     public function excluir($emeid)
     {
-        $url = '?modulo=apoio/emenda&acao=A';
+        $url = '?modulo=principal/emenda&acao=A';
 
         try {
             $mEmenda = new Emendas_Model_Emenda($emeid);
@@ -33,7 +33,7 @@ class Emendas_Controller_Emenda
                 simec_redirecionar($url, 'error', $mensagem);
             }            
             
-            $mEmenda->status = 'I';
+            $mEmenda->emestatus = 'I';
             $mEmenda->salvar();
             $mEmenda->commit();
             simec_redirecionar($url, 'success');
