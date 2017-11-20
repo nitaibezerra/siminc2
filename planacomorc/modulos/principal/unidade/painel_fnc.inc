@@ -14,10 +14,10 @@ $oPlanoInterno = new Pi_PlanoInterno();
 
 switch ($_REQUEST['req']) {
     case 'detalhe-subunidade':
-        $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
+        $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid'], 'fnc');
         die;
     case 'detalhe-funcional':
-        $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
+        $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid'], 'fnc');
         die;
 }
 
@@ -199,12 +199,12 @@ bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), ar
     $(document).ready(function(){
 
         $('.detalhe-subunidade').click(function(){
-            $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid=' + $(this).data('suoid'));
+            $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A&req=detalhe-subunidade&suoid=' + $(this).data('suoid'));
             $('#detalhe-subunidade').modal();
         });
 
         $('.detalhe-funcional').click(function(){
-            $('#detalhe-funcional .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-funcional&ptrid=' + $(this).data('ptrid'));
+            $('#detalhe-funcional .modal-body').load('planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A&req=detalhe-funcional&ptrid=' + $(this).data('ptrid'));
             $('#detalhe-funcional').modal();
         });
 
