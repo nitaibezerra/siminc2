@@ -35,6 +35,16 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
 }
 
 if($_REQUEST['fnc']){
+    $listCabecalho = array(
+        "PTRES",
+        "Funcional",
+        "Dotação Atual(R$)",
+        '<center>Aprovado em PI(R$)</center>' => array(
+            'Aprovado',
+            'Disponível Custeio',
+            'Disponível Capital'),
+        '<center>Empenho(R$)</center>' => array('Empenhado', 'Não Empenhado')
+    );
     $sql_lista = montarSqlBuscarFuncionalFnc((object)array(
         'exercicio' => $_SESSION['exercicio'],
         'prgcod' => $_REQUEST['prgcod'],
@@ -45,6 +55,16 @@ if($_REQUEST['fnc']){
         'buscalivre' => $_REQUEST['buscalivre'],
     ));
 } else {
+    $listCabecalho = array(
+        "PTRES",
+        "Funcional",
+        "Dotação Atual(R$)",
+        '<center>Detalhado em PI(R$)</center>' => array(
+            'Detalhado',
+            'Não Detalhado Custeio',
+            'Não Detalhado Capital'),
+        '<center>Empenho(R$)</center>' => array('Empenhado', 'Não Empenhado')
+    );
     $sql_lista = montarSqlBuscarFuncional((object)array(
         'exercicio' => $_SESSION['exercicio'],
         'prgcod' => $_REQUEST['prgcod'],
@@ -131,42 +151,24 @@ if($_REQUEST['fnc']){
         <br>
         <?php
         $listagem = new Simec_Listagem();
-        if ($_REQUEST['tipo'] == 'pi') {
-            $listagem->setCabecalho(array(
-                "PTRES",
-                "Funcional",
-                "Dotação Atual(R$)",
-                '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado'),
-            ));
-        } else {
-            $listagem->setCabecalho(array(
-                "PTRES",
-                "Funcional",
-                "Dotação Atual(R$)",
-                '<center>Detalhado em PI (R$)</center>' => array(
-                    'Detalhado',
-                    'Não Detalhado Custeio',
-                    'Não Detalhado Capital'),
-                '<center>Empenho (R$)</center>' => array('Empenhado', 'Não Empenhado')
-            ));
-        }
-
-        $listagem->setQuery($sql_lista);
-        $listagem->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')));
-        $listagem->setIdLinha();
-        $listagem->addCallbackDeCampo(array(
-            'dotacaoatual',
-            'det_subacao',
-            'nao_det_subacao',
-            'det_pi',
-            'nao_det_pi',
-            'nao_det_pi_custeio',
-            'nao_det_pi_capital',
-            'empenhado',
-            'nao_empenhado',
-            'saldo'), 'mascaraMoeda');
-        $listagem->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS);
-        $listagem->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+        $listagem
+            ->setCabecalho($listCabecalho)
+            ->setQuery($sql_lista)
+            ->addAcao('select', array('func' => 'resultado', 'extra-params' => array('acao')))
+            ->setIdLinha()
+            ->addCallbackDeCampo(array(
+                'dotacaoatual',
+                'det_subacao',
+                'nao_det_subacao',
+                'det_pi',
+                'nao_det_pi',
+                'nao_det_pi_custeio',
+                'nao_det_pi_capital',
+                'empenhado',
+                'nao_empenhado',
+                'saldo'), 'mascaraMoeda')
+            ->setTotalizador(Simec_Listagem::TOTAL_QTD_REGISTROS)
+            ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
         ?>
         <div id="dialog" />
         <script type="text/javascript">

@@ -471,7 +471,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <b>Dotação Atual(R$)</b>
                                         </td>
                                         <td colspan="2" nowrap>
-                                            <b><span id="detPi">Detalhado em PI (R$)</span></b>
+                                            <b><span id="detPi">Aprovado em PI (R$)</span></b>
                                         </td>
                                         <td colspan="2">
                                             <b>Empenho (R$)</b>
@@ -481,10 +481,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td nowrap><b>Detalhado</b></td>
-                                        <td nowrap><b>Não&nbsp;Detalhado</b></td>
+                                        <td nowrap><b>Aprovado</b></td>
+                                        <td nowrap><b>Disponível</b></td>
                                         <td nowrap><b>Empenhado</b></td>
-                                        <td nowrap><b>Não&nbsp;Empenhado</b></td>
+                                        <td nowrap><b>Não Empenhado</b></td>
                                     </tr>
                                     <?php
                                         if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
