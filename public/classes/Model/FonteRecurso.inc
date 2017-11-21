@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento da entidade emendas.emendadetalhe
+ * Classe de mapeamento da entidade public.fonterecurso
  *
  * @category Class
  * @package  A1
  * @author   ORION TELES DE MESQUITA <orion.mesquita@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 13-11-2017
+ * @version  Release: 20-11-2017
  * @link     no link
  */
 
@@ -15,7 +15,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 
 
 /**
- * Emendas_Model_EmendaDetalhe
+ * Public_Model_Fonterecurso
  *
  * @category Class
  * @package  A1
@@ -24,14 +24,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @version  Release: 
  * @link     no link
  */
-class Emendas_Model_EmendaDetalhe extends Modelo
+class Public_Model_FonteRecurso extends Modelo
 {
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = 'emendas.emendadetalhe';
+    protected $stNomeTabela = 'public.fonterecurso';
 
     /**
      * Chave primaria.
@@ -39,16 +39,13 @@ class Emendas_Model_EmendaDetalhe extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
-        'emdid',
+        'foncod',
     );
     /**
      * Chaves estrangeiras.
      * @var array
      */
     protected $arChaveEstrangeira = array(
-        'foncod' => array('tabela' => 'public.fonterecurso', 'pk' => 'foncod'),
-        'mapcod' => array('tabela' => 'modalidadeaplicacao', 'pk' => 'mapcod'),
-        'gndcod' => array('tabela' => 'gnd', 'pk' => 'gndcod'),
     );
 
     /**
@@ -57,12 +54,12 @@ class Emendas_Model_EmendaDetalhe extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
-        'emdid' => null,
-        'emeid' => null,
-        'gndcod' => null,
-        'mapcod' => null,
         'foncod' => null,
-        'emdvalor' => null,
+        'fondsc' => null,
+        'fonstatus' => null,
+        'fonabrev' => null,
+        'grfid' => null,
+        'clasproporc' => null,
     );
 
 }//end Class
