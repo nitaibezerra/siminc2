@@ -1,4 +1,5 @@
 <?php
+$mEmenda = new Emendas_Model_Emenda($_REQUEST['emeid']);
 
 $cEmenda = new Emendas_Controller_Emenda();
 switch ($_REQUEST['req']) {
@@ -11,9 +12,21 @@ switch ($_REQUEST['req']) {
 	case 'carregarAcaoPorUo':
         echo $simec->select('acaid', 'Funcional', null, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'], ["unoid = '{$_REQUEST['unoid']}'"]));
 		die;
+    case 'formulario-detalhe':
+        $cEmenda->montarFormularioDetalhes($_REQUEST['emeid'], $_REQUEST['emdid']);
+        die;
+    case 'listar-detalhe':
+        $cEmenda->montarListagemDetalhes($mEmenda->emeid);
+        die;
+    case 'salvar-detalhe':
+        $cEmendaDetalhe = new Emendas_Controller_EmendaDetalhe();
+        $cEmendaDetalhe->salvar($_POST);
+        die;
+    case 'excluir-detalhe':
+        $cEmendaDetalhe = new Emendas_Controller_EmendaDetalhe();
+        echo $cEmendaDetalhe->excluir($_REQUEST['emdid']);
+        die;
 }
-
-$mEmenda = new Emendas_Model_Emenda($_REQUEST['emeid']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -26,7 +39,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Dados Gerais</h5>
@@ -42,7 +55,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
                         echo '<span id="span-funcional">' . $simec->select('acaid', 'Funcional', $mEmenda->acaid, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'])) . '</span>';
                         echo $simec->radio('emeimpositiva', 'Impositiva', $mEmenda->emeimpositiva, ['t'=>'Sim', 'f'=>'Não'], ['required']);
-                        echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['required', 'maxlength' => 2000]);
+                        echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['maxlength' => 2000]);
                         ?>
                         
                         <div class="form-group">
@@ -56,6 +69,21 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>                        
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+            	<div class="ibox-title">
+            		<h5>Dados Financeiros</h5>
+            	</div>
+            	<div class="ibox-content" id="">
+                    <div id="div_formulario_detalhe">
+                        <?php $cEmenda->montarFormularioDetalhes($mEmenda->emeid); ?>
+                    </div>
+                    <div id="div_listagem_detalhe">
+                        <?php $cEmenda->montarListagemDetalhes($mEmenda->emeid); ?>
+                    </div>
+            	</div>
             </div>
         </div>
     </div>

@@ -11,4 +11,7 @@ $(document).ready(function(){
         prefix: ''
     });
 
+	$('body').on('keyup', '.valor', function(){
+        $(this).val(mascaraglobal('###.###.###.###.###,##', $(this).val()));
+    });
 });

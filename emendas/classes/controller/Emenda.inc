@@ -111,4 +111,19 @@ class Emendas_Controller_Emenda
         echo 'Fim';
     }
 
+    public function montarFormularioDetalhes($emeid = null, $emdid = null)
+    {
+        global $simec;
+        $mEmendadetalhe = new Emendas_Model_EmendaDetalhe($emdid);
+
+        if(!$mEmendadetalhe->emeid){ $mEmendadetalhe->emeid = $emeid; }
+        include_once APPRAIZ . 'emendas/modulos/principal/emendadetalhe_form.inc';
+    }
+
+    public function montarListagemDetalhes($emeid)
+    {
+        $aEmendadetalhe = (new Emendas_Model_Emendadetalhe)->recuperarTodos('*', ["emeid = $emeid"]);
+        include_once APPRAIZ . 'emendas/modulos/principal/emendadetalhe.inc';
+    }
+
 }            
