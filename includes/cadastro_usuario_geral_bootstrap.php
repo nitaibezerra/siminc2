@@ -1506,32 +1506,34 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 
 	$remetente = array (
             "nome" => SIGLA_SISTEMA,
-            "email" => "noreply@mec.gov.br"
+            "email" => $_SESSION['email_sistema']
 	);
 	$destinatarios = recuperarDestinatariosPadrao ();
 
 	$assunto = "Novo super-usuário atribuído ({$dados['sisabrev']})";
-	$mensagem = "<pre>Prezados,
-	Foi vinculado um novo usuário com o perfil Super-Usuário. Seguem os dados:
-	Módulo: {$dados['sisdsc']} ({$dados['sisabrev']})
-	Perfil Atribuído: {$dados['pfldsc']} ({$dados['pflcod']})
-	Nome: {$dados['usunome']}
-	CPF: {$dados['usucpf']}
-	E-mail: {$dados['usuemail']}
-	UF: {$dados['regcod']}
-	Telefone: ({$dados['usufoneddd']}) {$dados['usufonenum']}
-	Função: {$dados['usufuncao']}
+	$mensagem = "
+        <pre>
+            Prezados,
+            Foi vinculado um novo usuário com o perfil Super-Usuário. Seguem os dados:
+            Módulo: {$dados['sisdsc']} ({$dados['sisabrev']})
+            Perfil Atribuído: {$dados['pfldsc']} ({$dados['pflcod']})
+            Nome: {$dados['usunome']}
+            CPF: {$dados['usucpf']}
+            E-mail: {$dados['usuemail']}
+            UF: {$dados['regcod']}
+            Telefone: ({$dados['usufoneddd']}) {$dados['usufonenum']}
+            Função: {$dados['usufuncao']}
 
-	Responsável pelo cadastro: {$dados['usunomeorigem']} ({$dados['usucpforigem']})
-	Telefone: ({$dados['usufonedddorigem']}) {$dados['usufonenumorigem']}
-	E-mail: {$dados['usuemailorigem']}
+            Responsável pelo cadastro: {$dados['usunomeorigem']} ({$dados['usucpforigem']})
+            Telefone: ({$dados['usufonedddorigem']}) {$dados['usufonenumorigem']}
+            E-mail: {$dados['usuemailorigem']}
 
-	Link para verificação do usuário: http://simec.mec.gov.br/seguranca/seguranca.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf={$dados['usucpf']}
+            Link para verificação do usuário: ". URL_SISTEMA. "seguranca/seguranca.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf={$dados['usucpf']}
 
-	Qualquer dúvida, entrar em contato com o gestor do módulo.
+            Qualquer dúvida, entrar em contato com o gestor do módulo.
 
-	Atenciosamente,
-	Equipe <?php echo SIGLA_SISTEMA; ?>.
+            Atenciosamente,
+            Equipe ". SIGLA_SISTEMA. "
 	</pre>
 	";
 	$retorno = enviar_email ( $remetente, $destinatarios, $assunto, $mensagem );
@@ -1543,7 +1545,7 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 
 	$remetente = array (
             "nome" => SIGLA_SISTEMA,
-            "email" => "noreply@mec.gov.br"
+            "email" => $_SESSION['email_sistema']
 	);
 	$destinatarios = recuperarDestinatariosPadrao ();
 
@@ -1560,28 +1562,30 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
             ";
         }
 
-        $mensagem = "<pre>Prezados,
+        $mensagem = "
+            <pre>
+                Prezados,
 
-        {$texto}
+                {$texto}
 
-        Módulo: {$_SESSION['sisdsc']} ({$_SESSION['sisabrev']})
+                Módulo: {$_SESSION['sisdsc']} ({$_SESSION['sisabrev']})
 
-        Nome: {$dados['usunome']}
-        CPF: {$dados['usucpf']}
-        E-mail: {$dados['usuemail']}
-        UF: {$dados['regcod']}
-        Telefone: ({$dados['usufoneddd']}) {$dados['usufonenum']}
-        Função: {$dados['usufuncao']}
+                Nome: {$dados['usunome']}
+                CPF: {$dados['usucpf']}
+                E-mail: {$dados['usuemail']}
+                UF: {$dados['regcod']}
+                Telefone: ({$dados['usufoneddd']}) {$dados['usufonenum']}
+                Função: {$dados['usufuncao']}
 
-        Responsável pela alteracao: {$_SESSION['usunome']} ({$_SESSION['usucpf']}) - {$_SESSION['usuemail']}
+                Responsável pela alteracao: {$_SESSION['usunome']} ({$_SESSION['usucpf']}) - {$_SESSION['usuemail']}
 
-        Link para verificação do usuário: http://simec.mec.gov.br/seguranca/seguranca.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf={$dados['usucpf']}
+                Link para verificação do usuário: ". URL_SISTEMA. "seguranca/seguranca.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf={$dados['usucpf']}
 
-        Qualquer dúvida, entrar em contato com o gestor do módulo.
+                Qualquer dúvida, entrar em contato com o gestor do módulo.
 
-        Atenciosamente,
-        Equipe <?php echo SIGLA_SISTEMA; ?>.
-        </pre>
+                Atenciosamente,
+                Equipe ". SIGLA_SISTEMA. "
+            </pre>
         ";
         return enviar_email($remetente, $destinatarios, $assunto, $mensagem);
     }
