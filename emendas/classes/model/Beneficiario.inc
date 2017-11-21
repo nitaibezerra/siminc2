@@ -58,15 +58,20 @@ class Emendas_Model_Beneficiario extends Modelo
      */
     protected $arAtributos = array(
         'benid' => null,
+        'emeid' => null,
         'suoid' => null,
         'proid' => null,
         'esfid' => null,
         'benformaexecucao' => null,
         'bennumeroprocesso' => null,
         'beninicio' => null,
+        'benpprogramanumero' => null,
         'benprogramatitulo' => null,
         'benprogramaobjeto' => null,
         'benstatus' => null,
+        'benpropostanumero' => null,
+        'benpropostatitulo' => null,
+        'benpropostaobjeto' => null,
     );
 
 }//end Class

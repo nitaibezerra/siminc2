@@ -122,7 +122,7 @@ class Emendas_Controller_Emenda
 
     public function montarListagemDetalhes($emeid)
     {
-        $aEmendadetalhe = (new Emendas_Model_Emendadetalhe)->recuperarTodos('*', ["emeid = $emeid"]);
+        $aEmendadetalhe = (new Emendas_Model_Emendadetalhe)->recuperarTodos('*', ['emeid = ' . (int)$emeid]);
         include_once APPRAIZ . 'emendas/modulos/principal/emendadetalhe.inc';
     }
 

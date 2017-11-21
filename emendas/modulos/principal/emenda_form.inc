@@ -78,13 +78,69 @@ include APPRAIZ . "includes/cabecalho.inc";
             	</div>
             	<div class="ibox-content" id="">
                     <div id="div_formulario_detalhe">
-                        <?php $cEmenda->montarFormularioDetalhes($mEmenda->emeid); ?>
+                        <?php if($mEmenda->emeid){
+                            $cEmenda->montarFormularioDetalhes($mEmenda->emeid);
+                        } ?>
                     </div>
                     <div id="div_listagem_detalhe">
                         <?php $cEmenda->montarListagemDetalhes($mEmenda->emeid); ?>
                     </div>
             	</div>
             </div>
+        </div>
+        
+        <div class="ibox float-e-margins">
+        	<div class="ibox-title">
+        		<h5>Beneficiários</h5>
+        	</div>
+        	<div class="ibox-content">
+                <?php if($mEmenda->emeid){ ?>
+
+                    <a class="btn btn-small btn-warning" href="?modulo=principal/beneficiario_form&acao=A&emeid=<?php echo $mEmenda->emeid; ?>">Novo</a>
+
+                    <?php $aBeneficiario = (new Emendas_Model_Beneficiario())->recuperarTodos('*', ['emeid = ' . $mEmenda->emeid]);
+                    if(count($aBeneficiario)){ ?>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" >
+                                <thead>
+                                <tr class="text-center">
+                                    <th width="10%">Ações</th>
+                                    <th>suoid</th>
+                                    <th>proid</th>
+                                    <th>esfid</th>
+                                    <th>benformaexecucao</th>
+                                    <th>bennumeroprocesso</th>
+                                    <th>beninicio</th>
+                                    <th>benprogramatitulo</th>
+                                    <th>benprogramaobjeto</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($aBeneficiario as $dados){ ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a title="Alterar" href="?modulo=principal/beneficiario_form&acao=A&benid=<?php echo $dados['benid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        </td>
+                                        <td><?php echo $dados['suoid']; ?></td>
+                                        <td><?php echo $dados['proid']; ?></td>
+                                        <td><?php echo $dados['esfid']; ?></td>
+                                        <td><?php echo $dados['benformaexecucao']; ?></td>
+                                        <td><?php echo $dados['bennumeroprocesso']; ?></td>
+                                        <td><?php echo $dados['beninicio']; ?></td>
+                                        <td><?php echo $dados['benprogramatitulo']; ?></td>
+                                        <td><?php echo $dados['benprogramaobjeto']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php } else {
+                        echo '<div class="alert alert-danger">Nenhum beneficiário cadastrado</div>';
+                    }
+                } ?>
+
+        	</div>
         </div>
     </div>
 </div>
