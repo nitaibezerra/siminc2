@@ -271,8 +271,11 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                     if (($tpocod == 2 || $tpocod == 3) && !empty($usuario->orgao)) {
                         $entid = 999999;
                     }
+                    if(!$entid){
+                        $entid = 390374;
+                    }
                     //Função utilizada ao carregar a página. Após isso, qualquer tipo de ação no Tipo de Orgão será executada por outra função.
-                    $funcoesBootstrap->carrega_orgao_bootstrap("S",$usuario->usucpf);
+                    $funcoesBootstrap->carrega_orgao_bootstrap("S", $usuario->usucpf);
                     ?>
                 </section>
             </section>
