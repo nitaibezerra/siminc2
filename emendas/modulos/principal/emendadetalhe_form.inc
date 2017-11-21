@@ -7,7 +7,7 @@
     echo $simec->select('gndcod', 'GND', $mEmendadetalhe->gndcod, (new Public_Model_Gnd())->recuperarSqlCombo(['gndcod', 'gnddsc']));
     echo $simec->select('mapcod', 'Mod. Aplicação', $mEmendadetalhe->mapcod, (new Public_Model_ModalidadeAplicacao())->recuperarSqlCombo(['mapcod', 'mapdsc']));
     echo $simec->select('foncod', 'Fonte', $mEmendadetalhe->foncod, (new Public_Model_FonteRecurso())->recuperarSqlCombo(['foncod', 'fondsc'], ['grfid = 1']));
-    echo $simec->input('emdvalor', 'Valor', $mEmendadetalhe->emdvalor, ['class'=>'valor']);
+    echo $simec->valor('emdvalor', 'Valor', $mEmendadetalhe->emdvalor, ['class'=>'teste']);
     ?>
 
     <div class="form-group">
