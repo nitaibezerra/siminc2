@@ -569,7 +569,10 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
     $where .= $filtros->prgcod? "\n AND UPPER(ptr.prgcod) LIKE('%". strtoupper($filtros->prgcod). "%')": NULL;
     $where .= $filtros->acacod? "\n AND UPPER(aca.acacod) LIKE('%". strtoupper($filtros->acacod). "%')": NULL;
     $where .= $filtros->unicod? "\n AND aca.unicod = '{$filtros->unicod}'": NULL;
-    $where .= $filtros->ungcod? "\n AND uni.suocod = '{$filtros->ungcod}'": NULL;
+    if($filtros->ungcod){
+        $where .= "\n AND uni.suocod = '{$filtros->ungcod}'";
+        $whereCadastrado = "\n AND pli.ungcod = '{$filtros->ungcod}'";
+    }
     $where .= $filtros->buscalivre? "\n AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $filtros->buscalivre . "%') OR dtl.ptres ILIKE '%" . $filtros->buscalivre . "%')": NULL;
     if($filtros->no_ptrid){
         if(is_array($filtros->no_ptrid)){
@@ -628,7 +631,7 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
                     JOIN planacomorc.pi_complemento pc USING(pliid)
                 WHERE
                     pli.plistatus = 'A'
-                    AND pli.pliano = '{$filtros->exercicio}'
+                    AND pli.pliano = '{$filtros->exercicio}' {$whereCadastrado}
                 GROUP BY
                     pip2.ptrid
             ) cadastrado ON(ptr.ptrid = cadastrado.ptrid)

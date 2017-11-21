@@ -1611,6 +1611,7 @@ function buscarPtresFnc(stdClass $filtros) {
             LEFT JOIN (
                 SELECT
                     pip2.ptrid,
+                    pli.ungcod,
                     (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS total,
                     SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
                     SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
@@ -1621,8 +1622,9 @@ function buscarPtresFnc(stdClass $filtros) {
                     pli.plistatus = 'A'
                     AND pli.pliano = '{$filtros->exercicio}'
                 GROUP BY
-                    pip2.ptrid
-            ) cadastrado ON(ptr.ptrid = cadastrado.ptrid)
+                    pip2.ptrid,
+                    pli.ungcod
+            ) cadastrado ON(ptr.ptrid = cadastrado.ptrid AND pi.ungcod = cadastrado.ungcod)
             LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
             aca.acasnrap = FALSE

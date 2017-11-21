@@ -271,11 +271,11 @@ if($_REQUEST['fnc']){
                     var dotacaoAtualPO = $('tr#' + id + ' td:nth-child(4)').text();
                     celDotacaoAtualPo.innerHTML = dotacaoAtualPO;
                     
-                    var vlrAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(2) autorizadocusteio').text());
-                    var vlrAutorizadoCapital = textToFloat($('tr#' + id + ' td:nth-child(2) autorizadocapital').text());
+                    var vlrAutorizadoCusteio = textToFloat($('tr#'+ id+ ' td:nth-child(2) autorizadocusteio').text());
+                    var vlrAutorizadoCapital = textToFloat($('tr#'+ id+ ' td:nth-child(2) autorizadocapital').text());
                     
-                    var vlrCadastradoAutorizadoCusteio = textToFloat($('tr#' + id + ' td:nth-child(2) cadastradocusteio').text());
-                    var vlrCadastradoAutorizadoCapital = textToFloat($('tr#' + id + ' td:nth-child(2) cadastradocapital').text());
+                    var vlrCadastradoAutorizadoCusteio = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocusteio').text());
+                    var vlrCadastradoAutorizadoCapital = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocapital').text());
                     
                     $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
                     $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
