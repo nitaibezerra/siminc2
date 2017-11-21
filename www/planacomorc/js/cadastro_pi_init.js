@@ -289,11 +289,14 @@
             atualizarValorDoProjeto();
             atualizarValorDetalhado();
             atualizarValorNaoDetalhado();
-            atualizarValorLimiteDisponivelUnidade();
             if(fnc === false){
+                atualizarValorLimiteDisponivelUnidade();
                 atualizarValorLimiteDisponivelFuncionalCusteio();
                 mudarCorValorProjeto();
             } else {
+                if(intEsdid == intEsdidAprovado){
+                    atualizarValorLimiteDisponivelUnidade();
+                }
                 atualizarValorJaCadastradoFuncionalCusteio();
             }
         });
@@ -303,11 +306,14 @@
             atualizarValorDoProjeto();
             atualizarValorDetalhado();
             atualizarValorNaoDetalhado();
-            atualizarValorLimiteDisponivelUnidade();
             if(fnc === false){
+                atualizarValorLimiteDisponivelUnidade();
                 atualizarValorLimiteDisponivelFuncionalCapital();
                 mudarCorValorProjeto();
             } else {
+                if(intEsdid == intEsdidAprovado){
+                    atualizarValorLimiteDisponivelUnidade();
+                }
                 atualizarValorJaCadastradoFuncionalCapital();
             }
         });
