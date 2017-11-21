@@ -1433,8 +1433,12 @@ DML;
     intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";
     intEsfidFederalBrasil = "<?php echo ESFERA_FEDERAL_BRASIL; ?>";
     intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
+    // Estado do PI FNC
+    intEsdidAprovado = "<?php echo ESD_FNC_PI_APROVADO; ?>";
     // Manutenção item
     intMaiid = '<?php echo $dadosPI['maiid']; ?>';
+    // Estado do PI
+    intEsdid = '<?php echo $estadoAtual['esdid']; ?>';
 
     listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
 
