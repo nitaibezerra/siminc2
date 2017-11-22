@@ -79,8 +79,8 @@ class Planacomorc_Model_PiJanela extends Modelo
             SELECT
                 pij.pijid,
                 pij.pijdsc,
-                pij.pijinicio,
-                pij.pijfim,
+                TO_CHAR(pij.pijinicio, 'DD/MM/YYYY') AS pijinicio,
+                TO_CHAR(pij.pijfim, 'DD/MM/YYYY') AS pijfim,
                 INITCAP(ucad.usunome) AS usunome
             FROM planacomorc.pi_janela pij
                 JOIN seguranca.usuario ucad ON pij.usucpf = ucad.usucpf

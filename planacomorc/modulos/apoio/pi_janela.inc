@@ -1,7 +1,6 @@
 <?php
 
 $listaJanelas = (new Planacomorc_Model_PiJanela)->buscarTodos((object) array("prsano" => $_SESSION['exercicio']));
-
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
@@ -42,8 +41,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             </a>
                                         </td>
                                         <td><?php echo $dados['pijdsc']; ?></td>
-                                        <td><?php echo formata_data($dados['pijinicio']); ?></td>
-                                        <td><?php echo formata_data($dados['pijfim']); ?></td>
+                                        <td><?php echo $dados['pijinicio']; ?></td>
+                                        <td><?php echo $dados['pijfim']; ?></td>
                                         <td><?php echo $dados['usunome']; ?></td>
                                     </tr>
                                 <?php } ?>
