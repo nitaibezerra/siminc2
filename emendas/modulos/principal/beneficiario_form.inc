@@ -50,7 +50,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
 
                         echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required']);
-                        echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(['procnpj', 'pronome'], null,'pronome'), ['required']);
+                        echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required']);
                         echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                         echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
                         echo $simec->radio('benformaexecucao', 'Forma de Execução', $mBeneficiario->benformaexecucao, ['S'=>'SICONV', 'D'=>'Direta', 'T'=>'TED'], ['required']);

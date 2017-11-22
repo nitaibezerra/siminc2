@@ -10,7 +10,7 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario = new Emendas_Model_Beneficiario($dados['benid']);
             $mBeneficiario->popularDadosObjeto($dados);
             
-            $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benprogramatitulo', 'benprogramaobjeto', ]);
+            $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto']);
 
             // Salvando dados da Localização
             $dados['benid'] = $mBeneficiario->benid;
@@ -46,4 +46,4 @@ class Emendas_Controller_Beneficiario
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
-}            
+}

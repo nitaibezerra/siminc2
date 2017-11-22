@@ -106,14 +106,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <thead>
                                 <tr class="text-center">
                                     <th width="10%">Ações</th>
-                                    <th>suoid</th>
-                                    <th>proid</th>
-                                    <th>esfid</th>
-                                    <th>benformaexecucao</th>
-                                    <th>bennumeroprocesso</th>
-                                    <th>beninicio</th>
-                                    <th>benprogramatitulo</th>
-                                    <th>benprogramaobjeto</th>
+                                    <th>Proponente</th>
+                                    <th>Unidade</th>
+                                    <th>Esfera</th>
+                                    <th>Forma de Execução</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -122,14 +118,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <td class="text-center">
                                             <a title="Alterar" href="?modulo=principal/beneficiario_form&acao=A&benid=<?php echo $dados['benid']; ?>"><i class="fa fa-pencil"></i></a>
                                         </td>
-                                        <td><?php echo $dados['suoid']; ?></td>
-                                        <td><?php echo $dados['proid']; ?></td>
-                                        <td><?php echo $dados['esfid']; ?></td>
-                                        <td><?php echo $dados['benformaexecucao']; ?></td>
-                                        <td><?php echo $dados['bennumeroprocesso']; ?></td>
-                                        <td><?php echo $dados['beninicio']; ?></td>
-                                        <td><?php echo $dados['benprogramatitulo']; ?></td>
-                                        <td><?php echo $dados['benprogramaobjeto']; ?></td>
+                                        <td><?php echo $dados['procnpj'] . ' - ' . $dados['pronome']; ?></td>
+                                        <td><?php echo $dados['suocod'] . ' - ' . $dados['suonome']; ?></td>
+                                        <td><?php echo $dados['esfdsc']; ?></td>
+                                        <td><?php echo $dados['formaexecucao']; ?></td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -138,7 +130,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <?php } else {
                         echo '<div class="alert alert-danger">Nenhum beneficiário cadastrado</div>';
                     }
-                } ?>
+                } else {
+                    echo '<div class="alert alert-danger">Nenhum beneficiário cadastrado</div>';
+                }?>
 
         	</div>
         </div>
