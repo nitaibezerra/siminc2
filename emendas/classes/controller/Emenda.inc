@@ -4,7 +4,7 @@ class Emendas_Controller_Emenda
 {
     public function salvar($dados)
     {
-        $url = '?modulo=principal/emenda&acao=A';
+        $url = '?modulo=principal/emenda_form&acao=A';
 
         try {
             $mEmenda = new Emendas_Model_Emenda($dados['emeid']);
@@ -13,7 +13,7 @@ class Emendas_Controller_Emenda
                 
             $mEmenda->salvar(null, null, ['emejustificativa', 'emeimpositiva', ]);
             $mEmenda->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . '&emeid=' . $mEmenda->emeid, 'success');
         } catch (Exception $e){
             $mEmenda->rollback();
             simec_redirecionar($url, 'error');

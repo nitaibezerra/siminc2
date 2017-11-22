@@ -53,9 +53,6 @@
                     $.ajax({
                         url: href,
                         success: function (emeid) {
-
-                            alert(emeid);
-
                             jQuery("#div_listagem_detalhe").load('?modulo=principal/emenda_form&acao=A&req=listar-detalhe&emeid=' + emeid);
                         }
                     });

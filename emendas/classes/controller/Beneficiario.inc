@@ -4,15 +4,20 @@ class Emendas_Controller_Beneficiario
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/beneficiario&acao=A';
+        $url = '?modulo=principal/beneficiario_form&acao=A';
 
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($dados['benid']);
             $mBeneficiario->popularDadosObjeto($dados);
             
             $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benprogramatitulo', 'benprogramaobjeto', ]);
+
+            // Salvando dados da Localização
+            $dados['benid'] = $mBeneficiario->benid;
+            (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
+
             $mBeneficiario->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . '&benid=' . $mBeneficiario->benid, 'success');
         } catch (Exception $e){
             $mBeneficiario->rollback();
             simec_redirecionar($url, 'error');

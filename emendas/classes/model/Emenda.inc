@@ -78,7 +78,8 @@ class Emendas_Model_Emenda extends Modelo
                     inner join emendas.autor aut on aut.autid  = eme.autid
                     inner join monitora.acao aca on aca.acaid = eme.acaid
                 where eme.emestatus = 'A'        
-                and eme.prsano = '$exercicio'";
+                and eme.prsano = '$exercicio'
+                order by aut.autnome";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
