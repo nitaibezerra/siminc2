@@ -1,6 +1,6 @@
 <?php
 
-$aPiJanela = (new Planacomorc_Model_PiJanela)->buscarTodos((object) array("prsano" => $_SESSION['exercicio']));
+$listaJanelas = (new Planacomorc_Model_PiJanela)->buscarTodos((object) array("prsano" => $_SESSION['exercicio']));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -34,7 +34,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($aPiJanela as $dados){ ?>
+                                <?php foreach($listaJanelas as $dados){ ?>
                                     <tr>
                                         <td class="text-center">
                                             <a title="Alterar" href="?modulo=apoio/pi_janela_form&acao=A&pijid=<?php echo $dados['pijid']; ?>">

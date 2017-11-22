@@ -598,11 +598,29 @@ class Pi_PlanoInterno extends Modelo
 
     public function verificarPermissaoEditar($estadoAtual, $perfis)
     {
-
         switch ($estadoAtual['esdid']) {
             case ESD_PI_APROVADO:
             case ESD_PI_CANCELADO:
             case ESD_PI_AGUARDANDO_APROVACAO:
+                return (bool)count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]));
+        }
+
+        return true;
+    }
+    
+    public function verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao)
+    {
+        # Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
+        if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao){
+            return false;
+        }
+        
+        switch ($estadoAtual['esdid']) {
+            case ESD_FNC_PI_APROVADO:
+            case ESD_FNC_PI_BANCO_PROJETOS:
+            case ESD_FNC_PI_DELIBERACAO_CFNC:
+            case ESD_FNC_PI_EM_ANALISE:
+            case ESD_FNC_PI_SELECIONADO_CFNC:
                 return (bool)count(array_intersect($perfis, [PFL_ADMINISTRADOR, PFL_SUPERUSUARIO, PFL_PLANEJAMENTO]));
         }
 

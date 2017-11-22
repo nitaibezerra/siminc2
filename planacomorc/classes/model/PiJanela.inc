@@ -73,6 +73,7 @@ class Planacomorc_Model_PiJanela extends Modelo
     public static function montarSqlBuscarTodos(stdClass $filtros) {
         $where = '';
         $where .= $filtros->prsano? "\n AND pij.prsano = '".(int) $filtros->prsano. "'": NULL;
+        $where .= $filtros->periodoVigente? "\n AND NOW() BETWEEN pij.pijinicio AND pij.pijfim ": NULL;
         
         $sql = "
             SELECT

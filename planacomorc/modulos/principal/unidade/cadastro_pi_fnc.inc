@@ -209,8 +209,12 @@ $codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
 
+$listaJanelasDeAlteracao = (new Planacomorc_Model_PiJanela)->buscarTodos((object) array(
+    'prsano' => $_SESSION['exercicio'],
+    'periodoVigente' => TRUE
+));
 $mPiPlanoInterno = new Pi_PlanoInterno();
-$podeEditar = $mPiPlanoInterno->verificarPermissaoEditar($estadoAtual, $perfis);
+$podeEditar = $mPiPlanoInterno->verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao);
 
 /**
  * Cabeçalho padrão do sistema.
@@ -245,7 +249,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                 echo '<input type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
             } ?>
         </h2>
-        <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+        &nbsp; <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+        <?php if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao): ?>
+            <h3>
+                <span style="color: red; padding: 5px;">
+                    Não há janelas de período vigente no momento para possibilitar a unidade cadastrar PI.
+                </span>
+            </h3>
+        <?php endif; ?>
     </div>
 </div>
 
