@@ -86,6 +86,34 @@ class Planacomorc_Model_PiJanela extends Modelo
                 JOIN seguranca.usuario ucad ON pij.usucpf = ucad.usucpf
             WHERE
                 pij.pijstatus = 'A' $where
+            ORDER BY
+                pijfim
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+    
+    /**
+     * Monta consulta pra buscar dados das janelas.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function montarSqlBuscarTodosCombo(stdClass $filtros) {
+        $where = '';
+        $where .= $filtros->prsano? "\n AND pij.prsano = '".(int) $filtros->prsano. "'": NULL;
+        $where .= $filtros->periodoVigente? "\n AND NOW() BETWEEN pij.pijinicio AND pij.pijfim ": NULL;
+        
+        $sql = "
+            SELECT
+                pij.pijid AS codigo,
+                pij.pijdsc || '(' || TO_CHAR(pij.pijinicio, 'DD/MM/YYYY') || ' até ' || TO_CHAR(pij.pijfim, 'DD/MM/YYYY') || ')' AS descricao
+            FROM planacomorc.pi_janela pij
+                JOIN seguranca.usuario ucad ON pij.usucpf = ucad.usucpf
+            WHERE
+                pij.pijstatus = 'A' $where
+            ORDER BY
+                descricao
         ";
         return $sql;
     }

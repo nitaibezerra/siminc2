@@ -11,6 +11,8 @@ switch ($_REQUEST['req']) {
         );
         if($_REQUEST['pijid']){
             $janela['pijid'] = $_REQUEST['pijid'];
+        } else {
+            $janela['prsano'] = $_SESSION['exercicio'];
         }
         $cPiJanela->salvar($janela);
     die;

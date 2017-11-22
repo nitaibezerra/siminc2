@@ -732,12 +732,13 @@ DML;
                             </div>
                             <div class="col-lg-9">
                                 <?php
-                                    $sql = (new Planacomorc_Model_PiJanela)->montarSqlBuscarTodos((object) array(
+                                    $janela = end($listaJanelasDeAlteracao);
+                                    $sql = (new Planacomorc_Model_PiJanela)->montarSqlBuscarTodosCombo((object) array(
                                         'prsano' => $_SESSION['exercicio'],
-                                        'periodoVigente' => TRUE
+//                                        'periodoVigente' => TRUE
                                     ));
-                                    $pijid = $dadosPI['pijid'];
-                                    $db->monta_combo('pijid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pijid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pijid) ? $pijid : null));
+                                    $pijid = $dadosPI['pijid']? $dadosPI['pijid']: $janela['pijid'];
+                                    $db->monta_combo('pijid', $sql, (in_array(PFL_SUBUNIDADE, $perfis)? 'N': 'S'), 'Selecione', '', null, null, null, 'N', 'pijid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pijid) ? $pijid : null));
                                 ?>
                             </div>
                         </div>
