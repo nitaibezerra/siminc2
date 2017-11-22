@@ -250,7 +250,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             } ?>
         </h2>
         &nbsp; <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
-        <?php if(!verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)): ?>
+        <?php if(!$mPiPlanoInterno->verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)): ?>
             <h3>
                 <span style="color: red; padding: 5px;">
                     Não há janelas de período vigente no momento para possibilitar a unidade cadastrar PI.
@@ -724,6 +724,21 @@ DML;
                             </div>
                             <div class="col-lg-9 div_neeid">
                                 <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="capid">Janela de alteração das unidades: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                            </div>
+                            <div class="col-lg-9">
+                                <?php
+                                    $sql = (new Planacomorc_Model_PiJanela)->montarSqlBuscarTodos((object) array(
+                                        'prsano' => $_SESSION['exercicio'],
+                                        'periodoVigente' => TRUE
+                                    ));
+                                    $pijid = $dadosPI['pijid'];
+                                    $db->monta_combo('pijid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pijid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pijid) ? $pijid : null));
+                                ?>
                             </div>
                         </div>
                         <div class="form-group">

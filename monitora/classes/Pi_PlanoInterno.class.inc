@@ -626,7 +626,7 @@ class Pi_PlanoInterno extends Modelo
     public function verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao)
     {
         # Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
-        if(!verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
+        if(!self::verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
             return false;
         }
         
