@@ -63,6 +63,46 @@ class Planacomorc_Model_PiJanela extends Modelo
         'prsano' => null,
         'pijstatus' => null,
     );
+    
+    /**
+     * Monta consulta pra buscar dados das janelas.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function montarSqlBuscarTodos(stdClass $filtros) {
+        $where = '';
+        $where .= $filtros->prsano? "\n AND pij.prsano = '".(int) $filtros->prsano. "'": NULL;
+        
+        $sql = "
+            SELECT
+                pij.pijid,
+                pij.pijdsc,
+                pij.pijinicio,
+                pij.pijfim,
+                INITCAP(ucad.usunome) AS usunome
+            FROM planacomorc.pi_janela pij
+                JOIN seguranca.usuario ucad ON pij.usucpf = ucad.usucpf
+            WHERE
+                pij.pijstatus = 'A' $where
+        ";
+        return $sql;
+    }
+    
+    /**
+     * Buscar dados das janelas.
+     * 
+     * @global type $db
+     * @param stdClass $filtros
+     * @return array/boolean
+     */
+    public static function buscarTodos(stdClass $filtros) {
+        global $db;
+        $sql = self::montarSqlBuscarTodos($filtros);
+        $resultado = $db->carregar($sql);
+        $lista = $resultado? $resultado: array();
+        return $lista;
+    }
 
 }//end Class
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$aPiJanela = (new Planacomorc_Model_PiJanela)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
+$aPiJanela = (new Planacomorc_Model_PiJanela)->buscarTodos((object) array("prsano" => $_SESSION['exercicio']));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -25,30 +25,28 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>pijdsc</th>
-                                <th>pijinicio</th>
-                                <th>pijfim</th>
-                                <th>pijcadastro</th>
-                                <th>usucpf</th>
-                                <th>prsano</th>
-                            </tr>
+                                <tr class="text-center">
+                                    <th width="10%">Ações</th>
+                                    <th>Descrição</th>
+                                    <th>Início</th>
+                                    <th>Fim</th>
+                                    <th>Usuário</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aPiJanela as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/pi_janela_form&acao=A&pijid=<?php echo $dados['pijid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['pijdsc']; ?></td>
-                                    <td><?php echo $dados['pijinicio']; ?></td>
-                                    <td><?php echo $dados['pijfim']; ?></td>
-                                    <td><?php echo $dados['pijcadastro']; ?></td>
-                                    <td><?php echo $dados['usucpf']; ?></td>
-                                    <td><?php echo $dados['prsano']; ?></td>
-                                </tr>
-                            <?php } ?>        
+                                <?php foreach($aPiJanela as $dados){ ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a title="Alterar" href="?modulo=apoio/pi_janela_form&acao=A&pijid=<?php echo $dados['pijid']; ?>">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                        <td><?php echo $dados['pijdsc']; ?></td>
+                                        <td><?php echo formata_data($dados['pijinicio']); ?></td>
+                                        <td><?php echo formata_data($dados['pijfim']); ?></td>
+                                        <td><?php echo $dados['usunome']; ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
