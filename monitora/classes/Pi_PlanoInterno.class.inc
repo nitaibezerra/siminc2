@@ -864,7 +864,7 @@ class Pi_PlanoInterno extends Modelo
         return 'green';
     }
 
-    public function recuperarPiPorSubunidade($suoid, $tipoPi)
+    public function recuperarPiPorSubunidade($suoid, $tipoPi = '')
     {
         $dadosPi = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_PI);
         $dadosDelegado = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_DELEGADO);
@@ -872,7 +872,7 @@ class Pi_PlanoInterno extends Modelo
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-subunidade.inc';
     }
 
-    public function recuperarPiPorFuncional($ptrid, $tipoPi)
+    public function recuperarPiPorFuncional($ptrid, $tipoPi = '')
     {
         $dados = $this->recuperarDadosDetalhe($ptrid, self::K_TIPO_DETALHE_PTRES);
 
