@@ -74,5 +74,30 @@ class Emendas_Model_Beneficiario extends Modelo
         'benpropostaobjeto' => null,
     );
 
+
+    public function recuperarTodos($stCampos = '*', $arClausulas = null, $stOrdem = null, array $opcoes = array()) {
+
+        $sql = "select  ben.*, replace(to_char(pro.procnpj::numeric, '00:000:000/0000-00'), ':', '.') procnpj, pro.pronome, suo.suocod, suo.suonome, suo.unocod, suo.unonome, suo.unoid, esf.esfdsc,  
+                        case 
+                                when benformaexecucao = 'S' then 'SICONV'
+                                when benformaexecucao = 'D' then 'DIRETA'
+                                when benformaexecucao = 'T' then 'TED'
+                        end formaexecucao
+                from  emendas.beneficiario ben
+                        inner join emendas.proponente pro on pro.proid = ben.proid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suoid = ben.suoid
+                        left join territorios.esfera esf on esf.esfid = ben.esfid";
+
+        $sql .= $arClausulas ? " WHERE " . implode(" AND ", $arClausulas) : "";
+        $sql .= $stOrdem ? " ORDER BY $stOrdem" : "";
+
+        if ($opcoes['query']) {
+            return $sql;
+        }
+
+        $resultado = $this->carregar($sql);
+        return $resultado ? $resultado : array();
+    }
+
 }//end Class
 ?>
