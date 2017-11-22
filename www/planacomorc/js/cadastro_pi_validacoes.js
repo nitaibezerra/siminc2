@@ -211,7 +211,12 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'capid'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid'];
+
+        // Se o TED não estiver marcado o sistema obriga a preencher a modalidade de Pactuação.
+        if(!$('#picted').is(':checked')){
+            listaObrigatorios.push('capid');
+        }
 
         // Verifica se o formulário é reduzido ou completo.
         if(verificarFormularioReduzido()){
@@ -235,4 +240,3 @@
 
         return listaObrigatorios;
     }
-

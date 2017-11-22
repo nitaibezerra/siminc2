@@ -728,7 +728,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="capid">Janela de alteração das unidades: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="pijid">Janela de alteração das unidades:</label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -744,7 +744,7 @@ DML;
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="capid">Modalidade de Pactuação: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="capid">Modalidade de Pactuação:</label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
