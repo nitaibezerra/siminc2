@@ -13,8 +13,16 @@ switch ($_REQUEST['req']) {
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
 
+$mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
+
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
+
+<style>
+    .select-localizacao{
+        display: none;
+    }
+</style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -36,14 +44,19 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="emeid" id="emeid" type="hidden" value="<?php echo $mBeneficiario->emeid; ?>">
 
                         <?php
-                        echo $simec->input('suoid', 'SubUnidade', $mBeneficiario->suoid, ['required']);
-                        echo $simec->input('proid', 'Proponente', $mBeneficiario->proid, ['required']);
-                        echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['required', 'maxlength' => 50]);
-                        echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio, ['required']);
-                        echo $simec->input('benformaexecucao', 'Forma de Execução', $mBeneficiario->benformaexecucao, ['required', 'maxlength' => 1]);
+                        $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = {$mEmenda->unoid}"], 'suonome');
+                        $options = simec_preparar_array($db->carregar($sql));
+
+                        $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
+
+                        echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required']);
+                        echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(['procnpj', 'pronome'], null,'pronome'), ['required']);
+                        echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
+                        echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
+                        echo $simec->radio('benformaexecucao', 'Forma de Execução', $mBeneficiario->benformaexecucao, ['S'=>'SICONV', 'D'=>'Direta', 'T'=>'TED'], ['required']);
                         ?>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 dados-siconv">
                             <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
                             <?php
                             echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
@@ -51,7 +64,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
                             ?>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 dados-siconv">
                             <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
                             <?php
                             echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero, ['class'=>'inteiro']);
@@ -70,94 +83,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <h5>Localização do Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
                     <div class="ibox-content">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="esfid" class="control-label">Tipo de localização:</label>
-                            </div>
-                            <div class="col-sm-12">
-                                <?php
-                                $sql = "SELECT esfid AS codigo, esfdsc AS descricao FROM territorios.esfera ORDER BY descricao";
-                                $esfid = $dadosPI['esfid'];
-                                $db->monta_combo('esfid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'esfid', null, '', null, 'class="form-control" style="width=100%;"', null, null);
-                                ?>
-                            </div>
+                        <?php
+                        $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
+                        echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                        ?>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
+                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table id="table_localizacao" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                    <tr class="tr_head">
-                                        <td style="text-align: left;"><b>UF</b></td>
-                                        <td style="text-align: left;"><b>Município</b></td>
-                                        <td style="text-align: center;"></td>
-                                    </tr>
-                                    <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_MUNICIPAL){
-                                        foreach($aLocalizacao as $localizacao){ ?>
-                                            <tr style="height: 30px;" class="tr_localizacao_<?php echo $localizacao['muncod']; ?>" >
-                                                <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
-                                                <td style="text-align: left;"><?php echo $localizacao['mundescricao']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $localizacao['muncod']; ?>" name="listaLocalizacao[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacao link" data-localizacao="<?php echo $localizacao['muncod']; ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                    } ?>
-
-                                </table>
-                            </div>
+                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
+                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table id="table_localizacao_estadual" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                    <tr class="tr_head">
-                                        <td style="text-align: left;"><b>UF</b></td>
-                                        <td style="text-align: left;"><b>Nome</b></td>
-                                        <td style="text-align: center;"></td>
-                                    </tr>
-                                    <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_ESTADUAL){
-                                        foreach($aLocalizacao as $localizacao){ ?>
-                                            <tr style="height: 30px;" class="tr_localizacao_estadual_<?php echo $localizacao['estuf']; ?>" >
-                                                <td style="text-align: left;"><?php echo $localizacao['estuf']; ?></td>
-                                                <td style="text-align: left;"><?php echo $localizacao['estdescricao']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $localizacao['estuf']; ?>" name="listaLocalizacaoEstadual[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoEstadual link" data-localizacao-estadual="<?php echo $localizacao['estuf']; ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                    } ?>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <table id="table_localizacao_exterior" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                    <tr class="tr_head">
-                                        <td style="text-align: left;"><b>País</b></td>
-                                        <td style="text-align: center;"></td>
-                                    </tr>
-                                    <?php if($dadosPI['esfid'] == Territorios_Model_Esfera::K_EXTERIOR){
-                                        foreach($aLocalizacao as $localizacao){ ?>
-                                            <tr style="height: 30px;" class="tr_localizacao_exterior_<?php echo $localizacao['paiid']; ?>" >
-                                                <td style="text-align: left;"><?php echo $localizacao['paidescricao']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $localizacao['paiid']; ?>" name="listaLocalizacaoExterior[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverLocalizacaoExterior link" data-localizacao-exterior="<?php echo $localizacao['paiid']; ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php }
-                                    } ?>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="form-group text-right">
-                            <div class="col-lg-12">
-                                <div class="text-right">
-                                    <input type="button" id="btn_selecionar_localizacao_estadual" title="Inserir Localização Estadual/Distrito Federal" value="Inserir Localização Estadual/Distrito Federal" class="btn btn-info" />
-                                    <input type="button" id="btn_selecionar_localizacao_exterior" title="Inserir Localização no Exterior" value="Inserir Localização no Exterior" class="btn btn-info" />
-                                    <input type="button" id="btn_selecionar_localizacao" title="Inserir Localização municipal" value="Inserir Localização municipal" class="btn btn-info" />
-                                </div>
-                            </div>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
+                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
                         </div>
                     </div>
                 </div>
@@ -193,81 +130,23 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <script>
     $(function(){
-        // Localizações
-        intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";
-        intEsfidExterior = "<?php echo ESFERA_EXTERIOR; ?>";
-        intEsfidFederalBrasil = "<?php echo ESFERA_FEDERAL_BRASIL; ?>";
-        intEsfidMunicipal = "<?php echo ESFERA_MUNICIPAL; ?>";
+        verificarDadosSiconv();
+        $('[id^="benformaexecucao"]').change(function(){
+            verificarDadosSiconv();
+        });
 
         $('#esfid').change(function(){
-            controlarTipoLocalizacao($(this).val());
-        });
+            $('.select-localizacao').hide('slow');
+            $('#div-localizacao_' + $('#esfid').val()).show('slow');
+        }).change();
 
-        controlarTipoLocalizacao($('#esfid').val());
+        $('#bennumeroprocesso').mask('99999.999999/9999-99');
 
-        $('#table_localizacao').on('click', '.btnRemoverLocalizacao', function(){
-            var id = $(this).attr('data-localizacao');
-            $('.tr_localizacao_'+ id).remove();
-        });
-
-        $('#table_localizacao_estadual').on('click', '.btnRemoverLocalizacaoEstadual', function(){
-            var id = $(this).attr('data-localizacao-estadual');
-            $('.tr_localizacao_estadual_'+ id).remove();
-        });
-
-        $('#table_localizacao_exterior').on('click', '.btnRemoverLocalizacaoExterior', function(){
-            var id = $(this).attr('data-localizacao-exterior');
-            $('.tr_localizacao_exterior_'+ id).remove();
-        });
-
-        /**
-         * Controla as opções do formulario conforme a opção de tipo de localização selecionada.
-         *
-         * @param int esfid Código da esfera preenchido pelo usuário
-         * @return VOID
-         */
-        function controlarTipoLocalizacao(esfid){
-
-            alert(esfid)
-
-            $('#btn_selecionar_localizacao').hide();
-            $('#btn_selecionar_localizacao_estadual').hide();
-            $('#btn_selecionar_localizacao_exterior').hide();
-            $('#table_localizacao tr').hide();
-            $('#table_localizacao_estadual tr').hide();
-            $('#table_localizacao_exterior tr').hide();
-
-            switch (esfid) {
-                // Verifica se a esfera é Estadual/DF.
-                case intEsfidEstadualDF:
-                    $('#table_localizacao_estadual tr').show('slow');
-                    $('#btn_selecionar_localizacao_estadual').show('slow');
-
-                    $('#table_localizacao tr').not('tr.tr_head').remove();
-                    $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
-                    break;
-                // Verifica se a esfera é Exterior.
-                case intEsfidExterior:
-                    $('#table_localizacao_exterior tr').show('slow');
-                    $('#btn_selecionar_localizacao_exterior').show('slow');
-                    $('#table_localizacao tr').not('tr.tr_head').remove();
-                    $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
-                    break;
-                // Verifica se a esfera é Federal.
-                case intEsfidFederalBrasil:
-                    $('#btn_selecionar_localizacao').hide('slow');
-                    $('#table_localizacao tr').hide('slow');
-                    $('#table_localizacao tr').not('tr.tr_head').remove();
-                    $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
-                    $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
-                    break;
-                // Verifica se a esfera é Municipal.
-                case intEsfidMunicipal:
-                    $('#table_localizacao tr').show('slow');
-                    $('#btn_selecionar_localizacao').show('slow');
-                    $('#table_localizacao_estadual tr').not('tr.tr_head').remove();
-                    $('#table_localizacao_exterior tr').not('tr.tr_head').remove();
-                    break;
+        function verificarDadosSiconv(){
+            if($('[id^="benformaexecucao"]:checked').val() == 'S'){
+                $('.dados-siconv').show('slow');
+            } else {
+                $('.dados-siconv').hide('slow');
             }
         }
     })

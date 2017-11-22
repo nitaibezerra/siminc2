@@ -64,5 +64,23 @@ class Emendas_Model_BeneficiarioLocalizacao extends Modelo
         'muncod' => null,
     );
 
+    public function recuperarPorBeneficiario($benid){
+        $sql = "select * 
+                from  emendas.beneficiariolocalizacao
+                where benid = " . (int) $benid;
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $aLocalizacoes = ['paiid'=>[], 'estuf'=>[], 'muncod'=>[]];
+        foreach($dados as $dado){
+            if($dado['paiid']){ $aLocalizacoes['paiid'][] = $dado['paiid']; }
+            if($dado['estuf']){ $aLocalizacoes['estuf'][] = $dado['estuf']; }
+            if($dado['muncod']){ $aLocalizacoes['muncod'][] = $dado['muncod']; }
+        }
+
+        return $aLocalizacoes;
+    }
+
 }//end Class
 ?>

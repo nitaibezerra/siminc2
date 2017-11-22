@@ -322,6 +322,7 @@ function simec_preparar_array($dados = null, $where = null, $order = null)
 {
 	$array = array();
 
+    $dados = $dados ? $dados : [];
 	foreach ($dados as $linha) {
 		$array[$linha['codigo']] = $linha['descricao'];
 	}
