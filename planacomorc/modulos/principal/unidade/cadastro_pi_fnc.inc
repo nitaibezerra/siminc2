@@ -250,7 +250,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             } ?>
         </h2>
         &nbsp; <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
-        <?php if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao): ?>
+        <?php if(!verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)): ?>
             <h3>
                 <span style="color: red; padding: 5px;">
                     Não há janelas de período vigente no momento para possibilitar a unidade cadastrar PI.

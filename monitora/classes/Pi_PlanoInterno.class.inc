@@ -608,10 +608,25 @@ class Pi_PlanoInterno extends Modelo
         return true;
     }
     
+    /**
+     * Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
+     * 
+     * @param array $perfis
+     * @param array $listaJanelasDeAlteracao
+     * @return boolean
+     */
+    public function verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao){
+        if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao){
+            return false;
+        }
+        
+        return true;
+    }
+    
     public function verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao)
     {
         # Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
-        if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao){
+        if(!verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
             return false;
         }
         
