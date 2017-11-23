@@ -276,17 +276,32 @@ class Pi_PlanoInterno extends Modelo
 
     public function recuperarExecucaoOrcamentariaFnc()
     {
-        $sql = "SELECT distinct suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid
+        $sql = "SELECT  distinct suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, 
+                        ptr.ptrdotacaocapital ptrdotacao_capital, ptr.ptrdotacaocusteio ptrdotacao_custeio, 
+                        psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc                
                 from public.vw_subunidadeorcamentaria suo
-                        inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                        left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                    
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
+                    inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
+                    inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
+                    
+                    left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
                 where suo.suostatus = 'A'
                 and suo.unofundo = 't' 
                 and suo.prsano = '{$_SESSION['exercicio']}'                
                 ORDER BY suo.unonome";
 
         $dados = $this->carregar($sql);
-        return  $dados ? $dados : [];
+        $dados = $dados ? $dados : [];
+        $dadosAgrupados = [];
+        foreach ($dados as $dado) {
+            $dadosAgrupados[$dado['unocod']]['detalhe'][] = $dado;
+            $dadosAgrupados[$dado['unocod']]['dotacaoCapital'] += $dado['ptrdotacao_capital'];
+            $dadosAgrupados[$dado['unocod']]['dotacaoCusteio'] += $dado['ptrdotacao_custeio'];
+        }
+
+        return $dadosAgrupados;
     }
 
     /**
