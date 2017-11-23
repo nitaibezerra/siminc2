@@ -291,6 +291,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <h5>Dados do Plano Interno</h5>
                     </div>
                     <div class="ibox-content">
+
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="pijid">Reunião:</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <?php
+                                    $janela = end($listaJanelasDeAlteracao);
+                                    $sql = (new Planacomorc_Model_PiJanela)->montarSqlBuscarTodosCombo((object) array(
+                                        'prsano' => $_SESSION['exercicio'],
+//                                        'periodoVigente' => TRUE
+                                    ));
+                                    $pijid = $dadosPI['pijid']? $dadosPI['pijid']: $janela['pijid'];
+                                    $db->monta_combo('pijid', $sql, (in_array(PFL_SUBUNIDADE, $perfis)? 'N': 'S'), 'Selecione', '', null, null, null, 'N', 'pijid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pijid) ? $pijid : null));
+                                ?>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="plititulo">Título: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
@@ -724,22 +741,6 @@ DML;
                             </div>
                             <div class="col-lg-9 div_neeid">
                                 <?php carregarSegmentoCultural($dadosPI['mdeid'], $dadosPI['neeid']); ?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3 text-right">
-                                <label class="control-label" for="pijid">Janela de alteração das unidades:</label>
-                            </div>
-                            <div class="col-lg-9">
-                                <?php
-                                    $janela = end($listaJanelasDeAlteracao);
-                                    $sql = (new Planacomorc_Model_PiJanela)->montarSqlBuscarTodosCombo((object) array(
-                                        'prsano' => $_SESSION['exercicio'],
-//                                        'periodoVigente' => TRUE
-                                    ));
-                                    $pijid = $dadosPI['pijid']? $dadosPI['pijid']: $janela['pijid'];
-                                    $db->monta_combo('pijid', $sql, (in_array(PFL_SUBUNIDADE, $perfis)? 'N': 'S'), 'Selecione', '', null, null, null, 'N', 'pijid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pijid) ? $pijid : null));
-                                ?>
                             </div>
                         </div>
                         <div class="form-group">

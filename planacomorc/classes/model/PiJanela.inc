@@ -107,7 +107,7 @@ class Planacomorc_Model_PiJanela extends Modelo
         $sql = "
             SELECT
                 pij.pijid AS codigo,
-                pij.pijdsc || '(' || TO_CHAR(pij.pijinicio, 'DD/MM/YYYY') || ' até ' || TO_CHAR(pij.pijfim, 'DD/MM/YYYY') || ')' AS descricao
+                pij.pijdsc AS descricao
             FROM planacomorc.pi_janela pij
                 JOIN seguranca.usuario ucad ON pij.usucpf = ucad.usucpf
             WHERE

@@ -26,7 +26,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                                 <tr class="text-center">
                                     <th width="10%">Ações</th>
-                                    <th>Descrição</th>
+                                    <th>Reunião</th>
                                     <th>Início</th>
                                     <th>Fim</th>
                                     <th>Usuário</th>

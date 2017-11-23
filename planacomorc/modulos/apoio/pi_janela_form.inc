@@ -45,7 +45,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="pijid" id="pijid" type="hidden" value="<?php echo $mPiJanela->pijid; ?>">
                         <?php
-                            echo $simec->input('pijdsc', 'Descrição', $mPiJanela->pijdsc, ['maxlength' => 500]);
+                            echo $simec->input('pijdsc', 'Reunião', $mPiJanela->pijdsc, ['maxlength' => 500]);
                             echo $simec->data('pijinicio', 'Início', $mPiJanela->pijinicio);
                             echo $simec->data('pijfim', 'Fim', $mPiJanela->pijfim);
                         ?>
