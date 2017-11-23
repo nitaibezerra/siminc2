@@ -274,9 +274,11 @@ if($_REQUEST['fnc']){
                     var vlrAutorizadoCusteio = textToFloat($('tr#'+ id+ ' td:nth-child(2) autorizadocusteio').text());
                     var vlrAutorizadoCapital = textToFloat($('tr#'+ id+ ' td:nth-child(2) autorizadocapital').text());
                     
-                    var vlrCadastradoAutorizadoCusteio = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocusteio').text());
-                    var vlrCadastradoAutorizadoCapital = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocapital').text());
-                    
+                    if(fnc === true){
+                        var vlrCadastradoAutorizadoCusteio = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocusteio').text());
+                        var vlrCadastradoAutorizadoCapital = textToFloat($('tr#'+ id+ ' td:nth-child(2) cadastradocapital').text());
+                    }
+
                     $('#td_autorizado_funcional_custeio').text(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
                     $('#td_autorizado_funcional_capital').text(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
 
@@ -351,15 +353,19 @@ if($_REQUEST['fnc']){
                     
                     $('#ptresCusteio').val(number_format(vlrAutorizadoCusteio.toFixed(2), 2, ',', '.'));
                     $('#ptresCapital').val(number_format(vlrAutorizadoCapital.toFixed(2), 2, ',', '.'));
-                    $('#ptresCadastradoCusteio').val(number_format(vlrCadastradoAutorizadoCusteio.toFixed(2), 2, ',', '.'));
-                    $('#ptresCadastradoCapital').val(number_format(vlrCadastradoAutorizadoCapital.toFixed(2), 2, ',', '.'));
+                    if(fnc === true){
+                        $('#ptresCadastradoCusteio').val(number_format(vlrCadastradoAutorizadoCusteio.toFixed(2), 2, ',', '.'));
+                        $('#ptresCadastradoCapital').val(number_format(vlrCadastradoAutorizadoCapital.toFixed(2), 2, ',', '.'));
+                    }
                     $('#piNaoDetalhadoCusteio').val(naoDetalhadoCusteio);
                     $('#piNaoDetalhadoCapital').val(naoDetalhadoCapital);
                     
                     atualizarValorLimiteDisponivelFuncionalCapital();
                     atualizarValorLimiteDisponivelFuncionalCusteio();
-                    atualizarValorJaCadastradoFuncionalCusteio();
-                    atualizarValorJaCadastradoFuncionalCapital();
+                    if(fnc === true){
+                        atualizarValorJaCadastradoFuncionalCusteio();
+                        atualizarValorJaCadastradoFuncionalCapital();
+                    }
                     atualizarValorDetalhado();
                     atualizarValorNaoDetalhado();
                     atualizarValorLimiteDisponivelUnidade();
