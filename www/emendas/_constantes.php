@@ -1,0 +1,7 @@
+<?php
+
+// ESFERA DA AÇÃO
+define( 'ESFERA_FEDERAL_BRASIL', 1 );
+define( 'ESFERA_ESTADUAL_DISTRITO_FEDERAL', 2 );
+define( 'ESFERA_MUNICIPAL', 3 );
+define( 'ESFERA_EXTERIOR', 4 );
