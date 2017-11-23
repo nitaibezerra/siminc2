@@ -34,7 +34,8 @@ if (isAjax() && isset($_POST['prgcod']) && isset($_POST['comboacao'])) {
     exit;
 }
 
-if($_REQUEST['fnc']){
+if($_REQUEST['fnc'] == 1){
+
     $listCabecalho = array(
         "PTRES",
         "Funcional",
@@ -75,7 +76,7 @@ if($_REQUEST['fnc']){
         'buscalivre' => $_REQUEST['buscalivre'],
     ));
 }
-//ver($sql_lista); 
+//ver($sql_lista);
 ?>
 
         <div class="col-lg-12">
