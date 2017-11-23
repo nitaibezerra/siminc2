@@ -390,10 +390,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     $wherePerfilUO  = " and unocod in ('" . implode("', '", $unidadeUsuario['unidades']) . "')";
 
                                     if(empty($dadosPI['unicod'])){
-                                        $dadosPI['unicod'] = (1 == count($unidadeUsuario['unocod']['f'])) ? current($unidadeUsuario['unocod']['f']) : '';
+                                        $dadosPI['unicod'] = (1 == count($unidadeUsuario['unocod']['t'])) ? current($unidadeUsuario['unocod']['t']) : '';
                                     }
                                     if(empty($dadosPI['ungcod'])){
-                                        $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['f'])) ? current($unidadeUsuario['suocod']['f']) : '';
+                                        $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['t'])) ? current($unidadeUsuario['suocod']['t']) : '';
                                     }
                                 }
 
