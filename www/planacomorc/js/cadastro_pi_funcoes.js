@@ -1335,10 +1335,14 @@
             urlPopup += '&fnc=1';
         }
         
-        if($("#ungcod").val() != ""){
+        if($("#ungcod").val() == ""){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível selecionar uma funcional sem informar a Unidade.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, selecione uma unidade e tente novamente.</span></p>');
+        } else if($('#eqdid').val() == ""){
+            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível selecionar uma funcional sem informar o Enquadramento da Despesa.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, selecione um Enquadramento da Despesa e tente novamente.</span></p>');
+        } else {
             // Verifica se o modal terá que recarregar a tela.
-            if($('#modal-ptres .modal-body p').size() <= 1){
-                $.post(urlPopup+ '&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val(), function(response) {
+            if($('#modal-ptres .modal-body div').size() <= 1){
+                $.post(urlPopup+ '&obrigatorio=n&unicod='+ $("#unicod").val()+ '&ungcod='+ $("#ungcod").val()+ '&no_ptrid='+ $('input[name=ptrid]').val()+ '&eqdid='+ $('#eqdid').val(), function(response) {
                     $('#modal-ptres .modal-body p').html(response);
                     $('.modal-dialog-ptres').show();
                     $('#modal-ptres').modal();
@@ -1348,12 +1352,11 @@
             } else {
                 $('#formularioPopup input[name=unicod]').val($("#unicod").val());
                 $('#formularioPopup input[name=ungcod]').val($("#ungcod").val());
+                $('#formularioPopup input[name=eqdid]').val($('#eqdid').val());
                 $('#formularioPopup input[name=no_ptrid]').val($('input[name=ptrid]').val());
                 $('#modal-ptres').modal();
                 $('#btnPopupPtresPesquisar').click();
             }
-        } else {
-            alert('<p style="text-align: justify;">&nbsp; &nbsp; Não será possível selecionar uma funcional sem informar a Unidade.<br />&nbsp; &nbsp; <span style="color: #ff0000;">Por favor, selecione uma unidade e tente novamente.</span></p>');
         }
     }
 

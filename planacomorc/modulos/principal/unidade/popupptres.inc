@@ -52,6 +52,7 @@ if($_REQUEST['fnc'] == 1){
         'acacod' => $_REQUEST['acacod'],
         'unicod' => $_REQUEST['unicod'],
         'ungcod' => $_REQUEST['ungcod'],
+        'eqdid' => $_REQUEST['eqdid'],
         'no_ptrid' => $_REQUEST['no_ptrid'],
         'buscalivre' => $_REQUEST['buscalivre'],
     ));
@@ -72,6 +73,7 @@ if($_REQUEST['fnc'] == 1){
         'acacod' => $_REQUEST['acacod'],
         'unicod' => $_REQUEST['unicod'],
         'ungcod' => $_REQUEST['ungcod'],
+        'eqdid' => $_REQUEST['eqdid'],
         'no_ptrid' => $_REQUEST['no_ptrid'],
         'buscalivre' => $_REQUEST['buscalivre'],
     ));
@@ -86,6 +88,7 @@ if($_REQUEST['fnc'] == 1){
                         <input type="hidden" name="fnc" value="<?= $_REQUEST['fnc'] ?>">
                         <input type="hidden" name="unicod" value="<?= $_REQUEST['unicod'] ?>">
                         <input type="hidden" name="ungcod" value="<?= $_REQUEST['ungcod'] ?>">
+                        <input type="hidden" name="eqdid" value="<?= $_REQUEST['eqdid'] ?>">
                         <input type="hidden" name="no_ptrid" value="<?= $_REQUEST['no_ptrid'] ?>">
                         <div class="form-group">
                             <label for="inputUnidade" class="col-lg-2 control-label">Programa:</label>

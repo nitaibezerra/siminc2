@@ -488,6 +488,16 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
             $where .= "\n AND ptr.ptrid != ". (int)$filtros->no_ptrid;
         }
     }
+    if($filtros->eqdid){
+        $where .= " \n AND ptr.irpcod IN(
+                SELECT
+                    eqrp.irpcod
+                FROM monitora.enquadramentorp eqrp
+                WHERE
+                    eqrp.eqdid = ". (int)$filtros->eqdid. "
+            )
+        ";
+    }
     
     $sql = "
         SELECT
@@ -579,6 +589,16 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
         } else {
             $where .= "\n AND ptr.ptrid != ". (int)$filtros->no_ptrid;
         }
+    }
+    if($filtros->eqdid){
+        $where .= " \n AND ptr.irpcod IN(
+                SELECT
+                    eqrp.irpcod
+                FROM monitora.enquadramentorp eqrp
+                WHERE
+                    eqrp.eqdid = ". (int)$filtros->eqdid. "
+            )
+        ";
     }
     
     $sql = "
