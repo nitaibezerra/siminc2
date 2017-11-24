@@ -1573,7 +1573,7 @@ function buscarPtresFnc(stdClass $filtros) {
             (COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00)) AS dotacaoatual,
             COALESCE(cadastrado.custeio, 0.00) AS cadastradocusteio,
             COALESCE(cadastrado.capital, 0.00) AS cadastradocapital,
-            COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
+            COALESCE(ptr.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
             COALESCE(ptr.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
             COALESCE(SUM(dtp.valor), 0.00) AS det_pi,
 	    COALESCE(SUM(dtp.custeio), 0.00) AS det_pi_custeio,
