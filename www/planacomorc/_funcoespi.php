@@ -1011,6 +1011,7 @@ DML;
 
     $dados['mdeid'] = $dados['mdeid'] ? $dados['mdeid'] : 'null';
     $dados['neeid'] = $dados['neeid'] ? $dados['neeid'] : 'null';
+    $dados['capid'] = $dados['capid'] ? $dados['capid'] : 'null';
 
     $plicod = null; //$db->PegaUm($sql);
     if (empty($dados['pliid'])) {
@@ -1040,7 +1041,7 @@ INSERT INTO monitora.pi_planointerno(
     pliano,
     plisituacao,
     plicadsiafi
-) VALUES (%s, %d, %s, %d, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
+) VALUES (%s, %d, %s, %s, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
   RETURNING pliid;
 DML;
             
