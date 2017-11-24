@@ -11,7 +11,7 @@ $entid = $db->pegaUm($sql);
 
 $entid = $entid ? $entid : 0;
 
-$sql = "SELECT arqid FROM entidade.fotoentidade WHERE entid = ". (int)$entid . " AND fotbox = 'perfil' ORDER BY fotordem DESC LIMIT 1";
+$sql = "SELECT arqid FROM entidade.fotoentidade WHERE entid = '". $entid . "' AND fotbox = 'perfil' ORDER BY fotordem DESC LIMIT 1";
 $id = $db->pegaUm($sql);
 
 if ($id && is_file(DIRFILES . '/seguranca/usuario/'. floor($id/1000) .'/'.$id)) {
