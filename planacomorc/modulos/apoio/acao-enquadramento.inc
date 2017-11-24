@@ -21,7 +21,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Víncular Enquadramento de Despesas com Resultado Primário (RP)</h2>
+        <h2>Vincular Enquadramento de Despesas com Resultado Primário (RP)</h2>
     </div>
 </div>
 
@@ -30,7 +30,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Metas PPA</h5>
+                    <h5>Mapeamento</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
@@ -40,8 +40,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <table class="table table-striped table-bordered table-hover" >
                                 <thead>
                                 <tr>
-                                    <th width="50%">Meta PPA</th>
-                                    <th>Unidade</th>
+                                    <th width="50%">Enquadramento de Despesas</th>
+                                    <th>Resultado Primário (RP)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
