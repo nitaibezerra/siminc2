@@ -503,7 +503,7 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
         SELECT
             ptr.ptrid,
             ptr.ptres || '<autorizadocusteio>' || COALESCE(psu.ptrdotacaocusteio, 0.00) || '</autorizadocusteio><autorizadocapital>' || COALESCE(psu.ptrdotacaocapital, 0.00) || '</autorizadocapital>' AS ptres,
-            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || ptr.irpcod || ')' AS descricao,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
             COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
             COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
@@ -610,7 +610,7 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
             || '<cadastradocusteio>' || COALESCE(cadastrado.custeio, 0.00) || '</cadastradocusteio>'
             || '<cadastradocapital>' || COALESCE(cadastrado.capital, 0.00) || '</cadastradocapital>'
             AS ptres,
-            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || ptr.irpcod || ')' AS descricao,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
             COALESCE(ptr.ptrdotacaocusteio, 0.00) + COALESCE(ptr.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.total), 0.00) AS det_pi,
             COALESCE(ptr.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
