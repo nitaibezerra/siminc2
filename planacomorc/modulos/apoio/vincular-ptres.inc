@@ -97,7 +97,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <thead>
                                     <tr class="text-center">
                                         <th><input type="checkbox" class="marcar-todos-ptres" marcar="check_<?php echo $tipo; ?>" checked></th>
-                                        <th>Prog.a</th>
+                                        <th>Prog</th>
                                         <th>Ação</th>
                                         <th>Local.</th>
                                         <th>P.O.</th>

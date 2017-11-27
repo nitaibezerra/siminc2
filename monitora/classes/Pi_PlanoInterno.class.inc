@@ -274,6 +274,103 @@ class Pi_PlanoInterno extends Modelo
         return $dadosAgrupados;
     }
 
+    public function recuperarDadosFncPorAcao($exercicio)
+    {
+
+        $sql = "SELECT  distinct 'CUSTEIO' tipo, suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc,
+                        ptr.ptrdotacaocusteio dotacao
+                from public.vw_subunidadeorcamentaria suo
+                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                    
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
+                    inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
+                    inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
+                    
+                    left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                where suo.suostatus = 'A'
+                and suo.unofundo = 't' 
+                and suo.prsano = '$exercicio'                
+                union 
+                SELECT  distinct 'CAPITAL' tipo, suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc,
+                        ptr.ptrdotacaocapital dotacao              
+                from public.vw_subunidadeorcamentaria suo
+                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                    
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
+                    inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
+                    inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
+                    
+                    left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                where suo.suostatus = 'A'
+                and suo.unofundo = 't' 
+                and suo.prsano = '$exercicio'                
+                ORDER BY funcional, tipo desc";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
+    public function recuperarValoresPorEstado($exercicio)
+    {
+
+        $sql = "select pli.pliid, pip.ptrid, pic.picvalorcapital, pic.picvalorcusteio, doc.esdid
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                        inner join workflow.documento doc on doc.docid = pli.docid
+                        inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
+                where pli.plistatus = 'A'        
+                and pli.pliano = '$exercicio'
+                and suo.unofundo = 't'
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $aValores = [];
+        foreach($dados as $dado){
+            $aValores[$dado['ptrid']][$dado['esdid']]['CAPITAL'] += $dado['picvalorcapital'];
+            $aValores[$dado['ptrid']][$dado['esdid']]['CUSTEIO'] += $dado['picvalorcusteio'];
+        }
+        return $aValores;
+    }
+
+    public function recuperarValoresPorExecucao($exercicio)
+    {
+
+        $sql = "select  ptr.ptrid, 
+                        case 
+                                when substring(sec.natcod, 1, 1) = '3' then 'CUSTEIO'  
+                                when substring(sec.natcod, 1, 1) = '4' then 'CAPITAL'  
+                                else substring(sec.natcod, 1, 1)
+                        end nat, 
+                        sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS vlrempenhado,
+                        sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS vlrpago,
+                        sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
+                from spo.siopexecucao sec
+                        inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                        /*
+                        inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
+                        inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = 't'
+                */
+                group by ptr.ptrid, nat     
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+        $aValores = [];
+        foreach($dados as $dado){
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrempenhado'] += $dado['vlrempenhado'];
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrpago'] += $dado['vlrpago'];
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrliquidado'] += $dado['vlrliquidado'];
+        }
+
+        return $aValores;
+    }
+
     public function recuperarExecucaoOrcamentariaFnc()
     {
         $sql = "SELECT  distinct suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, 
@@ -461,6 +558,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -478,6 +576,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -496,6 +595,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -517,6 +617,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -538,6 +639,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -559,6 +661,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -567,7 +670,7 @@ class Pi_PlanoInterno extends Modelo
                 ordem,
                 categoria
         ";
-//ver($sql,d);
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
