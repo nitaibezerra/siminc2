@@ -558,6 +558,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -575,6 +576,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -593,6 +595,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -614,6 +617,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -635,6 +639,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -656,6 +661,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
             GROUP BY
                 ordem,
                 descricao,
@@ -664,7 +670,7 @@ class Pi_PlanoInterno extends Modelo
                 ordem,
                 categoria
         ";
-//ver($sql,d);
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }

@@ -91,6 +91,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab-1"> Gráficos das Unidades</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-2"> Gráficos da Direta</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3"> Gráficos da CGCON/COGEP</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
@@ -113,7 +114,21 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
                                             'exercicio' => $_SESSION['exercicio'],
                                             'unosigla' => 'MINC',
-                                            'unofundo' => 'FALSE'));
+                                            'unofundo' => 'FALSE',
+                                            'unidades'=>"suocod not in ('420009', '420008')"));
+                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                        $grafico->setWidth('85%')->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                        ?>
+                                    </div>
+                                </div>
+                                <div id="tab-3" class="tab-pane">
+                                    <div class="panel-body">
+                                        <?php
+                                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                                            'exercicio' => $_SESSION['exercicio'],
+                                            'unosigla' => 'MINC',
+                                            'unofundo' => 'FALSE',
+                                            'unidades'=>"suocod in ('420009', '420008')"));
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
                                         $grafico->setWidth('85%')->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                                         ?>
