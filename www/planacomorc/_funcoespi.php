@@ -358,6 +358,31 @@ function carregarIndicadorPNC($mpnid, $ipnid) {
 }
 
 /**
+ * Monta a combo de Indicadores PNC
+ */
+function carregarAderenciaPtFnc($ptaid) {
+    global $db;
+
+    $sql = "
+        SELECT
+            n4.ptaid AS codigo,
+            n1.ptaitem || '.' || n2.ptaitem || '.' || n3.ptaitem || '.' || n4.ptaitem || ' ' || n4.ptadsc AS descricao
+        FROM spo.planotrabalhoanual AS n1
+            JOIN spo.planotrabalhoanual AS n2 ON n1.ptaid = n2.ptapai
+            JOIN spo.planotrabalhoanual AS n3 ON n2.ptaid = n3.ptapai
+            JOIN spo.planotrabalhoanual AS n4 ON n3.ptaid = n4.ptapai
+        WHERE
+            n1.ptapai IS NULL
+            AND n1.ptaitem = '". PTAID_LINHAS_PROGRAMATICAS. "'
+            AND n4.prsano = '{$_SESSION['exercicio']}'
+        ORDER BY
+            descricao
+    ";
+
+    $db->monta_combo('ptaid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'ptaid', null, (isset($ptaid)? $ptaid: null), null, 'class="form-control chosen-select" style="width=100%;"');
+}
+
+/**
  * Monta a combo de Segmento Cultural.
  */
 function carregarSegmentoCultural($mdeid, $neeid) {
@@ -1162,12 +1187,13 @@ function salvarPiComplemento($pliid, $dados)
     $modelPiComplemento->maiid = $dados['maiid'] ? $dados['maiid'] : null;
     $modelPiComplemento->masid = $dados['masid'] ? $dados['masid'] : null;
     $modelPiComplemento->pijid = $dados['pijid'] ? $dados['pijid'] : null;
+    $modelPiComplemento->ptaid = $dados['ptaid'] ? $dados['ptaid'] : null;
     $modelPiComplemento->picpublico = str_replace(array("'"), ' ', $dados['picpublico']);
     $modelPiComplemento->picexecucao = $dados['picexecucao']? desformata_valor($dados['picexecucao']): null;
     $modelPiComplemento->picted = $dados['picted'] == 't' ? 't' : 'f';
     $modelPiComplemento->picedital = $dados['picedital'] == 't' ? 't' : 'f';
 
-    $modelPiComplemento->salvar(NULL, NULL, array('pijid', 'oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picpriorizacao', 'picquantidade', 'picpublico', 'picexecucao', 'picvalorcusteio', 'picvalorcapital'));
+    $modelPiComplemento->salvar(NULL, NULL, array('ptaid', 'pijid', 'oppid', 'mppid', 'ippid', 'pprid', 'pumid', 'picpriorizacao', 'picquantidade', 'picpublico', 'picexecucao', 'picvalorcusteio', 'picvalorcapital'));
 
     associarConvenio($pliid, $dados);
     associarSniic($pliid, $dados);

@@ -640,6 +640,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <?php carregarIndicadorPNC($dadosPI['mpnid'], $dadosPI['ipnid']); ?>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label for="ptaid" class="control-label">Aderencia ao PT do FNC: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                            </div>
+                            <div class="col-lg-9 div_ipnid">
+                                <?php carregarAderenciaPtFnc($dadosPI['ptaid']); ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -46,6 +46,7 @@ class Pi_Complemento extends Modelo{
         'pprid' => null,
         'pumid' => null,
         'pijid' => null,
+        'ptaid' => null,
         'picpriorizacao' => null,
         'picquantidade' => null,
         'picted' => null,
