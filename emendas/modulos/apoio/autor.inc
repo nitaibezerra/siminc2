@@ -1,6 +1,6 @@
 <?php
 
-$aAutor = (new Emendas_Model_Autor)->recuperarTodos();
+$listaAutor = (new Emendas_Model_Autor)->buscarTodos((object)array());
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -25,28 +25,28 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>atpid</th>
-                                <th>autnome</th>
-                                <th>autemail</th>
-                                <th>estuf</th>
-                                <th>autcod</th>
-                                <th>parid</th>
-                            </tr>
+                                <tr class="text-center">
+                                    <th width="10%">Ações</th>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
+                                    <th>Partido</th>
+                                    <th>E-mail</th>
+                                    <th>UF</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aAutor as $dados){ ?>
+                            <?php foreach($listaAutor as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=apoio/autor_form&acao=A&autid=<?php echo $dados['autid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
-                                    <td><?php echo $dados['atpid']; ?></td>
+                                    <td><?php echo $dados['autcod']; ?></td>
                                     <td><?php echo $dados['autnome']; ?></td>
+                                    <td><?php echo $dados['atpdsc']; ?></td>
+                                    <td><?php echo $dados['parsigla']; ?></td>
                                     <td><?php echo $dados['autemail']; ?></td>
                                     <td><?php echo $dados['estuf']; ?></td>
-                                    <td><?php echo $dados['autcod']; ?></td>
-                                    <td><?php echo $dados['parid']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>
