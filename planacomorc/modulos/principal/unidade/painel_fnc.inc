@@ -31,6 +31,7 @@ if($listaSubUnidadeUsuario){
 }
 $aDadosPorAcao = $oPlanoInterno->recuperarDadosFncPorAcao($_SESSION['exercicio']);
 $aValoresEstado = $oPlanoInterno->recuperarValoresPorEstado($_SESSION['exercicio']);
+$aValoresExecucao = $oPlanoInterno->recuperarValoresPorExecucao($_SESSION['exercicio']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -124,9 +125,31 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <td> - </td>
                                     <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
+
+                                    <td>
+                                        <?php
+                                        // VALOR EMPENHADO
+                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrempenhado']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrempenhado'] : '0';
+                                        $total['vlrempenhado'][$dados['tipo']] += $valor;
+                                        echo $valor ? number_format($valor, 2, ',', '.') : '-';
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        // VALOR PAGO
+                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrpago']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrpago'] : '0';
+                                        $total['vlrpago'][$dados['tipo']] += $valor;
+                                        echo $valor ? number_format($valor, 2, ',', '.') : '-';
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        // VALOR LIQUIDADO
+                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrliquidado']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrliquidado'] : '0';
+                                        $total['vlrliquidado'][$dados['tipo']] += $valor;
+                                        echo $valor ? number_format($valor, 2, ',', '.') : '-';
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -139,9 +162,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo number_format($total[ESD_FNC_PI_APROVADO]['CUSTEIO'], 2, ',', '.'); ?></td>
                                     <td> - </td>
                                     <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
+                                    <td><?php echo number_format($total['vlrempenhado']['CUSTEIO'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrpago']['CUSTEIO'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrliquidado']['CUSTEIO'], 2, ',', '.'); ?></td>
                                 </tr>
                                 <tr class="text-right">
                                     <td style="text-align: left">TOTAL CAPITAL</td>
@@ -151,9 +174,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo number_format($total[ESD_FNC_PI_APROVADO]['CAPITAL'], 2, ',', '.'); ?></td>
                                     <td> - </td>
                                     <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
+                                    <td><?php echo number_format($total['vlrempenhado']['CAPITAL'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrpago']['CAPITAL'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrliquidado']['CAPITAL'], 2, ',', '.'); ?></td>
                                 </tr>
                                 <tr class="text-right">
                                     <th style="text-align: left">TOTAL</th>
@@ -163,9 +186,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th><?php echo number_format(array_sum($total[ESD_FNC_PI_APROVADO]), 2, ',', '.'); ?></th>
                                     <th> - </th>
                                     <th> - </th>
-                                    <th> - </th>
-                                    <th> - </th>
-                                    <th> - </th>
+                                    <th><?php echo number_format(array_sum($total['vlrempenhado']), 2, ',', '.'); ?></th>
+                                    <th><?php echo number_format(array_sum($total['vlrpago']), 2, ',', '.'); ?></th>
+                                    <th><?php echo number_format(array_sum($total['vlrliquidado']), 2, ',', '.'); ?></th>
                                 </tr>
                             </tfoot>
                         </table>

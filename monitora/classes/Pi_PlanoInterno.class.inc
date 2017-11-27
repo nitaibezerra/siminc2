@@ -335,6 +335,42 @@ class Pi_PlanoInterno extends Modelo
         return $aValores;
     }
 
+    public function recuperarValoresPorExecucao($exercicio)
+    {
+
+        $sql = "select  ptr.ptrid, 
+                        case 
+                                when substring(sec.natcod, 1, 1) = '3' then 'CUSTEIO'  
+                                when substring(sec.natcod, 1, 1) = '4' then 'CAPITAL'  
+                                else substring(sec.natcod, 1, 1)
+                        end nat, 
+                        sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS vlrempenhado,
+                        sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS vlrpago,
+                        sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
+                from spo.siopexecucao sec
+                        inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                        /*
+                        inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
+                        inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = 't'
+                */
+                group by ptr.ptrid, nat     
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+        $aValores = [];
+        foreach($dados as $dado){
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrempenhado'] += $dado['vlrempenhado'];
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrpago'] += $dado['vlrpago'];
+            $aValores[$dado['ptrid']][$dado['nat']]['vlrliquidado'] += $dado['vlrliquidado'];
+        }
+
+        return $aValores;
+    }
+
     public function recuperarExecucaoOrcamentariaFnc()
     {
         $sql = "SELECT  distinct suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, 
