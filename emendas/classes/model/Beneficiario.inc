@@ -84,8 +84,8 @@ class Emendas_Model_Beneficiario extends Modelo
                                 when benformaexecucao = 'T' then 'TED'
                         end formaexecucao
                 from  emendas.beneficiario ben
-                        inner join emendas.proponente pro on pro.proid = ben.proid
-                        inner join public.vw_subunidadeorcamentaria suo on suo.suoid = ben.suoid
+                        left join emendas.proponente pro on pro.proid = ben.proid
+                        left join public.vw_subunidadeorcamentaria suo on suo.suoid = ben.suoid
                         left join territorios.esfera esf on esf.esfid = ben.esfid";
 
         $sql .= $arClausulas ? " WHERE " . implode(" AND ", $arClausulas) : "";
