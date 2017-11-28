@@ -46,67 +46,10 @@ class Emendas_Controller_Emenda
     public function importar($files)
     {
         if($files['error'] == UPLOAD_ERR_OK){
-            $extensao = substr($files['name'], strrpos($files['name'], '.'));
 
-            $origem = $files['tmp_name'];
-            $destino = APPRAIZ . 'emendas/modulos/apoio/importacao/planilha_' . date('YmdHis') . $extensao;
-            if(move_uploaded_file($origem , $destino)){
+            $mEmendas = new Emendas_Model_Emenda();
+            $mEmendas->importar($files);
 
-                $file = fopen($destino, 'r');
-
-                $count = 0;
-                while (($line = fgetcsv($file, 0, ';')) !== false)
-                {
-
-                    $line = array_map('trim', $line);
-//                    $line = array_map('utf8_decode', $line);
-
-                    $mEmendas = new Emendas_Model_Emenda();
-                    if(!$count++){ continue; }
-
-                    // Unidade Orçamentária
-                    $unocod = substr(trim($line[5]), 0, 5);
-                    $sql = "select unoid from public.unidadeorcamentaria where unocod = '{$unocod}' and prsano = '{$_SESSION['exercicio']}'";
-                    $unoid = $mEmendas->pegaUm($sql);
-
-                    // Autor
-                    $autor = explode('-', $line[0]);
-                    $autcod = trim($autor[0]);
-                    $sql = "select autid from emendas.autor where autcod = '{$autcod}' order by autstatus";
-                    $autid = $mEmendas->pegaUm($sql);
-
-                    // Ação
-                    $acacod = substr(trim($line[7]), 0, 4);
-                    $prgcod = substr(trim($line[6]), 0, 4);
-                    $loccod = substr(trim($line[8]), 0, 4);
-                    $sql = "select acaid from monitora.acao where acacod = '$acacod' and prgcod = '$prgcod' and loccod = '$loccod' and unicod = '$unocod' and prgano = '{$_SESSION['exercicio']}'";
-
-                    $acoes = $mEmendas->carregar($sql);
-
-                    if(!$acoes || !$autid){
-                        continue;
-                    }
-
-                    if(count($acoes)> 1){
-                        ver('Mais de uma ação', d);
-                    }
-
-                    $mEmendas->emenumero = trim($line[2]);
-                    $mEmendas->unoid = $unoid;
-                    $mEmendas->acaid = $acoes[0]['acaid'];
-                    $mEmendas->autid = $autid;
-                    $mEmendas->prsano = $_SESSION['exercicio'];
-
-                    try{
-                        $mEmendas->salvar();
-                        $mEmendas->commit();
-                        unset($mEmendas);
-                    } catch (Exception $e){
-
-                    }
-                }
-                fclose($file);
-            }
         }
         echo 'Fim';
     }
