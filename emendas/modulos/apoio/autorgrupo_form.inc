@@ -2,12 +2,12 @@
 
 $cAutorGrupo = new Emendas_Controller_AutorGrupo();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cAutorGrupo->salvar($_REQUEST);
-		die;
-	case 'excluir':
-        $cAutorGrupo->excluir($_REQUEST['agrid']);
-		die;
+        die;
+    case 'excluir':
+        $cAutorGrupo->salvar(array('agrid' => $_REQUEST['agrid'], 'agrstatus' => 'I'));
+        die;
 }
 
 $mAutorGrupo = new Emendas_Model_AutorGrupo($_REQUEST['agrid']);
@@ -34,7 +34,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="agrid" id="agrid" type="hidden" value="<?php echo $mAutorGrupo->agrid; ?>">
                         
                         <?php                         
-                        echo $simec->input('agrdsc', 'agrdsc', $mAutorGrupo->agrdsc, ['maxlength' => 100]);                        
+                        echo $simec->input('agrdsc', 'Grupo de Autor', $mAutorGrupo->agrdsc, ['maxlength' => 100]);                        
                         ?>
                         
                         <div class="form-group">

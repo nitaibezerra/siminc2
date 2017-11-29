@@ -27,7 +27,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>agrdsc</th>
+                                <th>Grupo de Autor</th>
                             </tr>
                             </thead>
                             <tbody>
