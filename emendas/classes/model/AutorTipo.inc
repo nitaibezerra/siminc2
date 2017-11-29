@@ -61,5 +61,32 @@ class Emendas_Model_AutorTipo extends Modelo
         'atpstatus' => null,
     );
 
+    /**
+     * Monta consulta para retornar dados para a combo.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function buscarTodosCombo(stdClass $filtro)
+    {
+        $where = '';
+//        if($filtro->unicod){
+//            $where = "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
+//        }
+        
+        $sql = "
+            SELECT
+                atpid AS codigo,
+                atpdsc AS descricao
+            FROM emendas.autortipo
+            WHERE
+                atpstatus = 'A' $where
+            ORDER BY
+                descricao
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+    
 }//end Class
 ?>

@@ -80,6 +80,7 @@ class Emendas_Model_Autor extends Modelo
         
         $sql = "
             SELECT
+                autid,
                 autcod,
                 a.autnome AS autnome,
                 aut.atpdsc,

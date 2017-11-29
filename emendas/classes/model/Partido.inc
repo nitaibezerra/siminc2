@@ -60,6 +60,33 @@ class Emendas_Model_Partido extends Modelo
         'parcod' => null,
         'parstatus' => null,
     );
+    
+    /**
+     * Monta consulta para retornar dados para a combo.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function buscarTodosCombo(stdClass $filtro)
+    {
+        $where = '';
+//        if($filtro->unicod){
+//            $where = "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
+//        }
+        
+        $sql = "
+            SELECT
+                parid AS codigo,
+                pardsc || '(' || parsigla || ')' AS descricao
+            FROM emendas.partido
+            WHERE
+                parstatus = 'A' $where
+            ORDER BY
+                descricao
+        ";
+//ver($sql,d);
+        return $sql;
+    }
 
 }//end Class
 ?>

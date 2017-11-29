@@ -58,7 +58,7 @@ class Territorios_Model_Estado extends Modelo
      *
      * @return query para montar componentes.
      */
-    public function pegarSQLSelect($arrPost)
+    public static function pegarSQLSelect($arrPost)
     {
         $where = '';
 

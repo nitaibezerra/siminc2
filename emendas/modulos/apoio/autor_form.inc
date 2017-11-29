@@ -2,12 +2,16 @@
 
 $cAutor = new Emendas_Controller_Autor();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cAutor->salvar($_REQUEST);
-		die;
-	case 'excluir':
-        $cAutor->excluir($_REQUEST['autid']);
-		die;
+    die;
+    case 'excluir':
+        $atributos = array(
+            'autid' => $_REQUEST['autid'],
+            'autstatus' => 'I'
+        );
+        $cAutor->salvar($atributos);
+    die;
 }
 
 $mAutor = new Emendas_Model_Autor($_REQUEST['autid']);
@@ -33,13 +37,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="autid" id="autid" type="hidden" value="<?php echo $mAutor->autid; ?>">
                         
-                        <?php                         
-                        echo $simec->input('atpid', 'atpid', $mAutor->atpid);                    
-                        echo $simec->input('autnome', 'autnome', $mAutor->autnome, ['maxlength' => 200]);                    
-                        echo $simec->input('autemail', 'autemail', $mAutor->autemail, ['required', 'maxlength' => 300]);                    
-                        echo $simec->input('estuf', 'estuf', $mAutor->estuf, ['maxlength' => 2]);                    
-                        echo $simec->input('autcod', 'autcod', $mAutor->autcod, ['required', 'maxlength' => 10]);                    
-                        echo $simec->input('parid', 'parid', $mAutor->parid);                        
+                        <?php
+                            echo $simec->select('atpid', 'Tipo de Autor', $mAutor->atpid, Emendas_Model_AutorTipo::buscarTodosCombo((object) array()));
+                            echo $simec->input('autnome', 'Nome', $mAutor->autnome, ['maxlength' => 200]);                    
+                            echo $simec->input('autemail', 'Email', $mAutor->autemail, ['required', 'maxlength' => 300]);                    
+                            echo $simec->select('estuf', 'Estado', $mAutor->estuf, Territorios_Model_Estado::pegarSQLSelect(array()));
+                            echo $simec->input('autcod', 'Código', $mAutor->autcod, ['required', 'maxlength' => 10]);                    
+                            echo $simec->select('parid', 'Partido', $mAutor->parid, Emendas_Model_Partido::buscarTodosCombo((object) array()));
                         ?>
                         
                         <div class="form-group">
