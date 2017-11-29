@@ -1,6 +1,6 @@
 <?php
 
-$aProponente = (new Emendas_Model_Proponente)->recuperarTodos();
+$aProponente = (new Emendas_Model_Proponente)->recuperarTodos('*', array("prostatus = 'A'"), 'pronome');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,10 +27,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>pronome</th>
-                                <th>procnpj</th>
-                                <th>protelefone</th>
-                                <th>proemail</th>
+                                <th>Nome</th>
+                                <th>CNPJ</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,8 +40,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <a title="Alterar" href="?modulo=apoio/proponente_form&acao=A&proid=<?php echo $dados['proid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['pronome']; ?></td>
-                                    <td><?php echo $dados['procnpj']; ?></td>
-                                    <td><?php echo $dados['protelefone']; ?></td>
+                                    <td><?php echo formatar_cnpj($dados['procnpj']); ?></td>
+                                    <td class="maskTelefone"><?php echo formata_fone_fax($dados['protelefone']); ?></td>
                                     <td><?php echo $dados['proemail']; ?></td>
                                 </tr>
                             <?php } ?>        
@@ -53,3 +53,4 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+
