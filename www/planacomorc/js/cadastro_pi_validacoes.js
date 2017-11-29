@@ -116,31 +116,27 @@
             }
         }
 
-        // Verifica se o usuário escolheu um enquadramento que é do tipo formulario reduzido para verificar a validação do cronograma físico.
-        if(!verificarFormularioReduzido()){
+        // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
+        if($('#pprid').val() != intProdNaoAplica ){
 
-            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
-            if($('#pprid').val() != intProdNaoAplica ){
+            // Verifica se o cronograma físico foi preenchido.
+            if(!validarCronogramaFisicoPreenchido()){
+                $('input.input_fisico').addClass('validateRedText');
+                $('#td_total_fisico').addClass('validateRedText');
+                addMsgCustom.push('Cronograma Fisíco');
+            } else {
+                $('input.input_fisico').removeClass('validateRedText');
+                $('#td_total_fisico').removeClass('validateRedText');
+            }
 
-                // Verifica se o cronograma físico foi preenchido.
-                if(!validarCronogramaFisicoPreenchido()){
-                    $('input.input_fisico').addClass('validateRedText');
-                    $('#td_total_fisico').addClass('validateRedText');
-                    addMsgCustom.push('Cronograma Fisíco');
-                } else {
-                    $('input.input_fisico').removeClass('validateRedText');
-                    $('#td_total_fisico').removeClass('validateRedText');
-                }
-
-                // Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
-                if(!validarCronogramaFisicoIgualQuantidade()){
-                    $('input.input_fisico').addClass('validateRedText');
-                    $('#td_total_fisico').addClass('validateRedText');
-                    addMsgCustom.push('Soma dos valores do Cronograma Fisíco está diferente da quantidade informada para o Produto do PI');
-                } else {
-                    $('input.input_fisico').removeClass('validateRedText');
-                    $('#td_total_fisico').removeClass('validateRedText');
-                }
+            // Verifica se o valor do cronograma Físico é igual ao informado no Produto do PI.
+            if(!validarCronogramaFisicoIgualQuantidade()){
+                $('input.input_fisico').addClass('validateRedText');
+                $('#td_total_fisico').addClass('validateRedText');
+                addMsgCustom.push('Soma dos valores do Cronograma Fisíco está diferente da quantidade informada para o Produto do PI');
+            } else {
+                $('input.input_fisico').removeClass('validateRedText');
+                $('#td_total_fisico').removeClass('validateRedText');
             }
         }
 
@@ -211,7 +207,7 @@
      */
     function definirCamposObrigatorios(){
         var codigoEnquadramento = $('#eqdid').val();
-        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid'];
+        var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'pprid'];
 
         // Se o TED não estiver marcado o sistema obriga a preencher a modalidade de Pactuação.
         if(!$('#picted').is(':checked')){
@@ -226,12 +222,12 @@
             // Se o formulario não possui as opções de manutenção item o sistema lista como obrigatório as opções Objetivo PPA, Metas PPA, Iniciativa PPA
             }
         } else {
-            listaObrigatorios.push('oppid', 'mppid', 'pprid', 'mdeid', 'neeid', 'mpnid', 'ipnid');
-
-            // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
-            if($('#pprid').val() != intProdNaoAplica ){
-                listaObrigatorios.push('pumid', 'picquantidade');
-            }
+            listaObrigatorios.push('oppid', 'mppid', 'mdeid', 'neeid', 'mpnid', 'ipnid');
+        }
+        
+        // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
+        if($('#pprid').val() != intProdNaoAplica ){
+            listaObrigatorios.push('pumid', 'picquantidade');
         }
 
         if($('#picedital').is(':checked')){

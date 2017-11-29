@@ -1156,6 +1156,11 @@
                 $('#div_area_cultural').hide('slow');
                 $('#div_segmento_cultural').hide('slow');
                 $('#div_botao_edital').hide('slow');
+                // Marca a opção produto com o valor padrão "Não se aplica" se não tiver valor marcado ainda.
+                if($('#pprid').val() === ""){
+                    $('#pprid').val(intProdNaoAplica).trigger("chosen:updated");
+                }
+                
                 $('#mdeid').val('').trigger("chosen:updated");
                 $('#neeid').val('').trigger("chosen:updated");
                 $('#oppid').val('').trigger("chosen:updated");
@@ -1163,15 +1168,6 @@
                 $('#ippid').val('').trigger("chosen:updated");
                 $('#mpnid').val('').trigger("chosen:updated");
                 $('#ipnid').val('').trigger("chosen:updated");
-                // Oculta os campos do Produto do PI
-                $('.div_produto_pi').hide('slow');
-                $('#pprid').val('').trigger("chosen:updated");
-                $('#pumid').val('').trigger("chosen:updated");
-                $('#picquantidade').val('');
-                // Oculta as colunas e campos do Cronograma Físico
-                $('.td_cronograma_fisico').hide('slow');
-                // Apaga os dados do cronograma Físico
-                $('.input_fisico').val('');
             } else {
                 // Se existir itens de manutenção exibe as opções de manutenção item e sub-item e bloqueia os campos de titulo e descrição.
                 exibirOpcoesItemManutencao();
@@ -1181,10 +1177,6 @@
                 $('#div_area_cultural').show('slow');
                 $('#div_segmento_cultural').show('slow');
                 $('#div_botao_edital').show('slow');
-                // Exibe os campos do Produto do PI
-                $('.div_produto_pi').show('slow');
-                // Exibe as colunas e campos do Cronograma Físico
-                $('.td_cronograma_fisico').show('slow');
             }
         }
     }
