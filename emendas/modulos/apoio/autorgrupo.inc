@@ -1,6 +1,6 @@
 <?php
 
-$aAutorGrupo = (new Emendas_Model_AutorGrupo)->recuperarTodos();
+$aAutorGrupo = (new Emendas_Model_AutorGrupo)->recuperarTodos('*', array("agrstatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

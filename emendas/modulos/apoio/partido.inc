@@ -1,6 +1,6 @@
 <?php
 
-$aPartido = (new Emendas_Model_Partido)->recuperarTodos();
+$aPartido = (new Emendas_Model_Partido)->recuperarTodos('*', array("parstatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,9 +27,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>pardsc</th>
-                                <th>parsigla</th>
-                                <th>parcod</th>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Sigla</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,9 +38,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=apoio/partido_form&acao=A&parid=<?php echo $dados['parid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
+                                    <td><?php echo $dados['parcod']; ?></td>
                                     <td><?php echo $dados['pardsc']; ?></td>
                                     <td><?php echo $dados['parsigla']; ?></td>
-                                    <td><?php echo $dados['parcod']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

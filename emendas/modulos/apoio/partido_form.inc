@@ -2,12 +2,12 @@
 
 $cPartido = new Emendas_Controller_Partido();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cPartido->salvar($_REQUEST);
-		die;
-	case 'excluir':
-        $cPartido->excluir($_REQUEST['parid']);
-		die;
+        die;
+    case 'excluir':
+        $cPartido->salvar(array('parid' => $_REQUEST['parid'], 'parstatus' => 'I'));
+        die;
 }
 
 $mPartido = new Emendas_Model_Partido($_REQUEST['parid']);
@@ -33,10 +33,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="parid" id="parid" type="hidden" value="<?php echo $mPartido->parid; ?>">
                         
-                        <?php                         
-                        echo $simec->input('pardsc', 'pardsc', $mPartido->pardsc, ['maxlength' => 200]);                    
-                        echo $simec->input('parsigla', 'parsigla', $mPartido->parsigla, ['maxlength' => 30]);                    
-                        echo $simec->input('parcod', 'parcod', $mPartido->parcod);                        
+                        <?php
+                            echo $simec->input('parcod', 'Código', $mPartido->parcod);                        
+                            echo $simec->input('pardsc', 'Nome', $mPartido->pardsc, ['maxlength' => 200]);                    
+                            echo $simec->input('parsigla', 'Sigla', $mPartido->parsigla, ['maxlength' => 30]);                    
                         ?>
                         
                         <div class="form-group">
