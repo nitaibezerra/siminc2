@@ -538,18 +538,19 @@ if ( $_POST['formulario'] ) {
                     $destinatariosBcc = $envioRegra['emails'];
                     $assunto = $envioRegra['assunto'];
                     $mensagem = '<p>'. $envioRegra['email']. '</p><br /><br /><br />';
+                    $linkUsuario = URL_SISTEMA. "planacomorc/planacomorc.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf=". str_replace(array(".", "-"), '', $_POST['usucpf']);
 
                     $mensagem .= "
-                        <p>Dados da Solicitação:</p>
+                        <p><b>Dados da Solicitação:</b> <a title='Clique aqui para ir a tela de aprovar o usuário.' href='{$linkUsuario}'>{$linkUsuario}</a></p>
                         <br />
                         <p><b>Módulo:</b> {$envioRegra['sistema']}</p>
                         <p><b>Perfil Desejado:</b> {$envioRegra['perfil']}</p>
-
+                        <br />
                         <p><b>Nome:</b> {$_POST['usunome']}</p>
                         <p><b>CPF:</b> {$_POST['usucpf']}</p>
                         <p><b>E-mail:</b> {$_POST['usuemail']}</p>
                         <p><b>Telefone:</b> ({$_POST['usufoneddd']}) {$_POST['usufonenum']}</p>
-
+                        <br />
                         <p>
                         Atenciosamente,
                         <br />Equipe ". SIGLA_SISTEMA. ".
