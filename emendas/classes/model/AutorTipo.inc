@@ -62,6 +62,49 @@ class Emendas_Model_AutorTipo extends Modelo
     );
 
     /**
+     * Monta consulta pra buscar dados da entidade.
+     * 
+     * @param stdClass $filtros
+     * @return string
+     */
+    public static function montarSqlBuscarTodos(stdClass $filtros) {
+        $where = '';
+//        $where .= $filtros->prsano? "\n AND pij.prsano = '".(int) $filtros->prsano. "'": NULL;
+//        $where .= $filtros->periodoVigente? "\n AND NOW() BETWEEN pij.pijinicio AND pij.pijfim ": NULL;
+        
+        $sql = "
+            SELECT
+                atp.atpid,
+                atp.agrid,
+                atp.atpdsc,
+                atg.agrdsc
+            FROM emendas.autortipo atp
+                JOIN emendas.autorgrupo atg USING(agrid)
+            WHERE
+                atp.atpstatus = 'A' $where
+            ORDER BY
+                atp.atpdsc
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+    
+    /**
+     * Buscar dados da entidade.
+     * 
+     * @global type $db
+     * @param stdClass $filtros
+     * @return array/boolean
+     */
+    public static function buscarTodos(stdClass $filtros) {
+        global $db;
+        $sql = self::montarSqlBuscarTodos($filtros);
+        $resultado = $db->carregar($sql);
+        $lista = $resultado? $resultado: array();
+        return $lista;
+    }
+    
+    /**
      * Monta consulta para retornar dados para a combo.
      * 
      * @param stdClass $filtro

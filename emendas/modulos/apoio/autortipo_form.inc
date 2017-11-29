@@ -2,12 +2,12 @@
 
 $cAutorTipo = new Emendas_Controller_AutorTipo();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cAutorTipo->salvar($_REQUEST);
-		die;
-	case 'excluir':
-        $cAutorTipo->excluir($_REQUEST['atpid']);
-		die;
+        die;
+    case 'excluir':
+        $cAutorTipo->salvar(array('atpid' => $_REQUEST['atpid'], 'atpstatus' => 'I'));
+        die;
 }
 
 $mAutorTipo = new Emendas_Model_AutorTipo($_REQUEST['atpid']);
@@ -34,8 +34,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="atpid" id="atpid" type="hidden" value="<?php echo $mAutorTipo->atpid; ?>">
                         
                         <?php                         
-                        echo $simec->input('atpdsc', 'atpdsc', $mAutorTipo->atpdsc, ['maxlength' => 200]);                    
-                        echo $simec->input('agrid', 'agrid', $mAutorTipo->agrid);                        
+                            echo $simec->input('atpdsc', 'Tipo de Autor', $mAutorTipo->atpdsc, ['maxlength' => 200]);                    
+//                        echo $simec->input('agrid', 'agrid', $mAutorTipo->agrid);                        
+                            echo $simec->select('agrid', 'Grupo de autor', $mAutorTipo->agrid, Emendas_Model_AutorGrupo::buscarTodosCombo((object) array()));
                         ?>
                         
                         <div class="form-group">

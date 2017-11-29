@@ -100,7 +100,7 @@ class Emendas_Model_Autor extends Modelo
     }
     
     /**
-     * Buscar dados das janelas.
+     * Buscar dados da entidade.
      * 
      * @global type $db
      * @param stdClass $filtros

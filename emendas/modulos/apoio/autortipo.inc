@@ -1,6 +1,6 @@
 <?php
 
-$aAutorTipo = (new Emendas_Model_AutorTipo)->recuperarTodos();
+$listaAutorTipo = (new Emendas_Model_AutorTipo)->buscarTodos((object)array());
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,18 +27,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>atpdsc</th>
-                                <th>agrid</th>
+                                <th>Tipo de Autor</th>
+                                <th>Grupo de Autor</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aAutorTipo as $dados){ ?>
+                            <?php foreach($listaAutorTipo as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=apoio/autortipo_form&acao=A&atpid=<?php echo $dados['atpid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['atpdsc']; ?></td>
-                                    <td><?php echo $dados['agrid']; ?></td>
+                                    <td><?php echo $dados['agrdsc']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>
