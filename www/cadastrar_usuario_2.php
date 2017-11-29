@@ -469,7 +469,11 @@ if ( $_POST['formulario'] ) {
         $nmusu    = !empty($_REQUEST['usunome']) ? ", <b>".$usuariod->usunome."</b>" : "";
         $perfil   = !empty($nmPerfil) ? ", para o perfil <b>".$nmPerfil."</b>" : "";
         $conteudo = "Houve uma solicitação de acesso ao demandas para o CPF: <b>".formatar_cpf($cpf)."</b>".$nmusu."".$perfil." em <b>".date('d/m/Y H:i:s')."</b>.";
-        enviar_email( $remetente, $destinatario, $assunto, $conteudo, $emailCopia );
+        # $corpoEmailV3 Variavel inserida dentro do template.
+        $corpoEmailV3 = '<p>'. $conteudo. '</p>';
+        # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
+        include 'email-template-novo-bootstrap-v3.php';
+        enviar_email( $remetente, $destinatario, $assunto, $textoEmailV3, $emailCopia );
     }
 
     // VERIFICA SE HÁ REGRA PARA ENVIO DE EMAIL/SMS
@@ -533,27 +537,32 @@ if ( $_POST['formulario'] ) {
 
                     $destinatariosBcc = $envioRegra['emails'];
                     $assunto = $envioRegra['assunto'];
-                    $mensagem = $envioRegra['email'];
+                    $mensagem = '<p>'. $envioRegra['email']. '</p><br /><br /><br />';
+                    $linkUsuario = URL_SISTEMA. "planacomorc/planacomorc.php?modulo=sistema/usuario/cadusuario&acao=A&usucpf=". str_replace(array(".", "-"), '', $_POST['usucpf']);
 
-                    $mensagem .= "<pre>
-
-    Dados da Solicitação:
-
-    Módulo: {$envioRegra['sistema']}
-    Perfil Desejado: {$envioRegra['perfil']}
-
-    Nome: {$_POST['usunome']}
-    CPF: {$_POST['usucpf']}
-    E-mail: {$_POST['usuemail']}
-    Telefone: ({$_POST['usufoneddd']}) {$_POST['usufonenum']}
-
-    Atenciosamente,
-    Equipe ". SIGLA_SISTEMA. ".
-    </pre>
-    ";
+                    $mensagem .= "
+                        <p><b>Dados da Solicitação:</b> <a title='Clique aqui para ir a tela de aprovar o usuário.' href='{$linkUsuario}'>{$linkUsuario}</a></p>
+                        <br />
+                        <p><b>Módulo:</b> {$envioRegra['sistema']}</p>
+                        <p><b>Perfil Desejado:</b> {$envioRegra['perfil']}</p>
+                        <br />
+                        <p><b>Nome:</b> {$_POST['usunome']}</p>
+                        <p><b>CPF:</b> {$_POST['usucpf']}</p>
+                        <p><b>E-mail:</b> {$_POST['usuemail']}</p>
+                        <p><b>Telefone:</b> ({$_POST['usufoneddd']}) {$_POST['usufonenum']}</p>
+                        <br />
+                        <p>
+                        Atenciosamente,
+                        <br />Equipe ". SIGLA_SISTEMA. ".
+                        </p>
+                    ";
+                    # $corpoEmailV3 Variavel inserida dentro do template.
+                    $corpoEmailV3 = $mensagem;
+                    # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
+                    include 'email-template-novo-bootstrap-v3.php';
 
                     $aDestinatarios = array();
-                    enviar_email($remetente, $aDestinatarios, $assunto, $mensagem, null, $destinatariosBcc);
+                    enviar_email($remetente, $aDestinatarios, $assunto, $textoEmailV3, null, $destinatariosBcc);
                 }
                 if(isset($envioRegra['celular'])){
 
@@ -614,7 +623,7 @@ if ( $_POST['formulario'] ) {
 			// envia email de confirmação
 			$remetente = array("nome" => $instituicao->ittsistemasigla,"email" => $emailCopia);
 			$destinatario = $usuemail;
-			$assunto = "Solicitação de Cadastro no Simec";
+			$assunto = "Solicitação de Cadastro no ". SIGLA_SISTEMA;
 			$conteudo = sprintf("%s<p>%s %s ou no(s) telefone(s): %s Fax %s</p>%s",
 				$ususexo == 'M' ? 'Prezado Sr.' : 'Prezada Sra.',
 				$instituicao->ittemail_inclusao_usuario,
@@ -623,7 +632,11 @@ if ( $_POST['formulario'] ) {
 				$sistema->sisfax,
 				$cpf_cadastrado ? '*Usuário já cadastrado' : '*Novo Usuário'
 			);
-			enviar_email( $remetente, $destinatario, $assunto, $conteudo, $emailCopia );
+                        # $corpoEmailV3 Variavel inserida dentro do template.
+                        $corpoEmailV3 = '<p>'. $conteudo. '</p>';
+                        # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
+                        include 'email-template-novo-bootstrap-v3.php';
+			enviar_email( $remetente, $destinatario, $assunto, $textoEmailV3, $emailCopia );
 		}
 		// leva o usuário para a página de login e exibe confirmação
 		$db->commit();

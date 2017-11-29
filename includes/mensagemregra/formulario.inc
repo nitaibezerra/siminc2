@@ -216,11 +216,20 @@ $modelMensagemRegra->sisid = $_SESSION['sisid'];
             <td>
                 <?php
                 
-                $sql = "select p.pflcod as codigo, p.pfldsc || ' (' || s.sisabrev || ')' as descricao
-                        from seguranca.perfil p
-                                inner join seguranca.sistema s on s.sisid = p.sisid
-                        where p.sisid = '{$_SESSION['sisid']}'
-                        order by descricao";
+                $sql = "
+                    SELECT
+                        p.pflcod AS codigo,
+                        p.pfldsc || ' (' || s.sisabrev || ')' AS descricao
+                    FROM
+                        seguranca.perfil p
+                        JOIN seguranca.sistema s ON s.sisid = p.sisid
+                    WHERE
+                        p.sisid = '{$_SESSION['sisid']}'
+                        AND p.pflstatus = 'A'
+                        AND s.sisstatus = 'A'
+                    ORDER BY
+                        descricao
+                ";
                 
                 if($modelMensagemRegra->mreid){
                     $sqlCarregar = "select mcavalor as codigo, p.pfldsc || ' (' || s.sisabrev || ')' as descricao
