@@ -72,6 +72,12 @@ class Emendas_Model_Beneficiario extends Modelo
         'benpropostanumero' => null,
         'benpropostatitulo' => null,
         'benpropostaobjeto' => null,
+        'benempenhado' => null,
+        'benconveniado' => null,
+        'benpago' => null,
+        'benobservacao' => null,
+        'benimpedimento' => null,
+        'sicid' => null,
     );
 
 
