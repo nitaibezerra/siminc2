@@ -836,14 +836,14 @@ function formata_fone_fax($numero) {
 	$numero = preg_replace('/^0+/', '',$numero, -1);
 	if ( strlen($numero) == 14 or strlen($numero) == 12 )
 	$numero = substr($numero,-10);
-	if ( strlen($numero) == 13 or strlen($numero) == 11 )
+	if ( strlen($numero) == 13 )
 	$numero = substr($numero,-9);
 	$res = substr($numero,-4);
 	if ( strlen($numero) > 4  and strlen($numero) < 9 )
 	$res = substr($numero,0,strlen($numero)-4)."-".$res;
-	if ( strlen($numero) > 8  )
-	$res = "(0XX".substr($numero,0,2).") ".
-	substr($numero,2,strlen($numero)-6)."-".$res;
+	if ( strlen($numero) > 8 )
+	$res = "(0XX".substr($numero,0,2).") ". substr($numero,2,strlen($numero)-6)."-".$res;
+        
 	return $res;
 }
 function formata_cep($num) {
