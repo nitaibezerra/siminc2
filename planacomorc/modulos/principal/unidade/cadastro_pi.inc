@@ -312,7 +312,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="unicod">Unidade Solicitante: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="unicod">Unidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
                                 <?php
@@ -380,7 +380,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 text-right">
-                                <label class="control-label" for="ungcod">Unidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                                <label class="control-label" for="ungcod">SubUnidade: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_ungcod">
                                 <?php
