@@ -9,6 +9,8 @@
    Finalidade: permitir abrir a página inicial
     */
 
+simec_redirecionar('emendas.php?modulo=principal/emenda&acao=A');
+
 //Chamada de programa
 include  APPRAIZ."includes/cabecalho.inc";
 
