@@ -1,6 +1,9 @@
 <?php
 
+$mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
+
 $cBeneficiario = new Emendas_Controller_Beneficiario();
+
 switch ($_REQUEST['req']) {
 	case 'salvar':
         $cBeneficiario->salvar($_REQUEST);
@@ -8,9 +11,23 @@ switch ($_REQUEST['req']) {
 	case 'excluir':
         $cBeneficiario->excluir($_REQUEST['benid']);
 		die;
+    case 'formulario-historico':
+        $cBeneficiario->montarFormularioHistorico($_REQUEST['benid'], $_REQUEST['behid']);
+        die;
+    case 'listar-historico':
+        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid);
+        die;
+    case 'salvar-historico':
+        $cBeneficiarioHistorico = new Emendas_Controller_BeneficiarioHistorico();
+        $cBeneficiarioHistorico->salvar($_POST);
+        die;
+    case 'excluir-historico':
+        $cBeneficiarioHistorico = new Emendas_Controller_BeneficiarioHistorico();
+        echo $cBeneficiarioHistorico->excluir($_REQUEST['behid']);
+        die;
 }
 
-$mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
+
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
 
 $mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
@@ -32,7 +49,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <form id="formulario" name="formulario" method="post" class="form-horizontal">
+        <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
             <div class="col-md-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -53,6 +70,36 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required']);
                         echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                         echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
+
+                        ?>
+
+                        <div class="form-group ">
+                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
+                            <div class="col-md-1 ">
+                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
+                            </div>
+                            <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
+                            <div class="col-md-1 ">
+                                <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
+                            </div>
+                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
+                            <div class="col-md-1 ">
+                                <input type="checkbox" name="benpago" id="benpago" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benpago ? 'checked="checked"' : ''; ?> />
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
+                            <div class="col-md-1 ">
+                                <input type="checkbox" name="benimpedimento" id="benimpedimento" value="t" class="js-switch" <?php echo $mBeneficiario->impid ? 'checked="checked"' : ''; ?> />
+                            </div>
+                            <label for="benimpedimento" class="col-sm-2 control-label div_motivo">Motivo: </label>
+                            <div class="col-md-6 div_motivo">
+                                <?php echo $simec->select('impid', null, $mBeneficiario->impid, (new Emendas_Model_Impedimento())->recuperarSqlCombo(['impcod', 'impdsc'], ["impstatus = 'A'"], 'impcod'));; ?>
+                            </div>
+                        </div>
+
+                        <?php 
                         echo $simec->radio('benformaexecucao', 'Forma de Execução', $mBeneficiario->benformaexecucao, ['S'=>'SICONV', 'D'=>'Direta', 'T'=>'TED'], ['required']);
                         ?>
 
@@ -99,21 +146,40 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                 </div>
             </div>
+        </form>
 
-            <div class="clearfix"></div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="text-center">
-                        <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                        <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                        <?php if($mBeneficiario->benid){ ?>
-                            <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                        <?php } ?>
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Histórico</h5>
+                </div>
+                <div class="ibox-content" id="">
+                    <div id="div_formulario_historico">
+                        <?php if($mBeneficiario->benid){
+                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
+                        } ?>
+                    </div>
+                    <div id="div_listagem_historico">
+                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                    <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                    <?php if($mBeneficiario->benid){ ?>
+                        <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-12">
             <div class="ibox float-e-margins">
             	<div class="ibox-title">
@@ -135,6 +201,15 @@ include APPRAIZ . "includes/cabecalho.inc";
             verificarDadosSiconv();
         });
 
+        toggleMotivo();
+        $('#benimpedimento').change(function(){
+            toggleMotivo();
+        });
+
+        $('#btn-salvar').click(function(){
+            $('#formulario-beneficiario').submit();
+        });
+
         $('#esfid').change(function(){
             $('.select-localizacao').hide('slow');
             $('#div-localizacao_' + $('#esfid').val()).show('slow');
@@ -147,6 +222,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $('.dados-siconv').show('slow');
             } else {
                 $('.dados-siconv').hide('slow');
+            }
+        }
+        function toggleMotivo(){
+            if($('#benimpedimento').is(':checked')){
+                $('.div_motivo').show('slow');
+            } else {
+                $('#impid').val('').trigger("chosen:updated");
+                $('.div_motivo').hide('slow');
             }
         }
     })

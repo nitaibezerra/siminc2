@@ -51,18 +51,18 @@ class Emendas_Controller_Beneficiario
         }
     } //end salvar()
 
-    public function montarFormularioHistorico($benid = null, $emdid = null)
+    public function montarFormularioHistorico($benid = null, $behid = null)
     {
         global $simec;
         $mBeneficiarioHistorico = new Emendas_Model_BeneficiarioHistorico($behid);
-
-        if(!$mBeneficiarioHistorico->benid){ $mBeneficiariohistorico->benid = $benid; }
+        if(!$mBeneficiarioHistorico->benid){ $mBeneficiarioHistorico->benid = $benid; }
+        $mBeneficiarioHistorico->behdata = $mBeneficiarioHistorico->behdata = date('Y-m-d');
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico_form.inc';
     }
 
     public function montarListagemHistorico($benid)
     {
-        $mBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarTodos('*', ['benid = ' . (int)$benid]);
+        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarTodos('*', ['benid = ' . (int)$benid, " behstatus = 'A' "], 'behdata desc');
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
     }
 }
