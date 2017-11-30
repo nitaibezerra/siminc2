@@ -107,7 +107,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
                                         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
                                             ->setColors($colors)
-                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
+//                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
                                             ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
