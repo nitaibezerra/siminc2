@@ -1159,6 +1159,7 @@
                 // Marca a opção produto com o valor padrão "Não se aplica" se não tiver valor marcado ainda.
                 if($('#pprid').val() === ""){
                     $('#pprid').val(intProdNaoAplica).trigger("chosen:updated");
+                    formatarTelaProdutoNaoAplica(intProdNaoAplica);
                 }
                 
                 $('#mdeid').val('').trigger("chosen:updated");
