@@ -90,7 +90,7 @@ class Spo_Model_Planointerno extends Modelo
         # Sub-Unidades e Sub-Unidades Delegadas do Usuário.
         $where .= self::montarFiltroSubUnidadeUsuario($filtros);
         # Código do PI.
-        $where .= $filtros->plicod? "\n AND pli.plicod = '". pg_escape_string($filtros->plicod). "' ": NULL;
+        $where .= $filtros->plicod? "\n AND (pli.plicod = '". pg_escape_string($filtros->plicod). "' OR pli.pliid = '". (int)pg_escape_string($filtros->plicod). "') ": NULL;
         # Unidade Orçamentária.
         $where .= $filtros->unicod? "\n AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
         # Sub-Unidade Orçamentária.

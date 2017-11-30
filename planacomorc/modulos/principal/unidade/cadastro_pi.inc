@@ -389,10 +389,22 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 ?>
                             </div>
                         </div>
-                        <?php
-                        $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
-                        echo $simec->select("delegacao[]", 'Sub-Unidades Delegadas', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
-                        ?>
+
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="picted">Delegação:</label>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox" name="delegacao" id="delegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                            </div>
+                            <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
+                                <?php
+                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+                                echo $simec->select("delegacao[]", '', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
+                                ?>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="eqdid">Enquadramento da Despesa: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
@@ -415,6 +427,7 @@ DML;
                                 ?>
                             </div>
                         </div>
+
                         <div class="form-group grupo_manutencao" style="display: none;">
                             <div class="col-md-3 text-right">
                                 <label class="control-label" for="maiid">Item: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>

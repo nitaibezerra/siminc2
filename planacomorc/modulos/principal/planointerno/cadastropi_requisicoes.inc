@@ -92,7 +92,7 @@ if (isset($_REQUEST['evento'])) {
             $retorno = $func($_REQUEST);
         }
         if ($retorno) {
-            simec_redirecionar($href, 'success');
+            simec_redirecionar($href, 'success', 'Operação realizada com sucesso! <br /><br /> Favor enviar para aprovação.');
         } else {
             simec_redirecionar($href, 'error');
         }

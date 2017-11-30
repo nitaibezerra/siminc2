@@ -1366,3 +1366,11 @@
         });
     }
 
+    function toggleDelegacao(){
+        if($('#delegacao').is(':checked')){
+            $('#div_unidades_delegadas').show('slow');
+        } else {
+            $('#div_unidades_delegadas').hide('slow');
+        }
+    }
+
