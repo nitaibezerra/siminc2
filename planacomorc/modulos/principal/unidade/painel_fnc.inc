@@ -57,7 +57,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Acompanhamento FNC - Por Ação</h5>
+                    <h5>Acompanhamento Geral FNC - Por Ação</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">

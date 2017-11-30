@@ -9,8 +9,12 @@ class Emendas_Controller_Beneficiario
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($dados['benid']);
             $mBeneficiario->popularDadosObjeto($dados);
-            
-            $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto']);
+
+            $mBeneficiario->benempenhado = $dados['benempenhado'] == 't' ? 't' : 'f';
+            $mBeneficiario->benconveniado = $dados['benconveniado'] == 't' ? 't' : 'f';
+            $mBeneficiario->benpago = $dados['benpago'] == 't' ? 't' : 'f';
+
+            $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid']);
 
             // Salvando dados da Localização
             $dados['benid'] = $mBeneficiario->benid;
@@ -46,4 +50,19 @@ class Emendas_Controller_Beneficiario
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+
+    public function montarFormularioHistorico($benid = null, $emdid = null)
+    {
+        global $simec;
+        $mBeneficiarioHistorico = new Emendas_Model_BeneficiarioHistorico($behid);
+
+        if(!$mBeneficiarioHistorico->benid){ $mBeneficiariohistorico->benid = $benid; }
+        include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico_form.inc';
+    }
+
+    public function montarListagemHistorico($benid)
+    {
+        $mBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarTodos('*', ['benid = ' . (int)$benid]);
+        include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
+    }
 }

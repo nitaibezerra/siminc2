@@ -97,12 +97,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
                                         <?php
+
+                                        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+
                                         $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
                                             'exercicio' => $_SESSION['exercicio'],
                                             'unofundo' => 'FALSE'
                                         ));
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
                                         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                            ->setColors($colors)
                                             ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
                                             ->gerarGrafico($estatistica);
                                         ?>
@@ -117,7 +121,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             'unofundo' => 'FALSE',
                                             'unidades'=>"suocod not in ('420009', '420008')"));
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setWidth('85%')->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+
                                         ?>
                                     </div>
                                 </div>
@@ -130,7 +135,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             'unofundo' => 'FALSE',
                                             'unidades'=>"suocod in ('420009', '420008')"));
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setWidth('85%')->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                                         ?>
                                     </div>
                                 </div>
