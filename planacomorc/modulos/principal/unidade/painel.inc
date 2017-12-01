@@ -1,4 +1,5 @@
 <?php
+
 include_once APPRAIZ . "includes/library/simec/Grafico.php";
 
 include_once '_funcoespi.php';
@@ -38,6 +39,9 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
+
+# Cores dos Graficos
+$colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
 
 ?>
 <script>
@@ -97,18 +101,15 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
                                         <?php
-
-                                        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
-
-                                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
-                                            'exercicio' => $_SESSION['exercicio'],
-                                            'unofundo' => 'FALSE'
-                                        ));
-                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                            ->setColors($colors)
-//                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
-                                            ->gerarGrafico($estatistica);
+                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
+                                                'exercicio' => $_SESSION['exercicio'],
+                                                'unofundo' => 'FALSE'
+                                            ));
+                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                            $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                                ->setColors($colors)
+    //                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
+                                                ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
                                 </div>
@@ -138,6 +139,31 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
                                         ?>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Valores por Unidades</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="tabs-container">
+                            <div class="tab-content">
+                                <div class="panel-body">
+                                    <?php
+                                        $codigoUnidadesWhere = "'". join($listaSubUnidadeUsuario, "','"). "'";
+                                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                                            'exercicio' => $_SESSION['exercicio'],
+                                            'unofundo' => 'FALSE',
+                                            'unidades'=>"suocod IN(". $codigoUnidadesWhere. ")"));
+                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                    ?>
                                 </div>
                             </div>
                         </div>
