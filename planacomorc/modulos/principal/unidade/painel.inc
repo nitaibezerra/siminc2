@@ -86,7 +86,7 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
             <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>
             <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A"><i class="fa fa-list"></i> Lista de PI</a>
             <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A"><i class="fa fa-plus-circle"></i> Criar PI</a>
-            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
+            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A&fundo=f"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
         </div>
     </div>
 </div>

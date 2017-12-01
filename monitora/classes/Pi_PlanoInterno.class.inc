@@ -349,13 +349,11 @@ class Pi_PlanoInterno extends Modelo
                         sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
                 from spo.siopexecucao sec
                         inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
-                        /*
                         inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
                         inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                 where suo.prsano = '$exercicio'
                 AND suo.unofundo = 't'
-                */
                 group by ptr.ptrid, nat     
                 ";
 
@@ -366,6 +364,77 @@ class Pi_PlanoInterno extends Modelo
             $aValores[$dado['ptrid']][$dado['nat']]['vlrempenhado'] += $dado['vlrempenhado'];
             $aValores[$dado['ptrid']][$dado['nat']]['vlrpago'] += $dado['vlrpago'];
             $aValores[$dado['ptrid']][$dado['nat']]['vlrliquidado'] += $dado['vlrliquidado'];
+        }
+
+        return $aValores;
+    }
+
+    public function recuperarDadosFncPorUnidade($exercicio)
+    {
+
+        $sql = "SELECT  DISTINCT suo.unoid, suo.unocod, suo.unosigla, suo.unonome, suo.suoid, suo.suonome, suo.suosigla
+                from public.vw_subunidadeorcamentaria suo
+                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+                where suo.suostatus = 'A'
+                and suo.unofundo = 't' 
+                and suo.prsano = '$exercicio'                
+                order by suo.suonome";
+
+        $dadosUnidade = $this->carregar($sql);
+        $dados['unidade'] = $dadosUnidade ? $dadosUnidade : [];
+        $dados['estado'] = $this->recuperarValoresPorUnidadeEstado($exercicio);
+        $dados['execucao'] = $this->recuperarValoresPorUnidadeExecucao($exercicio);
+
+        return $dados;
+    }
+
+    public function recuperarValoresPorUnidadeEstado($exercicio)
+    {
+        $sql = "select pli.pliid, suo.suoid, (pic.picvalorcapital + pic.picvalorcusteio) valor, doc.esdid
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                        inner join workflow.documento doc on doc.docid = pli.docid
+                        inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
+                where pli.plistatus = 'A'        
+                and pli.pliano = '$exercicio'
+                and suo.unofundo = 't'
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $aValores = [];
+        foreach($dados as $dado){
+            $aValores[$dado['suoid']][$dado['esdid']] += $dado['valor'];
+        }
+        return $aValores;
+    }
+
+    public function recuperarValoresPorUnidadeExecucao($exercicio)
+    {
+
+        $sql = "select  suo.suoid, 
+                        sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS vlrempenhado,
+                        sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS vlrpago,
+                        sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
+                from spo.siopexecucao sec
+                        inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                        inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
+                        inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+                where suo.prsano = '$exercicio'
+                AND suo.unofundo = 't'
+                group by suo.suoid
+                ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+        $aValores = [];
+        foreach($dados as $dado){
+            $aValores[$dado['suoid']]['vlrempenhado'] += $dado['vlrempenhado'];
+            $aValores[$dado['suoid']]['vlrpago'] += $dado['vlrpago'];
+            $aValores[$dado['suoid']]['vlrliquidado'] += $dado['vlrliquidado'];
         }
 
         return $aValores;
@@ -774,10 +843,14 @@ class Pi_PlanoInterno extends Modelo
         return true;
     }
 
-    public function getDadosGerais($exercicio)
+    public function getDadosGerais($exercicio, $fundo = null)
     {
 
         $where = " pli.pliano = '$exercicio' ";
+
+        if($fundo){
+            $where .= " AND suo.unofundo = '{$fundo}' ";
+        }
 
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));
