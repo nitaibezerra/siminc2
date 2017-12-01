@@ -1106,7 +1106,7 @@ class Pi_PlanoInterno extends Modelo
             $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
             $grafico->gerarGrafico($dados);
         } else {
-            echo '<div class="alert alert-danger">Nenhum dado encontrado.</div>';
+            echo "<script>$('#detalhe-grafico').modal('hide'); swal({title: 'Atenção', text: 'Nenhum dado encontrado.', type: 'warning', html: true});</script>";
         }
     }
     
