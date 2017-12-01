@@ -35,18 +35,26 @@ class Pi_Responsavel extends Modelo{
      * @var array
      * @access protected
      */
-    protected $arAtributos     = array(
-                                        'pirid' => null,
-                                        'pliid' => null,
-                                        'usucpf' => null,
-									  );
+    protected $arAtributos = array(
+        'pirid' => null,
+        'pliid' => null,
+        'usucpf' => null,
+    );
 
     public function recuperarPorPlanoInterno($pliid)
     {
-        $sql = "select r.pliid, u.usunome, u.usuemail, u.usucpf, usufoneddd || ' - ' ||usufonenum as usutelefone
-                from planacomorc.pi_responsavel r
-                    inner join seguranca.usuario u on u.usucpf = r.usucpf
-                where r.pliid = $pliid";
+        $sql = "
+            SELECT
+                r.pliid,
+                u.usunome,
+                u.usuemail,
+                u.usucpf,
+                usufoneddd || ' - ' || usufonenum AS usutelefone
+            FROM planacomorc.pi_responsavel r
+                JOIN seguranca.usuario u ON u.usucpf = r.usucpf
+            WHERE
+                r.pliid = $pliid
+        ";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];

@@ -1887,7 +1887,7 @@ function enviarEmailAprovacao($pliid){
 //ver(
 //array(
 //# Remetente
-//'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+//'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
 //'email' => $_SESSION['email_sistema']
 //),
 //array(
@@ -1902,7 +1902,7 @@ function enviarEmailAprovacao($pliid){
     enviar_email(
         array(
             # Remetente
-            'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
             'email' => $_SESSION['email_sistema']
         ),
         $listaResponsaveis,
@@ -1939,7 +1939,7 @@ function enviarEmailCorrecao($pliid){
 //ver(
 //array(
 //# Remetente
-//'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+//'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
 //'email' => $_SESSION['email_sistema']
 //),
 //array(
@@ -1954,7 +1954,7 @@ function enviarEmailCorrecao($pliid){
     enviar_email(
         array(
             # Remetente
-            'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
             'email' => $_SESSION['email_sistema']
         ),
         $listaResponsaveis,
@@ -1991,7 +1991,7 @@ function enviarEmailAprovado($pliid){
 //ver(
 //array(
 //# Remetente
-//'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+//'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
 //'email' => $_SESSION['email_sistema']
 //),
 //array(
@@ -2006,7 +2006,7 @@ function enviarEmailAprovado($pliid){
     enviar_email(
         array(
             # Remetente
-            'nome' => 'SIMINC2 - SPOA - Planejamento Orçamentário',
+            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
             'email' => $_SESSION['email_sistema']
         ),
         $listaResponsaveis,
