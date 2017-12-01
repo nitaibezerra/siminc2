@@ -1011,15 +1011,23 @@ class Pi_PlanoInterno extends Modelo
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
-    public function recuperarDetalhesValoresGrafico($unosigla)
+    public function recuperarDetalhesValoresGrafico($categoria, $unosigla)
     {
-        $estatistica = $this->recuperarEstatisticaPagamentoDetalhe((object) array(
-            'exercicio' => $_SESSION['exercicio'],
-            'unosigla' => $unosigla,
-            'unofundo' => 'FALSE'));
-        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-            ->gerarGrafico($estatistica);
+
+        switch($categoria){
+            case 'Dotação':
+                echo 'Gráfico RP';
+                $sql = "Gráfico RP";
+                break;
+            case 'Limite':
+                echo 'Gráfico Enquadramento';
+                $sql = "Gráfico Enquadramento";
+                break;
+        }
+
+//        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+//        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+//            ->gerarGrafico($sql);
     }
 
     public function recuperarDadosDetalhe($id, $tipo)

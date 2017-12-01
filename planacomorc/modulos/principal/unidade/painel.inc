@@ -20,7 +20,7 @@ switch ($_REQUEST['req']) {
         $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
         die;
     case 'detalhe-grafico':
-        $oPlanoInterno->recuperarDetalhesValoresGrafico($_REQUEST['unosigla']);
+        $oPlanoInterno->recuperarDetalhesValoresGrafico($_REQUEST['categoria'], $_REQUEST['unosigla']);
         die;
 }
 
@@ -45,8 +45,8 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
 
 ?>
 <script>
-    function exibirModalDetalheGrafico(unosigla){
-        $('#detalhe-grafico .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-grafico&unosigla=' + unosigla);
+    function exibirModalDetalheGrafico(categoria, unosigla){
+        $('#detalhe-grafico .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-grafico&categoria=' + categoria + '&unosigla=' + unosigla);
         $('#detalhe-grafico').modal();
     }
 </script>
@@ -100,6 +100,19 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
+
+<?php
+//                                        $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
+//                                        $grafico->gerarGrafico("select 'RP ' || ptr.irpcod descricao, sum(pic.picvalorcapital + pic.picvalorcusteio) valor
+//from public.vw_subunidadeorcamentaria suo
+//        inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
+//        inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+//        inner join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+//        inner join monitora.pi_planointerno pli on pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod
+//        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+//group by ptr.irpcod        ");
+?>
+
                                         <?php
                                             $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
                                                 'exercicio' => $_SESSION['exercicio'],
@@ -108,7 +121,7 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                                             $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
                                             $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
                                                 ->setColors($colors)
-    //                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.category);"))
+//                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.series.name, event.point.category);"))
                                                 ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
