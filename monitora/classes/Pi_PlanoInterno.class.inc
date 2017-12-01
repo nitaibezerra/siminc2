@@ -774,10 +774,14 @@ class Pi_PlanoInterno extends Modelo
         return true;
     }
 
-    public function getDadosGerais($exercicio)
+    public function getDadosGerais($exercicio, $fundo = null)
     {
 
         $where = " pli.pliano = '$exercicio' ";
+
+        if($fundo){
+            $where .= " AND suo.unofundo = '{$fundo}' ";
+        }
 
         # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));

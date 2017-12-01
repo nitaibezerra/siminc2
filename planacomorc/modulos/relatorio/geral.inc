@@ -1,6 +1,8 @@
 <?php
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+$fundo = !empty($_REQUEST['fundo']) ? $_REQUEST['fundo'] : null;
+
 $cabecalho = [
     'ID Planejamento', 'Situação', 'Código', 'Código da UO', 'UO', 'Código da Unidade', 'Unidade', 'Unidade Delegada', 'Unidade Delegada', 'Enquadramento', 'RP - Resultado Primário',
     'Item de Manutenção', 'Subitem de Manutenção', 'Código do Programa', 'Programa', 'Código do Objetivo', 'Objetivo', 'Código da Iniciativa', 'Iniciativa', 'Código da Ação', 'Ação', 'Código do Localizador',
@@ -31,7 +33,7 @@ $cabecalho = [
     'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
 ];
 
-$dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio']);
+$dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio'], $fundo);
 
 ?>
 
@@ -57,5 +59,5 @@ $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio']);
 header( 'Content-Type: application/vnd.ms-excel' );
 header( 'Expires: 0' );
 header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-header( 'Content-Disposition: attachment; filename="siminc_detalhamentos_' . date("YmdHi") . '.xls"' );
+header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
 die;
