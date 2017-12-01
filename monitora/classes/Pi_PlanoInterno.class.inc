@@ -1011,23 +1011,75 @@ class Pi_PlanoInterno extends Modelo
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
-    public function recuperarDetalhesValoresGrafico($categoria, $unosigla)
+    public function recuperarDetalhesValoresGrafico($graficoSubunidade = TRUE, $tipoValor, $sigla)
     {
-
-        switch($categoria){
+        if($graficoSubunidade){
+            $filtro = (object)array('suosigla' => $sigla);
+        } else {
+            $filtro = (object)array('unosigla' => $sigla);
+        }
+        
+        switch($tipoValor){
             case 'Dotação':
-                echo 'Gráfico RP';
-                $sql = "Gráfico RP";
+                $sql = self::montarSqlGraficoPizzaRp($filtro);
                 break;
             case 'Limite':
-                echo 'Gráfico Enquadramento';
-                $sql = "Gráfico Enquadramento";
+                $sql = self::montarSqlGraficoPizzaEnquadramento($filtro);
                 break;
         }
 
-//        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-//        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-//            ->gerarGrafico($sql);
+        $dados = $this->carregar($sql);
+        if($dados){
+            $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
+            $grafico->gerarGrafico($dados);
+        } else {
+            echo '<div class="alert alert-danger">Nenhum dado encontrado.</div>';
+        }
+    }
+    
+    public static function montarSqlGraficoPizzaRp(stdClass $filtro){
+        $where = '';
+        $where .= $filtro->suosigla? "\n AND suo.suosigla = '$filtro->suosigla'": NULL;
+        $where .= $filtro->unosigla? "\n AND suo.unosigla = '$filtro->unosigla'": NULL;
+        
+        $sql = "
+            SELECT
+                'RP ' || ptr.irpcod descricao,
+                SUM(COALESCE(ptr.ptrdotacaocapital, 0) + COALESCE(ptr.ptrdotacaocusteio, 0)) valor
+            FROM monitora.vw_ptres ptr
+                JOIN spo.ptressubunidade psu ON ptr.ptrid = psu.ptrid
+                JOIN public.vw_subunidadeorcamentaria suo ON psu.suoid = suo.suoid AND ptr.ptrano = suo.prsano
+            WHERE
+                ptr.ptrano = '{$_SESSION['exercicio']}' $where
+            GROUP BY
+                ptr.irpcod
+        ";
+//ver($sql);
+        return $sql;
+    }
+    
+    public static function montarSqlGraficoPizzaEnquadramento(stdClass $filtro){
+        $where = '';
+        $where .= $filtro->suosigla? "\n AND suo.suosigla = '$filtro->suosigla'": NULL;
+        $where .= $filtro->unosigla? "\n AND suo.unosigla = '$filtro->unosigla'": NULL;
+        $sql = "
+            SELECT
+                eqd.eqddsc descricao,
+                SUM(COALESCE(pic.picvalorcapital, 0) + COALESCE(pic.picvalorcusteio, 0)) valor
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
+                JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+                JOIN monitora.pi_planointernoptres ppt ON ppt.ptrid = ptr.ptrid
+                JOIN monitora.pi_planointerno pli ON pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod
+                JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
+                JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pli.eqdid
+            WHERE
+                ptr.ptrano = '{$_SESSION['exercicio']}' $where
+            GROUP BY
+                eqd.eqddsc
+        ";
+//ver($sql);
+        return $sql;
     }
 
     public function recuperarDadosDetalhe($id, $tipo)

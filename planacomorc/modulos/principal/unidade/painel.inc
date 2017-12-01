@@ -19,8 +19,11 @@ switch ($_REQUEST['req']) {
     case 'detalhe-funcional':
         $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
         die;
-    case 'detalhe-grafico':
-        $oPlanoInterno->recuperarDetalhesValoresGrafico($_REQUEST['categoria'], $_REQUEST['unosigla']);
+    case 'detalhe-grafico-subunidade':
+        $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
+        die;
+    case 'detalhe-grafico-uo':
+        $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
         die;
 }
 
@@ -45,9 +48,17 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
 
 ?>
 <script>
-    function exibirModalDetalheGrafico(categoria, unosigla){
-        $('#detalhe-grafico .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-grafico&categoria=' + categoria + '&unosigla=' + unosigla);
-        $('#detalhe-grafico').modal();
+    function exibirModalDetalheGrafico(tipoGraficoSubunidade, tipoValor, sigla){
+        var urlBase = 'planacomorc.php?modulo=principal/unidade/painel&acao=A'
+        if(tipoGraficoSubunidade === 1){
+            var parametroTipoGrafico = '&req=detalhe-grafico-subunidade';
+        } else {
+            var parametroTipoGrafico = '&req=detalhe-grafico-uo';
+        }
+        if(tipoValor === "Dotação" || tipoValor === "Limite"){
+            $('#detalhe-grafico .modal-body').load(urlBase+ '&tipo_valor='+ tipoValor+ '&sigla='+ sigla+ parametroTipoGrafico);
+            $('#detalhe-grafico').modal();
+        }
     }
 </script>
 
@@ -119,9 +130,10 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                                                 'unofundo' => 'FALSE'
                                             ));
                                             $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                            $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                            $grafico
+                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
                                                 ->setColors($colors)
-//                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(event.point.series.name, event.point.category);"))
+                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
                                                 ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
@@ -129,27 +141,36 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                                 <div id="tab-2" class="tab-pane">
                                     <div class="panel-body">
                                         <?php
-                                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-                                            'exercicio' => $_SESSION['exercicio'],
-                                            'unosigla' => 'MINC',
-                                            'unofundo' => 'FALSE',
-                                            'unidades'=>"suocod not in ('420009', '420008')"));
-                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
-
+                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                                                'exercicio' => $_SESSION['exercicio'],
+                                                'unosigla' => 'MINC',
+                                                'unofundo' => 'FALSE',
+                                                'unidades'=>"suocod not in ('420009', '420008')"));
+                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                            $grafico
+                                                ->setWidth('85%')
+                                                ->setColors($colors)
+                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+                                                ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
                                 </div>
                                 <div id="tab-3" class="tab-pane">
                                     <div class="panel-body">
                                         <?php
-                                        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-                                            'exercicio' => $_SESSION['exercicio'],
-                                            'unosigla' => 'MINC',
-                                            'unofundo' => 'FALSE',
-                                            'unidades'=>"suocod in ('420009', '420008')"));
-                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                                                'exercicio' => $_SESSION['exercicio'],
+                                                'unosigla' => 'MINC',
+                                                'unofundo' => 'FALSE',
+                                                'unidades'=>"suocod in ('420009', '420008')"));
+                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                            $grafico
+                                                ->setWidth('85%')
+                                                ->setColors($colors)
+                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+                                                ->gerarGrafico($estatistica);
                                         ?>
                                     </div>
                                 </div>
@@ -175,7 +196,12 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                                             'unofundo' => 'FALSE',
                                             'unidades'=>"suocod IN(". $codigoUnidadesWhere. ")"));
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setWidth('85%')->setColors($colors)->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($estatistica);
+                                        $grafico
+                                            ->setWidth('85%')
+                                            ->setColors($colors)
+                                            ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                            ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+                                            ->gerarGrafico($estatistica);
                                     ?>
                                 </div>
                             </div>
@@ -335,3 +361,4 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
     });
 
 </script>
+
