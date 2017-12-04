@@ -7,6 +7,9 @@ include_once '_funcoespi.php';
 require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+# Cores dos Graficos
+$colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 
@@ -15,16 +18,72 @@ $oPlanoInterno = new Pi_PlanoInterno();
 switch ($_REQUEST['req']) {
     case 'detalhe-subunidade':
         $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
-        die;
+    die;
     case 'detalhe-funcional':
         $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
-        die;
+    die;
     case 'detalhe-grafico-subunidade':
         $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
-        die;
+    die;
     case 'detalhe-grafico-uo':
         $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
-        die;
+    die;
+    case 'carregarGraficoUnidade':
+        carregarGraficoUnidade($colors);
+    die;
+    case 'carregarGraficoDireta':
+        echo '<div class="panel-body">';
+        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+            'exercicio' => $_SESSION['exercicio'],
+            'unosigla' => 'MINC',
+            'unofundo' => 'FALSE',
+            'unidades'=>"suocod not in ('420009', '420008')"));
+        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+        $grafico
+            ->setWidth('85%')
+            ->setColors($colors)
+            ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+            ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+            ->gerarGrafico($estatistica);
+        echo '</div>';
+    die;
+    case 'carregarGraficoCgconCogep':
+        echo '<div class="panel-body">';
+            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+                'exercicio' => $_SESSION['exercicio'],
+                'unosigla' => 'MINC',
+                'unofundo' => 'FALSE',
+                'unidades'=>"suocod in ('420009', '420008')"));
+            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+            $grafico
+                ->setWidth('85%')
+                ->setColors($colors)
+                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+                ->gerarGrafico($estatistica);
+        echo '</div>';
+    die;
+}
+
+/**
+ * Exibe o grafico de unidades.
+ * 
+ * @param string $colors
+ */
+function carregarGraficoUnidade($colors){
+    $oPlanoInterno = new Pi_PlanoInterno();
+    echo '<div class="panel-body">';
+    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
+        'exercicio' => $_SESSION['exercicio'],
+        'unofundo' => 'FALSE'
+    ));
+    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+    $grafico
+        ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+        ->setColors($colors)
+        ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
+        ->gerarGrafico($estatistica);
+    echo '</div>';
 }
 
 $filtros = array(
@@ -42,9 +101,6 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
-
-# Cores dos Graficos
-$colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
 
 ?>
 <script>
@@ -83,10 +139,18 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A"><i class="fa fa-area-chart"></i> Painel FNC</a>
-            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A"><i class="fa fa-list"></i> Lista de PI</a>
-            <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A"><i class="fa fa-plus-circle"></i> Criar PI</a>
-            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A&fundo=f"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
+            <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel_fnc&acao=A">
+                <i class="fa fa-area-chart"></i> Painel FNC
+            </a>
+            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">
+                <i class="fa fa-list"></i> Lista de PI
+            </a>
+            <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">
+                <i class="fa fa-plus-circle"></i> Criar PI
+            </a>
+            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A&fundo=f">
+                <i class="fa fa-file-excel-o"></i> Relatório Geral
+            </a>
         </div>
     </div>
 </div>
@@ -101,78 +165,22 @@ $colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7
                         <h5>Valores por Unidades</h5>
                     </div>
                     <div class="ibox-content">
-
-                        <div class="tabs-container">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#tab-1"> Gráficos das Unidades</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-2"> Gráficos da Direta</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-3"> Gráficos da CGCON/COGEP</a></li>
+                        <div class="tabs-container tabs">
+                            <ul class="nav nav-tabs prodTabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-1" data-url="?modulo=principal/unidade/painel&acao=A&req=carregarGraficoUnidade"> Gráficos das Unidades</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-2" data-url="?modulo=principal/unidade/painel&acao=A&req=carregarGraficoDireta"> Gráficos da Direta</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3" data-url="?modulo=principal/unidade/painel&acao=A&req=carregarGraficoCgconCogep"> Gráficos da CGCON/COGEP</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
-                                    <div class="panel-body">
-
-<?php
-//                                        $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
-//                                        $grafico->gerarGrafico("select 'RP ' || ptr.irpcod descricao, sum(pic.picvalorcapital + pic.picvalorcusteio) valor
-//from public.vw_subunidadeorcamentaria suo
-//        inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-//        inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-//        inner join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-//        inner join monitora.pi_planointerno pli on pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod
-//        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-//group by ptr.irpcod        ");
-?>
-
-                                        <?php
-                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
-                                                'exercicio' => $_SESSION['exercicio'],
-                                                'unofundo' => 'FALSE'
-                                            ));
-                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                            $grafico
-                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                                ->setColors($colors)
-                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
-                                                ->gerarGrafico($estatistica);
-                                        ?>
-                                    </div>
+                                    <!--O grafico 1 será carregado aqui via ajax-->
+                                    <?php carregarGraficoUnidade($colors); ?>
                                 </div>
                                 <div id="tab-2" class="tab-pane">
-                                    <div class="panel-body">
-                                        <?php
-                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-                                                'exercicio' => $_SESSION['exercicio'],
-                                                'unosigla' => 'MINC',
-                                                'unofundo' => 'FALSE',
-                                                'unidades'=>"suocod not in ('420009', '420008')"));
-                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                            $grafico
-                                                ->setWidth('85%')
-                                                ->setColors($colors)
-                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-                                                ->gerarGrafico($estatistica);
-                                        ?>
-                                    </div>
+                                    <!--O grafico 2 será carregado aqui via ajax-->
                                 </div>
                                 <div id="tab-3" class="tab-pane">
-                                    <div class="panel-body">
-                                        <?php
-                                            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-                                                'exercicio' => $_SESSION['exercicio'],
-                                                'unosigla' => 'MINC',
-                                                'unofundo' => 'FALSE',
-                                                'unidades'=>"suocod in ('420009', '420008')"));
-                                            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                            $grafico
-                                                ->setWidth('85%')
-                                                ->setColors($colors)
-                                                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-                                                ->gerarGrafico($estatistica);
-                                        ?>
-                                    </div>
+                                    <!--O grafico 3 será carregado aqui via ajax-->
                                 </div>
                             </div>
                         </div>
@@ -322,6 +330,22 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
 
 <script>
     $(document).ready(function(){
+
+        $('.tabs').on('click', '.tablink, .prodTabs a',function (e) {
+            e.preventDefault();
+            var url = $(this).attr("data-url");
+
+            if (typeof url !== "undefined") {
+                var pane = $(this), href = this.hash;
+
+                // ajax load from data-url
+                $(href).load(url, function(result){      
+                    pane.tab('show');
+                });
+            } else {
+                $(this).tab('show');
+            }
+        });
 
         $('.detalhe-subunidade').click(function(){
             $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid=' + $(this).data('suoid'));
