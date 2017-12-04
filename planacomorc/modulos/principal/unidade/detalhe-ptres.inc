@@ -1,6 +1,6 @@
 <?php
     $dado = count($dados) ? current($dados) : [];
-    $urlBaseCadastro = $tipoPi = 'fnc'? 'planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A': 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
+    $urlBaseCadastro = $tipoPi == 'fnc'? 'planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A': 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
 ?>
 
 <div class="row">
