@@ -17,7 +17,7 @@ switch ($_REQUEST['req']) {
         $cPiJanela->salvar($janela);
     die;
     case 'excluir':
-        $janela = array('pijstatus' => 'I');
+        $janela = array('pijid' => $_REQUEST['pijid'], 'pijstatus' => 'I');
         $cPiJanela->salvar($janela);
     die;
 }
