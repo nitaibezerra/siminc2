@@ -1096,7 +1096,7 @@ class Pi_PlanoInterno extends Modelo
             case 'Dotação':
                 $sql = self::montarSqlGraficoPizzaRp($filtro);
                 break;
-            case 'Limite':
+            case 'Planejado':
                 $sql = self::montarSqlGraficoPizzaEnquadramento($filtro);
                 break;
         }

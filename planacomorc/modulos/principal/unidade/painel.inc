@@ -56,20 +56,6 @@ $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
 include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
-<script>
-    function exibirModalDetalheGrafico(tipoGraficoSubunidade, tipoValor, sigla){
-        var urlBase = 'planacomorc.php?modulo=principal/unidade/painel&acao=A'
-        if(tipoGraficoSubunidade === 1){
-            var parametroTipoGrafico = '&req=detalhe-grafico-subunidade';
-        } else {
-            var parametroTipoGrafico = '&req=detalhe-grafico-uo';
-        }
-        if(tipoValor === "Dotação" || tipoValor === "Limite"){
-            $('#detalhe-grafico .modal-body').load(urlBase+ '&tipo_valor='+ tipoValor+ '&sigla='+ sigla+ parametroTipoGrafico);
-            $('#detalhe-grafico').modal();
-        }
-    }
-</script>
 
 <style>
     .detalhe-subunidade, .detalhe-funcional{
@@ -336,6 +322,20 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
             }
         });
     });
+
+    function exibirModalDetalheGrafico(tipoGraficoSubunidade, tipoValor, sigla){
+        var urlBase = 'planacomorc.php?modulo=principal/unidade/painel&acao=A'
+        if(tipoGraficoSubunidade === 1){
+            var parametroTipoGrafico = '&req=detalhe-grafico-subunidade';
+        } else {
+            var parametroTipoGrafico = '&req=detalhe-grafico-uo';
+        }
+        if(tipoValor === "Dotação" || tipoValor === "Planejado"){
+            $('#detalhe-grafico .modal-body').load(urlBase+ '&tipo_valor='+ tipoValor+ '&sigla='+ sigla+ parametroTipoGrafico);
+            $('#detalhe-grafico').modal();
+        }
+    }
+
 
 </script>
 
