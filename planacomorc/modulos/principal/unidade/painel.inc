@@ -339,7 +339,7 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
                 var pane = $(this), href = this.hash;
 
                 // ajax load from data-url
-                $(href).load(url, function(result){      
+                $(href).empty().load(url, function(result){      
                     pane.tab('show');
                 });
             } else {
