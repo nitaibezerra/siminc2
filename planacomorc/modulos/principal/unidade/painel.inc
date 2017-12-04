@@ -32,58 +32,11 @@ switch ($_REQUEST['req']) {
         carregarGraficoUnidade($colors);
     die;
     case 'carregarGraficoDireta':
-        echo '<div class="panel-body">';
-        $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-            'exercicio' => $_SESSION['exercicio'],
-            'unosigla' => 'MINC',
-            'unofundo' => 'FALSE',
-            'unidades'=>"suocod not in ('420009', '420008')"));
-        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-        $grafico
-            ->setWidth('85%')
-            ->setColors($colors)
-            ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-            ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-            ->gerarGrafico($estatistica);
-        echo '</div>';
+        carregarGraficoDireta($colors);
     die;
     case 'carregarGraficoCgconCogep':
-        echo '<div class="panel-body">';
-            $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
-                'exercicio' => $_SESSION['exercicio'],
-                'unosigla' => 'MINC',
-                'unofundo' => 'FALSE',
-                'unidades'=>"suocod in ('420009', '420008')"));
-            $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-            $grafico
-                ->setWidth('85%')
-                ->setColors($colors)
-                ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-                ->gerarGrafico($estatistica);
-        echo '</div>';
+        carregarGraficoCgconCogep($colors);
     die;
-}
-
-/**
- * Exibe o grafico de unidades.
- * 
- * @param string $colors
- */
-function carregarGraficoUnidade($colors){
-    $oPlanoInterno = new Pi_PlanoInterno();
-    echo '<div class="panel-body">';
-    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
-        'exercicio' => $_SESSION['exercicio'],
-        'unofundo' => 'FALSE'
-    ));
-    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-    $grafico
-        ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-        ->setColors($colors)
-        ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
-        ->gerarGrafico($estatistica);
-    echo '</div>';
 }
 
 $filtros = array(

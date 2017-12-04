@@ -3307,3 +3307,70 @@ function exibirLinkEspelho($pliid){
     return $strIcone;
 }
 
+/**
+ * Exibe o grafico de unidades.
+ * 
+ * @param string $colors
+ */
+function carregarGraficoUnidade($colors){
+    $oPlanoInterno = new Pi_PlanoInterno();
+    echo '<div class="panel-body">';
+    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
+        'exercicio' => $_SESSION['exercicio'],
+        'unofundo' => 'FALSE'
+    ));
+    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+    $grafico
+        ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+        ->setColors($colors)
+        ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
+        ->gerarGrafico($estatistica);
+    echo '</div>';
+}
+
+/**
+ * Exibe o grafico de unidades.
+ * 
+ * @param string $colors
+ */
+function carregarGraficoDireta($colors){
+    $oPlanoInterno = new Pi_PlanoInterno();
+    echo '<div class="panel-body">';
+    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+        'exercicio' => $_SESSION['exercicio'],
+        'unosigla' => 'MINC',
+        'unofundo' => 'FALSE',
+        'unidades'=>"suocod not in ('420009', '420008')"));
+    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+    $grafico
+        ->setWidth('85%')
+        ->setColors($colors)
+        ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+        ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+        ->gerarGrafico($estatistica);
+    echo '</div>';
+}
+
+/**
+ * Exibe o grafico de unidades.
+ * 
+ * @param string $colors
+ */
+function carregarGraficoCgconCogep($colors){
+    $oPlanoInterno = new Pi_PlanoInterno();
+    echo '<div class="panel-body">';
+    $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
+        'exercicio' => $_SESSION['exercicio'],
+        'unosigla' => 'MINC',
+        'unofundo' => 'FALSE',
+        'unidades'=>"suocod in ('420009', '420008')"));
+    $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+    $grafico
+        ->setWidth('85%')
+        ->setColors($colors)
+        ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+        ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
+        ->gerarGrafico($estatistica);
+    echo '</div>';
+}
+
