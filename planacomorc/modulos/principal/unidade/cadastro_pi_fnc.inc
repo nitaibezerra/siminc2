@@ -1246,13 +1246,13 @@ DML;
                                 ?>
                                 <table cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover table-input">
                                     <tr>
-                                        <td rowspan="2" style="text-align: center;">
+                                        <td rowspan="2" style="text-align: center; border-right: 1px black solid;">
                                             <b>Mês</b>
                                         </td>
                                         <?php 
                                             $colunaCronograma = 0;
                                             foreach($cronogramasAgrupado as $cronograma => $descricaoValores){ ?>
-                                                <td style="text-align: center;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
+                                                <td style="text-align: center; border-right: 1px black solid;" colspan="<?php echo count($descricaoValores); ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><b><?php echo $cronograma; ?></b></td>
                                         <?php
                                             $colunaCronograma++;
                                         }
@@ -1263,8 +1263,9 @@ DML;
                                             $colunaCronograma = 0;
                                             foreach($cronogramasAgrupado as $cronograma => $descricaoValores){
                                                 foreach($descricaoValores as $cronogramaValor){
+                                                    $bordaPreta = in_array($cronogramaValor['crvid'], array(Cronograma::K_FISICO, Cronograma::ORCAMENTO_CAPITAL, Cronograma::FINANCEIRO_CAPITAL))? 'border-right: 1px black solid': NULL;
                                             ?>
-                                                <td style="text-align: center;" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
+                                                <td style="text-align: center; <?php echo $bordaPreta; ?>" class="<?php echo buscarClasseCronograma($colunaCronograma, TRUE); ?>"><?php echo $cronogramaValor['crvdsc']; ?></td>
                                             <?php
                                                     $colunaCronograma++;
                                                 }
@@ -1273,7 +1274,7 @@ DML;
                                     </tr>
                                     <?php foreach($meses as $mes){ ?>
                                         <tr style="height: 30px;">
-                                            <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
+                                            <td style="text-align: left; border-right: 1px black solid;"><?php echo $mes['mesdsc']; ?></td>
                                             <?php foreach($aCronogramas as $cronogramaValor){
                                                 switch($cronogramaValor['croid']){
                                                     case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
@@ -1281,8 +1282,9 @@ DML;
                                                     case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
                                                     default: $class = '';
                                                 }
-                                                ?>
-                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>">
+                                                $bordaPreta = in_array($cronogramaValor['crvid'], array(Cronograma::K_FISICO, Cronograma::ORCAMENTO_CAPITAL, Cronograma::FINANCEIRO_CAPITAL))? 'border-right: 1px black solid': NULL;
+                                            ?>
+                                            <td class="<?php echo buscarClasseCronograma($cronogramaValor['croid']); ?>" style="<?php echo $bordaPreta; ?>">
                                                     <?php
                                                         $pcrid = $pcrvalor = '';
                                                         if(isset($piCronogramasAgrupado[$mes['mescod']][$cronogramaValor['crvid']])){
@@ -1317,12 +1319,12 @@ DML;
                                         </tr>
                                     <?php } ?>
                                     <tr style="height: 30px; ">
-                                        <td style="text-align: left;">Total:</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
+                                        <td style="text-align: left; border-right: 1px black solid;">Total:</td>
+                                        <td style="font-weight: bold; text-align: center; border-right: 1px black solid;" id="td_total_fisico" class="td_cronograma_fisico">0</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_custeio" class="td_cronograma_orcamentario">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_orcamentario_capital" class="td_cronograma_orcamentario">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center; border-right: 1px black solid;" id="td_total_orcamentario_capital" class="td_cronograma_orcamentario">R$ 0,00</td>
                                         <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_custeio" class="td_cronograma_financeiro">R$ 0,00</td>
-                                        <td style="font-weight: bold; text-align: center;" id="td_total_financeiro_capital" class="td_cronograma_financeiro">R$ 0,00</td>
+                                        <td style="font-weight: bold; text-align: center; border-right: 1px black solid;" id="td_total_financeiro_capital" class="td_cronograma_financeiro">R$ 0,00</td>
                                     </tr>
                                 </table>
                             </div>
