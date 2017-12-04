@@ -378,22 +378,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     $dadosUsuario = $db->carregar($sql);
 
                                     $unidadeUsuario = [];
-                                    foreach ($dadosUsuario as $dadoUsuario){
-                                        $unidadeUsuario['unidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
-                                        $unidadeUsuario['subunidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+                                    if($dadosUsuario){
+                                        foreach ($dadosUsuario as $dadoUsuario){
+                                            $unidadeUsuario['unidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+                                            $unidadeUsuario['subunidades'][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
 
-                                        // Agrupando por FNC
-                                        $unidadeUsuario['unocod'][$dadoUsuario['unofundo']][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
-                                        $unidadeUsuario['suocod'][$dadoUsuario['unofundo']][$dadoUsuario['suocod']] = $dadoUsuario['suocod'];
-                                    }
+                                            // Agrupando por FNC
+                                            $unidadeUsuario['unocod'][$dadoUsuario['unofundo']][$dadoUsuario['unocod']] = $dadoUsuario['unocod'];
+                                            $unidadeUsuario['suocod'][$dadoUsuario['unofundo']][$dadoUsuario['suocod']] = $dadoUsuario['suocod'];
+                                        }
 
-                                    $wherePerfilUO  = " and unocod in ('" . implode("', '", $unidadeUsuario['unidades']) . "')";
+                                        $wherePerfilUO  = " and unocod in ('" . implode("', '", $unidadeUsuario['unidades']) . "')";
 
-                                    if(empty($dadosPI['unicod'])){
-                                        $dadosPI['unicod'] = (1 == count($unidadeUsuario['unocod']['t'])) ? current($unidadeUsuario['unocod']['t']) : '';
-                                    }
-                                    if(empty($dadosPI['ungcod'])){
-                                        $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['t'])) ? current($unidadeUsuario['suocod']['t']) : '';
+                                        if(empty($dadosPI['unicod'])){
+                                            $dadosPI['unicod'] = (1 == count($unidadeUsuario['unocod']['t'])) ? current($unidadeUsuario['unocod']['t']) : '';
+                                        }
+                                        if(empty($dadosPI['ungcod'])){
+                                            $dadosPI['ungcod'] = (1 == count($unidadeUsuario['suocod']['t'])) ? current($unidadeUsuario['suocod']['t']) : '';
+                                        }
                                     }
                                 }
 

@@ -444,4 +444,14 @@
             atualizarDescricao();
         }
 
+        if(fnc === true && $("#ungcod option[value!='']").size() == 0){
+            swal({
+                title: 'Atenção',
+                text: 'Você não possui vínculos a unidades do FNC. Favor, entrar em contato com administrador do sistema para providenciar a vinculação do seu perfil a alguma unidade.',
+                type: 'warning',
+                html: true
+            }, function(){
+                window.location.href = '/planacomorc/planacomorc.php?modulo=principal/unidade/painel&acao=A';
+            });
+        }
     }
