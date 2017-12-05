@@ -102,9 +102,8 @@ class Emendas_Model_Emenda extends Modelo
                 $line = array_map('trim', $line);
 //                    $line = array_map('utf8_decode', $line);
 
-
                 if(!$count++){ continue; }
-
+                
                 $emenumero = trim($line[2]);
                 if(!$emenumero) { continue; }
 
@@ -119,7 +118,7 @@ class Emendas_Model_Emenda extends Modelo
                     $unoid = $this->_recuperarUnidadeImportacao($unocod, $_SESSION['exercicio']);
 
                     // Autor
-                    $autid = $this->_recuperarAutorImportacao($line[0], $_SESSION['exercicio']);
+                    $autid = $this->_recuperarAutorImportacao($line, $_SESSION['exercicio']);
 
                     // Ação
                     $acoes = $this->_recuperarAcaoImportacao($line[7], $line[6], $line[8], $unocod, $_SESSION['exercicio']);
@@ -130,12 +129,16 @@ class Emendas_Model_Emenda extends Modelo
                     $this->unoid = $unoid;
                     $this->acaid = $acoes[0]['acaid'];
                     $this->autid = $autid;
+                    $this->emeimpositiva = 't';
                     $this->prsano = $_SESSION['exercicio'];
                     $this->salvar();
                 }
 
-                $this->_inserirDetalhesImportacao($line);
-                $this->_inserirBeneficiarioImportacao($line);
+                if(is_numeric($line[14])){
+                    $this->_inserirBeneficiarioImportacao($line);
+                } else {
+                    $this->_inserirDetalhesImportacao($line);
+                }
                 $this->commit();
                 $this->emeid = null;
             }
@@ -150,12 +153,41 @@ class Emendas_Model_Emenda extends Modelo
         return $this->pegaUm($sql);
     }
 
-    private function _recuperarAutorImportacao($dado, $exercicio)
+    private function _recuperarAutorImportacao($line, $exercicio)
     {
+        $dado = $line[0];
+
+        if('(-1)' == substr($dado, 0, 4)){
+            return false;
+        }
+
         $autor = explode('-', $dado);
         $autcod = trim($autor[0]);
         $sql = "select autid from emendas.autor where autcod = '{$autcod}' order by autstatus";
-        return $this->pegaUm($sql);
+        $autid = $this->pegaUm($sql);
+
+        $parsigla = $line[1];
+        $sql = "select parid from emendas.partido where parsigla = '{$parsigla}' order by parstatus";
+        $parid = $this->pegaUm($sql);
+
+        if(!$parid){
+            $mPartido = new Emendas_Model_Partido();
+            $mPartido->pardsc = $parsigla;
+            $mPartido->parsigla = $parsigla;
+            $mPartido->salvar();
+
+            $parid = $mPartido->parid;
+        }
+
+        // Atualizando nome e partido do autor
+        $mAutor = new Emendas_Model_Autor($autid);
+        $mAutor->autcod = $autcod;
+        $mAutor->autnome = trim($autor[1]);
+        $mAutor->parid = $parid;
+        $mAutor->salvar();
+        $autid = $mAutor->autid;
+
+        return $autid;
     }
 
     private function _recuperarAcaoImportacao($acao, $programa, $localizador, $unocod, $exercicio)
@@ -180,7 +212,7 @@ class Emendas_Model_Emenda extends Modelo
         $mEmendaDetalhe->emeid = $this->emeid;
         $mEmendaDetalhe->foncod = $line[9];
         $mEmendaDetalhe->gndcod = $line[12];
-        $mEmendaDetalhe->mapcod = str_replace('1', '0', $line[13]);
+        $mEmendaDetalhe->mapcod = $line[13];
         $mEmendaDetalhe->emdvalor = $line[18] + $line[20];
 
         return $mEmendaDetalhe->salvar();
@@ -190,8 +222,8 @@ class Emendas_Model_Emenda extends Modelo
     {
         $proponente = explode('-', $line[15]);
 
-        if(count($proponente) == 2){
-            $procnpj = trim($proponente[0]);
+        if(count($proponente) >= 2){
+            $procnpj = trim(array_shift($proponente));
             $sql = "select proid from emendas.proponente where procnpj = '{$procnpj}' order by prostatus";
 
         } else {
@@ -199,7 +231,13 @@ class Emendas_Model_Emenda extends Modelo
         }
 
         $proid = $this->pegaUm($sql);
-        if(!$proid) return;
+        if(!$proid){
+            $mProponente = new Emendas_Model_Proponente();
+            $mProponente->procnpj = $procnpj;
+            $mProponente->pronome = trim(implode(' - ', $proponente));
+            $mProponente->salvar();
+            $proid = $mProponente->proid;
+        }
 
         $mBeneficiario = new Emendas_Model_Beneficiario();
         $mBeneficiario->emeid = $this->emeid;
