@@ -349,22 +349,25 @@ function alteraDadosUsuario($info){
 
         // envia o email de confirmação caso a conta seja aprovada
         if ($email_aprovacao) {
-                $remetente = array (
-                                "nome" => $_SESSION ['usunome'],
-                                "email" => $_SESSION ['usuemail']
-                );
-                $destinatario = $_REQUEST ['usuemail'];
-                $assunto = "Aprovação do Cadastro no ". SIGLA_SISTEMA;
-                $conteudo = "
-                                <br/>
-                                <span style='background-color: red;'><b>Esta é uma mensagem gerada automaticamente pelo sistema. </b></span>
-                                <br/>
-                                <span style='background-color: red;'><b>Por favor, não responda. Pois, neste caso, a mesma será descartada.</b></span>
-                                <br/>
-                            ";
-                $conteudo .= sprintf ( "%s %s<p>Sua conta está ativa. Sua Senha de acesso é: %s</p>", $_REQUEST ['ususexo'] == 'M' ? 'Prezado Sr.' : 'Prezada Sra.', $_REQUEST ['usunome'], md5_decrypt_senha ( $usuario->ususenha, '' ) );
-
-                enviar_email ( $remetente, $destinatario, $assunto, $conteudo );
+            $remetente = array (
+                "nome" => $_SESSION ['usunome'],
+                "email" => $_SESSION ['usuemail']
+            );
+            $destinatario = $_REQUEST ['usuemail'];
+            $assunto = "Aprovação do Cadastro no ". SIGLA_SISTEMA;
+            $conteudo = "
+                <br/>
+                <span style='background-color: red;'><b>Esta é uma mensagem gerada automaticamente pelo sistema. </b></span>
+                <br/>
+                <span style='background-color: red;'><b>Por favor, não responda. Pois, neste caso, a mesma será descartada.</b></span>
+                <br/>
+                <br/>
+            ";
+            $conteudo .= sprintf ( "%s %s<p>Sua conta está ativa. Sua Senha de acesso é: %s</p>", $_REQUEST ['ususexo'] == 'M' ? 'Prezado Sr.' : 'Prezada Sra.', $_REQUEST ['usunome'], md5_decrypt_senha ( $usuario->ususenha, '' ) );
+            $corpoEmailV3 = '<p>'. $conteudo. '</p>';
+            include APPRAIZ . "www/email-template-novo-bootstrap-v3.php";
+//ver($textoEmailV3, d);
+            enviar_email ( $remetente, $destinatario, $assunto, $textoEmailV3 );
         }
         // cadastra os perfils selecionados
         if (is_array($_REQUEST ['pflcod'])) {
