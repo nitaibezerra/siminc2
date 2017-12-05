@@ -3,6 +3,7 @@
  * Constantes do sistema planacomorc.
  * $Id: _constantes.php 98005 2015-05-29 20:02:53Z werteralmeida $
  */
+define('SISID_PLANEJAMENTO', 157);
 define('MODULO', $_SESSION['sisdiretorio']);
 define("SIS_NAME", "Planejamento e Acompanhamento Orçamentário");
 define("APPRAIZ_SISOP", APPRAIZ."/planacomorc/modulos/principal/");
