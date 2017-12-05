@@ -5285,3 +5285,39 @@ function dump( $mData, $bExit = false )
 		exit();
 	}
 }
+
+/**
+ * Busca todos os usuários de um perfil especifico ou sistema.
+ * 
+ * @global cls_banco $db
+ * @param stdClass $filtro
+ * @return boolean/array
+ */
+function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
+    global $db;
+    $where = '';
+//    157 SPOA - Planejamento Orçamentario
+    $where .= $filtro->sisid? " \n AND s.sisid = {$filtro->sisid}": NULL;
+//    956 Planejamento
+    $where .= $filtro->pflcod? " \n AND pu.pflcod = {$filtro->pflcod}": NULL;
+    $sql = "
+        SELECT DISTINCT
+            s.sisid,
+            u.usucpf,
+            u.usunome,
+            u.usuemail
+        FROM seguranca.sistema s
+            JOIN seguranca.usuario_sistema us USING(sisid)
+            JOIN seguranca.usuario u USING(usucpf)
+            JOIN seguranca.perfilusuario pu USING(usucpf)
+            JOIN seguranca.perfil p ON(pu.pflcod = p.pflcod AND p.sisid = s.sisid)
+        WHERE
+            us.suscod = 'A'
+            AND u.suscod = 'A'
+            AND p.pflstatus = 'A' $where
+    ";
+//ver($sql,d);
+    $listaUsuarioPlanejamento = $db->carregar($sql);
+    return $listaUsuarioPlanejamento;
+}
+

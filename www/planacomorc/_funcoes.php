@@ -1882,8 +1882,16 @@ function enviarEmailAprovacao($pliid){
     # $textoEmail
     include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
 
-    $listaResponsaveis = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    $listaUsuariosPlanejamento = buscarUsuarioPerfilPlanejamento((object) array(
+        'sisid' => SISID_PLANEJAMENTO,
+        'pflcod' => PFL_PLANEJAMENTO));
     
+    $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    
+    $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
+
+//ver($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
+//ver($listaDestinatario, d);
 //ver(
 //array(
 //# Remetente
@@ -1897,18 +1905,19 @@ function enviarEmailAprovacao($pliid){
 //'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
 //$textoEmail,
 //d);
-
-    # Envia E-mail para o SOLICITANTE    
-    enviar_email(
-        array(
-            # Remetente
-            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
-            'email' => $_SESSION['email_sistema']
-        ),
-        $listaResponsaveis,
-        'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
-        $textoEmail
-    );
+    if($listaDestinatario){
+        # Envia E-mail para o SOLICITANTE    
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaDestinatario,
+            'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
     
     return true;
 }
@@ -1949,18 +1958,19 @@ function enviarEmailCorrecao($pliid){
 //'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
 //$textoEmail,
 //d);
-
-    # Envia E-mail para o SOLICITANTE
-    enviar_email(
-        array(
-            # Remetente
-            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
-            'email' => $_SESSION['email_sistema']
-        ),
-        $listaResponsaveis,
-        'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
-        $textoEmail
-    );
+    if($listaResponsaveis){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaResponsaveis,
+            'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
     
     return true;
 }
@@ -2001,19 +2011,19 @@ function enviarEmailAprovado($pliid){
 //'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
 //$textoEmail,
 //d);
-
-    # Envia E-mail para o SOLICITANTE    
-    enviar_email(
-        array(
-            # Remetente
-            'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
-            'email' => $_SESSION['email_sistema']
-        ),
-        $listaResponsaveis,
-        'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
-        $textoEmail
-    );
-    
+    if($listaResponsaveis){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaResponsaveis,
+            'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
     return true;
 }
 
