@@ -18,8 +18,9 @@
             u.usuemail
         FROM planacomorc.usuarioresponsabilidade rpu
             JOIN seguranca.usuario u ON rpu.usucpf = u.usucpf-- SELECT * FROM seguranca.usuario
+            JOIN seguranca.usuario_sistema us ON us.usucpf = u.usucpf
         WHERE
-            rpu.rpustatus = 'A'
+            us.suscod = 'A'
             $where
         ORDER BY
             u.usunome
