@@ -59,6 +59,7 @@ class Emendas_Model_Partido extends Modelo
         'parsigla' => null,
         'parcod' => null,
         'parstatus' => null,
+        'parlado' => null,
     );
     
     /**
