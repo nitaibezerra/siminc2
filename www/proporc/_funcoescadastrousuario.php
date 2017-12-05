@@ -356,14 +356,20 @@ function alteraDadosUsuario($info){
             $destinatario = $_REQUEST ['usuemail'];
             $assunto = "Aprovação do Cadastro no ". SIGLA_SISTEMA;
             $conteudo = "
-                <br/>
+                <br />
                 <span style='background-color: red;'><b>Esta é uma mensagem gerada automaticamente pelo sistema. </b></span>
-                <br/>
+                <br />
                 <span style='background-color: red;'><b>Por favor, não responda. Pois, neste caso, a mesma será descartada.</b></span>
-                <br/>
-                <br/>
+                <br />
+                <br />
             ";
             $conteudo .= sprintf ( "%s %s<p>Sua conta está ativa. Sua Senha de acesso é: %s</p>", $_REQUEST ['ususexo'] == 'M' ? 'Prezado Sr.' : 'Prezada Sra.', $_REQUEST ['usunome'], md5_decrypt_senha ( $usuario->ususenha, '' ) );
+            $conteudo .= "
+                <br />
+                <a style='color: #0000ff;' href='". URL_SISTEMA. "' title='".NOME_SISTEMA ."'>". URL_SISTEMA. "</a>
+                <br />
+                <br />
+            ";
             $corpoEmailV3 = '<p>'. $conteudo. '</p>';
             include APPRAIZ . "www/email-template-novo-bootstrap-v3.php";
 //ver($textoEmailV3, d);
