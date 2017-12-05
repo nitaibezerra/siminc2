@@ -479,11 +479,11 @@ DML;
         '(' || usuario.usufoneddd || ') ' || usuario.usufonenum AS fone,
         CASE WHEN entidade.entid = 390402 THEN trim(usuario.orgao) ELSE trim(unidadex.unidsc) END AS unidsc,
         '<section class=\"btn-group\">' ||
-        CASE WHEN usuario.suscod = 'A' THEN
+        CASE WHEN usuariosistema.suscod = 'A' THEN
             '<label class=\"btn btn-default active\">Ativo</label>'
-        WHEN usuario.suscod = 'P' THEN
+        WHEN usuariosistema.suscod = 'P' THEN
             '<label class=\"btn btn-warning active\">Pendente</label>'
-        WHEN usuario.suscod = 'B' THEN
+        WHEN usuariosistema.suscod = 'B' THEN
             '<label class=\"btn btn-danger active\">Bloqueado</label>'
         ELSE
             '<label class=\"btn btn-danger active\">Inativo</label>'
@@ -494,7 +494,7 @@ DML;
 
     $groupby = "usuario.usucpf, usuario.usunome, usuario.usufoneddd, usuario.usufonenum, usuario.usuemail, entidade.entid,
                 usuario.orgao, unidadex.unidsc, cargo.cardsc, usuario.usufuncao, entidade.entnome, usuario.regcod,
-                municipio.mundescricao, usuario.usudataatualizacao, usuario.suscod, usuario.usuchaveativacao, perfil.pflcod";
+                municipio.mundescricao, usuario.usudataatualizacao, usuariosistema.suscod, usuario.usuchaveativacao, perfil.pflcod";
 
     $sql = "
         SELECT DISTINCT
