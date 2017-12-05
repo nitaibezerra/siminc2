@@ -5300,6 +5300,7 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
     $where .= $filtro->sisid? " \n AND s.sisid = {$filtro->sisid}": NULL;
 //    956 Planejamento
     $where .= $filtro->pflcod? " \n AND pu.pflcod = {$filtro->pflcod}": NULL;
+    $where .= $filtro->ungcod? " \n AND ur.ungcod = '{$filtro->ungcod}'": NULL;
     $sql = "
         SELECT DISTINCT
             s.sisid,
@@ -5311,6 +5312,7 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
             JOIN seguranca.usuario u USING(usucpf)
             JOIN seguranca.perfilusuario pu USING(usucpf)
             JOIN seguranca.perfil p ON(pu.pflcod = p.pflcod AND p.sisid = s.sisid)
+            LEFT JOIN planacomorc.usuarioresponsabilidade ur ON(u.usucpf = ur.usucpf AND ur.pflcod = p.pflcod AND ur.rpustatus = 'A')
         WHERE
             us.suscod = 'A'
             AND u.suscod = 'A'

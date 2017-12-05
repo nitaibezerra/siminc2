@@ -1890,8 +1890,6 @@ function enviarEmailAprovacao($pliid){
     
     $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
 
-//ver($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
-//ver($listaDestinatario, d);
 //ver(
 //array(
 //# Remetente
@@ -1943,7 +1941,14 @@ function enviarEmailCorrecao($pliid){
     # $textoEmail
     include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
 
-    $listaResponsaveis = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    $listaUsuariosPlanejamento = buscarUsuarioPerfilPlanejamento((object) array(
+        'sisid' => SISID_PLANEJAMENTO,
+        'pflcod' => PFL_SUBUNIDADE,
+        'ungcod' => $pi['ungcod']));
+
+    $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    
+    $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
     
 //ver(
 //array(
@@ -1958,7 +1963,7 @@ function enviarEmailCorrecao($pliid){
 //'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
 //$textoEmail,
 //d);
-    if($listaResponsaveis){
+    if($listaDestinatario){
         # Envia E-mail para o SOLICITANTE
         enviar_email(
             array(
@@ -1966,7 +1971,7 @@ function enviarEmailCorrecao($pliid){
                 'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
                 'email' => $_SESSION['email_sistema']
             ),
-            $listaResponsaveis,
+            $listaDestinatario,
             'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
@@ -1996,8 +2001,13 @@ function enviarEmailAprovado($pliid){
     # $textoEmail
     include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
 
-    $listaResponsaveis = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    $listaUsuariosPlanejamento = buscarUsuarioPerfilPlanejamento((object) array(
+        'sisid' => SISID_PLANEJAMENTO,
+        'pflcod' => PFL_PLANEJAMENTO));
     
+    $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
+    
+    $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
 //ver(
 //array(
 //# Remetente
@@ -2011,7 +2021,7 @@ function enviarEmailAprovado($pliid){
 //'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
 //$textoEmail,
 //d);
-    if($listaResponsaveis){
+    if($listaDestinatario){
         # Envia E-mail para o SOLICITANTE
         enviar_email(
             array(
@@ -2019,7 +2029,7 @@ function enviarEmailAprovado($pliid){
                 'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
                 'email' => $_SESSION['email_sistema']
             ),
-            $listaResponsaveis,
+            $listaDestinatario,
             'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
