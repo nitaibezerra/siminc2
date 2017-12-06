@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sistema Integrado de Planejamento, Orçamento e Finanças do Ministério da Educação
  * Setor responsvel: DTI/SE/MEC
@@ -43,21 +44,21 @@ if ( $_REQUEST['expirou'] ) {
 }
 
 function DownloadArquivoInfo($arqid){
-	global $db;
-	
-	$sql ="SELECT * FROM public.arquivo WHERE arqid = ".$arqid;
-	$arquivo = $db->carregar($sql);
-	$caminho = APPRAIZ . 'arquivos/informes/'. floor($arquivo[0]['arqid']/1000) .'/'.$arquivo[0]['arqid'];
-	
-	if ( !is_file( $caminho ) ) {
-		die('<script>alert("Arquivo não encontrado.");</script>');
-	}
-	
-	$filename = str_replace(" ", "_", $arquivo[0]['arqnome'].'.'.$arquivo[0]['arqextensao']);
-	header( 'Content-type: '. $arquivo[0]['arqtipo'] );
-	header( 'Content-Disposition: attachment; filename='.$filename);
-	readfile( $caminho );
-	exit();
+    global $db;
+
+    $sql ="SELECT * FROM public.arquivo WHERE arqid = ".$arqid;
+    $arquivo = $db->carregar($sql);
+    $caminho = APPRAIZ . 'arquivos/informes/'. floor($arquivo[0]['arqid']/1000) .'/'.$arquivo[0]['arqid'];
+
+    if ( !is_file( $caminho ) ) {
+            die('<script>alert("Arquivo não encontrado.");</script>');
+    }
+
+    $filename = str_replace(" ", "_", $arquivo[0]['arqnome'].'.'.$arquivo[0]['arqextensao']);
+    header( 'Content-type: '. $arquivo[0]['arqtipo'] );
+    header( 'Content-Disposition: attachment; filename='.$filename);
+    readfile( $caminho );
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -121,7 +122,6 @@ function DownloadArquivoInfo($arqid){
     <script type="text/javascript" src="library/fancybox-2.1.5/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 
     <style>
-
         body{
             height: auto;
         }
@@ -145,9 +145,6 @@ function DownloadArquivoInfo($arqid){
         .panel-login input.form-control{
             height: 50px;
         }
-
-
-
     </style>
 
 </head>
@@ -156,110 +153,183 @@ function DownloadArquivoInfo($arqid){
 
     <!-- Login -->
     <section id="login" class="login">
-		<div class="content">
-			<?php if ( $_SESSION['MSG_AVISO'] ): ?>
-				<div class="col-md-4 col-md-offset-4">
-					<div class="alert alert-danger" style="font-size: 14px; line-height: 20px;">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<i class="fa fa-bell"></i> <?php echo implode( "<br />", (array) $_SESSION['MSG_AVISO'] ); ?>
-					</div>
-				</div>
-			<?php endif; ?>
-			<?php $_SESSION['MSG_AVISO'] = array(); ?>
-		
-			<div class="col-md-4 col-md-offset-4">
-				<div class="panel-login">
-					<div class="panel-heading">
+        <div class="content">
+            <?php if ($_SESSION['MSG_AVISO']): ?>
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-danger" style="font-size: 14px; line-height: 20px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-bell"></i> <?php echo implode("<br />", (array) $_SESSION['MSG_AVISO']); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php $_SESSION['MSG_AVISO'] = array(); ?>
+
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel-login">
+                    <div class="panel-heading">
                         <img src="estrutura/temas/default/img/logo-siminc2.png" class="img-responsive" width="200">
-					</div>
-					<div class="panel-body">
-						<form class="form-horizontal" role="form" method="post" action="">
-							<input type="hidden" name="versao" value="<?php echo $_POST['versao']; ?>"/>
-				            <input type="hidden" name="formulario" value="1"/>
-				           
-				            <?php if (!IS_PRODUCAO) : ?>
-<!--				            <input type="hidden" name="baselogin" id="baselogin" value="simec_espelho_producao"/>
-				            <div class="form-group text-right">
-			                    <div class="col-lg-12">
-			                        <div class="make-switch" data-on-label="Espelho" data-off-label="Desenv. " data-on="primary" data-off="danger">
-			                            <input type="checkbox" name="baselogincheck" id="baselogincheck" value="simec_espelho_producao" checked="checked" />
-			                        </div>
-			                    </div>
-			                </div>-->
-			                <?php endif; ?>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input type="text" class="form-control cpf" name="usucpf" id="usucpf" placeHolder="CPF" required="">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input type="password" class="form-control" name="ususenha" id="ususenha" placeHolder="Senha" required="">
-								</div>
-							</div>
-							<div class="form-group" style="font-size: 14px;">
-								<div class="col-sm-7" style="margin-top: 3px">
-									<i class="fa fa-key"></i> <a href="recupera_senha.php" style="color: #fff">Esqueci minha senha?</a>
-								</div>
-								<div class="col-sm-5 text-right">
-									<button style="background-color: #1da589; border-color: #1da589;" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Acessar</button>
-								</div>
-							</div>
-						</form>
-                           <hr>
-					</div>
-					<div class=" text-center" style="font-size: 14px;">
-					   <div class="btn-group">
-							Não tem acesso ainda?&nbsp;
-							<i class="fa fa-user"></i> 
-							<a href="cadastrar_usuario.php" id="btn-cadastro" style="color: #fff">Solicitar acesso</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--/LOGIN -->
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="post" action="">
+                            <input type="hidden" name="versao" value="<?php echo $_POST['versao']; ?>"/>
+                            <input type="hidden" name="formulario" value="1"/>
+
+                            <?php if (!IS_PRODUCAO) : ?>
+    <!--				            <input type="hidden" name="baselogin" id="baselogin" value="simec_espelho_producao"/>
+     <div class="form-group text-right">
+     <div class="col-lg-12">
+         <div class="make-switch" data-on-label="Espelho" data-off-label="Desenv. " data-on="primary" data-off="danger">
+             <input type="checkbox" name="baselogincheck" id="baselogincheck" value="simec_espelho_producao" checked="checked" />
+         </div>
+     </div>
+    </div>-->
+                            <?php endif; ?>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" onkeyup="mascara(this, mcpf);" name="usucpf" id="usucpf" placeHolder="CPF" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="password" class="form-control" name="ususenha" id="ususenha" placeHolder="Senha" required="">
+                                </div>
+                            </div>
+                            <div class="form-group" style="font-size: 14px;">
+                                <div class="col-sm-7" style="margin-top: 3px">
+                                    <i class="fa fa-key"></i> <a href="recupera_senha.php" style="color: #fff">Esqueci minha senha?</a>
+                                </div>
+                                <div class="col-sm-5 text-right">
+                                    <button style="background-color: #1da589; border-color: #1da589;" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Acessar</button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+                    <div class=" text-center" style="font-size: 14px;">
+                        <div class="btn-group">
+                            Não tem acesso ainda?&nbsp;
+                            <i class="fa fa-user"></i> 
+                            <a href="cadastrar_usuario.php" id="btn-cadastro" style="color: #fff">Solicitar acesso</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/LOGIN -->
 
     <!-- Custom Theme JavaScript -->
     <script>
-    $(function(){
-		$('[data-tooltip="left"]').tooltip({placement : 'left'});
-        $('.modal-informes').modal('show');
-		$('span').tooltip({placement: 'bottom'})
-		$('.carousel').carousel();
-		$('.chosen-select').chosen();
-		$('.cpf').mask('999.999.999-99');
-		$(".menu-close").click(function(e) {
-			e.preventDefault();
-			$("." + $(this).data('toggle')).toggleClass("active");
-		});
-		$(".menu-toggle").click(function(e) {
-			e.preventDefault();
-			$("." + $(this).data('toggle')).toggleClass("active");
-		});
-		$('#baselogincheck').change(function(){
-			if($(this).is(':checked')){
-				$('#baselogin').val('simec_espelho_producao');
-			} else {
-				$('#baselogin').val('simec_desenvolvimento');
-			}
-		});
-	});
+        $(function(){
+            $('[data-tooltip="left"]').tooltip({placement : 'left'});
+            $('.modal-informes').modal('show');
+            $('span').tooltip({placement: 'bottom'})
+            $('.carousel').carousel();
+            $('.chosen-select').chosen();
+//            $('.usucpf').mask('999.999.999-99');
+            $(".menu-close").click(function(e) {
+                e.preventDefault();
+                $("." + $(this).data('toggle')).toggleClass("active");
+            });
+            $(".menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("." + $(this).data('toggle')).toggleClass("active");
+            });
+            $('#baselogincheck').change(function(){
+                if($(this).is(':checked')){
+                    $('#baselogin').val('simec_espelho_producao');
+                } else {
+                    $('#baselogin').val('simec_desenvolvimento');
+                }
+            });
+        });
         
-	function dinfo(id){
-		var url = 'login.php?download=' + id;
-		var iframe;
-		iframe = document.getElementById("download-container");
-		if (iframe === null)
-		{
-			iframe = document.createElement('iframe');  
-			iframe.id = "download-container";
-			iframe.style.visibility = 'hidden';
-			document.body.appendChild(iframe);
-		}
-		iframe.src = url;
-	}	
+        function dinfo(id){
+            var url = 'login.php?download=' + id;
+            var iframe;
+            iframe = document.getElementById("download-container");
+            if (iframe === null){
+                iframe = document.createElement('iframe');  
+                iframe.id = "download-container";
+                iframe.style.visibility = 'hidden';
+                document.body.appendChild(iframe);
+            }
+            iframe.src = url;
+        }
+        
+        /* Máscaras ER */
+        function mascara(o,f){
+            v_obj=o
+            v_fun=f
+            setTimeout("execmascara()",1)
+        }
+        function execmascara(){
+            v_obj.value=v_fun(v_obj.value)
+        }
+        function mcep(v){
+            v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{5})(\d)/,"$1-$2")         //Esse é tão fácil que não merece explicações
+            return v
+        }
+        function mtel(v){
+            v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+            v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+            return v;
+        }
+        function cnpj(v){
+            v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+            v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+            v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+            v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+            return v
+        }
+        function mcpf(v){
+            v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+            v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+            v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+                                                     //de novo (para o segundo bloco de números)
+            v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+            return v
+        }
+        function mdata(v){
+            v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
+            v=v.replace(/(\d{2})(\d)/,"$1/$2");
+            v=v.replace(/(\d{2})(\d)/,"$1/$2");
+
+            v=v.replace(/(\d{2})(\d{2})$/,"$1$2");
+            return v;
+        }
+        function mtempo(v){
+            v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
+            v=v.replace(/(\d{1})(\d{2})(\d{2})/,"$1:$2.$3");
+            return v;
+        }
+        function mhora(v){
+            v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
+            v=v.replace(/(\d{2})(\d)/,"$1h$2");
+            return v;
+        }
+        function mrg(v){
+            v=v.replace(/\D/g,"");                                      //Remove tudo o que não é dígito
+                v=v.replace(/(\d)(\d{7})$/,"$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+                v=v.replace(/(\d)(\d{4})$/,"$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+                v=v.replace(/(\d)(\d)$/,"$1-$2");               //Coloca o - antes do último dígito
+            return v;
+        }
+        function mnum(v){
+            v=v.replace(/\D/g,"");                                      //Remove tudo o que não é dígito
+            return v;
+        }
+        function mvalor(v){
+            v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
+            v=v.replace(/(\d)(\d{8})$/,"$1.$2");//coloca o ponto dos milhões
+            v=v.replace(/(\d)(\d{5})$/,"$1.$2");//coloca o ponto dos milhares
+
+            v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
+            return v;
+        }
     </script>
 
 </body>
