@@ -103,7 +103,7 @@ function DownloadArquivoInfo($arqid){
     <script src="library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
     
 	<!-- Custom Scripts -->
-    <script type="text/javascript" src="../includes/funcoes.js"></script>
+    <script type="text/javascript" src="../includes/funcoes.js?v=1"></script>
     
     <!-- FancyBox -->
     <script type="text/javascript" src="library/fancybox-2.1.5/source/jquery.fancybox.js?v=2.1.5"></script>
