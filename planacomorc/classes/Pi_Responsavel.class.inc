@@ -45,11 +45,10 @@ class Pi_Responsavel extends Modelo{
     {
         $sql = "
             SELECT
-                r.pliid,
+                u.usucpf,
                 u.usunome,
                 u.usuemail,
-                u.usucpf,
-                usufoneddd || ' - ' || usufonenum AS usutelefone
+                usufoneddd || ' - ' || usufonenum AS telefone
             FROM planacomorc.pi_responsavel r
                 JOIN seguranca.usuario u ON u.usucpf = r.usucpf
             WHERE

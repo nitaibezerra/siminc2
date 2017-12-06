@@ -5303,10 +5303,14 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
     $where .= $filtro->ungcod? " \n AND ur.ungcod = '{$filtro->ungcod}'": NULL;
     $sql = "
         SELECT DISTINCT
-            s.sisid,
             u.usucpf,
             u.usunome,
-            u.usuemail
+            u.usuemail,
+            CASE WHEN LENGTH(u.usufoneddd) > 0 THEN
+                '(' || u.usufoneddd || ')' || u.usufonenum
+            ELSE
+                NULL
+            END AS telefone
         FROM seguranca.sistema s
             JOIN seguranca.usuario_sistema us USING(sisid)
             JOIN seguranca.usuario u USING(usucpf)
@@ -5318,7 +5322,7 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
             AND u.suscod = 'A'
             AND p.pflstatus = 'A' $where
     ";
-//ver($sql,d);
+//ver($sql, d);
     $listaUsuarioPlanejamento = $db->carregar($sql);
     return $listaUsuarioPlanejamento;
 }
