@@ -933,7 +933,7 @@ DML;
                                     <?php foreach($aResponsavel as $responsavel){ ?>
                                         <tr style="height: 30px;" class="tr_responsaveis_<?php echo $responsavel['pirid']; ?>" >
                                             <td style="text-align: left;"><?php echo $responsavel['usunome']; ?></td>
-                                            <td style="text-align: left;"><?php echo $responsavel['usutelefone']; ?></td>
+                                            <td style="text-align: left;"><?php echo $responsavel['telefone']; ?></td>
                                             <td style="text-align: left;"><?php echo $responsavel['usuemail']; ?></td>
                                             <td style="text-align: center;">
                                                 <input type="hidden" value="<?php echo $responsavel['usucpf']; ?>" name="listaResponsaveis[]">
