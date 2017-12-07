@@ -949,7 +949,11 @@ class Pi_PlanoInterno extends Modelo
                                 where ppr.pliid = pli.pliid                           
                         ), '; ')) pronac,                          
                                                 
-                        ppr.pprnome, pum.pumnome, picquantidade, (pic.picvalorcusteio + pic.picvalorcapital) valortotal,  pic.picvalorcusteio, pic.picvalorcapital,
+                        ppr.pprnome, pum.pumnome, picquantidade,
+                        
+                        COALESCE(pic.picvalorcusteio, 0.00) + COALESCE(pic.picvalorcapital, 0.00) AS valortotal,
+                        COALESCE(pic.picvalorcusteio, 0.00) AS picvalorcusteio,
+                        COALESCE(pic.picvalorcapital, 0.00) AS picvalorcapital,
                         
                         -- Cronograma Físico
                         (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 1 AND mescod = '01' AND pcr.pliid = pli.pliid) fisico_1,
@@ -1057,7 +1061,15 @@ class Pi_PlanoInterno extends Modelo
                 ";
 
         $dados = $this->carregar($sql);
-        return $dados ? $dados : [];
+        if($dados){
+            foreach($dados as $key => $_){
+                $dados[$key]['valortotal'] = number_format($dados[$key]['valortotal'], 2, '.', '');
+                $dados[$key]['picvalorcusteio'] = number_format($dados[$key]['picvalorcusteio'], 2, '.', '');
+                $dados[$key]['picvalorcapital'] = number_format($dados[$key]['picvalorcapital'], 2, '.', '');
+            }
+        }
+
+        return $dados? $dados: [];
     }
 
     public function getCorPainelPorValorDisponivel($valorDisponivel)
