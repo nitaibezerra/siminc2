@@ -145,6 +145,27 @@ class Emendas_Model_Beneficiario extends Modelo
         }
     }
 
+    public function associarAlteracao($dados)
+    {
+        if($benid = $this->benid){
+
+            $mBeneficiarioAlteracao = new Emendas_Model_BeneficiarioAlteracao();
+            $mBeneficiarioAlteracao->excluirVarios("benid = '$benid'");
+
+            if(isset($dados['alteracao']) && is_array($dados['alteracao'])){
+
+                $mBeneficiarioAlteracao->benid = $benid;
+
+                foreach($dados['alteracao'] as $aloid){
+                    $mBeneficiarioAlteracao->aloid = $aloid;
+                    $mBeneficiarioAlteracao->salvar();
+
+                    $mBeneficiarioAlteracao->beaid = null;
+                }
+            }
+        }
+    }
+
     public function recuperarDelegacao($exercicio = null)
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
@@ -164,6 +185,18 @@ class Emendas_Model_Beneficiario extends Modelo
             $listaId[] = $dado['suoid'];
         }
         return $listaId;
+    }
+
+    public function recuperarAlteracao($exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "SELECT aloid as codigo, aloid as descricao
+                FROM emendas.beneficiarioalteracao 
+                WHERE benid = ". (int)$this->benid;
+
+        $dados = $this->carregar($sql);
+        return simec_preparar_array($dados);
     }
 
 }//end Class

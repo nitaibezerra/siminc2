@@ -18,6 +18,7 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid']);
 
             $mBeneficiario->associarDelegacao($dados);
+            $mBeneficiario->associarAlteracao($dados);
 
             // Salvando dados da Localização
             $dados['benid'] = $mBeneficiario->benid;
