@@ -1328,8 +1328,8 @@ class SimecWsInterfaceService extends SoapClient {
 		$this->tipolog = '';
 		$this->logid = '';
 		$this->db = '';
-		
-		parent::__construct($wsdl, $options);
+
+		parent::__construct($wsdl);
 	}
 
 	/**
@@ -1339,10 +1339,19 @@ class SimecWsInterfaceService extends SoapClient {
 	 * @return consultarPropostaPorUFResponse
 	 */
 	public function consultarPropostaPorUF(consultarPropostaPorUF $parameters) {
-		return $this->__soapCall('consultarPropostaPorUF', array($parameters),       array(
-				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
+
+
+//	    ver(htmlentities($this->wssecurity_header()->data->enc_value), d);
+
+		return $this->__soapCall(
+		    'consultarPropostaPorUF',
+            array($parameters),
+            array(
+//				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
+				'uri' => 'https://ws.convenios.gov.br/siconv-siconv-interfaceSiconv-1.0/InterfaceSiconvHandlerBeanImpl?wsdl',
 				'soapaction' => ''
-		)
+		    ),
+            $this->wssecurity_header()
 		);
 	}
 
@@ -1384,10 +1393,14 @@ class SimecWsInterfaceService extends SoapClient {
 		$this->arrDados = $arrDados;
 		$this->tipolog = 'exportaConvenio';
 	
-		return $this->__soapCall('exportaConvenio', array($parameters),       array(
+		return $this->__soapCall(
+		    'exportaConvenio',
+            array($parameters),
+            array(
 				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
 				'soapaction' => ''
-		), $this->wssecurity_header()
+		    ),
+            $this->wssecurity_header()
 		);
 	}
 	
@@ -1400,6 +1413,8 @@ class SimecWsInterfaceService extends SoapClient {
   public function consultarConvenio(consultarConvenio $parameters, $arrDados = array()) {
   	$this->arrDados = $arrDados;
 	$this->tipolog = 'consultarConvenio';
+	
+	ver(111, d);
 		
     return $this->__soapCall('consultarConvenio', array($parameters),       array(
             'uri' => 'http://simec.intraSiconvWS.sistema.fnde.gov.br',
@@ -1475,7 +1490,7 @@ class SimecWsInterfaceService extends SoapClient {
 		return $this->__soapCall('consultarPropostaPorAcaoOrcamentaria', array($parameters),       array(
 				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
 				'soapaction' => ''
-		)
+        ), $this->wssecurity_header()
 		);
 	}
 
@@ -1501,9 +1516,9 @@ class SimecWsInterfaceService extends SoapClient {
 	 */
 	public function consultarPropostaPorEmendaParlamentar(consultarPropostaPorEmendaParlamentar $parameters) {
 		return $this->__soapCall('consultarPropostaPorEmendaParlamentar', array($parameters),       array(
-				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
+				'uri' => 'https://ws.convenios.gov.br/siconv-siconv-interfaceSiconv-1.0/InterfaceSiconvHandlerBeanImpl?wsdl',
 				'soapaction' => ''
-		)
+		), $this->wssecurity_header()
 		);
 	}
 
@@ -1645,13 +1660,13 @@ class SimecWsInterfaceService extends SoapClient {
 	}
 	
 	function __doRequest($request, $location, $action, $version, $one_way = 0){
-		$this->log($request, $location, $action, $version, 'request');
+//		$this->log($request, $location, $action, $version, 'request');
 	
 		$response = SoapClient::__doRequest($request, $location,
 				$action, $version,
 				$one_way);
 	
-		$this->log($response, $location, $action, $version, 'response');
+//		$this->log($response, $location, $action, $version, 'response');
 		 
 		return $response;
 	}

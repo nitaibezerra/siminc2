@@ -30,9 +30,9 @@ class WSIntegracaoSiconv{
 		
 		if($_SESSION['baselogin'] == "simec_desenvolvimento" || $_SESSION['baselogin'] == "simec_espelho_producao" ){
 			//$urlWsdl = 'http://172.20.65.93:8080/IntraSiconvWS/services/SimecWsFacade?wsdl';
-			$urlWsdl = 'https://wshom.convenios.gov.br/siconv-siconv-interfaceSiconv-1.0/InterfaceSiconvHandlerBeanImpl?wsdl';
+			$urlWsdl = 'https://ws.convenios.gov.br/siconv-siconv-interfaceSiconv-1.0/InterfaceSiconvHandlerBeanImpl?wsdl';
 		} else {
-			$urlWsdl = 'https://ws.convenios.gov.br/siconv-interfaceSiconv-1.0/InterfaceSiconvHandler/InterfaceSiconvHandlerBeanImpl?wsdl';
+			$urlWsdl = 'https://ws.convenios.gov.br/siconv-siconv-interfaceSiconv-1.0/InterfaceSiconvHandlerBeanImpl?wsdl';
 		}
 		
 		$this->db = new cls_banco();
@@ -56,52 +56,101 @@ class WSIntegracaoSiconv{
 													inner join entidade.entidade e on e.entid = c.entid and c.convigente = 't'");
 	}
 		
-	public function enviaPropostaWS(){
-		
-		$this->arrDadosPTA = $this->carregaDadosPTA();
-		
-		$sql = "select
-					vf.acacod
-				from
-					emenda.ptemendadetalheentidade pte
-				    inner join emenda.v_emendadetalheentidade ve on ve.edeid = pte.edeid
-				    inner join emenda.v_funcionalprogramatica vf on vf.acaid = ve.acaid
-				where
-					pte.ptrid = {$this->arrDadosPTA['ptrid']}   
-				    and ve.edestatus = 'A'
-				    and vf.acastatus = 'A'
-				    and vf.prgano = '{$_SESSION['exercicio']}'";
-		$acacod = $this->db->pegaUm($sql);
-		$this->acacod = $acacod;
-		
-		//ver($this->getCronogramaDesembolsoPropostaWS(), $this->getCronogramaFisicoPropostaWS(),d);
-		
-		$sql = "SELECT distinct
-					esp.espid,
-				    esp.espnome
-				FROM 
-				    emenda.ptiniciativa pti
-				    inner join emenda.ptiniciativaespecificacao pte on pte.ptiid = pti.ptiid and pte.ptestatus = 'A'
-				    inner join emenda.iniciativaespecificacao ice on ice.iceid = pte.iceid
-				    inner join emenda.especificacao esp on esp.espid = ice.espid
-				WHERE 
-				    pti.ptrid = {$this->ptrid}
-				    and ice.icestatus = 'A'
-                    and esp.ssiid is null";
-        $arrNatureza = $this->db->carregar($sql);
-        $arrNatureza = ($arrNatureza ? $arrNatureza : array());
+	public function consultarPropostaPorUF(){
+        $obEnvio = $this->getConsultarPropostaPorUF();
+        $wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
+                'exceptions'	=> true,
+                'trace'			=> true,
+                'encoding'		=> 'ISO-8859-1',
+                "proxy_host" => "",
+                "proxy_port" => '',
+            )
+        );
         
-		$msg = '';
-        if( $arrNatureza ){
-        	$msg = "<span style='color: red;'><b>Detalhes do erro:</b><br/><br/>SIMEC : É necessário vincular a especificação a natureza de despesa:<br>";
-	        foreach ($arrNatureza as $arr) {
-	        	$msg .= '<a href="#" onclick="abreEspecificacao('.$arr['espid'].')" style="cursor: pointer;">'.$arr['espnome'].'</a><br>';
-	        }
-	        $msg .= "</span>";
-	        die($msg);
-		}
+        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+
+        $retorno = $wsProposta->consultarPropostaPorUF( $obEnvio );
+ver($retorno, d);
+        return $retorno->return;
+    }
+
+	public function consultarPropostaPorEmenda($dados){
+        $obEnvio = $this->getConsultarPropostaPorEmendaParlamentar($dados);
+        $wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
+                'exceptions'	=> true,
+                'trace'			=> true,
+                'encoding'		=> 'ISO-8859-1',
+                "proxy_host" => "",
+                "proxy_port" => '',
+            )
+        );
+
+        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+        $retorno = $wsProposta->consultarPropostaPorEmendaParlamentar( $obEnvio );
+        return $retorno->return;
+    }
+
+	public function consultarPropostaPorAcaoOrcamentaria($dados){
+        $obEnvio = $this->getConsultarPropostaPorAcaoOrcamentaria($dados);
+        $wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
+                'exceptions'	=> true,
+                'trace'			=> true,
+                'encoding'		=> 'ISO-8859-1',
+                "proxy_host" => "",
+                "proxy_port" => '',
+            )
+        );
+
+        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+        $retorno = $wsProposta->consultarPropostaPorAcaoOrcamentaria( $obEnvio );
+        return $retorno->return;
+    }
+
+	public function enviaPropostaWS(){
+
+//		$this->arrDadosPTA = $this->carregaDadosPTA();
+//
+//		$sql = "select
+//					vf.acacod
+//				from
+//					emenda.ptemendadetalheentidade pte
+//				    inner join emenda.v_emendadetalheentidade ve on ve.edeid = pte.edeid
+//				    inner join emenda.v_funcionalprogramatica vf on vf.acaid = ve.acaid
+//				where
+//					pte.ptrid = {$this->arrDadosPTA['ptrid']}
+//				    and ve.edestatus = 'A'
+//				    and vf.acastatus = 'A'
+//				    and vf.prgano = '{$_SESSION['exercicio']}'";
+//		$acacod = $this->db->pegaUm($sql);
+//		$this->acacod = $acacod;
+//
+//		//ver($this->getCronogramaDesembolsoPropostaWS(), $this->getCronogramaFisicoPropostaWS(),d);
+//
+//		$sql = "SELECT distinct
+//					esp.espid,
+//				    esp.espnome
+//				FROM
+//				    emenda.ptiniciativa pti
+//				    inner join emenda.ptiniciativaespecificacao pte on pte.ptiid = pti.ptiid and pte.ptestatus = 'A'
+//				    inner join emenda.iniciativaespecificacao ice on ice.iceid = pte.iceid
+//				    inner join emenda.especificacao esp on esp.espid = ice.espid
+//				WHERE
+//				    pti.ptrid = {$this->ptrid}
+//				    and ice.icestatus = 'A'
+//                    and esp.ssiid is null";
+//        $arrNatureza = $this->db->carregar($sql);
+//        $arrNatureza = ($arrNatureza ? $arrNatureza : array());
+//
+//		$msg = '';
+//        if( $arrNatureza ){
+//        	$msg = "<span style='color: red;'><b>Detalhes do erro:</b><br/><br/>SIMEC : É necessário vincular a especificação a natureza de despesa:<br>";
+//	        foreach ($arrNatureza as $arr) {
+//	        	$msg .= '<a href="#" onclick="abreEspecificacao('.$arr['espid'].')" style="cursor: pointer;">'.$arr['espnome'].'</a><br>';
+//	        }
+//	        $msg .= "</span>";
+//	        die($msg);
+//		}
 		$obEnvio = $this->getEnviarProposta();
-		//ver($obEnvio,d); 
 		$wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
 																'exceptions'	=> true,
 																'trace'			=> true,
@@ -110,11 +159,12 @@ class WSIntegracaoSiconv{
 																"proxy_port" => '',
 																)
 												);
-												
+
 		$wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
 		/*$obEnvio = $this->getExportaProponente();
 		$retorno = $wsProposta->exportaProponente( $obEnvio, $this->arrDadosPTA );*/
-		
+
+		ver($wsProposta,d);
 		$retorno = $wsProposta->enviaPropostaWS( $obEnvio, $this->arrDadosPTA );
 		
 		$numeroProposta = substr($retorno->return, -11);
@@ -134,7 +184,45 @@ class WSIntegracaoSiconv{
 		
 		return $ObjetoWS;
 	}
-	
+
+	public function getConsultarPropostaPorUF(){
+		$ObjetoWS = new consultarPropostaPorUF();
+
+		$oParametros = new parametrosConsultarPropostaPorUFWS();
+        $oParametros->codigoOrgao = 42000;
+        $oParametros->codigoUF = 'DF';
+        $oParametros->login = $this->getLoginWS('true'); // LoginWS
+
+		$ObjetoWS->arg0	= $oParametros;
+		return $ObjetoWS;
+	}
+
+	public function getConsultarPropostaPorEmendaParlamentar($dados){
+		$ObjetoWS = new consultarPropostaPorEmendaParlamentar();
+
+		$oParametros = new parametrosConsultarPropostaPorEmendaParlamentarWS();
+        $oParametros->codigoOrgao = $dados['unocod'];
+        $oParametros->numeroEmendaParlamentar = $dados['emenumero'];
+
+        $oParametros->login = $this->getLoginWS('true'); // LoginWS
+
+		$ObjetoWS->arg0	= $oParametros;
+		return $ObjetoWS;
+	}
+
+	public function getConsultarPropostaPorAcaoOrcamentaria($dados){
+		$ObjetoWS = new consultarPropostaPorAcaoOrcamentaria();
+
+		$oParametros = new parametrosConsultarPropostaPorAcaoOrcamentariaWS();
+        $oParametros->codigoOrgao = $dados['unocod'];
+        $oParametros->numeroAcaoOrcamentaria = $dados['acao'];
+
+        $oParametros->login = $this->getLoginWS('true'); // LoginWS
+
+		$ObjetoWS->arg0	= $oParametros;
+		return $ObjetoWS;
+	}
+
 	public function solicitarNotaEmpenhoWS(){
 		$this->arrDadosEmpenho = $this->carregaDadosEmpenho();
 		
@@ -210,9 +298,9 @@ class WSIntegracaoSiconv{
 		$retorno = $wsProposta->consultarConvenio( $obEnvio, $this->arrDadosEmpenho );
 		return $retorno; 
 	}
-	
+
 	public function consultarEmpenhoWS(){
-		$arrDados = $this->carregarDadosConsultaEmpenho();
+//		$arrDados = $this->carregarDadosConsultaEmpenho();
 		$wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
 																'exceptions'	=> true,
 																'trace'			=> true,
@@ -223,7 +311,12 @@ class WSIntegracaoSiconv{
 												);
 
 		$obEnvio = $this->getConsultarEmpenho( $arrDados );
+
+
 		$retorno = $wsProposta->consultarEmpenho( $obEnvio, $arrDados );
+		
+		ver($retorno, d);
+		
 		
 		$logresponse = $this->db->pegaUm("SELECT logresponse FROM emenda.logerroswsdl WHERE logid='".$_SESSION['emenda']['logid']."'");
 
@@ -299,12 +392,10 @@ XML;
 	public function getConsultaEmpenhoDTO( $arrDados ){
 		
 		$ObjetoWS = new ConsultaEmpenhoDTO();
-  		$ObjetoWS->anConvenio		= $arrDados['ptranoconvenio']; // string
-  		$ObjetoWS->anExercicio		= $arrDados['ptrexercicio']; // string
-  		$ObjetoWS->nuConvenio		= '900623'; //$arrDados['ptrnumconvenio']; // string
-  		$ObjetoWS->nuProcesso		= '23400002829200986'; //$arrDados['ptrnumprocessoempenho']; // string
-  		$ObjetoWS->nuPropostaSiconv	= '000448/2009'; //$arrDados['specodigosiconv']; // string
-  		
+  		$ObjetoWS->anConvenio		= '2017'; // string
+  		$ObjetoWS->anExercicio		= '2017'; // string
+  		$ObjetoWS->nuPropostaSiconv	= '027941/2017'; //$arrDados['specodigosiconv']; // string
+
   		return $ObjetoWS;
 	}
 	
@@ -395,7 +486,7 @@ XML;
 		
 		return $ObjetoWS;
 	}
-	
+
 	public function getSolicitarOrdemBancaria(){
 		
 		$ObjetoWS = new solicitarOrdemBancaria();
