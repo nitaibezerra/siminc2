@@ -41,14 +41,6 @@ class Emendas_Model_Delegacao extends Modelo
     protected $arChavePrimaria = array(
         'edeid',
     );
-    /**
-     * Chaves estrangeiras.
-     * @var array
-     */
-    protected $arChaveEstrangeira = array(
-        'suoid' => array('tabela' => 'subunidadeorcamentaria', 'pk' => 'suoid'),
-        'emeid' => array('tabela' => 'emendas.emenda', 'pk' => 'emeid'),
-    );
 
     /**
      * Atributos
@@ -57,7 +49,7 @@ class Emendas_Model_Delegacao extends Modelo
      */
     protected $arAtributos = array(
         'edeid' => null,
-        'emeid' => null,
+        'benid' => null,
         'suoid' => null,
     );
 

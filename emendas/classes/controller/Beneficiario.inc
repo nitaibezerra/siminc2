@@ -13,8 +13,11 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario->benempenhado = $dados['benempenhado'] == 't' ? 't' : 'f';
             $mBeneficiario->benconveniado = $dados['benconveniado'] == 't' ? 't' : 'f';
             $mBeneficiario->benpago = $dados['benpago'] == 't' ? 't' : 'f';
+            $mBeneficiario->bented = $dados['bented'] == 't' ? 't' : 'f';
 
             $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid']);
+
+            $mBeneficiario->associarDelegacao($dados);
 
             // Salvando dados da Localização
             $dados['benid'] = $mBeneficiario->benid;

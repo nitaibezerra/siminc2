@@ -5,9 +5,9 @@
 require_once 'Zend/View/Helper/FormElement.php';
 
 
-class Simec_View_Helper_Boolean extends Simec_View_Helper_Element
+class Simec_View_Helper_RadioBoolean extends Simec_View_Helper_Element
 {
-    public function boolean($name, $label = null, $value = null, $attribs = array(), $config = array())
+    public function radioBoolean($name, $label = null, $value = null, $attribs = array(), $config = array())
     {
         $attribs = (array) $attribs;
 

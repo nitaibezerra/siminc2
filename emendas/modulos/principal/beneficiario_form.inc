@@ -85,14 +85,33 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = {$mEmenda->unoid}"], 'suonome');
                         $options = simec_preparar_array($db->carregar($sql));
-
                         $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
-
                         echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required']);
+
+                        $listaSubUnidadesDelegadas = $mBeneficiario->recuperarDelegacao();
+                        ?>
+
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label class="control-label" for="picted">Delegação:</label>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="checkbox" name="delegacao" id="delegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                            </div>
+                            <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
+                                <?php
+                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+                                echo $simec->select("delegacao[]", '', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
+                                ?>
+                            </div>
+                        </div>
+
+                        <?php
                         echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required']);
                         echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                         echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
                         echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
+                        echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
                         ?>
 
                         <div class="col-md-6 dados-siconv">
@@ -139,6 +158,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                         echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                        echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                        echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                         ?>
                         <div class="form-group ">
                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
@@ -232,6 +253,11 @@ include APPRAIZ . "includes/cabecalho.inc";
             toggleMotivo();
         });
 
+        toggleDelegacao();
+        $('#delegacao').change(function(){
+            toggleDelegacao();
+        });
+
         $('#btn-salvar').click(function(){
             $('#formulario-beneficiario').submit();
         });
@@ -268,6 +294,14 @@ include APPRAIZ . "includes/cabecalho.inc";
             } else {
                 $('#impid').val('').trigger("chosen:updated");
                 $('.div_motivo').hide('slow');
+            }
+        }
+
+        function toggleDelegacao(){
+            if($('#delegacao').is(':checked')){
+                $('#div_unidades_delegadas').show('slow');
+            } else {
+                $('#div_unidades_delegadas').hide('slow');
             }
         }
     })

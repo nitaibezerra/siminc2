@@ -26,6 +26,11 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  */
 class Emendas_Model_Beneficiario extends Modelo
 {
+
+    const K_PARECER_NAO         = 0;
+    const K_PARECER_SIM         = 1;
+    const K_PARECER_NAO_APLICA  = 2;
+
     /**
      * Nome da tabela especificada
      * @var string
@@ -82,7 +87,18 @@ class Emendas_Model_Beneficiario extends Modelo
         'neeid' => null,
         'capid' => null,
         'bented' => null,
+        'benparecertecnico' => null,
+        'benparecerjuridico' => null,
     );
+
+    public function recuperarTiposParecer()
+    {
+        return [
+            self::K_PARECER_SIM => 'Sim',
+            self::K_PARECER_NAO => 'Não',
+            self::K_PARECER_NAO_APLICA => 'Não se Aplica',
+        ];
+    }
 
     public function recuperarTodos($stCampos = '*', $arClausulas = null, $stOrdem = null, array $opcoes = array()) {
 
@@ -106,6 +122,48 @@ class Emendas_Model_Beneficiario extends Modelo
 
         $resultado = $this->carregar($sql);
         return $resultado ? $resultado : array();
+    }
+
+    public function associarDelegacao($dados)
+    {
+        if($benid = $this->benid){
+
+            $mDelegacao = new Emendas_Model_Delegacao();
+            $mDelegacao->excluirVarios("benid = '$benid'");
+
+            if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
+
+                $mDelegacao->benid = $benid;
+
+                foreach($dados['delegacao'] as $suoid){
+                    $mDelegacao->suoid = $suoid;
+                    $mDelegacao->salvar();
+
+                    $mDelegacao->edeid = null;
+                }
+            }
+        }
+    }
+
+    public function recuperarDelegacao($exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = " SELECT suo.suoid
+                FROM public.vw_subunidadeorcamentaria suo
+                    JOIN emendas.delegacao d ON(suo.suoid = d.suoid)
+                WHERE suo.suostatus = 'A'
+                AND benid = ". (int)$this->benid. "
+                AND suo.prsano = '". (int)$exercicio. "' ";
+
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $listaId = [];
+        foreach($dados as $dado){
+            $listaId[] = $dado['suoid'];
+        }
+        return $listaId;
     }
 
 }//end Class

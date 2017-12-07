@@ -45,7 +45,7 @@ class Simec_View_Helper
 		}
 
 		$this->title = new Simec_View_Helper_Title();
-		$this->boolean = new Simec_View_Helper_Boolean();
+		$this->radioBoolean = new Simec_View_Helper_RadioBoolean();
 		$this->input = new Simec_View_Helper_Input();
 		$this->data = new Simec_View_Helper_Data();
 		$this->cpf = new Simec_View_Helper_Cpf();
@@ -82,11 +82,11 @@ class Simec_View_Helper
 		return $this->title->title($title, $subTitle, $attribs);
 	}
 	
-	public function boolean($name, $label = null, $value = null, $attribs = array(), $config = array())
+	public function radioBoolean($name, $label = null, $value = null, $attribs = array(), $config = array())
     {
         $config = $this->montarConfig($name, $config);
-		$this->boolean->setView(Simec_View_Helper::$view);
-		return $this->boolean->boolean($name, $label, $value, $attribs, $config);
+		$this->radioBoolean->setView(Simec_View_Helper::$view);
+		return $this->radioBoolean->radioBoolean($name, $label, $value, $attribs, $config);
 	}
 
 	public function input($name, $label = null, $value = null, $attribs = array(), $config = array())
