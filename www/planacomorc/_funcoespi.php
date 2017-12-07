@@ -506,6 +506,7 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
     $where .= $filtros->unicod? "\n AND aca.unicod = '{$filtros->unicod}'": NULL;
     $where .= $filtros->ungcod? "\n AND uni.suocod = '{$filtros->ungcod}'": NULL;
     $where .= $filtros->buscalivre? "\n AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $filtros->buscalivre . "%') OR dtl.ptres ILIKE '%" . $filtros->buscalivre . "%')": NULL;
+    $where .= $filtros->ptrid? "\n AND ptr.ptrid = {$filtros->ptrid}": NULL;
     if($filtros->no_ptrid){
         if(is_array($filtros->no_ptrid)){
             $where .= "\n AND ptr.ptrid NOT IN('". join($filtros->no_ptrid, "','"). "')";
@@ -531,6 +532,111 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
             TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
             COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00) AS dotacaoatual,
             COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
+            COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
+            COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
+            COALESCE((pemp.total), 0.00) AS empenhado,
+            (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) - COALESCE(pemp.total, 0.00) AS nao_empenhado
+        FROM monitora.ptres ptr
+            JOIN monitora.acao aca ON(ptr.acaid = aca.acaid)
+            JOIN public.vw_subunidadeorcamentaria uni ON(aca.unicod = uni.unocod AND ptr.ptrano = uni.prsano)
+            JOIN spo.ptressubunidade psu ON(ptr.ptrid = psu.ptrid AND uni.suoid = psu.suoid)
+        LEFT JOIN (
+            SELECT
+                pip2.ptrid,
+                (SUM(COALESCE(pc.picvalorcusteio, 0.00)) + SUM(COALESCE(pc.picvalorcapital, 0.00))) AS pipvalor,
+                SUM(COALESCE(pc.picvalorcusteio, 0.00)) AS custeio,
+                SUM(COALESCE(pc.picvalorcapital, 0.00)) AS capital
+            FROM monitora.pi_planointernoptres pip2
+                JOIN monitora.pi_planointerno USING(pliid)
+                JOIN planacomorc.pi_complemento pc USING(pliid)
+            WHERE
+                plistatus = 'A'
+            GROUP BY
+                pip2.ptrid
+        ) pip ON(ptr.ptrid = pip.ptrid)
+        LEFT JOIN (
+            SELECT
+                ex.unicod,
+                ex.ptres,
+                ex.exercicio,
+                sum(ex.vlrempenhado) AS total
+            FROM spo.siopexecucao ex
+            WHERE
+                ex.exercicio = '{$filtros->exercicio}'
+            GROUP BY
+                ex.unicod,
+                ex.ptres,
+                ex.exercicio
+            ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+        WHERE
+            ptr.ptrstatus = 'A'
+            AND ptr.ptrano = '{$filtros->exercicio}' $where
+        GROUP BY
+            ptr.ptrid,
+            ptr.ptres,
+            psu.ptrdotacaocusteio,
+            psu.ptrdotacaocapital,
+            aca.prgcod,
+            aca.acacod,
+            aca.loccod,
+            aca.acaobjetivocod,
+            ptr.plocod,
+            aca.unicod,
+            uni.unonome,
+            aca.acatitulo,
+            pemp.total
+        ORDER BY
+            ptr.ptres
+    ";
+    return $sql;
+}
+
+/**
+ * Monta o SQL da consulta de funcional para as subunidades.
+ * 
+ * @param stdClass $filtros "$filtros->exercicio" O Exercício é obrigatório.
+ * @return string
+ */
+function montarSqlBuscarFuncionalImportacao(stdClass $filtros) {
+    $where = NULL;
+    
+    # Filtros
+    $where .= $filtros->prgcod? "\n AND UPPER(ptr.prgcod) LIKE('%". strtoupper($filtros->prgcod). "%')": NULL;
+    $where .= $filtros->acacod? "\n AND UPPER(aca.acacod) LIKE('%". strtoupper($filtros->acacod). "%')": NULL;
+    $where .= $filtros->unicod? "\n AND aca.unicod = '{$filtros->unicod}'": NULL;
+    $where .= $filtros->ungcod? "\n AND uni.suocod = '{$filtros->ungcod}'": NULL;
+    $where .= $filtros->buscalivre? "\n AND (TRIM(aca.prgcod||'.'||aca.acacod||'.'||aca.loccod||' - '||aca.acadsc) ILIKE('%" . $filtros->buscalivre . "%') OR dtl.ptres ILIKE '%" . $filtros->buscalivre . "%')": NULL;
+    $where .= $filtros->ptrid? "\n AND ptr.ptrid = {$filtros->ptrid}": NULL;
+    if($filtros->no_ptrid){
+        if(is_array($filtros->no_ptrid)){
+            $where .= "\n AND ptr.ptrid NOT IN('". join($filtros->no_ptrid, "','"). "')";
+        } else {
+            $where .= "\n AND ptr.ptrid != ". (int)$filtros->no_ptrid;
+        }
+    }
+    if($filtros->eqdid){
+        $where .= " \n AND ptr.irpcod IN(
+                SELECT
+                    eqrp.irpcod
+                FROM monitora.enquadramentorp eqrp
+                WHERE
+                    eqrp.eqdid = ". (int)$filtros->eqdid. "
+            )
+        ";
+    }
+    
+    $sql = "
+        SELECT
+            ptr.ptrid,
+            ptr.ptres,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE COALESCE(TRIM(aca.acaobjetivocod), '') END) || '.' || COALESCE(TRIM(ptr.plocod)) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
+            COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00) AS dotacaoatual,
+            COALESCE(psu.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
+            COALESCE(psu.ptrdotacaocapital, 0.00) AS ptrdotacaocapital,
+            COALESCE(SUM(pip.pipvalor), 0.00) AS det_pi,
+            COALESCE(SUM(pip.custeio), 0.00) AS det_pi_custeio,
+            COALESCE(SUM(pip.capital), 0.00) AS det_pi_capital,
+            (COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00)) + COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi,
             COALESCE(psu.ptrdotacaocusteio, 0.00) - COALESCE(SUM(pip.custeio), 0.00) AS nao_det_pi_custeio,
             COALESCE(psu.ptrdotacaocapital, 0.00) - COALESCE(SUM(pip.capital), 0.00) AS nao_det_pi_capital,
             COALESCE((pemp.total), 0.00) AS empenhado,
