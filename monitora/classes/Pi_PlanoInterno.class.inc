@@ -1105,10 +1105,10 @@ class Pi_PlanoInterno extends Modelo
         }
         
         switch($tipoValor){
-            case 'Dotação':
+            case 'Dot':
                 $sql = self::montarSqlGraficoPizzaRp($filtro);
                 break;
-            case 'Planejado':
+            case 'Pla':
                 $sql = self::montarSqlGraficoPizzaEnquadramento($filtro);
                 break;
         }

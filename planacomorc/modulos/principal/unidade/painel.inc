@@ -330,8 +330,9 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
         } else {
             var parametroTipoGrafico = '&req=detalhe-grafico-uo';
         }
-        if(tipoValor === "Dotação" || tipoValor === "Planejado"){
-            $('#detalhe-grafico .modal-body').load(urlBase+ '&tipo_valor='+ tipoValor+ '&sigla='+ sigla+ parametroTipoGrafico);
+        // Dotação ou Planejado
+        if(tipoValor.substr(0, 3) === "Dot" || tipoValor.substr(0, 3) === "Pla"){
+            $('#detalhe-grafico .modal-body').load(urlBase+ '&tipo_valor='+ tipoValor.substr(0, 3)+ '&sigla='+ sigla+ parametroTipoGrafico);
             $('#detalhe-grafico').modal();
         }
     }
