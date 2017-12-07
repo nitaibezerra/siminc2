@@ -1,5 +1,7 @@
 <?php
 
+include_once '../planacomorc/_funcoespi.php';
+
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
 
 $cBeneficiario = new Emendas_Controller_Beneficiario();
@@ -25,6 +27,26 @@ switch ($_REQUEST['req']) {
         $cBeneficiarioHistorico = new Emendas_Controller_BeneficiarioHistorico();
         echo $cBeneficiarioHistorico->excluir($_REQUEST['behid']);
         die;
+    case 'formulario-detalhe':
+        $cBeneficiario->montarFormularioDetalhe($_REQUEST['benid'], $_REQUEST['bedid']);
+        die;
+    case 'listar-detalhe':
+        $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid);
+        die;
+    case 'salvar-detalhe':
+        $cBeneficiarioDetalhe = new Emendas_Controller_BeneficiarioDetalhe();
+        $cBeneficiarioDetalhe->salvar($_POST);
+        die;
+    case 'excluir-detalhe':
+        $cBeneficiarioDetalhe = new Emendas_Controller_BeneficiarioDetalhe();
+        echo $cBeneficiarioDetalhe->excluir($_REQUEST['bedid']);
+        die;
+    case 'carregarSegmento':
+        echo $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$_REQUEST['mdeid']]));
+        die;
+    case 'verificarPactuacaoConvenio':
+        echo verificarPactuacaoConvenio($_REQUEST['capid']);
+        die();
 }
 
 
@@ -50,7 +72,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Dados Gerais</h5>
@@ -70,12 +92,57 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required']);
                         echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                         echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
-
+                        echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
                         ?>
 
+                        <div class="col-md-6 dados-siconv">
+                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
+                            <?php
+                            echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
+                            echo $simec->input('benprogramatitulo', 'Título', $mBeneficiario->benprogramatitulo, ['maxlength' => 1000]);
+                            echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
+                            ?>
+                        </div>
+                        <div class="col-md-6 dados-siconv">
+                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
+                            <?php
+                            echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero, ['class'=>'inteiro']);
+                            echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
+                            echo $simec->textarea('benpropostaobjeto', 'Objeto', $mBeneficiario->benpropostaobjeto);
+                            ?>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Informações Complementares</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
+                        echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                        ?>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
+                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
+                        </div>
+                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
+                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
+                        </div>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
+                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
+                        </div>
+                        
+                        <?php
+                        echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                        ?>
                         <div class="form-group ">
                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
-                            <div class="col-md-1 ">
+                            <div class="col-md-2 ">
                                 <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
                             </div>
                             <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
@@ -99,74 +166,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                         </div>
 
-                        <?php 
-                        echo $simec->radio('benformaexecucao', 'Forma de Execução', $mBeneficiario->benformaexecucao, ['S'=>'SICONV', 'D'=>'Direta', 'T'=>'TED'], ['required']);
-                        ?>
-
-                        <div class="col-md-6 dados-siconv">
-                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
-                            <?php
-                            echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
-                            echo $simec->input('benprogramatitulo', 'Título', $mBeneficiario->benprogramatitulo, ['maxlength' => 1000]);
-                            echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
-                            ?>
-                        </div>
-                        <div class="col-md-6 dados-siconv">
-                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
-                            <?php
-                            echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero, ['class'=>'inteiro']);
-                            echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
-                            echo $simec->textarea('benpropostaobjeto', 'Objeto', $mBeneficiario->benpropostaobjeto);
-                            ?>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Localização do Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
-                    </div>
-                    <div class="ibox-content">
-                        <?php
-                        $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
-                        echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
-                        ?>
-                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
-                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
-                        </div>
-                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
-                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
-                        </div>
-                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
-                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
+                        <div class="div_motivo">
+                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justivicativa', $mBeneficiario->benmotivoimpedimento); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-
-        <div class="col-md-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Histórico</h5>
-                </div>
-                <div class="ibox-content" id="">
-                    <div id="div_formulario_historico">
-                        <?php if($mBeneficiario->benid){
-                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
-                        } ?>
-                    </div>
-                    <div id="div_listagem_historico">
-                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
 
         <div class="col-md-12">
             <div class="form-group">
@@ -180,15 +186,39 @@ include APPRAIZ . "includes/cabecalho.inc";
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Histórico/Observações</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="div_formulario_historico">
+                        <?php if($mBeneficiario->benid){
+                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
+                        } ?>
+                    </div>
+                    <div id="div_listagem_historico">
+                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
             <div class="ibox float-e-margins">
             	<div class="ibox-title">
             		<h5>Dados Financeiros</h5>
             	</div>
-            	<div class="ibox-content">
-            
-            		
-            	</div>
+                <div class="ibox-content">
+                    <div id="div_formulario_detalhe">
+                        <?php if($mBeneficiario->benid){
+                            $cBeneficiario->montarFormularioDetalhe($mBeneficiario->benid);
+                        } ?>
+                    </div>
+                    <div id="div_listagem_detalhe">
+                        <?php $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid); ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -196,10 +226,6 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <script>
     $(function(){
-        verificarDadosSiconv();
-        $('[id^="benformaexecucao"]').change(function(){
-            verificarDadosSiconv();
-        });
 
         toggleMotivo();
         $('#benimpedimento').change(function(){
@@ -217,13 +243,25 @@ include APPRAIZ . "includes/cabecalho.inc";
 
         $('#bennumeroprocesso').mask('99999.999999/9999-99');
 
-        function verificarDadosSiconv(){
-            if($('[id^="benformaexecucao"]:checked').val() == 'S'){
-                $('.dados-siconv').show('slow');
-            } else {
-                $('.dados-siconv').hide('slow');
-            }
-        }
+        $('#mdeid').change(function(){
+            $('#span-segmento').load('?modulo=principal/beneficiario_form&acao=A&req=carregarSegmento&mdeid=' + $(this).val());
+        });
+
+        $('#capid').change(function(){
+
+            $.ajax({
+                url: 'emendas.php?modulo=principal/beneficiario_form&acao=A&req=verificarPactuacaoConvenio&capid='+$('#capid').val(),
+                success: function($retorno){
+                    if($retorno){
+                        $('.dados-siconv').show('slow');
+                    } else {
+                        $('.dados-siconv').hide('slow');
+                    }
+                }
+            });
+
+        }).change();
+
         function toggleMotivo(){
             if($('#benimpedimento').is(':checked')){
                 $('.div_motivo').show('slow');

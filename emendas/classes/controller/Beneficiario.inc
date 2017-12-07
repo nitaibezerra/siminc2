@@ -65,4 +65,19 @@ class Emendas_Controller_Beneficiario
         $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarTodos('*', ['benid = ' . (int)$benid, " behstatus = 'A' "], 'behdata desc');
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
     }
+
+    public function montarFormularioDetalhe($benid = null, $bedid = null)
+    {
+        global $simec;
+        $mBeneficiarioDetalhe = new Emendas_Model_BeneficiarioDetalhe($bedid);
+        if(!$mBeneficiarioDetalhe->benid){ $mBeneficiarioDetalhe->benid = $benid; }
+        $mBeneficiario = new Emendas_Model_Beneficiario($mBeneficiarioDetalhe->benid);
+        include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe_form.inc';
+    }
+
+    public function montarListagemDetalhe($benid)
+    {
+        $aBeneficiarioDetalhe = (new Emendas_Model_BeneficiarioDetalhe)->recuperarTodos('*', ['benid = ' . (int)$benid, " bedstatus = 'A' "]);
+        include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe.inc';
+    }
 }
