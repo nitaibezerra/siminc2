@@ -75,11 +75,14 @@ class Emendas_Model_Beneficiario extends Modelo
         'benempenhado' => null,
         'benconveniado' => null,
         'benpago' => null,
-        'benobservacao' => null,
+        'benmotivoimpedimento' => null,
         'sicid' => null,
         'impid' => null,
+        'mdeid' => null,
+        'neeid' => null,
+        'capid' => null,
+        'bented' => null,
     );
-
 
     public function recuperarTodos($stCampos = '*', $arClausulas = null, $stOrdem = null, array $opcoes = array()) {
 

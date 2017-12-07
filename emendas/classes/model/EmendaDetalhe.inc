@@ -65,5 +65,40 @@ class Emendas_Model_EmendaDetalhe extends Modelo
         'emdvalor' => null,
     );
 
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
+        $pk = $this->arChavePrimaria[0];
+
+        foreach (array_keys($this->arAtributos) as $atributo) {
+            if (substr($atributo, -6) == 'status') {
+                $where[] = "{$atributo} = 'A'";
+            } elseif (substr($atributo, -3) == 'ano') {
+                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
+            }
+            if ($descricao) {
+                $descricao = implode(" || ' - ' || ", (array)$descricao);
+            } else {
+                $descricao = '*, gndcod';
+                $order = 'gndcod';
+            }
+        }
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? " where  " . implode(' and ', $where) : '';
+
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+                from {$this->stNomeTabela}
+                $where
+                order by $order   
+        ";
+
+        $dados = $this->carregar($sql);
+
+        $dados = $dados ? $dados : [];
+        foreach ($dados as $linha) {
+            $array[$linha['codigo']] = 'GND: ' . $linha['gndcod'] . ' / Valor: ' . number_format($linha['emdvalor'], 2, ',', '.');
+        }
+
+        return $array;
+    }
+
 }//end Class
 ?>
