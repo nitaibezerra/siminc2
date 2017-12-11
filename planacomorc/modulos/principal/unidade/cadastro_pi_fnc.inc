@@ -688,8 +688,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         ORDER BY
                                             descricao
                                     ";
-
-                                    $eqdid = $dadosPI['eqdid'];
+                                    $pprid = $dadosPI['pprid'];
                                     $db->monta_combo('pprid', $sql, 'S', 'Selecione', '', null, null, null, 'N', 'pprid', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($pprid)? $pprid: null));
                                 ?>
                             </div>
