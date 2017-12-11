@@ -1,6 +1,11 @@
 <?php
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+header( 'Content-Type: application/vnd.ms-excel' );
+header( 'Expires: 0' );
+header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
+
 $fundo = !empty($_REQUEST['fundo']) ? $_REQUEST['fundo'] : null;
 
 $cabecalho = [
@@ -33,6 +38,64 @@ $cabecalho = [
     'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
 ];
 
+# Lista de colunas que terão formatação de moeda.
+$listaColunaMoeda = array(
+    'valortotal',
+    'picvalorcusteio',
+    'picvalorcapital',
+    'fin_capital_1',
+    'fin_capital_2',
+    'fin_capital_3',
+    'fin_capital_4',
+    'fin_capital_5',
+    'fin_capital_6',
+    'fin_capital_7',
+    'fin_capital_8',
+    'fin_capital_9',
+    'fin_capital_10',
+    'fin_capital_11',
+    'fin_capital_12',
+    'fin_custeio_1',
+    'fin_custeio_2',
+    'fin_custeio_3',
+    'fin_custeio_4',
+    'fin_custeio_5',
+    'fin_custeio_6',
+    'fin_custeio_7',
+    'fin_custeio_8',
+    'fin_custeio_9',
+    'fin_custeio_10',
+    'fin_custeio_11',
+    'fin_custeio_12',
+    'orc_capital_1',
+    'orc_capital_2',
+    'orc_capital_3',
+    'orc_capital_4',
+    'orc_capital_5',
+    'orc_capital_6',
+    'orc_capital_7',
+    'orc_capital_8',
+    'orc_capital_9',
+    'orc_capital_10',
+    'orc_capital_11',
+    'orc_capital_12',
+    'orc_custeio_1',
+    'orc_custeio_2',
+    'orc_custeio_3',
+    'orc_custeio_4',
+    'orc_custeio_5',
+    'orc_custeio_6',
+    'orc_custeio_7',
+    'orc_custeio_8',
+    'orc_custeio_9',
+    'orc_custeio_10',
+    'orc_custeio_11',
+    'orc_custeio_12',
+    'vlrempenhado',
+    'vlrliquidado',
+    'vlrpago'
+);
+
 $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio'], $fundo);
 
 ?>
@@ -48,16 +111,13 @@ $dados = (new Pi_PlanoInterno())->getDadosGerais($_SESSION['exercicio'], $fundo)
     <tbody>
         <?php foreach($dados as $dado){ ?>
             <tr>
-                <?php foreach($dado as $valor){ ?>
-                    <td style="border: 1px #e5d9c5 solid;"><?php echo $valor; ?></td>
+                <?php foreach($dado as $coluna => $valor){ ?>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo in_array($coluna, $listaColunaMoeda)? formata_valor($valor): $valor; ?></td>
                 <?php } ?>
             </tr>
         <?php } ?>
     </tbody>
-<?php
+</table>
 
-header( 'Content-Type: application/vnd.ms-excel' );
-header( 'Expires: 0' );
-header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
+<?php
 die;
