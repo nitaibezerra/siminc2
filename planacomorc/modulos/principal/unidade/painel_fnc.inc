@@ -68,10 +68,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Apresentado</th>
                                 <th>Selecionado</th>
                                 <th>Aprovado</th>
-                                <th>Liberado</th>
+                                <th>Provisionado</th>
                                 <th>Empenhado</th>
-                                <th>Pago</th>
                                 <th>Liquidado</th>
+                                <th>Pago</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -94,7 +94,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <?php
                                     // VALOR APRESENTADO
                                     $valor = $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_EM_ANALISE] +
+                                             $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_BANCO_PROJETOS] +
                                              $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_DELIBERACAO_CFNC] +
+                                             $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_AGUARDANDO_CORRECAO] +
                                              $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_SELECIONADO_CFNC] +
                                              $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_APROVADO];
                                     $total['APRESENTADO'] += $valor;
@@ -104,7 +106,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <?php
                                     // VALOR SELECIONADO
-                                    $valor = !empty($aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_SELECIONADO_CFNC]) ? $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_SELECIONADO_CFNC] : '0';
+                                    $valor = $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_SELECIONADO_CFNC] +
+                                             $aValoresUnidadeEstado[$dados['suoid']][ESD_FNC_PI_APROVADO];
+
                                     $total[ESD_FNC_PI_SELECIONADO_CFNC] += $valor;
                                     ?>
                                     <td>
@@ -129,17 +133,17 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <td>
                                         <?php
-                                        // VALOR PAGO
-                                        $valor = !empty($aValoresUnidadeExecucao[$dados['suoid']]['vlrpago']) ? $aValoresUnidadeEstado[$dados['suoid']]['vlrpago'] : '0';
-                                        $total['vlrpago'] += $valor;
+                                        // VALOR LIQUIDADO
+                                        $valor = !empty($aValoresUnidadeExecucao[$dados['suoid']]['vlrliquidado']) ? $aValoresUnidadeEstado[$dados['suoid']]['vlrliquidado'] : '0';
+                                        $total['vlrliquidado'] += $valor;
                                         echo $valor ? number_format($valor, 2, ',', '.') : '-';
                                         ?>
                                     </td>
                                     <td>
                                         <?php
-                                        // VALOR LIQUIDADO
-                                        $valor = !empty($aValoresUnidadeExecucao[$dados['suoid']]['vlrliquidado']) ? $aValoresUnidadeEstado[$dados['suoid']]['vlrliquidado'] : '0';
-                                        $total['vlrliquidado'] += $valor;
+                                        // VALOR PAGO
+                                        $valor = !empty($aValoresUnidadeExecucao[$dados['suoid']]['vlrpago']) ? $aValoresUnidadeEstado[$dados['suoid']]['vlrpago'] : '0';
+                                        $total['vlrpago'] += $valor;
                                         echo $valor ? number_format($valor, 2, ',', '.') : '-';
                                         ?>
                                     </td>
@@ -154,8 +158,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th><?php echo number_format(($total[ESD_FNC_PI_APROVADO]), 2, ',', '.'); ?></th>
                                     <th> - </th>
                                     <th><?php echo number_format(($total['vlrempenhado']), 2, ',', '.'); ?></th>
-                                    <th><?php echo number_format(($total['vlrpago']), 2, ',', '.'); ?></th>
                                     <th><?php echo number_format(($total['vlrliquidado']), 2, ',', '.'); ?></th>
+                                    <th><?php echo number_format(($total['vlrpago']), 2, ',', '.'); ?></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -180,11 +184,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Apresentado</th>
                                 <th>Selecionado</th>
                                 <th>Aprovado</th>
-                                <th>Liberado</th>
+                                <th>Provisionado</th>
                                 <th>Limite</th>
                                 <th>Empenhado</th>
-                                <th>Pago</th>
                                 <th>Liquidado</th>
+                                <th>Pago</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -208,7 +212,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <?php
                                     // VALOR APRESENTADO
                                     $valor = $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_EM_ANALISE][$dados['tipo']] +
+                                             $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_BANCO_PROJETOS][$dados['tipo']] +
                                              $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_DELIBERACAO_CFNC][$dados['tipo']] +
+                                             $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_AGUARDANDO_CORRECAO][$dados['tipo']] +
                                              $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_SELECIONADO_CFNC][$dados['tipo']] +
                                              $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_APROVADO][$dados['tipo']];
                                     $total['APRESENTADO'][$dados['tipo']] += $valor;
@@ -219,7 +225,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <?php
                                     // VALOR SELECIONADO
-                                    $valor = !empty($aValoresEstado[$dados['ptrid']][ESD_FNC_PI_SELECIONADO_CFNC][$dados['tipo']]) ? $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_SELECIONADO_CFNC][$dados['tipo']] : '0';
+                                    $valor = $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_SELECIONADO_CFNC][$dados['tipo']] +
+                                             $aValoresEstado[$dados['ptrid']][ESD_FNC_PI_APROVADO][$dados['tipo']];
+
                                     $total[ESD_FNC_PI_SELECIONADO_CFNC][$dados['tipo']] += $valor;
                                     $disponivel = $dados['dotacao'] - $valor;
                                     ?>
@@ -248,17 +256,17 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <td>
                                         <?php
-                                        // VALOR PAGO
-                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrpago']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrpago'] : '0';
-                                        $total['vlrpago'][$dados['tipo']] += $valor;
+                                        // VALOR LIQUIDADO
+                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrliquidado']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrliquidado'] : '0';
+                                        $total['vlrliquidado'][$dados['tipo']] += $valor;
                                         echo $valor ? number_format($valor, 2, ',', '.') : '-';
                                         ?>
                                     </td>
                                     <td>
                                         <?php
-                                        // VALOR LIQUIDADO
-                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrliquidado']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrliquidado'] : '0';
-                                        $total['vlrliquidado'][$dados['tipo']] += $valor;
+                                        // VALOR PAGO
+                                        $valor = !empty($aValoresExecucao[$dados['ptrid']][$dados['tipo']]['vlrpago']) ? $aValoresEstado[$dados['ptrid']][$dados['tipo']]['vlrpago'] : '0';
+                                        $total['vlrpago'][$dados['tipo']] += $valor;
                                         echo $valor ? number_format($valor, 2, ',', '.') : '-';
                                         ?>
                                     </td>
@@ -275,8 +283,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td> - </td>
                                     <td> - </td>
                                     <td><?php echo number_format($total['vlrempenhado']['CUSTEIO'], 2, ',', '.'); ?></td>
-                                    <td><?php echo number_format($total['vlrpago']['CUSTEIO'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($total['vlrliquidado']['CUSTEIO'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrpago']['CUSTEIO'], 2, ',', '.'); ?></td>
                                 </tr>
                                 <tr class="text-right">
                                     <td style="text-align: left">TOTAL CAPITAL</td>
@@ -287,8 +295,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td> - </td>
                                     <td> - </td>
                                     <td><?php echo number_format($total['vlrempenhado']['CAPITAL'], 2, ',', '.'); ?></td>
-                                    <td><?php echo number_format($total['vlrpago']['CAPITAL'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($total['vlrliquidado']['CAPITAL'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($total['vlrpago']['CAPITAL'], 2, ',', '.'); ?></td>
                                 </tr>
                                 <tr class="text-right">
                                     <th style="text-align: left">TOTAL</th>
@@ -299,8 +307,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th> - </th>
                                     <th> - </th>
                                     <th><?php echo number_format(array_sum($total['vlrempenhado']), 2, ',', '.'); ?></th>
-                                    <th><?php echo number_format(array_sum($total['vlrpago']), 2, ',', '.'); ?></th>
                                     <th><?php echo number_format(array_sum($total['vlrliquidado']), 2, ',', '.'); ?></th>
+                                    <th><?php echo number_format(array_sum($total['vlrpago']), 2, ',', '.'); ?></th>
                                 </tr>
                             </tfoot>
                         </table>
