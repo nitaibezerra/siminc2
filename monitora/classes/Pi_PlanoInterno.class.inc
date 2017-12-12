@@ -372,13 +372,15 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarDadosFncPorUnidade($exercicio)
     {
 
-        $sql = "SELECT  DISTINCT suo.unoid, suo.unocod, suo.unosigla, suo.unonome, suo.suoid, suo.suonome, suo.suosigla
+        $sql = "SELECT  DISTINCT suo.unoid, suo.unocod, suo.suocod, suo.unosigla, suo.unonome, suo.suoid, suo.suonome, suo.suosigla,
+                    case when suo.suocod in ('344042', '344001', '344041', '403201', '423001', '403101') then 1 else 2 end ordem
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
                 where suo.suostatus = 'A'
                 and suo.unofundo = 't' 
-                and suo.prsano = '$exercicio'                
-                order by suo.suonome";
+                and suo.prsano = '$exercicio'
+                and suo.suocod not in ('203003', '420017')
+                order by ordem, suo.suonome";
 
         $dadosUnidade = $this->carregar($sql);
         $dados['unidade'] = $dadosUnidade ? $dadosUnidade : [];
@@ -400,7 +402,7 @@ class Pi_PlanoInterno extends Modelo
                 and pli.pliano = '$exercicio'
                 and suo.unofundo = 't'
                 ";
-
+ver($sql, d);
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
 
