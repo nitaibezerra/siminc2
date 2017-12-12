@@ -71,49 +71,49 @@
             } else {
                 $('#valor_projeto').removeClass('validateRedText');
             }
-            
-            // Valida se o valor do projeto pra Custeio não foi superior ao valor disponivel de Custeio da funcional.
-            // implements here...
-            // Valida se o valor do projeto pra Custeio não foi superior ao valor disponivel de Custeio da funcional.
-            // implements here...
         }
-
-        /*
-         *
-         * @todo Refatorar esse código de validação da parte Custeio e Capital dividindo em funções.
-         */
-        var disponivelUnidade = textToFloat($('#td_disponivel_sub_unidade').text());
-        var disponivelFuncionalCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
-        var disponivelFuncionalCapital = textToFloat($('#td_disponivel_funcional_capital').text());
-        
         
         // Se o usuário estiver abaixando o valor em relação ao valor salvo na base de dados o sistema não valida se o valor ultrapassou o limite permitindo ajuste entre os PIs.
         if(!(buscarValorBaseDoProjeto() > buscarValorDoProjeto())){
             // Verifica se o valor do projeto é superior ao limite disponível da Subunidade
-            if(disponivelUnidade < 0){
-                $('#picvalorcusteio').addClass('validateRedText');
-                $('#picvalorcapital').addClass('validateRedText');
-                if(disponivelUnidade < 0){
-                    if(fnc === true){
-                        addMsgCustom.push('Valor do projeto superior ao limite disponível do FNC');
-                    } else {
+            if(buscarValorDisponivelSubUnidade() < 0){
+                if(buscarValorDisponivelSubUnidade() < 0){
+                    if(false === fnc){
+                        $('#picvalorcusteio').addClass('validateRedText');
+                        $('#picvalorcapital').addClass('validateRedText');
                         addMsgCustom.push('Valor do projeto superior ao limite disponível da Unidade');
                     }
                 }
-            } else if(disponivelFuncionalCusteio < 0 || disponivelFuncionalCapital < 0) {
-                if(disponivelFuncionalCusteio < 0){
+            } else if(buscarValorDisponivelFuncionalCusteio() < 0 || buscarValorDisponivelFuncionalCapital() < 0) {
+                if(buscarValorDisponivelFuncionalCusteio() < 0){
                     $('#picvalorcusteio').addClass('validateRedText');
                     addMsgCustom.push('Valor de Custeio do projeto superior ao limite disponível da Funcional');
                 }
 
-                if(disponivelFuncionalCapital < 0){
+                if(buscarValorDisponivelFuncionalCapital() < 0){
                     $('#picvalorcapital').addClass('validateRedText');
                     addMsgCustom.push('Valor de Capital do projeto superior ao limite disponível da Funcional');
+                }
+            } else if(true === fnc){
+                // Regra FnC - Quando o valor do projeto for maior que o valor Autorizado na Funcional FNC o sistema não permite gravar os dados.
+                if(validarValorProjetoMenorAutorizadoFuncionalCusteio()){
+                    $('#picvalorcusteio').removeClass('validateRedText');
+                } else {
+                    $('#picvalorcusteio').addClass('validateRedText');
+                    addMsgCustom.push('Valor de Custeio do projeto superior ao autorizado na Funcional');
+                }
+                
+                if(validarValorProjetoMenorAutorizadoFuncionalCapital()){
+                    $('#picvalorcapital').removeClass('validateRedText');
+                } else {
+                    $('#picvalorcapital').addClass('validateRedText');
+                    addMsgCustom.push('Valor de Capital do projeto superior ao limite autorizado na Funcional');
                 }
             } else {
                 $('#picvalorcusteio').removeClass('validateRedText');
                 $('#picvalorcapital').removeClass('validateRedText');
             }
+            
         }
 
         // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.

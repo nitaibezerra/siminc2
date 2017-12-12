@@ -227,9 +227,9 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script language="JavaScript" src="../includes/funcoesspo.js"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi_funcoes.js"></script>
-<script src="js/cadastro_pi_validacoes.js"></script>
-<script src="js/cadastro_pi_init.js"></script>
+<script src="js/cadastro_pi_funcoes.js?v=1"></script>
+<script src="js/cadastro_pi_validacoes.js?v=1"></script>
+<script src="js/cadastro_pi_init.js?v=1"></script>
 <style>
     autorizadocapital {
         display: none;
@@ -536,7 +536,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 'pliid' => $dadosPI['pliid'],
                                                 'importar' => ($_REQUEST['replicarProposta']? TRUE: FALSE)
                                             ));
-    //ver($dadosPTRES);
+// ver($dadosPTRES);
                                             if($dadosPTRES) {
                                                 $valortotalpi = 0;
                                                 $cor = 1;

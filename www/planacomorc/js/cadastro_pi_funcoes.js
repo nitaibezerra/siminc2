@@ -708,6 +708,88 @@
 
         return valorDoProjeto;
     }
+    
+    /**
+     * Busca o valor de Custeio do projeto.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorDoProjetoCusteio(){
+        var valor = textToFloat($('#picvalorcusteio').val());
+        return valor;
+    }
+    
+    /**
+     * Busca o valor de capital do projeto.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorDoProjetoCapital(){
+        var valor = textToFloat($('#picvalorcapital').val());
+        return valor;
+    }
+    
+    /**
+     * Busca o valor disponivel na Sub-Unidade.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorDisponivelSubUnidade(){
+        var valor = textToFloat($('#td_disponivel_sub_unidade').text());
+        return valor;
+    }
+    
+    /**
+     * Busca o valor disponivel na funcional para custeio.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorDisponivelFuncionalCusteio(){
+        var valor = textToFloat($('#td_disponivel_funcional_custeio').text());
+        return valor;
+    }
+    
+    /**
+     * Busca o valor disponivel na funcional para Capital.
+     *
+     * @returns float Valor do projeto
+     */
+    function buscarValorDisponivelFuncionalCapital(){
+        var valor = textToFloat($('#td_disponivel_funcional_capital').text());
+        return valor;
+    }
+    
+    /**
+     * Valida se o valor do Projeto declarado pelo usuário é maior do que o valor
+     * autorizado da funcional para Custeio.
+     * 
+     * @returns boolean
+     */
+    function validarValorProjetoMenorAutorizadoFuncionalCusteio(){
+        if(buscarValorDoProjetoCusteio() <= buscarValorAutorizadoFuncionalCusteio()){
+            resultado = true;
+        } else {
+            resultado = false;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Valida se o valor do Projeto declarado pelo usuário é maior do que o valor
+     * autorizado da funcional para Capital.
+     * 
+     * @returns boolean
+     */
+    function validarValorProjetoMenorAutorizadoFuncionalCapital(){
+        if(buscarValorDoProjetoCapital() <= buscarValorAutorizadoFuncionalCapital()){
+            resultado = true;
+        } else {
+            resultado = false;
+        }
+        
+        return resultado;
+    }
 
     /**
      * Soma o valor de capital e custeio e retorna o valor base total do projeto.
@@ -746,6 +828,28 @@
         var autorizadoFuncional = valorCusteio + valorCapital;
 
         return autorizadoFuncional;
+    }
+
+    /**
+     * Busca o valor de custeio autorizado na funcional no formato de numero 
+     * flutuante sem mascara.
+     * 
+     * @returns {Number}
+     */
+    function buscarValorAutorizadoFuncionalCusteio(){
+        var valor = textToFloat($('#td_autorizado_funcional_custeio').text());
+        return valor;
+    }
+    
+    /**
+     * Busca o valor de custeio autorizado na funcional no formato de numero 
+     * flutuante sem mascara.
+     * 
+     * @returns {Number}
+     */
+    function buscarValorAutorizadoFuncionalCapital(){
+        var valor = textToFloat($('#td_autorizado_funcional_capital').text());
+        return valor;
     }
 
     /**
