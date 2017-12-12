@@ -402,7 +402,7 @@ class Pi_PlanoInterno extends Modelo
                 and pli.pliano = '$exercicio'
                 and suo.unofundo = 't'
                 ";
-ver($sql, d);
+
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
 
