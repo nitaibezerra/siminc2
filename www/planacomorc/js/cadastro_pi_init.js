@@ -431,6 +431,9 @@
         
         formatarTelaProdutoNaoAplica($('#pprid').val());
         
+        // Caso o formulário seja de edição e exista objetivo cadastrado o sistema impede que o usuário mude o objetivo.
+        initTravarObjetivo();
+        
         // Efetua calculos financeiros de limites para o caso de pi por replica de proposta.
         if(ppiid > 0){
             atualizarValorDoProjeto();

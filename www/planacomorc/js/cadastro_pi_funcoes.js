@@ -1478,3 +1478,18 @@
         }
     }
 
+    /**
+     * Caso o formulário seja de edição e exista objetivo cadastrado o sistema 
+     * impede que o usuário mude o objetivo.
+     * 
+     * @returns VOID
+     */
+    function initTravarObjetivo(){
+        // Verifica se o formulário é de edição de PI.
+        if($('#pliid').val() !== ""){
+            // Verifica se existe objetivo salvo.
+            if($('#oppid').val() !== ""){
+                $('#oppid').prop('disabled', true).trigger("chosen:updated");
+            }
+        }
+    }
