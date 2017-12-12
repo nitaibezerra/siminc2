@@ -1501,6 +1501,7 @@ function buscarPTRES(stdClass $filtros) {
             LEFT JOIN (
                 SELECT
                     pip.ptrid,
+                    pli.ungcod,
                     SUM(COALESCE(picvalorcusteio, 0.00) + COALESCE(picvalorcapital, 0.00)) AS valor,
                     SUM(COALESCE(picvalorcusteio, 0.00)) AS custeio,
                     SUM(COALESCE(picvalorcapital, 0.00)) AS capital
@@ -1510,7 +1511,9 @@ function buscarPTRES(stdClass $filtros) {
                 WHERE
                     plistatus = 'A'
                 GROUP BY
-                    ptrid) dtp ON dtp.ptrid = ptr.ptrid
+                    ptrid,
+                    pli.ungcod
+            ) dtp ON(dtp.ptrid = ptr.ptrid AND uni.suocod = dtp.ungcod)
             LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
             aca.acasnrap = FALSE
@@ -1593,6 +1596,7 @@ function buscarPtresFnc(stdClass $filtros) {
             LEFT JOIN (
                 SELECT
                     pip.ptrid,
+                    pli.ungcod,
                     SUM(COALESCE(picvalorcusteio, 0.00) + COALESCE(picvalorcapital, 0.00)) AS valor,
                     SUM(COALESCE(picvalorcusteio, 0.00)) AS custeio,
                     SUM(COALESCE(picvalorcapital, 0.00)) AS capital
@@ -1606,8 +1610,9 @@ function buscarPtresFnc(stdClass $filtros) {
                     AND pli.pliano = '{$filtros->exercicio}'
                     AND ed.esdid = ". ESD_FNC_PI_APROVADO. "
                 GROUP BY
-                    ptrid
-            ) dtp ON dtp.ptrid = ptr.ptrid
+                    ptrid,
+                    pli.ungcod
+            ) dtp ON(dtp.ptrid = ptr.ptrid AND uni.suocod = dtp.ungcod)
             LEFT JOIN (
                 SELECT
                     pip2.ptrid,
