@@ -289,6 +289,7 @@ class Pi_PlanoInterno extends Modelo
                     left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
                 where suo.suostatus = 'A'
                 and suo.unofundo = 't' 
+                and suo.suocod not in ('203003', '420017')
                 and suo.prsano = '$exercicio'                
                 union 
                 SELECT  distinct 'CAPITAL' tipo, suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc,
@@ -303,6 +304,7 @@ class Pi_PlanoInterno extends Modelo
                     left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
                 where suo.suostatus = 'A'
                 and suo.unofundo = 't' 
+                and suo.suocod not in ('203003', '420017')
                 and suo.prsano = '$exercicio'                
                 ORDER BY funcional, tipo desc";
 
@@ -321,6 +323,7 @@ class Pi_PlanoInterno extends Modelo
                         inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
                 where pli.plistatus = 'A'        
                 and pli.pliano = '$exercicio'
+                and suo.suocod not in ('203003', '420017')
                 and suo.unofundo = 't'
                 ";
 
@@ -353,6 +356,7 @@ class Pi_PlanoInterno extends Modelo
                         inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                 where suo.prsano = '$exercicio'
+                and suo.suocod not in ('203003', '420017')
                 AND suo.unofundo = 't'
                 group by ptr.ptrid, nat     
                 ";
@@ -392,7 +396,7 @@ class Pi_PlanoInterno extends Modelo
 
     public function recuperarValoresPorUnidadeEstado($exercicio)
     {
-        $sql = "select pli.pliid, suo.suoid, (pic.picvalorcapital + pic.picvalorcusteio) valor, doc.esdid
+        $sql = "select pli.pliid, suo.suoid, (coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0)) valor, doc.esdid
                 from monitora.pi_planointerno pli
                         inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
@@ -400,6 +404,7 @@ class Pi_PlanoInterno extends Modelo
                         inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
                 where pli.plistatus = 'A'        
                 and pli.pliano = '$exercicio'
+                and suo.suocod not in ('203003', '420017')
                 and suo.unofundo = 't'
                 ";
 
@@ -407,6 +412,7 @@ class Pi_PlanoInterno extends Modelo
         $dados = $dados ? $dados : [];
 
         $aValores = [];
+        
         foreach($dados as $dado){
             $aValores[$dado['suoid']][$dado['esdid']] += $dado['valor'];
         }
@@ -426,6 +432,7 @@ class Pi_PlanoInterno extends Modelo
                         inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
                 where suo.prsano = '$exercicio'
+                and suo.suocod not in ('203003', '420017')
                 AND suo.unofundo = 't'
                 group by suo.suoid
                 ";
@@ -457,6 +464,7 @@ class Pi_PlanoInterno extends Modelo
                     left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
                 where suo.suostatus = 'A'
                 and suo.unofundo = 't' 
+                and suo.suocod not in ('203003', '420017')
                 and suo.prsano = '{$_SESSION['exercicio']}'                
                 ORDER BY suo.unonome";
 
