@@ -1478,7 +1478,7 @@ function buscarPTRES(stdClass $filtros) {
         SELECT
             ptr.ptrid,
             ptr.ptres,
-            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(aca.acaobjetivocod) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
+            TRIM(aca.prgcod) || '.' || TRIM(aca.acacod) || '.' || TRIM(aca.loccod) || '.' || (CASE WHEN LENGTH(TRIM(aca.acaobjetivocod)) <= 0 THEN '-' ELSE TRIM(coalesce(aca.acaobjetivocod, '')) END) || '.' || TRIM(ptr.plocod) || ' - ' || aca.acatitulo || CASE WHEN LENGTH(TRIM(ptr.plodsc)) >= 0 THEN ': ' || ptr.plodsc ELSE '' END || ' (RP ' || COALESCE(ptr.irpcod, '') || ')' AS descricao,
             aca.unicod || ' - ' || uni.unonome as unidsc,
             (COALESCE(psu.ptrdotacaocusteio, 0.00) + COALESCE(psu.ptrdotacaocapital, 0.00)) AS dotacaoatual,
             COALESCE(psu.ptrdotacaocusteio, 0.00) AS ptrdotacaocusteio,
@@ -1515,9 +1515,7 @@ function buscarPTRES(stdClass $filtros) {
                     pli.ungcod
             ) dtp ON(dtp.ptrid = ptr.ptrid AND uni.suocod = dtp.ungcod)
             LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
-        WHERE
-            aca.acasnrap = FALSE
-            AND aca.prgano = '{$filtros->exercicio}'
+        WHERE  aca.prgano = '{$filtros->exercicio}'
             AND ptr.ptrstatus = 'A'
             $where
         GROUP BY
@@ -1539,6 +1537,8 @@ function buscarPTRES(stdClass $filtros) {
             ptr.ptres
 SQL;
 
+    
+//    ver($sql, d);
     $result = is_array($result) ? $result : Array();
 //ver($sql,d);
     $result = $db->carregar($sql);
