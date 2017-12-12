@@ -21,6 +21,7 @@
             JOIN seguranca.usuario_sistema us ON us.usucpf = u.usucpf
         WHERE
             us.suscod = 'A'
+            and rpu.rpustatus = 'A'
             $where
         ORDER BY
             u.usunome
