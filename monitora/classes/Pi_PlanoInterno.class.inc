@@ -222,13 +222,13 @@ class Pi_PlanoInterno extends Modelo
                 psu.psuid,
                 psu.ptrdotacaocapital ptrdotacao_capital,
                 psu.ptrdotacaocusteio ptrdotacao_custeio,                
-                sum(pic.picvalorcapital) picvalorcapital,
-                sum(pic.picvalorcusteio) picvalorcusteio
+                sum(COALESCE(pic.picvalorcapital, 0)) picvalorcapital,
+                sum(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio
             from public.vw_subunidadeorcamentaria suo
                 inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
                 inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
                 left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                left  join monitora.pi_planointerno pli on pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod
+                left  join monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
                 left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             where 
