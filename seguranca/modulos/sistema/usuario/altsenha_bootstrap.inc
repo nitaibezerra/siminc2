@@ -1,4 +1,5 @@
-<?
+<?php
+
 /*
  * Sistema Simec Setor responsável: SPO-MEC Desenvolvedor: 
  * Equipe Simec 
@@ -26,7 +27,7 @@ if (! $_SESSION ['logincadastro']) {
                 history.back();
             </script>
 
-            <? exit ();
+            <?php exit ();
         }
     }
 }
@@ -165,18 +166,18 @@ if ($_SESSION ['logincadastro']) {
                     <input type=hidden name="modulo" value="<?=$modulo?>"> 
                     <input type=hidden name="act" id="act" value=0>
 
-                    <?if($_SESSION['logincadastro']){?>
+                    <?php if($_SESSION['logincadastro']){?>
                             <input type=hidden name="senhaatual" value="OK">
-                    <?}?>	
+                    <?php }?>	
 
-                    <?if(!$_SESSION['logincadastro']){?>
+                    <?php if(!$_SESSION['logincadastro']){ ?>
                             <div class="form-group" id="divsenhaatual">
                             <label class="control-label col-lg-5" for="senhaatual"> Senha atual:</label>
                             <div class="col-lg-7"> 
                                 <input type='password' class="form-control" name='senhaatual' id='senhaatual' size='20'>
                             </div>		 	        	
                     </div>			
-                    <?}?>  
+                    <?php } ?>  
                             <div class="form-group" id="divnovasenha">
                             <label class="control-label col-lg-5" for="novasenha"> Nova senha:</label>
                             <div class="col-lg-7">
