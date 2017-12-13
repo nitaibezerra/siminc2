@@ -461,9 +461,8 @@ function carregarLimiteAutorizadoSubUnidade(stdClass $parametros) {
         WHERE
             ul.lmustatus = 'A'
             AND ul.prsano = '{$_SESSION['exercicio']}'
-            AND ul.lmuflgliberado IS TRUE
             AND ul.ungcod = '". $parametros->ungcod. "'";
-
+//ver($sql, d);
     $autorizado = $db->pegaUm($sql);
     return $autorizado;
 }
@@ -849,7 +848,6 @@ function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
         WHERE
             ul.lmustatus = 'A'
             AND ul.prsano = '{$_SESSION['exercicio']}'
-            AND ul.lmuflgliberado IS TRUE
             AND ul.ungcod = '". $parametros->ungcod. "'";
     
     $disponivel = $db->pegaUm($sql);
