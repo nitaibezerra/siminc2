@@ -6,6 +6,11 @@
      */
     function initCadastroPi(){
         
+        $('#btnApagar').click(function(){
+            divCarregando();
+            window.location.href = urlPagina+ '&confirmar-apagar=1&pliid='+ $('#pliid').val();
+        });
+        
         var strComentarioEstadoAtual = $('#div_comentario_estado_atual').html();
 
         if(strComentarioEstadoAtual != ""){

@@ -92,7 +92,7 @@
     {
         bootbox.confirm('Tem certeza que deseja apagar o PI?', function(confirmacao){
             if (confirmacao) {
-                window.location.assign('planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&apagar=true&pliid=' + pliid);
+                window.location.assign('planacomorc.php?modulo=principal/unidade/cadastro_pi'+ sufixoUrl+ '&acao=A&apagar=true&pliid=' + pliid);
             }
         });
     }

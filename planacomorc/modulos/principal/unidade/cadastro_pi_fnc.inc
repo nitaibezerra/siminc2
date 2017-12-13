@@ -227,9 +227,9 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script language="JavaScript" src="../includes/funcoesspo.js"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi_funcoes.js?v=2"></script>
-<script src="js/cadastro_pi_validacoes.js?v=2"></script>
-<script src="js/cadastro_pi_init.js?v=2"></script>
+<script src="js/cadastro_pi_funcoes.js?v=3"></script>
+<script src="js/cadastro_pi_validacoes.js?v=3"></script>
+<script src="js/cadastro_pi_init.js?v=3"></script>
 <style>
     autorizadocapital {
         display: none;
@@ -275,10 +275,8 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                 <?php if ($_GET['apagar']): ?>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-9">
-                            <input type="button" class="btn btn-danger" name="btassociar4" id="btassociar4" value="APAGAR"
-                                   onclick="removerpi();" />
+                        <div class="col-lg-12">
+                            <input type="button" class="btn btn-danger" id="btnApagar" value="APAGAR" />
                         </div>
                     </div>
                 <?php endif; ?>

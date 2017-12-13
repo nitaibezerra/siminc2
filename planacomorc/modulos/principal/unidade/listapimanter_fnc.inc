@@ -68,7 +68,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js"></script>
+<script src="js/unidade/lista-pi-manter.js?v=1"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
@@ -136,6 +136,8 @@
         $filtropi['exercicio'] = $_SESSION['exercicio'];
         $filtropi['usucpf'] = $_SESSION['usucpf'];
         $filtropi['unofundo'] = 'TRUE';
+        # Redirecionar apos excluir
+        $_SESSION['filtropi'] = $filtropi;
         $list = new Simec_Listagem();
         $list->setQuery(Spo_Model_Planointerno::listar((object) $filtropi))
             ->turnOnPesquisator()
@@ -177,6 +179,8 @@
 </div>
 
 <script type="text/javascript">
+    sufixoUrl = '_fnc';
+    
     $(document).ready(function(){
         initListaPiManter();
     });

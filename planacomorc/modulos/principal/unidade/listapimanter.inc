@@ -62,7 +62,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js"></script>
+<script src="js/unidade/lista-pi-manter.js?v=1"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
@@ -175,6 +175,7 @@
 </div>
 
 <script type="text/javascript">
+    sufixoUrl = '';
     
     $(document).ready(function(){
         initListaPiManter();
