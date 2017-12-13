@@ -306,12 +306,12 @@ function updateArquivo($nome,$unicod,$codResposta){
 	return;
 }
 
-function formata_data($data)
+function formata_data($data, $formato = "%d/%m/%Y")
 {
 	// retorna a data no formato yyyy-mm-dd
 	//if ($data) return substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,6,4);
 
-	if ($data) return strftime("%d/%m/%Y",strtotime($data));
+	if ($data) return strftime($formato, strtotime($data));
 
 	else return '';
 }

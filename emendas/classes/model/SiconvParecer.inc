@@ -26,6 +26,9 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  */
 class Emendas_Model_SiconvParecer extends Modelo
 {
+    const K_TIPO_PROPOSTA       = 'PR';
+    const K_TIPO_PLANO_TRABALHO = 'PT';
+
     /**
      * Nome da tabela especificada
      * @var string
@@ -58,6 +61,8 @@ class Emendas_Model_SiconvParecer extends Modelo
         'spadsc' => null,
         'spadata' => null,
         'idhash' => null,
+        'spatipo' => null,
+        'sicid' => null,
     );
 
 }//end Class

@@ -1,6 +1,7 @@
 <?php
 
 include_once '../planacomorc/_funcoespi.php';
+require_once APPRAIZ . 'includes/workflow.php';
 
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
 
@@ -49,10 +50,13 @@ switch ($_REQUEST['req']) {
         die();
 }
 
+$aSiconv = $mBeneficiario->recuperarDadosSiconv();
 
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
 
 $mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
+
+$estadoAtual = $mBeneficiario->gerarDocid(WF_TPDID_BENEFICIARIO, 'Beneficiário');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -60,6 +64,10 @@ include APPRAIZ . "includes/cabecalho.inc";
 <style>
     .select-localizacao{
         display: none;
+    }
+
+    .coluna-parecer{
+        cursor: pointer;
     }
 </style>
 
@@ -140,9 +148,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-6 dados-siconv">
                             <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
                             <?php
-                            echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero, ['class'=>'inteiro']);
+                            $sicsequencial = $aSiconv['siconv']['sicsequencial'] ? $aSiconv['siconv']['sicsequencial'] . '/' . $aSiconv['siconv']['prsano'] : null;
+                            echo $simec->input('benpropostanumero', 'Número', $sicsequencial, ['class'=>'inteiro']);
                             echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
-                            echo $simec->textarea('benpropostaobjeto', 'Objeto', $mBeneficiario->benpropostaobjeto);
+                            echo $simec->textarea('benpropostaobjeto', 'Objeto', $aSiconv['siconv']['sicobjeto']);
+                            echo $simec->select('sitid', 'Situação', $aSiconv['siconv']['sitid'], (new Emendas_Model_SiconvSituacao())->recuperarSqlCombo());
                             ?>
                         </div>
                         <div class="clearfix"></div>
@@ -244,11 +254,62 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
             </div>
         </div>
+        
+        <div class="clearfix"></div>
+
+        <?php $aTipoParecer = [
+            Emendas_Model_SiconvParecer::K_TIPO_PROPOSTA => 'Parecer',
+            Emendas_Model_SiconvParecer::K_TIPO_PLANO_TRABALHO => 'Parecer - Plano de Trabalho',
+        ];
+
+        foreach($aTipoParecer as $tipo => $titulo){ ?>
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $titulo; ?></h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <?php if(isset($aSiconv['parecer'][$tipo]) && is_array($aSiconv['parecer'][$tipo])){ ?>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover bedidTables" >
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>Data</th>
+                                        <th>Parecer</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($aSiconv['parecer'][$tipo] as $dados){ ?>
+                                        <tr>
+                                            <td><?php echo formata_data($dados['spadata'], "%d/%m/%Y %H:%M:%S"); ?></td>
+                                            <td class="coluna-parecer" title="<?php echo $dados['spadsc']; ?>"><?php echo substr($dados['spadsc'], 0, 100); ?>...</td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php } else {
+                            echo '<div class="alert alert-danger">Nenhum registro encontrado</div>';
+                        }?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
 <script>
     $(function(){
+
+        $('.coluna-parecer').click(function(){
+            // Inverte título com conteúdo
+            var title = $(this).attr('title');
+            var html = $(this).html();
+
+            $(this).attr('title', html);
+            $(this).html(title);
+        });
 
         toggleMotivo();
         $('#benimpedimento').change(function(){

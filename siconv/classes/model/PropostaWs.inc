@@ -91,6 +91,7 @@ class Siconv_Model_PropostaWs extends Modelo
         'datacarga' => null,
         'valor' => null,
         'emeid' => null,
+        'numeroconvenio' => null,
     );
 
 }//end Class

@@ -657,5 +657,23 @@ class Modelo extends cls_banco {
         
         return $listaFiltros;
     }
+
+    public function gerarDocid($tipoFluxo, $docdsc)
+    {
+        $chavePrimaria = $this->arChavePrimaria[0];
+        $id = $this->{$chavePrimaria};
+
+        if ($id && !$this->docid) {
+            $docdsc = $docdsc . ' - ' . $id;
+            $docid = wf_cadastrarDocumento($tipoFluxo, $docdsc);
+
+            $this->executar("UPDATE {$this->stNomeTabela} SET docid = $docid where {$chavePrimaria} = {$id}");
+            $this->commit();
+
+            $this->docid = $docid;
+        }
+
+        return wf_pegarEstadoAtual($this->docid);
+    }
     
 }

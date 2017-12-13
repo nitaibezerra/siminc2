@@ -15,7 +15,8 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario->benpago = $dados['benpago'] == 't' ? 't' : 'f';
             $mBeneficiario->bented = $dados['bented'] == 't' ? 't' : 'f';
 
-            $mBeneficiario->salvar(null, null, ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid']);
+            $aCamposNulos = ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid', 'mdeid', 'neeid', 'capid', 'bented'];
+            $mBeneficiario->salvar(null, null, $aCamposNulos);
 
             $mBeneficiario->associarDelegacao($dados);
             $mBeneficiario->associarAlteracao($dados);

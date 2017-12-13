@@ -89,6 +89,7 @@ class Emendas_Model_Beneficiario extends Modelo
         'bented' => null,
         'benparecertecnico' => null,
         'benparecerjuridico' => null,
+        'docid' => null,
     );
 
     public function recuperarTiposParecer()
@@ -198,6 +199,31 @@ class Emendas_Model_Beneficiario extends Modelo
         $dados = $this->carregar($sql);
         return simec_preparar_array($dados);
     }
+
+    public function recuperarDadosSiconv()
+    {
+        $sql = "select * 
+                from emendas.siconv sic
+                where sic.sicid = " . (int) $this->sicid;
+
+        $dadosSiconv['siconv'] = $this->pegaLinha($sql);
+
+        $sql = "select * 
+                from emendas.siconvparecer spa
+                where spa.sicid = " . (int) $this->sicid . "
+                order by spadata desc ";
+
+        $aParecer = $this->carregar($sql);
+        $aParecer = $aParecer ? $aParecer : [];
+
+        $dadosSiconv['parecer'] = [];
+        foreach($aParecer as $parecer){
+            $dadosSiconv['parecer'][$parecer['spatipo']][] = $parecer;
+        }
+
+        return $dadosSiconv;
+    }
+
 
 }//end Class
 ?>

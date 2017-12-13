@@ -59,6 +59,10 @@ class Emendas_Model_Siconv extends Modelo
         'sicproposta' => null,
         'sicdata' => null,
         'sitid' => null,
+        'prsano' => null,
+        'sicsequencial' => null,
+        'idhash' => null,
+        'numeroconvenio' => null,
     );
 
 }//end Class
