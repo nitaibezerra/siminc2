@@ -1213,14 +1213,25 @@ DML;
         if($podeEditar){
 
         $sql = <<<DML
-UPDATE monitora.pi_planointerno
-  SET plititulo = '%s',
-      plidsc = '%s',
-      eqdid = '%s',
-     plicadsiafi = {$cadastroSIAF}
-  WHERE pliid = %d
+            UPDATE monitora.pi_planointerno SET
+                plititulo = '%s',
+                plidsc = '%s',
+                mdeid = %s,
+                eqdid = %s,
+                neeid = %s,
+                capid = %s,
+                plicadsiafi = {$cadastroSIAF}
+            WHERE
+                pliid = %d
 DML;
-        $stmt = sprintf($sql, trim($dados['plititulo']), trim($dados['plidsc']), $dados['eqdid'], $dados['pliid']);
+        $stmt = sprintf($sql,
+            trim($dados['plititulo']),
+            trim($dados['plidsc']),
+            $dados['mdeid'],
+            $dados['eqdid'],
+            $dados['neeid'],
+            $dados['capid'],
+            $dados['pliid']);
         $db->executar($stmt);
 
         // -- Apagando os enquadramentos já associados, para uma posterior re-inserção
