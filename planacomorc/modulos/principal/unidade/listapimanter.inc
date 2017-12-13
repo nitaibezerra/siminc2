@@ -132,6 +132,8 @@
         $filtropi['exercicio'] = $_SESSION['exercicio'];
         $filtropi['usucpf'] = $_SESSION['usucpf'];
         $filtropi['unofundo'] = 'FALSE';
+        # Redirecionar apos excluir
+        $_SESSION['filtropi'] = $filtropi;
         $list = new Simec_Listagem();
         $list->setQuery(Spo_Model_Planointerno::listar((object) $filtropi))
             ->turnOnPesquisator()
@@ -173,6 +175,7 @@
 </div>
 
 <script type="text/javascript">
+    
     $(document).ready(function(){
         initListaPiManter();
     });

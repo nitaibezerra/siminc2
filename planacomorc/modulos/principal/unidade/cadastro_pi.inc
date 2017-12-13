@@ -255,13 +255,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="row">
 
             <div class="col-md-12">
-
-                <?php if ($_GET['apagar']): ?>
+                <?php if($_GET['apagar']): ?>
                     <div class="form-group">
-                        <label for="inputUnidade" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-9">
-                            <input type="button" class="btn btn-danger" name="btassociar4" id="btassociar4" value="APAGAR"
-                                   onclick="removerpi();" />
+                        <div class="col-lg-12">
+                            <input type="button" class="btn btn-danger" id="btnApagar" value="APAGAR" />
                         </div>
                     </div>
                 <?php endif; ?>

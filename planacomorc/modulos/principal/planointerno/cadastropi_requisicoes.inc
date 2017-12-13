@@ -12,6 +12,32 @@
  * $Id$
  */
 
+$perfis = pegaPerfilGeral();
+
+if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
+    $href = $href? $href: 'planacomorc.php?modulo=principal/unidade/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
+} else {
+    $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
+}
+
+if($_REQUEST['confirmar-apagar']){
+    // implements here update status...
+    $pliid = $_REQUEST['pliid'];
+    $modelPi = new Pi_PlanoInterno($pliid);
+    $modelPi->plistatus = 'I';
+    $resultado = $modelPi->salvar();
+    $modelPi->commit();
+
+    $href .= http_build_query($_SESSION['filtropi']);
+    if($resultado) {
+        simec_redirecionar($href, 'success', 'PI apagado com sucesso!');
+    } else {
+        simec_redirecionar($href, 'error');
+    }
+    
+    exit;
+}
+
 /* Monta a combo de UGs filtrando por UO */
 if ($_POST['carregarComboUG']) {
 	header('content-type: text/html; charset=ISO-8859-1');
@@ -51,14 +77,6 @@ if ($_REQUEST['carregarComboEnquadramentoPorSubacao']) {
 	header('content-type: text/html; charset=ISO-8859-1');
 	carregarComboEnquadramentoPorSubacao($_POST['sbaid']);
 	exit;
-}
-
-$perfis = pegaPerfilGeral();
-
-if (strpos($_SERVER['HTTP_REFERER'], 'unidade')) {
-    $href = $href ? $href : 'planacomorc.php?modulo=principal/unidade/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
-} else {
-    $href = 'planacomorc.php?modulo=principal/planointerno/listapimanter'. $sufixoOrigemRequisicao. '&acao=A';
 }
 
 //salvarPI($dados);
