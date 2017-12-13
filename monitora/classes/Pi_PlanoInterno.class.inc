@@ -211,7 +211,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suosigla,
                 suo.suocod,
                 suo.suonome,
-                pli.pliano,
+                ptr.ptrano,
                 ptr.funcional,
                 ptr.acatitulo,
                 ptr.irpcod,
@@ -242,7 +242,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suocod,
                 suo.suonome,
                 suo.suosigla,
-                pli.pliano,
+                ptr.ptrano,
                 ptr.funcional,
                 ptr.acatitulo,
                 ptr.irpcod,
@@ -258,7 +258,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suonome,
                 ptr.funcional
         ";
-
+//ver($sql, d);
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
         $dadosAgrupados = [];
