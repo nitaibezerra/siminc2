@@ -11,6 +11,8 @@
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_REQUEST;
     
+    $perfis = pegaPerfilGeral();
+    
     # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
     $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
     
@@ -150,21 +152,20 @@
 //            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
 //            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
             ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
-            ->addAcao('edit', 'alterarPi')
+            ->addAcao('edit', 'alterarPi');
 //            ->setAcaoComoCondicional('edit', array(
 //                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
 //                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')
 //            ))
-            ->addAcao('delete', 'removerPi')
-//            ->setAcaoComoCondicional('delete', array(array(
-//                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
-//            )))
+            if(in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)){
+                $list->addAcao('delete', 'removerPi');
+            }
 //            ->addAcao('chart', 'exibirGrafico')
 //            ->addAcao('view', 'exibirEspelhoPi')
 //            ->setAcaoComoCondicional('view', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))
-            ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+            $list->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 
         # Popup de detalhamento do PI
         bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));

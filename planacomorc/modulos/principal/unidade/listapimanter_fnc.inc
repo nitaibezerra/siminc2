@@ -11,6 +11,8 @@
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_REQUEST;
     
+    $perfis = pegaPerfilGeral();
+    
     $sqlListaUO = Spo_Model_Unidade::queryCombo((object)array(
         'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
         'suo.unofundo = TRUE'));
@@ -154,12 +156,14 @@
 //            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
 //            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
             ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
-            ->addAcao('edit', 'alterarPiFnc')
+            ->addAcao('edit', 'alterarPiFnc');
 //            ->setAcaoComoCondicional('edit', array(
 //                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
 //                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')
 //            ))
-            ->addAcao('delete', 'removerPi')
+            if(in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)){
+                $list->addAcao('delete', 'removerPi');
+            }
 //            ->setAcaoComoCondicional('delete', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))
@@ -168,7 +172,7 @@
 //            ->setAcaoComoCondicional('view', array(array(
 //                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
 //            )))
-            ->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
+            $list->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 
         # Popup de detalhamento do PI
         bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
