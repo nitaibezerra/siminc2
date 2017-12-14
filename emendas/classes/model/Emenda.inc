@@ -231,6 +231,7 @@ class Emendas_Model_Emenda extends Modelo
         }
 
         $proid = $this->pegaUm($sql);
+        
         if(!$proid){
             $mProponente = new Emendas_Model_Proponente();
             $mProponente->procnpj = $procnpj;
@@ -239,11 +240,35 @@ class Emendas_Model_Emenda extends Modelo
             $proid = $mProponente->proid;
         }
 
-        $mBeneficiario = new Emendas_Model_Beneficiario();
-        $mBeneficiario->emeid = $this->emeid;
-        $mBeneficiario->proid = $proid;
+        $sql = "select benid from emendas.beneficiario where emeid = {$this->emeid} and proid = {$proid}";
+        $benid = $this->pegaUm($sql);
 
-        return $mBeneficiario->salvar();
+        $mBeneficiario = new Emendas_Model_Beneficiario($benid);
+
+        if(!$benid){
+            $mBeneficiario->emeid = $this->emeid;
+            $mBeneficiario->proid = $proid;
+
+            $mBeneficiario->salvar();
+        }
+
+        $this->_inserirBeneficiarioDetalhe($mBeneficiario->benid, $mBeneficiario->emeid, $line);
+    }
+
+    private function _inserirBeneficiarioDetalhe($benid, $emeid, $line)
+    {
+        $gndcod = $line[12];
+
+        $sql = "select emdid from emendas.emendadetalhe where gndcod = {$gndcod} and emeid = {$emeid}";
+        $emdid = $this->pegaUm($sql);
+
+        $mBeneficiarioDetalhe = new Emendas_Model_BeneficiarioDetalhe();
+        $mBeneficiarioDetalhe->benid = $benid;
+        $mBeneficiarioDetalhe->emdid = $emdid;
+        $mBeneficiarioDetalhe->bedvalor = $line[19];
+        $mBeneficiarioDetalhe->bedvalorpriorizado = $line[20];
+
+        return $mBeneficiarioDetalhe->salvar();
     }
 
 }//end Class

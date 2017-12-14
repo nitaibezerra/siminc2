@@ -207,6 +207,10 @@ include APPRAIZ . "includes/cabecalho.inc";
             </div>
         </form>
 
+        <div class="col-md-1">
+            <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+        </div>
+
         <div class="col-md-12">
             <div class="form-group">
                 <div class="text-center">
