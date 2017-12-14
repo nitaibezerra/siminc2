@@ -38,10 +38,10 @@ include APPRAIZ . "includes/cabecalho.inc";
 require_once APPRAIZ . "includes/funcoesspo_componentes.php";
 
 if ($_REQUEST['acao'] == 'A') {
-    $titulo_modulo = 'Alterar o Cadastro de Usuários do Simec';
+    $titulo_modulo = 'Alterar o Cadastro de Usuários do Sistema';
 }
 if ($_REQUEST['acao'] == 'C') {
-    $titulo_modulo = 'Consultar o Cadastro de Usuários do Simec';
+    $titulo_modulo = 'Consultar o Cadastro de Usuários do Sistema';
 }
 
 //monta_titulo( $titulo_modulo, '' );
