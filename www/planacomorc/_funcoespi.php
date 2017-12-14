@@ -241,7 +241,7 @@ DML;
 
     $sql = <<<DML
             SELECT DISTINCT
-                suo.suocod AS codigo,
+                TRIM(suo.suocod) AS codigo,
                 suo.suocod || ' - ' || suonome AS descricao
             FROM public.vw_subunidadeorcamentaria suo
             WHERE
