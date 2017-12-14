@@ -2093,7 +2093,7 @@ function carregarPiComDetalhes(stdclass $filtros) {
             ptr.prgcod || ' - ' || ptr.prgdsc AS programa,
             ptr.acacod || ' - ' || ptr.acatitulo AS acao,
             ptr.loccod || ' - ' || ptr.locdsc AS localizador,
-            ptr.plocod || ' - ' || ptr.acatitulo AS po,
+            ptr.plocod || ' - ' || ptr.plodsc AS po,
             ptr.ptres AS ptres,
             pprnome AS produto,
             pum.pumdescricao AS unidade_medida,
