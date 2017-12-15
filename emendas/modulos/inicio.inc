@@ -14,7 +14,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">
+            <a class="btn btn-danger" href="emendas.php?modulo=principal/emenda&acao=A">
                 <i class="fa fa-list"></i> Lista de Emendas
             </a>
         </div>

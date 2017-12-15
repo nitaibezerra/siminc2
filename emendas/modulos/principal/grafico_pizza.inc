@@ -36,6 +36,7 @@
     <div class="col-md-6">
         <?php
         $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
+        if($colors){ $grafico->setColors($colors); }
         $grafico->setHeight('200px')->gerarGrafico($sqlPizza);
         unset($grafico);
         ?>

@@ -437,8 +437,11 @@ class Emendas_Model_Emenda extends Modelo
             $dadosAgrupados[$dado['categoria']][$dado['descricao']] = $dado['valor'];
         }
 
+
         $item = 'Gênero';
         if($tipo){
+            $colors =  "'#ff0066', '#00BFFF', '#FFD700'";
+
             $sqlPizza = "select case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end descricao, sum(bed.bedvalor) valor
                     from emendas.emenda eme        
                             inner join emendas.autor aut on aut.autid = eme.autid

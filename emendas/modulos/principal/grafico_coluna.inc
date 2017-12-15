@@ -36,6 +36,7 @@
     <div class="col-md-6">
         <?php
         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+        if($colors){ $grafico->setColors($colors); }
         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->gerarGrafico($dados);
         unset($grafico);
         ?>

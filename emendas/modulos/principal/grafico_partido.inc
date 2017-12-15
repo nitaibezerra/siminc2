@@ -38,6 +38,7 @@
             <div class="col-md-12" style="margin-bottom: 100px;">
                 <?php
                 $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                if($colors){ $grafico->setColors($colors); }
                 $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->setTitulo('Valores por Partido')->setHeight(400)->gerarGrafico($dados);
                 unset($grafico);
                 ?>
@@ -79,6 +80,7 @@
             <div class="col-md-6">
                 <?php
                 $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                if($colors){ $grafico->setColors($colors); }
                 $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)->setTitulo('Valores por Base')->gerarGrafico($dadosLado);
                 unset($grafico);
                 ?>
