@@ -513,11 +513,11 @@
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjeto = buscarValorDoProjeto();
 
-//        if(valorProjeto < valorBaseProjeto){
-//            valorDiferenca = (valorBaseProjeto - valorProjeto);
-//        } else {
+        if(valorProjeto < valorBaseProjeto){
+            valorDiferenca = (valorBaseProjeto - valorProjeto);
+        } else {
             valorDiferenca = (valorProjeto - valorBaseProjeto);
-//        }
+        }
 
         var fltValorLimiteDisponivelUnidade = (valorBaseLimiteDisponivelUnidade - valorDiferenca);
         $('#td_disponivel_sub_unidade').html(number_format(fltValorLimiteDisponivelUnidade.toFixed(2), 2, ',', '.'));
@@ -536,12 +536,17 @@
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjetoCusteio = textToFloat($('#picvalorcusteio').val());
 
-        if(valorProjetoCusteio < valorBaseLimiteProjetoCusteio){
+        if(valorProjetoCusteio == 0){
+            valorCusteio = valorBaseLimiteProjetoCusteio;
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel + valorCusteio);
+        } else if(valorProjetoCusteio < valorBaseLimiteProjetoCusteio){
             valorCusteio = (valorBaseLimiteProjetoCusteio - valorProjetoCusteio);
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
         } else {
             valorCusteio = (valorProjetoCusteio - valorBaseLimiteProjetoCusteio);
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
         }
-        var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCusteio);
+
         $('#td_disponivel_funcional_custeio').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
 
@@ -558,12 +563,17 @@
         // Valor atualizado em tempo de execução da tela durante o ato de cadastro.
         var valorProjetoCapital = textToFloat($('#picvalorcapital').val());
 
-        if(valorProjetoCapital < valorBaseLimiteProjetoCapital){
+        if(valorProjetoCapital == 0){
+            valorCapital = valorBaseLimiteProjetoCapital;
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel + valorCapital);
+        } else if(valorProjetoCapital < valorBaseLimiteProjetoCapital){
             valorCapital = (valorBaseLimiteProjetoCapital - valorProjetoCapital);
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
         } else {
             valorCapital = (valorProjetoCapital - valorBaseLimiteProjetoCapital);
+            var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
         }
-        var fltValorLimiteDisponivelFuncional = (valorBaseLimiteDisponivel - valorCapital);
+
         $('#td_disponivel_funcional_capital').html(number_format(fltValorLimiteDisponivelFuncional.toFixed(2), 2, ',', '.'));
     }
     
