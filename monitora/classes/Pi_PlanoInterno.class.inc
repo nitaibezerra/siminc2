@@ -560,7 +560,7 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
@@ -581,7 +581,7 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
@@ -602,7 +602,7 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
