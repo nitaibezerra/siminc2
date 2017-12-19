@@ -212,7 +212,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script language="JavaScript" src="../includes/funcoesspo.js"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi_funcoes.js?v=3"></script>
+<script src="js/cadastro_pi_funcoes.js?v=4"></script>
 <script src="js/cadastro_pi_validacoes.js?v=3"></script>
 <script src="js/cadastro_pi_init.js?v=3"></script>
 <style>
