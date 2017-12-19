@@ -55,8 +55,9 @@ class Emendas_Model_Impedimento extends Modelo
      */
     protected $arAtributos = array(
         'impid' => null,
+        'impcod' => null,
         'impdsc' => null,
-        'impstatus' => null,
+        'impstatus' => null
     );
 
 }//end Class

@@ -42,7 +42,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->input('autnome', 'Nome', $mAutor->autnome, ['maxlength' => 200]);                    
                             echo $simec->email('autemail', 'Email', $mAutor->autemail, ['required', 'maxlength' => 300]);                    
                             echo $simec->select('estuf', 'Estado', $mAutor->estuf, Territorios_Model_Estado::pegarSQLSelect(array()));
-                            echo $simec->input('autcod', 'Código', $mAutor->autcod, ['required', 'maxlength' => 10]);                    
+                            echo $simec->input('autcod', 'Código', $mAutor->autcod, ['class' => 'inteiro', 'required', 'maxlength' => 10]);                    
                             echo $simec->select('parid', 'Partido', $mAutor->parid, Emendas_Model_Partido::buscarTodosCombo((object) array()));
                             echo $simec->radio('autsexo', 'Partido', $mAutor->autsexo, array(
                                 'M' => 'Masculino',

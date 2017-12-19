@@ -2,12 +2,12 @@
 
 $cImpedimento = new Emendas_Controller_Impedimento();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cImpedimento->salvar($_REQUEST);
-		die;
-	case 'excluir':
+    die;
+    case 'excluir':
         $cImpedimento->excluir($_REQUEST['impid']);
-		die;
+    die;
 }
 
 $mImpedimento = new Emendas_Model_Impedimento($_REQUEST['impid']);
@@ -33,8 +33,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="impid" id="impid" type="hidden" value="<?php echo $mImpedimento->impid; ?>">
                         
-                        <?php                         
-                        echo $simec->input('impdsc', 'impdsc', $mImpedimento->impdsc, ['maxlength' => 100]);                        
+                        <?php
+                            echo $simec->input('impcod', 'Código', $mImpedimento->impcod, ['class'=>'inteiro']);
+                            echo $simec->input('impdsc', 'Nome', $mImpedimento->impdsc, ['maxlength' => 100]);                        
                         ?>
                         
                         <div class="form-group">

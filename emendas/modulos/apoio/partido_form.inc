@@ -34,7 +34,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="parid" id="parid" type="hidden" value="<?php echo $mPartido->parid; ?>">
                         
                         <?php
-                            echo $simec->input('parcod', 'Código', $mPartido->parcod);
+                            echo $simec->input('parcod', 'Código', $mPartido->parcod, ['class'=>'inteiro']);
                             echo $simec->input('pardsc', 'Nome', $mPartido->pardsc, ['maxlength' => 200]);
                             echo $simec->input('parsigla', 'Sigla', $mPartido->parsigla, ['maxlength' => 30]);
                             echo $simec->radio('parlado', 'Lado', $mAutor->parlado, array(
