@@ -30,6 +30,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Código</th>
                                 <th>Nome</th>
                                 <th>Sigla</th>
+                                <th>Lado</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['parcod']; ?></td>
                                     <td><?php echo $dados['pardsc']; ?></td>
                                     <td><?php echo $dados['parsigla']; ?></td>
+                                    <td><?php echo retornarDescricaoLadoPartido($dados['parlado']); ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

@@ -5346,3 +5346,22 @@ function retornarDescricaoSexo($sexo){
     return $descricao;
 }
 
+/**
+ * Recebe o caractere que representa o sexo e retorna uma string com a descrição Base ou Oposição.
+ * 
+ * @param string $lado 'B', 'O' ou Vazio
+ * @return string
+ */
+function retornarDescricaoLadoPartido($lado){
+    $descricao = '';
+    if($lado == 'B'){
+        $descricao = 'Base';
+    }
+    
+    if($lado == 'O'){
+        $descricao = 'Oposição';
+    }
+    
+    return $descricao;
+}
+
