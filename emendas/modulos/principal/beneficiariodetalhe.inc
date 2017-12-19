@@ -4,10 +4,11 @@
             <thead>
             <tr class="text-center">
                 <th width="10%">Ações</th>
-                <th>benid</th>
-                <th>emdid</th>
-                <th>bedvalor</th>
-                <th>bedvalorpriorizado</th>
+                <th>GND</th>
+                <th>Vl. Emenda</th>
+                <th>Vl. Beneficiário</th>
+                <th>Vl. Priorizado</th>
+                <th>Vl. Contingenciado</th>
             </tr>
             </thead>
             <tbody>
@@ -17,10 +18,11 @@
                         <a title="Alterar" class="editar-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&bedid=<?php echo $dados['bedid']; ?>"><i class="fa fa-pencil"></i></a>
                         <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-detalhe&bedid=<?php echo $dados['bedid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                     </td>
-                    <td><?php echo $dados['benid']; ?></td>
-                    <td><?php echo $dados['emdid']; ?></td>
-                    <td><?php echo $dados['bedvalor']; ?></td>
-                    <td><?php echo $dados['bedvalorpriorizado']; ?></td>
+                    <td><?php echo $dados['gndcod']; ?></td>
+                    <td class="text-right"><?php echo number_format($dados['emdvalor'], 2, ',', '.'); ?></td>
+                    <td class="text-right"><?php echo number_format($dados['bedvalor'], 2, ',', '.'); ?></td>
+                    <td class="text-right"><?php echo number_format($dados['bedvalorpriorizado'], 2, ',', '.'); ?></td>
+                    <td class="text-right"><?php echo number_format(($dados['bedvalor'] - $dados['bedvalorpriorizado']), 2, ',', '.'); ?></td>
                 </tr>
             <?php } ?>
             </tbody>

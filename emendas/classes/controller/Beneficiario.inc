@@ -82,7 +82,7 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemDetalhe($benid)
     {
-        $aBeneficiarioDetalhe = (new Emendas_Model_BeneficiarioDetalhe)->recuperarTodos('*', ['benid = ' . (int)$benid, " bedstatus = 'A' "]);
+        $aBeneficiarioDetalhe = (new Emendas_Model_BeneficiarioDetalhe)->recuperarListagem($benid);
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe.inc';
     }
 }
