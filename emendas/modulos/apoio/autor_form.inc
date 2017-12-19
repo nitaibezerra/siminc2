@@ -36,7 +36,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="autid" id="autid" type="hidden" value="<?php echo $mAutor->autid; ?>">
-                        
+
                         <?php
                             echo $simec->select('atpid', 'Tipo de Autor', $mAutor->atpid, Emendas_Model_AutorTipo::buscarTodosCombo((object) array()));
                             echo $simec->input('autnome', 'Nome', $mAutor->autnome, ['maxlength' => 200]);                    
@@ -44,8 +44,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->select('estuf', 'Estado', $mAutor->estuf, Territorios_Model_Estado::pegarSQLSelect(array()));
                             echo $simec->input('autcod', 'Código', $mAutor->autcod, ['required', 'maxlength' => 10]);                    
                             echo $simec->select('parid', 'Partido', $mAutor->parid, Emendas_Model_Partido::buscarTodosCombo((object) array()));
+                            echo $simec->radio('autsexo', 'Partido', $mAutor->autsexo, array(
+                                'M' => 'Masculino',
+                                'F' => 'Feminino'
+                            ));
                         ?>
-                        
+
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>

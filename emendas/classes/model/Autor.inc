@@ -65,6 +65,7 @@ class Emendas_Model_Autor extends Modelo
         'autcod' => null,
         'parid' => null,
         'autstatus' => null,
+        'autsexo' => null
     );
 
     /**
