@@ -5327,3 +5327,22 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
     return $listaUsuarioPlanejamento;
 }
 
+/**
+ * Recebe o caractere que representa o sexo e retorna uma string com a descrição Masculino ou Feminino.
+ * 
+ * @param string $sexo 'M', 'F' ou Vazio
+ * @return string
+ */
+function retornarDescricaoSexo($sexo){
+    $descricao = '';
+    if($sexo == 'M'){
+        $descricao = 'Masculino';
+    }
+    
+    if($sexo == 'F'){
+        $descricao = 'Feminino';
+    }
+    
+    return $descricao;
+}
+

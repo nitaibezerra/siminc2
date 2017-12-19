@@ -29,6 +29,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Código</th>
                                     <th>Nome</th>
+                                    <th>Sexo</th>
                                     <th>Tipo</th>
                                     <th>Partido</th>
                                     <th>E-mail</th>
@@ -43,6 +44,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                         <td><?php echo $dados['autcod']; ?></td>
                                         <td><?php echo $dados['autnome']; ?></td>
+                                        <td><?php echo retornarDescricaoSexo($dados['autsexo']); ?></td>
                                         <td><?php echo $dados['atpdsc']; ?></td>
                                         <td><?php echo $dados['parsigla']; ?></td>
                                         <td><?php echo $dados['autemail']; ?></td>

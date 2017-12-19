@@ -85,6 +85,7 @@ class Emendas_Model_Autor extends Modelo
                 autcod,
                 a.autnome AS autnome,
                 aut.atpdsc,
+                a.autsexo,
                 p.parsigla,
                 a.autemail autemail,
                 a.estuf
