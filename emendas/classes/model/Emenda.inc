@@ -71,15 +71,19 @@ class Emendas_Model_Emenda extends Modelo
 
     public function recuperarListagem($exercicio)
     {
-        $sql = "select  eme.emeid, eme.emenumero, eme.unoid, eme.acaid, eme.emeimpositiva, eme.autid, eme.prsano, uno.unocod || ' - ' || uno.unonome unonome, 
-                        aut.autnome, aut.autcod, aca.acacod, aca.prgcod || '.' || aca.acacod || '.' || aca.acaobjetivocod || '.' || aca.loccod || ' - ' || aca.acatitulo funcional
+        $sql = "select  eme.emeid, eme.emenumero, eme.unoid, eme.acaid, eme.emeimpositiva, eme.autid, eme.prsano, uno.unocod || ' - ' || uno.unosigla unidade,
+                        aut.autnome, aut.autcod, pro.pronome, sit.sitdsc, ben.benid
                 from emendas.emenda eme
+                    left join emendas.beneficiario ben on ben.emeid = eme.emeid
+                    left join emendas.proponente pro on pro.proid = ben.proid
+                    left join emendas.siconv sic on sic.sicid = ben.sicid
+                    left join emendas.siconvsituacao sit on sit.sitid = sic.sitid
                     inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid
                     inner join emendas.autor aut on aut.autid  = eme.autid
                     inner join monitora.acao aca on aca.acaid = eme.acaid
                 where eme.emestatus = 'A'        
                 and eme.prsano = '$exercicio'
-                order by aut.autnome";
+                order by aut.autnome, eme.emenumero, pro.pronome";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];

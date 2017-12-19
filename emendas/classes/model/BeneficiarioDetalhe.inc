@@ -64,5 +64,16 @@ class Emendas_Model_BeneficiarioDetalhe extends Modelo
         'bedstatus' => null,
     );
 
+    public function recuperarListagem($benid)
+    {
+        $sql = "select * 
+                from emendas.beneficiariodetalhe bed
+                        inner join emendas.emendadetalhe emd on emd.emdid = bed.emdid
+                where bed.benid = $benid
+                order by gndcod";
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
 }//end Class
 ?>
