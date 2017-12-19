@@ -1,4 +1,4 @@
-<?
+<?php
 	
  /*
    Sistema Simec
@@ -59,11 +59,11 @@
 		if ( $RS['total'] > 0 ) // caso já exista módulo igual cadastrado e não seja alteração mostra a mensagem
 		{
 			?>
-				<script type="text/javascript">
-					alert( 'Este Menu/Módulo já se encontra cadastrado!' );
-					history.back();
-				</script>
-			<?
+                            <script type="text/javascript">
+                                    alert( 'Este Menu/Módulo já se encontra cadastrado!' );
+                                    history.back();
+                            </script>
+			<?php
 			$db->close();
 			exit();
 		}
@@ -149,7 +149,7 @@
 		<script type="text/javascript">
 			//location.href = "<?=$_SESSION['sisdiretorio']?>.php?modulo=<?=$modulo.'&acao=A&mnuid='.$_REQUEST['mnucod']?>";
 		</script>
-		<?
+		<?php
 		$db->commit();
 		//exit();
 	}
@@ -204,7 +204,7 @@
 			<tr>
 				<td align='right' class="SubTituloDireita">Sistema:</td>
 				<td>
-					<?
+					<?php
 					$sisid = $_REQUEST['sisid'];
 					//Caso a página de inclusão não tenha sido aberta pelo menu Incluir menu faça
 					if( $_REQUEST['menuselecionado'] == '' )
@@ -224,13 +224,13 @@
 						print $sisdsc;
 						?>
 						<input type ="hidden" name = "sisid" value ="<?= $sisid ?>">
-					<?}?>
+					<?php } ?>
 				</td>
 			</tr>
 			<tr>
 				<td align='right' class="SubTituloDireita">Código:</td>
 				<td>
-					<? if ( !$_REQUEST['mnuid'] ) $habil='S'; else $habil= 'N'; ?>
+					<?php if ( !$_REQUEST['mnuid'] ) $habil='S'; else $habil= 'N'; ?>
 					<?= campo_texto( 'mnucod', 'S', $habil, '', 6, 5, '#####', '' ); ?>
 				</td>
 			</tr>
@@ -247,10 +247,10 @@
 				<td>
 					<select name="mnutipo" onchange="Selecionatipo()" class="CampoEstilo">
 						<option value=""></option>
-						<option value="1" <? if ( $mnutipo == "1" ) print "selected"; ?>>1</option>
-						<option value="2" <? if ( $mnutipo == "2" ) print "selected"; ?>>2</option>
-						<option value="3" <? if ( $mnutipo == "3" ) print "selected"; ?>>3</option>
-						<option value="4" <? if ( $mnutipo == "4" ) print "selected"; ?>>4</option>
+						<option value="1" <?php if ( $mnutipo == "1" ) print "selected"; ?>>1</option>
+						<option value="2" <?php if ( $mnutipo == "2" ) print "selected"; ?>>2</option>
+						<option value="3" <?php if ( $mnutipo == "3" ) print "selected"; ?>>3</option>
+						<option value="4" <?php if ( $mnutipo == "4" ) print "selected"; ?>>4</option>
 					</select>
 					<?=obrigatorio();?>
 				</td>
@@ -259,7 +259,7 @@
       <tr>
         <td align='right'  class="SubTituloDireita">Menu Pai:</td>
         <td>
-                 <?
+                 <?php
 		$sql="SELECT mnuid as codigo, mnudsc as descricao FROM seguranca.menu where mnutipo = " . ($mnutipo-1) . " and mnusnsubmenu='t' and sisid=".$sisid."  order by mnudsc";
 		
 			$db->monta_combo("mnuidpai",$sql,'S',"Selecione o Menu",'','');
@@ -272,7 +272,7 @@
     	 <?=obrigatorio();?>
         </td>
         </tr>
-      <?}?>
+      <?php } ?>
       <tr>
         <td align='right'  class="SubTituloDireita">Possui Sub-menu?</td>
         <td>
@@ -284,7 +284,7 @@
         <td id="sub0" align='right'  class="SubTituloDireita">Link:</td>
         <td id="sub1"><?=campo_texto('mnulink','N','S','',50,100,'','');?></td>
       </tr>
-    <?  
+    <?php  
      //Caso seja passado o sisid faça
     if($sisid<> '')
     {    
@@ -296,7 +296,7 @@
    
         <td id="sub3">
         
-       <?$sql="SELECT abacod as codigo, abadsc as descricao FROM seguranca.aba where sisid=".$sisid;
+       <?php $sql="SELECT abacod as codigo, abadsc as descricao FROM seguranca.aba where sisid=".$sisid;
         
       
        $db->monta_combo("abacod",$sql,'S',"Selecione a Aba",'','');
@@ -305,7 +305,7 @@
        ?>	
 	</td>
       </tr>
-   <?}?>   
+   <?php } ?>   
 	  <tr>
 	  
         <td id="sub4" align='right'  class="SubTituloDireita">Faz parte da árvore?</td>
@@ -353,24 +353,24 @@
 		}?>
 		
 
-<? if ($_REQUEST["mnuid"]) { ?>
+<?php if ($_REQUEST["mnuid"]) { ?>
 <tr bgcolor='#CCCCCC'>
    <td></td>
    <td><input type="button" name="btalterar" value="Alterar" onclick="validar_cadastro('A')" class="botao">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="btcancelar" value="Voltar" onclick="window.location='seguranca.php?modulo=sistema/menu/menu&acao=A';" class="botao"></td>
  </tr>
 </table>
 
-<? } else { ?>
+<?php } else { ?>
 <tr bgcolor="#CCCCCC">
    <td></td><td><input type="button" name="btinserir" value="Incluir" onclick="validar_cadastro('I')" class="botao">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="btcancelar" value="Voltar" onclick="history.back();" class="botao"></td>
  </tr>
-<?}?>
+<?php } ?>
  </form>
  </table>
-<? 
+<?php 
 }elseif ($_REQUEST['acao']=='A' and !$_REQUEST['mnuid']){?>
 
-<?
+<?php
 
 //título da página
 monta_titulo($titulo_modulo,'Escolha uma ação desejada referente ao Menu / Módulo : 	<img src="../imagens/alterar.gif" border="0" align="absmiddle"> = Alterar / 	<img src="../imagens/excluir.gif" border="0" align="absmiddle"> = Excluir / 	<img src="../imagens/gif_inclui.gif" border="0" align="absmiddle"> = Incluir');
@@ -382,7 +382,7 @@ monta_titulo($titulo_modulo,'Escolha uma ação desejada referente ao Menu / Módul
         <td align='right' class="SubTituloDireita">Sistema:</td>
         <td>
 		
-		<? $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
+		<?php $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
 			$db->monta_combo('sisid',$sql,'S',"Selecione o Sistema",'submete_sistema','');?>
 	    </td>
    </tr>
@@ -391,7 +391,7 @@ monta_titulo($titulo_modulo,'Escolha uma ação desejada referente ao Menu / Módul
 <input type='hidden' name='mnutipo'>
 <input type='hidden' name="exclui" value=<?=$_REQUEST['mnuid']?>>
 
-<?
+<?php
 //teste utilizando a função Monta Lista
 $cabecalho = array('Ações','Código','Menu / Módulo','Visível','Transação');
 //$sql = "select acacod, acadsc from acao";
@@ -413,7 +413,7 @@ if (document.formulario.mnusnsubmenu[0].checked)
 					document.getElementById("sub"+i).style.display = "none";
 					}
 }
-<?}?>
+<?php } ?>
 
 
   function submenu(op)

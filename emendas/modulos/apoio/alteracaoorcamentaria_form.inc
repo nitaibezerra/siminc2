@@ -2,12 +2,12 @@
 
 $cAlteracaoOrcamentaria = new Emendas_Controller_AlteracaoOrcamentaria();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cAlteracaoOrcamentaria->salvar($_REQUEST);
-		die;
-	case 'excluir':
+    die;
+    case 'excluir':
         $cAlteracaoOrcamentaria->excluir($_REQUEST['aloid']);
-		die;
+    die;
 }
 
 $mAlteracaoOrcamentaria = new Emendas_Model_AlteracaoOrcamentaria($_REQUEST['aloid']);
@@ -34,7 +34,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="aloid" id="aloid" type="hidden" value="<?php echo $mAlteracaoOrcamentaria->aloid; ?>">
                         
                         <?php                         
-                        echo $simec->input('alodsc', 'alodsc', $mAlteracaoOrcamentaria->alodsc, ['maxlength' => 100]);                        
+                            echo $simec->input('alodsc', 'Nome', $mAlteracaoOrcamentaria->alodsc, ['maxlength' => 100]);                        
                         ?>
                         
                         <div class="form-group">
