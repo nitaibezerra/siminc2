@@ -70,7 +70,7 @@ function DownloadArquivoInfo($arqid){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema Integrado de Monitoramento Execu&ccedil;&atilde;o e Controle</title>
+    <title><?php echo NOME_SISTEMA; ?></title>
 
 	<!-- Styles Boostrap -->
     <link href="library/bootstrap-3.0.0/css/bootstrap.min.css" rel="stylesheet">
