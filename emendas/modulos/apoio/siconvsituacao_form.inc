@@ -2,12 +2,12 @@
 
 $cSiconvSituacao = new Emendas_Controller_SiconvSituacao();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cSiconvSituacao->salvar($_REQUEST);
-		die;
-	case 'excluir':
+    die;
+    case 'excluir':
         $cSiconvSituacao->excluir($_REQUEST['sitid']);
-		die;
+    die;
 }
 
 $mSiconvSituacao = new Emendas_Model_SiconvSituacao($_REQUEST['sitid']);
@@ -34,8 +34,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="sitid" id="sitid" type="hidden" value="<?php echo $mSiconvSituacao->sitid; ?>">
                         
                         <?php                         
-                        echo $simec->input('sitdsc', 'sitdsc', $mSiconvSituacao->sitdsc, ['maxlength' => 200]);                    
-                        echo $simec->input('sitcodigo', 'sitcodigo', $mSiconvSituacao->sitcodigo, ['required', 'maxlength' => 300]);                        
+                            echo $simec->input('sitcodigo', 'Código', $mSiconvSituacao->sitcodigo, ['required', 'maxlength' => 300, 'class' => 'inteiro']);
+                            echo $simec->input('sitdsc', 'Situação', $mSiconvSituacao->sitdsc, ['maxlength' => 200]);
                         ?>
                         
                         <div class="form-group">
