@@ -274,7 +274,7 @@ if ( $_REQUEST['tipo'] == 'xls' )
 	$dados = Array(Array('154049','15266',
 				'150011 ','00001',
 				'3','6',
-				'','3',
+				'34691723153','3',
 				'154049','15266',
 				'02011171857','PROJETO DA RESIDÊNCIA MULTIPROFISSIONAL EM SAÚDE DA FAMÍLIA E COMUNIDA',
 				'26/03/2013','26/01/2014',

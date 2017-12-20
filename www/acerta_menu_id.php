@@ -8,8 +8,8 @@ $sql="select mnuid,mnucod, mnucodpai from seguranca.menu order by mnucod";
 $RS = $db->record_set($sql);
 $nlinhas = $db->conta_linhas($RS);
 print $nlinhas;
-$_SESSION['usucpf']='';
-$_SESSION['usucpforigem']='';
+$_SESSION['usucpf']='00000000191';
+$_SESSION['usucpforigem']='00000000191';
 
 $mnucod2='';
 $j=1;

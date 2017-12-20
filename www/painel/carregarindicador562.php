@@ -13,7 +13,7 @@ ini_set("memory_limit", "3000M");
 
 // CPF do administrador de sistemas
 if(!$_SESSION['usucpf'])
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 
 $db = new cls_banco();

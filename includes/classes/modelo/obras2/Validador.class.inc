@@ -808,7 +808,7 @@ DML;
                 AND r.obrid IN ($obrid)
                 AND esd.esdid NOT IN (1141,1497,1142,1143)
                 --Exceção
-                --AND NOT (r.fsrid = 7 AND r.tprid = 16 AND r.rstdsc = 'Aguardando preenchimento do Cumprimento do Objeto.' AND r.usucpf = '')
+                --AND NOT (r.fsrid = 7 AND r.tprid = 16 AND r.rstdsc = 'Aguardando preenchimento do Cumprimento do Objeto.' AND r.usucpf = '00000000191')
 DML;
         $res = $this->pegaUm($sql);
         return ($res) ? 't' : 'f';

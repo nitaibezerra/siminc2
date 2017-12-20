@@ -228,7 +228,7 @@ class Cronograma extends Modelo
                    r.obrid = $obrid
                    AND rstitem IN ('I')
                    AND rststatus = 'A'
-                   AND usucpf = ''
+                   AND usucpf = '00000000191'
                    AND rstdsc = 'A execução física da obra está divergente do cronograma preenchido.';
             ";
 

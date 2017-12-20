@@ -19,8 +19,8 @@
     require_once "_funcoes_termoCooperacao.php";
 
     $_SESSION['sisid'] = 2; # seleciona o sistema de segurança
-    $_SESSION['usucpf'] = '';
-    $_SESSION['usucpforigem'] = '';
+    $_SESSION['usucpf'] = '00000000191';
+    $_SESSION['usucpforigem'] = '00000000191';
 
     $db = new cls_banco();
 

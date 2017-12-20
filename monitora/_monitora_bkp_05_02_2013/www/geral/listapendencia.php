@@ -94,7 +94,7 @@ $intPixelPasso = 20;
                  	if (! $db->pegaUm($sql))
                  	{
                  		// neste ponto deve ser criada uma mensagem para os usuários envolvidos
-                	$sql = "insert into mensagem (msgassunto,msgconteudo,usucpf,sisid) values ('Acompanhamento de atividade em Projeto','Acompanhar a atividade $descricao no Projeto $pjedsc','',6)";
+                	$sql = "insert into mensagem (msgassunto,msgconteudo,usucpf,sisid) values ('Acompanhamento de atividade em Projeto','Acompanhar a atividade $descricao no Projeto $pjedsc','00000000191',6)";
 		 				$saida=$db->executar($sql);
             			$sql =  "Select msgid from mensagem where oid = ".pg_last_oid($saida);		 			    
             			$ultimomsgid = $db->pegaUm( $sql );

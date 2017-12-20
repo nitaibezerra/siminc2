@@ -13,8 +13,8 @@ include_once APPRAIZ . "includes/classes_simec.inc";
 include_once APPRAIZ . "includes/funcoes.inc";
 
 // CPF do administrador de sistemas
-$_SESSION['usucpforigem'] = '';
-$_SESSION['usucpf'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
+$_SESSION['usucpf'] = '00000000191';
 
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();

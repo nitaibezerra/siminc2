@@ -12,8 +12,8 @@ session_start();
 
 // CPF do administrador de sistemas
 if( !$_SESSION['usucpf'] ){
-	$_SESSION['usucpforigem'] = '';
-	$_SESSION['usucpf'] = '';
+	$_SESSION['usucpforigem'] = '00000000191';
+	$_SESSION['usucpf'] = '00000000191';
 }
 
 if( !$db ){

@@ -29,9 +29,9 @@ define("COLETA_AUTOMATICA", 2);// tipo automatica
 
 // CPF do administrador de sistemas
 if(!$_SESSION['usucpf']){
-	$_SESSION['usucpforigem'] = '';
-	$auxusucpf = '';
-	$auxusucpforigem = '';
+	$_SESSION['usucpforigem'] = '00000000191';
+	$auxusucpf = '00000000191';
+	$auxusucpforigem = '00000000191';
 }else{
 	$auxusucpf = $_SESSION['usucpf'];
 	$auxusucpforigem = $_SESSION['usucpforigem'];

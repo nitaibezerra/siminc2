@@ -10,7 +10,7 @@ include_once "../../includes/open_flash_chart/open-flash-chart.php";
 
 // CPF do administrador de sistemas
 if(!$_SESSION['usucpf'])
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 
 // abre conexão com o servidor de banco de dados

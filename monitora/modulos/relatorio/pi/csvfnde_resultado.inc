@@ -115,7 +115,7 @@ $dadostipo10 = $db->carregar($sql);
 
 if($dadostipo10[0]) {
 	foreach($dadostipo10 as $tipo10) {
-		$csv .= "10;".$tipo10['ptres'].";".$tipo10['sbadata'].";".$tipo10['sbacod'].";".(($tipo10['sadvalor'])?str_pad(str_replace(".","",$tipo10['sadvalor']), 15, "0", STR_PAD_LEFT):"0000").";".$tipo10['codigo']."\n"; 
+		$csv .= "10;".$tipo10['ptres'].";".$tipo10['sbadata'].";".$tipo10['sbacod'].";".(($tipo10['sadvalor'])?str_pad(str_replace(".","",$tipo10['sadvalor']), 15, "0", STR_PAD_LEFT):"000000000000000").";".$tipo10['codigo']."\n"; 
 	}
 }
 
@@ -224,7 +224,7 @@ $dadostipo30 = $db->carregar($sql);
 
 if($dadostipo30[0]) {
 	foreach($dadostipo30 as $tipo30) {
-		$csv .= "30;".$tipo30['plicod'].";".$tipo30['plidata'].";".$tipo30['pliptres'].";".(($tipo30['plivalor'])?str_pad(str_replace(".","",$tipo30['plivalor']), 15, "0", STR_PAD_LEFT):"0000").";".$tipo30['codigo']."\n"; 
+		$csv .= "30;".$tipo30['plicod'].";".$tipo30['plidata'].";".$tipo30['pliptres'].";".(($tipo30['plivalor'])?str_pad(str_replace(".","",$tipo30['plivalor']), 15, "0", STR_PAD_LEFT):"000000000000000").";".$tipo30['codigo']."\n"; 
 	}
 }
 /*

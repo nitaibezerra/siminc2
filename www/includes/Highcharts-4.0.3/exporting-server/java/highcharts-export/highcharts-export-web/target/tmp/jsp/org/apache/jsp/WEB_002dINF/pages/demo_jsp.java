@@ -245,8 +245,8 @@ public final class demo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  </g>\n");
       out.write("  <g class=\"highcharts-series-group\">\n");
       out.write("    <g class=\"highcharts-series\" visibility=\"visible\" transform=\"translate(60,40)\" clip-path=\"url(#highcharts-9)\">\n");
-      out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"black\" stroke-width=\"5\" stroke-opacity=\"0.0499996\" transform=\"translate(1, 1)\"></path>\n");
-      out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"black\" stroke-width=\"3\" stroke-opacity=\"0.099999\" transform=\"translate(1, 1)\"></path>\n");
+      out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"black\" stroke-width=\"5\" stroke-opacity=\"0.049999999999999996\" transform=\"translate(1, 1)\"></path>\n");
+      out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"black\" stroke-width=\"3\" stroke-opacity=\"0.09999999999999999\" transform=\"translate(1, 1)\"></path>\n");
       out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"black\" stroke-width=\"1\" stroke-opacity=\"0.15\" transform=\"translate(1, 1)\"></path>\n");
       out.write("      <path fill=\"none\" d=\"M 31.958333333333332 173.4 L 95.875 140.7 L 159.79166666666666 113.2 L 223.70833333333334 95.2 L 287.625 83.5 L 351.54166666666663 58.3 L 415.4583333333333 90.1 L 479.37499999999994 80 L 543.2916666666666 26.5 L 607.2083333333334 44 L 671.125 121.7 L 735.0416666666666 154.1\" stroke=\"#4572A7\" stroke-width=\"2\"></path>\n");
       out.write("    </g>\n");
@@ -274,7 +274,7 @@ public final class demo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("      <g>\n");
       out.write("        <g class=\"highcharts-legend-item\" transform=\"translate(8,3)\">\n");
       out.write("          <path fill=\"none\" d=\"M 0 11 L 16 11\" stroke-width=\"2\" stroke=\"#4572A7\"></path>\n");
-      out.write("          <path fill=\"#4572A7\" d=\"M 8 7 C 13.328 7 13.328 15 8 15 C 2.67197 15 2.67197 7 8 7 Z\" stroke=\"#FFFFFF\" stroke-width=\"0.000001\"></path>\n");
+      out.write("          <path fill=\"#4572A7\" d=\"M 8 7 C 13.328 7 13.328 15 8 15 C 2.6719999999999997 15 2.6719999999999997 7 8 7 Z\" stroke=\"#FFFFFF\" stroke-width=\"0.000001\"></path>\n");
       out.write("          <text x=\"21\" y=\"15\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:12px;cursor:pointer;color:#3e576f;fill:#3e576f;\" text-anchor=\"start\">\n");
       out.write("            <tspan x=\"21\">Series 1</tspan>\n");
       out.write("          </text>\n");
@@ -324,10 +324,10 @@ public final class demo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <text x=\"52\" y=\"243.1\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
       out.write("      <tspan x=\"52\">0</tspan>\n");
       out.write("    </text>\n");
-      out.write("    <text x=\"52\" y=\"203.702\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
+      out.write("    <text x=\"52\" y=\"203.70000000000002\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
       out.write("      <tspan x=\"52\">50</tspan>\n");
       out.write("    </text>\n");
-      out.write("    <text x=\"52\" y=\"164.298\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
+      out.write("    <text x=\"52\" y=\"164.29999999999998\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
       out.write("      <tspan x=\"52\">100</tspan>\n");
       out.write("    </text>\n");
       out.write("    <text x=\"52\" y=\"124.9\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:11px;width:364px;color:#666;line-height:14px;fill:#666;\" text-anchor=\"end\" visibility=\"visible\">\n");
@@ -341,8 +341,8 @@ public final class demo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </text>\n");
       out.write("  </g>\n");
       out.write("  <g class=\"highcharts-tooltip\" style=\"padding:0;white-space:nowrap;\" visibility=\"hidden\">\n");
-      out.write("    <rect rx=\"5\" ry=\"5\" fill=\"none\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"5\" fill-opacity=\"0.85\" stroke=\"black\" stroke-opacity=\"0.0499996\" transform=\"translate(1, 1)\"></rect>\n");
-      out.write("    <rect rx=\"5\" ry=\"5\" fill=\"none\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"3\" fill-opacity=\"0.85\" stroke=\"black\" stroke-opacity=\"0.099999\" transform=\"translate(1, 1)\"></rect>\n");
+      out.write("    <rect rx=\"5\" ry=\"5\" fill=\"none\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"5\" fill-opacity=\"0.85\" stroke=\"black\" stroke-opacity=\"0.049999999999999996\" transform=\"translate(1, 1)\"></rect>\n");
+      out.write("    <rect rx=\"5\" ry=\"5\" fill=\"none\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"3\" fill-opacity=\"0.85\" stroke=\"black\" stroke-opacity=\"0.09999999999999999\" transform=\"translate(1, 1)\"></rect>\n");
       out.write("    <rect rx=\"5\" ry=\"5\" fill=\"none\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"1\" fill-opacity=\"0.85\" stroke=\"black\" stroke-opacity=\"0.15\" transform=\"translate(1, 1)\"></rect>\n");
       out.write("    <rect rx=\"5\" ry=\"5\" fill=\"rgb(255,255,255)\" x=\"0\" y=\"0\" width=\"10\" height=\"10\" stroke-width=\"2\" fill-opacity=\"0.85\"></rect>\n");
       out.write("    <text x=\"5\" y=\"18\" style=\"font-family:'lucida grande', 'lucida sans unicode', verdana, arial, helvetica, sans-serif;font-size:12px;color:#333333;fill:#333333;\"></text>\n");

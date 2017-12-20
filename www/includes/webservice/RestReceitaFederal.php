@@ -204,7 +204,7 @@ class RestReceitaFederal {
 function isRfCPF($cpf) {
     $cpf = str_pad(preg_replace('[^0-9]', '', $cpf), 11, '0', STR_PAD_LEFT);
 
-    if (strlen($cpf) != 11 || $cpf == '' || $cpf == '11111111111' || $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' || $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' || $cpf == '88888888888' || $cpf == '') {
+    if (strlen($cpf) != 11 || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '' || $cpf == '') {
         return false;
     } else {   // Calcula os numeros para verificar se o CPF é verdadeiro
         for ($t = 9; $t < 11; $t++) {
@@ -226,13 +226,13 @@ function isRfCPF($cpf) {
 /**
  * Verifica se o CNPJ é válido.
  * 
- * @param string $cnpj "00.000.000/0000-00", "000", "00 000 000 0000 00" etc...
+ * @param string $cnpj "00.000.000/0000-00", "00000000000000", "00 000 000 0000 00" etc...
  * @return boolean
  */
 function isRfCnpj($cnpj) {
     // Etapa 1: Cria um array com apenas os digitos numéricos,
     // Isso permite receber o cnpj em diferentes formatos como:
-    // "00.000.000/0000-00", "000", "00 000 000 0000 00" etc...
+    // "00.000.000/0000-00", "00000000000000", "00 000 000 0000 00" etc...
     $num = array();
     $j = 0;
     for ($i = 0; $i < (strlen($cnpj)); $i++) {
@@ -247,7 +247,7 @@ function isRfCnpj($cnpj) {
         return false;
     }
 
-    //Etapa 3: O número  embora não seja um cnpj real resultaria um cnpj válido
+    //Etapa 3: O número 00000000000 embora não seja um cnpj real resultaria um cnpj válido
     // após o calculo dos dígitos verificares e por isso precisa ser filtradas nesta etapa.
     if ($num[0] == 0 && $num[1] == 0 && $num[2] == 0 && $num[3] == 0 && $num[4] == 0 && $num[5] == 0 && $num[6] == 0 && $num[7] == 0 && $num[8] == 0 && $num[9] == 0 && $num[10] == 0 && $num[11] == 0) {
         return false;

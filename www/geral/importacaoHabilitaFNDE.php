@@ -30,7 +30,7 @@ define( "DIRETORIO_LOG_HABILITA", '../../arquivos/emenda/habilita/log' );
 
 // CPF do administrador de sistemas
 if(!$_SESSION['usucpf'])
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();

@@ -6,7 +6,7 @@ include APPRAIZ . "includes/funcoes.inc";
 
 // CPF do administrador de sistemas
 if(!$_SESSION['usucpf'])
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 $db          = new cls_banco();
 

@@ -355,7 +355,7 @@ class Solicitacao extends Modelo
         $ano = $data->formataData($data->dataAtual(), 'YYYY');
 
         $dados = array(
-            'usucpf' => '',
+            'usucpf' => '00000000191',
             'emlconteudo' => '
                         <html>
                             <head>

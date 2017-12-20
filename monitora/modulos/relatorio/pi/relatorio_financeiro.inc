@@ -13,10 +13,10 @@ if($_POST['exporta'] == "true"){
 	$sql_financeiro = str_replace("ex.executado","replace(cast(ex.executado as varchar),'.',',') as v4", $sql_financeiro);
 	*/
 	/*
-	$sql_financeiro = str_replace("ex.dotacao"," replace(cast(to_char(ex.dotacao, 'D99')::money as varchar),'R$','') as v1", $sql_financeiro);
-	$sql_financeiro = str_replace("ex.autorizada"," replace(cast(to_char(ex.autorizada, 'D99')::money as varchar),'R$','') as v2", $sql_financeiro);
-	$sql_financeiro = str_replace("ex.empenhado"," replace(cast(to_char(ex.empenhado, 'D99')::money as varchar),'R$','') as v3", $sql_financeiro);
-	$sql_financeiro = str_replace("ex.executado"," replace(cast(to_char(ex.executado, 'D99')::money as varchar),'R$','') as v4", $sql_financeiro);
+	$sql_financeiro = str_replace("ex.dotacao"," replace(cast(to_char(ex.dotacao, '99999999999D99')::money as varchar),'R$','') as v1", $sql_financeiro);
+	$sql_financeiro = str_replace("ex.autorizada"," replace(cast(to_char(ex.autorizada, '99999999999D99')::money as varchar),'R$','') as v2", $sql_financeiro);
+	$sql_financeiro = str_replace("ex.empenhado"," replace(cast(to_char(ex.empenhado, '99999999999D99')::money as varchar),'R$','') as v3", $sql_financeiro);
+	$sql_financeiro = str_replace("ex.executado"," replace(cast(to_char(ex.executado, '99999999999D99')::money as varchar),'R$','') as v4", $sql_financeiro);
 	*/
 	//dbg($sql_financeiro,1);
 	$tipo_campo = array();

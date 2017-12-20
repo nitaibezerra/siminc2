@@ -271,7 +271,7 @@ mpdf-->
 <tr>
 <td align="center">EAN128C [A/B/C]</td>
 <td>EAN128 (A, B, and C). Specified variant of Code 128, utilising an FNC1 start code. Also known as UCC/EAN-128 or GS1-128. Valid characters: [cf. Code 128]. Checksum digit: automatic.</td>
-<td class="barcodecell"><barcode code="01343" type="EAN128C" class="barcode" /></td>
+<td class="barcodecell"><barcode code="0112345678912343" type="EAN128C" class="barcode" /></td>
 </tr>
 
 <tr>

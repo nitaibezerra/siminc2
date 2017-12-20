@@ -419,7 +419,7 @@ class Restricao extends Modelo {
 
         $dados['rstdtinclusao'] = "now()";
         $dados['rststatus']     = "'A'";
-        $dados['usucpf']        = "''";
+        $dados['usucpf']        = "'00000000191'";
 
         foreach ($dados as $k => $v) {
             if($v == null){

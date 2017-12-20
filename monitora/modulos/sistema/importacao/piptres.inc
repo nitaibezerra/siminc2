@@ -347,7 +347,7 @@ function inserePI($pi, $pidsc, $unicod, $ptres, $dotAtualizada, $dotInicial)
         'neeid' => "SELECT neeid FROM monitora.pi_niveletapaensino WHERE neecod = '" . substr($pi, 5, 1) . "' AND neeano = '{$ano}' AND neestatus = 'A'",
         'capid' => "SELECT capid FROM monitora.pi_categoriaapropriacao WHERE capcod = '" . substr($pi, 6, 2) . "' AND capano = '{$ano}' AND capstatus = 'A'",
         'mdeid' => "SELECT mdeid FROM monitora.pi_modalidadeensino WHERE mdecod = '" . substr($pi, 10) . "' AND mdeano = '{$ano}' AND mdestatus = 'A'",
-        'usucpf' => '',
+        'usucpf' => '00000000191',
         'plisituacao' => 'C',
         'plistatus' => 'A'
     );

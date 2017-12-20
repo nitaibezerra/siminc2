@@ -156,7 +156,7 @@ if ($_SESSION['elabrev']['cooid']) {
     function montaShowModal() {
         var campoTextArea = '' +
                 '<div>' +
-                '<p align=center style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:normal\'>O SIMEC estarï¿½ disponï¿½vel para a inclusï¿½o de crï¿½ditos referentes ao segundo perï¿½odo de 2011, de 18/08/2011 atï¿½ 31/08/2011.</b></p>' +
+                '<p align=center style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:normal\'>O SIMEC estará disponível para a inclusão de créditos referentes ao segundo período de 2011, de 18/08/2011 até 31/08/2011.</b></p>' +
                 '</div>';
         var alertaDisplay = '<div class="titulo_box" ><center><b>Prezados,</b></center><br/ >' + campoTextArea + '</div><div class="links_box" ><center><input type="button" onclick=\'closeMessage(); return false \' value="Fechar" /></center>';
         displayStaticMessage(alertaDisplay, false);
@@ -182,28 +182,28 @@ if ($_SESSION['elabrev']['cooid']) {
 </script>
 <body>
     <div id="aviso" title="Aviso" style="display: none; padding: 20px">
-<!--        De acordo com o art. 6ï¿½ da Portaria nï¿½ 549, de 16 de abril de 2013, ï¿½ 1ï¿½, o <i>ï¿½rgï¿½o ou entidade recebedora dos recursos deverï¿½ encaminhar ao concedente relatï¿½rio de cumprimento do objeto pactuado atï¿½ 60 dias do tï¿½rmino do prazo para cumprimento do objeto estabelecido no Termo de Execuï¿½ï¿½o Descentralizada.
-            Ainda no mesmo artigo, em seu ï¿½ 3ï¿½, a celebraï¿½ï¿½o de novos termos de execuï¿½ï¿½o descentralizado com o ï¿½rgï¿½o ou entidade recebedora dos recursos descentralizados ficarï¿½ condicionada a comprovaï¿½ï¿½o de entrega do relatï¿½rio de cumprimento do objeto, apï¿½s transcorrido o prazo estabelecido no parï¿½grafo primeiro deste artigo.</i>
+<!--        De acordo com o art. 6º da Portaria nº 549, de 16 de abril de 2013, § 1º, o <i>órgão ou entidade recebedora dos recursos deverá encaminhar ao concedente relatório de cumprimento do objeto pactuado até 60 dias do término do prazo para cumprimento do objeto estabelecido no Termo de Execução Descentralizada.
+            Ainda no mesmo artigo, em seu § 3º, a celebração de novos termos de execução descentralizado com o órgão ou entidade recebedora dos recursos descentralizados ficará condicionada a comprovação de entrega do relatório de cumprimento do objeto, após transcorrido o prazo estabelecido no parágrafo primeiro deste artigo.</i>
         <br/>
-        <b><br/>Alertamos assim que aquelas instituiï¿½ï¿½es que celebraram termos de execuï¿½ï¿½o descentralizado em 2013 no <?php echo SIGLA_SISTEMA; ?> devem realizar o preenchimento e entrega do relatï¿½rio de cumprimento de objeto no prazo indicado, evitando que sejam bloqueados novos repasses conforme previsto no ï¿½ 3ï¿½ supracitado.
-            <br/><br/>Ressaltamos ainda que o preenchimento do relatï¿½rio tambï¿½m ï¿½ feito via <?php echo SIGLA_SISTEMA; ?>, da mesma forma como ï¿½ celebrado o termo de execuï¿½ï¿½o descentralizada. O relatï¿½rio deve ser inserido pela Equipe Tï¿½cnica da entidade proponente, passando novamente pela validaï¿½ï¿½o do gestor orï¿½amentï¿½rio e do representante legal.
-            Em seguida o termo chega ï¿½ secretaria que analisou aquele termo, que poderï¿½ enviar para diligï¿½ncia ou emitir parecer e finalizar o termo.
+        <b><br/>Alertamos assim que aquelas instituições que celebraram termos de execução descentralizado em 2013 no <?php echo SIGLA_SISTEMA; ?> devem realizar o preenchimento e entrega do relatório de cumprimento de objeto no prazo indicado, evitando que sejam bloqueados novos repasses conforme previsto no § 3º supracitado.
+            <br/><br/>Ressaltamos ainda que o preenchimento do relatório também é feito via <?php echo SIGLA_SISTEMA; ?>, da mesma forma como é celebrado o termo de execução descentralizada. O relatório deve ser inserido pela Equipe Técnica da entidade proponente, passando novamente pela validação do gestor orçamentário e do representante legal.
+            Em seguida o termo chega à secretaria que analisou aquele termo, que poderá enviar para diligência ou emitir parecer e finalizar o termo.
         </b>-->
         
             Senhores Dirigentes,
             <br/><br/>
-            Hoje, dia <b>26/03/2014</b>, ï¿½ o prazo final para a solicitaï¿½ï¿½o de alteraï¿½ï¿½es orï¿½amentï¿½rias (crï¿½ditos) no primeiro momento.
-            Lembramos que tal pedido deve ser efetuado no Mï¿½dulo de Alteraï¿½ï¿½es Orï¿½amentï¿½rias. Caso a Unidade nï¿½o possua o acesso, deve efetuar o pedido de acesso no Simec na primeira tela do Simec e entrar em contato por meio do e-mail <?php echo $_SESSION['email_sistema']; ?>.
-            Apï¿½s a inserï¿½ï¿½o dos crï¿½ditos a unidade deve acessar a guia ?Resumo/Trï¿½mite? e clicar na opï¿½ï¿½o ?Enviar para SPO?. Essa aï¿½ï¿½o ï¿½ necessï¿½ria para que a SPO possa analisar as solicitaï¿½ï¿½es e proceder o andamento do pedido.
+            Hoje, dia <b>26/03/2014</b>, é o prazo final para a solicitação de alterações orçamentárias (créditos) no primeiro momento.
+            Lembramos que tal pedido deve ser efetuado no Módulo de Alterações Orçamentárias. Caso a Unidade não possua o acesso, deve efetuar o pedido de acesso no Simec na primeira tela do Simec e entrar em contato por meio do e-mail <?php echo $_SESSION['email_sistema']; ?>.
+            Após a inserção dos créditos a unidade deve acessar a guia ?Resumo/Trâmite? e clicar na opção ?Enviar para SPO?. Essa ação é necessária para que a SPO possa analisar as solicitações e proceder o andamento do pedido.
 <br/><br/>
-            Estamos a disposiï¿½ï¿½o para esclarecimentos.
+            Estamos a disposição para esclarecimentos.
 <br/><br/>
             Contatos:<br/>
             Universidades e Hospitais: (61) 2022-8860 / 8857 / 8855 / 8856
             <br/>Institutos: (61) 2022-8854 / 8858 / 8859 / 8861
 <br/><br/>
             Luciane Tisbierek de Carvalho
-            <br/>Coordenadora-Geral de Orï¿½amento
+            <br/>Coordenadora-Geral de Orçamento
         
     </div>
     <?php
@@ -254,7 +254,7 @@ if ($_SESSION['elabrev']['cooid']) {
                 if ($db->executar($sql)) {
                     $db->commit();
                 } else {
-                    $_SESSION['MSG_AVISO'][] = "Ocorreu um erro ao cadastrar o arquivo no banco dedados.<br />Verifique as informaï¿½ï¿½es e tente novamente.";
+                    $_SESSION['MSG_AVISO'][] = "Ocorreu um erro ao cadastrar o arquivo no banco dedados.<br />Verifique as informações e tente novamente.";
                     $db->rollback();
                 }
             } else {
@@ -269,10 +269,10 @@ if ($_SESSION['elabrev']['cooid']) {
 
             $sql = sprintf("UPDATE elabrev.documentos SET docstatus = 'E' WHERE docid = %d", $_REQUEST['docid']);
             if (!$db->executar($sql)) {
-                $_SESSION['MSG_AVISO'][] = "Nï¿½o foi possï¿½vel remover o documento.";
+                $_SESSION['MSG_AVISO'][] = "Não foi possível remover o documento.";
                 $db->rollback();
             } else {
-                // enquanto nao pode ser removido de verdade... fica comentï¿½da a linha
+                // enquanto nao pode ser removido de verdade... fica comentáda a linha
                 //if(unlink($this->arquivo_caminho))
                 //{
 
@@ -280,12 +280,12 @@ if ($_SESSION['elabrev']['cooid']) {
 
                 if (is_file(APPRAIZ . 'arquivos/elabrev/' . $arquivo['doccaminho'])) {
                     if (unlink(APPRAIZ . 'arquivos/elabrev/' . $arquivo['doccaminho'])) {
-                        $_SESSION['MSG_AVISO'][] = "Documento excluï¿½do com ï¿½xito";
+                        $_SESSION['MSG_AVISO'][] = "Documento excluído com êxito";
                     } else {
-                        $_SESSION['MSG_AVISO'][] = "Nï¿½o foi possï¿½vel remover o documento.";
+                        $_SESSION['MSG_AVISO'][] = "Não foi possível remover o documento.";
                     }
                 } else {
-                    $_SESSION['MSG_AVISO'][] = "Nï¿½o foi possï¿½vel remover o arquivo. Arquivo inexistente.";
+                    $_SESSION['MSG_AVISO'][] = "Não foi possível remover o arquivo. Arquivo inexistente.";
                 }
             }
 
@@ -298,7 +298,7 @@ if ($_SESSION['elabrev']['cooid']) {
             $caminho = APPRAIZ . 'arquivos/elabrev/' . $arquivo['doccaminho'];
 
             if (!is_file($caminho)) {
-                $_SESSION['MSG_AVISO'][] = "Arquivo nï¿½o encontrado.";
+                $_SESSION['MSG_AVISO'][] = "Arquivo não encontrado.";
             }
             ob_clean();
             //tratando para abrir arquivos excel (antigos)
@@ -321,7 +321,7 @@ if ($_SESSION['elabrev']['cooid']) {
     /*
       if( possuiPerfil( $perfil ) && !($db->testa_superuser())){
       echo "<script>
-      alert('A proposta orï¿½amentï¿½ria estï¿½ sendo transmitida para o SIOP e a partir do dia 3 de agosto estarï¿½ disponï¿½vel para visualizaï¿½ï¿½o!');
+      alert('A proposta orçamentária está sendo transmitida para o SIOP e a partir do dia 3 de agosto estará disponível para visualização!');
       </script>";
       } */
 
@@ -329,7 +329,7 @@ if ($_SESSION['elabrev']['cooid']) {
     include APPRAIZ . "includes/cabecalho.inc";
     echo '<br/>';
     monta_titulo(
-            'Certificado de Disponibilidade Orï¿½amentï¿½ria - CDO', 'Notas Tï¿½cnicas Para Download'
+            'Certificado de Disponibilidade Orçamentária - CDO', 'Notas Técnicas Para Download'
     );
     ?>
 
@@ -343,7 +343,7 @@ if ($_SESSION['elabrev']['cooid']) {
 
         function validar_formulario_anexo() {
             var validacao = true;
-            var mensagem = 'Os seguintes campos nï¿½o foram preenchidos:';
+            var mensagem = 'Os seguintes campos não foram preenchidos:';
             document.anexo.taaid.value = trim(document.anexo.taaid.value);
             document.anexo.docdescricao.value = trim(document.anexo.docdescricao.value);
             if (
@@ -354,7 +354,7 @@ if ($_SESSION['elabrev']['cooid']) {
                 validacao = false;
             }
             if (document.anexo.docdescricao.value == '') {
-                mensagem += '\nDescriï¿½ï¿½o';
+                mensagem += '\nDescrição';
                 validacao = false;
             }
             if (document.anexo.arquivo.value == '') {
@@ -389,13 +389,13 @@ if ($_SESSION['elabrev']['cooid']) {
         }
     </script>
     <div style="border:solid red 1px;">
-        Prezados usuï¿½rios do <b>Termo de Execuï¿½ï¿½o Descentralizada</b>,
+        Prezados usuários do <b>Termo de Execução Descentralizada</b>,
     <br/><br/>
-    A partir do dia <b>06/05/2015</b> estarï¿½ no ar um <b>novo mï¿½dulo</b> para o lanï¿½amento dos Termos de Execuï¿½ï¿½o Descentralizada, contendo tambï¿½m todos os termos jï¿½ registrados.
+    A partir do dia <b>06/05/2015</b> estará no ar um <b>novo módulo</b> para o lançamento dos Termos de Execução Descentralizada, contendo também todos os termos já registrados.
     <br/>
-    O <?php echo SIGLA_SISTEMA; ?> irï¿½ redirecionar automï¿½ticamente o usuï¿½rio ao clicar nos menus para esta finalidade.
+    O <?php echo SIGLA_SISTEMA; ?> irá redirecionar automáticamente o usuário ao clicar nos menus para esta finalidade.
     <br/>
-    Todos os dados e perfis serï¿½o migrados. Caso encontre algum problema, entre em contato com a CGSO.
+    Todos os dados e perfis serão migrados. Caso encontre algum problema, entre em contato com a CGSO.
     <br/>
     <br/>
     Equipe <?php echo SIGLA_SISTEMA; ?>.
@@ -444,7 +444,7 @@ if ($_SESSION['elabrev']['cooid']) {
                                 <thead>
                                     <tr style="text-align: center; vertical-align: top">
                                         <th style="width: 5%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
-                                            Aï¿½ï¿½o	
+                                            Ação	
                                             </td>				
 
                                         <th style="width: 20%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
@@ -454,13 +454,13 @@ if ($_SESSION['elabrev']['cooid']) {
                                             Tamanho
                                         </th>
                                         <th style="width: 35%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
-                                            Descriï¿½ï¿½o
+                                            Descrição
                                         </th>
                                         <th style="width: 10%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
                                             Tipo
                                         </th>
                                         <th style="width: 10%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
-                                            Data de Inclusï¿½o
+                                            Data de Inclusão
                                         </th>
                                         <th style="width: 20%; border-left: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(192, 192, 192); border-bottom: 1px solid rgb(192, 192, 192);">
                                             Por
@@ -537,7 +537,7 @@ if ($_SESSION['elabrev']['cooid']) {
 
                 <p style="text-align: justify;">Senhor Dirigente,</p>
 
-                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionarï¿½ um plantï¿½o nesta SPO/MEC somente por meio do endereï¿½o eletrï¿½nico <?php echo $_SESSION['email_sistema']; ?>, com a finalidade de esclarecer dï¿½vidas atinentes ï¿½ inclusï¿½o no <?php echo SIGLA_SISTEMA; ?> do detalhamento dos limites para o PLOA 2014. </p>
+                <p style="text-align: justify;">Informamos que durante os dias <strong>03 e 04/ 08 </strong> 08 funcionará um plantão nesta SPO/MEC somente por meio do endereço eletrônico <?php echo $_SESSION['email_sistema']; ?>, com a finalidade de esclarecer dúvidas atinentes à inclusão no <?php echo SIGLA_SISTEMA; ?> do detalhamento dos limites para o PLOA 2014. </p>
 
                 <p style="text-align: justify;"><br>Atenciosamente,<br><br><strong>Wagner Vilas Boas de Souza<br>
                         Subsecret&aacute;rio de Planejamento e Or&ccedil;amento
@@ -553,7 +553,7 @@ if ($_SESSION['elabrev']['cooid']) {
             <link rel="stylesheet" href="/includes/ModalDialogBox/modal-message.css" type="text/css" media="screen" />
 
             <script language="javascript">
-                                                        /* Alerta a pedido o Subsecretï¿½rio Wagner */
+                                                        /* Alerta a pedido o Subsecretário Wagner */
                                                         //$("#aviso").dialog({position: 'top', width: 780, top: '20px'});
 
             </script>

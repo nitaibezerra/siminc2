@@ -79,7 +79,7 @@ class SolicitacaoDesembolso extends Modelo
                     wf_alterarEstado($solicitacoesEmAnalise['docid'], AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_TECNICA_PARA_INDEFERIDO, 'A obra apresenta restrições impeditivas de liberação de pagamento. Favor consultar aba "Restrições e Inconformidades" para regularização de pendências.', array('obrid' => $solicitacoesEmAnalise['obrid'], 'sldid' => $solicitacoesEmAnalise['sldid']));
             }
 
-            $sql = "UPDATE workflow.historicodocumento SET usucpf = '' WHERE docid = {$solicitacoesEmAnalise['docid']} AND aedid IN (" . AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_REI_PARA_INDEFERIDO. ", " . AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_DOCUMENTAL_PARA_INDEFERIDO . ", ".AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_TECNICA_PARA_INDEFERIDO.")";
+            $sql = "UPDATE workflow.historicodocumento SET usucpf = '00000000191' WHERE docid = {$solicitacoesEmAnalise['docid']} AND aedid IN (" . AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_REI_PARA_INDEFERIDO. ", " . AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_DOCUMENTAL_PARA_INDEFERIDO . ", ".AEDID_SOLICITACAO_DESEMBOLSO_ANALISE_TECNICA_PARA_INDEFERIDO.")";
             $this->executar($sql);
             $this->commit();
         }

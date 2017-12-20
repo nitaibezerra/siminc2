@@ -10,7 +10,7 @@ include_once APPRAIZ . "includes/funcoes.inc";
 include_once APPRAIZ . "includes/classes_simec.inc";
 
 if(!$_SESSION['usucpf'])
-	$_SESSION['usucpforigem'] = '';
+	$_SESSION['usucpforigem'] = '00000000191';
 
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();

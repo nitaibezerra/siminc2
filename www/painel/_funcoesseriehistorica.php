@@ -2178,8 +2178,8 @@ function exportarsehcsv($dados) {
 					else $selalias .= "COALESCE(trim(to_char(".$val['campo'].", '999g999g999g999d99')),'')".$sep;
 					break;
 				case 'validaracdqtde':
-					if($CONV[$val['campo']]) $selalias .= "trim(to_char(".$CONV[$val['campo']].", ''))".$sep;
-					else $selalias .= "trim(to_char(".$val['campo'].", ''))".$sep;
+					if($CONV[$val['campo']]) $selalias .= "trim(to_char(".$CONV[$val['campo']].", '99999999999'))".$sep;
+					else $selalias .= "trim(to_char(".$val['campo'].", '99999999999'))".$sep;
 					break;
 				default:
 					// se o campo correto da estrutura estiver vazio (possivelmente foi alterado a regionalização)

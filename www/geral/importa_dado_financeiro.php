@@ -117,7 +117,7 @@ if ( !$xml )
 	erro( 'arquivo inválido ' . $arquivo );
 }
 
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 // realiza importação de dados normais e RAP
 msg( 'iniciando importacao de dados financeiros do arquivo ' . $arquivo );

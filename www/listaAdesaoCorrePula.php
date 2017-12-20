@@ -7,11 +7,11 @@
 $_REQUEST['baselogin'] = "simec_espelho_producao";
 
 // CPF do administrador de sistemas
-$_SESSION['usucpf'] = '';
+$_SESSION['usucpf'] = '00000000191';
 
 if(!$_SESSION['usucpf'])
 
-	$_SESSION['usucpforigem'] = '';
+	$_SESSION['usucpforigem'] = '00000000191';
 
 if(md5('correpula2013') == $_GET['chave'])
 {

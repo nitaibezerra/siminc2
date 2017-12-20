@@ -173,8 +173,8 @@ function validaCPF($cpf) {
 	*/
 	$nulos = array("12345678909","11111111111","22222222222","33333333333",
 	               "44444444444","55555555555","66666666666","77777777777",
-	               "88888888888","","","12345678909",
-	               "","22525837541","23111478203","28075746708",
+	               "88888888888","99999999999","00000000000","12345678909",
+	               "00000000191","22525837541","23111478203","28075746708",
 				   "91087662826");
 
 	/* Retira todos os caracteres que nao sejam 0-9 */
@@ -1040,8 +1040,8 @@ function campo_data($dt,$obrig,$habil,$label,$formata,$txtdica='',$txtOnChange='
 		$title = ' title="'.$label.'" ';
 
 	if ($habil=='S') {
-		//dbg(${$dt},0,'');
-		//dbg('rrr'.formata_data(${$dt}),0,'');
+		//dbg(${$dt},0,'37423428787');
+		//dbg('rrr'.formata_data(${$dt}),0,'37423428787');
 
 		$data = '<input '.$title.' type="text" id="'.$dt.'" name="'.$dt;
 		if ($formata=='S') $data.='" value="'.formata_data(($value) ? $value : ${$dt}); else $data.='" value="'.${$dt};

@@ -239,7 +239,7 @@ XML;
 					$aedid = $db->pegaUm($sql);
 					if($aedid){
 						$sql = "INSERT INTO workflow.historicodocumento(aedid, docid, usucpf, pflcod, htddata)
-								VALUES (".$aedid.", ".$docid.", '', 932, '".$aosdtalteracao."') RETURNING hstid";
+								VALUES (".$aedid.", ".$docid.", '00000000191', 932, '".$aosdtalteracao."') RETURNING hstid";
 						$hstid = $db->pegaUm($sql);
 					}else{
 						$dadoEsdid = $db->pegaUm("SELECT esddsc FROM workflow.estadodocumento WHERE esdid = ".$esdid);
@@ -249,7 +249,7 @@ XML;
 						$aedid = $db->pegaUm($sql);
 						
 						$sql = "INSERT INTO workflow.historicodocumento(aedid, docid, usucpf, pflcod, htddata)
-								VALUES (".$aedid.", ".$docid.", '', 932, '".$aosdtalteracao."') RETURNING hstid";
+								VALUES (".$aedid.", ".$docid.", '00000000191', 932, '".$aosdtalteracao."') RETURNING hstid";
 						$hstid = $db->pegaUm($sql);
 					}
 		

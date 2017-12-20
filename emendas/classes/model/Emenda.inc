@@ -231,7 +231,7 @@ class Emendas_Model_Emenda extends Modelo
             $sql = "select proid from emendas.proponente where procnpj = '{$procnpj}' order by prostatus";
 
         } else {
-            $sql = "select proid from emendas.proponente where procnpj = '000' order by prostatus";
+            $sql = "select proid from emendas.proponente where procnpj = '00000000000000' order by prostatus";
         }
 
         $proid = $this->pegaUm($sql);

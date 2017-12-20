@@ -582,7 +582,7 @@ function detalhar($dados) {
 		$formato = "999g999g999g999d99";
 		$monetario = "N";
 	} else {
-		$formato = "99";
+		$formato = "9999999999999";
 		$monetario = "N";
 	}
 		
@@ -807,7 +807,7 @@ function detalharPorDetalhes($dados) {
 		$formato = "999g999g999g999d99";
 		$monetario = "S";
 	} else {
-		$formato = "99";
+		$formato = "9999999999999";
 		$monetario = "N";
 	}
 	

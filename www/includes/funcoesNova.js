@@ -645,9 +645,9 @@ function DvCpfOk(e) {
 	if ( s == "66666666666" ) dv = false;
 	if ( s == "77777777777" ) dv = false;
 	if ( s == "88888888888" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "99999999999" ) dv = false;
+	if ( s == "00000000000" ) dv = false;
+	if ( s == "00000000191" ) dv = false;
 	if ( s == "22525837541" ) dv = false;
 	if ( s == "23111478203" ) dv = false;
 	if ( s == "28075746708" ) dv = false;
@@ -1177,10 +1177,10 @@ function validar_cpf( cpf ){
 	if ( s == "66666666666" ) dv = false;
 	if ( s == "77777777777" ) dv = false;
 	if ( s == "88888888888" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "99999999999" ) dv = false;
+	if ( s == "00000000000" ) dv = false;
 	if ( s == "12345678909" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "00000000191" ) dv = false;
 	if ( s == "22525837541" ) dv = false;
 	if ( s == "23111478203" ) dv = false;
 	if ( s == "28075746708" ) dv = false;

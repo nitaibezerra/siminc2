@@ -75,7 +75,7 @@ function dCNPJ (){
      * @attribute string nu_cep "Código de endereçamento postal, sem máscara"
      * @attribute string ds_ponto_referencia "Ponto de referência que sirva de auxílio no endereço"
      * @attribute string ds_tipo_logradouro "Descrição do tipo de logradouro"
-     * @attribute array|string nu_socio_rf "Número do CNPJ ou CPF do sócio do estabelecimento consultado, sendo que, se o sócio for estrangeiro, este campo será 99"
+     * @attribute array|string nu_socio_rf "Número do CNPJ ou CPF do sócio do estabelecimento consultado, sendo que, se o sócio for estrangeiro, este campo será 9999999999999"
      * @attribute array|string tp_socio_rf "Indicador do tipo de sócio" 1:Sócio pessoa júridica | 2:Sócio pessoa física | 3:Sócio estrangeiro
      * @attribute array|string no_socio_rf "Corresponde ao nome do sócio pessoa física, razão social e/ou nome empresarial da pessoa jurídica e nome do sócio/razão social do sócio estrangeiro"
      * @attribute array|string nu_percentual_participacao_rf "Percentual de participação de um sócio na empresa"

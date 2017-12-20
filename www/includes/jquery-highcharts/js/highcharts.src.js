@@ -71,12 +71,12 @@ var UNDEFINED,
 	 * IE6: 0.002
 	 * IE7: 0.002
 	 * IE8: 0.002
-	 * IE9: 0. (unlimited)
+	 * IE9: 0.00000000001 (unlimited)
 	 * IE10: 0.0001 (exporting only)
-	 * FF: 0. (unlimited)
+	 * FF: 0.00000000001 (unlimited)
 	 * Chrome: 0.000001
 	 * Safari: 0.000001
-	 * Opera: 0. (unlimited)
+	 * Opera: 0.00000000001 (unlimited)
 	 */
 	TRACKER_FILL = 'rgba(192,192,192,' + (hasSVG ? 0.0001 : 0.002) + ')', // invisible but clickable
 	//TRACKER_FILL = 'rgba(192,192,192,0.5)',

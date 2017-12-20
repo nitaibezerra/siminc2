@@ -2080,8 +2080,8 @@ class Spreadsheet_Excel_Writer_Worksheet extends Spreadsheet_Excel_Writer_BIFFwr
     
         // Pack the undocumented parts of the hyperlink stream
         $unknown1 = pack("H*",'D0C9EA79F9BACE118C8200AA004BA90B02000000'       );
-        $unknown2 = pack("H*",'03030C0046'               );
-        $unknown3 = pack("H*",'FFFFADDE000000');
+        $unknown2 = pack("H*",'0303000000000000C000000000000046'               );
+        $unknown3 = pack("H*",'FFFFADDE000000000000000000000000000000000000000');
         $unknown4 = pack("v",  0x03                                            );
     
         // Pack the main data stream

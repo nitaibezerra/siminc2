@@ -1499,9 +1499,9 @@ function DvCpfOk(e) {
 	if ( s == "66666666666" ) dv = false;
 	if ( s == "77777777777" ) dv = false;
 	if ( s == "88888888888" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "99999999999" ) dv = false;
+	if ( s == "00000000000" ) dv = false;
+	if ( s == "00000000191" ) dv = false;
 	if ( s == "22525837541" ) dv = false;
 	if ( s == "23111478203" ) dv = false;
 	if ( s == "28075746708" ) dv = false;
@@ -2105,10 +2105,10 @@ function validar_cpf( cpf ){
 	if ( s == "66666666666" ) dv = false;
 	if ( s == "77777777777" ) dv = false;
 	if ( s == "88888888888" ) dv = false;
-	if ( s == "" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "99999999999" ) dv = false;
+	if ( s == "00000000000" ) dv = false;
 	if ( s == "12345678909" ) dv = false;
-	if ( s == "" ) dv = false;
+	if ( s == "00000000191" ) dv = false;
 	if ( s == "22525837541" ) dv = false;
 	if ( s == "23111478203" ) dv = false;
 	if ( s == "28075746708" ) dv = false;
@@ -3121,13 +3121,13 @@ function removeAcento(strToReplace) {
 }
 
 /**
- * Mï¿½scaras ER
- * Mascaras compativeis com dispositivos mobile e versï¿½es recentes de navegadores
+ * Máscaras ER
+ * Mascaras compativeis com dispositivos mobile e versões recentes de navegadores
  * @example <input type="text" onkeyup="mascara(this, mcpf);" />
  * @example $('#usucpf').keyup(function(){ mascara(this, mcpf); });
  * 
  * @param object o Objeto dom HTML
- * @param string f Nome da funï¿½ï¿½o
+ * @param string f Nome da função
  * @returns {undefined}
  */
 function mascara(o,f){
@@ -3139,34 +3139,34 @@ function execmascara(){
     v_obj.value=v_fun(v_obj.value)
 }
 function mcep(v){
-    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/^(\d{5})(\d)/,"$1-$2")         //Esse ï¿½ tï¿½o fï¿½cil que nï¿½o merece explicaï¿½ï¿½es
+    v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{5})(\d)/,"$1-$2")         //Esse é tão fácil que não merece explicações
     return v
 }
 function mtel(v){
-    v=v.replace(/\D/g,"");             //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parï¿½nteses em volta dos dois primeiros dï¿½gitos
-    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hï¿½fen entre o quarto e o quinto dï¿½gitos
+    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
     return v;
 }
 function cnpj(v){
-    v=v.replace(/\D/g,"")                           //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dï¿½gitos
-    v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dï¿½gitos
-    v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dï¿½gitos
-    v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hï¿½fen depois do bloco de quatro dï¿½gitos
+    v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+    v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+    v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
     return v
 }
 function mcpf(v){
-    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dï¿½gitos
-    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dï¿½gitos
-                                             //de novo (para o segundo bloco de nï¿½meros)
-    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hï¿½fen entre o terceiro e o quarto dï¿½gitos
+    v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+                                             //de novo (para o segundo bloco de números)
+    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
     return v
 }
 function mdata(v){
-    v=v.replace(/\D/g,"");                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
     v=v.replace(/(\d{2})(\d)/,"$1/$2");
     v=v.replace(/(\d{2})(\d)/,"$1/$2");
 
@@ -3174,31 +3174,31 @@ function mdata(v){
     return v;
 }
 function mtempo(v){
-    v=v.replace(/\D/g,"");                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
     v=v.replace(/(\d{1})(\d{2})(\d{2})/,"$1:$2.$3");
     return v;
 }
 function mhora(v){
-    v=v.replace(/\D/g,"");                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/\D/g,"");                    //Remove tudo o que não é dígito
     v=v.replace(/(\d{2})(\d)/,"$1h$2");
     return v;
 }
 function mrg(v){
-    v=v.replace(/\D/g,"");                                      //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-        v=v.replace(/(\d)(\d{7})$/,"$1.$2");    //Coloca o . antes dos ï¿½ltimos 3 dï¿½gitos, e antes do verificador
-        v=v.replace(/(\d)(\d{4})$/,"$1.$2");    //Coloca o . antes dos ï¿½ltimos 3 dï¿½gitos, e antes do verificador
-        v=v.replace(/(\d)(\d)$/,"$1-$2");               //Coloca o - antes do ï¿½ltimo dï¿½gito
+    v=v.replace(/\D/g,"");                                      //Remove tudo o que não é dígito
+        v=v.replace(/(\d)(\d{7})$/,"$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v=v.replace(/(\d)(\d{4})$/,"$1.$2");    //Coloca o . antes dos últimos 3 dígitos, e antes do verificador
+        v=v.replace(/(\d)(\d)$/,"$1-$2");               //Coloca o - antes do último dígito
     return v;
 }
 function mnum(v){
-    v=v.replace(/\D/g,"");                                      //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/\D/g,"");                                      //Remove tudo o que não é dígito
     return v;
 }
 function mvalor(v){
-    v=v.replace(/\D/g,"");//Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/(\d)(\d{8})$/,"$1.$2");//coloca o ponto dos milhï¿½es
+    v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
+    v=v.replace(/(\d)(\d{8})$/,"$1.$2");//coloca o ponto dos milhões
     v=v.replace(/(\d)(\d{5})$/,"$1.$2");//coloca o ponto dos milhares
 
-    v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 ï¿½ltimos dï¿½gitos
+    v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
     return v;
 }

@@ -80,7 +80,7 @@ class Zend_Measure_Frequency extends Zend_Measure_Abstract
         'REVOLUTION_PER_MINUTE' => array(array('' => '1', '/' => '60'),   'rpm'),
         'REVOLUTION_PER_SECOND' => array('1',             'rps'),
         'RPM'                   => array(array('' => '1', '/' => '60'), 'rpm'),
-        'TERRAHERTZ'            => array('10', 'THz'),
+        'TERRAHERTZ'            => array('1000000000000', 'THz'),
         'STANDARD'              =>'HERTZ'
     );
 }

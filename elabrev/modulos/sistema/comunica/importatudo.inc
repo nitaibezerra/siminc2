@@ -152,7 +152,7 @@ for ($i=0;$i<=$nlinhas;$i++)
         if (! is_array($res))
         {
           // não existe então inclui
-          $sql = "insert into execucaopto (exprealizado, usucpf, acaid, refcod) values (".${'fisqtderealizado'.$j}.",'',".$acaid.",".$refcod.")";
+          $sql = "insert into execucaopto (exprealizado, usucpf, acaid, refcod) values (".${'fisqtderealizado'.$j}.",'00000000191',".$acaid.",".$refcod.")";
         }
         else if ($res['exprealizado']==0)
         {

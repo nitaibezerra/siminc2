@@ -2071,7 +2071,7 @@
             <languagePopulation type="ar" populationPercent="0.39"/>
             <languagePopulation type="ha_Arab" populationPercent="0.14"/>
         </territory>
-        <territory type="CN" gdp="78" literacyPercent="90.9" population="1338610000">
+        <territory type="CN" gdp="7800000000000" literacyPercent="90.9" population="1338610000">
             <languagePopulation type="zh_Hans" populationPercent="90" officialStatus="official"/>
             <languagePopulation type="ii" populationPercent="0.6"/>
             <languagePopulation type="ug" populationPercent="0.55" officialStatus="official_regional"/>

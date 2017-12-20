@@ -126,7 +126,7 @@ else
 
 //Verifica se é o gerente do projeto ou super usuário
        $sql="select p.pflcod,p.pfldsc from perfil p inner join perfilusuario pu on p.pflcod=pu.pflcod and  pu.usucpf='".$_SESSION['usucpf']."' where p.pflcod = 12 or p.pflcod = 62 and pu.usucpf='".$_SESSION['usucpf']."' and p.sisid=".$_SESSION['sisid'];
-       //dbg($sql,1,'');     
+       //dbg($sql,1,'37423428787');     
        $res =  $db->pegalinha($sql);
        	//Caso seja gerente de projeto ou super usuário mostra botão inclui
        	if(is_array($res)){

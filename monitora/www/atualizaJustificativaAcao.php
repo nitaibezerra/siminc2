@@ -14,7 +14,7 @@ echo '<link rel="stylesheet" type="text/css" href="../includes/Estilo.css"/>
 <link rel="stylesheet" type="text/css" href="../includes/listagem.css"/>';
 
 if(!$_SESSION['usucpf'])
-	$_SESSION['usucpforigem'] = '';
+	$_SESSION['usucpforigem'] = '00000000191';
 
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();

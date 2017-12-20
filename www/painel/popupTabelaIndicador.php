@@ -36,8 +36,8 @@ include_once APPRAIZ . "includes/funcoes.inc";
 include_once APPRAIZ . "includes/classes_simec.inc";
 
 $_SESSION['sisid'] = 4; # seleciona o sistema de segurança
-$_SESSION['usucpf'] = '';
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpf'] = '00000000191';
+$_SESSION['usucpforigem'] = '00000000191';
 
 $_SESSION['exercicio_atual'] = '2010';
 $_SESSION['exercicio'] = '2010';

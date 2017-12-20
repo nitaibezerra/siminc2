@@ -24,7 +24,7 @@ set_time_limit(0);
 
 
 
-$_SESSION['usucpforigem'] = '';
+$_SESSION['usucpforigem'] = '00000000191';
 
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();

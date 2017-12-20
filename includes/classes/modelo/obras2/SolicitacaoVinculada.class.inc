@@ -78,7 +78,7 @@ class SolicitacaoVinculada extends Modelo
             'rstitem' => 'R',
             'empid' => NULL,
             'obrid' => $obrid,
-            'usucpf' => '',
+            'usucpf' => '00000000191',
             'rstdsc' => 'Solicitação de criação de obra vinculada.',
             'rstdtprevisaoregularizacao' => $date->format('Y-m-d'),
             'rstdscprovidencia' => $providencia,

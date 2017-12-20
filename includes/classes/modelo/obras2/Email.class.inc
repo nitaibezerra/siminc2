@@ -2890,7 +2890,7 @@ DML;
         $valorp = percentualSupEmpresa($emp->empid);
 
         $dados = array(
-            'usucpf' => '',
+            'usucpf' => '00000000191',
             'emlconteudo' => '
             <html>
                 <head>
