@@ -1,3 +1,0 @@
-<?php
-	// Teste SVN
-?>

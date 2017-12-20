@@ -1,5 +1,0 @@
-Online Documentation is locate here:
-
-http://ajphpth.sourceforge.net
-
-Have Fun

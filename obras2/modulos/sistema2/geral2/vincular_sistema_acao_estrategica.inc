@@ -1,1 +1,0 @@
-<?php include APPRAIZ .'includes/vincular_sistema_acao_estrategica.inc'; ?>
