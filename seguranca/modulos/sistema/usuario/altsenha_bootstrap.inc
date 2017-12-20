@@ -11,48 +11,37 @@
  * Data: 18/08/2014
  */
 
-$modulo = "inicio"; 
+$urlLocation = str_replace($_SERVER['PHP_SELF'], '', $_SERVER['REQUEST_URI']);
 //ver($_REQUEST, d);
-if (! $_SESSION ['logincadastro']) {
+if (!$_SESSION ['logincadastro']) {
     if ($_REQUEST ['act'] == 'alterar') {
         // checagem de consistencias
         $sql = "select ususenha from usuario where usucpf='" . $_SESSION ['usucpf'] . "'";
-        $senha_banco = $db->recuperar ( $sql );
-        $senha = md5_decrypt_senha ( $senha_banco ['ususenha'], '' );
+        $senha_banco = $db->recuperar($sql);
+        $senha = md5_decrypt_senha($senha_banco ['ususenha'], '');
 
-        if ($senha != $_REQUEST ['senhaatual']) {?>
-             <!--A senha atual não confere-->
-            <script>
-                alert ('A senha atual não confere.');
-                history.back();
-            </script>
-
-            <?php exit ();
+        if ($senha != $_REQUEST ['senhaatual']) {
+            simec_redirecionar($urlLocation, 'warning', 'A senha atual não confere.');
+            exit();
         }
     }
 }
 
-if (($_REQUEST ['act'] == 'alterar') and (! is_array ( $msgerro ))) {
-    // fazer alteração da senha.
-	
-    $sql = "update usuario set usuchaveativacao = 't', ususenha='" . md5_encrypt_senha ( $_REQUEST ['novasenha'], '' ) . "' where usucpf='" . $_SESSION ['usucpf'] . "'";
-    $saida = $db->executar ( $sql );
-    $db->commit ();
-    unset ( $_SESSION ['logincadastro'] );
-    unset ( $_SESSION ['chave'] );
-    $db->sucesso ( $modulo );
-        
+if (($_REQUEST['act'] == 'alterar') and ( !is_array($msgerro))) {
+    # fazer alteração da senha.
+    $sql = "update usuario set usuchaveativacao = 't', ususenha='" . md5_encrypt_senha($_REQUEST['novasenha'], '') . "' where usucpf='" . $_SESSION ['usucpf'] . "'";
+    $saida = $db->executar($sql);
+    $db->commit();
+    unset($_SESSION['logincadastro']);
+    unset($_SESSION['chave']);
+    simec_redirecionar($urlLocation, 'success', 'Sua senha foi cadastrada com sucesso!');
 }
 
 include APPRAIZ . "includes/cabecalho.inc";
 print '<br>';
 
 if ($_SESSION ['logincadastro']) {
-    print '<section class="alert alert-info col-md-6 col-md-offset-3 text-center">';
-    print "<p>Seu cadastro foi realizado com sucesso!</p>";
-    print "<p>Entretanto, é necessário que você troque-a no primeiro acesso.</p>";
-    print '</section>';
-    print '<br>';
+    simec_redirecionar($urlLocation, 'success', 'Sua senha foi cadastrada com sucesso! <br /><br /> Entretanto, é necessário que você troque-a no primeiro acesso.');
 }
 
 ?>
@@ -71,8 +60,7 @@ if ($_SESSION ['logincadastro']) {
                     <h5>Alterar Senha Atual</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="POST" name="formulario" id="formAltSenha" role="form" class="form-horizontal">
-                        <input type=hidden name="modulo" value="<?=$modulo?>">
+                    <form id="formAltSenha" name="formulario" class="form-horizontal" method="post">
                         <input type=hidden name="act" id="act" value=0>
                         <?php
                             if($_SESSION['logincadastro']):
@@ -86,7 +74,7 @@ if ($_SESSION ['logincadastro']) {
                         ?>
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-primary" type="button" onclick="validar_cadastro()">
+                                <button class="btn btn-primary" type="submit" onclick="validar_cadastro(); return false;">
                                     <span class="glyphicon glyphicon-saved"></span> Atualizar
                                 </button>
                             </div>

@@ -1,6 +1,6 @@
 <?php
 
-$aImpedimento = (new Emendas_Model_Impedimento)->recuperarTodos();
+$aImpedimento = (new Emendas_Model_Impedimento)->recuperarTodos('*', array("impstatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,18 +27,26 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>impdsc</th>
+                                <th>Código</th>
+                                <th>Nome</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aImpedimento as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/impedimento_form&acao=A&impid=<?php echo $dados['impid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['impdsc']; ?></td>
-                                </tr>
-                            <?php } ?>        
+                                <?php foreach($aImpedimento as $dados){ ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a title="Alterar" href="?modulo=apoio/impedimento_form&acao=A&impid=<?php echo $dados['impid']; ?>">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <?php echo $dados['impcod']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $dados['impdsc']; ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

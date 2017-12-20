@@ -1,16 +1,16 @@
 <?php
 
-$cAlteracaoOrcamentaria = new Emendas_Controller_AlteracaoOrcamentaria();
+$cProponentetipo = new Emendas_Controller_Proponentetipo();
 switch ($_REQUEST['req']) {
     case 'salvar':
-        $cAlteracaoOrcamentaria->salvar($_REQUEST);
+        $cProponentetipo->salvar($_REQUEST);
     die;
     case 'excluir':
-        $cAlteracaoOrcamentaria->excluir($_REQUEST['aloid']);
+        $cProponentetipo->excluir($_REQUEST['prtid']);
     die;
 }
 
-$mAlteracaoOrcamentaria = new Emendas_Model_AlteracaoOrcamentaria($_REQUEST['aloid']);
+$mProponentetipo = new Emendas_Model_Proponentetipo($_REQUEST['prtid']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -31,18 +31,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content">
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
                         <input type="hidden" name="req" id="req" value="salvar" />
-                        <input name="aloid" id="aloid" type="hidden" value="<?php echo $mAlteracaoOrcamentaria->aloid; ?>">
+                        <input name="prtid" id="prtid" type="hidden" value="<?php echo $mProponentetipo->prtid; ?>">
                         
                         <?php                         
-                            echo $simec->input('alodsc', 'Nome', $mAlteracaoOrcamentaria->alodsc, ['maxlength' => 100]);                        
+                        echo $simec->input('prtdsc', 'Nome', $mProponentetipo->prtdsc, ['maxlength' => 500]);                        
                         ?>
                         
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <a href="?modulo=apoio/alteracaoorcamentaria&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                <?php if($mAlteracaoOrcamentaria->aloid){ ?>
-                                    <a href="?modulo=apoio/alteracaoorcamentaria_form&acao=A&req=excluir&aloid=<?php echo $mAlteracaoOrcamentaria->aloid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                <a href="?modulo=apoio/proponentetipo&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                <?php if($mProponentetipo->prtid){ ?>
+                                    <a href="?modulo=apoio/proponentetipo_form&acao=A&req=excluir&prtid=<?php echo $mProponentetipo->prtid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
                                 <?php } ?>                                
                             </div>
                         </div>                        

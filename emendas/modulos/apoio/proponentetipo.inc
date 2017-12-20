@@ -1,6 +1,6 @@
 <?php
 
-$aPartido = (new Emendas_Model_Partido)->recuperarTodos('*', array("parstatus = 'A'"));
+$aProponentetipo = (new Emendas_Model_Proponentetipo)->recuperarTodos('*', array("prtstatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -20,29 +20,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="ibox-content">
                     
-                    <a class="btn btn-small btn-warning" href="?modulo=apoio/partido_form&acao=A">Novo</a>
+                    <a class="btn btn-small btn-warning" href="?modulo=apoio/proponentetipo_form&acao=A">Novo</a>
                     
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Sigla</th>
-                                <th>Lado</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aPartido as $dados){ ?>
+                            <?php foreach($aProponentetipo as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/partido_form&acao=A&parid=<?php echo $dados['parid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        <a title="Alterar" href="?modulo=apoio/proponentetipo_form&acao=A&prtid=<?php echo $dados['prtid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
-                                    <td><?php echo $dados['parcod']; ?></td>
-                                    <td><?php echo $dados['pardsc']; ?></td>
-                                    <td><?php echo $dados['parsigla']; ?></td>
-                                    <td><?php echo retornarDescricaoLadoPartido($dados['parlado']); ?></td>
+                                    <td><?php echo $dados['prtdsc']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

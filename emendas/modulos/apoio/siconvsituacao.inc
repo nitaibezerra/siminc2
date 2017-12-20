@@ -1,6 +1,6 @@
 <?php
 
-$aSiconvSituacao = (new Emendas_Model_SiconvSituacao)->recuperarTodos();
+$aSiconvSituacao = (new Emendas_Model_SiconvSituacao)->recuperarTodos('*', array("sitstatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -25,22 +25,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>sitdsc</th>
-                                <th>sitcodigo</th>
-                            </tr>
+                                <tr class="text-center">
+                                    <th width="10%">Ações</th>
+                                    <th>Código</th>
+                                    <th>Situação</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aSiconvSituacao as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/siconvsituacao_form&acao=A&sitid=<?php echo $dados['sitid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['sitdsc']; ?></td>
-                                    <td><?php echo $dados['sitcodigo']; ?></td>
-                                </tr>
-                            <?php } ?>        
+                                <?php foreach($aSiconvSituacao as $dados){ ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a title="Alterar" href="?modulo=apoio/siconvsituacao_form&acao=A&sitid=<?php echo $dados['sitid']; ?>">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                        <td><?php echo $dados['sitcodigo']; ?></td>
+                                        <td><?php echo $dados['sitdsc']; ?></td>
+                                    </tr>
+                                <?php } ?>        
                             </tbody>
                         </table>
                     </div>

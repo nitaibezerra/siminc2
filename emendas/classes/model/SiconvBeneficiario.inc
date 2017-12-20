@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento da entidade emendas.impedimento
+ * Classe de mapeamento da entidade emendas.siconvbeneficiario
  *
  * @category Class
  * @package  A1
  * @author   ORION TELES DE MESQUITA <orion.mesquita@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 29-11-2017
+ * @version  Release: 19-12-2017
  * @link     no link
  */
 
@@ -15,7 +15,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 
 
 /**
- * Emendas_Model_Impedimento
+ * Emendas_Model_SiconvBeneficiario
  *
  * @category Class
  * @package  A1
@@ -24,14 +24,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @version  Release: 
  * @link     no link
  */
-class Emendas_Model_Impedimento extends Modelo
+class Emendas_Model_SiconvBeneficiario extends Modelo
 {
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = 'emendas.impedimento';
+    protected $stNomeTabela = 'emendas.siconvbeneficiario';
 
     /**
      * Chave primaria.
@@ -39,7 +39,7 @@ class Emendas_Model_Impedimento extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
-        'impid',
+        'sibid',
     );
     /**
      * Chaves estrangeiras.
@@ -54,10 +54,11 @@ class Emendas_Model_Impedimento extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
-        'impid' => null,
-        'impcod' => null,
-        'impdsc' => null,
-        'impstatus' => null
+        'sibid' => null,
+        'sicid' => null,
+        'procnpj' => null,
+        'emenumero' => null,
+        'benid' => null,
     );
 
 }//end Class

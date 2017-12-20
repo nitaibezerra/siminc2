@@ -1,6 +1,6 @@
 <?php
 
-$aAlteracaoOrcamentaria = (new Emendas_Model_AlteracaoOrcamentaria)->recuperarTodos();
+$aAlteracaoOrcamentaria = (new Emendas_Model_AlteracaoOrcamentaria)->recuperarTodos('*', array("alostatus = 'A'"));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,7 +27,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>alodsc</th>
+                                <th>Nome</th>
                             </tr>
                             </thead>
                             <tbody>

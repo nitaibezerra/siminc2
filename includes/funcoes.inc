@@ -5327,3 +5327,41 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
     return $listaUsuarioPlanejamento;
 }
 
+/**
+ * Recebe o caractere que representa o sexo e retorna uma string com a descrição Masculino ou Feminino.
+ * 
+ * @param string $sexo 'M', 'F' ou Vazio
+ * @return string
+ */
+function retornarDescricaoSexo($sexo){
+    $descricao = '';
+    if($sexo == 'M'){
+        $descricao = 'Masculino';
+    }
+    
+    if($sexo == 'F'){
+        $descricao = 'Feminino';
+    }
+    
+    return $descricao;
+}
+
+/**
+ * Recebe o caractere que representa o sexo e retorna uma string com a descrição Base ou Oposição.
+ * 
+ * @param string $lado 'B', 'O' ou Vazio
+ * @return string
+ */
+function retornarDescricaoLadoPartido($lado){
+    $descricao = '';
+    if($lado == 'B'){
+        $descricao = 'Base';
+    }
+    
+    if($lado == 'O'){
+        $descricao = 'Oposição';
+    }
+    
+    return $descricao;
+}
+

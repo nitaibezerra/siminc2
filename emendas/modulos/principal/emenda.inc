@@ -29,20 +29,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th width="10%">Ações</th>
                                 <th>Número</th>
                                 <th>Autor</th>
+                                <th>Beneficiário</th>
                                 <th>Unidade</th>
-                                <th>Funcional</th>
+                                <th>Situação</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($aEmenda as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
-                                        <a title="Alterar" href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $dados['emeid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        <a title="Emenda" href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $dados['emeid']; ?>"><i class="fa fa-file-o"></i></a>
+                                        <a title="Beneficiário" href="?modulo=principal/beneficiario_form&acao=A&benid=<?php echo $dados['benid']; ?>" style="margin-left: 5px;"><i class="fa fa-usd"></i></a>
                                     </td>
                                     <td><?php echo $dados['emenumero']; ?></td>
                                     <td><?php echo $dados['autnome']; ?></td>
-                                    <td><?php echo $dados['unonome']; ?></td>
-                                    <td><?php echo $dados['funcional']; ?></td>
+                                    <td><?php echo $dados['pronome']; ?></td>
+                                    <td><?php echo $dados['unidade']; ?></td>
+                                    <td><?php echo $dados['sitdsc']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

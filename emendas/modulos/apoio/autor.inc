@@ -29,6 +29,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Código</th>
                                     <th>Nome</th>
+                                    <th>Sexo</th>
                                     <th>Tipo</th>
                                     <th>Partido</th>
                                     <th>E-mail</th>
@@ -36,19 +37,20 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($listaAutor as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/autor_form&acao=A&autid=<?php echo $dados['autid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['autcod']; ?></td>
-                                    <td><?php echo $dados['autnome']; ?></td>
-                                    <td><?php echo $dados['atpdsc']; ?></td>
-                                    <td><?php echo $dados['parsigla']; ?></td>
-                                    <td><?php echo $dados['autemail']; ?></td>
-                                    <td><?php echo $dados['estuf']; ?></td>
-                                </tr>
-                            <?php } ?>        
+                                <?php foreach($listaAutor as $dados){ ?>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a title="Alterar" href="?modulo=apoio/autor_form&acao=A&autid=<?php echo $dados['autid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        </td>
+                                        <td><?php echo $dados['autcod']; ?></td>
+                                        <td><?php echo $dados['autnome']; ?></td>
+                                        <td><?php echo retornarDescricaoSexo($dados['autsexo']); ?></td>
+                                        <td><?php echo $dados['atpdsc']; ?></td>
+                                        <td><?php echo $dados['parsigla']; ?></td>
+                                        <td><?php echo $dados['autemail']; ?></td>
+                                        <td><?php echo $dados['estuf']; ?></td>
+                                    </tr>
+                                <?php } ?>        
                             </tbody>
                         </table>
                     </div>
