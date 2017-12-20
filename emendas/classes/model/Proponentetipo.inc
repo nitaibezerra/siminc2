@@ -1,16 +1,4 @@
 <?php
-/**
- * Classe de mapeamento da entidade emendas.proponentetipo
- *
- * @category Class
- * @package  A1
- * @author   Adriano <teste@teste.com>
- * @license  GNU simec.mec.gov.br
- * @version  Release: 19-12-2017
- * @link     no link
- */
-
-
 
 /**
  * Emendas_Model_Proponentetipo
@@ -57,5 +45,32 @@ class Emendas_Model_Proponentetipo extends Modelo
         'prtstatus' => null,
     );
 
+    /**
+     * Monta consulta para retornar dados para a combo.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function buscarTodosCombo(stdClass $filtro)
+    {
+        $where = '';
+//        if($filtro->unicod){
+//            $where = "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
+//        }
+        
+        $sql = "
+            SELECT
+                prtid AS codigo,
+                prtdsc AS descricao
+            FROM emendas.proponentetipo
+            WHERE
+                prtstatus = 'A' $where
+            ORDER BY
+                descricao
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+    
 }//end Class
 ?>

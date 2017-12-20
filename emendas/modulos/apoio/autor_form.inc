@@ -6,11 +6,7 @@ switch ($_REQUEST['req']) {
         $cAutor->salvar($_REQUEST);
     die;
     case 'excluir':
-        $atributos = array(
-            'autid' => $_REQUEST['autid'],
-            'autstatus' => 'I'
-        );
-        $cAutor->salvar($atributos);
+        $cAutor->excluir($_REQUEST['autid']);
     die;
 }
 

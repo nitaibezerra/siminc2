@@ -4,6 +4,7 @@ $cProponente = new Emendas_Controller_Proponente();
 switch ($_REQUEST['req']) {
     case 'salvar':
         $atributos = array(
+            'prtid' => $_REQUEST['prtid'],
             'pronome' => $_REQUEST['pronome'],
             'procnpj' => str_replace(array('.', '/', '-'), '', $_REQUEST['procnpj']),
             'protelefone' => str_replace(array('(', ')', ' ', '-'), '', $_REQUEST['protelefone']),
@@ -13,15 +14,16 @@ switch ($_REQUEST['req']) {
             $atributos['proid'] = $_REQUEST['proid'];
         }
         $cProponente->salvar($atributos);
-        die;
+    die;
     case 'excluir':
-        $cProponente->salvar(array('proid' => $_REQUEST['proid'], 'prostatus' => 'I'));
-        die;
+        $cProponente->excluir($_REQUEST['proid']);
+    die;
 }
 
 $mProponente = new Emendas_Model_Proponente($_REQUEST['proid']);
 
 include APPRAIZ . "includes/cabecalho.inc";
+
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -43,10 +45,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="proid" id="proid" type="hidden" value="<?php echo $mProponente->proid; ?>">
                         
                         <?php                         
-                            echo $simec->input('pronome', 'Nome', $mProponente->pronome, ['maxlength' => 300]);                    
-                            echo $simec->cnpj('procnpj', 'CNPJ', $mProponente->procnpj);                    
+                            echo $simec->select('prtid', 'Tipo de Proponente', $mProponente->prtid, Emendas_Model_Proponentetipo::buscarTodosCombo((object) array()));
+                            echo $simec->input('pronome', 'Nome', $mProponente->pronome, ['maxlength' => 300]);
+                            echo $simec->cnpj('procnpj', 'CNPJ', $mProponente->procnpj);
                             echo $simec->telefone('protelefone', 'Telefone', $mProponente->protelefone, ['required', 'maxlength' => 15]);
-                            echo $simec->email('proemail', 'E-mail', $mProponente->proemail, ['required', 'maxlength' => 300]);                        
+                            echo $simec->email('proemail', 'E-mail', $mProponente->proemail, ['required', 'maxlength' => 300]);
                         ?>
                         
                         <div class="form-group">
