@@ -90,49 +90,72 @@ class FuncoesBootstrap{
     function carrega_unidade_bootstrap($entid, $editavel, $usucpf){
         global $db;
 
-        if ($editavel == null){
+        if($editavel == null){
             $editavel = 'S';
         }
-        if ( $entid == 999999 ){
+
+        if($entid == 999999){
             echo "<p class=\"form-control-static\">";
-            inputTexto("orgao", $valor, "orgao", 50,false,array('habil'=>$editavel));
+                inputTexto("orgao", $valor, "orgao", 50,false,array('habil'=>$editavel));
             echo "</p>";
         } else {	
-            if ($editavel == 'N' ){	
+            if($editavel == 'N'){
                 $sql = "SELECT
                             u.unicod AS codigo,
-                            u.unicod||' - '||u.unidsc AS descricao
+                            u.unicod || ' - ' || u.unidsc AS descricao
                         FROM unidade u
-                        INNER JOIN seguranca.usuario su ON u.unicod = su.unicod
-                        WHERE usucpf = '{$usucpf}'";
+                            JOIN seguranca.usuario su ON u.unicod = su.unicod
+                        WHERE
+                            usucpf = '{$usucpf}'";
                 inputCombo("unicod", $sql, $valor, "unicod",array('acao' => 'selecionar_unidade_orcamentaria','habil'=>'N'));
-            }else {	
-               if (!empty($entid) ){	
-                   $uo_total = $db->pegaUm(" SELECT
-                                                count(u.unicod)
-                                             FROM unidade u
-                                             INNER JOIN entidade.entidade e ON u.orgcod = e.entorgcod
-                                             WHERE unistatus='A' 
-                                             AND unitpocod='U' 
-                                             AND e.entid ='{$entid}'");
+            } else {
+               if(!empty($entid)){
+                   $uo_total = $db->pegaUm("
+                        SELECT
+                            count(u.unicod)
+                        FROM unidade u
+                            JOIN entidade.entidade e ON u.orgcod = e.entorgcod
+                        WHERE
+                            unistatus='A'
+                            AND unitpocod='U' 
+                            AND e.entid ='{$entid}' ");
                 }
-                if ($uo_total > 0){	
+
+                if($uo_total > 0){
                     $sql = "
                         SELECT DISTINCT
                             u.unicod AS codigo,
-                            u.unicod||' - '||unidsc AS descricao
+                            u.unicod || ' - ' || unidsc AS descricao
                         FROM unidade u
-                        INNER JOIN entidade.entidade e ON orgcod = entorgcod
-                        WHERE unistatus='A' 
-                            AND u.unitpocod='U' 
+                            JOIN entidade.entidade e ON orgcod = entorgcod
+                        WHERE
+                            unistatus='A'
+                            AND u.unitpocod='U'
                             AND entid = '{$entid}'
-                        ORDER BY u.unicod";      
-                    inputCombo("unicod", $sql, $valor, "unicod",array('acao' => 'carregarUnidadeGestora'));
+                        ORDER BY
+                            u.unicod";
+                    inputCombo("unicod", $sql, $valor, "unicod", array('acao' => 'carregarUnidadeGestora'));
                 } else {
-                    if(!$entid || trim($entid) == "")
-                        echo '<p id="unicod" class="form-control-static" style="color:#428bca;">Selecione um Órgão.</p>';
-                    else                            
-                        echo '<p id="unicod" class="form-control-static" style="color:#f0ad4e;">Este órgão não possui uma Unidade Orçamentária.</p>';
+                    $sql = "
+                        SELECT
+                            unocod AS codigo,
+                            unocod || ' - ' || unonome || '(' || unosigla || ')' AS descricao
+                        FROM public.unidadeorcamentaria u
+                        WHERE
+                            prsano = '2018'
+                        ORDER BY
+                            descricao
+                    ";
+                    $listaUo = $db->carregar($sql);
+                    if($listaUo){
+                        inputCombo("unicod", $listaUo, $valor, "unicod", array('acao' => 'carregarUnidadeGestora'));
+                    } else {
+                        if(!$entid || trim($entid) == ""){
+                            echo '<p id="unicod" class="form-control-static" style="color:#428bca;">Selecione um Órgão.</p>';
+                        } else {
+                            echo '<p id="unicod" class="form-control-static" style="color:#f0ad4e;">Este órgão não possui uma Unidade Orçamentária.</p>';
+                        }
+                    }
                 }
             }
         }
