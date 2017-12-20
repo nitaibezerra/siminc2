@@ -323,7 +323,9 @@ require_once APPRAIZ . "includes/funcoesspo_componentes.php";
                 <section class="col-md-10">
                 <?php
                     $sql = "select carid as codigo, cardsc as descricao from public.cargo order by descricao";
+                    $carid = $carid? $carid: 9;
                     inputCombo("carid", $sql, $valor, "carid",array('acao'=>'alternarExibicaoCargo','classe'=>'form-control','habil' => $habilitar_edicao));
+                    $valor = $valor? $valor: 'Outros';
                     inputTexto('usufuncao', $valor, 'usufuncao', 100,false,array());
                 ?>
                     <script>
