@@ -23,7 +23,7 @@
 			
 			// compila os dados da mensagem
 			$remetente = '';
-			$destinatarios = array( '', '00271457198' );
+			$destinatarios = array( '', '' );
 			$assunto = 'assunto qualquer';
 			$conteudo = 'conteudo qualquer';
 			$anexos = array(
