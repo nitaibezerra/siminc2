@@ -1510,11 +1510,28 @@ function buscarPTRES(stdClass $filtros) {
                     JOIN planacomorc.pi_complemento pc USING(pliid)
                 WHERE
                     plistatus = 'A'
+                    AND pliano = '{$filtros->exercicio}'
                 GROUP BY
                     ptrid,
                     pli.ungcod
             ) dtp ON(dtp.ptrid = ptr.ptrid AND uni.suocod = dtp.ungcod)
-            LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+            LEFT JOIN (
+                SELECT
+                    ex.unicod,
+                    pi.ungcod,
+                    ex.ptres,
+                    ex.exercicio,
+                    sum(ex.vlrempenhado) AS total
+                FROM spo.siopexecucao ex
+                    JOIN monitora.pi_planointerno pi ON(ex.plicod = pi.plicod AND ex.exercicio = pi.pliano)
+                WHERE
+                    ex.exercicio = '{$filtros->exercicio}'
+                GROUP BY
+                    ex.unicod,
+                    pi.ungcod,
+                    ex.ptres,
+                    ex.exercicio
+                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod AND uni.suocod = pemp.ungcod)
         WHERE  aca.prgano = '{$filtros->exercicio}'
             AND ptr.ptrstatus = 'A'
             $where
@@ -1537,8 +1554,7 @@ function buscarPTRES(stdClass $filtros) {
             ptr.ptres
 SQL;
 
-    
-//    ver($sql, d);
+//ver($sql, d);
     $result = is_array($result) ? $result : Array();
 //ver($sql,d);
     $result = $db->carregar($sql);
@@ -1630,7 +1646,23 @@ function buscarPtresFnc(stdClass $filtros) {
                     pip2.ptrid,
                     pli.ungcod
             ) cadastrado ON(ptr.ptrid = cadastrado.ptrid AND pi.ungcod = cadastrado.ungcod)
-            LEFT JOIN siafi.uo_ptrempenho pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+            LEFT JOIN (
+                SELECT
+                    ex.unicod,
+                    pi.ungcod,
+                    ex.ptres,
+                    ex.exercicio,
+                    sum(ex.vlrempenhado) AS total
+                FROM spo.siopexecucao ex
+                    JOIN monitora.pi_planointerno pi ON(ex.plicod = pi.plicod AND ex.exercicio = pi.pliano)
+                WHERE
+                    ex.exercicio = '{$filtros->exercicio}'
+                GROUP BY
+                    ex.unicod,
+                    pi.ungcod,
+                    ex.ptres,
+                    ex.exercicio
+            ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod AND uni.suocod = pemp.ungcod)
         WHERE
             aca.acasnrap = FALSE
             AND aca.prgano = '{$filtros->exercicio}'
@@ -1680,7 +1712,7 @@ function formatarValoresFuncional($result){
         $result[$key]['ptrdotacaocapital'] = mascaraMoeda($result[$key]['ptrdotacaocapital'], false);
         $result[$key]['cadastradocusteio'] = mascaraMoeda($result[$key]['cadastradocusteio'], false);
         $result[$key]['cadastradocapital'] = mascaraMoeda($result[$key]['cadastradocapital'], false);
-        $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
+        $result[$key]['nao_det_pi'] = number_format($result[$key]['nao_det_pi'], 2, ',', '.');
         $result[$key]['nao_det_pi_custeio'] = mascaraMoeda($result[$key]['nao_det_pi_custeio'], false);
         $result[$key]['nao_det_pi_capital'] = mascaraMoeda($result[$key]['nao_det_pi_capital'], false);
         $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
@@ -1689,7 +1721,7 @@ function formatarValoresFuncional($result){
         $result[$key]['pipvalor_'] = $result[$key]['pipvalor'];
         $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
     }
-    
+
     return $result;
 }
 
@@ -1770,23 +1802,29 @@ function buscarPTRESdoPIInstituicoes($pliid, $sbaid, $ptrid) {
         ORDER BY
             ptr.ptres
 SQL;
-    $result = is_array($result) ? $result : Array();
+//    $result = is_array($result) ? $result : Array();
 //ver($sql,d);
+//    $result = $db->carregar($sql);
+//    if (is_array($result)) {
+//        foreach ($result as $key => $_) {
+//            $result[$key]['dotacaoatual'] = mascaraMoeda($result[$key]['dotacaoatual'], false);
+//            $result[$key]['det_subacao'] = mascaraMoeda($result[$key]['det_subacao'], false);
+//            $result[$key]['nao_det_subacao'] = mascaraMoeda($result[$key]['nao_det_subacao'], false);
+//            $result[$key]['det_pi'] = mascaraMoeda($result[$key]['det_pi'], false);
+//            $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
+//            $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
+//            $result[$key]['nao_empenhado'] = mascaraMoeda($result[$key]['nao_empenhado'], false);
+//            $result[$key]['pipvalor_'] = $result[$key]['pipvalor']; // -- Não formatado - para soma na interface
+//            $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
+//        }
+//    }
+//    return $result;
     $result = $db->carregar($sql);
-    if (is_array($result)) {
-        foreach ($result as $key => $_) {
-            $result[$key]['dotacaoatual'] = mascaraMoeda($result[$key]['dotacaoatual'], false);
-            $result[$key]['det_subacao'] = mascaraMoeda($result[$key]['det_subacao'], false);
-            $result[$key]['nao_det_subacao'] = mascaraMoeda($result[$key]['nao_det_subacao'], false);
-            $result[$key]['det_pi'] = mascaraMoeda($result[$key]['det_pi'], false);
-            $result[$key]['nao_det_pi'] = mascaraMoeda($result[$key]['nao_det_pi'], false);
-            $result[$key]['empenhado'] = mascaraMoeda($result[$key]['empenhado'], false);
-            $result[$key]['nao_empenhado'] = mascaraMoeda($result[$key]['nao_empenhado'], false);
-            $result[$key]['pipvalor_'] = $result[$key]['pipvalor']; // -- Não formatado - para soma na interface
-            $result[$key]['pipvalor'] = number_format($result[$key]['pipvalor'], 2, ',', '.');
-        }
+    if(is_array($result)) {
+        $result = formatarValoresFuncional($result);
     }
     return $result;
+    
 }
 
 function buscarUmPTRES(stdClass $objFiltros) {
@@ -3236,34 +3274,6 @@ function exibirIconeDelegadas($pliid){
     }
     
     return $strIcone;
-}
-
-/**
- * Busca Sub-Unidades vinculadas ao usuário.
- * 
- * @return array
- */
-function buscarSubUnidadeUsuario(stdClass $filtros){
-    global $db;
-    $listaSubUnidadeUsuario = array();
-    $sql = "
-        SELECT DISTINCT
-            suo.suocod
-        FROM planacomorc.usuarioresponsabilidade rpu
-            JOIN public.vw_subunidadeorcamentaria suo ON rpu.ungcod = suo.suocod
-        WHERE
-            rpu.rpustatus = 'A'
-            AND rpu.usucpf = '". pg_escape_string($filtros->usucpf). "'
-    ";
-//ver($sql,d);
-    $resultado = $db->carregar($sql);
-    if($resultado){
-        foreach($resultado as $contador => $subUnidade){
-            $listaSubUnidadeUsuario[] = $subUnidade['suocod'];
-        }
-    }
-    
-    return $listaSubUnidadeUsuario;
 }
 
 function formatarObrid($obrid)

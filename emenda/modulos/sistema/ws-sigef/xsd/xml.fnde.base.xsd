@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.1.654 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="created">
+    <xs:restriction base="xs:dateTime" />
+  </xs:simpleType>
+  <xs:complexType name="header">
+    <xs:annotation>
+      <xs:documentation>Cabeçalho do XML</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="app" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Nome da aplicação que gerou o arquivo XML</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="version" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Versão da aplicação que gerou o XML</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="created" type="created">
+        <xs:annotation>
+          <xs:documentation>Data em que o arquivo XML foi criado</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="message">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Código de identificação da mensagem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="text" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Descritivo da mensagem</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="type">
+        <xs:annotation>
+          <xs:documentation>Tipo de Mensagem, pode ser: Informação ou Alerta ou Erro</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Info" />
+            <xs:enumeration value="Alert" />
+            <xs:enumeration value="Error" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="row">
+    <xs:annotation>
+      <xs:documentation>Linha de registro.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any processContents="skip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="status">
+    <xs:annotation>
+      <xs:documentation>Situação do XML</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="result" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Resultado da criação do XML.
+
+Sendo 0 (false), obrigatoriamente será criada a tag [status.error] para que seja detalhado as mensagens de erros e alertas.
+Sendo 1 (true), obrigatoriamente será criada a tag [body], com o conteúdo a ser carregado pelo solicitante.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="message" type="message" />
+      <xs:element minOccurs="0" maxOccurs="1" name="error">
+        <xs:annotation>
+          <xs:documentation>Lista de Erros, caso o [status.result] seja igual a 0 (false), essa tag existirá para que seja relatado os erros ou alertas encontrados.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="unbounded" name="message" type="message" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="uf">
+    <xs:restriction base="xs:string">
+      <xs:length value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="cep">
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="\d{8}" />
+      <xs:totalDigits value="8" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

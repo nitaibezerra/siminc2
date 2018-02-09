@@ -15,7 +15,9 @@
                 <tr>
                     <td class="text-center">
                         <a title="Alterar" class="editar-detalhe" href="?modulo=principal/emenda_form&acao=A&req=formulario-detalhe&emdid=<?php echo $dados['emdid']; ?>"><i class="fa fa-pencil"></i></a>
-                        <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/emenda_form&acao=A&req=excluir-detalhe&emdid=<?php echo $dados['emdid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <?php if($podeEditar): ?>
+                            <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/emenda_form&acao=A&req=excluir-detalhe&emdid=<?php echo $dados['emdid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <?php endif; ?>
                     </td>
                     <td class="text-center"><?php echo $dados['gndcod']; ?></td>
                     <td class="text-center"><?php echo $dados['mapcod']; ?></td>

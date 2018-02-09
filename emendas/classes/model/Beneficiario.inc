@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe de mapeamento da entidade emendas.beneficiario
  *
@@ -9,10 +10,7 @@
  * @version  Release: 13-11-2017
  * @link     no link
  */
-
-
-require_once APPRAIZ .'includes/classes/Modelo.class.inc';
-
+require_once APPRAIZ. 'includes/classes/Modelo.class.inc';
 
 /**
  * Emendas_Model_Beneficiario
@@ -54,6 +52,14 @@ class Emendas_Model_Beneficiario extends Modelo
         'esfid' => array('tabela' => 'territorios.esfera', 'pk' => 'esfid'),
         'proid' => array('tabela' => 'emendas.proponente', 'pk' => 'proid'),
         'suoid' => array('tabela' => 'subunidadeorcamentaria', 'pk' => 'suoid'),
+        'oppid' => array('tabela' => 'objetivoppa', 'pk' => 'oppid'),
+        'mppid' => array('tabela' => 'metappa', 'pk' => 'mppid'),
+        'ippid' => array('tabela' => 'iniciativappa', 'pk' => 'ippid'),
+        'mpnid' => array('tabela' => 'metapnc', 'pk' => 'mpnid'),
+        'ipnid' => array('tabela' => 'indicadorpnc', 'pk' => 'ipnid'),
+        'pumid' => array('tabela' => 'monitora.pi_unidade_medida', 'pk' => 'pumid'),
+        'pprid' => array('tabela' => 'monitora.pi_produto', 'pk' => 'pprid'),
+        'pliid' => array('tabela' => 'monitora.pi_planointerno', 'pk' => 'pliid')
     );
 
     /**
@@ -90,8 +96,37 @@ class Emendas_Model_Beneficiario extends Modelo
         'benparecertecnico' => null,
         'benparecerjuridico' => null,
         'docid' => null,
+        'plititulo' => null,
+        'plidsc' => null,
+        'oppid' => null,
+        'mppid' => null,
+        'ippid' => null,
+        'mpnid' => null,
+        'ipnid' => null,
+        'pumid' => null,
+        'pprid' => null,
+        'picquantidade' => null,
+        'pliid' => null
     );
 
+    public function carregarPorId($id) {
+        $id = trim(str_replace("'", "", (string) $id));
+        $sql = "
+            SELECT
+                pi_planointerno.pliid AS pliid,
+                *
+            FROM $this->stNomeTabela
+                LEFT JOIN monitora.pi_planointerno ON(
+                    $this->stNomeTabela.pliid = pi_planointerno.pliid
+                    AND pi_planointerno.plistatus = 'A')
+            WHERE
+                {$this->arChavePrimaria[0]} = '$id'
+        ";
+
+        $arResultado = $this->pegaLinha($sql);
+        $this->popularObjeto(array_keys($this->arAtributos), $arResultado);
+    }
+    
     public function recuperarTiposParecer()
     {
         return [
@@ -162,6 +197,69 @@ class Emendas_Model_Beneficiario extends Modelo
                     $mBeneficiarioAlteracao->salvar();
 
                     $mBeneficiarioAlteracao->beaid = null;
+                }
+            }
+        }
+    }
+    
+    public function associarSniic($dados)
+    {
+        if($this->benid){
+
+            $mSniic = new Emendas_Model_Sniic();
+            $mSniic->excluirVarios("benid = '$this->benid'");
+
+            if(isset($dados['lista_sniic']) && is_array($dados['lista_sniic'])){
+
+                $mSniic->benid = $this->benid;
+
+                foreach($dados['lista_sniic'] as $sniic){
+                    $mSniic->sninumero = $sniic;
+                    $mSniic->salvar();
+
+                    $mSniic->sniid = null;
+                }
+            }
+        }
+    }
+    
+    public function associarPronac($dados)
+    {
+        if($this->benid){
+
+            $mPronac = new Emendas_Model_Pronac();
+            $mPronac->excluirVarios("benid = '$this->benid'");
+
+            if(isset($dados['lista_pronac']) && is_array($dados['lista_pronac'])){
+
+                $mPronac->benid = $this->benid;
+
+                foreach($dados['lista_pronac'] as $pronac){
+                    $mPronac->pronumero = $pronac;
+                    $mPronac->salvar();
+
+                    $mPronac->proid = null;
+                }
+            }
+        }
+    }
+    
+    public function associarAnexo($dados)
+    {
+        if($this->benid){
+
+            $mBeneficiarioAnexo = new Emendas_Model_BeneficiarioAnexo();
+            $mBeneficiarioAnexo->excluirVarios("benid = '$this->benid'");
+
+            if(isset($dados['listaAnexos']) && is_array($dados['listaAnexos'])){
+
+                $mBeneficiarioAnexo->benid = $this->benid;
+
+                foreach($dados['listaAnexos'] as $arqid){
+                    $mBeneficiarioAnexo->arqid = $arqid;
+                    $mBeneficiarioAnexo->salvar();
+
+                    $mBeneficiarioAnexo->beaid = null;
                 }
             }
         }

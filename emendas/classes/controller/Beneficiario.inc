@@ -15,21 +15,32 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario->benpago = $dados['benpago'] == 't' ? 't' : 'f';
             $mBeneficiario->bented = $dados['bented'] == 't' ? 't' : 'f';
 
-            $aCamposNulos = ['suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid', 'mdeid', 'neeid', 'capid', 'bented'];
+            $aCamposNulos = [
+                # Cadastro Inicial
+                'suoid', 'proid', 'esfid', 'benformaexecucao', 'bennumeroprocesso', 'beninicio', 'benpprogramanumero', 'benpropostanumero', 'benpropostatitulo', 'benpropostaobjeto', 'impid', 'mdeid', 'neeid', 'capid', 'bented',
+                # Cadastro Complementar pra o PI
+                'plititulo', 'plidsc', 'oppid', 'mppid', 'ippid', 'mpnid', 'ipnid', 'pprid', 'pumid', 'picquantidade'
+            ];
             $mBeneficiario->salvar(null, null, $aCamposNulos);
 
-            $mBeneficiario->associarDelegacao($dados);
-            $mBeneficiario->associarAlteracao($dados);
+            if($dados['req'] == 'salvar-complemento'){
+                $mBeneficiario->associarSniic($dados);
+                $mBeneficiario->associarPronac($dados);
+                $mBeneficiario->associarAnexo($dados);
+            } else {
+                $mBeneficiario->associarDelegacao($dados);
+                $mBeneficiario->associarAlteracao($dados);
 
-            // Salvando dados da Localização
-            $dados['benid'] = $mBeneficiario->benid;
-            (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
+                // Salvando dados da Localização
+                $dados['benid'] = $mBeneficiario->benid;
+                (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
+            }
 
             $mBeneficiario->commit();
-            simec_redirecionar($url . '&benid=' . $mBeneficiario->benid, 'success');
+            simec_redirecionar($url. '&benid='. $mBeneficiario->benid. ($dados['req'] == 'salvar-complemento'? '&aba=1': NULL), 'success');
         } catch (Exception $e){
             $mBeneficiario->rollback();
-            simec_redirecionar($url, 'error');
+            simec_redirecionar($url. ($dados['req'] == 'salvar-complemento'? '&aba=1': NULL), 'error');
         }
     } //end salvar()
     
@@ -84,5 +95,18 @@ class Emendas_Controller_Beneficiario
     {
         $aBeneficiarioDetalhe = (new Emendas_Model_BeneficiarioDetalhe)->recuperarListagem($benid);
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe.inc';
+    }
+
+    public function montarListagemSiconv($benid)
+    {
+        $aSiconv = (new Emendas_Model_Siconv)->recuperarListagem($benid);
+        include_once APPRAIZ . 'emendas/modulos/principal/siconv.inc';
+    }
+
+    public function atualizarSiconv($emeid)
+    {
+        $mEmenda = new Emendas_Model_Emenda($emeid);
+        $mEmenda->atualizarSiconv();
+        ver($benid, $mEmenda, d);
     }
 }

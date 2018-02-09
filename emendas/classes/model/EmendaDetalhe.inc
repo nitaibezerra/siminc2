@@ -26,6 +26,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  */
 class Emendas_Model_EmendaDetalhe extends Modelo
 {
+    const GND_COD_CUSTEIO_PESSOAL = 1;
+    const GND_COD_CUSTEIO_JUROS = 2;
+    const GND_COD_CUSTEIO_DESPESAS = 3;
+    const GND_COD_CAPITAL_INVESTIMENTO = 4;
+    const GND_COD_CAPITAL_INVERSOES = 5;
+    const GND_COD_CAPITAL_AMORTIZACAO = 6;
+    const GND_COD_CAPITAL_CONTIGENCIA = 9;
+
     /**
      * Nome da tabela especificada
      * @var string

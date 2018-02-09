@@ -558,17 +558,20 @@ function montarSqlBuscarFuncional(stdClass $filtros) {
             LEFT JOIN (
                 SELECT
                     ex.unicod,
+                    pi.ungcod,
                     ex.ptres,
                     ex.exercicio,
                     sum(ex.vlrempenhado) AS total
                 FROM spo.siopexecucao ex
+                    JOIN monitora.pi_planointerno pi ON(ex.plicod = pi.plicod AND ex.exercicio = pi.pliano)
                 WHERE
                     ex.exercicio = '{$filtros->exercicio}'
                 GROUP BY
                     ex.unicod,
+                    pi.ungcod,
                     ex.ptres,
                     ex.exercicio
-                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod AND uni.suocod = pemp.ungcod)
         WHERE
             ptr.ptrstatus = 'A'
             AND ptr.ptrano = '{$filtros->exercicio}' $where
@@ -658,6 +661,7 @@ function montarSqlBuscarFuncionalImportacao(stdClass $filtros) {
                 JOIN planacomorc.pi_complemento pc USING(pliid)
             WHERE
                 plistatus = 'A'
+                AND pliano = '{$filtros->exercicio}'
             GROUP BY
                 pip2.ptrid,
                 ungcod
@@ -665,17 +669,20 @@ function montarSqlBuscarFuncionalImportacao(stdClass $filtros) {
         LEFT JOIN (
             SELECT
                 ex.unicod,
+                pi.ungcod,
                 ex.ptres,
                 ex.exercicio,
                 sum(ex.vlrempenhado) AS total
             FROM spo.siopexecucao ex
+                JOIN monitora.pi_planointerno pi ON(ex.plicod = pi.plicod AND ex.exercicio = pi.pliano)
             WHERE
                 ex.exercicio = '{$filtros->exercicio}'
             GROUP BY
                 ex.unicod,
+                pi.ungcod,
                 ex.ptres,
                 ex.exercicio
-            ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+            ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod AND uni.suocod = pemp.ungcod)
         WHERE
             ptr.ptrstatus = 'A'
             AND ptr.ptrano = '{$filtros->exercicio}' $where
@@ -793,17 +800,20 @@ function montarSqlBuscarFuncionalFnc(stdClass $filtros) {
             LEFT JOIN (
                 SELECT
                     ex.unicod,
+                    pi.ungcod,
                     ex.ptres,
                     ex.exercicio,
                     sum(ex.vlrempenhado) AS total
                 FROM spo.siopexecucao ex
+                    JOIN monitora.pi_planointerno pi ON(ex.plicod = pi.plicod AND ex.exercicio = pi.pliano)
                 WHERE
                     ex.exercicio = '{$filtros->exercicio}'
                 GROUP BY
                     ex.unicod,
+                    pi.ungcod,
                     ex.ptres,
                     ex.exercicio
-                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+                ) pemp ON(pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod AND uni.suocod = pemp.ungcod)
         WHERE
             ptr.ptrstatus = 'A'
             AND ptr.ptrano = '{$filtros->exercicio}' $where
@@ -1119,7 +1129,6 @@ function _salvarPI_ElabrevTED($unicod, $plicod) {
  * @return type bool|integer
  */
 function salvarPI($dados, $comCommit = true, $criarComoAprovado = false) {
-
     global $db, $obrigatorias_array;
 
     $unicod = $dados['unicod'] ? $dados['unicod'] : $dados['unicod_disable'];
@@ -1132,12 +1141,14 @@ function salvarPI($dados, $comCommit = true, $criarComoAprovado = false) {
     $plicodC = strtoupper($dados['plicod']);
 
     $sql = <<<DML
-SELECT *
-  FROM monitora.pi_planointerno
-  WHERE plicod = '{$plicodC}'
-    AND pliano = '{$_SESSION['exercicio']}'
-    AND unicod = '{$unicod}'
-    AND plistatus = 'A'
+        SELECT
+            *
+        FROM monitora.pi_planointerno
+        WHERE
+            plicod = '{$plicodC}'
+            AND pliano = '{$_SESSION['exercicio']}'
+            AND unicod = '{$unicod}'
+            AND plistatus = 'A'
 DML;
     
     # Soma valores preenchidos pelo usuário na parte de Capital e Custeio do PI
@@ -1160,25 +1171,26 @@ DML;
             $plicod = strtoupper($dados['plicod']);
             $plicod = str_replace(' ', '', $plicod);
             $sql = <<<DML
-INSERT INTO monitora.pi_planointerno(
-    mdeid,
-    eqdid,
-    neeid,
-    capid,
-    sbaid,
-    plititulo,
-    plicodsubacao,
-    plicod,
-    plilivre,
-    plidsc,
-    usucpf,
-    unicod,
-    ungcod,
-    pliano,
-    plisituacao,
-    plicadsiafi
-) VALUES (%s, %d, %s, %s, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
-  RETURNING pliid;
+                INSERT INTO monitora.pi_planointerno(
+                    mdeid,
+                    eqdid,
+                    neeid,
+                    capid,
+                    sbaid,
+                    plititulo,
+                    plicodsubacao,
+                    plicod,
+                    plilivre,
+                    plidsc,
+                    usucpf,
+                    unicod,
+                    ungcod,
+                    pliano,
+                    plisituacao,
+                    plicadsiafi
+                ) VALUES (%s, %d, %s, %s, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')
+                RETURNING
+                    pliid;
 DML;
             
             $stmt = sprintf(
@@ -1193,7 +1205,11 @@ DML;
                 associarPIePTRES($pliid, NULL, array($dados['ptrid'] => $totalValorTemplate));
             }
 
-            // -- Inserindo as novas associações PI/Enquadramento
+            /**
+             * Inserindo as novas associações PI/Enquadramento
+             * 
+             * @todo Verificar a necessidade desse método. Se ele não for necessário ao MINC, ele deverá ser excluído.
+             */
             associarPIeEnquadramento($pliid, $dados['m_eqdid']);
         } else {
             echo '<script>alert(\'PI: ' . $plicodC . ' já cadastrado para esta unidade.\');location.href= \'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A\'</script>';
@@ -1233,7 +1249,11 @@ DML;
             $dados['pliid']);
         $db->executar($stmt);
 
-        // -- Apagando os enquadramentos já associados, para uma posterior re-inserção
+        /**
+         * Inserindo as novas associações PI/Enquadramento
+         * 
+         * @todo Verificar a necessidade desse método. Se ele não for necessário ao MINC, ele deverá ser excluído.
+         */
         desassociarPIeEnquadramento($dados['pliid']);
 
         // -- Apagando os ptres já associados, para uma posterior re-inserção
@@ -1257,19 +1277,21 @@ DML;
         } else {
             $pliidFinal = $pliid;
         }
-        //ver($dados);
 
         // Grava informações complementares
         $pliid = $dados['pliid'];
         salvarPiComplemento($pliid, $dados);
 
         if($dados['ptrid']){
-        // -- Inserindo as novas associações PI/PTRES
-//        associarPIePTRES($pliidFinal, $dados['plivalor'], $dados['plivalored']);
+            // Inserindo as novas associações PI/PTRES
             associarPIePTRES($pliidFinal, NULL, array($dados['ptrid'] => $totalValorTemplate));
         }
 
-        // -- Inserindo as novas associações PI/Enquadramento
+        /**
+         * Inserindo as novas associações PI/Enquadramento
+         * 
+         * @todo Verificar a necessidade desse método. Se ele não for necessário ao MINC, ele deverá ser excluído.
+         */
         associarPIeEnquadramento($pliidFinal, $dados['m_eqdid']);
 
         } else {
@@ -1493,10 +1515,13 @@ function associarLocalizacao($pliid, $dados)
 
     $dadosLocalizacao = [];
 
+    # Estadual
     if(isset($dados['listaLocalizacaoEstadual']) && is_array($dados['listaLocalizacaoEstadual'])){
         $dadosLocalizacao = $dados['listaLocalizacaoEstadual'];
+    # Municipal
     } elseif(isset($dados['listaLocalizacao']) && is_array($dados['listaLocalizacao'])){
         $dadosLocalizacao = $dados['listaLocalizacao'];
+    # Exterior
     }elseif(isset($dados['listaLocalizacaoExterior']) && is_array($dados['listaLocalizacaoExterior'])){
         $dadosLocalizacao = $dados['listaLocalizacaoExterior'];
     }
@@ -2709,7 +2734,6 @@ function posAcaoAprovarPi($pliid)
 
     if(!$dadosPI['plicod']){
         $codigos = gerarCodigosPi($pliid);
-
         $sql = "update monitora.pi_planointerno set 
                     plicod = '{$codigos['plicod']}', 
                     plilivre = '{$codigos['plilivre']}', 
@@ -2719,7 +2743,7 @@ function posAcaoAprovarPi($pliid)
         $db->executar($sql);
         $db->commit();
     }
-    
+
     enviarEmailAprovado($pliid);
 
     return true;
@@ -2733,19 +2757,34 @@ function gerarCodigosPi($pliid)
     *        Regra para formação do Código do PI está em /docs/planacomorc/Estrutura_Codigo_PI.xlsx         *
     ********************************************************************************************************/
 
-    $sql = "select  substr(pliano, 3, 2) || 
-                    case when pi.pliemenda = true then 'E' else eqd.eqdcod end || 
-                    LPAD(pi.pliid::text, 5, '0') || 
-                    suo.suocodigopi || 
-                    case when pic.picted = true then 'T' else cap.capcod end as plicod,
-                    LPAD(pi.pliid::text, 4, '0') plicodsubacao, substr(pliano, 3, 2) plilivre
-            from monitora.pi_planointerno pi
-                    inner join planacomorc.pi_complemento pic on pic.pliid = pi.pliid
-                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pi.eqdid
-                    inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pi.ungcod and suo.unocod = pi.unicod and suo.prsano = pi.pliano
-                    inner join monitora.pi_categoriaapropriacao cap on cap.capid = pi.capid
-            where pi.pliid = $pliid";
-
+    $sql = "
+        SELECT
+            SUBSTR(pliano, 3, 2) ||
+            CASE WHEN pi.pliemenda = TRUE THEN
+                'E'
+            ELSE
+                eqd.eqdcod
+            END ||
+            LPAD(pi.pliid::TEXT, 5, '0') ||
+            suo.suocodigopi ||
+            CASE WHEN pic.picted = TRUE THEN
+                'T'
+            ELSE
+                cap.capcod
+            END AS plicod,
+            LPAD(pi.pliid::TEXT, 4, '0') plicodsubacao,
+            SUBSTR(pliano, 3, 2) plilivre
+        FROM
+            monitora.pi_planointerno pi
+            JOIN planacomorc.pi_complemento pic ON pic.pliid = pi.pliid
+            JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pi.eqdid
+            JOIN public.vw_subunidadeorcamentaria suo ON suo.suocod = pi.ungcod
+                AND suo.unocod = pi.unicod
+                AND suo.prsano = pi.pliano
+            LEFT JOIN monitora.pi_categoriaapropriacao cap ON cap.capid = pi.capid
+        WHERE
+             pi.pliid = ". (int)$pliid;
+//ver($sql, d);
     return $db->pegaLinha($sql);
 }
 

@@ -9,12 +9,14 @@
     echo $simec->select('foncod', 'Fonte', $mEmendadetalhe->foncod, (new Public_Model_FonteRecurso())->recuperarSqlCombo(['foncod', 'fondsc'], ['grfid = 1']));
     echo $simec->valor('emdvalor', 'Valor', $mEmendadetalhe->emdvalor);
     ?>
-
-    <div class="form-group">
-        <div class="text-center">
-            <button class="btn btn-primary" type="button" id="btn-salvar-detalhe"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+    
+    <?php if($podeEditar): ?>
+        <div class="form-group">
+            <div class="text-center">
+                <button class="btn btn-primary" type="button" id="btn-salvar-detalhe"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 </form>
 
 <script type="text/javascript">

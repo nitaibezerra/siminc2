@@ -12,6 +12,7 @@
 
 
 require_once APPRAIZ .'includes/classes/Modelo.class.inc';
+include_once APPRAIZ . "emenda/classes/WSIntegracaoSiconv.class.inc";
 
 
 /**
@@ -48,8 +49,8 @@ class Emendas_Model_Emenda extends Modelo
     protected $arChaveEstrangeira = array(
         'prsano' => array('tabela' => 'emendas.programacaoexercicio', 'pk' => 'prsano'),
         'autid' => array('tabela' => 'emendas.autor', 'pk' => 'autid'),
-        'acaid' => array('tabela' => 'acao', 'pk' => 'acaid'),
-        'unoid' => array('tabela' => 'unidadeorcamentaria', 'pk' => 'unoid'),
+        'ptrid' => array('tabela' => 'monitora.ptres', 'pk' => 'ptrid'),
+        'unoid' => array('tabela' => 'unidadeorcamentaria', 'pk' => 'unoid')
     );
 
     /**
@@ -61,29 +62,57 @@ class Emendas_Model_Emenda extends Modelo
         'emeid' => null,
         'emenumero' => null,
         'unoid' => null,
-        'acaid' => null,
+        'ptrid' => null,
         'emejustificativa' => null,
         'emeimpositiva' => null,
         'autid' => null,
         'prsano' => null,
-        'emestatus' => null,
+        'emestatus' => null
     );
 
-    public function recuperarListagem($exercicio)
+    public function recuperarListagem($exercicio, $listaSubUnidadeUsuario = array())
     {
-        $sql = "select  eme.emeid, eme.emenumero, eme.unoid, eme.acaid, eme.emeimpositiva, eme.autid, eme.prsano, uno.unocod || ' - ' || uno.unosigla unidade,
-                        aut.autnome, aut.autcod, pro.pronome, sit.sitdsc, ben.benid
-                from emendas.emenda eme
-                    left join emendas.beneficiario ben on ben.emeid = eme.emeid
-                    left join emendas.proponente pro on pro.proid = ben.proid
-                    left join emendas.siconv sic on sic.sicid = ben.sicid
-                    left join emendas.siconvsituacao sit on sit.sitid = sic.sitid
-                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid
-                    inner join emendas.autor aut on aut.autid  = eme.autid
-                    inner join monitora.acao aca on aca.acaid = eme.acaid
-                where eme.emestatus = 'A'        
-                and eme.prsano = '$exercicio'
-                order by aut.autnome, eme.emenumero, pro.pronome";
+        $where = '';
+        
+        # Sub-Unidade Orçamentária ou Sub-Unidade Orçamentária delegada.
+        $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
+        
+        $sql = "
+            SELECT
+                eme.emeid,
+                eme.emenumero,
+                eme.unoid,
+                eme.ptrid,
+                eme.emeimpositiva,
+                eme.autid,
+                eme.prsano,
+                uno.unocod || ' - ' || uno.unosigla unidade,
+                aut.autnome,
+                aut.autcod,
+                pro.pronome,
+                sit.sitdsc,
+                ben.benid
+            FROM
+                emendas.emenda eme
+                LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
+                LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
+                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
+                JOIN emendas.autor aut ON aut.autid = eme.autid
+                JOIN monitora.ptres ptr ON ptr.ptrid = eme.ptrid
+                LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
+		LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
+		LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+            WHERE
+                eme.emestatus = 'A'
+                AND eme.prsano = '". (int)$exercicio. "'
+                $where
+            ORDER BY
+                aut.autnome,
+                eme.emenumero,
+                pro.pronome
+        ";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
@@ -125,13 +154,13 @@ class Emendas_Model_Emenda extends Modelo
                     $autid = $this->_recuperarAutorImportacao($line, $_SESSION['exercicio']);
 
                     // Ação
-                    $acoes = $this->_recuperarAcaoImportacao($line[7], $line[6], $line[8], $unocod, $_SESSION['exercicio']);
+                    $funcional = $this->_recuperarAcaoImportacao($line[7], $line[6], $line[8], $unocod, $_SESSION['exercicio']);
 
-                    if(!$acoes || !$autid){ continue; }
+                    if(!$funcional || !$autid){ continue; }
 
                     $this->emenumero = $emenumero;
                     $this->unoid = $unoid;
-                    $this->acaid = $acoes[0]['acaid'];
+                    $this->ptrid = $funcional[0]['ptrid'];
                     $this->autid = $autid;
                     $this->emeimpositiva = 't';
                     $this->prsano = $_SESSION['exercicio'];
@@ -199,15 +228,15 @@ class Emendas_Model_Emenda extends Modelo
         $acacod = substr(trim($acao), 0, 4);
         $prgcod = substr(trim($programa), 0, 4);
         $loccod = substr(trim($localizador), 0, 4);
-        $sql = "select acaid from monitora.acao where acacod = '$acacod' and prgcod = '$prgcod' and loccod = '$loccod' and unicod = '$unocod' and prgano = '{$exercicio}'";
+        $sql = "select ptrid from monitora.ptres where acacod = '$acacod' and prgcod = '$prgcod' and loccod = '$loccod' and unicod = '$unocod' and ptrano = '{$exercicio}' and plocod = 'EIND'";
 
-        $acoes = $this->carregar($sql);
+        $funcional = $this->carregar($sql);
 
-        if(count($acoes)> 1){
+        if(count($funcional)> 1){
             ver('Mais de uma ação', d);
         }
 
-        return $acoes;
+        return $funcional;
     }
 
     private function _inserirDetalhesImportacao($line)
@@ -217,7 +246,7 @@ class Emendas_Model_Emenda extends Modelo
         $mEmendaDetalhe->foncod = $line[9];
         $mEmendaDetalhe->gndcod = $line[12];
         $mEmendaDetalhe->mapcod = $line[13];
-        $mEmendaDetalhe->emdvalor = $line[18] + $line[20];
+        $mEmendaDetalhe->emdvalor = str_replace(['.', ','], ['', '.'], $line[18]) + str_replace(['.', ','], ['', '.'], $line[20]);
 
         return $mEmendaDetalhe->salvar();
     }
@@ -269,8 +298,8 @@ class Emendas_Model_Emenda extends Modelo
         $mBeneficiarioDetalhe = new Emendas_Model_BeneficiarioDetalhe();
         $mBeneficiarioDetalhe->benid = $benid;
         $mBeneficiarioDetalhe->emdid = $emdid;
-        $mBeneficiarioDetalhe->bedvalor = $line[19];
-        $mBeneficiarioDetalhe->bedvalorpriorizado = $line[20];
+        $mBeneficiarioDetalhe->bedvalor = str_replace(['.', ','], ['', '.'], $line[19]);
+        $mBeneficiarioDetalhe->bedvalorpriorizado = str_replace(['.', ','], ['', '.'], $line[20]);
 
         return $mBeneficiarioDetalhe->salvar();
     }
@@ -451,7 +480,7 @@ class Emendas_Model_Emenda extends Modelo
                             inner join emendas.autor aut on aut.autid = eme.autid
                             inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                             inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                    where eme.prsano = '2017'     
+                    where eme.prsano = '$exercicio'     
                     group by descricao";
             include APPRAIZ . 'emendas/modulos/principal/grafico_pizza.inc';
 
@@ -498,7 +527,7 @@ class Emendas_Model_Emenda extends Modelo
                             inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
                             inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
                             inner join public.gnd gnd on gnd.gndcod = emd.gndcod
-                    where eme.prsano = '2017'     
+                    where eme.prsano = '$exercicio'     
                     group by descricao";
             include APPRAIZ . 'emendas/modulos/principal/grafico_pizza.inc';
 
@@ -506,5 +535,82 @@ class Emendas_Model_Emenda extends Modelo
             include APPRAIZ . 'emendas/modulos/principal/grafico_coluna.inc';
         }
     }
+
+    public function atualizarSiconv()
+    {
+        $sql = "select eme.*, uno.unocodorcamento
+                from emendas.emenda eme
+                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid 
+                where eme.emeid = {$this->emeid}
+        ";
+        $emenda = $this->pegaLinha($sql);
+
+        $usuario = '';
+        $senha = '';
+
+        $arrParam = array(
+            'usuario' => $usuario,
+            'senha' 	=> $senha,
+            'url' 	=> WEB_SERVICE_SICONV_URL,
+        );
+        $obWS = new WSIntegracaoSiconv($arrParam);
+
+        $sql = "delete from siconv.propostaws";
+        $this->executar($sql);
+
+        if($emenda){
+            $this->recuperarPropostaWs($obWS, $emenda);
+
+            $mSiconv = new Emendas_Model_Siconv();
+
+            $filtro = [
+                "coalesce(situacaopropostaws, '') != ''",
+                "coalesce(parecerproposta, '') != ''",
+            ];
+
+            $mSiconv->atualizar($filtro);
+        }
+        ver('FIM', d);
+    }
+
+    public function recuperarPropostaWs($obWS, $emenda)
+    {
+        $filtro = [
+            'unocod'=>$emenda['unocodorcamento'],
+            'emenumero'=>substr($emenda['emenumero'], 4)
+        ];
+        $retorno = $obWS->consultarPropostaPorEmenda($filtro);
+
+        if(isset($retorno->propostas)){
+
+            $mPropostaWS = new Siconv_Model_PropostaWs();
+
+            foreach ($retorno->propostas as $PropostaWS){
+
+                foreach ($PropostaWS as $indice => $dados){
+                    $indice = strtolower($indice);
+
+                    if(strpos($indice, 'data')!== false){
+
+                    } elseif(
+                        'ws' == substr($indice, -2) ||
+                        in_array($indice, ['parecerplanotrabalho', 'parecerproposta'])
+                    ){
+                        $dados = json_encode($dados);
+                    }
+
+                    if(key_exists($indice, $mPropostaWS->arAtributos)){
+                        $mPropostaWS->{$indice} = $dados;
+                    }
+                }
+
+                $mPropostaWS->emeid = $emenda['emeid'];
+                $mPropostaWS->salvar();
+                $mPropostaWS->commit();
+                $mPropostaWS->id = null;
+            }
+        }
+    }
+
 }//end Class
 ?>

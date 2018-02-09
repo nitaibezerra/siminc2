@@ -4,7 +4,8 @@
      * Funções de apoio ao cadastro de PIs.
      * @see _funcoespi.php
      */
-    include_once '_funcoespi.php';
+    include_once APPRAIZ. 'www/planacomorc/_funcoespi.php';
+    include_once APPRAIZ. 'www/planacomorc/_funcoes.php';
 
     require_once APPRAIZ. 'includes/workflow.php';
     include_once APPRAIZ. "planacomorc/classes/Cronograma.class.inc";
@@ -37,7 +38,12 @@
     $listaSubUnidadesDelegadas = (new Planacomorc_Model_PiDelegacao())->recuperarIdPorPlanoInterno($pliid, $_SESSION['exercicio']);
 
     $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
-
+    $codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'F');
+    $codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'N');
+    $codigoEnquadramentoEmenda = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'E');
+    $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
+    $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
+    
     include APPRAIZ . "includes/cabecalho_bootstrap_v3_popup.inc";
 
     $autorizadoSubUnidade = carregarLimiteAutorizadoSubUnidade(
@@ -63,12 +69,12 @@
     }
 </style>
 
-<script src="js/cadastro_pi_funcoes.js"></script>
+<script src="../planacomorc/js/cadastro_pi_funcoes.js"></script>
 <!--
     @todo REFATORAR
     DETALHES FINANCEIROS DA FUNCIONAL APENAS PARA EXECUTAR OS CALCULOS AUTOMATICOS VIA JS VIDE carregarSaldoFuncional();
 -->
-<table id="orcamento" style="display: none;" class="table table-hover table-bordered table-hover">
+<table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="display: none;" onmouseover="tabindexcampo();"  class="table table-hover table-bordered table-hover" >
     <tr>
         <td rowspan="2" nowrap>
             <b>PTRES</b>
@@ -77,7 +83,7 @@
             <b>Funcional</b>
         </td>
         <td rowspan="2" nowrap>
-            <b>Dotação Atual PO (R$)</b>
+            <b>Dotação Atual(R$)</b>
         </td>
         <td colspan="2" nowrap>
             <b><span id="detPi">Detalhado em PI (R$)</span></b>
@@ -96,15 +102,25 @@
         <td nowrap><b>Não&nbsp;Empenhado</b></td>
     </tr>
     <?php
-        $dadosPTRES = buscarPTRESdoPIInstituicoes($dadosPI['pliid'], $dadosPI['sbaid'], $dadosPI['ptrid']);
-        #ver($dadosPTRES);
-        if ($dadosPTRES) {
-            $valortotalpi = 0;
-            $cor = 1;
-
+//ver($dadosPI['pliid'], $dadosPI['ptrid']);
+    if ($dadosPI['pliid'] || $dadosPI['ptrid']) {
+        $dadosPTRES = buscarPTRES((object) array(
+            'exercicio' => $_SESSION['exercicio'],
+            'pliid' => $dadosPI['pliid'],
+            'ptrid' => $dadosPI['ptrid'],
+            'importar' => FALSE
+        ));
+        if($dadosPTRES) {
+//ver($dadosPTRES);
             foreach ($dadosPTRES as $ptres):
-                $vlrPiDetalhado = $ptres['det_pi'];
-                $vlrPiNaoDetalhado = $ptres['nao_det_pi'];
+                $vlrPiDetalhado = strip_tags($ptres['det_pi']);
+                $vlrPiDetalhadoCusteio = strip_tags($ptres['det_pi_custeio']);
+                $vlrPiDetalhadoCapital = strip_tags($ptres['det_pi_capital']);
+                $vlrPtresCusteio = strip_tags($ptres['ptrdotacaocusteio']);
+                $vlrPtresCapital = strip_tags($ptres['ptrdotacaocapital']);
+                $vlrPiNaoDetalhado = strip_tags($ptres['nao_det_pi']);
+                $vlrPiNaoDetalhadoCusteio = strip_tags($ptres['nao_det_pi_custeio']);
+                $vlrPiNaoDetalhadoCapital = strip_tags($ptres['nao_det_pi_capital']);
                 ?>
                 <tr style="height:30px;" id="ptres_<?php echo $ptres['ptrid']; ?>">
                     <td align="center">
@@ -130,15 +146,20 @@
                     </td>
                 </tr>
                 <?php
-                $cor++;
-                $valortotalpi = $valortotalpi + $ptres['pipvalor_'];
             endforeach;
         }
+    }
     ?>
 </table>
-<input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
-<input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />
 
+<input type="hidden" id="ptresCusteio" value="<?php echo $vlrPtresCusteio; ?>" />
+<input type="hidden" id="ptresCapital" value="<?php echo $vlrPtresCapital; ?>" />
+<input type="hidden" id="piDetalhado" value="<?php echo $vlrPiDetalhado; ?>" />
+<input type="hidden" id="piDetalhadoCusteio" value="<?php echo $vlrPiDetalhadoCusteio; ?>" />
+<input type="hidden" id="piDetalhadoCapital" value="<?php echo $vlrPiDetalhadoCapital; ?>" />
+<input type="hidden" id="piNaoDetalhadoCusteio" value="<?php echo $vlrPiNaoDetalhadoCusteio; ?>" />
+<input type="hidden" id="piNaoDetalhadoCapital" value="<?php echo $vlrPiNaoDetalhadoCapital; ?>" />
+<input type="hidden" id="piNaoDetalhado" value="<?php echo $vlrPiNaoDetalhado; ?>" />
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <form id="formulario" name="formulario" method="post" action="" class="form-horizontal">
@@ -353,6 +374,7 @@
                                             <b>Forma de Execução</b>
                                         </td>
                                     </tr>
+                                    <?php if($dadosPI['eqdid'] != $codigoEnquadramentoEmenda): ?>
                                     <tr>
                                         <td>
                                             <b>Edital:</b>
@@ -361,6 +383,7 @@
                                             <span><?php echo $dadosPI['picedital'] == 't'? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
+                                    <?php endif; ?>
                                     <tr>
                                         <td>
                                             <b>TED:</b>
@@ -379,7 +402,7 @@
                                             <b>Emenda:</b>
                                         </td>
                                         <td align="left">
-                                            <span><?php echo $dadosPI['pliemenda'] == 't'? 'Sim': 'Não'; ?></span>
+                                            <span><?php echo $dadosPI['eqdid'] == $codigoEnquadramentoEmenda? 'Sim': 'Não'; ?></span>
                                         </td>
                                     </tr>
                                     <tr class="titulo_espelho">
@@ -454,6 +477,7 @@
                                         </td>
                                     </tr>
                                     <?php endif; ?>
+                                    <?php if($dadosPI['eqdid'] != $codigoEnquadramentoEmenda): ?>
                                     <tr class="titulo_espelho">
                                         <td colspan="2">
                                             <b>Responsáveis do Projeto</b>
@@ -477,6 +501,7 @@
                                             </table>
                                         </td>
                                     </tr>
+                                    <?php endif; ?>
                                     <tr class="titulo_espelho">
                                         <td colspan="2">
                                             <b>Vinculações Eventuais do Projeto</b>
@@ -545,6 +570,7 @@
                                                         <b>Total (Custeio e Capital)</b>
                                                     </td>
                                                 </tr>
+                                                <?php if($dadosPI['eqdid'] != $codigoEnquadramentoEmenda): ?>
                                                 <tr style="height: 30px;">
                                                     <td style="text-align: left;">Limite Autorizado na Unidade: </td>
                                                     <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >
@@ -560,6 +586,7 @@
                                                         <?php echo number_format($disponivelSubUnidade, 2, ',', '.') ?>
                                                     </td>
                                                 </tr>
+                                                <?php endif; ?>
                                                 <tr>
                                                     <td style="text-align: left;"></td>
                                                     <td style="text-align: center;"><b>Custeio </b></td>
@@ -595,6 +622,7 @@
                                             </table>
                                         </td>
                                     </tr>
+                                    <?php if($dadosPI['eqdid'] != $codigoEnquadramentoEmenda): ?>
                                     <tr class="titulo_espelho">
                                         <td colspan="2">
                                             <b>Cronogramas</b>
@@ -713,6 +741,7 @@
                                         </td>
                                     </tr>
                                 </table>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

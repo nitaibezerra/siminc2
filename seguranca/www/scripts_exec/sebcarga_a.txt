@@ -1,0 +1,34 @@
+26271;UNB Fundação Universidade de Brasília;Suporte Tecnologico e manutenção de plataforma dos cursos vinculados aos programas de formação continuada na modalidade a distancia;SEB / DAGE;222.863,67
+26231;Universidade Federal de Alagoas;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;586.777,00
+26232;Universidade Federal da Bahia;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.482.056,00
+26233;Universidade Federal do Ceará;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.519.959,00
+26234;Universidade Federal do Espírito Santo;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;596.300,00
+26235;Universidade Federal de Goiás;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.200.000,00
+26237;Universidade Federal de Juiz de Fora;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;405.840,00
+26238;Universidade Federal de Minas Gerais;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;579.568,00
+26239;Universidade Federal do Pará;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.535.606,00
+26240;Universidade Federal da Paraíba;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;762.463,00
+26241;Universidade Federal do Paraná;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;765.605,45
+26242;Universidade Federal de Pernambuco;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.849.596,00
+26243;Universidade Federal do Rio Grande do Norte;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;481.757,00
+26245;Universidade Federal do Rio de Janeiro;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.471.899,00
+26246;Universidade Federal de Santa Catarina;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;2.179.515,00
+26247;Universidade Federal de Santa Maria;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;710.487,00
+26250;Fundação Universidade Federal de Roraima;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;137.772,00
+26251;Fundação Universidade Federal do Tocantins;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;254.184,00
+26255;Universidade Federal dos Vales do Jequitinhonha e Mucuri;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;398.987,00
+26268;Fundação Universidade Federal de Rondônia;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;348.524,00
+26270;Fundação Universidade do Amazonas;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;856.091,00
+26271;Fundação Universidade de Brasília;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;531.525,00
+26272;Fundação Universidade Federal do Maranhão;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.718.946,00
+26274;Universidade Federal de Uberlândia;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;472.807,37
+26275;Fundação Universidade Federal do Acre;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;250.713,00
+26276;Fundação Universidade Federal de Mato Grosso;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;543.968,00
+26277;Fundação Universidade Federal de Ouro Preto;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;447.175,37
+26278;Fundação Universidade Federal de Pelotas;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;836.244,00
+26279;Fundação Universidade Federal do Piauí;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;759.793,00
+26280;Fundação Universidade Federal de São Carlos;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;1.231.666,61
+26281;Fundação Universidade Federal de Sergipe;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;312.390,00
+26283;Fundação Universidade Federal de Mato Grosso do Sul;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;372.465,00
+26286;Fundação Universidade Federal do Amapá;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;178.000,00
+26441;Universidade Federal do Oeste do Pará;Curso de Formação de Orientadores de Estudos e Professores Alfabetizadores;SEB / DAGE;347.278,00

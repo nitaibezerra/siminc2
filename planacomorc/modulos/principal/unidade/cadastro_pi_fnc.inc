@@ -25,13 +25,7 @@ include_once APPRAIZ . "planacomorc/classes/Pi_Anexo.class.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 if($_REQUEST['uploadAnexo']){
-    $campos = array(
-        'angdsc'       => "'{$_REQUEST['arqdescricao']}'",
-        'angtip'       => "'PI'",
-        'angtipoanexo' => "'D'",
-        'angano'       => "'{$_SESSION['exercicio']}'"
-    );
-    $file = new FilesSimec('anexogeral', $campos, 'planacomorc');
+    $file = new FilesSimec();
     if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
         echo simec_json_encode(array(
             'arqid' => $file->getIdArquivo(),
@@ -224,10 +218,10 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
-<script language="JavaScript" src="../includes/funcoesspo.js"></script>
+<script language="JavaScript" src="../includes/funcoesspo.js?v=1"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi_funcoes.js?v=4"></script>
+<script src="js/cadastro_pi_funcoes.js?v=5"></script>
 <script src="js/cadastro_pi_validacoes.js?v=3"></script>
 <script src="js/cadastro_pi_init.js?v=3"></script>
 <style>
@@ -455,6 +449,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         FROM monitora.pi_enquadramentodespesa
                                         WHERE
                                             eqdstatus = 'A'
+                                            AND eqdcod != 'E'
                                             AND eqdano = '{$_SESSION['exercicio']}'
                                         ORDER BY
                                             eqddsc
@@ -1477,6 +1472,7 @@ DML;
     // Enquadramentos
     intEnqFinalistico = "<?php echo $codigoEnquadramentoFinalistico; ?>";
     intEnqNaoOrcamentario = "<?php echo $codigoEnquadramentoNaoOrcamentario; ?>";
+    intEnqEmenda = "<?php echo $codigoEnquadramentoEmenda; ?>";
     intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
     // Localizações
     intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";

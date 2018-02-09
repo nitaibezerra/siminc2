@@ -17,7 +17,8 @@
         });
         
         $('.btn-limpar').click(function(){
-            window.document.location.href = '';
+            $('#requisicao').val('limpar');
+            $('#filtropi').submit();
         });
         
         $('.btn-novo').click(function(){

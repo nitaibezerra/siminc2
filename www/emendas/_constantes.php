@@ -1,15 +1,25 @@
 <?php
 
-// ESFERA DA AÇÃO
+# ESFERA DA AÇÃO
 define( 'ESFERA_FEDERAL_BRASIL', 1 );
 define( 'ESFERA_ESTADUAL_DISTRITO_FEDERAL', 2 );
 define( 'ESFERA_MUNICIPAL', 3 );
 define( 'ESFERA_EXTERIOR', 4 );
 
+# Tipo de Documento do Planejamento
+define("WF_TPDID_PLANEJAMENTO_PI", 265);
+define("ESD_PI_AGUARDANDO_APROVACAO", 1770);
+define("AED_ENVIAR_APROVACAO", 4298);
 
+# Tipo de Documento do Emendas
 define("WF_TPDID_BENEFICIARIO", 267);
-
 define("ESD_BENEFICIARIO_CADASTRAMENTO", 1781);
 define("ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE", 1782);
 define("ESD_BENEFICIARIO_CORRECAO", 1783);
 define("ESD_BENEFICIARIO_PI_GERADO", 1784);
+
+# Perfis de Usuário
+define('PFL_SUPERUSUARIO', 1501);
+define("PFL_ADMINISTRADOR", 1507);
+define("PFL_ASPAR", 1508);
+define("PFL_SUBUNIDADE", 1506);

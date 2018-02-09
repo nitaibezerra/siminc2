@@ -55,12 +55,14 @@
             }
         }
 
-        // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
-        if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
-            $('.legend_responsaveis').addClass('validateRedText');
-            addMsgCustom.push('Responsáveis pelo Projeto');
-        } else {
-            $('.legend_responsaveis').removeClass('validateRedText');
+        if(!verificarFormularioEmenda()){
+            // Se não for inserido nenhum Responsável, o sistema acrescenta uma mensagem de erro.
+            if($('#table_responsaveis input[name="listaResponsaveis[]"]').size() == 0){
+                $('.legend_responsaveis').addClass('validateRedText');
+                addMsgCustom.push('Responsáveis pelo Projeto');
+            } else {
+                $('.legend_responsaveis').removeClass('validateRedText');
+            }
         }
 
         if(!verificarFormularioNaoOrcamentario()){
@@ -116,8 +118,8 @@
             
         }
 
-        // Verifica se o usuário escolheu um produto diferente de não se aplica para verificar a validação do cronograma físico.
-        if($('#pprid').val() != intProdNaoAplica ){
+        // Verifica se o usuário escolheu um produto diferente de não se aplica e o enquadramento não é emenda para verificar a validação do cronograma físico.
+        if($('#pprid').val() != intProdNaoAplica && !verificarFormularioEmenda()){
 
             // Verifica se o cronograma físico foi preenchido.
             if(!validarCronogramaFisicoPreenchido()){
@@ -140,7 +142,7 @@
             }
         }
 
-        if(!verificarFormularioNaoOrcamentario()){
+        if(!verificarFormularioNaoOrcamentario() && !verificarFormularioEmenda()){
             // Verifica se o cronograma orçamentário foi preenchido.
             if(!validarCronogramaOrcamentarioPreenchido()){
                 $('input.input_orcamentario').addClass('validateRedText');
@@ -206,7 +208,6 @@
      * @returns Array
      */
     function definirCamposObrigatorios(){
-        var codigoEnquadramento = $('#eqdid').val();
         var listaObrigatorios = ['plititulo', 'plidsc', 'unicod', 'ungcod','eqdid', 'pprid'];
 
         // Se o TED não estiver marcado o sistema obriga a preencher a modalidade de Pactuação.
@@ -231,7 +232,9 @@
         }
 
         if($('#picedital').is(':checked')){
-            listaObrigatorios.push('mes');
+            if(!verificarFormularioEmenda()){
+                listaObrigatorios.push('mes');
+            }
         }
 
         return listaObrigatorios;

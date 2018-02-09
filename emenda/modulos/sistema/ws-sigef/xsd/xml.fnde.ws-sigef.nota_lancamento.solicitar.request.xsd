@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--Created with Liquid XML Studio - FREE Community Edition 7.0.1.654 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="header" type="header" />
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="params">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="nota_lancamento">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element minOccurs="1" maxOccurs="1" name="nu_cgc_favorecido" type="nu_cgc_favorecido" />
+                          <xs:element minOccurs="1" maxOccurs="1" name="nu_processo" type="nu_processo" />
+                          <xs:element minOccurs="1" maxOccurs="1" name="nu_empenho" type="xs:string" />
+                          <xs:element minOccurs="1" maxOccurs="1" name="nu_convenio_original">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[0-9]{6}" />
+                                <xs:maxLength value="6" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="nu_convenio_siafi" />
+                          <xs:element name="ano" />
+                          <xs:element name="vl_lancamento" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

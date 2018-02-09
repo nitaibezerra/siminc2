@@ -5,7 +5,7 @@
             <tr class="text-center">
                 <th>Partido</th>
                 <?php
-                $dadosTabela = current($dadosAgrupados);
+                $dadosTabela = (array)current($dadosAgrupados);
                 foreach($dadosTabela as $categoria => $descricao){ ?>
                     <th><?php echo $categoria; ?></th>
                 <?php } ?>
@@ -49,7 +49,7 @@
                     <tr class="text-center">
                         <th>Base</th>
                         <?php
-                        $dadosTabela = current($dadosAgrupadosLado);
+                        $dadosTabela = (array)current($dadosAgrupadosLado);
                         foreach($dadosTabela as $categoria => $descricao){ ?>
                             <th><?php echo $categoria; ?></th>
                         <?php } ?>

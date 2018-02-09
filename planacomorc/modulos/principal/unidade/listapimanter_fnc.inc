@@ -9,7 +9,7 @@
      */
 
     $requisicao = $_REQUEST['requisicao'];
-    $filtropi = $_REQUEST;
+    $filtropi = $_SESSION['filtropi'] = ($_POST? $_POST: $_SESSION['filtropi']);
     
     $perfis = pegaPerfilGeral();
     
@@ -41,6 +41,9 @@
                 include_once APPRAIZ . "planacomorc/modulos/principal/unidade/sub-unidades-delegadas.inc";
                 die();
             break;
+            case 'limpar':
+                $filtropi = $_SESSION['filtropi'] = array();
+            break;
         }
     }
     
@@ -70,7 +73,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js?v=1"></script>
+<script src="js/unidade/lista-pi-manter.js?v=2"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
@@ -86,7 +89,7 @@
                 </div>
                 <div class="ibox-content">
                     <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
-                        <input name="" id="filtropi_requisicao" value="" type="hidden">
+                        <input name="requisicao" id="requisicao" value="" type="hidden">
 
                         <?php
                             echo $simec->input('plicod', 'Código ou ID do PI', $filtropi['plicod'], ['maxlength' => 11]);
@@ -111,7 +114,7 @@
 
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-warning btn-limpar" type="reset">
+                                <button class="btn btn-warning btn-limpar" type="button">
                                     <span class="glyphicon glyphicon-remove-circle"></span> Limpar
                                 </button>
                                 <button class="btn btn-primary btn-buscar" type="submit">
@@ -138,48 +141,95 @@
         $filtropi['exercicio'] = $_SESSION['exercicio'];
         $filtropi['usucpf'] = $_SESSION['usucpf'];
         $filtropi['unofundo'] = 'TRUE';
-        # Redirecionar apos excluir
-        $_SESSION['filtropi'] = $filtropi;
-        $list = new Simec_Listagem();
-        $list->setQuery(Spo_Model_Planointerno::listar((object) $filtropi))
-            ->turnOnPesquisator()
-            ->setFormFiltros('filtropi')
-//            ->esconderColunas('unidsc', 'valido')
-            ->setCabecalho(array(
-                'id', 'Código', 'Unidade', 'Título', 'Funcional', 'Situação', 'Orçamento do PI (R$)' => array(
-                    'Custeio', 'Capital', 'Empenhado', 'Liquidado', 'Pago'
-                )))
-            ->addCallbackDeCampo('id', 'exibirLinkEspelho')
-//            ->addCallbackDeCampo('unicod', 'alinharUOEsquerda')
-//            ->addCallbackDeCampo('plititulo', 'formatarTituloPI')
-//            ->addCallbackDeCampo('obrid', 'formatarObrid')
-//            ->addCallbackDeCampo('delegadas', 'exibirIconeDelegadas')
-//            ->addCallbackDeCampo('cadastramento', 'formatarCadastramento')
-            ->addCallbackDeCampo(array('custeio', 'capital', 'total', 'empenhado', 'pago', 'liquidado'), 'mascaraMoeda')
-            ->addAcao('edit', 'alterarPiFnc');
-//            ->setAcaoComoCondicional('edit', array(
-//                array('campo' => 'obrid', 'valor' => 'N/A', 'op' => 'igual'),
-//                array('campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente')
-//            ))
-            if(in_array(PFL_SUPERUSUARIO, $perfis) || in_array(PFL_ADMINISTRADOR, $perfis)){
-                $list->addAcao('delete', 'removerPi');
-            }
-//            ->setAcaoComoCondicional('delete', array(array(
-//                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
-//            )))
-//            ->addAcao('chart', 'exibirGrafico')
-//            ->addAcao('view', 'exibirEspelhoPi')
-//            ->setAcaoComoCondicional('view', array(array(
-//                'campo' => 'cadastramento', 'valor' => Spo_Model_Planointerno::CADASTRADO_SIAFI, 'op' => 'diferente'
-//            )))
-            $list->render(Simec_Listagem::SEM_REGISTROS_MENSAGEM);
 
-        # Popup de detalhamento do PI
-        bootstrapPopup('Dados do Plano Interno', 'detalhepi', '', array('fechar'), array('tamanho' => 'lg'));
-
-        # Popup com lista de Unidades delegadas
-        bootstrapPopup('Dados do Plano Interno', 'detalhePiDelegadas', '', array('fechar'), array('tamanho' => 'lg'));
+        $mPlanointerno = new Spo_Model_Planointerno();
+        $sql = $mPlanointerno->listar((object) $filtropi);
+        $aDados = $mPlanointerno->carregar($sql);
     ?>
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Lista de PIs</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover dataTables" >
+                    <tbody>
+                    <?php
+                    $total['custeio'] = $total['capital'] = $total['empenhado'] = $total['pago'] = $total['liquidado'] = 0;
+                    foreach($aDados as $dados){
+                        $total['custeio'] += $dados['custeio'];
+                        $total['capital'] += $dados['capital'];
+                        $total['autorizado'] += $dados['autorizado'];
+                        $total['empenhado'] += $dados['empenhado'];
+                        $total['pago'] += $dados['pago'];
+                        $total['liquidado'] += $dados['liquidado'];
+                        ?>
+                        <tr>
+                            <td class="text-center" nowrap="nowrap">
+                                <a href="javascript:alterarPiFnc(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
+                                <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
+                            </td>
+                            <td><?php echo $dados['id']; ?></td>
+                            <td><?php echo $dados['codigo_pi']; ?></td>
+                            <td><?php echo $dados['sub_unidade']; ?></td>
+                            <td><?php echo $dados['plititulo']; ?></td>
+                            <td><?php echo $dados['funcional']; ?></td>
+                            <td><?php echo $dados['situacao']; ?></td>
+                            <td class="text-right"><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
+                            <td class="text-right"><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
+                            <td class="text-right"><?php echo number_format($dados['autorizado'], 2, ',', '.'); ?></td>
+                            <td class="text-right"><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
+                            <td class="text-right"><?php echo number_format($dados['liquidado'], 2, ',', '.'); ?></td>
+                            <td class="text-right"><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                    <thead>
+                    <tr class="text-center">
+                        <th rowspan="2" width="5%">Ações</th>
+                        <th rowspan="2">Id</th>
+                        <th rowspan="2">Código</th>
+                        <th rowspan="2">Unidade</th>
+                        <th rowspan="2">Título</th>
+                        <th rowspan="2">Funcional</th>
+                        <th rowspan="2">Situação</th>
+                        <th colspan="6">Orçamento do PI (R$)</th>
+                    </tr>
+                    <tr class="text-center">
+                        <th>Custeio</th>
+                        <th>Capital</th>
+                        <th>Provisionado</th>
+                        <th>Empenhado</th>
+                        <th>Liquidado</th>
+                        <th>Pago</th>
+                    </tr>
+                    <tr>
+                        <th colspan="7">TOTAL</th>
+                        <th class="text-right"><?php echo number_format($total['custeio'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['capital'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['autorizado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['empenhado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['liquidado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['pago'], 2, ',', '.'); ?></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">TOTAL</th>
+                        <th class="text-right"><?php echo number_format($total['custeio'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['capital'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['autorizado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['empenhado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['liquidado'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo number_format($total['pago'], 2, ',', '.'); ?></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

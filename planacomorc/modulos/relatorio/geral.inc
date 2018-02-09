@@ -35,7 +35,7 @@ $cabecalho = [
     'Cronograma Orçamentário<br />Custeio Maio', 'Cronograma Orçamentário<br />Custeio Junho', 'Cronograma Orçamentário<br />Custeio Julho', 'Cronograma Orçamentário<br />Custeio Agosto',
     'Cronograma Orçamentário<br />Custeio Setembro', 'Cronograma Orçamentário<br />Custeio Outubro', 'Cronograma Orçamentário<br />Custeio Novembro', 'Cronograma Orçamentário<br />Custeio Dezembro',
 
-    'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
+    'Valor Provisionado', 'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
 ];
 
 # Lista de colunas que terão formatação de moeda.
@@ -91,6 +91,7 @@ $listaColunaMoeda = array(
     'orc_custeio_10',
     'orc_custeio_11',
     'orc_custeio_12',
+    'vlrautorizado',
     'vlrempenhado',
     'vlrliquidado',
     'vlrpago'

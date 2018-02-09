@@ -136,8 +136,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <tr class="tr_<?php echo $dado['unoid']; ?> tr_detalhe" style="display: none; background-color: #fff0e6 !important;">
                                         <td style="padding-left: 30px; border-right: 1px black solid;" >
                                             <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
-                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?>
+                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ' (RP ' . $dado['irpcod'] . ')'; ?>
                                             </span>
+                                            <?php if($dado['compartilhada'] > 1): ?>
+                                                &nbsp;<i class="fa fa-handshake-o link" title="Funcional Compartilhada com outras Subunidades."></i>
+                                            <?php endif; ?>
                                         </td>
 
                                         <td class="text-right" style="border-right: 1px black solid;">
@@ -179,8 +182,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <tr class="tr_<?php echo $dado['suoid']; ?> tr_detalhe" style="display: none;">
                                         <td style="padding-left: 30px; border-right: 1px black solid;" >
                                             <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
-                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo']; ?>
+                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ' (RP ' . $dado['irpcod'] . ')'; ?>
                                             </span>
+                                            <?php if($dado['compartilhada'] > 1): ?>
+                                                &nbsp;<i class="fa fa-handshake-o link" title="Funcional Compartilhada com outras Subunidades."></i>
+                                            <?php endif; ?>
                                         </td>
 
                                         <td class="text-right" style="border-right: 1px black solid;">

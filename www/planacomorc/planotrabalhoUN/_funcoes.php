@@ -1583,7 +1583,7 @@ function enviaEmailStatusPi($pi){
 				WHERE
 					pi.plistatus = 'A' 
 					AND pi.pliid = '" . $pi . "'
-					and pi.usucpf not in ('', '', '', '')
+					and pi.usucpf not in ('40074641115', '18431445149', '30420202668', '26873559172')
 				ORDER BY
 					plidata";
 		$dado = (array) $db->pegaLinha($sql);

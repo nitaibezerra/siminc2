@@ -911,16 +911,30 @@
         var disponivelFuncionalCusteio = textToFloat($('#td_disponivel_funcional_custeio').text());
         var disponivelFuncionalCapital = textToFloat($('#td_disponivel_funcional_capital').text());
         
-        if(disponivelUnidade < 0 || disponivelFuncionalCusteio < 0){
-            $('#picvalorcusteio').addClass('validateRedText');
+        if(verificarFormularioEmenda()){
+            if(disponivelFuncionalCusteio < 0){
+                $('#picvalorcusteio').addClass('validateRedText');
+            } else {
+                $('#picvalorcusteio').removeClass('validateRedText');
+            }
+
+            if(disponivelFuncionalCapital < 0){
+                $('#picvalorcapital').addClass('validateRedText');
+            } else {
+                $('#picvalorcapital').removeClass('validateRedText');
+            }
         } else {
-            $('#picvalorcusteio').removeClass('validateRedText');
-        }
-        
-        if(disponivelUnidade < 0 || disponivelFuncionalCapital < 0){
-            $('#picvalorcapital').addClass('validateRedText');
-        } else {
-            $('#picvalorcapital').removeClass('validateRedText');
+            if(disponivelUnidade < 0 || disponivelFuncionalCusteio < 0){
+                $('#picvalorcusteio').addClass('validateRedText');
+            } else {
+                $('#picvalorcusteio').removeClass('validateRedText');
+            }
+
+            if(disponivelUnidade < 0 || disponivelFuncionalCapital < 0){
+                $('#picvalorcapital').addClass('validateRedText');
+            } else {
+                $('#picvalorcapital').removeClass('validateRedText');
+            }
         }
     }
     
@@ -1011,6 +1025,20 @@
     function verificarFormularioNaoOrcamentario(){
         var resultado = false;
         if($('#eqdid').val() == intEnqNaoOrcamentario){
+            resultado = true;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Verifica se o formulário é de Emenda.
+     * 
+     * @returns boolean retorna true se o formulário for Não Orçamentário.
+     */
+    function verificarFormularioEmenda(){
+        var resultado = false;
+        if($('#eqdid').val() == intEnqEmenda){
             resultado = true;
         }
         
@@ -1121,7 +1149,7 @@
      */
     function mudarFormularioNaoOrcamentario(codigo){
         // Se o código for Não Orçamentário, o sistema não exibe as opções PTRES(Funcional), Valor do Projeto, Cronograma Orçamentário e Financeiro.
-        if(codigo == intEnqNaoOrcamentario){
+        if(verificarFormularioNaoOrcamentario()){
             // Oculta a opções PTRES(Funcional).
             $('.div_ptres').hide('slow');
             // Oculta o quadro de Custeio e Capital com a opção de Valor do Projeto.
@@ -1139,6 +1167,42 @@
             $('.td_cronograma_orcamentario').show('slow');
             // Exibe as colunas e campos do Cronograma Financeiro.
             $('.td_cronograma_financeiro').show('slow');
+        }
+    }
+    
+    /**
+     * Controla a exibição do formulario se o enquadramento for Emenda.
+     *
+     * @param integer codigo Código selecionado pelo usuário.
+     * @returns VOID
+     */
+    function mudarFormularioEmenda(codigo){
+        if(fnc === false){
+            /*
+             * Se o código for Emenda, o sistema não exibe as opções Responsáveis pelo Projeto,
+             * edital e Cronogramas.
+             */
+            if(verificarFormularioEmenda()){
+                // Oculta a opções Responsáveis pelo Projeto.
+                $('#div_responsaveis').hide('slow');
+                // Oculta a opção Edital.
+                $('#div_botao_edital').hide('slow');
+                // Oculta as colunas e campos do Cronograma.
+                $('#div_cronogramas').hide('slow');
+                // Ocultando Limites da unidade
+                $('.tr_limite_autorizado_unidade').hide('slow');
+                $('.tr_limite_disponivel_unidade').hide('slow');
+            } else {
+                // Exibe a opções Responsáveis pelo Projeto.
+                $('#div_responsaveis').show('slow');
+                // Exibe a opção Edital.
+                $('#div_botao_edital').show('slow');
+                // Exibe as colunas e campos do Cronograma.
+                $('#div_cronogramas').show('slow');
+                // Exibindo Limites da unidade
+                $('.tr_limite_autorizado_unidade').show('slow');
+                $('.tr_limite_disponivel_unidade').show('slow');
+            }
         }
     }
 
@@ -1168,19 +1232,21 @@
      * Carrega limites da Sub-Unidade via requisição ajax.
      */
     function carregarLimitesUnidade(codigo) {
-        $.ajax({
-            url: urlPagina+ '&carregarLimitesUnidade=ok',
-            type: "post",
-            data: {'ungcod': codigo},
-            dataType: 'json',
-            success: function(data){
-                $('#td_autorizado_sub_unidade').text(data.autorizado);
-                $('#VlrSUDisponivel').val(data.disponivel);
-                
-                atualizarValorLimiteDisponivelUnidade();
-                mudarCorValorProjeto();
-            }
-        });
+        if(!verificarFormularioEmenda()){
+            $.ajax({
+                url: urlPagina+ '&carregarLimitesUnidade=ok',
+                type: "post",
+                data: {'ungcod': codigo},
+                dataType: 'json',
+                success: function(data){
+                    $('#td_autorizado_sub_unidade').text(data.autorizado);
+                    $('#VlrSUDisponivel').val(data.disponivel);
+
+                    atualizarValorLimiteDisponivelUnidade();
+                    mudarCorValorProjeto();
+                }
+            });
+        }
     }
 
     /**

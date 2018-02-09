@@ -3,22 +3,23 @@
 include_once '../planacomorc/_funcoespi.php';
 require_once APPRAIZ . 'includes/workflow.php';
 
-$mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
-
 $cBeneficiario = new Emendas_Controller_Beneficiario();
 
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cBeneficiario->salvar($_REQUEST);
-		die;
-	case 'excluir':
+        die;
+    case 'salvar-complemento':
+        $cBeneficiario->salvar($_REQUEST);
+        die;
+    case 'excluir':
         $cBeneficiario->excluir($_REQUEST['benid']);
-		die;
+        die;
     case 'formulario-historico':
         $cBeneficiario->montarFormularioHistorico($_REQUEST['benid'], $_REQUEST['behid']);
         die;
     case 'listar-historico':
-        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid);
+        $cBeneficiario->montarListagemHistorico($_REQUEST['benid']);
         die;
     case 'salvar-historico':
         $cBeneficiarioHistorico = new Emendas_Controller_BeneficiarioHistorico();
@@ -32,7 +33,7 @@ switch ($_REQUEST['req']) {
         $cBeneficiario->montarFormularioDetalhe($_REQUEST['benid'], $_REQUEST['bedid']);
         die;
     case 'listar-detalhe':
-        $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid);
+        $cBeneficiario->montarListagemDetalhe($_REQUEST['benid']);
         die;
     case 'salvar-detalhe':
         $cBeneficiarioDetalhe = new Emendas_Controller_BeneficiarioDetalhe();
@@ -43,264 +44,610 @@ switch ($_REQUEST['req']) {
         echo $cBeneficiarioDetalhe->excluir($_REQUEST['bedid']);
         die;
     case 'carregarSegmento':
+        $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
         echo $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$_REQUEST['mdeid']]));
         die;
     case 'verificarPactuacaoConvenio':
         echo verificarPactuacaoConvenio($_REQUEST['capid']);
-        die();
+        die;
+    case 'atualizar-siconv':
+        $cBeneficiario->atualizarSiconv($_REQUEST['emeid']);
+        die;
+    case 'uploadAnexo':
+        $file = new FilesSimec();
+        if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
+            echo simec_json_encode(array(
+                'arqid' => $file->getIdArquivo(),
+                'arqnome' => $_FILES['file']['name'],
+                'arqdescricao' => $_REQUEST['arqdescricao']
+            ));
+        }else{
+            echo simec_json_encode(array(
+                'error' => 1,
+                'errorMensage' => 'Não foi possível enviar o arquivo!'
+            ));
+        }
+        die;
+    case 'carregarMetasPPA':
+        $sql = (new Public_Model_MetaPpa())->recuperarSqlCombo(NULL, array(
+            'exercicio' => $_SESSION['exercicio'],
+            'suoid' => $_REQUEST['suoid'],
+            'oppid' => $_REQUEST['oppid']));
+        $listaMetaPpa = $db->carregar($sql);
+
+        if($listaMetaPpa){
+            echo simec_json_encode($listaMetaPpa);
+        } else {
+            echo simec_json_encode(array());
+        }
+        die;
+    case 'carregarIniciativaPPA':
+        $sql = (new Public_Model_IniciativaPpa())->recuperarSqlCombo(NULL, array(
+            'exercicio' => $_SESSION['exercicio'],
+            'oppid' => $_REQUEST['oppid']));
+        $listaIniciativaPpa = $db->carregar($sql);
+        if($listaIniciativaPpa){
+            echo simec_json_encode($listaIniciativaPpa);
+        } else {
+            echo simec_json_encode(array());
+        }
+        die;
+    case 'carregarIndicadorPNC':
+        $sql = (new Public_Model_IndicadorPnc())->recuperarSqlCombo(NULL, array(
+            'exercicio' => $_SESSION['exercicio'],
+            'mpnid' => $_REQUEST['mpnid']));
+        $listaIndicadorPnc = $db->carregar($sql);
+        if($listaIndicadorPnc){
+            echo simec_json_encode($listaIndicadorPnc);
+        } else {
+            echo simec_json_encode(array());
+        }
+        die;
+    case 'espelho-pi':
+        include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
+        die;
 }
+
+$perfis = pegaPerfilGeral();
+$podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+//$podeEditar = TRUE;
+$configPodeEditar = array('pode-editar' => $podeEditar? 'S': 'N');
+
+$mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
+
+$listaSniic = (new Emendas_Model_Sniic())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
+$listaPronac = (new Emendas_Model_Pronac())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
+$listaDeAnexos = (new Emendas_Model_BeneficiarioAnexo())->buscarPorBeneficiario((int)$mBeneficiario->benid);
+
+# Selecionando Aba
+$aba = $_REQUEST['aba'];
+$classTab0 = empty($aba)? 'active': NULL;
+$classTab1 = $aba? 'active': NULL;
 
 $aSiconv = $mBeneficiario->recuperarDadosSiconv();
 
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
-
 $mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
 
 $estadoAtual = $mBeneficiario->gerarDocid(WF_TPDID_BENEFICIARIO, 'Beneficiário');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
-
+<script language="JavaScript" src="../includes/funcoesspo.js?v=1"></script>
 <style>
-    .select-localizacao{
+    .select-localizacao {
         display: none;
     }
 
-    .coluna-parecer{
+    .coluna-parecer {
         cursor: pointer;
+    }
+    
+    div div.ibox div.ibox-title {
+        background-color: #F3F3F4;
+    }
+    
+    div div.ibox div.ibox-content {
+        background-color: #F3F3F4;
     }
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-4">
         <h2><?php echo $titulo_modulo; ?></h2>
+        <?php echo $mBeneficiario->pliid? "<span class='link a_espelho' title='Exibir dados do Plano Interno' data-pi='{$mBeneficiario->pliid}' style='color: red;'>Id do PI: {$mBeneficiario->pliid}</span>": NULL; ?>
+    </div>
+    <div class="col-lg-8">
+        <div style="padding-top: 10px;" class="text-right">
+            <a class="btn btn-info" href="?modulo=principal/beneficiario_form&acao=A&req=atualizar-siconv&emeid=<?php echo $mBeneficiario->emeid; ?>"><i class="fa fa-refresh"></i> Atualizar dados SICONV</a>
+        </div>
     </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
-            <div class="col-md-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Dados Gerais</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <input type="hidden" name="req" id="req" value="salvar" />
-                        <input name="benid" id="benid" type="hidden" value="<?php echo $mBeneficiario->benid; ?>">
-                        <input name="emeid" id="emeid" type="hidden" value="<?php echo $mBeneficiario->emeid; ?>">
-
-                        <?php
-                        $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = {$mEmenda->unoid}"], 'suonome');
-                        $options = simec_preparar_array($db->carregar($sql));
-                        $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
-                        echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required']);
-
-                        $listaSubUnidadesDelegadas = $mBeneficiario->recuperarDelegacao();
-                        ?>
-
-                        <div class="form-group">
-                            <div class="col-md-3 text-right">
-                                <label class="control-label" for="picted">Delegação:</label>
-                            </div>
-                            <div class="col-md-1">
-                                <input type="checkbox" name="delegacao" id="delegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
-                            </div>
-                            <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
-                                <?php
-                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
-                                echo $simec->select("delegacao[]", '', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
-                                ?>
-                            </div>
-                        </div>
-
-                        <?php
-                        echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required']);
-
-                        $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
-                        echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
-                        ?>
-                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
-                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
-                        </div>
-                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
-                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
-                        </div>
-                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
-                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
-                        </div>
-
-                        <?php
-                        echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
-                        echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
-                        echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
-                        echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
-                        ?>
-
-                        <div class="col-md-6 dados-siconv">
-                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
-                            <?php
-                            echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
-                            echo $simec->input('benprogramatitulo', 'Título', $mBeneficiario->benprogramatitulo, ['maxlength' => 1000]);
-                            echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
-                            ?>
-                        </div>
-                        <div class="col-md-6 dados-siconv">
-                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
-                            <?php
-                            $sicsequencial = $aSiconv['siconv']['sicsequencial'] ? $aSiconv['siconv']['sicsequencial'] . '/' . $aSiconv['siconv']['prsano'] : null;
-                            echo $simec->input('benpropostanumero', 'Número', $sicsequencial, ['class'=>'inteiro']);
-                            echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
-                            echo $simec->textarea('benpropostaobjeto', 'Objeto', $aSiconv['siconv']['sicobjeto']);
-                            echo $simec->select('sitid', 'Situação', $aSiconv['siconv']['sitid'], (new Emendas_Model_SiconvSituacao())->recuperarSqlCombo());
-                            ?>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5">
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Informações Complementares</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <?php
-                        echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
-                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
-                        echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo());
-                        echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
-                        echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
-                        ?>
-                        <div class="form-group ">
-                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
-                            <div class="col-md-2 ">
-                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
-                            </div>
-                            <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
-                            <div class="col-md-1 ">
-                                <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
-                            </div>
-                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
-                            <div class="col-md-1 ">
-                                <input type="checkbox" name="benpago" id="benpago" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benpago ? 'checked="checked"' : ''; ?> />
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
-                            <div class="col-md-1 ">
-                                <input type="checkbox" name="benimpedimento" id="benimpedimento" value="t" class="js-switch" <?php echo $mBeneficiario->impid ? 'checked="checked"' : ''; ?> />
-                            </div>
-                            <label for="benimpedimento" class="col-sm-2 control-label div_motivo">Motivo: </label>
-                            <div class="col-md-6 div_motivo">
-                                <?php echo $simec->select('impid', null, $mBeneficiario->impid, (new Emendas_Model_Impedimento())->recuperarSqlCombo(['impcod', 'impdsc'], ["impstatus = 'A'"], 'impcod'));; ?>
-                            </div>
-                        </div>
-
-                        <div class="div_motivo">
-                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justivicativa', $mBeneficiario->benmotivoimpedimento); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="col-md-1">
-            <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
-        </div>
-
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                    <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                    <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-voltar" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
-                    <?php if($mBeneficiario->benid){ ?>
-                        <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Histórico/Observações</h5>
-                </div>
-                <div class="ibox-content">
-                    <div id="div_formulario_historico">
-                        <?php if($mBeneficiario->benid){
-                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
-                        } ?>
-                    </div>
-                    <div id="div_listagem_historico">
-                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="ibox float-e-margins">
-            	<div class="ibox-title">
-            		<h5>Dados Financeiros</h5>
-            	</div>
-                <div class="ibox-content">
-                    <div id="div_formulario_detalhe">
-                        <?php if($mBeneficiario->benid){
-                            $cBeneficiario->montarFormularioDetalhe($mBeneficiario->benid);
-                        } ?>
-                    </div>
-                    <div id="div_listagem_detalhe">
-                        <?php $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
         
-        <div class="clearfix"></div>
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="<?php echo $classTab0; ?>">
+                    <a data-toggle="tab" href="#tab-0">Cadastro Inicial</a>
+                </li>
+                <li class="<?php echo $classTab1; ?>">
+                    <a data-toggle="tab" href="#tab-1">Cadastro complementar do PI</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-0" class="tab-pane <?php echo $classTab0; ?>">
+                    <div class="panel-body">
 
-        <?php $aTipoParecer = [
-            Emendas_Model_SiconvParecer::K_TIPO_PROPOSTA => 'Parecer',
-            Emendas_Model_SiconvParecer::K_TIPO_PLANO_TRABALHO => 'Parecer - Plano de Trabalho',
-        ];
+                        <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
+                            <div class="col-md-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Dados Gerais</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <input type="hidden" name="req" id="req" value="salvar" />
+                                        <input name="benid" id="benid" type="hidden" value="<?php echo $mBeneficiario->benid; ?>">
+                                        <input name="emeid" id="emeid" type="hidden" value="<?php echo $mBeneficiario->emeid; ?>">
 
-        foreach($aTipoParecer as $tipo => $titulo){ ?>
-            <div class="col-md-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5><?php echo $titulo; ?></h5>
-                    </div>
-                    <div class="ibox-content">
+                                        <?php
+                                            $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = ". (int)$mEmenda->unoid], 'suonome');
+                                            $options = simec_preparar_array($db->carregar($sql));
+                                            $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
+                                            echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required'], $configPodeEditar);
 
-                        <?php if(isset($aSiconv['parecer'][$tipo]) && is_array($aSiconv['parecer'][$tipo])){ ?>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover bedidTables" >
-                                    <thead>
-                                    <tr class="text-center">
-                                        <th>Data</th>
-                                        <th>Parecer</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach($aSiconv['parecer'][$tipo] as $dados){ ?>
-                                        <tr>
-                                            <td><?php echo formata_data($dados['spadata'], "%d/%m/%Y %H:%M:%S"); ?></td>
-                                            <td class="coluna-parecer" title="<?php echo $dados['spadsc']; ?>"><?php echo substr($dados['spadsc'], 0, 100); ?>...</td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                </table>
+                                            $listaSubUnidadesDelegadas = $mBeneficiario->recuperarDelegacao();
+                                        ?>
+
+                                        <div class="form-group">
+                                            <div class="col-md-3 text-right">
+                                                <label class="control-label" for="radioDelegacao">Delegação:</label>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input <?php echo $podeEditar? NULL: 'disabled="disabled"'; ?> type="checkbox" id="radioDelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                            <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
+                                            <?php
+                                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+                                                echo $simec->select("delegacao[]", '', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria, [], $configPodeEditar);
+                                            ?>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                            echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required'], $configPodeEditar);
+
+                                            $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
+                                            echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                                        ?>
+                                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
+                                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
+                                        </div>
+                                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
+                                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
+                                        </div>
+                                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
+                                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
+                                        </div>
+
+                                        <?php
+                                            echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
+                                            echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
+                                            echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
+                                            echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
+                                        ?>
+
+                                        <div class="col-md-6 dados-siconv">
+                                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
+                                            <?php
+                                            echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
+                                            echo $simec->input('benprogramatitulo', 'Título', $mBeneficiario->benprogramatitulo, ['maxlength' => 1000]);
+                                            echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
+                                            ?>
+                                        </div>
+                                        <div class="col-md-6 dados-siconv">
+                                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
+                                            <?php
+                                                $sicsequencial = $aSiconv['siconv']['sicsequencial'] ? $aSiconv['siconv']['sicsequencial'] . '/' . $aSiconv['siconv']['prsano'] : null;
+                                                echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero? $mBeneficiario->benpropostanumero: $sicsequencial, ['class'=>'inteiro']);
+                                                echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
+                                                echo $simec->textarea('benpropostaobjeto', 'Objeto', $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: $aSiconv['siconv']['sicobjeto']);
+                                                echo $simec->select('sitid', 'Situação', $aSiconv['siconv']['sitid'], (new Emendas_Model_SiconvSituacao())->recuperarSqlCombo());
+                                            ?>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
                             </div>
-                        <?php } else {
-                            echo '<div class="alert alert-danger">Nenhum registro encontrado</div>';
-                        }?>
+                            <div class="col-md-5">
+
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Informações Complementares</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <?php
+                                        echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                                        echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
+                                        echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                        echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
+                                        ?>
+                                        <div class="form-group ">
+                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
+                                            <div class="col-md-2 ">
+                                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                            <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
+                                            <div class="col-md-1 ">
+                                                <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
+                                            <div class="col-md-1 ">
+                                                <input type="checkbox" name="benpago" id="benpago" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benpago ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
+                                            <div class="col-md-1 ">
+                                                <input type="checkbox" name="benimpedimento" id="benimpedimento" value="t" class="js-switch" <?php echo $mBeneficiario->impid ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                            <label for="benimpedimento" class="col-sm-2 control-label div_motivo">Motivo: </label>
+                                            <div class="col-md-6 div_motivo">
+                                                <?php echo $simec->select('impid', null, $mBeneficiario->impid, (new Emendas_Model_Impedimento())->recuperarSqlCombo(['impcod', 'impdsc'], ["impstatus = 'A'"], 'impcod'));; ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="div_motivo">
+                                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justivicativa', $mBeneficiario->benmotivoimpedimento); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="col-md-1">
+                            <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                    <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-voltar" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
+                                    <?php if($mBeneficiario->benid){ ?>
+                                        <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Histórico/Observações</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <div id="div_formulario_historico">
+                                        <?php if($mBeneficiario->benid){
+                                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
+                                        } ?>
+                                    </div>
+                                    <div id="div_listagem_historico">
+                                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                        <h5>Dados Financeiros</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <div id="div_formulario_detalhe">
+                                        <?php if($mBeneficiario->benid){
+                                            $cBeneficiario->montarFormularioDetalhe($mBeneficiario->benid);
+                                        } ?>
+                                    </div>
+                                    <div id="div_listagem_detalhe">
+                                        <?php $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                        <h5>Dados do SICONV</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <?php $cBeneficiario->montarListagemSiconv($mBeneficiario->benid); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <?php $aTipoParecer = [
+                            Emendas_Model_SiconvParecer::K_TIPO_PROPOSTA => 'Parecer',
+                            Emendas_Model_SiconvParecer::K_TIPO_PLANO_TRABALHO => 'Parecer - Plano de Trabalho',
+                        ];
+
+                //        foreach($aTipoParecer as $tipo => $titulo){ ?>
+                <!--            <div class="col-md-6">-->
+                <!--                <div class="ibox float-e-margins">-->
+                <!--                    <div class="ibox-title">-->
+                <!--                        <h5>--><?php //echo $titulo; ?><!--</h5>-->
+                <!--                    </div>-->
+                <!--                    <div class="ibox-content">-->
+                <!---->
+                <!--                        --><?php //if(isset($aSiconv['parecer'][$tipo]) && is_array($aSiconv['parecer'][$tipo])){ ?>
+                <!--                            <div class="table-responsive">-->
+                <!--                                <table class="table table-striped table-bordered table-hover bedidTables" >-->
+                <!--                                    <thead>-->
+                <!--                                    <tr class="text-center">-->
+                <!--                                        <th>Data</th>-->
+                <!--                                        <th>Parecer</th>-->
+                <!--                                    </tr>-->
+                <!--                                    </thead>-->
+                <!--                                    <tbody>-->
+                <!--                                    --><?php //foreach($aSiconv['parecer'][$tipo] as $dados){ ?>
+                <!--                                        <tr>-->
+                <!--                                            <td>--><?php //echo formata_data($dados['spadata'], "%d/%m/%Y %H:%M:%S"); ?><!--</td>-->
+                <!--                                            <td class="coluna-parecer" title="--><?php //echo $dados['spadsc']; ?><!--">--><?php //echo substr($dados['spadsc'], 0, 100); ?><!--...</td>-->
+                <!--                                        </tr>-->
+                <!--                                    --><?php //} ?>
+                <!--                                    </tbody>-->
+                <!--                                </table>-->
+                <!--                            </div>-->
+                <!--                        --><?php //} else {
+                //                            echo '<div class="alert alert-danger">Nenhum registro encontrado</div>';
+                //                        }?>
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--        --><?php //} ?>
+
+                    </div>
+                </div>
+                <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
+                    <div class="panel-body">
+
+                        <form id="formulario-beneficiario-complemento" name="formulario-beneficiario-complemento" method="POST" class="form-horizontal">
+
+                            <div class="col-md-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Dados Gerais</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <input type="hidden" name="req" id="req" value="salvar-complemento" />
+                                        <input name="benid" id="benid" type="hidden" value="<?php echo $mBeneficiario->benid; ?>">
+                                        <input name="emeid" id="emeid" type="hidden" value="<?php echo $mBeneficiario->emeid; ?>">
+                                        <input name="aba" id="aba" type="hidden" value="<?php echo $aba; ?>">
+
+                                        <?php
+                                            if(empty($mBeneficiario->plititulo)){
+                                                $tituloDinamico = $mEmenda->emenumero && $mBeneficiario->benpropostatitulo? $mEmenda->emenumero . ' '. $mBeneficiario->benpropostatitulo: NULL;
+                                            } else {
+                                                $tituloDinamico = $mBeneficiario->plititulo;
+                                            }
+                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $tituloDinamico, ['maxlength' => 250]);
+
+                                            $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
+                                            echo $simec->textarea('plidsc', 'Descrição / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
+                                        ?>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-5">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Metas</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <?php
+                                            if($mBeneficiario->oppid){
+                                                $oppidDinamico = $mBeneficiario->oppid;
+                                            } else {
+                                                $oppidDinamico = (new Public_Model_ObjetivoPpa())->buscarOppidPorFuncional($mEmenda->ptrid);
+                                            }
+                                            echo $simec->select('oppid', 'Objetivo PPA', $oppidDinamico, (new Public_Model_ObjetivoPpa())->recuperarSqlCombo(null, ['exercicio' => $_SESSION['exercicio']]));
+                                            echo $simec->select('mppid', 'Metas PPA', $mBeneficiario->mppid, (new Public_Model_MetaPpa())->recuperarSqlCombo(null, ['exercicio' => $_SESSION['exercicio'], 'suoid' => $mBeneficiario->suoid, 'oppid' => $oppidDinamico]));
+                                            echo $simec->select('ippid', 'Iniciativa PPA', $mBeneficiario->ippid, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['exercicio' => $_SESSION['exercicio'], 'oppid' => $oppidDinamico]));
+                                            echo $simec->select('mpnid', 'Meta PNC', $mBeneficiario->mpnid, (new Public_Model_MetaPnc())->recuperarSqlCombo(null, ['exercicio' => $_SESSION['exercicio'], 'suoid' => $mBeneficiario->suoid]));
+                                            echo $simec->select('ipnid', 'Indicador PNC', $mBeneficiario->ipnid, (new Public_Model_IndicadorPnc())->recuperarSqlCombo(null, ['exercicio' => $_SESSION['exercicio'], 'mpnid' => $mBeneficiario->mpnid]));
+                                        ?>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="col-md-1">
+                                <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Vinculações Eventuais do Projeto</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                Números SNIIC
+                                                <div class="form-group">
+                                                    <div class="col-md-10" style="padding-right: 3px;">
+                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
+                                                    </div>
+                                                    <div class="col-lg-1" style="padding-left: 0;">
+                                                        <input type="button" id="btn_adicionar_sniic" value="+" class="btn btn-info" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <table id="table_sniic" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                            <?php foreach($listaSniic as $sniic){ ?>
+                                                                <tr style="height: 30px;" id="tr_sniic_<?php echo $sniic['sniid']; ?>" >
+                                                                    <td style="text-align: left;"><?php echo $sniic['sninumero']; ?></td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="hidden" name="lista_sniic[]" value="<?php echo $sniic['sninumero']; ?>" />
+                                                                        <span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="<?php echo $sniic['sniid']; ?>" ></span>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                Número Pronac
+                                                <div class="form-group">
+                                                    <div class="col-md-10" style="padding-right: 3px;">
+                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo normal form-control" title="Número PRONAC" id="input_pronac" name="input_pronac" />
+                                                    </div>
+                                                    <div class="col-lg-1" style="padding-left: 0;">
+                                                        <input type="button" id="btn_adicionar_pronac" value="+" class="btn btn-info" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <table id="table_pronac" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                            <?php foreach($listaPronac as $pronac){ ?>
+                                                                <tr style="height: 30px;" id="tr_pronac_<?php echo $pronac['proid']; ?>" >
+                                                                    <td style="text-align: left;"><?php echo $pronac['pronumero']; ?></td>
+                                                                    <td style="text-align: center;">
+                                                                        <input type="hidden" name="lista_pronac[]" value="<?php echo $pronac['pronumero']; ?>" />
+                                                                        <span class="glyphicon glyphicon-trash link btnRemovePronac" data-pronac="<?php echo $pronac['proid']; ?>" ></span>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="col-md-5">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Produto PI</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <?php
+                                            echo $simec->select('pprid', 'Produto', $mBeneficiario->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(null, ["pprstatus = 'A'"]));
+                                            echo $simec->select('pumid', 'Unidade de Medida', $mBeneficiario->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(null, ["pumstatus = 'A'"]));
+                                            echo $simec->input('picquantidade', 'Quantidade', $mBeneficiario->picquantidade, ['class'=>'inteiro']);
+                                        ?>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Anexos</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                                    <tr>
+                                                        <td style="text-align: left;"><b>Nome do arquivo</b></td>
+                                                        <td style="text-align: left;"><b>Descrição</b></td>
+                                                        <td style="text-align: center;"><b>Ação</b></td>
+                                                    </tr>
+                                                    <?php foreach($listaDeAnexos as $anexo){ ?>
+                                                        <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
+                                                            <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
+                                                            <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
+                                                            <td style="text-align: center;">
+                                                                <input type="hidden" value="<?php echo $anexo['arqid']; ?>" name="listaAnexos[]">
+                                                                <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos="<?php echo $anexo['arqid']; ?>" />
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" type="button" id="btn-salvar-complemento">
+                                            <i class="fa fa-check"></i>&nbsp;Salvar
+                                        </button>
+                                        <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button">
+                                            <i class="fa fa-arrow-left"></i>&nbsp;Voltar
+                                        </a>
+                                        <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-voltar" type="button">
+                                            <i class="fa fa-file"></i>&nbsp;Ver Emenda
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_upload" class="modal fade">
+            <div class="modal_dialog_upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="emendas.php?modulo=principal/beneficiario_form&acao=A&benid=<?php echo $mBeneficiario->benid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                            <div class="form-group">
+                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                </div>
+                            </div>
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -322,12 +669,16 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
 
         toggleDelegacao();
-        $('#delegacao').change(function(){
+        $('#radioDelegacao').change(function(){
             toggleDelegacao();
         });
 
         $('#btn-salvar').click(function(){
             $('#formulario-beneficiario').submit();
+        });
+        
+        $('#btn-salvar-complemento').click(function(){
+            $('#formulario-beneficiario-complemento').submit();
         });
 
         $('#esfid').change(function(){
@@ -366,11 +717,230 @@ include APPRAIZ . "includes/cabecalho.inc";
         }
 
         function toggleDelegacao(){
-            if($('#delegacao').is(':checked')){
+            if($('#radioDelegacao').is(':checked')){
                 $('#div_unidades_delegadas').show('slow');
             } else {
                 $('#div_unidades_delegadas').hide('slow');
             }
         }
-    })
+        
+        // Evento ao mudar opção de Objetivos PPA
+        $('#oppid').change(function(){
+            carregarMetasPPA($(this).val(), null, $('#suoid').val());
+            carregarIniciativaPPA($(this).val());
+        });
+        
+        // Evento ao mudar opção de Metas PNC
+        $('#mpnid').change(function(){
+            carregarIndicadorPNC($(this).val());
+        });
+        
+        $('#btn_inserir_anexos').click(function(){
+            abrirModalUpload();
+        });
+
+        // Evento de terminar de carregar arquivos
+        Dropzone.options.formularioAnexo = {
+            init: function() {
+                
+                this.on("success", function(file, response){
+                    var jsonResponse = $.parseJSON(response);
+                    inserirNovoAnexo(jsonResponse);
+                });
+
+                this.on("queuecomplete", function(file){
+
+                    // Armazena o objeto Dropzone para chamar métodos
+                    objFormularioAnexo = this;
+                    // Chama mensagem de sucesso
+                    swal({
+                      title: "",
+                      text: "Arquivos salvos com sucesso!",
+                      timer: 2000,
+                      showConfirmButton: false,
+                      type: "success"
+                    }, function(){
+                        // Fecha o swal alert
+                        swal.close();
+                        // limpa campo de upload
+                        objFormularioAnexo.removeAllFiles();
+                        // fecha modal após a seleção
+                        $('#modal_upload').modal('hide');
+                    });
+                });
+            }
+        };
+        
+        $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
+            var id = $(this).attr('data-anexos');
+            $('.tr_anexos_'+ id).remove();
+        });
+
+        $('#btn_adicionar_sniic').click(function(){
+             var trHtml =
+                '<tr style="height: 30px;" id="tr_sniic_' + $('#input_sniic').val()+ '" >'
+                        + '<td style="text-align: left;">' + $('#input_sniic').val() + '</td>'
+                        + '<td style="text-align: center;">'
+                            + '<input type="hidden" name="lista_sniic[]" value="' + $('#input_sniic').val() + '" />'
+                            + '<span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="' + $('#input_sniic').val()+ '" ></span>'
+                        + '</td>'
+                + '</tr>';
+            $('#table_sniic').append(trHtml);
+            $('#input_sniic').val('');
+        });
+
+        $('#table_sniic').on('click', '.btnRemoveSniic', function(){
+            var sniic = $(this).attr('data-sniic');
+            $('#tr_sniic_'+ sniic).remove();
+        });
+
+        $('#input_sniic').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_adicionar_sniic').click();
+            }
+        });
+
+        $('#btn_adicionar_pronac').click(function(){
+             var trHtml =
+                '<tr style="height: 30px;" id="tr_pronac_' + $('#input_pronac').val()+ '" >'
+                        + '<td style="text-align: left;">' + $('#input_pronac').val() + '</td>'
+                        + '<td style="text-align: center;">'
+                            + '<input type="hidden" name="lista_pronac[]" value="' + $('#input_pronac').val() + '" />'
+                            + '<span class="glyphicon glyphicon-trash link btnRemovePronac" data-pronac="' + $('#input_pronac').val()+ '" ></span>'
+                        + '</td>'
+                + '</tr>';
+            $('#table_pronac').append(trHtml);
+            $('#input_pronac').val('');
+        });
+
+        $('#table_pronac').on('click', '.btnRemovePronac', function(){
+            var pronac = $(this).attr('data-pronac');
+            $('#tr_pronac_'+ pronac).remove();
+        });
+
+        $('#input_pronac').keypress(function(e){
+            if(e.which == 13) {
+                $('#btn_adicionar_pronac').click();
+            }
+        });
+
+        $('.a_espelho').click(function(){
+            var pliid = $(this).attr('data-pi');
+            exibirEspelhoPi(pliid);
+            return false;
+        });
+
+    });
+    
+    /**
+     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     * 
+     * @param {integer} oppid
+     * @param {integer} mppid
+     * @param {integer} suoid
+     * @returns {VOID}
+     */
+    function carregarMetasPPA(oppid, mppid, suoid) {
+        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
+
+        carregarSelectPorJson(
+            requisicao,
+            '#mppid',
+            'codigo',
+            'descricao',
+            {
+                'req': 'carregarMetasPPA',
+                'oppid': oppid,
+                'suoid': suoid
+            },
+            'Selecione',
+            mppid,
+            function(){
+                $(".chosen-select").chosen();
+            }
+        );
+    }
+
+    /**
+     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     * 
+     * @param {integer} codigo
+     * @returns {VOID}
+     */
+    function carregarIniciativaPPA(codigo){
+        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
+
+        carregarSelectPorJson(
+            requisicao,
+            '#ippid',
+            'codigo',
+            'descricao',
+            {
+                'req': 'carregarIniciativaPPA',
+                'oppid': codigo
+            },
+            'Selecione',
+            '',
+            function(){
+                $(".chosen-select").chosen();
+            }
+        );
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
+     * 
+     * @param {integer} codigo
+     * @returns {VOID}
+     */
+    function carregarIndicadorPNC(codigo) {
+        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
+
+        carregarSelectPorJson(
+            requisicao,
+            '#ipnid',
+            'codigo',
+            'descricao',
+            {
+                'req': 'carregarIndicadorPNC',
+                'mpnid': codigo
+            },
+            'Selecione',
+            '',
+            function(){
+                $(".chosen-select").chosen();
+            }
+        );
+    }
+    
+    function abrirModalUpload() {
+        $('.modal_dialog_upload').show();
+        $('#modal_upload').modal();
+        $('#modal_upload .chosen-container').css('width', '100%');
+    }
+
+    function inserirNovoAnexo(json){
+        var trHtml = '<tr style="height: 30px;" class="tr_anexos_'+ json.arqid +'" >'
+            + '                    <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('+ json.arqid+ '); return false;" >'+ json.arqnome +'</a></td>'
+            + '                    <td style="text-align: left;">'+ json.arqdescricao +'</td>'
+            + '                    <td style="text-align: center;">'
+            + '                         <input type="hidden" value="'+ json.arqid +'" name="listaAnexos[]">'
+            + '                         <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo '+ json.arqnome+ '" data-anexos="'+ json.arqid +'" >'
+            + '                    </td>'
+            + '                </tr>'
+        ;
+        $('#table_anexos').append(trHtml);
+    }
+    
+    /**
+     * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
+     * 
+     * @returns VOID
+     */
+    function exibirEspelhoPi(pliid){
+        window.open(
+            '?modulo=principal/beneficiario_form&acao=A&req=espelho-pi&pliid='+ pliid,
+            'popup_espelho_pi',
+            'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
+    }
 </script>

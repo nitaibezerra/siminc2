@@ -5,15 +5,22 @@
             <tr class="text-center">
                 <th>UF</th>
                 <?php
-                $dadosTabela = current($dadosAgrupados);
-                foreach($dadosTabela as $categoria => $descricao){ ?>
+                    $dadosTabela = current($dadosAgrupados);
+                    if($dadosTabela):
+                        foreach($dadosTabela as $categoria => $descricao):
+                ?>
                     <th><?php echo $categoria; ?></th>
-                <?php } ?>
+                <?php 
+                        endforeach;
+                    endif;
+                ?>
             </tr>
             </thead>
             <tbody>
             <?php $aTotal = [];
-            foreach($dadosAgrupados as $agrupador => $dadosTabela){ ?>
+                if($dadosAgrupados):
+                    foreach($dadosAgrupados as $agrupador => $dadosTabela):
+            ?>
                     <tr>
                         <td><?php echo $agrupador; ?></td>
                         <?php foreach($dadosTabela as $key => $descricao){
@@ -22,14 +29,21 @@
                             <td width="30%" class="text-right"><?php echo number_format($descricao, 0, ',', '.'); ?></td>
                         <?php } ?>
                     </tr>
-            <?php } ?>
+            <?php
+                    endforeach;
+                endif;
+            ?>
             </tbody>
             <tr>
                 <th>TOTAL</th>
                 <?php
-                foreach($dadosTabela as $key => $descricao){ ?>
+                    if($dadosTabela):
+                        foreach($dadosTabela as $key => $descricao): ?>
                     <th class="text-right"><?php echo number_format($aTotal[$key], 0, ',', '.'); ?></th>
-                <?php } ?>
+                <?php
+                        endforeach;
+                    endif;
+                ?>
             </tr>
         </table>
     </div>

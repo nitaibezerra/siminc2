@@ -24,13 +24,7 @@ include_once APPRAIZ . "planacomorc/classes/Pi_Anexo.class.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 if($_REQUEST['uploadAnexo']){
-    $campos = array(
-        'angdsc'       => "'{$_REQUEST['arqdescricao']}'",
-        'angtip'       => "'PI'",
-        'angtipoanexo' => "'D'",
-        'angano'       => "'{$_SESSION['exercicio']}'"
-    );
-    $file = new FilesSimec('anexogeral', $campos, 'planacomorc');
+    $file = new FilesSimec();
     if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
         echo simec_json_encode(array(
             'arqid' => $file->getIdArquivo(),
@@ -195,6 +189,7 @@ if ($dadosPI['pliid'] && !$dadosPI['docid']) {
 $estadoAtual = wf_pegarEstadoAtual($dadosPI['docid']);
 $codigoEnquadramentoFinalistico = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'F');
 $codigoEnquadramentoNaoOrcamentario = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'N');
+$codigoEnquadramentoEmenda = buscarCodigoEnquadramento((int)$_SESSION['exercicio'], 'E');
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
 
@@ -209,12 +204,12 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
 <script language="JavaScript" src="../includes/funcoes.js"></script>
-<script language="JavaScript" src="../includes/funcoesspo.js"></script>
+<script language="JavaScript" src="../includes/funcoesspo.js?v=1"></script>
 <link rel="stylesheet" href="/library/bootstrap-switch/stylesheets/bootstrap-switch.css">
 <script src="/library/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="js/cadastro_pi_funcoes.js?v=4"></script>
-<script src="js/cadastro_pi_validacoes.js?v=3"></script>
-<script src="js/cadastro_pi_init.js?v=3"></script>
+<script src="js/cadastro_pi_funcoes.js?v=5"></script>
+<script src="js/cadastro_pi_validacoes.js?v=5"></script>
+<script src="js/cadastro_pi_init.js?v=5"></script>
 <style>
     autorizadocapital {
         display: none;
@@ -469,13 +464,13 @@ DML;
                                             <b>Funcional</b>
                                         </td>
                                         <td rowspan="2" nowrap>
-                                            <b>Dotação Atual(R$)</b>
+                                            <b>Dotação na Unidade(R$)</b>
                                         </td>
                                         <td colspan="2" nowrap>
-                                            <b><span id="detPi">Detalhado em PI (R$)</span></b>
+                                            <b><span id="detPi">Detalhado em PI Pela Unidade(R$)</span></b>
                                         </td>
                                         <td colspan="2">
-                                            <b>Empenho (R$)</b>
+                                            <b>Empenho na Funcional(R$)</b>
                                         </td>
                                         <td rowspan="2" align="center">
                                             <b>Valor do Projeto</b>
@@ -834,13 +829,13 @@ DML;
                             <div class="col-lg-9">
                                 <?php
                                 $sql = "
-                                                SELECT
-                                                    mescod as codigo,
-                                                    mesdsc as descricao
-                                                FROM public.meses 
-                                                ORDER BY
-                                                    codigo
-                                            ";
+                                    SELECT
+                                        mescod as codigo,
+                                        mesdsc as descricao
+                                    FROM public.meses 
+                                    ORDER BY
+                                        codigo
+                                ";
                                 $mescod = $dadosPI['mescod'];
                                 $db->monta_combo('mescod', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mes', null, '', null, 'class="form-control chosen-select" style="width=100%;"', null, (isset($mescod) ? $mescod: null));
                                 ?>
@@ -957,7 +952,7 @@ DML;
                     </div>
                 </div>
 
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins" id="div_responsaveis">
                     <div class="ibox-title">
                         <h5 class="legend_responsaveis">Responsáveis pelo Projeto <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></h5>
                     </div>
@@ -1103,11 +1098,11 @@ DML;
                                             <b>Total (Custeio e Capital)</b>
                                         </td>
                                     </tr>
-                                    <tr style="height: 30px;">
+                                    <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
                                         <td style="text-align: left;">Limite Autorizado na Unidade: </td>
                                         <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" >0,00</td>
                                     </tr>
-                                    <tr style="height: 30px;">
+                                    <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                         <td style="text-align: left;">
                                             Limite Disponível na Unidade:
                                             <input id="VlrSUDisponivel" type="hidden" value="" />
@@ -1186,7 +1181,7 @@ DML;
                 
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" id="div_cronogramas">
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -1457,6 +1452,7 @@ DML;
     // Enquadramentos
     intEnqFinalistico = "<?php echo $codigoEnquadramentoFinalistico; ?>";
     intEnqNaoOrcamentario = "<?php echo $codigoEnquadramentoNaoOrcamentario; ?>";
+    intEnqEmenda = "<?php echo $codigoEnquadramentoEmenda; ?>";
     intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
     // Localizações
     intEsfidEstadualDF = "<?php echo ESFERA_ESTADUAL_DISTRITO_FEDERAL; ?>";

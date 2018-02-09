@@ -20,11 +20,9 @@
                                 <th>Código</th>
                                 <th>Título</th>
                                 <th>RP</th>
-<!--                                <th>Unidade</th>
-                                <th>Enquadramento</th>-->
                                 <th>Custeio</th>
                                 <th>Capital</th>
-                                <!--<th>Total</th>-->
+                                <th>Provisionado</th>
                                 <th>Empenhado</th>
                                 <th>Liquidado</th>
                                 <th>Pago</th>
@@ -36,6 +34,7 @@
                             foreach($dados as $dado){
                                 $total['custeio'] += $dado['picvalorcusteio'];
                                 $total['capital'] += $dado['picvalorcapital'];
+                                $total['autorizado'] += $dado['autorizado'];
                                 $total['empenhado'] += $dado['empenhado'];
                                 $total['pago'] += $dado['pago'];
                                 $total['liquidado'] += $dado['liquidado'];
@@ -48,11 +47,9 @@
                                     <td><?php echo $dado['plicod']; ?></td>
                                     <td><?php echo $dado['plititulo']; ?></td>
                                     <td class="text-center"><?php echo $dado['eqdrp']; ?></td>
-<!--                                    <td><?php echo $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?></td>
-                                    <td><?php echo $dado['eqddsc']; ?></td>-->
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
-<!--                                    <td class="text-right"><?php echo number_format(($dado['picvalorcusteio'] + $dado['picvalorcapital']), 0, ',', '.'); ?></td>-->
+                                    <td class="text-right"><?php echo number_format($dado['autorizado'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['empenhado'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['liquidado'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['pago'], 0, ',', '.'); ?></td>
@@ -64,7 +61,7 @@
                                     <th colspan="5">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
-<!--                                    <th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
+                                    <th class="text-right"><?php echo number_format($total['autorizado'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['empenhado'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>

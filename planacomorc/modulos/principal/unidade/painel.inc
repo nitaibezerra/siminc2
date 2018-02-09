@@ -8,7 +8,7 @@ require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 # Cores dos Graficos
-$colors = "'#FFD700', '#FF0000', '#55BF3B', '#00BFFF', '#eeaaee', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+$colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
 
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
@@ -20,7 +20,7 @@ switch ($_REQUEST['req']) {
         $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
     die;
     case 'detalhe-funcional':
-        $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
+        $oPlanoInterno->recuperarPiPorFuncional((object) array('suoid' => $_REQUEST['suoid'], 'ptrid' => $_REQUEST['ptrid']));
     die;
     case 'detalhe-grafico-subunidade':
         $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
@@ -193,7 +193,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <tr class="linha_subunidade">
                                     <td style="border-right: 1px black solid;">
                                         <i class="fa fa-plus detalhar-linha link" data-suoid="<?php echo $dado['suoid']; ?>"></i>&nbsp;&nbsp;
-                                        <span class="detalhe-subunidade" data-suoid="<?php echo $dado['suoid']; ?>">
+                                        <span class="detalhe-subunidade" data-suoid="<?php echo $dado['suoid']; ?>" title="Visualizar PIs dessa Unidade">
                                             <?php echo $dado['unosigla'] . ' - ' . $dado['suonome'] . ' (' . $dado['suocod'] . ')'; ?>
                                         </span>
                                     </td>
@@ -224,9 +224,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <?php foreach($dados['detalhe'] as $dado){ ?>
                                     <tr class="tr_<?php echo $dado['suoid']; ?> tr_detalhe" style="display: none;">
                                         <td style="padding-left: 30px; border-right: 1px black solid;" >
-                                            <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
+                                            <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>" data-suoid="<?php echo $dado['suoid']; ?>" title="Visualizar lista de PIs com essa funcional">
                                                 <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ': ' . $dado['plodsc'] . ' (RP ' . $dado['irpcod'] . ')'; ?>
                                             </span>
+                                            <?php if($dado['compartilhada'] > 1): ?>
+                                                &nbsp;<i class="fa fa-handshake-o link" title="Funcional Compartilhada com outras Subunidades."></i>
+                                            <?php endif; ?>
                                         </td>
 
                                         <td class="text-right"><?php echo number_format($dado['ptrdotacao_custeio'], 0, ',', '.'); ?></td>
@@ -263,7 +266,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <?php
 // -- popup de detalhamento do PI
 bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
-bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
+bootstrapPopup("PI's da Funcional na Unidade", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
 bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), array('tamanho' => 'lg'));
 ?>
 
@@ -287,12 +290,12 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
         });
 
         $('.detalhe-subunidade').click(function(){
-            $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid=' + $(this).data('suoid'));
+            $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid='+ $(this).data('suoid'));
             $('#detalhe-subunidade').modal();
         });
 
         $('.detalhe-funcional').click(function(){
-            $('#detalhe-funcional .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-funcional&ptrid=' + $(this).data('ptrid'));
+            $('#detalhe-funcional .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-funcional&ptrid='+ $(this).data('ptrid')+ '&suoid='+ $(this).data('suoid'));
             $('#detalhe-funcional').modal();
         });
 

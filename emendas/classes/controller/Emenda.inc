@@ -57,6 +57,17 @@ class Emendas_Controller_Emenda
     public function montarFormularioDetalhes($emeid = null, $emdid = null)
     {
         global $simec;
+        
+        $perfis = pegaPerfilGeral();
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+        $simec->setPodeEditar($podeEditar);
+        
+        $listaEmendadetalhe = (new Emendas_Model_EmendaDetalhe)->recuperarTodos('*', ['emeid = ' . (int)$emeid]);
+        
+        if(!$podeEditar && $listaEmendadetalhe){
+            $emdid = $emdid? $emdid: $listaEmendadetalhe[0]['emdid'];
+        }
+        
         $mEmendadetalhe = new Emendas_Model_EmendaDetalhe($emdid);
 
         if(!$mEmendadetalhe->emeid){ $mEmendadetalhe->emeid = $emeid; }
@@ -65,6 +76,9 @@ class Emendas_Controller_Emenda
 
     public function montarListagemDetalhes($emeid)
     {
+        $perfis = pegaPerfilGeral();
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+        
         $aEmendadetalhe = (new Emendas_Model_EmendaDetalhe)->recuperarTodos('*', ['emeid = ' . (int)$emeid]);
         include_once APPRAIZ . 'emendas/modulos/principal/emendadetalhe.inc';
     }

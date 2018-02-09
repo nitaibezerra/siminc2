@@ -65,6 +65,7 @@
         // Evento ao mudar opção de enquadramento
         $('#eqdid').change(function(){
             mudarFormularioNaoOrcamentario($(this).val());
+            mudarFormularioEmenda($(this).val());
             carregarManutencaoItem($(this).val());
         });
 
@@ -226,6 +227,7 @@
 
         // Evento ao carregar a tela
         controlarEdital($('#picedital').is(':checked'));
+        mudarFormularioEmenda($('#eqdid').val());
 
         $('#btn_selecionar_functional').click(function(){
             mostrarPopupPtres();
@@ -462,3 +464,4 @@
             });
         }
     }
+

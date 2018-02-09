@@ -1,17 +1,22 @@
 <?php
+
+$perfis = pegaPerfilGeral();
+
 $mEmenda = new Emendas_Model_Emenda($_REQUEST['emeid']);
+
+$podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 
 $cEmenda = new Emendas_Controller_Emenda();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cEmenda->salvar($_REQUEST);
-		die;
-	case 'excluir':
+        die;
+    case 'excluir':
         $cEmenda->excluir($_REQUEST['emeid']);
-		die;
-	case 'carregarAcaoPorUo':
-        echo $simec->select('acaid', 'Funcional', null, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'], ["unoid = '{$_REQUEST['unoid']}'"]));
-		die;
+        die;
+    case 'carregarAcaoPorUo':
+        echo $simec->select('ptrid', 'Funcional', null, (new Monitora_Model_Ptres())->recuperarSqlCombo(['ptres.prgcod', 'ptres.acacod', 'acaobjetivocod', 'ptres.loccod', 'acatitulo'], ["unoid = '{$_REQUEST['unoid']}'"]));
+        die;
     case 'formulario-detalhe':
         $cEmenda->montarFormularioDetalhes($_REQUEST['emeid'], $_REQUEST['emdid']);
         die;
@@ -48,25 +53,29 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="emeid" id="emeid" type="hidden" value="<?php echo $mEmenda->emeid; ?>">
-                        
-                        <?php                         
-                        echo $simec->input('emenumero', 'Número', $mEmenda->emenumero, ['class'=>'inteiro']);
-                        echo $simec->select('autid', 'Autor', $mEmenda->autid, (new Emendas_Model_Autor())->recuperarSqlCombo(['autcod', 'autnome'], null, 'autnome'));
-                        echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
-                        echo '<span id="span-funcional">' . $simec->select('acaid', 'Funcional', $mEmenda->acaid, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'])) . '</span>';
-                        echo $simec->radio('emeimpositiva', 'Impositiva', $mEmenda->emeimpositiva, ['t'=>'Sim', 'f'=>'Não']);
-                        echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['maxlength' => 2000]);
+
+                        <?php
+                            $simec->setPodeEditar($podeEditar);
+                            echo $simec->input('emenumero', 'Número', $mEmenda->emenumero, ['class'=>'inteiro']);
+                            echo $simec->select('autid', 'Autor', $mEmenda->autid, (new Emendas_Model_Autor())->recuperarSqlCombo(['autcod', 'autnome'], null, 'autnome'));
+                            echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
+                            echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mEmenda->ptrid, (new Monitora_Model_Ptres())->recuperarSqlCombo(['ptres.prgcod', 'ptres.acacod', 'acaobjetivocod', 'ptres.loccod', 'acatitulo'])) . '</span>';
+                            echo $simec->radio('emeimpositiva', 'Impositiva', $mEmenda->emeimpositiva, ['t'=>'Sim', 'f'=>'Não']);
+                            echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['maxlength' => 2000]);
                         ?>
-                        
-                        <div class="form-group">
-                            <div class="text-center">
-                                <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                <?php if($mEmenda->emeid){ ?>
-                                    <a href="?modulo=principal/emenda_form&acao=A&req=excluir&emeid=<?php echo $mEmenda->emeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                <?php } ?>                                
+
+                        <?php if($podeEditar): ?>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                    <?php if($mEmenda->emeid){ ?>
+                                        <a href="?modulo=principal/emenda_form&acao=A&req=excluir&emeid=<?php echo $mEmenda->emeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                    <?php } ?>                                
+                                </div>
                             </div>
-                        </div>                        
+                        <?php endif; ?>
+
                     </form>
                 </div>
             </div>
@@ -78,9 +87,11 @@ include APPRAIZ . "includes/cabecalho.inc";
             	</div>
             	<div class="ibox-content" id="">
                     <div id="div_formulario_detalhe">
-                        <?php if($mEmenda->emeid){
-                            $cEmenda->montarFormularioDetalhes($mEmenda->emeid);
-                        } ?>
+                        <?php
+                            if($mEmenda->emeid){
+                                $cEmenda->montarFormularioDetalhes($mEmenda->emeid);
+                            }
+                        ?>
                     </div>
                     <div id="div_listagem_detalhe">
                         <?php $cEmenda->montarListagemDetalhes($mEmenda->emeid); ?>
@@ -91,12 +102,14 @@ include APPRAIZ . "includes/cabecalho.inc";
         
         <div class="ibox float-e-margins">
         	<div class="ibox-title">
-        		<h5>Beneficiários</h5>
+                    <h5>Beneficiários</h5>
         	</div>
         	<div class="ibox-content">
                 <?php if($mEmenda->emeid){ ?>
 
-                    <a class="btn btn-small btn-warning" href="?modulo=principal/beneficiario_form&acao=A&emeid=<?php echo $mEmenda->emeid; ?>">Novo</a>
+                    <?php if($podeEditar): ?>
+                        <a class="btn btn-small btn-warning" href="?modulo=principal/beneficiario_form&acao=A&emeid=<?php echo $mEmenda->emeid; ?>">Novo</a>
+                    <?php endif; ?>
 
                     <?php $aBeneficiario = (new Emendas_Model_Beneficiario())->recuperarTodos('*', ['emeid = ' . $mEmenda->emeid]);
                     if(count($aBeneficiario)){ ?>
@@ -132,9 +145,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                     }
                 } else {
                     echo '<div class="alert alert-danger">Nenhum beneficiário cadastrado</div>';
-                }?>
+                }
+            ?>
 
-        	</div>
+            </div>
         </div>
     </div>
 </div>

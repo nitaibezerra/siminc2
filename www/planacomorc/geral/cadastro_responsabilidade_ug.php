@@ -107,19 +107,22 @@ $pflcod = $_REQUEST['pflcod'];
                 SELECT DISTINCT
                     '<input type=\"checkbox\" name=\"suocod\" id=\"chk_' || ung.suocod || '\" value=\"' || ung.suocod || '\" '
                     || 'onclick=\"marcarAcao(this)\"'
-                    || CASE WHEN urp.rpuid IS NOT NULL AND urp.rpustatus = 'A' THEN ' checked' ELSE '' END || '>' AS suocod,
+                    || CASE WHEN urp.rpuid IS NOT NULL THEN ' checked' ELSE '' END || '>' AS acao,
                     ung.suocod || ' - ' || ung.suonome AS descricao
                 FROM public.vw_subunidadeorcamentaria ung
-                    LEFT JOIN planacomorc.usuarioresponsabilidade urp ON urp.ungcod = ung.suocod AND urp.usucpf = '{$usucpf}' AND urp.pflcod = '{$pflcod}'
+                    LEFT JOIN planacomorc.usuarioresponsabilidade urp ON(
+                        urp.ungcod = ung.suocod
+                        AND urp.rpustatus = 'A'
+                        AND urp.usucpf = '{$usucpf}'
+                        AND urp.pflcod = '{$pflcod}')
                 WHERE
                     ung.suostatus = 'A'
                     AND ung.prsano = '". (int)$_SESSION['exercicio']. "'
                 ORDER BY
                     descricao
             ";
-            //ver($sql,d);
+//ver($sql,d);
             $cabecalho = array('', 'Unidade - Descrição');
-            //echo "<pre>"; var_dump($sql); die;
             $db->monta_lista_simples($sql, $cabecalho, 500, 5, 'N', '100%', 'N');
         ?>
         </div>

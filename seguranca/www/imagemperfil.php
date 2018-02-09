@@ -14,7 +14,7 @@ $entid = $entid ? $entid : 0;
 $sql = "SELECT arqid FROM entidade.fotoentidade WHERE entid = '". $entid . "' AND fotbox = 'perfil' ORDER BY fotordem DESC LIMIT 1";
 $id = $db->pegaUm($sql);
 
-if ($id && is_file(DIRFILES . '/seguranca/usuario/'. floor($id/1000) .'/'.$id)) {
+if (false && $id && is_file(DIRFILES . '/seguranca/usuario/'. floor($id/1000) .'/'.$id)) {
 	header("Location: ../../includes/highslide/verimagem.php?arqid={$id}&_sisarquivo=seguranca/usuario");
 } else {
 	$cache = mktime(0,0,0,date('m'),date('d')+1,date('Y'));

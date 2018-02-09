@@ -60,12 +60,12 @@ if($_REQUEST['fnc'] == 1){
     $listCabecalho = array(
         "PTRES",
         "Funcional",
-        "Dotação Atual(R$)",
-        '<center>Detalhado em PI(R$)</center>' => array(
+        "Dotação na unidade(R$)",
+        '<center>Detalhado em PI pela Unidade(R$)</center>' => array(
             'Detalhado',
             'Não Detalhado Custeio',
             'Não Detalhado Capital'),
-        '<center>Empenho(R$)</center>' => array('Empenhado', 'Não Empenhado')
+        '<center>Empenho na Funcional(R$)</center>' => array('Empenhado', 'Não Empenhado')
     );
     $sql_lista = montarSqlBuscarFuncional((object)array(
         'exercicio' => $_SESSION['exercicio'],
