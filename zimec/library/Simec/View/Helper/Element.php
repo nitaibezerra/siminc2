@@ -61,6 +61,7 @@ class Simec_View_Helper_Element extends Zend_View_Helper_FormElement
                         '. $xhtml .'
                         '. $labelErros .'
                     </div>
+                    <div style="clear:both"></div>
                 </div>
             ';
         }else{

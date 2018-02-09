@@ -10,6 +10,7 @@ class Simec_View_Helper_Radio extends Simec_View_Helper_Options
     public function radio($name, $label = null, $value = null, $options = null, $attribs = null, $config = array())
     {
         $attribs['type'] = 'radio';
+        $config['visible'] = isset($config['visible']) ? $config['visible'] : true;
 
         $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
         if(!$podeEditar || $podeEditar==='N'){

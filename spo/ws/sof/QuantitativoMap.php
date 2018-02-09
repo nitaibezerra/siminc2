@@ -880,6 +880,10 @@ class SelecaoRetornoExecucaoOrcamentariaDTO
 	public $tipoCredito; // -- boolean
 	public $unidadeGestoraResponsavel; // -- boolean
 	public $unidadeOrcamentaria; // -- boolean
+
+	public $programacaoSelecionada; // -- boolean
+	public $tipoPrecatorio; // -- boolean
+	public $mes; // -- boolean
 }
 
 class ConsultarExecucaoOrcamentariaResponse

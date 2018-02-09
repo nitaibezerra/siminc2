@@ -54,7 +54,7 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
         unset($attribs['']);
 
         $id = isset($attribs['id']) ? $attribs['id'] : $name;
-        $attribs['class'] = isset($attribs['class']) ? 'form-control chosen-select ' .  $attribs['class'] : 'form-control chosen-select';
+        $attribs['class'] = isset($attribs['class']) ? 'form-control chosen-select' .  $attribs['class'] : 'form-control chosen-select';
         $attribs['data-placeholder'] = isset($attribs['data-placeholder']) ? $attribs['data-placeholder'] : 'Selecione';
         
         $config['visible'] = isset($config['visible']) ? $config['visible'] : true;
@@ -105,7 +105,7 @@ class Simec_View_Helper_Select extends Simec_View_Helper_Element
         $info = $this->_getInfo($name, $value, $attribs, $options);
         $help = isset($attribs['help']) ? true : false;
         extract($info); // name, id, value, attribs, options, listsep, disable
-
+        
         // force $value to array so we can compare multiple values to multiple
         // options; also ensure it's a string for comparison purposes.
         $value = array_map('strval', (array) $value);

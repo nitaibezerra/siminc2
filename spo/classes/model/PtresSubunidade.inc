@@ -126,8 +126,17 @@ class Spo_Model_PtresSubunidade extends Modelo
             $this->excluirVarios("ptrid = {$dados['ptrid']} and suoid = {$dados['suoid']}");
             $this->commit();
         }
+    }
 
+    public function recuperarPorUnidade($suoid)
+    {
+        $sql = "select ptr.funcional, ptr.plodsc
+                from spo.ptressubunidade psu
+                        inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid
+                where suoid = " . (int) $suoid . "
+                order by funcional";
 
+        return $this->carregar($sql);
     }
 
 }//end Class

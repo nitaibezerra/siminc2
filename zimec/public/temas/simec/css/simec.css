@@ -281,8 +281,8 @@
     left: 0;
     right: 0;
     height: 64px;
-    background: #ffffff;
-    border-bottom: 1px solid #e5e6e6;
+    background: #2f4050;
+    border-bottom: 1px solid #2f4050;
   }
   .header-fixed .navbar-left {
     position: fixed;
@@ -344,7 +344,7 @@
 }
 @media (max-width: 768px) {
   .header-inverse .navbar-left {
-    background: #242a31;
+    background: #2f4050;
     border-bottom-color: rgba(255, 255, 255, 0.15);
   }
   .header-inverse .navbar-right {
@@ -662,4 +662,11 @@ tr.text-right th, tr.text-right td{
 .table-input .form-control, .single-line{
     padding: 3px 6px;
     font-size: 12px
+}
+
+.box-legenda{
+    border-radius: 5px;
+    padding: 3px 20px;
+    float: left;
+    margin-left: 10px;
 }

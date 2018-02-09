@@ -122,13 +122,13 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
     {
         $where = '';
         if($filtro->listaSubUnidadeUsuario){
-            $where = "\n                AND suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ";
+            $where .= "\n                AND suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ";
         }
         if($filtro->unicod){
-            $where = "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
+            $where .= "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
         }
         if($filtro->unofundo){
-            $where = "\n                AND suo.unofundo = ". $filtro->unofundo;
+            $where .= "\n                AND suo.unofundo = ". $filtro->unofundo;
         }
         
         $sql = "
@@ -147,6 +147,27 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
 //ver($sql,d);
         return $sql;
     }
-    
+
+    public function recuperarPorUsuario($usucpf = null, $exercicio = null)
+    {
+        $perfis = pegaPerfilGeral();
+        $usucpf = $usucpf ? $usucpf : $_SESSION['usucpf'];
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select suo.suoid, suo.suosigla, suo.suonome, suo.unoid, suo.unosigla, suo.unonome
+                from public.vw_subunidadeorcamentaria suo
+                where suo.prsano = '$exercicio'
+                and suo.suostatus = 'A'
+                and suo.unofundo = 'f'
+                order by suo.unosigla";
+
+        $dados = $this->carregar($sql);
+
+        $aUnidades = [];
+        foreach($dados as $dado){
+            $aUnidades[$dado['suoid']] = "{$dado['unosigla']} - {$dado['suonome']} ";
+        }
+        return $aUnidades;
+    }
 }
 

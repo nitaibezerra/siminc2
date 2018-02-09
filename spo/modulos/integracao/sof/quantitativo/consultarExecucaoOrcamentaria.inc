@@ -130,23 +130,23 @@ function onConsultarexecucaoorcamentariaSubmit(e)
             1 Página(s)
         </div>
     </div>
-<?php
-    $colunasRetorno = Spo_Ws_Sof_QuantitativoMap::getComponentesSelecaoRetornoExecucaoOrcamentariaDTO();
-    $dados = array();
-    foreach ($colunasRetorno as $coluna) {
-        $dados[] = array('codigo' => $coluna, 'descricao' => $coluna);
-    }
-    $multiple = array('multiple' => true);
+    <?php
+        $colunasRetorno = Spo_Ws_Sof_QuantitativoMap::getComponentesSelecaoRetornoExecucaoOrcamentariaDTO();
+        $dados = array();
+        foreach ($colunasRetorno as $coluna) {
+            $dados[] = array('codigo' => $coluna, 'descricao' => $coluna);
+        }
+        $multiple = array('multiple' => true);
 
-    $form = new Simec_View_Form('consultarexecucaoorcamentaria');
-    $form->carregarDados($_GET['consultarexecucaoorcamentaria'])
-        ->addCombo('Campos de retorno', 'selecaoRetorno', $dados, $multiple)
-        ->addCombo('Unidade(s) Orçamentária(s)', 'unidadesOrcamentarias', Spo_Model_Unidade::queryCombo(), $multiple)
-        ->addCheckbox('Registrar log do serviço?', 'log')
-        ->addBotoes(array('limpar', 'importar'))
-        ->addHidden('anoExercicio', $_SESSION['exercicio'])
-        ->addHidden('pagina', 1)
-        ->setRequisicao('consultarExecucaoOrcamentaria')
-        ->render();
-    ?>
+        $form = new Simec_View_Form('consultarexecucaoorcamentaria');
+        $form->carregarDados($_GET['consultarexecucaoorcamentaria'])
+            ->addCombo('Campos de retorno', 'selecaoRetorno', $dados, $multiple)
+            ->addCombo('Unidade(s) Orçamentária(s)', 'unidadesOrcamentarias', Spo_Model_Unidade::queryCombo((object)[]), $multiple)
+            ->addCheckbox('Registrar log do serviço?', 'log')
+            ->addBotoes(array('limpar', 'importar'))
+            ->addHidden('anoExercicio', $_SESSION['exercicio'])
+            ->addHidden('pagina', 1)
+            ->setRequisicao('consultarExecucaoOrcamentaria')
+            ->render();
+        ?>
 </div>

@@ -62,18 +62,38 @@ class Public_Model_ObjetivoPpa extends Modelo
         'oppstatus' => null,
     );
 
-    public function recuperarSqlCombo()
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '')
     {
-        return "SELECT
-                    oppid AS codigo,
-                    oppcod || '-' || oppnome AS descricao
-                FROM public.objetivoppa
-                WHERE
-                    oppstatus = 'A'
-                    AND prsano = '{$_SESSION['exercicio']}'
-                ORDER BY
-                    oppcod";
+        $where['exercicio'] = !empty($where['exercicio']) ? $where['exercicio'] : $_SESSION['exercicio'];
+
+        $sql = "
+            SELECT
+                oppid AS codigo,
+                oppcod || '-' || oppnome AS descricao
+            FROM public.objetivoppa
+            WHERE
+                oppstatus = 'A'
+                AND prsano = '{$where['exercicio']}'
+            ORDER BY
+                oppcod";
+        return $sql;
+    }
+    
+    /**
+     * Busca o código do objetivo(oppid) por código da funcional.
+     * 
+     * @param integer $ptrid
+     */
+    public function buscarOppidPorFuncional($ptrid) {
+        $sql = "
+            SELECT DISTINCT
+                o.oppid
+            FROM monitora.ptres ptr
+                JOIN monitora.acao aca ON ptr.acaid = aca.acaid AND ptr.ptrano = aca.prgano
+                JOIN public.objetivoppa o ON o.oppcod = aca.acaobjetivocod AND o.prsano = aca.prgano
+            WHERE
+                ptrid = ". (int)$ptrid;
+        return $this->pegaUm($sql);
     }
 
-}//end Class
-?>
+}

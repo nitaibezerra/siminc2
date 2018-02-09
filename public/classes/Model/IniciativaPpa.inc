@@ -63,5 +63,24 @@ class Public_Model_IniciativaPpa extends Modelo
         'ippstatus' => null,
         'prsano' => null,
     );
+    
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '')
+    {
+        $where['exercicio'] = !empty($where['exercicio']) ? $where['exercicio'] : $_SESSION['exercicio'];
+
+        $sql = "
+            SELECT
+                ippid AS codigo,
+                ippcod || ' - ' || ippnome AS descricao
+            FROM public.iniciativappa
+            WHERE
+                ippstatus = 'A'
+                AND prsano = '{$where['exercicio']}'
+                AND oppid = ". (int)$where['oppid']. "
+            ORDER BY
+                ippcod
+        ";
+        return $sql;
+    }
 }//end Class
 ?>

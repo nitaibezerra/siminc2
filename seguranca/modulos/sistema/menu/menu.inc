@@ -393,9 +393,36 @@ monta_titulo($titulo_modulo,'Escolha uma ação desejada referente ao Menu / Módul
 
 <?php
 //teste utilizando a função Monta Lista
-$cabecalho = array('Ações','Código','Menu / Módulo','Visível','Transação');
+$cabecalho = array('Ações','Código','Menu / Módulo','Visível','Link');
 //$sql = "select acacod, acadsc from acao";
-$sql= "select  case when mnusnsubmenu=true then '<img border=\"0\" src=\"../imagens/alterar.gif\" title=\"Alterar Menu\" onclick=\"altera_menu('||mnuid||')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/excluir.gif\" title=\"Excluir Menu\" onclick=\"excluir_menu('||mnuid||')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/gif_inclui.gif\" title=\"Incluir Menu em » '||mnudsc||'\" onclick=\"incluir_menu('||mnuid||','||mnutipo||')\">' else '<img border=\"0\" src=\"../imagens/alterar.gif\" title=\"Alterar Menu\" onclick=\"altera_menu('||mnuid||')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/excluir.gif\" title=\"Excluir Menu\" onclick=\"excluir_menu('||mnuid||')\">' end as acao, mnucod, case when mnutipo=2 then '&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc when  mnutipo=3 then '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc when  mnutipo=4 then '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">'||mnudsc else mnudsc end as mnudsc, case when mnushow=false then '<font color=#808080>Não</font>' else '<font color=#008000>Sim</font>' end as mnushow, mnutransacao from seguranca.menu where mnustatus = 'A' and sisid=".$sisid."  order by mnucod";
+$sql = "
+    SELECT 
+        CASE WHEN mnusnsubmenu = TRUE THEN
+            '<img border=\"0\" src=\"../imagens/alterar.gif\" title=\"Alterar Menu\" onclick=\"altera_menu(' || mnuid || ')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/excluir.gif\" title=\"Excluir Menu\" onclick=\"excluir_menu(' || mnuid || ')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/gif_inclui.gif\" title=\"Incluir Menu em » ' || mnudsc|| '\" onclick=\"incluir_menu(' || mnuid || ',' || mnutipo || ')\">'
+        ELSE
+            '<img border=\"0\" src=\"../imagens/alterar.gif\" title=\"Alterar Menu\" onclick=\"altera_menu(' || mnuid || ')\">&nbsp;&nbsp;&nbsp;<img border=\"0\" src=\"../imagens/excluir.gif\" title=\"Excluir Menu\" onclick=\"excluir_menu(' || mnuid || ')\">'
+        END AS acao,
+        mnucod,
+        CASE WHEN mnutipo = 2 THEN
+            '&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">' || mnudsc
+        WHEN mnutipo = 3 THEN
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">' || mnudsc
+        WHEN mnutipo = 4  THEN
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"../imagens/seta_filho.gif\" align=\"absmiddle\">' || mnudsc
+        ELSE
+            mnudsc
+        END AS mnudsc,
+        CASE WHEN mnushow = FALSE THEN
+            '<font color=#808080>Não</font>' else '<font color=#008000>Sim</font>'
+        END AS mnushow,
+        mnulink
+    FROM seguranca.menu
+    WHERE
+        mnustatus = 'A'
+        AND sisid=". $sisid. "
+    ORDER BY
+        mnucod";
+//ver($sql,d);
 $db->monta_lista_simples($sql,$cabecalho,200,20,'','','');
 }?>
 </form>

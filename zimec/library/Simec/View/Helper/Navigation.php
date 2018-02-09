@@ -79,7 +79,7 @@ class Simec_View_Helper_Navigation extends Zend_View_Helper_Abstract
 			$this->_html.= '		<span style="color: #fff;" class="text-xs block"><b>' . $identity['auth']['usuario']['usufuncao'] . '</b></span>';
 			$this->_html.= '		<div style="color: #fff; font-size: 11px">Sua sessão expira em: 59min21s</div>';
 			$this->_html.= '	<div class="logo-element">';
-			$this->_html.= '		' SIGLA_SISTEMA;
+			$this->_html.= '		SIMEC';
 			$this->_html.= '	</div>';
 			$this->_html.= '</li>';
 				

@@ -62,5 +62,53 @@ class Public_Model_IndicadorPnc extends Modelo
         'prsano' => null,
         'ipncod' => null,
     );
+    
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '')
+    {
+        $where['exercicio'] = !empty($where['exercicio']) ? $where['exercicio'] : $_SESSION['exercicio'];
+
+        $sql = "
+            SELECT
+                ipnid AS codigo,
+                ipncod || ' - ' || ipndsc AS descricao
+            FROM public.indicadorpnc
+            WHERE
+                ipnstatus = 'A'
+                AND prsano = '{$where['exercicio']}'
+                AND mpnid = ". (int)$where['mpnid']. "
+            ORDER BY
+                ipncod
+        ";
+//ver($sql,d);
+        return $sql;
+    }
+
+    public function recuperarIndicadores()
+    {
+        $sql = "select * 
+                from public.indicadorpnc ipn
+                        inner join public.metapnc mpn on mpn.mpnid = ipn.mpnid
+                where ipn.ipnstatus = 'A'        
+                and ipn.prsano = '{$_SESSION['exercicio']}'
+                order by mpn.mpncod::int, ipn.ipncod";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarInformacoes($exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select  opm.oppid, opp.oppdsc, opp.oppcod, mpp.mppid, mpp.mppcod, mpp.mppdsc, mpp.mppquantificavel, mpp.mppquantidade, 
+                        -- Cálculo para verificar quantidade anualizada: (valor previsto dividido por 4 e vezes o ano do monitoramento)
+                        mpp.mppquantidade / 4 * ((to_char(now(), 'YYYY')::int % 4)+1) mppquantidadeanualizada
+                from public.objetivometappa opm
+                        inner join public.objetivoppa opp on opp.oppid = opm.oppid
+                        inner join public.metappa mpp on mpp.mppid = opm.mppid
+                where opm.mppid = " . (int) $this->ipnid . "
+                and opp.prsano = '$exercicio'";
+ver($sql, d);
+        return $this->pegaLinha($sql);
+    }
 }//end Class
 ?>

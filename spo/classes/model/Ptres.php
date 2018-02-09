@@ -112,6 +112,7 @@ class Spo_Model_Ptres extends Modelo
                                   inner join public.vw_subunidadeorcamentaria uo on uo.unocod = p.unicod and uo.prsano = '2018' and uo.suostatus = 'A'
                           where ptrano = '$prsano'
                           and p.ptrstatus = 'A'
+                          and p.plocod not like 'E%'
                           and uo.unocod in ('42902')
                           and uo.unofundo = true";
                 break;
@@ -126,6 +127,7 @@ class Spo_Model_Ptres extends Modelo
                         inner join public.vw_subunidadeorcamentaria uo on uo.unocod = p.unicod and uo.prsano = '$prsano' and uo.suostatus = 'A'
                 where ptrano = '$prsano'
                 and p.ptrstatus = 'A'
+                and p.plocod not like 'E%'
                 $where
                 order by unofundo, unonome, suonome, acacod, prgcod, loccod, plocod";
 

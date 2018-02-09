@@ -32,14 +32,14 @@ if ($_REQUEST['pesquisarUsuario']) {
 ### function, Copia diretório ###
 function copyDir ($source, $dest) {
 	$arq = (array) scandir($source);
-	
+
 	// Caso não exista o diretório de destino cria o mesmo
 	if (!is_dir($dest))
-		mkdir($dest); 
-		
-	// LOOP nos arquivos do diretório que será copiado	
+		mkdir($dest);
+
+	// LOOP nos arquivos do diretório que será copiado
 	foreach ($arq as $arq):
-	
+
 		## Caso seja um diretório aplica recursividade ##
 		if (strpos($arq, ".") === false && is_dir($source."/".$arq)):
 			copyDir($source."/".$arq, $dest."/".$arq);
@@ -54,12 +54,12 @@ function copyDir ($source, $dest) {
 }
 
 ########### AÇÕES Cadastro/Atualização de sistema ###########
-/* 
- * Será feita uma CÓPIA do sistema RAIZ => sisid = 999 
- * Criado com a finalidade de ser o sistema padrão 
+/*
+ * Será feita uma CÓPIA do sistema RAIZ => sisid = 999
+ * Criado com a finalidade de ser o sistema padrão
 */
 if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
-	
+
    $sql= "SELECT
   	  	   sisid 
   		  FROM
@@ -85,7 +85,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 //////// Verifica ESQUEMA /////////
 /*
  * Se há esquema == diretório novo, interrompe cadastro
- */	
+ */
 	$sql = sprintf("SELECT
 				     true 
 				    FROM
@@ -98,8 +98,8 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 	         	alert(\'Já existe o esquema "'.$_REQUEST['diret'].'" no Banco de Dados.\nOperação não realizada!\');
 	         	history.back();
 	      	 </script>');
-	}	
-		   
+	}
+
 ///////// Cadastro do sistema //////////
 
     $usucpf = ereg_replace( "[^0-9]", "", $_REQUEST['usucpfgestor']);
@@ -108,7 +108,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 		   "'".$_REQUEST['dsc']."',".
 		   "'http://',".
 		   "'".$_REQUEST['abrev']."',".
-		   "'".$_REQUEST['diret']."',".   
+		   "'".$_REQUEST['diret']."',".
 		   "'".$_REQUEST['diret']."',".
 		   "'".$_REQUEST['finalidade']."',".
 		   "'".$_REQUEST['relacionado']."',".
@@ -125,8 +125,8 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
    $sisidNew = $db->pegaUm($sql);
   # $db->commit();
    unset($sql);
-   
-///////// Cadastro dos PERFIS (Super Usuário) //////////   
+
+///////// Cadastro dos PERFIS (Super Usuário) //////////
    $sql = sprintf("INSERT INTO seguranca.perfil 
 		   			(
 		   			 pfldsc, pflstatus, pflresponsabilidade,
@@ -141,10 +141,13 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 		   			   WHERE 
 		   			   		sisid=999 AND 
 		   			   		pflsuperuser='t';", $sisidNew);
+   
+
+   
 	$db->executar($sql);
 	unset($sql);
 
-//////// Cadastro dos MENUS (Menus padrão) /////////// 	
+//////// Cadastro dos MENUS (Menus padrão) ///////////
 	$sql = sprintf("INSERT INTO seguranca.menu 
 					(
 					 mnucod, mnucodpai, mnudsc, 
@@ -165,7 +168,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 	$db->executar($sql);
 	unset($sql);
 
-//////// Atualiza a hierarquia do menu ///////////	
+//////// Atualiza a hierarquia do menu ///////////
   	$sql = sprintf("UPDATE
 		  			 seguranca.menu 
 		  			SET 
@@ -179,13 +182,13 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 		  			 			  	 m2.sisid = %d 
 		  			 			) 
 		  			WHERE 
-		  			 menu.sisid = %d;", 
+		  			 menu.sisid = %d;",
   					$sisidNew,
   					$sisidNew);
   	$db->executar($sql);
   	unset($sql);
 
-/////// Cadastro de ABA ////////  	
+/////// Cadastro de ABA ////////
   	$sql = sprintf("INSERT INTO seguranca.aba 
   					(
   					 abadsc,
@@ -217,7 +220,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
  					 abacod IS NOT NULL AND 
  					 sisid = %d",
  					$sisidNew,
- 					$sisidNew); 
+ 					$sisidNew);
  	$db->executar($sql);
  	unset($sql);
 
@@ -237,7 +240,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
  	$db->executar($sql);
  	unset($sql);
 
-/////// Associa PERFIL ao MENU /////// 	
+/////// Associa PERFIL ao MENU ///////
  	$sql = sprintf("INSERT INTO seguranca.perfilmenu 
  					(
  					 pflcod,
@@ -253,9 +256,9 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 					  m.sisid=%d",$sisidNew);
  	$db->executar($sql);
  	unset($sql);
- 	
-/////// Atualiza campo com o arquivo padrão de abertura //////// 
-## DE raiz.php PARA arquivo novo ##	
+
+/////// Atualiza campo com o arquivo padrão de abertura ////////
+## DE raiz.php PARA arquivo novo ##
 	$sql = sprintf("UPDATE
 					 seguranca.menu 
 					SET 
@@ -267,7 +270,7 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 					 $sisidNew);
  	$db->executar($sql);
  	unset($sql);
-	
+
 //////// Cadastra usuario no sistema /////////
 	$sql = sprintf("INSERT INTO
 					 seguranca.usuario_sistema 
@@ -296,22 +299,23 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 					$_SESSION['usucpf'],
 					$sisidNew);
  	$db->executar($sql);
-	unset($sql);	
-	
+	unset($sql);
+
 /////// Cria esquema no banco /////////
 	$sql = sprintf("CREATE SCHEMA %s AUTHORIZATION postgres;
 					GRANT ALL ON SCHEMA %s TO postgres;
-					GRANT USAGE ON SCHEMA %s TO sysdbbackup;",
+					-- GRANT USAGE ON SCHEMA %s TO sysdbbackup;
+					",
 					$_REQUEST['diret'],
 					$_REQUEST['diret'],
-					$_REQUEST['diret']); 	
+					$_REQUEST['diret']);
 	#dbg($sql,1);
  	$db->executar($sql);
 	unset($sql);
- 	
+
 	if ($_POST['exerc'] == 'true'):
-	
-/////// Criar tabela "programacaoexercicio" dentro do esquema ////////	
+
+/////// Criar tabela "programacaoexercicio" dentro do esquema ////////
 		$sql = sprintf("CREATE TABLE %s.programacaoexercicio
 						(
 						  prsano character(4) NOT NULL,
@@ -326,8 +330,9 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 						WITH OIDS;
 						ALTER TABLE %s.programacaoexercicio OWNER TO postgres;
 						GRANT ALL ON TABLE %s.programacaoexercicio TO postgres;
-						GRANT SELECT ON TABLE %s.programacaoexercicio TO sysdbbackup;
-						GRANT SELECT ON TABLE %s.programacaoexercicio TO sysdbsimec_consulta;",
+						-- GRANT SELECT ON TABLE %s.programacaoexercicio TO sysdbbackup;
+						-- GRANT SELECT ON TABLE %s.programacaoexercicio TO sysdbsimec_consulta;
+						",
 						$_REQUEST['diret'],
 						$_REQUEST['diret'],
 						$_REQUEST['diret'],
@@ -358,8 +363,8 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 						)",
 						$_REQUEST['diret']);
 		$db->executar($sql);
-		unset($sql);	
-	endif;				
+		unset($sql);
+	endif;
 
 #################################### Criar tabelas de segurança #################################
 	if ($_REQUEST['tblseg'] == 'A'):
@@ -391,8 +396,8 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 				$_REQUEST['diret']);
 		$db->executar($sql);
 		unset($sql);
-		
-	////////// Criar no esquema a tabela tprperfil //////////	
+
+	////////// Criar no esquema a tabela tprperfil //////////
 		$sql = sprintf("CREATE TABLE %s.tprperfil
 						(
 						  prfid serial NOT NULL, -- Identificador único da tabela tprperfil.
@@ -421,8 +426,8 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 				$_REQUEST['diret']);
 		$db->executar($sql);
 		unset($sql);
-		
-	////////// Criar no esquema a tabela usuarioresponsabilidade //////////	
+
+	////////// Criar no esquema a tabela usuarioresponsabilidade //////////
 		$sql = sprintf("CREATE TABLE %s.usuarioresponsabilidade
 						(
 						  rpuid serial NOT NULL, -- Identificador único da tabela usuarioresponsabilidade.
@@ -465,13 +470,13 @@ if (($_REQUEST['act'] == 'inserir') and (! is_array($msgerro))):
 						$_REQUEST['diret'],
 						$_REQUEST['diret'],
 						$_REQUEST['diret'],
-						$_REQUEST['diret']);			
+						$_REQUEST['diret']);
 		$db->executar($sql);
 		unset($sql);
-	endif;		
+	endif;
 
 	$db->commit();
-	
+
 	$pathDef = $_SERVER['DOCUMENT_ROOT'];
 	copyDir($pathDef.'/raiz', $pathDef.'/'.$_REQUEST['diret']);
 	copyDir($pathDef.'/../raiz', $pathDef.'/../'.$_REQUEST['diret']);
@@ -563,10 +568,10 @@ if ($sisid):
 		   ORDER BY
 		     sisdsc";
 	$dados = (array) $db->carregar($sql);
-	
+
 	#### Transforma $dados[0] em Variáveis ####
 	extract($dados[0]);
-	
+
 else:
 	$sisid 		   = "";
 	$dsc 		   ="";
@@ -582,7 +587,7 @@ else:
 	$tblseg 	   = 'I';
 endif;
 	$act = '';
-	
+
 ?>
 <form method="POST"  name="formulario">
 <input type='hidden' name="modulo" value="<?=$modulo?>">
@@ -590,7 +595,7 @@ endif;
 <input type='hidden' name="act" value=<?=$act?>>
     <center>
     <table  class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3" align="center">
-    <!-- 
+    <!--
       <tr>
         <td align='right' class="SubTituloDireita">Código:</td>
 	    <td><?//=campo_texto('sisid','S',($sisid != ""?'N':'S'),'',5,5,'','');?></td>
@@ -638,7 +643,7 @@ endif;
 							ur.celid in (2) and
 							ur.pflcod = 237
 						ORDER BY u.usunome";
-						
+
 				$db->monta_combo("usucpfanalista",$sql, 'S',"-- Selecione o Analista --",'','','','','S');
 	    	?>
 	    </td>
@@ -650,7 +655,7 @@ endif;
             <span id="dados-gestor"></span>
         </td>
     </tr>
-      <!--       
+      <!--
       <tr>
         <td align='right' class="SubTituloDireita">Url:</td>
 	    <td><?//=campo_texto('surl','S','S','',50,100,'','');?></td>
@@ -666,7 +671,7 @@ endif;
             <input type="radio" name="exerc" value="true" <?=($exerc=='t'?"CHECKED":"")?>> Ativo
             <input type="radio" name="exerc" value="false" <?=($exerc=='f'?"CHECKED":"")?>> Inativo
         </td>
-      </tr>      
+      </tr>
       <tr>
         <td align='right' class="SubTituloDireita">Status:</td>
 	       <td>
@@ -693,7 +698,7 @@ endif;
         <td align='right' class="SubTituloDireita">Fax do Gestor:</td>
 	    <td><?=campo_texto('sisfax','N','S','',20,25,'##-####-####','');?></td>
       </tr>-->
-      
+
 <? if ($sisid) { ?>
 	<tr bgcolor="#CCCCCC">
    		<td></td>
@@ -707,7 +712,7 @@ endif;
    		<input type="button" name="btcancela" value="Cancelar" onclick="inicio();" class="botao"></td>
 	</tr>
 <? } ?>
-      
+
     </table>
     <br><br>
 
@@ -715,14 +720,14 @@ endif;
 <thead>
     <tr>
       <td valign="top" class="title"><strong>Ação</strong></td>
-      <td valign="top" class="title"><strong>Sistema</strong></td>     
+      <td valign="top" class="title"><strong>Sistema</strong></td>
       <td valign="top" class="title"><strong>Abreviação</strong></td>
       <td valign="top" class="title"><strong>Analista Resposável</strong></td>
       <td valign="top" class="title"><strong>Status</strong></td>
     </tr>
 </thead>
 <tbody>
-<? 
+<?
 
 //exibe listagem dos sistemas cadastrados
 $sql= "select sisid as codigo2, sisdsc as descricao2, sisabrev as abreviacao2, sisstatus as status2, u.usunome 
@@ -746,7 +751,7 @@ for ($i=0; $i<=$nlinhas;$i++){
   					<td>'.$usunome.'</td>
   					<td>'.($status2 == 'A'?'Ativo':'Inativo').'</td>
   				</tr>';
-  
+
 } }
 else
 {
@@ -756,7 +761,7 @@ else
 	</tbody>
     </table>
     </center>
-  
+
 </form>
 
 <script>
@@ -768,7 +773,7 @@ function strSpecial(string){
 		if ( string.indexOf(search.substr(i,1)) >= 0 ){
 			alert('Esse caractere é inválido para o campo: " '+search.substr(i,1)+' "');
 			return false;
-		}		
+		}
 	}
 	return true;
 }
@@ -793,70 +798,70 @@ jQuery(function(){
 function validar_cadastro(cod) {
 
 	/*
-	if (document.formulario.sisid.value == "") 
+	if (document.formulario.sisid.value == "")
 	{
 		alert("Sistema sem código.");
 		document.formulario.sisid.focus();
 		return;
 	}
 	*/
-	
-	if (document.formulario.dsc.value == "") 
+
+	if (document.formulario.dsc.value == "")
 	{
 		alert("Sistema sem descrição.");
 		document.formulario.dsc.focus();
 		return;
 	}
-	
-	if (document.formulario.abrev.value == "") 
+
+	if (document.formulario.abrev.value == "")
 	{
 		alert("Sistema sem abreviação.");
 		document.formulario.abrev.focus();
 		return;
 	}
-	
-	if (document.formulario.finalidade.value == "") 
+
+	if (document.formulario.finalidade.value == "")
 	{
 		alert("Sistema sem finalidade.");
 		document.formulario.finalidade.focus();
 		return;
 	}
-	
-	if (document.formulario.relacionado.value == "") 
+
+	if (document.formulario.relacionado.value == "")
 	{
 		alert("Sistema sem relacionamento.");
 		document.formulario.relacionado.focus();
 		return;
 	}
-	
-	if (document.formulario.publico.value == "") 
+
+	if (document.formulario.publico.value == "")
 	{
 		alert("Sistema sem público alvo.");
 		document.formulario.publico.focus();
 		return;
 	}
-	
-	if (document.formulario.diret.value == "") 
+
+	if (document.formulario.diret.value == "")
 	{
 		alert("Sistema sem diretorio.");
 		document.formulario.diret.focus();
 		return;
 	}
-	
+
 	if (!strSpecial(document.formulario.diret.value)){
 		document.formulario.diret.focus();
 		return;
 	}
-	
-	if (document.formulario.usucpfanalista.value == "") 
+
+	if (document.formulario.usucpfanalista.value == "")
 	{
 		alert("Informe o Analista.");
 		document.formulario.usucpfanalista.focus();
 		return;
 	}
-	
+
 	/*
-	if (document.formulario.surl.value == "") 
+	if (document.formulario.surl.value == "")
 	{
 		alert("Sistema sem url.");
 		document.formulario.surl.focus();
@@ -864,30 +869,30 @@ function validar_cadastro(cod) {
 	}
 	*/
 	/*
-	if (document.formulario.paginainicial.value == "") 
+	if (document.formulario.paginainicial.value == "")
 	{
 		alert("Sistema sem página inicial.");
 		document.formulario.paginainicial.focus();
 		return;
 	}
 	*/
-	if ((document.formulario.exerc[0].checked == 0) && (document.formulario.exerc[1].checked == 0)) 
+	if ((document.formulario.exerc[0].checked == 0) && (document.formulario.exerc[1].checked == 0))
 	{
 		alert("Sistema sem exercício.");
 		document.formulario.exerc.focus();
 		return;
 	}
-	
-	if ((document.formulario.status[0].checked == 0) && (document.formulario.status[1].checked == 0)) 
+
+	if ((document.formulario.status[0].checked == 0) && (document.formulario.status[1].checked == 0))
 	{
 		alert("Sistema sem status.");
 		document.formulario.status.focus();
 		return;
 	}
-	
-	
+
+
 	if (cod == 'I') document.formulario.act.value = 'inserir'; else document.formulario.act.value = 'alterar';
     document.formulario.submit();
 
-}    
+}
 </script>

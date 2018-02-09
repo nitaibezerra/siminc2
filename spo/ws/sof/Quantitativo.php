@@ -186,7 +186,7 @@ class Spo_Ws_Sof_Quantitativo extends Spo_Ws_Sof
 	 * @see filtroExecucaoOrcamentariaDTO
 	 * @see selecaoRetornoExecucaoOrcamentariaDTO
 	 */
-	function consultarExecucaoOrcamentaria(array $filtro, array $selRetorno, $pagina = 1, $retornaArray = false)
+	function consultarExecucaoOrcamentaria(array $filtro, $selRetorno = null, $pagina = 1, $retornaArray = false)
 	{
 		// -- Filtros da consulta
 		$filtroExecucaoOrcamentaria = new filtroExecucaoOrcamentariaDTO();
@@ -200,6 +200,7 @@ class Spo_Ws_Sof_Quantitativo extends Spo_Ws_Sof
 
 		// -- Retorno da consulta
 		$selecaoRetornoExecucaoOrcamentaria = new selecaoRetornoExecucaoOrcamentariaDTO();
+        $selRetorno = $selRetorno ? $selRetorno : array_keys(get_class_vars('SelecaoRetornoExecucaoOrcamentariaDTO'));
 		foreach ($selRetorno as $ret) {
 			if (!property_exists($selecaoRetornoExecucaoOrcamentaria, $ret)) {
 				throw new Exception("O retorno '{$ret}' não é válido para o método WSQuantitaivo::consultarExecucaoOrcamentaria.");

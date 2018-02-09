@@ -36,8 +36,7 @@ class Wssof_Ws_PlanosOrcamentariosDto extends Modelo
      * @var array
      * @access protected
      */
-    protected $arChavePrimaria = array(
-    );
+    protected $arChavePrimaria = array('identificadorunico');
     /**
      * Chaves estrangeiras.
      * @var array
