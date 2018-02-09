@@ -48,6 +48,12 @@
     define("UNIDADES_OBRIGATORIAS", "PREENCHER"); # Exemplo: '42101', '42902'
     $obrigatorias_array = array('PREENCHER'); # Exemplo: '42101', '42902'
     
+    # Configuração padrão dos dados de solicitação de acesso
+    $configPadrao = new stdClass();
+    $configPadrao->estufPadrao = 'DF';
+    $configPadrao->muncodPadrao = '5300108';
+    $configPadrao->tpocodPadrao = '1';
+
     # SIOP - Configuração de webservice do SIOP
     # Arquivo de credencial
     define('WEB_SERVICE_SIOP_CERTIFICADO', 'PREENCHER'); # Exemplo: APPRAIZ. 'global/prod_orgao_2016.crt'

@@ -41,7 +41,7 @@ abstract class Spo_Ws_Sof extends Simec_BasicWS
      * @see Simec_BasicWS::STAGING
      * @see Simec_BasicWS::DEVELOPMENT
      */
-    public function __construct($dbSchema, $env = null)
+    public function __construct($dbSchema = null, $env = null)
     {
         if (is_null($env)) {
             $env = (('simec_desenvolvimento' == $_SESSION['baselogin']) || ('simec_espelho_producao' == $_SESSION['baselogin'])) ? self::STAGING:self::PRODUCTION;

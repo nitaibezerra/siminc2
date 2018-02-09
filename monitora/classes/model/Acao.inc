@@ -40,10 +40,6 @@ class Monitora_Model_Acao extends Modelo
      */
     protected $arChavePrimaria = array(
         'acaid',
-        'acacod',
-        'saccod',
-        'loccod',
-        'acaid',
     );
     /**
      * Chaves estrangeiras.

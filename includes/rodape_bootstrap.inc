@@ -453,7 +453,7 @@
         global $Tinicio;
 
 		if (isset($_SESSION['mnuid']) && !empty($_SESSION['mnuid'])) {
-            simec_gravar_estatistica();
+//            simec_gravar_estatistica();
 		}
     }
 ?>

@@ -676,4 +676,9 @@ class Modelo extends cls_banco {
         return wf_pegarEstadoAtual($this->docid);
     }
     
+    function carregar($SQL, $var = null, $tempocache = null){
+        $dados = parent::carregar($SQL, $var, $tempocache);
+        return $dados ? $dados : [];
+    }
+
 }

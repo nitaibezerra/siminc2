@@ -113,16 +113,6 @@ function inicio()
     });
 }
 
-/**
- * Abre um arquivo cadastrado no sistema de comunicados.
- * @param {int} arqid O ID do arquivo no sistema.
- */
-function abrirArquivo(arqid) {
-    var uri = window.location.href;
-    uri = uri.replace(/\?.+/g, '?modulo=principal/comunicado/visualizar&acao=A&download=S&arqid=' + arqid);
-    window.location.href = uri;
-}
-
 function calculaMedia(ID_dividendo, ID_divisor, ID_destino, ehMoeda)
 {
     var dividendo = $(ID_dividendo).val().replace(/\./g, '').replace(/,/g, '.');

@@ -131,7 +131,7 @@ $navBar = $_COOKIE['navbar']=='false' ? 'mini-navbar' : null;
         <link href="/zimec/public/temas/simec/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
         <link href="/zimec/public/temas/simec/css/style.min.css?t=1.0" rel="stylesheet" media="all">
-        <link href="/zimec/public/temas/simec/css/simec.css?t=1.0" rel="stylesheet" media="all">
+        <link href="/zimec/public/temas/simec/css/simec.css?t=2.0" rel="stylesheet" media="all">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -157,7 +157,7 @@ $navBar = $_COOKIE['navbar']=='false' ? 'mini-navbar' : null;
         <div id="wrapper">
             <div id="page-wrapper" class="gray-bg" style="margin-left: 0;">
                 <div class="row border-bottom">
-                    <nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #273A4A !important; background: #273A4A") no-repeat">
+                    <nav class="navbar navbar-fixed-top" role="navigation" style="margin: 0px; height: 61px; border-bottom: 1px solid #2f4050 !important; background: #2f4050") no-repeat">
                         <div class="navbar-left">
                             <ul class="header-nav header-nav-options">
                                 <li class="header-nav-brand" style="cursor:pointer;" onclick="window.location='<?= $_SESSION['sisarquivo'] ?>.php?modulo=inicio&acao=C';"><img src="/zimec/public/img/logo-simec.png" class="img-responsive" style="width: 139px; margin: 10px 0px;"></li>

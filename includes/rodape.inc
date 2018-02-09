@@ -29,7 +29,7 @@ $linkmanual = montaLinkManual( $_SESSION['sisid'] );
 // -- incluir os arquivos.
 if (file_exists(realpath(APPRAIZ . $_SESSION['sisdiretorio'] . "/modulos/" . $_REQUEST['modulo'] . ".inc"))) {
     if (isset($_SESSION['mnuid']) && !empty($_SESSION['mnuid'])) {
-        simec_gravar_estatistica();
+//        simec_gravar_estatistica();
     }
 }
 ?>

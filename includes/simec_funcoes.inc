@@ -52,8 +52,8 @@ function simec_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$cc
     global $db;
     $mensagem->persistencia = $db;
 //	$mensagem->Host         = "localhost";
-    $mensagem->Host         = "";
-    $mensagem->Mailer       = "";
+    $mensagem->Host         = $_SESSION['config_smtp'];
+    $mensagem->Mailer       = "smtp";
 
     /* Regras definidas pelo Cristiano (11/11/2008)*/
     //$mensagem->From = $remetente['email'];
@@ -152,8 +152,13 @@ function simec_email( $remetente, $destinatario, $assunto, $conteudo, $cc='',$cc
     $mensagem->Subject = $assunto;
     $mensagem->Body = $conteudo;
     $mensagem->IsHTML( true );
-    return $mensagem->Send();
 
+    # Verifica se o SMTP está configurado pra enviar e-mail. Se estiver, envia.
+    if($_SESSION['config_smtp']){
+        return $mensagem->Send();
+    } else {
+        return FALSE;
+    }
 }
 
 /*
@@ -320,14 +325,14 @@ function simec_gravar_estatistica($mnuid = null, $usucpf = null, $esttempoexec =
  */
 function simec_preparar_array($dados = null, $where = null, $order = null)
 {
-	$array = array();
+    $array = array();
 
     $dados = $dados ? $dados : [];
-	foreach ($dados as $linha) {
-		$array[$linha['codigo']] = $linha['descricao'];
-	}
+    foreach ($dados as $linha) {
+        $array[$linha['codigo']] = $linha['descricao'];
+    }
 
-	return $array;
+    return $array;
 }
 
 function simec_redirecionar($url, $tipo = null, $mensagem = null)
@@ -344,28 +349,28 @@ function simec_redirecionar($url, $tipo = null, $mensagem = null)
 
 function simec_multi_in_array($value, $array)
 {
-	foreach ($array AS $item)
-	{
-		if (!is_array($item))
-		{
-			if ($item == $value)
-			{
-				return true;
-			}
-			continue;
-		}
+    foreach ($array AS $item)
+    {
+        if (!is_array($item))
+        {
+            if ($item == $value)
+            {
+                return true;
+            }
+            continue;
+        }
 
-		if (in_array($value, $item))
-		{
-			return true;
-		}
-		else if (simec_multi_in_array($value, $item))
-		{
-			return true;
-		}
-	}
+        if (in_array($value, $item))
+        {
+            return true;
+        }
+        else if (simec_multi_in_array($value, $item))
+        {
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 
@@ -478,5 +483,33 @@ function initAutoload()
     if(is_array($funcs) && in_array('spo_autoload', $funcs)){
         spl_autoload_register('spo_autoload');
     }
+}
+
+/**
+ * Busca Sub-Unidades vinculadas ao usuário.
+ *
+ * @return array
+ */
+function buscarSubUnidadeUsuario(stdClass $filtros){
+    global $db;
+    $listaSubUnidadeUsuario = array();
+    $sql = "
+        SELECT DISTINCT
+            suo.suocod
+        FROM {$_SESSION['sisdiretorio']}.usuarioresponsabilidade rpu
+            JOIN public.vw_subunidadeorcamentaria suo ON rpu.ungcod = suo.suocod
+        WHERE
+            rpu.rpustatus = 'A'
+            AND rpu.usucpf = '". pg_escape_string($filtros->usucpf). "'
+    ";
+//ver($sql,d);
+    $resultado = $db->carregar($sql);
+    if($resultado){
+        foreach($resultado as $contador => $subUnidade){
+            $listaSubUnidadeUsuario[] = $subUnidade['suocod'];
+        }
+    }
+
+    return $listaSubUnidadeUsuario;
 }
 

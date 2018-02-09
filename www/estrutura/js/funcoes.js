@@ -991,8 +991,8 @@ function mascaraglobal(mascara, valor) {
  *
  * @param {string} requisicao Caminho onde sera buscada as informacoes para o preenchimento do select. Seu retorno deve ser um json
  * @param {JqueryObject} select Campo que sera alimentado com o retorno da url
- * @param {string} campoDescricao Nome do atributo no json do texto do option
  * @param {string} campoCodigo Nome do atributo no json do valor do option
+ * @param {string} campoDescricao Nome do atributo no json do texto do option
  * @param {Object} parametros Valores a serem passados via POST pela URL
  * @param {string} primeiraOpcao Primeiro option do select.
  * @param {mixed} valorSelecionado Valor que vira pre-preenchido no select alimentado

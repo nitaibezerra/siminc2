@@ -3202,3 +3202,14 @@ function mvalor(v){
     v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
     return v;
 }
+
+/**
+ * Abre um arquivo cadastrado no sistema de comunicados.
+ * @param {int} arqid O ID do arquivo no sistema.
+ */
+function abrirArquivo(arqid) {
+    var uri = window.location.href;
+    uri = uri.replace(/\?.+/g, '?modulo=principal/arquivo/visualizar&acao=A&download=S&arqid=' + arqid);
+    window.location.href = uri;
+}
+

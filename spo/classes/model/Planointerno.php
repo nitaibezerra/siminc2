@@ -155,6 +155,7 @@ class Spo_Model_Planointerno extends Modelo
 		ed.esddsc AS situacao,
 		pc.picvalorcusteio AS custeio,
 		pc.picvalorcapital AS capital,
+                SUM(COALESCE (sex.vlrautorizado, 0.00)) AS autorizado,
                 SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
                 SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado,
 		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago
@@ -196,7 +197,7 @@ class Spo_Model_Planointerno extends Modelo
             ORDER BY
                 pli.plicod
         ";
-//ver($sql);
+
         return $sql;
     }
     

@@ -188,18 +188,9 @@ class Pi_PlanoInterno extends Modelo
         return $dadosPI;
     }
 
-    /**
-     * Busca lista de PI.
-     * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
-     *
-     * @param integer $exercicio
-     * @param array $aFiltro
-     * @return array
-     */
-    public function recuperarExecucaoOrcamentaria($aFiltro = [])
-    {
-        $aFiltro[] = "suo.suostatus = 'A'";
-        $where = $this->montarFiltros($aFiltro);
+    public function montarSqlExecucaoOrcamentaria($filtro = []){
+        $filtro[] = "suo.suostatus = 'A'";
+        $where = $this->montarFiltros($filtro);
 
         $sql = "
             SELECT
@@ -223,15 +214,22 @@ class Pi_PlanoInterno extends Modelo
                 psu.ptrdotacaocapital ptrdotacao_capital,
                 psu.ptrdotacaocusteio ptrdotacao_custeio,                
                 sum(COALESCE(pic.picvalorcapital, 0)) picvalorcapital,
-                sum(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio
-            from public.vw_subunidadeorcamentaria suo
-                inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                left  join monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                left  join monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
-                left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                left join planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
-            where 
+                sum(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio,
+                (
+                    SELECT
+                        COUNT(1)
+                    FROM spo.ptressubunidade
+                    WHERE
+                        ptressubunidade.ptrid = ptr.ptrid
+                ) AS compartilhada
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
+                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+                LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+                LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
+                LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+            WHERE 
                 {$where}
             GROUP BY
                 suo.suoid,
@@ -258,6 +256,122 @@ class Pi_PlanoInterno extends Modelo
                 suo.suonome,
                 ptr.funcional
         ";
+
+        return $sql;
+    }
+    public function montarSqlRelFuncionais($filtro = []){
+        $filtro[] = "suo.suostatus = 'A'";
+        $where = $this->montarFiltros($filtro);
+//ver($filtro, d);
+        $sql = "
+            SELECT
+                suo.suoid,
+                suo.unoid,
+                suo.unocod,
+                suo.unosigla,
+                suo.unonome,
+                suo.suosigla,
+                suo.suocod,
+                suo.suonome,
+                ptr.ptrano,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.irpcod,
+                ptr.plodsc,
+                ptr.ptrid,
+                ptr.ptres,
+                lmu.lmuvlr,
+                lmu.lmuid,
+                psu.psuid,
+                psu.ptrdotacaocapital ptrdotacao_capital,
+                psu.ptrdotacaocusteio ptrdotacao_custeio,                
+                SUM(COALESCE(pic.picvalorcapital, 0)) picvalorcapital,
+                SUM(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio,
+		COALESCE(sec.provisionado, 0.00) AS provisionado,
+		COALESCE(sec.empenhado, 0.00) AS empenhado,
+		COALESCE(sec.liquidado, 0.00) AS liquidado,
+		COALESCE(sec.pago, 0.00) as pago,
+                (
+                    SELECT
+                        COUNT(1)
+                    FROM spo.ptressubunidade
+                    WHERE
+                        ptressubunidade.ptrid = ptr.ptrid
+                ) AS compartilhada
+            FROM public.vw_subunidadeorcamentaria suo
+                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
+                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+                LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+                LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
+                LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                LEFT JOIN(
+                    SELECT
+                        siopexecucao.unicod,
+                        pi_planointerno.ungcod,
+                        siopexecucao.ptres,
+                        SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                        SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                        SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                        SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+                    FROM spo.siopexecucao
+                        LEFT JOIN monitora.pi_planointerno ON(siopexecucao.plicod = pi_planointerno.plicod AND siopexecucao.exercicio = pi_planointerno.pliano AND pi_planointerno.plistatus = 'A')
+                    WHERE
+                        siopexecucao.exercicio = '". (int)$_SESSION['exercicio']. "' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+                    GROUP BY
+                        siopexecucao.ptres,
+                        siopexecucao.unicod,
+                        pi_planointerno.ungcod
+		) sec ON sec.ptres = ptr.ptres AND sec.unicod = pli.unicod AND sec.ungcod = pli.ungcod
+            WHERE 
+                {$where}
+            GROUP BY
+                suo.suoid,
+                suo.unoid,
+                suo.unocod,
+                suo.unosigla,
+                suo.unonome,
+                suo.suocod,
+                suo.suonome,
+                suo.suosigla,
+                ptr.ptrano,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.irpcod,
+                ptr.plodsc,
+                ptr.ptrid,
+                ptr.ptres,
+                lmu.lmuvlr,
+                lmu.lmuid,
+                psu.psuid,
+                ptrdotacao_capital,
+                ptrdotacao_custeio,
+		sec.provisionado,
+		sec.empenhado,
+		sec.liquidado,
+		sec.pago
+            ORDER BY
+                suo.unosigla,
+                suo.unocod,
+                suo.suonome,
+                suo.suocod,
+                ptr.funcional
+        ";
+
+        return $sql;
+    }
+
+    /**
+     * Busca lista de PI.
+     * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
+     *
+     * @param integer $exercicio
+     * @param array $aFiltro
+     * @return array
+     */
+    public function recuperarExecucaoOrcamentaria($aFiltro = [])
+    {
+        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro);
 //ver($sql, d);
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
@@ -418,7 +532,7 @@ class Pi_PlanoInterno extends Modelo
         $dados = $dados ? $dados : [];
 
         $aValores = [];
-        
+
         foreach($dados as $dado){
             $aValores[$dado['suoid']][$dado['esdid']] += $dado['valor'];
         }
@@ -490,7 +604,7 @@ class Pi_PlanoInterno extends Modelo
 
     /**
      * Busca Unidades com estatistica de orçamento e valores de pagamento.
-     * 
+     *
      * @param stdClass $filtro
      * @return array
      */
@@ -554,6 +668,27 @@ class Pi_PlanoInterno extends Modelo
                 categoria
             UNION ALL
             SELECT DISTINCT
+                3.5 AS ordem,
+                'Provisionado' AS descricao,
+                suo.unosigla AS categoria,
+                sum(COALESCE (sec.vlrautorizado, 0))::DECIMAL AS valor
+            FROM
+                public.vw_subunidadeorcamentaria suo
+                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
+                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
+                AND sec.exercicio = ptr.ptrano
+            WHERE
+                suo.prsano = '{$filtro->exercicio}'
+                AND suo.unofundo = {$filtro->unofundo}
+                and suo.suostatus = 'A'
+            GROUP BY
+                ordem,
+                descricao,
+                categoria
+            UNION ALL
+            SELECT DISTINCT
                 4 AS ordem,
                 'Empenhado' AS descricao,
                 suo.unosigla AS categoria,
@@ -563,7 +698,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
@@ -584,7 +719,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
@@ -605,7 +740,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
@@ -626,7 +761,7 @@ class Pi_PlanoInterno extends Modelo
 
     /**
      * Busca Subunidades por UO com estatistica de orçamento e valores de pagamento.
-     * 
+     *
      * @param stdClass $filtro
      * @return array
      */
@@ -694,6 +829,28 @@ class Pi_PlanoInterno extends Modelo
                 categoria
             UNION ALL
             SELECT DISTINCT
+                3.5 AS ordem,
+                'Provisionado' AS descricao,
+                suo.suosigla AS categoria,
+                sum(COALESCE (sec.vlrautorizado, 0))::DECIMAL AS valor
+            FROM
+                public.vw_subunidadeorcamentaria suo
+                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
+                LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
+                AND sec.exercicio = ptr.ptrano
+            WHERE
+                suo.prsano = '$filtro->exercicio' {$filtroUO}
+                AND suo.unofundo = $filtro->unofundo
+                and {$filtro->unidades}
+                and suo.suostatus = 'A'
+            GROUP BY
+                ordem,
+                descricao,
+                categoria
+            UNION ALL
+            SELECT DISTINCT
                 4 AS ordem,
                 'Empenhado' AS descricao,
                 suo.suosigla AS categoria,
@@ -703,7 +860,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
@@ -725,7 +882,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
@@ -747,7 +904,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
-                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres
+                LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
                 AND sec.exercicio = ptr.ptrano
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
@@ -819,10 +976,10 @@ class Pi_PlanoInterno extends Modelo
 
         return true;
     }
-    
+
     /**
      * Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
-     * 
+     *
      * @param array $perfis
      * @param array $listaJanelasDeAlteracao
      * @return boolean
@@ -831,17 +988,17 @@ class Pi_PlanoInterno extends Modelo
         if(in_array(PFL_SUBUNIDADE, $perfis) && !$listaJanelasDeAlteracao){
             return false;
         }
-        
+
         return true;
     }
-    
+
     public function verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao)
     {
         # Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
         if(!self::verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
             return false;
         }
-        
+
         switch ($estadoAtual['esdid']) {
             case ESD_FNC_PI_APROVADO:
             case ESD_FNC_PI_BANCO_PROJETOS:
@@ -893,7 +1050,7 @@ class Pi_PlanoInterno extends Modelo
                 ), '; ')) suodelegada,
 
                 eqd.eqddsc, rp.rpcod || ' - ' || rp.redsc as resultadoprimario, mai.mainome, mas.masnome, ptr.prgcod, ptr.prgdsc, opp.oppcod, opp.oppnome, ipp.ippcod, ipp.ippnome, 
-                ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, 'PO' po, ptr.ptres,
+                ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, plodsc po, ptr.ptres,
                 mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
                 pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc, 
                 case when pli.pliemenda = true then 'Sim' else 'Não' end as pliemenda,
@@ -1044,7 +1201,7 @@ class Pi_PlanoInterno extends Modelo
                 (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '11' AND pcr.pliid = pli.pliid) orc_custeio_11,
                 (select pcrvalor from planacomorc.pi_cronograma pcr where crvid = 2 AND mescod = '12' AND pcr.pliid = pli.pliid) orc_custeio_12,         
 
-                vlrempenhado, vlrliquidado, vlrpago
+                vlrautorizado, vlrempenhado, vlrliquidado, vlrpago
                            
             from monitora.pi_planointerno pli
                 inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
@@ -1069,7 +1226,7 @@ class Pi_PlanoInterno extends Modelo
                 left join territorios.esfera esf on esf.esfid = pic.esfid
                 left join public.meses mes on mes.mescod = pic.mescod
                 left join (
-                        select sex.exercicio, sex.plicod, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
+                        select sex.exercicio, sex.plicod, sum(sex.vlrautorizado) vlrautorizado, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
                         from spo.siopexecucao sex
                         where coalesce(sex.plicod, '') != ''
                         group by sex.exercicio, sex.plicod                                
@@ -1091,18 +1248,17 @@ class Pi_PlanoInterno extends Modelo
         return 'green';
     }
 
-    public function recuperarPiPorSubunidade($suoid, $tipoPi = '')
+    public function recuperarPiPorSubunidade($suoid)
     {
-        $dadosPi = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_PI);
-        $dadosDelegado = $this->recuperarDadosDetalhe($suoid, self::K_TIPO_DETALHE_DELEGADO);
+        $dadosPi = $this->recuperarDadosDetalhe((object) array('suoid' => $suoid, 'tipo' => self::K_TIPO_DETALHE_PI));
+        $dadosDelegado = $this->recuperarDadosDetalhe((object) array('suoid' => $suoid, 'tipo' => self::K_TIPO_DETALHE_DELEGADO));
 
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-subunidade.inc';
     }
 
-    public function recuperarPiPorFuncional($ptrid, $tipoPi = '')
+    public function recuperarPiPorFuncional(stdClass $parametros)
     {
-        $dados = $this->recuperarDadosDetalhe($ptrid, self::K_TIPO_DETALHE_PTRES);
-
+        $dados = $this->recuperarDadosDetalhe((object) array('suoid' => $parametros->suoid, 'ptrid' => $parametros->ptrid, 'tipo' => self::K_TIPO_DETALHE_PTRES));
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
@@ -1113,7 +1269,7 @@ class Pi_PlanoInterno extends Modelo
         } else {
             $filtro = (object)array('unosigla' => $sigla);
         }
-        
+
         switch($tipoValor){
             case 'Dot':
                 $sql = self::montarSqlGraficoPizzaRp($filtro);
@@ -1131,12 +1287,12 @@ class Pi_PlanoInterno extends Modelo
             echo "<script>$('#detalhe-grafico').modal('hide'); swal({title: 'Atenção', text: 'Nenhum dado encontrado.', type: 'warning', html: true});</script>";
         }
     }
-    
+
     public static function montarSqlGraficoPizzaRp(stdClass $filtro){
         $where = '';
         $where .= $filtro->suosigla? "\n AND suo.suosigla = '$filtro->suosigla'": NULL;
         $where .= $filtro->unosigla? "\n AND suo.unosigla = '$filtro->unosigla'": NULL;
-        
+
         $sql = "
             SELECT
                 'RP ' || ptr.irpcod descricao,
@@ -1152,7 +1308,7 @@ class Pi_PlanoInterno extends Modelo
 //ver($sql);
         return $sql;
     }
-    
+
     public static function montarSqlGraficoPizzaEnquadramento(stdClass $filtro){
         $where = '';
         $where .= $filtro->suosigla? "\n AND suo.suosigla = '$filtro->suosigla'": NULL;
@@ -1177,18 +1333,19 @@ class Pi_PlanoInterno extends Modelo
         return $sql;
     }
 
-    public function recuperarDadosDetalhe($id, $tipo)
+    public function recuperarDadosDetalhe(stdClass $parametros)
     {
         $where = '';
-        switch ($tipo) {
+        switch ($parametros->tipo) {
             case self::K_TIPO_DETALHE_PTRES:
-                $where = " AND ptr.ptrid = '$id'";
+                $where .= $parametros->ptrid? " AND ptr.ptrid = '$parametros->ptrid'": NULL;
+                $where .= $parametros->suoid? " AND suo.suoid = '$parametros->suoid'": NULL;
                 break;
             case self::K_TIPO_DETALHE_PI:
-                $where = " AND suo.suoid = '$id'";
+                $where .= " AND suo.suoid = '$parametros->suoid'";
                 break;
             case self::K_TIPO_DETALHE_DELEGADO:
-                $where = " AND pde.suoid = '$id'";
+                $where .= " AND pde.suoid = '$parametros->suoid'";
                 break;
         }
 
@@ -1202,6 +1359,7 @@ class Pi_PlanoInterno extends Modelo
                 pic.picedital,
                 pic.picvalorcapital,
                 pic.picvalorcusteio,
+		SUM(COALESCE(ex.vlrautorizado,0)) AS autorizado,
 		SUM(COALESCE(ex.vlrempenhado,0)) AS empenhado,
 		SUM(COALESCE(ex.vlrliquidado,0)) AS liquidado,
 		SUM(COALESCE(ex.vlrpago,0)) AS pago,
@@ -1226,9 +1384,9 @@ class Pi_PlanoInterno extends Modelo
                 INNER JOIN monitora.vw_ptres ptr ON ptr.ptrid = ppt.ptrid
                     AND ptr.ptrano = pli.pliano
                 LEFT JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pli.eqdid
-                LEFT JOIN spo.siopexecucao ex ON(ptr.ptres = ex.ptres)
+                LEFT JOIN spo.siopexecucao ex ON ptr.ptres = ex.ptres AND ex.exercicio = ptr.ptrano and ex.plicod = pli.plicod
             WHERE
-                pli.plistatus = 'A'       
+                pli.plistatus = 'A'
                 $where
             GROUP BY
                 pli.pliid,
@@ -1254,4 +1412,201 @@ class Pi_PlanoInterno extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+
+    public function recuperarPis($filtro)
+    {
+        if(is_array($filtro['eqdid']) && count($filtro['eqdid'])){
+            $where = ' and pli.eqdid in (' . implode(',', $filtro['eqdid']) . ')';
+        }
+
+        $sql = "select  pli.docid, doc.esdid, pli.pliid, pli.plicod, pli.plidsc, pli.plititulo, ptr.acatitulo, ptr.funcional,
+                        doc.esdid, ptr.ptres, ptr.ptrid, ptr.prgcod, ptr.acacod, ptr.loccod, ptr.plocod, ptr.plodsc, ptr.irpcod,
+                        suo.unocod, suo.unosigla, suo.unonome, suo.suocod, suo.suosigla, suo.suonome, suo.unofundo
+                from monitora.pi_planointerno pli
+                        inner join workflow.documento doc on doc.docid = pli.docid
+                        inner join monitora.pi_planointernoptres pip on pip.pliid = pli.pliid
+                        inner join monitora.vw_ptres ptr on ptr.ptrid = pip.ptrid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
+                where pli.pliano = '{$filtro['exercicio']}'
+                and pli.plistatus = 'A'
+                and doc.esdid = '{$filtro['esdid']}'
+                $where
+                ";
+        return $this->carregar($sql);
+    }
+
+    public function tramitarLote($aedid, $aDocid, $cmddsc = null)
+    {
+        $cmddsc = $cmddsc ? $cmddsc : 'Tramitado em lote';
+        if(is_array($aDocid)){
+            foreach($aDocid as $pliid => $docid){
+                wf_alterarEstado($docid, $aedid, $cmddsc, array('pliid' => $pliid));
+            }
+        }
+
+    }
+
+    public function recuperarResumoPorMetaESubunidade($mppid, $suoid, $exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select  count(*) qtd, sum(coalesce(pic.picvalorcapital, 0)) picvalorcapital, sum(coalesce(pic.picvalorcusteio, 0)) picvalorcusteio, 
+                        sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0)) previsto,
+                        sum(coalesce(sex.vlrautorizado,0)) as autorizado,
+                        sum(coalesce(sex.vlrempenhado,0)) as empenhado,
+                        sum(coalesce(sex.vlrliquidado,0)) as liquidado,
+                        sum(coalesce(sex.vlrpago,0)) as pago
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
+                        left join (
+                                select sex.exercicio, sex.plicod, sum(sex.vlrautorizado) vlrautorizado, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
+                                from spo.siopexecucao sex
+                                where coalesce(sex.plicod, '') != ''
+                                group by sex.exercicio, sex.plicod                                
+                        ) sex on sex.plicod = pli.plicod AND sex.exercicio = pli.pliano        
+                where pli.plistatus = 'A'
+                and pli.pliano = '$exercicio'
+                and mppid = " . (int) $mppid . "
+                and suo.suoid = " . (int) $suoid . "
+                ;";
+
+        return $this->pegaLinha($sql);
+    }
+
+    public function recuperarPiPorMetaESubunidade($mppid, $suoid, $exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select  pli.pliid, pli.plicod, pli.plititulo, 
+                        coalesce(pic.picvalorcapital, 0) picvalorcapital, coalesce(pic.picvalorcusteio, 0) picvalorcusteio, 
+                        coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) previsto,
+                        coalesce(sex.vlrautorizado,0) as autorizado,
+                        coalesce(sex.vlrempenhado,0) as empenhado,
+                        coalesce(sex.vlrliquidado,0) as liquidado,
+                        coalesce(sex.vlrpago,0) as pago
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
+                        left join (
+                                select sex.exercicio, sex.plicod, sum(sex.vlrautorizado) vlrautorizado, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
+                                from spo.siopexecucao sex
+                                where coalesce(sex.plicod, '') != ''
+                                group by sex.exercicio, sex.plicod                                
+                        ) sex on sex.plicod = pli.plicod AND sex.exercicio = pli.pliano        
+                where pli.plistatus = 'A'
+                and pli.pliano = '$exercicio'
+                and mppid = " . (int) $mppid . "
+                and suo.suoid = " . (int) $suoid . "
+                ;";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarPiPorIndicadorESubunidade($ipnid, $suoid, $exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select  pli.pliid, pli.plicod, pli.plititulo, 
+                        coalesce(pic.picvalorcapital, 0) picvalorcapital, coalesce(pic.picvalorcusteio, 0) picvalorcusteio, 
+                        coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) previsto,
+                        coalesce(sex.vlrautorizado,0) as autorizado,
+                        coalesce(sex.vlrempenhado,0) as empenhado,
+                        coalesce(sex.vlrliquidado,0) as liquidado,
+                        coalesce(sex.vlrpago,0) as pago
+                from monitora.pi_planointerno pli
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
+                        left join (
+                                select sex.exercicio, sex.plicod, sum(sex.vlrautorizado) vlrautorizado, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
+                                from spo.siopexecucao sex
+                                where coalesce(sex.plicod, '') != ''
+                                group by sex.exercicio, sex.plicod                                
+                        ) sex on sex.plicod = pli.plicod AND sex.exercicio = pli.pliano        
+                where pli.plistatus = 'A'
+                and pli.pliano = '$exercicio'
+                and pic.ipnid = " . (int) $ipnid . "
+                and suo.suoid = " . (int) $suoid . "
+                ";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarPorUnidade($suoid, $exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "select pli.pliid, pli.plititulo, pli.plicod, coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) valor, pic.picquantidade, aco.acoid,
+                       pic.pprid, pic.pumid, ppr.pprnome, pum.pumnome, ptr.funcional, ptr.plocod, ptr.plodsc, ptr.acatitulo, opp.oppid, opp.oppcod, opp.oppdsc, opp.oppnome
+                from monitora.pi_planointerno pli
+                        inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
+                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                        left  join monitora.pi_planointernoptres ppt on ppt.pliid = pli.pliid
+                        inner join monitora.vw_ptres ptr on ptr.ptrid = ppt.ptrid AND ptr.ptrano = pli.pliano
+                        left join monitora.pi_produto ppr on ppr.pprid = pic.pprid
+                        left join monitora.pi_unidade_medida pum on pum.pumid = pic.pumid
+                        left join public.objetivoppa opp on opp.oppid = pic.oppid
+                        left join acompanhamento.acompanhamento aco on aco.pliid = pli.pliid
+                where pli.plistatus = 'A'        
+                and pli.pliano = '$exercicio'
+                and suo.suoid = " . (int)$suoid;
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarQuantidadePrevista($mes = null)
+    {
+        $mes = $mes ? $mes : date('m');
+        $sql = "select sum(pcrvalor)
+                from planacomorc.pi_cronograma pcr 
+                where crvid = 1 
+                AND mescod::int <= $mes
+                AND pcr.pliid = " . (int)$this->pliid;
+
+        return $this->pegaUm($sql);
+    }
+
+    public function recuperarUltimoHistoricoAcompanhamento($mes = null)
+    {
+        $sql = "select his.*, usu.usunome, to_char(hisdata, 'DD/MM/YYYY HH24:MI:SS') hisdata
+                from acompanhamento.historico his
+                        inner join acompanhamento.acompanhamento aco on aco.acoid = his.acoid
+                        inner join seguranca.usuario usu on usu.usucpf = his.usucpf
+                where aco.pliid = " . (int)$this->pliid . "
+                order by his.hisdata desc";
+
+        return $this->pegaLinha($sql);
+    }
+
+    public function recuperarDados(array $filtro = [], $order = null)
+    {
+        $filtro['pliano'] = $filtro['exercicio'] ? $filtro['exercicio'] : $_SESSION['exercicio'];
+        $order = $order ? $order : ['pli.suonome', 'pli.suonome', 'pli.funcional'];
+
+        if($this->pliid){
+            $where[] = ' pli.pliid = ' . (int) $this->pliid;
+        }
+
+        foreach($filtro as $campo => $valor){
+
+            if(is_array($valor) && count($valor)){
+                $where[] = " pli.{$campo} in '" . implode("', '", $valor) . "' ";
+            } elseif(!empty($valor)) {
+                $where[] = " pli.{$campo} = '$valor' ";
+            }
+        }
+
+        $where = ' where ' . implode(' and ', $where);
+        $order = ' order by ' . implode(', ', $order);
+
+        $sql = "select * 
+                from monitora.vw_planointerno pli
+                $where
+                $order
+                "
+        ;
+
+        return $this->carregar($sql);
+    }
+
 }
