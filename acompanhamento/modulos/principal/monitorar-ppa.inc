@@ -114,7 +114,7 @@
                                 if(in_array($key, ['previsto', 'provisionado', 'empenhado', 'liquidado', 'pago'])){
                                     $dadosGrafico[$key]['descricao'] = ucfirst($key);
                                     $dadosGrafico[$key]['valor'] = $valor;
-                                    $dadosGrafico[$key]['categoria'] = 'unidade';
+                                    $dadosGrafico[$key]['categoria'] = $infoMeta['mppcod'];
                                 }
                             }
                         }
