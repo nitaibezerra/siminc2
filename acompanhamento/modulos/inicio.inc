@@ -194,10 +194,16 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
                                         '<a href="?modulo=principal/monitorar-ppa&acao=A&acoid=' . $dados['acoid'] . '"><span class="label label-primary">Preenchida</span></a>' :
                                         '<a href="?modulo=principal/monitorar-ppa&acao=A&mppid=' . $dados['mppid'] . '&suoid=' . $dados['suoid'] . '"><span class="label label-danger">Pendente</span></a>';
                                     ?>
-
                                     <tr>
                                         <td class="text-center"><?php echo $status; ?></td>
-                                        <td><?php echo $dados['mppcod'] . " - " . $dados['mppdsc']; ?></td>
+                                        <td>
+                                            <?php
+                                            echo $dados['mppcod'] . " - " . $dados['mppdsc'];
+                                            if($dados['compartilhada'] == 't'){
+                                                echo ' <i style="font-size: 15px; color: #6892ff;" class="fa fa-handshake-o link" title="Meta Compartilhada com outras Subunidades."></i>';
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="text-right"><?php echo number_format($dados['mppquantidade'], 2, ',', '.'); ?></td>
                                         <td class="text-right"><?php echo number_format($dados['acoquantidade'], 2, ',', '.'); ?></td>
                                         <td class="text-center">

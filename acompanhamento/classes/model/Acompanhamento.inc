@@ -111,7 +111,13 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
         if($suoid){
-            $sql = "select ac.mppid, ac.mppdsc, ac.mppcod, ac.mppnome, ac.mppstatus, ac.prsano, ac.mppquantificavel, ac.mppquantidade, ac.acoid, ac.suoid, ac.acoquantidade, count(pic.pliid) pis, sum(pic.picquantidade) picquantidade
+            $sql = "select  ac.mppid, ac.mppdsc, ac.mppcod, ac.mppnome, ac.mppstatus, ac.prsano, ac.mppquantificavel, ac.mppquantidade, ac.acoid, ac.suoid, ac.acoquantidade,
+                            case 
+                                when  (select count(1) from spo.subunidademetappa m where m.mppid = ac.mppid) = 0 then true
+                                when  (select count(1) from spo.subunidademetappa m where m.mppid = ac.mppid) > 2 then true
+                                else false      
+                            end as compartilhada,
+                            count(pic.pliid) pis, sum(pic.picquantidade) picquantidade
                     from (
                             select mpp.mppid, mpp.mppdsc, mpp.mppcod, mpp.mppnome, mpp.mppstatus, mpp.prsano, mpp.mppquantificavel, mpp.mppquantidade, aco.acoid, smp.suoid, aco.acoquantidade
                             from public.metappa mpp
@@ -133,7 +139,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                             left join public.vw_subunidadeorcamentaria suo on suo.suoid = ac.suoid
                             left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.unicod = suo.unocod        
                             left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid and pic.mppid = ac.mppid        
-                    group by ac.mppid, ac.mppdsc, ac.mppcod, ac.mppnome, ac.mppstatus, ac.prsano, ac.mppquantificavel, ac.mppquantidade, ac.acoid, ac.suoid, ac.acoquantidade
+                    group by ac.mppid, ac.mppdsc, ac.mppcod, ac.mppnome, ac.mppstatus, ac.prsano, ac.mppquantificavel, ac.mppquantidade, ac.acoid, ac.suoid, ac.acoquantidade, compartilhada
                     order by mppcod, mppdsc        
                     ;";
 

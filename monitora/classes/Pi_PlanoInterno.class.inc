@@ -1452,7 +1452,7 @@ class Pi_PlanoInterno extends Modelo
 
         $sql = "select  count(*) qtd, sum(coalesce(pic.picvalorcapital, 0)) picvalorcapital, sum(coalesce(pic.picvalorcusteio, 0)) picvalorcusteio, 
                         sum(coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0)) previsto,
-                        sum(coalesce(sex.vlrautorizado,0)) as autorizado,
+                        sum(coalesce(sex.vlrautorizado,0)) as provisionado,
                         sum(coalesce(sex.vlrempenhado,0)) as empenhado,
                         sum(coalesce(sex.vlrliquidado,0)) as liquidado,
                         sum(coalesce(sex.vlrpago,0)) as pago

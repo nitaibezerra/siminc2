@@ -56,6 +56,9 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
+<script src="../library/liquify/snap.svg.js"></script>
+<script src="../library/liquify/liquid.meter.js"></script>
+
 <style>
     .no-margin-bottom .form-group{
         margin-bottom: 5px;
@@ -104,6 +107,17 @@
                         $aUnidades = (new Public_Model_SubUnidadeOrcamentaria())->recuperarPorUsuario();
                         $infoMeta = (new Public_Model_MetaPpa($mppid))->recuperarInformacoes();
                         $infoPI = (new Pi_PlanoInterno())->recuperarResumoPorMetaESubunidade($mppid, $suoid);
+
+                        $dadosGrafico = [];
+                        if(count($infoPI)){
+                            foreach ($infoPI as $key => $valor) {
+                                if(in_array($key, ['previsto', 'provisionado', 'empenhado', 'liquidado', 'pago'])){
+                                    $dadosGrafico[$key]['descricao'] = ucfirst($key);
+                                    $dadosGrafico[$key]['valor'] = $valor;
+                                    $dadosGrafico[$key]['categoria'] = 'unidade';
+                                }
+                            }
+                        }
                         ?>
 
                         <div class="col-sm-6">
@@ -137,8 +151,7 @@
 
                         <?php if($mppid){ ?>
                             <hr />
-
-                            <div class="col-sm-9 no-margin-bottom">
+                            <div class="col-md-5 no-margin-bottom">
                                 <?php
                                 $simec->setPodeEditar(0);
                                 echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})");
@@ -146,42 +159,58 @@
                                 echo $simec->input('Referência', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']}");
                                 echo $simec->input('Previsto', 'Previsto PPA', number_format($infoMeta['mppquantidade'], 2, ',', '.'));
                                 echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoMeta['mppquantidadeanualizada'], 2, ',', '.'));
+                                echo $simec->input('qtd_pis', 'Planos Internos (PI´s)', '<a class="detalhe-pi" title="PI\'s Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=' . $mppid . '&suoid=' . $suoid . '">' . number_format($infoPI['qtd'], 0, ',', '.') . '</a>');
                                 $simec->setLabelSize(3);
                                 $simec->setPodeEditar(1);
                                 ?>
+
                             </div>
-                            <div class="col-sm-3">
-                                <?php if(!count($aBeneficiarioDetalhe)){ ?>
-                                    <ul class="list-group clear-list m-t">
-                                        <a class="detalhe-pi" title="PI's Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=<?php echo $mppid; ?>&suoid=<?php echo $suoid; ?>">
-                                        <li class="list-group-item fist-item">
-                                            <span class="pull-right"><?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?></span>
-                                            Planos Internos (PI´s)
-                                        </li>
-                                        </a>
-                                        <li class="list-group-item">
-                                            Previsto
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['previsto'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Empenhado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['empenhado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Liquidado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['liquidado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Pago
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['pago'], 2, ',', '.'); ?></span>
-                                        </li>
-                                    </ul>
-                                <?php } else {
-                                    echo '<div class="alert alert-danger">Nenhum PI cadastrado para essa meta</div>';
-                                } ?>
+<!--                            <div class="col-sm-2">-->
+<!--                                --><?php //if(count($infoPI)){ ?>
+<!--                                    <ul class="list-group clear-list m-t">-->
+<!--                                        <a class="detalhe-pi" title="PI's Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=--><?php //echo $mppid; ?><!--&suoid=--><?php //echo $suoid; ?><!--">-->
+<!--                                        <li class="list-group-item fist-item">-->
+<!--                                            <span class="pull-right">--><?php //echo number_format($infoPI['qtd'], 0, ',', '.'); ?><!--</span>-->
+<!--                                            Planos Internos (PI´s)-->
+<!--                                        </li>-->
+<!--                                        </a>-->
+<!--                                        <li class="list-group-item">-->
+<!--                                            Previsto-->
+<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['previsto'], 2, ',', '.'); ?><!--</span>-->
+<!--                                        </li>-->
+<!--                                        <li class="list-group-item">-->
+<!--                                            Empenhado-->
+<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['empenhado'], 2, ',', '.'); ?><!--</span>-->
+<!--                                        </li>-->
+<!--                                        <li class="list-group-item">-->
+<!--                                            Liquidado-->
+<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['liquidado'], 2, ',', '.'); ?><!--</span>-->
+<!--                                        </li>-->
+<!--                                        <li class="list-group-item">-->
+<!--                                            Pago-->
+<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['pago'], 2, ',', '.'); ?><!--</span>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                --><?php //} else {
+//                                    echo '<div class="alert alert-danger">Nenhum PI cadastrado para essa meta</div>';
+//                                } ?>
+<!--                            </div>-->
+                            <div class="col-md-5">
+                                <?php
+                                        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                                ->setColors($colors)
+                                                ->setHeight('200px')
+                                                ->gerarGrafico($dadosGrafico);
+                                ?>
+                            </div>
+                            <div class="col-sm-2">
+                                <?php $percentual = $infoPI['previsto'] ? $infoPI['empenhado'] * 100 / $infoPI['previsto'] : 0; ?>
+                                <h3 class="text-center">Percentual de Empenho</h3>
+                                <meter style="display: none;" max="100" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
                             </div>
                         <?php } ?>
-
                     </div>
             	</div>
             </div>
@@ -332,6 +361,7 @@
 
 <script>
     $(function(){
+
         $('#claid').change(function(){
             $.ajax({
                 url: '?modulo=principal/monitorar-ppa&acao=A&req=carregarMedida&claid=' + $(this).val(),
@@ -425,6 +455,19 @@
         $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
             var id = $(this).attr('data-anexos');
             $('.tr_anexos_'+ id).remove();
+        });
+
+        $('#percentual-empenhado').liquidMeter({
+            shape: 'circle',
+            color: '#0088cc',
+            background: '#F9F9F9',
+            fontSize: '24px',
+            fontWeight: '600',
+            stroke: '#F2F2F2',
+            textColor: '#333',
+            liquidOpacity: 0.9,
+            liquidPalette: ['#333'],
+            speed: 3000,
         });
     });
     
