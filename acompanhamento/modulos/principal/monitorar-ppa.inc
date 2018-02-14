@@ -153,10 +153,12 @@
                             <hr />
                             <div class="col-md-5 no-margin-bottom">
                                 <?php
+                                $compartilhada =  $infoMeta['compartilhada'] == 't' ? ' <i style="font-size: 15px; color: #6892ff;" class="fa fa-handshake-o link" title="Meta Compartilhada com outras Subunidades."></i>' : '';
+
                                 $simec->setPodeEditar(0);
                                 echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})");
                                 echo $simec->input('Objetivo', 'Objetivo', "{$infoMeta['oppcod']} - {$infoMeta['oppdsc']}");
-                                echo $simec->input('Referência', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']}");
+                                echo $simec->input('Meta', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']} {$compartilhada}");
                                 echo $simec->input('Previsto', 'Previsto PPA', number_format($infoMeta['mppquantidade'], 2, ',', '.'));
                                 echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoMeta['mppquantidadeanualizada'], 2, ',', '.'));
                                 echo $simec->input('qtd_pis', 'Planos Internos (PI´s)', '<a class="detalhe-pi" title="PI\'s Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=' . $mppid . '&suoid=' . $suoid . '">' . number_format($infoPI['qtd'], 0, ',', '.') . '</a>');
@@ -198,12 +200,12 @@
                             <div class="col-md-5">
                                 <h3 class="text-center">Valores da Meta</h3>
                                 <?php
-                                        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
-                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
-                                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
-                                                ->setColors($colors)
-                                                ->setHeight('250px')
-                                                ->gerarGrafico($dadosGrafico);
+                                $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+                                $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                        ->setColors($colors)
+                                        ->setHeight('250px')
+                                        ->gerarGrafico($dadosGrafico);
                                 ?>
                             </div>
                             <div class="col-sm-2">
@@ -237,16 +239,30 @@
                             </h5>
                         </div>
                         <div class="ibox-content">
+
+                            <div class="form-group ">
+                                <label for="acoquantidade" class="col-sm-3 col-md-3 col-lg-3 control-label">Executado: <span class="campo-obrigatorio" title="Campo obrigatório">*</span></label>
+                                <div class="col-sm-3 col-md-3 col-lg-3 ">
+                                    <?php $acoquantidade = is_numeric($mAcompanhamento->acoquantidade) ? number_format($mAcompanhamento->acoquantidade, 2, ',', '.') : null; ?>
+                                    <input name="acoquantidade" id="acoquantidade" type="text" class="form-control  valor " value="<?php echo $acoquantidade; ?>" required="required">
+                                </div>
+                                <label for="acodata" class="col-sm-2 col-md-2 col-lg-2 control-label">Dt. Referência: <span class="campo-obrigatorio" title="Campo obrigatório">*</span></label>
+                                <div class="col-sm-4 col-md-4 col-lg-4 date">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                        <input name="acodata" id="acodata" type="text" value="<?php echo Simec_Util::formatarData($mAcompanhamento->acodata, Zend_Date::DATES); ?>" class="datemask form-control" required="required">
+                                    </div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
                             <?php
-                                echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
-                                echo $simec->data('acodata', 'Dt. Referência', $mAcompanhamento->acodata, ['required']);
-                                echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise);
+                                echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise, ['rows'=>6]);
                                 echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_META_PPA]), ['required']);
 
                                 $aMedidasSelecionadas = $mAcompanhamento->recuperarMedidas();
-                                echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
-
-                                echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias);
+                                echo '<span class="span-medida" id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
+                                echo '<span class="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias, ['rows'=>6]) . '</span>';
                             ?>
 
                             <div class="form-group">
@@ -370,9 +386,9 @@
                 success: function(retorno){
                     $('#span-medida').html(retorno.select);
                     if(retorno.medida == 't'){
-                        $('#span-medida').show();
+                        $('.span-medida').show();
                     } else {
-                        $('#span-medida').hide();
+                        $('.span-medida').hide();
                     }
                 }
             });

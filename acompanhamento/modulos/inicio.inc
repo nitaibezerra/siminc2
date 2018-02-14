@@ -85,8 +85,8 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
                                             <a href="javascript: exibirEspelhoPi('<?php echo $dados['pliid']; ?>')"><?php echo $dados['plicod'] ?></a>
                                         </td>
                                         <td><?php echo $dados['plititulo'] ?></td>
-                                        <td class="text-right"><?php echo number_format($dados['valor'], 2, ',', '.'); ?></td>
-                                        <td class="text-right"><?php echo number_format($dados['picquantidade'], 2, ',', '.'); ?></td>
+                                        <td class="text-right"><?php echo number_format($dados['valor'], 0, ',', '.'); ?></td>
+                                        <td class="text-right"><?php echo number_format($dados['picquantidade'], 0, ',', '.'); ?></td>
                                         <td><?php echo $dados['pumnome'] ?></td>
                                         <td><?php echo $dados['pprnome'] ?></td>
                                     </tr>
