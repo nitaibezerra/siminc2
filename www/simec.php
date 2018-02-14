@@ -1,4 +1,4 @@
-<?
+<?php
  /*
    Sistema Simec
    Setor responsável: SPO-MEC

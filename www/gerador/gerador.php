@@ -9,6 +9,12 @@ include "classes/ControllerGenerator.php";
 include "classes/ListaGenerator.php";
 $db = new cls_banco();
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+if ( !$_SESSION['usucpf'] ) {
+    header( "Location: ../login.php" );
+    exit();
+}
+
 $schema = $_GET['schema'];
 $tables = $_GET['tables'];
 $gerarArquivos = $_GET['gerar_arquivos'];
