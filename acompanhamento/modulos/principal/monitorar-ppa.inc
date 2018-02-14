@@ -196,12 +196,13 @@
 //                                } ?>
 <!--                            </div>-->
                             <div class="col-md-5">
+                                <h3 class="text-center">Valores da Meta</h3>
                                 <?php
                                         $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
                                         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
                                         $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
                                                 ->setColors($colors)
-                                                ->setHeight('200px')
+                                                ->setHeight('250px')
                                                 ->gerarGrafico($dadosGrafico);
                                 ?>
                             </div>
