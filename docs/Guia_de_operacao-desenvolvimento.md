@@ -8,7 +8,7 @@ AlÃ©m da master, existem duas branches principais de trabalho no SIMINC2, identi
               \
                ---- feature-sentry -----
 
-Cada desenvolvedor criarÃ¡ uma branch a partir de uma das duas.
+Cada desenvolvedor criará uma branch a partir de uma das duas.
 
 ## Criando uma branch a partir da branch dev
     
@@ -22,7 +22,7 @@ Cada desenvolvedor criarÃ¡ uma branch a partir de uma das duas.
                 \
                  o--- feature-nome-demanda ----
 
-## FaÃ§a commits na sua branch e envie para o gitlab (origin)
+## Faça commits na sua branch e envie para o gitlab (origin)
     $ git commit -m 'fix: funcionalidade x'
     $ git commit -m 'fix: funcionalidade y'
     $ git push origin feature-nome-demanda
@@ -33,7 +33,7 @@ Cada desenvolvedor criarÃ¡ uma branch a partir de uma das duas.
                 \
                  o---o----o----- feature-nome-demanda ---
 
-## Atualizando sua branch com as alteraÃ§Ãµes mais recentes do dev
+## Atualizando sua branch com as alterações mais recentes do dev
 
     $ git checkout feature-nome-demanda
     $ git fetch
@@ -46,7 +46,7 @@ Cada desenvolvedor criarÃ¡ uma branch a partir de uma das duas.
                 \               \
                  o---o----o------o--- feature-nome-demanda ---
 
-## Enviando suas alteraÃ§Ãµes para a branch dev
+## Enviando suas alterações para a branch dev
 
     $ git checkout feature-sentry
     $ git fetch
@@ -60,9 +60,9 @@ Cada desenvolvedor criarÃ¡ uma branch a partir de uma das duas.
                  o---o----o------o---o -------- feature-nome-demanda ------
 
 
-## Homologando e publicando uma versÃ£o para a master
+## Homologando e publicando uma versão para a master
 
-Certifique-se de que estÃ¡ na branch correta. FaÃ§a os testes; caso encontre bugs pequenos (1), nÃ£o hÃ¡ problema que a correÃ§Ã£o seja feita diretamente na branch feature-sentry mesmo. Caso se tratem de alteraÃ§Ãµes maiores (2), melhor voltar a trabalhar no seu branch para sÃ³ entÃ£o publicar o resultado na feature-sentry:
+Certifique-se de que está na branch correta. Faça os testes; caso encontre bugs pequenos (1), não há problema que a correção seja feita diretamente na branch feature-sentry mesmo. Caso se tratem de alterações maiores (2), melhor voltar a trabalhar no seu branch para só então publicar o resultado na feature-sentry:
 
 (1)
 
@@ -88,7 +88,7 @@ Se estiver tudo ok, edite o CHANGELOG e crie a tag
     $ git push origin feature-sentry
     
 
-Na produÃ§Ã£o:
+Na produção:
 
     $ git fetch
     $ git checkout -b v1.7.1

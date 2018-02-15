@@ -1,19 +1,19 @@
-# Roteiro de publica√ß√£o de release
+# Roteiro de publicaÁ„o de release
 
 
 ## Fluxo de desenvolvimento (simplificado)
 
-Existem dois tipos de releases: hotfixes e features. Cada um segue um caminho diferente de desenvolvimento e publica√ß√£o.
+Existem dois tipos de releases: hotfixes e features. Cada um segue um caminho diferente de desenvolvimento e publicaÁ„o.
 
 ## 1) Hotfix
 
-Hotfix √© uma altera√ß√£o emergencial a ser aplicada √† produ√ß√£o. Envolve alguns commits no m√°ximo e dificilmente dura mais que um dia.
+Hotfix · uma alteraÁ„o emergencial a ser aplicada ‡ produÁ„o. Envolve alguns commits no m·ximo e dificilmente dura mais que um dia.
 
 Para criar uma hotfix, siga os passos abaixo:
 
     $ git checkout master
     $ git checkout -b hotfix-nome-da-correcao
-    $ ... comite suas corre√ß√µes
+    $ ... comite suas correÁıes
     $ git push hotfix-nome-da-correcao
 
     No github:
@@ -23,15 +23,15 @@ Para criar uma hotfix, siga os passos abaixo:
     * crie uma nova release em https://github.com/culturagovbr/siminc2/releases
     (draft a new release)
     * preencha a release com:
-      - n√∫mero da tag
-      - t√≠tulo da release
+      - n˙mero da tag
+      - tÌtulo da release
       - texto descritivo contendo modelo anterior do CHANGELOG (listagem de novas funcionalidades):
         Release 2.x.x
-	* [FIX] √Årea do sistema: descri√ß√£o da altera√ß√£o (#3 [n√∫mero da issue])
+	* [FIX] ¿rea do sistema: descriÁ„o da alteraÁ„o (#3 [n˙mero da issue])
 	(O identificador da issue deveria ser informado sempre que houver)
 
-    Publica√ß√£o da release
-    * acesse os n√≥s
+    PublicaÁ„o da release
+    * acesse os nÛs
     * cd /var/www/html/siminc2
     * git pull origin master
     
@@ -41,12 +41,12 @@ Para criar uma feature, siga os passos abaixo:
 
     $ git checkout develop
     $ git checkout -b feature-nome-da-feature
-    $ ... comite suas corre√ß√µes
+    $ ... comite suas correÁıes
     $ git checkout test
     $ git merge feature-nome-da-feature
     $ git push origin test
     
-    ... homologa√ß√£o pelo cliente
+    ... homologaÁ„o pelo cliente
     
     Se aceito:
     $ git checkout develop
@@ -54,23 +54,23 @@ Para criar uma feature, siga os passos abaixo:
     $ git push origin develop
     
     Se rejeitado:
-    * n√£o sobe para develop e volta para o desenvolvimento da feature
+    * n„o sobe para develop e volta para o desenvolvimento da feature
     
-    No github (ir√° publicar todas as features aprovadas e mergeadas na develop):
+    No github (ir· publicar todas as features aprovadas e mergeadas na develop):
     * crie um pull request da feature develop em https://github.com/culturagovbr/siminc2/pulls
     * revise o pull request
     * aceite ou rejeite
     * crie uma nova release em https://github.com/culturagovbr/siminc2/releases
     (draft a new release)
     * preencha a release com:
-      - n√∫mero da tag
-      - t√≠tulo da release
+      - n˙mero da tag
+      - tÌtulo da release
       - texto descritivo contendo modelo anterior do CHANGELOG (listagem de novas funcionalidades)
         Release 2.x.x
-	* [FIX] √Årea do sistema: descri√ß√£o da altera√ß√£o (#3 [n√∫mero da issue])
+	* [FIX] ¿rea do sistema: descriÁ„o da alteraÁ„o (#3 [n˙mero da issue])
 	(O identificador da issue deveria ser informado sempre que houver)
 
-    Publica√ß√£o da release
-    * acesse os n√≥s
+    PublicaÁ„o da release
+    * acesse os nÛs
     * cd /var/www/html/siminc2
     * git pull origin master
