@@ -13,7 +13,6 @@
 require_once APPRAIZ . "includes/library/simec/Listagem.php";
 
 include_once APPRAIZ . 'includes/funcoes_espelhoperfil.php';
-include_once APPRAIZ . 'www/proporc/_funcoescadastrousuario.php';
 include_once( APPRAIZ . "includes/classes/FuncoesBootstrap.class.inc" );
 
 //CONSTANTES
