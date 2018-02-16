@@ -47,6 +47,9 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
+<script src="../library/liquify/snap.svg.js"></script>
+<script src="../library/liquify/liquid.meter.js"></script>
+
 <style>
     .no-margin-bottom .form-group{
         margin-bottom: 5px;
@@ -75,44 +78,50 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row form-horizontal">
-                            <div class="col-sm-9 no-margin-bottom">
+                            <div class="col-md-4 no-margin-bottom">
                                 <?php
                                 $qtdPrevista = $mPlanoInterno->recuperarQuantidadePrevista();
                                 $ultimoHistorico = $mPlanoInterno->recuperarUltimoHistoricoAcompanhamento();
 
+                                $dadosGrafico = [];
+                                if(count($aPlanoInterno)){
+                                    foreach ($aPlanoInterno as $key => $valor) {
+                                        if(in_array($key, ['previsto', 'autorizado', 'empenhado', 'liquidado', 'pago'])){
+                                            $dadosGrafico[$key]['descricao'] = $key == 'autorizado' ? 'Provisionado' : ucfirst($key);
+                                            $dadosGrafico[$key]['valor'] = $valor;
+                                            $dadosGrafico[$key]['categoria'] = 'PI';
+                                        }
+                                    }
+                                }
+
                                 $simec->setPodeEditar(0);
+                                $simec->setLabelSize(4);
                                 if($ultimoHistorico){
                                     echo $simec->input('Monitorado', 'Monitorado em: ', "{$ultimoHistorico['hisdata']} por {$ultimoHistorico['usunome']}");
                                 }
                                 echo $simec->input('Quantidade', 'Quantidade', number_format($aPlanoInterno['picquantidade'], 2, ',', '.'));
                                 echo $simec->input('Unidade', 'Unidade', $aPlanoInterno['pumnome']);
                                 echo $simec->input('Produto', 'Produto', $aPlanoInterno['pprnome']);
-                                echo $simec->input('Quantidade Prevista', 'Quantidade Prevista', number_format($qtdPrevista, 2, ',', '.'));
+                                echo $simec->input('Quantidadep', 'Quantidade prevista até a data', number_format($qtdPrevista, 2, ',', '.'));
                                 $simec->setLabelSize(3);
                                 $simec->setPodeEditar(1);
                                 ?>
                             </div>
-                            <div class="col-sm-3">
-                                <?php if(!count($aBeneficiarioDetalhe)){ ?>
-                                    <ul class="list-group clear-list m-t">
-                                        <li class="list-group-item fist-item">
-                                            Previsto
-                                            <span class="pull-right">R$ <?php echo number_format($aPlanoInterno['previsto'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Empenhado
-                                            <span class="pull-right">R$ <?php echo number_format($aPlanoInterno['empenhado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Liquidado
-                                            <span class="pull-right">R$ <?php echo number_format($aPlanoInterno['liquidado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Pago
-                                            <span class="pull-right">R$ <?php echo number_format($aPlanoInterno['pago'], 2, ',', '.'); ?></span>
-                                        </li>
-                                    </ul>
-                                <?php } ?>
+                            <div class="col-md-6">
+                                <h3 class="text-center">Acompanhamento do PI</h3>
+                                <?php
+                                $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+                                $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                    ->setColors($colors)
+                                    ->setHeight('200px')
+                                    ->gerarGrafico($dadosGrafico);
+                                ?>
+                            </div>
+                            <div class="col-sm-2">
+                                <?php $percentual = $aPlanoInterno['previsto'] ? $aPlanoInterno['empenhado'] * 100 / $aPlanoInterno['previsto'] : 0; ?>
+                                <h3 class="text-center">Percentual de Empenho</h3>
+                                <meter style="display: none;" max="100" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
                             </div>
                         </div>
                     </div>
@@ -141,13 +150,12 @@
                         <div class="ibox-content">
                             <?php
                                 echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
-                                echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise);
-                                echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_PI]), ['required']);
+                                echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise, ['rows'=>6]);
+                                echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_PI]));
 
                                 $aMedidasSelecionadas = $mAcompanhamento->recuperarMedidas();
-                                echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
-
-                                echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias);
+                                echo '<span class="span-medida" id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
+                                echo '<span class="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias, ['rows'=>6]) . '</span>';
                             ?>
 
                             <div class="form-group">
@@ -270,9 +278,9 @@
                 success: function(retorno){
                     $('#span-medida').html(retorno.select);
                     if(retorno.medida == 't'){
-                        $('#span-medida').show();
+                        $('.span-medida').show();
                     } else {
-                        $('#span-medida').hide();
+                        $('.span-medida').hide();
                     }
                 }
             });
@@ -356,6 +364,19 @@
         $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
             var id = $(this).attr('data-anexos');
             $('.tr_anexos_'+ id).remove();
+        });
+
+        $('#percentual-empenhado').liquidMeter({
+            shape: 'circle',
+            color: '#0088cc',
+            background: '#F9F9F9',
+            fontSize: '24px',
+            fontWeight: '600',
+            stroke: '#F2F2F2',
+            textColor: '#333',
+            liquidOpacity: 0.9,
+            liquidPalette: ['#333'],
+            speed: 3000,
         });
     });
     
