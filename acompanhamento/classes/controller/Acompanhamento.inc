@@ -21,7 +21,7 @@ class Acompanhamento_Controller_Acompanhamento
 
             $mAcompanhamento->prsano = $mAcompanhamento->prsano ? $mAcompanhamento->prsano : $_SESSION['exercicio'];
 
-            $mAcompanhamento->salvar(null, null, ['acoanalise', 'acoprovidencias']);
+            $mAcompanhamento->salvar(null, null, ['acoanalise', 'acoprovidencias', 'claid']);
 
             $mAcompanhamento->associarAnexo($dados);
             $this->_vincularMedidas($mAcompanhamento->acoid, $dados);
@@ -105,5 +105,16 @@ class Acompanhamento_Controller_Acompanhamento
         $aHistorico = (new Acompanhamento_Model_Historico())->recuperarHistorico($acoid);
 
         include_once APPRAIZ . 'acompanhamento/modulos/principal/historico.inc';
+    }
+
+    public function listarMetasPpa($suoid, $janid = null)
+    {
+        $mAcompanhamento = new Acompanhamento_Model_Acompanhamento();
+
+        $mJanela = new Acompanhamento_Model_Janela();
+        $janelaAtiva = $mJanela->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_META_PPA);
+        $aJanelas = $mJanela->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "janstatus = 'A'", "tipid = " . Acompanhamento_Model_Tipo::K_TIPO_META_PPA], 'janinicio desc');
+
+        include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-ppa.inc';
     }
 }
