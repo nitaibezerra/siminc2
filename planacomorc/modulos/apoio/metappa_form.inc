@@ -38,8 +38,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->textarea('mppnome', 'Meta', $mMetappa->mppnome, ['required', 'maxlength' => 400]);
                             echo $simec->textarea('mppdsc', 'Descrição', $mMetappa->mppdsc, ['required', 'maxlength' => 1000]);
                             echo $simec->input('prsano', 'Ano', $mMetappa->prsano, ['class' => 'inteiro', 'required', 'maxlength' => 4]);
-                            echo $simec->radioBoolean('mppquantificavel', 'Possui medida quantificavel', $mMetappa->mppquantificavel);
+                            echo $simec->radioBoolean('mppquantificavel', 'Possui medida quantificável', $mMetappa->mppquantificavel);
                             echo '<div id="div_mppquantidade">';
+                            echo $simec->radioBoolean('mppanualizavel', 'Anualizável', $mMetappa->mppanualizavel);
                             echo $simec->input('mppquantidade', 'Quantidade', $mMetappa->mppquantidade, ['class' => 'inteiro', 'required', 'inteiro']);
                             echo '</div>';
                         ?>

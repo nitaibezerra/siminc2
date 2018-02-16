@@ -1536,7 +1536,7 @@ class Pi_PlanoInterno extends Modelo
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
-        $sql = "select pli.pliid, pli.plititulo, pli.plicod, coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) valor, pic.picquantidade, aco.acoid,
+        $sql = "select pli.pliid, pli.plititulo, pli.plicod, coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) valor, pic.picquantidade, aco.acoid, suo.unofundo,
                        pic.pprid, pic.pumid, ppr.pprnome, pum.pumnome, ptr.funcional, ptr.plocod, ptr.plodsc, ptr.acatitulo, opp.oppid, opp.oppcod, opp.oppdsc, opp.oppnome
                 from monitora.pi_planointerno pli
                         inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
@@ -1549,7 +1549,9 @@ class Pi_PlanoInterno extends Modelo
                         left join acompanhamento.acompanhamento aco on aco.pliid = pli.pliid
                 where pli.plistatus = 'A'        
                 and pli.pliano = '$exercicio'
-                and suo.suoid = " . (int)$suoid;
+                and pli.ungcod = (select suocod from public.vw_subunidadeorcamentaria where suoid = " . (int)$suoid . ")
+                order by suo.unofundo, pum.pumnome, pli.plititulo;
+                ";
 
         return $this->carregar($sql);
     }

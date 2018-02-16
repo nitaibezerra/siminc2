@@ -160,45 +160,17 @@
                                 echo $simec->input('Objetivo', 'Objetivo', "{$infoMeta['oppcod']} - {$infoMeta['oppdsc']}");
                                 echo $simec->input('Meta', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']} {$compartilhada}");
                                 echo $simec->input('Previsto', 'Previsto PPA', number_format($infoMeta['mppquantidade'], 2, ',', '.'));
-                                echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoMeta['mppquantidadeanualizada'], 2, ',', '.'));
+                                if($infoMeta['mppanualizavel'] == 't'){
+                                    echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoMeta['mppquantidadeanualizada'], 2, ',', '.'));
+                                }
                                 echo $simec->input('qtd_pis', 'Planos Internos (PI´s)', '<a class="detalhe-pi" title="PI\'s Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=' . $mppid . '&suoid=' . $suoid . '">' . number_format($infoPI['qtd'], 0, ',', '.') . '</a>');
                                 $simec->setLabelSize(3);
                                 $simec->setPodeEditar(1);
                                 ?>
 
                             </div>
-<!--                            <div class="col-sm-2">-->
-<!--                                --><?php //if(count($infoPI)){ ?>
-<!--                                    <ul class="list-group clear-list m-t">-->
-<!--                                        <a class="detalhe-pi" title="PI's Vinculados" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=--><?php //echo $mppid; ?><!--&suoid=--><?php //echo $suoid; ?><!--">-->
-<!--                                        <li class="list-group-item fist-item">-->
-<!--                                            <span class="pull-right">--><?php //echo number_format($infoPI['qtd'], 0, ',', '.'); ?><!--</span>-->
-<!--                                            Planos Internos (PI´s)-->
-<!--                                        </li>-->
-<!--                                        </a>-->
-<!--                                        <li class="list-group-item">-->
-<!--                                            Previsto-->
-<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['previsto'], 2, ',', '.'); ?><!--</span>-->
-<!--                                        </li>-->
-<!--                                        <li class="list-group-item">-->
-<!--                                            Empenhado-->
-<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['empenhado'], 2, ',', '.'); ?><!--</span>-->
-<!--                                        </li>-->
-<!--                                        <li class="list-group-item">-->
-<!--                                            Liquidado-->
-<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['liquidado'], 2, ',', '.'); ?><!--</span>-->
-<!--                                        </li>-->
-<!--                                        <li class="list-group-item">-->
-<!--                                            Pago-->
-<!--                                            <span class="pull-right">R$ --><?php //echo number_format($infoPI['pago'], 2, ',', '.'); ?><!--</span>-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-<!--                                --><?php //} else {
-//                                    echo '<div class="alert alert-danger">Nenhum PI cadastrado para essa meta</div>';
-//                                } ?>
-<!--                            </div>-->
                             <div class="col-md-5">
-                                <h3 class="text-center">Valores da Meta</h3>
+                                <h3 class="text-center">PI's Associados à Meta</h3>
                                 <?php
                                 $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
                                 $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);

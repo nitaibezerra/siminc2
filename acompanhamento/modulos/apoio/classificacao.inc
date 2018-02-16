@@ -1,6 +1,6 @@
 <?php
 
-$aClassificacao = (new Acompanhamento_Model_Classificacao)->recuperarTodos('*', NULL, NULL, array('join' => 'tipid'));
+$aClassificacao = (new Acompanhamento_Model_Classificacao)->recuperarTodos('*', ["clastatus = 'A'"], NULL, array('join' => 'tipid'));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
