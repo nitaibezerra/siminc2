@@ -113,11 +113,11 @@ class Emendas_Model_Beneficiario extends Modelo
         $id = trim(str_replace("'", "", (string) $id));
         $sql = "
             SELECT
-                pi_planointerno.pliid AS pliid,
-                *
-            FROM $this->stNomeTabela
+                ben.*,
+                pi_planointerno.pliid AS pliid
+            FROM $this->stNomeTabela ben
                 LEFT JOIN monitora.pi_planointerno ON(
-                    $this->stNomeTabela.pliid = pi_planointerno.pliid
+                    ben.pliid = pi_planointerno.pliid
                     AND pi_planointerno.plistatus = 'A')
             WHERE
                 {$this->arChavePrimaria[0]} = '$id'
