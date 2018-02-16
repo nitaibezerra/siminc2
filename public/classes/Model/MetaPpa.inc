@@ -62,6 +62,7 @@ class Public_Model_MetaPpa extends Modelo
         'prsano' => null,
         'mppquantificavel' => null,
         'mppquantidade' => null,
+        'mppanualizavel' => null,
     );
     
     public function recuperarSqlCombo($descricao = null, $where = [], $order = '')
@@ -112,7 +113,7 @@ class Public_Model_MetaPpa extends Modelo
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
-        $sql = "select  opm.oppid, opp.oppdsc, opp.oppcod, mpp.mppid, mpp.mppcod, mpp.mppdsc, mpp.mppquantificavel, mpp.mppquantidade, 
+        $sql = "select  opm.oppid, opp.oppdsc, opp.oppcod, mpp.mppid, mpp.mppcod, mpp.mppdsc, mpp.mppquantificavel, mpp.mppquantidade, mpp.mppanualizavel, 
                         case 
                             when  (select count(1) from spo.subunidademetappa m where m.mppid = mpp.mppid) = 0 then true
                             when  (select count(1) from spo.subunidademetappa m where m.mppid = mpp.mppid) > 2 then true
