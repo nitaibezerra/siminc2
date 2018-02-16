@@ -1954,7 +1954,7 @@ function enviarEmailAprovacao($pliid){
                 'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
                 'email' => $_SESSION['email_sistema']
             ),
-            array_unique($listaDestinatario),
+            $listaDestinatario,
             'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
@@ -2014,7 +2014,7 @@ function enviarEmailCorrecao($pliid){
                 'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
                 'email' => $_SESSION['email_sistema']
             ),
-            array_unique($listaDestinatario),
+            $listaDestinatario,
             'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
@@ -2080,7 +2080,7 @@ function enviarEmailAprovado($pliid){
                 'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
                 'email' => $_SESSION['email_sistema']
             ),
-            array_unique($listaDestinatario),
+            $listaDestinatario,
             'PI - '. ($pi['plicod']? $pi['plicod']: $pi['pliid']). ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
