@@ -1549,6 +1549,7 @@ class Pi_PlanoInterno extends Modelo
                         left join acompanhamento.acompanhamento aco on aco.pliid = pli.pliid
                 where pli.plistatus = 'A'        
                 and pli.pliano = '$exercicio'
+                and coalesce(pli.plicod, '') != ''
                 and pli.ungcod = (select suocod from public.vw_subunidadeorcamentaria where suoid = " . (int)$suoid . ")
                 order by suo.unofundo, pum.pumnome, pli.plititulo;
                 ";
