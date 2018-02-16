@@ -3,20 +3,21 @@ Autores
 
 ### Regras
 
-Assim que alguÈm iniciar no projeto, automaticamente deve adicionar uma nova linha com seus dados na tabela abaixo.
+Assim que algu√©m iniciar no projeto, automaticamente deve adicionar uma nova linha com seus dados na tabela abaixo.
 
 ### Sobre
 
-O intuito desse arquivo È centralizar as informaÁıes dos autores do projeto, reduzindo linhas de cÛdigo-fonte que contÈm as tags "@author".
+O intuito desse arquivo √© centralizar as informa√ß√µes dos autores do projeto, reduzindo linhas de c√≥digo-fonte que cont√©m as tags "@author".
 
 ## Participantes
 
-Abaixo temos uma lista de pessoas que j· participaram deste projeto.
+Abaixo temos uma lista de pessoas que j√° participaram deste projeto.
 
-Nome                              |  E-mail                          |  Cargo                       | Data de Entrada | Data de SaÌda  | Empresa 
+Nome                              |  E-mail                          |  Cargo                       | Data de Entrada | Data de Sa√≠da  | Empresa 
 --------------------------------- | -------------------------------- | ---------------------------- | --------------- | -------------- | --------------------
-Guilherme Adler                   | guiadler@hotmail.com             | Estagi·rio - Desenvolvimento | ?      | ? | Estagi·rio do MINC
-Fern„o Lopes Ginez de Lara       | fernao@gmail.com                 | Desenvolvedor SÍnior         | ? | ? | HEPTA - SustentaÁ„o
-Rafael JosÈ da Costa Gloria       | rafaeljcg20@gmail.com            | Analista de Sistemas e Dados | 01/03/2016 | Atuando        | HEPTA - SustentaÁ„o
-Orion ? | ? | ? | ? | Atuando        | HEPTA - SustentaÁ„o
+Guilherme Adler                   | guiadler@hotmail.com             | Estagi√°rio - Desenvolvimento | ?      | ? | Estagi√°rio do MINC
+Fern√£o Lopes Ginez de Lara       | fernao@gmail.com                 | Desenvolvedor S√™nior         | ? | ? | HEPTA - Sustenta√ß√£o
+Rafael Jos√© da Costa Gloria       | rafaeljcg20@gmail.com            | Analista de Sistemas e Dados | 01/03/2016 | Atuando        | HEPTA - Sustenta√ß√£o
+Orion ? | ? | ? | ? | Atuando        | HEPTA - Sustenta√ß√£o
 Christian Moryah Contiero Miranda | christian.miranda@cultura.gov.br |            ?                 | ?               | ?        | MPOG
+Pedro Philipe Alves de Oliveira | pedrophilipe.ti@gmail.com |            Desenvolvedor                 | ?               | ?        | UFABC - LabLivre
