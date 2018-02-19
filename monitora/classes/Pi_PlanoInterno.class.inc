@@ -323,7 +323,7 @@ class Pi_PlanoInterno extends Modelo
                         siopexecucao.unicod,
                         pi_planointerno.ungcod
 		) sec ON sec.ptres = ptr.ptres AND sec.unicod = pli.unicod AND sec.ungcod = pli.ungcod
-            WHERE 
+            WHERE
                 {$where}
             GROUP BY
                 suo.suoid,
