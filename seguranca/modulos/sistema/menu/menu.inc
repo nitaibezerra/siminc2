@@ -204,27 +204,43 @@
 			<tr>
 				<td align='right' class="SubTituloDireita">Sistema:</td>
 				<td>
-					<?php
-					$sisid = $_REQUEST['sisid'];
-					//Caso a página de inclusão não tenha sido aberta pelo menu Incluir menu faça
-					if( $_REQUEST['menuselecionado'] == '' )
-					{
-						$sql = "SELECT sisid as codigo, sisdsc as descricao FROM sistema order by sisdsc";
-						$db->monta_combo( "sisid", $sql, 'S', "Selecione o Sistema", '', '' );
-					}
-					//Caso tenha sido aberta pela tela de administração de menus faça
-					else
-					{
-						$sql= "select * from sistema where sisid=".$sisid;
-						//$saida = $db->recuperar($sql,$res);
-						if( is_array( $saida ) )
-						{
-							foreach( $saida as $k => $v ) ${$k} = $v;
-						}
-						print $sisdsc;
-						?>
-						<input type ="hidden" name = "sisid" value ="<?= $sisid ?>">
-					<?php } ?>
+                                    <?php
+                                    $sisid = $_REQUEST['sisid'];
+                                    //Caso a página de inclusão não tenha sido aberta pelo menu Incluir menu faça
+                                    if( $_REQUEST['menuselecionado'] == '' )
+                                    {
+                                        $sql = "
+                                            SELECT
+                                                sisid AS codigo,
+                                                sisdsc AS descricao
+                                            FROM sistema
+                                            WHERE
+                                                sisstatus = 'A'
+                                            ORDER BY
+                                                sisdsc
+                                        ";
+                                        $db->monta_combo( "sisid", $sql, 'S', "Selecione o Sistema", '', '' );
+                                    }
+                                    //Caso tenha sido aberta pela tela de administração de menus faça
+                                    else
+                                    {
+                                        $sql= "
+                                            SELECT
+                                                *
+                                            FROM
+                                                sistema
+                                            WHERE
+                                                sisstatus = 'A'
+                                                AND sisid = ". (int)$sisid;
+                                        //$saida = $db->recuperar($sql,$res);
+                                        if( is_array( $saida ) )
+                                        {
+                                            foreach( $saida as $k => $v ) ${$k} = $v;
+                                        }
+                                        print $sisdsc;
+                                        ?>
+                                        <input type ="hidden" name = "sisid" value ="<?= $sisid ?>">
+                                    <?php } ?>
 				</td>
 			</tr>
 			<tr>
@@ -378,15 +394,26 @@ monta_titulo($titulo_modulo,'Escolha uma ação desejada referente ao Menu / Módul
 
 ?>
 <form method="POST"   name="formulario">
- <table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="1" align="center">          <tr>
+<table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="1" align="center">
+     <tr>
         <td align='right' class="SubTituloDireita">Sistema:</td>
         <td>
-		
-		<?php $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
-			$db->monta_combo('sisid',$sql,'S',"Selecione o Sistema",'submete_sistema','');?>
-	    </td>
-   </tr>
- </table>	    
+            <?php
+                $sql = "
+                    SELECT DISTINCT
+                        sisid AS codigo,
+                        sisdsc AS descricao
+                    FROM sistema
+                    WHERE
+                        sisstatus = 'A'
+                    ORDER BY
+                        descricao
+                ";
+                $db->monta_combo('sisid',$sql,'S',"Selecione o Sistema",'submete_sistema','');
+            ?>
+        </td>
+    </tr>
+</table>	    
 <input type='hidden' name='mnuidpai'>
 <input type='hidden' name='mnutipo'>
 <input type='hidden' name="exclui" value=<?=$_REQUEST['mnuid']?>>
