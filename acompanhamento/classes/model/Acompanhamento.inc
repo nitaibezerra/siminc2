@@ -106,7 +106,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
         return [];
     }
 
-    public function getMetasPpaComPi($suoid, $exercicio = null)
+    public function getMetasPpaComPi($suoid, $janid = null, $exercicio = null)
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
@@ -122,7 +122,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                             select mpp.mppid, mpp.mppdsc, mpp.mppcod, mpp.mppnome, mpp.mppstatus, mpp.prsano, mpp.mppquantificavel, mpp.mppquantidade, aco.acoid, smp.suoid, aco.acoquantidade
                             from public.metappa mpp
                                 inner join spo.subunidademetappa smp on smp.mppid = mpp.mppid
-                                left join acompanhamento.acompanhamento aco on aco.mppid = mpp.mppid and aco.suoid = smp.suoid and acostatus = 'A'
+                                left join acompanhamento.acompanhamento aco on aco.mppid = mpp.mppid and aco.suoid = smp.suoid and acostatus = 'A' and aco.janid = " . (int) $janid . "
                             where mpp.prsano = '$exercicio'
                             and mpp.mppstatus = 'A'
                             and smp.suoid = $suoid
@@ -130,7 +130,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                             select mpp.mppid, mpp.mppdsc, mpp.mppcod, mpp.mppnome, mpp.mppstatus, mpp.prsano, mpp.mppquantificavel, mpp.mppquantidade, aco.acoid, $suoid, aco.acoquantidade
                             from public.metappa mpp
                                 left join spo.subunidademetappa smp on smp.mppid = mpp.mppid
-                                left join acompanhamento.acompanhamento aco on aco.mppid = mpp.mppid and aco.suoid = $suoid and acostatus = 'A'
+                                left join acompanhamento.acompanhamento aco on aco.mppid = mpp.mppid and aco.suoid = $suoid and acostatus = 'A' and aco.janid = " . (int) $janid . "
                             where mpp.prsano = '$exercicio'
                             and mpp.mppstatus = 'A'
                             and smp.suoid is null

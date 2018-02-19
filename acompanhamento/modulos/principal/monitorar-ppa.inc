@@ -41,9 +41,17 @@
 
     $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
 
-    // Recuperando Janela Ativa
-    $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_META_PPA);
-    $janid = $mAcompanhamento->janid ? $mAcompanhamento->janid : $janela['janid'];
+    // Verificando qual a janela e se a janela permite editar ou não
+    $janid = $mAcompanhamento->janid ? $mAcompanhamento->janid : $_REQUEST['janid'];
+
+    if(!$janid){
+        $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_META_PPA);
+        $janid = $janela['janid'];
+    }
+
+    $mJanela = new Acompanhamento_Model_Janela($janid);
+
+    $podeEditar = $mJanela->isAtual() == 't' ? 1 : 0;
 
     // Recuperando Meta Selecionada
     $mppid = $mAcompanhamento->mppid ? $mAcompanhamento->mppid : $_REQUEST['mppid'];
@@ -156,7 +164,11 @@
                                 $compartilhada =  $infoMeta['compartilhada'] == 't' ? ' <i style="font-size: 15px; color: #6892ff;" class="fa fa-handshake-o link" title="Meta Compartilhada com outras Subunidades."></i>' : '';
 
                                 $simec->setPodeEditar(0);
-                                echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})");
+
+                                $janinicio = Simec_Util::formatarData($mJanela->janinicio, 'dd/MM/YYYYY');
+                                $janfim = Simec_Util::formatarData($mJanela->janfim, 'dd/MM/YYYYY');
+
+                                echo $simec->input('Referência', 'Referência', "{$mJanela->jandsc} ({$janinicio} - {$janfim})");
                                 echo $simec->input('Objetivo', 'Objetivo', "{$infoMeta['oppcod']} - {$infoMeta['oppdsc']}");
                                 echo $simec->input('Meta', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']} {$compartilhada}");
                                 echo $simec->input('Previsto', 'Previsto PPA', number_format($infoMeta['mppquantidade'], 2, ',', '.'));
@@ -192,14 +204,17 @@
             
         </div>
 
-        <?php if($mppid){ ?>
-            <form id="formulario" name="formulario" method="post" class="form-horizontal">
-                <input type="hidden" name="req" id="req" value="salvar" />
-                <input name="suoid" type="hidden" value="<?php echo $suoid; ?>">
-                <input name="mppid" id="mppid" type="hidden" value="<?php echo $mppid; ?>">
-                <input name="janid" id="janid" type="hidden" value="<?php echo $janid; ?>">
-                <input name="acoid" id="acoid" type="hidden" value="<?php echo $mAcompanhamento->acoid; ?>">
+        <?php if($mppid){
+            $simec->setPodeEditar($podeEditar);
 
+            if($podeEditar){ ?>
+                <form id="formulario" name="formulario" method="post" class="form-horizontal">
+                    <input type="hidden" name="req" id="req" value="salvar" />
+                    <input name="suoid" type="hidden" value="<?php echo $suoid; ?>">
+                    <input name="mppid" id="mppid" type="hidden" value="<?php echo $mppid; ?>">
+                    <input name="janid" id="janid" type="hidden" value="<?php echo $mJanela->janid; ?>">
+                    <input name="acoid" id="acoid" type="hidden" value="<?php echo $mAcompanhamento->acoid; ?>">
+            <?php } ?>
                 <div class="col-md-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -216,13 +231,23 @@
                                 <label for="acoquantidade" class="col-sm-3 col-md-3 col-lg-3 control-label">Executado: <span class="campo-obrigatorio" title="Campo obrigatório">*</span></label>
                                 <div class="col-sm-3 col-md-3 col-lg-3 ">
                                     <?php $acoquantidade = is_numeric($mAcompanhamento->acoquantidade) ? number_format($mAcompanhamento->acoquantidade, 2, ',', '.') : null; ?>
-                                    <input name="acoquantidade" id="acoquantidade" type="text" class="form-control  valor " value="<?php echo $acoquantidade; ?>" required="required">
+                                    <?php if($podeEditar){ ?>
+                                        <input name="acoquantidade" id="acoquantidade" type="text" class="form-control  valor " value="<?php echo $acoquantidade; ?>" required="required">
+                                    <?php } else { ?>
+                                        <p class="form-control-static" id="acoquantidade"><?php echo $acoquantidade; ?></p>
+                                    <?php } ?>
+
                                 </div>
                                 <label for="acodata" class="col-sm-2 col-md-2 col-lg-2 control-label">Dt. Referência: <span class="campo-obrigatorio" title="Campo obrigatório">*</span></label>
-                                <div class="col-sm-4 col-md-4 col-lg-4 date">
+                                <div class="col-sm-4 col-md-4 col-lg-4 <?php echo $podeEditar ? 'date' : '' ; ?>">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                        <input name="acodata" id="acodata" type="text" value="<?php echo Simec_Util::formatarData($mAcompanhamento->acodata, Zend_Date::DATES); ?>" class="datemask form-control" required="required">
+                                        <?php if($podeEditar){ ?>
+                                            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                            <input name="acodata" id="acodata" type="text" value="<?php echo Simec_Util::formatarData($mAcompanhamento->acodata, Zend_Date::DATES); ?>" class="datemask form-control" required="required">
+                                        <?php } else { ?>
+                                            <p class="form-control-static" id="acodata"><?php echo Simec_Util::formatarData($mAcompanhamento->acodata, Zend_Date::DATES); ?></p>
+                                        <?php } ?>
+
                                     </div>
                                 </div>
                                 <div style="clear:both"></div>
@@ -239,7 +264,10 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php if($podeEditar){ ?>
+                                        <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php } ?>
+
                                     <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                     <?php if($mAcompanhamento->acoid){ ?>
     <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $mAcompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
@@ -284,17 +312,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                            <?php if($podeEditar){ ?>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
                     </div>
                 </div>
-
-            </form>
+            <?php if($podeEditar){ ?>
+                </form>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>

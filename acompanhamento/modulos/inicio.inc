@@ -1,10 +1,13 @@
 <?php
 
 //simec_redirecionar('emendas.php?modulo=principal/emenda&acao=A');
-
+$cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
 switch ($_REQUEST['req']) {
     case 'espelho-pi':
         include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
+        die;
+    case 'listar-metas-ppa':
+        $cAcompanhamento->listarMetasPpa($_REQUEST['suoid'], $_REQUEST['janid']);
         die;
 }
 
@@ -173,57 +176,8 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <?php $aMetasPpa = $mAcompanhamento->getMetasPpaComPi($suoid); ?>
-                    <h5>Minhas Metas PPA <span style="color: red;">(<?php echo count($aMetasPpa); ?>)</span></h5>
-                </div>
-                <div class="ibox-content">
-                    <?php
-                    if(count($aMetasPpa)){ ?>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover table-condensed" >
-                                <thead>
-                                <tr class="text-center">
-                                    <th>Status</th>
-                                    <th>Meta</th>
-                                    <th>Qtd. Prevista</th>
-                                    <th>Qtd. Alcançada</th>
-                                    <th>PIs</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach($aMetasPpa as $dados){
-                                    $status = $dados['acoid'] ?
-                                        '<a href="?modulo=principal/monitorar-ppa&acao=A&acoid=' . $dados['acoid'] . '"><span class="label label-primary">Preenchida</span></a>' :
-                                        '<a href="?modulo=principal/monitorar-ppa&acao=A&mppid=' . $dados['mppid'] . '&suoid=' . $dados['suoid'] . '"><span class="label label-danger">Pendente</span></a>';
-                                    ?>
-                                    <tr>
-                                        <td class="text-center"><?php echo $status; ?></td>
-                                        <td>
-                                            <?php
-                                            echo $dados['mppcod'] . " - " . $dados['mppdsc'];
-                                            if($dados['compartilhada'] == 't'){
-                                                echo ' <i style="font-size: 15px; color: #6892ff;" class="fa fa-handshake-o link" title="Meta Compartilhada com outras Subunidades."></i>';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="text-right"><?php echo number_format($dados['mppquantidade'], 2, ',', '.'); ?></td>
-                                        <td class="text-right"><?php echo number_format($dados['acoquantidade'], 2, ',', '.'); ?></td>
-                                        <td class="text-center">
-                                            <a class="detalhe-pi" href="?modulo=principal/monitorar-ppa&acao=A&req=detalhe-pi&mppid=<?php echo $dados['mppid']; ?>&suoid=<?php echo $dados['suoid']; ?>"><?php echo $dados['pis']; ?></a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php } else {
-                        echo '<div class="alert alert-danger">Nenhum registro cadastrado</div>';
-                    } ?>
-                </div>
-            </div>
+        <div class="col-md-12" id="box-metas-ppa">
+            <?php $cAcompanhamento->listarMetasPpa($suoid); ?>
         </div>
         <div class="col-md-12">
             <div class="ibox float-e-margins">
