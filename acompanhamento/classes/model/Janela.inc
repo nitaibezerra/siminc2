@@ -67,13 +67,28 @@ class Acompanhamento_Model_Janela extends Modelo
     public function recuperarJanelaAtiva($tipid, $exercicio = null)
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
-        $sql = "select *, to_char(janinicio, 'DD/MM/YYYY') janinicio, to_char(janfim, 'DD/MM/YYYY') janfim
+
+        $sql = "select  *, to_char(janinicio, 'DD/MM/YYYY') janinicio, to_char(janfim, 'DD/MM/YYYY') janfim, 
+                        to_char(now(), 'YYYYMMDD') between to_char(janinicio, 'YYYYMMDD') and coalesce(to_char(janfim, 'YYYYMMDD'), '2018-12-31') atual
                 from acompanhamento.janela 
                 where prsano = '$exercicio'
-                and to_char(now(), 'YYYYMMDD') between to_char(janinicio, 'YYYYMMDD') and coalesce(to_char(janfim, 'YYYYMMDD'), '2018-12-31') 
-                and tipid = $tipid";
+                and janela.janstatus = 'A'
+                and to_char(now(), 'YYYYMMDD') between to_char(janinicio, 'YYYYMMDD') and to_char(now(), 'YYYYMMDD')
+                and tipid = $tipid
+                order by janela.janinicio desc, janela.janfim desc
+                limit 1";
 
         return $this->pegaLinha($sql);
+    }
+
+    public function isAtual()
+    {
+        $sql = "select  to_char(now(), 'YYYYMMDD') between to_char(janinicio, 'YYYYMMDD') and coalesce(to_char(janfim, 'YYYYMMDD'), '2018-12-31') atual
+                from acompanhamento.janela 
+                where janela.janstatus = 'A'
+                and janid = " . (int) $this->janid;
+
+        return $this->pegaUm($sql);
     }
 
 }//end Class
