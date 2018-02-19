@@ -1,6 +1,6 @@
 <?php
 include_once '_funcoespi.php';
-include_once APPRAIZ. "monitora/classes/Pi_PlanoInterno.class.inc";
+include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 
 $filtros = array(
@@ -17,10 +17,6 @@ $sql = $modelPlanoInterno->montarSqlRelFuncionais($filtros);
 //ver($sql, d);
 $listaFuncionais = $modelPlanoInterno->carregar($sql);
 
-if($_REQUEST['req'] == 'exportar-xls'){
-    include_once APPRAIZ. "planacomorc/modulos/relatorio/funcionais-xls.inc";
-}
-
 include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
@@ -34,15 +30,8 @@ include APPRAIZ . "includes/cabecalho.inc";
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
+    <div class="col-lg-12">
         <h2><?php echo $titulo_modulo; ?></h2>
-    </div>
-    <div class="col-lg-8">
-        <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/funcionais&acao=A&req=exportar-xls">
-                <i class="fa fa-file-excel-o"></i> Exportar XLS
-            </a>
-        </div>
     </div>
 </div>
 
@@ -56,7 +45,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content">
 
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover dataTables" >
+                        <table class="table table-bordered table-hover dataTablesFuncionais" >
                             <thead>
                             <tr class="text-center">
                                 <th rowspan="2" style="border-left: 1px black solid;">
@@ -74,7 +63,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th colspan="2" style="border-right: 1px black solid;">Custeio</th>
                                 <th colspan="2" style="border-right: 1px black solid;">Capital</th>
                                 <th colspan="2" style="border-right: 1px black solid;">Total</th>
-                                <th colspan="4" style="border-right: 1px black solid;">&nbsp;</th>
                             </tr>
                             <tr class="text-center">
                                 <th>Dotação</th>
@@ -83,10 +71,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th style="border-right: 1px black solid;">Planejado</th>
                                 <th>Dotação</th>
                                 <th style="border-right: 1px black solid;">Planejado</th>
-                                <th>Provisionado</th>
-                                <th>Empenhado</th>
-                                <th>Liquidado</th>
-                                <th style="border-right: 1px black solid;">Pago</th>
                             </tr>
                             </thead>
                             <?php if($listaFuncionais): ?>
@@ -130,18 +114,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <td style="color: <?php echo $modelPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
                                             <?php echo number_format(($dado['picvalorcusteio'] + $dado['picvalorcapital']), 0, ',', '.'); ?>
                                         </td>
-                                        <td class="text-right">
-                                            <?php echo number_format(($dado['provisionado']), 0, ',', '.'); ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo number_format(($dado['empenhado']), 0, ',', '.'); ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo number_format(($dado['liquidado']), 0, ',', '.'); ?>
-                                        </td>
-                                        <td style="border-right: 1px black solid;" class="text-right">
-                                            <?php echo number_format(($dado['pago']), 0, ',', '.'); ?>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>
@@ -164,6 +136,15 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
 
 <script>
     $(document).ready(function(){
+
+        $('.dataTablesFuncionais').DataTable({
+            bPaginate: false,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            "language": {
+                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
+            }
+        });
 
         $('.tabs').on('click', '.tablink, .prodTabs a',function (e) {
             e.preventDefault();
