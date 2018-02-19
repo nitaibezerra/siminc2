@@ -18,5 +18,5 @@
         </table>
     </div>
 <?php } else {
-    echo '<div class="alert alert-danger">Nenhum PI vinculado</div>';
+    echo '<div class="alert alert-danger">Nenhum histórico vinculado</div>';
 } ?>
