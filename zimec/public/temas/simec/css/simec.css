@@ -670,3 +670,17 @@ tr.text-right th, tr.text-right td{
     float: left;
     margin-left: 10px;
 }
+
+.tabs-container .nav-tabs > li > a, .tabs-container .nav-tabs > li > a:hover {
+    text-transform: uppercase;
+}
+
+.tabs-container .nav-tabs > li.active > a, .tabs-container .nav-tabs > li.active > a:hover {
+    background-color: #e6e6e6;
+    box-shadow: 1px 0px 1px #b0aeae;
+}
+
+.tabs-container .panel-body {
+    background: #e6e6e6;
+}
+
