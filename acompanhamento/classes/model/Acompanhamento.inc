@@ -182,6 +182,44 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
         return [];
     }
 
+    public function getMetasPncComPi($suoid, $janid = null, $exercicio = null)
+    {
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        if($suoid){
+            $sql = "select distinct ac.prsano, ac.suoid, mpn.mpncod::int, mpn.mpndsc, mpn.mpnid, count(pic.pliid) pis, count(ac.acoid) acompanhamento
+                    from (
+                        select ipn.ipnid, ipn.mpnid, ipn.ipndsc, ipn.ipnstatus, ipn.prsano, ipn.ipncod, aco.acoid, sic.suoid, aco.acoquantidade
+                        from public.indicadorpnc ipn
+                            inner join spo.subunidadeindicadorpnc sic on sic.ipnid = ipn.ipnid
+                            left join acompanhamento.acompanhamento aco on aco.ipnid = ipn.ipnid and aco.suoid = sic.suoid and acostatus = 'A' and aco.janid = " . (int) $janid . "
+                        where ipn.prsano = '$exercicio'
+                        and ipn.ipnstatus = 'A'
+                        and sic.suoid = $suoid
+                        union
+                        select ipn.ipnid, ipn.mpnid, ipn.ipndsc, ipn.ipnstatus, ipn.prsano, ipn.ipncod, aco.acoid, $suoid, aco.acoquantidade
+                        from public.indicadorpnc ipn
+                            left join spo.subunidadeindicadorpnc sic on sic.ipnid = ipn.ipnid
+                            left join acompanhamento.acompanhamento aco on aco.ipnid = ipn.ipnid and aco.suoid = $suoid and acostatus = 'A' and aco.janid = " . (int) $janid . "
+                        where ipn.prsano = '$exercicio'
+                        and ipn.ipnstatus = 'A'
+                        and sic.suoid is null
+                        and ipn.ipncod != '0'
+                    ) ac
+                        inner join public.metapnc mpn on mpn.mpnid = ac.mpnid
+                        left join public.vw_subunidadeorcamentaria suo on suo.suoid = ac.suoid
+                        left join monitora.pi_planointerno pli on pli.ungcod = suo.suocod and pli.unicod = suo.unocod        
+                        left join planacomorc.pi_complemento pic on pic.pliid = pli.pliid and pic.ipnid = ac.ipnid        
+                    group by ac.prsano, ac.suoid, mpn.mpncod, mpn.mpndsc, mpn.mpnid
+                    order by mpncod;
+                    ";
+
+            return $this->carregar($sql);
+        }
+
+        return [];
+    }
+
     public function getIndicadoresPncComPi($suoid, $exercicio = null)
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
