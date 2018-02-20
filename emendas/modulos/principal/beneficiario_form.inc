@@ -142,14 +142,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     .coluna-parecer {
         cursor: pointer;
     }
-    
-    div div.ibox div.ibox-title {
-        background-color: #F3F3F4;
-    }
-    
-    div div.ibox div.ibox-content {
-        background-color: #F3F3F4;
-    }
+
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
