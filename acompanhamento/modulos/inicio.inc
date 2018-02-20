@@ -9,6 +9,9 @@ switch ($_REQUEST['req']) {
     case 'listar-metas-ppa':
         $cAcompanhamento->listarMetasPpa($_REQUEST['suoid'], $_REQUEST['janid']);
         die;
+    case 'listar-metas-pnc':
+        $cAcompanhamento->listarMetasPnc($_REQUEST['suoid'], $_REQUEST['janid']);
+        die;
 }
 
 $mEmendas = new Emendas_Model_Emenda();
@@ -179,52 +182,8 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
         <div class="col-md-12" id="box-metas-ppa">
             <?php $cAcompanhamento->listarMetasPpa($suoid); ?>
         </div>
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <?php $aIndicadoresPnc = $mAcompanhamento->getIndicadoresPncComPi($suoid); ?>
-                    <h5>Meus Indicadores PNC <span style="color: red;">(<?php echo count($aIndicadoresPnc); ?>)</span></h5>
-                </div>
-                <div class="ibox-content">
-                    <?php
-                    $aIndicadoresPnc = $mAcompanhamento->getIndicadoresPncComPi($suoid);
-                    if(count($aIndicadoresPnc)){ ?>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover table-condensed" >
-                                <thead>
-                                <tr class="text-center">
-                                    <th>Status</th>
-                                    <th>Indicador</th>
-                                    <th>Qtd. Prevista</th>
-                                    <th>Qtd. Alcançada</th>
-                                    <th>PIs</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach($aIndicadoresPnc as $dados){
-                                    $status = $dados['acoid'] ?
-                                        '<a href="?modulo=principal/monitorar-pnc&acao=A&acoid=' . $dados['acoid'] . '"><span class="label label-primary">Preenchida</span></a>' :
-                                        '<a href="?modulo=principal/monitorar-pnc&acao=A&ipnid=' . $dados['ipnid'] . '&suoid=' . $dados['suoid'] . '"><span class="label label-danger">Pendente</span></a>';
-                                    ?>
-
-                                    <tr>
-                                        <td class="text-center"><?php echo $status; ?></td>
-                                        <td title="Meta <?php echo $dados['mpncod'] . " - " . $dados['mpndsc']; ?>"><?php echo $dados['ipncod'] . " - " . $dados['ipndsc']; ?></td>
-                                        <td class="text-right"><?php echo number_format($dados['ipnquantidade'], 2, ',', '.'); ?></td>
-                                        <td class="text-right"><?php echo number_format($dados['acoquantidade'], 2, ',', '.'); ?></td>
-                                        <td class="text-center">
-                                            <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&ipnid=<?php echo $dados['ipnid']; ?>&suoid=<?php echo $dados['suoid']; ?>"><?php echo $dados['pis']; ?></a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    <?php } else {
-                        echo '<div class="alert alert-danger">Nenhum registro cadastrado</div>';
-                    } ?>
-                </div>
-            </div>
+        <div class="col-md-12" id="box-metas-pnc">
+            <?php $cAcompanhamento->listarMetasPnc($suoid); ?>
         </div>
     </div>
 </div>
@@ -253,7 +212,7 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
             window.location.href = '?modulo=inicio&acao=C&suoid=' + $(this).val();
         });
 
-        $('.detalhe-pi').click(function(){
+        $('body').on('click', '.detalhe-pi', function(){
             var url = $(this).attr('href');
             $('#detalhe-pi .modal-body').load(url);
             $('#detalhe-pi').modal();
