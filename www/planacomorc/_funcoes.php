@@ -1927,7 +1927,7 @@ function enviarEmailAprovacao($pliid){
 
     $listaUsuariosPlanejamento = buscarUsuarioPerfilPlanejamento((object) array(
         'sisid' => SISID_PLANEJAMENTO,
-        'pflcod' => PFL_PLANEJAMENTO));
+        'pflcod' => PFL_ADMINISTRADOR));
     
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
@@ -2046,7 +2046,7 @@ function enviarEmailAprovado($pliid){
 
     $listaUsuariosPlanejamento = buscarUsuarioPerfilPlanejamento((object) array(
         'sisid' => SISID_PLANEJAMENTO,
-        'pflcod' => PFL_PLANEJAMENTO));
+        'pflcod' => PFL_ADMINISTRADOR));
     
     $listaUsuariosUnidadeDoPi = buscarUsuarioPerfilPlanejamento((object) array(
         'sisid' => SISID_PLANEJAMENTO,
