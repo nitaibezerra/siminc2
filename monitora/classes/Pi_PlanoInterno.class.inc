@@ -1242,7 +1242,7 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 $where
         ";
-ver($sql, d);
+//ver($sql, d);
         $dados = $this->carregar($sql);
         return $dados? $dados: [];
     }
