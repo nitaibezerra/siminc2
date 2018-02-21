@@ -1,6 +1,6 @@
 <?php
+    include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
-    # Requisições
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     switch ($_REQUEST['req']) {
         case 'salvar':
@@ -36,9 +36,6 @@
         die;
     }
 
-    # Formulario
-    include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
-    
     $mPlanoInterno = new Pi_PlanoInterno($_REQUEST['pliid']);
     $aPlanoInterno = current($mPlanoInterno->recuperarDados());
 
@@ -47,7 +44,6 @@
 
     $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
 
-    # Cabeçalho
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
@@ -68,7 +64,6 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        
         <?php if($aPlanoInterno['pliid']){ ?>
 
             <div class="col-md-12">
@@ -222,7 +217,6 @@
 
             </form>
         <?php } ?>
-
     </div>
 </div>
 
