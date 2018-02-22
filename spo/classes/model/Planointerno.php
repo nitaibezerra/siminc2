@@ -92,17 +92,18 @@ class Spo_Model_Planointerno extends Modelo
         # Código do PI.
         $where .= $filtros->plicod? "\n AND (pli.plicod = '". pg_escape_string($filtros->plicod). "' OR pli.pliid = '". (int)pg_escape_string($filtros->plicod). "') ": NULL;
         # Unidade Orçamentária.
-        $where .= $filtros->unicod? "\n AND pli.unicod::INTEGER IN(". join(',', $filtros->unicod). ") ": NULL;
+//ver($filtros->unicod);
+        $where .= $filtros->unicod && !empty(join_simec(',', $filtros->unicod))? "\n AND pli.unicod::INTEGER IN(". join_simec(',', $filtros->unicod). ") ": NULL;
         # Sub-Unidade Orçamentária.
-        $where .= $filtros->ungcod? "\n AND pli.ungcod::INTEGER IN(". join(',', $filtros->ungcod). ") ": NULL;
+        $where .= $filtros->ungcod && !empty(join_simec(',', $filtros->ungcod))? "\n AND pli.ungcod::INTEGER IN(". join_simec(',', $filtros->ungcod). ") ": NULL;
         # PTRES - Plano de trabalho resumido.
-        $where .= $filtros->ptres? "\n AND ptr.ptres::INTEGER IN(". join(',', $filtros->ptres). ") ": NULL;
+        $where .= $filtros->ptres && !empty(join_simec(',', $filtros->ptres))? "\n AND ptr.ptres::INTEGER IN(". join_simec(',', $filtros->ptres). ") ": NULL;
         # Título ou Descrição.
         $where .= $filtros->descricao? "\n AND ( pli.plititulo ILIKE('%". pg_escape_string($filtros->descricao). "%') OR pli.plidsc ILIKE('%". pg_escape_string($filtros->descricao). "%') ) ": NULL;
         # Enquadramento.
-        $where .= $filtros->eqdid? "\n AND pli.eqdid::INTEGER IN(". join(',', $filtros->eqdid). ") ": NULL;
+        $where .= $filtros->eqdid && !empty(join_simec(',', $filtros->eqdid))? "\n AND pli.eqdid::INTEGER IN(". join_simec(',', $filtros->eqdid). ") ": NULL;
         # Opção da Situação.
-        $where .= $filtros->esdid? "\n AND ed.esdid::INTEGER IN(". join(',', $filtros->esdid). ") ": NULL;
+        $where .= $filtros->esdid && !empty(join_simec(',', $filtros->esdid))? "\n AND ed.esdid::INTEGER IN(". join_simec(',', $filtros->esdid). ") ": NULL;
         # Descrição da situação.
         $where .= $filtros->esddsc? "\n AND ed.esddsc ILIKE('%". pg_escape_string($filtros->esddsc). "%') ": NULL;
         # Emenda.
