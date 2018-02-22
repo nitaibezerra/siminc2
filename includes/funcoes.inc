@@ -5365,3 +5365,25 @@ function retornarDescricaoLadoPartido($lado){
     return $descricao;
 }
 
+/**
+ * (PHP 4, PHP 5, PHP 7)<br/>
+ * Alias of <b>implode</b>
+ * @link http://php.net/manual/en/function.join.php
+ * @param string $glue
+ * @param array $pieces
+ * @return string
+ */
+function join_simec($glue, $pieces){
+    $resultado = '';
+    if($pieces){
+        foreach($pieces as $item => $valor){
+            if(!empty($valor)){
+                $resultado .= $valor. $glue;
+            }
+        }
+        $resultado = substr($resultado, 0, -1);
+    }
+
+    return $resultado;
+}
+
