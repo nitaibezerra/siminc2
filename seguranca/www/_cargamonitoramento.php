@@ -88,7 +88,7 @@ if($sistemas[0]) {
 		
 		unset($dadosne);
 		
-		$sql = "SELECT COUNT(au.oid) as num, to_char(auddata, 'DD') as dia FROM seguranca.auditoria au 
+		$sql = "SELECT COUNT(au.oid) as num, to_char(auddata, 'DD') as dia FROM auditoria au 
 			    INNER JOIN seguranca.menu me ON au.mnuid=me.mnuid 
 				WHERE me.sisid='".$sis['sisid']."' AND au.audtipo='X' AND to_char(auddata, 'YYYY-MM')='".sprintf("%04d-%02d", $ano, $mes)."' 
 				GROUP BY to_char(auddata, 'DD') ORDER BY dia";
@@ -98,7 +98,7 @@ if($sistemas[0]) {
 			foreach($dados as $d) {
 				$dadosne[$d['dia']] = $d['num'];
 			}
-			$sql = "SELECT COUNT(au.oid) as num FROM seguranca.auditoria au 
+			$sql = "SELECT COUNT(au.oid) as num FROM auditoria au 
 			    INNER JOIN seguranca.menu me ON au.mnuid=me.mnuid 
 				WHERE me.sisid='".$sis['sisid']."' AND au.audtipo='X' AND to_char(auddata, 'YYYY-MM')='".sprintf("%04d-%02d", $ano, $mes)."'";
 			
