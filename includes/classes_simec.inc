@@ -204,78 +204,114 @@ class cls_banco
 	}
 
 	/**
-	 * function executar
-	 * @description : Retorna a string de resultado da execução do SQL. / Cria um log de auditoria.
+         * Executa consulta na base de dados e Cria um log de auditoria.
+         * 
 	 * @param string SQL (obrigatório)
 	 * @param boolean auditoria (opcional) Cria um log de auditoria
-	 * @return : string
-	 * @author Gilberto Arruda Cerqueira Xavier
-	 * @since 24/06/2005
+	 * @return string
 	 */
-	function executar( $SQL, $auditoria = false )
-	{
-	    if (gettype( self::$link[$this->nome_bd] ) != "resource") {
-	    	self::$link[$this->nome_bd] = null;
-	        self::cls_banco();
-	    }
+	function executar($SQL, $auditoria = NULL) {
+            $auditoria = $auditoria ? $auditoria : EXECUTAR_AUDITORIA;
+            
+            if (gettype(self::$link[$this->nome_bd]) != "resource") {
+                self::$link[$this->nome_bd] = null;
+                self::cls_banco();
+            }
 
-		$SQL = simec_trim($SQL);
-//ver($SQL);
-        //detecta operacao e tabela (Insert, Update ou Delete)
-        preg_match('/(CREATE\s+TABLE|ALTER\s+TABLE|DROP\s+TABLE|SELECT.*FROM|INSERT\s+INTO|UPDATE|DELETE\s+FROM)\s+([A-Za-z0-1.]+).*/smui', utf8_encode($SQL), $matches);
-        $audtipoCompleto = strtoupper($matches[1]);
-        $audtipo         = substr($audtipoCompleto, 0, 1);
-        $audtabela       = strtoupper($matches[2]);
+            $SQL = simec_trim($SQL);
 
-        if ($audtipoCompleto == 'ALTER TABLE' || $audtipoCompleto == 'DROP TABLE')
-            throw new Exception('A execução do comando "' .$audtipoCompleto. '" não é permitido pelo sistema');
+            # Detecta tipo de operacao de tabela(Insert, Update ou Delete)
+            preg_match('/(CREATE\s+TABLE|ALTER\s+TABLE|DROP\s+TABLE|SELECT.*FROM|INSERT\s+INTO|UPDATE|DELETE\s+FROM)\s+([A-Za-z0-1.]+).*/smui', utf8_encode($SQL), $matches);
+            $audtipoCompleto = strtoupper($matches[1]);
+            $audtipo = substr($audtipoCompleto, 0, 1);
+            $audtabela = strtoupper($matches[2]);
 
-		$_SESSION['sql'] = $SQL;
-		$momentoAnterior = microtime();
+            if($audtipoCompleto == 'ALTER TABLE' || $audtipoCompleto == 'DROP TABLE'){
+                throw new Exception('A execução do comando "' . $audtipoCompleto . '" não é permitido pelo sistema');
+            }
 
-        // Inicia a transação quando nao estiver iniciada e obrigatoriamente quando
-        // a operação for diferente de SELECT
-		if (!isset($_SESSION['transacao']) && $audtipo != 'S') {
-			$this->resultado = pg_query(self::$link[$this->nome_bd], 'begin transaction; ');
-			$_SESSION['transacao'] = '1';
-		}
-//try {
-//ver($SQL);
-		$this->resultado = @pg_query(self::$link[$this->nome_bd], $SQL);
-//} catch(Exception $e) {
-//    ver($e->getMessage());
-//}
+            $_SESSION['sql'] = $SQL;
+            $momentoAnterior = microtime();
 
-		$momentoPosterior = microtime();
-		$this->salvaQueryArray($_SESSION['sql'], $momentoAnterior, $momentoPosterior);
+            # Inicia a transação quando nao estiver iniciada e obrigatoriamente quando a operação for diferente de SELECT
+            if (!isset($_SESSION['transacao']) && $audtipo != 'S') {
+                $this->resultado = pg_query(self::$link[$this->nome_bd], 'begin transaction; ');
+                $_SESSION['transacao'] = '1';
+            }
+            
+//            try {
+                $this->resultado = @pg_query(self::$link[$this->nome_bd], $SQL);
+//            } catch(Exception $e) {
+//                ver($e->getMessage());
+//            }
 
-		if($this->resultado == null) {
-                    if (is_resource (self::$link[$this->nome_bd])) {
-//                        throw new Exception( $SQL );
-                    }
-		}
+            $momentoPosterior = microtime();
+            $this->salvaQueryArray($_SESSION['sql'], $momentoAnterior, $momentoPosterior);
 
-		if ($auditoria && $audtipo != 'S')
-        {
-            //Se no tiver vindo de algum módulo
-            if ($_SESSION['mnuid']=='') $_SESSION['mnuid']=1;
-			//Se no tiver sessão validada
-            if ($_SESSION['usucpf']=='') $_SESSION['usucpf']='';
-            //Insere dados na tabela auditoria
-            if (!$_SESSION['sisid'])
-                $id = 4;
-            else
-                $id = $_SESSION['sisid'];
+            if ($this->resultado == null) {
+                if (is_resource(self::$link[$this->nome_bd])) {
+//                    throw new Exception( $SQL );
+                }
+            }
 
+            if ($auditoria && $audtipo != 'S') {
+                //Se no tiver vindo de algum módulo
+                if ($_SESSION['mnuid'] == ''){
+                    $_SESSION['mnuid'] = 1;
+                }
+                //Se no tiver sessão validada
+//                if ($_SESSION['usucpf'] == ''){
+//                    $_SESSION['usucpf'] = '';
+//                }
+                //Insere dados na tabela auditoria
+                $id = $_SESSION['sisid']? $_SESSION['sisid']: 4;
+                
                 $SQL = pg_escape_string($SQL);
-            $sql_audit = "insert into auditoria (usucpf, mnuid, audsql, auddata, audtabela, audtipo, audip, sisid, audscript) values ('".$_SESSION['usucpforigem']."', ".$_SESSION['mnuid'].", '".$SQL."', '".date('Y-m-d H:i:s')."', '".$audtabela."', '".$audtipo."', '".$_SERVER["REMOTE_ADDR"]."',$id, '".pg_escape_string($_SERVER['REQUEST_URI'])."')";
-            pg_query(self::$link[$this->nome_bd], $sql_audit);
-		}
+                $sql_audit = self::montarSqlAuditar($SQL, $audtabela, $audtipo, $id);
 
-		return $this->resultado;
-	}
+                pg_query(self::$link[$this->nome_bd], $sql_audit);
+            }
 
-	/**
+            return $this->resultado;
+        }
+        
+        /**
+         * Monta sql para inserir dado de auditoria.
+         * 
+         * @param string $sqlOperacao Sql com a operação no banco.
+         * @param string $tabela
+         * @param string $tipoManipulacao
+         * @param integer $sistema
+         * @return string
+         */
+        protected function montarSqlAuditar($sqlOperacao, $tabela, $tipoManipulacao, $sistema){
+            $sql = "
+                INSERT INTO auditoria.auditoria(
+                    usucpf,
+                    mnuid,
+                    audsql,
+                    auddata,
+                    audtabela,
+                    audtipo,
+                    audip,
+                    sisid,
+                    audscript
+                ) values (
+                    '". $_SESSION['usucpforigem']. "',
+                    ". $_SESSION['mnuid']. ",
+                    '". $sqlOperacao. "',
+                    '". date('Y-m-d H:i:s'). "',
+                    '". $tabela. "',
+                    '". $tipoManipulacao. "',
+                    '". $_SERVER["REMOTE_ADDR"]. "',
+                    $sistema,
+                    '". pg_escape_string($_SERVER['REQUEST_URI']). "'
+                )";
+
+            return $sql;
+        }
+
+    /**
 	 * function executar
 	 * @description : Retorna um objeto como resultado da execução do sql.
 	 * @param string sql (obrigatório)
