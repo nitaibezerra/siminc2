@@ -123,7 +123,7 @@ if ($_POST['exclui'] > 0)
     }else{
         $sql = "DELETE FROM seguranca.estatistica WHERE mnuid=".$_POST['exclui'];
         $saida = $db->executar($sql);
-        $sql = "DELETE FROM seguranca.auditoria WHERE mnuid=".$_POST['exclui'];
+        //$sql = "DELETE FROM auditoria WHERE mnuid=".$_POST['exclui'];
         $saida = $db->executar($sql);	  
         $sql = "DELETE FROM seguranca.menu WHERE mnuid=".$_POST['exclui'];
         // não pode deixar escluir se já estiver associado à algum perfil

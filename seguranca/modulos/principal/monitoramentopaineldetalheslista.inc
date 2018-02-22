@@ -70,7 +70,7 @@ if($_REQUEST['link']) {
 			$db->monta_lista_simples($sql,$cabecalho,1000,5,'N','95%',$par2);
 			break;
 		case NE:
-			$sql = "SELECT me.mnudsc, '<a href=seguranca.php?modulo=principal/monitoramentopainelpaginadetalhes&acao=A&sisid=".$_REQUEST['sisid']."&ano=".$_REQUEST['ano']."&mes=".$_REQUEST['mes']."&link='||mnulink||'><img src=../imagens/eixos-mini2.png border=0></a> <a href=seguranca.php?modulo=principal/monitoramentopaineldetalheslista&acao=A&sisid=".$_REQUEST['sisid']."&ano=".$_REQUEST['ano']."&mes=".$_REQUEST['mes']."&dia=".$_REQUEST['dia']."&link='||mnulink||'><img src=../imagens/consultar.gif border=0></a> '||mnulink, COUNT(au.oid) as num FROM seguranca.auditoria au 
+			$sql = "SELECT me.mnudsc, '<a href=seguranca.php?modulo=principal/monitoramentopainelpaginadetalhes&acao=A&sisid=".$_REQUEST['sisid']."&ano=".$_REQUEST['ano']."&mes=".$_REQUEST['mes']."&link='||mnulink||'><img src=../imagens/eixos-mini2.png border=0></a> <a href=seguranca.php?modulo=principal/monitoramentopaineldetalheslista&acao=A&sisid=".$_REQUEST['sisid']."&ano=".$_REQUEST['ano']."&mes=".$_REQUEST['mes']."&dia=".$_REQUEST['dia']."&link='||mnulink||'><img src=../imagens/consultar.gif border=0></a> '||mnulink, COUNT(au.oid) as num FROM auditoria au 
 				    INNER JOIN seguranca.menu me ON au.mnuid=me.mnuid 
 				    LEFT JOIN seguranca.usuario u ON u.usucpf=au.usucpf 
 					WHERE me.sisid='".$_REQUEST['sisid']."' AND au.audtipo='X' AND to_char(auddata, 'YYYY-MM-DD')='".sprintf("%04d-%02d-%02d", $_REQUEST['ano'], $_REQUEST['mes'], $_REQUEST['dia'])."' 

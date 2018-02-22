@@ -75,12 +75,13 @@ class cls_banco
 
                 self::$link[$this->nome_bd] = pg_connect("host=".$GLOBALS["servidor_bd"]." port=".$GLOBALS["porta_bd"]." dbname=".$GLOBALS['nome_bd']."  user=".$GLOBALS["usuario_db"] ." password=".$GLOBALS["senha_bd"] ."");
 
-                if($GLOBALS["servidor_bd"] != '')
-                    pg_query(self::$link[$this->nome_bd], "SET search_path TO seguranca,monitora,elabrev,public");
-                else
-                    pg_query(self::$link[$this->nome_bd], "SET search_path TO public, seguranca");
+                if($GLOBALS["servidor_bd"] != ''){
+                    pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria, monitora, elabrev");
+                } else {
+                    pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria");
+                }
                 
-                pg_query(self::$link[$this->nome_bd], "SET standard_conforming_strings TO off;");
+                pg_query(self::$link[$this->nome_bd], "SET STANDARD_CONFORMING_STRINGS TO OFF;");
 
                 pg_set_client_encoding(self::$link[$this->nome_bd],'LATIN1');
 
@@ -286,7 +287,7 @@ class cls_banco
          */
         protected function montarSqlAuditar($sqlOperacao, $tabela, $tipoManipulacao, $sistema){
             $sql = "
-                INSERT INTO auditoria.auditoria(
+                INSERT INTO auditoria(
                     usucpf,
                     mnuid,
                     audsql,
