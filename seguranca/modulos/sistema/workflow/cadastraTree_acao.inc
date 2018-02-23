@@ -1,276 +1,284 @@
 <?php
-# Deletar o tipo documento
-if ($_GET[tpdidDel]):
-	$sql = sprintf("SELECT
-						COUNT(esdid)
-					FROM
-						workflow.estadodocumento
-					WHERE
-						esdstatus = 'A' AND
-						tpdid = %d", $_GET[tpdidDel]);
-	$totTipDocAtivo = $db->pegaUm($sql);
-	
-	if ($totTipDocAtivo):
-		die('<script type="text/javascript">
-				  alert(\'Operação não realizada!\nExiste Estado Documento cadastrado neste Tipo Documento.\');
-				  location.href=\'seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A\';			  
-			  </script>');	
-	else:
-		$sql_confere = sprintf("SELECT
-									COUNT(tpdid) as total
-								FROM
-									workflow.estadodocumento
-								WHERE
-									tpdid = %d", $_GET[tpdidDel]);
-		$determina = $db->pegaUm($sql_confere);
-		
-		$determina ? $sql = "UPDATE workflow.tipodocumento SET tpdstatus = 'I' WHERE tpdid=".$_GET[tpdidDel] : $sql = "DELETE FROM workflow.tipodocumento WHERE tpdid = ".$_GET[tpdidDel];
-		
-		$db->executar($sql);
-		$db->commit();
-		
-		die("<script>
-				alert('Operação executada com sucesso!');
-				location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
-			 </script>");
-	endif;			
-endif;
+    # Deletar o tipo documento
+    if ($_GET[tpdidDel]):
+        $sql = sprintf("
+            SELECT
+                COUNT(esdid)
+            FROM
+                workflow.estadodocumento
+            WHERE
+                esdstatus = 'A' AND
+                tpdid = %d", $_GET[tpdidDel]);
+        $totTipDocAtivo = $db->pegaUm($sql);
 
-# Deletar Estado Documento
-if ($_GET[esdidDel]):
-	$sql = sprintf("SELECT
-						COUNT(aedid)
-					FROM
-						workflow.acaoestadodoc
-					WHERE
-						aedstatus = 'A' AND
-						esdidorigem = %d", $_GET[esdidDel]);
-	$totEstDoc = $db->pegaUm($sql);
-	if ($totEstDoc):
-		die('<script type="text/javascript">
-				  alert(\'Operação não realizada!\nExiste Ação cadastrada neste Estado Documento.\');
-				  location.href=\'seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A\';
-			 </script>');	
-	else:
-		$sql_confere = sprintf("SELECT
-									COUNT(esdidorigem)
-								FROM
-									workflow.acaoestadodoc
-								WHERE
-									esdidorigem = %d OR
-									esdiddestino = %d",$_GET[esdidDel],$_GET[esdidDel]);
+        if ($totTipDocAtivo):
+            die('
+                <script type="text/javascript">
+                    alert(\'Operação não realizada!\nExiste Estado Documento cadastrado neste Tipo Documento.\');
+                    location.href=\'seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A\';			  
+                </script>');
+        else:
+            $sql_confere = sprintf("
+                SELECT
+                    COUNT(tpdid) as total
+                FROM
+                    workflow.estadodocumento
+                WHERE
+                    tpdid = %d", $_GET[tpdidDel]);
+            $determina = $db->pegaUm($sql_confere);
 
-		$determina = $db->pegaUm($sql_confere);
+            $determina ? $sql = "UPDATE workflow.tipodocumento SET tpdstatus = 'I' WHERE tpdid=" . $_GET[tpdidDel] : $sql = "DELETE FROM workflow.tipodocumento WHERE tpdid = " . $_GET[tpdidDel];
 
-		$determina ? $sql = "UPDATE workflow.estadodocumento SET esdstatus = 'I' WHERE esdid = ".$_GET[esdidDel] : $sql = "DELETE FROM workflow.estadodocumento WHERE esdid = ".$_GET[esdidDel];
-	
-		$db->executar($sql);
-		$db->commit();
-		
-		die("<script>
-				alert('Operação executada com sucesso!');
-				location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
-			 </script>");
-	endif;
-endif;
+            $db->executar($sql);
+            $db->commit();
 
-# Deletar Estado Documento
-if ($_GET[aedidDel]):
+            die("
+                <script>
+                    alert('Operação executada com sucesso!');
+                    location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
+                </script>");
+        endif;
+    endif;
 
-	$aedid = $_GET[aedidDel];
+    # Deletar Estado Documento
+    if ($_GET[esdidDel]):
+        $sql = sprintf("
+            SELECT
+                COUNT(aedid)
+            FROM
+                workflow.acaoestadodoc
+            WHERE
+                aedstatus = 'A' AND
+                esdidorigem = %d", $_GET[esdidDel]);
+        $totEstDoc = $db->pegaUm($sql);
+        if ($totEstDoc):
+            die('
+                <script type="text/javascript">
+                    alert(\'Operação não realizada!\nExiste Ação cadastrada neste Estado Documento.\');
+                    location.href=\'seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A\';
+                </script>');
+        else:
+            $sql_confere = sprintf("
+                SELECT
+                        COUNT(esdidorigem)
+                FROM
+                    workflow.acaoestadodoc
+                WHERE
+                    esdidorigem = %d OR
+                    esdiddestino = %d", $_GET[esdidDel], $_GET[esdidDel]);
 
-	$sql_confere = sprintf("SELECT
-								COUNT(aedid) as total	
-							FROM
-								workflow.historicodocumento
-							WHERE
-								aedid = %d", $aedid);
-	$determina = $db->pegaUm($sql_confere);
-	
-	//excluindo a ação				
-	if ($determina):		
-		$sql_excluir = "UPDATE 
-							workflow.acaoestadodoc
-                        SET 
-                        	aedstatus = 'I'
-						WHERE  
-							aedid = ".$aedid;
-	else:
-		$sql_excluir = "DELETE								
-						FROM
-							workflow.estadodocumentoperfil
-						WHERE
-							aedid = ".$aedid;
-		$db->executar ($sql_excluir);
-		
-		$sql_excluir = "DELETE
-						FROM
-							workflow.acaoestadodoc
-						WHERE
-							aedid = ".$aedid;	
-	endif;
-	
-	$db->executar($sql_excluir);	
-	$db->commit();
-	
-	unset($sql_excluir,$determina,$sql_confere);
-	
-	die("<script>
-		alert('Operação executada com sucesso!');
-		location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
-	 </script>");
-endif;
-				
-if ( $_SESSION['usucpf'] != '' ){		
-	$sql = "SELECT
-				sisid,
-				sisdsc
-			FROM
-				seguranca.sistema
-			ORDER BY
-				sisdsc DESC";
-}else{
-	$sql = "SELECT
-				sisid,
-				sisdsc
-			FROM
-				seguranca.sistema
-			WHERE
-				sisid = 147
-			ORDER BY
-				sisdsc DESC";
-}
-$dSistema = $db->carregar($sql);
+            $determina = $db->pegaUm($sql_confere);
 
-if (!$dSistema)
-$dSistema = array();
+            $determina ? $sql = "UPDATE workflow.estadodocumento SET esdstatus = 'I' WHERE esdid = " . $_GET[esdidDel] : $sql = "DELETE FROM workflow.estadodocumento WHERE esdid = " . $_GET[esdidDel];
+
+            $db->executar($sql);
+            $db->commit();
+
+            die("
+                <script>
+                    alert('Operação executada com sucesso!');
+                    location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
+                </script>");
+        endif;
+    endif;
+
+    # Deletar Estado Documento
+    if ($_GET[aedidDel]):
+
+        $aedid = $_GET[aedidDel];
+
+        $sql_confere = sprintf("
+            SELECT
+                COUNT(aedid) as total	
+            FROM
+                workflow.historicodocumento
+            WHERE
+                aedid = %d", $aedid);
+        $determina = $db->pegaUm($sql_confere);
+
+        //excluindo a ação				
+        if ($determina):
+            $sql_excluir = "
+                UPDATE workflow.acaoestadodoc SET 
+                    aedstatus = 'I'
+                WHERE  
+                    aedid = " . $aedid;
+        else:
+            $sql_excluir = "DELETE FROM workflow.estadodocumentoperfil WHERE aedid = " . $aedid;
+            $db->executar($sql_excluir);
+
+            $sql_excluir = "DELETE FROM workflow.acaoestadodoc WHERE aedid = " . $aedid;
+        endif;
+
+        $db->executar($sql_excluir);
+        $db->commit();
+
+        unset($sql_excluir, $determina, $sql_confere);
+
+        die("
+            <script>
+                alert('Operação executada com sucesso!');
+                location.href='seguranca.php?modulo=sistema/workflow/cadastraTree_acao&acao=A';		
+            </script>");
+    endif;
+
+    if ($_SESSION['usucpf'] != '') {
+        $sql = "
+            SELECT
+                sisid,
+                sisdsc
+            FROM
+                seguranca.sistema
+            ORDER BY
+                sisdsc DESC";
+    } else {
+        $sql = "
+            SELECT
+                sisid,
+                sisdsc
+            FROM seguranca.sistema
+            WHERE
+                sisid = 147
+            ORDER BY
+                sisdsc DESC";
+    }
+    $dSistema = $db->carregar($sql);
+
+    if (!$dSistema)
+        $dSistema = array();
 
     include APPRAIZ . 'includes/cabecalho.inc';
 
     print '<br/>';
-    monta_titulo( 'Manutenção Workflow', '<img src=\'/imagens/gif_inclui.gif\'/> Incluir | <img src=\'/imagens/alterar.gif\' /> Alterar | <img src=\'/imagens/excluir.gif\' /> Excluir'  );
+    monta_titulo('Manutenção Workflow', '<img src=\'/imagens/gif_inclui.gif\'/> Incluir | <img src=\'/imagens/alterar.gif\' /> Alterar | <img src=\'/imagens/excluir.gif\' /> Excluir');
     ?>
-    <script language="javascript" type="text/javascript" src="../includes/dtree/dtree.js"></script>
-    <link rel="stylesheet" type="text/css" href="../includes/dtree/dtree.css" />
+        <script language="javascript" type="text/javascript" src="../includes/dtree/dtree.js"></script>
+        <link rel="stylesheet" type="text/css" href="../includes/dtree/dtree.css" />
 
-    <script type="text/javascript">    	
-        function pesquisarSistema(sisid){
-            window.location.href = '/<?php echo 'seguranca/' . $url ?>&id_sistema='+sisid;
-        }
-    </script>
+        <script type="text/javascript">
+            function pesquisarSistema(sisid) {
+                window.location.href = '/<?php echo 'seguranca/' . $url ?>&id_sistema=' + sisid;
+            }
+        </script>
 
-    <table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3"
-        align="center">
+        <table class="tabela" bgcolor="#f5f5f5" cellSpacing="1" cellPadding="3"
+            align="center">
 
-        <tr>
-            <td>
-                <div>
-                    Sistema:
-                    <?php
+            <tr>
+                <td>
+                    <div>
+                        Sistema:
+                            <?php
+                                $sql = "
+                                    SELECT
+                                        sisid AS codigo,
+                                        sisdsc AS descricao
+                                    FROM seguranca.sistema
+                                    WHERE
+                                        sisstatus = 'A'
+                                    ORDER BY
+                                        descricao";
+                                echo $db->monta_combo("id_sistema", $sql, 'S', "Selecione...", 'pesquisarSistema', '', '', '500', 'N', 'id_sistema', '', $_REQUEST['id_sistema'], '', 'class="sel_chosen"');
+                            ?>
+                    </div>
+                </td>
+            </tr>
 
-                        $sql = "select  sisid as codigo,
-				                        sisdsc as descricao
-                               from  seguranca.sistema
-                               order by descricao";
-                        echo $db->monta_combo("id_sistema", $sql, 'S', "Selecione...", 'pesquisarSistema', '', '', '500', 'N', 'id_sistema', '', $_REQUEST['id_sistema'], '', 'class="sel_chosen"');
-                    ?>
-                </div>
-            </td>
-        </tr>
+    <?php
+    if ($_REQUEST['id_sistema']) {
 
-<?php
+        $sql = "SELECT sisid, sisdsc
+                            FROM seguranca.sistema
+                            WHERE sisid = '{$_REQUEST['id_sistema']}'
+                            ORDER BY sisdsc DESC";
 
-if($_REQUEST['id_sistema']){
+        $dSistema = $db->carregar($sql);
 
-    $sql = "SELECT sisid, sisdsc
-			FROM seguranca.sistema
-			WHERE sisid = '{$_REQUEST['id_sistema']}'
-			ORDER BY sisdsc DESC";
+        $sql2 = "
+            SELECT
+                sisid,
+                tpdid,
+                tpddsc
+            FROM workflow.tipodocumento
+            WHERE
+                tpdstatus != 'I'
+            ORDER BY
+                tpddsc ASC";
+        $dTipoDoc = $db->carregar($sql2);
 
-    $dSistema = $db->carregar($sql);
+        if (!$dTipoDoc)
+            $dTipoDoc = array();
 
-    $sql2 = "SELECT
-                    sisid,
-                    tpdid,
-                    tpddsc
-                 FROM
-                    workflow.tipodocumento
-                 WHERE
-                    tpdstatus != 'I'
-                 ORDER BY tpddsc ASC ";
-    $dTipoDoc = $db->carregar($sql2);
+        $sql3 = "
+            SELECT
+                tpdid,
+                esdid,
+                esddsc
+            FROM workflow.estadodocumento
+            WHERE
+                esdstatus != 'I'
+            ORDER BY
+                esdordem ASC";
+        $dEstadoDoc = $db->carregar($sql3);
 
-    if (!$dTipoDoc)
-        $dTipoDoc = array();
+        $sql4 = "
+            SELECT
+                esdidorigem,
+                aedid,
+                aeddscrealizar
+            FROM
+                workflow.acaoestadodoc
+            WHERE
+                aedstatus != 'I'
+            ORDER BY
+                aedordem,
+                aedid;";
+        $dAcaoEstDoc = $db->carregar($sql4);
 
-    $sql3 = "SELECT
-                    tpdid,
-                    esdid,
-                    esddsc
-                 FROM
-                    workflow.estadodocumento
-                 WHERE
-                    esdstatus != 'I'
-                 ORDER BY
-                    esdordem ASC";
-    $dEstadoDoc = $db->carregar($sql3);
+        unset($sql, $sql2, $sql3, $sql4);
 
-    $sql4 = "SELECT
-                    esdidorigem,
-                    aedid,
-                    aeddscrealizar
-                 FROM
-                    workflow.acaoestadodoc
-                 WHERE
-                    aedstatus != 'I'
-                 order by aedordem, aedid
-                 ;";
-    $dAcaoEstDoc = $db->carregar($sql4);
+        if (!$dEstadoDoc)
+            $dEstadoDoc = array();
 
-    unset($sql,$sql2,$sql3,$sql4);
+        $arvore .= "arvore.add(0, -1, 'Workflow');\n";
+        foreach ($dSistema as $val):
+            $arvore .= "arvore.add(" . $val[sisid] . ", 0, '" . $val[sisdsc] . "', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif');\n";
+            $arvore .= "arvore.add('sisTpd_1" . $val[sisid] . "', " . $val[sisid] . ", '<img src=\'/imagens/gif_inclui.gif\' title=\'Faz uma réplica do WorkFlow para o módulo desejado\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupReplica&acao=A&sisid=" . $val[sisid] . "\',\'Janela1\',\'scrollbars=no,location=no,toolbar=no,menubar=no,width=480,height=240\'); w.focus();\"> Replicar WorkFlow', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
+            $arvore .= "arvore.add('sisTpd_" . $val[sisid] . "', " . $val[sisid] . ", '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=" . $val[sisid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\"> Tipo Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
 
-    if (!$dEstadoDoc)
-        $dEstadoDoc = array();
+            foreach ($dTipoDoc as $val2):
+                if ($val[sisid] == $val2[sisid]):
+                    //if ($val[sisid] != $valsisid):
+                    //	$arvore .= "arvore.add('sisTpd_".$val[sisid]."', ".$val[sisid].", '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=".$val[sisid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\"> Tipo Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
+                    //	$valsisid = $val[sisid];
+                    //endif;
+                    $arvore .= "arvore.add('tpd_" . $val2[tpdid] . "', 'sisTpd_" . $val[sisid] . "', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=" . $val[sisid] . "&tpdid=" . $val2[tpdid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\">  <img src=\'/imagens/consultar.gif\' title=\'Consultar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDocGraf&acao=I&sisid=" . $val[sisid] . "&tpdid=" . $val2[tpdid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Tipo Documento\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&tpdidDel=" . $val2[tpdid] . "\', \'Deseja apagar o Tipo Documento ( " . $val2[tpddsc] . " )?\') \"/> " . $val2[tpddsc] . "', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
+                    $arvore .= "arvore.add('tpdEsd_" . $val2[tpdid] . "', 'tpd_" . $val2[tpdid] . "', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Estado Documento\'onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=" . $val2[tpdid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=250\'); w.focus();\"> Estado Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
 
-    $arvore .= "arvore.add(0, -1, 'Workflow');\n";
-    foreach ($dSistema as $val):
-        $arvore .= "arvore.add(".$val[sisid].", 0, '".$val[sisdsc]."', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif');\n";
-        $arvore .= "arvore.add('sisTpd_1".$val[sisid]."', ".$val[sisid].", '<img src=\'/imagens/gif_inclui.gif\' title=\'Faz uma réplica do WorkFlow para o módulo desejado\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupReplica&acao=A&sisid=".$val[sisid]."\',\'Janela1\',\'scrollbars=no,location=no,toolbar=no,menubar=no,width=480,height=240\'); w.focus();\"> Replicar WorkFlow', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-        $arvore .= "arvore.add('sisTpd_".$val[sisid]."', ".$val[sisid].", '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=".$val[sisid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\"> Tipo Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-
-        foreach ($dTipoDoc as $val2):
-            if ($val[sisid] == $val2[sisid]):
-                //if ($val[sisid] != $valsisid):
-                //	$arvore .= "arvore.add('sisTpd_".$val[sisid]."', ".$val[sisid].", '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=".$val[sisid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\"> Tipo Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-                //	$valsisid = $val[sisid];
-                //endif;
-                $arvore .= "arvore.add('tpd_".$val2[tpdid]."', 'sisTpd_".$val[sisid]."', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDoc&acao=I&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=430,height=140\'); w.focus();\">  <img src=\'/imagens/consultar.gif\' title=\'Consultar Tipo Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupTipDocGraf&acao=I&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Tipo Documento\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&tpdidDel=".$val2[tpdid]."\', \'Deseja apagar o Tipo Documento ( ".$val2[tpddsc]." )?\') \"/> ".$val2[tpddsc]."', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
-                $arvore .= "arvore.add('tpdEsd_".$val2[tpdid]."', 'tpd_".$val2[tpdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Estado Documento\'onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=".$val2[tpdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=250\'); w.focus();\"> Estado Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-
-                foreach ($dEstadoDoc as $val3):
-                    if ($val2[tpdid] == $val3[tpdid]):
-                        //	if ($val2[tpdid] != $valtpdid):
-                        //		$arvore .= "arvore.add('tpdEsd_".$val2[tpdid]."', 'tpd_".$val2[tpdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Estado Documento\'onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=".$val2[tpdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=440,height=220\'); w.focus();\"> Estado Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-                        //		$valtpdid = $val2[tpdid];
-                        //		endif;
-                        $arvore .= "arvore.add('esd_".$val3[esdid]."', 'tpdEsd_".$val2[tpdid]."', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Estado Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=".$val2[tpdid]."&esdid=".$val3[esdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=250\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Estado Documento\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&esdidDel=".$val3[esdid]."\', \'Deseja apagar o Tipo Documento ( ".$val3[esddsc]." )?\') \" /> ".$val3[esddsc]."', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
-                        $arvore .= "arvore.add('endEsd_".$val3[esdid]."', 'esd_".$val3[esdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."&esdid=".$val3[esdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> Acao', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-                        foreach ($dAcaoEstDoc as $val4):
-                            if ($val3[esdid] == $val4[esdidorigem]):
-                                #			if ($val3[esdid] != $valesdid):
-                                #				$arvore .= "arvore.add('endEsd_".$val3[esdid]."', 'esd_".$val3[esdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."&esdid=".$val3[esdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=430\'); w.focus();\"> Acao', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
-                                #				$valesdid = $val3[esdid];
-                                #			endif;
-                                $arvore .= "arvore.add('aed_".$val4[aedid]."', 'endEsd_".$val3[esdid]."', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."&esdid=".$val3[esdid]."&aedid=".$val4[aedid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Ação\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&aedidDel=".$val4[aedid]."\', \'Deseja apagar esta Ação ( ".$val4[aeddscrealizar]." )?\') \"/> ".$val4[aeddscrealizar]."', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
-                            endif;
-                        endforeach;
-                    endif;
-                endforeach;
-            endif;
+                    foreach ($dEstadoDoc as $val3):
+                        if ($val2[tpdid] == $val3[tpdid]):
+                            //	if ($val2[tpdid] != $valtpdid):
+                            //		$arvore .= "arvore.add('tpdEsd_".$val2[tpdid]."', 'tpd_".$val2[tpdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Estado Documento\'onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=".$val2[tpdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=440,height=220\'); w.focus();\"> Estado Documento', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
+                            //		$valtpdid = $val2[tpdid];
+                            //		endif;
+                            $arvore .= "arvore.add('esd_" . $val3[esdid] . "', 'tpdEsd_" . $val2[tpdid] . "', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Estado Documento\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupEstDoc&acao=I&tpdid=" . $val2[tpdid] . "&esdid=" . $val3[esdid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=250\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Estado Documento\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&esdidDel=" . $val3[esdid] . "\', \'Deseja apagar o Tipo Documento ( " . $val3[esddsc] . " )?\') \" /> " . $val3[esddsc] . "', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
+                            $arvore .= "arvore.add('endEsd_" . $val3[esdid] . "', 'esd_" . $val3[esdid] . "', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=" . $val[sisid] . "&tpdid=" . $val2[tpdid] . "&esdid=" . $val3[esdid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> Acao', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
+                            foreach ($dAcaoEstDoc as $val4):
+                                if ($val3[esdid] == $val4[esdidorigem]):
+                                    #			if ($val3[esdid] != $valesdid):
+                                    #				$arvore .= "arvore.add('endEsd_".$val3[esdid]."', 'esd_".$val3[esdid]."', '<img src=\'/imagens/gif_inclui.gif\' title=\'Cadastrar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=".$val[sisid]."&tpdid=".$val2[tpdid]."&esdid=".$val3[esdid]."\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=500,height=430\'); w.focus();\"> Acao', 'javascript:void(0)', '', '', '../includes/dtree/img/folder.gif', '../includes/dtree/img/folder.gif');\n";
+                                    #				$valesdid = $val3[esdid];
+                                    #			endif;
+                                    $arvore .= "arvore.add('aed_" . $val4[aedid] . "', 'endEsd_" . $val3[esdid] . "', '<img src=\'/imagens/alterar.gif\' title=\'Alterar Ação\' onclick=\"w = window.open(\'seguranca.php?modulo=sistema/workflow/popupAcaoDoc&acao=A&sisid=" . $val[sisid] . "&tpdid=" . $val2[tpdid] . "&esdid=" . $val3[esdid] . "&aedid=" . $val4[aedid] . "\',\'Janela1\',\'scrollbars=yes,location=no,toolbar=no,menubar=no,width=800,height=650\'); w.focus();\"> <img src=\'/imagens/excluir.gif\' title=\'Excluir Ação\' onClick=\"apagar(\'?modulo=sistema/workflow/cadastraTree_acao&acao=A&aedidDel=" . $val4[aedid] . "\', \'Deseja apagar esta Ação ( " . $val4[aeddscrealizar] . " )?\') \"/> " . $val4[aeddscrealizar] . "', 'javascript:void(0)', '', '', '../includes/dtree/img/pixel_hidden.gif', '../includes/dtree/img/pixel_hidden.gif')\n";
+                                endif;
+                            endforeach;
+                        endif;
+                    endforeach;
+                endif;
+            endforeach;
         endforeach;
-    endforeach;
 
-    unset($dSistema,$dTipoDoc,$dEstadoDoc,$dAcaoDoc,$val,$val2,$val3,$val4);
+        unset($dSistema, $dTipoDoc, $dEstadoDoc, $dAcaoDoc, $val, $val2, $val3, $val4);
 ?>
 
         <tr>
@@ -288,7 +296,7 @@ if($_REQUEST['id_sistema']){
         arvore.config.useIcons = true;
         arvore.config.useCookies = true;
 
-    <?
+    <?php
 
     echo $arvore;
 
