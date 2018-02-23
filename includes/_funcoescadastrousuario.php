@@ -371,7 +371,7 @@ function alteraDadosUsuario($info){
                 <br />
             ";
             $corpoEmailV3 = '<p>'. $conteudo. '</p>';
-            include APPRAIZ . "www/email-template-novo-bootstrap-v3.php";
+            include APPRAIZ . "includes/email-template.php";
 //ver($textoEmailV3, d);
             enviar_email ( $remetente, $destinatario, $assunto, $textoEmailV3 );
         }
