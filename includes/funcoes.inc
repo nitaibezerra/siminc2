@@ -371,7 +371,7 @@ function md5_encrypt($plain_text, $password='', $iv_len = 16)
 }
 Function obrigatorio()
 {
-	$obrigatorio = " <img border='0' src='../imagens/obrig.gif' title='Indica campo obrigatório.' />";
+	$obrigatorio = " <img border='0' src='". URL_SISTEMA. "imagens/obrig.gif' title='Indica campo obrigatório.' />";
 	return $obrigatorio;
 }
 function md5_decrypt($enc_text, $password='', $iv_len = 16)
@@ -1337,7 +1337,7 @@ function campo_texto_ajax( $sql, $id, $nome, $label='', $valor='', $size='', $ma
 	{
 		$extraCampo .= '<span id="LSLabel_' . $idCampo . '">' . $valor_label . '</span>';
 	}
-	$extraCampo .= $obrigatorio ? "&nbsp;<img src=\"/imagens/obrig.gif\" title=\"Campo $label obrigatório.\" border=\"0\">" : "";
+	$extraCampo .= $obrigatorio ? "&nbsp;<img src=\"". URL_SISTEMA. "imagens/obrig.gif\" title=\"Campo $label obrigatório.\" border=\"0\">" : "";
 	// colocar campo hidden se necessario
 	$extraCampo .= $hidden ? "<input type=\"hidden\" name=\"" . $nome . "\" value=\"" . $valor ."\">" : "";
 	// adiciona label ao campo
@@ -2204,15 +2204,14 @@ function mostrarComboPopup( $stDescricao, $stNomeCampo, $sql_combo, $sql_carrega
 	echo '>';
 	combo_popup( $stNomeCampo, sprintf( $sql_combo, '' ), $stTextoSelecao, '400x400', 0, array(), '', 'S', true, $campoContem, 10, 400, null, null, '', $where, null, true, false, $funcaoJS, $intervalo , $arrVisivel, $arrOrdem);
 
-	if( $obrig )
-	{
-		echo '<img border="0" title="Indica campo obrigatório." src="../imagens/obrig.gif">';
+	if($obrig){
+            echo '<img border="0" title="Indica campo obrigatório." src="'. URL_SISTEMA. 'imagens/obrig.gif">';
 	}
 
 	echo '</div>
-			</td>';
+            </td>';
 
-	if(!$semTR)	echo '</tr>';
+	if(!$semTR) echo '</tr>';
 }
 
 
