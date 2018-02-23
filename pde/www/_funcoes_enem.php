@@ -969,7 +969,7 @@ function atividade_atribuir_responsavel( $atividade, $perfil, $usuarios ){
 		$db->alterar_status_usuario( $usuario, 'A', 'Atribuição de responsabilidade em atividade ou projeto.', $_SESSION['sisid'] );
 		$usuariodados = $db->pegaLinha("SELECT * FROM seguranca.usuario WHERE usucpf='".$usuario."'");
 		if($usuariodados['usuchaveativacao'] == "f") {
-			$remetente = array("nome" => "Simec","email" => $_SESSION['email_sistema']);
+			$remetente = array("nome" => "Simec","email" => "simec@mec.gov.br");
 			$destinatario = $usuariodados['usuemail'];
 			$assunto = "Aprovação do Cadastro no Simec";
 			$conteudo = "
@@ -1800,7 +1800,7 @@ function temPerfilExecValidCertif()
 	}
 }
 
-function wf_gerencimentoFluxoEnem($tpdid, $docids = array(), $cxentrada = 'pendencias', $parametros = array(), $filtro_pendencias = null) {
+function wf_gerencimentoFluxoEnem($tpdid, $docids = array(), $cxentrada = 'pendencias', $parametros = array(), $filtro_pendencias = null, $filtro_datas = null) {
 	global $db;
 
 	$sql = "SELECT * FROM workflow.tipodocumento WHERE tpdid='".$tpdid."'";
@@ -1888,29 +1888,29 @@ function wf_gerencimentoFluxoEnem($tpdid, $docids = array(), $cxentrada = 'pende
 
 	}
 
-	$arrHistoricos = $db->carregar("SELECT
-										doc.docid as documento,
-										doc.docdsc,
-										ed.esddsc as origem,
-										ed2.esddsc as destino,
-										ed3.esddsc as estado,
-										ac.aeddscrealizada,
-										us.usunome,
-										to_char(hd.htddata, 'dd/mm/YYYY HH24:MI') as htddata,
-										cd.cmddsc
-									FROM workflow.historicodocumento hd
-									INNER JOIN workflow.documento doc ON hd.docid = doc.docid
-									INNER JOIN workflow.acaoestadodoc ac ON	ac.aedid = hd.aedid
-									INNER JOIN workflow.estadodocumento ed ON ed.esdid = ac.esdidorigem
-									INNER JOIN workflow.estadodocumento ed2 ON ed2.esdid = ac.esdiddestino
-									INNER JOIN workflow.estadodocumento ed3 ON ed3.esdid = doc.esdid
-									INNER JOIN seguranca.usuario us ON us.usucpf = hd.usucpf
-									LEFT JOIN workflow.comentariodocumento cd ON cd.hstid = hd.hstid
-									INNER JOIN pde.itemchecklist icl ON icl.docid = doc.docid
-									LEFT JOIN pde.atividade ati ON ati.atiid = icl.atiid
-									WHERE hd.usucpf='".$_SESSION['usucpf']."' AND doc.tpdid='".$tpdid."'
-									AND $filtro_pendencias 1=1
-									ORDER BY hd.htddata DESC");
+	$arrHistoricos = $db->carregar("SELECT		doc.docid as documento,
+												doc.docdsc,
+												ed.esddsc as origem,
+												ed2.esddsc as destino,
+												ed3.esddsc as estado,
+												ac.aeddscrealizada,
+												us.usunome,
+												to_char(hd.htddata, 'dd/mm/YYYY HH24:MI') as htddata,
+												cd.cmddsc
+									FROM 		workflow.historicodocumento hd
+									INNER JOIN 	workflow.documento doc ON hd.docid = doc.docid
+									INNER JOIN 	workflow.acaoestadodoc ac ON	ac.aedid = hd.aedid
+									INNER JOIN 	workflow.estadodocumento ed ON ed.esdid = ac.esdidorigem
+									INNER JOIN 	workflow.estadodocumento ed2 ON ed2.esdid = ac.esdiddestino
+									INNER JOIN 	workflow.estadodocumento ed3 ON ed3.esdid = doc.esdid
+									INNER JOIN 	seguranca.usuario us ON us.usucpf = hd.usucpf
+									LEFT JOIN 	workflow.comentariodocumento cd ON cd.hstid = hd.hstid
+									INNER JOIN 	pde.itemchecklist icl ON icl.docid = doc.docid
+									LEFT JOIN 	pde.atividade ati ON ati.atiid = icl.atiid
+									WHERE 		hd.usucpf='{$_SESSION['usucpf']}' AND doc.tpdid = '{$tpdid}'
+												$filtro_pendencias
+												$filtro_datas
+									ORDER BY 	hd.htddata DESC");
 
 
 
@@ -2597,6 +2597,43 @@ function possuiPerfil( $pflcods ){
 					usucpf = '" . $_SESSION['usucpf'] . "' and
 					pflcod in ( " . implode( ",", $pflcods ) . " ) ";
 		return $db->pegaUm( $sql ) > 0;
+	}
+}
+
+function estadoDocumentoItemChecklist($iclid){
+	global $db;
+	
+	
+	$sql = "SELECT 		d.docid, d.esdid
+			FROM 		pde.itemchecklist i
+			INNER JOIN 	workflow.documento d ON i.docid = d.docid
+			WHERE 		i.iclid = '{$iclid}'";
+	
+	$dados = $db->pegaLinha($sql);
+	
+	return $dados;
+}
+
+function listarItensChecklist($atiid){
+	global $db;
+	
+	$sql = "SELECT		icl.iclid,
+						icl.icldsc,
+						to_char(icl.iclprazo, 'DD/MM/YYYY') AS iclprazo,
+						CASE WHEN iclcritico = 't' THEN 'Sim' ELSE 'Não' END AS iclcritico,
+						esd.esddsc
+			FROM		pde.itemchecklist icl
+			INNER JOIN  workflow.documento doc ON doc.docid = icl.docid
+			INNER JOIN  workflow.estadodocumento esd ON doc.esdid = esd.esdid
+			WHERE		icl.atiid = {$atiid}
+			ORDER BY 	icl.iclordem ASC";
+	
+	$dados = $db->carregar($sql);
+	
+	if(is_array($dados)){
+		return $dados;
+	} else {
+		return array();
 	}
 }
 ?>

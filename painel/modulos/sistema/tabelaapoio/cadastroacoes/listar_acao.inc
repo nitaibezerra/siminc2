@@ -93,7 +93,9 @@ monta_titulo( $titulo_modulo , '');
 				ac.acadsc
 				FROM painel.acao ac 
 				$where
-				ORDER BY ac.acadsc";
+				ORDER BY ac.acadsc
+				";
+ 
 	$cabecalho = array("","Título");
 	$db->monta_lista($sql,$cabecalho,100,5,'N','95%',$par2);
 //}

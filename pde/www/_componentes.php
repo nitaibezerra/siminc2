@@ -1467,14 +1467,19 @@ function montar_titulo_projeto( $atividade = '' ){
 	global $titulo_modulo;
 	global $db;
 	// pega o projeto
-	$sql = "select atiid, atidescricao from pde.atividade where atiid = ".(int)$_SESSION['projeto']."";
-	$projeto = $db->pegaLinha( $sql );
+	
+	if($_SESSION['projeto']){ 
+		$sql = "SELECT atiid, atidescricao FROM pde.atividade WHERE atiid = {$_SESSION['projeto']}";
+		$projeto = $db->pegaLinha( $sql );
+	}
+	
 	// monta título e subtítulo
-	if ($_SESSION["sisid"] == 1 ) {
+	if($_SESSION["sisid"] == 1 ) {
 		$titulo = $projeto['atidescricao'];
-	} else{
+	} else {
 		$titulo = '<a href="?modulo=principal/projeto&acao=A&atiid= "'.$projeto['atiid'].'">'.$projeto['atidescricao'].'</a>';
 	}
+	
 	$subtitulo = $atividade ? $atividade : $titulo_modulo;
 	// exibe o cabeçalho
 	monta_titulo( $titulo, $subtitulo );

@@ -1,5 +1,5 @@
 <?php
-$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
+$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>'simec@mec.gov.br');
 
 /**
  * Centraliza as requisições ajax do módulo.  

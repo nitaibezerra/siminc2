@@ -987,7 +987,7 @@ function atividade_atribuir_responsavel( $atividade, $perfil, $usuarios ){
 		$db->alterar_status_usuario( $usuario, 'A', 'Atribuição de responsabilidade em atividade ou projeto.', $_SESSION['sisid'] );
 		$usuariodados = $db->pegaLinha("SELECT * FROM seguranca.usuario WHERE usucpf='".$usuario."'");
 		if($usuariodados['usuchaveativacao'] == "f") {
-			$remetente = array("nome" => "Simec","email" => $_SESSION['email_sistema']);
+			$remetente = array("nome" => "Simec","email" => "simec@mec.gov.br");
 			$destinatario = $usuariodados['usuemail'];
 			$assunto = "Aprovação do Cadastro no Simec";
 			$conteudo = "
@@ -1479,10 +1479,9 @@ function projeto_verifica_selecionado( $atividade = null ) {
 	$atividade = (integer) $atividade;
 	// verifica se projeto está escolhido
 	$sql = sprintf( "select count(atiid) from pde.atividade where atiid = %d and atistatus = 'A'", $_SESSION['projeto'] );
-//$totalAtividades = $db->pegaUm( $sql );
-//var_dump($_SESSION['paginainicial']); die;
+
 	if ( $db->pegaUm( $sql ) != 1 ) {
-//            redirecionar( $_SESSION['paginainicial'], 'A' );
+		redirecionar( $_SESSION['paginainicial'], 'A' );
 	}
 
 	// verifica se a atividade indicada pertence ao projeto atual
@@ -1492,7 +1491,7 @@ function projeto_verifica_selecionado( $atividade = null ) {
 	$sql = sprintf( "select _atiprojeto from pde.atividade where atiid = %d", $atividade );
 
 	if ( $db->pegaUm( $sql ) != $_SESSION['projeto'] ) {
-//		redirecionar( $_SESSION['paginainicial'], 'A' );
+		redirecionar( $_SESSION['paginainicial'], 'A' );
 	}
 }
 

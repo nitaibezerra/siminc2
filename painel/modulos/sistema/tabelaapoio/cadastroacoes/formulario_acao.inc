@@ -23,7 +23,8 @@ if($_POST['action'] == 'save'){
                     , 'acadetalhe' => ''
                     , 'tipid' => '4'
                     , 'temid' => ''
-                    , 'cocid' => ''
+                    , 'mapid' => ''
+                    , 'acaorcamento' => ''
                     , 'acastatus' => "'A'");
     populate($table , $_POST , 'acaid');
     
@@ -31,6 +32,9 @@ if($_POST['action'] == 'save'){
         
         $sqlValuesUpdate = array();
         foreach($table as $columnName => $columnValue){
+
+            $columnValue = $columnName == 'acaorcamento' ? str_replace(['.', ','], ['', '.'], $columnValue) : $columnValue;
+
             $sqlValuesUpdate[] = "{$columnName} = {$columnValue}";
         }
         
@@ -89,7 +93,9 @@ if ($acaid) {
                                                 temid,
                                                 acadetalhe,
                                                 indidprincipal,
-                                                cocid
+                                                cocid,
+                                                mapid,
+                                                acaorcamento
                                         FROM painel.acao where acaid = $acaid ";
     $arrDados = $db->pegaLinha($sqlUpdate);
     $_SESSION['temid'] = $arrDados[temid];
@@ -139,42 +145,27 @@ monta_titulo( $titulo_modulo , '<img src="../imagens/obrig.gif" border="0"> Indi
 			        temdsc AS descricao, 
 			        temid AS codigo
 				FROM pto.tema
-				WHERE temid <> 6
-				ORDER BY temid asc	 
+				ORDER BY temdsc asc	 
 			  ";
             ?>
             <td align='right' class="SubTituloDireita">Tema:</td>
             <td><?= $db->monta_combo('temid' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'S' , '' , '' , ($arrDados[temid]) ? ($arrDados[temid]) : ''); ?></td>
         </tr>
-<?php
-/*
-//RETIRADO A PEDIDO DO MARCOS E MANOELA
         <tr>
             <?php
             $sql = "SELECT 
-			        indid || ' - ' || substring(indnome,0,60) AS descricao, 
-			        indid AS codigo
-				FROM painel.indicador
-				WHERE indstatus = 'A'
-				ORDER BY indid asc	 
+			        mapdsc AS descricao, 
+			        mapid AS codigo
+				FROM mapa.mapa
+				ORDER BY mapdsc asc	 
 			  ";
             ?>
-            <td align='right' class="SubTituloDireita">Indicador:</td>
-            <td><?= $db->monta_combo('indidprincipal' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'N' , '' , '' , ($arrDados[indidprincipal]) ? ($arrDados[indidprincipal]) : ''); ?></td>
+            <td align='right' class="SubTituloDireita">Fonte do Recurso:</td>
+            <td><?= $db->monta_combo('mapid' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'S' , '' , '' , ($arrDados[mapid]) ? ($arrDados[mapid]) : ''); ?></td>
         </tr>
-*/
-?>
         <tr>
-            <?php
-            $sql = "	SELECT 
-			        cocnome AS descricao, 
-			        cocid AS codigo
-				FROM pde.cockpit
-				ORDER BY cocid asc	 
-			  ";
-            ?>
-            <td align='right' class="SubTituloDireita">Cockpit:</td>
-            <td><?= $db->monta_combo('cocid' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'N' , '' , '' , ($arrDados[cocid]) ? ($arrDados[cocid]) : ''); ?></td>
+            <td align='right' class="SubTituloDireita">Orçamento:</td>
+            <td><?=campo_texto('acaorcamento', "N", "S", "Orçamento (R$)", 15, 14, "###.###.###,##", "", '', '', 0, 'id="acaorcamento"', '', mascaraglobal($arrDados[acaorcamento],"###.###.###,##") ); ?></td>
         </tr>
 
         <tr bgcolor="#cccccc">
