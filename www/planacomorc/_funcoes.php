@@ -1878,9 +1878,8 @@ function buscarUmPTRES(stdClass $objFiltros) {
                 GROUP BY ptrid) dtp ON dtp.ptrid = ptr.ptrid
             LEFT JOIN siafi.uo_ptrempenho pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
         WHERE
-            aca.acasnrap = FALSE
+            ptr.ptrstatus = 'A'
             AND aca.prgano = '$objFiltros->exercicio'
-            AND ptr.ptrstatus = 'A'
             $where
         GROUP BY
             ptr.ptrid,
@@ -1980,6 +1979,8 @@ function enviarEmailCorrecao($pliid){
     ));
 
     $usuario = wf_pegarUltimoUsuarioModificacao($pi['docid']);
+    
+    $textoDevolucao = wf_pegarComentarioEstadoAtual($pi['docid']);
 
     # $textoEmail
     include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
@@ -1992,7 +1993,7 @@ function enviarEmailCorrecao($pliid){
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
     $listaDestinatario = array_merge($listaUsuariosUnidadeDoPi, $listaUsuariosResponsaveisDoPi);
-    
+
 //ver(
 //array(
 //# Remetente

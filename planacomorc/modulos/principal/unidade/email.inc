@@ -310,6 +310,10 @@ $textoEmail = "
 
                                                                                                                             </tbody>
                                                                                                                         </table>
+                                                                                                                        
+                                                                                                                        ".
+                                                                                                                        ($textoDevolucao? (" <br /> <br /><p><b>Motivo de devolução: </b>". $textoDevolucao. "</p>"): NULL).
+                                                                                                                        "
                                                                                                                         <br>
                                                                                                                         <br>
                                                                                                                         <br>
