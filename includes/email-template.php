@@ -1,7 +1,6 @@
 <?php
 
 $textoEmailV3 = "
-
 <style>
     body {
         padding-top: 0 !important;
@@ -229,7 +228,7 @@ $textoEmailV3 = "
                                                                                                                     <td valign='middle' style='vertical-align: middle;'>
                                                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                                                             <div class='contentEditable' style='text-align: left;font-weight: light; color:#555555;font-size:26;line-height: 39px;font-family: Helvetica Neue;'>
-                                                                                                                                <img src='http://siminc2.cultura.gov.br/zimec/public/img/logo-simec.png'>
+                                                                                                                                <img src='". URL_SISTEMA. "zimec/public/img/logo-simec.png'>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </td>
@@ -277,10 +276,12 @@ $textoEmailV3 = "
                                                                                                                 <div style='background-color: white;padding-top: 0px;position: relative;width: 108%; border-top: 3px solid #54b3a3;'>
                                                                                                                     <br>
 
-                                                                                                                    <div class='left'>
+                                                                                                                    <div class='left'>";
                                                                                                                     
-                                                                                                                        {$corpoEmailV3}
-
+                                                                                                                    # Insere Corpo do texto de e-mail
+                                                                                                                    $textoEmailV3 .= $corpoEmailV3;
+                                                                                                                    
+                                                                                                                    $textoEmailV3 .= "
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
@@ -327,5 +328,4 @@ $textoEmailV3 = "
         </tbody>
     </table>
 </body>
-
 ";
