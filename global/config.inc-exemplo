@@ -28,7 +28,7 @@
     # Indica se o sistema vai gravar auditoria
     define('EXECUTAR_AUDITORIA', IS_PRODUCAO);
 
-    $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Produção' : 'Ambiente de Desenvolvimento';
+    $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Producao' : 'Ambiente de Desenvolvimento';
     $_SESSION['sisbaselogin'] = $_REQUEST['baselogin'] && $_REQUEST['baselogin'] != "teste" ? $_REQUEST['baselogin'] : $_SESSION['sisbaselogin'];
     $_SESSION['baselogin'] = $_REQUEST['baselogin'] ? $_REQUEST['baselogin'] : $_SESSION['baselogin'];
 
