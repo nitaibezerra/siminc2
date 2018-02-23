@@ -38,40 +38,49 @@ function retornaInicio(){
 
 function selecionaAba(metaaba)
 {
-    $('[id^="abametaf"]').css("color","#4488cc");
-    $('[id^="abametaf"]').css("font-weight","");
-    $('#abametaf'+metaaba).css("font-weight","bold");
-    $('#abametaf'+metaaba).css("color","navy");
+    $('[id^="abametaf"]').css("color", "#4488cc");
+    $('[id^="abametaf"]').css("font-weight", "");
+    $('#abametaf' + metaaba).css("font-weight", "bold");
+    $('#abametaf' + metaaba).css("color", "navy");
 
-    if(metaaba == 14 || metaaba == 17 || metaaba == 13 || metaaba == 11 || metaaba ==  12){
+    //if (metaaba == 14 || metaaba == 17 || metaaba == 13 || metaaba == 11 || metaaba == 12) {
 //        alert("Não foi calculada a situação das mesorregiões e municípios nesta meta nacional.");
-        $('#pesquisa').css("display","inherit");
-        $('#tabelaMesoregioes').css("display","none");
-        $('#tabelaMunicipios').css("display","none");
-        $('#tabelaEstados').css("display","table");
-        $('#tabelaRegioes').css("display","table");
-    }else{
-        if(metaaba == 7 || metaaba == 15 || metaaba == 18 || metaaba == 19 || metaaba == 20)
-        {
-            $('#tabelaMesoregioes').css("display","none");
-            $('#tabelaMunicipios').css("display","none");
-            $('#tabelaEstados').css("display","none");
-            $('#tabelaRegioes').css("display","none");
-            $('#pesquisa').css("display","none");
-        }else{
-            $('#pesquisa').css("display","inherit");
-            $('#tabelaMesoregioes').css("display","table");
-            $('#tabelaMunicipios').css("display","table");
-            $('#tabelaEstados').css("display","table");
-            $('#tabelaRegioes').css("display","table");
-        }
-        //$('#tabelaMesoregioes').css("display","table");
-        //$('#tabelaMunicipios').css("display","table");
+    if(metaaba == 18){
+        $('#tabelaMesoregioes').css("display", "none");
+        $('#tabelaMunicipios').css("display", "table");
+        $('#tabelaEstados').css("display", "table");
+        $('#tabelaRegioes').css("display", "none");
+    }else if (metaaba == 14 || metaaba == 17 || metaaba == 13) {
+        $('#pesquisa').css("display", "inherit");
+        $('#tabelaMesoregioes').css("display", "table");
+        $('#tabelaMunicipios').css("display", "table");
+        $('#tabelaEstados').css("display", "table");
+        $('#tabelaRegioes').css("display", "table");
+    } else {
+
+//        if(metaaba == 7 || metaaba == 15 || metaaba == 18 || metaaba == 19 || metaaba == 20)
+//        {
+//            $('#tabelaMesoregioes').css("display","table");
+//            $('#tabelaMunicipios').css("display","table");
+//            $('#tabelaEstados').css("display","table");
+//            $('#tabelaRegioes').css("display","table");
+//            $('#pesquisa').css("display","table");
+//        }else{
+//            $('#pesquisa').css("display","inherit");
+//            $('#tabelaMesoregioes').css("display","table");
+//            $('#tabelaMunicipios').css("display","table");
+//            $('#tabelaEstados').css("display","table");
+//            $('#tabelaRegioes').css("display","table");
+//        }
+        $('#tabelaMesoregioes').css("display", "table");
+        $('#tabelaMunicipios').css("display", "table");
+        $('#tabelaEstados').css("display", "table");
+        $('#tabelaRegioes').css("display", "table");
     }
 
     // Esconder mesoregiões e municípios. Solicitação feita em 25/09/2015 pelo escritório de processos
-    $('#tabelaMesoregioes').css("display","none");
-    $('#tabelaMunicipios').css("display","none");
+//    $('#tabelaMesoregioes').css("display", "table");
+//    $('#tabelaMunicipios').css("display", "table");
 }
 
 
@@ -117,7 +126,6 @@ function selecionaSubmeta(metid)
 }
 
 function atualizarRelacionadosRegiao(requisicao) {
-    //alert(requisicao);
 
     //1-estado(chamado pela lista de regiao),2-mesoregiao(chamado pela lista de estado), 3-municipio (chamado pela lista de mesoregiao)
     if (requisicao == 1)
@@ -132,11 +140,17 @@ function atualizarRelacionadosRegiao(requisicao) {
     {
         requisicaoAjax = 'listarMunicipios';
     }
-
+    else if (requisicao == 5)
+    {
+        requisicaoAjax = '';
+        ciclo = $('#pneciclo').val();
+    }
+    
+    
     jQuery.ajax({
         type: "POST",
         url: window.location,
-        data: "requisicaoAjax="+requisicaoAjax+"&regioes="+pegaSelecionados('slRegiao[]')+"&estados="+pegaSelecionados('slEstado[]')+"&mesoregioes="+pegaSelecionados('slMesoregiao[]')+"&municipios="+pegaSelecionados('slMunicipio[]'),
+        data: "requisicaoAjax="+requisicaoAjax+"&regioes="+pegaSelecionados('slRegiao[]')+"&estados="+pegaSelecionados('slEstado[]')+"&mesoregioes="+pegaSelecionados('slMesoregiao[]')+"&municipios="+pegaSelecionados('slMunicipio[]')+"&ciclo="+ciclo,
         success: function(retorno)
         {
             if (requisicao == 1)
@@ -153,19 +167,19 @@ function atualizarRelacionadosRegiao(requisicao) {
             {
                 $('#tabelaMunicipios').html(retorno);
             }
-
-            if (requisicao == 3 || requisicao == 4)
-                listarSubmetas(pegaSelecionados('slRegiao[]'),pegaSelecionados('slEstado[]'),pegaSelecionados('slMesoregiao[]'),pegaSelecionados('slMunicipio[]'));
+            
+            if (requisicao == 3 || requisicao == 4 || requisicao == 5)
+                listarSubmetas(pegaSelecionados('slRegiao[]'),pegaSelecionados('slEstado[]'),pegaSelecionados('slMesoregiao[]'),pegaSelecionados('slMunicipio[]'),$('#pneciclo').val());
         }
     });
 }
 
-function listarSubmetas(regioes, estados, mesoregioes, municipios)
+function listarSubmetas(regioes, estados, mesoregioes, municipios,ciclo)
 {
     jQuery.ajax({
         type: "POST",
         url: window.location,
-        data: "requisicaoAjax=listagemPrincipal&metid="+$('#metid').val()+"&regioes="+regioes+"&estados="+estados+"&mesoregioes="+mesoregioes+"&municipios="+municipios,
+        data: "requisicaoAjax=listagemPrincipal&metid="+$('#metid').val()+"&regioes="+regioes+"&estados="+estados+"&mesoregioes="+mesoregioes+"&municipios="+municipios+"&ciclo="+$('#pneciclo').val() ,
         success: function(retorno){
             $('#divListagem').html(retorno);
         }
@@ -188,9 +202,10 @@ function abreNota(submeta){
 }
 
 $(document).ready(function() {
-    listarSubmetas('','','','');
+    ciclo = $('#pneciclo').val();
+    listarSubmetas('','','','',ciclo);
     selecionaAba(1);
-
+    
     $('.linkExibirTabela').live('click', function(){
         if( $('#tabelaPne_' + $(this).attr('contador')).is(':hidden')) {
             $('#tabelaPne_' + $(this).attr('contador')).show();

@@ -12,7 +12,7 @@ include ("../../../includes/classes_simec.inc");
 <!DOCTYPE html> 
 <html> 
 	<head> 
-	<title><?php echo SIGLA_SISTEMA; ?> - Mobile</title> 
+	<title>SIMEC - Mobile</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/includes/mobile-simec/SIMEC.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile.structure-1.3.0-rc.1.min.css" /> 
@@ -29,7 +29,7 @@ include ("../../../includes/classes_simec.inc");
 <div data-role="page" data-theme="c">
 	<div data-role="header" data-position="fixed" data-theme="c">
 		<a data-transition="flip" href="#" data-role="button" data-icon="home" class="inicio-rodape">Início</a>
-		<h1><?php echo SIGLA_SISTEMA; ?> - Mobile</h1>
+		<h1>SIMEC - Mobile</h1>
 	</div>
 
 	<ul data-role="listview" data-inset="true" >

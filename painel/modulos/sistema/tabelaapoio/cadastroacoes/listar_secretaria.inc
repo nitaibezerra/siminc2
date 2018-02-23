@@ -26,7 +26,7 @@
                             FROM pde.ae_metapne
                             WHERE temid = {$_SESSION['temid']}
 							". ($_POST['filtroPesquisa'] ? 'AND '. $filtro : '') . "
-							ORDER BY mpnenome";
+							ORDER BY mpneordem";
 
                 break;
             case 'objetivoestrategico':

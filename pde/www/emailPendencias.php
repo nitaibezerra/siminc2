@@ -105,7 +105,7 @@ $arrUsu = $arrUsu ? $arrUsu : array();
 
 foreach($arrUsu as $u){
 	$e = new EmailAgendado();
-	$e->setTitle("Pendências - Monitoramento Estratégico - ". SIGLA_SISTEMA);
+	$e->setTitle("Pendências - Monitoramento Estratégico - SIMEC");
 	$html = '
 	Sr(a). '.$u['nome'].',<br />
 	Você possui os seguintes itens na sua Caixa de Entrada do Módulo Monitoramento Estratégico:<br /><br />';
@@ -123,15 +123,15 @@ foreach($arrUsu as $u){
 	}
 	$html.= '</table><br />';
 	$html.= 'Atenciosamente,<br /><br />
-	Equipe '. SIGLA_SISTEMA. '<br /><br />
+	Equipe SIMEC<br /><br />
 	Obs.: Este é um email automático enviado pelo sistema, favor não responder.</div>';
 	echo $html."<br/><br/>";
 	$e->setText($html);
-	$e->setName(SIGLA_SISTEMA. " - Ministério da Educação");
+	$e->setName("SIMEC - Ministério da Educação");
 	$e->setEmailOrigem("no-reply@mec.gov.br");
-	$arrEmail = Array($u['email'],$_SESSION['email_sistema']);
+	$arrEmail = Array($u['email'],'HenriqueCouto@mec.gov.br');
 //	$arrEmail[] = $u['email'];
-//	$arrEmail = $_SESSION['email_sistema'];
+//	$arrEmail = "HenriqueCouto@mec.gov.br";
 	$e->setEmailsDestino($arrEmail);
 	$e->enviarEmails();	
 }

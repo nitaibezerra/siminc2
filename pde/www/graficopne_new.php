@@ -40,9 +40,9 @@ function mostraTexto(){
 	$meta = $_REQUEST['metid'];
 	$submeta = $_REQUEST['submeta'];
 	$sql = "SELECT s.subnotatecnica,s.subtitulo,m.mettitulo 
-	FROM sase.submeta s 
+	FROM sase.submetadial s
 	LEFT JOIN sase.meta m ON(s.metid = m.metid) 
-	WHERE s.metid = $meta AND s.subid = $submeta";
+	WHERE s.metid = $meta AND s.subiddial = $submeta";
 	global $db;
 	$texto = $db->carregar($sql);	
 	echo "<html>";
@@ -498,7 +498,7 @@ function listagemPrincipal()
 	global $db;
 	$contador=0;
 
-	$sql = "select sub.subid, sub.subtitulo,meta.metfontemunicipio,meta.metfonteestado,meta.mettitulo, sub.subnotatecnica from sase.submeta as sub left join sase.meta meta on (sub.metid = meta.metid) where sub.substatus = 'A' and sub.metid = ".$_REQUEST['metid']." order by sub.subordem ASC";
+	$sql = "select sub.subiddial as subid, sub.subtitulo,meta.metfontemunicipio,meta.metfonteestado,meta.mettitulo, sub.subnotatecnica from sase.submetadial as sub left join sase.meta meta on (sub.metid = meta.metid) where sub.substatus = 'A' and sub.metid = ".$_REQUEST['metid']." order by sub.subordem ASC";
 	$arr = $db->carregar($sql);
 
 	$regioes = trim( $_REQUEST['regioes'], ',');
@@ -692,22 +692,22 @@ function listagemPrincipal()
 	                            ROUND(pnevalor, $valor) as pnevalor2,
 	                            pneano,
 	                            pnetipo,
-	                            pne.subid,
+	                            pne.subiddial as subid,
 	                            sub.metid,
 	                            sub.subtitulo, *
-							FROM sase.pne  pne
-                            	inner join sase.submeta sub on sub.subid = pne.subid
+							FROM sase.pnedial  pne
+                            	inner join sase.submetadial sub on sub.subiddial = pne.subiddial
                             	left join territorios.estado e on e.estuf = pne.estuf
                                 left join territorios.municipio m on m.muncod = pne.muncod
                                 left join territorios.regiao r on r.regcod = pne.regcod
                                 left join territorios.mesoregiao mr on mr.mescod = pne.mescod
-                            WHERE sub.subid = {$s['subid']}
+                            WHERE sub.subiddial = {$s['subid']}
 								AND (
 								  (pne.estuf is null and pnetipo = 'E' and pneano = $pneanoBrasil)
 								  $where
                                 )
 								-- and pneano = 2013
-							ORDER BY ordem, sub.subordem, pne.subid, pne.pneano, pnetipo, descricao
+							ORDER BY ordem, sub.subordem, pne.subiddial, pne.pneano, pnetipo, descricao
 						";
 
         $dados = $db->carregar($sql);

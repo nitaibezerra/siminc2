@@ -12,19 +12,46 @@ if ($_REQUEST['requisicao'] == 'carregaRoll') {
             break;
         case 'obj':
             $sql = "select obeid as codigo, obenome as descricao from pde.ae_objetivoestrategico
-					where temid = {$_REQUEST['temid']} order by obenome";
+					where temid = {$_REQUEST['temid']} order by obeordem";
             $subTitulo = "Objetivos Estratégicos";
             break;
         case 'ppa':
             $sql = "select objid as codigo, objnome as descricao from pde.ae_objetivoppa
-					where temid = {$_REQUEST['temid']} order by objnome";
+					where temid = {$_REQUEST['temid']} order by objordem";
             $subTitulo = "Objetivos";
             break;
         case 'pne':
 			$sql = "select
-						m.mpneid as codigo, 
-						coalesce(ind.link,'') || m.mpnenome as descricao
+						m.mpneid as codigo,
+						CASE m.mpneid
+						    WHEN 99999999 THEN coalesce(ind.link,'') || m.mpnenome
+						ELSE
+                            coalesce(ind.link,'') || m.mpnenome || '<br><br>' ||
+                            '<table border=''2'' align=''center'' width=''98%'' cellspacing=''4'' cellpadding=''5''>
+                                <tr>
+                                    <td width=''20%''>Prazo</td><td width=''70%''>Encaminhamento</td><td width=''5%''>Situação</td><td width=''5%''>Crítico?</td>
+                                </tr>
+                                <tr>
+                                    <td>'||to_char(m.mpneprazo, 'DD/MM/YYYY')||'</td>
+                                    <td>'|| COALESCE((SELECT ecp.ecpdsc FROM pde.ae_encaminhamentopne ecp WHERE ecp.mpneid = m.mpneid ORDER BY ecpdata DESC, ecpid DESC LIMIT 1),'-') || '</td>
+                                    <td align=''center''>' ||
+                                        CASE m.sitid
+                                            WHEN 1 THEN '<img src=''../imagens/erro_checklist.png'' height=''30px'' width=''30px'' title='''|| sit.sitdsc ||'''>'
+                                            WHEN 2 THEN '<img src=''../imagens/lapis2.png'' height=''30px'' width=''30px'' title='''|| sit.sitdsc ||'''>'
+                                            WHEN 3 THEN '<img src=''../imagens/check_checklist.png'' height=''30px'' width=''30px'' title='''|| sit.sitdsc ||'''>'
+                                        END ||
+                                    '</td>
+                                    <td align=''center''>'||
+                                        CASE
+                                            WHEN m.mpnecritico IS TRUE THEN '<img src=''../imagens/obras/atencao.png'' height=''30px'' width=''30px'' title=''Crítico''>'
+                                            ELSE 'NÃO'
+                                        END ||
+                                    '</td>
+                                </tr>
+                            </table>'
+						END as descricao
 					from pde.ae_metapne m
+					left join pde.ae_situacao sit ON sit.sitid = m.sitid
 					left join
 						(
 						select
@@ -33,7 +60,7 @@ if ($_REQUEST['requisicao'] == 'carregaRoll') {
 						from pde.ae_metapnexindicador group by mpneid
 						) as ind ON ind.mpneid = m.mpneid
 					where m.temid = {$_REQUEST['temid']}
-					and m.mpneid <> 99999999
+					--and m.mpneid <> 99999999
 					order by m.mpneordem";
             $subTitulo = "Metas";
             break;
@@ -133,7 +160,7 @@ if ($_REQUEST['requisicao'] == 'carregaMetasPNE') {
 						from pde.ae_metapnexindicador group by mpneid
 						) as ind ON ind.mpneid = m.mpneid
 					where m.mpneid in ($metas)
-					and m.mpneid <> 99999999
+					--and m.mpneid <> 99999999
 					order by m.mpneordem";
             $rs = $db->carregar($sql);
             if ($rs) {
@@ -160,7 +187,7 @@ if ($_REQUEST['requisicao'] == 'carregaMetasPPAPE') {
             $sql = "
                 select mppaid as codigo, mppanome as nome, temid, o.objid, mppatipo from pde.ae_metappa m
                 inner join pde.ae_objetivoppa o on m.objid = o.objid
-                where mppaid in ($metas) order by mppanome
+                where mppaid in ($metas) order by mppaordem
             ";
             $rs = $db->carregar($sql);
 
@@ -208,7 +235,7 @@ if($_REQUEST['requisicao'] == 'carregaObjetivosEstrategicosPE') {
         $dados = $db->carregarColuna($sql, 'obeid');
         $objetivos = implode(',', $dados);
         if ($objetivos) {
-            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obenome";
+            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obeordem";
             $rs = $db->carregar($sql);
             if ($rs) {
                 foreach ($rs as $data) {
@@ -244,7 +271,7 @@ if($_REQUEST['requisicao'] == 'carregaMetasPNEPPA') {
 						from pde.ae_metapnexindicador group by mpneid
 						) as ind ON ind.mpneid = m.mpneid
 					where m.mpneid in ($metas)
-					and m.mpneid <> 99999999
+					--and m.mpneid <> 99999999
 					order by m.mpneordem";
             $rs = $db->carregar($sql);
             if ($rs) {
@@ -390,7 +417,7 @@ if($_REQUEST['requisicao'] == 'carregarObjetivosEstrategicosPNE') {
         $objetivos = implode(',', $dados);
 
         if ($objetivos) {
-            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obenome";
+            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obeordem";
             $rs = $db->carregar($sql);
 
             if ($rs) {
@@ -421,14 +448,13 @@ if($_REQUEST['requisicao'] == 'carregaProjetosPNE') {
                     AND sol.solid IN ($solucoes)
                     ORDER BY sol.solordem";
             $rs = $db->carregar($sql);
-
             if ($rs) {
                 foreach ($rs as $data) {
                     echo '
-                        <div id="' . $data['temid'] . '_' . $data['codigo'] . '" class="tile1 tile4 marromClaro clickProjetos">
-                            <a href="/pto/pto.php?modulo=relatorio/painelVersaoImpressao&acao=A&solid='. $data['codigo'] .'" target="_blank"><img src="../imagens/icones/icons/Preview.png" height="30px" width="30px" title="Detalhar Projeto"></a>&nbsp;
-                            <span class="textoDescricao" >' . $data['nome'] . '</span><br/>
-			            </div>
+                        <div class="tile1 tile4 marromClaro" onclick="abreSolucao('.$data['codigo'].');">
+                            <img src="../imagens/icones/icons/Preview.png" height="25px" width="25px" title="Detalhar Projeto">&nbsp;
+                            <span class="textoDescricao">' . $data['nome'] . '</span><br/>
+                        </div>
                     ';
                 }
             }
@@ -480,7 +506,7 @@ if ($_REQUEST['requisicao'] == 'carregaMetaPPA') {
             $sql = "
                 select mppaid as codigo, mppanome as nome, temid,o.objid, mppatipo from pde.ae_metappa
                 m  inner join pde.ae_objetivoppa o on m.objid = o.objid
-                where mppaid in ($metas) order by mppanome
+                where mppaid in ($metas) order by mppaordem
             ";
             $rs = $db->carregar($sql);
 
@@ -582,14 +608,36 @@ if ($_REQUEST['requisicao'] == 'carregaOrcamentosPE') {
 
 if ($_REQUEST['requisicao'] == 'carregaEstrategiasPNE') {
     if ($_REQUEST['id'] > 0) {
-        $sql = "select estnome as nome from pde.ae_estrategia where metid = " . $_REQUEST['id'] . " ORDER BY estordem";
+        if($_REQUEST['id'] != 99999999){
+            $sql = "select estnome as nome, to_char(est.estprazo,'DD/MM/YYYY') AS prazo, sit.sitdsc, est.estcritico AS critico,
+	                (SELECT ece.ecedsc FROM pde.ae_encaminhamentoestrategia ece WHERE ece.estid = est.estid ORDER BY ecedata DESC, eceid DESC LIMIT 1) AS encaminhamento
+                    from pde.ae_estrategia est
+                    INNER JOIN pde.ae_situacao sit ON sit.sitid = est.sitid
+                    where metid = " . $_REQUEST['id'] . " ORDER BY estordem";
+        }else{
+            $sql = "SELECT art.artnome as nome, to_char(art.artprazo,'DD/MM/YYYY') AS prazo, sit.sitdsc, art.artcritico AS critico,
+	                (SELECT eca.ecadsc FROM pde.ae_encaminhamentoartigo eca WHERE eca.artid = art.artid ORDER BY ecadata DESC, ecaid DESC LIMIT 1) AS encaminhamento
+                    FROM pde.ae_artigo art
+                    INNER JOIN pde.ae_situacao sit ON sit.sitid = art.sitid
+                    ORDER BY art.artordem";
+        }
         $rs = $db->carregar($sql);
-
         if ($rs) {
             foreach ($rs as $data) {
                 echo '
-                    <div class="tile1 tile4 azulClaro" style="cursor: default">
-                        <span class="textoDescricao">' . $data['nome'] . '</span><br/>
+                    <div class="tile4 azulClaro" style="cursor: default">
+                        <span class="textoDescricao">' . $data['nome'] . '<br/><br/>
+                        <table border="2" align="center" width="98%" cellspacing="4" cellpadding="5">
+                            <tr>
+                                <td width="20%">Prazo</td><td width="70%">Encaminhamento</td><td width="5%">Situação</td><td width="5%">Crítico?</td>
+                            </tr>
+                            <tr>
+                                <td>'.$data['prazo'].'</td>
+                                <td>'.($data['encaminhamento'] != '' ? $data['encaminhamento'] : '-').'</td>
+                                <td align="center">'.($data['sitdsc']=='Atendida' ? '<img src="../imagens/check_checklist.png" height="30px" width="30px" title="Atendida">' : ($data['sitdsc']=='Não atendida' ? '<img src="../imagens/erro_checklist.png" height="30px" width="30px" title="Não atendida">' : ($data['sitdsc']=='Em atendimento' ? '<img src="../imagens/lapis2.png" height="30px" width="30px" title="Em atendimento">' : '-'))).'</td>
+                                <td align="center">'.($data['critico']=='t' ? '<img src="../imagens/obras/atencao.png" height="30px" width="30px" title="Crítico">' : 'NÃO').'</td>
+                            </tr>
+                        </table><br>
                     </div>
                 ';
             }
@@ -690,6 +738,12 @@ if ($_REQUEST['requisicao'] == 'carregaEstrategiasPNE') {
                             //carregarMetasPne();
                             $('.eixo').show();
                             $('#caminho_nivel1').html('Plano Nacional de Educação');
+                            $('#caminho_nivel2').html('');
+                            $('#caminho_nivel3').html('');
+                            break;
+                    case 'obj':
+                            $('.eixo').show();
+                            $('#caminho_nivel1').html('Objetivos Estratégicos');
                             $('#caminho_nivel2').html('');
                             $('#caminho_nivel3').html('');
                             break;
@@ -1642,7 +1696,7 @@ if ($_REQUEST['requisicao'] == 'carregaEstrategiasPNE') {
                     $('#div_roll').html(e);
                     $('#objetivos_metas').val(idProjeto);
                     $('.objetivos_metas').addClass('nao_selecionado').removeClass('marcado');
-                    $('#pro_' + idObeid).removeClass('nao_selecionado').addClass('marcado');
+                    $('#pro_' + idProjeto).removeClass('nao_selecionado').addClass('marcado');
                     $('#caminho_nivel3').html(' > ' + delimitador($('#pro_' + idProjeto).html(), 25));
                     $('#pro_' + idProjeto).trigger('click');
                 }
@@ -1680,7 +1734,8 @@ if ($_REQUEST['requisicao'] == 'carregaEstrategiasPNE') {
                         </div>
                     </td>
                     <td align=center width="5%">
-                        <a style="vertical-align:middle;" href="wap/"><img  style="vertical-align:middle;" src="cockpit/images/mobileicon2.png"><br><font color="white">Mobile</font></a>
+			&nbsp;
+                        <!--<a style="vertical-align:middle;" href="wap/"><img  style="vertical-align:middle;" src="cockpit/images/mobileicon2.png"><br><font color="white">Mobile</font></a>-->
                     </td>
                     <td align="right" width="5%" style="cursor:pointer;" >
                         <img src="./cockpit/images/bt_atualizar.png" onclick="window.location='estrategico.php?modulo=principal/alinhamento_estrategico&acao=A';" style="vertical-align:middle;" alt="" title="" />
@@ -1710,20 +1765,28 @@ if ($_REQUEST['requisicao'] == 'carregaEstrategiasPNE') {
 
             <table  width="100%" cellpadding="0" cellspacing="10" border="0">
                 <tr>
-                    <td align="right" valign="bottom" colspan="2">
+                    <td align="right" valign="bottom" colspan="3">
                         <span id="caminho_nivel1" style="font-size:14px;"></span>
                         <span id="caminho_nivel2" style="font-size:14px;"></span>
                         <span id="caminho_nivel3" style="font-size:14px;"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td align=center colspan= 2>
+                    <td align=center colspan=3>
                         <table>
                             <tr>
                                 <td id="td_acoes_estrategicas">
                                     <div id="div-acoes-estrategicas" style="width:160px;height:60px;background:gray;display:table-cell;vertical-align:middle;font-family:  Verdana;font-size:12px;cursor:pointer" onclick="$('#divalinhamento').hide(); $('#divplanejamento').show();" >
                                         <img style="float:left;" src="../imagens/icones/icons/mapas.png" > <br><b>Ações Estratégicas
                                     </div>
+                                </td>
+                                
+                                <td>
+                                    <a href="estrategico.php?modulo=principal/alinhamento_estrategico/alinhamento_estrategico&layout=novo&acao=A">
+                                        <div  style="width:160px;height:60px;background:navy;display:table-cell;vertical-align:middle;font-family: Verdana;font-size:12px;cursor:pointer">
+                                            <img style="float:left;" src="../imagens/icones/icons/casas.png" /> <br/><b>Alinhamento Estratégico (Novo)
+                                        </div>
+                                    </a>
                                 </td>
                                 <td id="td_alinhamento_estrategico">
                                     <div  id="div-alinhamento-estrategico" style="width:160px;height:60px;background:navy;display:table-cell;vertical-align:middle;font-family: Verdana;font-size:12px;cursor:pointer" onclick="$('#divalinhamento').show(); $('#divplanejamento').hide();" >
@@ -1881,6 +1944,7 @@ function montaGridPE()
 	<?php
 }
 
+//TODOS OS QUADROS HERDAM DAS METAS DO OBJETIVO
 function montaGridOBJ()
 {
     global $db;
@@ -1889,7 +1953,7 @@ function montaGridOBJ()
     <div class="pagina" style="width:100%">
         <table width="100%" cellpadding="4">
             <tr>
-                <td bgcolor="#4682B4" width="100%"><span class="titulo">Iniciativas PEI</span></td>
+                <td bgcolor="#4682B4" width="100%"><span class="titulo">Iniciativas do Planejamento Estratégico</span></td>
             </tr>
             <tr>
                 <td align="left" valign="top">
@@ -1899,7 +1963,7 @@ function montaGridOBJ()
                                 FROM pde.ae_iniciativa ini
                                 INNER JOIN pde.ae_objetivoestrategicoxiniciativa ins ON ins.iniid = ini.iniid
                                 WHERE ins.obeid = ".$arIds[1]. "
-                                ORDER BY ini.ininome";
+                                ORDER BY ini.iniordem";
                         $rs = $db->carregar($sql);
                         if ($rs) {
                             foreach($rs as $data){ ?>
@@ -1941,7 +2005,7 @@ function montaGridOBJ()
 										from pde.ae_metapnexindicador group by mpneid
 										) as ind ON ind.mpneid = m.mpneid
 									where m.mpneid in ($metas)
-									and m.mpneid <> 99999999
+									--and m.mpneid <> 99999999
 									order by m.mpneordem";
                         $rs = $db->carregar($sql);
 
@@ -1958,18 +2022,21 @@ function montaGridOBJ()
                 </td>
                 <td id="div_objetivo_ppa" align="left" valign="top" style="padding-right:4px;">
                     <?php
-                    $sql = "select mppaid from pde.ae_objetivoestrategicoxmetappa where obeid =".$arIds[1];
+                    //$sql = "select mppaid from pde.ae_objetivoestrategicoxmetappa where obeid =".$arIds[1];
+                    $sql = "SELECT mppaid
+                            FROM pde.ae_objetivoestrategicoxmetapne obe
+                            INNER JOIN pde.ae_metapnexppa met ON met.mpneid = obe.mpneid
+                            WHERE obe.obeid = ".$arIds[1];
                     $dados = $db->carregarColuna($sql,'mppaid');
                     $metas = implode(',',$dados);
-
-                    if ($metas)
-                    {
-                        $sql = "select mppaid as codigo, mppanome as nome, temid, o.objid, mppatipo from pde.ae_metappa m
-							inner join pde.ae_objetivoppa o on m.objid = o.objid where mppaid in ($metas) order by mppatipo DESC, mppanome";
+                    if ($metas){
+                        $sql = "select mppaid as codigo, mppanome as nome, temid, o.objid, mppatipo
+                                from pde.ae_metappa m
+							    inner join pde.ae_objetivoppa o on m.objid = o.objid
+							    where mppaid in ($metas)
+							    order by mppatipo DESC, mppaordem";
                         $rs = $db->carregar($sql);
-
-                        if ($rs)
-                        {
+                        if ($rs) {
                             foreach($rs as $data)
                             {
                                 echo '<div id="'.$data['temid'].'_'.$data['objid'].'_'.$data['codigo'].'_'.$data['mppatipo'].'" class="tile1 tile4 azul clickMetasPPA">
@@ -1981,7 +2048,11 @@ function montaGridOBJ()
                 </td>
                 <td id="div_acoes_metas" align="left" valign="top" style="padding-right:4px;">
                     <?php
-                    $sql = "select acaid from pde.ae_objetivoestrategicoxacao where obeid =".$arIds[1];
+                    //$sql = "select acaid from pde.ae_objetivoestrategicoxacao where obeid =".$arIds[1];
+                    $sql = "SELECT acaid
+                            FROM pde.ae_objetivoestrategicoxmetapne obe
+                            INNER JOIN pde.ae_acaoxmetapne met ON met.mpneid = obe.mpneid
+                            WHERE obe.obeid = ".$arIds[1];
                     $dados = $db->carregarColuna($sql, 'acaid');
                     $acoes = implode(',', $dados);
 
@@ -2011,7 +2082,11 @@ function montaGridOBJ()
                 </td>
                 <td id="div_orcamentos" align="left" valign="top" style="padding-right:4px;">
                     <?php
-                    $sql = "select acaid from pde.ae_objetivoestrategicoxacao where obeid =".$arIds[1];
+                    //$sql = "select acaid from pde.ae_objetivoestrategicoxacao where obeid =".$arIds[1];
+                    $sql = "SELECT acaid
+                            FROM pde.ae_objetivoestrategicoxmetapne obe
+                            INNER JOIN pde.ae_acaoxmetapne met ON met.mpneid = obe.mpneid
+                            WHERE obe.obeid = ".$arIds[1];
                     $dados = $db->carregarColuna($sql, 'acaid');
                     $orcamentos = implode(',', $dados);
 
@@ -2197,7 +2272,7 @@ function montaGridAE()
 										from pde.ae_metapnexindicador group by mpneid
 										) as ind ON ind.mpneid = m.mpneid
 									where m.mpneid in ($metas)
-									and m.mpneid <> 99999999
+									--and m.mpneid <> 99999999
 									order by m.mpneordem";
 							$rs = $db->carregar($sql);
 
@@ -2221,7 +2296,7 @@ function montaGridAE()
                         if ($metas)
                         {
                             $sql = "select mppaid as codigo, mppanome as nome, temid, o.objid, mppatipo from pde.ae_metappa m
-							inner join pde.ae_objetivoppa o on m.objid = o.objid where mppaid in ($metas) order by mppatipo DESC, mppanome";
+							inner join pde.ae_objetivoppa o on m.objid = o.objid where mppaid in ($metas) order by mppatipo DESC, mppaordem";
                             $rs = $db->carregar($sql);
 
                             if ($rs)
@@ -2265,7 +2340,7 @@ function montaGridAE()
 
                         if ($objetivos)
                         {
-                            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obenome";
+                            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obeordem";
                             $rs = $db->carregar($sql);
 
                             if ($rs)
@@ -2344,7 +2419,7 @@ function montaGridPRO()
         <table width="100%" cellpadding="4">
             <tr>
                 <td bgcolor="#4682B4" width="50%"><span class="titulo">Estratégias</span></td>
-                <td bgcolor="#4682B4" width="50%"><span class="titulo">Iniciativas PEI</span></td>
+                <td bgcolor="#4682B4" width="50%"><span class="titulo">Iniciativas do Planejamento Estratégico</span></td>
             </tr>
             <tr>
                 <td align="left" valign="top">
@@ -2372,7 +2447,7 @@ function montaGridPRO()
                                 FROM pde.ae_iniciativa ini
                                 INNER JOIN pto.iniciativasolucao ins ON ins.iniid = ini.iniid
                                 WHERE ins.solid = ".$arIds[1]. "
-                                ORDER BY ini.ininome";
+                                ORDER BY ini.iniordem";
                         $rs = $db->carregar($sql);
                         if ($rs) {
                             foreach($rs as $data){ ?>
@@ -2415,7 +2490,7 @@ function montaGridPRO()
 										from pde.ae_metapnexindicador group by mpneid
 										) as ind ON ind.mpneid = m.mpneid
 									where m.mpneid in ($metas)
-									and m.mpneid <> 99999999
+									--and m.mpneid <> 99999999
 									order by m.mpneordem";
                         $rs = $db->carregar($sql);
 
@@ -2441,7 +2516,7 @@ function montaGridPRO()
 
                     if ($objetivos)
                     {
-                        $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obenome";
+                        $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($objetivos) order by obeordem";
                         $rs = $db->carregar($sql);
 
                         if ($rs)
@@ -2579,7 +2654,7 @@ function montaGridOrc()
 										from pde.ae_metapnexindicador group by mpneid
 										) as ind ON ind.mpneid = m.mpneid
 									where m.mpneid in ($metas)
-									and m.mpneid <> 99999999
+									--and m.mpneid <> 99999999
 									order by m.mpneordem";
 							$rs = $db->carregar($sql);
 
@@ -2609,7 +2684,7 @@ function montaGridOrc()
                         if ($metas)
                         {
                             $sql = "select mppaid as codigo, mppanome as nome, temid, o.objid, mppatipo from pde.ae_metappa
-									m  inner join pde.ae_objetivoppa o on m.objid = o.objid where mppaid in ($metas) order by mppatipo DESC, mppanome";
+									m  inner join pde.ae_objetivoppa o on m.objid = o.objid where mppaid in ($metas) order by mppatipo DESC, mppaordem";
                             $rs = $db->carregar($sql);
 
                             if ($rs)
@@ -2665,7 +2740,7 @@ function montaGridOrc()
 
                         if ($desafios)
                         {
-                            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($desafios) order by obenome";
+                            $sql = "select obeid as codigo, obenome as nome, temid from pde.ae_objetivoestrategico where obeid in ($desafios) order by obeordem";
 
                             $rs = $db->carregar($sql);
 
@@ -2759,11 +2834,18 @@ function montaGridOrc()
 }
 
 function montaGridPNE(){
+    $arIds = explode('_', $_REQUEST['id']);
 	?>
 	<div class="pagina" style="width:100%">
 		<table width="100%" cellpadding="3">
 			<tr>
-				<td colspan="5" bgcolor="#4682B4"><span class="titulo">Estratégias</span></td>
+                <?php
+                if($arIds[1] != 99999999){
+				    echo "<td colspan='5' bgcolor='#4682B4'><span class='titulo'>Estratégias</span></td>";
+                }else{
+                    echo "<td colspan='5' bgcolor='#4682B4'><span class='titulo'>Artigos</span></td>";
+                }
+                ?>
 			</tr>
 			<tr>
 				<td colspan="5">
@@ -2929,5 +3011,10 @@ function verificarPerfilParaAcessoModulo(){
 	function abreOrcamento(vacid)
 	{
 		window.open('/planacomorc/planacomorc.php?modulo=sistema/tabelasapoio/popupImpressaoVinculacaoOrcamentaria&acao=A&vacid='+vacid,'blank','height=500,width=1000,status=yes,toolbar=no,menubar=no,scrollbars=yes,location=no,resizable=yes');
+	}
+
+	function abreSolucao(solid)
+	{
+		window.open('/pto/pto.php?modulo=relatorio/painelVersaoImpressao&acao=A&solid='+solid,'blank','height=500,width=1000,status=yes,toolbar=no,menubar=no,scrollbars=yes,location=no,resizable=yes');
 	}
 </script>

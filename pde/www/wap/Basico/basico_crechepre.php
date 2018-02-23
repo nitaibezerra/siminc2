@@ -13,7 +13,7 @@ $db = new cls_banco();
 <!DOCTYPE html> 
 <html> 
 	<head> 
-		<title><?php echo SIGLA_SISTEMA; ?> - Mobile</title> 
+		<title>SIMEC - Mobile</title> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/includes/mobile-simec/SIMEC.min.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile.structure-1.3.0-rc.1.min.css" /> 
