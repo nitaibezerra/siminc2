@@ -38,6 +38,19 @@
             case 'limpar':
                 $filtropi = $_SESSION['filtropi'] = array();
             break;
+            case 'listapimanter-xls':
+                # Lista de PIs
+                $filtropi['exercicio'] = $_SESSION['exercicio'];
+                $filtropi['usucpf'] = $_SESSION['usucpf'];
+                $filtropi['unofundo'] = 'FALSE';
+
+                $mPlanointerno = new Spo_Model_Planointerno();
+                $sql = $mPlanointerno->listar((object) $filtropi);
+                $listaPi = $mPlanointerno->carregar($sql);
+                
+                include_once APPRAIZ. "planacomorc/modulos/principal/unidade/listapimanter-xls.inc";
+                die;
+            break;
         }
     }
 
@@ -67,7 +80,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js?v=2"></script>
+<script src="js/unidade/lista-pi-manter.js?v=3"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
@@ -115,6 +128,9 @@
                                 </button>
                                 <button class="btn btn-primary btn-buscar" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
+                                    <i class="fa fa-file-excel-o"></i> Exportar XLS
                                 </button>
                                 <button class="btn btn-success btn-novo" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>

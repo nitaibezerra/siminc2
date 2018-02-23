@@ -21,6 +21,11 @@
             $('#filtropi').submit();
         });
         
+        $('#btn-exportar-xls').click(function(){
+            $('#requisicao').val('listapimanter-xls');
+            $('#filtropi').submit();
+        });
+        
         $('.btn-novo').click(function(){
             window.document.location.href = 'planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A';
         });
