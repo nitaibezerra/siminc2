@@ -5386,3 +5386,20 @@ function join_simec($glue, $pieces){
     return $resultado;
 }
 
+/**
+ * Verifica se o primeiro valor é superior ao segundo e formata a cor pra vermelho.
+ * 
+ * @param string $valor1
+ * @param string $valor2
+ * @return string
+ */
+function marcarVermelhoValorSuperior($valor1 = NULL, $valor2 = NULL, $decimal = 0){
+    $resultado = number_format($valor1, $decimal, ',', '.');
+
+    if($valor1 > $valor2){
+        $resultado = '<span class="validateRedText">'. number_format($valor1, $decimal, ',', '.'). '</span>';
+    }
+    
+    return $resultado;
+}
+

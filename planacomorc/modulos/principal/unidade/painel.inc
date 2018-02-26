@@ -1,59 +1,59 @@
 <?php
 
-include_once APPRAIZ . "includes/library/simec/Grafico.php";
+    include_once APPRAIZ . "includes/library/simec/Grafico.php";
 
-include_once '_funcoespi.php';
+    include_once '_funcoespi.php';
 
-require_once APPRAIZ . 'includes/workflow.php';
-include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
+    require_once APPRAIZ . 'includes/workflow.php';
+    include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
-# Cores dos Graficos
-$colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+    # Cores dos Graficos
+    $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
 
-# Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+    # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 
-$oPlanoInterno = new Pi_PlanoInterno();
+    $oPlanoInterno = new Pi_PlanoInterno();
 
-switch ($_REQUEST['req']) {
-    case 'detalhe-subunidade':
-        $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
-    die;
-    case 'detalhe-funcional':
-        $oPlanoInterno->recuperarPiPorFuncional((object) array('suoid' => $_REQUEST['suoid'], 'ptrid' => $_REQUEST['ptrid']));
-    die;
-    case 'detalhe-grafico-subunidade':
-        $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
-    die;
-    case 'detalhe-grafico-uo':
-        $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
-    die;
-    case 'carregarGraficoUnidade':
-        carregarGraficoUnidade($colors);
-    die;
-    case 'carregarGraficoDireta':
-        carregarGraficoDireta($colors);
-    die;
-    case 'carregarGraficoCgconCogep':
-        carregarGraficoCgconCogep($colors);
-    die;
-}
+    switch ($_REQUEST['req']) {
+        case 'detalhe-subunidade':
+            $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
+        die;
+        case 'detalhe-funcional':
+            $oPlanoInterno->recuperarPiPorFuncional((object) array('suoid' => $_REQUEST['suoid'], 'ptrid' => $_REQUEST['ptrid']));
+        die;
+        case 'detalhe-grafico-subunidade':
+            $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
+        die;
+        case 'detalhe-grafico-uo':
+            $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
+        die;
+        case 'carregarGraficoUnidade':
+            carregarGraficoUnidade($colors);
+        die;
+        case 'carregarGraficoDireta':
+            carregarGraficoDireta($colors);
+        die;
+        case 'carregarGraficoCgconCogep':
+            carregarGraficoCgconCogep($colors);
+        die;
+    }
 
-$filtros = array(
-    "suo.prsano = '". $_SESSION['exercicio']. "'",
-    'suo.unofundo = FALSE',
-);
-# Filtro por Subunidades do perfil do usuário logado.
-if($listaSubUnidadeUsuario){
-    $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
-}
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+    $filtros = array(
+        "suo.prsano = '". $_SESSION['exercicio']. "'",
+        'suo.unofundo = FALSE',
+    );
+    # Filtro por Subunidades do perfil do usuário logado.
+    if($listaSubUnidadeUsuario){
+        $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
+    }
+    $aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
 
-/**
- * Cabeçalho padrão do sistema.
- * @see cabecalho.inc
- */
-include APPRAIZ . "includes/cabecalho.inc";
+    /**
+     * Cabeçalho padrão do sistema.
+     * @see cabecalho.inc
+     */
+    include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
 
