@@ -283,8 +283,8 @@ class Pi_PlanoInterno extends Modelo
                 lmu.lmuvlr,
                 lmu.lmuid,
                 psu.psuid,
-                psu.ptrdotacaocapital ptrdotacao_capital,
-                psu.ptrdotacaocusteio ptrdotacao_custeio,                
+                COALESCE(psu.ptrdotacaocapital, 0) ptrdotacao_capital,
+                COALESCE(psu.ptrdotacaocusteio, 0) ptrdotacao_custeio,            
                 SUM(COALESCE(pic.picvalorcapital, 0)) picvalorcapital,
                 SUM(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio,
 		COALESCE(sec.provisionado, 0.00) AS provisionado,
@@ -317,12 +317,13 @@ class Pi_PlanoInterno extends Modelo
                     FROM spo.siopexecucao
                         LEFT JOIN monitora.pi_planointerno ON(siopexecucao.plicod = pi_planointerno.plicod AND siopexecucao.exercicio = pi_planointerno.pliano AND pi_planointerno.plistatus = 'A')
                     WHERE
-                        siopexecucao.exercicio = '". (int)$_SESSION['exercicio']. "' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+                        pi_planointerno.ungcod IS NOT NULL
+                        AND siopexecucao.exercicio = '". (int)$_SESSION['exercicio']. "' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
                     GROUP BY
                         siopexecucao.ptres,
                         siopexecucao.unicod,
                         pi_planointerno.ungcod
-		) sec ON sec.ptres = ptr.ptres AND sec.unicod = pli.unicod AND sec.ungcod = pli.ungcod
+		) sec ON(ptr.ptres = sec.ptres AND suo.unocod = sec.unicod AND suo.suocod = sec.ungcod)
             WHERE
                 {$where}
             GROUP BY
