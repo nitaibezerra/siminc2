@@ -285,7 +285,7 @@ if($corpoEmailV3){
         $db->commit();
     }
 
-    include_once APPRAIZ. "www/email-template-novo-bootstrap-v3.php";
+    include_once APPRAIZ. "includes/email-template.php";
 
     // Recuperando email dos super-usuários e administradores
     $sql = "select distinct usu.usucpf, usu.usunome, usu.usuemail

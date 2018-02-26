@@ -82,7 +82,7 @@ monta_titulo($titulo_modulo, $titul);
 
                         from seguranca.usuario usu									
 
-                        inner join seguranca.auditoria aud on usu.usucpf = aud.usucpf
+                        inner join auditoria aud on usu.usucpf = aud.usucpf
 
                         inner join seguranca.aba aba on aud.sisid = aba.sisid
 

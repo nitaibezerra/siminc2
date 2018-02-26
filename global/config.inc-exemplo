@@ -23,9 +23,12 @@
     defined('SISRAIZ') || define('SISRAIZ', APPRAIZ . $_SESSION['sisdiretorio'] . '/');
     defined('MAXONLINETIME') || define('MAXONLINETIME', 3600);
     
+    # Indica o ambiente para controlar comportamentos que só devem ser realizados em produção
     define('IS_PRODUCAO', FALSE);
+    # Indica se o sistema vai gravar auditoria
+    define('EXECUTAR_AUDITORIA', IS_PRODUCAO);
 
-    $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Produção' : 'Ambiente de Desenvolvimento';
+    $_SESSION['ambiente'] = IS_PRODUCAO ? 'Ambiente de Producao' : 'Ambiente de Desenvolvimento';
     $_SESSION['sisbaselogin'] = $_REQUEST['baselogin'] && $_REQUEST['baselogin'] != "teste" ? $_REQUEST['baselogin'] : $_SESSION['sisbaselogin'];
     $_SESSION['baselogin'] = $_REQUEST['baselogin'] ? $_REQUEST['baselogin'] : $_SESSION['baselogin'];
 

@@ -120,12 +120,13 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
      */
     public static function queryCombo(stdClass $filtro)
     {
+//ver($filtro);
         $where = '';
-        if($filtro->listaSubUnidadeUsuario){
-            $where .= "\n                AND suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ";
+        if($filtro->listaSubUnidadeUsuario && !empty(join_simec(',', $filtro->listaSubUnidadeUsuario))){
+            $where .= "\n                AND suo.suocod::INTEGER IN(". join_simec(',', $filtro->listaSubUnidadeUsuario). ") ";
         }
-        if($filtro->unicod){
-            $where .= "\n                AND suo.unocod::INTEGER IN(". join(',', $filtro->unicod). ") ";
+        if($filtro->unicod && !empty(join_simec(',', $filtro->unicod))){
+            $where .= "\n                AND suo.unocod::INTEGER IN(". join_simec(',', $filtro->unicod). ") ";
         }
         if($filtro->unofundo){
             $where .= "\n                AND suo.unofundo = ". $filtro->unofundo;

@@ -49,10 +49,10 @@
                                     <td class="text-center"><?php echo $dado['eqdrp']; ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['autorizado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['empenhado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['liquidado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['pago'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['autorizado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['empenhado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['liquidado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['pago'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -61,11 +61,10 @@
                                     <th colspan="5">TOTAL</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
-                                    <!--<th class="text-right"><?php echo number_format(($total['custeio'] + $total['capital']), 0, ',', '.'); ?></th>-->
-                                    <th class="text-right"><?php echo number_format($total['autorizado'], 0, ',', '.'); ?></th>
-                                    <th class="text-right"><?php echo number_format($total['empenhado'], 0, ',', '.'); ?></th>
-                                    <th class="text-right"><?php echo number_format($total['liquidado'], 0, ',', '.'); ?></th>
-                                    <th class="text-right"><?php echo number_format($total['pago'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['autorizado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['empenhado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['liquidado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['pago'], $total['custeio']+ $total['capital']); ?></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -92,9 +91,10 @@
                                 <th>Título</th>
                                 <th>Custeio</th>
                                 <th>Capital</th>
+                                <th>Provisionado</th>
                                 <th>Empenhado</th>
-                                <th>Pago</th>
                                 <th>Liquidado</th>
+                                <th>Pago</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -105,9 +105,10 @@
                                     <td><?php echo $dado['plititulo']; ?></td>
                                     <td class="text-right"><?php echo number_format2($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format2($dado['picvalorcapital'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['empenhado'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['pago'], 0, ',', '.'); ?></td>
-                                    <td class="text-right"><?php echo number_format($dado['liquidado'], 0, ',', '.'); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['autorizado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['empenhado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['liquidado'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
+                                    <td class="text-right"><?php echo marcarVermelhoValorSuperior($dado['pago'], $dado['picvalorcusteio']+ $dado['picvalorcapital']); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>

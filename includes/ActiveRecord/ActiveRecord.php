@@ -493,14 +493,19 @@ abstract class ActiveRecord {
         if ($audtipo == 'I' || $audtipo == 'D' || $audtipo == 'U') {
             $audtabela = $matches[2];
 
-            $_sql= 'insert into seguranca.auditoria (usucpf,
-                                                     mnuid,
-                                                     audsql,
-                                                     audtabela,
-                                                     audtipo,
-                                                     audip,
-                                                     sisid,
-                                                     auddata) values (?, ?, ?, ?, ?, ?, ?, now())';
+            $_sql= '
+                INSERT INTO auditoria(
+                    usucpf,
+                    mnuid,
+                    audsql,
+                    audtabela,
+                    audtipo,
+                    audip,
+                    sisid,
+                    auddata
+                ) VALUES (
+                    ?, ?, ?, ?, ?, ?, ?, now()
+                )';
 
             $sql = str_replace(array("  ", "\r\n", "\n", "\t"), " ", $sql);
             $sql = vsprintf(str_replace("?", "'%s'", $sql), $params);

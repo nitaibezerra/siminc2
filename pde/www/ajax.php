@@ -47,7 +47,7 @@ header( 'Content-type: text/plain' );
 header( 'Cache-Control: no-store, no-cache' );
 
 
-$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>$_SESSION['email_sistema']);
+$remetente = array('nome'=>$_SESSION['usunome'], 'email'=>'simec@mec.gov.br');
 
 
 if($_REQUEST['dataInicio'] && $_REQUEST['idAtividade'] && $_REQUEST['desc']){

@@ -367,7 +367,7 @@ class ErrorHandler {
     	
         $msgLog = str_replace ( "<q>", "\n", $msgLog );
         $msgLog = str_replace ( "'", "''", $msgLog );
-        $tabelaAuditoria = 'auditoria.auditoria_' . date('Y_m');
+        $tabelaAuditoria = 'auditoria_' . date('Y_m');
 
         $sql = "insert into {$tabelaAuditoria} (auddata, audsql,usucpf,audmsg,audip,mnuid, audtipo) values ('" . date ( "d-m-Y H:i:s" ) . "','" . str_replace ( "'", "''", $_SESSION ['sql'] ) . "','" . $_SESSION ['usucpf'] . "','" . $msgLog . "','" . $_SESSION ['ip'] . "','" . $_SESSION ['mnuid'] . "','X')";
         $sql = utf8_encode( $sql );

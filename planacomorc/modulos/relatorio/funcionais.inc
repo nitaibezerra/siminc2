@@ -1,26 +1,27 @@
 <?php
-include_once '_funcoespi.php';
-include_once APPRAIZ. "monitora/classes/Pi_PlanoInterno.class.inc";
 
-$filtros = array(
-    "suo.prsano = '". $_SESSION['exercicio']. "'",
-    'suo.unofundo = FALSE',
-);
-# Filtro por Subunidades do perfil do usuário logado.
-if($listaSubUnidadeUsuario){
-    $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
-}
+    include_once '_funcoespi.php';
+    include_once APPRAIZ. "monitora/classes/Pi_PlanoInterno.class.inc";
 
-$modelPlanoInterno = new Pi_PlanoInterno();
-$sql = $modelPlanoInterno->montarSqlRelFuncionais($filtros);
-//ver($sql, d);
-$listaFuncionais = $modelPlanoInterno->carregar($sql);
+    $filtros = array(
+        "suo.prsano = '". $_SESSION['exercicio']. "'",
+        'suo.unofundo = FALSE',
+    );
+    # Filtro por Subunidades do perfil do usuário logado.
+    if($listaSubUnidadeUsuario){
+        $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
+    }
 
-if($_REQUEST['req'] == 'exportar-xls'){
-    include_once APPRAIZ. "planacomorc/modulos/relatorio/funcionais-xls.inc";
-}
+    $modelPlanoInterno = new Pi_PlanoInterno();
+    $sql = $modelPlanoInterno->montarSqlRelFuncionais($filtros);
+    //ver($sql, d);
+    $listaFuncionais = $modelPlanoInterno->carregar($sql);
 
-include APPRAIZ . "includes/cabecalho.inc";
+    if($_REQUEST['req'] == 'exportar-xls'){
+        include_once APPRAIZ. "planacomorc/modulos/relatorio/funcionais-xls.inc";
+    }
+
+    include APPRAIZ . "includes/cabecalho.inc";
 
 ?>
 
@@ -36,12 +37,12 @@ include APPRAIZ . "includes/cabecalho.inc";
     <div class="col-lg-4">
         <h2><?php echo $titulo_modulo; ?></h2>
     </div>
-    <div class="col-lg-8">	
-        <div style="padding-top: 10px;" class="text-right">	
-            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/funcionais&acao=A&req=exportar-xls">	
-                <i class="fa fa-file-excel-o"></i> Exportar XLS	
-            </a>	
-        </div>	
+    <div class="col-lg-8">
+        <div style="padding-top: 10px;" class="text-right">
+            <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/funcionais&acao=A&req=exportar-xls">
+                <i class="fa fa-file-excel-o"></i> Exportar XLS
+            </a>
+        </div>
     </div>
 </div>
 
@@ -55,38 +56,38 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content">
 
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover dataTablesFuncionais" >
+                        <table class="table table-bordered table-hover dataTablesFuncionais">
                             <thead>
-                            <tr class="text-center">
-                                <th rowspan="2" style="border-left: 1px black solid;">
-                                    Unidade
-                                </th>
-                                <th rowspan="2" style="border-right: 1px black solid;">
-                                    Subunidade
-                                </th>
-                                <th rowspan="2">
-                                    PTRES
-                                </th>
-                                <th rowspan="2" style="border-right: 1px black solid;">
-                                    Funcional
-                                </th>
-                                <th colspan="2" style="border-right: 1px black solid;">Custeio</th>
-                                <th colspan="2" style="border-right: 1px black solid;">Capital</th>
-                                <th colspan="2" style="border-right: 1px black solid;">Total</th>
-                                <th colspan="4" style="border-right: 1px black solid;">&nbsp;</th>
-                            </tr>
-                            <tr class="text-center">
-                                <th>Dotação</th>
-                                <th style="border-right: 1px black solid;">Planejado</th>
-                                <th>Dotação</th>
-                                <th style="border-right: 1px black solid;">Planejado</th>
-                                <th>Dotação</th>
-                                <th style="border-right: 1px black solid;">Planejado</th>
-                                <th>Provisionado</th>
-                                <th>Empenhado</th>
-                                <th>Liquidado</th>
-                                <th style="border-right: 1px black solid;">Pago</th>
-                            </tr>
+                                <tr class="text-center">
+                                    <th rowspan="2" style="border-left: 1px black solid;">
+                                        Unidade
+                                    </th>
+                                    <th rowspan="2" style="border-right: 1px black solid;">
+                                        Subunidade
+                                    </th>
+                                    <th rowspan="2">
+                                        PTRES
+                                    </th>
+                                    <th rowspan="2" style="border-right: 1px black solid;">
+                                        Funcional
+                                    </th>
+                                    <th colspan="2" style="border-right: 1px black solid;">Custeio</th>
+                                    <th colspan="2" style="border-right: 1px black solid;">Capital</th>
+                                    <th colspan="2" style="border-right: 1px black solid;">Total</th>
+                                    <th colspan="4" style="border-right: 1px black solid;">&nbsp;</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <th>Dotação</th>
+                                    <th style="border-right: 1px black solid;">Planejado</th>
+                                    <th>Dotação</th>
+                                    <th style="border-right: 1px black solid;">Planejado</th>
+                                    <th>Dotação</th>
+                                    <th style="border-right: 1px black solid;">Planejado</th>
+                                    <th>Provisionado</th>
+                                    <th>Empenhado</th>
+                                    <th>Liquidado</th>
+                                    <th style="border-right: 1px black solid;">Pago</th>
+                                </tr>
                             </thead>
                             <?php if($listaFuncionais): ?>
                                 <tbody>

@@ -65,11 +65,11 @@ if (file_exists(realpath(APPRAIZ . $_SESSION['sisdiretorio'] . "/modulos/" . $_R
 						</tr>
 						<tr>
 							<td align="left" height="15">
-								Data: <?= date("d/m/Y - H:i:s") ?> / Último acesso (<?= formata_data( $_SESSION['usuacesso'] ); ?>) -
-								<a href="javascript:abrirUsuariosOnline();" >
+								Data: <?= date("d/m/Y - H:i:s") ?> / Último acesso (<?= formata_data( $_SESSION['usuacesso'] ); ?>)
+<!--								 - <a href="javascript:abrirUsuariosOnline();" >
 									<span id="rdpUsuariosOnLine"><?= $_SESSION['qtdusuariosonline'][$_SESSION['sisid']];?></span>
 									Usuários On-Line
-								</a>
+								</a>-->
 							</td>
 							<?if( $db->testa_superuser() ): ?>
 							<td style="text-align: left"><a href="javascript: abrirRegras( <?=$_SESSION['mnuid']; ?> );">Visualizar Regras</a></td>

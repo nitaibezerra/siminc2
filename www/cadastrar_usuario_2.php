@@ -472,7 +472,7 @@ if ( $_POST['formulario'] ) {
         # $corpoEmailV3 Variavel inserida dentro do template.
         $corpoEmailV3 = '<p>'. $conteudo. '</p>';
         # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
-        include 'email-template-novo-bootstrap-v3.php';
+        include APPRAIZ. "includes/email-template.php";
         enviar_email( $remetente, $destinatario, $assunto, $textoEmailV3, $emailCopia );
     }
 
@@ -559,7 +559,7 @@ if ( $_POST['formulario'] ) {
                     # $corpoEmailV3 Variavel inserida dentro do template.
                     $corpoEmailV3 = $mensagem;
                     # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
-                    include 'email-template-novo-bootstrap-v3.php';
+                    include APPRAIZ. "includes/email-template.php";
 
                     $aDestinatarios = array();
                     enviar_email($remetente, $aDestinatarios, $assunto, $textoEmailV3, null, $destinatariosBcc);
@@ -635,7 +635,7 @@ if ( $_POST['formulario'] ) {
                         # $corpoEmailV3 Variavel inserida dentro do template.
                         $corpoEmailV3 = '<p>'. $conteudo. '</p>';
                         # $textoEmailV3 é a variavel que terá o template com a msg principal do e-mail.
-                        include 'email-template-novo-bootstrap-v3.php';
+                        include APPRAIZ. "includes/email-template.php";
 			enviar_email( $remetente, $destinatario, $assunto, $textoEmailV3, $emailCopia );
 		}
 		// leva o usuário para a página de login e exibe confirmação

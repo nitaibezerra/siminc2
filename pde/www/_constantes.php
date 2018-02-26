@@ -39,9 +39,6 @@ switch ($_SESSION['sisid']) {
             case '2012':
                 $_SESSION['projeto'] = PROJETO_PDE2011;
                 break;
-            default:
-                $_SESSION['projeto'] = PROJETO_PDE2011;
-                break;
         }
 
         break;

@@ -38,6 +38,19 @@
             case 'limpar':
                 $filtropi = $_SESSION['filtropi'] = array();
             break;
+            case 'listapimanter-xls':
+                # Lista de PIs
+                $filtropi['exercicio'] = $_SESSION['exercicio'];
+                $filtropi['usucpf'] = $_SESSION['usucpf'];
+                $filtropi['unofundo'] = 'FALSE';
+
+                $mPlanointerno = new Spo_Model_Planointerno();
+                $sql = $mPlanointerno->listar((object) $filtropi);
+                $listaPi = $mPlanointerno->carregar($sql);
+                
+                include_once APPRAIZ. "planacomorc/modulos/principal/unidade/listapimanter-xls.inc";
+                die;
+            break;
         }
     }
 
@@ -67,7 +80,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js?v=2"></script>
+<script src="js/unidade/lista-pi-manter.js?v=3"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
@@ -115,6 +128,9 @@
                                 </button>
                                 <button class="btn btn-primary btn-buscar" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
+                                    <i class="fa fa-file-excel-o"></i> Exportar XLS
                                 </button>
                                 <button class="btn btn-success btn-novo" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
@@ -174,10 +190,10 @@
                             <td><?php echo $dados['situacao']; ?></td>
                             <td class="text-right"><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
                             <td class="text-right"><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
-                            <td class="text-right"><?php echo number_format($dados['autorizado'], 2, ',', '.'); ?></td>
-                            <td class="text-right"><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
-                            <td class="text-right"><?php echo number_format($dados['liquidado'], 2, ',', '.'); ?></td>
-                            <td class="text-right"><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
+                            <th class="text-right"><?php echo marcarVermelhoValorSuperior($dados['autorizado'], $dados['custeio']+ $dados['capital'], 2); ?></th>
+                            <th class="text-right"><?php echo marcarVermelhoValorSuperior($dados['empenhado'], $dados['custeio']+ $dados['capital'], 2); ?></th>
+                            <th class="text-right"><?php echo marcarVermelhoValorSuperior($dados['liquidado'], $dados['custeio']+ $dados['capital'], 2); ?></th>
+                            <th class="text-right"><?php echo marcarVermelhoValorSuperior($dados['pago'], $dados['custeio']+ $dados['capital'], 2); ?></th>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -204,10 +220,10 @@
                         <th colspan="7">TOTAL</th>
                         <th class="text-right"><?php echo number_format($total['custeio'], 2, ',', '.'); ?></th>
                         <th class="text-right"><?php echo number_format($total['capital'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['autorizado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['empenhado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['liquidado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['pago'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['autorizado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['empenhado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['liquidado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['pago'], $total['custeio']+ $total['capital'], 2); ?></th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -215,10 +231,10 @@
                         <th colspan="7">TOTAL</th>
                         <th class="text-right"><?php echo number_format($total['custeio'], 2, ',', '.'); ?></th>
                         <th class="text-right"><?php echo number_format($total['capital'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['autorizado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['empenhado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['liquidado'], 2, ',', '.'); ?></th>
-                        <th class="text-right"><?php echo number_format($total['pago'], 2, ',', '.'); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['autorizado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['empenhado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['liquidado'], $total['custeio']+ $total['capital'], 2); ?></th>
+                        <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['pago'], $total['custeio']+ $total['capital'], 2); ?></th>
                     </tr>
                     </tfoot>
                 </table>

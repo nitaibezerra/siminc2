@@ -264,7 +264,7 @@ function pegarDadosPorPagina($dados) {
 		unset($result); 
 	}
 	
-	$resultado = $db->carregar("SELECT COUNT(au.oid) as num, to_char(auddata, 'DD') as dia FROM seguranca.auditoria au 
+	$resultado = $db->carregar("SELECT COUNT(au.oid) as num, to_char(auddata, 'DD') as dia FROM auditoria au 
 							    INNER JOIN seguranca.menu me ON au.mnuid=me.mnuid 
 							    LEFT JOIN seguranca.usuario u ON u.usucpf=au.usucpf 
 								WHERE me.sisid='".$dados['sisid']."' AND au.audtipo='X' AND (date_part('year',auddata)::varchar||date_part('month',auddata)::varchar)::varchar='".$dados['ano'].(integer)$dados['mes']."' AND me.mnulink ILIKE '%".$dados['link']."%'
