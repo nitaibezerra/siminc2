@@ -40,13 +40,13 @@
                         <?php echo $pi['id']; ?>
                     </td>
                     <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['codigo_pi']; ?>
+                        <?php echo strip_tags($pi['codigo_pi']); ?>
                     </td>
                     <td style="border: 1px #e5d9c5 solid;">
                         <?php echo $pi['sub_unidade']; ?>
                     </td>
                     <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['plititulo']; ?>
+                        <?php echo strip_tags($pi['plititulo']); ?>
                     </td>
                     <td style="border: 1px #e5d9c5 solid;">
                         <?php echo $pi['funcional']; ?>
