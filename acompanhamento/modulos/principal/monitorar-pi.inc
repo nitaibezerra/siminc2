@@ -18,13 +18,8 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        
-        <?php
-        
-            # Requisições
-            include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-cad.inc";
-        
-        ?>
+
+        <?php include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-cad.inc"; ?>
 
     </div>
 </div>

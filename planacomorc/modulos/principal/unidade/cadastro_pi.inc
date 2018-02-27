@@ -241,9 +241,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <li class="<?php echo $classTab0; ?>">
                     <a data-toggle="tab" href="#tab-0">Plano Interno( Projeto )</a>
                 </li>
-                <li class="<?php echo $classTab1; ?>">
-                    <a data-toggle="tab" href="#tab-1">Monitoramento</a>
-                </li>
+                <?php if($dadosPI['pliid']): ?>
+                    <li class="<?php echo $classTab1; ?>">
+                        <a data-toggle="tab" href="#tab-1">Monitoramento</a>
+                    </li>
+                <?php endif; ?>
             </ul>
             <div class="tab-content">
                 <div id="tab-0" class="tab-pane <?php echo $classTab0; ?>">
@@ -1325,18 +1327,17 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                     </div>
                 </div>
-                <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
-                    <div class="panel-body">
 
-                        <?php
+                <?php if($dadosPI['pliid']): ?>
+                    <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
+                        <div class="panel-body">
 
-                            # Requisições
-                            include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-cad.inc";
+                            <?php include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-cad.inc"; ?>
 
-                        ?>
-
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
+
             </div>
         </div>
 
