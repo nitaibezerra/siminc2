@@ -538,6 +538,8 @@ class Emendas_Model_Emenda extends Modelo
 
     public function atualizarSiconv()
     {
+        global $configSiconv;
+        
         $sql = "select eme.*, uno.unocodorcamento
                 from emendas.emenda eme
                     inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid 
@@ -545,8 +547,8 @@ class Emendas_Model_Emenda extends Modelo
         ";
         $emenda = $this->pegaLinha($sql);
 
-        $usuario = '';
-        $senha = '';
+        $usuario = $configSiconv->user;
+        $senha = $configSiconv->pwd;
 
         $arrParam = array(
             'usuario' => $usuario,
@@ -580,12 +582,12 @@ class Emendas_Model_Emenda extends Modelo
             'emenumero'=>substr($emenda['emenumero'], 4)
         ];
         $retorno = $obWS->consultarPropostaPorEmenda($filtro);
-
         if(isset($retorno->propostas)){
 
             $mPropostaWS = new Siconv_Model_PropostaWs();
 
-            foreach ($retorno->propostas as $PropostaWS){
+            $aPropostas = is_array($retorno->propostas) ? $retorno->propostas : [$retorno->propostas];
+            foreach ($aPropostas as $PropostaWS){
 
                 foreach ($PropostaWS as $indice => $dados){
                     $indice = strtolower($indice);

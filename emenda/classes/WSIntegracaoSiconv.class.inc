@@ -67,7 +67,7 @@ class WSIntegracaoSiconv{
             )
         );
         
-        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+        $wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);
 
         $retorno = $wsProposta->consultarPropostaPorUF( $obEnvio );
 ver($retorno, d);
@@ -85,7 +85,7 @@ ver($retorno, d);
             )
         );
 
-        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+        $wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);
         $retorno = $wsProposta->consultarPropostaPorEmendaParlamentar( $obEnvio );
         return $retorno->return;
     }
@@ -101,7 +101,7 @@ ver($retorno, d);
             )
         );
 
-        $wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+        $wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);
         $retorno = $wsProposta->consultarPropostaPorAcaoOrcamentaria( $obEnvio );
         return $retorno->return;
     }
@@ -160,7 +160,7 @@ ver($retorno, d);
 																)
 												);
 
-		$wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );
+		$wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);
 		/*$obEnvio = $this->getExportaProponente();
 		$retorno = $wsProposta->exportaProponente( $obEnvio, $this->arrDadosPTA );*/
 
@@ -254,7 +254,7 @@ ver($retorno, d);
 																)
 												);
 												
-			$wsProposta->__setUsernameToken($this->wsusuario, md5($this->wssenha) );			
+			$wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);			
 			$retorno = $wsProposta->solicitarNotaEmpenho( $obEnvio, $this->arrDadosEmpenho );
 			ver($retorno,d);
 			
@@ -358,7 +358,7 @@ XML;
 																)
 												);
 												
-		$wsConvenio->__setUsernameToken( $this->wsusuario, md5($this->wssenha) );		
+		$wsConvenio->__setUsernameToken( $this->wsusuario, $this->wssenha);		
 		$objRetorno = $wsConvenio->exportaProponente( $obEnvio, $this->arrDadosEmp );
 		ver($objRetorno,d);
 	}
@@ -671,7 +671,7 @@ XML;
 		if (!$hash)
 			$ObjetoWS->senha 	= $this->wssenha;//$this->wssenha;
 		else 
-			$ObjetoWS->senha 	= md5($this->wssenha);
+			$ObjetoWS->senha 	= $this->wssenha;
 		
 		return $ObjetoWS;
 	}
