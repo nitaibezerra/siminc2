@@ -112,36 +112,16 @@ class Emendas_Model_Siconv extends Modelo
             // VINCULAR BENEFICIÁRIOS
             $this->_vincularBeneficiario($mSiconv, $proposta);
 
+            // VINCULAR PROGRAMAS
+            $this->_vincularPrograma($mSiconv, $proposta);
+
             $mSiconv->commit();
             $mSiconv->sicid = null;
         }
-
     }
 
     private function _getSituacao($situacaopropostaws)
     {
-        $situacao = json_decode($situacaopropostaws);
-
-        $sql = "select sitid from emendas.siconvsituacao where sitcodigo = '{$situacao->value}'";
-        $sitid = $this->pegaUm($sql);
-
-        if(!$sitid){
-            $mSiconvSituacao = new Emendas_Model_SiconvSituacao();
-
-            $mSiconvSituacao->sitdsc = $situacao->value;
-            $mSiconvSituacao->sitcodigo = $situacao->value;
-
-            $mSiconvSituacao->salvar();
-            $sitid = $mSiconvSituacao->sitid;
-        }
-
-        return $sitid;
-    }
-
-    private function _getPrograma($codigo)
-    {
-        ver($codigo, d);
-        
         $situacao = json_decode($situacaopropostaws);
 
         $sql = "select sitid from emendas.siconvsituacao where sitcodigo = '{$situacao->value}'";
@@ -198,8 +178,6 @@ class Emendas_Model_Siconv extends Modelo
             $origemRecursoPropProgramaWS = $programa->origemRecursoPropProgramaWS;
             $origemRecursoPropProgramaWS = is_array($origemRecursoPropProgramaWS) ? $origemRecursoPropProgramaWS : [$origemRecursoPropProgramaWS];
 
-            $aProgramas[] = $programa->programaWS->codigo;
-
             foreach($origemRecursoPropProgramaWS as $propProgramaWS){
 
                 $cnpjProgramaEmendaWS = isset($propProgramaWS->cnpjProgramaEmendaWS) ? $propProgramaWS->cnpjProgramaEmendaWS : $propProgramaWS;
@@ -238,8 +216,27 @@ class Emendas_Model_Siconv extends Modelo
                 $mBeneficiario->salvar();
             }
         }
-        
-        ver($aProgramas, d);
+    }
+
+    private function _vincularPrograma($mSiconv, $proposta)
+    {
+        $aPrograma = json_decode($proposta['propostaprogramaws']);
+
+        $aPrograma = is_array($aPrograma) ? $aPrograma : [$aPrograma];
+        foreach($aPrograma as $programa){
+
+            $prgid = (new Emendas_Model_Programa())->getPrograma($programa->programaWS);
+
+            $sql = "select 1 from emendas.siconvprograma where prgid = '{$prgid}' and sicid = {$mSiconv->sicid}";
+            $existeSiconv = $this->pegaUm($sql);
+            
+            if(!$existeSiconv){
+                $mSiconvPrograma= new Emendas_Model_SiconvPrograma();
+                $mSiconvPrograma->sicid = $mSiconv->sicid;
+                $mSiconvPrograma->prgid = $prgid;
+                $mSiconvPrograma->salvar();
+            }
+        }
     }
 
 }//end Class

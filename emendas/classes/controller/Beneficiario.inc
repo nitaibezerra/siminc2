@@ -103,10 +103,23 @@ class Emendas_Controller_Beneficiario
         include_once APPRAIZ . 'emendas/modulos/principal/siconv.inc';
     }
 
+    public function montarDetalheSiconv($sicid)
+    {
+        $aSiconv = (new Emendas_Model_Beneficiario())->recuperarDadosSiconv($sicid);
+        include_once APPRAIZ . 'emendas/modulos/principal/siconv-detalhe.inc';
+    }
+
     public function atualizarSiconv($emeid)
     {
         $mEmenda = new Emendas_Model_Emenda($emeid);
         $mEmenda->atualizarSiconv();
+        ver($benid, $mEmenda, d);
+    }
+
+    public function atualizarPrograma($emeid)
+    {
+        $mEmenda = new Emendas_Model_Emenda($emeid);
+        $mEmenda->atualizarPrograma();
         ver($benid, $mEmenda, d);
     }
 }

@@ -298,17 +298,17 @@ class Emendas_Model_Beneficiario extends Modelo
         return simec_preparar_array($dados);
     }
 
-    public function recuperarDadosSiconv()
+    public function recuperarDadosSiconv($sicid)
     {
         $sql = "select * 
                 from emendas.siconv sic
-                where sic.sicid = " . (int) $this->sicid;
+                where sic.sicid = " . (int) $sicid;
 
         $dadosSiconv['siconv'] = $this->pegaLinha($sql);
 
         $sql = "select * 
                 from emendas.siconvparecer spa
-                where spa.sicid = " . (int) $this->sicid . "
+                where spa.sicid = " . (int) $sicid . "
                 order by spadata desc ";
 
         $aParecer = $this->carregar($sql);

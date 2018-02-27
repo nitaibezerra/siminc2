@@ -1504,7 +1504,7 @@ class SimecWsInterfaceService extends SoapClient {
 		return $this->__soapCall('consultarPrograma', array($parameters),       array(
 				'uri' => 'http://interfaceSiconv.cs.siconv.mp.gov.br/',
 				'soapaction' => ''
-		)
+        ), $this->wssecurity_header()
 		);
 	}
 
@@ -1647,7 +1647,7 @@ class SimecWsInterfaceService extends SoapClient {
 		$header = new SoapHeader("http://docs.oasis-open.org/wss/2004/01/oasis-".
 				"200401-wss-wssecurity-secext-1.0.xsd", "Security", $authvalues,
 				true);
-	
+
 		return $header;
 	}
 	
