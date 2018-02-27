@@ -3,7 +3,7 @@
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     switch ($_REQUEST['req']) {
         case 'salvar':
-            $cAcompanhamento->salvar($_REQUEST);
+            $cAcompanhamento->salvar($_REQUEST, $urlModulo);
         die;
         case 'excluir':
             $cAcompanhamento->excluir($_REQUEST['acoid']);
@@ -26,7 +26,7 @@
                     'arqnome' => $_FILES['file']['name'],
                     'arqdescricao' => $_REQUEST['arqdescricao']
                 ));
-            }else{
+            } else {
                 echo simec_json_encode(array(
                     'error' => 1,
                     'errorMensage' => 'Não foi possível enviar o arquivo!'

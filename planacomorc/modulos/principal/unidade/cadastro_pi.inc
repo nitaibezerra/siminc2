@@ -32,7 +32,7 @@ if($_REQUEST['uploadAnexo']){
             'arqdescricao' => $_REQUEST['arqdescricao']
         ));
         die();
-    }else{
+    } else {
         echo simec_json_encode(array(
             'error' => 1,
             'errorMensage' => 'Não foi possível enviar o arquivo!'
@@ -40,6 +40,8 @@ if($_REQUEST['uploadAnexo']){
         die();
     }
 }
+
+$urlModulo = '?modulo=principal/unidade/cadastro_pi&acao=A&aba=1';
 
 # Requisições
 include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-request.inc";
@@ -118,8 +120,7 @@ if ($_REQUEST['alterarCodigoPi']) {
  * Processa as requições enviadas a esta página.
  * @see cadastropi_requisicoes.inc
  */
-
-require(APPRAIZ . 'planacomorc/modulos/principal/planointerno/cadastropi_requisicoes.inc');
+require(APPRAIZ. 'planacomorc/modulos/principal/planointerno/cadastropi_requisicoes.inc');
 
 // -- Identificando se o usuário atual faz parte do CGSO/CPMO
 $pulaSolicitacao = pulaSolicitacao();
@@ -238,10 +239,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class="<?php echo $classTab0; ?>">
-                    <a data-toggle="tab" href="#tab-0">PI(Projeto)</a>
+                    <a data-toggle="tab" href="#tab-0">Plano Interno( Projeto )</a>
                 </li>
                 <li class="<?php echo $classTab1; ?>">
-                    <a data-toggle="tab" href="#tab-1">Acompanhamento</a>
+                    <a data-toggle="tab" href="#tab-1">Monitoramento</a>
                 </li>
             </ul>
             <div class="tab-content">

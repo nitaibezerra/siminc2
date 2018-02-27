@@ -89,7 +89,7 @@
 
 
 
-            <form id="formulario" name="formulario" method="post" class="form-horizontal">
+            <form id="formMonitorar" name="formMonitorar" method="post" class="form-horizontal">
                 <input type="hidden" name="req" id="req" value="salvar" />
                 <input name="pliid" id="pliid" type="hidden" value="<?php echo $aPlanoInterno['pliid']; ?>">
                 <input name="suoid" id="suoid" type="hidden" value="<?php echo $aPlanoInterno['suoid']; ?>">
@@ -101,7 +101,7 @@
                             <h5>
                                 Monitoramento do Projeto
                                 <?php if($mAcompanhamento->acoid){ ?>
-                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="?modulo=principal/monitorar-ppa&acao=A&req=ver-historico&acoid=<?php echo $mAcompanhamento->acoid; ?>"></a>
+                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="<?php echo $urlModulo; ?>&req=ver-historico&acoid=<?php echo $mAcompanhamento->acoid; ?>"></a>
                                 <?php } ?>
                             </h5>
                         </div>
@@ -205,7 +205,7 @@
                                 <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                             </div>
                             <div class="modal-body">
-                                <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-ppa&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                                <form class="dropzone" method="POST" enctype="multipart/form-data" action="<?php echo $urlModulo; ?>&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
                                     <div class="form-group">
                                         <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
                                         <div class="col-lg-10">
@@ -227,10 +227,12 @@
         </div>
 
 <script>
+    urlModulo = '<?php echo $urlModulo; ?>';
+    
     $(function(){
         $('#claid').change(function(){
             $.ajax({
-                url: '?modulo=principal/monitorar-ppa&acao=A&req=carregarMedida&claid=' + $(this).val(),
+                url: urlModulo+ '&req=carregarMedida&claid=' + $(this).val(),
                 dataType: 'json',
                 success: function(retorno){
                     $('#span-medida').html(retorno.select);
@@ -251,7 +253,7 @@
         });
 
         $('#suoid').change(function(){
-            window.location.href = '?modulo=principal/monitorar-ppa&acao=A&suoid=' + $(this).val();
+            window.location.href = urlModulo+ '&suoid=' + $(this).val();
         });
 
         $('.div-meta').mouseenter(function(){
@@ -279,7 +281,7 @@
                 return false;
             }
 
-            $('#formulario').submit();
+            $('#formMonitorar').submit();
         });
         
         $('#btn_inserir_anexos').click(function(){
