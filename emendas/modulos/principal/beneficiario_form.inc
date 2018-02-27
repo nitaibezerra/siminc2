@@ -124,8 +124,6 @@ $aba = $_REQUEST['aba'];
 $classTab0 = empty($aba)? 'active': NULL;
 $classTab1 = $aba? 'active': NULL;
 
-$aSiconv = $mBeneficiario->recuperarDadosSiconv();
-
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
 $mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
 
@@ -230,26 +228,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
                                             echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
                                         ?>
-
-                                        <div class="col-md-6 dados-siconv">
-                                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
-                                            <?php
-                                            echo $simec->input('benpprogramanumero', 'Número', $mBeneficiario->benpprogramanumero, ['class'=>'inteiro']);
-                                            echo $simec->input('benprogramatitulo', 'Título', $mBeneficiario->benprogramatitulo, ['maxlength' => 1000]);
-                                            echo $simec->textarea('benprogramaobjeto', 'Objeto', $mBeneficiario->benprogramaobjeto);
-                                            ?>
-                                        </div>
-                                        <div class="col-md-6 dados-siconv">
-                                            <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Proposta</h5>
-                                            <?php
-                                                $sicsequencial = $aSiconv['siconv']['sicsequencial'] ? $aSiconv['siconv']['sicsequencial'] . '/' . $aSiconv['siconv']['prsano'] : null;
-                                                echo $simec->input('benpropostanumero', 'Número', $mBeneficiario->benpropostanumero? $mBeneficiario->benpropostanumero: $sicsequencial, ['class'=>'inteiro']);
-                                                echo $simec->input('benpropostatitulo', 'Título', $mBeneficiario->benpropostatitulo, ['maxlength' => 1000]);
-                                                echo $simec->textarea('benpropostaobjeto', 'Objeto', $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: $aSiconv['siconv']['sicobjeto']);
-                                                echo $simec->select('sitid', 'Situação', $aSiconv['siconv']['sitid'], (new Emendas_Model_SiconvSituacao())->recuperarSqlCombo());
-                                            ?>
-                                        </div>
-                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +321,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_detalhe">
-                                        <?php if($mBeneficiario->benid){
+                                        <?php if($podeEditar && $mBeneficiario->benid){
                                             $cBeneficiario->montarFormularioDetalhe($mBeneficiario->benid);
                                         } ?>
                                     </div>
@@ -354,7 +332,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 dados-siconv">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                         <h5>Dados do SICONV</h5>
@@ -366,47 +344,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
 
                         <div class="clearfix"></div>
-
-                        <?php $aTipoParecer = [
-                            Emendas_Model_SiconvParecer::K_TIPO_PROPOSTA => 'Parecer',
-                            Emendas_Model_SiconvParecer::K_TIPO_PLANO_TRABALHO => 'Parecer - Plano de Trabalho',
-                        ];
-
-                //        foreach($aTipoParecer as $tipo => $titulo){ ?>
-                <!--            <div class="col-md-6">-->
-                <!--                <div class="ibox float-e-margins">-->
-                <!--                    <div class="ibox-title">-->
-                <!--                        <h5>--><?php //echo $titulo; ?><!--</h5>-->
-                <!--                    </div>-->
-                <!--                    <div class="ibox-content">-->
-                <!---->
-                <!--                        --><?php //if(isset($aSiconv['parecer'][$tipo]) && is_array($aSiconv['parecer'][$tipo])){ ?>
-                <!--                            <div class="table-responsive">-->
-                <!--                                <table class="table table-striped table-bordered table-hover bedidTables" >-->
-                <!--                                    <thead>-->
-                <!--                                    <tr class="text-center">-->
-                <!--                                        <th>Data</th>-->
-                <!--                                        <th>Parecer</th>-->
-                <!--                                    </tr>-->
-                <!--                                    </thead>-->
-                <!--                                    <tbody>-->
-                <!--                                    --><?php //foreach($aSiconv['parecer'][$tipo] as $dados){ ?>
-                <!--                                        <tr>-->
-                <!--                                            <td>--><?php //echo formata_data($dados['spadata'], "%d/%m/%Y %H:%M:%S"); ?><!--</td>-->
-                <!--                                            <td class="coluna-parecer" title="--><?php //echo $dados['spadsc']; ?><!--">--><?php //echo substr($dados['spadsc'], 0, 100); ?><!--...</td>-->
-                <!--                                        </tr>-->
-                <!--                                    --><?php //} ?>
-                <!--                                    </tbody>-->
-                <!--                                </table>-->
-                <!--                            </div>-->
-                <!--                        --><?php //} else {
-                //                            echo '<div class="alert alert-danger">Nenhum registro encontrado</div>';
-                //                        }?>
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--        --><?php //} ?>
-
                     </div>
                 </div>
                 <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">

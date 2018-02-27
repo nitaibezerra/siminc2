@@ -14,7 +14,7 @@
         <?php
         echo $simec->valor('bedvalor', 'Vl. Beneficiário', $mBeneficiarioDetalhe->bedvalor);
         $valorContingenciado = ($mBeneficiarioDetalhe->bedvalor - $mBeneficiarioDetalhe->bedvalorpriorizado);
-        echo $simec->valor('bedvalorcontingenciado', 'Vl. Contingencia', ($valorContingenciado ? $valorContingenciado : null));
+        echo $simec->valor('bedvalorcontingenciado', 'Vl. Contingenciado', ($valorContingenciado ? $valorContingenciado : null));
         ?>
 
     </div>
