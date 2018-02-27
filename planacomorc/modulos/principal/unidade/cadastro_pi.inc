@@ -41,6 +41,9 @@ if($_REQUEST['uploadAnexo']){
     }
 }
 
+# Requisições
+include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-request.inc";
+
 if ($_REQUEST['carregarComboUG']) {
     echo carregarComboUG($_REQUEST['unicod']);
     die();
@@ -1324,7 +1327,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
                     <div class="panel-body">
 
+                        <?php
 
+                            # Requisições
+                            include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-cad.inc";
+
+                        ?>
 
                     </div>
                 </div>

@@ -1,41 +1,8 @@
 <?php
+
+    # Formulario
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
-
-    $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
-    switch ($_REQUEST['req']) {
-        case 'salvar':
-            $cAcompanhamento->salvar($_REQUEST);
-        die;
-        case 'excluir':
-            $cAcompanhamento->excluir($_REQUEST['acoid']);
-        die;
-        case 'ver-historico':
-            $cAcompanhamento->recuperarHistorico($_REQUEST['acoid']);
-        die;
-        case 'carregarMedida':
-            $mClassificacao = new Acompanhamento_Model_Classificacao($_REQUEST['claid']);
-            $retorno['medida'] = $mClassificacao->clamedida;
-            $retorno['select'] = $simec->select('medidas[]', 'Medidas a serem adotadas', null, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$_REQUEST['claid']]));
-
-            echo json_encode($retorno);
-        die;
-        case 'uploadAnexo':
-            $file = new FilesSimec();
-            if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
-                echo simec_json_encode(array(
-                    'arqid' => $file->getIdArquivo(),
-                    'arqnome' => $_FILES['file']['name'],
-                    'arqdescricao' => $_REQUEST['arqdescricao']
-                ));
-            }else{
-                echo simec_json_encode(array(
-                    'error' => 1,
-                    'errorMensage' => 'Não foi possível enviar o arquivo!'
-                ));
-            }
-        die;
-    }
-
+    
     $mPlanoInterno = new Pi_PlanoInterno($_REQUEST['pliid']);
     $aPlanoInterno = current($mPlanoInterno->recuperarDados());
 
@@ -44,7 +11,6 @@
 
     $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
 
-    include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
 <script src="../library/liquify/snap.svg.js"></script>
@@ -56,14 +22,6 @@
     }
 </style>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2><?php echo $titulo_modulo; ?></h2>
-    </div>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
         <?php if($aPlanoInterno['pliid']){ ?>
 
             <div class="col-md-12">
@@ -217,58 +175,56 @@
 
             </form>
         <?php } ?>
-    </div>
-</div>
 
-<!-- Modal PI -->
-<div class="modal fade" id="detalhe-pi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"></h4>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de anexos -->
-<div class="row">
-    <div class="col-md-12">
-        <div id="modal_upload" class="modal fade">
-            <div class="modal_dialog_upload">
+        <!-- Modal PI -->
+        <div class="modal fade" id="detalhe-pi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
                     <div class="modal-body">
-                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-ppa&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
-                            <div class="form-group">
-                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
-                                </div>
-                            </div>
-                            <div class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
-                        </form>
+
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <!-- Modal de anexos -->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="modal_upload" class="modal fade">
+                    <div class="modal_dialog_upload">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                                <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-ppa&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                                    <div class="form-group">
+                                        <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                        </div>
+                                    </div>
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 <script>
     $(function(){
@@ -399,4 +355,5 @@
         ;
         $('#table_anexos').append(trHtml);
     }
+
 </script>
