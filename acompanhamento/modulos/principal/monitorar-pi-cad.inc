@@ -29,7 +29,14 @@
                     <div class="ibox-title">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5>Informações do Projeto</h5>
+                                <h5>
+                                    Informações do Projeto: 
+                                    <?php
+                                        if(!empty($aPlanoInterno['plicod'])){
+                                            echo '<span class="link" title="Exibir Espelho do PI" style="color: red; padding: 5px;" onclick="javascript: exibirEspelhoPi(\''. (int)$aPlanoInterno['pliid']. '\')">(' . $aPlanoInterno['plicod'] . ')</span>';
+                                        }
+                                    ?>
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -365,6 +372,18 @@
         var uri = window.location.href;
         uri = uri.replace(/\?.+/g, '?modulo=principal/arquivo/visualizar&acao=A&download=S&arqid=' + arqid+ '&esquema=acompanhamento');
         window.location.href = uri;
+    }
+
+    /**
+     * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
+     *
+     * @returns VOID
+     */
+    function exibirEspelhoPi(pliid){
+        window.open(
+            '?modulo=inicio&acao=C&req=espelho-pi&pliid='+ pliid,
+            'popup_espelho_pi',
+            'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
     }
 
 </script>
