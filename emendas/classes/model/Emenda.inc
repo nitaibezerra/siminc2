@@ -575,6 +575,39 @@ class Emendas_Model_Emenda extends Modelo
         ver('FIM', d);
     }
 
+    public function atualizarPrograma()
+    {
+        global $configSiconv;
+
+        $mPrograma = new Emendas_Model_Programa();
+        $programas = $mPrograma->recuperarTodos();
+        
+        $usuario = $configSiconv->user;
+        $senha = $configSiconv->pwd;
+
+        $arrParam = array(
+            'usuario' => $usuario,
+            'senha' 	=> $senha,
+            'url' 	=> WEB_SERVICE_SICONV_URL,
+        );
+        $obWS = new WSIntegracaoSiconv($arrParam);
+
+        foreach ($programas as $programa){
+
+            $filtro = [
+                'prgcodigo'=>$programa['prgcodigo']
+            ];
+
+            $mPrograma->atualizar($obWS, $filtro);
+            $mPrograma->commit();
+            if(count($programas)>1){
+                sleep(5);
+            }
+        }
+
+        ver('FIM', d);
+    }
+
     public function recuperarPropostaWs($obWS, $emenda)
     {
         $filtro = [

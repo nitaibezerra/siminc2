@@ -53,6 +53,9 @@ switch ($_REQUEST['req']) {
     case 'atualizar-siconv':
         $cBeneficiario->atualizarSiconv($_REQUEST['emeid']);
         die;
+    case 'atualizar-programa':
+        $cBeneficiario->atualizarPrograma($_REQUEST['emeid']);
+        die;
     case 'uploadAnexo':
         $file = new FilesSimec();
         if($file->setUpload($_REQUEST['arqdescricao'], '', false)){

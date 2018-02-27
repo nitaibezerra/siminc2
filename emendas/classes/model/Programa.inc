@@ -60,5 +60,39 @@ class Emendas_Model_Programa extends Modelo
         'idhash' => null,
     );
 
+    public function atualizar($obWS, $filtro = null)
+    {
+        $retorno = $obWS->consultarPrograma($filtro);
+
+        $prgid = $this->getPrograma($retorno);
+
+        if($prgid){
+            $this->carregarPorId((int)$prgid);
+        } else {
+            $this->prgid = null;
+        }
+
+        $this->idhash = $retorno->idHash;
+        $this->prgcodigo = $retorno->codigo;
+        $this->prgtitulo = $retorno->nome;
+        $this->salvar();
+    }
+
+    public function getPrograma($programa)
+    {
+        $sql = "select prgid from emendas.programa where idhash = '{$programa->idHash}'";
+        $prgid = $this->pegaUm($sql);
+        
+        if(!$prgid){
+            $this->prgcodigo = $programa->codigo;
+            $this->idhash = $programa->idHash;
+
+            $this->salvar();
+            $prgid = $this->prgid;
+        }
+
+        return $prgid;
+    }
+
 }//end Class
 ?>

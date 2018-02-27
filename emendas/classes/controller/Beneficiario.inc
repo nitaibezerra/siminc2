@@ -115,4 +115,11 @@ class Emendas_Controller_Beneficiario
         $mEmenda->atualizarSiconv();
         ver($benid, $mEmenda, d);
     }
+
+    public function atualizarPrograma($emeid)
+    {
+        $mEmenda = new Emendas_Model_Emenda($emeid);
+        $mEmenda->atualizarPrograma();
+        ver($benid, $mEmenda, d);
+    }
 }
