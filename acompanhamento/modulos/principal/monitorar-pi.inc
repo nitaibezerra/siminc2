@@ -1,6 +1,6 @@
 <?php
 
-    $urlModulo = '?modulo=principal/monitorar-ppa&acao=A';
+    $urlModulo = '?modulo=principal/monitorar-pi&acao=A';
 
     # Requisições
     include_once APPRAIZ. "acompanhamento/modulos/principal/monitorar-pi-request.inc";

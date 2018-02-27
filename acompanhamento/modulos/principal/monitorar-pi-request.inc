@@ -18,8 +18,9 @@
 
             echo json_encode($retorno);
         die;
-        case 'uploadAnexo':
+        case 'uploadAnexoAcompanhamento':
             $file = new FilesSimec();
+            $file->setEsquema('acompanhamento');
             if($file->setUpload($_REQUEST['arqdescricao'], '', false)){
                 echo simec_json_encode(array(
                     'arqid' => $file->getIdArquivo(),

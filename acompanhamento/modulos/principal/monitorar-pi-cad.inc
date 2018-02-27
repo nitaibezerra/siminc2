@@ -1,6 +1,5 @@
 <?php
 
-    # Formulario
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
     
     $mPlanoInterno = new Pi_PlanoInterno($_REQUEST['pliid']);
@@ -137,7 +136,7 @@
                         <div class="ibox-content">
                             <div class="form-group">
                                 <div class="col-lg-12">
-                                    <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
+                                    <table id="table_anexos_acompanhamento" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                         <tr>
                                             <td style="text-align: left;"><b>Nome do arquivo</b></td>
                                             <td style="text-align: left;"><b>Descrição</b></td>
@@ -147,12 +146,12 @@
                                             if($listaDeAnexos):
                                                 foreach($listaDeAnexos as $anexo):
                                         ?>
-                                            <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
-                                                <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
+                                            <tr style="height: 30px;" class="tr_anexos_acompanhamento_<?php echo $anexo['arqid']; ?>" >
+                                                <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivoAcompanhamento('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
                                                 <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
                                                 <td style="text-align: center;">
                                                     <input type="hidden" value="<?php echo $anexo['arqid']; ?>" name="listaAnexos[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos="<?php echo $anexo['arqid']; ?>" />
+                                                    <span class="glyphicon glyphicon-trash btnRemoverAnexosAcompanhamento link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos-acompanhamento="<?php echo $anexo['arqid']; ?>" />
                                                 </td>
                                             </tr>
                                         <?php
@@ -165,7 +164,7 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <input type="button" id="btn_inserir_anexos_acompanhamento" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
                                 </div>
                             </div>
 
@@ -197,15 +196,15 @@
         <!-- Modal de anexos -->
         <div class="row">
             <div class="col-md-12">
-                <div id="modal_upload" class="modal fade">
-                    <div class="modal_dialog_upload">
+                <div id="modal_upload_acompanhamento" class="modal fade">
+                    <div class="modal_dialog_upload_acompanhamento">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
                                 <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                             </div>
                             <div class="modal-body">
-                                <form class="dropzone" method="POST" enctype="multipart/form-data" action="<?php echo $urlModulo; ?>&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                                <form class="dropzone" method="POST" enctype="multipart/form-data" action="<?php echo $urlModulo; ?>&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexoAcompanhamento" id="formularioAnexoAcompanhamento" name="formularioAnexoAcompanhamento">
                                     <div class="form-group">
                                         <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
                                         <div class="col-lg-10">
@@ -284,23 +283,23 @@
             $('#formMonitorar').submit();
         });
         
-        $('#btn_inserir_anexos').click(function(){
-            abrirModalUpload();
+        $('#btn_inserir_anexos_acompanhamento').click(function(){
+            abrirModalUploadAcompanhamento();
         });
 
         // Evento de terminar de carregar arquivos
-        Dropzone.options.formularioAnexo = {
+        Dropzone.options.formularioAnexoAcompanhamento = {
             init: function() {
                 
                 this.on("success", function(file, response){
                     var jsonResponse = $.parseJSON(response);
-                    inserirNovoAnexo(jsonResponse);
+                    inserirNovoAnexoAcompanhamento(jsonResponse);
                 });
 
                 this.on("queuecomplete", function(file){
 
                     // Armazena o objeto Dropzone para chamar métodos
-                    objFormularioAnexo = this;
+                    objFormularioAnexoAcompanhamento = this;
                     // Chama mensagem de sucesso
                     swal({
                       title: "",
@@ -312,17 +311,17 @@
                         // Fecha o swal alert
                         swal.close();
                         // limpa campo de upload
-                        objFormularioAnexo.removeAllFiles();
+                        objFormularioAnexoAcompanhamento.removeAllFiles();
                         // fecha modal após a seleção
-                        $('#modal_upload').modal('hide');
+                        $('#modal_upload_acompanhamento').modal('hide');
                     });
                 });
             }
         };
-        
-        $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
-            var id = $(this).attr('data-anexos');
-            $('.tr_anexos_'+ id).remove();
+
+        $('#table_anexos_acompanhamento').on('click', '.btnRemoverAnexosAcompanhamento', function(){
+            var id = $(this).attr('data-anexos-acompanhamento');
+            $('.tr_anexos_acompanhamento_'+ id).remove();
         });
 
         $('#percentual-empenhado').liquidMeter({
@@ -339,23 +338,33 @@
         });
     });
     
-    function abrirModalUpload() {
-        $('.modal_dialog_upload').show();
-        $('#modal_upload').modal();
-        $('#modal_upload .chosen-container').css('width', '100%');
+    function abrirModalUploadAcompanhamento() {
+        $('.modal_dialog_upload_acompanhamento').show();
+        $('#modal_upload_acompanhamento').modal();
+        $('#modal_upload_acompanhamento .chosen-container').css('width', '100%');
     }
 
-    function inserirNovoAnexo(json){
-        var trHtml = '<tr style="height: 30px;" class="tr_anexos_'+ json.arqid +'" >'
-            + '                    <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('+ json.arqid+ '); return false;" >'+ json.arqnome +'</a></td>'
-            + '                    <td style="text-align: left;">'+ json.arqdescricao +'</td>'
+    function inserirNovoAnexoAcompanhamento(json) {
+        var trHtml = '<tr style="height: 30px;" class="tr_anexos_acompanhamento_'+ json.arqid+ '" >'
+            + '                    <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivoAcompanhamento('+ json.arqid+ '); return false;" >'+ json.arqnome+ '</a></td>'
+            + '                    <td style="text-align: left;">'+ json.arqdescricao+ '</td>'
             + '                    <td style="text-align: center;">'
-            + '                         <input type="hidden" value="'+ json.arqid +'" name="listaAnexos[]">'
-            + '                         <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo '+ json.arqnome+ '" data-anexos="'+ json.arqid +'" >'
+            + '                         <input type="hidden" value="'+ json.arqid+ '" name="listaAnexos[]">'
+            + '                         <span class="glyphicon glyphicon-trash btnRemoverAnexosAcompanhamento link" title="Excluir o arquivo '+ json.arqnome+ '" data-anexos-acompanhamento="'+ json.arqid+ '" >'
             + '                    </td>'
             + '                </tr>'
         ;
-        $('#table_anexos').append(trHtml);
+        $('#table_anexos_acompanhamento').append(trHtml);
+    }
+
+    /**
+     * Abre um arquivo cadastrado no sistema de comunicados.
+     * @param {int} arqid O ID do arquivo no sistema.
+     */
+    function abrirArquivoAcompanhamento(arqid) {
+        var uri = window.location.href;
+        uri = uri.replace(/\?.+/g, '?modulo=principal/arquivo/visualizar&acao=A&download=S&arqid=' + arqid+ '&esquema=acompanhamento');
+        window.location.href = uri;
     }
 
 </script>
