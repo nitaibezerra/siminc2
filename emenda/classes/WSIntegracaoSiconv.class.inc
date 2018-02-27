@@ -90,6 +90,22 @@ ver($retorno, d);
         return $retorno->return;
     }
 
+	public function consultarPrograma($dados){
+        $obEnvio = $this->getConsultarPrograma($dados);
+        $wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
+                'exceptions'	=> true,
+                'trace'			=> true,
+                'encoding'		=> 'ISO-8859-1',
+                "proxy_host" => "",
+                "proxy_port" => '',
+            )
+        );
+
+        $wsProposta->__setUsernameToken($this->wsusuario, $this->wssenha);
+        $retorno = $wsProposta->consultarPrograma( $obEnvio );
+        return $retorno->return;
+    }
+
 	public function consultarPropostaPorAcaoOrcamentaria($dados){
         $obEnvio = $this->getConsultarPropostaPorAcaoOrcamentaria($dados);
         $wsProposta = new SimecWsInterfaceService($this->urlWsdl, array(
@@ -203,6 +219,17 @@ ver($retorno, d);
 		$oParametros = new parametrosConsultarPropostaPorEmendaParlamentarWS();
         $oParametros->codigoOrgao = $dados['unocod'];
         $oParametros->numeroEmendaParlamentar = $dados['emenumero'];
+
+        $oParametros->login = $this->getLoginWS('true'); // LoginWS
+
+		$ObjetoWS->arg0	= $oParametros;
+		return $ObjetoWS;
+	}
+
+	public function getConsultarPrograma($dados){
+		$ObjetoWS = new consultarPrograma();
+		$oParametros = new parametrosConsultarProgramaWS();
+        $oParametros->codigoPrograma = $dados['prgcodigo'];
 
         $oParametros->login = $this->getLoginWS('true'); // LoginWS
 
