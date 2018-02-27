@@ -107,7 +107,7 @@ class FilesSimec extends Files {
 	 * @since  : 09/03/2009
 	 * @tutorial : Caso não seja passado o Nome do Esquema a função recupera pelo ID do sistema que está na session.
 	 */
-	private function setEsquema($nomeSistema = NULL){
+	public function setEsquema($nomeSistema = NULL){
 			if($nomeSistema){
 				$this->nomeEsquema 	= $nomeSistema;
 			}else{

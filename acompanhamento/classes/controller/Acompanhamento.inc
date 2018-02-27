@@ -2,14 +2,13 @@
 
 class Acompanhamento_Controller_Acompanhamento
 {
-    public function salvar($dados)
+    public function salvar($dados, $urlModulo)
     {
-
         $url = '?modulo=principal/monitorar-ppa&acao=A';
         if(!empty($dados['ipnid'])){
             $url = '?modulo=principal/monitorar-pnc&acao=A';
         } elseif(!empty($dados['pliid'])){
-            $url = '?modulo=principal/monitorar-pi&acao=A&pliid=' . $dados['pliid'];
+            $url = $urlModulo. '&pliid='. $dados['pliid'];
         }
 
         try {
@@ -28,7 +27,7 @@ class Acompanhamento_Controller_Acompanhamento
             $this->_gravarHistorico($mAcompanhamento->acoid);
 
             $mAcompanhamento->commit();
-            simec_redirecionar($url . '&acoid=' . $mAcompanhamento->acoid, 'success');
+            simec_redirecionar($url. '&acoid='. $mAcompanhamento->acoid, 'success');
         } catch (Exception $e){
             $mAcompanhamento->rollback();
             simec_redirecionar($url, 'error');

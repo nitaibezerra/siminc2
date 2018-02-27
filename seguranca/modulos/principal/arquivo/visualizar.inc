@@ -1,15 +1,23 @@
 <?php
 
-    include_once APPRAIZ . "includes/classes/fileSimec.class.inc";
+    include_once APPRAIZ. "includes/classes/fileSimec.class.inc";
 
-    $caminho_atual = $_SERVER ['REQUEST_URI'];
+    $caminho_atual = $_SERVER['REQUEST_URI'];
+    $esquema = $_REQUEST['esquema'];
+    $opcaoDownload = $_REQUEST['download'];
+    $arqid = $_REQUEST['arqid'];
 
-    if ($_REQUEST ['download'] == 'S') {
+    if($opcaoDownload == 'S') {
         $file = new FilesSimec();
-        $arqid = $_REQUEST ['arqid'];
+        
+        # Verifica se o arquivo deverá ser aberto a partir de outro módulo
+        if($esquema){
+            $file->setEsquema($esquema);
+        }
+        
         ob_clean();
-        $arquivo = $file->getDownloadArquivo( $arqid );
+        $arquivo = $file->getDownloadArquivo($arqid);
         exit();
     }
 
-    include APPRAIZ . "includes/cabecalho.inc";
+    include APPRAIZ. "includes/cabecalho.inc";

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Processa as requições recebidas pelo arquivo cadastro.inc.
  * São chamadas funções incluídas no arquivo _funcoespi.php, incluído
@@ -40,46 +41,46 @@ if($_REQUEST['confirmar-apagar']){
 
 /* Monta a combo de UGs filtrando por UO */
 if ($_POST['carregarComboUG']) {
-	header('content-type: text/html; charset=ISO-8859-1');
+    header('content-type: text/html; charset=ISO-8859-1');
     carregarComboUG($_POST['unicod']);
     exit;
 }
 
 /* Monta a combo de subações */
 if ($_POST['carregarComboSubacao']) {
-	header('content-type: text/html; charset=ISO-8859-1');
-	carregarComboSubacao($_POST['unicod'], $_POST['ungcod']);
-	exit;
+    header('content-type: text/html; charset=ISO-8859-1');
+    carregarComboSubacao($_POST['unicod'], $_POST['ungcod']);
+    exit;
 }
 
 /* Monta a combo de subações */
 if ($_POST['carregarComboSubacaoInstituicoes']) {
-	header('content-type: text/html; charset=ISO-8859-1');
-	carregarComboSubacaoUO($_POST['unicod']);
-	exit;
+    header('content-type: text/html; charset=ISO-8859-1');
+    carregarComboSubacaoUO($_POST['unicod']);
+    exit;
 }
 
 //valida cod pi AJAX
 if ($_POST['piAjax']) {
-	header('content-type: text/html; charset=ISO-8859-1');
-	validaCodPi($_POST['piAjax'], $_POST['pliid']);
-	exit;
+    header('content-type: text/html; charset=ISO-8859-1');
+    validaCodPi($_POST['piAjax'], $_POST['pliid']);
+    exit;
 }
 
 //valida cod pi AJAX
 if ($_REQUEST['sbaAjax']) {
-	header('content-type: text/html; charset=ISO-8859-1');
-	buscaDadosSubacao($_POST['sbaAjax'], $_POST['capidAjax']);
-	exit;
+    header('content-type: text/html; charset=ISO-8859-1');
+    buscaDadosSubacao($_POST['sbaAjax'], $_POST['capidAjax']);
+    exit;
 }
 
 if ($_REQUEST['carregarComboEnquadramentoPorSubacao']) {
-	header('content-type: text/html; charset=ISO-8859-1');
-	carregarComboEnquadramentoPorSubacao($_POST['sbaid']);
-	exit;
+    header('content-type: text/html; charset=ISO-8859-1');
+    carregarComboEnquadramentoPorSubacao($_POST['sbaid']);
+    exit;
 }
 
-//salvarPI($dados);
+//ver($_REQUEST, d);
 // -- Salvando o novo PI
 if (isset($_REQUEST['evento'])) {
     $func = '';
