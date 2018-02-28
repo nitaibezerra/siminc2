@@ -85,7 +85,7 @@
                             <div class="col-sm-2">
                                 <?php $percentual = $aPlanoInterno['previsto'] ? $aPlanoInterno['empenhado'] * 100 / $aPlanoInterno['previsto'] : 0; ?>
                                 <h3 class="text-center">Percentual de Empenho</h3>
-                                <meter style="display: none;" max="100" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
+                                <meter style="display: none;" max="1000" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
                             </div>
                         </div>
                     </div>
