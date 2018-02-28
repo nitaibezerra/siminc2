@@ -51,10 +51,10 @@ switch ($_REQUEST['req']) {
         echo verificarPactuacaoConvenio($_REQUEST['capid']);
         die;
     case 'atualizar-siconv':
-        $cBeneficiario->atualizarSiconv($_REQUEST['emeid']);
+        $cBeneficiario->atualizarSiconv($_REQUEST['emeid'], $_REQUEST['benid']);
         die;
     case 'atualizar-programa':
-        $cBeneficiario->atualizarPrograma($_REQUEST['emeid']);
+        $cBeneficiario->atualizarPrograma($_REQUEST['emeid'], $_REQUEST['benid']);
         die;
     case 'uploadAnexo':
         $file = new FilesSimec();
@@ -153,7 +153,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-info" href="?modulo=principal/beneficiario_form&acao=A&req=atualizar-siconv&emeid=<?php echo $mBeneficiario->emeid; ?>"><i class="fa fa-refresh"></i> Atualizar dados SICONV</a>
+            <a class="btn btn-info" href="?modulo=principal/beneficiario_form&acao=A&req=atualizar-siconv&emeid=<?php echo $mBeneficiario->emeid; ?>&benid=<?php echo $mBeneficiario->benid; ?>"><i class="fa fa-refresh"></i> Atualizar dados SICONV</a>
         </div>
     </div>
 </div>

@@ -109,11 +109,11 @@ class Emendas_Controller_Beneficiario
         include_once APPRAIZ . 'emendas/modulos/principal/siconv-detalhe.inc';
     }
 
-    public function atualizarSiconv($emeid)
+    public function atualizarSiconv($emeid, $benid)
     {
         $mEmenda = new Emendas_Model_Emenda($emeid);
         $mEmenda->atualizarSiconv();
-        ver($benid, $mEmenda, d);
+        simec_redirecionar('?modulo=principal/beneficiario_form&acao=A&benid=7966&benid='. $benid, 'success');
     }
 
     public function atualizarPrograma($emeid)

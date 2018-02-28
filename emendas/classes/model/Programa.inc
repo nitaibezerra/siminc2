@@ -58,6 +58,7 @@ class Emendas_Model_Programa extends Modelo
         'prgtitulo' => null,
         'prgcodigo' => null,
         'idhash' => null,
+        'prgstatus' => null,
     );
 
     public function atualizar($obWS, $filtro = null)
@@ -75,6 +76,8 @@ class Emendas_Model_Programa extends Modelo
         $this->idhash = $retorno->idHash;
         $this->prgcodigo = $retorno->codigo;
         $this->prgtitulo = $retorno->nome;
+        $this->prgstatus = $retorno->status;
+
         $this->salvar();
     }
 
