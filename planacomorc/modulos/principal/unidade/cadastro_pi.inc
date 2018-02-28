@@ -241,7 +241,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <li class="<?php echo $classTab0; ?>">
                     <a data-toggle="tab" href="#tab-0">Plano Interno( Projeto )</a>
                 </li>
-                <?php if($dadosPI['pliid']): ?>
+                <?php if($dadosPI['plicod']): ?>
                     <li class="<?php echo $classTab1; ?>">
                         <a data-toggle="tab" href="#tab-1">Monitoramento</a>
                     </li>
@@ -1328,7 +1328,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                 </div>
 
-                <?php if($dadosPI['pliid']): ?>
+                <?php if($dadosPI['plicod']): ?>
                     <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
                         <div class="panel-body">
 

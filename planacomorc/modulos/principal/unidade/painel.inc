@@ -19,6 +19,9 @@
         case 'detalhe-subunidade':
             $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
         die;
+        case 'espelho-pi':
+            include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
+        die;
         case 'detalhe-funcional':
             $oPlanoInterno->recuperarPiPorFuncional((object) array('suoid' => $_REQUEST['suoid'], 'ptrid' => $_REQUEST['ptrid']));
         die;

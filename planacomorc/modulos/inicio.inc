@@ -9,6 +9,12 @@ $perfis = pegaPerfilGeral();
     if($_REQUEST['exercicio']){
         $urlPainel .= '&exercicio='. $_REQUEST['exercicio'];
     }
+    if($_REQUEST['req']){
+        $urlPainel .= '&req='. $_REQUEST['req'];
+    }
+    if($_REQUEST['pliid']){
+        $urlPainel .= '&pliid='. $_REQUEST['pliid'];
+    }
     simec_redirecionar($urlPainel);
 //}
 
