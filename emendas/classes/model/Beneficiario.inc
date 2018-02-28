@@ -319,6 +319,19 @@ class Emendas_Model_Beneficiario extends Modelo
             $dadosSiconv['parecer'][$parecer['spatipo']][] = $parecer;
         }
 
+        $sql = "select * 
+                from emendas.siconvprograma sip
+                  inner join emendas.programa prg on prg.prgid = sip.prgid
+                where sip.sicid = " . (int) $sicid . "
+                ";
+
+        $aPrograma = $this->carregar($sql);
+
+        $dadosSiconv['programa'] = [];
+        foreach($aPrograma as $programa){
+            $dadosSiconv['programa'][] = $programa;
+        }
+
         return $dadosSiconv;
     }
 

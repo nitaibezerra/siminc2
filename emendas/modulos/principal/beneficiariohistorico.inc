@@ -4,8 +4,8 @@
             <thead>
             <tr class="text-center">
                 <th width="10%">Ações</th>
-                <th>behdsc</th>
-                <th>behdata</th>
+                <th>Descrição</th>
+                <th>Data</th>
             </tr>
             </thead>
             <tbody>
