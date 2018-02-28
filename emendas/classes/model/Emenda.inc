@@ -572,7 +572,6 @@ class Emendas_Model_Emenda extends Modelo
 
             $mSiconv->atualizar($filtro);
         }
-        ver('FIM', d);
     }
 
     public function atualizarPrograma()

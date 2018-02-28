@@ -6,9 +6,9 @@
         global $simec;
         $simec->setPodeEditar(0);
 
-        echo $simec->input('benpprogramanumero', 'Número', $aSiconv['siconv']['benpprogramanumero'], ['class'=>'inteiro']);
-        echo $simec->input('benprogramatitulo', 'Título', $aSiconv['siconv']['benprogramatitulo'], ['maxlength' => 1000]);
-        echo $simec->textarea('benprogramaobjeto', 'Objeto', $aSiconv['siconv']['benprogramatitulo']);
+        echo $simec->input('benpprogramanumero', 'Número', $aSiconv['programa'][0]['prgcodigo']);
+        echo $simec->input('benprogramatitulo', 'Título', $aSiconv['programa'][0]['prgtitulo']);
+        echo $simec->textarea('benprogramaobjeto', 'Objeto', $aSiconv['programa'][0]['benprogramatitulo']);
         ?>
     </div>
     <div class="col-md-6">
