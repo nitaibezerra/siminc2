@@ -24,6 +24,7 @@
         $('#btn-exportar-xls').click(function(){
             $('#requisicao').val('listapimanter-xls');
             $('#filtropi').submit();
+            $('#requisicao').val('');
         });
         
         $('.btn-novo').click(function(){

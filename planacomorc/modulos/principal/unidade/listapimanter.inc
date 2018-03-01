@@ -80,7 +80,7 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/unidade/lista-pi-manter.js?v=3"></script>
+<script src="js/unidade/lista-pi-manter.js?v=4"></script>
 <style>
 /*    .tabela-listagem {
         font-size: 1em !important;
