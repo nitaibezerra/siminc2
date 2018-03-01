@@ -36,6 +36,8 @@ $cabecalho = [
     'Cronograma Orçamentário<br />Custeio Setembro', 'Cronograma Orçamentário<br />Custeio Outubro', 'Cronograma Orçamentário<br />Custeio Novembro', 'Cronograma Orçamentário<br />Custeio Dezembro',
 
     'Valor Provisionado', 'Valor Empenhado', 'Valor Liquidado', 'Valor Pago',
+    
+    'Executado', 'Análise Situacional', 'Classificação', 'Medidas a serem adotadas', 'Detalhamento das providências a serem adotadas'
 ];
 
 # Lista de colunas que terão formatação de moeda.
