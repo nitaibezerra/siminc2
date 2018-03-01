@@ -154,7 +154,7 @@ class Emendas_Model_Emenda extends Modelo
                     $autid = $this->_recuperarAutorImportacao($line, $_SESSION['exercicio']);
 
                     // Ação
-                    $funcional = $this->_recuperarAcaoImportacao($line[7], $line[6], $line[8], $unocod, $_SESSION['exercicio']);
+                    $funcional = $this->_recuperarFuncionalImportacao($line[7], $line[6], $line[8], $unocod, $_SESSION['exercicio']);
 
                     if(!$funcional || !$autid){ continue; }
 
@@ -223,7 +223,7 @@ class Emendas_Model_Emenda extends Modelo
         return $autid;
     }
 
-    private function _recuperarAcaoImportacao($acao, $programa, $localizador, $unocod, $exercicio)
+    private function _recuperarFuncionalImportacao($acao, $programa, $localizador, $unocod, $exercicio)
     {
         $acacod = substr(trim($acao), 0, 4);
         $prgcod = substr(trim($programa), 0, 4);

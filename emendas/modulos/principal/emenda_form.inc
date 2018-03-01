@@ -15,7 +15,8 @@ switch ($_REQUEST['req']) {
         $cEmenda->excluir($_REQUEST['emeid']);
         die;
     case 'carregarAcaoPorUo':
-        echo $simec->select('ptrid', 'Funcional', null, (new Monitora_Model_Ptres())->recuperarSqlCombo(['ptres.prgcod', 'ptres.acacod', 'acaobjetivocod', 'ptres.loccod', 'acatitulo'], ["unoid = '{$_REQUEST['unoid']}'"]));
+        $aPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo(["coalesce(ptres.prgcod, '')", "coalesce(ptres.acacod, '')", "coalesce(acaobjetivocod, '')", "coalesce(ptres.loccod, '')", "coalesce(ptres.plocod, '')", "acatitulo"], ["plocod = 'EIND'", "unoid = '{$_REQUEST['unoid']}'"]);
+        echo $simec->select('ptrid', 'Funcional', null, $aPtres);
         die;
     case 'formulario-detalhe':
         $cEmenda->montarFormularioDetalhes($_REQUEST['emeid'], $_REQUEST['emdid']);
@@ -59,7 +60,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->input('emenumero', 'Número', $mEmenda->emenumero, ['class'=>'inteiro']);
                             echo $simec->select('autid', 'Autor', $mEmenda->autid, (new Emendas_Model_Autor())->recuperarSqlCombo(['autcod', 'autnome'], null, 'autnome'));
                             echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
-                            echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mEmenda->ptrid, (new Monitora_Model_Ptres())->recuperarSqlCombo(['ptres.prgcod', 'ptres.acacod', 'acaobjetivocod', 'ptres.loccod', 'acatitulo'])) . '</span>';
+                            $aPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo(["coalesce(ptres.prgcod, '')", "coalesce(ptres.acacod, '')", "coalesce(acaobjetivocod, '')", "coalesce(ptres.loccod, '')", "coalesce(ptres.plocod, '')", "acatitulo"], ["plocod = 'EIND'", "unoid = '{$mEmenda->unoid}'"]);
+                            echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mEmenda->ptrid, $aPtres) . '</span>';
                             echo $simec->radio('emeimpositiva', 'Impositiva', $mEmenda->emeimpositiva, ['t'=>'Sim', 'f'=>'Não']);
                             echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['maxlength' => 2000]);
                         ?>

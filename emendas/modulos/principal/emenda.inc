@@ -36,11 +36,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
                             <tr class="text-center">
-                                <th width="10%">Ações</th>
+                                <th width="5%">Ações</th>
                                 <th>Número</th>
-                                <th>Autor</th>
+                                <th width="15%">Autor</th>
                                 <th>Beneficiário</th>
-                                <th>Unidade</th>
+                                <th width="10%">Unidade</th>
                                 <th>Situação</th>
                             </tr>
                             </thead>
