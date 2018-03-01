@@ -1201,8 +1201,22 @@ class Pi_PlanoInterno extends Modelo
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '11' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_11,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '12' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_12,         
 
-                vlrautorizado, vlrempenhado, vlrliquidado, vlrpago
-                           
+                vlrautorizado, vlrempenhado, vlrliquidado, vlrpago,
+                
+		-- DADOS DO MONITORAMENTO
+		ac.acoquantidade AS executado,
+		ac.acoanalise AS analise,
+		cl.cladsc AS classificacao,
+		LTRIM(REPLACE(REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				' ' || meddsc
+			FROM acompanhamento.medida md
+				JOIN acompanhamento.acompanhamentomedida amd ON md.medid = amd.medid
+			WHERE
+				amd.acoid = ac.acoid
+		)::TEXT, '{', ''), '}', ''), '\"', '')) AS medidas,
+		ac.acoprovidencias AS providencias
+
             FROM monitora.pi_planointerno pli
                 JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
                 JOIN public.vw_subunidadeorcamentaria suo ON suo.suocod = pli.ungcod AND suo.unocod = pli.unicod AND suo.prsano = pli.pliano
@@ -1240,6 +1254,9 @@ class Pi_PlanoInterno extends Modelo
                         sex.exercicio,
                         sex.plicod
                 ) sex ON sex.plicod = pli.plicod AND sex.exercicio = pli.pliano
+		-- DADOS DO MONITORAMENTO
+		LEFT JOIN acompanhamento.acompanhamento ac ON pli.pliid = ac.pliid
+		LEFT JOIN acompanhamento.classificacao cl ON ac.claid = cl.claid
             WHERE
                 $where
         ";
