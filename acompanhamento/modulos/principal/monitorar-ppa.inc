@@ -195,7 +195,7 @@
                             <div class="col-sm-2">
                                 <?php $percentual = $infoPI['previsto'] ? $infoPI['empenhado'] * 100 / $infoPI['previsto'] : 0; ?>
                                 <h3 class="text-center">Percentual de Empenho</h3>
-                                <meter style="display: none;" max="100" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
+                                <meter style="display: none;" max="1000" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
                             </div>
                         <?php } ?>
                     </div>
