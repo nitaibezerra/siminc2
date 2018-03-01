@@ -7,7 +7,7 @@ class Api_IndicadorController extends Simec_Controller_Rest
 	
 	public function init() 
 	{
-		$this->businessIndicador = new Api_Business_IndicadorBusiness();
+//		$this->businessIndicador = new Api_Business_IndicadorBusiness();
 	}
 	
 	/**
@@ -25,9 +25,9 @@ class Api_IndicadorController extends Simec_Controller_Rest
 	 */
 	public function tempoAction() 
 	{
-		$tempo = $this->businessIndicador->totalTempoExcucao();
+//		$tempo = $this->businessIndicador->totalTempoExcucao();
 		
-		$this->_encode($tempo);
+		$this->_encode(array('callback' => 'ok'));
 	}
 	
 	/**
