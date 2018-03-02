@@ -67,7 +67,8 @@ class Emendas_Model_Emenda extends Modelo
         'emeimpositiva' => null,
         'autid' => null,
         'prsano' => null,
-        'emestatus' => null
+        'emestatus' => null,
+        'emeatualizacaosiconv' => null,
     );
 
     public function recuperarListagem($exercicio, $listaSubUnidadeUsuario = array())
@@ -228,10 +229,9 @@ class Emendas_Model_Emenda extends Modelo
         $acacod = substr(trim($acao), 0, 4);
         $prgcod = substr(trim($programa), 0, 4);
         $loccod = substr(trim($localizador), 0, 4);
-        $sql = "select ptrid from monitora.ptres where acacod = '$acacod' and prgcod = '$prgcod' and loccod = '$loccod' and unicod = '$unocod' and ptrano = '{$exercicio}' and plocod = 'EIND'";
+        $sql = "select * from monitora.ptres where acacod = '$acacod' and prgcod = '$prgcod' and loccod = '$loccod' and unicod = '$unocod' and ptrano = '{$exercicio}' and plocod = 'EIND' and ptrstatus = 'A'";
 
         $funcional = $this->carregar($sql);
-
         if(count($funcional)> 1){
             ver('Mais de uma ação', d);
         }
@@ -539,7 +539,7 @@ class Emendas_Model_Emenda extends Modelo
     public function atualizarSiconv()
     {
         global $configSiconv;
-        
+
         $sql = "select eme.*, uno.unocodorcamento
                 from emendas.emenda eme
                     inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid 
@@ -572,6 +572,10 @@ class Emendas_Model_Emenda extends Modelo
 
             $mSiconv->atualizar($filtro);
         }
+
+        $this->emeatualizacaosiconv = date('Y-m-d H:i:s');
+        $this->salvar();
+        $this->commit();
     }
 
     public function atualizarPrograma()
@@ -614,8 +618,8 @@ class Emendas_Model_Emenda extends Modelo
             'emenumero'=>substr($emenda['emenumero'], 4)
         ];
         $retorno = $obWS->consultarPropostaPorEmenda($filtro);
+        
         if(isset($retorno->propostas)){
-
             $mPropostaWS = new Siconv_Model_PropostaWs();
 
             $aPropostas = is_array($retorno->propostas) ? $retorno->propostas : [$retorno->propostas];
