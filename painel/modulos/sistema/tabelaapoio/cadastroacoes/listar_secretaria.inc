@@ -24,7 +24,7 @@
                                     '<input type=\"checkbox\" id=\"chk_'||mpneid||'\" onclick=\"resultado(this,\''||mpneid||'\',\''||mpnenome||'\');\">' as checkbox,
                                     mpnenome
                             FROM pde.ae_metapne
-                            WHERE temid = {$_SESSION['temid']}
+                            WHERE 1 = 1
 							". ($_POST['filtroPesquisa'] ? 'AND '. $filtro : '') . "
 							ORDER BY mpneordem";
 
@@ -38,7 +38,7 @@
                                     '<input type=\"checkbox\" id=\"chk_'||obeid||'\" onclick=\"resultado(this,\''||obeid||'\',\''||obenome||'\');\">' as checkbox,
                                     obenome
                             FROM pde.ae_objetivoestrategico
-                            WHERE temid = {$_SESSION['temid']}
+                            WHERE 1 = 1
 							". ($_POST['filtroPesquisa'] ? 'AND '. $filtro : '') . "
 							ORDER BY obenome";
 
@@ -53,7 +53,7 @@
                                     mppanome
                             FROM pde.ae_metappa mppa
                             INNER JOIN pde.ae_objetivoppa obj ON obj.objid = mppa.objid
-                            WHERE obj.temid = {$_SESSION['temid']}
+                            WHERE 1 = 1
 							". ($_POST['filtroPesquisa'] ? 'AND '. $filtro : '') . "
 							ORDER BY mppa.mppanome";
 
