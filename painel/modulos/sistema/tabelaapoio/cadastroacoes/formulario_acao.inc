@@ -41,6 +41,9 @@ if($_POST['action'] == 'save'){
         $sql = "UPDATE painel.acao SET " . implode( ' , ' , $sqlValuesUpdate) ." WHERE acaid= {$table['acaid']} RETURNING acaid";
     } else {
         unset($table['acaid']);
+
+        $table['acaorcamento'] = str_replace(['.', ','], ['', '.'], $table['acaorcamento']);
+        
         $sql = "INSERT INTO painel.acao(" . implode( ' , ' , array_keys($table)) .")
                 VALUES (" . implode( ' , ' ,array_values($table) ) .")  RETURNING acaid";
     }
