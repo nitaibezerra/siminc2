@@ -1318,18 +1318,26 @@ class SimecWsInterfaceService extends SoapClient {
 	);
 
 	public function SimecWsInterfaceService($wsdl = "https://wshom.convenios.gov.br/siconv-interfaceSiconv-1.0/InterfaceSiconvHandler/InterfaceSiconvHandlerBeanImpl?wsdl", $options = array()) {
-		foreach(self::$classmap as $key => $value) {
-			if(!isset($options['classmap'][$key])) {
-				$options['classmap'][$key] = $value;
-			}
-		}
-		$this->soapClient = $client;
-		$this->arrDados = '';
-		$this->tipolog = '';
-		$this->logid = '';
-		$this->db = '';
+            foreach(self::$classmap as $key => $value) {
+                if(!isset($options['classmap'][$key])) {
+                    $options['classmap'][$key] = $value;
+                }
+            }
+            $this->soapClient = $client;
+            $this->arrDados = '';
+            $this->tipolog = '';
+            $this->logid = '';
+            $this->db = '';
 
-		parent::__construct($wsdl);
+            parent::__construct($wsdl, Array(
+                'exceptions' => TRUE,
+                'trace' => TRUE,
+                'stream_context' => stream_context_create(array(
+                    "ssl" => array(
+                        "verify_peer" => FALSE,
+                        "allow_self_signed" => TRUE
+                )))
+            ));
 	}
 
 	/**
