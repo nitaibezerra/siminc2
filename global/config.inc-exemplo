@@ -57,6 +57,10 @@
     $configPadrao->muncodPadrao = '5300108';
     $configPadrao->tpocodPadrao = '1';
 
+    $configSiconv = new stdClass();
+    $configSiconv->user = 'PREENCHER';
+    $configSiconv->pwd = md5('PREENCHER');
+    
     # SIOP - Configuração de webservice do SIOP
     # Arquivo de credencial
     define('WEB_SERVICE_SIOP_CERTIFICADO', 'PREENCHER'); # Exemplo: APPRAIZ. 'global/prod_orgao_2016.crt'
@@ -64,6 +68,9 @@
     define('WEB_SERVICE_SIOP_USUARIO', 'PREENCHER'); # Exemplo: WS-USUARIO-123
     define('WEB_SERVICE_SIOP_SENHA', 'PREENCHER'); # Exemplo: senhaSenhaSenha123
     define('WEB_SERVICE_SIOP_PERFIL', 'PREENCHER'); # Exemplo: 32
+    
+    # SICONV
+    define('WEB_SERVICE_SICONV_URL', 'PREENCHER');
 
     # Configurações de Webservice(REST) do Orgão pra gerenciar consultas ao Webservice da Receita Federal
     # Homologação
