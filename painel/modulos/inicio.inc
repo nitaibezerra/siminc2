@@ -12,6 +12,9 @@ $sql = "SELECT p.pflcod FROM seguranca.perfil p
 
 $perfilcod = $db->pegaUm($sql);
 
+header('Location: ?modulo=principal/eixostemas&acao=A');
+die;
+
 switch($perfilcod) {
 	case PAINEL_PERFIL_ENVIARSMS:
 		header('Location: painel.php?modulo=principal/enviarsms&acao=A');
@@ -22,7 +25,6 @@ switch($perfilcod) {
 	default:
 		//include APPRAIZ . '/painel/modulos/principal/painel_controle.inc';
 		header('Location: painel.php?modulo=principal/painel_controle&acao=A');
-		
 }
 
 ?>
