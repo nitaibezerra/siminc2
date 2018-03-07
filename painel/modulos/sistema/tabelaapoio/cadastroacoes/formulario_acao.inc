@@ -24,10 +24,11 @@ if($_POST['action'] == 'save'){
                     , 'tipid' => '4'
                     , 'temid' => ''
                     , 'mapid' => ''
+                    , 'dirid' => ''
                     , 'acaorcamento' => ''
                     , 'acastatus' => "'A'");
     populate($table , $_POST , 'acaid');
-    
+
     if($_POST['acaid']){
         
         $sqlValuesUpdate = array();
@@ -98,6 +99,7 @@ if ($acaid) {
                                                 indidprincipal,
                                                 cocid,
                                                 mapid,
+                                                dirid,
                                                 acaorcamento
                                         FROM painel.acao where acaid = $acaid ";
     $arrDados = $db->pegaLinha($sqlUpdate);
@@ -151,8 +153,20 @@ monta_titulo( $titulo_modulo , '<img src="../imagens/obrig.gif" border="0"> Indi
 				ORDER BY temdsc asc	 
 			  ";
             ?>
-            <td align='right' class="SubTituloDireita">Tema:</td>
+            <td align='right' class="SubTituloDireita">Eixo:</td>
             <td><?= $db->monta_combo('temid' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'S' , '' , '' , ($arrDados[temid]) ? ($arrDados[temid]) : ''); ?></td>
+        </tr>
+        <tr>
+            <?php
+            $sql = "	SELECT 
+			        dirdsc AS descricao, 
+			        dirid AS codigo
+				FROM painel.diretriz
+				ORDER BY dirdsc asc	 
+			  ";
+            ?>
+            <td align='right' class="SubTituloDireita">Diretriz:</td>
+            <td><?= $db->monta_combo('dirid' , $sql , 'S' , 'Selecione...' , '' , '' , '' , '' , 'S' , '' , '' , ($arrDados[dirid]) ? ($arrDados[dirid]) : ''); ?></td>
         </tr>
         <tr>
             <?php
