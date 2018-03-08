@@ -118,6 +118,71 @@ class Emendas_Model_Emenda extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+    
+   
+    /**
+     * Monta consulta pra buscar dados do relat?rio geral
+     * 
+     * @param integer $exercicio
+     * @param array $listaSubUnidadeUsuario
+     * @return string
+     */
+    public function montarSqlRelatorioGeral($exercicio, $listaSubUnidadeUsuario = array()){
+        $where = '';
+        
+        # Sub-Unidade Orçamentária ou Sub-Unidade Orçamentária delegada.
+        $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
+        
+        $sql = "
+            SELECT DISTINCT
+		-- DADOS DA EMENDA
+                eme.emeid,
+                eme.emenumero,
+                aut.autcod,
+                aut.autnome,
+		uno.unocod,
+		uno.unosigla,
+		ptr.funcional || ' - ' || COALESCE(ptr.acatitulo, '') AS funcional,
+                CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'N?o' END AS impositiva,
+                eme.emejustificativa,
+                emed.gndcod,
+                emed.mapcod AS mod_aplic,
+                emed.foncod AS fonte,
+                emed.emdvalor,
+--                eme.*,
+-- Beneficiario
+                sit.sitdsc
+/*
+                eme.autid,
+                eme.prsano,
+                pro.pronome,
+                sit.sitdsc,
+                ben.benid
+*/
+            FROM emendas.emenda eme
+                LEFT JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
+                LEFT JOIN emendas.autor aut ON aut.autid = eme.autid
+                LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
+                LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
+
+                LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
+                LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
+                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
+                LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
+                LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+            WHERE
+                eme.emestatus = 'A'
+                AND eme.prsano = '". (int)$exercicio. "'
+                $where
+            ORDER BY
+                1,
+                2
+        ";
+//ver($sql, d);
+        return $sql;
+    }
 
     public function importar($files)
     {
