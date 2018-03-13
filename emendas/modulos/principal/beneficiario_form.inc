@@ -175,6 +175,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="panel-body">
 
                         <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
+
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -234,6 +235,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-md-5">
 
                                 <div class="ibox float-e-margins">
@@ -242,11 +244,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                     <div class="ibox-content">
                                         <?php
-                                        echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
-                                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
-                                        echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                        echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
-                                        echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                                            echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
+                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
                                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
@@ -280,24 +282,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-                        <div class="col-md-1">
-                            <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
-                        </div>
+                            <div class="col-md-1">
+                                <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                            </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                    <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-voltar" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
-                                    <?php if($mBeneficiario->benid){ ?>
-                                        <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                    <?php } ?>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                        <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                        <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-emenda" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
+                                        <?php if($mBeneficiario->benid){ ?>
+                                            <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            
+                        </form>
 
                         <div class="col-md-4">
                             <div class="ibox float-e-margins">
@@ -352,7 +355,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
                     <div class="panel-body">
 
-                        <form id="formulario-beneficiario-complemento" name="formulario-beneficiario-complemento" method="POST" class="form-horizontal">
+                        <form id="formulario-beneficiario-complemento" name="formulario-beneficiario-complemento" method="post" class="form-horizontal">
 
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
@@ -530,7 +533,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="text-center">
-                                        <button class="btn btn-primary" type="button" id="btn-salvar-complemento">
+                                        <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-check"></i>&nbsp;Salvar
                                         </button>
                                         <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button">
@@ -604,14 +607,6 @@ include APPRAIZ . "includes/cabecalho.inc";
         toggleDelegacao();
         $('#radioDelegacao').change(function(){
             toggleDelegacao();
-        });
-
-        $('#btn-salvar').click(function(){
-            $('#formulario-beneficiario').submit();
-        });
-        
-        $('#btn-salvar-complemento').click(function(){
-            $('#formulario-beneficiario-complemento').submit();
         });
 
         $('#esfid').change(function(){
