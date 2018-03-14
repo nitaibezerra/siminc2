@@ -33,7 +33,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <?php endif; ?>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables" >
+                        <table class="table table-bordered table-hover dataTablesSP" >
                             <thead>
                             <tr class="text-center">
                                 <th width="5%">Ações</th>
@@ -70,3 +70,18 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+
+        $('.dataTablesSP').DataTable({
+            bPaginate: false,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            "language": {
+                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
+            }
+        });
+        
+    });
+</script>
