@@ -4,7 +4,7 @@ class Public_Controller_UnidadeOrcamentaria
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/unidadeOrcamentaria&acao=A';
+        $url = '?modulo=apoio/unidadeOrcamentaria_&acao=A';
 
         try {
             $mUnidadeOrcamentaria = new Public_Model_UnidadeOrcamentaria($dados['unoid']);
@@ -29,7 +29,7 @@ class Public_Controller_UnidadeOrcamentaria
 
             if($mUnidadeOrcamentaria->existeVinculo()){
                 $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&unoid=' . $mUnidadeOrcamentaria->unoid;
+                $url = '?modulo=apoio/unidadeOrcamentaria_form&acao=A&unoid=' . $mUnidadeOrcamentaria->unoid;
                 simec_redirecionar($url, 'error', $mensagem);
             }
 
@@ -42,4 +42,39 @@ class Public_Controller_UnidadeOrcamentaria
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+
+    public function montarFormulario($unoid = null, $suoid = null)
+    {
+        global $simec;
+
+        $perfis = pegaPerfilGeral();
+        /**
+         * @todo colcoar a constante correta do acompanhamento para atualizar a regra.
+         */
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+        $simec->setPodeEditar($podeEditar);
+
+        $listaSubUnidade = (new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos('*', ['unoid = ' . (int)$unoid]);
+
+        if(!$podeEditar && $listaSubUnidade){
+            $suoid = $suoid? $suoid: $listaSubUnidade[0]['suoid'];
+        }
+
+        $mSubUnidade = new Public_Model_SubUnidadeOrcamentaria($suoid);
+        // ver($mSubUnidade, d);
+
+        if(!$mSubUnidade->unoid){ $mSubUnidade->unoid = $unoid; }
+        include_once APPRAIZ. 'planacomorc/modulos/apoio/SubUnidadeOrcamentaria_form.inc';
+    }
+    public function montarListagem($unoid)
+    {
+        $perfis = pegaPerfilGeral();
+        /**
+         * @todo colcoar a constante correta do acompanhamento para atualizar a regra.
+         */
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+
+        $lista = (new Public_Model_SubUnidadeOrcamentaria)->recuperarTodos('*', ['unoid = ' . (int)$unoid, "suostatus = 'A'"]);
+        include_once APPRAIZ . 'planacomorc/modulos/apoio/SubUnidadeOrcamentaria.inc';
+    }
 }

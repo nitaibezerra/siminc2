@@ -1,6 +1,6 @@
 <?php
 
-$aUnidadeOrcamentaria = (new Public_Model_UnidadeOrcamentaria())->recuperarTodos('*', ["unostatus = 'A'", "prsano = '{$_SESSION['exercicio']}'"], 'unonome');
+$aUnidadeOrcamentaria = (new Public_Model_UnidadeOrcamentaria())->RecuperarTodos('*', ["unostatus = 'A'", "prsano = '{$_SESSION['exercicio']}'"], 'unonome');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -35,7 +35,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aUnidadeOrcamentaria as $dados){ ?>
+                            <?php
+                            foreach($aUnidadeOrcamentaria as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Alterar" href="planacomorc.php?modulo=apoio/unidadeOrcamentaria_form&acao=A&unoid=<?php echo $dados['unoid']; ?>"><i class="fa fa-pencil"></i></a>

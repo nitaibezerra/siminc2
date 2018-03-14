@@ -64,6 +64,13 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         'unosigla' => null,
         'unocodorcamento'=> null,
     );
-
+    public function RecuperaId(){
+      $sql = "SELECT
+          unoid, unonome, prsano
+          FROM public.unidadeorcamentaria
+	    WHERE
+          unostatus = 'A'";
+          return $sql;
+    }
 }//end Class
 ?>
