@@ -160,7 +160,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        
+
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class="<?php echo $classTab0; ?>">
@@ -175,6 +175,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="panel-body">
 
                         <form id="formulario-beneficiario" name="formulario-beneficiario" method="post" class="form-horizontal">
+
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -234,6 +235,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-5">
 
                                 <div class="ibox float-e-margins">
@@ -242,11 +244,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                     <div class="ibox-content">
                                         <?php
-                                        echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
-                                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
-                                        echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                        echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
-                                        echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                                            echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
+                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
                                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
@@ -280,24 +282,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-                        <div class="col-md-1">
-                            <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
-                        </div>
+                            <div class="col-md-1">
+                                <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                            </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                    <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-voltar" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
-                                    <?php if($mBeneficiario->benid){ ?>
-                                        <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                    <?php } ?>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                        <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                        <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-emenda" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
+                                        <?php if($mBeneficiario->benid){ ?>
+                                            <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </form>
 
                         <div class="col-md-4">
                             <div class="ibox float-e-margins">
@@ -307,11 +310,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <div class="ibox-content">
                                     <div id="div_formulario_historico">
                                         <?php if($mBeneficiario->benid){
-                                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
+                                          $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
                                         } ?>
                                     </div>
                                     <div id="div_listagem_historico">
-                                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
+                                        <?php
+                                        # Busca perfis do usuário logado
+                                        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid);
+                                         ?>
                                     </div>
                                 </div>
                             </div>
@@ -352,7 +358,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div id="tab-1" class="tab-pane <?php echo $classTab1; ?>">
                     <div class="panel-body">
 
-                        <form id="formulario-beneficiario-complemento" name="formulario-beneficiario-complemento" method="POST" class="form-horizontal">
+                        <form id="formulario-beneficiario-complemento" name="formulario-beneficiario-complemento" method="post" class="form-horizontal">
 
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
@@ -381,7 +387,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-5">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -402,9 +408,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         ?>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="col-md-1">
                                 <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
                             </div>
@@ -471,9 +477,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="col-md-5">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -490,7 +496,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -526,11 +532,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="text-center">
-                                        <button class="btn btn-primary" type="button" id="btn-salvar-complemento">
+                                        <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-check"></i>&nbsp;Salvar
                                         </button>
                                         <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button">
@@ -542,7 +548,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </form>
 
                     </div>
@@ -606,14 +612,6 @@ include APPRAIZ . "includes/cabecalho.inc";
             toggleDelegacao();
         });
 
-        $('#btn-salvar').click(function(){
-            $('#formulario-beneficiario').submit();
-        });
-        
-        $('#btn-salvar-complemento').click(function(){
-            $('#formulario-beneficiario-complemento').submit();
-        });
-
         $('#esfid').change(function(){
             $('.select-localizacao').hide('slow');
             $('#div-localizacao_' + $('#esfid').val()).show('slow');
@@ -656,18 +654,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $('#div_unidades_delegadas').hide('slow');
             }
         }
-        
+
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val(), null, $('#suoid').val());
             carregarIniciativaPPA($(this).val());
         });
-        
+
         // Evento ao mudar opção de Metas PNC
         $('#mpnid').change(function(){
             carregarIndicadorPNC($(this).val());
         });
-        
+
         $('#btn_inserir_anexos').click(function(){
             abrirModalUpload();
         });
@@ -675,7 +673,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         // Evento de terminar de carregar arquivos
         Dropzone.options.formularioAnexo = {
             init: function() {
-                
+
                 this.on("success", function(file, response){
                     var jsonResponse = $.parseJSON(response);
                     inserirNovoAnexo(jsonResponse);
@@ -703,7 +701,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 });
             }
         };
-        
+
         $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
             var id = $(this).attr('data-anexos');
             $('.tr_anexos_'+ id).remove();
@@ -764,10 +762,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
 
     });
-    
+
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     * 
+     *
      * @param {integer} oppid
      * @param {integer} mppid
      * @param {integer} suoid
@@ -796,7 +794,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     * 
+     *
      * @param {integer} codigo
      * @returns {VOID}
      */
@@ -819,10 +817,10 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
         );
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
-     * 
+     *
      * @param {integer} codigo
      * @returns {VOID}
      */
@@ -845,7 +843,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
         );
     }
-    
+
     function abrirModalUpload() {
         $('.modal_dialog_upload').show();
         $('#modal_upload').modal();
@@ -864,10 +862,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         ;
         $('#table_anexos').append(trHtml);
     }
-    
+
     /**
      * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
-     * 
+     *
      * @returns VOID
      */
     function exibirEspelhoPi(pliid){

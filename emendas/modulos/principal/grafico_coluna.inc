@@ -45,8 +45,7 @@
                 <?php
                     if($dadosTabela):
                         foreach($dadosTabela as $key => $descricao):
-                ?>endforeach;
-                    endif;
+                ?>
                     <th class="text-right"><?php echo number_format($aTotal[$key], 0, ',', '.'); ?></th>
                 <?php 
                         endforeach;
