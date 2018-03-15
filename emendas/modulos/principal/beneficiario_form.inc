@@ -67,7 +67,7 @@ switch ($_REQUEST['req']) {
         }else{
             echo simec_json_encode(array(
                 'error' => 1,
-                'errorMensage' => 'Não foi possível enviar o arquivo!'
+                'errorMensage' => 'NÃ£o foi possÃ­vel enviar o arquivo!'
             ));
         }
         die;
@@ -130,7 +130,7 @@ $classTab1 = $aba? 'active': NULL;
 if(!$mBeneficiario->emeid){ $mBeneficiario->emeid = $_REQUEST['emeid']; }
 $mEmenda = new Emendas_Model_Emenda($mBeneficiario->emeid);
 
-$estadoAtual = $mBeneficiario->gerarDocid(WF_TPDID_BENEFICIARIO, 'Beneficiário');
+$estadoAtual = $mBeneficiario->gerarDocid(WF_TPDID_BENEFICIARIO, 'BeneficiÃ¡rio');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -197,7 +197,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                                         <div class="form-group">
                                             <div class="col-md-3 text-right">
-                                                <label class="control-label" for="radioDelegacao">Delegação:</label>
+                                                <label class="control-label" for="radioDelegacao">DelegaÃ§Ã£o:</label>
                                             </div>
                                             <div class="col-md-1">
                                                 <input <?php echo $podeEditar? NULL: 'disabled="disabled"'; ?> type="checkbox" id="radioDelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
@@ -214,22 +214,22 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required'], $configPodeEditar);
 
                                             $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
-                                            echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                                            echo $simec->select('esfid', 'LocalizaÃ§Ã£o', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                                         ?>
                                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
-                                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
+                                            <?php echo $simec->select('paiid[]', 'PaÃ­s', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
                                         </div>
                                         <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
                                             <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
                                         </div>
                                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
-                                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
+                                            <?php echo $simec->select('muncod[]', 'MunicÃ­pio', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
                                         </div>
 
                                         <?php
-                                            echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
-                                            echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
-                                            echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
+                                            echo $simec->input('bennumeroprocesso', 'NÃºmero do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
+                                            echo $simec->data('beninicio', 'Data de InÃ­cio da VigÃªncia', $mBeneficiario->beninicio);
+                                            echo $simec->select('capid', 'Modalidade de PactuaÃ§Ã£o', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
                                             echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
                                         ?>
                                     </div>
@@ -240,15 +240,15 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h5>Informações Complementares</h5>
+                                        <h5>InformaÃ§Ãµes Complementares</h5>
                                     </div>
                                     <div class="ibox-content">
                                         <?php
-                                            echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                                            echo $simec->select('mdeid', 'Ãrea Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                                             echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
-                                            echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
-                                            echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->select("alteracao[]", 'AlteraÃ§Ãµes', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
+                                            echo $simec->radio('benparecertecnico', 'Parecer TÃ©cnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->radio('benparecerjuridico', 'Parecer JurÃ­dico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
                                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
@@ -303,22 +303,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-
                         </form>
 
                         <div class="col-md-4">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>Histórico/Observações</h5>
+                                    <h5>HistÃ³rico/ObservaÃ§Ãµes</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_historico">
                                         <?php if($mBeneficiario->benid){
-                                            $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
+                                          $cBeneficiario->montarFormularioHistorico($mBeneficiario->benid);
                                         } ?>
                                     </div>
                                     <div id="div_listagem_historico">
-                                        <?php $cBeneficiario->montarListagemHistorico($mBeneficiario->benid); ?>
+                                        <?php
+                                        # Busca perfis do usuÃ¡rio logado
+                                        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid);
+                                         ?>
                                     </div>
                                 </div>
                             </div>
@@ -378,10 +380,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             } else {
                                                 $tituloDinamico = $mBeneficiario->plititulo;
                                             }
-                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $tituloDinamico, ['maxlength' => 250]);
+                                            echo $simec->input('plititulo', 'TÃ­tulo do PI/Projeto', $tituloDinamico, ['maxlength' => 250]);
 
                                             $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
-                                            echo $simec->textarea('plidsc', 'Descrição / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
+                                            echo $simec->textarea('plidsc', 'DescriÃ§Ã£o / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
                                         ?>
 
                                         <div class="clearfix"></div>
@@ -419,15 +421,15 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
-                                        <h5>Vinculações Eventuais do Projeto</h5>
+                                        <h5>VinculaÃ§Ãµes Eventuais do Projeto</h5>
                                     </div>
                                     <div class="ibox-content">
                                         <div class="row">
                                             <div class="col-md-5">
-                                                Números SNIIC
+                                                NÃºmeros SNIIC
                                                 <div class="form-group">
                                                     <div class="col-md-10" style="padding-right: 3px;">
-                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo inteiro normal form-control" title="Número SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
+                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo inteiro normal form-control" title="NÃºmero SNIIC" id="input_sniic" maxlength="10" name="input_sniic" />
                                                     </div>
                                                     <div class="col-lg-1" style="padding-left: 0;">
                                                         <input type="button" id="btn_adicionar_sniic" value="+" class="btn btn-info" />
@@ -450,10 +452,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                Número Pronac
+                                                NÃºmero Pronac
                                                 <div class="form-group">
                                                     <div class="col-md-10" style="padding-right: 3px;">
-                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo normal form-control" title="Número PRONAC" id="input_pronac" name="input_pronac" />
+                                                        <input type="text" placeholder="Adicione" value="" class="CampoEstilo normal form-control" title="NÃºmero PRONAC" id="input_pronac" name="input_pronac" />
                                                     </div>
                                                     <div class="col-lg-1" style="padding-left: 0;">
                                                         <input type="button" id="btn_adicionar_pronac" value="+" class="btn btn-info" />
@@ -509,8 +511,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                                     <tr>
                                                         <td style="text-align: left;"><b>Nome do arquivo</b></td>
-                                                        <td style="text-align: left;"><b>Descrição</b></td>
-                                                        <td style="text-align: center;"><b>Ação</b></td>
+                                                        <td style="text-align: left;"><b>DescriÃ§Ã£o</b></td>
+                                                        <td style="text-align: center;"><b>AÃ§Ã£o</b></td>
                                                     </tr>
                                                     <?php foreach($listaDeAnexos as $anexo){ ?>
                                                         <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
@@ -566,15 +568,15 @@ include APPRAIZ . "includes/cabecalho.inc";
             <div class="modal_dialog_upload">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">Ã—</button>
                         <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                     </div>
                     <div class="modal-body">
                         <form class="dropzone" method="POST" enctype="multipart/form-data" action="emendas.php?modulo=principal/beneficiario_form&acao=A&benid=<?php echo $mBeneficiario->benid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
                             <div class="form-group">
-                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
+                                <label for="arqdescricao" class="col-lg-2 control-label">DescriÃ§Ã£o:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descriÃ§Ã£o do arquivo." title="DescriÃ§Ã£o" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
                                 </div>
                             </div>
                             <div class="fallback">
@@ -595,7 +597,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     $(function(){
 
         $('.coluna-parecer').click(function(){
-            // Inverte título com conteúdo
+            // Inverte tÃ­tulo com conteÃºdo
             var title = $(this).attr('title');
             var html = $(this).html();
 
@@ -656,13 +658,13 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
         }
 
-        // Evento ao mudar opção de Objetivos PPA
+        // Evento ao mudar opÃ§Ã£o de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val(), null, $('#suoid').val());
             carregarIniciativaPPA($(this).val());
         });
 
-        // Evento ao mudar opção de Metas PNC
+        // Evento ao mudar opÃ§Ã£o de Metas PNC
         $('#mpnid').change(function(){
             carregarIndicadorPNC($(this).val());
         });
@@ -682,7 +684,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                 this.on("queuecomplete", function(file){
 
-                    // Armazena o objeto Dropzone para chamar métodos
+                    // Armazena o objeto Dropzone para chamar mÃ©todos
                     objFormularioAnexo = this;
                     // Chama mensagem de sucesso
                     swal({
@@ -696,7 +698,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         swal.close();
                         // limpa campo de upload
                         objFormularioAnexo.removeAllFiles();
-                        // fecha modal após a seleção
+                        // fecha modal apÃ³s a seleÃ§Ã£o
                         $('#modal_upload').modal('hide');
                     });
                 });
@@ -765,7 +767,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     });
 
     /**
-     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     * Carrega novo conteÃºdo para o select de Metas PPA via requisiÃ§Ã£o ajax.
      *
      * @param {integer} oppid
      * @param {integer} mppid
@@ -794,7 +796,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     }
 
     /**
-     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     * Carrega novo conteÃºdo para o select de Metas PPA via requisiÃ§Ã£o ajax.
      *
      * @param {integer} codigo
      * @returns {VOID}
@@ -820,7 +822,7 @@ include APPRAIZ . "includes/cabecalho.inc";
     }
 
     /**
-     * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
+     * Carrega novo conteÃºdo para o select de Indicadores PNC via requisiÃ§Ã£o ajax.
      *
      * @param {integer} codigo
      * @returns {VOID}
