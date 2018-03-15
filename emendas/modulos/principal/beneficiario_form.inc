@@ -189,7 +189,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php
                                             $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = ". (int)$mEmenda->unoid], 'suonome');
                                             $options = simec_preparar_array($db->carregar($sql));
-                                            $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
+                                            $mBeneficiario->suoid = (!empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
                                             echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required'], $configPodeEditar);
 
                                             $listaSubUnidadesDelegadas = $mBeneficiario->recuperarDelegacao();
@@ -284,7 +284,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
 
                             <div class="col-md-1">
-                                <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                                <?php
+                                  if($mBeneficiario->suoid){
+                                    wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid));
+                                  }
+                                ?>
                             </div>
 
                             <div class="col-md-12">
