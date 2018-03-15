@@ -117,7 +117,7 @@ $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 $configPodeEditar = array('pode-editar' => $podeEditar? 'S': 'N');
 
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
-
+$convenio = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'",  "capdsc = 'Convênio'", "capano = '{$_SESSION['exercicio']}'"]);
 $listaSniic = (new Emendas_Model_Sniic())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
 $listaPronac = (new Emendas_Model_Pronac())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
 $listaDeAnexos = (new Emendas_Model_BeneficiarioAnexo())->buscarPorBeneficiario((int)$mBeneficiario->benid);
@@ -153,7 +153,9 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
     <div class="col-lg-8">
         <div style="padding-top: 10px;" class="text-right">
+          <?php if($mBeneficiario->capid == $convenio[0]['capid']) { ?>
             <a class="btn btn-info" href="?modulo=principal/beneficiario_form&acao=A&req=atualizar-siconv&emeid=<?php echo $mBeneficiario->emeid; ?>&benid=<?php echo $mBeneficiario->benid; ?>"><i class="fa fa-refresh"></i> Atualizar dados SICONV</a>
+          <?php }?>
         </div>
     </div>
 </div>
