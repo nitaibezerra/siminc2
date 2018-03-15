@@ -164,7 +164,7 @@ class Emendas_Model_Emenda extends Modelo
 		uno.unocod,
 		uno.unosigla,
 		ptr.funcional || ' - ' || COALESCE(ptr.acatitulo, '') AS funcional,
-                CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'N?o' END AS impositiva,
+                CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'Não' END AS impositiva,
                 eme.emejustificativa,
                 emed.gndcod,
                 emed.mapcod AS mod_aplic,
@@ -193,6 +193,9 @@ class Emendas_Model_Emenda extends Modelo
                 LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
                 LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
                 LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
+		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+                LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
             WHERE
                 eme.emestatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
