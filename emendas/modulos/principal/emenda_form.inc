@@ -113,7 +113,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <a class="btn btn-small btn-warning" href="?modulo=principal/beneficiario_form&acao=A&emeid=<?php echo $mEmenda->emeid; ?>">Novo</a>
                     <?php endif; ?>
 
-                    <?php $aBeneficiario = (new Emendas_Model_Beneficiario())->recuperarTodos('*', ['emeid = ' . $mEmenda->emeid]);
+                    <?php $aBeneficiario = (new Emendas_Model_Beneficiario())->recuperarTodos('*', ['emeid = ' . $mEmenda->emeid, "benstatus = 'A'"]);
                     if(count($aBeneficiario)){ ?>
 
                         <div class="table-responsive">

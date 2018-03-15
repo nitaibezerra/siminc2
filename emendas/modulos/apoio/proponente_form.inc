@@ -45,7 +45,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="proid" id="proid" type="hidden" value="<?php echo $mProponente->proid; ?>">
                         
                         <?php                         
-                            echo $simec->select('prtid', 'Tipo de Proponente', $mProponente->prtid, Emendas_Model_Proponentetipo::buscarTodosCombo((object) array()));
+                            echo $simec->select('prtid', 'Tipo de Proponente', $mProponente->prtid, Emendas_Model_Proponentetipo::buscarTodosCombo((object) array()), ['required']);
                             echo $simec->input('pronome', 'Nome', $mProponente->pronome, ['maxlength' => 300]);
                             echo $simec->cnpj('procnpj', 'CNPJ', $mProponente->procnpj);
                             echo $simec->telefone('protelefone', 'Telefone', $mProponente->protelefone, ['required', 'maxlength' => 15]);

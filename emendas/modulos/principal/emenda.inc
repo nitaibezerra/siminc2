@@ -9,7 +9,6 @@ $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_S
 //ver($listaSubUnidadeUsuario);
 
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
-
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
@@ -33,15 +32,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <?php endif; ?>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables" >
+                        <table class="table table-bordered table-hover dataTablesSP" >
                             <thead>
                             <tr class="text-center">
                                 <th width="5%">Ações</th>
+                                <th>Id</th>
                                 <th>Número</th>
-                                <th width="15%">Autor</th>
-                                <th>Beneficiário</th>
                                 <th width="10%">Unidade</th>
+                                <th width="15%">Autor</th>
+                                <th>Id Beneficiário</th>
+                                <th>Beneficiário</th>
+                                <th width="10%">Subunidade</th>
+                                <th>UF</th>
+                                <th>Impedimento</th>
                                 <th>Situação</th>
+                                <th>Situação SICONV</th>
+                                <th>Empenhado</th>
+                                <th>Pago</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,11 +62,19 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <a title="Beneficiário" href="?modulo=principal/beneficiario_form&acao=A&emeid=<?php echo $dados['emeid']; ?>" style="margin-left: 5px;"><i class="fa fa-usd"></i></a>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $dados['emeid']; ?></td>
                                     <td><?php echo $dados['emenumero']; ?></td>
-                                    <td><?php echo $dados['autnome']; ?></td>
-                                    <td><?php echo $dados['pronome']; ?></td>
                                     <td><?php echo $dados['unidade']; ?></td>
+                                    <td><?php echo $dados['autnome']; ?></td>
+                                    <td><?php echo $dados['benid']; ?></td>
+                                    <td><?php echo $dados['pronome']; ?></td>
+                                    <td><?php echo $dados['subunidade']; ?></td>
+                                    <td><?php echo $dados['lista_uf']; ?></td>
+                                    <td><?php echo $dados['empedimento']; ?></td>
+                                    <td><?php echo $dados['esddsc']; ?></td>
                                     <td><?php echo $dados['sitdsc']; ?></td>
+                                    <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
+                                    <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>
@@ -70,3 +85,18 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+
+        $('.dataTablesSP').DataTable({
+            bPaginate: false,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            "language": {
+                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
+            }
+        });
+        
+    });
+</script>

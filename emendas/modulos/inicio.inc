@@ -1,6 +1,23 @@
 <?php
 
-//simec_redirecionar('emendas.php?modulo=principal/emenda&acao=A');
+# Busca perfis do usuário logado
+$perfis = pegaPerfilGeral();
+
+# Caso seja o perfil de SubUnidade o sistema redireciona para a tela de lista de emendas.
+if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
+    # Todos os perfis são redirecionados para a nova tela de Painel
+    $urlPainel = 'emendas.php?modulo=principal/emenda&acao=A';
+    if($_REQUEST['exercicio']){
+        $urlPainel .= '&exercicio='. $_REQUEST['exercicio'];
+    }
+    if($_REQUEST['req']){
+        $urlPainel .= '&req='. $_REQUEST['req'];
+    }
+    if($_REQUEST['pliid']){
+        $urlPainel .= '&pliid='. $_REQUEST['pliid'];
+    }
+    simec_redirecionar($urlPainel);
+}
 
 $mEmendas = new Emendas_Model_Emenda();
 

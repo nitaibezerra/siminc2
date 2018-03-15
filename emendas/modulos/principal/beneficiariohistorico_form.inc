@@ -4,8 +4,8 @@
     <input name="benid" type="hidden" value="<?php echo $mBeneficiarioHistorico->benid; ?>">
 
     <?php
-    echo $simec->data('behdata', 'Data', $mBeneficiarioHistorico->behdata);
-    echo $simec->textarea('behdsc', 'Histórico', $mBeneficiarioHistorico->behdsc);
+    echo $simec->data('behdata', 'Data', $mBeneficiarioHistorico->behdata, ['required']);
+    echo $simec->textarea('behdsc', 'Histórico', $mBeneficiarioHistorico->behdsc, ['required']);
     ?>
 
     <div class="form-group">

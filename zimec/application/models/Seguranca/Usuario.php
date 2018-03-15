@@ -73,7 +73,7 @@ class Model_Seguranca_Usuario extends Simec_Db_Table
     {
     	$select = $this->select();
     	$select->setIntegrityCheck(false);
-    	$select->from(array('sistema' => 'seguranca.sistema'), array('sisid', 'sisdiretorio', 'sisarquivo', 'sisdsc', 'sisurl', 'sisabrev', 'sisexercicio', 'paginainicial', 'sissnalertaajuda', 'sislayoutbootstrap', 'siszend'));
+    	$select->from(array('sistema' => 'seguranca.sistema'), array('sisid', 'sisdiretorio', 'sisarquivo', 'sisdsc', 'sisurl', 'sisabrev', 'sisexercicio', 'paginainicial', 'sissnalertaajuda', 'sislayoutbootstrap'));
     	$select->joinInner(array('usuario_sistema' => 'seguranca.usuario_sistema'), "sistema.sisid = usuario_sistema.sisid", array('susdataultacesso'));
     	$select->joinInner(array('usuario' => 'seguranca.usuario'), "usuario.usucpf = usuario_sistema.usucpf", array());
     	$select->joinInner(array('perfilusuario' => 'seguranca.perfilusuario'), "usuario.usucpf = perfilusuario.usucpf", array());
@@ -86,8 +86,8 @@ class Model_Seguranca_Usuario extends Simec_Db_Table
     	 
     	$select->group(array
     	(
-    		'sistema.sisid', 'sisdiretorio', 'sisarquivo', 'sisdsc', 'sisurl', 'sisabrev', 'siszend', 'sisexercicio', 'paginainicial',
-    		'pflnivel', 'susdataultacesso', 'sissnalertaajuda', 'sislayoutbootstrap'
+            'sistema.sisid', 'sisdiretorio', 'sisarquivo', 'sisdsc', 'sisurl', 'sisabrev', 'sisexercicio', 'paginainicial',
+            'pflnivel', 'susdataultacesso', 'sissnalertaajuda', 'sislayoutbootstrap'
     	));
     	 
     	$select->order('susdataultacesso DESC');

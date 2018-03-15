@@ -73,13 +73,17 @@ class Emendas_Model_Emenda extends Modelo
 
     public function recuperarListagem($exercicio, $listaSubUnidadeUsuario = array())
     {
-        $where = '';
+        $where = NULL;
         
-        # Sub-Unidade Orçamentária ou Sub-Unidade Orçamentária delegada.
-        $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
+        if($listaSubUnidadeUsuario){
+            # Expressão para verificar se o estado é após enviado para preenchimento da unidade.
+            $where .= "\n AND doce.esdid IN(". ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE. ','. ESD_BENEFICIARIO_CORRECAO. ','. ESD_BENEFICIARIO_PI_GERADO. ")";
+            # Expressão pra verificar se o beneficiario é da mesa unidade do Usuário Logado com perfil de Unidade.
+            $where .= "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ";
+        }
         
         $sql = "
-            SELECT
+            SELECT DISTINCT
                 eme.emeid,
                 eme.emenumero,
                 eme.unoid,
@@ -92,10 +96,23 @@ class Emendas_Model_Emenda extends Modelo
                 aut.autcod,
                 pro.pronome,
                 sit.sitdsc,
-                ben.benid
+                ben.benid,
+                suo.suocod || ' - ' || suo.suosigla subunidade,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				bl.estuf
+			FROM emendas.beneficiariolocalizacao bl
+			WHERE
+				bl.estuf IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_uf,
+                CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
+                doce.esddsc,
+                pi.empenhado,
+                pi.pago
             FROM
                 emendas.emenda eme
-                LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                LEFT JOIN emendas.beneficiario ben ON(ben.emeid = eme.emeid AND benstatus = 'A')
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
                 LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
                 LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
@@ -105,6 +122,9 @@ class Emendas_Model_Emenda extends Modelo
                 LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
 		LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
 		LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
+		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+                LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
             WHERE
                 eme.emestatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
@@ -115,6 +135,7 @@ class Emendas_Model_Emenda extends Modelo
                 pro.pronome
         ";
 
+//ver($sql, d);
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }

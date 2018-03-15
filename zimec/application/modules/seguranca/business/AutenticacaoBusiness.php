@@ -193,7 +193,7 @@ class Seguranca_Business_AutenticacaoBusiness
 			$auth['sisid'] = $sistema->sisid;
 			$auth['sisdiretorio'] = $sistema->sisdiretorio;
 			$auth['sisarquivo'] = $sistema->sisarquivo;
-			$auth['sisantigo'] = !$sistema->siszend;
+			$auth['sisantigo'] = FALSE; //!$sistema->siszend;
 			$auth['paginainicial'] = $sistema->paginainicial;
 
 			return $auth;

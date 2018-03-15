@@ -21,7 +21,7 @@ require_once APPRAIZ . 'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Public_Model_ObjetivoPpa extends Modelo
@@ -68,20 +68,20 @@ class Public_Model_ObjetivoPpa extends Modelo
 
         $sql = "
             SELECT
-                oppid AS codigo,
-                oppcod || '-' || oppnome AS descricao
+                oppid,
+                oppcod || ' - ' || oppnome AS descricao,prsano 
             FROM public.objetivoppa
             WHERE
                 oppstatus = 'A'
                 AND prsano = '{$where['exercicio']}'
             ORDER BY
                 oppcod";
-        return $sql;
-    }
-    
+                $resultado = $this->carregar($sql);
+                return $resultado ? $resultado : array();    }
+
     /**
      * Busca o código do objetivo(oppid) por código da funcional.
-     * 
+     *
      * @param integer $ptrid
      */
     public function buscarOppidPorFuncional($ptrid) {
