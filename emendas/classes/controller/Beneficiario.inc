@@ -46,16 +46,11 @@ class Emendas_Controller_Beneficiario
 
     public function excluir($benid)
     {
-        $url = '?modulo=apoio/beneficiario&acao=A';
+        $url = '?modulo=principal/beneficiario_form&acao=A&benid='. (int)$benid;
 
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($benid);
-
-            if($mBeneficiario->existeVinculo()){
-                $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mBeneficiario->benid;
-                simec_redirecionar($url, 'error', $mensagem);
-            }
+            $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;        
 
             $mBeneficiario->benstatus = 'I';
             $mBeneficiario->salvar();
