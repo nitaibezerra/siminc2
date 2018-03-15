@@ -333,7 +333,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.autor aut on aut.autid = eme.autid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'
                 group by aut.estuf, categoria
                 union all
                 select  case when coalesce(aut.estuf, '') = '' then 'A Identificar' else  aut.estuf end categoria, 
@@ -342,7 +345,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.autor aut on aut.autid = eme.autid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'                
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'                
                 group by aut.estuf, categoria
                 order by categoria, descricao desc";
 
@@ -361,7 +367,10 @@ class Emendas_Model_Emenda extends Modelo
                                 left join territorios.regiao reg on reg.regcod = est.regcod
                                 inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                                 inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                        where eme.prsano = '$exercicio'        
+                        where
+                            eme.emestatus = 'A'
+                            AND ben.benstatus = 'A'
+                            AND eme.prsano = '$exercicio'        
                         group by descricao, reg.regcod
                         order by reg.regcod";
 
@@ -373,7 +382,10 @@ class Emendas_Model_Emenda extends Modelo
                         left join territorios.regiao reg on reg.regcod = est.regcod
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by descricao, reg.regcod, categoria
                 union all
                 select  case when coalesce(reg.regdescricao, '') = '' then 'A Identificar' else  reg.regdescricao end categoria, reg.regcod,
@@ -384,7 +396,10 @@ class Emendas_Model_Emenda extends Modelo
                         left join territorios.regiao reg on reg.regcod = est.regcod
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'
                 group by descricao, reg.regcod, categoria
                 order by regcod, categoria desc";
 
@@ -408,7 +423,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.partido par on par.parid = aut.parid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by categoria, par.pardsc, descricao
                 union all
                 select  case when coalesce(par.parsigla, '') = '' then 'A Identificar' else par.parsigla end categoria, par.pardsc,
@@ -418,7 +436,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.partido par on par.parid = aut.parid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by categoria, par.pardsc, descricao
                 order by categoria, descricao desc";
 
@@ -437,7 +458,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.partido par on par.parid = aut.parid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by categoria, descricao
                 union all 
                 select  case when coalesce(par.parlado, '') = '' then 'A Identificar' else par.parlado end categoria,
@@ -447,7 +471,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.partido par on par.parid = aut.parid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by categoria, descricao
                 order by categoria, descricao desc";
 
@@ -470,7 +497,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.autor aut on aut.autid = eme.autid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'        
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'        
                 group by categoria, descricao
                 union all
                 select  case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end categoria,
@@ -479,7 +509,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.autor aut on aut.autid = eme.autid
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                where eme.prsano = '$exercicio'   
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'
                 group by categoria, descricao
                 order by categoria, descricao desc";
 
@@ -518,7 +551,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
                         inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
                         inner join public.gnd gnd on gnd.gndcod = emd.gndcod
-                where eme.prsano = '$exercicio'     
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'
                 group by categoria, gnd.gndcod, descricao
                 union all
                 select  gnd.gnddsc categoria, gnd.gndcod, 'Valor Após Contingenciamento' descricao, sum(bed.bedvalorpriorizado) valor
@@ -527,7 +563,10 @@ class Emendas_Model_Emenda extends Modelo
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
                         inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
                         inner join public.gnd gnd on gnd.gndcod = emd.gndcod
-                where eme.prsano = '$exercicio'     
+                where
+                    eme.emestatus = 'A'
+                    AND ben.benstatus = 'A'
+                    AND eme.prsano = '$exercicio'
                 group by categoria, gnd.gndcod, descricao
                 order by gndcod, categoria, descricao desc";
 
