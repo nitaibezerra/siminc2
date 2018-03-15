@@ -305,7 +305,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-
                         </form>
 
                         <div class="col-md-4">
@@ -571,7 +570,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             <div class="modal_dialog_upload">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">Ã—</button>
                         <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                     </div>
                     <div class="modal-body">
