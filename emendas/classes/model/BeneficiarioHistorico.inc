@@ -64,12 +64,14 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
     );
 
     public function montarRecuperarPorUnidade($listaUnidades,$benid){
-      $sql = "SELECT *
-        FROM emendas.beneficiariohistorico bh
-        LEFT JOIN emendas.usuarioresponsabilidade  ur  ON bh.usucpf = ur.usucpf
-        WHERE
-           bh.behstatus = 'A'
-           and bh.benid = " . (int)$benid
+      $sql = "
+            SELECT DISTINCT
+                bh.*
+            FROM emendas.beneficiariohistorico bh
+            LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
+            WHERE
+                bh.behstatus = 'A'
+                AND bh.benid = " . (int)$benid
          ;
 
          if(count($listaUnidades)){
