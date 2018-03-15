@@ -160,7 +160,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        
+
         <div class="tabs-container">
             <ul class="nav nav-tabs">
                 <li class="<?php echo $classTab0; ?>">
@@ -189,7 +189,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php
                                             $sql = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(['suocod', 'suonome'], ["unoid = ". (int)$mEmenda->unoid], 'suonome');
                                             $options = simec_preparar_array($db->carregar($sql));
-                                            $mBeneficiario->suoid = (empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
+                                            $mBeneficiario->suoid = (!empty($mBeneficiario->suoid) && count($options) == 1) ? key($options) : $mBeneficiario->suoid;
                                             echo $simec->select('suoid', 'SubUnidade', $mBeneficiario->suoid, $options, ['required'], $configPodeEditar);
 
                                             $listaSubUnidadesDelegadas = $mBeneficiario->recuperarDelegacao();
@@ -235,7 +235,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-5">
 
                                 <div class="ibox float-e-margins">
@@ -284,7 +284,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
 
                             <div class="col-md-1">
-                                <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
+                                <?php
+                                  if($mBeneficiario->suoid){
+                                    wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid));
+                                  }
+                                ?>
                             </div>
 
                             <div class="col-md-12">
@@ -299,7 +303,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </form>
 
                         <div class="col-md-4">
@@ -384,7 +388,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-5">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -405,9 +409,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         ?>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="col-md-1">
                                 <?php wf_desenhaBarraNavegacao($mBeneficiario->docid, array('benid' => $mBeneficiario->benid)); ?>
                             </div>
@@ -474,9 +478,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="col-md-5">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -493,7 +497,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -529,7 +533,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="text-center">
@@ -545,7 +549,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </form>
 
                     </div>
@@ -651,18 +655,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                 $('#div_unidades_delegadas').hide('slow');
             }
         }
-        
+
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val(), null, $('#suoid').val());
             carregarIniciativaPPA($(this).val());
         });
-        
+
         // Evento ao mudar opção de Metas PNC
         $('#mpnid').change(function(){
             carregarIndicadorPNC($(this).val());
         });
-        
+
         $('#btn_inserir_anexos').click(function(){
             abrirModalUpload();
         });
@@ -670,7 +674,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         // Evento de terminar de carregar arquivos
         Dropzone.options.formularioAnexo = {
             init: function() {
-                
+
                 this.on("success", function(file, response){
                     var jsonResponse = $.parseJSON(response);
                     inserirNovoAnexo(jsonResponse);
@@ -698,7 +702,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 });
             }
         };
-        
+
         $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
             var id = $(this).attr('data-anexos');
             $('.tr_anexos_'+ id).remove();
@@ -759,10 +763,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
 
     });
-    
+
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     * 
+     *
      * @param {integer} oppid
      * @param {integer} mppid
      * @param {integer} suoid
@@ -791,7 +795,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     * 
+     *
      * @param {integer} codigo
      * @returns {VOID}
      */
@@ -814,10 +818,10 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
         );
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
-     * 
+     *
      * @param {integer} codigo
      * @returns {VOID}
      */
@@ -840,7 +844,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
         );
     }
-    
+
     function abrirModalUpload() {
         $('.modal_dialog_upload').show();
         $('#modal_upload').modal();
@@ -859,10 +863,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         ;
         $('#table_anexos').append(trHtml);
     }
-    
+
     /**
      * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
-     * 
+     *
      * @returns VOID
      */
     function exibirEspelhoPi(pliid){
