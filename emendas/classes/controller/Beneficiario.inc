@@ -31,7 +31,7 @@ class Emendas_Controller_Beneficiario
                 $mBeneficiario->associarDelegacao($dados);
                 $mBeneficiario->associarAlteracao($dados);
 
-                // Salvando dados da Localização
+                // Salvando dados da LocalizaÃ§Ã£o
                 $dados['benid'] = $mBeneficiario->benid;
                 (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
             }
@@ -43,7 +43,7 @@ class Emendas_Controller_Beneficiario
             simec_redirecionar($url. ($dados['req'] == 'salvar-complemento'? '&aba=1': NULL), 'error');
         }
     } //end salvar()
-    
+
     public function excluir($benid)
     {
         $url = '?modulo=principal/beneficiario_form&acao=A&benid='. (int)$benid;
@@ -52,12 +52,6 @@ class Emendas_Controller_Beneficiario
             $mBeneficiario = new Emendas_Model_Beneficiario($benid);
             $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;
 
-//            if($mBeneficiario->existeVinculo()){
-//                $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-//                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mBeneficiario->benid;
-//                simec_redirecionar($url, 'error', $mensagem);
-//            }            
-            
             $mBeneficiario->benstatus = 'I';
             $mBeneficiario->salvar();
             $mBeneficiario->commit();
@@ -79,9 +73,21 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemHistorico($benid)
     {
-        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarTodos('*', ['benid = ' . (int)$benid, " behstatus = 'A' "], 'behdata desc');
+      # Busca perfis do usuÃ¡rio logado
+      $perfis = pegaPerfilGeral();
+      # Caso seja o perfil de SubUnidade o sistema redireciona para a tela de lista de emendas.
+      if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
+        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarPorUnidade($listaSubUnidadeUsuario,$benid);
+
+      } else {
+        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarPorUnidade([],$benid);
+      }
+
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
     }
+
 
     public function montarFormularioDetalhe($benid = null, $bedid = null)
     {
