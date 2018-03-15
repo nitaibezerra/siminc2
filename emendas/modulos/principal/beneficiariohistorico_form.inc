@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <div class="text-center">
-            <button class="btn btn-primary" type="submit" id="btn-salvar-historico"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+            <button class="btn btn-primary" type="button" id="btn-salvar-historico"><i class="fa fa-check"></i>&nbsp;Salvar</button>
         </div>
     </div>
 </form>
