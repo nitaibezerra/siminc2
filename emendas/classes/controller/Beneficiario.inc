@@ -31,7 +31,7 @@ class Emendas_Controller_Beneficiario
                 $mBeneficiario->associarDelegacao($dados);
                 $mBeneficiario->associarAlteracao($dados);
 
-                // Salvando dados da LocalizaÁ„o
+                // Salvando dados da Localiza√ß√£o
                 $dados['benid'] = $mBeneficiario->benid;
                 (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
             }
@@ -50,7 +50,8 @@ class Emendas_Controller_Beneficiario
 
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($benid);
-            $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;        
+
+            $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;
 
             $mBeneficiario->benstatus = 'I';
             $mBeneficiario->salvar();
@@ -73,7 +74,7 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemHistorico($benid)
     {
-      # Busca perfis do usu·rio logado
+      # Busca perfis do usu√°rio logado
       $perfis = pegaPerfilGeral();
       # Caso seja o perfil de SubUnidade o sistema redireciona para a tela de lista de emendas.
       if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
