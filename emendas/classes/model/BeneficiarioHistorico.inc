@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Emendas_Model_BeneficiarioHistorico extends Modelo
@@ -62,6 +62,28 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
         'behstatus' => null,
         'benid' => null,
     );
+
+    public function montarRecuperarPorUnidade($listaUnidades,$benid){
+      $sql = "
+            SELECT DISTINCT
+                bh.*
+            FROM emendas.beneficiariohistorico bh
+            LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
+            WHERE
+                bh.behstatus = 'A'
+                AND bh.benid = " . (int)$benid
+         ;
+
+         if(count($listaUnidades)){
+           $sql .= " and ur.ungcod IN('" . join($listaUnidades, "','") . "')";
+         }
+        return $sql;
+    }
+
+    public function recuperarPorUnidade($listaUnidades,$benid){
+      $sql = $this->montarRecuperarPorUnidade($listaUnidades,$benid);
+      return $this->carregar($sql);
+    }
 
 }//end Class
 ?>

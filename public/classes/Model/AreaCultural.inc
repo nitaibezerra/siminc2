@@ -63,12 +63,16 @@ class Public_Model_AreaCultural extends Modelo
 
     public function recuperarSqlCombo()
     {
-        return "SELECT acuid AS codigo, upper(public.removeacento(acudsc)) AS descricao
-                FROM public.areacultural
-                WHERE acustatus = 'A'
-                AND acuano = '{$_SESSION['exercicio']}'
-                ORDER BY descricao ASC";
+        return "SELECT 
+                        MAX(acuid) AS codigo,
+                        upper(public.removeacento(acudsc)) AS descricao
+                        FROM monitora.pi_modalidadeensino
+                        WHERE acustatus = 'A'
+                        AND acuano = '{$_SESSION['exercicio']}' -- Resolver 2014
+                        GROUP BY descricao
+                        ORDER BY descricao ASC";
     }
+
 
 }//end Class
 ?>
