@@ -4,13 +4,13 @@
     <input name="benid" type="hidden" value="<?php echo $mBeneficiarioHistorico->benid; ?>">
 
     <?php
-    echo $simec->data('behdata', 'Data', $mBeneficiarioHistorico->behdata);
-    echo $simec->textarea('behdsc', 'Histórico', $mBeneficiarioHistorico->behdsc);
+    echo $simec->data('behdata', 'Data', $mBeneficiarioHistorico->behdata, ['required']);
+    echo $simec->textarea('behdsc', 'Histórico', $mBeneficiarioHistorico->behdsc, ['required']);
     ?>
 
     <div class="form-group">
         <div class="text-center">
-            <button class="btn btn-primary" type="button" id="btn-salvar-historico"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+            <button class="btn btn-primary" type="submit" id="btn-salvar-historico"><i class="fa fa-check"></i>&nbsp;Salvar</button>
         </div>
     </div>
 </form>
