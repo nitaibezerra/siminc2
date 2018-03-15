@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento da entidade public.areacultural
+ * Classe de mapeamento da entidade public.gnd
  *
  * @category Class
  * @package  A1
  * @author   ORION TELES DE MESQUITA <orion.mesquita@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 31-05-2017
+ * @version  Release: 20-11-2017
  * @link     no link
  */
 
@@ -15,7 +15,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 
 
 /**
- * Public_Model_Areacultural
+ * Public_Model_Gnd
  *
  * @category Class
  * @package  A1
@@ -24,14 +24,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @version  Release: 
  * @link     no link
  */
-class Public_Model_AreaCultural extends Modelo
+class Painel_Model_Subacao extends Modelo
 {
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = 'public.areacultural';
+    protected $stNomeTabela = 'painel.subacao';
 
     /**
      * Chave primaria.
@@ -39,7 +39,7 @@ class Public_Model_AreaCultural extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
-        'acuid',
+        'subid',
     );
     /**
      * Chaves estrangeiras.
@@ -54,25 +54,14 @@ class Public_Model_AreaCultural extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
-        'acuid' => null,
-        'acucod' => null,
-        'acudsc' => null,
-        'acuano' => null,
-        'acustatus' => null,
+        'subid' => null,
+        'subdsc' => null,
+        'subtexto' => null,
+        'subdatainicio' => null,
+        'subdatafim' => null,
+        'acaid' => null,
+        'substatus' => null,
     );
-
-    public function recuperarSqlCombo()
-    {
-        return "SELECT 
-                        MAX(acuid) AS codigo,
-                        upper(public.removeacento(acudsc)) AS descricao
-                        FROM monitora.pi_modalidadeensino
-                        WHERE acustatus = 'A'
-                        AND acuano = '{$_SESSION['exercicio']}' -- Resolver 2014
-                        GROUP BY descricao
-                        ORDER BY descricao ASC";
-    }
-
 
 }//end Class
 ?>

@@ -31,7 +31,7 @@ class Emendas_Controller_Beneficiario
                 $mBeneficiario->associarDelegacao($dados);
                 $mBeneficiario->associarAlteracao($dados);
 
-                // Salvando dados da LocalizaÁ„o
+                // Salvando dados da Localiza√ß√£o
                 $dados['benid'] = $mBeneficiario->benid;
                 (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
             }
@@ -46,16 +46,11 @@ class Emendas_Controller_Beneficiario
 
     public function excluir($benid)
     {
-        $url = '?modulo=apoio/beneficiario&acao=A';
+        $url = '?modulo=principal/beneficiario_form&acao=A&benid='. (int)$benid;
 
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($benid);
-
-            if($mBeneficiario->existeVinculo()){
-                $mensagem = 'O registro n„o pode ser excluÌdo pois possui vÌnculo com algum PI.';
-                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mBeneficiario->benid;
-                simec_redirecionar($url, 'error', $mensagem);
-            }
+            $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;
 
             $mBeneficiario->benstatus = 'I';
             $mBeneficiario->salvar();
@@ -78,7 +73,7 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemHistorico($benid)
     {
-      # Busca perfis do usu·rio logado
+      # Busca perfis do usu√°rio logado
       $perfis = pegaPerfilGeral();
       # Caso seja o perfil de SubUnidade o sistema redireciona para a tela de lista de emendas.
       if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){

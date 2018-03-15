@@ -151,7 +151,7 @@ class Emendas_Model_Siconv extends Modelo
             if(is_array($pareceres)){
                 foreach($pareceres as $parecer){
 
-                    $sql = "select * from emendas.siconvparecer where idhash = '{$parecer->idHash}' and sicid = '{$sicid}'";
+                    $sql = "select * from emendas.siconvparecer where idhash = '{$parecer->idHash}' and sicid = ". (int)$sicid;
                     $spaid = $this->pegaUm($sql);
 
                     $mSiconvParecer = new Emendas_Model_SiconvParecer($spaid);

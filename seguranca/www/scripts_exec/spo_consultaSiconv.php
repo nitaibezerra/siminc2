@@ -64,7 +64,7 @@ include_once APPRAIZ . "emendas/classes/model/SiconvPrograma.inc";
 include_once APPRAIZ . "emendas/classes/model/SiconvSituacao.inc";
 include_once APPRAIZ . "emendas/classes/model/SiconvBeneficiario.inc";
 include_once APPRAIZ . "siconv/classes/model/PropostaWs.inc";
-include_once APPRAIZ . "emenda\classes\WSIntegracaoSiconv.class.inc";
+include_once APPRAIZ . "emenda/classes/WSIntegracaoSiconv.class.inc";
 
 $exercicio = date('Y');
 

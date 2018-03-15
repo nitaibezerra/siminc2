@@ -95,7 +95,7 @@ class Emendas_Model_Emenda extends Modelo
                 ben.benid
             FROM
                 emendas.emenda eme
-                LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                LEFT JOIN emendas.beneficiario ben ON(ben.emeid = eme.emeid AND benstatus = 'A')
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
                 LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
                 LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
