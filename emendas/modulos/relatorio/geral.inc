@@ -43,6 +43,7 @@
         'Impedimento',
         'Motivo',
         'Justivicativa',
+        'Situação',
         'Empenhado',
         'Pago',
         

@@ -226,13 +226,14 @@ class Emendas_Model_Emenda extends Modelo
 		CASE WHEN ben.benparecerjuridico = 0 THEN 'Não' WHEN ben.benparecerjuridico = 1 THEN 'Sim' WHEN ben.benparecerjuridico = 2 THEN 'Não se aplica' END AS parecer_juridico,
                 CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
                 imp.impdsc as motivo,
+                benmotivoimpedimento as justificativa,
                 -- SITUAÇÃO WORKFLOW
                 doce.esddsc,
 		-- PLANO INTERNO
                 pi.empenhado,
                 pi.pago
-            -- DADOS DA EMENDA
             FROM emendas.emenda eme
+                -- DADOS DA EMENDA
                 LEFT JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
                 LEFT JOIN emendas.autor aut ON aut.autid = eme.autid
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
