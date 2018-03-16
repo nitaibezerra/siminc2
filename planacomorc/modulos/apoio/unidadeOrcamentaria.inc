@@ -31,7 +31,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Nome</th>
                                 <th>Sigla</th>
                                 <th>Código</th>
-                                <th>Orçamento</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,7 +44,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['unonome']; ?></td>
                                     <td class="text-center"><?php echo $dados['unosigla']; ?></td>
                                     <td class="text-center"><?php echo $dados['unocodigopi']; ?></td>
-                                    <td class="text-center"><?php echo $dados['unocodorcamento']; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
