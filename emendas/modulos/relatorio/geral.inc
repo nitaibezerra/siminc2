@@ -1,9 +1,9 @@
 <?php
 
-//    header( 'Content-Type: application/vnd.ms-excel' );
-//    header( 'Expires: 0' );
-//    header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-//    header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
+    header( 'Content-Type: application/vnd.ms-excel' );
+    header( 'Expires: 0' );
+    header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+    header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
 
     $cabecalho = [
         'ID Emenda',
@@ -19,13 +19,41 @@
         'Mod. Aplicação',
         'Fonte',
         'Valor',
+        # BENEFICIARIOS
+        'Id Beneficiario',
+        'Código Subunidade',
+        'Subunidade',
+        'Código Subunidade delegada',
+        'Subunidade delegada',
+        'CNPJ',
+        'Proponente',
+        'Localização',
+        'Paises',
+        'UFs',
+        'Municipios',
+        'Número do Processo',
+        'Data de Início da Vigência',
+        'Modalidade de Pactuação',
+        'TED',
+        'Área Cultural',
+        'Segmento Cultural',
+        'Alterações',
+        'Parecer Técnico',
+        'Parecer Jurídico',
+        'Impedimento',
+        'Motivo',
+        'Justivicativa',
+        'Empenhado',
+        'Pago',
         
-        'Situação SICONV'
+//        'Situação SICONV'
     ];
 
     # Lista de colunas que terão formatação de moeda.
     $listaColunaMoeda = array(
-        'emdvalor'
+        'emdvalor',
+        'empenhado',
+        'pago'
     );
 
     $sql = (new Emendas_Model_Emenda)->montarSqlRelatorioGeral($_SESSION['exercicio']);

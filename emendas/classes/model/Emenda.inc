@@ -155,10 +155,10 @@ class Emendas_Model_Emenda extends Modelo
         $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
         
         $sql = "
-            SELECT DISTINCT
+           SELECT DISTINCT
 		-- DADOS DA EMENDA
-                eme.emeid,
-                eme.emenumero,
+		eme.emeid,
+		eme.emenumero,
                 aut.autcod,
                 aut.autnome,
 		uno.unocod,
@@ -166,39 +166,100 @@ class Emendas_Model_Emenda extends Modelo
 		ptr.funcional || ' - ' || COALESCE(ptr.acatitulo, '') AS funcional,
                 CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'Não' END AS impositiva,
                 eme.emejustificativa,
+                -- DADOS FINANCEIROS
                 emed.gndcod,
                 emed.mapcod AS mod_aplic,
                 emed.foncod AS fonte,
                 emed.emdvalor,
---                eme.*,
--- Beneficiario
-                sit.sitdsc
-/*
-                eme.autid,
-                eme.prsano,
+                -- BENEFICIARIOS
+		ben.benid,
+                suo.suocod AS cod_unidade,
+                suo.suonome AS unidade,
+                suoed.suocod AS cod_unidade_delegada,
+                suoed.suonome AS unidade_delegada,
+                REPLACE(TO_CHAR(pro.procnpj::NUMERIC, '00:000:000/0000-00'), ':', '.') procnpj,
                 pro.pronome,
-                sit.sitdsc,
-                ben.benid
-*/
+		esf.esfdsc AS localizacao,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				p.paidescricao
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+				JOIN territorios.pais p ON bl.paiid = p.paiid-- SELECT * FROM territorios.pais 
+			WHERE
+				p.paidescricao IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_pais,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				bl.estuf
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+			WHERE
+				bl.estuf IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_uf,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				m.mundescricao || '-' || m.estuf
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+				JOIN territorios.municipio m ON bl.muncod = m.muncod-- SELECT * FROM territorios.municipio  
+			WHERE
+				m.mundescricao IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_municipio,
+--                TO_CHAR(ben.bennumeroprocesso::bigint, 'FM00000\".\"000000\"/\"0000\"-\"00') AS processo,
+		ben.bennumeroprocesso AS processo,
+		TO_CHAR(ben.beninicio,'dd/mm/YYYY') AS vigencia,
+		pca.capdsc,
+                CASE WHEN bented IS TRUE THEN 'Sim' ELSE 'Não' END AS ted,
+                mde.mdedsc,
+		nee.needsc,
+                REPLACE(REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				alo.alodsc
+			FROM emendas.beneficiarioalteracao ba -- SELECT * FROM emendas.beneficiarioalteracao
+				LEFT JOIN emendas.alteracaoorcamentaria alo ON ba.aloid = alo.aloid -- SELECT alo.alodsc, * FROM emendas.alteracaoorcamentaria
+			WHERE
+				alo.alodsc IS NOT NULL
+				AND ba.benid = ben.benid
+                )::TEXT, '{', ''), '}', ''), '\"', '') AS lista_alteracoes,
+		CASE WHEN ben.benparecertecnico = 0 THEN 'Não' WHEN ben.benparecertecnico = 1 THEN 'Sim' WHEN ben.benparecertecnico = 2 THEN 'Não se aplica' END AS parecer_tecnico,
+		CASE WHEN ben.benparecerjuridico = 0 THEN 'Não' WHEN ben.benparecerjuridico = 1 THEN 'Sim' WHEN ben.benparecerjuridico = 2 THEN 'Não se aplica' END AS parecer_juridico,
+                CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
+                imp.impdsc as motivo,
+                -- SITUAÇÃO WORKFLOW
+                doce.esddsc,
+		-- PLANO INTERNO
+                pi.empenhado,
+                pi.pago
+            -- DADOS DA EMENDA
             FROM emendas.emenda eme
                 LEFT JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
                 LEFT JOIN emendas.autor aut ON aut.autid = eme.autid
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
                 LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
-
+                -- BENEFICIARIOS
                 LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
-                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
+                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid -- SELECT * FROM emendas.proponente
                 LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
                 LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
-                LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
+                LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid -- SELECT * FROM public.vw_subunidadeorcamentaria
                 LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
                 LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+		LEFT JOIN territorios.esfera esf ON ben.esfid = esf.esfid
+		LEFT JOIN monitora.pi_categoriaapropriacao pca ON ben.capid = pca.capid -- SELECT * FROM monitora.pi_categoriaapropriacao
+		LEFT JOIN monitora.pi_modalidadeensino mde ON ben.mdeid = mde.mdeid
+		LEFT JOIN monitora.pi_niveletapaensino nee ON ben.neeid = nee.neeid
+		LEFT JOIN emendas.impedimento imp ON ben.impid = imp.impid
+                -- SITUAÇÃO
 		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
 		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+		-- PLANO INTERNO
                 LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
             WHERE
                 eme.emestatus = 'A'
+                AND ben.benstatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
+--AND ben.benid = 8670
                 $where
             ORDER BY
                 1,
