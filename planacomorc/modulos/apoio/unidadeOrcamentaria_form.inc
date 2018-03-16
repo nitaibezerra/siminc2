@@ -47,17 +47,17 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="unoid" id="unoid" type="hidden" value="<?php echo $mUnidadeOrcamentaria->unoid; ?>">
 
                         <?php
-                        echo $simec->input('unocod', 'Código', $mUnidadeOrcamentaria->unocod, ['maxlength' => 5]);
-                        echo $simec->input('unonome', 'Nome', $mUnidadeOrcamentaria->unonome, ['maxlength' => 250]);
-                        echo $simec->input('unocodigopi', 'Código PI', $mUnidadeOrcamentaria->unocodigopi, ['maxlength' => 1]);
+                        echo $simec->input('unocod', 'Código', $mUnidadeOrcamentaria->unocod, ['required','class'=>"inteiro" ,'maxlength' => 5]);
+                        echo $simec->input('unonome', 'Nome', $mUnidadeOrcamentaria->unonome, ['required','maxlength' => 250]);
+                        echo $simec->input('unocodigopi', 'Código PI', $mUnidadeOrcamentaria->unocodigopi, ['required','maxlength' => 1]);
                         echo $simec->radio('unofundo', 'Fundos', $mUnidadeOrcamentaria->unofundo, ['TRUE'=>'Sim', 'FALSE'=>'Não']);
-                        echo $simec->input('unosigla', 'Sigla da Unidade Orçamentária', $mUnidadeOrcamentaria->unosigla, ['maxlength' => 20]);
-                        echo $simec->input('unocodorcamento', 'Código dor Orçmaneto', $mUnidadeOrcamentaria->unocodorcamento, ['maxlength' => 5]);
+                        echo $simec->input('unosigla', 'Sigla da Unidade Orçamentária', $mUnidadeOrcamentaria->unosigla, ['required','maxlength' => 20]);
+                        echo $simec->input('unocodorcamento', 'Código dor Orçmaneto', $mUnidadeOrcamentaria->unocodorcamento, ['required','maxlength' => 5]);
                         ?>
 
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-primary" id="btn-salvar" type="button"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                <button class="btn btn-primary" id="btn-salvar" type="submit"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                 <a href="?modulo=apoio/unidadeOrcamentaria&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                 <?php if($mUnidadeOrcamentaria->unoid){ ?>
                                     <a href="?modulo=apoio/unidadeOrcamentaria_form&acao=A&req=excluir&unoid=<?php echo $mUnidadeOrcamentaria->unoid; ?>" class="btn btn-danger link-excluir" id="btnExcluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
