@@ -1,7 +1,7 @@
 <?php if(count($aSiconv)){ ?>
 
     <div class="col-md-6">
-        <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados da Programa</h5>
+        <h5 class="text-center" style="color: #55b3a3; border-bottom: 1px #55b3a3 solid; padding-bottom: 5px;">Dados do Programa</h5>
         <?php
         global $simec;
         $simec->setPodeEditar(0);
