@@ -139,6 +139,164 @@ class Emendas_Model_Emenda extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+    
+   
+    /**
+     * Monta consulta pra buscar dados do relat?rio geral
+     * 
+     * @param integer $exercicio
+     * @param array $listaSubUnidadeUsuario
+     * @return string
+     */
+    public function montarSqlRelatorioGeral($exercicio, $listaSubUnidadeUsuario = array()){
+        $where = '';
+        
+        # Sub-Unidade Orçamentária ou Sub-Unidade Orçamentária delegada.
+        $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
+        
+        $sql = "
+           SELECT DISTINCT
+		-- DADOS DA EMENDA
+		eme.emeid,
+		eme.emenumero,
+                -- AUTOR
+                aut.autcod,
+                aut.autnome,
+                case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end genero,
+                autip.atpdsc as tipo_parlamentar,
+                aut.estuf,
+                p.parsigla,
+                -- UNIDADE
+		uno.unocod,
+		uno.unosigla,
+		ptr.funcional || ' - ' || COALESCE(ptr.acatitulo, '') AS funcional,
+                CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'Não' END AS impositiva,
+                eme.emejustificativa,
+                -- DADOS FINANCEIROS
+                emed.gndcod,
+                emed.mapcod AS mod_aplic,
+                emed.foncod AS fonte,
+                emed.emdvalor,
+                -- BENEFICIARIOS
+		ben.benid,
+                suo.suocod AS cod_unidade,
+                suo.suonome AS unidade,
+                suoed.suocod AS cod_unidade_delegada,
+                suoed.suonome AS unidade_delegada,
+                REPLACE(TO_CHAR(pro.procnpj::NUMERIC, '00:000:000/0000-00'), ':', '.') procnpj,
+                pro.pronome,
+		esf.esfdsc AS localizacao,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				p.paidescricao
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+				JOIN territorios.pais p ON bl.paiid = p.paiid-- SELECT * FROM territorios.pais 
+			WHERE
+				p.paidescricao IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_pais,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				bl.estuf
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+			WHERE
+				bl.estuf IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_uf,
+                REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				m.mundescricao || '-' || m.estuf
+			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
+				JOIN territorios.municipio m ON bl.muncod = m.muncod-- SELECT * FROM territorios.municipio  
+			WHERE
+				m.mundescricao IS NOT NULL
+				AND bl.benid = ben.benid
+                )::TEXT, '{', ''), '}', '') AS lista_municipio,
+--                TO_CHAR(ben.bennumeroprocesso::bigint, 'FM00000\".\"000000\"/\"0000\"-\"00') AS processo,
+		ben.bennumeroprocesso AS processo,
+		TO_CHAR(ben.beninicio,'dd/mm/YYYY') AS vigencia,
+		pca.capdsc,
+                CASE WHEN bented IS TRUE THEN 'Sim' ELSE 'Não' END AS ted,
+                mde.mdedsc,
+		nee.needsc,
+                REPLACE(REPLACE(REPLACE(ARRAY(
+			SELECT DISTINCT
+				alo.alodsc
+			FROM emendas.beneficiarioalteracao ba -- SELECT * FROM emendas.beneficiarioalteracao
+				LEFT JOIN emendas.alteracaoorcamentaria alo ON ba.aloid = alo.aloid -- SELECT alo.alodsc, * FROM emendas.alteracaoorcamentaria
+			WHERE
+				alo.alodsc IS NOT NULL
+				AND ba.benid = ben.benid
+                )::TEXT, '{', ''), '}', ''), '\"', '') AS lista_alteracoes,
+		CASE WHEN ben.benparecertecnico = 0 THEN 'Não' WHEN ben.benparecertecnico = 1 THEN 'Sim' WHEN ben.benparecertecnico = 2 THEN 'Não se aplica' END AS parecer_tecnico,
+		CASE WHEN ben.benparecerjuridico = 0 THEN 'Não' WHEN ben.benparecerjuridico = 1 THEN 'Sim' WHEN ben.benparecerjuridico = 2 THEN 'Não se aplica' END AS parecer_juridico,
+                CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
+                imp.impdsc as motivo,
+                benmotivoimpedimento as justificativa,
+                -- DADOS FINANCEIROS DO BENFICIÁRIO
+		bed.bedvalor,
+		bed.bedvalorpriorizado,
+                bed.bedvalor - bed.bedvalorpriorizado AS contigenciado,
+		-- DADOS SICONV
+		prg.prgcodigo AS numero_programa,
+		prg.prgtitulo AS titulo_programa,
+		ben.benprogramatitulo AS objeto_programa,
+		CASE WHEN bensic.sicsequencial IS NOT NULL THEN bensic.sicsequencial || '/' || bensic.prsano END AS numero_proposta,
+		bensic.sicjustificativa AS titulo_proposta,
+		bensic.sicobjeto AS objeto_proposta,
+		bensit.sitdsc AS situacao_proposta,
+                -- SITUAÇÃO WORKFLOW
+                doce.esddsc,
+		-- PLANO INTERNO
+                pi.empenhado,
+                pi.pago
+            FROM emendas.emenda eme
+                -- DADOS DA EMENDA
+                LEFT JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
+                LEFT JOIN emendas.autor aut ON(aut.autid = eme.autid AND aut.autstatus = 'A')
+                LEFT JOIN emendas.autortipo autip ON aut.atpid = autip.atpid -- SELECT * FROM emendas.autortipo
+                LEFT JOIN emendas.partido p ON aut.parid = p.parid -- SELECT * FROM emendas.partido
+                LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
+                LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
+                -- BENEFICIARIOS
+                LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid -- SELECT * FROM emendas.proponente
+                LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
+                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid -- SELECT * FROM public.vw_subunidadeorcamentaria
+                LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
+                LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+		LEFT JOIN territorios.esfera esf ON ben.esfid = esf.esfid
+		LEFT JOIN monitora.pi_categoriaapropriacao pca ON ben.capid = pca.capid -- SELECT * FROM monitora.pi_categoriaapropriacao
+		LEFT JOIN monitora.pi_modalidadeensino mde ON ben.mdeid = mde.mdeid
+		LEFT JOIN monitora.pi_niveletapaensino nee ON ben.neeid = nee.neeid
+		LEFT JOIN emendas.impedimento imp ON ben.impid = imp.impid
+                -- DADOS FINANCEIROS DO BENFICIÁRIO
+                LEFT JOIN emendas.beneficiariodetalhe bed ON(bed.benid = ben.benid AND emed.emdid = bed.emdid AND bed.bedstatus = 'A')
+		-- DADOS SICONV
+		LEFT JOIN emendas.siconvbeneficiario sib ON(ben.benid = sib.benid) -- sib.sicid
+		LEFT JOIN emendas.siconvprograma sip ON(sib.sicid = sip.sicid) -- SELECT * FROM emendas.siconvprograma
+		LEFT JOIN emendas.programa prg on prg.prgid = sip.prgid -- SELECT * FROM emendas.programa
+                LEFT JOIN emendas.siconv bensic on bensic.sicid = sib.sicid -- SELECT * FROM emendas.siconv
+                LEFT JOIN emendas.siconvsituacao bensit on bensic.sitid = bensit.sitid
+                -- SITUAÇÃO
+		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
+		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+		-- PLANO INTERNO
+                LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
+            WHERE
+                eme.emestatus = 'A'
+                AND ben.benstatus = 'A'
+                AND eme.prsano = '". (int)$exercicio. "'
+--AND ben.benid = 8670 -- Emenda completa
+                $where
+            ORDER BY
+                1,
+                2
+        ";
+//ver($sql, d);
+        return $sql;
+    }
 
     public function importar($files)
     {
