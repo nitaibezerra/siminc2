@@ -52,7 +52,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->input('unocodigopi', 'Código PI', $mUnidadeOrcamentaria->unocodigopi, ['required','maxlength' => 1]);
                         echo $simec->radio('unofundo', 'Fundos', $mUnidadeOrcamentaria->unofundo, ['TRUE'=>'Sim', 'FALSE'=>'Não']);
                         echo $simec->input('unosigla', 'Sigla da Unidade Orçamentária', $mUnidadeOrcamentaria->unosigla, ['required','maxlength' => 20]);
-                        echo $simec->input('unocodorcamento', 'Código dor Orçmaneto', $mUnidadeOrcamentaria->unocodorcamento, ['required','maxlength' => 5]);
+//                        echo $simec->input('unocodorcamento', 'Código dor Orçmaneto', $mUnidadeOrcamentaria->unocodorcamento, ['required','maxlength' => 5]);
                         ?>
 
                         <div class="form-group">
