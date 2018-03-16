@@ -12,8 +12,8 @@ $cabecalho = [
     'PTRES',
     'Funcional',
     'Dotação Custeio',
-    'Dotação Capital',
     'Planejado Custeio',
+    'Dotação Capital',
     'Planejado Capital',
     'Dotação Total',
     'Planejado Total',
@@ -101,4 +101,3 @@ $listaColunaMoeda = array(
 
 <?php
 die;
-
