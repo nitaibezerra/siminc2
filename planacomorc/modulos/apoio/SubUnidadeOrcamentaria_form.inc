@@ -4,7 +4,7 @@
     <input name="$unoid" id="$unoid" type="hidden" value="<?php echo $mSubUnidade->unoid; ?>">
 
     <?php
-    echo $simec->input('suocod', 'Código', $mSubUnidade->suocod, ['required', 'maxlength' => 6]);
+    echo $simec->input('suocod', 'Código', $mSubUnidade->suocod, ['required', 'class'=>"inteiro", 'maxlength' => 6]);
     echo $simec->input('suonome', 'Nome', $mSubUnidade->suonome, ['required', 'maxlength' => 200]);
     echo $simec->radio('suoflaglimiteliberado', 'Limite Liberado', $mSubUnidade->suoflaglimiteliberado, ['TRUE'=>'Sim', 'FALSE'=>'Não']);
     echo $simec->input('suocodigopi', 'Código PI', $mSubUnidade->suocodigopi, ['required', 'maxlength' => 2]);

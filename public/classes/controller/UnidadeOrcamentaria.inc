@@ -4,8 +4,7 @@ class Public_Controller_UnidadeOrcamentaria
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/unidadeOrcamentaria_&acao=A';
-
+        $url = '?modulo=apoio/unidadeOrcamentaria_form&acao=A&unoid=';
         try {
             $mUnidadeOrcamentaria = new Public_Model_UnidadeOrcamentaria($dados['unoid']);
             $mUnidadeOrcamentaria->popularDadosObjeto($dados);
@@ -13,7 +12,7 @@ class Public_Controller_UnidadeOrcamentaria
 
             $mUnidadeOrcamentaria->salvar(null, null, ['unocod', 'prsano', 'unonome', 'unostatus','unocodigopi','unofundo','unosigla', 'unocodorcamento', ]);
             $mUnidadeOrcamentaria->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . $mUnidadeOrcamentaria->unoid, 'success');
         } catch (Exception $e){
             $mUnidadeOrcamentaria->rollback();
             simec_redirecionar($url, 'error');
