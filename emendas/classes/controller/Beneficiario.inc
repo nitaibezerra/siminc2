@@ -31,7 +31,7 @@ class Emendas_Controller_Beneficiario
                 $mBeneficiario->associarDelegacao($dados);
                 $mBeneficiario->associarAlteracao($dados);
 
-                // Salvando dados da Localização
+                // Salvando dados da LocalizaÃ§Ã£o
                 $dados['benid'] = $mBeneficiario->benid;
                 (new Emendas_Controller_BeneficiarioLocalizacao())->salvar($dados);
             }
@@ -73,7 +73,7 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemHistorico($benid)
     {
-      # Busca perfis do usuário logado
+      # Busca perfis do usuÃ¡rio logado
       $perfis = pegaPerfilGeral();
       # Caso seja o perfil de SubUnidade o sistema redireciona para a tela de lista de emendas.
       if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
