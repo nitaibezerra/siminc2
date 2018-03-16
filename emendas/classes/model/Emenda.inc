@@ -159,8 +159,14 @@ class Emendas_Model_Emenda extends Modelo
 		-- DADOS DA EMENDA
 		eme.emeid,
 		eme.emenumero,
+                -- AUTOR
                 aut.autcod,
                 aut.autnome,
+                case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end genero,
+                autip.atpdsc as tipo_parlamentar,
+                aut.estuf,
+                p.parsigla,
+                -- UNIDADE
 		uno.unocod,
 		uno.unosigla,
 		ptr.funcional || ' - ' || COALESCE(ptr.acatitulo, '') AS funcional,
@@ -227,6 +233,18 @@ class Emendas_Model_Emenda extends Modelo
                 CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
                 imp.impdsc as motivo,
                 benmotivoimpedimento as justificativa,
+                -- DADOS FINANCEIROS DO BENFICIÁRIO
+		bed.bedvalor,
+		bed.bedvalorpriorizado,
+                bed.bedvalor - bed.bedvalorpriorizado AS contigenciado,
+		-- DADOS SICONV
+		prg.prgcodigo AS numero_programa,
+		prg.prgtitulo AS titulo_programa,
+		ben.benprogramatitulo AS objeto_programa,
+		CASE WHEN bensic.sicsequencial IS NOT NULL THEN bensic.sicsequencial || '/' || bensic.prsano END AS numero_proposta,
+		bensic.sicjustificativa AS titulo_proposta,
+		bensic.sicobjeto AS objeto_proposta,
+		bensit.sitdsc AS situacao_proposta,
                 -- SITUAÇÃO WORKFLOW
                 doce.esddsc,
 		-- PLANO INTERNO
@@ -235,7 +253,9 @@ class Emendas_Model_Emenda extends Modelo
             FROM emendas.emenda eme
                 -- DADOS DA EMENDA
                 LEFT JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
-                LEFT JOIN emendas.autor aut ON aut.autid = eme.autid
+                LEFT JOIN emendas.autor aut ON(aut.autid = eme.autid AND aut.autstatus = 'A')
+                LEFT JOIN emendas.autortipo autip ON aut.atpid = autip.atpid -- SELECT * FROM emendas.autortipo
+                LEFT JOIN emendas.partido p ON aut.parid = p.parid -- SELECT * FROM emendas.partido
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
                 LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
                 -- BENEFICIARIOS
@@ -251,6 +271,14 @@ class Emendas_Model_Emenda extends Modelo
 		LEFT JOIN monitora.pi_modalidadeensino mde ON ben.mdeid = mde.mdeid
 		LEFT JOIN monitora.pi_niveletapaensino nee ON ben.neeid = nee.neeid
 		LEFT JOIN emendas.impedimento imp ON ben.impid = imp.impid
+                -- DADOS FINANCEIROS DO BENFICIÁRIO
+                LEFT JOIN emendas.beneficiariodetalhe bed ON(bed.benid = ben.benid AND emed.emdid = bed.emdid AND bed.bedstatus = 'A')
+		-- DADOS SICONV
+		LEFT JOIN emendas.siconvbeneficiario sib ON(ben.benid = sib.benid) -- sib.sicid
+		LEFT JOIN emendas.siconvprograma sip ON(sib.sicid = sip.sicid) -- SELECT * FROM emendas.siconvprograma
+		LEFT JOIN emendas.programa prg on prg.prgid = sip.prgid -- SELECT * FROM emendas.programa
+                LEFT JOIN emendas.siconv bensic on bensic.sicid = sib.sicid -- SELECT * FROM emendas.siconv
+                LEFT JOIN emendas.siconvsituacao bensit on bensic.sitid = bensit.sitid
                 -- SITUAÇÃO
 		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
 		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
@@ -260,7 +288,7 @@ class Emendas_Model_Emenda extends Modelo
                 eme.emestatus = 'A'
                 AND ben.benstatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
---AND ben.benid = 8670
+--AND ben.benid = 8670 -- Emenda completa
                 $where
             ORDER BY
                 1,

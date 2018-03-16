@@ -10,11 +10,16 @@
         'Número',
         'Cod. Autor',
         'Autor',
+        'Gênero',
+        'Tipo Parlamentar',
+        'UF Parlamentar',
+        'Partido',
         'Cod. Unidade',
         'Unidade',
         'Funcional',
         'Impositiva',
         'Justificativa',
+        # DADOS FINANCEIROS
         'GND',
         'Mod. Aplicação',
         'Fonte',
@@ -43,16 +48,31 @@
         'Impedimento',
         'Motivo',
         'Justivicativa',
+        # DADOS FINANCEIROS DO BENFICIÁRIO
+        'Vl. Beneficiário',
+        'Vl. Priorizado',
+        'Vl. Contingenciado',
+        # DADOS SICONV
+        'Número Programa - SICONV',
+        'Título Programa - SICONV',
+        'Objeto Programa',
+        'Número Proposta - SICONV',
+        'Título Proposta - SICONV',
+        'Objeto Proposta',
+        'Situação Proposta',
+        # SITUAÇÃO WORKFLOW
         'Situação',
+        # PLANO INTERNO
         'Empenhado',
         'Pago',
-        
-//        'Situação SICONV'
     ];
 
     # Lista de colunas que terão formatação de moeda.
     $listaColunaMoeda = array(
         'emdvalor',
+        'bedvalor',
+        'bedvalorpriorizado',
+        'contigenciado',
         'empenhado',
         'pago'
     );
