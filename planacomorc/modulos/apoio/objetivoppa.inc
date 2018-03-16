@@ -28,7 +28,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
                                 <th>Descrição</th>
-                                <th>Ano</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,7 +38,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <a title="Alterar" href="planacomorc.php?modulo=apoio/objetivoppa_form&acao=A&oppid=<?php echo $dados['oppid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['descricao']; ?></td>
-                                    <td><?php echo $dados['prsano']; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
