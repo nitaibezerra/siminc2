@@ -68,16 +68,17 @@ class Public_Model_ObjetivoPpa extends Modelo
 
         $sql = "
             SELECT
-                oppid,
-                oppcod || ' - ' || oppnome AS descricao,prsano 
+                oppid AS codigo,
+                oppcod || ' - ' || oppnome AS descricao,
+                prsano
             FROM public.objetivoppa
             WHERE
                 oppstatus = 'A'
                 AND prsano = '{$where['exercicio']}'
             ORDER BY
                 oppcod";
-                $resultado = $this->carregar($sql);
-                return $resultado ? $resultado : array();    }
+        return $sql;
+      }
 
     /**
      * Busca o código do objetivo(oppid) por código da funcional.

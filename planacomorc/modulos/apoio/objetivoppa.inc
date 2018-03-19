@@ -1,7 +1,8 @@
 <?php
 
 // $aObjetivoppa = (new Public_Model_ObjetivoPpa())->recuperarTodos('*', ["oppstatus = 'A'","prsano = '{$_SESSION['exercicio']}'"], 'oppdsc');
-$aObjetivoppa = (new Public_Model_ObjetivoPpa())->recuperarSqlCombo();
+$sqlObjetivo = (new Public_Model_ObjetivoPpa())->recuperarSqlCombo();
+$aObjetivoppa = $db->carregar($sqlObjetivo);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -35,7 +36,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                                 <tr>
                                     <td class="text-center">
-                                        <a title="Alterar" href="planacomorc.php?modulo=apoio/objetivoppa_form&acao=A&oppid=<?php echo $dados['oppid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        <a title="Alterar" href="planacomorc.php?modulo=apoio/objetivoppa_form&acao=A&oppid=<?php echo $dados['codigo']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['descricao']; ?></td>
                                 </tr>
