@@ -6,11 +6,15 @@
 
     $mPlanoInterno = new Pi_PlanoInterno();
 
+    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
     $dadosListagem = [];
-    if(!empty($_REQUEST['esdid'])){
+    if(!empty($_REQUEST['esdid']) || !empty($_REQUEST['unoid']) || !empty($_REQUEST['suoid']) ){
         $filtro = $_REQUEST;
         $filtro['exercicio'] = $_SESSION['exercicio'];
+        $filtro['suoid'] = $_REQUEST['suoid'];
         $dadosListagem = $mPlanoInterno->recuperarPis($filtro);
+
     }
     if(isset($_REQUEST['btn-aplicar'])){
         $mPlanoInterno->tramitarLote($_REQUEST['aedid'], $_REQUEST['aDocid'], $_REQUEST['cmddsc']);
@@ -39,6 +43,19 @@
                         <?php
                         echo $simec->select('esdid', 'Situação Origem', $_REQUEST['esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_PLANEJAMENTO_PI)), array('required'));
                         echo $simec->select('eqdid[]', 'Enquadramento da Despesa', $_REQUEST['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'])));
+
+                        // if (!$listaSubUnidadeUsuario) {
+                        //     echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                        //         'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
+                        //         'suo.unofundo = FALSE')), array('multiple' => 'true'));
+                        // }
+                        echo '<div id=div_ungcod >';
+                        echo $simec->select('suoid', 'SubUnidade', $_REQUEST['suoid'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                            'unofundo' => 'FALSE',
+                            'exercicio' => $_SESSION['exercicio'],
+                            'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
+                        echo '</div>';
+                        // ver($dadosListagem,d);
                         ?>
 
                         <div class="form-group">
@@ -46,7 +63,7 @@
                                 <button class="btn btn-primary btn-buscar" name="btn-buscar" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -162,7 +179,7 @@
         </div>
     </div>
 </div>
-    
+
 
 <script type="text/javascript">
     $(document).ready(function(){
