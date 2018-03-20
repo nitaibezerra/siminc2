@@ -202,12 +202,13 @@ foreach($dadosSiminc as $funcional => $dado){
     }
 }
 
-$sql = "select  pli.plicod, pli.pliid, pli.suosigla, pli.unosigla, pli.funcional,        
+$sql = "select  pli.plicod, pli.pliid, pli.suosigla, plititulo, pli.unosigla, pli.funcional,        
                 pli.previsto::numeric, pli.autorizado::numeric, pli.empenhado::numeric, pli.liquidado::numeric, pli.pago::numeric pago
         from monitora.vw_planointerno pli
         where pli.pliano = '$exercicio'
         and pli.autorizado > pli.previsto
         order by pli.unosigla, pli.suosigla, pli.funcional";
+
 $dados = $db->carregar($sql);
 $dadosProvisionado = $dados ? $dados : [];
 
@@ -219,6 +220,7 @@ $htmlTabela3 = "
         <th>Funcional</th>
         <th>Unidade</th>
         <th>PI</th>
+        <th>Título</th>
         <th>Previsto</th>
         <th>Provisionado</th>
         <th>Empenhado</th>
@@ -234,6 +236,7 @@ foreach($dadosProvisionado as $dado){
             <td>{$dado['funcional']}</td>
             <td>{$dado['unosigla']} - {$dado['suosigla']}</td>
             <td>{$dado['plicod']}</td>
+            <td>{$dado['plititulo']}</td>
             <td style='text-align: right; color: green;'>" . number_format($dado['previsto'], 0, ',', '.') . "</td>
             <td style='text-align: right; color: red;'>" . number_format($dado['autorizado'], 0, ',', '.') . "</td>
             <td style='text-align: right;'>" . number_format($dado['empenhado'], 0, ',', '.') . "</td>
@@ -296,11 +299,12 @@ if($corpoEmailV3){
             order by usuemail";
     $destinatario = $db->carregar($sql);
 
-//    $destinatario = ["orion.mesquita@cultura.gov.br"];
+//    $destinatario = ["douglas.fontes@cultura.gov.br"];
 
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
+
 
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }
