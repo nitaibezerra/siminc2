@@ -95,7 +95,18 @@ class Emendas_Model_Emenda extends Modelo
                 aut.autnome,
                 aut.autcod,
                 pro.pronome,
-                sit.sitdsc,
+                (
+		    SELECT
+                        sit.sitdsc
+                    FROM emendas.siconvbeneficiario sbe                                                
+                        JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                        JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                    WHERE
+			sbe.benid = ben.benid
+                    ORDER BY
+                        sicsequencial DESC
+                    LIMIT 1
+                ) AS sitdsc,
                 ben.benid,
                 suo.suocod || ' - ' || suo.suosigla subunidade,
                 aut.estuf,
@@ -127,8 +138,6 @@ class Emendas_Model_Emenda extends Modelo
                 emendas.emenda eme
                 LEFT JOIN emendas.beneficiario ben ON(ben.emeid = eme.emeid AND benstatus = 'A')
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
-                LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
-                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
                 JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
                 JOIN emendas.autor aut ON aut.autid = eme.autid
                 JOIN monitora.ptres ptr ON ptr.ptrid = eme.ptrid
