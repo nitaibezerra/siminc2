@@ -11,6 +11,8 @@ switch ($_REQUEST['req']) {
 }
 
 $mEnquadramento = new Monitora_Model_PiEnquadramentoDespesa($_REQUEST['eqdid']);
+$lista_rp = $mEnquadramento->recuperarRP($_REQUEST['eqdid']);
+ver($lista_rp);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -34,11 +36,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="eqdid" id="eqdid" type="hidden" value="<?php echo $mEnquadramento->eqdid; ?>">
 
                         <?php
-                        echo $simec->input('eqdcod', 'Código', $mEnquadramento->eqdcod, ['required', 'maxlength' => 2]);
-                        echo $simec->input('eqddsc', 'Descrição', $mEnquadramento->eqddsc, ['required', 'maxlength' => 250]);
-                        echo $simec->radio('eqdstreduzido', 'Reduzido', $mEnquadramento->eqdstreduzido, ['S'=>'Sim', 'N'=>'Não']);
-                        echo $simec->select('eqdrp', 'Resultado Primario', $mEnquadramento->eqdrp, (new Planacomorc_Model_ResultadoPrimario())->recuperarSqlCombo(['redsc'], null, 'redsc'));
-
+                          echo $simec->input('eqdcod', 'Código', $mEnquadramento->eqdcod, ['required', 'maxlength' => 2]);
+                          echo $simec->input('eqddsc', 'Descrição', $mEnquadramento->eqddsc, ['required', 'maxlength' => 250]);
+                          echo $simec->radio('eqdstreduzido', 'Reduzido', $mEnquadramento->eqdstreduzido, ['S'=>'Sim', 'N'=>'Não']);
+                          echo $simec->select('lista_rp', 'Resultado Primario', $lista_rp, (new Public_Model_IdentResultPrimario())->recuperarSqlCombo("irpcod, irpcod || ' - ' || irpdsc", ["irpstatus = 'A'"], 'descricao'), array('multiple' => 'true'));
                         ?>
 
                         <div class="form-group">

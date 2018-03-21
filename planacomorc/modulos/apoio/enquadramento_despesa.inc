@@ -1,6 +1,6 @@
 <?php
 
-$Enquadramento = (new Monitora_Model_PiEnquadramentoDespesa())->recuperarTodos('*', ["eqdstatus = 'A'", "eqdano = '{$_SESSION['exercicio']}'"], 'eqddsc');
+$Enquadramento = (new Monitora_Model_PiEnquadramentoDespesa())->recuperarTodosDetail( (object) array('exercicio' => $_SESSION['exercicio']));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -43,7 +43,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td class="text-center"><?php echo $dados['eqdcod']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
                                     <td class="text-center"><?php echo $dados['eqdstreduzido'] == 'S' ? 'Sim' : 'Não'; ?></td>
-                                    <td class="text-center"><?php echo $dados['redsc']; ?></td>
+                                    <td class="text-center"><?php echo $dados['lista_rp']; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
