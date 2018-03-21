@@ -151,11 +151,9 @@ include APPRAIZ . "includes/cabecalho.inc";
         <h2><?php echo $titulo_modulo; ?></h2>
         <?php echo $mBeneficiario->pliid? "<span class='link a_espelho' title='Exibir dados do Plano Interno' data-pi='{$mBeneficiario->pliid}' style='color: red;'>Id do PI: {$mBeneficiario->pliid}</span>": NULL; ?>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 dados-siconv">
         <div style="padding-top: 10px;" class="text-right">
-          <?php if($mBeneficiario->capid == $convenio[0]['capid']) { ?>
             <a class="btn btn-info" href="?modulo=principal/beneficiario_form&acao=A&req=atualizar-siconv&emeid=<?php echo $mBeneficiario->emeid; ?>&benid=<?php echo $mBeneficiario->benid; ?>"><i class="fa fa-refresh"></i> Atualizar dados SICONV</a>
-          <?php }?>
         </div>
     </div>
 </div>
