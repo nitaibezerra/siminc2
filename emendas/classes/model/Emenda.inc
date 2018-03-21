@@ -158,7 +158,7 @@ class Emendas_Model_Emenda extends Modelo
            SELECT DISTINCT
 		-- DADOS DA EMENDA
 		eme.emeid,
-		eme.emenumero::TEXT,
+		SUBSTRING(eme.emenumero::TEXT FROM 1 FOR 4) || ' ' || SUBSTRING(eme.emenumero::TEXT FROM 5 FOR LENGTH(eme.emenumero::TEXT)) AS emenumero,
                 -- AUTOR
                 aut.autcod,
                 aut.autnome,
