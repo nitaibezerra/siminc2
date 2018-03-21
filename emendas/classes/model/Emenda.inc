@@ -98,16 +98,29 @@ class Emendas_Model_Emenda extends Modelo
                 sit.sitdsc,
                 ben.benid,
                 suo.suocod || ' - ' || suo.suosigla subunidade,
-                REPLACE(REPLACE(ARRAY(
-			SELECT DISTINCT
-				bl.estuf
-			FROM emendas.beneficiariolocalizacao bl
-			WHERE
-				bl.estuf IS NOT NULL
-				AND bl.benid = ben.benid
-                )::TEXT, '{', ''), '}', '') AS lista_uf,
+                aut.estuf,
                 CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
                 doce.esddsc,
+                (
+                    SELECT
+                        SUM(bedvalor)
+                    FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                    WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod <= 3
+                ) AS custeio,
+                (
+                    SELECT
+                        SUM(bedvalor)
+                    FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                    WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod >= 4
+                ) AS capital,
                 pi.empenhado,
                 pi.pago
             FROM
