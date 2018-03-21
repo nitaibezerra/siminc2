@@ -783,12 +783,12 @@ class Emendas_Model_Emenda extends Modelo
 
             $mSiconv = new Emendas_Model_Siconv();
 
-            $filtro = [
-                "coalesce(situacaopropostaws, '') != ''",
-                "coalesce(parecerproposta, '') != ''",
-            ];
+//            $filtro = [
+//                "coalesce(situacaopropostaws, '') != ''",
+//                "coalesce(parecerproposta, '') != ''",
+//            ];
 
-            $mSiconv->atualizar($filtro);
+            $mSiconv->atualizar();
         }
 
         $this->emeatualizacaosiconv = date('Y-m-d H:i:s');
@@ -825,8 +825,6 @@ class Emendas_Model_Emenda extends Modelo
                 sleep(5);
             }
         }
-
-        ver('FIM', d);
     }
 
     public function recuperarPropostaWs($obWS, $emenda)
