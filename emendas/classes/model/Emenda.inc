@@ -158,7 +158,7 @@ class Emendas_Model_Emenda extends Modelo
            SELECT DISTINCT
 		-- DADOS DA EMENDA
 		eme.emeid,
-		eme.emenumero,
+		eme.emenumero::TEXT,
                 -- AUTOR
                 aut.autcod,
                 aut.autnome,
@@ -248,6 +248,8 @@ class Emendas_Model_Emenda extends Modelo
                 -- SITUAÇÃO WORKFLOW
                 doce.esddsc,
 		-- PLANO INTERNO
+                pi.pliid,
+                pi.plicod,
                 pi.empenhado,
                 pi.pago
             FROM emendas.emenda eme

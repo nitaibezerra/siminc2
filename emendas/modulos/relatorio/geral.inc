@@ -63,6 +63,8 @@
         # SITUAÇÃO WORKFLOW
         'Situação',
         # PLANO INTERNO
+        'Id PI',
+        'Código PI',
         'Empenhado',
         'Pago',
     ];
@@ -94,7 +96,7 @@
         <?php foreach($lista as $dado){ ?>
             <tr>
                 <?php foreach($dado as $coluna => $valor){ ?>
-                    <td style="border: 1px #e5d9c5 solid;"><?php echo in_array($coluna, $listaColunaMoeda)? formata_valor($valor): $valor; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo in_array($coluna, $listaColunaMoeda)? formata_valor($valor): (string)$valor; ?></td>
                 <?php } ?>
             </tr>
         <?php } ?>
