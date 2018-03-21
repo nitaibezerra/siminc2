@@ -12,7 +12,6 @@ switch ($_REQUEST['req']) {
 
 $mEnquadramento = new Monitora_Model_PiEnquadramentoDespesa($_REQUEST['eqdid']);
 $lista_rp = $mEnquadramento->recuperarRP($_REQUEST['eqdid']);
-ver($lista_rp);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
