@@ -12,6 +12,19 @@ class Monitora_Controller_PiEnquadramentoDespesa
             $mEnquadramento->eqdano = $mEnquadramento->eqdano ? $mEnquadramento->eqdano : $_SESSION['exercicio'];
 
             $mEnquadramento->salvar(null, null, ['eqdcod', 'eqddsc', 'eqdano', 'eqdstatus', 'mpneid', 'eqdstreduzido', 'edqrp' ]);
+
+            $mEnquadramentoRp = new Monitora_Model_EnquadramentoRp();
+            $mEnquadramentoRp->excluirPorExercicio($_SESSION['exercicio'], $mEnquadramento->eqdid);
+
+            if($dados['lista_rp']){
+              foreach($dados['lista_rp'] as $irpcod){
+                  $mEnquadramentoRp->eqdid = $mEnquadramento->eqdid;
+                  $mEnquadramentoRp->irpcod = $irpcod;
+                  $mEnquadramentoRp->salvar();
+                  $mEnquadramentoRp->erpid = null;
+              }
+            }
+
             $mEnquadramento->commit();
             simec_redirecionar($url . '&eqdid=' . $mEnquadramento->eqdid, 'success');
         } catch (Exception $e){
