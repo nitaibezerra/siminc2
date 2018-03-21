@@ -46,7 +46,7 @@
                                 <button class="btn btn-primary btn-buscar" name="btn-buscar" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
@@ -102,7 +102,9 @@
                                         <?php echo $simec->select('aedid', 'Tramitar Para', null, $aEstados, array('required')); ?>
                                     </div>
                                     <div class="col-md-2 div_motivo">
+                                      <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                         <button class="btn btn-danger" name="btn-aplicar" type="submit"><span class="glyphicon glyphicon-transfer"></span> Tramitar</button>
+                                      <?php }?>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -162,7 +164,7 @@
         </div>
     </div>
 </div>
-    
+
 
 <script type="text/javascript">
     $(document).ready(function(){
