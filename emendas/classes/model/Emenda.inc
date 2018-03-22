@@ -180,7 +180,7 @@ class Emendas_Model_Emenda extends Modelo
            SELECT DISTINCT
 		-- DADOS DA EMENDA
 		eme.emeid,
-		eme.emenumero,
+		SUBSTRING(eme.emenumero::TEXT FROM 1 FOR 4) || ' ' || SUBSTRING(eme.emenumero::TEXT FROM 5 FOR LENGTH(eme.emenumero::TEXT)) AS emenumero,
                 -- AUTOR
                 aut.autcod,
                 aut.autnome,
@@ -270,6 +270,8 @@ class Emendas_Model_Emenda extends Modelo
                 -- SITUAÇÃO WORKFLOW
                 doce.esddsc,
 		-- PLANO INTERNO
+                pi.pliid,
+                pi.plicod,
                 pi.empenhado,
                 pi.pago
             FROM emendas.emenda eme
