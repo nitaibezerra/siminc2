@@ -7,48 +7,17 @@
      *
      * @filesource
      */
+    $requisicao = $_REQUEST['req'];
 
-    $requisicao = $_REQUEST['requisicao'];
-    $filtropi = $_SESSION['filtropi'] = ($_POST? $_POST: $_SESSION['filtropi']);
-
-    $perfis = pegaPerfilGeral();
-
-    # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
-//    $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
     if($requisicao) {
         switch ($requisicao) {
-            case 'exibirGrafico':
-                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/grafico-pi-dotacao.inc";
-                die();
-            break;
             case 'carregarComboUG':
                 echo montarComboUG((object) array(
                     'ungcod' => $filtropi['ungcod'],
                     'exercicio' => $_SESSION['exercicio'],
-                    'unicod' => $_REQUEST['unicod'],
-                    'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
+                    'unicod' => $_REQUEST['unicod']
                 ));
                 die();
-            break;
-            case 'detalharPiDelegadas':
-                include_once APPRAIZ . "planacomorc/modulos/principal/unidade/sub-unidades-delegadas.inc";
-                die();
-            break;
-            case 'limpar':
-                $filtropi = $_SESSION['filtropi'] = array();
-            break;
-            case 'listapimanter-xls':
-                # Lista de PIs
-                $filtropi['exercicio'] = $_SESSION['exercicio'];
-                $filtropi['usucpf'] = $_SESSION['usucpf'];
-                $filtropi['unofundo'] = 'FALSE';
-
-                $mPlanointerno = new Spo_Model_Planointerno();
-                $sql = $mPlanointerno->listar((object) $filtropi);
-                $listaPi = $mPlanointerno->carregar($sql);
-                
-                include_once APPRAIZ. "planacomorc/modulos/principal/unidade/listapimanter-xls.inc";
-                die;
             break;
         }
     }
@@ -68,8 +37,7 @@
             $filtros->ungcod,
             Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                 'exercicio' => $filtros->exercicio,
-                'unicod' => $filtros->unicod,
-                'listaSubUnidadeUsuario' => $filtros->listaSubUnidadeUsuario)),
+                'unicod' => $filtros->unicod)),
             array('multiple' => 'true'));
     }
 
@@ -98,12 +66,9 @@
                         <input name="requisicao" id="requisicao" value="" type="hidden">
 
                         <?php
-                            # Se o usuário tiver Sub-Unidades vinculadas ao seu perfil o sistema não mostra opção de selecionar UO.
-                            if (!$listaSubUnidadeUsuario) {
-                                echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
-                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
-                                    'suo.unofundo = FALSE')), array('multiple' => 'true'));
-                            }
+                            echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                                'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
+                                'suo.unofundo = FALSE')), array('multiple' => 'true'));
                             echo '<div id=div_ungcod >';
                             echo $simec->select('ungcod', 'SubUnidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                                 'unofundo' => 'FALSE',
@@ -136,7 +101,27 @@
 <!--implements here list-->
 
 <script>
+    
+    $(document).ready(function(){
 
+        // Evento ao mudar opção de UO
+        $('#unicod').change(function(){
+            carregarUG($(this).val());
+        });
 
+    });
+    
+    /**
+     * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
+     * 
+     */
+    function carregarUG(unicod) {
+        $.post(
+            '?modulo=relatorio/relatorio-ppa&acao=A&req=carregarComboUG', { unicod: $('#unicod').val() }, function(response) {
+                $('#div_ungcod').remove('slow');
+                $('#div_ungcod').html(response);
+                $(".chosen-select").chosen();
+        });
+    }
 
 </script>
