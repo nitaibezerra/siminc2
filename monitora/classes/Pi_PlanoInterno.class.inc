@@ -396,8 +396,8 @@ class Pi_PlanoInterno extends Modelo
                         ptr.ptrdotacaocusteio dotacao
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
                     -- ESSE JOIN DE PTRES COM A VW_PTRES √â NECESS√ÅRIO PARA RECUPERAR O VALOR DE DOTA√á√ÉO E CUSTEIO CORRETO EM CASO DO PNC
+
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
 
@@ -413,6 +413,7 @@ class Pi_PlanoInterno extends Modelo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
 
                     -- ESSE JOIN DE PTRES COM A VW_PTRES √â NECESS√ÅRIO PARA RECUPERAR O VALOR DE DOTA√á√ÉO E CUSTEIO CORRETO EM CASO DO PNC
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES … NECESS¡RIO PARA RECUPERAR O VALOR DE DOTA«√O E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
 
@@ -579,7 +580,6 @@ class Pi_PlanoInterno extends Modelo
                         psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
                     -- ESSE JOIN DE PTRES COM A VW_PTRES √â NECESS√ÅRIO PARA RECUPERAR O VALOR DE DOTA√á√ÉO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
@@ -999,7 +999,9 @@ class Pi_PlanoInterno extends Modelo
         if(!self::verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
             return false;
         }
-
+        if(array_intersect($perfis, [PFL_CONSULTA, PFL_GEST√O_CONSULTA])){
+          return false;
+        }
         switch ($estadoAtual['esdid']) {
             case ESD_FNC_PI_APROVADO:
             case ESD_FNC_PI_BANCO_PROJETOS:
@@ -1054,9 +1056,8 @@ class Pi_PlanoInterno extends Modelo
                 ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, plodsc po, ptr.ptres,
                 mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
                 pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc,
-                case when pli.pliemenda = true then 'Sim' else 'N√£o' end as pliemenda,
-                case when pic.picedital = true then 'Sim' else 'N√£o' end as picedital, esf.esfdsc,
-
+                case when pli.pliemenda = true then 'Sim' else 'N„o' end as pliemenda,
+                case when pic.picedital = true then 'Sim' else 'N„o' end as picedital, esf.esfdsc,
                 case
                         when pic.esfid in (1, 2, 3) then 'Brasil'
                         else pic.esfid::char
@@ -1096,8 +1097,8 @@ class Pi_PlanoInterno extends Modelo
                         WHERE pir.pliid = pli.pliid
                 ), '; ')) usuario,
 
-                case when pic.picted then 'Sim' else 'N√£o' end ted,
-                case when pic.picedital then 'Sim' else 'N√£o' end edital,
+                case when pic.picted then 'Sim' else 'N„o' end ted,
+                case when pic.picedital then 'Sim' else 'N„o' end edital,
                 mes.mesdsc,
 
                 (SELECT ARRAY_TO_STRING(array(
@@ -1187,7 +1188,7 @@ class Pi_PlanoInterno extends Modelo
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '11' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_11,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '12' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_12,
 
-                -- Cronograma Or√ßament√°rio Custeio
+                -- Cronograma OrÁament·rio Custeio
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '01' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_1,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '02' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_2,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '03' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_3,
