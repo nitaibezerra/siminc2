@@ -112,6 +112,12 @@ $htmlTabela1 = "
 
 $htmlTabela2 = "
 <h3>As seguintes funcionais compartilhadas estão com valores divergentes:</h3>
+<style>
+       /* classe mid para alterar a formatação das colunas para o meio/centro */
+    .mid{
+        vertical-align: middle;
+}
+</style>
 <table border='1' width='100%' style='font-size: 12px;'>
     <thead>
     <tr>
@@ -177,11 +183,11 @@ foreach($dadosSiminc as $funcional => $dado){
         if(isset($dadosSiop[$funcional][3]) && $total[3] != $dadosSiop[$funcional][3]){
             $htmlTabela2 .= "
                     <tr>
-                        <td>{$dado[0]['funcionalptres']}</td>
+                        <td class='mid'>{$dado[0]['funcionalptres']}</td>
                         <td>" . implode('<hr />', $unidades[3]) . "</td>
-                        <td>3 - CUSTEIO</td>
-                        <td style='text-align: right; color: red;'>" . number_format($total[3], 0, ',', '.') . "</td>
-                        <td style='text-align: right; color: green;'>" . number_format($dadosSiop[$funcional][3], 0, ',', '.') . "</td>
+                        <td class='mid'>3 - CUSTEIO</td>
+                        <td class='mid' style='text-align: right; color: red;'>" . number_format($total[3], 0, ',', '.') . "</td>
+                        <td class='mid' style='text-align: right; color: green;'>" . number_format($dadosSiop[$funcional][3], 0, ',', '.') . "</td>
                     </tr>
                 ";
             $boAlteracaoCompartilhada = true;
@@ -202,28 +208,36 @@ foreach($dadosSiminc as $funcional => $dado){
     }
 }
 
-$sql = "select  pli.plicod, pli.pliid, pli.suosigla, pli.unosigla, pli.funcional,        
+$sql = "select  pli.plicod, pli.pliid, pli.suosigla, plititulo, pli.unosigla, pli.funcional,        
                 pli.previsto::numeric, pli.autorizado::numeric, pli.empenhado::numeric, pli.liquidado::numeric, pli.pago::numeric pago
         from monitora.vw_planointerno pli
         where pli.pliano = '$exercicio'
         and pli.autorizado > pli.previsto
         order by pli.unosigla, pli.suosigla, pli.funcional";
+
 $dados = $db->carregar($sql);
 $dadosProvisionado = $dados ? $dados : [];
 
 $htmlTabela3 = "
 <h3>Lista de PIs com valor Provisionado maior do que o valor Previsto:</h3>
+<style>
+       /* classe mid para alterar a formatação das colunas para o meio/centro */
+    .mid{
+        vertical-align: middle;
+}
+</style>
 <table border='1' width='100%' style='font-size: 12px;'>
     <thead>
     <tr>
         <th>Funcional</th>
-        <th>Unidade</th>
+        <th style='width: 75px'>Unidade</th>
         <th>PI</th>
-        <th>Previsto</th>
-        <th>Provisionado</th>
-        <th>Empenhado</th>
-        <th>Liquidado</th>
-        <th>Pago</th>
+        <th>Título</th>
+        <th style='text-align: right; color: green;'>Previsto</th>
+        <th style='text-align: right; color: red;'>Provisionado</th>
+        <th style='text-align: right;'>Empenhado</th>
+        <th style='text-align: right;'>Liquidado</th>
+        <th style='text-align: right;'>Pago</th>
     </tr>   
     </thead>
     <tbody>";
@@ -231,14 +245,15 @@ $htmlTabela3 = "
 foreach($dadosProvisionado as $dado){
     $htmlTabela3 .= "
         <tr>
-            <td>{$dado['funcional']}</td>
-            <td>{$dado['unosigla']} - {$dado['suosigla']}</td>
-            <td>{$dado['plicod']}</td>
-            <td style='text-align: right; color: green;'>" . number_format($dado['previsto'], 0, ',', '.') . "</td>
-            <td style='text-align: right; color: red;'>" . number_format($dado['autorizado'], 0, ',', '.') . "</td>
-            <td style='text-align: right;'>" . number_format($dado['empenhado'], 0, ',', '.') . "</td>
-            <td style='text-align: right;'>" . number_format($dado['liquidado'], 0, ',', '.') . "</td>
-            <td style='text-align: right;'>" . number_format($dado['pago'], 0, ',', '.') . "</td>
+            <td class='mid'>{$dado['funcional']}</td>
+            <td class='mid'>{$dado['unosigla']} - {$dado['suosigla']}</td>
+            <td class='mid'>{$dado['plicod']}</td>
+            <td class='mid'>{$dado['plititulo']}</td>
+            <td class='mid'>". number_format($dado['previsto'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['autorizado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['empenhado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['liquidado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['pago'], 0, ',', '.') . "</td>
         </tr>
     ";
     $boAlteracaoProvisionado = true;
@@ -296,7 +311,7 @@ if($corpoEmailV3){
             order by usuemail";
     $destinatario = $db->carregar($sql);
 
-//    $destinatario = ["orion.mesquita@cultura.gov.br"];
+//    $destinatario = ["douglasantana007@gmail.com"];
 
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
