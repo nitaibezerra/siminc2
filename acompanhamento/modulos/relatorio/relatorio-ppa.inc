@@ -33,7 +33,7 @@
 
         return $simec->select(
             'ungcod',
-            'Unidade',
+            'SubUnidade',
             $filtros->ungcod,
             Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                 'exercicio' => $filtros->exercicio,
@@ -66,16 +66,27 @@
                         <input name="requisicao" id="requisicao" value="" type="hidden">
 
                         <?php
-                            echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                        echo $simec->select('janid', 'Janela', $filtropi['janid'], (new Acompanhamento_Model_Janela())->recuperarSqlCombo(null, ["prsano = '{$_SESSION['exercicio']}'", 'tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_META_PPA]));
+                        echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
                                 'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
                                 'suo.unofundo = FALSE')), array('multiple' => 'true'));
-                            echo '<div id=div_ungcod >';
-                            echo $simec->select('ungcod', 'SubUnidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
+                        echo '<div id=div_ungcod>';
+                        echo $simec->select('ungcod', 'SubUnidade', $filtropi['ungcod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object)array(
                                 'unofundo' => 'FALSE',
                                 'exercicio' => $_SESSION['exercicio'],
                                 'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
-                            echo '</div>';
+                        echo '</div>';
+                        echo $simec->select('oppdsc', 'Objetivo PPA', $filtropi->oppdsc, (new Public_Model_ObjetivoPpa())->recuperarSqlCombo());
+
+                        // Model Sobreescrita!!!   echo $simec->select('oppdsc', 'Meta PPA', $filtropi->oppdsc, (new carregarMetasPPA())->recuperarSqlCombo());
+
                         ?>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                         <div class="form-group">
                             <div class="text-center">
@@ -90,13 +101,6 @@
                                 </button>-->
                             </div>
                         </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--implements here list-->
 
@@ -123,5 +127,6 @@
                 $(".chosen-select").chosen();
         });
     }
+
 
 </script>
