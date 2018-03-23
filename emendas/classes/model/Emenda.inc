@@ -860,10 +860,11 @@ class Emendas_Model_Emenda extends Modelo
         $retorno = $obWS->consultarPropostaPorEmenda($filtro);
         
         if(isset($retorno->propostas)){
-            $mPropostaWS = new Siconv_Model_PropostaWs();
 
             $aPropostas = is_array($retorno->propostas) ? $retorno->propostas : [$retorno->propostas];
             foreach ($aPropostas as $PropostaWS){
+
+                $mPropostaWS = new Siconv_Model_PropostaWs();
 
                 foreach ($PropostaWS as $indice => $dados){
                     $indice = strtolower($indice);
@@ -885,7 +886,8 @@ class Emendas_Model_Emenda extends Modelo
                 $mPropostaWS->emeid = $emenda['emeid'];
                 $mPropostaWS->salvar();
                 $mPropostaWS->commit();
-                $mPropostaWS->id = null;
+                
+                unset($mPropostaWS);
             }
         }
     }
