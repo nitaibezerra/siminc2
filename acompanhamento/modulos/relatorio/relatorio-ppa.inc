@@ -64,7 +64,6 @@
                 <div class="ibox-content">
                     <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
                         <input name="requisicao" id="requisicao" value="" type="hidden">
-
                         <?php
                         echo $simec->select('janid', 'Janela', $filtropi['janid'], (new Acompanhamento_Model_Janela())->recuperarSqlCombo(null, ["prsano = '{$_SESSION['exercicio']}'", 'tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_META_PPA]));
                         echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
@@ -81,6 +80,11 @@
                         // Model Sobreescrita!!!   echo $simec->select('oppdsc', 'Meta PPA', $filtropi->oppdsc, (new carregarMetasPPA())->recuperarSqlCombo());
 
                         ?>
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-buscar" type="submit">
+                                <span class="glyphicon glyphicon-search"></span> Buscar
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -88,19 +92,35 @@
     </div>
 </div>
 
-                        <div class="form-group">
-                            <div class="text-center">
-                                <button class="btn btn-warning btn-limpar" type="button">
-                                    <span class="glyphicon glyphicon-remove-circle"></span> Limpar
-                                </button>
-                                <button class="btn btn-primary btn-buscar" type="submit">
-                                    <span class="glyphicon glyphicon-search"></span> Buscar
-                                </button>
-<!--                                <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
-                                    <i class="fa fa-file-excel-o"></i> Exportar XLS
-                                </button>-->
-                            </div>
-                        </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-title">
+        <h5>Lista de Relatório</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables">
+                <thead>
+                <tr class="text-center">
+                    <th>Janela</th>
+                    <th>Unidade</th>
+                    <th>SubUnidade</th>
+                    <th>Objetivo PPA</th>
+                    <th>Meta PPA</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo w;?></td>
+                    <td><?php echo w;?></td>
+                    <td><?php echo w;?></td>
+                    <td><?php echo w;?></td>
+                    <td><?php echo w;?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <!--implements here list-->
 
