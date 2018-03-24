@@ -148,6 +148,42 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
 //ver($sql,d);
         return $sql;
     }
+    
+    /**
+     * Monta consulta para retornar Sub-Unidades.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public static function queryComboChaveSuoid(stdClass $filtro)
+    {
+//ver($filtro);
+        $where = '';
+        if($filtro->listaSubUnidadeUsuario && !empty(join_simec(',', $filtro->listaSubUnidadeUsuario))){
+            $where .= "\n                AND suo.suocod::INTEGER IN(". join_simec(',', $filtro->listaSubUnidadeUsuario). ") ";
+        }
+        if($filtro->unicod && !empty(join_simec(',', $filtro->unicod))){
+            $where .= "\n                AND suo.unocod::INTEGER IN(". join_simec(',', $filtro->unicod). ") ";
+        }
+        if($filtro->unofundo){
+            $where .= "\n                AND suo.unofundo = ". $filtro->unofundo;
+        }
+        
+        $sql = "
+            SELECT
+                suo.suoid AS codigo,
+                suo.suocod || ' - ' || suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.prsano::INTEGER = ". (int)$filtro->exercicio. "
+                $where
+            ORDER BY
+                suo.suonome
+        ";
+//ver($sql,d);
+        return $sql;
+    }
 
     public function recuperarPorUsuario($usucpf = null, $exercicio = null)
     {
