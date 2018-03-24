@@ -1,21 +1,21 @@
 <?php
 /**
- * Classe de mapeamento da entidade public.unidadeorcamentaria
+ * Classe de mapeamento da entidade public.objetivoppa
  *
  * @category Class
  * @package  A1
  * @author   ORION TELES DE MESQUITA <orion.mesquita@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 16-08-2017
+ * @version  Release: 31-05-2017
  * @link     no link
  */
 
 
-require_once APPRAIZ .'includes/classes/Modelo.class.inc';
+require_once APPRAIZ . 'includes/classes/Modelo.class.inc';
 
 
 /**
- * Public_Model_Unidadeorcamentaria
+ * Public_Model_Objetivoppa
  *
  * @category Class
  * @package  A1
@@ -24,14 +24,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @version  Release: 
  * @link     no link
  */
-class Public_Model_UnidadeOrcamentaria extends Modelo
+class Public_Model_Localizador extends Modelo
 {
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = 'public.unidadeorcamentaria';
+    protected $stNomeTabela = 'wssof.ws_localizadoresdto';
 
     /**
      * Chave primaria.
@@ -39,13 +39,7 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
-        'unoid',
-    );
-    /**
-     * Chaves estrangeiras.
-     * @var array
-     */
-    protected $arChaveEstrangeira = array(
+        'identificadorunico',
     );
 
     /**
@@ -54,18 +48,14 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
-        'unoid' => null,
-        'prsano' => null,
-        'unocod' => null,
-        'unonome' => null,
-        'unostatus' => null,
-        'unocodigopi' => null,
-        'unofundo' => null,
-        'unosigla' => null,
+        'identificadorunico' => null,
+        'codigolocalizador' => null,
+        'descricao' => null,
+        'exercicio' => null
     );
-
-    public function recuperarSqlComboUnocod($descricao = null, $where = [], $order = '') {
-
+    
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
+        
         foreach (array_keys($this->arAtributos) as $atributo) {
             if (substr($atributo, -6) == 'status') {
                 $where[] = "{$atributo} = 'A'";
@@ -87,7 +77,7 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         $order = $order ? $order : $descricao;
         $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
-        $sql = "select unocod AS codigo, {$descricao} AS descricao
+        $sql = "select codigolocalizador AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela}
                 $where
                 order by $order   
@@ -95,6 +85,5 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
 
         return $sql;
     }
-    
 }//end Class
 ?>

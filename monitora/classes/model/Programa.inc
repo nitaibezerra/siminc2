@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento da entidade public.unidadeorcamentaria
+ * Classe de mapeamento da entidade monitora.pi_enquadramentodespesa
  *
  * @category Class
  * @package  A1
  * @author   ORION TELES DE MESQUITA <orion.mesquita@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 16-08-2017
+ * @version  Release: 23-11-2017
  * @link     no link
  */
 
@@ -15,7 +15,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 
 
 /**
- * Public_Model_Unidadeorcamentaria
+ * Monitora_Model_Pi_enquadramentodespesa
  *
  * @category Class
  * @package  A1
@@ -24,14 +24,14 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @version  Release: 
  * @link     no link
  */
-class Public_Model_UnidadeOrcamentaria extends Modelo
+class Monitora_Model_Programa extends Modelo
 {
     /**
      * Nome da tabela especificada
      * @var string
      * @access protected
      */
-    protected $stNomeTabela = 'public.unidadeorcamentaria';
+    protected $stNomeTabela = 'monitora.programa';
 
     /**
      * Chave primaria.
@@ -39,7 +39,7 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
-        'unoid',
+        'prgid',
     );
     /**
      * Chaves estrangeiras.
@@ -54,17 +54,15 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
-        'unoid' => null,
-        'prsano' => null,
-        'unocod' => null,
-        'unonome' => null,
-        'unostatus' => null,
-        'unocodigopi' => null,
-        'unofundo' => null,
-        'unosigla' => null,
+        'prgid' => null,
+        'prgano' => null,
+        'prgcod' => null,
+        'prgdsc' => null,
+        'prgstatus' => null,
+        'orgcod' => null
     );
-
-    public function recuperarSqlComboUnocod($descricao = null, $where = [], $order = '') {
+    
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
 
         foreach (array_keys($this->arAtributos) as $atributo) {
             if (substr($atributo, -6) == 'status') {
@@ -87,7 +85,7 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         $order = $order ? $order : $descricao;
         $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
-        $sql = "select unocod AS codigo, {$descricao} AS descricao
+        $sql = "select prgcod AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela}
                 $where
                 order by $order   
@@ -95,6 +93,6 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
 
         return $sql;
     }
-    
+
 }//end Class
 ?>
