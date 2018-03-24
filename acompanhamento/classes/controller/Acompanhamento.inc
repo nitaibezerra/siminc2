@@ -2,7 +2,7 @@
 
 class Acompanhamento_Controller_Acompanhamento
 {
-    public function salvar($dados, $urlModulo)
+    public function salvar($dados, $urlModulo = NULL)
     {
         $url = '?modulo=principal/monitorar-ppa&acao=A';
         if(!empty($dados['ipnid'])){

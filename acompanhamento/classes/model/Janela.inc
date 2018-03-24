@@ -91,5 +91,20 @@ class Acompanhamento_Model_Janela extends Modelo
         return $this->pegaUm($sql);
     }
 
+    public function recuperarSqlCombo($where = [], $order = '') {
+        $where = count($where) ? "\n WHERE \n janstatus = 'A' AND " . implode("\n AND ", $where): NULL;
+        $order = $order? $order: 'descricao';
+        $sql = "
+            SELECT
+                janid AS codigo,
+                jandsc || ' - (' || TO_CHAR(janinicio, 'dd/mm/yyyy') || ' - ' || TO_CHAR(janfim, 'dd/mm/yyyy') || ')' AS descricao
+            FROM acompanhamento.janela
+            $where
+            ORDER BY
+                $order";
+//ver($sql, d);
+        return $sql;
+    }
+    
 }//end Class
 ?>
