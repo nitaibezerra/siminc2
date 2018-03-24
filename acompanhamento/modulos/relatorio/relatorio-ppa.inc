@@ -15,6 +15,10 @@
                 ));
                 die();
             break;
+            case 'carregarMetasPPA':
+                carregarMetasPPA((int)$param['oppid'], null, $param['suocod']);
+                die();
+            break;
         }
     }
     
@@ -25,25 +29,6 @@
         'suoid' => $param['suoid']
     ));
 //ver($listaMetaPpa, d);
-    
-    /**
-     * Monta a combo de UGs filtrando por UO
-     *
-     * @param $filtros
-     * @return VOID
-     */
-    function montarComboUG(stdClass $filtros) {
-        global $simec;
-
-        return $simec->select(
-            'suoid',
-            'Subunidade',
-            $filtros->ungcod,
-            Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
-                'exercicio' => $filtros->exercicio,
-                'unicod' => $filtros->unicod)),
-            array('multiple' => 'true'));
-    }
 
     /**
      * Cabeçalho padrão do sistema.
@@ -73,20 +58,37 @@
                         <?php
                             echo $simec->select('unicod', 'Unidade', $param['unicod'], Spo_Model_Unidade::queryCombo((object)array(
                                     'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
-                                    'suo.unofundo = FALSE')), array('multiple' => 'true'));
+                                    'suo.unofundo = FALSE')));
                             echo '<div id=div_ungcod>';
-                            echo $simec->select('suoid', 'SubUnidade', $param['suoid'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
+                            echo $simec->select('suocod', 'SubUnidade', $param['suocod'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object)array(
                                     'unofundo' => 'FALSE',
-                                    'exercicio' => $_SESSION['exercicio'])), array('multiple' => 'true'));
+                                    'exercicio' => $_SESSION['exercicio'])));
                             echo '</div>';
                             echo $simec->select('janid', 'Janela', $param['janid'], (new Acompanhamento_Model_Janela())->recuperarSqlCombo(["prsano = '{$_SESSION['exercicio']}'", 'tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_META_PPA], 'janinicio DESC'));
-                            echo $simec->select('oppdsc', 'Objetivo PPA', $param->oppdsc, (new Public_Model_ObjetivoPpa())->recuperarSqlCombo());
                         ?>
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label for="oppid" class=" control-label">Objetivo PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                            </div>
+                            <div class="col-lg-9">
+                                <?php (new Public_Model_ObjetivoPpa())->monta_combo($dadosPI['oppid']); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 text-right">
+                                <label for="mppid" class=" control-label">Metas PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
+                            </div>
+                            <div class="col-lg-9 div_mppid">
+                                <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
+                            </div>
+                        </div>
+
                         <div class="text-center">
                             <button class="btn btn-primary btn-buscar" type="submit">
                                 <span class="glyphicon glyphicon-search"></span> Buscar
                             </button>
                         </div>
+
                     </form>
                 </div>
                 
@@ -241,6 +243,11 @@
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });
+        
+        // Evento ao mudar opção de Objetivos PPA
+        $('#oppid').change(function(){
+            carregarMetasPPA($(this).val(), null, $('#ungcod').val());
+        });
 
         $('.percentual-empenhado').liquidMeter({
             shape: 'circle',
@@ -267,6 +274,17 @@
                 $('#div_ungcod').remove('slow');
                 $('#div_ungcod').html(response);
                 $(".chosen-select").chosen();
+        });
+    }
+    
+    /**
+     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
+     */
+    function carregarMetasPPA(oppid, mppid, suocod) {
+        $.post('?modulo=relatorio/relatorio-ppa&acao=A&req=carregarMetasPPA&oppid=' +oppid +'&suocod='+ suocod, function(response) {
+            $('#mppid').remove();
+            $('.div_mppid').html(response);
+            $(".chosen-select").chosen();
         });
     }
 
