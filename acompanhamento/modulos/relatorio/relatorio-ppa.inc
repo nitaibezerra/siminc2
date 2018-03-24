@@ -9,7 +9,7 @@
         switch($param['req']) {
             case 'carregarComboUG':
                 echo montarComboUG((object) array(
-                    'suoid' => $param['suoid'],
+                    'suocod' => $param['suocod'],
                     'exercicio' => $_SESSION['exercicio'],
                     'unicod' => $param['unicod']
                 ));
@@ -26,7 +26,11 @@
     $modelAcompanhamento = new Acompanhamento_Model_Acompanhamento();
     $listaMetaPpa = $modelAcompanhamento->getMetasPpaRelatorio( (object)array(
         'exercicio' => $_SESSION['exercicio'],
-        'suoid' => $param['suoid']
+        'unicod' => $param['unicod'],
+        'suocod' => $param['suocod'],
+        'janid' => $param['janid'],
+        'oppid' => $param['oppid'],
+        'mppid' => $param['mppid'],
     ));
 //ver($listaMetaPpa, d);
 
@@ -52,7 +56,7 @@
                 <div class="ibox-title">
                     <h5><?php echo $titulo_modulo; ?></h5>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content noprint">
                     <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
                         <input name="requisicao" id="requisicao" value="" type="hidden">
                         <?php
@@ -71,7 +75,7 @@
                                 <label for="oppid" class=" control-label">Objetivo PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9">
-                                <?php (new Public_Model_ObjetivoPpa())->monta_combo($dadosPI['oppid']); ?>
+                                <?php (new Public_Model_ObjetivoPpa())->monta_combo($param['oppid']); ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,11 +83,14 @@
                                 <label for="mppid" class=" control-label">Metas PPA: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></label>
                             </div>
                             <div class="col-lg-9 div_mppid">
-                                <?php carregarMetasPPA($dadosPI['oppid'], $dadosPI['mppid']); ?>
+                                <?php carregarMetasPPA($param['oppid'], $param['mppid']); ?>
                             </div>
                         </div>
 
                         <div class="text-center">
+                            <button class="btn btn-warning btn-limpar" type="button">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Limpar
+                            </button>
                             <button class="btn btn-primary btn-buscar" type="submit">
                                 <span class="glyphicon glyphicon-search"></span> Buscar
                             </button>
@@ -196,13 +203,10 @@
                             
                             <div class="col-md-4">
                                 
-                                <div style="clear:both"></div>
-                                
-                                <div class="ibox-title">
-                                    <h5>Anexos</h5>
-                                </div>
-                                
                                 <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <h5>Anexos</h5>
+                                    </div>
                                     <div class="col-lg-12">
                                         <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
                                             <tr>
@@ -238,6 +242,10 @@
 <script>
     
     $(document).ready(function(){
+
+        $('.btn-limpar').click(function(){
+            window.location = window.location;
+        });
 
         // Evento ao mudar opção de UO
         $('#unicod').change(function(){

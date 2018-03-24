@@ -108,7 +108,12 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
     
     public function getMetasPpaRelatorio(stdClass $param){
         $where = "";
-        $where .= $param->suoid? "/n AND smp.suoid = ". (int)$param->suoid: '';
+//        $where .= $param->suoid? "\n AND smp.suoid = ". (int)$param->suoid: '';
+        $where .= $param->unicod? "\n AND suo.unocod = '". $param->unicod. "'": '';
+        $where .= $param->suocod? "\n AND suo.suocod = '". $param->suocod. "'": '';
+        $where .= $param->janid? "\n AND aco.janid = ". (int)$param->janid: '';
+        $where .= $param->oppid? "\n AND om.oppid = ". (int)$param->oppid: '';
+        $where .= $param->mppid? "\n AND mpp.mppid = ". (int)$param->mppid: '';
 
         $sql = "
             SELECT
@@ -130,6 +135,8 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
 --                    AND aco.suoid = smp.suoid
                     AND acostatus = 'A'
                 )
+                JOIN public.vw_subunidadeorcamentaria suo ON aco.suoid = suo.suoid
+                JOIN public.objetivometappa om ON mpp.mppid = om.mppid
             WHERE
                 mpp.prsano = '". (int)$param->exercicio. "'
                 AND mpp.mppstatus = 'A'

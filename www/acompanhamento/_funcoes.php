@@ -10,7 +10,7 @@
         global $simec;
 
         return $simec->select(
-            'suoid',
+            'suocod',
             'Subunidade',
             $filtros->ungcod,
             Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
