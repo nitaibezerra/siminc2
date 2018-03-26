@@ -96,7 +96,7 @@ foreach($dados as $dado){
 $sqls = [];
 $htmlTabela1 = "
 <h3>Foram realizadas alterações na Dotação das seguintes unidades:</h3>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -118,7 +118,7 @@ $htmlTabela2 = "
         vertical-align: middle;
 }
 </style>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -226,7 +226,7 @@ $htmlTabela3 = "
         vertical-align: middle;
 }
 </style>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -311,11 +311,11 @@ if($corpoEmailV3){
             order by usuemail";
     $destinatario = $db->carregar($sql);
 
-//    $destinatario = ["douglasantana007@gmail.com"];
+//    $destinatario = ["teste@teste.com"];
 
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
-
+//ver($conteudo, d);
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }
