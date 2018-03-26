@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Public_Model_SubUnidadeOrcamentaria extends Modelo
@@ -114,7 +114,7 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
 
     /**
      * Monta consulta para retornar Sub-Unidades.
-     * 
+     *
      * @param stdClass $filtro
      * @return string
      */
@@ -131,10 +131,11 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         if($filtro->unofundo){
             $where .= "\n                AND suo.unofundo = ". $filtro->unofundo;
         }
-        
+
         $sql = "
             SELECT
                 suo.suoid,
+                suo.unoid,
                 suo.suocod AS codigo,
                 suo.suocod || ' - ' || suonome AS descricao
             FROM public.vw_subunidadeorcamentaria suo
@@ -171,4 +172,3 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         return $aUnidades;
     }
 }
-

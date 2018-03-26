@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Public_Model_UnidadeOrcamentaria extends Modelo
@@ -62,7 +62,15 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         'unocodigopi' => null,
         'unofundo' => null,
         'unosigla' => null,
+        'unocodorcamento'=> null,
     );
-
+    public function RecuperaId(){
+      $sql = "SELECT
+          unoid, unonome, prsano
+          FROM public.unidadeorcamentaria
+	    WHERE
+          unostatus = 'A'";
+          return $sql;
+    }
 }//end Class
 ?>
