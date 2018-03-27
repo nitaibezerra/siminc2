@@ -1449,7 +1449,8 @@ class Pi_PlanoInterno extends Modelo
             SELECT DISTINCT
                 ptr.ptrid,
                 ptr.funcional,
-                sec.provisionado,
+                ptr.ptrdotacaocusteio AS custeio,
+                ptr.ptrdotacaocapital AS capital,
                 sec.empenhado,
                 sec.liquidado,
                 sec.pago
