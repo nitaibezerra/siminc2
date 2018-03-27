@@ -1,8 +1,9 @@
 <?php
 
-$aPtres = (new Monitora_Model_Ptres)->recuperarTodos();
+    $aPtres = (new Monitora_Model_Ptres)->recuperarTodosApoio((object)array('exercicio' => $_SESSION['exercicio']));
 
-include APPRAIZ . "includes/cabecalho.inc";
+    include APPRAIZ . "includes/cabecalho.inc";
+
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -25,32 +26,36 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>PTRES</th>
-                                <th>Ação</th>
-                                <th>RP</th>
-                                <th>Dotação Total</th>
-                                <th>Código PO</th>
-                                <th>Descrição PO</th>
-                                <th>Dotação Capital</th>
-                                <th>Dotação Custeio</th>
-                            </tr>
+                                <tr class="text-center">
+                                    <th width="10%">Ações</th>
+                                    <th>Unidade Orçamentária</th>
+                                    <th>Cod. Ação</th>
+                                    <th>Ação</th>
+                                    <th>PTRES</th>
+                                    <th>funcional</th>
+                                    <th>Cod. PO</th>
+                                    <th>PO</th>
+                                    <th>RP</th>
+                                    <th>Custeio</th>
+                                    <th>Capital</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php foreach($aPtres as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/ptres_form&acao=A&ptrid=<?php echo $dados['ptrid']; ?>"><i class="fa fa-pencil"></i></a>
+                                        <a title="Alterar" href="?modulo=apoio/funcionais_form&acao=A&ptrid=<?php echo $dados['ptrid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
+                                    <td><?php echo $dados['unidade_orcamentaria']; ?></td>
+                                    <td><?php echo $dados['acacod']; ?></td>
+                                    <td><?php echo $dados['acatitulo']; ?></td>
                                     <td><?php echo $dados['ptres']; ?></td>
-                                    <td><?php echo $dados['acaid']; ?></td>
-                                    <td><?php echo $dados['irpcod']; ?></td>
-                                    <td><?php echo $dados['ptrdotacao']; ?></td>
+                                    <td><?php echo $dados['funcional']; ?></td>
                                     <td><?php echo $dados['plocod']; ?></td>
                                     <td><?php echo $dados['plodsc']; ?></td>
-                                    <td><?php echo $dados['ptrdotacaocapital']; ?></td>
-                                    <td><?php echo $dados['ptrdotacaocusteio']; ?></td>
+                                    <td><?php echo $dados['irpcod']; ?></td>
+                                    <td><?php echo number_format($dados['ptrdotacaocusteio'], 0, ',', '.');; ?></td>
+                                    <td><?php echo number_format($dados['ptrdotacaocapital'], 0, ',', '.');; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
