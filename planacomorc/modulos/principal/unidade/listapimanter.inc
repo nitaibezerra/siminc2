@@ -170,12 +170,14 @@
                     <?php
                     $total['custeio'] = $total['capital'] = $total['empenhado'] = $total['pago'] = $total['liquidado'] = 0;
                     foreach($aDados as $dados){
-                        $total['custeio'] += $dados['custeio'];
-                        $total['capital'] += $dados['capital'];
-                        $total['autorizado'] += $dados['autorizado'];
-                        $total['empenhado'] += $dados['empenhado'];
-                        $total['pago'] += $dados['pago'];
-                        $total['liquidado'] += $dados['liquidado'];
+                        if($dados['plistatus'] == 'A'){
+                            $total['custeio'] += $dados['custeio'];
+                            $total['capital'] += $dados['capital'];
+                            $total['autorizado'] += $dados['autorizado'];
+                            $total['empenhado'] += $dados['empenhado'];
+                            $total['pago'] += $dados['pago'];
+                            $total['liquidado'] += $dados['liquidado'];
+                        }
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">

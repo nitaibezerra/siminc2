@@ -2749,6 +2749,36 @@ function posAcaoAprovarPi($pliid)
     return true;
 }
 
+function posAcaoCancelarPi($pliid){
+    global $db;
+
+    $sql = "
+        UPDATE monitora.pi_planointerno SET
+            plistatus = 'I'
+        WHERE
+            pliid = ". (int)$pliid;
+
+    $db->executar($sql);
+    $db->commit();
+
+    return true;
+}
+
+function posAcaoReabrirPi($pliid){
+    global $db;
+
+    $sql = "
+        UPDATE monitora.pi_planointerno SET
+            plistatus = 'A'
+        WHERE
+            pliid = ". (int)$pliid;
+
+    $db->executar($sql);
+    $db->commit();
+
+    return true;
+}
+
 function gerarCodigosPi($pliid)
 {
     global $db;
