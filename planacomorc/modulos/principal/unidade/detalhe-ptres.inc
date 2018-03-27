@@ -67,6 +67,15 @@
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['liquidado'], $total['custeio']+ $total['capital']); ?></th>
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['pago'], $total['custeio']+ $total['capital']); ?></th>
                                 </tr>
+                                <tr>
+                                    <th colspan="5">TOTAL DA FUNCIONAL</th>
+                                    <th class="text-right">&nbsp;</th>
+                                    <th class="text-right">&nbsp;</th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['provisionado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['empenhado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['liquidado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['pago'], $total['custeio']+ $total['capital']); ?></th>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>

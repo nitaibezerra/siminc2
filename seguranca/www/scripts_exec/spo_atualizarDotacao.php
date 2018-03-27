@@ -96,7 +96,7 @@ foreach($dados as $dado){
 $sqls = [];
 $htmlTabela1 = "
 <h3>Foram realizadas alterações na Dotação das seguintes unidades:</h3>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -118,7 +118,7 @@ $htmlTabela2 = "
         vertical-align: middle;
 }
 </style>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -226,7 +226,7 @@ $htmlTabela3 = "
         vertical-align: middle;
 }
 </style>
-<table border='1' width='100%' style='font-size: 12px;'>
+<table border='1' width='100%' style='font-size: 10px;'>
     <thead>
     <tr>
         <th>Funcional</th>
@@ -259,6 +259,137 @@ foreach($dadosProvisionado as $dado){
     $boAlteracaoProvisionado = true;
 }
 
+$sql = "
+    SELECT
+        ptr.ptrid,
+        ptr.ptres,
+        ptr.funcional,
+        suo.suoid,
+        suo.unosigla,
+        suo.suocod,
+        suo.suosigla,
+        (
+            SELECT
+                COUNT(1)
+            FROM spo.ptressubunidade
+            WHERE
+                ptressubunidade.ptrid = ptr.ptrid
+        ) AS compartilhada,
+        SUM(COALESCE(pic.picvalorcapital, 0)) + SUM(COALESCE(pic.picvalorcusteio, 0)) planejado,
+        COALESCE(sec_geral.provisionado, 0.00) - COALESCE(sec.provisionado, 0.00) AS provisionado,
+        COALESCE(sec_geral.empenhado, 0.00) - COALESCE(sec.empenhado, 0.00) AS empenhado,
+        COALESCE(sec_geral.liquidado, 0.00) - COALESCE(sec.liquidado, 0.00) AS liquidado,
+        COALESCE(sec_geral.pago, 0.00) - COALESCE(sec.pago, 0.00) as pago
+    FROM public.vw_subunidadeorcamentaria suo
+        JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
+        JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+        LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+        LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
+        LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+        LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+        LEFT JOIN(
+            SELECT
+                siopexecucao.unicod,
+                pi_planointerno.ungcod,
+                siopexecucao.ptres,
+                SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+            FROM spo.siopexecucao
+                LEFT JOIN monitora.pi_planointerno ON(siopexecucao.plicod = pi_planointerno.plicod AND siopexecucao.exercicio = pi_planointerno.pliano AND pi_planointerno.plistatus = 'A')
+            WHERE
+                pi_planointerno.ungcod IS NOT NULL
+                AND siopexecucao.exercicio = '$exercicio' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+            GROUP BY
+                siopexecucao.ptres,
+                siopexecucao.unicod,
+                pi_planointerno.ungcod
+        ) sec ON(ptr.ptres = sec.ptres AND suo.unocod = sec.unicod AND suo.suocod = sec.ungcod)
+        LEFT JOIN(
+            SELECT
+                siopexecucao.ptres,
+                SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+            FROM spo.siopexecucao
+            WHERE
+                siopexecucao.exercicio = '$exercicio' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+            GROUP BY
+                siopexecucao.ptres
+        ) sec_geral ON(ptr.ptres = sec_geral.ptres)
+    WHERE
+        suo.prsano = '$exercicio'
+        AND suo.unofundo = FALSE
+        AND suo.suostatus = 'A'
+    GROUP BY
+        ptr.ptrid,
+        ptr.ptres,
+        ptr.funcional,
+        suo.suoid,
+        suo.unosigla,
+        suo.suocod,
+        suo.suosigla,
+        sec.provisionado,
+        sec.empenhado,
+        sec.liquidado,
+        sec.pago,
+        sec_geral.provisionado,
+        sec_geral.empenhado,
+        sec_geral.liquidado,
+        sec_geral.pago
+    HAVING
+        COALESCE(sec_geral.provisionado, 0.00) - COALESCE(sec.provisionado, 0.00) > 0
+        OR COALESCE(sec_geral.empenhado, 0.00) - COALESCE(sec.empenhado, 0.00) > 0
+        OR COALESCE(sec_geral.liquidado, 0.00) - COALESCE(sec.liquidado, 0.00) > 0
+        OR COALESCE(sec_geral.pago, 0.00) - COALESCE(sec.pago, 0.00) > 0
+    ORDER BY
+        suo.unosigla,
+        suo.suosigla,
+        ptr.funcional
+";
+
+$listaResultado = $db->carregar($sql);
+$listaDivergenciaPlanejada = $listaResultado? $listaResultado: [];
+
+$htmlTabela4 = "
+    <h3>Lista de Funcionais com valores Provisionado, Liquidado, Empenhado ou Pago não planejados:</h3>
+    <style>
+        /* classe mid para alterar a formatação das colunas para o meio/centro */
+        .mid {
+            vertical-align: middle;
+        }
+    </style>
+    <table border='1' width='100%' style='font-size: 10px;'>
+        <thead>
+        <tr>
+            <th>Funcional</th>
+            <th style='width: 75px'>Unidade</th>
+            <th style='text-align: right; color: green;'>Planejado</th>
+            <th style='text-align: right; color: red;'>Provisionado</th>
+            <th style='text-align: right;'>Empenhado</th>
+            <th style='text-align: right;'>Liquidado</th>
+            <th style='text-align: right;'>Pago</th>
+        </tr>
+        </thead>
+        <tbody>";
+
+foreach($listaDivergenciaPlanejada as $dado){
+    $htmlTabela4 .= "
+        <tr>
+            <td class='mid'>{$dado['funcional']}</td>
+            <td class='mid'>{$dado['unosigla']} - {$dado['suosigla']}</td>
+            <td class='mid'>". number_format($dado['planejado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['provisionado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['empenhado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['liquidado'], 0, ',', '.') . "</td>
+            <td class='mid'>". number_format($dado['pago'], 0, ',', '.') . "</td>
+        </tr>
+    ";
+    $boDivergenciaPlanejada = true;
+}
+
 $htmlTabela1 .= "
         </tbody>
     </table>
@@ -270,6 +401,11 @@ $htmlTabela2 .= "
     ";
 
 $htmlTabela3 .= "
+        </tbody>
+    </table>
+    ";
+
+$htmlTabela4 .= "
         </tbody>
     </table>
     ";
@@ -287,6 +423,9 @@ if($boAlteracaoProvisionado){
     $corpoEmailV3 .= $htmlTabela3;
 }
 
+if($boDivergenciaPlanejada){
+    $corpoEmailV3 .= $htmlTabela4;
+}
 
 if($corpoEmailV3){
 
@@ -311,11 +450,11 @@ if($corpoEmailV3){
             order by usuemail";
     $destinatario = $db->carregar($sql);
 
-//    $destinatario = ["douglasantana007@gmail.com"];
+//    $destinatario = ["teste@teste.com"];
 
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
-
+//ver($conteudo, d);
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }
