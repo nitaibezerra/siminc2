@@ -120,7 +120,6 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
      */
     public static function queryCombo(stdClass $filtro)
     {
-//ver($filtro);
         $where = '';
         if($filtro->listaSubUnidadeUsuario && !empty(join_simec(',', $filtro->listaSubUnidadeUsuario))){
             $where .= "\n                AND suo.suocod::INTEGER IN(". join_simec(',', $filtro->listaSubUnidadeUsuario). ") ";
@@ -152,19 +151,18 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
             ORDER BY
                 suo.suonome
         ";
-//ver($sql,d);
+        // ver($sql,d);
         return $sql;
     }
-    
+
     /**
      * Monta consulta para retornar Sub-Unidades.
-     * 
+     *
      * @param stdClass $filtro
      * @return string
      */
     public static function queryComboChaveSuoid(stdClass $filtro)
     {
-//ver($filtro);
         $where = '';
         if($filtro->listaSubUnidadeUsuario && !empty(join_simec(',', $filtro->listaSubUnidadeUsuario))){
             $where .= "\n                AND suo.suocod::INTEGER IN(". join_simec(',', $filtro->listaSubUnidadeUsuario). ") ";
@@ -181,7 +179,7 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         if($filtro->unofundo){
             $where .= "\n                AND suo.unofundo = ". $filtro->unofundo;
         }
-        
+
         $sql = "
             SELECT
                 suo.suoid AS codigo,
@@ -194,7 +192,6 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
             ORDER BY
                 suo.suonome
         ";
-//ver($sql,d);
         return $sql;
     }
 

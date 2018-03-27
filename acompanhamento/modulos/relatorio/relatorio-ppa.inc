@@ -21,7 +21,7 @@
             break;
         }
     }
-    
+
     # Busca lista de metas PPA
     $modelAcompanhamento = new Acompanhamento_Model_Acompanhamento();
     $listaMetaPpa = $modelAcompanhamento->getMetasPpaRelatorio( (object)array(
@@ -32,8 +32,6 @@
         'oppid' => $param['oppid'],
         'mppid' => $param['mppid'],
     ));
-//ver($listaMetaPpa, d);
-
     /**
      * Cabeçalho padrão do sistema.
      */
@@ -98,7 +96,7 @@
 
                     </form>
                 </div>
-                
+
                 <div class="ibox-content">
                     <?php foreach($listaMetaPpa as $contador => $meta): ?>
                     <?php
@@ -107,7 +105,7 @@
                         $infoPI = (new Pi_PlanoInterno())->recuperarResumoPorMetaESubunidade($meta['mppid'], $meta['suoid']);
                         $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($meta['acoid']);
                         $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
-
+                        $subUnidade = new Public_Model_SubUnidadeOrcamentaria($meta['suoid']);
                         $dadosGrafico = [];
                         if(count($infoPI)){
                             foreach ($infoPI as $key => $valor) {
@@ -121,7 +119,6 @@
                     ?>
 
                         <div class="row form-horizontal">
-
                             <hr />
                             <div class="col-md-5 no-margin-bottom">
                                 <?php
@@ -131,8 +128,8 @@
 
                                     $janinicio = Simec_Util::formatarData($mJanela->janinicio, 'dd/MM/YYYYY');
                                     $janfim = Simec_Util::formatarData($mJanela->janfim, 'dd/MM/YYYYY');
-
                                     echo $simec->input('Referência', 'Referência', "{$mJanela->jandsc} ({$janinicio} - {$janfim})");
+                                    echo $simec->select('suocod', 'Subunidade', $subUnidade->suocod, (new Public_Model_SubUnidadeOrcamentaria())->queryCombo((object)['exercicio' => $_SESSION['exercicio']]));
                                     echo $simec->input('Objetivo', 'Objetivo', "{$infoMeta['oppcod']} - {$infoMeta['oppdsc']}");
                                     echo $simec->input('Meta', 'Meta', "{$infoMeta['mppcod']} - {$infoMeta['mppdsc']} {$compartilhada}");
                                     echo $simec->input('Previsto', 'Previsto PPA', number_format($infoMeta['mppquantidade'], 2, ',', '.'));
@@ -200,9 +197,9 @@
                                     ?>
 
                             </div>
-                            
+
                             <div class="col-md-4">
-                                
+
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <h5>Anexos</h5>
@@ -229,8 +226,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -240,7 +237,7 @@
 </div>
 
 <script>
-    
+
     $(document).ready(function(){
 
         $('.btn-limpar').click(function(){
@@ -251,7 +248,7 @@
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });
-        
+
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             carregarMetasPPA($(this).val(), null, $('#ungcod').val());
@@ -271,10 +268,10 @@
         });
 
     });
-    
+
     /**
      * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
-     * 
+     *
      */
     function carregarUG(unicod) {
         $.post(
@@ -284,7 +281,7 @@
                 $(".chosen-select").chosen();
         });
     }
-    
+
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
