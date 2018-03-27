@@ -358,7 +358,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suocod,
                 ptr.funcional
         ";
-
+//ver($sql, d);
         return $sql;
     }
 
