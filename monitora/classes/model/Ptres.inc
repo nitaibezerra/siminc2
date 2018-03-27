@@ -223,7 +223,7 @@ class Monitora_Model_Ptres extends Modelo
         $sql = "
             SELECT DISTINCT
                 ptr.ptrid,
-                suo.unocod || '(' || suo.unonome || ')' AS uo,
+                suo.unocod || '(' || suo.unonome || ')' AS unidade_orcamentaria,
                 vptr.acacod,
                 vptr.acatitulo,
                 ptr.ptres,

@@ -8,6 +8,10 @@ switch ($_REQUEST['req']) {
 	case 'excluir':
         $cPtres->excluir($_REQUEST['ptrid']);
 		die;
+    case 'carregarAcaoPorUo':
+        $cPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo(["coalesce(ptres.prgcod, '')", "coalesce(ptres.acacod, '')", "coalesce(acaobjetivocod, '')", "coalesce(ptres.loccod, '')", "coalesce(ptres.plocod, '')", "acatitulo"]);
+        echo $simec->select('acaid', 'Ação', null, $cPtres,['required']);
+        die;
 }
 
 $mPtres = new Monitora_Model_Ptres($_REQUEST['ptrid']);
@@ -32,16 +36,20 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="ptrid" id="ptrid" type="hidden" value="<?php echo $mPtres->ptrid; ?>">
-                        
-                        <?php                         
+
+                        <?php
                         echo $simec->input('ptres', 'PTRES', $mPtres->ptres, ['required','maxlength' => 50]);
-                        echo $simec->input('acaid', 'Ação', $mPtres->acaid, ['required']);
+                        echo $simec->select('unicod', 'Unidade', $mPtres->unicod, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
+                        // select de unidade para filtrar a ação com base do unicod.
+                        echo '<span id="span-acao">';
+                        echo $simec->select('acaid, ', 'Ação', $mPtres->acaid, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo']), ['required']);
+                        echo '</span>';
                         echo $simec->input('irpcod', 'RP', $mPtres->irpcod, ['maxlength' => 1]);
-                        echo $simec->input('ptrdotacao', 'Dotação Total', $mPtres->ptrdotacao);
                         echo $simec->input('plocod', 'Código PO', $mPtres->plocod, ['maxlength' => 4]);
                         echo $simec->input('plodsc', 'Descrição PO', $mPtres->plodsc, ['maxlength' => 500]);
-                        echo $simec->input('ptrdotacaocapital', 'Dotação Capital', $mPtres->ptrdotacaocapital);
-                        echo $simec->input('ptrdotacaocusteio', 'Dotação Custeio', $mPtres->ptrdotacaocusteio);
+                        echo $simec->valor('ptrdotacaocapital', 'Dotação Capital', $mPtres->ptrdotacaocapital);
+                        echo $simec->valor('ptrdotacaocusteio', 'Dotação Custeio', $mPtres->ptrdotacaocusteio);
+                        echo $simec->valor('ptrdotacao', 'Dotação Total', $mPtres->ptrdotacao);
                         ?>
                         
                         <div class="form-group">
@@ -59,3 +67,11 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $('#unicod').change(function () {
+            $('#span-acao').load('?modulo=apoio/funcionais_form&acao=A&req=carregarAcaoPorUo&unicod=' + $(this).val());
+        });
+    })
+
+</script>
