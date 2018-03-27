@@ -30,11 +30,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>PTRES</th>
                                 <th>Ação</th>
                                 <th>RP</th>
-                                <th>Dotação Total</th>
                                 <th>Código PO</th>
                                 <th>Descrição PO</th>
                                 <th>Dotação Capital</th>
                                 <th>Dotação Custeio</th>
+                                <th>Dotação Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,11 +46,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['ptres']; ?></td>
                                     <td><?php echo $dados['acaid']; ?></td>
                                     <td><?php echo $dados['irpcod']; ?></td>
-                                    <td><?php echo $dados['ptrdotacao']; ?></td>
                                     <td><?php echo $dados['plocod']; ?></td>
                                     <td><?php echo $dados['plodsc']; ?></td>
-                                    <td><?php echo $dados['ptrdotacaocapital']; ?></td>
-                                    <td><?php echo $dados['ptrdotacaocusteio']; ?></td>
+                                    <td><?php echo number_format($dados['ptrdotacaocapital'], 0, ',', '.'); ?></td>
+                                    <td><?php echo number_format($dados['ptrdotacaocusteio'], 0, ',', '.'); ?></td>
+                                    <td><?php echo number_format($dados['ptrdotacao'], 0, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
