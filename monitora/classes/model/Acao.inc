@@ -207,7 +207,6 @@ class Monitora_Model_Acao extends Modelo
 
         $sql = "select {$pk} AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela} a
-                  inner join public.unidadeorcamentaria uno on uno.unocod = a.unicod and uno.prsano = a.prgano
                 $where
                 order by $descricao   
         ";
