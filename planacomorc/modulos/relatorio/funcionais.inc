@@ -14,7 +14,7 @@
 
     $modelPlanoInterno = new Pi_PlanoInterno();
     $sql = $modelPlanoInterno->montarSqlRelFuncionais($filtros);
-    //ver($sql, d);
+//ver($sql, d);
     $listaFuncionais = $modelPlanoInterno->carregar($sql);
 
     if($_REQUEST['req'] == 'exportar-xls'){

@@ -358,7 +358,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suocod,
                 ptr.funcional
         ";
-
+//ver($sql, d);
         return $sql;
     }
 
@@ -1282,6 +1282,7 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarPiPorFuncional(stdClass $parametros)
     {
         $dados = $this->recuperarDadosDetalhe((object) array('suoid' => $parametros->suoid, 'ptrid' => $parametros->ptrid, 'tipo' => self::K_TIPO_DETALHE_PTRES));
+        $totaisFuncional = $this->buscarTotaisFuncional((object) array('exercicio' => $_SESSION['exercicio'], 'ptrid' => $parametros->ptrid));
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
@@ -1434,6 +1435,45 @@ class Pi_PlanoInterno extends Modelo
 //ver($sql,d);
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
+    }
+    
+    public function buscarTotaisFuncional(stdClass $parametros)
+    {
+        $where = '';
+        $where .= $parametros->ptrid? " \n AND ptr.ptrid = '$parametros->ptrid'": NULL;
+
+        $sql = "
+            SELECT DISTINCT
+                ptr.ptrid,
+                ptr.funcional,
+                ptr.ptrdotacaocusteio AS custeio,
+                ptr.ptrdotacaocapital AS capital,
+                sec.empenhado,
+                sec.liquidado,
+                sec.pago
+            FROM monitora.vw_ptres ptr
+                LEFT JOIN(
+                    SELECT
+                        siopexecucao.unicod,
+                        siopexecucao.ptres,
+                        SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                        SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                        SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                        SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+                    FROM spo.siopexecucao
+                    WHERE
+                        siopexecucao.exercicio = '". (int)$parametros->exercicio. "' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+                    GROUP BY
+                        siopexecucao.ptres,
+                        siopexecucao.unicod
+                ) sec ON(ptr.ptres = sec.ptres)
+            WHERE
+                ptr.ptrano = '". (int)$parametros->exercicio. "'
+                $where
+            ";
+//ver($sql,d);
+        $resultado = $this->pegaLinha($sql);
+        return $resultado;
     }
 
     public function recuperarPis($filtro)

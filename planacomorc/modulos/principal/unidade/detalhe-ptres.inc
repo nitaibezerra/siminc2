@@ -59,13 +59,22 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="5">TOTAL</th>
+                                    <th colspan="5">TOTAL PLANOS INTERNOS</th>
                                     <th class="text-right"><?php echo number_format($total['custeio'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo number_format($total['capital'], 0, ',', '.'); ?></th>
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['autorizado'], $total['custeio']+ $total['capital']); ?></th>
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['empenhado'], $total['custeio']+ $total['capital']); ?></th>
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['liquidado'], $total['custeio']+ $total['capital']); ?></th>
                                     <th class="text-right"><?php echo marcarVermelhoValorSuperior($total['pago'], $total['custeio']+ $total['capital']); ?></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="5">TOTAL NA FUNCIONAL</th>
+                                    <th class="text-right"><?php echo number_format($totaisFuncional['custeio'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php echo number_format($totaisFuncional['capital'], 0, ',', '.'); ?></th>
+                                    <th class="text-right"><?php // echo marcarVermelhoValorSuperior($totaisFuncional['provisionado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['empenhado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['liquidado'], $total['custeio']+ $total['capital']); ?></th>
+                                    <th class="text-right"><?php echo marcarVermelhoValorSuperior($totaisFuncional['pago'], $total['custeio']+ $total['capital']); ?></th>
                                 </tr>
                             </tfoot>
                         </table>
