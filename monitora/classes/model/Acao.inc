@@ -205,7 +205,7 @@ class Monitora_Model_Acao extends Modelo
 
         $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
-        $sql = "select {$pk} AS codigo, {$descricao} AS descricao,
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela} a
                 $where
                 order by $descricao
