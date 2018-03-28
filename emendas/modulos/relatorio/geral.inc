@@ -63,6 +63,8 @@
         # SITUAÇÃO WORKFLOW
         'Situação',
         # PLANO INTERNO
+        'Id PI',
+        'Código PI',
         'Empenhado',
         'Pago',
     ];

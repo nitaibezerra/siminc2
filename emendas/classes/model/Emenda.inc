@@ -95,27 +95,49 @@ class Emendas_Model_Emenda extends Modelo
                 aut.autnome,
                 aut.autcod,
                 pro.pronome,
-                sit.sitdsc,
+                (
+		    SELECT
+                        sit.sitdsc
+                    FROM emendas.siconvbeneficiario sbe                                                
+                        JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                        JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                    WHERE
+			sbe.benid = ben.benid
+                    ORDER BY
+                        sicsequencial DESC
+                    LIMIT 1
+                ) AS sitdsc,
                 ben.benid,
                 suo.suocod || ' - ' || suo.suosigla subunidade,
-                REPLACE(REPLACE(ARRAY(
-			SELECT DISTINCT
-				bl.estuf
-			FROM emendas.beneficiariolocalizacao bl
-			WHERE
-				bl.estuf IS NOT NULL
-				AND bl.benid = ben.benid
-                )::TEXT, '{', ''), '}', '') AS lista_uf,
+                aut.estuf,
                 CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
                 doce.esddsc,
+                (
+                    SELECT
+                        SUM(bedvalor)
+                    FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                    WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod <= 3
+                ) AS custeio,
+                (
+                    SELECT
+                        SUM(bedvalor)
+                    FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                    WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod >= 4
+                ) AS capital,
                 pi.empenhado,
                 pi.pago
             FROM
                 emendas.emenda eme
                 LEFT JOIN emendas.beneficiario ben ON(ben.emeid = eme.emeid AND benstatus = 'A')
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
-                LEFT JOIN emendas.siconv sic ON sic.sicid = ben.sicid
-                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
                 JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
                 JOIN emendas.autor aut ON aut.autid = eme.autid
                 JOIN monitora.ptres ptr ON ptr.ptrid = eme.ptrid
@@ -158,7 +180,7 @@ class Emendas_Model_Emenda extends Modelo
            SELECT DISTINCT
 		-- DADOS DA EMENDA
 		eme.emeid,
-		eme.emenumero,
+		SUBSTRING(eme.emenumero::TEXT FROM 1 FOR 4) || ' ' || SUBSTRING(eme.emenumero::TEXT FROM 5 FOR LENGTH(eme.emenumero::TEXT)) AS emenumero,
                 -- AUTOR
                 aut.autcod,
                 aut.autnome,
@@ -248,6 +270,8 @@ class Emendas_Model_Emenda extends Modelo
                 -- SITUAÇÃO WORKFLOW
                 doce.esddsc,
 		-- PLANO INTERNO
+                pi.pliid,
+                pi.plicod,
                 pi.empenhado,
                 pi.pago
             FROM emendas.emenda eme
@@ -783,12 +807,12 @@ class Emendas_Model_Emenda extends Modelo
 
             $mSiconv = new Emendas_Model_Siconv();
 
-            $filtro = [
-                "coalesce(situacaopropostaws, '') != ''",
-                "coalesce(parecerproposta, '') != ''",
-            ];
+//            $filtro = [
+//                "coalesce(situacaopropostaws, '') != ''",
+//                "coalesce(parecerproposta, '') != ''",
+//            ];
 
-            $mSiconv->atualizar($filtro);
+            $mSiconv->atualizar();
         }
 
         $this->emeatualizacaosiconv = date('Y-m-d H:i:s');
@@ -825,8 +849,6 @@ class Emendas_Model_Emenda extends Modelo
                 sleep(5);
             }
         }
-
-        ver('FIM', d);
     }
 
     public function recuperarPropostaWs($obWS, $emenda)
@@ -838,10 +860,11 @@ class Emendas_Model_Emenda extends Modelo
         $retorno = $obWS->consultarPropostaPorEmenda($filtro);
         
         if(isset($retorno->propostas)){
-            $mPropostaWS = new Siconv_Model_PropostaWs();
 
             $aPropostas = is_array($retorno->propostas) ? $retorno->propostas : [$retorno->propostas];
             foreach ($aPropostas as $PropostaWS){
+
+                $mPropostaWS = new Siconv_Model_PropostaWs();
 
                 foreach ($PropostaWS as $indice => $dados){
                     $indice = strtolower($indice);
@@ -863,7 +886,8 @@ class Emendas_Model_Emenda extends Modelo
                 $mPropostaWS->emeid = $emenda['emeid'];
                 $mPropostaWS->salvar();
                 $mPropostaWS->commit();
-                $mPropostaWS->id = null;
+                
+                unset($mPropostaWS);
             }
         }
     }

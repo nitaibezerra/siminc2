@@ -396,7 +396,6 @@ class Pi_PlanoInterno extends Modelo
                         ptr.ptrdotacaocusteio dotacao
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
                     -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
@@ -411,7 +410,6 @@ class Pi_PlanoInterno extends Modelo
                         ptr.ptrdotacaocapital dotacao
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
                     -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
@@ -579,7 +577,6 @@ class Pi_PlanoInterno extends Modelo
                         psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
                     -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
@@ -1058,7 +1055,6 @@ class Pi_PlanoInterno extends Modelo
                 pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc,
                 case when pli.pliemenda = true then 'Sim' else 'Não' end as pliemenda,
                 case when pic.picedital = true then 'Sim' else 'Não' end as picedital, esf.esfdsc,
-
                 case
                         when pic.esfid in (1, 2, 3) then 'Brasil'
                         else pic.esfid::char
@@ -1097,7 +1093,6 @@ class Pi_PlanoInterno extends Modelo
                                 JOIN seguranca.usuario usu ON usu.usucpf = pir.usucpf
                         WHERE pir.pliid = pli.pliid
                 ), '; ')) usuario,
-
                 case when pic.picted then 'Sim' else 'Não' end ted,
                 case when pic.picedital then 'Sim' else 'Não' end edital,
                 mes.mesdsc,
@@ -1443,10 +1438,12 @@ class Pi_PlanoInterno extends Modelo
 
     public function recuperarPis($filtro)
     {
-        if(is_array($filtro['eqdid']) && count($filtro['eqdid'])){
-            $where = ' and pli.eqdid in (' . implode(',', $filtro['eqdid']) . ')';
-        }
-
+      if(is_array($filtro['eqdid']) && count($filtro['eqdid'])){
+      	$where = ' and pli.eqdid in (' . implode(',', $filtro['eqdid']) . ')';
+      }
+      if(is_array($filtro['suoid']) && count($filtro['suoid'])){
+          $where .= " and suo.suocod in('" . implode("','", $filtro['suoid']) . "')";
+      }
         $sql = "select  pli.docid, doc.esdid, pli.pliid, pli.plicod, pli.plidsc, pli.plititulo, ptr.acatitulo, ptr.funcional,
                         doc.esdid, ptr.ptres, ptr.ptrid, ptr.prgcod, ptr.acacod, ptr.loccod, ptr.plocod, ptr.plodsc, ptr.irpcod,
                         suo.unocod, suo.unosigla, suo.unonome, suo.suocod, suo.suosigla, suo.suonome, suo.unofundo

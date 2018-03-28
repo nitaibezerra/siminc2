@@ -79,7 +79,7 @@ class Emendas_Model_Siconv extends Modelo
         return $dados ? $dados : [];
     }
 
-    public function atualizar($filtro)
+    public function atualizar($filtro = null)
     {
         $mPropostaWS = new Siconv_Model_PropostaWs();
         $campos = 'justificativa, situacaopropostaws, parecerproposta, ano, idhash, objetoconvenio, sequencial, numeroconvenio, propostaprogramaws, parecerplanotrabalho';
