@@ -96,5 +96,21 @@ class Public_Model_ObjetivoPpa extends Modelo
                 ptrid = ". (int)$ptrid;
         return $this->pegaUm($sql);
     }
+    
+    public function recuperarSqlComboPorOppcod($where = []){
+        $where['exercicio'] = !empty($where['exercicio']) ? $where['exercicio'] : $_SESSION['exercicio'];
+
+        $sql = "
+            SELECT
+                oppcod AS codigo,
+                oppcod || '-' || oppnome AS descricao
+            FROM public.objetivoppa
+            WHERE
+                oppstatus = 'A'
+                AND prsano = '{$where['exercicio']}'
+            ORDER BY
+                oppcod";
+        return $sql;
+    }
 
 }
