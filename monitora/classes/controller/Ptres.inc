@@ -11,11 +11,11 @@ class Monitora_Controller_Ptres
             $mPtres->popularDadosObjeto($dados);
 
             # Dados monetários
-            $mPtres->ptrdotacaocusteio = str_replace(array('.', ','), array('', '.'), $dados['ptrdotacaocusteio']);
-            $mPtres->ptrdotacaocapital = str_replace(array('.', ','), array('', '.'), $dados['ptrdotacaocapital']);
+            $mPtres->ptrdotacaocusteio = (int)str_replace(array('.', ','), array('', '.'), $dados['ptrdotacaocusteio']);
+            $mPtres->ptrdotacaocapital = (int)str_replace(array('.', ','), array('', '.'), $dados['ptrdotacaocapital']);
             $mPtres->ptrano = $_SESSION['exercicio'];
-            
-            $mPtres->salvar(null, null, ['acaid', 'ptrano', 'funcod', 'sfucod', 'prgcod', 'acacod', 'loccod', 'unicod', 'irpcod', 'ptrdotacao', 'ptrstatus', 'ptrdata', 'plocod', 'esfcod', 'ptrdotacaocapital', 'ptrdotacaocusteio', 'plodsc', ]);
+
+            $mPtres->salvar(null, null, ['acaid', 'ptrano', 'funcod', 'sfucod', 'prgcod', 'acacod', 'loccod', 'unicod', 'irpcod', 'ptrdotacao', 'ptrstatus', 'ptrdata', 'plocod', 'esfcod', 'ptrdotacaocapital', 'ptrdotacaocusteio', 'plodsc']);
             $mPtres->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
