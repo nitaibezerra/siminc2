@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Monitora_Model_EnquadramentoRp extends Modelo
@@ -61,10 +61,27 @@ class Monitora_Model_EnquadramentoRp extends Modelo
         'irpcod' => null,
     );
 
-    public function excluirPorExercicio($exercicio)
-    {
-        $sql = "delete from monitora.enquadramentorp where eqdid in (select eqdid from monitora.pi_enquadramentodespesa where eqdano = '{$exercicio}')";
-        return $this->executar($sql);
+    public function excluirPorExercicio($exercicio, $eqdid = null){
+      if($eqdid){
+        $condicao = "eqdid = ". (int)$eqdid;
+      } else {
+        $condicao = "
+          eqdid IN(
+            SELECT
+              eqdid
+            FROM monitora.pi_enquadramentodespesa
+            WHERE
+              eqdano = '{$exercicio}'
+          )
+        ";
+      }
+
+      $sql = "
+          DELETE from monitora.enquadramentorp
+          WHERE
+            $condicao
+      ";
+      return $this->executar($sql);
     }
 
     public function recuperarPorExercicio($exercicio)
@@ -79,6 +96,5 @@ class Monitora_Model_EnquadramentoRp extends Modelo
         }
         return $dadosAgrupados;
     }
-
 }//end Class
 ?>
