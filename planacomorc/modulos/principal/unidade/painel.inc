@@ -87,9 +87,11 @@
             <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A">
                 <i class="fa fa-list"></i> Lista de PI
             </a>
+            <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
             <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A">
                 <i class="fa fa-plus-circle"></i> Criar PI
             </a>
+          <?php }?>
             <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A&fundo=f">
                 <i class="fa fa-file-excel-o"></i> Relatório Geral
             </a>
@@ -284,7 +286,7 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
                 var pane = $(this), href = this.hash;
 
                 // ajax load from data-url
-                $(href).empty().load(url, function(result){      
+                $(href).empty().load(url, function(result){
                     pane.tab('show');
                 });
             } else {
@@ -345,4 +347,3 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
 
 
 </script>
-

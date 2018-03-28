@@ -119,7 +119,9 @@
                                         <?php echo $simec->select('aedid', 'Tramitar Para', null, $aEstados, array('required')); ?>
                                     </div>
                                     <div class="col-md-2 div_motivo">
+                                      <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                         <button class="btn btn-danger" name="btn-aplicar" type="submit"><span class="glyphicon glyphicon-transfer"></span> Tramitar</button>
+                                      <?php }?>
                                     </div>
                                 </div>
                                 <div class="form-group ">
