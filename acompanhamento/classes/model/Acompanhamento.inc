@@ -105,6 +105,52 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
 
         return [];
     }
+    
+    public function getMetasPpaRelatorio(stdClass $param){
+        $where = "";
+//        $where .= $param->suoid? "\n AND smp.suoid = ". (int)$param->suoid: '';
+        $where .= $param->unicod? "\n AND suo.unocod = '". $param->unicod. "'": '';
+        $where .= $param->suocod? "\n AND suo.suocod = '". $param->suocod. "'": '';
+        $where .= $param->janid? "\n AND aco.janid = ". (int)$param->janid: '';
+        $where .= $param->oppid? "\n AND om.oppid = ". (int)$param->oppid: '';
+        $where .= $param->mppid? "\n AND mpp.mppid = ". (int)$param->mppid: '';
+
+        $sql = "
+            SELECT
+                aco.acoid,
+                aco.suoid,
+                aco.janid,
+                mpp.mppid,
+                mpp.mppdsc,
+                mpp.mppcod,
+                mpp.mppnome,
+                mpp.mppquantificavel,
+                mpp.mppquantidade,
+                mpp.mppanualizavel,
+                aco.acoquantidade
+            FROM public.metappa mpp
+                LEFT JOIN spo.subunidademetappa smp ON smp.mppid = mpp.mppid
+                JOIN acompanhamento.acompanhamento aco ON(
+                    aco.mppid = mpp.mppid
+--                    AND aco.suoid = smp.suoid
+                    AND acostatus = 'A'
+                )
+                JOIN public.vw_subunidadeorcamentaria suo ON aco.suoid = suo.suoid
+                JOIN public.objetivometappa om ON mpp.mppid = om.mppid
+            WHERE
+                mpp.prsano = '". (int)$param->exercicio. "'
+                AND mpp.mppstatus = 'A'
+                $where
+            ORDER BY
+                aco.janid,
+                mppcod,
+                mppdsc
+        ";
+//ver($sql,d);
+        $listaResultado = $this->carregar($sql);
+
+        return $listaResultado? $listaResultado: array();
+    }
 
     public function getMetasPpaComPi($suoid, $janid = null, $exercicio = null)
     {
