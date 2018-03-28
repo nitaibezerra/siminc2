@@ -46,8 +46,8 @@
                             echo $simec->input('plocod', 'Código PO', $mPtres->plocod, ['maxlength' => 4]);
                             echo $simec->input('plodsc', 'Descrição PO', $mPtres->plodsc, ['maxlength' => 500]);
                             echo $simec->input('irpcod', 'RP', $mPtres->irpcod, ['required', 'maxlength' => 1]);
-                            echo $simec->valor('ptrdotacaocusteio', 'Custeio', number_format($mPtres->ptrdotacaocusteio, 0, ',', '.'), ['required']);
-                            echo $simec->valor('ptrdotacaocapital', 'Capital', number_format($mPtres->ptrdotacaocapital, 0, ',', '.'), ['required']);
+                            echo $simec->valor('ptrdotacaocusteio', 'Custeio', $mPtres->ptrdotacaocusteio, ['required']);
+                            echo $simec->valor('ptrdotacaocapital', 'Capital', $mPtres->ptrdotacaocapital, ['required']);
                         ?>
                         
                         <div class="form-group">
