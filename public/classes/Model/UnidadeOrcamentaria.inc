@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Public_Model_UnidadeOrcamentaria extends Modelo
@@ -62,6 +62,7 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         'unocodigopi' => null,
         'unofundo' => null,
         'unosigla' => null,
+        'unocodorcamento'=> null,
     );
     
     public function recuperarSqlComboPorUnocod($descricao = null, $where = [], $order = '') {
@@ -96,5 +97,37 @@ class Public_Model_UnidadeOrcamentaria extends Modelo
         return $sql;
     }
 
+    public function recuperarSqlComboUnocod($descricao = null, $where = [], $order = '') {
+
+        foreach (array_keys($this->arAtributos) as $atributo) {
+            if (substr($atributo, -6) == 'status') {
+                $where[] = "{$atributo} = 'A'";
+            } elseif (substr($atributo, -3) == 'ano') {
+                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
+            }
+            if ($descricao) {
+                $descricao = implode(" || ' - ' || ", (array)$descricao);
+            } else {
+                $aPossibilidades = ['dsc', 'desc', 'nome', 'descricao'];
+                foreach ($aPossibilidades as $possibilidade) {
+                    if (substr($atributo, -(strlen($possibilidade))) == $possibilidade) {
+                        $descricao = $atributo;
+                        break;
+                    }
+                }
+            }
+        }
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? " where  " . implode(' and ', $where) : '';
+
+        $sql = "select unocod AS codigo, {$descricao} AS descricao
+                from {$this->stNomeTabela}
+                $where
+                order by $order   
+        ";
+
+        return $sql;
+    }
+    
 }//end Class
 ?>

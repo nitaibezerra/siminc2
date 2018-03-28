@@ -10,18 +10,18 @@
 
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_SESSION['filtropi'] = ($_POST? $_POST: $_SESSION['filtropi']);
-    
+
     $perfis = pegaPerfilGeral();
-    
+
     $sqlListaUO = Spo_Model_Unidade::queryCombo((object)array(
         'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
         'suo.unofundo = TRUE'));
 
     $listaUO = $db->carregar($sqlListaUO);
-    
+
     # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
     $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-    
+
     if($requisicao) {
         switch ($requisicao) {
             case 'exibirGrafico':
@@ -46,11 +46,11 @@
             break;
         }
     }
-    
+
     /**
      * Monta a combo de UGs filtrando por UO
-     * 
-     * @param $filtros 
+     *
+     * @param $filtros
      * @return VOID
      */
     function montarComboUG(stdClass $filtros) {
@@ -120,20 +120,22 @@
                                 <button class="btn btn-primary btn-buscar" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Buscar
                                 </button>
+                                <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <button class="btn btn-success btn-novo-fnc" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     Novo
                                 </button>
+                              <?php }?>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    
+
 <div class="row col-md-12" style="margin-bottom: 30px;">
     <?php
 
@@ -167,8 +169,10 @@
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">
+                              <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <a href="javascript:alterarPiFnc(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
                                 <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
+                              <?php } ?>
                             </td>
                             <td><?php echo $dados['id']; ?></td>
                             <td><?php echo $dados['codigo_pi']; ?></td>
@@ -234,7 +238,7 @@
 
 <script type="text/javascript">
     sufixoUrl = '_fnc';
-    
+
     $(document).ready(function(){
         initListaPiManter();
     });

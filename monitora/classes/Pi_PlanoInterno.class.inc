@@ -56,7 +56,7 @@ class Pi_PlanoInterno extends Modelo
             $where[] = " AND uno.unoid = {$aFiltro['uno']}";
         }
 
-        # Verifica se o usuÃ¡rio tem vinculo de Sub-Unidades no seu Perfil
+        # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));
 
         if (count($listaSubUnidadeUsuario)) {
@@ -358,7 +358,7 @@ class Pi_PlanoInterno extends Modelo
                 suo.suocod,
                 ptr.funcional
         ";
-
+//ver($sql, d);
         return $sql;
     }
 
@@ -396,8 +396,7 @@ class Pi_PlanoInterno extends Modelo
                         ptr.ptrdotacaocusteio dotacao
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
-                    -- ESSE JOIN DE PTRES COM A VW_PTRES Ã‰ NECESSÃRIO PARA RECUPERAR O VALOR DE DOTAÃ‡ÃƒO E CUSTEIO CORRETO EM CASO DO PNC
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
 
@@ -411,8 +410,7 @@ class Pi_PlanoInterno extends Modelo
                         ptr.ptrdotacaocapital dotacao
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
-                    -- ESSE JOIN DE PTRES COM A VW_PTRES Ã‰ NECESSÃRIO PARA RECUPERAR O VALOR DE DOTAÃ‡ÃƒO E CUSTEIO CORRETO EM CASO DO PNC
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
 
@@ -579,8 +577,7 @@ class Pi_PlanoInterno extends Modelo
                         psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc
                 from public.vw_subunidadeorcamentaria suo
                     inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-
-                    -- ESSE JOIN DE PTRES COM A VW_PTRES Ã‰ NECESSÃRIO PARA RECUPERAR O VALOR DE DOTAÃ‡ÃƒO E CUSTEIO CORRETO EM CASO DO PNC
+                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
                     inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
                     inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
 
@@ -604,7 +601,7 @@ class Pi_PlanoInterno extends Modelo
     }
 
     /**
-     * Busca Unidades com estatistica de orÃ§amento e valores de pagamento.
+     * Busca Unidades com estatistica de orçamento e valores de pagamento.
      *
      * @param stdClass $filtro
      * @return array
@@ -614,7 +611,7 @@ class Pi_PlanoInterno extends Modelo
         $sql = "
             SELECT DISTINCT
                 1 AS ordem,
-                'DotaÃ§Ã£o' AS descricao,
+                'Dotação' AS descricao,
                 suo.unosigla AS categoria,
                 (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
             FROM
@@ -761,7 +758,7 @@ class Pi_PlanoInterno extends Modelo
     }
 
     /**
-     * Busca Subunidades por UO com estatistica de orÃ§amento e valores de pagamento.
+     * Busca Subunidades por UO com estatistica de orçamento e valores de pagamento.
      *
      * @param stdClass $filtro
      * @return array
@@ -773,7 +770,7 @@ class Pi_PlanoInterno extends Modelo
         $sql = "
             SELECT DISTINCT
                 1 AS ordem,
-                'DotaÃ§Ã£o' AS descricao,
+                'Dotação' AS descricao,
                 suo.suosigla AS categoria,
                 (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
             FROM
@@ -979,7 +976,7 @@ class Pi_PlanoInterno extends Modelo
     }
 
     /**
-     * Casol nÃ£o exista Janela cadastrada para o periodo vigente o sistema nÃ£o permite as unidades fazerem inserÃ§Ã£o ou alteraÃ§Ã£o no PI.
+     * Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
      *
      * @param array $perfis
      * @param array $listaJanelasDeAlteracao
@@ -995,11 +992,13 @@ class Pi_PlanoInterno extends Modelo
 
     public function verificarPermissaoEditarFnc($estadoAtual, $perfis, $listaJanelasDeAlteracao)
     {
-        # Casol nÃ£o exista Janela cadastrada para o periodo vigente o sistema nÃ£o permite as unidades fazerem inserÃ§Ã£o ou alteraÃ§Ã£o no PI.
+        # Casol não exista Janela cadastrada para o periodo vigente o sistema não permite as unidades fazerem inserção ou alteração no PI.
         if(!self::verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)){
             return false;
         }
-
+        if(array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){
+          return false;
+        }
         switch ($estadoAtual['esdid']) {
             case ESD_FNC_PI_APROVADO:
             case ESD_FNC_PI_BANCO_PROJETOS:
@@ -1021,7 +1020,7 @@ class Pi_PlanoInterno extends Modelo
             $where .= " AND suo.unofundo = '{$fundo}' ";
         }
 
-        # Verifica se o usuÃ¡rio tem vinculo de Sub-Unidades no seu Perfil
+        # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
         $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object)array('usucpf' => $_SESSION['usucpf']));
         if (count($listaSubUnidadeUsuario)) {
             $where .= " AND suo.suocod IN('" . join("','", $listaSubUnidadeUsuario) . "') ";
@@ -1054,9 +1053,8 @@ class Pi_PlanoInterno extends Modelo
                 ptr.acacod, ptr.acatitulo, ptr.loccod, ptr.locdsc, ptr.plocod, plodsc po, ptr.ptres,
                 mde.mdedsc, mpn.mpncod || ' - ' || mpn.mpnnome mpnnome, mpp.mppcod || ' - ' || mpp.mppnome mppnome,
                 pli.plititulo, pli.plidsc, nee.needsc, cap.capdsc,
-                case when pli.pliemenda = true then 'Sim' else 'NÃ£o' end as pliemenda,
-                case when pic.picedital = true then 'Sim' else 'NÃ£o' end as picedital, esf.esfdsc,
-
+                case when pli.pliemenda = true then 'Sim' else 'Não' end as pliemenda,
+                case when pic.picedital = true then 'Sim' else 'Não' end as picedital, esf.esfdsc,
                 case
                         when pic.esfid in (1, 2, 3) then 'Brasil'
                         else pic.esfid::char
@@ -1095,9 +1093,8 @@ class Pi_PlanoInterno extends Modelo
                                 JOIN seguranca.usuario usu ON usu.usucpf = pir.usucpf
                         WHERE pir.pliid = pli.pliid
                 ), '; ')) usuario,
-
-                case when pic.picted then 'Sim' else 'NÃ£o' end ted,
-                case when pic.picedital then 'Sim' else 'NÃ£o' end edital,
+                case when pic.picted then 'Sim' else 'Não' end ted,
+                case when pic.picedital then 'Sim' else 'Não' end edital,
                 mes.mesdsc,
 
                 (SELECT ARRAY_TO_STRING(array(
@@ -1131,7 +1128,7 @@ class Pi_PlanoInterno extends Modelo
                 COALESCE(pic.picvalorcusteio, 0) AS picvalorcusteio,
                 COALESCE(pic.picvalorcapital, 0) AS picvalorcapital,
 
-                -- Cronograma FÃ­sico
+                -- Cronograma Físico
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 1 AND mescod = '01' AND pcr.pliid = pli.pliid LIMIT 1) fisico_1,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 1 AND mescod = '02' AND pcr.pliid = pli.pliid LIMIT 1) fisico_2,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 1 AND mescod = '03' AND pcr.pliid = pli.pliid LIMIT 1) fisico_3,
@@ -1173,7 +1170,7 @@ class Pi_PlanoInterno extends Modelo
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 4 AND mescod = '11' AND pcr.pliid = pli.pliid LIMIT 1) fin_custeio_11,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 4 AND mescod = '12' AND pcr.pliid = pli.pliid LIMIT 1) fin_custeio_12,
 
-                -- Cronograma OrÃ§amentÃ¡rio Capital
+                -- Cronograma Orçamentário Capital
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '01' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_1,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '02' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_2,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '03' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_3,
@@ -1187,7 +1184,7 @@ class Pi_PlanoInterno extends Modelo
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '11' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_11,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 3 AND mescod = '12' AND pcr.pliid = pli.pliid LIMIT 1) orc_capital_12,
 
-                -- Cronograma OrÃ§amentÃ¡rio Custeio
+                -- Cronograma Orçamentário Custeio
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '01' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_1,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '02' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_2,
                 (SELECT pcrvalor FROM planacomorc.pi_cronograma pcr WHERE crvid = 2 AND mescod = '03' AND pcr.pliid = pli.pliid LIMIT 1) orc_custeio_3,
@@ -1285,6 +1282,7 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarPiPorFuncional(stdClass $parametros)
     {
         $dados = $this->recuperarDadosDetalhe((object) array('suoid' => $parametros->suoid, 'ptrid' => $parametros->ptrid, 'tipo' => self::K_TIPO_DETALHE_PTRES));
+        $totaisFuncional = $this->buscarTotaisFuncional((object) array('exercicio' => $_SESSION['exercicio'], 'ptrid' => $parametros->ptrid));
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
@@ -1310,7 +1308,7 @@ class Pi_PlanoInterno extends Modelo
             $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
             $grafico->gerarGrafico($dados);
         } else {
-            echo "<script>$('#detalhe-grafico').modal('hide'); swal({title: 'AtenÃ§Ã£o', text: 'Nenhum dado encontrado.', type: 'warning', html: true});</script>";
+            echo "<script>$('#detalhe-grafico').modal('hide'); swal({title: 'Atenção', text: 'Nenhum dado encontrado.', type: 'warning', html: true});</script>";
         }
     }
 
@@ -1437,6 +1435,45 @@ class Pi_PlanoInterno extends Modelo
 //ver($sql,d);
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
+    }
+    
+    public function buscarTotaisFuncional(stdClass $parametros)
+    {
+        $where = '';
+        $where .= $parametros->ptrid? " \n AND ptr.ptrid = '$parametros->ptrid'": NULL;
+
+        $sql = "
+            SELECT DISTINCT
+                ptr.ptrid,
+                ptr.funcional,
+                ptr.ptrdotacaocusteio AS custeio,
+                ptr.ptrdotacaocapital AS capital,
+                sec.empenhado,
+                sec.liquidado,
+                sec.pago
+            FROM monitora.vw_ptres ptr
+                LEFT JOIN(
+                    SELECT
+                        siopexecucao.unicod,
+                        siopexecucao.ptres,
+                        SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                        SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                        SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                        SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+                    FROM spo.siopexecucao
+                    WHERE
+                        siopexecucao.exercicio = '". (int)$parametros->exercicio. "' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+                    GROUP BY
+                        siopexecucao.ptres,
+                        siopexecucao.unicod
+                ) sec ON(ptr.ptres = sec.ptres)
+            WHERE
+                ptr.ptrano = '". (int)$parametros->exercicio. "'
+                $where
+            ";
+//ver($sql,d);
+        $resultado = $this->pegaLinha($sql);
+        return $resultado;
     }
 
     public function recuperarPis($filtro)

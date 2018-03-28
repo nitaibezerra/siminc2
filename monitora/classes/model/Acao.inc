@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Monitora_Model_Acao extends Modelo
@@ -205,12 +205,36 @@ class Monitora_Model_Acao extends Modelo
 
         $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
-        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao,
                 from {$this->stNomeTabela} a
                 $where
-                order by $descricao   
+                order by $descricao
         ";
         return $sql;
+    }
+    public function recuperarDados(){
+        $sql = "
+            SELECT DISTINCT
+                prgcod,
+                prgcod || '-' || prgdsc AS programa,
+                acastatus,
+                prgano,
+                loccod,
+                acaobjetivocod,
+                acacod,
+                acaid,
+                acadsc,
+                acao.unicod || '-' || uni.unidsc AS unidade
+            FROM monitora.acao acao
+                JOIN public.unidade uni ON uni.unicod = acao.unicod
+            WHERE
+                acastatus = 'A'
+                AND prgano = '". $_SESSION['exercicio']. "'";
+//ver($sql, d);
+        $resultado = $this->carregar($sql);
+
+        $dados = $resultado? $resultado : [];
+      return $dados;
     }
 
 }//end Class

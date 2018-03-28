@@ -41,8 +41,10 @@ $aPropostas = $oPlanoInterno->recuperarPropostasSiminc($_SESSION['exercicio'], $
                     <?php foreach($aPropostas as $dados){ ?>
                         <tr>
                             <td>
+															<?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <a href="planacomorc.php?modulo=principal/unidade/cadastro_pi&acao=A&replicarProposta=<?php echo $dados['ppiid']; ?>"><span class="fa fa-plus-circle" title="Criar PI"></span></a>
-                            </td>
+															<?php } ?>
+														</td>
                             <td><?php echo substr($dados['funcionalcampobusca'], 0, strpos($dados['funcionalcampobusca'], ' - ')); ?></td>
                             <td><?php echo $dados['ppinome']; ?></td>
                             <td><?php echo $dados['unonome']; ?></td>

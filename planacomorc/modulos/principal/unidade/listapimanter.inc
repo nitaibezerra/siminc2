@@ -10,7 +10,7 @@
 
     $requisicao = $_REQUEST['requisicao'];
     $filtropi = $_SESSION['filtropi'] = ($_POST? $_POST: $_SESSION['filtropi']);
-    
+
     $perfis = pegaPerfilGeral();
 
     # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
@@ -47,7 +47,7 @@
                 $mPlanointerno = new Spo_Model_Planointerno();
                 $sql = $mPlanointerno->listar((object) $filtropi);
                 $listaPi = $mPlanointerno->carregar($sql);
-                
+
                 include_once APPRAIZ. "planacomorc/modulos/principal/unidade/listapimanter-xls.inc";
                 die;
             break;
@@ -132,10 +132,12 @@
                                 <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
                                     <i class="fa fa-file-excel-o"></i> Exportar XLS
                                 </button>
+                                <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <button class="btn btn-success btn-novo" type="button">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     Novo
                                 </button>
+                              <?php } ?>
                             </div>
                         </div>
 
@@ -179,8 +181,10 @@
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">
+                              <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <a href="javascript:alterarPi(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
                                 <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
+                             <?php } ?>
                             </td>
                             <td><?php echo $dados['id']; ?></td>
                             <td><?php echo $dados['codigo_pi']; ?></td>
@@ -239,7 +243,7 @@
                     </tfoot>
                 </table>
             </div>
-    		
+
     	</div>
     </div>
 

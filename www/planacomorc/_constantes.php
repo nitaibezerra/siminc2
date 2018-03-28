@@ -15,6 +15,8 @@ define('PFL_SUPERUSUARIO', 955);
 define("PFL_PLANEJAMENTO", 956);
 define("PFL_ASPAR", 957);
 define("PFL_SUBUNIDADE", 994);
+define("PFL_CONSULTA", 1504);
+define("PFL_GESTÃO_CONSULTA", 1503);
 
 // -- Constantes utilizadas em: monitora/modulos/principal/planotrabalhoUN/popuphistoricoplanointernoUN.inc
 define("PFL_CGSO", 1044);
@@ -95,4 +97,3 @@ define( 'CAPCOD_CONVENIO', 45);
 
 # Plano de Trabalho Anual
 define('PTAID_LINHAS_PROGRAMATICAS', 5);
-
