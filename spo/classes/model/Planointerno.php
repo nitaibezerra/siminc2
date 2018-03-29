@@ -159,7 +159,8 @@ class Spo_Model_Planointerno extends Modelo
                 SUM(COALESCE (sex.vlrautorizado, 0.00)) AS autorizado,
                 SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
                 SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado,
-		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago
+		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
+                pli.plistatus
             FROM monitora.pi_planointerno pli
 		JOIN planacomorc.pi_complemento pc USING(pliid)
                 JOIN public.vw_subunidadeorcamentaria suo ON(
@@ -183,7 +184,7 @@ class Spo_Model_Planointerno extends Modelo
 		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
 		LEFT JOIN public.vw_subunidadeorcamentaria pdsuo ON(pd.suoid = pdsuo.suoid)
             WHERE
-                pli.plistatus = 'A'
+                (pli.plistatus = 'A' OR (pli.plistatus = 'I' AND ed.esdid = ". (int)ESD_PI_CANCELADO. "))
                 AND pli.pliano = '". (int)$filtros->exercicio. "'
                 $where
             GROUP BY
@@ -198,7 +199,7 @@ class Spo_Model_Planointerno extends Modelo
             ORDER BY
                 pli.plicod
         ";
-
+//ver($sql,d);
         return $sql;
     }
     
