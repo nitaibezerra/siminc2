@@ -67,7 +67,7 @@ class Emendas_Controller_Beneficiario
         global $simec;
         $mBeneficiarioHistorico = new Emendas_Model_BeneficiarioHistorico($behid);
         if(!$mBeneficiarioHistorico->benid){ $mBeneficiarioHistorico->benid = $benid; }
-        $mBeneficiarioHistorico->behdata = $mBeneficiarioHistorico->behdata = date('Y-m-d');
+        $mBeneficiarioHistorico->behdata = $mBeneficiarioHistorico->behdata ? $mBeneficiarioHistorico->behdata : date('d/m/Y');
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico_form.inc';
     }
 
