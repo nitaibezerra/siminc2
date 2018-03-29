@@ -44,7 +44,9 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div style="padding-top: 10px;" class="text-right">
             <a class="btn btn-success" href="planacomorc.php?modulo=principal/unidade/painel&acao=A"><i class="fa fa-area-chart"></i> Painel</a>
             <a class="btn btn-danger" href="planacomorc.php?modulo=principal/unidade/listapimanter_fnc&acao=A"><i class="fa fa-list"></i> Lista de PI - FNC</a>
+            <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
             <a class="btn btn-warning" href="planacomorc.php?modulo=principal/unidade/cadastro_pi_fnc&acao=A"><i class="fa fa-plus-circle"></i> Criar PI - FNC</a>
+          <? }?>
             <a class="btn btn-primary" href="planacomorc.php?modulo=relatorio/geral&acao=A&fundo=t"><i class="fa fa-file-excel-o"></i> Relatório Geral</a>
         </div>
     </div>
