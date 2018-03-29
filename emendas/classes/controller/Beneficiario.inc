@@ -71,7 +71,7 @@ class Emendas_Controller_Beneficiario
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico_form.inc';
     }
 
-    public function montarListagemHistorico($benid)
+    public function montarListagemHistorico($benid, $podeEditar)
     {
       # Busca perfis do usuÃ¡rio logado
       $perfis = pegaPerfilGeral();

@@ -5,6 +5,11 @@ require_once APPRAIZ . 'includes/workflow.php';
 
 $cBeneficiario = new Emendas_Controller_Beneficiario();
 
+$perfis = pegaPerfilGeral();
+$podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+//$podeEditar = TRUE;
+$configPodeEditar = array('pode-editar' => $podeEditar? 'S': 'N');
+
 switch ($_REQUEST['req']) {
     case 'salvar':
         $cBeneficiario->salvar($_REQUEST);
@@ -19,7 +24,7 @@ switch ($_REQUEST['req']) {
         $cBeneficiario->montarFormularioHistorico($_REQUEST['benid'], $_REQUEST['behid']);
         die;
     case 'listar-historico':
-        $cBeneficiario->montarListagemHistorico($_REQUEST['benid']);
+        $cBeneficiario->montarListagemHistorico($_REQUEST['benid'], $podeEditar);
         die;
     case 'salvar-historico':
         $cBeneficiarioHistorico = new Emendas_Controller_BeneficiarioHistorico();
@@ -110,11 +115,6 @@ switch ($_REQUEST['req']) {
         include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
         die;
 }
-
-$perfis = pegaPerfilGeral();
-$podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
-//$podeEditar = TRUE;
-$configPodeEditar = array('pode-editar' => $podeEditar? 'S': 'N');
 
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
 $convenio = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'",  "capdsc = 'Convênio'", "capano = '{$_SESSION['exercicio']}'"]);
@@ -319,7 +319,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <div id="div_listagem_historico">
                                         <?php
                                         # Busca perfis do usuário logado
-                                        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid);
+                                        $cBeneficiario->montarListagemHistorico($mBeneficiario->benid, $podeEditar);
                                          ?>
                                     </div>
                                 </div>

@@ -3,9 +3,7 @@
         <table class="table table-striped table-bordered table-hover" >
             <thead>
             <tr class="text-center">
-              <?php if ($_SESSION['usucpf'] == $_SESSION['origemcpf']) {?>
                 <th width="10%">Ações</th>
-              <?php }?>
                 <th>Descrição</th>
                 <th>Data</th>
             </tr>
@@ -13,12 +11,12 @@
             <tbody>
             <?php foreach($aBeneficiarioHistorico as $dados){?>
                 <tr>
-                    <?php if ($dados['usucpf'] === $_SESSION['usucpf']) { ?>
-                        <td class="text-center">
+                    <td class="text-center">
+                        <?php if($podeEditar || $dados['usucpf'] === $_SESSION['usucpf']) { ?>
                             <a title="Alterar" class="editar-historico" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-historico&behid=<?php echo $dados['behid']; ?>"><i class="fa fa-pencil"></i></a>
                             <a title="Excluir" class="excluir-historico" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-historico&behid=<?php echo $dados['behid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
-                        </td>
-                    <?php } ?>
+                        <?php } ?>
+                    </td>
                     <td><?php echo substr($dados['behdsc'], 0, 100); ?></td>
                     <td><?php echo formata_data($dados['behdata']); ?></td>
                 </tr>
