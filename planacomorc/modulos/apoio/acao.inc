@@ -46,7 +46,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['loccod']; ?></td>
                                     <td><?php echo $dados['acaobjetivocod']? $dados['acaobjetivocod']: '-'; ?></td>
                                     <td><?php echo $dados['unidade']; ?></td>
-                                    <td><?php echo $dados['acadsc']; ?></td>
+                                    <td><?php echo $dados['acatitulo']; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>

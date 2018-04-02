@@ -212,6 +212,7 @@ class Monitora_Model_Acao extends Modelo
         ";
         return $sql;
     }
+    
     public function recuperarDados(){
         $sql = "
             SELECT DISTINCT
@@ -223,7 +224,7 @@ class Monitora_Model_Acao extends Modelo
                 acaobjetivocod,
                 acacod,
                 acaid,
-                acadsc,
+                acatitulo,
                 acao.unicod || '-' || uni.unidsc AS unidade
             FROM monitora.acao acao
                 JOIN public.unidade uni ON uni.unicod = acao.unicod

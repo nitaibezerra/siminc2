@@ -36,8 +36,6 @@
                                     <th>Cod. PO</th>
                                     <th>PO</th>
                                     <th>RP</th>
-                                    <th>Custeio</th>
-                                    <th>Capital</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,8 +52,6 @@
                                     <td><?php echo $dados['plocod']; ?></td>
                                     <td><?php echo $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['irpcod']; ?></td>
-                                    <td><?php echo number_format($dados['ptrdotacaocusteio'], 0, ',', '.');; ?></td>
-                                    <td><?php echo number_format($dados['ptrdotacaocapital'], 0, ',', '.');; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>

@@ -238,7 +238,7 @@ class Monitora_Model_Ptres extends Modelo
                     ptr.unicod = suo.unocod
                     AND ptr.ptrano = suo.prsano
                     AND suo.suostatus = 'A'
-                ) -- SELECT * FROM public.vw_subunidadeorcamentaria 
+                )
                 JOIN monitora.vw_ptres vptr ON ptr.ptrid = vptr.ptrid-- SELECT * FROM monitora.vw_ptres 
             WHERE
                 ptr.ptrstatus = 'A'
