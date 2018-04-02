@@ -9,7 +9,7 @@
             $cPtres->excluir($_REQUEST['ptrid']);
             die;
         case 'carregarAcaoPorUo':
-            echo $simec->select('acaid, ', 'Ação', $mPtres->acaid, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'], ["unicod = '". $_REQUEST['unicod']. "'"]), ['required']);
+            echo $simec->select('acaid', 'Ação', $mPtres->acaid, (new Monitora_Model_Acao())->recuperarSqlCombo(['prgcod', 'acacod', 'acaobjetivocod', 'loccod', 'acatitulo'], ["unicod = '". $_REQUEST['unicod']. "'"]), ['required']);
             die;
     }
 
@@ -46,8 +46,8 @@
                             echo $simec->input('plocod', 'Código PO', $mPtres->plocod, ['maxlength' => 4]);
                             echo $simec->input('plodsc', 'Descrição PO', $mPtres->plodsc, ['maxlength' => 500]);
                             echo $simec->input('irpcod', 'RP', $mPtres->irpcod, ['required', 'maxlength' => 1]);
-                            echo $simec->valor('ptrdotacaocusteio', 'Custeio', $mPtres->ptrdotacaocusteio, ['required']);
-                            echo $simec->valor('ptrdotacaocapital', 'Capital', $mPtres->ptrdotacaocapital, ['required']);
+//                            echo $simec->valor('ptrdotacaocusteio', 'Custeio', $mPtres->ptrdotacaocusteio, ['required']);
+//                            echo $simec->valor('ptrdotacaocapital', 'Capital', $mPtres->ptrdotacaocapital, ['required']);
                         ?>
                         
                         <div class="form-group">
