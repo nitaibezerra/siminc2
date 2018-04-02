@@ -7,7 +7,11 @@ $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 //ver($listaSubUnidadeUsuario);
-
+switch ($_REQUEST['req']) {
+    case 'proposta_modal':
+        include 'proposta_modal.inc';
+    die;
+  }
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -75,11 +79,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td>
                                       <!-- se Situação SICONV for vazio, executa o if abaixo -->
                                     <?php if($dados['sitdsc'] == null){ ?>
-                                      <span class="editar_situacao fa fa-plus detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
                                       <?php echo "Proposta"; ?>
                                       </span>
                                     <?php } else{?>
-                                      <span class="editar_situacao fa fa-plus detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
                                     <?php echo $dados['sitdsc']; ?>
                                       </span>
                                     <?php  } ?>
@@ -100,9 +104,8 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <?php
-  bootstrapPopup("Proposta", 'modal-proposta-modal', '', array('fechar'), array('tamanho' => 'lg'));
+  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('fechar'), array('tamanho' => 'lg'));
 
-  bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
 ?>
 <script>
     $(document).ready(function(){
@@ -117,33 +120,8 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
 
         $('.editar_situacao').click(function(){
-            $('#proposta-modal .modal-body').load('emendas.php?modulo=principal/unidade/painel&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
-            $('#proposta-modal').modal();
-        });
-
-        $('.detalhar-linha').click(function(){
-
-            var benid = $(this).data('benid');
-
-            if($(this).hasClass('fa-minus')){
-                $(this).removeClass('fa-minus').addClass('fa-plus');
-                $('.tr_' + benid).hide();
-            } else {
-                $(this).removeClass('fa-plus').addClass('fa-minus');
-                $('.tr_' + benid).show('slow');
-            }
-        });
-        $('.detalhar-todos').click(function(){
-
-            if($(this).hasClass('fa-minus')){
-                $(this).removeClass('fa-minus').addClass('fa-plus');
-                $('.detalhar-linha').removeClass('fa-minus').addClass('fa-plus');
-                $('.tr_detalhe').hide();
-            } else {
-                $(this).removeClass('fa-plus').addClass('fa-minus');
-                $('.detalhar-linha').removeClass('fa-plus').addClass('fa-minus');
-                $('.tr_detalhe').show('slow');
-            }
+            $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
+            $('#proposta_modal').modal();
         });
     });
 </script>
