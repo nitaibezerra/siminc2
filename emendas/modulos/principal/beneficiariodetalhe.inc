@@ -15,8 +15,10 @@
             <?php foreach($aBeneficiarioDetalhe as $dados){ ?>
                 <tr>
                     <td class="text-center">
+                        <?php if(!PFL_SUBUNIDADE){ ?>
                         <a title="Alterar" class="editar-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&bedid=<?php echo $dados['bedid']; ?>"><i class="fa fa-pencil"></i></a>
                         <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-detalhe&bedid=<?php echo $dados['bedid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                       <?php } ?>
                     </td>
                     <td><?php echo $dados['gndcod']; ?></td>
                     <td class="text-right"><?php echo number_format($dados['emdvalor'], 2, ',', '.'); ?></td>

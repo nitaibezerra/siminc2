@@ -9,11 +9,13 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach($aBeneficiarioHistorico as $dados){ ?>
+            <?php foreach($aBeneficiarioHistorico as $dados){?>
                 <tr>
                     <td class="text-center">
-                        <a title="Alterar" class="editar-historico" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-historico&behid=<?php echo $dados['behid']; ?>"><i class="fa fa-pencil"></i></a>
-                        <a title="Excluir" class="excluir-historico" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-historico&behid=<?php echo $dados['behid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <?php if($podeEditar || $dados['usucpf'] === $_SESSION['usucpf']) { ?>
+                            <a title="Alterar" class="editar-historico" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-historico&behid=<?php echo $dados['behid']; ?>"><i class="fa fa-pencil"></i></a>
+                            <a title="Excluir" class="excluir-historico" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-historico&behid=<?php echo $dados['behid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <?php } ?>
                     </td>
                     <td><?php echo substr($dados['behdsc'], 0, 100); ?></td>
                     <td><?php echo formata_data($dados['behdata']); ?></td>

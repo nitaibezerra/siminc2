@@ -14,7 +14,9 @@
             <?php foreach($aEmendadetalhe as $dados){ ?>
                 <tr>
                     <td class="text-center">
+                       <?php if (!PFL_SUBUNIDADE){?>
                         <a title="Alterar" class="editar-detalhe" href="?modulo=principal/emenda_form&acao=A&req=formulario-detalhe&emdid=<?php echo $dados['emdid']; ?>"><i class="fa fa-pencil"></i></a>
+                        <?php }?>
                         <?php if($podeEditar): ?>
                             <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/emenda_form&acao=A&req=excluir-detalhe&emdid=<?php echo $dados['emdid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                         <?php endif; ?>
