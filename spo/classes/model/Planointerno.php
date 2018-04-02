@@ -108,9 +108,9 @@ class Spo_Model_Planointerno extends Modelo
         $where .= $filtros->esddsc? "\n AND ed.esddsc ILIKE('%". pg_escape_string($filtros->esddsc). "%') ": NULL;
         # Emenda.
         if ($filtros->pliemenda == 't') {
-            $where .= "\n AND coalesce(ben.pliid, 0) != 0 ";
+            $where .= "\n AND ben.pliid IS NOT NULL ";
         } elseif ($filtros->pliemenda == 'f') {
-            $where .= "\n AND coalesce(ben.pliid, 0) = 0 ";
+            $where .= "\n AND ben.pliid IS NULL ";
         }
         # FNC
         $where .= $filtros->unofundo? "\n AND suo.unofundo = ". $filtros->unofundo: NULL;
@@ -150,9 +150,9 @@ class Spo_Model_Planointerno extends Modelo
         $where = self::montarFiltro($filtros);
 //ver($where,d);
 
-        $left = '';
+        $leftEmendas = '';
         if ($filtros->pliemenda) {
-            $left = "LEFT JOIN emendas.beneficiario ben ON ben.pliid = pli.pliid";
+            $leftEmendas = "LEFT JOIN emendas.beneficiario ben ON(ben.pliid = pli.pliid AND ben.benstatus = 'A')";
         }
         $sql = "
             SELECT
@@ -192,7 +192,7 @@ class Spo_Model_Planointerno extends Modelo
 		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
 		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
 		LEFT JOIN public.vw_subunidadeorcamentaria pdsuo ON(pd.suoid = pdsuo.suoid)
-		$left
+		$leftEmendas
             WHERE
                 (pli.plistatus = 'A' OR (pli.plistatus = 'I' AND ed.esdid = ". (int)ESD_PI_CANCELADO. "))
                 AND pli.pliano = '". (int)$filtros->exercicio. "'
