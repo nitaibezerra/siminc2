@@ -261,6 +261,15 @@ foreach($dadosProvisionado as $dado){
 
 $sql = "
     SELECT
+	funcionais.ptrid,
+	funcionais.ptres,
+	funcionais.funcional,
+	funcionais.subunidade,
+	COALESCE(sec_geral.empenhado, 0.00) - COALESCE(funcionais.empenhado, 0.00) AS empenhado,
+	COALESCE(sec_geral.liquidado, 0.00) - COALESCE(funcionais.liquidado, 0.00) AS liquidado,
+	COALESCE(sec_geral.pago, 0.00) - COALESCE(funcionais.pago, 0.00) AS pago
+FROM(
+    SELECT
         agrupado.ptrid,
         agrupado.ptres,
         agrupado.funcional,
@@ -276,7 +285,7 @@ $sql = "
            (SELECT
                 suo.unosigla || ' - ' || suo.suosigla AS subunidade
             FROM spo.ptressubunidade
-                JOIN public.vw_subunidadeorcamentaria suo ON ptressubunidade.suoid = suo.suoid -- SELECT * FROM public.vw_subunidadeorcamentaria 
+                JOIN public.vw_subunidadeorcamentaria suo ON ptressubunidade.suoid = suo.suoid
             WHERE
                 ptressubunidade.ptrid = agrupado.ptrid
                 LIMIT 1
@@ -298,9 +307,9 @@ $sql = "
                 WHERE
                     ptressubunidade.ptrid = ptr.ptrid
             ) AS compartilhada,
-            COALESCE(sec_geral.empenhado, 0.00) - COALESCE(sec.empenhado, 0.00) AS empenhado,
-            COALESCE(sec_geral.liquidado, 0.00) - COALESCE(sec.liquidado, 0.00) AS liquidado,
-            COALESCE(sec_geral.pago, 0.00) - COALESCE(sec.pago, 0.00) as pago
+            COALESCE(sec.empenhado, 0.00) AS empenhado,
+            COALESCE(sec.liquidado, 0.00) AS liquidado,
+            COALESCE(sec.pago, 0.00) as pago
         FROM public.vw_subunidadeorcamentaria suo
             JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
             JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
@@ -318,28 +327,18 @@ $sql = "
                     SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
                     SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
                 FROM spo.siopexecucao
-                    LEFT JOIN monitora.pi_planointerno ON(siopexecucao.plicod = pi_planointerno.plicod AND siopexecucao.exercicio = pi_planointerno.pliano AND pi_planointerno.plistatus = 'A')
+                    LEFT JOIN monitora.pi_planointerno ON(
+                        siopexecucao.plicod = pi_planointerno.plicod
+                        AND siopexecucao.exercicio = pi_planointerno.pliano
+                        AND pi_planointerno.plistatus = 'A')
                 WHERE
                     pi_planointerno.ungcod IS NOT NULL
-                    AND siopexecucao.exercicio = '$exercicio' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
+                    AND siopexecucao.exercicio = '$exercicio'
                 GROUP BY
                     siopexecucao.ptres,
                     siopexecucao.unicod,
                     pi_planointerno.ungcod
             ) sec ON(ptr.ptres = sec.ptres AND suo.unocod = sec.unicod AND suo.suocod = sec.ungcod)
-            LEFT JOIN(
-                SELECT
-                    siopexecucao.ptres,
-                    SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
-                    SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
-                    SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
-                    SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
-                FROM spo.siopexecucao
-                WHERE
-                    siopexecucao.exercicio = '$exercicio' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
-                GROUP BY
-                    siopexecucao.ptres
-            ) sec_geral ON(ptr.ptres = sec_geral.ptres)
         WHERE
             suo.prsano = '$exercicio'
             AND suo.unofundo = FALSE
@@ -350,21 +349,32 @@ $sql = "
             ptr.funcional,
             sec.empenhado,
             sec.liquidado,
-            sec.pago,
-            sec_geral.empenhado,
-            sec_geral.liquidado,
-            sec_geral.pago
-        HAVING
-            COALESCE(sec_geral.empenhado, 0.00) - COALESCE(sec.empenhado, 0.00) > 0
-            OR COALESCE(sec_geral.liquidado, 0.00) - COALESCE(sec.liquidado, 0.00) > 0
-            OR COALESCE(sec_geral.pago, 0.00) - COALESCE(sec.pago, 0.00) > 0
+            sec.pago
     ) agrupado
     GROUP BY
         agrupado.ptrid,
         agrupado.ptres,
         agrupado.funcional
-    ORDER BY
-        agrupado.funcional
+) AS funcionais
+    LEFT JOIN(
+	SELECT
+	    siopexecucao.ptres,
+	    SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+	    SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+	    SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+	    SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+	FROM spo.siopexecucao
+	WHERE
+	    siopexecucao.exercicio = '$exercicio'
+	GROUP BY
+	    siopexecucao.ptres
+    ) sec_geral ON(funcionais.ptres = sec_geral.ptres)
+WHERE
+	sec_geral.empenhado - funcionais.empenhado > 0
+	OR sec_geral.liquidado - funcionais.liquidado > 0
+	OR sec_geral.pago - funcionais.pago > 0
+ORDER BY
+    funcionais.funcional
 ";
 //ver($sql, d);
 $listaResultado = $db->carregar($sql);
