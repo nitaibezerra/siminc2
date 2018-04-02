@@ -38,7 +38,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th width="5%">Ações</th>
                                 <th>Número</th>
                                 <th width="10%">Unidade</th>
-                                <th width="15%">Autor</th>
+                                <th width="10%">Autor</th>
                                 <th>UF</th>
                                 <th>Id Beneficiário</th>
                                 <th>Beneficiário</th>
@@ -53,7 +53,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aEmenda as $dados){ ?>
+                            <?php foreach($aEmenda as $dados){?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Emenda" href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $dados['emeid']; ?>"><i class="fa fa-file-o"></i></a>
@@ -72,13 +72,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['empedimento']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>
-                                    <td><?php echo $dados['sitdsc']; ?></td>
+                                    <td>
+                                      <!-- se Situação SICONV for vazio, executa o if abaixo -->
+                                    <?php if($dados['sitdsc'] == null){ ?>
+                                      <span class="editar_situacao fa fa-plus detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
+                                      <?php echo "Proposta"; ?>
+                                      </span>
+                                    <?php } else{?>
+                                      <span class="editar_situacao fa fa-plus detalhar-linha link" data-benid="<?php echo $dado['benid']; ?>" title="Adicionar Proposta">
+                                    <?php echo $dados['sitdsc']; ?>
+                                      </span>
+                                    <?php  } ?>
+                                    </td>
                                     <td><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                 </tr>
-                            <?php } ?>        
+                            <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -88,6 +99,11 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
 </div>
 
+<?php
+  bootstrapPopup("Proposta", 'modal-proposta-modal', '', array('fechar'), array('tamanho' => 'lg'));
+
+  bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
+?>
 <script>
     $(document).ready(function(){
 
@@ -99,6 +115,35 @@ include APPRAIZ . "includes/cabecalho.inc";
                 "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
             }
         });
-        
+
+        $('.editar_situacao').click(function(){
+            $('#proposta-modal .modal-body').load('emendas.php?modulo=principal/unidade/painel&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
+            $('#proposta-modal').modal();
+        });
+
+        $('.detalhar-linha').click(function(){
+
+            var benid = $(this).data('benid');
+
+            if($(this).hasClass('fa-minus')){
+                $(this).removeClass('fa-minus').addClass('fa-plus');
+                $('.tr_' + benid).hide();
+            } else {
+                $(this).removeClass('fa-plus').addClass('fa-minus');
+                $('.tr_' + benid).show('slow');
+            }
+        });
+        $('.detalhar-todos').click(function(){
+
+            if($(this).hasClass('fa-minus')){
+                $(this).removeClass('fa-minus').addClass('fa-plus');
+                $('.detalhar-linha').removeClass('fa-minus').addClass('fa-plus');
+                $('.tr_detalhe').hide();
+            } else {
+                $(this).removeClass('fa-plus').addClass('fa-minus');
+                $('.detalhar-linha').removeClass('fa-plus').addClass('fa-minus');
+                $('.tr_detalhe').show('slow');
+            }
+        });
     });
 </script>
