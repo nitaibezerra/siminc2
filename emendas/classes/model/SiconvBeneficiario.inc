@@ -60,18 +60,16 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
         'emenumero' => null,
         'benid' => null,
     );
-    public function recuperarListagem($descricao = null, $where = [], $order = '', $id= null)
+    public function recuperarListagem($emenumero = null)
     {
-        $where['exercicio'] = !empty($where['exercicio']) ? $where['exercicio'] : $_SESSION['exercicio'];
-
         $sql = "
             SELECT
                 sibid AS codigo,
                 procnpj || ' - ' || emenumero AS beneficiario, benid
             FROM emendas.siconvbeneficiario
-            where benid = "$id"
+            WHERE emenumero = '$emenumero'
             ORDER BY sibid";
-        return $sql;
+            return $sql;
       }
 }//end Class
 ?>
