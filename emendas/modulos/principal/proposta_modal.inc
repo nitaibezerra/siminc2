@@ -14,7 +14,7 @@ $aObjetivoppa = $db->carregar($aBeneficiario);
                       <thead>
                       <tr class="text-center">
                         <th>Opçoes</th>
-                        <th>Beneficiário</th>
+                        <th>CNPJ/NÚMERO</th>
                         <th>Id Beneficiário</th>
                       </tr>
                       </thead>
@@ -39,17 +39,3 @@ $aObjetivoppa = $db->carregar($aBeneficiario);
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function(){
-
-        // $('.dataTablesSP').DataTable({
-        //     bPaginate: false,
-        //     responsive: true,
-        //     dom: '<"html5buttons"B>lTfgitp',
-        //     "language": {
-        //         "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
-        //     }
-        // });
-    });
-</script>
