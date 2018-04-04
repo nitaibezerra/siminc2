@@ -251,13 +251,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
-                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
-                                            <div class="col-md-2 ">
-                                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
-                                            </div>
                                             <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
                                             <div class="col-md-1 ">
                                                 <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
+                                            </div>
+                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
+                                            <div class="col-md-2 ">
+                                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
                                             </div>
                                             <label for="benpago" class="col-sm-2 control-label">Pago: </label>
                                             <div class="col-md-1 ">
@@ -277,7 +277,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </div>
 
                                         <div class="div_motivo">
-                                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justivicativa', $mBeneficiario->benmotivoimpedimento); ?>
+                                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justificativa', $mBeneficiario->benmotivoimpedimento); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -308,7 +308,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-4">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>Histórico/Observações</h5>
+                                    <h5>Observações</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_historico">

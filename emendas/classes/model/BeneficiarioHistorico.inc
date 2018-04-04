@@ -71,7 +71,8 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
             LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
             WHERE
                 bh.behstatus = 'A'
-                AND bh.benid = " . (int)$benid
+                AND bh.benid = " . (int)$benid . " 
+            ORDER BY  behdata desc"
          ;
 
          if(count($listaUnidades)){
