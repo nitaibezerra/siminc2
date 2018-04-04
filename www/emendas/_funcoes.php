@@ -22,6 +22,7 @@ function condicaoGerarPi($benid){
             AND COALESCE(plidsc, NULL) IS NOT NULL
             AND e.unoid IS NOT NULL
             AND b.suoid IS NOT NULL
+            AND b.esfid IS NOT NULL
             AND e.ptrid IS NOT NULL
             AND b.pprid IS NOT NULL
             AND b.pumid IS NOT NULL
