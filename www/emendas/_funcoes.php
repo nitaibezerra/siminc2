@@ -165,7 +165,9 @@ function adaptarBeneficioPi(stdClass $beneficiario){
         $pi->lista_convenio = array(0 => $listaDadosSiconv[0]['numeroconvenio']);
     }
     $pi->lista_sniic = $listaSniic;
-    $pi->lista_sei = array(0 => $beneficiario->bennumeroprocesso);
+    if($beneficiario->bennumeroprocesso){
+        $pi->lista_sei = array(0 => $beneficiario->bennumeroprocesso);
+    }
     $pi->lista_pronac = $listaPronac;
     $pi->esfid = $beneficiario->esfid;
     
