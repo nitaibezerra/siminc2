@@ -71,9 +71,9 @@ function posAcaoGerarPi($benid){
         if($tipoFluxoFNC){
             # Gera número de documento pra workflow
             $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI_FNC);
-            # Altera a situação do PI pra Aguardando Aprovação
-            $resultado = wf_alterarEstado($docid, AED_APRESENTAR_PROJETO_FNC, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
-//ver(WF_TPDID_PLANEJAMENTO_PI_FNC, AED_APRESENTAR_PROJETO_FNC, $pliid, $resultado, d);
+            # Altera a situação do PI pra Em Análise
+            $resultado = wf_alterarEstado($docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
+//ver($pliid, $docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, $resultado, d);
         } else {
             # Gera número de documento pra workflow
             $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI);
@@ -84,33 +84,6 @@ function posAcaoGerarPi($benid){
     }
 //ver($resultado, $pliid, d);
     return $resultado;
-}
-
-/**
- * Verifica se o PI é do tipo FNC ou não.
- * 
- * @global cls_banco $db
- * @param integer $pliid
- * @return boolean Retorna TRUE caso o PI seja do tipo FNC
- */
-function verificarPiFnc($pliid){
-    global $db;
-    $sql = "
-        SELECT
-            suo.unofundo
-        FROM monitora.pi_planointerno pli
-            JOIN public.vw_subunidadeorcamentaria suo ON(
-                suo.suostatus = 'A'
-                AND pli.unicod = suo.unocod
-                AND pli.ungcod = suo.suocod
-                AND suo.prsano = pli.pliano
-            )
-        WHERE
-            pli.pliano = '". (int)$_SESSION['exercicio']. "'
-            AND pli.pliid = ". (int)$pliid;
-    $unofundo = $db->pegaUm($sql);
-//ver($unofundo, d);
-    return $unofundo == 't'? TRUE: FALSE;
 }
 
 /**
