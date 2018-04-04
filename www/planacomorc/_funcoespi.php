@@ -2744,9 +2744,32 @@ function posAcaoAprovarPi($pliid)
         $db->commit();
     }
 
+    # Busca docid do Beneficiario caso seja PI originado de beneficiario de Emenda
+    $beneficiario = buscarBeneficiarioPi($pliid);
+    if($beneficiario){
+        # Altera a situação do beneficiario pra PI Aprovado.
+        wf_alterarEstado($beneficiario['docid'], AED_EMENDAS_APROVAR_PI, 'PI Aprovado no Planejamento', array('benid' => $beneficiario['benid']));
+    }
+    
     enviarEmailAprovado($pliid);
 
     return true;
+}
+
+/**
+ * Busca beneficiario que gerou o Plano Interno(PI)
+ * 
+ * @global cls_banco $db
+ * @param integer $pliid
+ * @return array/boolean
+ */
+function buscarBeneficiarioPi($pliid) {
+    global $db;
+    
+    $sql = "SELECT benid, docid FROM emendas.beneficiario WHERE pliid = ". (int)$pliid;
+    $beneficiario = $db->pegaLinha($sql);
+    
+    return $beneficiario;
 }
 
 function posAcaoCancelarPi($pliid){
@@ -2835,4 +2858,31 @@ function verificarPactuacaoConvenio($capid)
     return $db->pegaUm($sql);
 
 
+}
+
+/**
+ * Verifica se o PI é do tipo FNC ou não.
+ * 
+ * @global cls_banco $db
+ * @param integer $pliid
+ * @return boolean Retorna TRUE caso o PI seja do tipo FNC
+ */
+function verificarPiFnc($pliid){
+    global $db;
+    $sql = "
+        SELECT
+            suo.unofundo
+        FROM monitora.pi_planointerno pli
+            JOIN public.vw_subunidadeorcamentaria suo ON(
+                suo.suostatus = 'A'
+                AND pli.unicod = suo.unocod
+                AND pli.ungcod = suo.suocod
+                AND suo.prsano = pli.pliano
+            )
+        WHERE
+            pli.pliano = '". (int)$_SESSION['exercicio']. "'
+            AND pli.pliid = ". (int)$pliid;
+    $unofundo = $db->pegaUm($sql);
+//ver($unofundo, d);
+    return $unofundo == 't'? TRUE: FALSE;
 }
