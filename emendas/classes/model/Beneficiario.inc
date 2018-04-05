@@ -106,16 +106,16 @@ class Emendas_Model_Beneficiario extends Modelo
         'pumid' => null,
         'pprid' => null,
         'picquantidade' => null,
-        'pliid' => null,
-        'ptres' => null,
-        'funcional' => null,
-        'pago' => null,
-        'empenhado' => null
-
+        'pliid' => null
     );
 
-    public function carregarPorId($id) {
-        $id = trim(str_replace("'", "", (string) $id));
+    /**
+     * Busca dados de beneficiario.
+     * 
+     * @param integer $benid
+     * @return array
+     */
+    public function buscarBeneficiario($benid){
         $sql = "
             SELECT DISTINCT
                 ben.*,
@@ -132,10 +132,14 @@ class Emendas_Model_Beneficiario extends Modelo
                     AND pi_planointerno.plistatus = 'A')
                 LEFT JOIN monitora.vw_planointerno vpi ON(ben.pliid = vpi.pliid)
             WHERE
-                {$this->arChavePrimaria[0]} = '$id'
-        ";
-
-        $arResultado = $this->pegaLinha($sql);
+                {$this->arChavePrimaria[0]} = ". (int)$benid;
+        
+        $beneficiario = $this->pegaLinha($sql);
+        return $beneficiario;
+    }
+    
+    public function carregarPorId($id) {
+        $arResultado = $this->buscarBeneficiario($id);
         $this->popularObjeto(array_keys($this->arAtributos), $arResultado);
     }
     

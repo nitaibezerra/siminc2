@@ -115,8 +115,9 @@ switch ($_REQUEST['req']) {
         include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
         die;
 }
-
+//ver('ok', d);
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
+$beneficiario = (object)$mBeneficiario->buscarBeneficiario($mBeneficiario->benid);
 $convenio = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'",  "capdsc = 'Convênio'", "capano = '{$_SESSION['exercicio']}'"]);
 $listaSniic = (new Emendas_Model_Sniic())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
 $listaPronac = (new Emendas_Model_Pronac())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
@@ -261,9 +262,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </div>
                                         <div class="form-group ">
                                             <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
-                                            <label class="col-md-3 control-label">R$ <?php echo number_format($mBeneficiario->empenhado, 2, ',', '.'); ?></label>
+                                            <label class="col-md-3 control-label">R$ <?php echo number_format($beneficiario->empenhado, 2, ',', '.'); ?></label>
                                             <label for="benpago" class="col-sm-2 control-label">Pago: </label>
-                                            <label class="col-md-3 control-label">R$ <?php echo number_format($mBeneficiario->pago, 2, ',', '.'); ?></label>
+                                            <label class="col-md-3 control-label">R$ <?php echo number_format($beneficiario->pago, 2, ',', '.'); ?></label>
                                         </div>
                                         <div class="form-group ">
                                             <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
@@ -331,8 +332,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <div class="ibox-title">
                                         <h5>Dados Financeiros -
                                             <?php
-                                                if($mBeneficiario->funcional){
-                                                    echo "<b>PTRES</b>: " .$mBeneficiario->ptres . "&nbsp; <b>Funcional</b>: " . $mBeneficiario->funcional ;
+                                                if($beneficiario->funcional){
+                                                    echo "<b>PTRES</b>: " .$beneficiario->ptres . "&nbsp; <b>Funcional</b>: " . $beneficiario->funcional ;
                                                 }
                                             ?>
                                         </h5>
