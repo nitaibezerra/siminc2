@@ -247,27 +247,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                                             echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
                                             echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                            // setar os campos para "não" por padrão.
+                                            # setar os campos para "não" por padrão.
                                             $benparecertecnico = $mBeneficiario->benparecertecnico ? $mBeneficiario->benparecertecnico : 0;
                                             $benparecerjuridico = $mBeneficiario->benparecerjuridico ? $mBeneficiario->benparecerjuridico : 0;
-                                                echo $simec->radio('benparecertecnico', 'Parecer Técnico', $benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $benparecertecnico, $mBeneficiario->recuperarTiposParecer());
                                             echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
-                                            <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
-                                            <div class="col-md-1 ">
+                                            <label for="benconveniado" class="col-sm-3 control-label">Conveniado: </label>
+                                            <div class="col-md-2 ">
                                                 <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
                                             </div>
-                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
-                                            <div class="col-md-2 ">
-                                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
-                                            </div>
-                                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
-                                            <div class="col-md-1 ">
-                                                <input type="checkbox" name="benpago" id="benpago" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benpago ? 'checked="checked"' : ''; ?> />
-                                            </div>
                                         </div>
-
+                                        <div class="form-group ">
+                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
+                                            <label class="col-md-3 control-label">R$ <?php echo number_format($mBeneficiario->empenhado, 2, ',', '.'); ?></label>
+                                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
+                                            <label class="col-md-3 control-label">R$ <?php echo number_format($mBeneficiario->pago, 2, ',', '.'); ?></label>
+                                        </div>
                                         <div class="form-group ">
                                             <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
                                             <div class="col-md-1 ">

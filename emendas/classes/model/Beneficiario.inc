@@ -106,7 +106,10 @@ class Emendas_Model_Beneficiario extends Modelo
         'pumid' => null,
         'pprid' => null,
         'picquantidade' => null,
-        'pliid' => null
+        'pliid' => null,
+        'pago' => null,
+        'empenhado' => null
+
     );
 
     public function carregarPorId($id) {
@@ -114,11 +117,14 @@ class Emendas_Model_Beneficiario extends Modelo
         $sql = "
             SELECT
                 ben.*,
-                pi_planointerno.pliid AS pliid
+                pi_planointerno.pliid AS pliid,
+                vpi.empenhado,
+                vpi.pago
             FROM $this->stNomeTabela ben
                 LEFT JOIN monitora.pi_planointerno ON(
                     ben.pliid = pi_planointerno.pliid
                     AND pi_planointerno.plistatus = 'A')
+                    left join monitora.vw_planointerno vpi on ( ben.pliid = vpi.pliid )
             WHERE
                 {$this->arChavePrimaria[0]} = '$id'
         ";
