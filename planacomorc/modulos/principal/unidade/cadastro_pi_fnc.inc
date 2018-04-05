@@ -243,7 +243,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                 echo '<input type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
             } ?>
         </h2>
-        &nbsp; <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+        <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+        <?php echo $dadosPI['emenumero'] ? "<br /><span>Emenda: {$dadosPI['emenumero']}</span>": ''; ?>
+        <?php echo $dadosPI['benid'] ? "<br /><span>Beneficiário: {$dadosPI['benid']}</span>": ''; ?>
         <?php if(!$mPiPlanoInterno->verificarPermissaoEditarUnidade($perfis, $listaJanelasDeAlteracao)): ?>
             <h3>
                 <span style="color: red; padding: 5px;">
