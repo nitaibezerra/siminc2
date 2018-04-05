@@ -172,17 +172,20 @@
                     <?php
                     $total['custeio'] = $total['capital'] = $total['empenhado'] = $total['pago'] = $total['liquidado'] = 0;
                     foreach($aDados as $dados){
-                        $total['custeio'] += $dados['custeio'];
-                        $total['capital'] += $dados['capital'];
-                        $total['autorizado'] += $dados['autorizado'];
-                        $total['empenhado'] += $dados['empenhado'];
-                        $total['pago'] += $dados['pago'];
-                        $total['liquidado'] += $dados['liquidado'];
+                        if($dados['plistatus'] == 'A'){
+                            $total['custeio'] += $dados['custeio'];
+                            $total['capital'] += $dados['capital'];
+                            $total['autorizado'] += $dados['autorizado'];
+                            $total['empenhado'] += $dados['empenhado'];
+                            $total['pago'] += $dados['pago'];
+                            $total['liquidado'] += $dados['liquidado'];
+                        }
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">
                               <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
                                 <a href="javascript:alterarPi(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
+                              <?php } if (!array_intersect($perfis,[PFL_SUBUNIDADE])) {?>
                                 <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
                              <?php } ?>
                             </td>
