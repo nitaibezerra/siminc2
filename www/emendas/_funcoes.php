@@ -118,6 +118,8 @@ function associarFuncionalSubunidade(stdClass $beneficiario){
 function adaptarBeneficioPi(stdClass $beneficiario){
     require_once APPRAIZ .'emendas/classes/model/Siconv.inc';
 
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    
 //ver($beneficiario);
     # Buscando enquadramento 2018 do tipo emenda.
     $eqdid = buscarEnquadramentoEmenda($beneficiario->prsano);
@@ -139,7 +141,7 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $pi->eqdid = $eqdid;
     $pi->neeid = $beneficiario->neeid;
     $pi->capid = $beneficiario->capid;
-    $pi->plititulo = $beneficiario->plititulo;
+    $pi->plititulo = $beneficiario->plititulo. ($emenda->emenumero? ' - '. $emenda->emenumero: NULL);
     $pi->plidsc = $beneficiario->plidsc;
     # Ptres
     $pi->ptrid = $beneficiario->ptrid;
