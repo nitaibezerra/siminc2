@@ -150,13 +150,10 @@ class Spo_Model_Planointerno extends Modelo
         $where = self::montarFiltro($filtros);
 //ver($where,d);
 
-        $leftEmendas = '';
-        if ($filtros->pliemenda) {
-            $leftEmendas = "LEFT JOIN emendas.beneficiario ben ON(ben.pliid = pli.pliid AND ben.benstatus = 'A')";
-        }
         $sql = "
             SELECT
                 pli.pliid::VARCHAR AS pliid,
+                ben.benid::VARCHAR AS benid,
                 pli.pliid::VARCHAR AS id,
                 '<a href=\"#\" title=\"Exibir detalhes do Plano Interno(Espelho)\" class=\"a_espelho\" data-pi=\"' || pli.pliid || '\">' || pli.plicod || '</a>' AS codigo_pi,
                 pli.ungcod || '-' || suo.suonome AS sub_unidade,
@@ -192,13 +189,14 @@ class Spo_Model_Planointerno extends Modelo
 		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
 		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
 		LEFT JOIN public.vw_subunidadeorcamentaria pdsuo ON(pd.suoid = pdsuo.suoid)
-		$leftEmendas
+		LEFT JOIN emendas.beneficiario ben ON(ben.pliid = pli.pliid)
             WHERE
                 (pli.plistatus = 'A' OR (pli.plistatus = 'I' AND ed.esdid = ". (int)ESD_PI_CANCELADO. "))
                 AND pli.pliano = '". (int)$filtros->exercicio. "'
                 $where
             GROUP BY
                 pli.pliid,
+                ben.benid,
                 pli.plicod,
                 sub_unidade,
                 pli.plititulo,

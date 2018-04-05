@@ -190,6 +190,7 @@ class Pi_PlanoInterno extends Modelo
 
     public function montarSqlExecucaoOrcamentaria($filtro = []){
         $filtro[] = "suo.suostatus = 'A'";
+        $filtro[] = "ben.benid IS NULL";
         $where = $this->montarFiltros($filtro);
 
         $sql = "
@@ -226,7 +227,12 @@ class Pi_PlanoInterno extends Modelo
                 JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
                 JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
                 LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.pliid = ppt.pliid
+                    AND pli.ungcod = suo.suocod
+                    AND pli.unicod = suo.unocod
+                    AND plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
@@ -428,8 +434,10 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarValoresPorEstado($exercicio)
     {
 
-        $sql = "select pli.pliid, pip.ptrid, pic.picvalorcapital, pic.picvalorcusteio, doc.esdid
+        $sql = "select DISTINCT
+            pli.pliid, pip.ptrid, pic.picvalorcapital, pic.picvalorcusteio, doc.esdid
                 from monitora.pi_planointerno pli
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                         inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                         inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
                         inner join workflow.documento doc on doc.docid = pli.docid
@@ -439,6 +447,7 @@ class Pi_PlanoInterno extends Modelo
                     and pli.pliano = '$exercicio'
                     and suo.suocod not in ('203003', '420017')
                     and suo.unofundo = 't'
+                    AND ben.benid IS NULL
                 ";
 
         $dados = $this->carregar($sql);
@@ -455,29 +464,35 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarValoresPorExecucao($exercicio)
     {
 
-        $sql = "select  ptr.ptrid,
-                        case
-                                when substring(sec.natcod, 1, 1) = '3' then 'CUSTEIO'
-                                when substring(sec.natcod, 1, 1) = '4' then 'CAPITAL'
-                                else substring(sec.natcod, 1, 1)
-                        end nat,
-                        sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS vlrempenhado,
-                        sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS vlrpago,
-                        sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
-                from spo.siopexecucao sec
-                        inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
-                        inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
-                        inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
-                        inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
-                where
-                    suo.prsano = '$exercicio'
-                    AND suo.suocod not in ('203003', '420017')
-                    AND suo.unofundo = 't'
-                    AND pli.plistatus = 'A'
-                group by
-                    ptr.ptrid,
-                    nat
-                ";
+        $sql = "
+            select DISTINCT
+                ptr.ptrid,
+                case when substring(sec.natcod, 1, 1) = '3' then
+                    'CUSTEIO'
+                when substring(sec.natcod, 1, 1) = '4' then
+                    'CAPITAL'
+                else
+                    substring(sec.natcod, 1, 1)
+                end nat,
+                sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS vlrempenhado,
+                sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS vlrpago,
+                sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS vlrliquidado
+            from spo.siopexecucao sec
+                inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
+                inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
+                inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
+                inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
+            where
+                suo.prsano = '$exercicio'
+                AND suo.suocod not in ('203003', '420017')
+                AND suo.unofundo = 't'
+                AND pli.plistatus = 'A'
+                AND ben.benid IS NULL
+            group by
+                ptr.ptrid,
+                nat
+        ";
 
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
@@ -653,13 +668,19 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (pic.picvalorcapital, 0) + COALESCE (pic.picvalorcusteio, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.unicod = suo.unocod
+                    AND pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
                 AND suo.suostatus = 'A'
                 AND pli.plistatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -672,7 +693,12 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrautorizado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.unicod = suo.unocod
+                    AND pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -680,7 +706,8 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
-                and suo.suostatus = 'A'
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -693,7 +720,12 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.unicod = suo.unocod
+                    AND pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -701,7 +733,8 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
-                and suo.suostatus = 'A'
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -715,6 +748,7 @@ class Pi_PlanoInterno extends Modelo
             FROM
                 public.vw_subunidadeorcamentaria suo
                 LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -722,7 +756,8 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
-                and suo.suostatus = 'A'
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -735,7 +770,12 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.unicod = suo.unocod
+                    AND pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -743,7 +783,8 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
-                and suo.suostatus = 'A'
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -814,13 +855,18 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (pic.picvalorcapital, 0) + COALESCE (pic.picvalorcusteio, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
                 AND {$filtro->unidades}
                 AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -833,7 +879,11 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrautorizado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -841,8 +891,9 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
-                and {$filtro->unidades}
-                and suo.suostatus = 'A'
+                AND {$filtro->unidades}
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -855,7 +906,11 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrempenhado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -863,8 +918,9 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
-                and {$filtro->unidades}
-                and suo.suostatus = 'A'
+                AND {$filtro->unidades}
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -877,7 +933,11 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrpago, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -885,8 +945,9 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
-                and {$filtro->unidades}
-                and suo.suostatus = 'A'
+                AND {$filtro->unidades}
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,
@@ -899,7 +960,11 @@ class Pi_PlanoInterno extends Modelo
                 sum(COALESCE (sec.vlrliquidado, 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN monitora.pi_planointerno pli ON(pli.ungcod = suo.suocod AND pli.pliano = suo.prsano AND pli.plistatus = 'A')
+                LEFT JOIN monitora.pi_planointerno pli ON(
+                    pli.ungcod = suo.suocod
+                    AND pli.pliano = suo.prsano
+                    AND pli.plistatus = 'A')
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN monitora.pi_planointernoptres ppt ON ppt.pliid = pli.pliid
                 LEFT JOIN monitora.ptres ptr ON ptr.ptrid = ppt.ptrid
                 LEFT JOIN spo.siopexecucao sec ON sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano and sec.plicod = pli.plicod
@@ -907,8 +972,9 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
-                and {$filtro->unidades}
-                and suo.suostatus = 'A'
+                AND {$filtro->unidades}
+                AND suo.suostatus = 'A'
+                AND ben.benid IS NULL
             GROUP BY
                 ordem,
                 descricao,

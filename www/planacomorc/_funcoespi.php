@@ -2047,7 +2047,7 @@ function carregarPI($pliid) {
     global $db;
 
     $sql = <<<DML
-        SELECT
+        SELECT DISTINCT
             pli.pliid,
             pli.mdeid,
             mde.mdecod,
@@ -2082,8 +2082,12 @@ function carregarPI($pliid) {
             END AS plisituacao,
             sba.sbaid,
             sba.sbasigla || ' - ' AS sbasigla,
-            sba.sbacod
+            sba.sbacod,
+            ben.benid,
+            em.emenumero
         FROM monitora.pi_planointerno pli
+            LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
+            LEFT JOIN emendas.emenda em ON(ben.emeid = em.emeid)
             LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
             LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
             LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)

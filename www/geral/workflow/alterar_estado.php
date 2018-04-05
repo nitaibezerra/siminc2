@@ -43,6 +43,7 @@ switch ( $_SESSION['sisdiretorio'] ){
         include_once APPRAIZ. 'planacomorc/classes/model/PiDelegacao.inc';
         include_once APPRAIZ. 'spo/classes/model/PtresSubunidade.inc';
         include_once APPRAIZ. 'emendas/classes/model/Beneficiario.inc';
+        include_once APPRAIZ. 'emendas/classes/model/Emenda.inc';
         include_once APPRAIZ. 'monitora/classes/Pi_PlanoInterno.class.inc';
     break;
     case 'proporc':
