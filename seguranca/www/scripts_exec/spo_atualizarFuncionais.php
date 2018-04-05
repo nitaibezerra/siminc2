@@ -45,6 +45,9 @@ require_once APPRAIZ . "includes/classes_simec.inc";
  */
 require_once APPRAIZ . "includes/funcoes.inc";
 
+# Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
+controlarExecucaoScript();
+
 require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 require_once(APPRAIZ . 'wssof/classes/Importador.inc');
 require_once(APPRAIZ . 'monitora/classes/model/Ptres.inc');

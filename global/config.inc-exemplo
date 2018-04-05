@@ -1,9 +1,10 @@
 <?php
 
-    define('SIGLA_SISTEMA', 'SIMINC2');
-    define('DESCRICAO_SISTEMA', 'Sistema Integrado do Ministério da Cultura');
+    define('SIGLA_SISTEMA', 'PREENCHER');
+    define('DESCRICAO_SISTEMA', 'PREENCHER');
     define('NOME_SISTEMA', SIGLA_SISTEMA. ' - '. DESCRICAO_SISTEMA);
-    define('URL_SISTEMA', 'http://siminc2.cultura.gov.br/');
+    define('URL_SISTEMA', 'http://PREENCHER.cultura.gov.br/');
+    define('IP_CLI_AUTORIZADO', 'PREENCHER');
 
     global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd, $servidor_bd_siafi, $porta_bd_siafi, $nome_bd_siafi, $usuario_db_siafi, $senha_bd_siafi;
 

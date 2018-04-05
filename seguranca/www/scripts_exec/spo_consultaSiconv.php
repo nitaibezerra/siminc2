@@ -46,6 +46,9 @@ require_once APPRAIZ . "includes/classes_simec.inc";
  */
 require_once APPRAIZ . "includes/funcoes.inc";
 
+# Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
+controlarExecucaoScript();
+
 /**
  * Classe de conexão com o SIOP, serviço WSQuantitativo.
  * @see Spo_Ws_Sof_Quantitativo

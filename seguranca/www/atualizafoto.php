@@ -4,6 +4,11 @@ require_once APPRAIZ . "includes/classes_simec.inc";
 require_once APPRAIZ . "includes/funcoes.inc";
 require_once APPRAIZ . "www/includes/fotosEntidades/ClassImage.php";
 
+if($_SESSION['usucpf']){
+    print simec_json_encode(array('status' => 'error', 'message' => 'Usuário não autenticado no sistema.'));
+    die;
+}
+
 $upload = new ClassImage();
 
 $storage = DIRFILES . "seguranca/usuario/";
