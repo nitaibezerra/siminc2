@@ -110,7 +110,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <?php
-  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('salvar','fechar'), array('tamanho' => 'lg'));
+  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('fechar'), array('tamanho' => 'lg'));
 
 ?>
 <script>
