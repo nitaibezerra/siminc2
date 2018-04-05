@@ -329,7 +329,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-8">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                        <h5>Dados Financeiros</h5>
+                                        <h5>Dados Financeiros -
+                                            <?php
+                                                if($mBeneficiario->funcional){
+                                                    echo "<b>PTRES</b>: " .$mBeneficiario->ptres . "&nbsp; <b>Funcional</b>: " . $mBeneficiario->funcional ;
+                                                }
+                                            ?>
+                                        </h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_detalhe">

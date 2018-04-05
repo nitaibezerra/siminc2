@@ -107,6 +107,8 @@ class Emendas_Model_Beneficiario extends Modelo
         'pprid' => null,
         'picquantidade' => null,
         'pliid' => null,
+        'ptres' => null,
+        'funcional' => null,
         'pago' => null,
         'empenhado' => null
 
@@ -115,16 +117,20 @@ class Emendas_Model_Beneficiario extends Modelo
     public function carregarPorId($id) {
         $id = trim(str_replace("'", "", (string) $id));
         $sql = "
-            SELECT
+            SELECT DISTINCT
                 ben.*,
                 pi_planointerno.pliid AS pliid,
+                vptres.ptres,
+                vptres.funcional,                
                 vpi.empenhado,
                 vpi.pago
             FROM $this->stNomeTabela ben
+            	JOIN emendas.emenda em ON(ben.emeid = em.emeid)
+                LEFT JOIN monitora.vw_ptres vptres ON(em.ptrid = vptres.ptrid)
                 LEFT JOIN monitora.pi_planointerno ON(
                     ben.pliid = pi_planointerno.pliid
                     AND pi_planointerno.plistatus = 'A')
-                    left join monitora.vw_planointerno vpi on ( ben.pliid = vpi.pliid )
+                LEFT JOIN monitora.vw_planointerno vpi ON(ben.pliid = vpi.pliid)
             WHERE
                 {$this->arChavePrimaria[0]} = '$id'
         ";
