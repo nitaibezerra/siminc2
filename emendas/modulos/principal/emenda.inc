@@ -9,8 +9,14 @@ $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_S
 //ver($listaSubUnidadeUsuario);
 switch ($_REQUEST['req']) {
     case 'proposta_modal':
-          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['emenumero']);
+          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST);
         include 'proposta_modal.inc';
+    die;
+    case 'salvar-proposta':
+    $cProposta = new Emendas_Controller_SiconvBeneficiario();
+    ver($_REQUEST,d);
+    $cProposta->salvar($_REQUEST);
+    include 'proposta_modal.inc';
     die;
   }
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
@@ -80,11 +86,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td>
                                       <!-- se Situação SICONV for vazio, executa o if abaixo -->
                                     <?php if($dados['sitdsc'] == null){ ?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-emenumero="<?php echo $dados['emenumero']; ?>" title="Adicionar Proposta">
-                                      <?php echo "Proposta"; ?>
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Adicionar Proposta">
                                       </span>
                                     <?php } else{?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-emenumero="<?php echo $dados['emenumero']; ?>" title="Adicionar Proposta">
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid']; ?>" title="Adicionar Proposta">
                                     <?php echo $dados['sitdsc']; ?>
                                       </span>
                                     <?php  } ?>
@@ -105,7 +110,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <?php
-  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('fechar'), array('tamanho' => 'lg'));
+  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('salvar','fechar'), array('tamanho' => 'lg'));
 
 ?>
 <script>
@@ -121,7 +126,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
 
         $('.editar_situacao').click(function(){
-            $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&emenumero='+ $(this).data('emenumero'));
+            $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
             $('#proposta_modal').modal();
         });
     });

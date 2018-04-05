@@ -22,7 +22,7 @@ include_once APPRAIZ . "emenda/classes/WSIntegracaoSiconv.class.inc";
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Emendas_Model_Emenda extends Modelo
@@ -74,14 +74,14 @@ class Emendas_Model_Emenda extends Modelo
     public function recuperarListagem($exercicio, $listaSubUnidadeUsuario = array())
     {
         $where = NULL;
-        
+
         if($listaSubUnidadeUsuario){
             # Expressão para verificar se o estado é após enviado para preenchimento da unidade.
             $where .= "\n AND doce.esdid IN(". ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE. ','. ESD_BENEFICIARIO_CORRECAO. ','. ESD_BENEFICIARIO_PI_GERADO. ")";
             # Expressão pra verificar se o beneficiario é da mesa unidade do Usuário Logado com perfil de Unidade.
             $where .= "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ";
         }
-        
+
         $sql = "
             SELECT DISTINCT
                 eme.emeid,
@@ -98,7 +98,7 @@ class Emendas_Model_Emenda extends Modelo
                 (
 		    SELECT
                         sit.sitdsc
-                    FROM emendas.siconvbeneficiario sbe                                                
+                    FROM emendas.siconvbeneficiario sbe
                         JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
                         JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
                     WHERE
@@ -161,21 +161,21 @@ class Emendas_Model_Emenda extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
-    
-   
+
+
     /**
      * Monta consulta pra buscar dados do relat?rio geral
-     * 
+     *
      * @param integer $exercicio
      * @param array $listaSubUnidadeUsuario
      * @return string
      */
     public function montarSqlRelatorioGeral($exercicio, $listaSubUnidadeUsuario = array()){
         $where = '';
-        
+
         # Sub-Unidade Orçamentária ou Sub-Unidade Orçamentária delegada.
         $where .= $listaSubUnidadeUsuario? "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ": NULL;
-        
+
         $sql = "
            SELECT DISTINCT
 		-- DADOS DA EMENDA
@@ -212,7 +212,7 @@ class Emendas_Model_Emenda extends Modelo
 			SELECT DISTINCT
 				p.paidescricao
 			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
-				JOIN territorios.pais p ON bl.paiid = p.paiid-- SELECT * FROM territorios.pais 
+				JOIN territorios.pais p ON bl.paiid = p.paiid-- SELECT * FROM territorios.pais
 			WHERE
 				p.paidescricao IS NOT NULL
 				AND bl.benid = ben.benid
@@ -229,7 +229,7 @@ class Emendas_Model_Emenda extends Modelo
 			SELECT DISTINCT
 				m.mundescricao || '-' || m.estuf
 			FROM emendas.beneficiariolocalizacao bl -- SELECT * FROM emendas.beneficiariolocalizacao
-				JOIN territorios.municipio m ON bl.muncod = m.muncod-- SELECT * FROM territorios.municipio  
+				JOIN territorios.municipio m ON bl.muncod = m.muncod-- SELECT * FROM territorios.municipio
 			WHERE
 				m.mundescricao IS NOT NULL
 				AND bl.benid = ben.benid
@@ -340,7 +340,7 @@ class Emendas_Model_Emenda extends Modelo
 //                    $line = array_map('utf8_decode', $line);
 
                 if(!$count++){ continue; }
-                
+
                 $emenumero = trim($line[2]);
                 if(!$emenumero) { continue; }
 
@@ -467,7 +467,7 @@ class Emendas_Model_Emenda extends Modelo
         }
 
         $proid = $this->pegaUm($sql);
-        
+
         if(!$proid){
             $mProponente = new Emendas_Model_Proponente();
             $mProponente->procnpj = $procnpj;
@@ -509,7 +509,7 @@ class Emendas_Model_Emenda extends Modelo
 
     public function gerarGraficoUf($exercicio)
     {
-        $sql = "select  case when coalesce(aut.estuf, '') = '' then 'A Identificar' else  aut.estuf end categoria, 
+        $sql = "select  case when coalesce(aut.estuf, '') = '' then 'A Identificar' else  aut.estuf end categoria,
                         'Valor LOA' descricao, sum(bed.bedvalor) valor
                 from emendas.emenda eme
                         inner join emendas.autor aut on aut.autid = eme.autid
@@ -521,7 +521,7 @@ class Emendas_Model_Emenda extends Modelo
                     AND eme.prsano = '$exercicio'
                 group by aut.estuf, categoria
                 union all
-                select  case when coalesce(aut.estuf, '') = '' then 'A Identificar' else  aut.estuf end categoria, 
+                select  case when coalesce(aut.estuf, '') = '' then 'A Identificar' else  aut.estuf end categoria,
                         'Valor Após Contingenciamento' descricao, sum(bed.bedvalorpriorizado) valor
                 from emendas.emenda eme
                         inner join emendas.autor aut on aut.autid = eme.autid
@@ -530,7 +530,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'                
+                    AND eme.prsano = '$exercicio'
                 group by aut.estuf, categoria
                 order by categoria, descricao desc";
 
@@ -552,7 +552,7 @@ class Emendas_Model_Emenda extends Modelo
                         where
                             eme.emestatus = 'A'
                             AND ben.benstatus = 'A'
-                            AND eme.prsano = '$exercicio'        
+                            AND eme.prsano = '$exercicio'
                         group by descricao, reg.regcod
                         order by reg.regcod";
 
@@ -567,7 +567,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by descricao, reg.regcod, categoria
                 union all
                 select  case when coalesce(reg.regdescricao, '') = '' then 'A Identificar' else  reg.regdescricao end categoria, reg.regcod,
@@ -608,7 +608,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by categoria, par.pardsc, descricao
                 union all
                 select  case when coalesce(par.parsigla, '') = '' then 'A Identificar' else par.parsigla end categoria, par.pardsc,
@@ -621,7 +621,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by categoria, par.pardsc, descricao
                 order by categoria, descricao desc";
 
@@ -643,9 +643,9 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by categoria, descricao
-                union all 
+                union all
                 select  case when coalesce(par.parlado, '') = '' then 'A Identificar' else par.parlado end categoria,
                         'Valor Após Contingenciamento' descricao, sum(bed.bedvalorpriorizado) valor
                 from emendas.emenda eme
@@ -656,7 +656,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by categoria, descricao
                 order by categoria, descricao desc";
 
@@ -682,7 +682,7 @@ class Emendas_Model_Emenda extends Modelo
                 where
                     eme.emestatus = 'A'
                     AND ben.benstatus = 'A'
-                    AND eme.prsano = '$exercicio'        
+                    AND eme.prsano = '$exercicio'
                 group by categoria, descricao
                 union all
                 select  case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end categoria,
@@ -712,11 +712,11 @@ class Emendas_Model_Emenda extends Modelo
             $colors =  "'#ff0066', '#00BFFF', '#FFD700'";
 
             $sqlPizza = "select case when aut.autsexo = 'M' then 'Homem' when aut.autsexo = 'F' then 'Mulher' else 'A Identificar' end descricao, sum(bed.bedvalor) valor
-                    from emendas.emenda eme        
+                    from emendas.emenda eme
                             inner join emendas.autor aut on aut.autid = eme.autid
                             inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                             inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                    where eme.prsano = '$exercicio'     
+                    where eme.prsano = '$exercicio'
                     group by descricao";
             include APPRAIZ . 'emendas/modulos/principal/grafico_pizza.inc';
 
@@ -728,10 +728,10 @@ class Emendas_Model_Emenda extends Modelo
     public function gerarGraficoGnd($exercicio, $tipo = null)
     {
         $sql = "select  gnd.gnddsc categoria, gnd.gndcod, 'Valor LOA' descricao, sum(bed.bedvalor) valor
-                from emendas.emenda eme        
+                from emendas.emenda eme
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                        inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
+                        inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid
                         inner join public.gnd gnd on gnd.gndcod = emd.gndcod
                 where
                     eme.emestatus = 'A'
@@ -740,10 +740,10 @@ class Emendas_Model_Emenda extends Modelo
                 group by categoria, gnd.gndcod, descricao
                 union all
                 select  gnd.gnddsc categoria, gnd.gndcod, 'Valor Após Contingenciamento' descricao, sum(bed.bedvalorpriorizado) valor
-                from emendas.emenda eme        
+                from emendas.emenda eme
                         inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                         inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                        inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
+                        inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid
                         inner join public.gnd gnd on gnd.gndcod = emd.gndcod
                 where
                     eme.emestatus = 'A'
@@ -764,12 +764,12 @@ class Emendas_Model_Emenda extends Modelo
 
         if($tipo){
             $sqlPizza = "select  gnd.gnddsc descricao, sum(bed.bedvalor) valor
-                    from emendas.emenda eme        
+                    from emendas.emenda eme
                             inner join emendas.beneficiario ben on ben.emeid = eme.emeid
                             inner join emendas.beneficiariodetalhe bed on bed.benid = ben.benid
-                            inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid        
+                            inner join emendas.emendadetalhe emd on bed.emdid = emd.emdid
                             inner join public.gnd gnd on gnd.gndcod = emd.gndcod
-                    where eme.prsano = '$exercicio'     
+                    where eme.prsano = '$exercicio'
                     group by descricao";
             include APPRAIZ . 'emendas/modulos/principal/grafico_pizza.inc';
 
@@ -784,7 +784,7 @@ class Emendas_Model_Emenda extends Modelo
 
         $sql = "select eme.*, uno.unocodorcamento
                 from emendas.emenda eme
-                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid 
+                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid
                 where eme.emeid = {$this->emeid}
         ";
         $emenda = $this->pegaLinha($sql);
@@ -826,7 +826,7 @@ class Emendas_Model_Emenda extends Modelo
 
         $mPrograma = new Emendas_Model_Programa();
         $programas = $mPrograma->recuperarTodos();
-        
+
         $usuario = $configSiconv->user;
         $senha = $configSiconv->pwd;
 
@@ -858,7 +858,7 @@ class Emendas_Model_Emenda extends Modelo
             'emenumero'=>substr($emenda['emenumero'], 4)
         ];
         $retorno = $obWS->consultarPropostaPorEmenda($filtro);
-        
+
         if(isset($retorno->propostas)){
 
             $aPropostas = is_array($retorno->propostas) ? $retorno->propostas : [$retorno->propostas];
@@ -886,7 +886,7 @@ class Emendas_Model_Emenda extends Modelo
                 $mPropostaWS->emeid = $emenda['emeid'];
                 $mPropostaWS->salvar();
                 $mPropostaWS->commit();
-                
+
                 unset($mPropostaWS);
             }
         }
