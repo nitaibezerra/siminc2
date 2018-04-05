@@ -107,13 +107,17 @@ class Spo_Model_Planointerno extends Modelo
         # Descrição da situação.
         $where .= $filtros->esddsc? "\n AND ed.esddsc ILIKE('%". pg_escape_string($filtros->esddsc). "%') ": NULL;
         # Emenda.
-        $where .= $filtros->pliemenda? "\n AND pli.pliemenda = '". pg_escape_string($filtros->pliemenda). "' ": NULL;
+        if ($filtros->pliemenda == 't') {
+            $where .= "\n AND ben.pliid IS NOT NULL ";
+        } elseif ($filtros->pliemenda == 'f') {
+            $where .= "\n AND ben.pliid IS NULL ";
+        }
         # FNC
         $where .= $filtros->unofundo? "\n AND suo.unofundo = ". $filtros->unofundo: NULL;
 //ver($where);
         return $where;
     }
-    
+
     /**
      * Monta o filtro de Sub-Unidades vinculadas aos perfis do Usuário da sessão.
      * 
@@ -145,6 +149,11 @@ class Spo_Model_Planointerno extends Modelo
     public static function listar(stdClass $filtros){
         $where = self::montarFiltro($filtros);
 //ver($where,d);
+
+        $leftEmendas = '';
+        if ($filtros->pliemenda) {
+            $leftEmendas = "LEFT JOIN emendas.beneficiario ben ON(ben.pliid = pli.pliid AND ben.benstatus = 'A')";
+        }
         $sql = "
             SELECT
                 pli.pliid::VARCHAR AS pliid,
@@ -183,6 +192,7 @@ class Spo_Model_Planointerno extends Modelo
 		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
 		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
 		LEFT JOIN public.vw_subunidadeorcamentaria pdsuo ON(pd.suoid = pdsuo.suoid)
+		$leftEmendas
             WHERE
                 (pli.plistatus = 'A' OR (pli.plistatus = 'I' AND ed.esdid = ". (int)ESD_PI_CANCELADO. "))
                 AND pli.pliano = '". (int)$filtros->exercicio. "'
@@ -199,7 +209,7 @@ class Spo_Model_Planointerno extends Modelo
             ORDER BY
                 pli.plicod
         ";
-//ver($sql,d);
+//        ver($sql, d);
         return $sql;
     }
     

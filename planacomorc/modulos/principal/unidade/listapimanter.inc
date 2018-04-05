@@ -65,7 +65,7 @@
 
         return $simec->select(
             'ungcod',
-            'Unidade',
+            'SubUnidade',
             $filtros->ungcod,
             Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                 'exercicio' => $filtros->exercicio,
