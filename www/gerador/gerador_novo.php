@@ -3,9 +3,14 @@ require_once "config.inc";
 include APPRAIZ . "includes/classes_simec.inc";
 include APPRAIZ . "includes/funcoes.inc";
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+if ( !$_SESSION['usucpf'] ) {
+    header( "Location: ../login.php" );
+    exit();
+}
+
 $db = new cls_banco();
 
-        
 switch ($_POST['action']) {
     
     case 'render_table':
