@@ -17,6 +17,9 @@ include_once "../../global/config.inc";
 include_once APPRAIZ . "includes/classes_simec.inc";
 include_once APPRAIZ . "includes/funcoes.inc";
 
+# Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
+controlarExecucaoScript();
+
 //Definindo como superuser para que o commit ocorra
 $_SESSION['superuser'] = true;
 if (!$_SESSION['usucpf']) {
