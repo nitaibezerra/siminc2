@@ -190,7 +190,7 @@ class Pi_PlanoInterno extends Modelo
 
     public function montarSqlExecucaoOrcamentaria($filtro = []){
         $filtro[] = "suo.suostatus = 'A'";
-        $filtro[] = "ben.benid IS NULL";
+        $filtro[] = "ptr.irpcod <> '6'";
         $where = $this->montarFiltros($filtro);
 
         $sql = "
@@ -232,7 +232,6 @@ class Pi_PlanoInterno extends Modelo
                     AND pli.ungcod = suo.suocod
                     AND pli.unicod = suo.unocod
                     AND plistatus = 'A')
-                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
@@ -481,14 +480,13 @@ class Pi_PlanoInterno extends Modelo
                 inner join monitora.ptres ptr on sec.ptres = ptr.ptres AND sec.exercicio = ptr.ptrano
                 inner join monitora.pi_planointernoptres ppt ON ptr.ptrid = ppt.ptrid
                 inner JOIN monitora.pi_planointerno pli ON ppt.pliid = pli.pliid
-                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
                 inner join public.vw_subunidadeorcamentaria suo ON pli.ungcod = suo.suocod AND pli.pliano = suo.prsano
             where
                 suo.prsano = '$exercicio'
                 AND suo.suocod not in ('203003', '420017')
                 AND suo.unofundo = 't'
                 AND pli.plistatus = 'A'
-                AND ben.benid IS NULL
+                AND ptr.irpcod <> '6'
             group by
                 ptr.ptrid,
                 nat
@@ -637,7 +635,8 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '{$filtro->exercicio}'
                 AND suo.unofundo = {$filtro->unofundo}
-                and suo.suostatus = 'A'
+                AND suo.suostatus = 'A'
+                AND ptr.irpcod <> '6'
             GROUP BY
                 ordem,
                 descricao,
@@ -822,8 +821,9 @@ class Pi_PlanoInterno extends Modelo
             WHERE
                 suo.prsano = '$filtro->exercicio' {$filtroUO}
                 AND suo.unofundo = $filtro->unofundo
-                and {$filtro->unidades}
-                and suo.suostatus = 'A'
+                AND {$filtro->unidades}
+                AND suo.suostatus = 'A'
+                AND ptr.irpcod <> '6'
             GROUP BY
                 ordem,
                 descricao,
@@ -1477,6 +1477,7 @@ class Pi_PlanoInterno extends Modelo
                 LEFT JOIN spo.siopexecucao ex ON ptr.ptres = ex.ptres AND ex.exercicio = ptr.ptrano and ex.plicod = pli.plicod
             WHERE
                 pli.plistatus = 'A'
+                AND ptr.irpcod <> '6'
                 $where
             GROUP BY
                 pli.pliid,
