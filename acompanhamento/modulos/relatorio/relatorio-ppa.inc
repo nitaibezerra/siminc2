@@ -1,6 +1,7 @@
 <?php
 
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
+    include_once APPRAIZ . "www/planacomorc/_funcoespi.php";
 
     $param = $_REQUEST;
 
