@@ -7,7 +7,17 @@ $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 //ver($listaSubUnidadeUsuario);
-
+switch ($_REQUEST['req']) {
+    case 'proposta_modal':
+          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['benid']);
+        include 'proposta_modal.inc';
+    die;
+    case 'salvar-proposta':
+    $cProposta = new Emendas_Controller_SiconvBeneficiario();
+    $cProposta->salvar($_REQUEST);
+    include 'proposta_modal.inc';
+    die;
+  }
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -38,7 +48,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th width="5%">Ações</th>
                                 <th>Número</th>
                                 <th width="10%">Unidade</th>
-                                <th width="15%">Autor</th>
+                                <th width="10%">Autor</th>
                                 <th>UF</th>
                                 <th>Id Beneficiário</th>
                                 <th>Beneficiário</th>
@@ -53,7 +63,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($aEmenda as $dados){ ?>
+                            <?php foreach($aEmenda as $dados){?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Emenda" href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $dados['emeid']; ?>"><i class="fa fa-file-o"></i></a>
@@ -72,13 +82,19 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['empedimento']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>
-                                    <td><?php echo $dados['sitdsc']; ?></td>
+                                    <td>
+                                      <!-- se Situação SICONV tiver mais de uma proposta, executa o if abaixo -->
+                                    <?php if($dados['qtdrepetida']!=0){?>
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Adicionar Proposta"></span>
+                                    <?php } echo $dados['sitdsc']; ?>
+                                      </span>
+                                    </td>
                                     <td><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                 </tr>
-                            <?php } ?>        
+                            <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -88,6 +104,10 @@ include APPRAIZ . "includes/cabecalho.inc";
     </div>
 </div>
 
+<?php
+  bootstrapPopup("Adicionar Proposta", 'proposta_modal', '', array('fechar'), array('tamanho' => 'lg'));
+
+?>
 <script>
     $(document).ready(function(){
 
@@ -99,6 +119,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                 "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
             }
         });
-        
+
+        $('.editar_situacao').click(function(){
+            $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
+            $('#proposta_modal').modal();
+        });
     });
 </script>

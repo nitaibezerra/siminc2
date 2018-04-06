@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Emendas_Model_SiconvBeneficiario extends Modelo
@@ -60,6 +60,19 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
         'emenumero' => null,
         'benid' => null,
     );
+    public function recuperarListagem($benid){
 
+          $sql = "select sib.sibid, sib.procnpj || ' - ' || sib.emenumero AS beneficiario, sib.benid, ben.benid AS ben
+                  from emendas.beneficiario ben
+                	inner join emendas.proponente pro on pro.proid = ben.proid
+                	inner join emendas.siconvbeneficiario sib on sib.procnpj = pro.procnpj
+                	inner join emendas.emenda eme on eme.emeid = ben.emeid
+                  where ben.benid = '$benid'
+                  and eme.emenumero = sib.emenumero
+                  Order By sib.emenumero
+                  ";
+
+        return $this->carregar($sql);
+    }
 }//end Class
 ?>
