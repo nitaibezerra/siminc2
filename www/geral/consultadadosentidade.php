@@ -8,6 +8,9 @@ if (!defined('APPRAIZ')) {
 require_once APPRAIZ . 'global/config.inc';
 require_once APPRAIZ . 'includes/classes_simec.inc';
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 function mascaraglobal($value, $mask) {
 	$casasdec = explode(",", $mask);
 	// Se possui casas decimais

@@ -5417,3 +5417,16 @@ function controlarExecucaoScript(){
     }
 }
 
+/**
+ * Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+ * 
+ * return VOID
+ */
+function controlarAcessoSemAutenticacao(){
+    # Verifica se o CPF do usuário autenticado foi gravado na sessao.
+    if(!$_SESSION['usucpf']) {
+        header( "Location: ". URL_SISTEMA);
+        die();
+    }
+}
+
