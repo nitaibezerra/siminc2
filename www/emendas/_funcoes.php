@@ -165,11 +165,11 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $pi->picvalorcapital = $piCapital? number_format($piCapital, 2, ',', '.'): NULL;
     # PI Associacões
     if($listaDadosSiconv[0]['numeroconvenio']){
-        $pi->lista_convenio = array(0 => $listaDadosSiconv[0]['numeroconvenio']);
+        $pi->lista_convenio = array(0 => str_replace(array('/', '.', ',','-'), '', $listaDadosSiconv[0]['numeroconvenio']));
     }
     $pi->lista_sniic = $listaSniic;
     if($beneficiario->bennumeroprocesso){
-        $pi->lista_sei = array(0 => $beneficiario->bennumeroprocesso);
+        $pi->lista_sei = array(0 => str_replace(array('/', '.', ',','-'), '', $beneficiario->bennumeroprocesso));
     }
     $pi->lista_pronac = $listaPronac;
     $pi->esfid = $beneficiario->esfid;
