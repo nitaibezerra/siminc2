@@ -4,6 +4,9 @@ require_once "config.inc";
 include APPRAIZ . "includes/classes_simec.inc";
 include APPRAIZ . "includes/funcoes.inc";
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 ini_set( "memory_limit", "1024M" ); // ...
 set_time_limit(0);
 

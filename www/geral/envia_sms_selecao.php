@@ -5,6 +5,10 @@
 require_once "config.inc";
 include APPRAIZ . "includes/classes_simec.inc";
 include APPRAIZ . "includes/funcoes.inc";
+
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 include_once APPRAIZ . "includes/envia_sms_sis_geral_funcoes.inc";
 include_once APPRAIZ . "includes/classes/Sms.class.inc";
 $db = new cls_banco();

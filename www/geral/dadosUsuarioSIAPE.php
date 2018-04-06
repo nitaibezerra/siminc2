@@ -7,6 +7,9 @@ header('Content-Type: text/html; charset=iso-8859-1');
 include APPRAIZ."includes/classes_simec.inc";
 include APPRAIZ."includes/funcoes.inc";
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 $db = new cls_banco();
 
 $sql = "SELECT

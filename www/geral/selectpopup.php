@@ -1,4 +1,13 @@
 <?PHP
+
+    #inicializa sistema
+    require_once "config.inc";
+    include APPRAIZ . "includes/classes_simec.inc";
+    include APPRAIZ . "includes/funcoes.inc";
+    
+    # Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+    controlarAcessoSemAutenticacao();
+
     function atualizarCombo_2( $dados ){
         global $db;
         $param  = $dados['param'];
@@ -29,11 +38,7 @@
         
         die('S');        
     }
-
-    #inicializa sistema
-    require_once "config.inc";
-    include APPRAIZ . "includes/classes_simec.inc";
-    include APPRAIZ . "includes/funcoes.inc";
+    
     $db = new cls_banco();
 
     #VERIFICA AS REQUISIÇÕES.

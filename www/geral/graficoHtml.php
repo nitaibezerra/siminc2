@@ -1,3 +1,15 @@
+<?php
+
+// inicia sistema
+include 'config.inc';
+include APPRAIZ . "includes/classes_simec.inc";
+include APPRAIZ . "includes/funcoes.inc";
+
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
+?>
+
 <html>
 	<head>
 		<title>Gráficos</title>
