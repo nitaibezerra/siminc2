@@ -5,11 +5,20 @@ class Emendas_Controller_SiconvBeneficiario
     public function salvar($dados)
     {
         try {
-            $mSiconvBeneficiario = new Emendas_Model_SiconvBeneficiario($dados['sibid']);
-            $mSiconvBeneficiario->popularDadosObjeto($dados->benid);
+            $url = '?modulo=principal/emenda&acao=A';
 
-            $mSiconvBeneficiario->salvar(['benid']);
-            $mSiconvBeneficiario->commit();
+            if(isset($dados['sibid']) && is_array($dados['sibid'])){
+              foreach($dados['sibid'] as $sibid){
+                  $mSiconvBeneficiario = new Emendas_Model_SiconvBeneficiario($sibid);
+                  $mSiconvBeneficiario->benid = $dados['benid'];
+
+                  $mSiconvBeneficiario->salvar();
+                  $mSiconvBeneficiario->commit();
+                  unset($mSiconvBeneficiario);
+              }
+
+            }
+
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
             $mSiconvBeneficiario->rollback();

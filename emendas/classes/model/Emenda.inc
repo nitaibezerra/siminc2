@@ -94,6 +94,7 @@ class Emendas_Model_Emenda extends Modelo
                 uno.unocod || ' - ' || uno.unosigla unidade,
                 aut.autnome,
                 aut.autcod,
+                coalesce(rep.qtdrepetida, 0) qtdrepetida,
                 pro.pronome,
                 (
 		    SELECT
@@ -142,11 +143,19 @@ class Emendas_Model_Emenda extends Modelo
                 JOIN emendas.autor aut ON aut.autid = eme.autid
                 JOIN monitora.ptres ptr ON ptr.ptrid = eme.ptrid
                 LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
-		LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
-		LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
-		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
-		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+            		LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
+            		LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+            		LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
+            		LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
                 LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
+                LEFT JOIN (
+              			select eme.emeid, pro.procnpj, count(*) qtdrepetida
+              			from emendas.emenda eme
+                				inner join emendas.beneficiario ben on ben.emeid = eme.emeid
+                				inner join emendas.proponente pro on pro.proid = ben.proid
+              			group by eme.emeid, pro.procnpj
+              			having count(*) > 1
+                ) rep on rep.emeid = eme.emeid
             WHERE
                 eme.emestatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
@@ -157,7 +166,7 @@ class Emendas_Model_Emenda extends Modelo
                 pro.pronome
         ";
 
-//ver($sql, d);
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }

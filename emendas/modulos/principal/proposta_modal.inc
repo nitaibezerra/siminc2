@@ -1,7 +1,6 @@
 <?php
-$mBeneficiario = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['benid']);
-$aProposta = $db->carregar($mBeneficiario);
-$listaProposta = $aProposta? $aProposta:[];
+$listaProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['benid']);
+
 ?>
 <form id="formulario" name="formulario" method="post" class="form-horizontal">
   <input type="hidden" name="req" id="req" value="salvar-proposta" />
@@ -18,27 +17,17 @@ $listaProposta = $aProposta? $aProposta:[];
                         <tr class="text-center">
                           <th>Opçoes</th>
                           <th>CNPJ/NÚMERO da EMENDA</th>
-                          <th>Beneficiario</th>
                         </tr>
                         </thead>
                         <tbody>
                           <?php
                            foreach($listaProposta as $dados){
+                             $dado = $dados['ben'] == $dados['benid']? checked:0;
                             ?>
-                              <tr>
-                                  <td class="text-center">
-                                      <?php if($dados['ben'] === $dados['benid']){ ?>
-                                        <input type="checkbox" name="sibid[]" value="<?php echo $dados['sibid'];?>" checked>
-                                        <td><?php echo $dados['beneficiario']; ?></td>
-                                        <td><?php echo $dados['benid'];?></td>
-                                      <?php } else{?>
-                                        <input type="checkbox" name="lista[]" value="<?php echo $dados['sibid'];?>">
-                                        <td><?php echo $dados['beneficiario']; ?></td>
-                                        <td><?php echo $dados['benid'];?></td>
-                                      <?php }?>
-                                  </td>
-
-                              </tr>
+                        <tr>
+                          <td><input type="checkbox" name="sibid[]" value="<?php echo $dados['sibid'];?>" <?php echo $dado?> ></td>
+                          <td><?php echo $dados['beneficiario']; ?></td>
+                        </tr>
                           <?php } ?>
                         </tbody>
                     </table>

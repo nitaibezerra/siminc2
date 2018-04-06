@@ -9,12 +9,11 @@ $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_S
 //ver($listaSubUnidadeUsuario);
 switch ($_REQUEST['req']) {
     case 'proposta_modal':
-          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST);
+          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['benid']);
         include 'proposta_modal.inc';
     die;
     case 'salvar-proposta':
     $cProposta = new Emendas_Controller_SiconvBeneficiario();
-    ver($_REQUEST,d);
     $cProposta->salvar($_REQUEST);
     include 'proposta_modal.inc';
     die;
@@ -84,15 +83,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['empedimento']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>
                                     <td>
-                                      <!-- se Situação SICONV for vazio, executa o if abaixo -->
-                                    <?php if($dados['sitdsc'] == null){ ?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Adicionar Proposta">
+                                      <!-- se Situação SICONV tiver mais de uma proposta, executa o if abaixo -->
+                                    <?php if($dados['qtdrepetida']!=0){?>
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Adicionar Proposta"></span>
+                                    <?php } echo $dados['sitdsc']; ?>
                                       </span>
-                                    <?php } else{?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid']; ?>" title="Adicionar Proposta">
-                                    <?php echo $dados['sitdsc']; ?>
-                                      </span>
-                                    <?php  } ?>
                                     </td>
                                     <td><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
