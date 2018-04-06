@@ -19,6 +19,9 @@ require_once APPRAIZ . 'includes/classes_simec.inc';
 require_once APPRAIZ . 'includes/class/dateTime.inc';
 include_once APPRAIZ . 'includes/funcoes.inc';
 
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 include_once APPRAIZ . '/includes/jpgraph/jpgraph.php';
 include_once APPRAIZ . '/includes/jpgraph/jpgraph_line.php';
 include_once APPRAIZ . '/includes/jpgraph/jpgraph_utils.inc';

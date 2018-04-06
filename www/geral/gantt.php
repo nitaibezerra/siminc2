@@ -1,5 +1,12 @@
 <?php
 
+	require_once 'config.inc';
+	include_once APPRAIZ . "includes/classes_simec.inc";
+	include_once APPRAIZ . "includes/funcoes.inc";
+
+    # Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+    controlarAcessoSemAutenticacao();
+
 	$pjeid = $_SESSION['pjeid'];
 	$cod = $_REQUEST['cod'];
 
