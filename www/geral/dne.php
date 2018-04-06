@@ -11,6 +11,11 @@ if (!defined('APPRAIZ')) {
 
 require_once APPRAIZ . 'global/config.inc';
 require_once APPRAIZ . 'includes/classes_simec.inc';
+include_once APPRAIZ . "includes/funcoes.inc";
+
+# Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+controlarAcessoSemAutenticacao();
+
 require_once APPRAIZ . 'seguranca/modulos/sistema/geral/endereco.inc';
 
 global $db;
