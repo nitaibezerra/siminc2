@@ -5403,3 +5403,30 @@ function marcarVermelhoValorSuperior($valor1 = NULL, $valor2 = NULL, $decimal = 
     return $resultado;
 }
 
+/**
+ * Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
+ * Caso o ip não seja autorizado o sistema para a execução do arquivo.
+ * 
+ * return VOID
+ */
+function controlarExecucaoScript(){
+    # Verificando IP de origem da requisição é autorizado
+    if(IP_CLI_AUTORIZADO != $_SERVER['REMOTE_ADDR']){
+        # Finaliza a execução do SCRIPT
+        die;
+    }
+}
+
+/**
+ * Verifica se a sessão não expirou, se tiver expirada envia pra tela de login.
+ * 
+ * return VOID
+ */
+function controlarAcessoSemAutenticacao(){
+    # Verifica se o CPF do usuário autenticado foi gravado na sessao.
+    if(!$_SESSION['usucpf']) {
+        header( "Location: ". URL_SISTEMA);
+        die();
+    }
+}
+
