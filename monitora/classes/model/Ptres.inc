@@ -218,5 +218,20 @@ class Monitora_Model_Ptres extends Modelo
 
         return $sql;
     }
+
+    public function recuperarSqlPorSubunidadeEEnquadramento($suoid, $eqdid)
+    {
+        $sql = "select coalesce(ptr.prgcod, ''), coalesce(ptr.acacod, ''), coalesce(ptr.acaobjetivocod, ''), coalesce(ptr.loccod, ''), coalesce(ptr.plocod, ''), ptr.acatitulo
+                from monitora.vw_ptres ptr
+                        inner join spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
+                        inner join monitora.enquadramentorp erp on erp.irpcod = ptr.irpcod and erp.eqdid = " . (int) $eqdid . "
+                where ptr.ptrano = '{$_SESSION['exercicio']}'
+                and ptr.ptrstatus = 'A'
+                and ptr.plocod != 'EIND'
+                and psu.suoid = " . (int) $suoid . "
+                order by coalesce(ptr.prgcod, ''), coalesce(ptr.acacod, ''), coalesce(ptr.acaobjetivocod, ''), coalesce(ptr.loccod, ''), coalesce(ptr.plocod, ''), ptr.acatitulo";
+
+        return $sql;
+    }
 }//end Class
 ?>

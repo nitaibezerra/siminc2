@@ -1,0 +1,45 @@
+<?php
+
+class Proposta_Controller_PrePlanoInterno
+{
+    public function salvar($dados)
+    {
+        $url = '?modulo=apoio/preplanointerno&acao=A';
+
+        try {
+            $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($dados['pliid']);
+            $mPrePlanoInterno->popularDadosObjeto($dados);
+            $mPrePlanoInterno->prsano = $mPrePlanoInterno->prsano ? $mPrePlanoInterno->prsano : $_SESSION['exercicio'];
+                
+            $mPrePlanoInterno->salvar(null, null, ['plidsc', 'maiid', 'masid', 'oppid', 'mppid', 'ippid', 'mpnid', 'ipnid', 'pprid', 'pumid', 'pliquantidade', 'plivalorcusteio', 'plivalorcapital', 'docid', ]);
+            $mPrePlanoInterno->commit();
+            simec_redirecionar($url, 'success');
+        } catch (Exception $e){
+            $mPrePlanoInterno->rollback();
+            simec_redirecionar($url, 'error');
+        }
+    } //end salvar()
+    
+    public function excluir($pliid)
+    {
+        $url = '?modulo=apoio/preplanointerno&acao=A';
+
+        try {
+            $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($pliid);
+            
+            if($mPrePlanoInterno->existeVinculo()){
+                $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
+                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mPrePlanoInterno->pliid;
+                simec_redirecionar($url, 'error', $mensagem);
+            }            
+            
+            $mPrePlanoInterno->plistatus = 'I';
+            $mPrePlanoInterno->salvar();
+            $mPrePlanoInterno->commit();
+            simec_redirecionar($url, 'success');
+        } catch (Exception $e){
+            $mPrePlanoInterno->rollback();
+            simec_redirecionar($url, 'error');
+        }
+    } //end salvar()
+}            
