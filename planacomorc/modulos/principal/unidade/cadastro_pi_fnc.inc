@@ -451,7 +451,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         FROM monitora.pi_enquadramentodespesa
                                         WHERE
                                             eqdstatus = 'A'
-                                            AND eqdcod != 'E'
                                             AND eqdano = '{$_SESSION['exercicio']}'
                                         ORDER BY
                                             eqddsc
