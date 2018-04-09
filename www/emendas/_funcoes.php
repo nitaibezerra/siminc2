@@ -22,6 +22,7 @@ function condicaoGerarPi($benid){
             AND COALESCE(plidsc, NULL) IS NOT NULL
             AND e.unoid IS NOT NULL
             AND b.suoid IS NOT NULL
+            AND b.esfid IS NOT NULL
             AND e.ptrid IS NOT NULL
             AND b.pprid IS NOT NULL
             AND b.pumid IS NOT NULL
@@ -65,13 +66,22 @@ function posAcaoGerarPi($benid){
         $modelBeneficiario = new Emendas_Model_Beneficiario($benid);
         $modelBeneficiario->pliid = $pliid;
         $modelBeneficiario->salvar();
-//ver($pliid, d);
-        # Gera número de documento pra workflow
-        $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI);
-        # Altera a situação do PI pra Aguardando Aprovação
-        $resultado = wf_alterarEstado($docid, AED_ENVIAR_APROVACAO, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
-//        wf_alterarEstado($docid, $aedid, $cmddsc, array('pliid' => $pliid));
-//ver($resultado, d);
+//ver($pliid, WF_TPDID_PLANEJAMENTO_PI, AED_ENVIAR_APROVACAO, d);
+        $tipoFluxoFNC = verificarPiFnc($pliid);
+//var_dump($tipoFluxoFNC); die;
+        if($tipoFluxoFNC){
+            # Gera número de documento pra workflow
+            $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI_FNC);
+            # Altera a situação do PI pra Em Análise
+            $resultado = wf_alterarEstado($docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
+//ver($pliid, $docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, $resultado, d);
+        } else {
+            # Gera número de documento pra workflow
+            $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI);
+            # Altera a situação do PI pra Aguardando Aprovação
+            $resultado = wf_alterarEstado($docid, AED_ENVIAR_APROVACAO, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
+//ver(WF_TPDID_PLANEJAMENTO_PI, AED_ENVIAR_APROVACAO, $pliid, $resultado, d);
+        }
     }
 //ver($resultado, $pliid, d);
     return $resultado;
@@ -106,6 +116,10 @@ function associarFuncionalSubunidade(stdClass $beneficiario){
  * @return stdClass $pi Dados do pi para serem salvos.
  */
 function adaptarBeneficioPi(stdClass $beneficiario){
+    require_once APPRAIZ .'emendas/classes/model/Siconv.inc';
+
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    
 //ver($beneficiario);
     # Buscando enquadramento 2018 do tipo emenda.
     $eqdid = buscarEnquadramentoEmenda($beneficiario->prsano);
@@ -117,6 +131,8 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $listaDelegacao = buscarListaDelegacao($beneficiario->benid);
     $piCusteio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
     $piCapital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
+    # Buscando numero do convênio do beneficiario
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($benid);
 
     # PI - Basico
     $pi = new stdClass();
@@ -125,7 +141,7 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $pi->eqdid = $eqdid;
     $pi->neeid = $beneficiario->neeid;
     $pi->capid = $beneficiario->capid;
-    $pi->plititulo = $beneficiario->plititulo;
+    $pi->plititulo = $beneficiario->plititulo. ($emenda->emenumero? ' - '. $emenda->emenumero: NULL);
     $pi->plidsc = $beneficiario->plidsc;
     # Ptres
     $pi->ptrid = $beneficiario->ptrid;
@@ -148,9 +164,13 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $pi->picvalorcusteio = $piCusteio? number_format($piCusteio, 2, ',', '.'): NULL;
     $pi->picvalorcapital = $piCapital? number_format($piCapital, 2, ',', '.'): NULL;
     # PI Associacões
-    $pi->lista_convenio = array(0 => $beneficiario->benpropostanumero);
+    if($listaDadosSiconv[0]['numeroconvenio']){
+        $pi->lista_convenio = array(0 => str_replace(array('/', '.', ',','-'), '', $listaDadosSiconv[0]['numeroconvenio']));
+    }
     $pi->lista_sniic = $listaSniic;
-    $pi->lista_sei = array(0 => $beneficiario->bennumeroprocesso);
+    if($beneficiario->bennumeroprocesso){
+        $pi->lista_sei = array(0 => str_replace(array('/', '.', ',','-'), '', $beneficiario->bennumeroprocesso));
+    }
     $pi->lista_pronac = $listaPronac;
     $pi->esfid = $beneficiario->esfid;
     

@@ -2047,7 +2047,7 @@ function carregarPI($pliid) {
     global $db;
 
     $sql = <<<DML
-        SELECT
+        SELECT DISTINCT
             pli.pliid,
             pli.mdeid,
             mde.mdecod,
@@ -2082,8 +2082,12 @@ function carregarPI($pliid) {
             END AS plisituacao,
             sba.sbaid,
             sba.sbasigla || ' - ' AS sbasigla,
-            sba.sbacod
+            sba.sbacod,
+            ben.benid,
+            em.emenumero
         FROM monitora.pi_planointerno pli
+            LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
+            LEFT JOIN emendas.emenda em ON(ben.emeid = em.emeid)
             LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
             LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
             LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
@@ -2744,9 +2748,32 @@ function posAcaoAprovarPi($pliid)
         $db->commit();
     }
 
+    # Busca docid do Beneficiario caso seja PI originado de beneficiario de Emenda
+    $beneficiario = buscarBeneficiarioPi($pliid);
+    if($beneficiario){
+        # Altera a situação do beneficiario pra PI Aprovado.
+        wf_alterarEstado($beneficiario['docid'], AED_EMENDAS_APROVAR_PI, 'PI Aprovado no Planejamento', array('benid' => $beneficiario['benid']));
+    }
+    
     enviarEmailAprovado($pliid);
 
     return true;
+}
+
+/**
+ * Busca beneficiario que gerou o Plano Interno(PI)
+ * 
+ * @global cls_banco $db
+ * @param integer $pliid
+ * @return array/boolean
+ */
+function buscarBeneficiarioPi($pliid) {
+    global $db;
+    
+    $sql = "SELECT benid, docid FROM emendas.beneficiario WHERE pliid = ". (int)$pliid;
+    $beneficiario = $db->pegaLinha($sql);
+    
+    return $beneficiario;
 }
 
 function posAcaoCancelarPi($pliid){
@@ -2835,4 +2862,31 @@ function verificarPactuacaoConvenio($capid)
     return $db->pegaUm($sql);
 
 
+}
+
+/**
+ * Verifica se o PI é do tipo FNC ou não.
+ * 
+ * @global cls_banco $db
+ * @param integer $pliid
+ * @return boolean Retorna TRUE caso o PI seja do tipo FNC
+ */
+function verificarPiFnc($pliid){
+    global $db;
+    $sql = "
+        SELECT
+            suo.unofundo
+        FROM monitora.pi_planointerno pli
+            JOIN public.vw_subunidadeorcamentaria suo ON(
+                suo.suostatus = 'A'
+                AND pli.unicod = suo.unocod
+                AND pli.ungcod = suo.suocod
+                AND suo.prsano = pli.pliano
+            )
+        WHERE
+            pli.pliano = '". (int)$_SESSION['exercicio']. "'
+            AND pli.pliid = ". (int)$pliid;
+    $unofundo = $db->pegaUm($sql);
+//ver($unofundo, d);
+    return $unofundo == 't'? TRUE: FALSE;
 }

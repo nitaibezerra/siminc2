@@ -218,5 +218,35 @@ class Monitora_Model_Ptres extends Modelo
 
         return $sql;
     }
+    
+    public function recuperarTodosApoio(stdClass $param) {
+        $sql = "
+            SELECT DISTINCT
+                ptr.ptrid,
+                suo.unocod || '(' || suo.unonome || ')' AS unidade_orcamentaria,
+                vptr.acacod,
+                vptr.acatitulo,
+                ptr.ptres,
+                vptr.funcional,
+                vptr.plocod,
+                vptr.plodsc,
+                vptr.irpcod,
+                ptr.ptrdotacaocusteio,
+                ptr.ptrdotacaocapital
+            FROM monitora.ptres ptr
+                JOIN public.vw_subunidadeorcamentaria suo ON(
+                    ptr.unicod = suo.unocod
+                    AND ptr.ptrano = suo.prsano
+                    AND suo.suostatus = 'A'
+                )
+                JOIN monitora.vw_ptres vptr ON ptr.ptrid = vptr.ptrid-- SELECT * FROM monitora.vw_ptres 
+            WHERE
+                ptr.ptrstatus = 'A'
+                AND ptr.ptrano = '". (int)$param->exercicio. "'
+        ";
+        
+        $listaResultado = $this->carregar($sql);
+        return $listaResultado? $listaResultado: [];
+    }
 }//end Class
 ?>

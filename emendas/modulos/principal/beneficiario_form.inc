@@ -375,15 +375,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <input name="aba" id="aba" type="hidden" value="<?php echo $aba; ?>">
 
                                         <?php
-                                            if(empty($mBeneficiario->plititulo)){
-                                                $tituloDinamico = $mEmenda->emenumero && $mBeneficiario->benpropostatitulo? $mEmenda->emenumero . ' '. $mBeneficiario->benpropostatitulo: NULL;
-                                            } else {
-                                                $tituloDinamico = $mBeneficiario->plititulo;
-                                            }
-                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $tituloDinamico, ['maxlength' => 250]);
+                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $mBeneficiario->plititulo, ['maxlength' => 250]);
 
                                             $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
                                             echo $simec->textarea('plidsc', 'Descrição / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
+//condicaoGerarPi($benid);
                                         ?>
 
                                         <div class="clearfix"></div>

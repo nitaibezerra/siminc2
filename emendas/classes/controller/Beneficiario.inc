@@ -50,6 +50,7 @@ class Emendas_Controller_Beneficiario
 
         try {
             $mBeneficiario = new Emendas_Model_Beneficiario($benid);
+
             $url = '?modulo=principal/emenda_form&acao=A&emeid='. (int)$mBeneficiario->emeid;
 
             $mBeneficiario->benstatus = 'I';
