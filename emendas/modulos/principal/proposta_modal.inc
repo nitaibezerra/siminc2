@@ -15,8 +15,11 @@ $listaProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQ
                     <table class="table table-bordered table-hover dataTablesSP" >
                         <thead>
                         <tr class="text-center">
-                          <th>Opçoes</th>
-                          <th>CNPJ/NÚMERO da EMENDA</th>
+                          <th>Opções</th>
+                            <th>Proposta</th>
+                            <th>Sequencial</th>
+                            <th>N° Convênio</th>
+                            <th>N° Situação</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,8 +28,11 @@ $listaProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQ
                              $dado = $dados['ben'] == $dados['benid']? checked:0;
                             ?>
                         <tr>
-                          <td><input type="checkbox" name="sibid[]" value="<?php echo $dados['sibid'];?>" <?php echo $dado?> ></td>
-                          <td><?php echo $dados['beneficiario']; ?></td>
+                          <td><input class="link" type="checkbox" name="sibid[]" value="<?php echo $dados['sibid'];?>" <?php echo $dado?> ></td>
+                            <td><?php echo $dados['sicobjeto']; ?></td>
+                            <td class="text-center"><?php echo $dados['sicsequencial']; ?></td>
+                            <td class="text-center"><?php echo $dados['numeroconvenio']; ?></td>
+                            <td><?php echo $dados['sitdsc']; ?></td>
                         </tr>
                           <?php } ?>
                         </tbody>

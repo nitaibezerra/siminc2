@@ -62,11 +62,14 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
     );
     public function recuperarListagem($benid){
 
-          $sql = "select sib.sibid, sib.procnpj || ' - ' || sib.emenumero AS beneficiario, sib.benid, ben.benid AS ben
+          $sql = "select sib.sibid, sib.benid, ben.benid, sic.sicobjeto, sic.sicsequencial, sic.numeroconvenio, sit.sitdsc 
                   from emendas.beneficiario ben
                 	inner join emendas.proponente pro on pro.proid = ben.proid
                 	inner join emendas.siconvbeneficiario sib on sib.procnpj = pro.procnpj
                 	inner join emendas.emenda eme on eme.emeid = ben.emeid
+                	inner join emendas.siconv sic on sic.sicid = sib.sicid
+                    LEFT join emendas.siconvsituacao sit on sit.sitid = sic.sitid
+
                   where ben.benid = '$benid'
                   and eme.emenumero = sib.emenumero
                   Order By sib.emenumero
