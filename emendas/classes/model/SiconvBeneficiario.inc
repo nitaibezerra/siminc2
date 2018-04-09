@@ -62,18 +62,28 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
     );
     public function recuperarListagem($benid){
 
-          $sql = "select sib.sibid, sib.benid, ben.benid, sic.sicobjeto, sic.sicsequencial, sic.numeroconvenio, sit.sitdsc 
-                  from emendas.beneficiario ben
-                	inner join emendas.proponente pro on pro.proid = ben.proid
-                	inner join emendas.siconvbeneficiario sib on sib.procnpj = pro.procnpj
-                	inner join emendas.emenda eme on eme.emeid = ben.emeid
-                	inner join emendas.siconv sic on sic.sicid = sib.sicid
-                    LEFT join emendas.siconvsituacao sit on sit.sitid = sic.sitid
-
-                  where ben.benid = '$benid'
-                  and eme.emenumero = sib.emenumero
-                  Order By sib.emenumero
-                  ";
+        $sql = "
+            SELECT
+                sib.sibid,
+                sib.benid,
+                ben.benid,
+                sic.sicobjeto,
+                sic.sicsequencial,
+                sic.numeroconvenio,
+                sit.sitdsc
+            FROM emendas.beneficiario ben
+                JOIN emendas.emenda eme ON eme.emeid = ben.emeid
+                JOIN emendas.proponente pro ON pro.proid = ben.proid
+                JOIN emendas.siconvbeneficiario sib ON(
+                    sib.procnpj = pro.procnpj
+                    AND eme.emenumero = sib.emenumero)
+                JOIN emendas.siconv sic ON sic.sicid = sib.sicid
+                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+            WHERE
+                ben.benid = '". (int)$benid. "'
+            ORDER BY
+                sib.emenumero
+        ";
 
         return $this->carregar($sql);
     }

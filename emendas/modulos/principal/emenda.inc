@@ -85,7 +85,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td>
                                       <!-- se Situação SICONV tiver mais de uma proposta, executa o if abaixo -->
                                     <?php if($dados['qtdrepetida']!=0){?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Adicionar Proposta"></span>
+                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Selecionar Proposta"></span>
                                     <?php } echo $dados['sitdsc']; ?>
                                       </span>
                                     </td>
