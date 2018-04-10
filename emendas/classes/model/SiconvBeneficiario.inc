@@ -60,6 +60,7 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
         'emenumero' => null,
         'benid' => null,
     );
+    
     public function recuperarListagem($benid){
 
         $sql = "
@@ -67,9 +68,8 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
                 sib.sibid,
                 ben.benid,
                 sib.benid AS ben,
-                sic.sicobjeto,
-                sic.sicsequencial,
-                sic.numeroconvenio,
+                sic.sicsequencial || '/' || sic.prsano AS numeroproposta,
+                sic.sicobjeto AS proposta,
                 sit.sitdsc
             FROM emendas.beneficiario ben
                 JOIN emendas.emenda eme ON eme.emeid = ben.emeid
@@ -87,5 +87,19 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
 
         return $this->carregar($sql);
     }
+    
+    /**
+     * Faz exclusão lógica de todos as Propostas do SICONV de um beneficiário expecifico.
+     * 
+     * @param integer $benid
+     * @return boolean
+     */
+    public function excluirDeBeneficiario($benid){
+        $sql = "UPDATE emendas.siconvbeneficiario SET benid = NULL WHERE benid = ". (int)$benid;
+        $this->executar($sql);
+        $resultado = $this->commit();
+        return $resultado;
+    }
+    
 }//end Class
 ?>

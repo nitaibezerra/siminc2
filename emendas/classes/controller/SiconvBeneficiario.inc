@@ -7,16 +7,18 @@ class Emendas_Controller_SiconvBeneficiario
         try {
             $url = '?modulo=principal/emenda&acao=A';
 
+            # Desmarca todos os beneficiarios(Exclusao logica).
+            (new Emendas_Model_SiconvBeneficiario())->excluirDeBeneficiario($dados['benid']);
+            
             if(isset($dados['sibid']) && is_array($dados['sibid'])){
-              foreach($dados['sibid'] as $sibid){
-                  $mSiconvBeneficiario = new Emendas_Model_SiconvBeneficiario($sibid);
-                  $mSiconvBeneficiario->benid = $dados['benid'];
+                foreach($dados['sibid'] as $sibid){
+                    $mSiconvBeneficiario = new Emendas_Model_SiconvBeneficiario($sibid);
+                    $mSiconvBeneficiario->benid = $dados['benid'];
 
-                  $mSiconvBeneficiario->salvar();
-                  $mSiconvBeneficiario->commit();
-                  unset($mSiconvBeneficiario);
-              }
-
+                    $mSiconvBeneficiario->salvar();
+                    $mSiconvBeneficiario->commit();
+                    unset($mSiconvBeneficiario);
+                }
             }
 
             simec_redirecionar($url, 'success');

@@ -9,15 +9,13 @@ $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_S
 //ver($listaSubUnidadeUsuario);
 switch ($_REQUEST['req']) {
     case 'proposta_modal':
-          $mProposta = (new Emendas_Model_SiconvBeneficiario)->recuperarListagem($_REQUEST['benid']);
         include 'proposta_modal.inc';
     die;
     case 'salvar-proposta':
-    $cProposta = new Emendas_Controller_SiconvBeneficiario();
-    $cProposta->salvar($_REQUEST);
-    include 'proposta_modal.inc';
+        $cProposta = new Emendas_Controller_SiconvBeneficiario();
+        $cProposta->salvar($_REQUEST);
     die;
-  }
+}
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -105,7 +103,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <?php
-  bootstrapPopup("Selecionar Proposta", 'proposta_modal', '', array('fechar'), array('tamanho' => 'lg'));
+  bootstrapPopup("Selecionar Proposta", 'proposta_modal', '', array('salvar'), array('tamanho' => 'lg'));
 
 ?>
 <script>
@@ -124,5 +122,10 @@ include APPRAIZ . "includes/cabecalho.inc";
             $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
             $('#proposta_modal').modal();
         });
+        
+        $('.btn-salvar').click(function(){
+            $('#formulario-selecionar-proposta').submit();
+        });
+        
     });
 </script>

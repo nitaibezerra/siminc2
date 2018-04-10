@@ -152,7 +152,7 @@ class Emendas_Model_Emenda extends Modelo
                     SELECT
                         eme.emeid,
                         pro.procnpj,
-                        count(*) qtdrepetida
+                        COUNT(pro.proid) qtdrepetida
                     FROM
                         emendas.emenda eme
                         INNER JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
@@ -170,8 +170,7 @@ class Emendas_Model_Emenda extends Modelo
                         eme.emeid,
                         pro.procnpj
                     HAVING
-                        count(*) > 1
-                        
+                        COUNT(pro.proid) > 1
                 ) rep ON(rep.emeid = eme.emeid)
             WHERE
                 eme.emestatus = 'A'
