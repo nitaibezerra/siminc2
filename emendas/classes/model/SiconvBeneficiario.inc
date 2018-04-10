@@ -65,8 +65,8 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
         $sql = "
             SELECT
                 sib.sibid,
-                sib.benid,
                 ben.benid,
+                sib.benid AS ben,
                 sic.sicobjeto,
                 sic.sicsequencial,
                 sic.numeroconvenio,
