@@ -150,18 +150,29 @@ class Emendas_Model_Emenda extends Modelo
                 LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
                 LEFT JOIN (
                     SELECT
-                        sib.emenumero,
-                        sib.procnpj,
-                        COUNT(sib.sicid) AS qtdrepetida
-                    FROM emendas.siconvbeneficiario sib
-                        JOIN emendas.siconv sic ON sib.sicid = sic.sicid
+                        eme.emeid,
+                        pro.procnpj,
+                        count(*) qtdrepetida
+                    FROM
+                        emendas.emenda eme
+                        INNER JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
+                        INNER JOIN emendas.proponente pro ON pro.proid = ben.proid
+                    WHERE
+                        EXISTS (
+                            SELECT
+                                1
+                            FROM emendas.siconvbeneficiario sib
+                            WHERE
+                                sib.emenumero = eme.emenumero
+                                AND sib.procnpj = pro.procnpj
+                        )
                     GROUP BY
-                        sib.emenumero,
-                        sib.procnpj
-                    HAVING COUNT(sib.sicid) > 1
-                ) rep ON(
-                    eme.emenumero = rep.emenumero
-                    AND pro.procnpj = rep.procnpj)
+                        eme.emeid,
+                        pro.procnpj
+                    HAVING
+                        count(*) > 1
+                        
+                ) rep ON(rep.emeid = eme.emeid)
             WHERE
                 eme.emestatus = 'A'
                 AND eme.prsano = '". (int)$exercicio. "'
