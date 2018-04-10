@@ -63,7 +63,7 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
         'benid' => null,
     );
 
-    public function montarRecuperarPorUnidade($listaUnidades,$benid){
+    public function montarRecuperarPorUnidade($benid){
       $sql = "
             SELECT DISTINCT
                 bh.*
@@ -75,14 +75,11 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
             ORDER BY  behdata desc"
          ;
 
-         if(count($listaUnidades)){
-           $sql .= " and ur.ungcod IN('" . join($listaUnidades, "','") . "')";
-         }
         return $sql;
     }
 
-    public function recuperarPorUnidade($listaUnidades,$benid){
-      $sql = $this->montarRecuperarPorUnidade($listaUnidades,$benid);
+    public function recuperarPorUnidade($benid){
+      $sql = $this->montarRecuperarPorUnidade($benid);
       return $this->carregar($sql);
     }
 
