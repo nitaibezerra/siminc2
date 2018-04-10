@@ -132,7 +132,7 @@ function adaptarBeneficioPi(stdClass $beneficiario){
     $piCusteio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
     $piCapital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
     # Buscando numero do convênio do beneficiario
-    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($benid);
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($beneficiario->benid);
 
     # PI - Basico
     $pi = new stdClass();
