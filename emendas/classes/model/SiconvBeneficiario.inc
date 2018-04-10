@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Emendas_Model_SiconvBeneficiario extends Modelo
@@ -60,6 +60,46 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
         'emenumero' => null,
         'benid' => null,
     );
+    
+    public function recuperarListagem($benid){
 
+        $sql = "
+            SELECT
+                sib.sibid,
+                ben.benid,
+                sib.benid AS ben,
+                sic.sicsequencial || '/' || sic.prsano AS numeroproposta,
+                sic.sicobjeto AS proposta,
+                sit.sitdsc
+            FROM emendas.beneficiario ben
+                JOIN emendas.emenda eme ON eme.emeid = ben.emeid
+                JOIN emendas.proponente pro ON pro.proid = ben.proid
+                JOIN emendas.siconvbeneficiario sib ON(
+                    sib.procnpj = pro.procnpj
+                    AND eme.emenumero = sib.emenumero)
+                JOIN emendas.siconv sic ON sic.sicid = sib.sicid
+                LEFT JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+            WHERE
+                ben.benid = '". (int)$benid. "'
+            ORDER BY
+                sib.emenumero
+        ";
+
+        return $this->carregar($sql);
+    }
+    
+    /**
+     * Faz exclusão lógica de todos as Propostas do SICONV de um beneficiário expecifico.
+     * 
+     * @param integer $benid
+     * @return boolean
+     */
+    public function excluirDeBeneficiario($benid){
+        $sql = "UPDATE emendas.siconvbeneficiario SET benid = NULL WHERE benid = ". (int)$benid;
+        $this->executar($sql);
+        $resultado = $this->commit();
+        return $resultado;
+    }
+    
 }//end Class
 ?>
