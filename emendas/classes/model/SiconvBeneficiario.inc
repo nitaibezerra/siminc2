@@ -87,5 +87,19 @@ class Emendas_Model_SiconvBeneficiario extends Modelo
 
         return $this->carregar($sql);
     }
+    
+    /**
+     * Faz exclusão lógica de todos as Propostas do SICONV de um beneficiário expecifico.
+     * 
+     * @param integer $benid
+     * @return boolean
+     */
+    public function excluirDeBeneficiario($benid){
+        $sql = "UPDATE emendas.siconvbeneficiario SET benid = NULL WHERE benid = ". (int)$benid;
+        $this->executar($sql);
+        $resultado = $this->commit();
+        return $resultado;
+    }
+    
 }//end Class
 ?>

@@ -12,11 +12,10 @@ switch ($_REQUEST['req']) {
         include 'proposta_modal.inc';
     die;
     case 'salvar-proposta':
-    $cProposta = new Emendas_Controller_SiconvBeneficiario();
-    $cProposta->salvar($_REQUEST);
-    include 'proposta_modal.inc';
+        $cProposta = new Emendas_Controller_SiconvBeneficiario();
+        $cProposta->salvar($_REQUEST);
     die;
-  }
+}
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
