@@ -2,39 +2,39 @@
 
 $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
 switch ($_REQUEST['req']) {
-	case 'salvar':
+    case 'salvar':
         $cPrePlanoInterno->salvar($_REQUEST);
-		die;
-	case 'excluir':
+        die;
+    case 'excluir':
         $cPrePlanoInterno->excluir($_REQUEST['pliid']);
-		die;
-	case 'carregar-item':
+        die;
+    case 'carregar-item':
         echo $simec->select('maiid', 'Item', null, (new Planacomorc_Model_ManutencaoItem())->recuperarSqlCombo(null, ["eqdid = " . (int) $_REQUEST['eqdid']]));
-		die;
-	case 'carregar-subitem':
+        die;
+    case 'carregar-subitem':
         echo $simec->select('masid', 'SubItem', null, (new Planacomorc_Model_ManutencaoSubItem())->recuperarSqlCombo(null, ["maiid = " . (int) $_REQUEST['maiid'] ]));
-		die;
-	case 'carregar-funcional':
+        die;
+    case 'carregar-funcional':
         echo $simec->select('ptrid', 'Funcional', null, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($_REQUEST['suoid'], $_REQUEST['eqdid']), ['required']);
-		die;
-	case 'carregar-segmento':
+        die;
+    case 'carregar-segmento':
         echo $simec->select('neeid', 'Segmento Cultural', null, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ['mdeid = ' . (int)$_REQUEST['mdeid']]), ['required']);
-		die;
-	case 'carregar-metapnc':
+        die;
+    case 'carregar-metapnc':
         echo $simec->select('mpnid', 'Meta PNC', null, (new Public_Model_MetaPnc())->recuperarSqlCombo(null, ['suoid'=>$_REQUEST['suoid']]), ['required']);
-		die;
-	case 'carregar-indicadorpnc':
+        die;
+    case 'carregar-indicadorpnc':
         echo $simec->select('ipnid', 'Indicador PNC', null, (new Public_Model_IndicadorPnc())->recuperarSqlCombo(null, ['mpnid'=>(int)$_REQUEST['mpnid']]), ['required']);
-		die;
-	case 'recuperar-objetivoppa':
-	    echo (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarObjetivoPorPtres();
-		die;
-	case 'carregar-metappa':
+        die;
+    case 'recuperar-objetivoppa':
+        echo (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarObjetivoPorPtres();
+        die;
+    case 'carregar-metappa':
         echo $simec->select('mppid', 'Metas PPA', null, (new Public_Model_MetaPpa())->recuperarSqlCombo(null, ['suoid'=>(int)$_REQUEST['suoid'], 'oppid'=>(int)$_REQUEST['oppid']]), ['required']);
-		die;
-	case 'carregar-iniciativappa':
+        die;
+    case 'carregar-iniciativappa':
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), ['required']);
-		die;
+        die;
 }
 
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
@@ -73,21 +73,6 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Metas</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <?php
-                        echo $simec->select('oppid', 'Objetivo PPA', $mPrePlanoInterno->oppid, (new Public_Model_ObjetivoPpa())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-metappa">' . $simec->select('mppid', 'Metas PPA', $mPrePlanoInterno->mppid, (new Public_Model_MetaPpa())->recuperarSqlCombo(), ['required']) . '</span>';
-                        echo '<span id="span-iniciativappa">' . $simec->select('ippid', 'Iniciativa PPA', $mPrePlanoInterno->ippid, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(), ['required']) . '</span>';
-                        echo '<span id="span-metapnc">' . $simec->select('mpnid', 'Meta PNC', $mPrePlanoInterno->mpnid, (new Public_Model_MetaPnc())->recuperarSqlCombo(null, ['suoid'=>$mPrePlanoInterno->suoid]), ['required']) . '</span>';
-                        echo '<span id="span-indicadorpnc">' . $simec->select('ipnid', 'Indicador PNC', $mPrePlanoInterno->ipnid, (new Public_Model_IndicadorPnc())->recuperarSqlCombo(), ['required']) . '</span>';
-                        ?>
-                    </div>
-                </div>
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
                         <h5>Produto PI</h5>
                     </div>
                     <div class="ibox-content">
@@ -99,36 +84,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                 </div>
 
-            </div>
-            <div class="col-md-5">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Identificação</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <?php
-                        echo $simec->select('suoid', 'SubUnidade', $mPrePlanoInterno->suoid, (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(), ['required']);
-                        echo $simec->select('eqdid', 'Enquadramento da Despesa', $mPrePlanoInterno->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-item">' . $simec->select('maiid', 'Item', $mPrePlanoInterno->maiid, (new Planacomorc_Model_ManutencaoItem())->recuperarSqlCombo(null, ["eqdid = " . (int) $mPrePlanoInterno->eqdid ])) . '</span>';
-                        echo '<span id="span-subitem">' . $simec->select('masid', 'SubItem', $mPrePlanoInterno->masid, (new Planacomorc_Model_ManutencaoSubItem())->recuperarSqlCombo(null, ["maiid = " . (int) $mPrePlanoInterno->maiid ])) . '</span>';
-                        echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mPrePlanoInterno->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mPrePlanoInterno->suoid, $mPrePlanoInterno->eqdid)) . '</span>';
-                        ?>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Informações Complementares</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <?php
-                        echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
-                        ?>
-                    </div>
-                </div>
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Custeio e Capital</h5>
@@ -179,6 +134,67 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </table>
                     </div>
                 </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Solicitação de Valor Adicional</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        echo $simec->valor('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional);
+                        echo $simec->valor('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
+                        echo $simec->valor('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
+                        echo $simec->textarea('plijustificativaadicional', 'Justificativa', $mPrePlanoInterno->plijustificativaadicional);
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-5">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Identificação</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        echo $simec->select('suoid', 'SubUnidade', $mPrePlanoInterno->suoid, (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(), ['required']);
+                        echo $simec->select('eqdid', 'Enquadramento da Despesa', $mPrePlanoInterno->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
+                        echo '<span id="span-item">' . $simec->select('maiid', 'Item', $mPrePlanoInterno->maiid, (new Planacomorc_Model_ManutencaoItem())->recuperarSqlCombo(null, ["eqdid = " . (int) $mPrePlanoInterno->eqdid ])) . '</span>';
+                        echo '<span id="span-subitem">' . $simec->select('masid', 'SubItem', $mPrePlanoInterno->masid, (new Planacomorc_Model_ManutencaoSubItem())->recuperarSqlCombo(null, ["maiid = " . (int) $mPrePlanoInterno->maiid ])) . '</span>';
+                        echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mPrePlanoInterno->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mPrePlanoInterno->suoid, $mPrePlanoInterno->eqdid)) . '</span>';
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Metas</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        echo $simec->select('oppid', 'Objetivo PPA', $mPrePlanoInterno->oppid, (new Public_Model_ObjetivoPpa())->recuperarSqlCombo(), ['required']);
+                        echo '<span id="span-metappa">' . $simec->select('mppid', 'Metas PPA', $mPrePlanoInterno->mppid, (new Public_Model_MetaPpa())->recuperarSqlCombo(null, ['suoid'=>(int)$mPrePlanoInterno->suoid, 'oppid'=>(int)$mPrePlanoInterno->oppid]), ['required']) . '</span>';
+                        echo '<span id="span-iniciativappa">' . $simec->select('ippid', 'Iniciativa PPA', $mPrePlanoInterno->ippid, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$mPrePlanoInterno->oppid]), ['required']) . '</span>';
+                        echo '<span id="span-metapnc">' . $simec->select('mpnid', 'Meta PNC', $mPrePlanoInterno->mpnid, (new Public_Model_MetaPnc())->recuperarSqlCombo(null, ['suoid'=>$mPrePlanoInterno->suoid]), ['required']) . '</span>';
+                        echo '<span id="span-indicadorpnc">' . $simec->select('ipnid', 'Indicador PNC', $mPrePlanoInterno->ipnid, (new Public_Model_IndicadorPnc())->recuperarSqlCombo(null, ['mpnid'=>(int)$mPrePlanoInterno->mpnid]), ['required']) . '</span>';
+                        ?>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Informações Complementares</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <?php
+                        echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
+                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
+                        ?>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -233,9 +249,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                 url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-objetivoppa&ptrid=' + $(this).val(),
                 success: function(oppid){
                     if(oppid){
-                        $('#oppid').val(oppid).prop('disabled', 'disabled').trigger("chosen:updated");
+                        $('#oppid').val(oppid).prop('readonly', 'readonly').trigger("chosen:updated").change();
                     } else {
-                        $('#oppid').val('').prop('disabled', false).trigger("chosen:updated");
+                        $('#oppid').val('').prop('readonly', false).trigger("chosen:updated").change();
                     }
                 }
             });

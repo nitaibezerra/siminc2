@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Proposta_Model_PrePlanoInterno extends Modelo
@@ -92,6 +92,10 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'docid' => null,
         'prsano' => null,
         'plistatus' => null,
+        'plivalorcusteioadicional' => null,
+        'plivalorcapitaladicional' => null,
+        'pliquantidadeadicional' => null,
+        'plijustificativaadicional' => null,
     );
 
 }//end Class
