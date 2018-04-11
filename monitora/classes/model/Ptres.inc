@@ -221,7 +221,8 @@ class Monitora_Model_Ptres extends Modelo
 
     public function recuperarSqlPorSubunidadeEEnquadramento($suoid, $eqdid)
     {
-        $sql = "select coalesce(ptr.prgcod, ''), coalesce(ptr.acacod, ''), coalesce(ptr.acaobjetivocod, ''), coalesce(ptr.loccod, ''), coalesce(ptr.plocod, ''), ptr.acatitulo
+        $sql = "select  ptr.ptrid codigo, 
+                        coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo descricao
                 from monitora.vw_ptres ptr
                         inner join spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
                         inner join monitora.enquadramentorp erp on erp.irpcod = ptr.irpcod and erp.eqdid = " . (int) $eqdid . "
@@ -229,9 +230,31 @@ class Monitora_Model_Ptres extends Modelo
                 and ptr.ptrstatus = 'A'
                 and ptr.plocod != 'EIND'
                 and psu.suoid = " . (int) $suoid . "
-                order by coalesce(ptr.prgcod, ''), coalesce(ptr.acacod, ''), coalesce(ptr.acaobjetivocod, ''), coalesce(ptr.loccod, ''), coalesce(ptr.plocod, ''), ptr.acatitulo";
+                order by descricao";
 
         return $sql;
+    }
+
+    public function recuperarDadosView()
+    {
+        $sql = "select  * from monitora.vw_ptres ptr 
+                where ptr.ptrano = '{$_SESSION['exercicio']}'
+                and ptr.ptrstatus = 'A'
+                and ptrid = " . (int) $this->ptrid;
+
+        return $this->pegaLinha($sql);
+    }
+
+    function recuperarObjetivoPorPtres() {
+        global $db;
+
+        $sql = "SELECT o.oppid
+                FROM monitora.ptres ptr
+                INNER JOIN monitora.acao aca on ptr.acaid = aca.acaid and aca.prgano = ptr.ptrano
+                INNER JOIN public.objetivoppa o on o.oppcod = aca.acaobjetivocod and o.prsano = ptr.ptrano
+            where ptrid = " . (int) $this->ptrid;
+
+        return $db->pegaUm($sql);
     }
 }//end Class
 ?>
