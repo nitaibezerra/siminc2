@@ -64,23 +64,24 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
     );
 
     public function montarRecuperarPorUnidade($benid){
-      $sql = "
+        $sql = "
             SELECT DISTINCT
                 bh.*
             FROM emendas.beneficiariohistorico bh
-            LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
+                LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
             WHERE
                 bh.behstatus = 'A'
                 AND bh.benid = " . (int)$benid . " 
-            ORDER BY  behdata desc"
-         ;
+            ORDER BY
+                behdata desc
+        ";
 
         return $sql;
     }
 
     public function recuperarPorUnidade($benid){
-      $sql = $this->montarRecuperarPorUnidade($benid);
-      return $this->carregar($sql);
+        $sql = $this->montarRecuperarPorUnidade($benid);
+        return $this->carregar($sql);
     }
 
 }//end Class

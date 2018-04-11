@@ -74,7 +74,7 @@ class Emendas_Controller_Beneficiario
 
     public function montarListagemHistorico($benid, $podeEditar)
     {
-        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarPorUnidade([],$benid);
+        $aBeneficiarioHistorico = (new Emendas_Model_BeneficiarioHistorico)->recuperarPorUnidade($benid);
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
     }
 
@@ -83,7 +83,9 @@ class Emendas_Controller_Beneficiario
     {
         global $simec;
         $mBeneficiarioDetalhe = new Emendas_Model_BeneficiarioDetalhe($bedid);
-        if(!$mBeneficiarioDetalhe->benid){ $mBeneficiarioDetalhe->benid = $benid; }
+        if(!$mBeneficiarioDetalhe->benid){
+            $mBeneficiarioDetalhe->benid = $benid;
+        }
         $mBeneficiario = new Emendas_Model_Beneficiario($mBeneficiarioDetalhe->benid);
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe_form.inc';
     }
