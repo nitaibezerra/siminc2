@@ -63,27 +63,25 @@ class Emendas_Model_BeneficiarioHistorico extends Modelo
         'benid' => null,
     );
 
-    public function montarRecuperarPorUnidade($listaUnidades,$benid){
-      $sql = "
+    public function montarRecuperarPorUnidade($benid){
+        $sql = "
             SELECT DISTINCT
                 bh.*
             FROM emendas.beneficiariohistorico bh
-            LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
+                LEFT JOIN emendas.usuarioresponsabilidade ur ON bh.usucpf = ur.usucpf
             WHERE
                 bh.behstatus = 'A'
                 AND bh.benid = " . (int)$benid . " 
-            ORDER BY  behdata desc"
-         ;
+            ORDER BY
+                behdata desc
+        ";
 
-         if(count($listaUnidades)){
-           $sql .= " and ur.ungcod IN('" . join($listaUnidades, "','") . "')";
-         }
         return $sql;
     }
 
-    public function recuperarPorUnidade($listaUnidades,$benid){
-      $sql = $this->montarRecuperarPorUnidade($listaUnidades,$benid);
-      return $this->carregar($sql);
+    public function recuperarPorUnidade($benid){
+        $sql = $this->montarRecuperarPorUnidade($benid);
+        return $this->carregar($sql);
     }
 
 }//end Class
