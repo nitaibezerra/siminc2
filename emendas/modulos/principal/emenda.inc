@@ -6,6 +6,7 @@ $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
 //ver($listaSubUnidadeUsuario);
 switch ($_REQUEST['req']) {
     case 'proposta_modal':
@@ -16,9 +17,14 @@ switch ($_REQUEST['req']) {
         $cProposta->salvar($_REQUEST);
     die;
 }
+
 $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem($_SESSION['exercicio'], $listaSubUnidadeUsuario);
+
 include APPRAIZ . "includes/cabecalho.inc";
+
 ?>
+
+<script src="js/principal/emenda.js?v=4"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-12">
@@ -31,13 +37,56 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
+                    <h5>Pesquisa avançada por PI</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
+                        <input name="requisicao" id="requisicao" value="" type="hidden">
+
+                        <?php
+                            $sqlSubunidade = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlComboUnidade((object)['exercicio' => $_SESSION['exercicio']]);
+                            echo $simec->select('suoid', 'SubUnidade', $filtropi['suoid'], $sqlSubunidade);
+                            echo $simec->select('suoid_delegada', 'SubUnidade Delegada', $filtropi['suoid_delegada'], $sqlSubunidade);
+                            echo $simec->select('lista_esdid', 'Situação', $filtropi['lista_esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_BENEFICIARIO)), array('multiple' => 'true'));
+                            $modelSiconvSituacao = new Emendas_Model_SiconvSituacao();
+                            $sqlSituacaoSiconv = $modelSiconvSituacao->recuperarSqlCombo(['sitid', 'sitdsc'], NULL, 'sitid');
+                            echo $simec->select('lista_sitid', 'Situação SICONV', $filtropi['lista_sitid'], $sqlSituacaoSiconv, array('multiple' => 'true'));
+                            echo $simec->radio('benimpedimento', 'Impedimento', $filtropi['benimpedimento'], ['t' => 'Sim', 'f' => 'Não']);
+                        ?>
+
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-success btn-limpar" type="button">
+                                    <span class="glyphicon glyphicon-remove-circle"></span> Limpar
+                                </button>
+                                <button class="btn btn-primary btn-buscar" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
+                                    <i class="fa fa-file-excel-o"></i> Exportar XLS
+                                </button>
+                                <?php if($podeEditar): ?>
+                                    <button id="btn_novo" class="btn btn-warning" type="button">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        Novo
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
                     <h5>Dados Gerais</h5>
                 </div>
                 <div class="ibox-content">
-
-                    <?php if($podeEditar): ?>
-                        <a class="btn btn-small btn-warning" href="?modulo=principal/emenda_form&acao=A">Novo</a>
-                    <?php endif; ?>
 
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover dataTablesSP" >
@@ -103,29 +152,14 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <?php
-  bootstrapPopup("Selecionar Proposta", 'proposta_modal', '', array('salvar'), array('tamanho' => 'lg'));
+
+    bootstrapPopup("Selecionar Proposta", 'proposta_modal', '', array('salvar'), array('tamanho' => 'lg'));
 
 ?>
 <script>
+
     $(document).ready(function(){
-
-        $('.dataTablesSP').DataTable({
-            bPaginate: false,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            "language": {
-                "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
-            }
-        });
-
-        $('.editar_situacao').click(function(){
-            $('#proposta_modal .modal-body').load('emendas.php?modulo=principal/emenda&acao=A&req=proposta_modal&benid='+ $(this).data('benid'));
-            $('#proposta_modal').modal();
-        });
-        
-        $('.btn-salvar').click(function(){
-            $('#formulario-selecionar-proposta').submit();
-        });
-        
+        initListaEmendas();
     });
+
 </script>
