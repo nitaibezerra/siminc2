@@ -90,7 +90,7 @@ class Emendas_Controller_Beneficiario
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe_form.inc';
     }
 
-    public function montarListagemDetalhe($benid)
+    public function montarListagemDetalhe($benid, $podeEditar)
     {
         $aBeneficiarioDetalhe = (new Emendas_Model_BeneficiarioDetalhe)->recuperarListagem($benid);
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariodetalhe.inc';
