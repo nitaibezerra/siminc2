@@ -71,15 +71,15 @@ class Emendas_Model_Emenda extends Modelo
         'emeatualizacaosiconv' => null,
     );
 
-    public function recuperarListagem($exercicio, $listaSubUnidadeUsuario = array())
+    public function recuperarListagem(stdClass $filtro)
     {
         $where = NULL;
 
-        if($listaSubUnidadeUsuario){
+        if($filtro->listaSubUnidadeUsuario){
             # Expressão para verificar se o estado é após enviado para preenchimento da unidade.
-            $where .= "\n AND doce.esdid IN(". ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE. ','. ESD_BENEFICIARIO_CORRECAO. ','. ESD_BENEFICIARIO_PI_GERADO. ")";
+            $where .= "\n AND doce.esdid IN(". ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE. ','. ESD_BENEFICIARIO_CORRECAO. ','. ESD_BENEFICIARIO_PI_GERADO. ','. ESD_BENEFICIARIO_PI_APROVADO. ")";
             # Expressão pra verificar se o beneficiario é da mesa unidade do Usuário Logado com perfil de Unidade.
-            $where .= "\n AND (suo.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $listaSubUnidadeUsuario). ") ) ";
+            $where .= "\n AND (suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ) ";
         }
 
         $sql = "
@@ -111,8 +111,9 @@ class Emendas_Model_Emenda extends Modelo
                 ben.benid,
                 suo.suocod || ' - ' || suo.suosigla subunidade,
                 aut.estuf,
-                CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
+                ben.impid,
                 doce.esddsc,
+                pi.pliid,
                 (
                     SELECT
                         SUM(bedvalor)
@@ -174,7 +175,7 @@ class Emendas_Model_Emenda extends Modelo
                 ) rep ON(rep.emeid = eme.emeid)
             WHERE
                 eme.emestatus = 'A'
-                AND eme.prsano = '". (int)$exercicio. "'
+                AND eme.prsano = '". (int)$filtro->exercicio. "'
                 $where
             ORDER BY
                 aut.autnome,
