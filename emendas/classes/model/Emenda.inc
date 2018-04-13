@@ -108,8 +108,28 @@ class Emendas_Model_Emenda extends Modelo
                         sicsequencial DESC
                     LIMIT 1
                 ) AS sitdsc,
+                (
+		    SELECT
+                        sic.sicsequencial || '/' || sic.prsano
+                    FROM emendas.siconvbeneficiario sbe
+                        JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                        JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                    WHERE
+			sbe.benid = ben.benid
+                    ORDER BY
+                        sicsequencial DESC
+                    LIMIT 1
+                ) AS numero_proposta,
                 ben.benid,
                 suo.suosigla subunidade,
+                (SELECT ARRAY_TO_STRING(ARRAY(
+                    SELECT
+                        suod.suosigla
+                    FROM emendas.delegacao d
+                        JOIN public.vw_subunidadeorcamentaria suod ON(d.suoid = suod.suoid)
+                    WHERE
+                        d.benid = ben.benid
+                ), '\n ')) AS subunidade_delegada,
                 aut.estuf,
                 ben.impid,
                 doce.esddsc,
