@@ -351,7 +351,7 @@ class Emendas_Model_Emenda extends Modelo
 		bed.bedvalorpriorizado,
                 bed.bedvalor - bed.bedvalorpriorizado AS contigenciado,
 		-- DADOS SICONV
-		prg.prgcodigo AS numero_programa,
+		CASE WHEN prg.prgcodigo IS NOT NULL THEN substr(prg.prgcodigo::TEXT, 1, 6) || ' ' || substr(prg.prgcodigo::TEXT, 6, 4) || ' ' || substr(prg.prgcodigo::TEXT, 10, 4) ELSE NULL END AS numero_programa,
 		prg.prgtitulo AS titulo_programa,
 		ben.benprogramatitulo AS objeto_programa,
 		CASE WHEN bensic.sicsequencial IS NOT NULL THEN bensic.sicsequencial || '/' || bensic.prsano END AS numero_proposta,
