@@ -119,10 +119,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Beneficiário</th>
                                 <th width="10%">Subunidade</th>
                                 <th>Situação</th>
+                                <th>Nº Proposta</th>
                                 <th>Situação SICONV</th>
-                                <th>PI</th>
+                                <th>PI Id</th>
                                 <th>Custeio</th>
-                                <th>Capital</th>
+                                <th>Valor</th>
                                 <th>Empenhado</th>
                                 <th>Pago</th>
                             </tr>
@@ -146,12 +147,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $dados['pronome']; ?></td>
-                                    <td><?php echo $dados['subunidade']; ?></td>
+                                    <td title="TESTE"><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>
+
+                                    <!-- AQUI ENTRA DADOS DO NÚMERO DA PROPOSTA-->
+                                    <td><?php ?></td>
                                     <td>
                                       <!-- se Situação SICONV tiver mais de uma proposta, executa o if abaixo -->
                                     <?php if($dados['qtdrepetida']!=0){?>
-                                      <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid'];?>" title="Selecionar Proposta"></span>
+                                        <span class="editar_situacao fa fa-pencil detalhar-linha link"
+                                              data-benid="<?php echo $dados['benid']; ?>" title="Selecionar Proposta">
                                     <?php } echo $dados['sitdsc']; ?>
                                       </span>
                                     </td>
@@ -159,7 +164,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php echo $dados['pliid']? "<span class='link a_espelho' title='Exibir dados do Plano Interno' data-pi='{$dados['pliid']}'>{$dados['pliid']}</span>": NULL; ?>
                                     </td>
                                     <td><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
-                                    <td><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
+                                    <td title="<?php echo number_format( ($dados['capital']+$dados['custeio']), 2, ',', '.'); ?>"><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                 </tr>

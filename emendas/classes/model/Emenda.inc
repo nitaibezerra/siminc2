@@ -91,10 +91,10 @@ class Emendas_Model_Emenda extends Modelo
                 eme.emeimpositiva,
                 eme.autid,
                 eme.prsano,
-                uno.unocod || ' - ' || uno.unosigla unidade,
+                uno.unosigla unidade,
                 aut.autnome,
                 aut.autcod,
-                coalesce(rep.qtdrepetida, 0) qtdrepetida,
+                COALESCE(rep.qtdrepetida, 0) qtdrepetida,
                 pro.pronome,
                 (
 		    SELECT
@@ -109,7 +109,7 @@ class Emendas_Model_Emenda extends Modelo
                     LIMIT 1
                 ) AS sitdsc,
                 ben.benid,
-                suo.suocod || ' - ' || suo.suosigla subunidade,
+                suo.suosigla subunidade,
                 aut.estuf,
                 ben.impid,
                 doce.esddsc,
