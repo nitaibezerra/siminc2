@@ -146,7 +146,6 @@ class Spo_Model_Unidade extends Modelo
      */
     public static function queryComboEstados(stdClass $filtro)
     {
-//ver((array)$filtro,d);
         # Filtros
         $where = self::montarFiltros((array)$filtro);
         
@@ -157,6 +156,8 @@ class Spo_Model_Unidade extends Modelo
             FROM workflow.estadodocumento
             WHERE
                 $where
+            ORDER BY
+                1
         ";
 //ver($sql,d);
         return $sql;
