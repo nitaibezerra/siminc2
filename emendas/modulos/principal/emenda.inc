@@ -195,7 +195,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td>
                                         <?php echo $dados['pliid']? "<span class='link a_espelho' title='Exibir dados do Plano Interno' data-pi='{$dados['pliid']}'>{$dados['pliid']}</span>": NULL; ?>
                                     </td>
-                                    <td class="link" title="<?php echo ' Custeio: '. number_format($dados['custeio'], 2, ',', '.'). "\n Capital: ". number_format($dados['capital'], 2, ',', '.'); ?>"><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
+                                    <td class="link" title="<?php echo ' Custeio: '. number_format($dados['custeio'], 2, ',', '.'). "\n Capital: ". number_format($dados['capital'], 2, ',', '.'); ?>"><?php echo number_format(($dados['custeio'] + $dados['capital']), 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
                                     <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                 </tr>

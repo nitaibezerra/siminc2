@@ -7,31 +7,24 @@
 
     # Colunas do relatório
     $cabecalho = [
-        'Id',
-        'Código',
+        'Emenda',
         'Unidade',
-        'Título',
-        'Funcional',
+        'Autor',
+        'UF',
+        'Id Beneficiário',
+        'Beneficiário',
+        'Subunidade',
         'Situação',
-        'Custeio',
-        'Capital',
-        'Provisionado',
+        'Nº Proposta',
+        'Situação SICONV',
+        'PI',
+        'Valor',
         'Empenhado',
-        'Liquidado',
-        'Pago',
+        'Pago'
     ];
 
 ?>
 
-<table width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            Em fase de desenvolvimento...
-        </tr>
-    </thead>
-</table>
-
-<!--
 <table width="100%" cellspacing="0">
     <thead>
         <tr>
@@ -41,53 +34,31 @@
         </tr>
     </thead>
     <tbody>
-        <?php if($listaPi): ?>
+        <?php if($aEmenda): ?>
             <tbody>
-            <?php foreach($listaPi as $pi): ?>
+            <?php foreach($aEmenda as $dados): ?>
                 <tr>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['id']; ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo strip_tags($pi['codigo_pi']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['sub_unidade']; ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo strip_tags($pi['plititulo']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['funcional']; ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo $pi['situacao']; ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['custeio']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['capital']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['autorizado']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['empenhado']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['liquidado']); ?>
-                    </td>
-                    <td style="border: 1px #e5d9c5 solid;">
-                        <?php echo formata_valor($pi['pago']); ?>
-                    </td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['emenumero']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['unidade']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['autnome']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['estuf']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['benid']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['pronome']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['subunidade']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['esddsc']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['numero_proposta']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['sitdsc']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['pliid'] ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo formata_valor(($dados['custeio'] + $dados['capital'])); ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo formata_valor($dados['empenhado']); ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo formata_valor($dados['pago']); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         <?php endif; ?>
     </tbody>
 </table>
--->
+
 <?php
 die;
 
