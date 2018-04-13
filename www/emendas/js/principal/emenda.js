@@ -88,7 +88,7 @@
      */
     function carregarUGdelegada(unicod) {
         $.post(
-            '?modulo=principal/emenda&acao=A&req=carregarComboUGDelegada', { unicod: unicod}, function(response) {
+            '?modulo=principal/emenda&acao=A&req=carregarComboUGDelegada', { unicod_delegada: unicod}, function(response) {
                 $('#div_ungcod_delegada').remove('slow');
                 $('#div_ungcod_delegada').html(response);
                 $(".chosen-select").chosen();

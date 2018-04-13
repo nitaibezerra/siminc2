@@ -39,7 +39,7 @@ switch ($requisicao) {
             $filtroEmenda['suoid'],
             Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
             'exercicio' => $_SESSION['exercicio'],
-            'unicod' => $param['unicod']
+            'unicod' => $filtroEmenda['unicod']
         )));
         
         die();
@@ -51,7 +51,7 @@ switch ($requisicao) {
             $filtroEmenda['suoid_delegada'],
             Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
             'exercicio' => $_SESSION['exercicio'],
-            'unicod' => $param['unicod']
+            'unicod' => $filtroEmenda['unicod_delegada']
         )));
         die();
     break;
