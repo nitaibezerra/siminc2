@@ -38,7 +38,7 @@
             <tbody>
             <?php foreach($aEmenda as $dados): ?>
                 <tr>
-                    <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['emenumero']; ?></td>
+                    <td style="border: 1px #e5d9c5 solid;"><?php echo substr($dados['emenumero'], 0, 4). ' '. substr($dados['emenumero'], 4); ?></td>
                     <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['unidade']; ?></td>
                     <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['autnome']; ?></td>
                     <td style="border: 1px #e5d9c5 solid;"><?php echo $dados['estuf']; ?></td>
