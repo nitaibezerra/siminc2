@@ -71,16 +71,62 @@ class Emendas_Model_Emenda extends Modelo
         'emeatualizacaosiconv' => null,
     );
 
-    public function recuperarListagem(stdClass $filtro)
-    {
+    /**
+     * Monta SQL com filtros da consulta principal de Emedas.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public function montarSqlFiltrosListaEmendas(stdClass $filtro) {
+        # Filtros
         $where = NULL;
-
         if($filtro->listaSubUnidadeUsuario){
             # Expressão para verificar se o estado é após enviado para preenchimento da unidade.
             $where .= "\n AND doce.esdid IN(". ESD_BENEFICIARIO_PREENCHIMENTO_UNIDADE. ','. ESD_BENEFICIARIO_CORRECAO. ','. ESD_BENEFICIARIO_PI_GERADO. ','. ESD_BENEFICIARIO_PI_APROVADO. ")";
             # Expressão pra verificar se o beneficiario é da mesa unidade do Usuário Logado com perfil de Unidade.
             $where .= "\n AND (suo.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") OR suoed.suocod::INTEGER IN(". join(',', $filtro->listaSubUnidadeUsuario). ") ) ";
         }
+        
+        if($filtro->unicod){
+            $where .= "\n AND suo.unocod = '". (int)$filtro->unicod. "'";
+        }
+        if($filtro->suoid){
+            $where .= "\n AND suo.suoid =  ". (int)$filtro->suoid;
+        }
+        if($filtro->unicod_delegada){
+            $where .= "\n AND suoed.unocod = '". (int)$filtro->unicod_delegada. "'";
+        }
+        if($filtro->suoid_delegada){
+            $where .= "\n AND suoed.suoid =  ". (int)$filtro->suoid_delegada;
+        }
+        if($filtro->lista_esdid){
+            $where .= "\n AND doce.esdid IN(". join(',', $filtro->lista_esdid). ")";
+        }
+        if($filtro->lista_sitid){
+            $where .= "\n AND
+                (
+		    SELECT
+                        sic.sitid
+                    FROM emendas.siconvbeneficiario sbe
+                        JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                    WHERE
+			sbe.benid = ben.benid
+                    ORDER BY
+                        sicsequencial DESC
+                    LIMIT 1
+                ) IN(". join(',', $filtro->lista_sitid). ")";
+        }
+        if($filtro->benimpedimento){
+            $where .= "\n AND ben.impid ". ($filtro->benimpedimento == 't'? 'IS NOT NULL': 'IS NULL');
+        }
+        
+        return $where;
+    }
+    
+    public function recuperarListagem(stdClass $filtro)
+    {
+        # Filtros
+        $where = $this->montarSqlFiltrosListaEmendas($filtro);
 
         $sql = "
             SELECT DISTINCT
@@ -124,7 +170,7 @@ class Emendas_Model_Emenda extends Modelo
                 suo.suosigla subunidade,
                 (SELECT ARRAY_TO_STRING(ARRAY(
                     SELECT
-                        suod.suosigla
+                        unosigla || ' - ' || suonome
                     FROM emendas.delegacao d
                         JOIN public.vw_subunidadeorcamentaria suod ON(d.suoid = suod.suoid)
                     WHERE
@@ -156,18 +202,17 @@ class Emendas_Model_Emenda extends Modelo
                 ) AS capital,
                 pi.empenhado,
                 pi.pago
-            FROM
-                emendas.emenda eme
+            FROM emendas.emenda eme
                 LEFT JOIN emendas.beneficiario ben ON(ben.emeid = eme.emeid AND benstatus = 'A')
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
                 JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
                 JOIN emendas.autor aut ON aut.autid = eme.autid
                 JOIN monitora.ptres ptr ON ptr.ptrid = eme.ptrid
                 LEFT JOIN public.vw_subunidadeorcamentaria suo ON ben.suoid = suo.suoid
-                    LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
-                    LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
-                    LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
-                    LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
+                LEFT JOIN emendas.delegacao ed ON ben.benid = ed.benid
+                LEFT JOIN public.vw_subunidadeorcamentaria suoed ON ed.suoid = suoed.suoid
+                LEFT JOIN workflow.documento doc ON ben.docid = doc.docid
+                LEFT JOIN workflow.estadodocumento doce ON doc.esdid = doce.esdid
                 LEFT JOIN monitora.vw_planointerno pi ON ben.pliid = pi.pliid
                 LEFT JOIN (
                     SELECT
