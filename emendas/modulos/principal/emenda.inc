@@ -24,11 +24,21 @@ switch ($requisicao) {
     die;
     case 'limpar':
         $filtroEmenda = $_SESSION['filtroEmenda'] = array();
+        $filtroEmenda['exercicio'] = $_SESSION['exercicio'];
+        $filtroEmenda['listaSubUnidadeUsuario'] = $listaSubUnidadeUsuario;
     break;
     case 'listaremendas-xls':
         $aEmenda = (new Emendas_Model_Emenda)->recuperarListagem((object)$filtroEmenda);
         include_once APPRAIZ. "emendas/modulos/principal/emenda-xls.inc";
         die;
+    break;
+    case 'carregarComboUG':
+        echo montarComboSubunidadeEmenda((object) array(
+            'suocod' => $param['suocod'],
+            'exercicio' => $_SESSION['exercicio'],
+            'unicod' => $param['unicod']
+        ));
+        die();
     break;
 }
 
@@ -63,9 +73,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="req" id="req" value="" type="hidden">
 
                         <?php
-                            $sqlSubunidade = (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlComboUnidade((object)['exercicio' => $_SESSION['exercicio']]);
-                            echo $simec->select('suoid', 'SubUnidade', $filtroEmenda['suoid'], $sqlSubunidade);
-                            echo $simec->select('suoid_delegada', 'SubUnidade Delegada', $filtroEmenda['suoid_delegada'], $sqlSubunidade);
+                            echo $simec->select('unicod', 'Unidade', $filtroEmenda['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'])));
+                            echo '<div id=div_ungcod>';
+                            echo $simec->select('suoid', 'SubUnidade', $filtroEmenda['suoid'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
+                                    'exercicio' => $_SESSION['exercicio'])));
+                            echo '</div>';
                             echo $simec->select('lista_esdid', 'Situação', $filtroEmenda['lista_esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_BENEFICIARIO)), array('multiple' => 'true'));
                             $modelSiconvSituacao = new Emendas_Model_SiconvSituacao();
                             $sqlSituacaoSiconv = $modelSiconvSituacao->recuperarSqlCombo(['sitid', 'sitdsc'], NULL, 'sitid');

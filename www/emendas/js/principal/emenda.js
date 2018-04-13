@@ -45,6 +45,10 @@
             return false;
         });
 
+        // Evento ao mudar opção de UO
+        $('#unicod').change(function(){
+            carregarUG($(this).val());
+        });
 
     }
 
@@ -60,3 +64,15 @@
             'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
     }
 
+    /**
+     * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
+     *
+     */
+    function carregarUG(unicod) {
+        $.post(
+            '?modulo=principal/emenda&acao=A&req=carregarComboUG', { unicod: $('#unicod').val() }, function(response) {
+                $('#div_ungcod').remove('slow');
+                $('#div_ungcod').html(response);
+                $(".chosen-select").chosen();
+        });
+    }
