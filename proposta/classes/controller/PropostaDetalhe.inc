@@ -4,24 +4,25 @@ class Proposta_Controller_PropostaDetalhe
 {
     public function salvar($dados)
     {
-        $url = '?modulo=proposta/propostadetalhe&acao=A';
-
         try {
             $mPropostaDetalhe = new Proposta_Model_PropostaDetalhe($dados['prdid']);
             $mPropostaDetalhe->popularDadosObjeto($dados);
-            
+
+            $mPropostaDetalhe->prdvalor = $mPropostaDetalhe->prdvalor ? str_replace(array('.', ','), array('', '.'), $mPropostaDetalhe->prdvalor) : 0;
+            $mPropostaDetalhe->prdvalorexpansao = $mPropostaDetalhe->prdvalorexpansao ? str_replace(array('.', ','), array('', '.'), $mPropostaDetalhe->prdvalorexpansao) : 0;
+
             $mPropostaDetalhe->salvar(null, null, ['prdvalorexpansao', ]);
             $mPropostaDetalhe->commit();
-            simec_redirecionar($url, 'success');
+            return true;
         } catch (Exception $e){
             $mPropostaDetalhe->rollback();
-            simec_redirecionar($url, 'error');
+            return false;
         }
     } //end salvar()
     
     public function excluir($prdid)
     {
-        $url = '?modulo=proposta/propostadetalhe&acao=A';
+        $url = '?modulo=proposta/proposta_form&acao=A';
 
         try {
             $mPropostaDetalhe = new Proposta_Model_PropostaDetalhe($prdid);
@@ -35,10 +36,10 @@ class Proposta_Controller_PropostaDetalhe
             $mPropostaDetalhe->prdstatus = 'I';
             $mPropostaDetalhe->salvar();
             $mPropostaDetalhe->commit();
-            simec_redirecionar($url, 'success');
+            return $mPropostaDetalhe->proid;
         } catch (Exception $e){
             $mPropostaDetalhe->rollback();
-            simec_redirecionar($url, 'error');
+            return false;
         }
     } //end salvar()
 }            

@@ -1,6 +1,7 @@
 <?php
 
 $cProposta = new Proposta_Controller_Proposta();
+$mProposta = new Proposta_Model_Proposta($_REQUEST['proid']);
 switch ($_REQUEST['req']) {
 	case 'salvar':
         $cProposta->salvar($_REQUEST);
@@ -11,9 +12,21 @@ switch ($_REQUEST['req']) {
     case 'carregar-funcional':
         echo $simec->select('ptrid', 'Funcional', null, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($_REQUEST['suoid'], $_REQUEST['eqdid']), ['required']);
         die;
+    case 'formulario-detalhe':
+        $cProposta->montarFormularioDetalhes($_REQUEST['proid'], $_REQUEST['prdid']);
+        die;
+    case 'listar-detalhe':
+        $cProposta->montarListagemDetalhes($mProposta->proid);
+        die;
+    case 'salvar-detalhe':
+        $cPropostaDetalhe = new Proposta_Controller_PropostaDetalhe();
+        $cPropostaDetalhe->salvar($_POST);
+        die;
+    case 'excluir-detalhe':
+        $cPropostaDetalhe = new Proposta_Controller_PropostaDetalhe();
+        echo $cPropostaDetalhe->excluir($_REQUEST['prdid']);
+        die;
 }
-
-$mProposta = new Proposta_Model_Proposta($_REQUEST['proid']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -59,6 +72,27 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
             </div>
         </div>
+
+        <div class="col-md-5">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Dados Financeiros</h5>
+                </div>
+                <div class="ibox-content" id="">
+                    <div id="div_formulario_detalhe">
+                        <?php
+                        if($mProposta->proid){
+                            $cProposta->montarFormularioDetalhes($mProposta->proid);
+                        }
+                        ?>
+                    </div>
+                    <div id="div_listagem_detalhe">
+                        <?php $cProposta->montarListagemDetalhes($mProposta->proid); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

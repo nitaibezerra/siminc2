@@ -1,61 +1,67 @@
-<?php
-
-$aPropostaDetalhe = (new Proposta_Model_PropostaDetalhe)->recuperarTodos();
-
-include APPRAIZ . "includes/cabecalho.inc";
-?>
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2><?php echo $titulo_modulo; ?></h2>
+<?php if(count($aPropostaDetalhe)){ ?>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" >
+            <thead>
+            <tr class="text-center">
+                <th width="10%">Ações</th>
+                <th>Nat. Desp.</th>
+                <th>IDUSO</th>
+                <th>Fonte</th>
+                <th>IDOC</th>
+                <th>Valor</th>
+                <th>Vl. Expansão</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($aPropostaDetalhe as $dados){ ?>
+                <tr>
+                    <td class="text-center">
+                        <a title="Alterar" class="editar-detalhe"   href="?modulo=principal/proposta_form&acao=A&req=formulario-detalhe&prdid=<?php echo $dados['prdid']; ?>"><i class="fa fa-pencil"></i></a>
+                        <a title="Excluir" class="excluir-detalhe"  href="?modulo=principal/proposta_form&acao=A&req=excluir-detalhe&prdid=<?php echo $dados['prdid']; ?>"  style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                    </td>
+                    <td align="center"><?php echo $dados['ndpid']; ?></td>
+                    <td align="center"><?php echo $dados['iducod']; ?></td>
+                    <td align="center"><?php echo $dados['foncod']; ?></td>
+                    <td align="center"><?php echo $dados['idoid']; ?></td>
+                    <td align="right"><?php echo number_format($dados['prdvalor'], 2, ',', '.'); ?></td>
+                    <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 2, ',', '.'); ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
-</div>
+<?php } else {
+    echo '<div class="alert alert-danger">Nenhum registro cadastrado</div>';
+} ?>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                </div>
-                <div class="ibox-content">
-                    
-                    <a class="btn btn-small btn-warning" href="?modulo=proposta/propostadetalhe_form&acao=A">Novo</a>
-                    
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables" >
-                            <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>ndpid</th>
-                                <th>iducod</th>
-                                <th>foncod</th>
-                                <th>idoid</th>
-                                <th>prdvalor</th>
-                                <th>prdvalorexpansao</th>
-                                <th>proid</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($aPropostaDetalhe as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=proposta/propostadetalhe_form&acao=A&prdid=<?php echo $dados['prdid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['ndpid']; ?></td>
-                                    <td><?php echo $dados['iducod']; ?></td>
-                                    <td><?php echo $dados['foncod']; ?></td>
-                                    <td><?php echo $dados['idoid']; ?></td>
-                                    <td><?php echo $dados['prdvalor']; ?></td>
-                                    <td><?php echo $dados['prdvalorexpansao']; ?></td>
-                                    <td><?php echo $dados['proid']; ?></td>
-                                </tr>
-                            <?php } ?>        
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    $(function(){
+        $('.editar-detalhe').click(function(){
+            jQuery("#div_formulario_detalhe").load(jQuery(this).attr('href'));
+            return false;
+        });
+
+        $('.excluir-detalhe').click(function(){
+            href = $(this).attr('href');
+
+            swal({
+                    title: "Atenção!",
+                    text: "Deseja realmente excluir o registro?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, estou certo!",
+                    closeOnConfirm: true
+                },
+                function(){
+                    $.ajax({
+                        url: href,
+                        success: function (proid) {
+                            jQuery("#div_listagem_detalhe").load('?modulo=principal/proposta_form&acao=A&req=listar-detalhe&proid=' + proid);
+                        }
+                    });
+                });
+            return false;
+        });
+    })
+</script>

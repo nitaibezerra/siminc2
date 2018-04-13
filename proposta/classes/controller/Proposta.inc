@@ -42,4 +42,21 @@ class Proposta_Controller_Proposta
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+
+
+    public function montarFormularioDetalhes($proid = null, $prdid = null)
+    {
+        global $simec;
+
+        $mPropostaDetalhe = new Proposta_Model_PropostaDetalhe($prdid);
+        if(!$mPropostaDetalhe->proid){ $mPropostaDetalhe->proid = $proid; }
+
+        include_once APPRAIZ . 'proposta/modulos/principal/propostadetalhe_form.inc';
+    }
+
+    public function montarListagemDetalhes($proid)
+    {
+        $aPropostaDetalhe = (new Proposta_Model_PropostaDetalhe)->recuperarTodos('*', ['proid = ' . (int)$proid, "prdstatus = 'A'"]);
+        include_once APPRAIZ . 'proposta/modulos/principal/propostadetalhe.inc';
+    }
 }            
