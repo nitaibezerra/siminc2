@@ -49,6 +49,11 @@
         $('#unicod').change(function(){
             carregarUG($(this).val());
         });
+        
+        // Evento ao mudar opção de UO Delegada
+        $('#unicod_delegada').change(function(){
+            carregarUGdelegada($(this).val());
+        });
 
     }
 
@@ -70,9 +75,23 @@
      */
     function carregarUG(unicod) {
         $.post(
-            '?modulo=principal/emenda&acao=A&req=carregarComboUG', { unicod: $('#unicod').val() }, function(response) {
+            '?modulo=principal/emenda&acao=A&req=carregarComboUG', { unicod: unicod}, function(response) {
                 $('#div_ungcod').remove('slow');
                 $('#div_ungcod').html(response);
                 $(".chosen-select").chosen();
         });
     }
+    
+    /**
+     * Carrega novo conteúdo para a opções de Sub-Unidade via requisição ajax.
+     *
+     */
+    function carregarUGdelegada(unicod) {
+        $.post(
+            '?modulo=principal/emenda&acao=A&req=carregarComboUGDelegada', { unicod: unicod}, function(response) {
+                $('#div_ungcod_delegada').remove('slow');
+                $('#div_ungcod_delegada').html(response);
+                $(".chosen-select").chosen();
+        });
+    }
+

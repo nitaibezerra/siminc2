@@ -33,11 +33,26 @@ switch ($requisicao) {
         die;
     break;
     case 'carregarComboUG':
-        echo montarComboSubunidadeEmenda((object) array(
-            'suocod' => $param['suocod'],
+        echo $simec->select(
+            'suoid',
+            'Subunidade',
+            $filtroEmenda['suoid'],
+            Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
             'exercicio' => $_SESSION['exercicio'],
             'unicod' => $param['unicod']
-        ));
+        )));
+        
+        die();
+    break;
+    case 'carregarComboUGDelegada':
+        echo $simec->select(
+            'suoid_delegada',
+            'Subunidade Delegada',
+            $filtroEmenda['suoid_delegada'],
+            Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
+            'exercicio' => $_SESSION['exercicio'],
+            'unicod' => $param['unicod']
+        )));
         die();
     break;
 }
@@ -77,6 +92,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     'prsano::INTEGER = '. (int)$_SESSION['exercicio'])));
                             echo '<div id=div_ungcod>';
                             echo $simec->select('suoid', 'SubUnidade', $filtroEmenda['suoid'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
+                                    'exercicio' => $_SESSION['exercicio'])));
+                            echo '</div>';
+                            echo $simec->select('unicod_delegada', 'Unidade Delegada', $filtroEmenda['unicod_delegada'], Spo_Model_Unidade::queryCombo((object)array(
+                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'])));
+                            echo '<div id=div_ungcod_delegada>';
+                            echo $simec->select('suoid_delegada', 'SubUnidade Delegada', $filtroEmenda['suoid_delegada'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
                                     'exercicio' => $_SESSION['exercicio'])));
                             echo '</div>';
                             echo $simec->select('lista_esdid', 'Situação', $filtroEmenda['lista_esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_BENEFICIARIO)), array('multiple' => 'true'));

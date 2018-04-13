@@ -507,21 +507,3 @@ function montarSqlDadosBeneficiario($benid){
     return $sql;
 }
 
-/**
- * Monta a combo de UGs filtrando por UO
- *
- * @param stdClass $filtros
- * @return VOID
- */
-function montarComboSubunidadeEmenda(stdClass $filtros) {
-    global $simec;
-
-    return $simec->select(
-        'suoid',
-        'Subunidade',
-        $filtros->ungcod,
-        Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object) array(
-            'exercicio' => $filtros->exercicio,
-            'unicod' => $filtros->unicod)));
-}
-
