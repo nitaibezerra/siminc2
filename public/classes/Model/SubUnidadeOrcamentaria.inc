@@ -239,4 +239,27 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
 
         return $sql;
     }
+    
+    /**
+     * Retorna SQL da consulta pra preencher o componente de combo referente à Subunidade.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public function recuperarSqlComboUnidade(stdClass $filtro) {
+        $sql = "
+            SELECT DISTINCT
+                suo.suoid AS codigo,
+                suo.unosigla || ' - ' || suo.suonome AS descricao
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.prsano = '". (int)$filtro->exercicio. "'
+                AND suo.suostatus = 'A'
+            ORDER BY
+                2
+        ";
+        return $sql;
+    }
+
+
 }

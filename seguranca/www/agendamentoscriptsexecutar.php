@@ -17,8 +17,11 @@ include_once "../../global/config.inc";
 include_once APPRAIZ . "includes/classes_simec.inc";
 include_once APPRAIZ . "includes/funcoes.inc";
 
-# Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
-controlarExecucaoScript();
+# Verificando IP de origem da requisição é autorizado
+if(IP_CLI_AUTORIZADO != $_SERVER['REMOTE_ADDR']){
+    # Finaliza a execução do SCRIPT
+    die;
+}
 
 //Definindo como superuser para que o commit ocorra
 $_SESSION['superuser'] = true;

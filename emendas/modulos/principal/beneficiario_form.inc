@@ -115,8 +115,9 @@ switch ($_REQUEST['req']) {
         include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
         die;
 }
-
+//ver('ok', d);
 $mBeneficiario = new Emendas_Model_Beneficiario($_REQUEST['benid']);
+$beneficiario = (object)$mBeneficiario->buscarBeneficiario($mBeneficiario->benid);
 $convenio = (new Monitora_Model_CategoriaApropriacao())->recuperarTodos('*', ["capstatus = 'A'",  "capdsc = 'Convênio'", "capano = '{$_SESSION['exercicio']}'"]);
 $listaSniic = (new Emendas_Model_Sniic())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
 $listaPronac = (new Emendas_Model_Pronac())->recuperarTodos('*', array('benid = '. (int)$mBeneficiario->benid));
@@ -142,6 +143,9 @@ include APPRAIZ . "includes/cabecalho.inc";
 
     .coluna-parecer {
         cursor: pointer;
+    }
+    .labelTextLeft {
+        text-align: left !important;
     }
 
 </style>
@@ -247,24 +251,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                                             echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
                                             echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $mBeneficiario->benparecertecnico, $mBeneficiario->recuperarTiposParecer());
-                                            echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $mBeneficiario->benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
+                                            # setar os campos para "não" por padrão.
+                                            $benparecertecnico = $mBeneficiario->benparecertecnico ? $mBeneficiario->benparecertecnico : 0;
+                                            $benparecerjuridico = $mBeneficiario->benparecerjuridico ? $mBeneficiario->benparecerjuridico : 0;
+                                            echo $simec->radio('benparecertecnico', 'Parecer Técnico', $benparecertecnico, $mBeneficiario->recuperarTiposParecer());
+                                            echo $simec->radio('benparecerjuridico', 'Parecer Jurídico', $benparecerjuridico, $mBeneficiario->recuperarTiposParecer());
                                         ?>
                                         <div class="form-group ">
-                                            <label for="benempenhado" class="col-sm-3 control-label">Empenhado: </label>
+                                            <label for="benconveniado" class="col-sm-3 control-label">Conveniado: </label>
                                             <div class="col-md-2 ">
-                                                <input type="checkbox" name="benempenhado" id="benempenhado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benempenhado ? 'checked="checked"' : ''; ?> />
-                                            </div>
-                                            <label for="benconveniado" class="col-sm-2 control-label">Conveniado: </label>
-                                            <div class="col-md-1 ">
                                                 <input type="checkbox" name="benconveniado" id="benconveniado" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benconveniado ? 'checked="checked"' : ''; ?> />
                                             </div>
-                                            <label for="benpago" class="col-sm-2 control-label">Pago: </label>
-                                            <div class="col-md-1 ">
-                                                <input type="checkbox" name="benpago" id="benpago" value="t" class="js-switch" <?php echo 't' == $mBeneficiario->benpago ? 'checked="checked"' : ''; ?> />
-                                            </div>
                                         </div>
-
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">Empenhado: </label>
+                                            <label class="col-md-3 control-label labelTextLeft">R$ <?php echo number_format($beneficiario->empenhado, 2, ',', '.'); ?></label>
+                                            <label class="col-sm-2 control-label">Pago: </label>
+                                            <label class="col-md-3 control-label labelTextLeft">R$ <?php echo number_format($beneficiario->pago, 2, ',', '.'); ?></label>
+                                        </div>
                                         <div class="form-group ">
                                             <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
                                             <div class="col-md-1 ">
@@ -277,7 +281,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </div>
 
                                         <div class="div_motivo">
-                                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justivicativa', $mBeneficiario->benmotivoimpedimento); ?>
+                                            <?php echo $simec->textarea('benmotivoimpedimento', 'Justificativa', $mBeneficiario->benmotivoimpedimento); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +301,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                         <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                         <a href="?modulo=principal/emenda_form&acao=A&emeid=<?php echo $mBeneficiario->emeid; ?>" class="btn btn-success" id="btn-emenda" type="button"><i class="fa fa-file"></i>&nbsp;Ver Emenda</a>
-                                        <?php if($mBeneficiario->benid && !PFL_SUBUNIDADE){ ?>
+                                        <?php if($mBeneficiario->benid && $podeEditar){ ?>
                                             <a href="?modulo=principal/beneficiario_form&acao=A&req=excluir&benid=<?php echo $mBeneficiario->benid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
                                         <?php } ?>
                                     </div>
@@ -308,7 +312,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-4">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>Histórico/Observações</h5>
+                                    <h5>Observações</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_historico">
@@ -329,7 +333,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-8">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                        <h5>Dados Financeiros</h5>
+                                        <h5>Dados Financeiros -
+                                            <?php
+                                                if($beneficiario->funcional){
+                                                    echo "<b>PTRES</b>: " .$beneficiario->ptres . "&nbsp; <b>Funcional</b>: " . $beneficiario->funcional ;
+                                                }
+                                            ?>
+                                        </h5>
                                 </div>
                                 <div class="ibox-content">
                                     <div id="div_formulario_detalhe">
@@ -338,7 +348,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         } ?>
                                     </div>
                                     <div id="div_listagem_detalhe">
-                                        <?php $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid); ?>
+                                        <?php $cBeneficiario->montarListagemDetalhe($mBeneficiario->benid, $podeEditar); ?>
                                     </div>
                                 </div>
                             </div>
@@ -375,15 +385,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <input name="aba" id="aba" type="hidden" value="<?php echo $aba; ?>">
 
                                         <?php
-                                            if(empty($mBeneficiario->plititulo)){
-                                                $tituloDinamico = $mEmenda->emenumero && $mBeneficiario->benpropostatitulo? $mEmenda->emenumero . ' '. $mBeneficiario->benpropostatitulo: NULL;
-                                            } else {
-                                                $tituloDinamico = $mBeneficiario->plititulo;
-                                            }
-                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $tituloDinamico, ['maxlength' => 250]);
+                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $mBeneficiario->plititulo, ['maxlength' => 250]);
 
                                             $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
                                             echo $simec->textarea('plidsc', 'Descrição / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
+//condicaoGerarPi($benid);
                                         ?>
 
                                         <div class="clearfix"></div>

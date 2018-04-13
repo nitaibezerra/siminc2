@@ -43,9 +43,21 @@
                                     <td class="text-center">
                                         <a href="<?php echo $urlBaseCadastro; ?>&pliid=<?php echo $dado['pliid']; ?>" class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></a>
                                     </td>
-                                    <td><?php echo $dado['pliid']; ?></td>
-                                    <td><?php echo $dado['plicod']; ?></td>
-                                    <td><?php echo $dado['plititulo']; ?></td>
+                                    <td>
+                                        <a href="#" title="Exibir detalhes do Plano Interno(Espelho)" class="a_espelho" data-pi="<?php echo $dado['pliid']; ?>" >
+                                        <?php echo $dado['pliid']; ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" title="Exibir detalhes do Plano Interno(Espelho)" class="a_espelho" data-pi="<?php echo $dado['pliid']; ?>" >
+                                        <?php echo $dado['plicod']; ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" title="Exibir detalhes do Plano Interno(Espelho)" class="a_espelho" data-pi="<?php echo $dado['pliid']; ?>" >
+                                            <?php echo $dado['plititulo']; ?>
+                                        </a>
+                                    </td>
                                     <td class="text-center"><?php echo $dado['eqdrp']; ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcusteio'], 0, ',', '.'); ?></td>
                                     <td class="text-right"><?php echo number_format($dado['picvalorcapital'], 0, ',', '.'); ?></td>
@@ -121,3 +133,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+
+        $('.a_espelho').click(function(){
+            var pliid = $(this).attr('data-pi');
+            exibirEspelhoPi(pliid);
+            return false;
+        });
+
+    });
+</script>

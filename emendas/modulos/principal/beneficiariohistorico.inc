@@ -12,7 +12,7 @@
             <?php foreach($aBeneficiarioHistorico as $dados){?>
                 <tr>
                     <td class="text-center">
-                        <?php if($podeEditar || $dados['usucpf'] === $_SESSION['usucpf']) { ?>
+                        <?php if($dados['usucpf'] === $_SESSION['usucpf']) { ?>
                             <a title="Alterar" class="editar-historico" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-historico&behid=<?php echo $dados['behid']; ?>"><i class="fa fa-pencil"></i></a>
                             <a title="Excluir" class="excluir-historico" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-historico&behid=<?php echo $dados['behid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                         <?php } ?>

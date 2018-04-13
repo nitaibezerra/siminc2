@@ -205,14 +205,14 @@ class Monitora_Model_Acao extends Modelo
 
         $where = count($where) ? " where  " . implode(' and ', $where) : '';
 
-        $sql = "select {$pk} AS codigo, {$descricao} AS descricao,
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
                 from {$this->stNomeTabela} a
-                  inner join public.unidadeorcamentaria uno on uno.unocod = a.unicod and uno.prsano = a.prgano
                 $where
                 order by $descricao
         ";
         return $sql;
     }
+    
     public function recuperarDados(){
         $sql = "
             SELECT DISTINCT
@@ -224,7 +224,7 @@ class Monitora_Model_Acao extends Modelo
                 acaobjetivocod,
                 acacod,
                 acaid,
-                acadsc,
+                acatitulo,
                 acao.unicod || '-' || uni.unidsc AS unidade
             FROM monitora.acao acao
                 JOIN public.unidade uni ON uni.unicod = acao.unicod

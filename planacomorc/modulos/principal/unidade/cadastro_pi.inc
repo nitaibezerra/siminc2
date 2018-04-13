@@ -225,6 +225,8 @@ include APPRAIZ . "includes/cabecalho.inc";
             } ?>
         </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
+        <?php echo $dadosPI['emenumero'] ? "<br /><span>Emenda: {$dadosPI['emenumero']}</span>": ''; ?>
+        <?php echo $dadosPI['benid'] ? "<br /><span>Beneficiário: {$dadosPI['benid']}</span>": ''; ?>
     </div>
     <div class="col-lg-7">
         <div style="padding-top: 10px;" class="text-right">

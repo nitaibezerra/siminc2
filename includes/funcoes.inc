@@ -5404,17 +5404,22 @@ function marcarVermelhoValorSuperior($valor1 = NULL, $valor2 = NULL, $decimal = 
 }
 
 /**
- * Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
+ * Verificando IP de origem da requisição é autorizado para executar os SCRIPTS VIA PHPCLI.
  * Caso o ip não seja autorizado o sistema para a execução do arquivo.
  * 
  * return VOID
  */
 function controlarExecucaoScript(){
+    # Verificando IP de origem da requisição via PHPCLI
+    $host = gethostname();
+    $ip = gethostbyname($host);
+    
     # Verificando IP de origem da requisição é autorizado
-    if(IP_CLI_AUTORIZADO != $_SERVER['REMOTE_ADDR']){
+    if(IP_CLI_AUTORIZADO != $ip){
         # Finaliza a execução do SCRIPT
         die;
     }
+
 }
 
 /**

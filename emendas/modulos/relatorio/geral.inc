@@ -80,6 +80,7 @@
     );
 
     $sql = (new Emendas_Model_Emenda)->montarSqlRelatorioGeral($_SESSION['exercicio']);
+//ver($sql);
     $lista = $db->carregar($sql);
 //ver($lista, d);
 ?>
