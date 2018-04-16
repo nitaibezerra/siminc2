@@ -1,6 +1,6 @@
 <?php
 
-$aProposta = (new Proposta_Model_Proposta)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'", "prostatus = 'A'"]);
+$aProposta = (new Proposta_Model_Proposta)->recuperarListagem();
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,14 +27,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>suoid</th>
-                                <th>eqdid</th>
-                                <th>ptrid</th>
-                                <th>proquantidade</th>
-                                <th>proquantidadeexpansao</th>
-                                <th>projustificativa</th>
-                                <th>projustificativaexpansao</th>
-                                <th>prsano</th>
+                                <th>Id</th>
+                                <th>Funcional</th>
+                                <th>Subunidade</th>
+                                <th>Enquadramento de Despesa</th>
+                                <th>Quantidade</th>
+                                <th>Quantidade Expansão</th>
+                                <th>Custo Total</th>
+                                <th>Custo Expansão</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,14 +43,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=principal/proposta_form&acao=A&proid=<?php echo $dados['proid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
+                                    <td><?php echo $dados['proid']; ?></td>
+                                    <td><?php echo $dados['ptrid']; ?></td>
                                     <td><?php echo $dados['suoid']; ?></td>
                                     <td><?php echo $dados['eqdid']; ?></td>
-                                    <td><?php echo $dados['ptrid']; ?></td>
-                                    <td><?php echo $dados['proquantidade']; ?></td>
-                                    <td><?php echo $dados['proquantidadeexpansao']; ?></td>
-                                    <td><?php echo $dados['projustificativa']; ?></td>
-                                    <td><?php echo $dados['projustificativaexpansao']; ?></td>
-                                    <td><?php echo $dados['prsano']; ?></td>
+                                    <td align="right"><?php echo $dados['proquantidade']; ?></td>
+                                    <td align="right"><?php echo $dados['proquantidadeexpansao']; ?></td>
+                                    <td align="right"><?php echo $dados['prdvalor']; ?></td>
+                                    <td align="right"><?php echo $dados['prdvalorexpansao']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

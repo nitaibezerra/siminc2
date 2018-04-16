@@ -42,7 +42,9 @@ switch ($_REQUEST['req']) {
 
 $perfis = pegaPerfilGeral();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
-$subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
+if($mPrePlanoInterno->suoid){
+    $subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
+}
 $limiteSubunidade = $subUnidade['lmuvlr'];
 
 include APPRAIZ . "includes/cabecalho.inc";
@@ -277,18 +279,18 @@ include APPRAIZ . "includes/cabecalho.inc";
         calcularValores();
 
         function calcularValores(){
-            totalPi = somarCampos('valorPI');
-            limiteDisponivel = $('#td_autorizado_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_autorizado_sub_unidade').html()) : 0;
-
-            valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
-
-            if(valorDisponivel < 0){
-                swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
-            }
-
-            $('#td_disponivel_sub_unidade').html(number_format(valorDisponivel, 2, ',', '.'));
-            
-            console.log(totalPi, limiteDisponivel, limiteDisponivel - totalPi);
+            // totalPi = somarCampos('valorPI');
+            // limiteDisponivel = $('#td_autorizado_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_autorizado_sub_unidade').html()) : 0;
+            //
+            // valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
+            //
+            // if(valorDisponivel < 0){
+            //     swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
+            // }
+            //
+            // $('#td_disponivel_sub_unidade').html(number_format(valorDisponivel, 2, ',', '.'));
+            //
+            // console.log(totalPi, limiteDisponivel, limiteDisponivel - totalPi);
         }
 
 

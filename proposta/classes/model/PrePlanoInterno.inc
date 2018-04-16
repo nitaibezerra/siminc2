@@ -98,5 +98,18 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'plijustificativaadicional' => null,
     );
 
+    public function recuperarListagem()
+    {
+        $sql = "select ptr.funcional, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pli.* 
+                from proposta.preplanointerno pli
+                    inner join monitora.vw_ptres ptr on pli.ptrid = ptr.ptrid
+                    inner join public.vw_subunidadeorcamentaria suo on suo.suoid = pli.suoid
+                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
+                where pli.prsano = '{$_SESSION['exercicio']}'
+                and plistatus = 'A'";
+
+        return $this->carregar($sql);
+    }
+
 }//end Class
 ?>

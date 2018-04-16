@@ -1,6 +1,6 @@
 <?php
 
-$aPrePlanoInterno = (new Proposta_Model_PrePlanoInterno)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'", "plistatus = 'A'"]);
+$aPrePlanoInterno = (new Proposta_Model_PrePlanoInterno)->recuperarListagem();
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,14 +27,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>ptrid</th>
-                                <th>suoid</th>
-                                <th>plititulo</th>
-                                <th>plidsc</th>
-                                <th>eqdid</th>
-                                <th>pliquantidade</th>
-                                <th>plivalorcusteio</th>
-                                <th>plivalorcapital</th>
+                                <th>Id</th>
+                                <th>Funcional</th>
+                                <th>Subunidade</th>
+                                <th>Título</th>
+                                <th>Enquadramento de Despesa</th>
+                                <th>Quantidade</th>
+                                <th>Valor Custeio</th>
+                                <th>Valor Capital</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,14 +43,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=principal/preplanointerno_form&acao=A&pliid=<?php echo $dados['pliid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
-                                    <td><?php echo $dados['ptrid']; ?></td>
-                                    <td><?php echo $dados['suoid']; ?></td>
+                                    <td><?php echo $dados['pliid']; ?></td>
+                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['plodsc']; ?></td>
+                                    <td><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['plititulo']; ?></td>
-                                    <td><?php echo $dados['plidsc']; ?></td>
-                                    <td><?php echo $dados['eqdid']; ?></td>
-                                    <td><?php echo $dados['pliquantidade']; ?></td>
-                                    <td><?php echo $dados['plivalorcusteio']; ?></td>
-                                    <td><?php echo $dados['plivalorcapital']; ?></td>
+                                    <td><?php echo $dados['eqddsc']; ?></td>
+                                    <td align="right"><?php echo $dados['pliquantidade']; ?></td>
+                                    <td align="right"><?php echo $dados['plivalorcusteio']; ?></td>
+                                    <td align="right"><?php echo $dados['plivalorcapital']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

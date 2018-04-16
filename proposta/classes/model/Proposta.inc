@@ -69,5 +69,21 @@ class Proposta_Model_Proposta extends Modelo
         'prsano' => null,
     );
 
+
+    public function recuperarListagem()
+    {
+        $sql = "select  ptr.funcional, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pro.proquantidade, pro.proquantidadeexpansao, 
+                        sum(prd.prdvalor) prdvalor, sum(prd.prdvalorexpansao) prdvalorexpansao
+                from proposta.proposta pro
+                    inner join monitora.vw_ptres ptr on pro.ptrid = ptr.ptrid
+                    inner join public.vw_subunidadeorcamentaria suo on suo.suoid = pro.suoid
+                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pro.eqdid
+                    left join proposta.propostadetalhe prd on prd.proid = pro.proid
+                where pro.prsano = '{$_SESSION['exercicio']}'
+                and prostatus = 'A'
+                group by ptr.funcional, ptr.plodsc, eqd.eqddsc, subunidade,  pro.proquantidade, pro.proquantidadeexpansao";
+
+        return $this->carregar($sql);
+    }
 }//end Class
 ?>

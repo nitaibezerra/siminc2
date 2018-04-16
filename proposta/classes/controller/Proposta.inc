@@ -31,7 +31,7 @@ class Proposta_Controller_Proposta
                 $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
                 $url = '?modulo=principal/modalidade-pactuacao-form&acao=A&capid=' . $mProposta->proid;
                 simec_redirecionar($url, 'error', $mensagem);
-            }            
+            }
             
             $mProposta->prostatus = 'I';
             $mProposta->salvar();
