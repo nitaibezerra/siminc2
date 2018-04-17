@@ -64,7 +64,7 @@
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <h2>MONITORAMENTO DAS METAS PNC</h2>
     </div>
 </div>
@@ -192,101 +192,136 @@
             
         </div>
 
-        <?php if($mpnid){ ?>
-            <form id="formulario" name="formulario" method="post" class="form-horizontal">
-                <input type="hidden" name="req" id="req" value="salvar" />
-                <input name="acoid" id="acoid" type="hidden" value="<?php echo $acompanhamento->acoid; ?>">
-                <input name="suoid" type="hidden" value="<?php echo $acompanhamento->suoid; ?>">
-                <input name="mpnid" id="mpnid" type="hidden" value="<?php echo $mpnid; ?>">
-                <input name="janid" id="janid" type="hidden" value="<?php echo $acompanhamento->janid; ?>">
-
-                <div class="col-md-8">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>
-                                Monitoramento do Indicador
-                                <?php if($acompanhamento->acoid){ ?>
-                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="?modulo=principal/monitorar-ppa&acao=A&req=ver-historico&acoid=<?php echo $acompanhamento->acoid; ?>"></a>
-                                <?php } ?>
-                            </h5>
-                        </div>
-                        <div class="ibox-content">
-                            <?php
-
-                            echo $simec->valor('acoquantidade', 'Executado', $acompanhamento->acoquantidade, ['required']);
-                            echo $simec->data('acodata', 'Dt. Referência', $acompanhamento->acodata, ['required']);
-                            echo $simec->textarea('acoanalise', 'Análise Situacional', $acompanhamento->acoanalise);
-                            echo $simec->select('claid', 'Classificação', $acompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC]), ['required']);
-
-                            $aMedidasSelecionadas = $acompanhamento->recuperarMedidas();
-                            echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$acompanhamento->claid])) . '</span>';
-
-                            echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $acompanhamento->acoprovidencias);
-                            ?>
-
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                    <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <?php if($acompanhamento->acoid){ ?>
-    <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $acompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
-                                    <?php } ?>
-                                </div>
+        <?php
+            if($mpnid){
+                $meta = new Public_Model_MetaPnc($mpnid);
+        ?>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="row">
+                            <div class="col-sm-1" style="text-align: center;">
+                               <h1><?php echo $meta->mpncod; ?></h1>
+                            </div>
+                            <div class="col-sm-11">
+                                <h2><?php echo $meta->mpndsc; ?></h2>
                             </div>
                         </div>
                     </div>
-                </div>
-        
-                <div class="col-md-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Anexos</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
-                                            <td style="text-align: left;"><b>Nome do arquivo</b></td>
-                                            <td style="text-align: left;"><b>Descrição</b></td>
-                                            <td style="text-align: center;"><b>Ação</b></td>
-                                        </tr>
-                                        <?php 
-                                            if($listaDeAnexos):
-                                                foreach($listaDeAnexos as $anexo):
-                                        ?>
-                                            <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
-                                                <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
-                                                <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $anexo['arqid']; ?>" name="listaAnexos[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos="<?php echo $anexo['arqid']; ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php
-                                                endforeach;
-                                            endif;
-                                        ?>
-                                    </table>
-                                </div>
+                    <div class="ibox-content">
+                        <form id="form" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
+                            <div class="steps clearfix">
+                                <ul role="tablist">
+                                    <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                                        <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                                            <span class="current-info audible">current step: </span>
+                                            <span class="number">1.</span> INDICADORES
+                                        </a>
+                                    </li>
+                                    <li role="tab" class="disabled" aria-disabled="true">
+                                        <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1">
+                                            <span class="number">2.</span> ATIVIDADES
+                                        </a>
+                                    </li>
+                                    <li role="tab" class="disabled last" aria-disabled="true">
+                                        <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3">
+                                            <span class="number">4.</span> ANEXOS
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
+                            <div class="content clearfix">
+                                <h1 id="form-h-0" tabindex="-1" class="title current">Account</h1>
+                                <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
+                                    <h2>Account Information</h2>
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>Username *</label>
+                                                <input id="userName" name="userName" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password *</label>
+                                                <input id="password" name="password" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Confirm Password *</label>
+                                                <input id="confirm" name="confirm" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
-                                </div>
+                                </fieldset>
+                                <h1 id="form-h-1" tabindex="-1" class="title">Profile</h1>
+                                <fieldset id="form-p-1" role="tabpanel" aria-labelledby="form-h-1" class="body" style="display: none;" aria-hidden="true">
+                                    <h2>Profile Information</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>First name *</label>
+                                                <input id="name" name="name" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Last name *</label>
+                                                <input id="surname" name="surname" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Email *</label>
+                                                <input id="email" name="email" class="form-control required email" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address *</label>
+                                                <input id="address" name="address" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <h1 id="form-h-2" tabindex="-1" class="title">Warning</h1>
+                                <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" style="display: none;" aria-hidden="true">
+                                    <div class="text-center" style="margin-top: 120px">
+                                        <h2>You did it Man :-)</h2>
+                                    </div>
+                                </fieldset>
+
+                                <h1 id="form-h-3" tabindex="-1" class="title">Finish</h1>
+                                <fieldset id="form-p-3" role="tabpanel" aria-labelledby="form-h-3" class="body" style="display: none;" aria-hidden="true">
+                                    <h2>Terms and Conditions</h2>
+                                    <input id="acceptTerms" name="acceptTerms" class="required" aria-required="true" type="checkbox"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                                </fieldset>
                             </div>
-
-                        </div>
+                            <div class="actions clearfix">
+                                <ul role="menu" aria-label="Pagination">
+                                    <li class="disabled" aria-disabled="true">
+                                        <a href="#previous" role="menuitem">Previous</a>
+                                    </li>
+                                    <li aria-hidden="false" aria-disabled="false">
+                                        <a href="#next" role="menuitem">Next</a>
+                                    </li>
+                                    <li style="display: none;" aria-hidden="true">
+                                        <a href="#finish" role="menuitem">Finish</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-            </form>
         <?php } ?>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Div do Modal de lista de PIs -->
 <div class="modal fade" id="detalhe-pi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -304,6 +339,7 @@
     </div>
 </div>
 
+<!-- Div do Modal do formulário de Anexo de Arquivos -->
 <div class="row">
     <div class="col-md-12">
         <div id="modal_upload" class="modal fade">
