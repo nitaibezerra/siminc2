@@ -143,46 +143,45 @@
                                     <?php echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})"); ?>
                                 </div>
                             </div>
-                            
-                            <div class="col-sm-9 no-margin-bottom">
-                                <?php
-                                    echo $simec->input('Objetivo', 'Objetivo', "{$infoIndicador['oppcod']} - {$infoIndicador['oppdsc']}");
-                                    echo $simec->input('Referência', 'Indicador', "{$infoIndicador['ipncod']} - {$infoIndicador['ipndsc']}");
-                                    echo $simec->input('Previsto', 'Previsto PNC', number_format($infoIndicador['ipnquantidade'], 2, ',', '.'));
-                                    echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoIndicador['ipnquantidadeanualizada'], 2, ',', '.'));
-                                    $simec->setLabelSize(3);
-                                    $simec->setPodeEditar(1);
-                                ?>
-                            </div>
-                            <div class="col-sm-3">
-                                <?php if(!count($aBeneficiarioDetalhe)){ ?>
-                                    <ul class="list-group clear-list m-t">
-                                        <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
-                                        <li class="list-group-item fist-item">
-                                            <span class="pull-right"><?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?></span>
-                                            Planos Internos (PI´s)
-                                        </li>
-                                        </a>
-                                        <li class="list-group-item">
-                                            Previsto
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['previsto'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Empenhado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['empenhado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Liquidado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['liquidado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Pago
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['pago'], 2, ',', '.'); ?></span>
-                                        </li>
-                                    </ul>
-                                <?php } else {
-                                    echo '<div class="alert alert-danger">Nenhum PI cadastrado para essa indicador</div>';
-                                } ?>
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
+                                                    Planos Internos (PI´s)
+                                                </a>
+                                            </th>
+                                            <th>Previsto</th>
+                                            <th>Empenhado</th>
+                                            <th>Liquidado</th>
+                                            <th>Pago</th>
+                                        </tr>
+                                    </thead>
+                                    <?php if(!count($aBeneficiarioDetalhe)): ?>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
+                                                        <?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?>
+                                                    </a>
+                                                </td>
+                                                <td>R$ <?php echo number_format($infoPI['previsto'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($infoPI['empenhado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($infoPI['liquidado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($infoPI['pago'], 2, ',', '.'); ?></td>
+                                            </tr>
+                                        </tbody>
+                                    <?php else: ?>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <div class="alert alert-danger">Nenhum PI cadastrado para essa indicador</div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    <?php endif; ?>
+                                </table>
                             </div>
                         <?php } ?>
 
