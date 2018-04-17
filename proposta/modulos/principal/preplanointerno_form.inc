@@ -1,5 +1,7 @@
 <?php
 
+require_once APPRAIZ . 'includes/workflow.php';
+
 $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
 switch ($_REQUEST['req']) {
     case 'salvar':
@@ -46,6 +48,8 @@ if($mPrePlanoInterno->suoid){
     $subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
 }
 $limiteSubunidade = $subUnidade['lmuvlr'];
+
+$estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -167,6 +171,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                         ?>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-1">
+                <?php
+                if($mPrePlanoInterno->pliid){
+                    wf_desenhaBarraNavegacao($mPrePlanoInterno->docid, array('benid' => $mPrePlanoInterno->pliid));
+                }
+                ?>
             </div>
 
             <div class="col-md-6">
