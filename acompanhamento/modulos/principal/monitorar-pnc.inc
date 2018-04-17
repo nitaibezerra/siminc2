@@ -1,7 +1,11 @@
 <?php
+
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
+    
+    $mpnid = $_REQUEST['mpnid'];
+    
     switch ($_REQUEST['req']) {
         case 'salvar':
             $cAcompanhamento->salvar($_REQUEST);
@@ -39,19 +43,16 @@
         die;
     }
 
-    $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
+    $acompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
 
     // Recuperando Janela Ativa
     $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
-    $janid = $mAcompanhamento->janid ? $mAcompanhamento->janid : $janela['janid'];
-
-    // Recuperando Indicador Selecionada
-    $ipnid = $mAcompanhamento->ipnid ? $mAcompanhamento->ipnid : $_REQUEST['ipnid'];
+    $acompanhamento->janid = $acompanhamento->janid? $acompanhamento->janid: $janela['janid'];
 
     // Recuperando SubUnidade
-    $suoid = $mAcompanhamento->suoid ? $mAcompanhamento->suoid : $_REQUEST['suoid'];
+    $suoid = $acompanhamento->suoid? $acompanhamento->suoid: $_REQUEST['suoid'];
     
-    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
+    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($acompanhamento->acoid);
 
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -64,7 +65,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2><?php echo $titulo_modulo; ?></h2>
+        <h2>MONITORAMENTO DAS METAS PNC</h2>
     </div>
 </div>
 
@@ -99,61 +100,64 @@
             	<div class="ibox-content">
                     <div class="row form-horizontal">
 
-                        <?php
-                        $aIndicadores = $mAcompanhamento->getIndicadoresPnc($suoid);
-                        $aUnidades = (new Public_Model_SubUnidadeOrcamentaria())->recuperarPorUsuario();
-//                        $infoIndicador = (new Public_Model_IndicadorPnc($ipnid))->recuperarInformacoes();
-//                        $infoPI = (new Pi_PlanoInterno())->recuperarResumoPorIndicadorESubunidade($ipnid, $suoid);
-                        ?>
-
                         <div class="col-sm-6">
-                            <?php echo $simec->select('suoid', 'Unidade', $suoid, $aUnidades, null, ['label-size'=>2]); ?>
+                            <?php
+                                $listaUnidades = (new Public_Model_SubUnidadeOrcamentaria())->recuperarPorUsuario();
+                                echo $simec->select('suoid', 'Unidade', $suoid, $listaUnidades, null, ['label-size'=>2]);
+                            ?>
                         </div>
 
                         <div class="clearfix"></div>
 
-                        <?php foreach($aIndicadores as $indicador){
-                            $cor = $indicador['acoid'] ? 'navy-bg' : 'red-bg';
-                            $cor = $ipnid == $indicador['ipnid'] ? 'blue-bg' : $cor;
-                            $urlAcompanhamento = $indicador['acoid'] ? "?modulo=principal/monitorar-pnc&acao=A&acoid={$indicador['acoid']}" : "?modulo=principal/monitorar-pnc&acao=A&ipnid={$indicador['ipnid']}&suoid={$suoid}";
+                        <?php
+                            $listaMetas = $acompanhamento->getMetasPncComPi($suoid, $acompanhamento->janid, $_SESSION['exercicio']);
+                        
+                            foreach($listaMetas as $meta){
+                                $cor = $meta['acoid']? 'navy-bg': 'red-bg';
+                                $cor = $mpnid == $meta['mpnid']? 'blue-bg': $cor;
+                                $urlAcompanhamento = $meta['acoid']? "?modulo=principal/monitorar-pnc&acao=A&acoid={$meta['acoid']}": "?modulo=principal/monitorar-pnc&acao=A&mpnid={$meta['mpnid']}&suoid={$suoid}";
                             ?>
-                            <a class="selecionar-indicador" href="<?php echo $urlAcompanhamento; ?>">
-                                <div class="col-sm-4 col-md-3" title="<?php echo $indicador['ipnid'] . ' - ' . $indicador['ipndsc']; ?>">
-                                    <div data-cor="<?php echo $cor ?>" class="widget div-indicador <?php echo $cor ?>">
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <h2><?php echo $indicador['ipncod']; ?></h2>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span><?php echo substr($indicador['ipndsc'], 0, 50); ?>...</span>
+                                <a class="selecionar-indicador" href="<?php echo $urlAcompanhamento; ?>">
+                                    <div class="col-xs-1" title="<?php echo $meta['mpncod'] . ' - ' . $meta['mpndsc']; ?>">
+                                        <div data-cor="<?php echo $cor ?>" class="widget div-indicador <?php echo $cor ?>">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h2><?php echo $meta['mpncod']; ?></h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        <?php } ?>
+                                </a>
+                            <?php } ?>
 
                         <div class="clearfix"></div>
 
-                        <?php if($ipnid){ ?>
+                        <?php
+                            if($mpnid){
+                                $simec->setPodeEditar(0);
+                        ?>
                             <hr />
-
+                            
+                            <div class="col-sm-12">
+                                <div style="float: right;">
+                                    <?php echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})"); ?>
+                                </div>
+                            </div>
+                            
                             <div class="col-sm-9 no-margin-bottom">
                                 <?php
-                                $simec->setPodeEditar(0);
-                                echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})");
-                                echo $simec->input('Objetivo', 'Objetivo', "{$infoIndicador['oppcod']} - {$infoIndicador['oppdsc']}");
-                                echo $simec->input('Referência', 'Indicador', "{$infoIndicador['ipncod']} - {$infoIndicador['ipndsc']}");
-                                echo $simec->input('Previsto', 'Previsto PNC', number_format($infoIndicador['ipnquantidade'], 2, ',', '.'));
-                                echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoIndicador['ipnquantidadeanualizada'], 2, ',', '.'));
-                                $simec->setLabelSize(3);
-                                $simec->setPodeEditar(1);
+                                    echo $simec->input('Objetivo', 'Objetivo', "{$infoIndicador['oppcod']} - {$infoIndicador['oppdsc']}");
+                                    echo $simec->input('Referência', 'Indicador', "{$infoIndicador['ipncod']} - {$infoIndicador['ipndsc']}");
+                                    echo $simec->input('Previsto', 'Previsto PNC', number_format($infoIndicador['ipnquantidade'], 2, ',', '.'));
+                                    echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoIndicador['ipnquantidadeanualizada'], 2, ',', '.'));
+                                    $simec->setLabelSize(3);
+                                    $simec->setPodeEditar(1);
                                 ?>
                             </div>
                             <div class="col-sm-3">
                                 <?php if(!count($aBeneficiarioDetalhe)){ ?>
                                     <ul class="list-group clear-list m-t">
-                                        <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&ipnid=<?php echo $ipnid; ?>&suoid=<?php echo $suoid; ?>">
+                                        <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
                                         <li class="list-group-item fist-item">
                                             <span class="pull-right"><?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?></span>
                                             Planos Internos (PI´s)
@@ -188,44 +192,44 @@
             
         </div>
 
-        <?php if($ipnid){ ?>
+        <?php if($mpnid){ ?>
             <form id="formulario" name="formulario" method="post" class="form-horizontal">
                 <input type="hidden" name="req" id="req" value="salvar" />
-                <input name="suoid" type="hidden" value="<?php echo $suoid; ?>">
-                <input name="ipnid" id="ipnid" type="hidden" value="<?php echo $ipnid; ?>">
-                <input name="janid" id="janid" type="hidden" value="<?php echo $janid; ?>">
-                <input name="acoid" id="acoid" type="hidden" value="<?php echo $mAcompanhamento->acoid; ?>">
+                <input name="acoid" id="acoid" type="hidden" value="<?php echo $acompanhamento->acoid; ?>">
+                <input name="suoid" type="hidden" value="<?php echo $acompanhamento->suoid; ?>">
+                <input name="mpnid" id="mpnid" type="hidden" value="<?php echo $mpnid; ?>">
+                <input name="janid" id="janid" type="hidden" value="<?php echo $acompanhamento->janid; ?>">
 
                 <div class="col-md-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>
                                 Monitoramento do Indicador
-                                <?php if($mAcompanhamento->acoid){ ?>
-                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="?modulo=principal/monitorar-ppa&acao=A&req=ver-historico&acoid=<?php echo $mAcompanhamento->acoid; ?>"></a>
+                                <?php if($acompanhamento->acoid){ ?>
+                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="?modulo=principal/monitorar-ppa&acao=A&req=ver-historico&acoid=<?php echo $acompanhamento->acoid; ?>"></a>
                                 <?php } ?>
                             </h5>
                         </div>
                         <div class="ibox-content">
                             <?php
 
-                            echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
-                            echo $simec->data('acodata', 'Dt. Referência', $mAcompanhamento->acodata, ['required']);
-                            echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise);
-                            echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC]), ['required']);
+                            echo $simec->valor('acoquantidade', 'Executado', $acompanhamento->acoquantidade, ['required']);
+                            echo $simec->data('acodata', 'Dt. Referência', $acompanhamento->acodata, ['required']);
+                            echo $simec->textarea('acoanalise', 'Análise Situacional', $acompanhamento->acoanalise);
+                            echo $simec->select('claid', 'Classificação', $acompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC]), ['required']);
 
-                            $aMedidasSelecionadas = $mAcompanhamento->recuperarMedidas();
-                            echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
+                            $aMedidasSelecionadas = $acompanhamento->recuperarMedidas();
+                            echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$acompanhamento->claid])) . '</span>';
 
-                            echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias);
+                            echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $acompanhamento->acoprovidencias);
                             ?>
 
                             <div class="form-group">
                                 <div class="text-center">
                                     <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                     <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <?php if($mAcompanhamento->acoid){ ?>
-    <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $mAcompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
+                                    <?php if($acompanhamento->acoid){ ?>
+    <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $acompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
                                     <?php } ?>
                                 </div>
                             </div>
@@ -310,7 +314,7 @@
                         <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $acompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
                             <div class="form-group">
                                 <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
                                 <div class="col-lg-10">
