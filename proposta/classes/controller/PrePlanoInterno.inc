@@ -18,6 +18,12 @@ class Proposta_Controller_PrePlanoInterno
             $mPrePlanoInterno->prsano = $mPrePlanoInterno->prsano ? $mPrePlanoInterno->prsano : $_SESSION['exercicio'];
 
             $mPrePlanoInterno->salvar(null, null, ['plidsc', 'maiid', 'masid', 'oppid', 'mppid', 'ippid', 'mpnid', 'ipnid', 'pprid', 'pumid', 'pliquantidade', 'plivalorcusteio', 'plivalorcapital', 'docid', 'plivalorcusteioadicional', 'plivalorcapitaladicional', 'pliquantidadeadicional', 'plijustificativaadicional']);
+
+
+            // Salvando dados da Localização
+            $dados['pliid'] = $mPrePlanoInterno->pliid;
+            (new Proposta_Controller_PrePlanoInternoLocalizacao())->salvar($dados);
+
             $mPrePlanoInterno->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){

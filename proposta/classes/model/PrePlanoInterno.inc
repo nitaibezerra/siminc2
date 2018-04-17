@@ -90,6 +90,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'plivalorcusteio' => null,
         'plivalorcapital' => null,
         'docid' => null,
+        'esfid' => null,
         'prsano' => null,
         'plistatus' => null,
         'plivalorcusteioadicional' => null,
@@ -109,6 +110,23 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 and plistatus = 'A'";
 
         return $this->carregar($sql);
+    }
+
+    public function recuperarLocalizacao(){
+        $sql = "select * 
+                from  proposta.preplanointernolocalizacao
+                where pliid = " . (int) $this->pliid;
+
+        $dados = $this->carregar($sql);
+
+        $aLocalizacoes = ['paiid'=>[], 'estuf'=>[], 'muncod'=>[]];
+        foreach($dados as $dado){
+            if($dado['paiid']){ $aLocalizacoes['paiid'][] = $dado['paiid']; }
+            if($dado['estuf']){ $aLocalizacoes['estuf'][] = $dado['estuf']; }
+            if($dado['muncod']){ $aLocalizacoes['muncod'][] = $dado['muncod']; }
+        }
+
+        return $aLocalizacoes;
     }
 
 }//end Class

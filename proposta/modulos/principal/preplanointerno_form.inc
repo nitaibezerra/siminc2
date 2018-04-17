@@ -206,7 +206,19 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
                         echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
+
+                        $aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacao();
+                        echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                         ?>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
+                            <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
+                        </div>
+                        <div class="select-localizacao" id="div-localizacao_<?php echo Territorios_Model_Esfera::K_ESTADUAL?>">
+                            <?php echo $simec->select('estuf[]', 'UF', $aLocalizacoes['estuf'], (new Territorios_Model_Estado())->recuperarSqlCombo(['estuf', 'estdescricao'])); ?>
+                        </div>
+                        <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_MUNICIPAL ?>">
+                            <?php echo $simec->select('muncod[]', 'Município', $aLocalizacoes['muncod'], (new Territorios_Model_Municipio())->recuperarSqlCombo(['estuf', 'mundescricao'])); ?>
+                        </div>
                     </div>
                 </div>
 
@@ -287,6 +299,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                 }
             });
         });
+
+        $('#esfid').change(function(){
+            $('.select-localizacao').hide('slow');
+            $('#div-localizacao_' + $('#esfid').val()).show('slow');
+        }).change();
 
         calcularValores();
 
