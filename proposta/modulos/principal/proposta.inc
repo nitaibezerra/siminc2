@@ -44,9 +44,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <a title="Alterar" href="?modulo=principal/proposta_form&acao=A&proid=<?php echo $dados['proid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['proid']; ?></td>
-                                    <td><?php echo $dados['ptrid']; ?></td>
-                                    <td><?php echo $dados['suoid']; ?></td>
-                                    <td><?php echo $dados['eqdid']; ?></td>
+                                    <td><?php echo $dados['funcional']; ?></td>
+                                    <td><?php echo $dados['subunidade']; ?></td>
+                                    <td><?php echo $dados['eqddsc']; ?></td>
                                     <td align="right"><?php echo $dados['proquantidade']; ?></td>
                                     <td align="right"><?php echo $dados['proquantidadeexpansao']; ?></td>
                                     <td align="right"><?php echo $dados['prdvalor']; ?></td>
