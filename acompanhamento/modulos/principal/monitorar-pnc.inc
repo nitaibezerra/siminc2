@@ -110,7 +110,7 @@
                         <div class="clearfix"></div>
 
                         <?php
-                            $listaMetas = $acompanhamento->getMetasPncComPi($suoid, $acompanhamento->janid, $_SESSION['exercicio']);
+                            $listaMetas = $acompanhamento->getMetasPncComPi((object) array('suoid' => $suoid, 'janid' => $acompanhamento->janid, 'exercicio' => $_SESSION['exercicio']));
                         
                             foreach($listaMetas as $meta){
                                 $cor = $meta['acoid']? 'navy-bg': 'red-bg';
@@ -223,8 +223,8 @@
                                         </a>
                                     </li>
                                     <li role="tab" class="disabled last" aria-disabled="true">
-                                        <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3">
-                                            <span class="number">4.</span> ANEXOS
+                                        <a id="form-t-2" href="#form-h-3" aria-controls="form-p-3">
+                                            <span class="number">3.</span> ANEXOS
                                         </a>
                                     </li>
                                 </ul>
@@ -232,21 +232,33 @@
                             <div class="content clearfix">
                                 <h1 id="form-h-0" tabindex="-1" class="title current">Account</h1>
                                 <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
-                                    <h2>Account Information</h2>
                                     <div class="row">
                                         <div class="col-lg-8">
-                                            <div class="form-group">
-                                                <label>Username *</label>
-                                                <input id="userName" name="userName" class="form-control required" aria-required="true" type="text">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password *</label>
-                                                <input id="password" name="password" class="form-control required" aria-required="true" type="text">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Confirm Password *</label>
-                                                <input id="confirm" name="confirm" class="form-control required" aria-required="true" type="text">
-                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>DESCRIÇÃO DO INDICADOR</th>
+                                                    <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                        <th><?php echo $ano; ?></th>
+                                                    <?php endfor; ?>
+                                                </tr>
+                                                </thead>
+                                                <?php
+                                                    $listaIndicadorPnc = $acompanhamento->getIndicadoresPnc((object) array('suoid' => $suoid, 'mpnid' => $meta->mpnid, 'exercicio' => (int)$_SESSION['exercicio']));
+                                                    foreach ($listaIndicadorPnc as $indicador):
+                                                ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
+                                                            <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                                <td>
+                                                                    <span class="editar_indicador fa fa-pencil link" data-acoid="<?php echo $indicador['acoid']; ?>" data-prsano="<?php echo $ano; ?>" data-ipnid="<?php echo $indicador['ipnid']; ?>" title="Editar Indicador"></span>
+                                                                </td>
+                                                            <?php endfor; ?>
+                                                        </tr>
+                                                    </tbody>
+                                                <?php endforeach; ?>
+                                            </table>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="text-center">
@@ -301,13 +313,13 @@
                             <div class="actions clearfix">
                                 <ul role="menu" aria-label="Pagination">
                                     <li class="disabled" aria-disabled="true">
-                                        <a href="#previous" role="menuitem">Previous</a>
+                                        <a href="#previous" role="menuitem">Voltar</a>
                                     </li>
                                     <li aria-hidden="false" aria-disabled="false">
-                                        <a href="#next" role="menuitem">Next</a>
+                                        <a href="#next" role="menuitem">Próximo</a>
                                     </li>
                                     <li style="display: none;" aria-hidden="true">
-                                        <a href="#finish" role="menuitem">Finish</a>
+                                        <a href="#finish" role="menuitem">Concluir</a>
                                     </li>
                                 </ul>
                             </div>

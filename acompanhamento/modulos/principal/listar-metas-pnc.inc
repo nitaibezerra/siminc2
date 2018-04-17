@@ -2,7 +2,7 @@
     <div class="ibox-title">
         <?php
         $janid = $janid ? $janid : $janelaAtiva['janid'];
-        $aMetasPnc = $mAcompanhamento->getMetasPncComPi($suoid, $janid);
+        $aMetasPnc = $mAcompanhamento->getMetasPncComPi((object)array('suoid' => $suoid, 'exercicio' => $_SESSION['exercicio'], 'janid' => $janid));
         ?>
         <h5 style="margin-right: 30px;">Minhas Metas PNC <span style="color: red;">(<?php echo count($aMetasPnc); ?>)</span></h5>
         Janela:
