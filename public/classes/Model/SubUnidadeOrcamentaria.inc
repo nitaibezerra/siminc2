@@ -216,6 +216,29 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         }
         return $aUnidades;
     }
+
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
+        $pk = $this->arChavePrimaria[0];
+
+        $descricao = $descricao ? $descricao : ['unosigla', 'suonome'];
+
+        if ($descricao) {
+            $descricao = implode(" || ' - ' || ", (array)$descricao);
+        }
+
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? implode(' and ', $where) : '';
+
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+                from public.vw_subunidadeorcamentaria
+                where suostatus = 'A'
+                and prsano = '{$_SESSION['exercicio']}'
+                $where
+                order by $order   
+        ";
+
+        return $sql;
+    }
     
     /**
      * Retorna SQL da consulta pra preencher o componente de combo referente à Subunidade.
@@ -237,5 +260,6 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         ";
         return $sql;
     }
+
 
 }
