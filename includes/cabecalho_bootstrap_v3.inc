@@ -286,6 +286,9 @@ $paginic = $db->pegaUm($sql);
 
     <!-- Ion Range Slider -->
     <script src="/zimec/public/temas/simec/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+    
+    <!-- Steps -->
+    <script src="/zimec/public/temas/simec/js/plugins/steps/jquery.steps.min.js"></script>
 
     <!-- Textext JS -->
     <script src="/zimec/public/temas/simec/js/plugins/textext/js/textext.core.js"></script>
@@ -312,6 +315,8 @@ $paginic = $db->pegaUm($sql);
     <link href="/zimec/public/temas/simec/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="/zimec/public/temas/simec/css/plugins/ionRangeSlider/ion.rangeSlider.skinHTML5.css" rel="stylesheet">
     <link href="/zimec/public/temas/simec/css/plugins/ionRangeSlider/normalize.css" rel="stylesheet">
+    <!-- Steps -->
+    <link href="/zimec/public/temas/simec/css/plugins/steps/jquery.steps.css" rel="stylesheet">
     <link href="/zimec/public/temas/simec/css/plugins/switchery/switchery.css" rel="stylesheet">
     <link href="/zimec/public/temas/simec/css/plugins/bootstrap-tour/bootstrap-tour.min.css" rel="stylesheet">
     <link href="/zimec/public/temas/simec/css/plugins/summernote/summernote.css" rel="stylesheet">

@@ -1,7 +1,11 @@
 <?php
+
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
+    
+    $mpnid = $_REQUEST['mpnid'];
+    
     switch ($_REQUEST['req']) {
         case 'salvar':
             $cAcompanhamento->salvar($_REQUEST);
@@ -10,7 +14,7 @@
             $cAcompanhamento->excluir($_REQUEST['acoid']);
         die;
         case 'detalhe-pi':
-            $cAcompanhamento->recuperarPiPorIndicadorESubunidade($_REQUEST['ipnid'], $_REQUEST['suoid']);
+            $cAcompanhamento->recuperarPiPorMetaPncESubunidade($_REQUEST['mpnid'], $_REQUEST['suoid']);
         die;
         case 'ver-historico':
             $cAcompanhamento->recuperarHistorico($_REQUEST['acoid']);
@@ -39,22 +43,21 @@
         die;
     }
 
-    $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
+    $acompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
 
     // Recuperando Janela Ativa
     $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
-    $janid = $mAcompanhamento->janid ? $mAcompanhamento->janid : $janela['janid'];
-
-    // Recuperando Indicador Selecionada
-    $ipnid = $mAcompanhamento->ipnid ? $mAcompanhamento->ipnid : $_REQUEST['ipnid'];
+    $acompanhamento->janid = $acompanhamento->janid? $acompanhamento->janid: $janela['janid'];
 
     // Recuperando SubUnidade
-    $suoid = $mAcompanhamento->suoid ? $mAcompanhamento->suoid : $_REQUEST['suoid'];
+    $suoid = $acompanhamento->suoid? $acompanhamento->suoid: $_REQUEST['suoid'];
     
-    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
+    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($acompanhamento->acoid);
 
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
+
+<script src="js/principal/acompanhamento.js?v=1"></script>
 
 <style>
     .no-margin-bottom .form-group{
@@ -63,8 +66,8 @@
 </style>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2><?php echo $titulo_modulo; ?></h2>
+    <div class="col-lg-12">
+        <h2>MONITORAMENTO DAS METAS PNC</h2>
     </div>
 </div>
 
@@ -99,86 +102,90 @@
             	<div class="ibox-content">
                     <div class="row form-horizontal">
 
-                        <?php
-                        $aIndicadores = $mAcompanhamento->getIndicadoresPnc($suoid);
-                        $aUnidades = (new Public_Model_SubUnidadeOrcamentaria())->recuperarPorUsuario();
-//                        $infoIndicador = (new Public_Model_IndicadorPnc($ipnid))->recuperarInformacoes();
-//                        $infoPI = (new Pi_PlanoInterno())->recuperarResumoPorIndicadorESubunidade($ipnid, $suoid);
-                        ?>
-
                         <div class="col-sm-6">
-                            <?php echo $simec->select('suoid', 'Unidade', $suoid, $aUnidades, null, ['label-size'=>2]); ?>
+                            <?php
+                                $listaUnidades = (new Public_Model_SubUnidadeOrcamentaria())->recuperarPorUsuario();
+                                echo $simec->select('suoid', 'Unidade', $suoid, $listaUnidades, null, ['label-size'=>2]);
+                            ?>
                         </div>
 
                         <div class="clearfix"></div>
 
-                        <?php foreach($aIndicadores as $indicador){
-                            $cor = $indicador['acoid'] ? 'navy-bg' : 'red-bg';
-                            $cor = $ipnid == $indicador['ipnid'] ? 'blue-bg' : $cor;
-                            $urlAcompanhamento = $indicador['acoid'] ? "?modulo=principal/monitorar-pnc&acao=A&acoid={$indicador['acoid']}" : "?modulo=principal/monitorar-pnc&acao=A&ipnid={$indicador['ipnid']}&suoid={$suoid}";
+                        <?php
+                            $listaMetas = $acompanhamento->getMetasPncComPi((object) array('suoid' => $suoid, 'janid' => $acompanhamento->janid, 'exercicio' => $_SESSION['exercicio']));
+                        
+                            foreach($listaMetas as $meta){
+                                $cor = $meta['acoid']? 'navy-bg': 'red-bg';
+                                $cor = $mpnid == $meta['mpnid']? 'blue-bg': $cor;
+                                $urlAcompanhamento = $meta['acoid']? "?modulo=principal/monitorar-pnc&acao=A&acoid={$meta['acoid']}": "?modulo=principal/monitorar-pnc&acao=A&mpnid={$meta['mpnid']}&suoid={$suoid}";
                             ?>
-                            <a class="selecionar-indicador" href="<?php echo $urlAcompanhamento; ?>">
-                                <div class="col-sm-4 col-md-3" title="<?php echo $indicador['ipnid'] . ' - ' . $indicador['ipndsc']; ?>">
-                                    <div data-cor="<?php echo $cor ?>" class="widget div-indicador <?php echo $cor ?>">
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <h2><?php echo $indicador['ipncod']; ?></h2>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span><?php echo substr($indicador['ipndsc'], 0, 50); ?>...</span>
+                                <a class="selecionar-indicador" href="<?php echo $urlAcompanhamento; ?>">
+                                    <div class="col-xs-1" title="<?php echo $meta['mpncod'] . ' - ' . $meta['mpndsc']; ?>">
+                                        <div data-cor="<?php echo $cor ?>" class="widget div-indicador <?php echo $cor ?>">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h2><?php echo $meta['mpncod']; ?></h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        <?php } ?>
+                                </a>
+                            <?php } ?>
 
                         <div class="clearfix"></div>
 
-                        <?php if($ipnid){ ?>
-                            <hr />
-
-                            <div class="col-sm-9 no-margin-bottom">
-                                <?php
+                        <?php
+                            if($mpnid){
                                 $simec->setPodeEditar(0);
-                                echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})");
-                                echo $simec->input('Objetivo', 'Objetivo', "{$infoIndicador['oppcod']} - {$infoIndicador['oppdsc']}");
-                                echo $simec->input('Referência', 'Indicador', "{$infoIndicador['ipncod']} - {$infoIndicador['ipndsc']}");
-                                echo $simec->input('Previsto', 'Previsto PNC', number_format($infoIndicador['ipnquantidade'], 2, ',', '.'));
-                                echo $simec->input('Previstoa', 'Previsto Anualizado', number_format($infoIndicador['ipnquantidadeanualizada'], 2, ',', '.'));
-                                $simec->setLabelSize(3);
-                                $simec->setPodeEditar(1);
-                                ?>
+                                
+                                $valoresOrcamentarios = (new Pi_PlanoInterno())->recuperarValoresPiMetaPncESubunidade($mpnid, $suoid);
+                        ?>
+                            <hr />
+                            
+                            <div class="col-sm-12">
+                                <div style="float: right;">
+                                    <?php echo $simec->input('Referência', 'Referência', "{$janela['jandsc']} ({$janela['janinicio']} - {$janela['janfim']})"); ?>
+                                </div>
                             </div>
-                            <div class="col-sm-3">
-                                <?php if(!count($aBeneficiarioDetalhe)){ ?>
-                                    <ul class="list-group clear-list m-t">
-                                        <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&ipnid=<?php echo $ipnid; ?>&suoid=<?php echo $suoid; ?>">
-                                        <li class="list-group-item fist-item">
-                                            <span class="pull-right"><?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?></span>
-                                            Planos Internos (PI´s)
-                                        </li>
-                                        </a>
-                                        <li class="list-group-item">
-                                            Previsto
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['previsto'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Empenhado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['empenhado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Liquidado
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['liquidado'], 2, ',', '.'); ?></span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            Pago
-                                            <span class="pull-right">R$ <?php echo number_format($infoPI['pago'], 2, ',', '.'); ?></span>
-                                        </li>
-                                    </ul>
-                                <?php } else {
-                                    echo '<div class="alert alert-danger">Nenhum PI cadastrado para essa indicador</div>';
-                                } ?>
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
+                                                    Planos Internos (PI´s)
+                                                </a>
+                                            </th>
+                                            <th>Previsto</th>
+                                            <th>Empenhado</th>
+                                            <th>Liquidado</th>
+                                            <th>Pago</th>
+                                        </tr>
+                                    </thead>
+                                    <?php if($valoresOrcamentarios): ?>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
+                                                        <?php echo number_format($valoresOrcamentarios['qtd'], 0, ',', '.'); ?>
+                                                    </a>
+                                                </td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['previsto'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['empenhado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['liquidado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['pago'], 2, ',', '.'); ?></td>
+                                            </tr>
+                                        </tbody>
+                                    <?php else: ?>
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <div class="alert alert-danger">Nenhum PI cadastrado para essa indicador</div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    <?php endif; ?>
+                                </table>
                             </div>
                         <?php } ?>
 
@@ -188,101 +195,148 @@
             
         </div>
 
-        <?php if($ipnid){ ?>
-            <form id="formulario" name="formulario" method="post" class="form-horizontal">
-                <input type="hidden" name="req" id="req" value="salvar" />
-                <input name="suoid" type="hidden" value="<?php echo $suoid; ?>">
-                <input name="ipnid" id="ipnid" type="hidden" value="<?php echo $ipnid; ?>">
-                <input name="janid" id="janid" type="hidden" value="<?php echo $janid; ?>">
-                <input name="acoid" id="acoid" type="hidden" value="<?php echo $mAcompanhamento->acoid; ?>">
-
-                <div class="col-md-8">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>
-                                Monitoramento do Indicador
-                                <?php if($mAcompanhamento->acoid){ ?>
-                                    <a style="margin-left: 10px;" class="fa fa-history detalhe-pi" title="Histórico de alterações" href="?modulo=principal/monitorar-ppa&acao=A&req=ver-historico&acoid=<?php echo $mAcompanhamento->acoid; ?>"></a>
-                                <?php } ?>
-                            </h5>
-                        </div>
-                        <div class="ibox-content">
-                            <?php
-
-                            echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
-                            echo $simec->data('acodata', 'Dt. Referência', $mAcompanhamento->acodata, ['required']);
-                            echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise);
-                            echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC]), ['required']);
-
-                            $aMedidasSelecionadas = $mAcompanhamento->recuperarMedidas();
-                            echo '<span id="span-medida" ' . (!count($aMedidasSelecionadas) ? 'style="display: none"' : '') . '>' . $simec->select('medidas[]', 'Medidas a serem adotadas', $aMedidasSelecionadas, (new Acompanhamento_Model_Medida())->recuperarSqlCombo(null, ['claid = ' . (int)$mAcompanhamento->claid])) . '</span>';
-
-                            echo $simec->textarea('acoprovidencias', 'Detalhamento das providências a serem adotadas', $mAcompanhamento->acoprovidencias);
-                            ?>
-
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                    <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <?php if($mAcompanhamento->acoid){ ?>
-    <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $mAcompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
-                                    <?php } ?>
-                                </div>
+        <?php
+            if($mpnid){
+                $meta = new Public_Model_MetaPnc($mpnid);
+        ?>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="row">
+                            <div class="col-sm-1" style="text-align: center;">
+                               <h1><?php echo $meta->mpncod; ?></h1>
+                            </div>
+                            <div class="col-sm-11">
+                                <h2><?php echo $meta->mpndsc; ?></h2>
                             </div>
                         </div>
                     </div>
-                </div>
-        
-                <div class="col-md-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Anexos</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <table id="table_anexos" cellpadding="5" border="0" width="98%" align="center" class="table table-striped table-hover table-bordered table-hover">
-                                        <tr>
-                                            <td style="text-align: left;"><b>Nome do arquivo</b></td>
-                                            <td style="text-align: left;"><b>Descrição</b></td>
-                                            <td style="text-align: center;"><b>Ação</b></td>
-                                        </tr>
-                                        <?php 
-                                            if($listaDeAnexos):
-                                                foreach($listaDeAnexos as $anexo):
-                                        ?>
-                                            <tr style="height: 30px;" class="tr_anexos_<?php echo $anexo['arqid']; ?>" >
-                                                <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('<?php echo $anexo['arqid']; ?>'); return false;" ><?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?></a></td>
-                                                <td style="text-align: left;"><?php echo $anexo['arqdescricao']; ?></td>
-                                                <td style="text-align: center;">
-                                                    <input type="hidden" value="<?php echo $anexo['arqid']; ?>" name="listaAnexos[]">
-                                                    <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo <?php echo $anexo['arqnome']. '.'. $anexo['arqextensao']; ?>" data-anexos="<?php echo $anexo['arqid']; ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php
-                                                endforeach;
-                                            endif;
-                                        ?>
-                                    </table>
-                                </div>
+                    <div class="ibox-content">
+                        <form id="form" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
+                            <div class="steps clearfix">
+                                <ul role="tablist">
+                                    <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                                        <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                                            <span class="current-info audible">current step: </span>
+                                            <span class="number">1.</span> INDICADORES
+                                        </a>
+                                    </li>
+                                    <li role="tab" class="disabled" aria-disabled="true">
+                                        <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1">
+                                            <span class="number">2.</span> ATIVIDADES
+                                        </a>
+                                    </li>
+                                    <li role="tab" class="disabled last" aria-disabled="true">
+                                        <a id="form-t-2" href="#form-h-3" aria-controls="form-p-3">
+                                            <span class="number">3.</span> ANEXOS
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
+                            <div class="content clearfix">
+                                <h1 id="form-h-0" tabindex="-1" class="title current">Account</h1>
+                                <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>DESCRIÇÃO DO INDICADOR</th>
+                                                    <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                        <th><?php echo $ano; ?></th>
+                                                    <?php endfor; ?>
+                                                </tr>
+                                                </thead>
+                                                <?php
+                                                    $listaIndicadorPnc = $acompanhamento->getIndicadoresPnc((object) array('suoid' => $suoid, 'mpnid' => $meta->mpnid, 'exercicio' => (int)$_SESSION['exercicio']));
+                                                    foreach ($listaIndicadorPnc as $indicador):
+                                                ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
+                                                            <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                                <td>
+                                                                    <span class="editar_indicador fa fa-pencil link" data-acoid="<?php echo $indicador['acoid']; ?>" data-prsano="<?php echo $ano; ?>" data-ipnid="<?php echo $indicador['ipnid']; ?>" title="Editar Indicador"></span>
+                                                                </td>
+                                                            <?php endfor; ?>
+                                                        </tr>
+                                                    </tbody>
+                                                <?php endforeach; ?>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-center">
+                                                <div style="margin-top: 20px">
+                                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
-                                </div>
+                                </fieldset>
+                                <h1 id="form-h-1" tabindex="-1" class="title">Profile</h1>
+                                <fieldset id="form-p-1" role="tabpanel" aria-labelledby="form-h-1" class="body" style="display: none;" aria-hidden="true">
+                                    <h2>Profile Information</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>First name *</label>
+                                                <input id="name" name="name" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Last name *</label>
+                                                <input id="surname" name="surname" class="form-control required" aria-required="true" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Email *</label>
+                                                <input id="email" name="email" class="form-control required email" aria-required="true" type="text">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Address *</label>
+                                                <input id="address" name="address" class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <h1 id="form-h-2" tabindex="-1" class="title">Warning</h1>
+                                <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" style="display: none;" aria-hidden="true">
+                                    <div class="text-center" style="margin-top: 120px">
+                                        <h2>You did it Man :-)</h2>
+                                    </div>
+                                </fieldset>
+
+                                <h1 id="form-h-3" tabindex="-1" class="title">Finish</h1>
+                                <fieldset id="form-p-3" role="tabpanel" aria-labelledby="form-h-3" class="body" style="display: none;" aria-hidden="true">
+                                    <h2>Terms and Conditions</h2>
+                                    <input id="acceptTerms" name="acceptTerms" class="required" aria-required="true" type="checkbox"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                                </fieldset>
                             </div>
-
-                        </div>
+                            <div class="actions clearfix">
+                                <ul role="menu" aria-label="Pagination">
+                                    <li class="disabled" aria-disabled="true">
+                                        <a href="#previous" role="menuitem">Voltar</a>
+                                    </li>
+                                    <li aria-hidden="false" aria-disabled="false">
+                                        <a href="#next" role="menuitem">Próximo</a>
+                                    </li>
+                                    <li style="display: none;" aria-hidden="true">
+                                        <a href="#finish" role="menuitem">Concluir</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-            </form>
         <?php } ?>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Div do Modal de lista de PIs -->
 <div class="modal fade" id="detalhe-pi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -300,6 +354,7 @@
     </div>
 </div>
 
+<!-- Div do Modal do formulário de Anexo de Arquivos -->
 <div class="row">
     <div class="col-md-12">
         <div id="modal_upload" class="modal fade">
@@ -310,7 +365,7 @@
                         <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $acompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
                             <div class="form-group">
                                 <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
                                 <div class="col-lg-10">
