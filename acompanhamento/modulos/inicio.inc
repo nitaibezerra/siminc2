@@ -218,7 +218,7 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
             $('#detalhe-pi').modal();
             return false;
         });
-    })
+    });
 
     /**
      * Exibe popup com Detalhes do pi. Tela de Espelho de PI.

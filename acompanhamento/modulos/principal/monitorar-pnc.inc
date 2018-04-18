@@ -57,6 +57,8 @@
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
+<script src="js/principal/acompanhamento.js?v=1"></script>
+
 <style>
     .no-margin-bottom .form-group{
         margin-bottom: 5px;
