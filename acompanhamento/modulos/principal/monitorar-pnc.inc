@@ -14,7 +14,7 @@
             $cAcompanhamento->excluir($_REQUEST['acoid']);
         die;
         case 'detalhe-pi':
-            $cAcompanhamento->recuperarPiPorIndicadorESubunidade($_REQUEST['ipnid'], $_REQUEST['suoid']);
+            $cAcompanhamento->recuperarPiPorMetaPncESubunidade($_REQUEST['mpnid'], $_REQUEST['suoid']);
         die;
         case 'ver-historico':
             $cAcompanhamento->recuperarHistorico($_REQUEST['acoid']);
@@ -150,7 +150,7 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
+                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
                                                     Planos Internos (PI´s)
                                                 </a>
                                             </th>
@@ -164,7 +164,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
+                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
                                                         <?php echo number_format($valoresOrcamentarios['qtd'], 0, ',', '.'); ?>
                                                     </a>
                                                 </td>

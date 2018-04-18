@@ -98,6 +98,14 @@ class Acompanhamento_Controller_Acompanhamento
 
         include_once APPRAIZ . 'acompanhamento/modulos/principal/detalhe-pi.inc';
     }
+    
+    public function recuperarPiPorMetaPncESubunidade($mpnid, $suoid)
+    {
+        $mPi = new Pi_PlanoInterno();
+        $aPis = $mPi->recuperarPiPorMetaPncESubunidade($mpnid, $suoid);
+
+        include_once APPRAIZ . 'acompanhamento/modulos/principal/detalhe-pi.inc';
+    }
 
     public function recuperarHistorico($acoid)
     {

@@ -1771,31 +1771,96 @@ class Pi_PlanoInterno extends Modelo
         return $this->carregar($sql);
     }
 
-    public function recuperarPiPorIndicadorESubunidade($ipnid, $suoid, $exercicio = null)
-    {
+    public function recuperarPiPorIndicadorESubunidade($ipnid, $suoid, $exercicio = null){
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
-        $sql = "select  pli.pliid, pli.plicod, pli.plititulo,
-                        coalesce(pic.picvalorcapital, 0) picvalorcapital, coalesce(pic.picvalorcusteio, 0) picvalorcusteio,
-                        coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) previsto,
-                        coalesce(sex.vlrautorizado,0) as autorizado,
-                        coalesce(sex.vlrempenhado,0) as empenhado,
-                        coalesce(sex.vlrliquidado,0) as liquidado,
-                        coalesce(sex.vlrpago,0) as pago
-                from monitora.pi_planointerno pli
-                        inner join planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                        inner join public.vw_subunidadeorcamentaria suo on suo.unocod = pli.unicod and suo.suocod = pli.ungcod and suo.prsano = pli.pliano
-                        left join (
-                                select sex.exercicio, sex.plicod, sum(sex.vlrautorizado) vlrautorizado, sum(sex.vlrempenhado) vlrempenhado, sum(sex.vlrliquidado) vlrliquidado, sum(sex.vlrpago) vlrpago
-                                from spo.siopexecucao sex
-                                where coalesce(sex.plicod, '') != ''
-                                group by sex.exercicio, sex.plicod
-                        ) sex on sex.plicod = pli.plicod AND sex.exercicio = pli.pliano
-                where pli.plistatus = 'A'
-                and pli.pliano = '$exercicio'
-                and pic.ipnid = " . (int) $ipnid . "
-                and suo.suoid = " . (int) $suoid . "
-                ";
+        $sql = "
+            SELECT
+                pli.pliid,
+                pli.plicod,
+                pli.plititulo,
+                coalesce(pic.picvalorcapital, 0) picvalorcapital,
+                coalesce(pic.picvalorcusteio, 0) picvalorcusteio,
+                coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) previsto,
+                coalesce(sex.vlrautorizado, 0) AS autorizado,
+                coalesce(sex.vlrempenhado, 0) AS empenhado,
+                coalesce(sex.vlrliquidado, 0) AS liquidado,
+                coalesce(sex.vlrpago, 0) AS pago
+            FROM monitora.pi_planointerno pli
+                JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
+                JOIN public.vw_subunidadeorcamentaria suo ON(
+                    suo.unocod = pli.unicod
+                    AND suo.suocod = pli.ungcod
+                    AND suo.prsano = pli.pliano
+                )
+                LEFT JOIN (
+                    SELECT
+                        sex.exercicio,
+                        sex.plicod,
+                        sum(sex.vlrautorizado) vlrautorizado,
+                        sum(sex.vlrempenhado) vlrempenhado,
+                        sum(sex.vlrliquidado) vlrliquidado,
+                        sum(sex.vlrpago) vlrpago
+                    FROM
+                        spo.siopexecucao sex
+                    WHERE
+                        coalesce(sex.plicod, '') != ''
+                    GROUP BY
+                        sex.exercicio,
+                        sex.plicod
+                ) sex ON(sex.plicod = pli.plicod AND sex.exercicio = pli.pliano)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '$exercicio'
+                    AND pic.ipnid = ". (int)$ipnid. "
+                    AND suo.suoid = ". (int)$suoid;
+
+        return $this->carregar($sql);
+    }
+    
+    public function recuperarPiPorMetaPncESubunidade($mpnid, $suoid, $exercicio = null){
+        $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
+
+        $sql = "
+            SELECT
+                pli.pliid,
+                pli.plicod,
+                pli.plititulo,
+                coalesce(pic.picvalorcapital, 0) picvalorcapital,
+                coalesce(pic.picvalorcusteio, 0) picvalorcusteio,
+                coalesce(pic.picvalorcapital, 0) + coalesce(pic.picvalorcusteio, 0) previsto,
+                coalesce(sex.vlrautorizado, 0) AS autorizado,
+                coalesce(sex.vlrempenhado, 0) AS empenhado,
+                coalesce(sex.vlrliquidado, 0) AS liquidado,
+                coalesce(sex.vlrpago, 0) AS pago
+            FROM monitora.pi_planointerno pli
+                JOIN planacomorc.pi_complemento pic ON pic.pliid = pli.pliid
+                JOIN public.vw_subunidadeorcamentaria suo ON(
+                    suo.unocod = pli.unicod
+                    AND suo.suocod = pli.ungcod
+                    AND suo.prsano = pli.pliano
+                )
+                LEFT JOIN (
+                    SELECT
+                        sex.exercicio,
+                        sex.plicod,
+                        sum(sex.vlrautorizado) vlrautorizado,
+                        sum(sex.vlrempenhado) vlrempenhado,
+                        sum(sex.vlrliquidado) vlrliquidado,
+                        sum(sex.vlrpago) vlrpago
+                    FROM
+                        spo.siopexecucao sex
+                    WHERE
+                        coalesce(sex.plicod, '') != ''
+                    GROUP BY
+                        sex.exercicio,
+                        sex.plicod
+                ) sex ON(sex.plicod = pli.plicod AND sex.exercicio = pli.pliano)
+                WHERE
+                    pli.plistatus = 'A'
+                    AND pli.pliano = '$exercicio'
+                    AND pic.mpnid = ". (int)$mpnid. "
+                    AND suo.suoid = ". (int)$suoid;
 
         return $this->carregar($sql);
     }
