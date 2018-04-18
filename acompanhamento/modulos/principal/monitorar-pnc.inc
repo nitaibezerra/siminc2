@@ -135,6 +135,8 @@
                         <?php
                             if($mpnid){
                                 $simec->setPodeEditar(0);
+                                
+                                $valoresOrcamentarios = (new Pi_PlanoInterno())->recuperarValoresPiMetaPncESubunidade($mpnid, $suoid);
                         ?>
                             <hr />
                             
@@ -158,18 +160,18 @@
                                             <th>Pago</th>
                                         </tr>
                                     </thead>
-                                    <?php if(!count($aBeneficiarioDetalhe)): ?>
+                                    <?php if($valoresOrcamentarios): ?>
                                         <tbody>
                                             <tr>
                                                 <td>
                                                     <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mppid=<?php echo $acompanhamento->mppid; ?>&suoid=<?php echo $acompanhamento->suoid; ?>">
-                                                        <?php echo number_format($infoPI['qtd'], 0, ',', '.'); ?>
+                                                        <?php echo number_format($valoresOrcamentarios['qtd'], 0, ',', '.'); ?>
                                                     </a>
                                                 </td>
-                                                <td>R$ <?php echo number_format($infoPI['previsto'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($infoPI['empenhado'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($infoPI['liquidado'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($infoPI['pago'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['previsto'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['empenhado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['liquidado'], 2, ',', '.'); ?></td>
+                                                <td>R$ <?php echo number_format($valoresOrcamentarios['pago'], 2, ',', '.'); ?></td>
                                             </tr>
                                         </tbody>
                                     <?php else: ?>
