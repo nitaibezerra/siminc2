@@ -146,8 +146,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Proponente</th>
                                     <th>Unidade</th>
-                                    <th>Esfera</th>
-                                    <th>Forma de Execução</th>
+                                    <th>N° Proposta</th>
+                                    <th>Situação Siconv</th>
+                                    <th>Custeio</th>
+                                    <th>Capital</th>
+                                    <th>Empenhado</th>
+                                    <th>Pago</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -158,8 +162,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                         <td><?php echo $dados['procnpj'] . ' - ' . $dados['pronome']; ?></td>
                                         <td><?php echo $dados['suocod'] . ' - ' . $dados['suonome']; ?></td>
-                                        <td><?php echo $dados['esfdsc']; ?></td>
-                                        <td><?php echo $dados['formaexecucao']; ?></td>
+                                        <td><?php echo $dados['numero_proposta']; ?></td>
+                                        <td><?php echo $dados['sitdsc']; ?></td>
+                                        <td><?php echo number_format($dados['picvalorcusteio'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['picvalorcapital'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
