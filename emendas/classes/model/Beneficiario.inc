@@ -165,17 +165,41 @@ class Emendas_Model_Beneficiario extends Modelo
                 suo.unonome,
                 suo.unoid,
                 esf.esfdsc,
-                pli.picvalorcusteio,
-                pli.picvalorcapital,
-                pli.empenhado,
-                pli.pago,
                 CASE WHEN benformaexecucao = 'S' THEN
                     'SICONV'
                 WHEN benformaexecucao = 'D' THEN
                     'DIRETA'
                 WHEN benformaexecucao = 'T' THEN
                     'TED'
-                END formaexecucao
+                END formaexecucao,
+                (
+                SELECT
+                    sit.sitdsc
+                FROM emendas.siconvbeneficiario sbe
+                    JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                    JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                WHERE
+                    sbe.benid = ben.benid
+                ORDER BY
+                    sicsequencial DESC
+                LIMIT 1
+                ) AS sitdsc,
+                (
+		        SELECT
+                    sic.sicsequencial || '/' || sic.prsano
+                FROM emendas.siconvbeneficiario sbe
+                    JOIN emendas.siconv sic ON sic.sicid = sbe.sicid
+                    JOIN emendas.siconvsituacao sit ON sit.sitid = sic.sitid
+                WHERE
+			        sbe.benid = ben.benid
+                ORDER BY
+                     sicsequencial DESC
+                LIMIT 1
+                ) AS numero_proposta,
+                pli.picvalorcusteio,
+                pli.picvalorcapital,
+                pli.empenhado,
+                pli.pago
             FROM
                 emendas.beneficiario ben
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid

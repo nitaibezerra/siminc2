@@ -162,8 +162,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                         <td><?php echo $dados['procnpj'] . ' - ' . $dados['pronome']; ?></td>
                                         <td><?php echo $dados['suocod'] . ' - ' . $dados['suonome']; ?></td>
-                                        <td><?php echo $dados['siconv']; ?></td>
-                                        <td><?php echo $dados['siconv']; ?></td>
+                                        <td><?php echo $dados['numero_proposta']; ?></td>
+                                        <td><?php echo $dados['sitdsc']; ?></td>
                                         <td><?php echo number_format($dados['picvalorcusteio'], 2, ',', '.'); ?></td>
                                         <td><?php echo number_format($dados['picvalorcapital'], 2, ',', '.'); ?></td>
                                         <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
