@@ -869,16 +869,32 @@ class Emendas_Model_Emenda extends Modelo
         }
     }
 
-    public function atualizarSiconv()
+    public function atualizarSiconv($benid = NULL)
     {
         global $configSiconv;
 
-        $sql = "select eme.*, uno.unocodorcamento
-                from emendas.emenda eme
-                    inner join public.unidadeorcamentaria uno on uno.unoid = eme.unoid
-                where eme.emeid = {$this->emeid}
+        $sql = "
+            SELECT
+                eme.*,
+                uno.unocodorcamento
+            FROM emendas.emenda eme
+                JOIN public.unidadeorcamentaria uno ON uno.unoid = eme.unoid
+            WHERE
+                eme.emeid = {$this->emeid}
         ";
         $emenda = $this->pegaLinha($sql);
+
+        # Caso seja passado o código do Beneficiario o Sistema verifica se existe Subunidade delegada
+        if($benid){
+            $beneficiario = new Emendas_Model_Beneficiario($benid);
+            $sqlSubUnidadeDelegada = $beneficiario->montarSqlRecuperarDelegacao((object)array('exercicio' => $_SESSION['exercicio']));
+            $resultadoSubUnidadeDelegada = $this->pegaLinha($sqlSubUnidadeDelegada);
+            # Caso exista Unidade delegada o Sistema insere o código orcamento da UO da Subunidade delegada para buscar a proposta SICONV
+            if($resultadoSubUnidadeDelegada){
+                $subUnidadeDelegada = (object)$resultadoSubUnidadeDelegada;
+                $emenda['unocodorcamento'] = $subUnidadeDelegada->unocodorcamento;
+            }
+        }
 
         $usuario = $configSiconv->user;
         $senha = $configSiconv->pwd;

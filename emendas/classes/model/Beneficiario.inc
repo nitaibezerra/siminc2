@@ -280,17 +280,35 @@ class Emendas_Model_Beneficiario extends Modelo
             }
         }
     }
+    
+    public function montarSqlRecuperarDelegacao(stdClass $filtro){
+        $sql = "
+            SELECT DISTINCT
+                suo.suoid,
+                suo.suocod,
+                suo.suosigla,
+                suo.suonome,
+                suo.unoid,
+                suo.unocod,
+		uo.unocodorcamento,
+                suo.unosigla,
+                suo.unonome
+            FROM public.vw_subunidadeorcamentaria suo
+		JOIN public.unidadeorcamentaria uo ON(suo.unoid = uo.unoid)
+                JOIN emendas.delegacao d ON(suo.suoid = d.suoid)
+            WHERE
+                suo.suostatus = 'A'
+                AND d.benid = ". (int)$this->benid. "
+                AND suo.prsano = '". (int)$filtro->exercicio. "' ";
+        
+        return $sql;
+    }
 
     public function recuperarDelegacao($exercicio = null)
     {
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
-        $sql = " SELECT suo.suoid
-                FROM public.vw_subunidadeorcamentaria suo
-                    JOIN emendas.delegacao d ON(suo.suoid = d.suoid)
-                WHERE suo.suostatus = 'A'
-                AND benid = ". (int)$this->benid. "
-                AND suo.prsano = '". (int)$exercicio. "' ";
+        $sql = $this->montarSqlRecuperarDelegacao((object)array('exercicio' => $exercicio));
 
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
