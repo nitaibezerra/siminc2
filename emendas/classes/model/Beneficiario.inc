@@ -154,16 +154,34 @@ class Emendas_Model_Beneficiario extends Modelo
 
     public function recuperarTodos($stCampos = '*', $arClausulas = null, $stOrdem = null, array $opcoes = array()) {
 
-        $sql = "select  ben.*, replace(to_char(pro.procnpj::numeric, '00:000:000/0000-00'), ':', '.') procnpj, pro.pronome, suo.suocod, suo.suonome, suo.unocod, suo.unonome, suo.unoid, esf.esfdsc,  
-                        case 
-                                when benformaexecucao = 'S' then 'SICONV'
-                                when benformaexecucao = 'D' then 'DIRETA'
-                                when benformaexecucao = 'T' then 'TED'
-                        end formaexecucao
-                from  emendas.beneficiario ben
-                        left join emendas.proponente pro on pro.proid = ben.proid
-                        left join public.vw_subunidadeorcamentaria suo on suo.suoid = ben.suoid
-                        left join territorios.esfera esf on esf.esfid = ben.esfid";
+        $sql = "
+            SELECT
+                ben.*,
+                REPLACE(to_char(pro.procnpj::numeric, '00:000:000/0000-00'), ':', '.') procnpj,
+                pro.pronome,
+                suo.suocod,
+                suo.suonome,
+                suo.unocod,
+                suo.unonome,
+                suo.unoid,
+                esf.esfdsc,
+                pli.picvalorcusteio,
+                pli.picvalorcapital,
+                pli.empenhado,
+                pli.pago,
+                CASE WHEN benformaexecucao = 'S' THEN
+                    'SICONV'
+                WHEN benformaexecucao = 'D' THEN
+                    'DIRETA'
+                WHEN benformaexecucao = 'T' THEN
+                    'TED'
+                END formaexecucao
+            FROM
+                emendas.beneficiario ben
+                LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid
+                LEFT JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = ben.suoid
+                LEFT JOIN territorios.esfera esf ON esf.esfid = ben.esfid
+                LEFT JOIN monitora.vw_planointerno pli ON (ben.pliid = pli.pliid)";
 
         $sql .= $arClausulas ? " WHERE " . implode(" AND ", $arClausulas) : "";
         $sql .= $stOrdem ? " ORDER BY $stOrdem" : "";
