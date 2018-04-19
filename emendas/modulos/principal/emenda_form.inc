@@ -16,13 +16,14 @@ switch ($_REQUEST['req']) {
         die;
     case 'carregarAcaoPorUo':
         $sqlPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo([
+            "'(Ptres: ' || ptres.ptres || ')'",
             "coalesce(ptres.prgcod, '')",
             "coalesce(ptres.acacod, '')",
             "coalesce(acaobjetivocod, '')",
             "coalesce(ptres.loccod, '')",
             "coalesce(ptres.plocod, '')",
             "acatitulo"
-            ],
+            ], 
             [
                 "plocod = 'EIND'",
                 "unoid = '". (int)$_REQUEST['unoid']. "'"
@@ -72,6 +73,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo $simec->select('autid', 'Autor', $mEmenda->autid, (new Emendas_Model_Autor())->recuperarSqlCombo(['autcod', 'autnome'], null, 'autnome'));
                             echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
                             $sqlPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo([
+                                "ptres.ptres",
                                 "coalesce(ptres.prgcod, '')",
                                 "coalesce(ptres.acacod, '')",
                                 "coalesce(acaobjetivocod, '')",
