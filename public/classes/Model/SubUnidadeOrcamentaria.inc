@@ -222,19 +222,25 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
 
         $descricao = $descricao ? $descricao : ['unosigla', 'suonome'];
 
+        $where[] = "suostatus = 'A'";
+        $where[] = "prsano = '{$_SESSION['exercicio']}'";
+        
         if ($descricao) {
             $descricao = implode(" || ' - ' || ", (array)$descricao);
         }
 
         $order = $order ? $order : $descricao;
-        $where = count($where) ? implode(' and ', $where) : '';
+        $where = count($where) ? implode("\n AND ", $where) : '';
 
-        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
-                from public.vw_subunidadeorcamentaria
-                where suostatus = 'A'
-                and prsano = '{$_SESSION['exercicio']}'
+        $sql = "
+            SELECT
+                {$pk} AS codigo,
+                {$descricao} AS descricao
+            FROM public.vw_subunidadeorcamentaria
+            WHERE
                 $where
-                order by $order   
+            ORDER BY
+                $order
         ";
 
         return $sql;
