@@ -177,10 +177,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['esddsc']; ?></td>
                                     <td><?php echo $dados['numero_proposta']; ?></td>
                                     <td>
-                                        <!-- Se Situação SICONV(Parecer/Proposta) tiver mais de uma proposta no mesmo CNPJ e na mesma Emenda(Número de emenda), Exibe o ícone da tela modal de Selecionar Proposta -->
-                                        <?php if($dados['qtdrepetida']!=0){?>
-                                            <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid']; ?>" title="Selecionar Proposta">
-                                        <?php } echo $dados['sitdsc']; ?>
+                                        <?php if($podeEditar): ?>
+                                            <!-- Se Situação SICONV(Parecer/Proposta) tiver mais de uma proposta no mesmo CNPJ e na mesma Emenda(Número de emenda), Exibe o ícone da tela modal de Selecionar Proposta -->
+                                            <?php if($dados['qtdrepetida']): ?>
+                                                <span class="editar_situacao fa fa-pencil detalhar-linha link" data-benid="<?php echo $dados['benid']; ?>" title="Selecionar Proposta">
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php echo $dados['sitdsc']; ?>
                                       </span>
                                     </td>
                                     <td>
