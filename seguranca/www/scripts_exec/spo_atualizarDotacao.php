@@ -78,16 +78,31 @@ foreach($dados as $dado){
 }
 
 //$sql = "select  psu.psuid, ptr.ptrid, ptr.unicod, psu.suoid, psu.ptrdotacaocapital, psu.ptrdotacaocusteio, funcional funcionalptres,
-$sql = "select  psu.psuid, ptr.ptrid, ptr.unicod, psu.suoid, coalesce(psu.ptrdotacaocapital, 0) ptrdotacaocapital, coalesce(psu.ptrdotacaocusteio, 0) ptrdotacaocusteio, funcional funcionalptres,
-                ptr.prgcod || '.' || ptr.acacod || '.' || ptr.plocod || '.' || ptr.unicod funcional,
-                suo.suonome, suo.unosigla, suo.suosigla
-        from spo.ptressubunidade psu
-                inner join monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid
-                inner join public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid
-        where ptr.ptrano = '$exercicio'
-        and suo.unofundo = 'f'
-        order by ptr.unicod, funcional";
-
+$sql = "
+    SELECT
+        psu.psuid,
+        ptr.ptrid,
+        ptr.unicod,
+        psu.suoid,
+        coalesce(psu.ptrdotacaocapital, 0) ptrdotacaocapital,
+        coalesce(psu.ptrdotacaocusteio, 0) ptrdotacaocusteio,
+        funcional funcionalptres,
+        ptr.prgcod || '.' || ptr.acacod || '.' || ptr.plocod || '.' || ptr.unicod funcional,
+        suo.suonome,
+        suo.unosigla,
+        suo.suosigla
+    FROM spo.ptressubunidade psu
+        JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
+        JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = psu.suoid
+    WHERE
+        ptr.ptrano = '$exercicio'
+        AND suo.unofundo = 'f'
+        AND ptr.irpcod != '6'
+    ORDER BY
+        ptr.unicod,
+        funcional
+";
+//ver($sql, d);
 $dados = $db->carregar($sql);
 $dados = $dados ? $dados : [];
 
@@ -211,12 +226,30 @@ foreach($dadosSiminc as $funcional => $dado){
     }
 }
 
-$sql = "select  pli.plicod, pli.pliid, pli.suosigla, plititulo, pli.unosigla, pli.funcional,        
-                pli.previsto::numeric, pli.autorizado::numeric, pli.empenhado::numeric, pli.liquidado::numeric, pli.pago::numeric pago
-        from monitora.vw_planointerno pli
-        where pli.pliano = '$exercicio'
-        and pli.autorizado > pli.previsto
-        order by pli.unosigla, pli.suosigla, pli.funcional";
+$sql = "
+    SELECT
+        pli.plicod,
+        pli.pliid,
+        pli.suosigla,
+        plititulo,
+        pli.unosigla,
+        pli.funcional,
+        pli.previsto::numeric,
+        pli.autorizado::numeric,
+        pli.empenhado::numeric,
+        pli.liquidado::numeric,
+        pli.pago::numeric pago
+    FROM monitora.vw_planointerno pli
+        JOIN monitora.vw_ptres ptr ON pli.ptrid = ptr.ptrid
+    WHERE
+        pli.pliano = '$exercicio'
+        AND pli.autorizado > pli.previsto
+        AND ptr.irpcod <> '6'
+    ORDER BY
+        pli.unosigla,
+        pli.suosigla,
+        pli.funcional
+";
 
 $dados = $db->carregar($sql);
 $dadosProvisionado = $dados ? $dados : [];
@@ -346,6 +379,7 @@ FROM(
             suo.prsano = '$exercicio'
             AND suo.unofundo = FALSE
             AND suo.suostatus = 'A'
+            AND ptr.irpcod <> '6'
         GROUP BY
             ptr.ptrid,
             ptr.ptres,
@@ -481,6 +515,6 @@ if($corpoEmailV3){
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
-//ver($conteudo, d);
+ver($conteudo, d);
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }
