@@ -196,8 +196,26 @@ class Emendas_Model_Beneficiario extends Modelo
                      sicsequencial DESC
                 LIMIT 1
                 ) AS numero_proposta,
-                pli.picvalorcusteio,
-                pli.picvalorcapital,
+                (
+                SELECT
+                    SUM(bedvalor)
+                FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod <= 3
+                ) AS custeio,
+                (
+                    SELECT
+                        SUM(bedvalor)
+                    FROM emendas.beneficiariodetalhe bd
+                        JOIN emendas.emendadetalhe ed ON bd.emdid = ed.emdid
+                    WHERE
+                        bd.bedstatus = 'A'
+                        AND bd.benid = ben.benid
+                        AND ed.gndcod >= 4
+                ) AS capital,
                 pli.empenhado,
                 pli.pago
             FROM
