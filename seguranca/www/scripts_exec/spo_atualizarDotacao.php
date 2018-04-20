@@ -515,6 +515,6 @@ if($corpoEmailV3){
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
-ver($conteudo, d);
+//ver($conteudo, d);
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }
