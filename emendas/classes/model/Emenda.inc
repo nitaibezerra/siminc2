@@ -235,9 +235,7 @@ class Emendas_Model_Emenda extends Modelo
                     GROUP BY
                         eme.emeid,
                         pro.procnpj
-                    HAVING
-                        COUNT(pro.proid) > 1
-                ) rep ON(rep.emeid = eme.emeid)
+                ) rep ON(rep.emeid = eme.emeid AND pro.procnpj = rep.procnpj)
             WHERE
                 eme.emestatus = 'A'
                 AND eme.prsano = '". (int)$filtro->exercicio. "'
