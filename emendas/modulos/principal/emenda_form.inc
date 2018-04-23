@@ -96,7 +96,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                     <?php if($mEmenda->emeid){ ?>
                                         <a href="?modulo=principal/emenda_form&acao=A&req=excluir&emeid=<?php echo $mEmenda->emeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                    <?php } ?>                                
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -124,7 +124,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             	</div>
             </div>
         </div>
-        
+
         <div class="ibox float-e-margins">
         	<div class="ibox-title">
                     <h5>Beneficiários</h5>
@@ -169,7 +169,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
                                         <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                     </tr>
+                                    <?php
+                                    $totalcusteio += $dados['custeio'];
+                                    $totalcapital += $dados['capital'];
+                                    $totalempenhado += $dados['empenhado'];
+                                    $totalpago += $dados['pago'];
+                                    ?>
                                 <?php } ?>
+                                <td colspan="5" style="text-align: right"><h5>Total</h5></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalcusteio, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalcapital, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalempenhado, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalpago, 2, ',', '.'); ?></td>
                                 </tbody>
                             </table>
                         </div>
