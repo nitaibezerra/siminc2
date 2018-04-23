@@ -18,8 +18,8 @@ switch ($_REQUEST['req']) {
         $sqlPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo([
             "coalesce(ptres.prgcod, '')",
             "coalesce(ptres.acacod, '')",
-            "coalesce(acaobjetivocod, '')",
             "coalesce(ptres.loccod, '')",
+            "coalesce(acaobjetivocod, '')",
             "coalesce(ptres.plocod, '')",
             "acatitulo"
             ],
@@ -74,8 +74,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                             $sqlPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo([
                                 "coalesce(ptres.prgcod, '')",
                                 "coalesce(ptres.acacod, '')",
-                                "coalesce(acaobjetivocod, '')",
                                 "coalesce(ptres.loccod, '')",
+                                "coalesce(acaobjetivocod, '')",
                                 "coalesce(ptres.plocod, '')",
                                 "acatitulo"
                                 ], [
