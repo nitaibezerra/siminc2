@@ -96,7 +96,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <a href="?modulo=principal/emenda&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                     <?php if($mEmenda->emeid){ ?>
                                         <a href="?modulo=principal/emenda_form&acao=A&req=excluir&emeid=<?php echo $mEmenda->emeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                    <?php } ?>                                
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -124,7 +124,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             	</div>
             </div>
         </div>
-        
+
         <div class="ibox float-e-margins">
         	<div class="ibox-title">
                     <h5>Beneficiários</h5>
@@ -146,8 +146,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Proponente</th>
                                     <th>Unidade</th>
-                                    <th>Esfera</th>
-                                    <th>Forma de Execução</th>
+                                    <th>N° Proposta</th>
+                                    <th>Situação Siconv</th>
+                                    <th>Custeio</th>
+                                    <th>Capital</th>
+                                    <th>Empenhado</th>
+                                    <th>Pago</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -158,10 +162,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                         <td><?php echo $dados['procnpj'] . ' - ' . $dados['pronome']; ?></td>
                                         <td><?php echo $dados['suocod'] . ' - ' . $dados['suonome']; ?></td>
-                                        <td><?php echo $dados['esfdsc']; ?></td>
-                                        <td><?php echo $dados['formaexecucao']; ?></td>
+                                        <td><?php echo $dados['numero_proposta']; ?></td>
+                                        <td><?php echo $dados['sitdsc']; ?></td>
+                                        <td><?php echo number_format($dados['custeio'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['capital'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['empenhado'], 2, ',', '.'); ?></td>
+                                        <td><?php echo number_format($dados['pago'], 2, ',', '.'); ?></td>
                                     </tr>
+                                    <?php
+                                    $totalcusteio += $dados['custeio'];
+                                    $totalcapital += $dados['capital'];
+                                    $totalempenhado += $dados['empenhado'];
+                                    $totalpago += $dados['pago'];
+                                    ?>
                                 <?php } ?>
+                                <td colspan="5" style="text-align: right"><h5>Total</h5></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalcusteio, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalcapital, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalempenhado, 2, ',', '.'); ?></td>
+                                <td style="vertical-align: middle"><?php echo number_format($totalpago, 2, ',', '.'); ?></td>
                                 </tbody>
                             </table>
                         </div>
