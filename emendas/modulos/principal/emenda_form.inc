@@ -27,7 +27,7 @@ switch ($_REQUEST['req']) {
                 "plocod = 'EIND'",
                 "unoid = '". (int)$_REQUEST['unoid']. "'"
             ]);
-        echo $simec->select('ptrid', 'Funcional', null, $sqlPtres);
+        echo $simec->select('ptrid', 'Funcional <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', null, $sqlPtres);
         die;
     case 'formulario-detalhe':
         $cEmenda->montarFormularioDetalhes($_REQUEST['emeid'], $_REQUEST['emdid']);
@@ -70,7 +70,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             $simec->setPodeEditar($podeEditar);
                             echo $simec->input('emenumero', 'Número', $mEmenda->emenumero, ['class'=>'inteiro']);
                             echo $simec->select('autid', 'Autor', $mEmenda->autid, (new Emendas_Model_Autor())->recuperarSqlCombo(['autcod', 'autnome'], null, 'autnome'));
-                            echo $simec->select('unoid', 'Unidade', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
+                            echo $simec->select('unoid', 'Unidade <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mEmenda->unoid, (new Public_Model_UnidadeOrcamentaria())->recuperarSqlCombo(['unocod', 'unonome'], null, 'unonome'));
                             $sqlPtres = (new Monitora_Model_Ptres())->recuperarSqlCombo([
                                 "coalesce(ptres.prgcod, '')",
                                 "coalesce(ptres.acacod, '')",
@@ -83,7 +83,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     "unoid = '". (int)$mEmenda->unoid. "'"
                                 ]);
                             echo '<span id="span-funcional">'.
-                                $simec->select('ptrid', 'Funcional', $mEmenda->ptrid, $sqlPtres).
+                                $simec->select('ptrid', 'Funcional <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mEmenda->ptrid, $sqlPtres).
                             '</span>';
                             echo $simec->radio('emeimpositiva', 'Impositiva', $mEmenda->emeimpositiva, ['t'=>'Sim', 'f'=>'Não']);
                             echo $simec->textarea('emejustificativa', 'Justificativa', $mEmenda->emejustificativa, ['maxlength' => 2000]);
