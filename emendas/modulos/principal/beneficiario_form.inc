@@ -218,7 +218,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('proid', 'Proponente', $mBeneficiario->proid, (new Emendas_Model_Proponente())->recuperarSqlCombo(["replace(to_char(procnpj::numeric, '00:000:000/0000-00'), ':', '.')", 'pronome'], null,'pronome'), ['required'], $configPodeEditar);
 
                                             $aLocalizacoes = (new Emendas_Model_BeneficiarioLocalizacao())->recuperarPorBeneficiario($mBeneficiario->benid);
-                                            echo $simec->select('esfid', 'Localização', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                                            echo $simec->select('esfid', 'Localização <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                                         ?>
                                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
                                             <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
@@ -233,7 +233,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php
                                             echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                                             echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
-                                            echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
+                                            echo $simec->select('capid', 'Modalidade de Pactuação <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
                                             echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
                                         ?>
                                     </div>
@@ -248,8 +248,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                     <div class="ibox-content">
                                         <?php
-                                            echo $simec->select('mdeid', 'Área Cultural', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
-                                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
+                                            echo $simec->select('mdeid', 'Área Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
+                                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
                                             echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
                                             # setar os campos para "não" por padrão.
                                             $benparecertecnico = $mBeneficiario->benparecertecnico ? $mBeneficiario->benparecertecnico : 0;
@@ -333,12 +333,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="col-md-8">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                        <h5>Dados Financeiros -
+                                        <h5> Dados Financeiros -
                                             <?php
                                                 if($beneficiario->funcional){
-                                                    echo "<b>PTRES</b>: " .$beneficiario->ptres . "&nbsp; <b>Funcional</b>: " . $beneficiario->funcional ;
+                                                    echo "<b>PTRES</b>: " .$beneficiario->ptres . "&nbsp; <b>Funcional</b>:" . $beneficiario->funcional ;
                                                 }
                                             ?>
+                                            <span class="campo-obrigatorio" title="Campo obrigatório">*</span>
                                         </h5>
                                 </div>
                                 <div class="ibox-content">
@@ -385,10 +386,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <input name="aba" id="aba" type="hidden" value="<?php echo $aba; ?>">
 
                                         <?php
-                                            echo $simec->input('plititulo', 'Título do PI/Projeto', $mBeneficiario->plititulo, ['maxlength' => 250]);
+                                            echo $simec->input('plititulo', 'Título do PI/Projeto <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->plititulo, ['maxlength' => 250]);
 
                                             $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
-                                            echo $simec->textarea('plidsc', 'Descrição / Finalidade', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
+                                            echo $simec->textarea('plidsc', 'Descrição / Finalidade <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);
 //condicaoGerarPi($benid);
                                         ?>
 
@@ -496,9 +497,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </div>
                                     <div class="ibox-content">
                                         <?php
-                                            echo $simec->select('pprid', 'Produto', $mBeneficiario->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(null, ["pprstatus = 'A'"]));
-                                            echo $simec->select('pumid', 'Unidade de Medida', $mBeneficiario->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(null, ["pumstatus = 'A'"]));
-                                            echo $simec->input('picquantidade', 'Quantidade', $mBeneficiario->picquantidade, ['class'=>'inteiro']);
+                                            echo $simec->select('pprid', 'Produto <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(null, ["pprstatus = 'A'"]));
+                                            echo $simec->select('pumid', 'Unidade de Medida <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(null, ["pumstatus = 'A'"]));
+                                            echo $simec->input('picquantidade', 'Quantidade <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->picquantidade, ['class'=>'inteiro']);
                                         ?>
 
                                         <div class="clearfix"></div>
