@@ -114,6 +114,9 @@ class Spo_Model_Planointerno extends Modelo
         }
         # FNC
         $where .= $filtros->unofundo? "\n AND suo.unofundo = ". $filtros->unofundo: NULL;
+        # Busca pelo ID do Beneficiário
+        $where .= $filtros->benid ? "\n AND ben.benid = " . $filtros->benid : NULL;
+
 //ver($where);
         return $where;
     }
