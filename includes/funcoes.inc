@@ -1722,8 +1722,8 @@ function ver(){
     if($exibirVer){
 
 		$parar = false;
-
-		$caminho = array_shift(debug_backtrace());
+                $backstrace = debug_backtrace();
+		$caminho = array_shift($backstrace);
 		echo '
 			<div style="background-color: #ddd; color: #000; font-size: 14px;">
 			<div>
