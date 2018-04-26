@@ -853,14 +853,22 @@ function carregarLimiteDetalhadoSubUnidade(stdClass $parametros) {
         SELECT
             SUM(COALESCE(picvalorcusteio, 0) + COALESCE(picvalorcapital, 0)) AS detalhado
         FROM monitora.pi_planointerno pli
-            JOIN public.vw_subunidadeorcamentaria suo ON(pli.unicod = suo.unocod AND pli.ungcod = suo.suocod AND suo.prsano = pli.pliano AND suo.unofundo = FALSE)
-            JOIN planacomorc.pi_complemento pc USING(pliid)
+            JOIN monitora.pi_planointernoptres pliptr ON(pli.pliid = pliptr.pliid) -- SELECT * FROM monitora.pi_planointernoptres
+            JOIN monitora.vw_ptres ptr ON(pliptr.ptrid = ptr.ptrid)
+            JOIN public.vw_subunidadeorcamentaria suo ON(
+                pli.unicod = suo.unocod
+                AND pli.ungcod = suo.suocod
+                AND suo.prsano = pli.pliano
+                AND suo.unofundo = FALSE
+            )
+            JOIN planacomorc.pi_complemento pc ON(pli.pliid = pc.pliid)
         WHERE
             pli.plistatus = 'A'
+            AND ptr.irpcod != '6'
             AND pli.pliano = '{$_SESSION['exercicio']}'
             AND pli.ungcod = '". $parametros->ungcod. "'
     ";
-    
+//ver($sql);
     $disponivel = $db->pegaUm($sql);
     return $disponivel;
 }
