@@ -297,121 +297,246 @@ foreach($dadosProvisionado as $dado){
 
 $sql = "
     SELECT
-	funcionais.ptrid,
-	funcionais.ptres,
-	funcionais.funcional,
-	funcionais.subunidade,
-	COALESCE(sec_geral.empenhado, 0.00) - COALESCE(funcionais.empenhado, 0.00) AS empenhado,
-	COALESCE(sec_geral.liquidado, 0.00) - COALESCE(funcionais.liquidado, 0.00) AS liquidado,
-	COALESCE(sec_geral.pago, 0.00) - COALESCE(funcionais.pago, 0.00) AS pago
-FROM(
-    SELECT
-        agrupado.ptrid,
-        agrupado.ptres,
-        agrupado.funcional,
-        CASE WHEN (
-            SELECT
-                COUNT(1)
-            FROM spo.ptressubunidade
-            WHERE
-                ptressubunidade.ptrid = agrupado.ptrid
-        ) > 1 THEN
-                'Várias'
-        ELSE
-           (SELECT
-                suo.unosigla || ' - ' || suo.suosigla AS subunidade
-            FROM spo.ptressubunidade
-                JOIN public.vw_subunidadeorcamentaria suo ON ptressubunidade.suoid = suo.suoid
-            WHERE
-                ptressubunidade.ptrid = agrupado.ptrid
-                LIMIT 1
-                )
-        END
-         AS subunidade,
-        SUM(agrupado.empenhado) AS empenhado,
-        SUM(agrupado.liquidado) AS liquidado,
-        SUM(agrupado.pago) AS pago
-    FROM (
+        ptrid,
+        ptres,
+        funcional,
+        subunidade,
+        empenhado,
+        liquidado,
+        pago
+    FROM(
         SELECT
-            ptr.ptrid,
-            ptr.ptres,
-            ptr.funcional,
-            (
+            funcionais.ptrid,
+            funcionais.ptres,
+            funcionais.funcional,
+            funcionais.subunidade,
+            COALESCE(sec_geral.empenhado, 0.00) - COALESCE(funcionais.empenhado, 0.00) AS empenhado,
+            COALESCE(sec_geral.liquidado, 0.00) - COALESCE(funcionais.liquidado, 0.00) AS liquidado,
+            COALESCE(sec_geral.pago, 0.00) - COALESCE(funcionais.pago, 0.00) AS pago
+        FROM(
+            SELECT
+                agrupado.ptrid,
+                agrupado.ptres,
+                agrupado.funcional,
+                CASE WHEN (
+                    SELECT
+                        COUNT(1)
+                    FROM spo.ptressubunidade
+                    WHERE
+                        ptressubunidade.ptrid = agrupado.ptrid
+                ) > 1 THEN
+                    'Várias'
+                ELSE
+                   (
+                    SELECT
+                        suo.unosigla || ' - ' || suo.suosigla AS subunidade
+                    FROM spo.ptressubunidade
+                        JOIN public.vw_subunidadeorcamentaria suo ON ptressubunidade.suoid = suo.suoid
+                    WHERE
+                        ptressubunidade.ptrid = agrupado.ptrid
+                        LIMIT 1
+                    )
+                END AS subunidade,
+                SUM(agrupado.empenhado) AS empenhado,
+                SUM(agrupado.liquidado) AS liquidado,
+                SUM(agrupado.pago) AS pago
+            FROM (
                 SELECT
-                    COUNT(1)
-                FROM spo.ptressubunidade
+                    ptr.ptrid,
+                    ptr.ptres,
+                    ptr.funcional,
+                    COALESCE(sec.empenhado, 0.00) AS empenhado,
+                    COALESCE(sec.liquidado, 0.00) AS liquidado,
+                    COALESCE(sec.pago, 0.00) as pago
+                FROM public.vw_subunidadeorcamentaria suo
+                    JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
+                    JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
+                    LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
+                    LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
+                    LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
+                    LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                    LEFT JOIN(
+                        SELECT
+                            siopexecucao.unicod,
+                            pi_planointerno.ungcod,
+                            siopexecucao.ptres,
+                            SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                            SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                            SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                            SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+                        FROM spo.siopexecucao
+                            LEFT JOIN monitora.pi_planointerno ON(
+                                siopexecucao.plicod = pi_planointerno.plicod
+                                AND siopexecucao.exercicio = pi_planointerno.pliano
+                                AND pi_planointerno.plistatus = 'A')
+                        WHERE
+                            pi_planointerno.ungcod IS NOT NULL
+                            AND siopexecucao.exercicio = '$exercicio'
+                        GROUP BY
+                            siopexecucao.ptres,
+                            siopexecucao.unicod,
+                            pi_planointerno.ungcod
+                    ) sec ON(ptr.ptres = sec.ptres AND suo.unocod = sec.unicod AND suo.suocod = sec.ungcod)
                 WHERE
-                    ptressubunidade.ptrid = ptr.ptrid
-            ) AS compartilhada,
-            COALESCE(sec.empenhado, 0.00) AS empenhado,
-            COALESCE(sec.liquidado, 0.00) AS liquidado,
-            COALESCE(sec.pago, 0.00) as pago
-        FROM public.vw_subunidadeorcamentaria suo
-            JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-            JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-            LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-            LEFT JOIN monitora.pi_planointerno pli on(pli.pliid = ppt.pliid AND pli.ungcod = suo.suocod AND pli.unicod = suo.unocod AND plistatus = 'A')
-            LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-            LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                    suo.prsano = '$exercicio'
+                    AND suo.unofundo = FALSE
+                    AND suo.suostatus = 'A'
+                    AND ptr.irpcod <> '6'
+                GROUP BY
+                    ptr.ptrid,
+                    ptr.ptres,
+                    ptr.funcional,
+                    sec.empenhado,
+                    sec.liquidado,
+                    sec.pago
+            ) agrupado
+            GROUP BY
+                agrupado.ptrid,
+                agrupado.ptres,
+                agrupado.funcional
+        ) AS funcionais
             LEFT JOIN(
                 SELECT
-                    siopexecucao.unicod,
-                    pi_planointerno.ungcod,
                     siopexecucao.ptres,
                     SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
                     SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
                     SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
                     SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
                 FROM spo.siopexecucao
-                    LEFT JOIN monitora.pi_planointerno ON(
-                        siopexecucao.plicod = pi_planointerno.plicod
-                        AND siopexecucao.exercicio = pi_planointerno.pliano
-                        AND pi_planointerno.plistatus = 'A')
                 WHERE
-                    pi_planointerno.ungcod IS NOT NULL
-                    AND siopexecucao.exercicio = '$exercicio'
+                    siopexecucao.exercicio = '$exercicio'
+                GROUP BY
+                    siopexecucao.ptres
+            ) sec_geral ON(funcionais.ptres = sec_geral.ptres)
+        WHERE
+            sec_geral.empenhado - funcionais.empenhado > 0
+            OR sec_geral.liquidado - funcionais.liquidado > 0
+            OR sec_geral.pago - funcionais.pago > 0
+
+        UNION
+
+        SELECT DISTINCT
+            ptr_divergente.ptrid,
+            ptr_divergente.ptres,
+            ptr_divergente.funcional,
+            CASE WHEN (
+                SELECT
+                    COUNT(1)
+                FROM spo.ptressubunidade
+                WHERE
+                    ptressubunidade.ptrid = ptr_divergente.ptrid
+            ) > 1 THEN
+                    'Várias'
+            ELSE
+               (
+                SELECT
+                    suo.unosigla || ' - ' || suo.suosigla AS subunidade
+                FROM spo.ptressubunidade
+                    JOIN public.vw_subunidadeorcamentaria suo ON ptressubunidade.suoid = suo.suoid
+                WHERE
+                    ptressubunidade.ptrid = ptr_divergente.ptrid
+                    LIMIT 1
+                )
+            END AS subunidade,
+            sec_total.empenhado - (
+                SELECT
+                    SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado
+                FROM spo.siopexecucao
+                    JOIN monitora.vw_planointerno pli ON(
+                        siopexecucao.plicod = pli.plicod
+                        AND siopexecucao.exercicio = pli.pliano)
+                WHERE
+                    siopexecucao.exercicio = '$exercicio'
+                    AND siopexecucao.ptres = ptr_divergente.ptres
+                    AND siopexecucao.plicod = pi_correto.plicod -- varios
+                    AND pli.unocod = pi_correto.unocod
+                    AND pli.suocod = pi_correto.suocod
+            ) AS empenhado,
+            sec_total.liquidado - (
+                SELECT
+                    SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS empenhado
+                FROM spo.siopexecucao
+                    JOIN monitora.vw_planointerno pli ON(
+                        siopexecucao.plicod = pli.plicod
+                        AND siopexecucao.exercicio = pli.pliano)
+                WHERE
+                    siopexecucao.exercicio = '$exercicio'
+                    AND siopexecucao.ptres = ptr_divergente.ptres
+                    AND siopexecucao.plicod = pi_correto.plicod -- varios
+                    AND pli.unocod = pi_correto.unocod
+                    AND pli.suocod = pi_correto.suocod
+            ) AS liquidado,
+            sec_total.pago - (
+                SELECT
+                    SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS empenhado
+                FROM spo.siopexecucao
+                    JOIN monitora.vw_planointerno pli ON(
+                        siopexecucao.plicod = pli.plicod
+                        AND siopexecucao.exercicio = pli.pliano)
+                WHERE
+                    siopexecucao.exercicio = '$exercicio'
+                    AND siopexecucao.ptres = ptr_divergente.ptres
+                    AND siopexecucao.plicod = pi_correto.plicod -- varios
+                    AND pli.unocod = pi_correto.unocod
+                    AND pli.suocod = pi_correto.suocod
+            ) AS pago
+        FROM spo.siopexecucao pi_siop -- SELECT * FROM spo.siopexecucao
+            JOIN (
+                SELECT
+                    pli.plicod,
+                    pli.ptres
+                FROM monitora.vw_planointerno pli
+                    JOIN public.vw_subunidadeorcamentaria suo ON(pli.suoid = suo.suoid)
+                    JOIN monitora.vw_ptres ptr ON(pli.ptrid = ptr.ptrid)
+                WHERE
+                    pli.pliano = '$exercicio'
+                    AND suo.unofundo IS FALSE
+                    AND ptr.irpcod != '6'
+                    AND(pli.plicod IS NOT NULL AND pli.plicod != '')
+            ) pi_siminc2 ON(pi_siop.plicod = pi_siminc2.plicod)
+            JOIN monitora.vw_ptres ptr_divergente ON(pi_siop.ptres = ptr_divergente.ptres AND ptr_divergente.ptrano = '$exercicio') -- SELECT * FROM monitora.vw_ptres
+            LEFT JOIN(
+                SELECT
+                    siopexecucao.unicod,
+                    siopexecucao.ptres,
+                    SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
+                    SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
+                    SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
+                    SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
+                FROM spo.siopexecucao
+                WHERE
+                    siopexecucao.exercicio = '$exercicio' -- Inserindo o ano direto na subquery por motivo de performance da consulta.
                 GROUP BY
                     siopexecucao.ptres,
-                    siopexecucao.unicod,
-                    pi_planointerno.ungcod
-            ) sec ON(ptr.ptres = sec.ptres AND suo.unocod = sec.unicod AND suo.suocod = sec.ungcod)
+                    siopexecucao.unicod
+            ) sec_total ON(ptr_divergente.ptres = sec_total.ptres)
+            LEFT JOIN (
+                SELECT
+                    suo.unocod,
+                    suo.suocod,
+                    pli.plicod,
+                    pli.ptres
+                FROM monitora.vw_planointerno pli
+                    JOIN public.vw_subunidadeorcamentaria suo ON(pli.suoid = suo.suoid)
+                    JOIN monitora.vw_ptres ptr ON(pli.ptrid = ptr.ptrid)
+                WHERE
+                    pli.pliano = '$exercicio'
+                    AND suo.unofundo IS FALSE
+                    AND ptr.irpcod != '6'
+                    AND(pli.plicod IS NOT NULL AND pli.plicod != '')
+            ) pi_correto ON(pi_siop.plicod = pi_siminc2.plicod AND pi_siop.ptres = pi_correto.ptres)
         WHERE
-            suo.prsano = '$exercicio'
-            AND suo.unofundo = FALSE
-            AND suo.suostatus = 'A'
-            AND ptr.irpcod <> '6'
-        GROUP BY
-            ptr.ptrid,
-            ptr.ptres,
-            ptr.funcional,
-            sec.empenhado,
-            sec.liquidado,
-            sec.pago
-    ) agrupado
-    GROUP BY
-        agrupado.ptrid,
-        agrupado.ptres,
-        agrupado.funcional
-) AS funcionais
-    LEFT JOIN(
-	SELECT
-	    siopexecucao.ptres,
-	    SUM(COALESCE(siopexecucao.vlrautorizado, 0.00))::NUMERIC AS provisionado,
-	    SUM(COALESCE(siopexecucao.vlrempenhado, 0.00))::NUMERIC AS empenhado,
-	    SUM(COALESCE(siopexecucao.vlrliquidado, 0.00))::NUMERIC AS liquidado,
-	    SUM(COALESCE(siopexecucao.vlrpago, 0.00))::NUMERIC AS pago
-	FROM spo.siopexecucao
-	WHERE
-	    siopexecucao.exercicio = '$exercicio'
-	GROUP BY
-	    siopexecucao.ptres
-    ) sec_geral ON(funcionais.ptres = sec_geral.ptres)
-WHERE
-	sec_geral.empenhado - funcionais.empenhado > 0
-	OR sec_geral.liquidado - funcionais.liquidado > 0
-	OR sec_geral.pago - funcionais.pago > 0
-ORDER BY
-    funcionais.funcional
+            pi_siop.exercicio = '$exercicio'
+            AND (
+                pi_siop.vlrempenhado > 0
+                OR pi_siop.vlrliquidado > 0
+                OR pi_siop.vlrpago > 0
+            )
+            -- Filtrar os PIs do SIOP que tem código de pi e ptres diferente do código do pi e ptres do SIMINC2
+            AND pi_siop.ptres != pi_siminc2.ptres
+    ) consulta
+    ORDER BY
+        funcional
 ";
 //ver($sql, d);
 $listaResultado = $db->carregar($sql);
