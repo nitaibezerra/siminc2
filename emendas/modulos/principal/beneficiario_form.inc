@@ -38,7 +38,7 @@ switch ($_REQUEST['req']) {
         $cBeneficiario->montarFormularioDetalhe($_REQUEST['benid'], $_REQUEST['bedid']);
         die;
     case 'listar-detalhe':
-        $cBeneficiario->montarListagemDetalhe($_REQUEST['benid']);
+        $cBeneficiario->montarListagemDetalhe($_REQUEST['benid'], $podeEditar);
         die;
     case 'salvar-detalhe':
         $cBeneficiarioDetalhe = new Emendas_Controller_BeneficiarioDetalhe();
