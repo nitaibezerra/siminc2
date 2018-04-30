@@ -111,7 +111,7 @@ class Emendas_Controller_Beneficiario
     public function atualizarSiconv($emeid, $benid)
     {
         $mEmenda = new Emendas_Model_Emenda($emeid);
-        $mEmenda->atualizarSiconv();
+        $mEmenda->atualizarSiconv($benid);
         simec_redirecionar('?modulo=principal/beneficiario_form&acao=A&benid=7966&benid='. $benid, 'success');
     }
 
