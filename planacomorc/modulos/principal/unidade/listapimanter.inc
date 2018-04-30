@@ -118,6 +118,7 @@
                             echo $simec->input('descricao', 'Título/Descrição', $filtropi['descricao'], ['maxlength' => 200]);
                             echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtropi['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'])), array('multiple' => 'true'));
                             echo $simec->radio('pliemenda', 'Emenda', (!$filtropi['pliemenda'] ? '' : $filtropi['pliemenda']), array('t' => 'Sim', 'f' => 'Não', '' => 'Todos'));
+                            echo $simec->input('benid', 'ID Beneficiário', $filtropi['benid'], ['maxlength' => 200]);
                             echo $simec->select('esdid', 'Situação', $filtropi['esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_PLANEJAMENTO_PI)), array('multiple' => 'true'));
                         ?>
 
