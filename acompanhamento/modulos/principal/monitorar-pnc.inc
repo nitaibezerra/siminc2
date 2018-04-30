@@ -50,10 +50,15 @@
 
     // Recuperando Janela Ativa
     $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
-    $acompanhamento->janid = $acompanhamento->janid? $acompanhamento->janid: $janela['janid'];
+    $janid = $acompanhamento->janid = $acompanhamento->janid? $acompanhamento->janid: $janela['janid'];
 
     // Recuperando SubUnidade
     $suoid = $acompanhamento->suoid? $acompanhamento->suoid: $_REQUEST['suoid'];
+    
+    $subunidade = new Public_Model_SubUnidadeOrcamentaria($suoid);
+    if($subunidade){
+        $unidadeOrcamentaria = new Public_Model_UnidadeOrcamentaria($subunidade->unoid);
+    }
     
     $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($acompanhamento->acoid);
 
@@ -204,6 +209,8 @@
         <?php
             if($mpnid){
                 $meta = new Public_Model_MetaPnc($mpnid);
+                $listaIndicadorPnc = $acompanhamento->getIndicadoresPnc((object) array('suoid' => $suoid, 'mpnid' => $meta->mpnid, 'exercicio' => (int)$_SESSION['exercicio']));
+//                ver($listaIndicadorPnc);
         ?>
             <div class="col-md-12">
                 <div class="ibox float-e-margins">
@@ -246,23 +253,35 @@
                                         <div class="col-lg-8">
                                             <table class="table table-bordered">
                                                 <thead>
-                                                <tr>
-                                                    <th>DESCRIÇÃO DO INDICADOR</th>
-                                                    <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
-                                                        <th><?php echo $ano; ?></th>
-                                                    <?php endfor; ?>
-                                                </tr>
+                                                    <tr>
+                                                        <th>DESCRIÇÃO DO INDICADOR</th>
+                                                        <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                            <th><?php echo $ano; ?></th>
+                                                        <?php endfor; ?>
+                                                    </tr>
                                                 </thead>
-                                                <?php
-                                                    $listaIndicadorPnc = $acompanhamento->getIndicadoresPnc((object) array('suoid' => $suoid, 'mpnid' => $meta->mpnid, 'exercicio' => (int)$_SESSION['exercicio']));
-                                                    foreach ($listaIndicadorPnc as $indicador):
-                                                ?>
+                                                <?php foreach ($listaIndicadorPnc as $indicador): ?>
                                                     <tbody>
                                                         <tr>
                                                             <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
-                                                            <?php for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++): ?>
+                                                            <?php
+                                                                for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++):
+                                                                    $acompanhamentoIndicadorPnc = (new Acompanhamento_Model_Acompanhamento())->buscarIndicadorPnc((object) array(
+                                                                        'janid' => $janid,
+                                                                        'unocod' => $unidadeOrcamentaria->unocod,
+                                                                        'suocod' => $subunidade->suocod,
+                                                                        'ipncod' => $indicador['ipncod'],
+                                                                        'prsano' => $ano
+                                                                    ));
+                                                            ?>
                                                                 <td>
-                                                                    <span class="editar_indicador fa fa-pencil link" data-acoid="<?php echo $indicador['acoid']; ?>" data-prsano="<?php echo $ano; ?>" data-ipnid="<?php echo $indicador['ipnid']; ?>" title="Editar Indicador"></span>
+                                                                    <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>
+                                                                        <a href="#" class="editar_indicador link" data-acoid="<?php echo $acompanhamentoIndicadorPnc->acoid; ?>" title="Editar Indicador">
+                                                                            <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
+                                                                        </a>
+                                                                    <?php else: ?>
+                                                                        <span class="editar_indicador fa fa-pencil link" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo $indicador['ipncod']; ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador"></span>
+                                                                    <?php endif; ?>
                                                                 </td>
                                                             <?php endfor; ?>
                                                         </tr>
