@@ -16,6 +16,9 @@
         case 'detalhe-pi':
             $cAcompanhamento->recuperarPiPorMetaPncESubunidade($_REQUEST['mpnid'], $_REQUEST['suoid']);
         die;
+        case 'exibir-grafico':
+//            $cAcompanhamento->exibirGrafico($_REQUEST['mpnid'], $_REQUEST['suoid']);
+        die;
         case 'ver-historico':
             $cAcompanhamento->recuperarHistorico($_REQUEST['acoid']);
             die;
@@ -58,6 +61,9 @@
 ?>
 
 <script src="js/principal/acompanhamento.js?v=1"></script>
+
+<script src="../library/liquify/snap.svg.js"></script>
+<script src="../library/liquify/liquid.meter.js"></script>
 
 <style>
     .no-margin-bottom .form-group{
@@ -152,28 +158,28 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
+                                                <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>" title="Exibir Lista de Planos Internos">
                                                     Planos Internos (PI´s)
                                                 </a>
                                             </th>
-                                            <th>Previsto</th>
-                                            <th>Empenhado</th>
-                                            <th>Liquidado</th>
-                                            <th>Pago</th>
+                                            <th><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">Previsto</a></th>
+                                            <th><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">Empenhado</a></th>
+                                            <th><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">Liquidado</a></th>
+                                            <th><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">Pago</a></th>
                                         </tr>
                                     </thead>
                                     <?php if($valoresOrcamentarios): ?>
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>">
+                                                    <a class="detalhe-pi" href="?modulo=principal/monitorar-pnc&acao=A&req=detalhe-pi&mpnid=<?php echo $mpnid; ?>&suoid=<?php echo $suoid; ?>" title="Exibir Lista de Planos Internos">
                                                         <?php echo number_format($valoresOrcamentarios['qtd'], 0, ',', '.'); ?>
                                                     </a>
                                                 </td>
-                                                <td>R$ <?php echo number_format($valoresOrcamentarios['previsto'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($valoresOrcamentarios['empenhado'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($valoresOrcamentarios['liquidado'], 2, ',', '.'); ?></td>
-                                                <td>R$ <?php echo number_format($valoresOrcamentarios['pago'], 2, ',', '.'); ?></td>
+                                                <td><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">R$ <?php echo number_format($valoresOrcamentarios['previsto'], 2, ',', '.'); ?></a></td>
+                                                <td><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">R$ <?php echo number_format($valoresOrcamentarios['empenhado'], 2, ',', '.'); ?></a></td>
+                                                <td><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">R$ <?php echo number_format($valoresOrcamentarios['liquidado'], 2, ',', '.'); ?></a></td>
+                                                <td><a class="a_grafico" href="#" title="Exibir Grafico de Planos Internos">R$ <?php echo number_format($valoresOrcamentarios['pago'], 2, ',', '.'); ?></a></td>
                                             </tr>
                                         </tbody>
                                     <?php else: ?>
@@ -386,6 +392,62 @@
     </div>
 </div>
 
+<!-- Div do Modal do Grafico -->
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_grafico" class="modal fade">
+            <div class="modal_dialog_grafico">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Grafico Planos Internos</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?php if($mpnid): ?>
+                            <div class="col-sm-12">
+                                <div class="col-md-8">
+                                    <h3 class="text-center">PI's Associados à Meta</h3>
+                                    <?php
+                                        $listaPI = (new Pi_PlanoInterno())->recuperarValoresPiMetaPncESubunidade($mpnid, $suoid);
+                                        $metaPnc = new Public_Model_MetaPnc($mpnid);
+                                        $dadosGrafico = [];
+                                        if(count($listaPI)){
+                                            foreach ($listaPI as $key => $valor) {
+                                                if(in_array($key, ['previsto', 'provisionado', 'empenhado', 'liquidado', 'pago'])){
+                                                    $dadosGrafico[$key]['descricao'] = ucfirst($key);
+                                                    $dadosGrafico[$key]['valor'] = $valor;
+                                                    $dadosGrafico[$key]['categoria'] = $metaPnc->mpncod;
+                                                }
+                                            }
+                                        }
+
+                                        $colors = "'#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+                                        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+                                        $grafico->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+                                            ->setColors($colors)
+                                            ->setHeight('250px')
+                                            ->gerarGrafico($dadosGrafico);
+                                    ?>
+                                </div>
+                                <div class="col-sm-2">
+                                    <?php
+                                        $percentual = $valoresOrcamentarios['previsto']? $valoresOrcamentarios['empenhado'] * 100 / $valoresOrcamentarios['previsto'] : 0;
+                                    ?>
+                                    <h3 class="text-center">Percentual de Empenho</h3>
+                                    <meter style="display: none;" max="1000" value="<?php echo $percentual; ?>" id="percentual-empenhado"></meter>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(function(){
         $('#claid').change(function(){
@@ -483,12 +545,36 @@
             $('.tr_anexos_'+ id).remove();
         });
 
+        $('#percentual-empenhado').liquidMeter({
+            shape: 'circle',
+            color: '#0088cc',
+            background: '#F9F9F9',
+            fontSize: '24px',
+            fontWeight: '600',
+            stroke: '#F2F2F2',
+            textColor: '#333',
+            liquidOpacity: 0.9,
+            liquidPalette: ['#333'],
+            speed: 3000
+        });
+
+        $('.a_grafico').click(function(){
+            abrirModalGrafico();
+            return false;
+        });
+
     });
 
     function abrirModalUpload() {
         $('.modal_dialog_upload').show();
         $('#modal_upload').modal();
         $('#modal_upload .chosen-container').css('width', '100%');
+    }
+    
+    function abrirModalGrafico() {
+        $('.modal_dialog_grafico').show();
+        $('#modal_grafico').modal();
+        $('#modal_grafico .chosen-container').css('width', '100%');
     }
 
     function inserirNovoAnexo(json){

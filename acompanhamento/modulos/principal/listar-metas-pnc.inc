@@ -14,6 +14,7 @@
             <?php } ?>
         </select>
     </div>
+
     <div class="ibox-content">
         <?php if(count($aMetasPnc)){ ?>
             <div class="table-responsive">
@@ -28,8 +29,8 @@
                     <tbody>
                     <?php foreach($aMetasPnc as $dados){
                         $status = $dados['acompanhamento'] ?
-                            '<a href="?modulo=principal/monitorar-pnc&acao=A&mpnid=' . $dados['mpnid'] . '&suoid=' . $dados['suoid'] . '&janid=' . $janid . '"><span class="label label-primary">Preenchida</span></a>' : 
-                            '<a href="?modulo=principal/monitorar-pnc&acao=A&mpnid=' . $dados['mpnid'] . '&suoid=' . $dados['suoid'] . '&janid=' . $janid . '"><span class="label label-danger">Pendente</span></a>';
+                            '<a href="?modulo=principal/monitorar-pnc&acao=A&mpnid=' . $dados['mpnid'] . '&suoid=' . $suoid . '&janid=' . $janid . '"><span class="label label-primary">Preenchida</span></a>' : 
+                            '<a href="?modulo=principal/monitorar-pnc&acao=A&mpnid=' . $dados['mpnid'] . '&suoid=' . $suoid . '&janid=' . $janid . '"><span class="label label-danger">Pendente</span></a>';
                         ?>
 
                         <tr>
