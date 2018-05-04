@@ -504,11 +504,17 @@
         array(
             'salvar',
             'fechar'),
-        array('tamanho' => 'lg'));
+        array(
+            'tamanho' => 'lg'
+        ));
 ?>
 
 <script>
     $(function(){
+        
+        $('#div_modal_acompanhamento_indicador').find('.btn-salvar').click(function(){
+            $('#formulario-acompanhamento-indicador').find('[type="submit"]').trigger('click');
+        });
         
         $('.editar_indicador').click(function(){
             var acoid = $(this).attr('data-acoid');
