@@ -10,6 +10,10 @@
         case 'salvar':
             $cAcompanhamento->salvar($_REQUEST);
         die;
+        case 'indicador-form':
+            include_once APPRAIZ. 'acompanhamento/modulos/principal/indicador_form.inc';
+            die;
+        die;
         case 'excluir':
             $cAcompanhamento->excluir($_REQUEST['acoid']);
         die;
@@ -260,7 +264,7 @@
                                                         <?php endfor; ?>
                                                     </tr>
                                                 </thead>
-                                                <?php foreach ($listaIndicadorPnc as $indicador): ?>
+                                                <?php foreach($listaIndicadorPnc as $indicador): ?>
                                                     <tbody>
                                                         <tr>
                                                             <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
@@ -467,8 +471,67 @@
     </div>
 </div>
 
+<!-- Modal de Cadastro de Indicador -->
+<div class="row">
+    <div class="col-md-6">
+        <div id="div_modal_cadastro_indicador" class="modal fade">
+            <div class="modal_dialog_upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Cadastro de acompanhamento do Indicador PNC</h4>
+                    </div>
+                    <div id="div_modal_cadastro_indicador_body" class="modal-body">
+                        
+                        <!-- Formulario de indicador -->
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" id="Salvar-indicador">Salvar</button>
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+    bootstrapPopup(
+        "Cadastro de acompanhamento do Indicador PNC",
+        'div_modal_acompanhamento_indicador',
+        '',
+        array(
+            'salvar',
+            'fechar'),
+        array('tamanho' => 'lg'));
+?>
+
 <script>
     $(function(){
+        
+        $('.editar_indicador').click(function(){
+            var acoid = $(this).attr('data-acoid');
+            var janid = $(this).attr('data-janid');
+            var unocod = $(this).attr('data-unocod');
+            var suocod = $(this).attr('data-suocod');
+            var ipncod = $(this).attr('data-ipncod');
+            var prsano = $(this).attr('data-prsano');
+            var url = '?modulo=principal/monitorar-pnc&acao=A'+
+                '&req=indicador-form'+
+                '&acoid='+ acoid+
+                '&janid='+ janid+
+                '&unocod='+ unocod+
+                '&suocod='+ suocod+
+                '&ipncod='+ ipncod+
+                '&prsano='+ prsano;
+            
+            $('#div_modal_acompanhamento_indicador .modal-body').empty();
+            $('#div_modal_acompanhamento_indicador .modal-body').load(url);
+            $('#div_modal_acompanhamento_indicador').modal();
+            return false;
+        });
+        
         $('#claid').change(function(){
             $.ajax({
                 url: '?modulo=principal/monitorar-pnc&acao=A&req=carregarMedida&claid=' + $(this).val(),
