@@ -139,5 +139,17 @@ class Monitora_Model_PiEnquadramentoDespesa extends Modelo
         // implement here cast de array
         return $lista;
     }
+
+    public function recuperarDescricaoRp($eqdid)
+    {
+        $sql = "select irp.irpcod || ' - ' || irp.irpdsc rp
+                from monitora.enquadramentorp erp
+                        inner join public.identresultprimario irp on irp.irpcod = erp.irpcod        
+                where eqdid = " . (int) $eqdid;
+
+        return $this->pegaUm($sql);
+    }
+
+
 }//end Class
 ?>

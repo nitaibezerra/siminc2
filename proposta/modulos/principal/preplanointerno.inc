@@ -26,15 +26,18 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
                             <tr class="text-center">
-                                <th width="10%">Ações</th>
+                                <th width="4%">Ações</th>
                                 <th>Id</th>
-                                <th>Funcional</th>
                                 <th>Subunidade</th>
+                                <th>Funcional</th>
                                 <th>Título</th>
-                                <th>Enquadramento de Despesa</th>
+                                <th>Enquadramento</th>
+                                <th>Estado Atual</th>
                                 <th>Quantidade</th>
                                 <th>Valor Custeio</th>
                                 <th>Valor Capital</th>
+                                <th>Valor Custeio Exp.</th>
+                                <th>Valor Capital Exp.</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,9 +51,12 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['plititulo']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
+                                    <td><?php echo $dados['esddsc']; ?></td>
                                     <td align="right"><?php echo $dados['pliquantidade']; ?></td>
                                     <td align="right"><?php echo $dados['plivalorcusteio']; ?></td>
                                     <td align="right"><?php echo $dados['plivalorcapital']; ?></td>
+                                    <td align="right"><?php echo $dados['plivalorcusteioadicional']; ?></td>
+                                    <td align="right"><?php echo $dados['plivalorcapitaladicional']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

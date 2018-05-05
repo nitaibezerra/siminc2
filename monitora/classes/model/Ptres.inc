@@ -296,7 +296,18 @@ class Monitora_Model_Ptres extends Modelo
         $listaResultado = $this->carregar($sql);
         return $listaResultado? $listaResultado: [];
     }
-    
+
+    function recuperarProdutosPorPtres() {
+        global $db;
+        
+        ver((int) $this->ptrid, d);
+
+        $sql = "select sum(pre.plivalorcapital) capitalptres, sum(pre.plivalorcusteio) custeioptres
+                from proposta.preplanointerno pre
+                where ptrid = " . (int) $this->ptrid;
+
+        return $db->pegaLinha($sql);
+    }
     
 }//end Class
 ?>
