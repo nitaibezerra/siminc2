@@ -47,8 +47,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <a title="Alterar" href="?modulo=principal/preplanointerno_form&acao=A&pliid=<?php echo $dados['pliid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['pliid']; ?></td>
-                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['subunidade']; ?></td>
+                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['plititulo']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>

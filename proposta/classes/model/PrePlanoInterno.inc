@@ -131,5 +131,16 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $aLocalizacoes;
     }
 
+    public function recuperarValoresPorSubnidadeEPtres($suoid, $ptrid)
+    {
+        $sql = "select  sum(pli.plivalorcapital) plivalorcapital, sum(pli.plivalorcusteio) plivalorcusteio, 
+                        sum(pli.plivalorcapitaladicional) plivalorcapitaladicional, sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
+                from proposta.preplanointerno pli
+                where suoid = " . (int) $suoid . "
+                and ptrid = " . (int) $ptrid;
+
+        return $this->pegaLinha($sql);
+    }
+
 }//end Class
 ?>

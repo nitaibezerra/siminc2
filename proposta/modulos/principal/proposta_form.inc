@@ -38,6 +38,9 @@ switch ($_REQUEST['req']) {
     case 'recuperar-dados-ptres':
         echo json_encode((new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres());
         die;
+    case 'recuperar-valores-ptres':
+        echo json_encode((new Proposta_Model_PrePlanoInterno())->recuperarValoresPorSubnidadeEPtres($_REQUEST['suoid'], $_REQUEST['ptrid']));
+        die;
 }
 
 include APPRAIZ . "includes/cabecalho.inc";
@@ -86,10 +89,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <tr>
                                             <td>Localizador</td>
                                             <td>
-                                                <input name="quantidadelocalizador" id="quantidadelocalizador" type="text" value="<?php echo number_format(0, 2, ',', '.'); ?>" class="form-control valor " required="required">
+                                                <input name="locquantidadeproposta" id="locquantidadeproposta" type="text" class="form-control valor " required="required">
                                             </td>
-                                            <td id="unidade_localizador"></td>
-                                            <td id="produto_localizador"></td>
+                                            <td id="unidade_acao"></td>
+                                            <td id="produto_acao"></td>
                                         </tr>
                                         <tr>
                                             <td>PO</td>
@@ -108,8 +111,42 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
 
                         <?php
+                        echo $simec->valor('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
 
-                        echo $simec->input('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
+                        ?>
+
+                        <div class="form-group ">
+                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
+                            <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" >
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th width="20%">Limite</th>
+                                            <th width="20%">Custeio</th>
+                                            <th width="20%">Capital</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Valor</td>
+                                            <td id="limite_valor_custeio"></td>
+                                            <td id="limite_valor_capital"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expansão</td>
+                                            <td id="limite_expansao_custeio"></td>
+                                            <td id="limite_expansao_capital"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <?php
                         echo $simec->textarea('projustificativa', 'Justificativa', $mProposta->projustificativa, ['cols'=>60, 'rows'=>6]);
                         echo $simec->textarea('projustificativaexpansao', 'Justificativa Expansão', $mProposta->projustificativaexpansao, ['cols'=>60, 'rows'=>6]);
                         ?>
@@ -157,22 +194,37 @@ include APPRAIZ . "includes/cabecalho.inc";
             $('#span-funcional').load('?modulo=principal/proposta_form&acao=A&req=carregar-funcional&eqdid=' + $('#eqdid').val() + '&suoid=' + $('#suoid').val());
         });
 
-
         $('#span-rp').load('?modulo=principal/proposta_form&acao=A&req=carregar-rp&eqdid=' + $('#eqdid').val());
         $('#eqdid').change(function(){
             $('#span-rp').load('?modulo=principal/proposta_form&acao=A&req=carregar-rp&eqdid=' + $('#eqdid').val());
         });
 
+        carregarDadosPtres();
         $('body').on('change', '#ptrid', function(){
             carregarDadosPtres();
         });
 
-
         function carregarDadosPtres() {
             $.ajax({
                 url: '?modulo=principal/proposta_form&acao=A&req=recuperar-dados-ptres&ptrid=' + $('#ptrid').val(),
+                dataType: 'json',
                 success: function(dados){
-                   console.log(dados)
+                    $('#unidade_acao').html(dados.unidade_acao);
+                    $('#produto_acao').html(dados.produto_acao);
+                    $('#unidade_po').html(dados.unidade_po);
+                    $('#produto_po').html(dados.produto_po);
+                    $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 2, ',', '.'));
+                }
+            });
+
+            $.ajax({
+                url: '?modulo=principal/proposta_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val() + '&suoid=' + $('#suoid').val(),
+                dataType: 'json',
+                success: function(dados){
+                    $('#limite_valor_custeio').html(number_format(parseFloat(dados.plivalorcusteio), 2, ',', '.'));
+                    $('#limite_valor_capital').html(number_format(parseFloat(dados.plivalorcapital), 2, ',', '.'));
+                    $('#limite_expansao_custeio').html(number_format(parseFloat(dados.plivalorcusteioadicional), 2, ',', '.'));
+                    $('#limite_expansao_capital').html(number_format(parseFloat(dados.plivalorcapitaladicional), 2, ',', '.'));
                 }
             });
         }

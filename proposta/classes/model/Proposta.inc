@@ -338,6 +338,5 @@ class Proposta_Model_Proposta extends Modelo
         $objWriter->save('php://output');
     }
 
-
 }//end Class
 ?>
