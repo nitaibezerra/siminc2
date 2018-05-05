@@ -222,7 +222,7 @@ class Monitora_Model_Ptres extends Modelo
     public function recuperarSqlPorSubunidadeEEnquadramento($suoid, $eqdid)
     {
         $sql = "select  ptr.ptrid codigo, 
-                        coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo descricao
+                        coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo  || ' - ' || ptr.plodsc descricao
                 from monitora.vw_ptres ptr
                         inner join spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
                         inner join monitora.enquadramentorp erp on erp.irpcod = ptr.irpcod and erp.eqdid = " . (int) $eqdid . "
@@ -256,7 +256,17 @@ class Monitora_Model_Ptres extends Modelo
 
         return $db->pegaUm($sql);
     }
-    
+
+    function recuperarValoresPrePi() {
+        global $db;
+
+        $sql = "select sum(pre.plivalorcapital) capitalptres, sum(pre.plivalorcusteio) custeioptres
+                from proposta.preplanointerno pre
+                where ptrid = " . (int) $this->ptrid;
+
+        return json_encode($db->pegaLinha($sql));
+    }
+
     public function recuperarTodosApoio(stdClass $param) {
         $sql = "
             SELECT DISTINCT

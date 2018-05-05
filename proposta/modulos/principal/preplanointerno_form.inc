@@ -3,6 +3,7 @@
 require_once APPRAIZ . 'includes/workflow.php';
 
 $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
+$mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
 switch ($_REQUEST['req']) {
     case 'salvar':
         $cPrePlanoInterno->salvar($_REQUEST);
@@ -31,6 +32,9 @@ switch ($_REQUEST['req']) {
     case 'recuperar-objetivoppa':
         echo (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarObjetivoPorPtres();
         die;
+    case 'recuperar-valores-ptres':
+        echo (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarValoresPrePi();
+        die;
     case 'carregar-metappa':
         echo $simec->select('mppid', 'Metas PPA', null, (new Public_Model_MetaPpa())->recuperarSqlCombo(null, ['suoid'=>(int)$_REQUEST['suoid'], 'oppid'=>(int)$_REQUEST['oppid']]), ['required']);
         die;
@@ -38,16 +42,17 @@ switch ($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), ['required']);
         die;
     case 'recuperar-limite':
-        echo 123;
+        echo json_encode((new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($_REQUEST['suoid']));
         die;
 }
 
 $perfis = pegaPerfilGeral();
-$mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
-if($mPrePlanoInterno->suoid){
-    $subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
-}
-$limiteSubunidade = $subUnidade['lmuvlr'];
+//$mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
+//if($mPrePlanoInterno->suoid){
+//    $subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
+//}
+//$limiteSubunidade = $subUnidade['lmuvlr'];
+//$disponivelSubunidade = $subUnidade['disponivelunidade'];
 
 $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
 
@@ -55,8 +60,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
+    <div class="col-lg-5">
         <h2><?php echo $titulo_modulo; ?></h2>
+    </div>
+    <div class="col-lg-7">
+        <div style="padding-top: 10px;" class="text-right">
+            <a class="btn btn-danger" href="#"> Importar de PI 2018</a>
+        </div>
     </div>
 </div>
 
@@ -115,7 +125,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     Limite Disponível na Unidade:
                                     <input id="VlrSUDisponivel" type="hidden" value="" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo number_format((int)$disponivelSubunidade, 2, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>
@@ -126,16 +136,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <td style="text-align: left;">
                                     Total Cadastrado na Funcional:
                                 </td>
-                                <td style="text-align: left;" id="td_disponivel_funcional_custeio" >0,00</td>
+                                <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0,00</td>
                                 <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
                             </tr>
                             <tr>
                                 <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
-                                <td style="text-align: left;">
-                                    <?php echo $simec->valor('plivalorcusteio', '', $mPrePlanoInterno->plivalorcusteio, ['required', 'class'=>'valorPI']); ?>
-                                </td>
                                 <td style="text-align: center;">
-                                    <?php echo $simec->valor('plivalorcapital', '', $mPrePlanoInterno->plivalorcapital, ['required', 'class'=>'valorPI']); ?>
+                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo $mPrePlanoInterno->plivalorcusteio; ?>" class="form-control valorPI valor " required="required">
+                                </td>
+                                <td align="center">
+                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo $mPrePlanoInterno->plivalorcapital; ?>" class="form-control valorPI valor " required="required">
                                 </td>
                             </tr>
                         </table>
@@ -240,6 +250,9 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script>
     $(function(){
         toggleItem();
+        recuperarValoresLimitesPtres();
+        recuperarValoresLimitesSubUnidade();
+
         $('#eqdid').change(function(){
             $('#span-item').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-item&eqdid=' + $(this).val(), function(){
                 toggleItem();
@@ -252,15 +265,8 @@ include APPRAIZ . "includes/cabecalho.inc";
 
         $('#suoid').change(function(){
             $('#span-metapnc').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-metapnc&suoid=' + $('#suoid').val());
-            $.ajax({
-                url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid=' + $(this).val(),
-                success: function(limite){
-                    if(limite){
-                        console.log(limite)
-                    }
-                }
-            });
-        });
+            recuperarValoresLimitesSubUnidade();
+        })
 
         $('#mdeid').change(function(){
             $('#span-segmento').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-segmento&mdeid=' + $(this).val());
@@ -298,6 +304,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     }
                 }
             });
+            recuperarValoresLimitesPtres();
         });
 
         $('#esfid').change(function(){
@@ -329,6 +336,28 @@ include APPRAIZ . "includes/cabecalho.inc";
             } else {
                 $('#span-item, #span-subitem').hide();
             }
+        }
+
+        function recuperarValoresLimitesSubUnidade(){
+            $.ajax({
+                url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid=' + $('#suoid').val(),
+                dataType: 'json',
+                success: function(dados){
+                    $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.lmuvlr), 2, ',', '.'));
+                    $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivelunidade), 2, ',', '.'));
+                }
+            });
+        }
+
+        function recuperarValoresLimitesPtres(){
+            $.ajax({
+                url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val(),
+                dataType: 'json',
+                success: function(dados){
+                    $('#td_disponivel_funcional_custeio').html(number_format(parseFloat(dados.custeioptres), 2, ',', '.'));
+                    $('#td_disponivel_funcional_capital').html(number_format(parseFloat(dados.capitalptres), 2, ',', '.'));
+                }
+            });
         }
     })
 </script>
