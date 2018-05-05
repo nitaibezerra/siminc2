@@ -4,7 +4,7 @@ class Proposta_Controller_PrePlanoInterno
 {
     public function salvar($dados)
     {
-        $url = '?modulo=principal/preplanointerno&acao=A';
+        $url = '?modulo=principal/preplanointerno_form&acao=A';
 
         try {
             $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($dados['pliid']);
@@ -25,7 +25,7 @@ class Proposta_Controller_PrePlanoInterno
             (new Proposta_Controller_PrePlanoInternoLocalizacao())->salvar($dados);
 
             $mPrePlanoInterno->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . '&pliid=' . $mPrePlanoInterno->pliid, 'success');
         } catch (Exception $e){
             $mPrePlanoInterno->rollback();
             simec_redirecionar($url, 'error');

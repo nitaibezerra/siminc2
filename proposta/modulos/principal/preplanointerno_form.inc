@@ -47,12 +47,6 @@ switch ($_REQUEST['req']) {
 }
 
 $perfis = pegaPerfilGeral();
-//$mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
-//if($mPrePlanoInterno->suoid){
-//    $subUnidade = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($mPrePlanoInterno->suoid);
-//}
-//$limiteSubunidade = $subUnidade['lmuvlr'];
-//$disponivelSubunidade = $subUnidade['disponivelunidade'];
 
 $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
 
@@ -125,7 +119,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     Limite Disponível na Unidade:
                                     <input id="VlrSUDisponivel" type="hidden" value="" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo number_format((int)$disponivelSubunidade, 2, ',', '.'); ?></td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>
@@ -142,10 +136,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tr>
                                 <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                 <td style="text-align: center;">
-                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo $mPrePlanoInterno->plivalorcusteio; ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
                                 </td>
                                 <td align="center">
-                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo $mPrePlanoInterno->plivalorcapital; ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
                                 </td>
                             </tr>
                         </table>
@@ -237,7 +231,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
         <div class="form-group">
             <div class="text-center">
-                <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                 <a href="?modulo=principal/preplanointerno&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                 <?php if($mPrePlanoInterno->pliid){ ?>
                     <a href="?modulo=principal/preplanointerno_form&acao=A&req=excluir&pliid=<?php echo $mPrePlanoInterno->pliid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
@@ -312,21 +306,31 @@ include APPRAIZ . "includes/cabecalho.inc";
             $('#div-localizacao_' + $('#esfid').val()).show('slow');
         }).change();
 
-        calcularValores();
+        $('#btn-salvar').click(function(){
+
+            valorDisponivel = $('#td_disponivel_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_disponivel_sub_unidade').html()) : 0;
+            if(valorDisponivel < 0){
+                swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
+                return false;
+            }
+
+            $('#formulario').submit();
+        });
+
 
         function calcularValores(){
-            // totalPi = somarCampos('valorPI');
-            // limiteDisponivel = $('#td_autorizado_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_autorizado_sub_unidade').html()) : 0;
-            //
-            // valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
-            //
-            // if(valorDisponivel < 0){
-            //     swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
-            // }
-            //
-            // $('#td_disponivel_sub_unidade').html(number_format(valorDisponivel, 2, ',', '.'));
-            //
-            // console.log(totalPi, limiteDisponivel, limiteDisponivel - totalPi);
+
+            // Calculando valor Disponível
+            totalPi = somarCampos('valorPI');
+            limiteDisponivel = $('#td_autorizado_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_autorizado_sub_unidade').html()) : 0;
+
+            valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
+
+            if(valorDisponivel < 0){
+                swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
+            }
+
+            $('#td_disponivel_sub_unidade').html(number_format(valorDisponivel, 2, ',', '.'));
         }
 
 
