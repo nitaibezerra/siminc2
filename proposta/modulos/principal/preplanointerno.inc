@@ -48,7 +48,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     </td>
                                     <td><?php echo $dados['pliid']; ?></td>
                                     <td><?php echo $dados['subunidade']; ?></td>
-                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['plodsc']; ?></td>
+                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['acatitulo'] . ' - ' . $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['plititulo']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>

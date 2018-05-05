@@ -28,10 +28,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
                                 <th>Id</th>
-                                <th>Funcional</th>
                                 <th>Subunidade</th>
+                                <th>Funcional</th>
                                 <th>Enquadramento de Despesa</th>
-                                <th>Quantidade</th>
+                                <th>Quantidade PO</th>
                                 <th>Quantidade Expansão</th>
                                 <th>Custo Total</th>
                                 <th>Custo Expansão</th>
@@ -44,8 +44,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <a title="Alterar" href="?modulo=principal/proposta_form&acao=A&proid=<?php echo $dados['proid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><?php echo $dados['proid']; ?></td>
-                                    <td><?php echo $dados['funcional']; ?></td>
                                     <td><?php echo $dados['subunidade']; ?></td>
+                                    <td><?php echo $dados['funcional'] . ' - ' . $dados['acatitulo'] . ' - ' . $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
                                     <td align="right"><?php echo $dados['proquantidade']; ?></td>
                                     <td align="right"><?php echo $dados['proquantidadeexpansao']; ?></td>

@@ -101,7 +101,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
 
     public function recuperarListagem()
     {
-        $sql = "select ptr.funcional, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pli.*, esd.esddsc
+        $sql = "select ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pli.*, esd.esddsc
                 from proposta.preplanointerno pli
                     inner join monitora.vw_ptres ptr on pli.ptrid = ptr.ptrid
                     inner join public.vw_subunidadeorcamentaria suo on suo.suoid = pli.suoid

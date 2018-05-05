@@ -300,14 +300,45 @@ class Monitora_Model_Ptres extends Modelo
     function recuperarProdutosPorPtres() {
         global $db;
         
-        ver((int) $this->ptrid, d);
-
-        $sql = "select sum(pre.plivalorcapital) capitalptres, sum(pre.plivalorcusteio) custeioptres
-                from proposta.preplanointerno pre
-                where ptrid = " . (int) $this->ptrid;
+        $sql = "select distinct ptr.ptrid, aca.ididentificadorunicosiop, pac.descricao produto_acao, ppo.descricao produto_po, upo.descricao unidade_po, uac.descricao unidade_acao, aca.acaid, aca.acacod, aca.locquantidadeproposta
+                from monitora.ptres ptr
+                        inner join monitora.acao aca on aca.acaid = ptr.acaid
+                        inner join wssof.ws_acoesdto a on a.identificadorunico = aca.ididentificadorunicosiop::int and a.exercicio = '{$this->ptrano}'
+                        inner join wssof.ws_localizadoresdto l on l.identificadorunicoacao = a.identificadorunico and l.exercicio = '{$this->ptrano}'
+                        inner join wssof.ws_planosorcamentariosdto po on po.identificadorunicoacao = a.identificadorunico and po.exercicio = '{$this->ptrano}'
+                        left join wssof.ws_produtosdto ppo on ppo.codigoproduto::text = po.codigoproduto
+                        left join wssof.ws_produtosdto pac on pac.codigoproduto::text = a.codigoproduto
+                        left join wssof.ws_unidadesmedidadto upo on upo.codigounidademedida::text = po.codigounidademedida
+                        left join wssof.ws_unidadesmedidadto uac on uac.codigounidademedida::text = a.codigounidademedida 
+                where ptr.ptrid = " . (int) $this->ptrid . "
+                order by produto_po, produto_acao
+                ";
 
         return $db->pegaLinha($sql);
     }
-    
+
+    public function salvarQuantidadeLocalizador($locquantidadeproposta = 0)
+    {
+        $locquantidadeproposta = $locquantidadeproposta ? str_replace(array('.', ','), array('', '.'), $locquantidadeproposta) : 0;
+        $sql = "update monitora.acao set locquantidadeproposta = $locquantidadeproposta where acaid = " . (int) $this->acaid;
+        $this->executar($sql);
+    }
+
+
+    public function recuperarSubunidades()
+    {
+        $sql = "select array_to_string(array(
+                    select suo.unosigla || ' - ' || suo.suonome suonome
+                    from spo.ptressubunidade psu
+                            inner join monitora.ptres p on p.ptrid = psu.ptrid
+                            inner join public.vw_subunidadeorcamentaria suo on suo.suoid = psu.suoid
+                    where p.ptrano = '{$_SESSION['exercicio']}'
+                    and p.ptrstatus = 'A'
+                    and p.ptrid = " . (int) $this->ptrid . "
+                ), ',') as subunidades";
+
+        return $this->pegaUm($sql);
+    }
+
 }//end Class
 ?>

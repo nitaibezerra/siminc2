@@ -41,6 +41,15 @@ switch ($_REQUEST['req']) {
     case 'recuperar-valores-ptres':
         echo json_encode((new Proposta_Model_PrePlanoInterno())->recuperarValoresPorSubnidadeEPtres($_REQUEST['suoid'], $_REQUEST['ptrid']));
         die;
+    case 'recuperar-subunidades-ptres':
+        $subunidades = (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarSubunidades();
+        echo '  <div class="form-group">
+                    <label class="col-sm-3 control-label">Subunidades Vinculadas à Funcional: </label>
+                    <div class="col-sm-9">
+                      <p class="form-control-static">' . $subunidades . '</p>
+                    </div>
+                  </div>';
+        die;
 }
 
 include APPRAIZ . "includes/cabecalho.inc";
@@ -69,7 +78,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->select('eqdid', 'Enquadramento da Despesa', $mProposta->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
                         echo '<span id="span-rp"></span>';
                         echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mProposta->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mProposta->suoid, $mProposta->eqdid), ['required']) . '</span>';
-
+                        echo '<span id="span-subunidades-ptres"></span>';
                         ?>
 
                         <div class="form-group ">
@@ -227,6 +236,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                     $('#limite_expansao_capital').html(number_format(parseFloat(dados.plivalorcapitaladicional), 2, ',', '.'));
                 }
             });
+
+            $('#span-subunidades-ptres').load('?modulo=principal/proposta_form&acao=A&req=recuperar-subunidades-ptres&ptrid=' + $('#ptrid').val());
         }
     })
 </script>
