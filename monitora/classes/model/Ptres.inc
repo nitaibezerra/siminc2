@@ -341,5 +341,49 @@ class Monitora_Model_Ptres extends Modelo
         return $this->pegaUm($sql);
     }
 
+    public function recuperarQuantidadesSiop($momento)
+    {
+        $sql = "select 'Ação' as descricao, count(*) qtd from wssof.ws_acoesdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'
+                union all
+                select 'Localizador' as descricao, count(*) qtd  from wssof.ws_localizadoresdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'
+                union all
+                select 'Plano Orçamentário' as descricao, count(*) qtd  from wssof.ws_planosorcamentariosdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarFuncionaisSiop($momento)
+    {
+        $sql = "select  distinct 
+                        aca.identificadorunico,  aca.exercicio, aca.codigomomento, aca.baselegal, aca.detalhamentoimplementacao,
+                        aca.codigoacao, aca.codigoorgao, aca.codigoprograma, aca.codigoobjetivo, 
+                        aca.descricao acadescricao, aca.titulo acatitulo, loc.codigolocalizador, 
+                        plo.planoorcamentario, loc.descricao locdescricao, plo.titulo plotitulo
+                from wssof.ws_acoesdto aca
+                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '{$_SESSION['exercicio']}' and loc.codigomomento = '$momento'
+                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '{$_SESSION['exercicio']}' and plo.codigomomento = '$momento'
+                where aca.exercicio = '{$_SESSION['exercicio']}'
+                and aca.codigomomento = '$momento'
+                order by aca.codigoacao, aca.codigoprograma, loc.codigolocalizador, aca.codigoorgao, plo.planoorcamentario";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarComparacaoSiop($momento)
+    {
+        $sql = "select 'SIOP' as descricao, count(*) qtd
+                from wssof.ws_acoesdto aca
+                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '{$_SESSION['exercicio']}' and loc.codigomomento = '$momento'
+                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '{$_SESSION['exercicio']}' and plo.codigomomento = '$momento'
+                where aca.exercicio = '{$_SESSION['exercicio']}'
+                and aca.codigomomento = '$momento'
+                union all
+                select 'Propostas' as descricao, count(*) qtd
+                from proposta.proposta pro
+                where pro.prsano = '{$_SESSION['exercicio']}'
+                ;";
+
+        return $this->carregar($sql);
+    }
 }//end Class
 ?>

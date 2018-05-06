@@ -9,7 +9,7 @@ class ConfiguracaoExercicio extends Modelo {
     {
         $sql = "select prsano from planointerno.programacaoexercicio where prsstatus = 'A' order by prsano;";
         $exercicios = $this->carregar($sql);
-        
+
         include_once APPRAIZ . 'planointerno/modulos/principal/configuracaoExercicio/exercicios.inc';
     }
 
@@ -709,10 +709,193 @@ class ConfiguracaoExercicio extends Modelo {
         $acao = $item == 1;
         $localizador = $item == 2;
         $po = $item == 3;
-        
+
         $siopQualitativo = new SiopWebServiceQualitativo();
         $dadosImportar = $siopQualitativo->obterProgramacaoCompleta($exercicio, $codigoMomento, false, false, false, false, false, $acao, $localizador, false, false, $po, false, false);
-        
+
         $this->importarTabelasSof($exercicio, $dadosImportar, $codigoMomento);
     }
+
+    public function resgatarDadosAnoAnterior()
+    {
+        $sql = "
+                insert into public.metappa (mppdsc, mppcod, mppnome, mppstatus, prsano, mppquantificavel, mppquantidade, mppanualizavel)
+                select t.mppdsc, t.mppcod, t.mppnome, t.mppstatus, '2019', t.mppquantificavel, t.mppquantidade, t.mppanualizavel
+                from public.metappa t
+                where prsano = '2018';
+                
+                insert into public.metapnc (mpndsc, mpnstatus, mpncod, mpnnome, prsano)
+                select t.mpndsc, t.mpnstatus, t.mpncod, t.mpnnome, '2019'
+                from public.metapnc t
+                where prsano = '2018';
+                
+                insert into monitora.pi_enquadramentodespesa (eqdcod, eqddsc, eqdano, eqdstatus, mpneid, eqdstreduzido, eqdrp)
+                select t.eqdcod, t.eqddsc, 2019, t.eqdstatus, t.mpneid, t.eqdstreduzido, t.eqdrp
+                from monitora.pi_enquadramentodespesa t
+                where eqdano = '2018';
+                
+                insert into monitora.pi_produto (prsano, pprnome, pprdescricao, pprstatus, tipo)
+                select '2019', t.pprnome, t.pprdescricao, t.pprstatus, t.tipo
+                from monitora.pi_produto t
+                where t.prsano = '2018';
+                
+                insert into monitora.pi_unidade_medida (prsano, pumnome, pumdescricao, pumstatus)
+                select '2019', t.pumnome, t.pumdescricao, t.pumstatus
+                from monitora.pi_unidade_medida t
+                where t.prsano = '2018';
+                
+                insert into monitora.pi_modalidadeensino (mdecod, mdedsc, mdeano, mdestatus)
+                select t.mdecod, t.mdedsc, '2019', t.mdestatus
+                from monitora.pi_modalidadeensino t
+                where t.mdeano = '2018';
+                
+                insert into monitora.pi_niveletapaensino (needsc
+                , neeano, neestatus, mdeid, neecod)
+                select t.needsc, '2019', t.neestatus, novo.mdeid, t.neecod
+                from monitora.pi_niveletapaensino t
+                        inner join monitora.pi_modalidadeensino old on old.mdeid = t.mdeid and old.mdestatus = 'A'
+                        inner join monitora.pi_modalidadeensino novo on novo.mdecod = old.mdecod and novo.mdeano = '2019' and novo.mdestatus = 'A'
+                where t.neeano = '2018'
+                and t.neestatus = 'A';
+                
+                insert into planacomorc.manutencaoitem (prsano,mainome,maidescricao,maistatus,eqdid)
+                select '2019', t.mainome, t.maidescricao, t.maistatus, novo.eqdid
+                from planacomorc.manutencaoitem t
+                        inner join monitora.pi_enquadramentodespesa old on old.eqdid = t.eqdid and old.eqdstatus = 'A'
+                        inner join monitora.pi_enquadramentodespesa novo on novo.eqdcod = old.eqdcod and novo.eqdano = '2019' and novo.eqdstatus = 'A'
+                where t.prsano = '2018'
+                and t.maistatus = 'A'
+                ;
+                
+                insert into planacomorc.manutencaosubitem (maiid, prsano, masnome, masdescricao, masstatus)
+                select novo.maiid, '2019', t.masnome, t.masdescricao, t.masstatus
+                from planacomorc.manutencaosubitem t
+                        inner join planacomorc.manutencaoitem old on old.maiid = t.maiid and old.maistatus = 'A'
+                        inner join planacomorc.manutencaoitem novo on novo.mainome = old.mainome and novo.prsano = '2019' and novo.maistatus = 'A'
+                where t.prsano = '2018'
+                and t.masstatus = 'A'
+                ;
+                
+                insert into public.objetivoppa (prsano, oppdsc, oppnome, oppcod, oppstatus)
+                select '2019', t.oppdsc, t.oppnome, t.oppcod, t.oppstatus
+                from public.objetivoppa t
+                where t.prsano = '2018';
+                
+                
+                insert into public.iniciativappa (oppid, ippdsc, ippnome, ippcod, ippstatus, prsano)
+                select novo.oppid, t.ippdsc, t.ippnome, t.ippcod, t.ippstatus, '2019'
+                from public.iniciativappa t
+                        inner join public.objetivoppa old on old.oppid = t.oppid and old.oppstatus = 'A'
+                        inner join public.objetivoppa novo on novo.oppcod = old.oppcod and novo.prsano = '2019' and novo.oppstatus = 'A'
+                where t.prsano = '2018'
+                and t.ippstatus = 'A';
+                
+                insert into public.indicadorpnc (mpnid, ipndsc, ipnstatus, prsano, ipncod)
+                select novo.mpnid, t.ipndsc, t.ipnstatus, '2019', t.ipncod
+                from public.indicadorpnc t
+                        inner join public.metapnc old on old.mpnid = t.mpnid and old.mpnstatus = 'A'
+                        inner join public.metapnc novo on novo.mpncod = old.mpncod and novo.prsano = '2019' and novo.mpnstatus = 'A'
+                where t.prsano = '2018'
+                and t.ipnstatus  = 'A';
+                ;
+                
+                insert into monitora.pi_categoriaapropriacao (capcod, capdsc, capano, capstatus, capsiconv)
+                select t.capcod, t.capdsc, '2019', t.capstatus, t.capsiconv
+                from monitora.pi_categoriaapropriacao t
+                where t.capano = '2018'
+                and t.capstatus = 'A'
+                ;
+                
+                
+                insert into public.unidadeorcamentaria (prsano, unocod, unonome, unostatus, unocodigopi, unofundo, unosigla, unocodorcamento)
+                select '2019', t.unocod, t.unonome, t.unostatus, t.unocodigopi, t.unofundo, t.unosigla, t.unocodorcamento
+                from public.unidadeorcamentaria t
+                where t.prsano = '2018'
+                and t.unostatus = 'A'
+                -- and not (unocod = '42902' and unofundo = 'f')
+                ;
+                
+                insert into public.subunidadeorcamentaria (unoid, suocod, suosigla, suonome, suostatus, suoflaglimiteliberado, suocodigopi)
+                select novo.unoid, t.suocod, t.suosigla, t.suonome, t.suostatus, t.suoflaglimiteliberado, t.suocodigopi
+                from public.subunidadeorcamentaria t
+                        inner join public.unidadeorcamentaria old on old.unoid = t.unoid and old.unostatus = 'A' and old.prsano = '2018'
+                        inner join public.unidadeorcamentaria novo on novo.unocod = old.unocod and novo.unofundo = old.unofundo and novo.prsano = '2019' and novo.unostatus = 'A'
+                where t.suostatus = 'A'
+                ;
+                
+                insert into planacomorc.unidadegestora_limite (lmuvlr, lmudtcadastro, usucpf, lmustatus, lmuflgliberado, prsano, ungcod, unoid)
+                select t.lmuvlr, '2018-05-05 17:17:17', '00704963159', t.lmustatus, t.lmuflgliberado, '2019', t.ungcod, t.unoid
+                from planacomorc.unidadegestora_limite t
+                where t.prsano = '2018'
+                ;
+                
+                insert into spo.subunidademetappa (suoid, mppid)
+                select novo.suoid, novo1.mppid 
+                from spo.subunidademetappa t
+                        inner join public.vw_subunidadeorcamentaria old on old.suoid = t.suoid and old.prsano = '2018'
+                        inner join public.vw_subunidadeorcamentaria novo on novo.suocod = old.suocod and novo.unofundo = old.unofundo  and novo.prsano = '2019'
+                        
+                        inner join public.metappa old1 on old1.mppid = t.mppid and old1.prsano = '2018'
+                        inner join public.metappa novo1 on novo1.mppcod = old1.mppcod and novo1.prsano = '2019'
+                ;
+                
+                insert into spo.subunidademetapnc (suoid, mpnid)
+                select novo.suoid, novo1.mpnid
+                from spo.subunidademetapnc t
+                        inner join public.vw_subunidadeorcamentaria old on old.suoid = t.suoid and old.prsano = '2018'
+                        inner join public.vw_subunidadeorcamentaria novo on novo.suocod = old.suocod and novo.unofundo = old.unofundo and novo.prsano = '2019'
+                        
+                        inner join public.metapnc old1 on old1.mpnid = t.mpnid and old1.prsano = '2018'
+                        inner join public.metapnc novo1 on novo1.mpncod = old1.mpncod and novo1.prsano = '2019'
+                ;
+                
+                insert into spo.subunidadeindicadorpnc (suoid, ipnid)
+                select novo.suoid, novo1.ipnid
+                from spo.subunidadeindicadorpnc t
+                        inner join public.vw_subunidadeorcamentaria old on old.suoid = t.suoid and old.prsano = '2018'
+                        inner join public.vw_subunidadeorcamentaria novo on novo.suocod = old.suocod and novo.unofundo = old.unofundo and novo.prsano = '2019'
+                        
+                        inner join public.indicadorpnc old1 on old1.ipnid = t.ipnid and old1.prsano = '2018'
+                        inner join public.indicadorpnc novo1 on novo1.ipncod = old1.ipncod and novo1.prsano = '2019'
+                ;        
+
+                insert into spo.ptressubunidade (ptrid, suoid, ptrdotacaocapital, ptrdotacaocusteio)
+                select novo1.ptrid, novo.suoid, t.ptrdotacaocapital, t.ptrdotacaocusteio
+                from spo.ptressubunidade t
+                        inner join public.vw_subunidadeorcamentaria old on old.suoid = t.suoid and old.prsano = '2018'
+                        inner join public.vw_subunidadeorcamentaria novo on novo.suocod = old.suocod and novo.unofundo = old.unofundo and novo.prsano = '2019'
+                
+                        inner join monitora.vw_ptres old1 on old1.ptrid = t.ptrid and old1.ptrano = '2018'
+                        inner join monitora.vw_ptres novo1 
+                                on  novo1.acacod = old1.acacod 
+                                and novo1.loccod = old1.loccod 
+                                and novo1.prgcod = old1.prgcod 
+                                -- and novo1.acaobjetivocod = old1.acaobjetivocod 
+                                and novo1.unicod = old1.unicod 
+                                and novo1.plocod = old1.plocod 
+                                and novo1.ptrano = '2019';                
+
+                insert into public.objetivometappa (oppid, mppid, mpodata)
+                select novo.oppid, novo1.mppid, '2018-05-06 13:31:13'
+                from public.objetivometappa t
+                        inner join public.objetivoppa old on old.oppid = t.oppid and old.prsano = '2018'
+                        inner join public.objetivoppa novo on novo.oppcod = old.oppcod and novo.prsano = '2019'
+                
+                        inner join public.metappa old1 on old1.mppid = t.mppid and old1.prsano = '2018'
+                        inner join public.metappa novo1  on  novo1.mppcod = old1.mppcod and novo1.prsano = '2019'
+                ;  
+                
+                insert into public.naturezadespesa (gndcod, ndpano, ndpcod, ndpdsc, ndpstatus, edpcod, mapcod, ctecod, sbecod, cagcod)
+                select t.gndcod, '2019', t.ndpcod, t.ndpdsc, t.ndpstatus, t.edpcod, t.mapcod, t.ctecod, t.sbecod, t.cagcod
+                from public.naturezadespesa t
+                where t.ndpano = '2018'
+                ;      
+        ";
+
+        $updateRpPtres = "  select 'update monitora.ptres set irpcod = '''|| t.irpcod ||''' where acacod = '''|| t.acacod ||''' and  loccod = '''|| t.loccod ||''' and  prgcod = '''|| t.prgcod ||''' and  unicod = '''|| t.unicod ||''' and  plocod = '''|| t.plocod ||''' and ptrano = ''2019'';  ' rp, t.irpcod
+                            from monitora.ptres t
+                            where t.ptrano = '2018'
+                            and coalesce(irpcod, '6') != '6'";
+    }
+
 }

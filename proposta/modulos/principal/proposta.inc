@@ -47,10 +47,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['subunidade']; ?></td>
                                     <td><?php echo $dados['funcional'] . ' - ' . $dados['acatitulo'] . ' - ' . $dados['plodsc']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
-                                    <td align="right"><?php echo $dados['proquantidade']; ?></td>
-                                    <td align="right"><?php echo $dados['proquantidadeexpansao']; ?></td>
-                                    <td align="right"><?php echo $dados['prdvalor']; ?></td>
-                                    <td align="right"><?php echo $dados['prdvalorexpansao']; ?></td>
+                                    <td align="right"><?php echo number_format($dados['proquantidade'], 0, ',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['proquantidadeexpansao'], 0, ',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['prdvalor'], 0, ',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 0, ',', '.'); ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

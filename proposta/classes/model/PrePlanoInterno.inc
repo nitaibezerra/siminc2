@@ -142,5 +142,100 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $this->pegaLinha($sql);
     }
 
+    function carregarGrafico($filtro = null){
+
+        # Cores dos Graficos
+        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+
+        echo '<div class="panel-body">';
+        $estatistica = $this->recuperarEstatisticaPagamento($filtro);
+        $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
+        $grafico
+            ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
+            ->setColors($colors)
+            ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
+            ->gerarGrafico($estatistica);
+        echo '</div>';
+    }
+
+    /**
+     * Busca Unidades com estatistica de orçamento e valores de pagamento.
+     *
+     * @param stdClass $filtro
+     * @return array
+     */
+    public function recuperarEstatisticaPagamento($aFiltro = null)
+    {
+        
+        $filtro = '';
+        $filtro .= $aFiltro['unosigla'] ? " AND suo.unosigla = '{$aFiltro['unosigla']}' ": NULL;
+        $filtro .= $aFiltro['unidades'] ? " AND {$aFiltro['unidades']} ": NULL;
+
+        $descricao .= $aFiltro['unosigla'] ? "suo.suosigla": "suo.unosigla";
+
+        $sql = "
+            SELECT DISTINCT
+                1 AS ordem,
+                'Dotação' AS descricao,
+                $descricao AS categoria,
+                (sum(COALESCE (psu.ptrdotacaocusteio, 0)::DECIMAL) + sum(COALESCE (psu.ptrdotacaocapital, 0)::DECIMAL)) AS valor
+            FROM
+                public.vw_subunidadeorcamentaria suo
+                LEFT JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
+                LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
+                AND ptr.ptrano = suo.prsano
+            WHERE
+                suo.prsano = '{$_SESSION['exercicio']}'
+                $filtro
+                AND suo.suostatus = 'A'
+                AND ptr.irpcod <> '6'
+            GROUP BY
+                ordem,
+                descricao,
+                categoria
+            UNION ALL
+            SELECT DISTINCT
+                2 AS ordem,
+                'Limite' AS descricao,
+                $descricao AS categoria,
+                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
+            FROM
+                public.vw_subunidadeorcamentaria suo
+                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
+                AND suo.prsano = lmu.prsano
+            WHERE
+                suo.prsano = '{$_SESSION['exercicio']}'
+                $filtro
+                and suo.suostatus = 'A'
+            GROUP BY
+                ordem,
+                descricao,
+                categoria
+            UNION ALL
+            SELECT DISTINCT
+                3 AS ordem,
+                'Planejado' AS descricao,
+                $descricao AS categoria,
+                sum(COALESCE (pli.plivalorcapital, 0) + COALESCE (pli.plivalorcusteio, 0))::DECIMAL AS valor
+            FROM
+                public.vw_subunidadeorcamentaria suo
+                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid AND pli.plistatus = 'A'
+            WHERE
+                suo.prsano = '{$_SESSION['exercicio']}'
+                $filtro
+                AND suo.suostatus = 'A'    
+            GROUP BY
+                ordem,
+                descricao,
+                categoria
+            ORDER BY
+                ordem,
+                categoria
+        ";
+
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];
+    }
+
 }//end Class
 ?>
