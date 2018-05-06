@@ -100,11 +100,12 @@ class Monitora_Model_Ptres extends Modelo
                         aca.descricao acadescricao, aca.titulo acatitulo, loc.codigolocalizador, 
                         plo.planoorcamentario, loc.descricao locdescricao, plo.titulo plotitulo
                 from wssof.ws_acoesdto aca
-                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico
-                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico
+                    inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '$exercicio' and loc.codigomomento = '$momento'
+                    inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '$exercicio' and plo.codigomomento = '$momento'
                 where aca.exercicio = '$exercicio'
                 and aca.codigomomento = '$momento'
                 ";
+        
         $aAcoesDto = $this->carregar($sql);
         $aAcoesDto = $aAcoesDto ? $aAcoesDto : [];
 
