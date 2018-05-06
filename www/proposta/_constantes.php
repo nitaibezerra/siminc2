@@ -1,9 +1,9 @@
 <?php
 define('SISID_PLANEJAMENTO', 256);
 
-define('PFL_SUPERUSUARIO', 1505);
-define("PFL_SUBUNIDADE", 1509);
-define("PFL_ADMINISTRADOR", 1510);
+define('PFL_SUPERUSUARIO', 1512);
+define("PFL_SUBUNIDADE", 1513);
+define("PFL_ADMINISTRADOR", 1514);
 
 define("WF_TPDID_PREPI", 268);
 
