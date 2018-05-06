@@ -32,6 +32,7 @@ switch ($_REQUEST['req']) {
 
 $quantidadeSiop = $mPtres->recuperarQuantidadesSiop($momento);
 $funcionaisSiop = $mPtres->recuperarFuncionaisSiop($momento);
+$comparacaoSiop = $mPtres->recuperarComparacaoSiop($momento);
 
 /**
  * Cabeçalho padrão do sistema.
@@ -69,15 +70,15 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <table class="table table-bordered table-hover" >
                             <thead>
                             <tr class="text-center">
-                                <th width="20%">Carga</th>
-                                <th width="20%">Quantidade</th>
+                                <th>Carga</th>
+                                <th>Quantidade</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($quantidadeSiop as $dado){ ?>
                                 <tr>
                                     <td><?php echo $dado['descricao']; ?></td>
-                                    <td><?php echo $dado['qtd']; ?></td>
+                                    <td align="right"><?php echo $dado['qtd']; ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -90,28 +91,25 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Funcionais SIOP</h5>
+                    <h5>Comparativo SIOP/Propostas SIMINC</h5>
                 </div>
                 <div class="ibox-content">
-
-                    <a class="btn btn-warning" id="btn-funcionais-siop"><i class="fa fa-search"></i>&nbsp;Ver Funcionais</a>
-                    <a href="?modulo=inicio&acao=C&req=importar-siop" class="btn btn-danger" id="btn-salvar"><i class="fa fa-download"></i>&nbsp;Importar</a>
 
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" >
                             <thead>
                             <tr class="text-center">
-                                <th width="20%">Carga</th>
-                                <th width="20%">Quantidade</th>
+                                <?php foreach($comparacaoSiop as $dado){ ?>
+                                    <th><?php echo $dado['descricao']; ?></th>
+                                <?php } ?>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($quantidadeSiop as $dado){ ?>
-                                <tr>
-                                    <td><?php echo $dado['descricao']; ?></td>
-                                    <td><?php echo $dado['qtd']; ?></td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <?php foreach($comparacaoSiop as $dado){ ?>
+                                    <td  align="right"><?php echo $dado['qtd']; ?></td>
+                                <?php } ?>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

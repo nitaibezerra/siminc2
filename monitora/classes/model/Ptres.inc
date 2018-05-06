@@ -352,7 +352,6 @@ class Monitora_Model_Ptres extends Modelo
         return $this->carregar($sql);
     }
 
-
     public function recuperarFuncionaisSiop($momento)
     {
         $sql = "select  distinct 
@@ -366,6 +365,23 @@ class Monitora_Model_Ptres extends Modelo
                 where aca.exercicio = '{$_SESSION['exercicio']}'
                 and aca.codigomomento = '$momento'
                 order by aca.codigoacao, aca.codigoprograma, loc.codigolocalizador, aca.codigoorgao, plo.planoorcamentario";
+
+        return $this->carregar($sql);
+    }
+
+    public function recuperarComparacaoSiop($momento)
+    {
+        $sql = "select 'SIOP' as descricao, count(*) qtd
+                from wssof.ws_acoesdto aca
+                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '{$_SESSION['exercicio']}' and loc.codigomomento = '$momento'
+                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '{$_SESSION['exercicio']}' and plo.codigomomento = '$momento'
+                where aca.exercicio = '{$_SESSION['exercicio']}'
+                and aca.codigomomento = '$momento'
+                union all
+                select 'Propostas' as descricao, count(*) qtd
+                from proposta.proposta pro
+                where pro.prsano = '{$_SESSION['exercicio']}'
+                ;";
 
         return $this->carregar($sql);
     }
