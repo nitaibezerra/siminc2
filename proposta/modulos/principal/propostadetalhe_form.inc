@@ -5,11 +5,11 @@
 
     <?php
     echo $simec->select('ndpid', 'Natureza Despesa', $mPropostaDetalhe->ndpid, (new Public_Model_NaturezaDespesa())->recuperarSqlCombo(['ndpcod', 'ndpdsc']), ['required']);
-    echo $simec->valor('prdvalor', 'Valor', $mPropostaDetalhe->prdvalor, ['required']);
-    echo $simec->valor('prdvalorexpansao', 'Valor Expansão', $mPropostaDetalhe->prdvalorexpansao);
     echo $simec->select('iducod', 'IDUSO', ($mPropostaDetalhe->iducod ? $mPropostaDetalhe->iducod : 0), (new Public_Model_IdentifUso())->recuperarSqlCombo(['iducod', 'idudsc']), ['required']);
     echo $simec->select('foncod', 'Fonte', ($mPropostaDetalhe->foncod ? $mPropostaDetalhe->foncod : 105), (new Public_Model_FonteRecurso())->recuperarSqlCombo(['foncod', 'fondsc'], ['grfid = 1']), ['required']);
     echo $simec->select('idoid', 'IDOC', ($mPropostaDetalhe->idoid ? $mPropostaDetalhe->idoid : 1), (new Public_Model_Idoc())->recuperarSqlCombo(['idocod', 'idodsc']), ['required']);
+    echo $simec->valor('prdvalor', 'Valor', $mPropostaDetalhe->prdvalor, ['required']);
+    echo $simec->valor('prdvalorexpansao', 'Valor Expansão', $mPropostaDetalhe->prdvalorexpansao);
     ?>
 
     <div class="form-group">

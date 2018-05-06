@@ -72,7 +72,7 @@ class Proposta_Model_Proposta extends Modelo
 
     public function recuperarListagem()
     {
-        $sql = "select pro.proid, ptr.funcional, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pro.proquantidade, pro.proquantidadeexpansao, 
+        $sql = "select pro.proid, ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pro.proquantidade, pro.proquantidadeexpansao, 
                         sum(prd.prdvalor) prdvalor, sum(prd.prdvalorexpansao) prdvalorexpansao
                 from proposta.proposta pro
                     inner join monitora.vw_ptres ptr on pro.ptrid = ptr.ptrid
@@ -81,7 +81,7 @@ class Proposta_Model_Proposta extends Modelo
                     left join proposta.propostadetalhe prd on prd.proid = pro.proid
                 where pro.prsano = '{$_SESSION['exercicio']}'
                 and prostatus = 'A'
-                group by pro.proid, ptr.funcional, ptr.plodsc, eqd.eqddsc, subunidade,  pro.proquantidade, pro.proquantidadeexpansao";
+                group by pro.proid, ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, subunidade,  pro.proquantidade, pro.proquantidadeexpansao";
 
         return $this->carregar($sql);
     }
@@ -337,7 +337,6 @@ class Proposta_Model_Proposta extends Modelo
         header('Cache-Control: max-age=0');
         $objWriter->save('php://output');
     }
-
 
 }//end Class
 ?>

@@ -5,13 +5,17 @@ class Proposta_Controller_Proposta
     public function salvar($dados)
     {
         $url = '?modulo=principal/proposta_form&acao=A';
-
         try {
             $mProposta = new Proposta_Model_Proposta($dados['proid']);
             $mProposta->popularDadosObjeto($dados);
             $mProposta->prsano = $mProposta->prsano ? $mProposta->prsano : $_SESSION['exercicio'];
-                
+            $mProposta->proquantidade = $mProposta->proquantidade ? str_replace(array('.', ','), array('', '.'), $mProposta->proquantidade) : 0;
+            $mProposta->proquantidadeexpansao = $mProposta->proquantidadeexpansao ? str_replace(array('.', ','), array('', '.'), $mProposta->proquantidadeexpansao) : 0;
+
             $mProposta->salvar(null, null, ['proquantidade', 'proquantidadeexpansao', 'projustificativa', 'projustificativaexpansao', ]);
+
+            $mPtres = (new Monitora_Model_Ptres($dados['ptrid']))->salvarQuantidadeLocalizador($dados['locquantidadeproposta']);
+
             $mProposta->commit();
             simec_redirecionar($url . '&proid='. $mProposta->proid, 'success');
         } catch (Exception $e){
