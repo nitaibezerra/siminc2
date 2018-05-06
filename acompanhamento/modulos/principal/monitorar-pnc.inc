@@ -10,9 +10,12 @@
         case 'salvar':
             $cAcompanhamento->salvar($_REQUEST);
         die;
-        case 'indicador-form':
-            include_once APPRAIZ. 'acompanhamento/modulos/principal/indicador_form.inc';
-            die;
+        case 'acompanhamento-indicador-pnc-form':
+            include_once APPRAIZ. 'acompanhamento/modulos/principal/acompanhamento_indicador_pnc_form.inc';
+        die;
+        case 'salvar-acompanhamento-indicador-pnc':
+            $resultado = $cAcompanhamento->salvarIndicadorPnc($_REQUEST);
+            echo json_encode($resultado);
         die;
         case 'excluir':
             $cAcompanhamento->excluir($_REQUEST['acoid']);
@@ -524,7 +527,7 @@
             var ipncod = $(this).attr('data-ipncod');
             var prsano = $(this).attr('data-prsano');
             var url = '?modulo=principal/monitorar-pnc&acao=A'+
-                '&req=indicador-form'+
+                '&req=acompanhamento-indicador-pnc-form'+
                 '&acoid='+ acoid+
                 '&janid='+ janid+
                 '&unocod='+ unocod+
