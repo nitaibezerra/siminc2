@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Monta consulta do relatório geral
+ * Monta consulta do relatório geral de Propostas
  * 
  * @param stdClass $filtros
  * @return string
@@ -44,6 +44,62 @@ function montarSqlRelatorioGeralProposta(stdClass $filtros){
             ptr.funcional,
             ptr.acatitulo,
             ptr.plodsc
+    ";
+    return $sql;
+}
+
+/**
+ * Monta consulta do relatório geral de Pre-PIs
+ * 
+ * @param stdClass $filtros
+ * @return string
+ */
+function montarSqlRelatorioGeralPrePi(stdClass $filtros){
+    $sql = "
+        SELECT
+	    suo.unosigla || ' - ' || suo.suonome subunidade,
+            ptr.funcional,
+            ptr.acatitulo,
+            ptr.plodsc,
+            eqd.eqddsc,
+            esd.esddsc,
+            pli.pliid,
+            pli.plititulo,
+            pli.plidsc,
+            pli.suoid,
+            pli.eqdid,
+            pli.maiid,
+            pli.masid,
+            pli.ptrid,
+            pli.oppid,
+            pli.mppid,
+            pli.ippid,
+            pli.mpnid,
+            pli.ipnid,
+            pli.pprid,
+            pli.pumid,
+            pli.pliquantidade,
+            pli.mdeid,
+            pli.neeid,
+            pli.plivalorcusteio,
+            pli.plivalorcapital,
+            pli.docid,
+            pli.prsano,
+            pli.plistatus,
+            pli.plivalorcusteioadicional,
+            pli.plivalorcapitaladicional,
+            pli.pliquantidadeadicional,
+            pli.plijustificativaadicional,
+            pli.esfid
+        FROM proposta.preplanointerno pli
+            JOIN monitora.vw_ptres ptr ON pli.ptrid = ptr.ptrid
+            JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = pli.suoid
+            JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pli.eqdid
+            LEFT JOIN workflow.documento doc ON doc.docid = pli.docid
+            LEFT JOIN workflow.estadodocumento esd ON esd.esdid = doc.esdid
+        WHERE
+            pli.prsano = '". (int)$filtros->exercicio. "'
+            AND plistatus = 'A'
     ";
     return $sql;
 }

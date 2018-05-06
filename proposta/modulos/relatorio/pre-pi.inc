@@ -1,9 +1,9 @@
 <?php
 
-    header( 'Content-Type: application/vnd.ms-excel' );
-    header( 'Expires: 0' );
-    header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-    header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
+//    header( 'Content-Type: application/vnd.ms-excel' );
+//    header( 'Expires: 0' );
+//    header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+//    header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
 
     $cabecalho = [
         'ID Proposta',
@@ -28,12 +28,14 @@
 
     # Lista de colunas que terão formatação de moeda.
     $listaColunaMoeda = array(
-        'prdvalor',
-        'prdvalorexpansao'
+        'plivalorcusteio',
+        'plivalorcapital',
+        'plivalorcusteioadicional',
+        'plivalorcapitaladicional',
     );
 
-    $sql = montarSqlRelatorioGeral((object) array('exercicio' => $_SESSION['exercicio']));
-//ver($sql, d);
+    $sql = montarSqlRelatorioGeralPrePi((object) array('exercicio' => $_SESSION['exercicio']));
+ver($sql, d);
     $lista = $db->carregar($sql);
 ?>
 
