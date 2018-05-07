@@ -17,7 +17,7 @@ switch ($_REQUEST['req']) {
         simec_redirecionar('?modulo=inicio&acao=C', 'success');
         die;
     case 'gerar-planilha':
-        $mProposta->gerarPlanilhaImportacao();
+        $mProposta->gerarPlanilhaImportacao($momento);
         die;
     case 'carregarGraficoUnidade':
         $mPrePlanoInterno->carregarGrafico();
