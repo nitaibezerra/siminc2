@@ -91,7 +91,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <th width="20%">Nível</th>
                                             <th width="20%">Quantidade</th>
                                             <th width="20%">Unidade</th>
-                                            <th>produto</th>
+                                            <th>Produto</th>
                                         </tr>
                                         </thead>
                                         <tbody>
