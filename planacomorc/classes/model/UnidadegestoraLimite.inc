@@ -79,5 +79,24 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
         return $dados ? $dados : [];
     }
 
+    public function recuperarLimitePorSuoid($suoid)
+    {
+        $sql = "select suo.suoid, suo.unoid, suo.suosigla, suo.unosigla, suo.unocod, suo.suonome, suo.unonome, suo.suocod, suo.unofundo, 
+                       lmu.*, coalesce(vlr.totalunidade, 0) totalunidade, coalesce(lmu.lmuvlr, 0) - coalesce(vlr.totalunidade, 0) disponivelunidade
+                from public.vw_subunidadeorcamentaria suo 
+                        inner join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
+                        left join (
+                                select sum(plivalorcapital + plivalorcusteio) totalunidade, suoid
+                                from proposta.preplanointerno
+                                where suoid = $suoid
+                                group by suoid
+                        ) vlr on vlr.suoid = suo.suoid                        
+                where suo.unostatus = 'A'
+                and suo.prsano = '{$_SESSION['exercicio']}'
+                and suo.suoid = " . (int) $suoid;
+
+        return $this->pegaLinha($sql);
+    }
+
 }//end Class
 ?>
