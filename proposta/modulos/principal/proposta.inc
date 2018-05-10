@@ -40,7 +40,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tbody>
                             <?php
                                 # Inicialização das variáveis do totalizador dos dados.
-
                                 $totalQtdPo = 0;
                                 $totalQtdExp = 0;
                                 $totalCustoT = 0;
@@ -63,10 +62,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </tr>
                             <?php
                                 # Soma dos Totalizadores.
-                                $totalQtdPo += $dados['proquantidade'];
-                                $totalQtdExp += $dados['proquantidadeexpansao'];
-                                $totalCustoT += $dados['prdvalor'];
-                                $totalCustoExp += $dados['prdvalorexpansao'];
+                                $totalQtdPo += (int)$dados['proquantidade'];
+                                $totalQtdExp +=  (int)$dados['proquantidadeexpansao'];
+                                $totalCustoT +=  (int)$dados['prdvalor'];
+                                $totalCustoExp +=  (int)$dados['prdvalorexpansao'];
                             ?>
                             <?php } ?>
                             </tbody>
