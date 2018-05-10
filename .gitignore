@@ -3,7 +3,7 @@ global/config.dev.php
 global/database.php
 global/prod_minc_2016.crt
 global/prod_minc_2017.crt
-sql/restore-siminc2/restore_treinamento.sh
-sql/restore-siminc2/restore_homologacao.sh
+sql/restore/treinamento.sh
+sql/restore/homologacao.sh
 .idea/
 arquivos/
