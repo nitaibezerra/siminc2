@@ -52,11 +52,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td><?php echo $dados['plititulo']; ?></td>
                                     <td><?php echo $dados['eqddsc']; ?></td>
                                     <td><?php echo $dados['esddsc']; ?></td>
-                                    <td align="right"><?php echo $dados['pliquantidade']; ?></td>
-                                    <td align="right"><?php echo $dados['plivalorcusteio']; ?></td>
-                                    <td align="right"><?php echo $dados['plivalorcapital']; ?></td>
-                                    <td align="right"><?php echo $dados['plivalorcusteioadicional']; ?></td>
-                                    <td align="right"><?php echo $dados['plivalorcapitaladicional']; ?></td>
+                                    <td align="right"><?php echo number_format($dados['pliquantidade'],0,',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['plivalorcusteio'],0,',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['plivalorcapital'],0,',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['plivalorcusteioadicional'],0,',', '.'); ?></td>
+                                    <td align="right"><?php echo number_format($dados['plivalorcapitaladicional'],0,',', '.'); ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>
