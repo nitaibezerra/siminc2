@@ -79,6 +79,37 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mProposta->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mProposta->suoid, $mProposta->eqdid), ['required']) . '</span>';
                             echo '<span id="span-subunidades-ptres"></span>';
                         ?>
+
+                        <div class="form-group ">
+                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
+                            <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" >
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th width="20%">Limite</th>
+                                            <th width="20%">Custeio</th>
+                                            <th width="20%">Capital</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Valor</td>
+                                            <td id="limite_valor_custeio"></td>
+                                            <td id="limite_valor_capital"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expansão</td>
+                                            <td id="limite_expansao_custeio"></td>
+                                            <td id="limite_expansao_capital"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
                         <div class="form-group ">
                             <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades</label>
                             <div class="col-sm-9 col-md-9 col-lg-9 ">
@@ -108,35 +139,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             </td>
                                             <td id="unidade_po"></td>
                                             <td id="produto_po"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div style="clear:both"></div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
-                            <div class="col-sm-9 col-md-9 col-lg-9 ">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover" >
-                                        <thead>
-                                        <tr class="text-center">
-                                            <th width="20%">Limite</th>
-                                            <th width="20%">Custeio</th>
-                                            <th width="20%">Capital</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Valor</td>
-                                            <td id="limite_valor_custeio"></td>
-                                            <td id="limite_valor_capital"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Expansão</td>
-                                            <td id="limite_expansao_custeio"></td>
-                                            <td id="limite_expansao_capital"></td>
                                         </tr>
                                         </tbody>
                                     </table>
