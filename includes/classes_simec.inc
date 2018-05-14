@@ -75,7 +75,7 @@ class cls_banco
 
                 self::$link[$this->nome_bd] = pg_connect("host=".$GLOBALS["servidor_bd"]." port=".$GLOBALS["porta_bd"]." dbname=".$GLOBALS['nome_bd']."  user=".$GLOBALS["usuario_db"] ." password=".$GLOBALS["senha_bd"] ."");
 
-                if($configSearchPath){
+                if($configSearchPath === TRUE){
                     if($GLOBALS["servidor_bd"] != ''){
                         pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria, monitora, elabrev");
                     } else {
