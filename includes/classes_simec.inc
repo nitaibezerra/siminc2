@@ -65,8 +65,8 @@ class cls_banco
 	var $numQuery; // Variavel Global para o FirePHP
 	// objeto de debug
 	private $cls_dbug;
-
-	function cls_banco()
+        
+	function cls_banco($configSearchPath = TRUE)
 	{
             $this->nome_bd 	   = ($this->nome_bd ? $this->nome_bd : $GLOBALS['nome_bd']);
 
@@ -75,10 +75,12 @@ class cls_banco
 
                 self::$link[$this->nome_bd] = pg_connect("host=".$GLOBALS["servidor_bd"]." port=".$GLOBALS["porta_bd"]." dbname=".$GLOBALS['nome_bd']."  user=".$GLOBALS["usuario_db"] ." password=".$GLOBALS["senha_bd"] ."");
 
-                if($GLOBALS["servidor_bd"] != ''){
-                    pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria, monitora, elabrev");
-                } else {
-                    pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria");
+                if($configSearchPath){
+                    if($GLOBALS["servidor_bd"] != ''){
+                        pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria, monitora, elabrev");
+                    } else {
+                        pg_query(self::$link[$this->nome_bd], "SET SEARCH_PATH TO public, seguranca, auditoria");
+                    }
                 }
                 
                 pg_query(self::$link[$this->nome_bd], "SET STANDARD_CONFORMING_STRINGS TO OFF;");
