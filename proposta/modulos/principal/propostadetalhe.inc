@@ -1,4 +1,7 @@
-<?php if(count($aPropostaDetalhe)){ ?>
+<?php
+    $listaPropostaDetalhe = (new Proposta_Model_PropostaDetalhe)->buscarListaFinanceiro((object)['proid' => (int)$proid]);
+?>
+<?php if(count($listaPropostaDetalhe)){ ?>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" >
             <thead>
@@ -13,16 +16,16 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach($aPropostaDetalhe as $dados){ ?>
+            <?php foreach($listaPropostaDetalhe as $dados){ ?>
                 <tr>
                     <td class="text-center">
                         <a title="Alterar" class="editar-detalhe"   href="?modulo=principal/proposta_form&acao=A&req=formulario-detalhe&prdid=<?php echo $dados['prdid']; ?>"><i class="fa fa-pencil"></i></a>
                         <a title="Excluir" class="excluir-detalhe"  href="?modulo=principal/proposta_form&acao=A&req=excluir-detalhe&prdid=<?php echo $dados['prdid']; ?>"  style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                     </td>
-                    <td align="center"><?php echo $dados['ndpid']; ?></td>
+                    <td align="center"><?php echo $dados['ndpcod']; ?></td>
                     <td align="center"><?php echo $dados['iducod']; ?></td>
                     <td align="center"><?php echo $dados['foncod']; ?></td>
-                    <td align="center"><?php echo $dados['idoid']; ?></td>
+                    <td align="center"><?php echo $dados['idocod']; ?></td>
                     <td align="right"><?php echo number_format($dados['prdvalor'], 2, ',', '.'); ?></td>
                     <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 2, ',', '.'); ?></td>
                 </tr>
