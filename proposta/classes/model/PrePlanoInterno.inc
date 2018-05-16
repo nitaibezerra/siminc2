@@ -237,5 +237,415 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $dados ? $dados : [];
     }
 
+    /**
+     * Importa plano interno baseado do ano anterior ao de exercício
+     *
+     * @param $pliid
+     */
+    public function importarPI($pliid) {
+        $sql = "
+        SELECT DISTINCT
+            pli.pliid,
+            pli.mdeid,
+            mde.mdecod,
+            pli.eqdid,
+            eqd.eqdcod,
+            pli.neeid,
+            nee.neecod,
+            pli.capid,
+            cap.capcod,
+            pli.sbaid,
+            pli.plititulo,
+            pli.plicodsubacao,
+            pli.plicod,
+            pli.plilivre,
+            pli.plidsc,
+            pli.unicod,
+            pli.ungcod,
+            pli.pliano,
+            pli.plicadsiafi,
+            pli.docid,
+            to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
+            pc.*,
+            CASE plisituacao
+                WHEN 'A' THEN 'Aprovado'
+                WHEN 'E' THEN 'Enviado para revisao'
+                WHEN 'P' THEN 'Pendente'
+                WHEN 'C' THEN 'Cadastrado no SIAFI'
+                WHEN 'R' THEN 'Revisado'
+                WHEN 'H' THEN 'Homologado'
+                WHEN 'T' THEN '<span style=\"color:red\">Cadastrado no SIAFI</span>'
+            ELSE 'Tendencioso'
+            END AS plisituacao,
+            sba.sbaid,
+            sba.sbasigla || ' - ' AS sbasigla,
+            sba.sbacod,
+            ben.benid,
+            em.emenumero
+        FROM monitora.pi_planointerno pli
+            LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
+            LEFT JOIN emendas.emenda em ON(ben.emeid = em.emeid)
+            LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
+            LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
+            LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
+            LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
+            LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
+            LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano)
+        WHERE
+            pli.pliid = $pliid
+        ";
+        $importedData = $this->pegaLinha($sql);
+
+        $this->plititulo     = $importedData['plititulo'];
+        $this->plidsc        = $importedData['plidsc'];
+        $this->pprid         = $this->getProdutoIDAnoAnterior($importedData['pprid']);
+        $this->pumid         = $this->getUnidadeMedidaIDAnoAnterior($importedData['pumid']);
+        $this->pliquantidade = $importedData['picquantidade'];
+        $this->suoid         = $this->getSubUnidadeIDAnoAnterior($importedData['unicod'], $importedData['ungcod']);
+        $this->eqdid         = $this->getEnquadramentoIDAnoAnterior($importedData['eqdid']);
+        $this->oppid         = $this->getObjPPAIDAnoAnterior($importedData['oppid']);
+        $this->mppid         = $this->getMetasPPAIDAnoAnterior($importedData['mppid']);
+        $this->ippid         = $this->getIniciativaPPAIDAnoAnterior ($this->oppid, $importedData['ippid']);
+        $this->mpnid         = $this->getMetaPNCIDAnoAnterior ($importedData['mpnid']);
+        $this->ipnid         = $this->getIndicadorPNCIDAnoAnterior ($importedData['ipnid']);
+        $this->mdeid         = $this->getAreaCulturalIDAnoAnterior ($importedData['mdeid']);
+        $this->neeid         = $this->getSegmentoCulturalIDAnoAnterior ($importedData['neeid']);
+        $this->esfid         = $importedData['esfid'];
+
+        // ver($importedData);
+    }
+
+    /**
+     * Retorna a ID do produto PI do ano atual, baseado no ano anterior
+     *
+     * @param $pprid
+     * @return array
+     */
+    private function getProdutoIDAnoAnterior ( $pprid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+          SELECT 
+              pprid
+          FROM 
+              monitora.pi_produto
+          WHERE 
+              prsano = '{$_SESSION['exercicio']}'
+              AND pprstatus = 'A'
+              AND pprnome = (
+                  SELECT 
+                    pprnome
+                  FROM 
+                    monitora.pi_produto
+                  WHERE 
+                    prsano = '{$anoAnterior}'
+                    AND pprstatus = 'A'
+                    AND pprid = '{$pprid}'
+              )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID da Unidade de Medida do ano atual, baseado no ano anterior
+     *
+     * @param $pumid
+     * @return array
+     */
+    private function getUnidadeMedidaIDAnoAnterior( $pumid ){
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $pumid = $pumid ? $pumid : 0;
+        $sql = "
+        SELECT 
+            pumid
+        FROM 
+            monitora.pi_unidade_medida
+        WHERE 
+            prsano = '{$_SESSION['exercicio']}'
+            AND pumstatus = 'A'
+            AND pumdescricao = (
+                SELECT 
+                    pumdescricao
+                FROM 
+                    monitora.pi_unidade_medida
+                WHERE 
+                    prsano = '{$anoAnterior}'
+                    AND pumstatus = 'A'
+                    AND pumid = '{$pumid}'
+            )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID da Subunidade do ano atual, baseado no ano anterior
+     *
+     * @param $unocod
+     * @param $suocod
+     * @return array
+     */
+    private function getSubUnidadeIDAnoAnterior( $unocod, $suocod ){
+        $sql = "
+        SELECT distinct
+            suo.suoid
+        FROM 
+          public.vw_subunidadeorcamentaria suo
+        WHERE
+            suo.suostatus = 'A'
+            AND suo.prsano = '{$_SESSION['exercicio']}'
+            AND suo.unocod = '{$unocod}'
+            AND suo.suocod = '{$suocod}'
+            AND suo.unofundo = false
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Enquadramento da Despesa do ano atual, baseado no ano anterior
+     *
+     * @param $eqdid
+     * @return bool|mixed|NULL|string
+     */
+    private function getEnquadramentoIDAnoAnterior ( $eqdid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                eqdid,
+                eqddsc
+            FROM monitora.pi_enquadramentodespesa
+            WHERE
+                eqdstatus = 'A'
+                AND eqdano = '{$_SESSION['exercicio']}'
+                AND eqddsc = (
+                    SELECT
+                        eqddsc
+                    FROM monitora.pi_enquadramentodespesa
+                    WHERE
+                        eqdstatus = 'A'
+                        AND eqdano = '{$anoAnterior}'
+                        and eqdid = '{$eqdid}'
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Objetivo PPA do ano atual, baseado no ano anterior
+     *
+     * @param $oppid
+     * @return bool|mixed|NULL|string
+     */
+    private function getObjPPAIDAnoAnterior ( $oppid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                oppid,
+                oppcod || ' - ' || oppnome AS descricao,
+                prsano
+            FROM 
+                public.objetivoppa
+            WHERE
+                oppstatus = 'A'
+                AND prsano = '{$_SESSION['exercicio']}'
+                AND oppcod || ' - ' || oppnome = (
+                    SELECT
+                        oppcod || ' - ' || oppnome
+                    FROM public.objetivoppa
+                    WHERE
+                        oppstatus = 'A'
+                        AND prsano = '{$anoAnterior}'
+                        and oppid = '{$oppid}'
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Metas PPA do ano atual, baseado no ano anterior
+     *
+     * @param $mppid
+     * @return bool|mixed|NULL|string
+     */
+    private function getMetasPPAIDAnoAnterior ( $mppid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT DISTINCT
+                m.mppid
+            FROM 
+                public.metappa m
+            JOIN 
+                public.objetivometappa om ON m.mppid = om.mppid
+            WHERE
+                m.mppstatus = 'A'
+                AND m.prsano = '{$_SESSION['exercicio']}'
+                AND m.mppcod || ' - ' || m.mppdsc = (
+                    SELECT DISTINCT
+                        m.mppcod || ' - ' || m.mppdsc
+                    FROM public.metappa m
+                    JOIN public.objetivometappa om ON m.mppid = om.mppid
+                    WHERE
+                        m.mppstatus = 'A'
+                        AND m.prsano = '{$anoAnterior}'
+                        AND om.mppid = '{$mppid}'	
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Iniciativa PPA do ano atual, baseado no ano anterior
+     *
+     * @param $oppid
+     * @param $ippid
+     * @return bool|mixed|NULL|string
+     */
+    private function getIniciativaPPAIDAnoAnterior ( $oppid, $ippid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $ippid = $ippid ? $ippid : 0;
+        $sql = "
+            SELECT
+                ippid
+            FROM public.iniciativappa
+            WHERE
+                ippstatus = 'A'
+                AND prsano = '{$_SESSION['exercicio']}'
+                AND oppid = '{$oppid}'
+                and ippcod || ' - ' || ippnome = (
+                    select
+                        ippcod || ' - ' || ippnome
+                    FROM public.iniciativappa
+                    WHERE
+                        ippstatus = 'A'
+                        AND prsano = '{$anoAnterior}'
+                        AND ippid = '{$ippid}'
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Meta PNC do ano atual, baseado no ano anterior
+     *
+     * @param $mpnid
+     * @return bool|mixed|NULL|string
+     */
+    private function getMetaPNCIDAnoAnterior ( $mpnid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                mpn.mpnid AS codigo
+            FROM public.metapnc mpn
+            WHERE
+                mpn.mpnstatus = 'A'
+                AND mpn.prsano  = '{$_SESSION['exercicio']}'
+                AND mpn.mpncod = (
+                    SELECT
+                        mpn.mpncod
+                    FROM public.metapnc mpn
+                    WHERE
+                        mpn.mpnstatus = 'A'
+                        AND mpn.prsano  = '{$anoAnterior}'
+                        and mpn.mpnid = '{$mpnid}'
+                )	
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Indicador PNC do ano atual, baseado no ano anterior
+     *
+     * @param $ipnid
+     * @return bool|mixed|NULL|string
+     */
+    private function getIndicadorPNCIDAnoAnterior ( $ipnid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                ipnid
+            FROM public.indicadorpnc
+            WHERE
+                ipnstatus = 'A'
+                AND prsano = '{$_SESSION['exercicio']}'
+                and ipncod || ' - ' || ipndsc = (
+                    SELECT
+                        ipncod || ' - ' || ipndsc
+                    FROM public.indicadorpnc
+                    WHERE
+                        ipnstatus = 'A'
+                        AND prsano = '{$anoAnterior}'
+                        AND ipnid = '{$ipnid}'
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Área Cultural do ano atual, baseado no ano anterior
+     *
+     * @param $mdeid
+     * @return bool|mixed|NULL|string
+     */
+    private function getAreaCulturalIDAnoAnterior ( $mdeid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                MAX(mdeid),
+                upper(public.removeacento(mdedsc)) as descricao
+            FROM monitora.pi_modalidadeensino
+            WHERE
+                mdestatus = 'A'
+                AND mdeano = '{$_SESSION['exercicio']}'
+                and upper(public.removeacento(mdedsc)) = (
+                    SELECT
+                        upper(public.removeacento(mdedsc))
+                    FROM monitora.pi_modalidadeensino
+                    WHERE
+                        mdestatus = 'A'
+                        AND mdeano = '{$anoAnterior}'
+                        and mdeid = '{$mdeid}'
+                )
+            GROUP BY
+                descricao
+        ";
+        return $this->pegaUm($sql);
+    }
+
+    /**
+     * Retorna a ID do campo Segmento Cultural do ano atual, baseado no ano anterior
+     *
+     * @param $neeid
+     * @return bool|mixed|NULL|string
+     */
+    private function getSegmentoCulturalIDAnoAnterior ( $neeid ) {
+        $anoAnterior = $_SESSION['exercicio'] - 1;
+        $sql = "
+            SELECT
+                neeid AS codigo
+            FROM monitora.pi_niveletapaensino
+            WHERE
+                neeano = '{$_SESSION['exercicio']}'
+                AND neestatus = 'A'
+                and needsc = (
+                    SELECT
+                        needsc AS descricao
+                    FROM monitora.pi_niveletapaensino
+                    WHERE
+                        neeano = '{$anoAnterior}'
+                        AND neestatus = 'A'
+                        AND neeid = '{$neeid}'	
+                )
+        ";
+
+        return $this->pegaUm($sql);
+    }
+
 }//end Class
 ?>
