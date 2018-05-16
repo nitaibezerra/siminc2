@@ -63,16 +63,15 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                </div>
-                <div class="ibox-content">
-                    <form id="formulario" name="formulario" method="post" class="form-horizontal">
+        <form id="formulario" name="formulario" method="post" class="form-horizontal">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Dados Gerais</h5>
+                    </div>
+                    <div class="ibox-content">
                         <input type="hidden" name="req" id="req" value="salvar" />
                         <input name="proid" id="proid" type="hidden" value="<?php echo $mProposta->proid; ?>">
-                        
                         <?php
                             echo $simec->select('suoid', 'SubUnidade', $mProposta->suoid, (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(), ['required']);
                             echo $simec->select('eqdid', 'Enquadramento da Despesa', $mProposta->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
@@ -80,7 +79,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                             echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mProposta->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mProposta->suoid, $mProposta->eqdid), ['required']) . '</span>';
                             echo '<span id="span-subunidades-ptres"></span>';
                         ?>
-
                         <div class="form-group ">
                             <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
                             <div class="col-sm-9 col-md-9 col-lg-9 ">
@@ -107,11 +105,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                             <div style="clear:both"></div>
                         </div>
-
                         <div class="form-group ">
                             <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades</label>
                             <div class="col-sm-9 col-md-9 col-lg-9 ">
@@ -149,26 +145,33 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                             <div style="clear:both"></div>
                         </div>
-
+                        <?php
+                            echo $simec->textarea('projustificativa', 'Justificativa', $mProposta->projustificativa, ['cols'=>60, 'rows'=>6]);
+                        ?>
+                    </div>
+                </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Expansão</h5>
+                    </div>
+                    <div class="ibox-content">
                         <?php
                             echo $simec->valor('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
-                            echo $simec->textarea('projustificativa', 'Justificativa', $mProposta->projustificativa, ['cols'=>60, 'rows'=>6]);
                             echo $simec->textarea('projustificativaexpansao', 'Justificativa Expansão', $mProposta->projustificativaexpansao, ['cols'=>60, 'rows'=>6]);
                         ?>
-                        
-                        <div class="form-group">
-                            <div class="text-center">
-                                <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <a href="?modulo=principal/proposta&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                <?php if($mProposta->proid){ ?>
-                                    <a href="?modulo=principal/proposta_form&acao=A&req=excluir&proid=<?php echo $mProposta->proid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                <?php } ?>                                
-                            </div>
-                        </div>                        
-                    </form>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                        <a href="?modulo=principal/proposta&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                        <?php if($mProposta->proid){ ?>
+                            <a href="?modulo=principal/proposta_form&acao=A&req=excluir&proid=<?php echo $mProposta->proid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
         <div class="col-md-5">
             <div class="ibox float-e-margins">
@@ -178,8 +181,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content" id="">
                     <div id="div_formulario_detalhe">
                         <?php
-                        if($mProposta->proid){
-                            $cProposta->montarFormularioDetalhes($mProposta->proid);
+                            if($mProposta->proid){
+                                $cProposta->montarFormularioDetalhes($mProposta->proid);
                         }
                         ?>
                     </div>
