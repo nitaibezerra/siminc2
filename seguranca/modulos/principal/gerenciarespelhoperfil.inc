@@ -9,7 +9,7 @@ if($configDbOldSiminc->dbname){
     $usuario_db = $configDbOldSiminc->user;
     $senha_bd = $configDbOldSiminc->password;
     
-    $db2 = new cls_banco();
+    $db2 = new cls_banco(FALSE);
 }
 
 function inserirEspelhamento($dados) {

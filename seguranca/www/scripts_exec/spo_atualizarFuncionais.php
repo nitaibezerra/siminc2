@@ -1,21 +1,22 @@
 <?php
+
 /**
- * Carrega os dados financeiros do SIOP para a base do SIMEC.
+ * Atualiza os dados qualitativos de ações, localizadores, POs para a base do SIMEC.
  *
- * Assim que termina de baixar os dados financeiros, o script roda um processamento
- * que coloca os dados na tabela <tt>spo.siopexecucao</tt>. O acompanhamento das páginas
- * da execução já baixadas é feito na tabela <tt>spo.siopexecucao_acompanhamento</tt>.
+ * Assim que termina de baixar os dados qualitativos da API do SIOP, o script roda um processamento
+ * que coloca os dados nas tabelas <tt>wssof.ws_acoesdto, wssof.ws_localizadoresdto, wssof.ws_planosorcamentariosdto</tt>. O acompanhamento das páginas
+ * da execução já baixadas é feito na tabela <tt>monitora.acao e monitora.ptres</tt>.
  * Ao final da execução, é enviado um e-mail com o resultado do processo.
  *
  * Sequência de execução:<br />
- * <ol><li>Baixa os dados do webservice (WSQuantitativo.consultarExecucaoOrcamentaria);</li>
- * <li>Apaga os dados da tabela wssof.ws_execucaoorcamentaria;</li>
- * <li>Insere os dados retornados pelo webservice na tabela wssof.ws_execucaoorcamentaria;</li>
- * <li>Executa o script de atualização de finaceiros na seguinte tabela: spo.siopexecucao;</li>
+ * <ol><li>Baixa os dados do webservice (WSQuanlitativo.obterProgramacaoCompleta);</li>
+ * <li>Apaga os dados das tabelas wssof.ws_acoesdto, wssof.ws_localizadoresdto, wssof.ws_planosorcamentariosdto;</li>
+ * <li>Insere os dados retornados pelo webservice nas tabelas wssof.ws_acoesdto, wssof.ws_localizadoresdto, wssof.ws_planosorcamentariosdto;</li>
+ * <li>Executa o script de atualização de funcionais(Ações, localizadores e POs) na seguinte tabela: monitora.acao e monitora.ptres;</li>
  * <li>Envia e-mail com resultado da execução.</li></ol>
  *
- * @version $Id: spo_BaixarDadosFinanceirosSIOP.php 101880 2015-08-31 19:50:33Z maykelbraz $
- * @link http://simec.mec.gov.br/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php URL de execução.
+ * @version $Id: spo_atualizarFuncionais.php
+ * @link http://siminc2.cultura.gov.br/seguranca/scripts_exec/spo_atualizarFuncionais.php URL de execução.
  */
 
 // -- Setup
@@ -26,7 +27,6 @@ ini_set("memory_limit", "2048M");
 define('BASE_PATH_SIMEC', realpath(dirname(__FILE__) . '/../../../'));
 session_start();
 
-// -- Includes necessários ao processamento
 /**
  * Carrega as configurações gerais do sistema.
  * @see config.inc
@@ -48,11 +48,11 @@ require_once APPRAIZ . "includes/funcoes.inc";
 # Verificando IP de origem da requisição é autorizado para executar os SCRIPTS.
 controlarExecucaoScript();
 
-require_once APPRAIZ .'includes/classes/Modelo.class.inc';
-require_once(APPRAIZ . 'wssof/classes/Importador.inc');
-require_once(APPRAIZ . 'monitora/classes/model/Ptres.inc');
+require_once APPRAIZ. 'includes/classes/Modelo.class.inc';
+require_once APPRAIZ. 'wssof/classes/Importador.inc';
+require_once APPRAIZ. 'monitora/classes/model/Ptres.inc';
 
-// -- Abrindo conexão com o banco de dados
+# Abrindo conexão com o banco de dados
 $db = new cls_banco();
 
 $exercicio = date('Y');

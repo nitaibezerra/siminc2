@@ -3,5 +3,8 @@ global/config.dev.php
 global/database.php
 global/prod_minc_2016.crt
 global/prod_minc_2017.crt
+sql/restore/treinamento.sh
+sql/restore/homologacao.sh
+sql/restore/bkp_prod_dbsiminc.backup
 .idea/
 arquivos/
