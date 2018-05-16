@@ -74,12 +74,43 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="proid" id="proid" type="hidden" value="<?php echo $mProposta->proid; ?>">
                         
                         <?php
-                        echo $simec->select('suoid', 'SubUnidade', $mProposta->suoid, (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(), ['required']);
-                        echo $simec->select('eqdid', 'Enquadramento da Despesa', $mProposta->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-rp"></span>';
-                        echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mProposta->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mProposta->suoid, $mProposta->eqdid), ['required']) . '</span>';
-                        echo '<span id="span-subunidades-ptres"></span>';
+                            echo $simec->select('suoid', 'SubUnidade', $mProposta->suoid, (new Public_Model_SubUnidadeOrcamentaria())->recuperarSqlCombo(), ['required']);
+                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $mProposta->eqdid, (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(), ['required']);
+                            echo '<span id="span-rp"></span>';
+                            echo '<span id="span-funcional">' . $simec->select('ptrid', 'Funcional', $mProposta->ptrid, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($mProposta->suoid, $mProposta->eqdid), ['required']) . '</span>';
+                            echo '<span id="span-subunidades-ptres"></span>';
                         ?>
+
+                        <div class="form-group ">
+                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
+                            <div class="col-sm-9 col-md-9 col-lg-9 ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" >
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th width="20%">Limite</th>
+                                            <th width="20%">Custeio</th>
+                                            <th width="20%">Capital</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Valor</td>
+                                            <td id="limite_valor_custeio"></td>
+                                            <td id="limite_valor_capital"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expansão</td>
+                                            <td id="limite_expansao_custeio"></td>
+                                            <td id="limite_expansao_capital"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
 
                         <div class="form-group ">
                             <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades</label>
@@ -120,44 +151,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         </div>
 
                         <?php
-                        echo $simec->valor('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
-
-                        ?>
-
-                        <div class="form-group ">
-                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Limites Pré-PI</label>
-                            <div class="col-sm-9 col-md-9 col-lg-9 ">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover" >
-                                        <thead>
-                                        <tr class="text-center">
-                                            <th width="20%">Limite</th>
-                                            <th width="20%">Custeio</th>
-                                            <th width="20%">Capital</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Valor</td>
-                                            <td id="limite_valor_custeio"></td>
-                                            <td id="limite_valor_capital"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Expansão</td>
-                                            <td id="limite_expansao_custeio"></td>
-                                            <td id="limite_expansao_capital"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                            <div style="clear:both"></div>
-                        </div>
-
-                        <?php
-                        echo $simec->textarea('projustificativa', 'Justificativa', $mProposta->projustificativa, ['cols'=>60, 'rows'=>6]);
-                        echo $simec->textarea('projustificativaexpansao', 'Justificativa Expansão', $mProposta->projustificativaexpansao, ['cols'=>60, 'rows'=>6]);
+                            echo $simec->valor('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
+                            echo $simec->textarea('projustificativa', 'Justificativa', $mProposta->projustificativa, ['cols'=>60, 'rows'=>6]);
+                            echo $simec->textarea('projustificativaexpansao', 'Justificativa Expansão', $mProposta->projustificativaexpansao, ['cols'=>60, 'rows'=>6]);
                         ?>
                         
                         <div class="form-group">
