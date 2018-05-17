@@ -1,6 +1,11 @@
 <?php
 
-$aProposta = (new Proposta_Model_Proposta)->recuperarListagem();
+$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
+$aProposta = (new Proposta_Model_Proposta)->recuperarListagem((object) array(
+    'exercicio' => $_SESSION['exercicio'],
+    'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
+));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>

@@ -65,7 +65,7 @@ if($_SESSION['sisid'] == 4) {
 		  }
 	  
 	//Pesquisa-se os sistemas cadastrados para montar a combo	  
-	  $sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
+	  $sql = "SELECT DISTINCT sisid AS codigo, sisdsc AS descricao FROM sistema WHERE sisstatus = 'A' ORDER BY 2";
 	  //Monta a combo
 	  $db->monta_combo("sisid",$sql,'S',"Selecione o Sistema",'submete_sistema','');
 	
