@@ -242,6 +242,54 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+    
+    private function montarSQlImportarPi($pliid) {
+        $sql = "
+            SELECT DISTINCT
+                pli.pliid,
+                pli.mdeid,
+                mde.mdecod,
+                pli.eqdid,
+                eqd.eqdcod,
+                pli.neeid,
+                nee.neecod,
+                pli.capid,
+                cap.capcod,
+                pli.sbaid, pli.plititulo, pli.plicodsubacao, pli.plicod, pli.plilivre, pli.plidsc, pli.unicod, pli.ungcod, pli.pliano, pli.plicadsiafi, pli.docid,
+                to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
+                pc.picid, pc.pliid, pc.oppid, pc.mppid, pc.ippid, pc.mpnid, pc.ipnid, pc.pprid, pc.pumid, pc.picquantidade, pc.picted, pc.picedital, pc.esfid, pc.picvalorcusteio, pc.picvalorcapital, pc.mescod, pc.acuid, pc.secid, pc.maiid, pc.masid, pc.picexecucao, pc.picpublico, pc.picpriorizacao, pc.pijid, pc.ptaid,
+                CASE plisituacao WHEN 'A' THEN
+                    'Aprovado'
+                WHEN 'E' THEN
+                    'Enviado para revisao'
+                WHEN 'P' THEN
+                    'Pendente'
+                WHEN 'C' THEN
+                    'Cadastrado no SIAFI'
+                WHEN 'R' THEN
+                    'Revisado'
+                WHEN 'H' THEN
+                    'Homologado'
+                WHEN 'T' THEN
+                    '<span style=\"color:red\">Cadastrado no SIAFI</span>'
+                ELSE 'Tendencioso'
+                END AS plisituacao,
+                sba.sbaid, sba.sbasigla || ' - ' AS sbasigla, sba.sbacod, ben.benid, em.emenumero
+            FROM monitora.pi_planointerno pli
+                LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
+                LEFT JOIN emendas.emenda em ON(ben.emeid = em.emeid)
+                LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
+                LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
+                LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
+                LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
+                LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
+                LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano)
+            WHERE
+                pli.pliid = $pliid
+        ";
+        
+        return $sql;
+    }
 
     /**
      * Importa plano interno baseado do ano anterior ao de exercício
@@ -249,74 +297,24 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $pliid
      */
     public function importarPI($pliid) {
-        $sql = "
-        SELECT DISTINCT
-            pli.pliid,
-            pli.mdeid,
-            mde.mdecod,
-            pli.eqdid,
-            eqd.eqdcod,
-            pli.neeid,
-            nee.neecod,
-            pli.capid,
-            cap.capcod,
-            pli.sbaid,
-            pli.plititulo,
-            pli.plicodsubacao,
-            pli.plicod,
-            pli.plilivre,
-            pli.plidsc,
-            pli.unicod,
-            pli.ungcod,
-            pli.pliano,
-            pli.plicadsiafi,
-            pli.docid,
-            to_char(pli.plidata, 'dd/mm/YYYY') as plidata,
-            pc.*,
-            CASE plisituacao
-                WHEN 'A' THEN 'Aprovado'
-                WHEN 'E' THEN 'Enviado para revisao'
-                WHEN 'P' THEN 'Pendente'
-                WHEN 'C' THEN 'Cadastrado no SIAFI'
-                WHEN 'R' THEN 'Revisado'
-                WHEN 'H' THEN 'Homologado'
-                WHEN 'T' THEN '<span style=\"color:red\">Cadastrado no SIAFI</span>'
-            ELSE 'Tendencioso'
-            END AS plisituacao,
-            sba.sbaid,
-            sba.sbasigla || ' - ' AS sbasigla,
-            sba.sbacod,
-            ben.benid,
-            em.emenumero
-        FROM monitora.pi_planointerno pli
-            LEFT JOIN emendas.beneficiario ben ON(pli.pliid = ben.pliid)
-            LEFT JOIN emendas.emenda em ON(ben.emeid = em.emeid)
-            LEFT JOIN planacomorc.pi_complemento pc on pc.pliid = pli.pliid
-            LEFT JOIN monitora.pi_subacao sba ON (pli.sbaid = sba.sbaid AND pli.pliano = sba.sbaano)
-            LEFT JOIN monitora.pi_enquadramentodespesa eqd ON (pli.eqdid = eqd.eqdid AND pli.pliano = eqd.eqdano)
-            LEFT JOIN monitora.pi_niveletapaensino nee ON (pli.neeid = nee.neeid AND pli.pliano = nee.neeano)
-            LEFT JOIN monitora.pi_categoriaapropriacao cap ON (pli.capid = cap.capid AND pli.pliano = cap.capano)
-            LEFT JOIN monitora.pi_modalidadeensino mde ON (pli.mdeid = mde.mdeid) --ON (pli.mdeid = mde.mdeid AND pli.pliano = mde.mdeano)
-        WHERE
-            pli.pliid = $pliid
-        ";
-        $importedData = $this->pegaLinha($sql);
+        $sql = $this->montarSQlImportarPi($pliid);
+        $pi = $this->pegaLinha($sql);
 
-        $this->plititulo     = $importedData['plititulo'];
-        $this->plidsc        = $importedData['plidsc'];
-        $this->pprid         = $this->getProdutoIDAnoAnterior($importedData['pprid']);
-        $this->pumid         = $this->getUnidadeMedidaIDAnoAnterior($importedData['pumid']);
-        $this->pliquantidade = $importedData['picquantidade'];
-        $this->suoid         = $this->getSubUnidadeIDAnoAnterior($importedData['unicod'], $importedData['ungcod']);
-        $this->eqdid         = $this->getEnquadramentoIDAnoAnterior($importedData['eqdid']);
-        $this->oppid         = $this->getObjPPAIDAnoAnterior($importedData['oppid']);
-        $this->mppid         = $this->getMetasPPAIDAnoAnterior($importedData['mppid']);
-        $this->ippid         = $this->getIniciativaPPAIDAnoAnterior ($this->oppid, $importedData['ippid']);
-        $this->mpnid         = $this->getMetaPNCIDAnoAnterior ($importedData['mpnid']);
-        $this->ipnid         = $this->getIndicadorPNCIDAnoAnterior ($importedData['ipnid']);
-        $this->mdeid         = $this->getAreaCulturalIDAnoAnterior ($importedData['mdeid']);
-        $this->neeid         = $this->getSegmentoCulturalIDAnoAnterior ($importedData['neeid']);
-        $this->esfid         = $importedData['esfid'];
+        $this->plititulo     = $pi['plititulo'];
+        $this->plidsc        = $pi['plidsc'];
+        $this->suoid         = $this->getSubUnidadeIDAnoAnterior($pi['unicod'], $pi['ungcod']);
+        $this->eqdid         = $this->getEnquadramentoIDAnoAnterior($pi['eqdid']);
+        $this->pprid         = $this->getProdutoIDAnoAnterior($pi['pprid']);
+        $this->pumid         = $this->getUnidadeMedidaIDAnoAnterior($pi['pumid']);
+        $this->pliquantidade = $pi['picquantidade'];
+        $this->oppid         = $this->getObjPPAIDAnoAnterior($pi['oppid']);
+        $this->mppid         = $this->getMetasPPAIDAnoAnterior($pi['mppid']);
+        $this->ippid         = $this->getIniciativaPPAIDAnoAnterior($this->oppid, $pi['ippid']);
+        $this->mpnid         = $this->getMetaPNCIDAnoAnterior($pi['mpnid']);
+        $this->ipnid         = $this->getIndicadorPNCIDAnoAnterior($pi['ipnid']);
+        $this->mdeid         = $this->getAreaCulturalIDAnoAnterior($pi['mdeid']);
+        $this->neeid         = $this->getSegmentoCulturalIDAnoAnterior($pi['neeid']);
+        $this->esfid         = $pi['esfid'];
 
         // ver($importedData);
     }
@@ -330,22 +328,21 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     private function getProdutoIDAnoAnterior ( $pprid ) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
-          SELECT 
-              pprid
-          FROM 
-              monitora.pi_produto
-          WHERE 
-              prsano = '{$_SESSION['exercicio']}'
-              AND pprstatus = 'A'
-              AND pprnome = (
-                  SELECT 
-                    pprnome
-                  FROM 
-                    monitora.pi_produto
-                  WHERE 
-                    prsano = '{$anoAnterior}'
-                    AND pprstatus = 'A'
-                    AND pprid = '{$pprid}'
+            SELECT 
+                pprid
+            FROM 
+                monitora.pi_produto
+            WHERE 
+                prsano = '{$_SESSION['exercicio']}'
+                AND pprstatus = 'A'
+                AND pprnome = (
+                    SELECT 
+                        pprnome
+                    FROM  monitora.pi_produto
+                    WHERE 
+                        prsano = '{$anoAnterior}'
+                        AND pprstatus = 'A'
+                        AND pprid = '". (int)$pprid. "'
               )
         ";
 
@@ -358,27 +355,25 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $pumid
      * @return array
      */
-    private function getUnidadeMedidaIDAnoAnterior( $pumid ){
+    private function getUnidadeMedidaIDAnoAnterior($pumid){
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $pumid = $pumid ? $pumid : 0;
         $sql = "
-        SELECT 
-            pumid
-        FROM 
-            monitora.pi_unidade_medida
-        WHERE 
-            prsano = '{$_SESSION['exercicio']}'
-            AND pumstatus = 'A'
-            AND pumdescricao = (
-                SELECT 
-                    pumdescricao
-                FROM 
-                    monitora.pi_unidade_medida
-                WHERE 
-                    prsano = '{$anoAnterior}'
-                    AND pumstatus = 'A'
-                    AND pumid = '{$pumid}'
-            )
+            SELECT
+                pumid
+            FROM monitora.pi_unidade_medida
+            WHERE
+                prsano = '{$_SESSION['exercicio']}'
+                AND pumstatus = 'A'
+                AND pumdescricao = (
+                    SELECT
+                        pumdescricao
+                    FROM monitora.pi_unidade_medida
+                    WHERE
+                        prsano = '{$anoAnterior}'
+                        AND pumstatus = 'A'
+                        AND pumid = '". (int)$pumid. "'
+                )
         ";
 
         return $this->pegaUm($sql);
@@ -391,18 +386,17 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $suocod
      * @return array
      */
-    private function getSubUnidadeIDAnoAnterior( $unocod, $suocod ){
+    private function getSubUnidadeIDAnoAnterior($unocod, $suocod){
         $sql = "
-        SELECT distinct
-            suo.suoid
-        FROM 
-          public.vw_subunidadeorcamentaria suo
-        WHERE
-            suo.suostatus = 'A'
-            AND suo.prsano = '{$_SESSION['exercicio']}'
-            AND suo.unocod = '{$unocod}'
-            AND suo.suocod = '{$suocod}'
-            AND suo.unofundo = false
+            SELECT DISTINCT
+                suo.suoid
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.prsano = '{$_SESSION['exercicio']}'
+                AND suo.unocod = '{$unocod}'
+                AND suo.suocod = '{$suocod}'
+                AND suo.unofundo IS FALSE
         ";
 
         return $this->pegaUm($sql);
@@ -414,7 +408,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $eqdid
      * @return bool|mixed|NULL|string
      */
-    private function getEnquadramentoIDAnoAnterior ( $eqdid ) {
+    private function getEnquadramentoIDAnoAnterior($eqdid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT
@@ -431,7 +425,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                     WHERE
                         eqdstatus = 'A'
                         AND eqdano = '{$anoAnterior}'
-                        and eqdid = '{$eqdid}'
+                        AND eqdid = '". (int)$eqdid. "'
                 )
         ";
 
@@ -444,26 +438,25 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $oppid
      * @return bool|mixed|NULL|string
      */
-    private function getObjPPAIDAnoAnterior ( $oppid ) {
+    private function getObjPPAIDAnoAnterior($oppid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT
                 oppid,
                 oppcod || ' - ' || oppnome AS descricao,
                 prsano
-            FROM 
-                public.objetivoppa
+            FROM public.objetivoppa
             WHERE
                 oppstatus = 'A'
                 AND prsano = '{$_SESSION['exercicio']}'
-                AND oppcod || ' - ' || oppnome = (
+                AND oppcod = (
                     SELECT
-                        oppcod || ' - ' || oppnome
+                        oppcod
                     FROM public.objetivoppa
                     WHERE
                         oppstatus = 'A'
                         AND prsano = '{$anoAnterior}'
-                        and oppid = '{$oppid}'
+                        and oppid = '". (int)$oppid. "'
                 )
         ";
 
@@ -476,27 +469,25 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $mppid
      * @return bool|mixed|NULL|string
      */
-    private function getMetasPPAIDAnoAnterior ( $mppid ) {
+    private function getMetasPPAIDAnoAnterior($mppid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT DISTINCT
                 m.mppid
-            FROM 
-                public.metappa m
-            JOIN 
-                public.objetivometappa om ON m.mppid = om.mppid
+            FROM public.metappa m
+                JOIN public.objetivometappa om ON m.mppid = om.mppid
             WHERE
                 m.mppstatus = 'A'
                 AND m.prsano = '{$_SESSION['exercicio']}'
-                AND m.mppcod || ' - ' || m.mppdsc = (
+                AND m.mppcod = (
                     SELECT DISTINCT
-                        m.mppcod || ' - ' || m.mppdsc
+                        m.mppcod
                     FROM public.metappa m
-                    JOIN public.objetivometappa om ON m.mppid = om.mppid
+                        JOIN public.objetivometappa om ON m.mppid = om.mppid
                     WHERE
                         m.mppstatus = 'A'
                         AND m.prsano = '{$anoAnterior}'
-                        AND om.mppid = '{$mppid}'	
+                        AND om.mppid = '". (int)$mppid. "'
                 )
         ";
 
@@ -510,7 +501,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $ippid
      * @return bool|mixed|NULL|string
      */
-    private function getIniciativaPPAIDAnoAnterior ( $oppid, $ippid ) {
+    private function getIniciativaPPAIDAnoAnterior($oppid, $ippid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $ippid = $ippid ? $ippid : 0;
         $sql = "
@@ -520,15 +511,15 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             WHERE
                 ippstatus = 'A'
                 AND prsano = '{$_SESSION['exercicio']}'
-                AND oppid = '{$oppid}'
-                and ippcod || ' - ' || ippnome = (
-                    select
-                        ippcod || ' - ' || ippnome
+                AND oppid = '".(int)$oppid. "'
+                AND ippcod = (
+                    SELECT
+                        ippcod
                     FROM public.iniciativappa
                     WHERE
                         ippstatus = 'A'
                         AND prsano = '{$anoAnterior}'
-                        AND ippid = '{$ippid}'
+                        AND ippid = '". (int)$ippid. "'
                 )
         ";
 
@@ -541,7 +532,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $mpnid
      * @return bool|mixed|NULL|string
      */
-    private function getMetaPNCIDAnoAnterior ( $mpnid ) {
+    private function getMetaPNCIDAnoAnterior($mpnid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT
@@ -556,11 +547,11 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                     FROM public.metapnc mpn
                     WHERE
                         mpn.mpnstatus = 'A'
-                        AND mpn.prsano  = '{$anoAnterior}'
-                        and mpn.mpnid = '{$mpnid}'
+                        AND mpn.prsano = '{$anoAnterior}'
+                        and mpn.mpnid = '". (int)$mpnid. "'
                 )	
         ";
-
+//ver($sql, d);
         return $this->pegaUm($sql);
     }
 
@@ -570,7 +561,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $ipnid
      * @return bool|mixed|NULL|string
      */
-    private function getIndicadorPNCIDAnoAnterior ( $ipnid ) {
+    private function getIndicadorPNCIDAnoAnterior($ipnid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT
@@ -579,14 +570,14 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             WHERE
                 ipnstatus = 'A'
                 AND prsano = '{$_SESSION['exercicio']}'
-                and ipncod || ' - ' || ipndsc = (
+                AND ipncod = (
                     SELECT
-                        ipncod || ' - ' || ipndsc
+                        ipncod
                     FROM public.indicadorpnc
                     WHERE
                         ipnstatus = 'A'
                         AND prsano = '{$anoAnterior}'
-                        AND ipnid = '{$ipnid}'
+                        AND ipnid = '". (int)$ipnid. "'
                 )
         ";
 
@@ -599,7 +590,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $mdeid
      * @return bool|mixed|NULL|string
      */
-    private function getAreaCulturalIDAnoAnterior ( $mdeid ) {
+    private function getAreaCulturalIDAnoAnterior($mdeid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT
@@ -609,14 +600,14 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             WHERE
                 mdestatus = 'A'
                 AND mdeano = '{$_SESSION['exercicio']}'
-                and upper(public.removeacento(mdedsc)) = (
+                AND upper(public.removeacento(mdedsc)) = (
                     SELECT
                         upper(public.removeacento(mdedsc))
                     FROM monitora.pi_modalidadeensino
                     WHERE
                         mdestatus = 'A'
                         AND mdeano = '{$anoAnterior}'
-                        and mdeid = '{$mdeid}'
+                        AND mdeid = '". (int)$mdeid. "'
                 )
             GROUP BY
                 descricao
@@ -630,7 +621,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param $neeid
      * @return bool|mixed|NULL|string
      */
-    private function getSegmentoCulturalIDAnoAnterior ( $neeid ) {
+    private function getSegmentoCulturalIDAnoAnterior($neeid) {
         $anoAnterior = $_SESSION['exercicio'] - 1;
         $sql = "
             SELECT

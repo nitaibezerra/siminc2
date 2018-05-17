@@ -75,7 +75,7 @@ class Public_Model_MetaPnc extends Modelo
                     FROM spo.subunidademetapnc smc
                         JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = smc.suoid AND suo.prsano = '{$where['exercicio']}'
                     WHERE
-                        suo.suocod = '{$where['suoid']}'
+                        suo.suoid = '{$where['suoid']}'
                     UNION 
                     SELECT
                         mpn.mpnid
@@ -101,7 +101,7 @@ class Public_Model_MetaPnc extends Modelo
             ORDER BY
                 ordem
         ";
-
+//ver($sql, d);
         return $sql;
     }
 
