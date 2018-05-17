@@ -109,7 +109,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                             <div style="clear:both"></div>
                         </div>
-
                         <div class="form-group ">
                             <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades</label>
                             <div class="col-sm-9 col-md-9 col-lg-9 ">
