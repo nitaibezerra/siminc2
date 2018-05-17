@@ -2,26 +2,15 @@
 
 global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd;
 
-// possiveis formas que acessam o simec
-//if(IS_PRODUCAO){
-//	$servidor_bd = '';
-//	$porta_bd = '';
-//	$nome_bd = '';
-//	$usuario_db = '';
-//	$senha_bd = '';
-//} else {
-//    $servidor_bd = '';
-//    $porta_bd    = '';
-//    $nome_bd     = '';
-//    $usuario_db  = '';
-//    $senha_bd    = '';
-//}
-//$nome_bd = '';
-//$servidor_bd = '';
-//$porta_bd = '';
-//$usuario_db = '';
-//$senha_bd = '';
-$db2 = new cls_banco();
+if($configDbOldSiminc->dbname){
+    $servidor_bd = $configDbOldSiminc->host;
+    $porta_bd = $configDbOldSiminc->port;
+    $nome_bd = $configDbOldSiminc->dbname;
+    $usuario_db = $configDbOldSiminc->user;
+    $senha_bd = $configDbOldSiminc->password;
+    
+    $db2 = new cls_banco(FALSE);
+}
 
 /* MECANISMO DE ESPELHO DOS PERFIS - Removendo todos os perfis slaves dos outros sistemas	 */
 function removerPerfisSlaves($usucpf, $sisid) {
@@ -259,9 +248,3 @@ function atualizarResponsabilidadesSlaves($usucpf, $pflcod) {
 	$db->commit();
 
 }
-
-
-
-
-
-?>
