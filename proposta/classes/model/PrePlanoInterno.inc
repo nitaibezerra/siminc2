@@ -340,6 +340,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         $this->esfid         = $pi['esfid'];
         $this->plivalorcusteio = $pi['picvalorcusteio'];
         $this->plivalorcapital = $pi['picvalorcapital'];
+        $this->pliid = NULL;
     }
 
     /**
