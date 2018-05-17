@@ -5,6 +5,8 @@ include_once '_funcoes.php';
 
 $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
+$aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacao();
+
 switch($_REQUEST['req']) {
     case 'salvar':
         $cPrePlanoInterno->salvar($_REQUEST);
@@ -49,7 +51,8 @@ switch($_REQUEST['req']) {
         include 'preplanointerno_modal.inc';
         die;
     case 'importar-pi':
-        $importArray = $mPrePlanoInterno->importarPI((int)$_REQUEST['pliid']);
+        $mPrePlanoInterno->importarPI((int)$_REQUEST['pliid']);
+        $aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacaoPi((int)$_REQUEST['pliid']);
 }
 
 $perfis = pegaPerfilGeral();
@@ -224,8 +227,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                         echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
                         echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
-
-                        $aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacao();
                         echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                         ?>
                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
