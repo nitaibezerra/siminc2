@@ -68,7 +68,7 @@ class Monitora_Model_Programa extends Modelo
             if (substr($atributo, -6) == 'status') {
                 $where[] = "{$atributo} = 'A'";
             } elseif (substr($atributo, -3) == 'ano') {
-                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
+//                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
             }
             if ($descricao) {
                 $descricao = implode(" || ' - ' || ", (array)$descricao);
