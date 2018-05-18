@@ -149,11 +149,17 @@ class Proposta_Model_PrePlanoInterno extends Modelo
 
     public function recuperarValoresPorSubnidadeEPtres($suoid, $ptrid)
     {
-        $sql = "select  sum(pli.plivalorcapital) plivalorcapital, sum(pli.plivalorcusteio) plivalorcusteio, 
-                        sum(pli.plivalorcapitaladicional) plivalorcapitaladicional, sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
-                from proposta.preplanointerno pli
-                where suoid = " . (int) $suoid . "
-                and ptrid = " . (int) $ptrid;
+        $sql = "SELECT
+                    sum(pli.plivalorcapital) plivalorcapital,
+                    sum(pli.plivalorcusteio) plivalorcusteio,
+                    sum(pli.plivalorcapitaladicional) plivalorcapitaladicional,
+                    sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
+                FROM
+                    proposta.preplanointerno pli
+                WHERE
+                    pli.suoid = " . (int) $suoid . "
+                    AND pli.ptrid = " . (int) $ptrid . " 
+                    AND pli.plistatus = 'A'";
 
         return $this->pegaLinha($sql);
     }

@@ -60,7 +60,6 @@ class Proposta_Controller_Proposta
 
     public function montarListagemDetalhes($proid)
     {
-        $aPropostaDetalhe = (new Proposta_Model_PropostaDetalhe)->recuperarTodos('*', ['proid = ' . (int)$proid, "prdstatus = 'A'"]);
         include_once APPRAIZ . 'proposta/modulos/principal/propostadetalhe.inc';
     }
 }            
