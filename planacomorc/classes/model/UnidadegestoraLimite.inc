@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Planacomorc_Model_UnidadegestoraLimite extends Modelo
@@ -74,9 +74,28 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
                 and suo.prsano = '$exercicio'
                 and suo.unofundo = false
                 order by suo.unofundo, suo.unonome, suo.suonome;";
-        
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
+    }
+
+    public function recuperarLimitePorSuoid($suoid)
+    {
+        $sql = "select suo.suoid, suo.unoid, suo.suosigla, suo.unosigla, suo.unocod, suo.suonome, suo.unonome, suo.suocod, suo.unofundo, 
+                       lmu.*, coalesce(vlr.totalunidade, 0) totalunidade, coalesce(lmu.lmuvlr, 0) - coalesce(vlr.totalunidade, 0) disponivelunidade
+                from public.vw_subunidadeorcamentaria suo 
+                        inner join planacomorc.unidadegestora_limite lmu on suo.suocod = lmu.ungcod and suo.prsano = lmu.prsano
+                        left join (
+                                select sum(plivalorcapital + plivalorcusteio) totalunidade, suoid
+                                from proposta.preplanointerno
+                                where suoid = $suoid
+                                group by suoid
+                        ) vlr on vlr.suoid = suo.suoid                        
+                where suo.unostatus = 'A'
+                and suo.prsano = '{$_SESSION['exercicio']}'
+                and suo.suoid = " . (int) $suoid;
+
+        return $utfEncodedArray = array_map("utf8_encode", $this->pegaLinha($sql) );
     }
 
 }//end Class
