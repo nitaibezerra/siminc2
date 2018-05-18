@@ -56,6 +56,8 @@ switch ($_REQUEST['req']) {
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
+<script src="js/principal/proposta_form.js"></script>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2><?php echo $titulo_modulo; ?></h2>
@@ -202,46 +204,11 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <script>
+
     $(function(){
-        $('#eqdid, #suoid').change(function(){
-            $('#span-funcional').load('?modulo=principal/proposta_form&acao=A&req=carregar-funcional&eqdid=' + $('#eqdid').val() + '&suoid=' + $('#suoid').val());
-        });
 
-        $('#span-rp').load('?modulo=principal/proposta_form&acao=A&req=carregar-rp&eqdid=' + $('#eqdid').val());
-        $('#eqdid').change(function(){
-            $('#span-rp').load('?modulo=principal/proposta_form&acao=A&req=carregar-rp&eqdid=' + $('#eqdid').val());
-        });
+        initPropostaForm();
 
-        carregarDadosPtres();
-        $('body').on('change', '#ptrid', function(){
-            carregarDadosPtres();
-        });
+    });
 
-        function carregarDadosPtres() {
-            $.ajax({
-                url: '?modulo=principal/proposta_form&acao=A&req=recuperar-dados-ptres&ptrid=' + $('#ptrid').val(),
-                dataType: 'json',
-                success: function(dados){
-                    $('#unidade_acao').html(dados.unidade_acao);
-                    $('#produto_acao').html(dados.produto_acao);
-                    $('#unidade_po').html(dados.unidade_po);
-                    $('#produto_po').html(dados.produto_po);
-                    $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 2, ',', '.'));
-                }
-            });
-
-            $.ajax({
-                url: '?modulo=principal/proposta_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val() + '&suoid=' + $('#suoid').val(),
-                dataType: 'json',
-                success: function(dados){
-                    $('#limite_valor_custeio').html(number_format(parseFloat(dados.plivalorcusteio), 2, ',', '.'));
-                    $('#limite_valor_capital').html(number_format(parseFloat(dados.plivalorcapital), 2, ',', '.'));
-                    $('#limite_expansao_custeio').html(number_format(parseFloat(dados.plivalorcusteioadicional), 2, ',', '.'));
-                    $('#limite_expansao_capital').html(number_format(parseFloat(dados.plivalorcapitaladicional), 2, ',', '.'));
-                }
-            });
-
-            $('#span-subunidades-ptres').load('?modulo=principal/proposta_form&acao=A&req=recuperar-subunidades-ptres&ptrid=' + $('#ptrid').val());
-        }
-    })
 </script>
