@@ -9,6 +9,11 @@ class Monitora_Controller_Ptres
         try {
             $mPtres = new Monitora_Model_Ptres($dados['ptrid']);
             $mPtres->popularDadosObjeto($dados);
+            
+            $acao = new Monitora_Model_Acao($mPtres->acaid);
+            $mPtres->acacod = $acao->acacod;
+            $mPtres->prgcod = $acao->prgcod;
+            $mPtres->loccod = $acao->loccod;
 
             # Dados monetários
 //            $mPtres->ptrdotacaocusteio = (int)str_replace(array('.', ','), array('', '.'), $dados['ptrdotacaocusteio']);
