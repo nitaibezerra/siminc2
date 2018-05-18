@@ -44,7 +44,7 @@ switch($_REQUEST['req']) {
         echo $simec->select('mppid', 'Metas PPA', null, (new Public_Model_MetaPpa())->recuperarSqlCombo(null, ['suoid'=> (int)$_REQUEST['suoid'], 'oppid'=> (int)$_REQUEST['oppid']]), ['required']);
         die;
     case 'carregar-iniciativappa':
-        echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), ['required']);
+        echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), []);
         die;
     case 'recuperar-limite':
         $limite = array('lmuvlr' => NULL, 'disponivelunidade' => NULL);
@@ -228,7 +228,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 'oppid'=>(int)$mPrePlanoInterno->oppid]), ['required']). '</span>';
                             echo '<span id="span-iniciativappa">' . $simec->select('ippid', 'Iniciativa PPA', $mPrePlanoInterno->ippid, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, [
                                 'oppid'=>(int)$mPrePlanoInterno->oppid
-                            ]), ['required']) . '</span>';
+                            ]), []) . '</span>';
                             echo '<span id="span-metapnc">' . $simec->select('mpnid', 'Meta PNC', $mPrePlanoInterno->mpnid, (new Public_Model_MetaPnc())->recuperarSqlCombo(null, [
                                 'suoid' => $mPrePlanoInterno->suoid
                             ]), ['required']) . '</span>';
@@ -266,6 +266,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
         <div class="form-group">
             <div class="text-center">
+                <button type="submit" style="display: none;" />
                 <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                 <a href="?modulo=principal/preplanointerno&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                 <?php if($mPrePlanoInterno->pliid){ ?>

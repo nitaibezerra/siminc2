@@ -78,7 +78,7 @@ function initPreplanointernoForm(){
             return false;
         }
 
-        $('#formulario').submit();
+        $('#formulario').find("button[type='submit']").click();
     });
     
     $('#importar-pi-btn').on('click', function () {
