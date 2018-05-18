@@ -1,6 +1,11 @@
 <?php
 
-$aPrePlanoInterno = (new Proposta_Model_PrePlanoInterno)->recuperarListagem();
+$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+
+$aPrePlanoInterno = (new Proposta_Model_PrePlanoInterno)->recuperarListagem((object) array(
+    'exercicio' => $_SESSION['exercicio'],
+    'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
+));
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
