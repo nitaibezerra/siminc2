@@ -38,7 +38,7 @@ switch ($_REQUEST['req']) {
         $cBeneficiario->montarFormularioDetalhe($_REQUEST['benid'], $_REQUEST['bedid']);
         die;
     case 'listar-detalhe':
-        $cBeneficiario->montarListagemDetalhe($_REQUEST['benid']);
+        $cBeneficiario->montarListagemDetalhe($_REQUEST['benid'], $podeEditar);
         die;
     case 'salvar-detalhe':
         $cBeneficiarioDetalhe = new Emendas_Controller_BeneficiarioDetalhe();
@@ -386,7 +386,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <input name="aba" id="aba" type="hidden" value="<?php echo $aba; ?>">
 
                                         <?php
-                                            echo $simec->input('plititulo', 'Título do PI/Projeto <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->plititulo, ['maxlength' => 250]);
+                                            echo $simec->input('plititulo', 'Título do PI/Projeto <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->plititulo, ['maxlength' => 230]);
 
                                             $descricaoDinamica = $mBeneficiario->benpropostaobjeto? $mBeneficiario->benpropostaobjeto: NULL;
                                             echo $simec->textarea('plidsc', 'Descrição / Finalidade <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->plidsc? $mBeneficiario->plidsc: $descricaoDinamica, ['maxlength' => 1000]);

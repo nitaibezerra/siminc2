@@ -1,20 +1,16 @@
 <?php
 
 global $servidor_bd, $porta_bd, $nome_bd, $usuario_db, $senha_bd;
-if($_SERVER['SERVER_NAME'] == "simec.mec.gov.br"){
-    $servidor_bd = '';
-    $porta_bd = '5432';
-    $nome_bd = '';
-    $usuario_db = '';
-    $senha_bd = '';
-}else{
-    $servidor_bd = '';
-    $porta_bd    = '';
-    $nome_bd     = '';
-    $usuario_db  = '';
-    $senha_bd    = '';
+
+if($configDbOldSiminc->dbname){
+    $servidor_bd = $configDbOldSiminc->host;
+    $porta_bd = $configDbOldSiminc->port;
+    $nome_bd = $configDbOldSiminc->dbname;
+    $usuario_db = $configDbOldSiminc->user;
+    $senha_bd = $configDbOldSiminc->password;
+    
+    $db2 = new cls_banco(FALSE);
 }
-$db2 = new cls_banco();
 
 function inserirEspelhamento($dados) {
 	global $db;
