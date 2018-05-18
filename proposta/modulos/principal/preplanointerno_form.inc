@@ -47,7 +47,12 @@ switch($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), ['required']);
         die;
     case 'recuperar-limite':
-        echo json_encode((new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($_REQUEST['suoid']));
+        $limite = array('lmuvlr' => NULL, 'disponivelunidade' => NULL);
+        $resultadoLimite = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($_REQUEST['suoid']);
+        if($resultadoLimite){
+            $limite = array_map("utf8_encode", $resultadoLimite);
+        }
+        echo json_encode($limite);
         die;
     case 'proposta_modal':
         include 'preplanointerno_modal.inc';
@@ -64,15 +69,19 @@ $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
+<script src="js/principal/preplanointerno_form.js"></script>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-5">
         <h2><?php echo $titulo_modulo; ?></h2>
     </div>
-    <div class="col-lg-7">
-        <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-danger" href="#" id="importar-pi-btn"> Importar de PI <?php echo date('Y'); ?></a>
+    <?php if(!$mPrePlanoInterno->pliid): ?>
+        <div class="col-lg-7">
+            <div style="padding-top: 10px;" class="text-right">
+                <a class="btn btn-danger" href="#" id="importar-pi-btn"> Importar de PI <?php echo date('Y'); ?></a>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -266,5 +275,13 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </form>
 </div>
-<script src="js/principal/preplanointerno.js"></script>
+
 <?php bootstrapPopup('Importar de PI ' . date('Y'), 'preplanointerno_modal', '', array('salvar'), array('tamanho' => 'lg')); ?>
+
+<script>
+
+    $(document).ready(function(){
+        initPreplanointernoForm();
+    });
+
+</script>
