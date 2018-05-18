@@ -1,4 +1,5 @@
 <?php
+
 //Carrega parametros iniciais do simec
 include_once "controleInicio.inc";
 
@@ -13,6 +14,8 @@ $_SESSION['sislayoutbootstrap'] = 'zimec';
 // -- Export de XLS automático da Listagem
 Simec_Listagem::monitorarExport($_SESSION['sisdiretorio']);
 
+# Inclusão de classes externas
+include_once APPRAIZ. 'wssof/classes/Ws_MomentosDto.inc';
+
 //Carrega as funções de controle de acesso
 include_once "controleAcesso.inc";
-?>

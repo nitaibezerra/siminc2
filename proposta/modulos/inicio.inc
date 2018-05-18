@@ -27,7 +27,7 @@ $mProposta = new Proposta_Model_Proposta();
 $mPtres = new Monitora_Model_Ptres();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 
-$momento = 1000;
+$momento = $_POST['momento']? $_POST['momento']: 1000;
 
 switch ($_REQUEST['req']) {
     case 'importar-siop':
@@ -74,16 +74,28 @@ include APPRAIZ . "includes/cabecalho.inc";
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Funcionais SIOP</h5>
                 </div>
                 <div class="ibox-content">
-
-                    <a class="btn btn-warning" id="btn-funcionais-siop"><i class="fa fa-search"></i>&nbsp;Ver Funcionais</a>
-                    <a href="?modulo=inicio&acao=C&req=importar-siop" class="btn btn-danger" id="btn-salvar"><i class="fa fa-download"></i>&nbsp;Importar</a>
-
+                    <form name='form_importar' id='form_importar' method="POST" action="?modulo=inicio&acao=C&req=importar-siop" class="form-horizontal">
+                        <?php
+                            echo $simec->select(
+                                'momento',
+                                'Momento',
+                                $momento,
+                                (new Wssof_Ws_MomentosDto())->recuperarSqlCombo(),
+                                ['required']);
+                        ?>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <a class="btn btn-warning" id="btn-funcionais-siop"><i class="fa fa-search"></i>&nbsp;Ver Funcionais</a>
+                                <button class="btn btn-danger fa fa-download" type="submit" id="btn-importar">&nbsp;Importar</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" >
                             <thead>

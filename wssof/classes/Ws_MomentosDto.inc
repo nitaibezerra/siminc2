@@ -37,6 +37,7 @@ class Wssof_Ws_MomentosDto extends Modelo
      * @access protected
      */
     protected $arChavePrimaria = array(
+        'codigomomento'
     );
     /**
      * Chaves estrangeiras.
@@ -57,6 +58,25 @@ class Wssof_Ws_MomentosDto extends Modelo
         'datahoraalteracao' => null,
         'dataultimaatualizacao' => null,
     );
+    
+    public function recuperarSqlCombo($descricao = null, $where = [], $order = 'codigomomento') {
+        $pk = $this->arChavePrimaria[0];
+
+        $where[] = "snativo = '1'";
+        if(!$descricao) {
+            $descricao = "{$this->stNomeTabela}.codigomomento || ' - ' || {$this->stNomeTabela}.descricao";
+        }
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? " where  " . implode(' and ', $where) : '';
+
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+                from {$this->stNomeTabela}
+                $where
+                order by $order   
+        ";
+
+        return $sql;
+    }
 
 }//end Class
 ?>
