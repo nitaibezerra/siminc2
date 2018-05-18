@@ -99,18 +99,34 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'plijustificativaadicional' => null,
     );
 
-    public function recuperarListagem()
+    public function recuperarListagem(stdClass $filtros)
     {
-        $sql = "select ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pli.*, esd.esddsc
-                from proposta.preplanointerno pli
-                    inner join monitora.vw_ptres ptr on pli.ptrid = ptr.ptrid
-                    inner join public.vw_subunidadeorcamentaria suo on suo.suoid = pli.suoid
-                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pli.eqdid
-                    left join workflow.documento doc on doc.docid = pli.docid
-                    left join workflow.estadodocumento esd on esd.esdid = doc.esdid
-                where pli.prsano = '{$_SESSION['exercicio']}'
-                and plistatus = 'A'";
-
+        $where = '';
+        if($filtros->listaSubUnidadeUsuario && !empty(join_simec(',', $filtros->listaSubUnidadeUsuario))){
+            $where .= "\n AND suo.suocod::INTEGER IN(". join_simec(',', $filtros->listaSubUnidadeUsuario). ") ";
+        }
+        
+        $sql = "
+            SELECT DISTINCT
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.plodsc,
+                eqd.eqddsc,
+                suo.unosigla || ' - ' || suo.suonome subunidade,
+                pli.*,
+                esd.esddsc
+            FROM proposta.preplanointerno pli
+                JOIN monitora.vw_ptres ptr ON pli.ptrid = ptr.ptrid
+                JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = pli.suoid
+                JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pli.eqdid
+                LEFT JOIN workflow.documento doc ON doc.docid = pli.docid
+                LEFT JOIN workflow.estadodocumento esd ON esd.esdid = doc.esdid
+            WHERE
+                plistatus = 'A'
+                AND pli.prsano = '". (int)$filtros->exercicio. "'
+                $where
+        ";
+//ver($sql, d);
         return $this->carregar($sql);
     }
 
@@ -133,11 +149,17 @@ class Proposta_Model_PrePlanoInterno extends Modelo
 
     public function recuperarValoresPorSubnidadeEPtres($suoid, $ptrid)
     {
-        $sql = "select  sum(pli.plivalorcapital) plivalorcapital, sum(pli.plivalorcusteio) plivalorcusteio, 
-                        sum(pli.plivalorcapitaladicional) plivalorcapitaladicional, sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
-                from proposta.preplanointerno pli
-                where suoid = " . (int) $suoid . "
-                and ptrid = " . (int) $ptrid;
+        $sql = "SELECT
+                    sum(pli.plivalorcapital) plivalorcapital,
+                    sum(pli.plivalorcusteio) plivalorcusteio,
+                    sum(pli.plivalorcapitaladicional) plivalorcapitaladicional,
+                    sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
+                FROM
+                    proposta.preplanointerno pli
+                WHERE
+                    pli.suoid = " . (int) $suoid . "
+                    AND pli.ptrid = " . (int) $ptrid . " 
+                    AND pli.plistatus = 'A'";
 
         return $this->pegaLinha($sql);
     }

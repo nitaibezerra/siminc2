@@ -3766,6 +3766,15 @@ function somar_dias_uteis($str_data, $int_qtd_dias_somar = 7) {
     return gmdate('Y-m-d',strtotime('+'.$count_days.' day',strtotime($str_data)));
 }
 
+/**
+ * Retorna uma lista de perfis com descrição e código do usuário no módulo 
+ * especificado pelo parametro sisid
+ * 
+ * @global cls_banco $db
+ * @param string $usucpf
+ * @param string $sisid
+ * @return array/boolean
+ */
 function pegaPerfilGeral($usucpf = null, $sisid = null){
 	global $db;
 

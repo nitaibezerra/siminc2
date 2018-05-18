@@ -21,7 +21,7 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
  * @package  A1
  * @author    <>
  * @license  GNU simec.mec.gov.br
- * @version  Release: 
+ * @version  Release:
  * @link     no link
  */
 class Planacomorc_Model_UnidadegestoraLimite extends Modelo
@@ -74,7 +74,7 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
                 and suo.prsano = '$exercicio'
                 and suo.unofundo = false
                 order by suo.unofundo, suo.unonome, suo.suonome;";
-        
+
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
@@ -95,7 +95,7 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
                 and suo.prsano = '{$_SESSION['exercicio']}'
                 and suo.suoid = " . (int) $suoid;
 
-        return $this->pegaLinha($sql);
+        return $utfEncodedArray = array_map("utf8_encode", $this->pegaLinha($sql) );
     }
 
 }//end Class

@@ -68,6 +68,67 @@ class Proposta_Model_PropostaDetalhe extends Modelo
         'proid' => null,
         'prdstatus' => null,
     );
+    
+    /**
+     * Montar consulta para buscar os dados do detalhe da proposta(Financeiro).
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public function montarSqlListaFinanceiro(stdClass $filtro) {
+        # Filtros
+        $where = '';
+        $where .= $filtro->prdid? "\n AND prd.prdid = ". (int)$filtro->prdid: NULL;
+        $where .= $filtro->ndpid? "\n AND prd.ndpid = ". (int)$filtro->ndpid: NULL;
+        
+        $sql = "
+            SELECT
+                prd.prdid,
+                prd.ndpid,
+                ndp.ndpcod,
+                prd.iducod,
+                prd.foncod,
+                ido.idocod,
+                prd.prdvalor,
+                prd.prdvalorexpansao,
+                prd.proid,
+                prd.prdstatus
+            FROM proposta.propostadetalhe prd
+                JOIN public.naturezadespesa ndp ON prd.ndpid = ndp.ndpid
+                JOIN public.idoc ido ON prd.idoid = ido.idoid
+            WHERE
+                prd.prdstatus = 'A'
+                AND prd.proid = ". (int)$filtro->proid. "
+                $where
+        ";
+        return $sql;
+    }
+    
+    /**
+     * Retorna lista de dados da consulta para buscar os dados do detalhe da proposta(Financeiro).
+     * 
+     * @param stdClass $filtro
+     * @return array
+     */
+    public function buscarListaFinanceiro(stdClass $filtro) {
+        $sql = $this->montarSqlListaFinanceiro($filtro);
+        $resultado = $this->carregar($sql);
+        $listaFinanceiro = $resultado? $resultado: [];
+        return $listaFinanceiro;
+    }
+    
+    /**
+     * Retorna dados da consulta para buscar o detalhe da proposta(Financeiro).
+     * 
+     * @param stdClass $filtro
+     * @return stdClass
+     */
+    public function buscarFinanceiro(stdClass $filtro) {
+        $sql = $this->montarSqlListaFinanceiro($filtro);
+        $resultado = $this->pegaLinha($sql);
+        $financeiro = (object)($resultado? $resultado: []);
+        return $financeiro;
+    }
 
 }//end Class
 ?>

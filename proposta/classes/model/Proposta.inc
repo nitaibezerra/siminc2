@@ -70,18 +70,44 @@ class Proposta_Model_Proposta extends Modelo
     );
 
 
-    public function recuperarListagem()
+    public function recuperarListagem(stdClass $filtros)
     {
-        $sql = "select pro.proid, ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, suo.unosigla || ' - ' || suo.suonome subunidade,  pro.proquantidade, pro.proquantidadeexpansao, 
-                        sum(prd.prdvalor) prdvalor, sum(prd.prdvalorexpansao) prdvalorexpansao
-                from proposta.proposta pro
-                    inner join monitora.vw_ptres ptr on pro.ptrid = ptr.ptrid
-                    inner join public.vw_subunidadeorcamentaria suo on suo.suoid = pro.suoid
-                    inner join monitora.pi_enquadramentodespesa eqd on eqd.eqdid = pro.eqdid
-                    left join proposta.propostadetalhe prd on prd.proid = pro.proid
-                where pro.prsano = '{$_SESSION['exercicio']}'
-                and prostatus = 'A'
-                group by pro.proid, ptr.funcional, ptr.acatitulo, ptr.plodsc, eqd.eqddsc, subunidade,  pro.proquantidade, pro.proquantidadeexpansao";
+        $where = '';
+        if($filtros->listaSubUnidadeUsuario && !empty(join_simec(',', $filtros->listaSubUnidadeUsuario))){
+            $where .= "\n AND suo.suocod::INTEGER IN(". join_simec(',', $filtros->listaSubUnidadeUsuario). ") ";
+        }
+        
+        $sql = "
+            SELECT
+                pro.proid,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.plodsc,
+                eqd.eqddsc,
+                suo.unosigla || ' - ' || suo.suonome subunidade,
+                pro.proquantidade,
+                pro.proquantidadeexpansao,
+                sum(prd.prdvalor) prdvalor,
+                sum(prd.prdvalorexpansao) prdvalorexpansao
+            FROM proposta.proposta pro
+                JOIN monitora.vw_ptres ptr ON pro.ptrid = ptr.ptrid
+                JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = pro.suoid
+                JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pro.eqdid
+                LEFT JOIN proposta.propostadetalhe prd ON prd.proid = pro.proid
+            WHERE
+                prostatus = 'A'
+                AND pro.prsano = '". (int)$filtros->exercicio. "'
+                $where
+            GROUP BY
+                pro.proid,
+                ptr.funcional,
+                ptr.acatitulo,
+                ptr.plodsc,
+                eqd.eqddsc,
+                subunidade,
+                pro.proquantidade,
+                pro.proquantidadeexpansao
+        ";
 
         return $this->carregar($sql);
     }
