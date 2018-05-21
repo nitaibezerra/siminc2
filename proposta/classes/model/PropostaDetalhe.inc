@@ -86,6 +86,7 @@ class Proposta_Model_PropostaDetalhe extends Modelo
                 prd.prdid,
                 prd.ndpid,
                 ndp.ndpcod,
+                ndp.gndcod,
                 prd.iducod,
                 prd.foncod,
                 ido.idocod,

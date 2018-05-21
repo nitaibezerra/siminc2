@@ -5,18 +5,31 @@
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" >
             <thead>
-            <tr class="text-center">
-                <th width="10%">Ações</th>
-                <th>Nat. Desp.</th>
-                <th>IDUSO</th>
-                <th>Fonte</th>
-                <th>IDOC</th>
-                <th>Valor</th>
-                <th>Vl. Expansão</th>
-            </tr>
+                <tr class="text-center">
+                    <th width="10%">Ações</th>
+                    <th>Nat. Desp.</th>
+                    <th>IDUSO</th>
+                    <th>Fonte</th>
+                    <th>IDOC</th>
+                    <th>Valor</th>
+                    <th>Vl. Expansão</th>
+                </tr>
             </thead>
             <tbody>
-            <?php foreach($listaPropostaDetalhe as $dados){ ?>
+            <?php
+                $totalCusteioValor = 0;
+                $totalCapitalValor = 0;
+                $totalCusteioExpansao = 0;
+                $totalCapitalExpansao = 0;
+                foreach($listaPropostaDetalhe as $dados):
+                    if($dados['gndcod'] <= 3){
+                        $totalCusteioValor += $dados['prdvalor'];
+                        $totalCusteioExpansao += $dados['prdvalorexpansao'];
+                    } else {
+                        $totalCapitalValor += $dados['prdvalor'];
+                        $totalCapitalExpansao += $dados['prdvalorexpansao'];
+                    }
+            ?>
                 <tr>
                     <td class="text-center">
                         <a title="Alterar" class="editar-detalhe"   href="?modulo=principal/proposta_form&acao=A&req=formulario-detalhe&prdid=<?php echo $dados['prdid']; ?>"><i class="fa fa-pencil"></i></a>
@@ -29,9 +42,13 @@
                     <td align="right"><?php echo number_format($dados['prdvalor'], 2, ',', '.'); ?></td>
                     <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 2, ',', '.'); ?></td>
                 </tr>
-            <?php } ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
+        <input type="hidden" name="totalCusteioValor" value="<?= $totalCusteioValor; ?>" />
+        <input type="hidden" name="totalCapitalValor" value="<?= $totalCapitalValor; ?>" />
+        <input type="hidden" name="totalCusteioExpansao" value="<?= $totalCusteioExpansao; ?>" />
+        <input type="hidden" name="totalCapitalExpansao" value="<?= $totalCapitalExpansao; ?>" />
     </div>
 <?php } else {
     echo '<div class="alert alert-danger">Nenhum registro cadastrado</div>';
@@ -66,5 +83,5 @@
                 });
             return false;
         });
-    })
+    });
 </script>
