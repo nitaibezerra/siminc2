@@ -154,7 +154,7 @@ class Spo_Model_Planointerno extends Modelo
 //ver($where,d);
 
         $sql = "
-            SELECT
+            SELECT DISTINCT
                 pli.pliid::VARCHAR AS pliid,
                 ben.benid::VARCHAR AS benid,
                 pli.pliid::VARCHAR AS id,
@@ -165,10 +165,10 @@ class Spo_Model_Planointerno extends Modelo
 		ed.esddsc AS situacao,
 		pc.picvalorcusteio AS custeio,
 		pc.picvalorcapital AS capital,
-                SUM(COALESCE (sex.vlrautorizado, 0.00)) AS autorizado,
-                SUM(COALESCE (sex.vlrempenhado, 0.00)) AS empenhado,
-                SUM(COALESCE (sex.vlrliquidado, 0.00)) AS liquidado,
-		SUM(COALESCE (sex.vlrpago, 0.00)) AS pago,
+                COALESCE(vpi.autorizado, 0.00) AS autorizado,
+                COALESCE(vpi.empenhado, 0.00) AS empenhado,
+                COALESCE(vpi.liquidado, 0.00) AS liquidado,
+		COALESCE(vpi.pago, 0.00) AS pago,
                 pli.plistatus
             FROM monitora.pi_planointerno pli
 		JOIN planacomorc.pi_complemento pc USING(pliid)
@@ -183,11 +183,7 @@ class Spo_Model_Planointerno extends Modelo
                     ppt.ptrid = ptr.ptrid
                     AND pli.pliano = ptr.ptrano)
 	        LEFT JOIN monitora.acao aca on ptr.acaid = aca.acaid
-                LEFT JOIN spo.siopexecucao sex ON(
-                    pli.unicod = sex.unicod
-                    AND pli.plicod = sex.plicod
-                    AND pli.pliano = sex.exercicio
-                    AND ptr.ptres = sex.ptres)
+                LEFT JOIN monitora.vw_planointerno vpi ON pli.pliid = vpi.pliid
 		LEFT JOIN workflow.documento wd ON(pli.docid = wd.docid)
 		LEFT JOIN workflow.estadodocumento ed ON(wd.esdid = ed.esdid)
 		LEFT JOIN planacomorc.pi_delegacao pd ON(pli.pliid = pd.pliid)
@@ -197,20 +193,10 @@ class Spo_Model_Planointerno extends Modelo
                 (pli.plistatus = 'A' OR (pli.plistatus = 'I' AND ed.esdid = ". (int)ESD_PI_CANCELADO. "))
                 AND pli.pliano = '". (int)$filtros->exercicio. "'
                 $where
-            GROUP BY
-                pli.pliid,
-                ben.benid,
-                pli.plicod,
-                sub_unidade,
-                pli.plititulo,
-                funcional,
-                situacao,
-                custeio,
-                capital
             ORDER BY
-                pli.plicod
+                codigo_pi
         ";
-//        ver($sql, d);
+//ver($sql, d);
         return $sql;
     }
     
