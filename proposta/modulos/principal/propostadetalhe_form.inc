@@ -26,6 +26,11 @@
 
 <script type="text/javascript">
     $(function(){
+        $('#prdvalor').keyup(function(){
+            
+//            validarMaximoValorCusteio();
+        });
+        
         $('#btn-salvar-detalhe').click(function(){
             options = {
                 success : function() {
@@ -40,4 +45,26 @@
             jQuery("#formulario-detalhe").ajaxForm(options).submit();
         });
     });
+
+    function validarMaximoValorCusteio(){
+
+        var limiteValorCusteio = $('#limite_valor_custeio').val()? str_replace(['.', ','], ['', '.'], $('#limite_valor_custeio').val()): 0;
+        var totalValorCusteioForm = $('input[name="prdvalor"]').val()? str_replace(['.', ','], ['', '.'], $('input[name="prdvalor"]').val()): 0;
+        var totalValorCusteioLista = $('input[name="totalCusteioValor"]').val()? str_replace(['.', ','], ['', '.'], $('input[name="totalCusteioValor"]').val()): 0;
+        
+        /*
+         * Se o valor informado no formulário mais o valor total da lista dos que
+         * são de custeio for maior que o limite de custeio da funcional pra 
+         * Unidade o sistema exibe uma critica.
+         */
+        if((totalValorCusteioForm+ totalValorCusteioLista) > limiteValorCusteio){
+            swal(
+                'Atenção',
+                'O Limite Pré-PI Disponível na Funcional pra Unidade foi ultrapassado. Favor, informar um número inferior para o Valor de custeio',
+                'error'
+            );
+            $('input[name="prdvalor"]').val('');
+        }
+    }
+    
 </script>
