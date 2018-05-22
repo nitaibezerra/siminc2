@@ -190,7 +190,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                             if($mProposta->proid){
                                 $cProposta->montarFormularioDetalhes($mProposta->proid);
-                        }
+                            }
                         ?>
                     </div>
                     <div id="div_listagem_detalhe">

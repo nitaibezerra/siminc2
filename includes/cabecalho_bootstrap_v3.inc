@@ -256,7 +256,7 @@ $paginic = $db->pegaUm($sql);
     <script src="/zimec/public/temas/simec/js/bootstrap.min.js"></script>
     <script src="/zimec/public/temas/simec/js/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="/estrutura/js/funcoes.js"></script>
-    <script src="/includes/funcoes.js?v=1"></script>
+    <script src="/includes/funcoes.js?v=2"></script>
 
     <!-- materialize menu lateral -->
     <script src="/zimec/public/temas/simec/js/plugins/materialize/materialize.js"></script>
