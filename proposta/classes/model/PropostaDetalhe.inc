@@ -79,6 +79,7 @@ class Proposta_Model_PropostaDetalhe extends Modelo
         # Filtros
         $where = '';
         $where .= $filtro->prdid? "\n AND prd.prdid = ". (int)$filtro->prdid: NULL;
+        $where .= $filtro->noPrdid? "\n AND prd.prdid != ". (int)$filtro->noPrdid: NULL;
         $where .= $filtro->ndpid? "\n AND prd.ndpid = ". (int)$filtro->ndpid: NULL;
         
         $sql = "
@@ -103,6 +104,40 @@ class Proposta_Model_PropostaDetalhe extends Modelo
                 $where
         ";
         return $sql;
+    }
+    
+    /**
+     * Busca os valores financeiros de totais e expansões tanto de custeio quanto
+     * de capital da proposta.
+     * 
+     * @param int $proid
+     * @param int $noPrdid
+     * @return int
+     */
+    public function buscarTotais(){
+        $totais = array(
+            'custeioValor' => 0,
+            'capitalValor' => 0,
+            'custeioExpansao' => 0,
+            'capitalExpansao' => 0,
+        );
+        $sql = $this->montarSqlListaFinanceiro((object) array(
+            'proid' => $this->proid,
+            'noPrdid' => $this->prdid));
+        $resultado = $this->carregar($sql);
+        if($resultado){
+            foreach($resultado as $financeiro){
+                if($financeiro['gndcod'] <= 3){
+                    $totais['custeioValor'] += $financeiro['prdvalor'];
+                    $totais['custeioExpansao'] += $financeiro['prdvalorexpansao'];
+                } else {
+                    $totais['capitalValor'] += $financeiro['prdvalor'];
+                    $totais['capitalExpansao'] += $financeiro['prdvalorexpansao'];
+                }
+            }
+        }
+        
+        return $totais;
     }
     
     /**

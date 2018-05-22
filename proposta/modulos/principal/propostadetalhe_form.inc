@@ -4,6 +4,8 @@
     if(!$mPropostaDetalhe->prdid){
         $mPropostaDetalhe->proid = $proid;
     }
+    
+    $totais = $mPropostaDetalhe->buscarTotais();
 ?>
 
 <form id="formulario-detalhe" name="formulario-detalhe" method="post" class="form-horizontal">
@@ -11,6 +13,11 @@
     <input name="prdid" id="prdid" type="hidden" value="<?php echo $mPropostaDetalhe->prdid; ?>">
     <input name="proid" type="hidden" value="<?php echo $mPropostaDetalhe->proid; ?>">
 
+    <input type="hidden" name="totalCusteioValor" value="<?= $totais['custeioValor']; ?>" />
+    <input type="hidden" name="totalCapitalValor" value="<?= $totais['capitalValor']; ?>" />
+    <input type="hidden" name="totalCusteioExpansao" value="<?= $totais['custeioExpansao']; ?>" />
+    <input type="hidden" name="totalCapitalExpansao" value="<?= $totais['capitalExpansao']; ?>" />
+    
     <?php
         echo $simec->select('ndpid', 'Natureza Despesa', $mPropostaDetalhe->ndpid, (new Public_Model_NaturezaDespesa())->recuperarSqlCombo(['ndpcod', 'ndpdsc']), ['required']);
         echo $simec->select('iducod', 'IDUSO', ($mPropostaDetalhe->iducod ? $mPropostaDetalhe->iducod : 0), (new Public_Model_IdentifUso())->recuperarSqlCombo(['iducod', 'idudsc']), ['required']);
@@ -23,7 +30,7 @@
     <div class="form-group">
         <div class="text-center">
             <button class="btn btn-primary" type="button" id="btn-salvar-detalhe"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-            <a href="?modulo=proposta/propostadetalhe&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+            <a href="?modulo=principal/proposta_form&acao=A&proid=<?= $mPropostaDetalhe->proid; ?>" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
             <?php if($mPropostaDetalhe->prdid){ ?>
                 <a href="?modulo=proposta/propostadetalhe_form&acao=A&req=excluir&prdid=<?php echo $mPropostaDetalhe->prdid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
             <?php } ?>
@@ -36,6 +43,10 @@
     $(function(){
         
         $('#prdvalor').keyup(function(){
+            validarValor();
+        });
+        
+        $('#ndpid').change(function(){
             validarValor();
         });
         
@@ -54,38 +65,49 @@
         });
     });
 
+    /*
+     * Se o valor informado no formulário mais o valor total da lista dos que
+     * são de custeio for maior que o limite de custeio da funcional pra 
+     * Unidade, o sistema exibe uma critica.
+     */
     function validarValor(){
         var textoNatureza = $('#ndpid option:selected').text();
         if(textoNatureza != ""){
             var numeroNatureza = $('#ndpid option:selected').text().substr(0,1);
             if(numeroNatureza <= 3){
-                validarMaximoValorCusteio();
+                if(validarMaximoValorCusteio() === false){
+                    var totalValorCusteio = buscarTotalValorCusteio();
+                    swal(
+                        'Atenção',
+                        'A soma de valores de custeio '+ number_format(totalValorCusteio.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_valor_custeio').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
+                        'error'
+                    );
+                    $('input[name="prdvalor"]').val('');
+                }
             } else {
 //                validarMaximoValorCapital();
             }
         }
     }
-
-    function validarMaximoValorCusteio(){
-
-        var limiteValorCusteio = $('#limite_valor_custeio').text()? str_replace(['.', ','], ['', '.'], $('#limite_valor_custeio').text()): 0;
-        var valorCusteioForm = $('input[name="prdvalor"]').val()? str_replace(['.', ','], ['', '.'], $('input[name="prdvalor"]').val()): 0;
-        var totalValorCusteioLista = $('input[name="totalCusteioValor"]').val()? str_replace(['.', ','], ['', '.'], $('input[name="totalCusteioValor"]').val()): 0;
-        
+    
+    function buscarTotalValorCusteio(){
+        var valorCusteioForm = $('input[name="prdvalor"]').val()? $('input[name="prdvalor"]').val(): 0;
+        var totalValorCusteioLista = $('input[name="totalCusteioValor"]').val()? $('input[name="totalCusteioValor"]').val(): 0;
         var totalValorCusteio = textToFloat(valorCusteioForm) + textToFloat(totalValorCusteioLista);
-        /*
-         * Se o valor informado no formulário mais o valor total da lista dos que
-         * são de custeio for maior que o limite de custeio da funcional pra 
-         * Unidade o sistema exibe uma critica.
-         */
+        
+        return totalValorCusteio;
+    }
+    
+    function validarMaximoValorCusteio(){
+        var limiteValorCusteio = $('#limite_valor_custeio').text()? str_replace(['.', ','], ['', '.'], $('#limite_valor_custeio').text()): 0;
+        var totalValorCusteio = buscarTotalValorCusteio();
+        var resultado = true;
+
         if(totalValorCusteio > limiteValorCusteio){
-            swal(
-                'Atenção',
-                'A soma de valores de custeio '+ number_format(totalValorCusteio.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_valor_custeio').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
-                'error'
-            );
-            $('input[name="prdvalor"]').val('');
+            resultado = false;
         }
+        
+        return resultado;
     }
     
 </script>
