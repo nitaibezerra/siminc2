@@ -48,18 +48,25 @@
             }, 500);
         });
         
+        $('#prdvalorexpansao').keyup(function(){
+            setTimeout(function(){
+                validarExpansao();
+            }, 500);
+        });
+        
         $('#ndpid').change(function(){
             validarValor();
+            validarExpansao();
         });
         
         $('#btn-salvar-detalhe').click(function(){
 
             if(verificarFormularioCusteio() === true){
-                if(validarMaximoValorCusteio() === true){
+                if(validarMaximoValorCusteio() === true && validarMaximoExpansaoCusteio() === true){
                     submeterFormularioDetalhe();
                 }
             } else {
-                if(validarMaximoValorCapital() === true){
+                if(validarMaximoValorCapital() === true && validarMaximoExpansaoCapital() === true){
                     submeterFormularioDetalhe();
                 }
             }
@@ -102,7 +109,7 @@
     }
 
     /*
-     * Se o valor informado no formulário mais o valor total referentes a 
+     * Se o Valor informado no formulário mais o valor total referentes a 
      * custeio ou capital for maior que o limite de custeio ou capital 
      * respectivamete, o sistema exibe uma critica.
      */
@@ -134,6 +141,39 @@
         }
     }
     
+    /*
+     * Se a Expansão informada no formulário mais o valor total referentes a 
+     * custeio ou capital for maior que o limite de custeio ou capital 
+     * respectivamete, o sistema exibe uma critica.
+     */
+    function validarExpansao(){
+        if(verificarFormularioCusteio() === true){
+            if(validarMaximoExpansaoCusteio() === false){
+                var totalExpansaoCusteio = buscarTotalExpansaoCusteio();
+                swal({
+                    title: 'Atenção',
+                    text: 'A soma de Expansão de custeio '+ number_format(totalExpansaoCusteio.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_expansao_custeio').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
+                    type: "error"
+                },
+                function(){
+                    $('input[name="prdvalorexpansao"]').val('');
+                });
+            }
+        } else {
+            if(validarMaximoExpansaoCapital() === false){
+                var totalExpansaoCapital = buscarTotalExpansaoCapital();
+                swal({
+                    title: 'Atenção',
+                    text: 'A soma de Expansão de capital '+ number_format(totalExpansaoCapital.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_expansao_capital').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
+                    type: "error"
+                },
+                function(){
+                    $('input[name="prdvalorexpansao"]').val('');
+                });
+            }
+        }
+    }
+    
     /**
      * Busca total de custeio para o campo Valor
      * 
@@ -148,6 +188,32 @@
     }
     
     /**
+     * Busca total de custeio para o campo Expansao
+     * 
+     * @returns {buscarTotalExpansaoCusteio.totalExpansaoCusteio}
+     */
+    function buscarTotalExpansaoCusteio(){
+        var expansaoCusteioForm = $('input[name="prdvalorexpansao"]').val()? $('input[name="prdvalorexpansao"]').val(): 0;
+        var totalExpansaoCusteioLista = $('input[name="totalCusteioExpansao"]').val()? $('input[name="totalCusteioExpansao"]').val(): 0;
+        var totalExpansaoCusteio = textToFloat(expansaoCusteioForm) + textToFloat(totalExpansaoCusteioLista);
+        
+        return totalExpansaoCusteio;
+    }
+    
+    /**
+     * Busca total de capital para o campo Expansao
+     * 
+     * @returns {buscarTotalExpansaoCapital.totalExpansaoCapital}
+     */
+    function buscarTotalExpansaoCapital(){
+        var expansaoCapitalForm = $('input[name="prdvalorexpansao"]').val()? $('input[name="prdvalorexpansao"]').val(): 0;
+        var totalExpansaoCapitalLista = $('input[name="totalCapitalExpansao"]').val()? $('input[name="totalCapitalExpansao"]').val(): 0;
+        var totalExpansaoCapital = textToFloat(expansaoCapitalForm) + textToFloat(totalExpansaoCapitalLista);
+        
+        return totalExpansaoCapital;
+    }
+    
+    /**
      * Busca total de capital para o campo Valor
      * 
      * @returns {buscarTotalValorCapital.totalValorCapital}
@@ -158,6 +224,40 @@
         var totalValorCapital = textToFloat(valorCapitalForm) + textToFloat(totalValorCapitalLista);
         
         return totalValorCapital;
+    }
+    
+    /**
+     * Verifica se o maximo de expansao custeio foi alcançado
+     * 
+     * @returns {Boolean}
+     */
+    function validarMaximoExpansaoCusteio(){
+        var limiteExpansaoCusteio = $('#limite_expansao_custeio').text()? textToFloat($('#limite_expansao_custeio').text()): 0;
+        var totalExpansaoCusteio = buscarTotalExpansaoCusteio();
+        var resultado = true;
+
+        if(totalExpansaoCusteio > limiteExpansaoCusteio){
+            resultado = false;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Verifica se o maximo de expansao capital foi alcançado
+     * 
+     * @returns {Boolean}
+     */
+    function validarMaximoExpansaoCapital(){
+        var limiteExpansaoCapital = $('#limite_expansao_capital').text()? textToFloat($('#limite_expansao_capital').text()): 0;
+        var totalExpansaoCapital = buscarTotalExpansaoCapital();
+        var resultado = true;
+
+        if(totalExpansaoCapital > limiteExpansaoCapital){
+            resultado = false;
+        }
+        
+        return resultado;
     }
     
     /**
