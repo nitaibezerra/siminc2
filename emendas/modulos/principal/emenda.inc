@@ -77,18 +77,22 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="req" id="req" value="" type="hidden">
 
                         <?php
-                            echo $simec->select('unicod', 'Unidade Emenda', $filtroEmenda['unicod'], Spo_Model_Unidade::queryCombo((object)array(
-                                    'prsano::INTEGER = '. (int)$_SESSION['exercicio'])));
+                            if(!$listaSubUnidadeUsuario){
+                                echo $simec->select('unicod', 'Unidade Emenda', $filtroEmenda['unicod'], Spo_Model_Unidade::queryCombo((object)array(
+                                        'prsano::INTEGER = '. (int)$_SESSION['exercicio']) ));
+                            }
                             echo '<div id=div_ungcod>';
                             echo $simec->select('suoid', 'SubUnidade Beneficiário', $filtroEmenda['suoid'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
                                     'exercicio' => $_SESSION['exercicio'],
-                                    'unicod' => $filtroEmenda['unicod']
+                                    'unicod' => $filtroEmenda['unicod'],
+                                'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
                                 )));
                             echo '</div>';
                             echo '<div id=div_ungcod_delegada>';
                             echo $simec->select('suoid_delegada', 'SubUnidade Delegada', $filtroEmenda['suoid_delegada'], Public_Model_SubUnidadeOrcamentaria::queryComboChaveSuoid((object)array(
                                     'exercicio' => $_SESSION['exercicio'],
-                                    'unicod' => $filtroEmenda['unicod_delegada']
+                                    'unicod' => $filtroEmenda['unicod_delegada'],
+                                'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
                                 )));
                             echo '</div>';
                             echo $simec->select('lista_esdid', 'Situação', $filtroEmenda['lista_esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_BENEFICIARIO)), array('multiple' => 'true'));
