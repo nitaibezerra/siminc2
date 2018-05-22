@@ -302,6 +302,7 @@ function carregarMetasPPA($oppid, $mppid, $suocod = null) {
         ORDER BY
             descricao
     ";
+//ver($sql, d);
     $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, (isset($mppid)? $mppid: null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 

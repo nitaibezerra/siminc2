@@ -95,16 +95,38 @@ class Monitora_Model_Ptres extends Modelo
     }
 
     public function atualizarFuncionaisSiop($exercicio, $momento) {
-        $sql = "select  aca.identificadorunico,  aca.exercicio, aca.codigomomento, aca.baselegal, aca.detalhamentoimplementacao,
-                        aca.codigoacao, aca.codigoorgao, aca.codigoprograma, aca.codigoobjetivo, 
-                        aca.descricao acadescricao, aca.titulo acatitulo, loc.codigolocalizador, 
-                        plo.planoorcamentario, loc.descricao locdescricao, plo.titulo plotitulo
-                from wssof.ws_acoesdto aca
-                    inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '$exercicio' and loc.codigomomento = '$momento'
-                    inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '$exercicio' and plo.codigomomento = '$momento'
-                where aca.exercicio = '$exercicio'
-                and aca.codigomomento = '$momento'
-                ";
+        $sql = "
+            SELECT
+                aca.identificadorunico,
+                aca.exercicio,
+                aca.codigomomento,
+                aca.baselegal,
+                aca.detalhamentoimplementacao,
+                aca.codigoacao,
+                aca.codigoorgao,
+                aca.codigoprograma,
+                aca.codigoobjetivo,
+                aca.descricao acadescricao,
+                aca.titulo acatitulo,
+                loc.codigolocalizador,
+                plo.planoorcamentario,
+                loc.descricao locdescricao,
+                plo.titulo plotitulo
+            FROM wssof.ws_acoesdto aca
+                JOIN wssof.ws_localizadoresdto loc ON(
+                    loc.identificadorunicoacao = aca.identificadorunico
+                    AND loc.exercicio = '$exercicio'
+                    AND loc.codigomomento = '". (int)$momento. "'
+                )
+                JOIN wssof.ws_planosorcamentariosdto plo ON(
+                    plo.identificadorunicoacao = aca.identificadorunico
+                    AND plo.exercicio = '$exercicio'
+                    AND plo.codigomomento = '". (int)$momento. "'
+                )
+            WHERE
+                aca.exercicio = '$exercicio'
+                AND aca.codigomomento = '". (int)$momento. "'
+        ";
         
         $aAcoesDto = $this->carregar($sql);
         $aAcoesDto = $aAcoesDto ? $aAcoesDto : [];
@@ -117,14 +139,18 @@ class Monitora_Model_Ptres extends Modelo
 
     public function atualizarAcaoSiop($acaoDto)
     {
-        $sql = "select acaid
-                from monitora.acao aca
-                where aca.prgano = '{$acaoDto['exercicio']}'
-                and aca.acacod = '{$acaoDto['codigoacao']}'
-                and aca.prgcod = '{$acaoDto['codigoprograma']}'
-                and aca.loccod = '{$acaoDto['codigolocalizador']}'
-                and aca.unicod = '{$acaoDto['codigoorgao']}'
-                ";
+        $sql = "
+            SELECT
+                acaid
+            FROM monitora.acao aca
+            WHERE
+                aca.prgano = '{$acaoDto['exercicio']}'
+                AND aca.unicod = '{$acaoDto['codigoorgao']}'
+                AND aca.prgcod = '{$acaoDto['codigoprograma']}'
+                AND aca.acacod = '{$acaoDto['codigoacao']}'
+                AND aca.loccod = '{$acaoDto['codigolocalizador']}'
+        ";
+
         $acaid = $this->pegaUm($sql);
 
         $mAcao = new Monitora_Model_Acao($acaid);
@@ -140,6 +166,7 @@ class Monitora_Model_Ptres extends Modelo
         $mAcao->loccod = $acaoDto['codigolocalizador'];
         $mAcao->saccod = $acaoDto['codigolocalizador'];
         $mAcao->unicod = $acaoDto['codigoorgao'];
+        $mAcao->acaobjetivocod = $acaoDto['codigoobjetivo'];
 
         $mAcao->salvar();
         $acaid = $mAcao->acaid;
@@ -222,17 +249,25 @@ class Monitora_Model_Ptres extends Modelo
 
     public function recuperarSqlPorSubunidadeEEnquadramento($suoid, $eqdid)
     {
-        $sql = "select  ptr.ptrid codigo, 
-                        coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo  || ' - ' || ptr.plodsc descricao
-                from monitora.vw_ptres ptr
-                        inner join spo.ptressubunidade psu on psu.ptrid = ptr.ptrid
-                        inner join monitora.enquadramentorp erp on erp.irpcod = ptr.irpcod and erp.eqdid = " . (int) $eqdid . "
-                where ptr.ptrano = '{$_SESSION['exercicio']}'
-                and ptr.ptrstatus = 'A'
-                and ptr.plocod != 'EIND'
-                and psu.suoid = " . (int) $suoid . "
-                order by descricao";
-
+        $sql = "
+            SELECT
+                ptr.ptrid codigo,
+                coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo || ' - ' || ptr.plodsc descricao
+            FROM monitora.vw_ptres ptr
+                JOIN spo.ptressubunidade psu ON psu.ptrid = ptr.ptrid
+                JOIN monitora.enquadramentorp erp ON(
+                    erp.irpcod = ptr.irpcod
+                    AND erp.eqdid = ". (int)$eqdid. "
+                )
+            WHERE
+                ptr.ptrano = '{$_SESSION['exercicio']}'
+                AND ptr.ptrstatus = 'A'
+                AND ptr.plocod != 'EIND'
+                AND psu.suoid = ". (int)$suoid. "
+            ORDER BY
+                descricao
+        ";
+//ver($sql, d);
         return $sql;
     }
 
@@ -343,29 +378,79 @@ class Monitora_Model_Ptres extends Modelo
 
     public function recuperarQuantidadesSiop($momento)
     {
-        $sql = "select 'Ação' as descricao, count(*) qtd from wssof.ws_acoesdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'
-                union all
-                select 'Localizador' as descricao, count(*) qtd  from wssof.ws_localizadoresdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'
-                union all
-                select 'Plano Orçamentário' as descricao, count(*) qtd  from wssof.ws_planosorcamentariosdto where exercicio = '{$_SESSION['exercicio']}' and codigomomento = '$momento'";
+        $sql = "
+            SELECT
+                'Ação' AS descricao,
+                count(*) qtd
+            FROM wssof.ws_acoesdto
+            WHERE
+                exercicio = '{$_SESSION['exercicio']}'
+                AND codigomomento = '".(int)$momento. "'
+
+            UNION ALL
+
+            SELECT
+                'Localizador' AS descricao,
+                count(*) qtd
+            FROM wssof.ws_localizadoresdto
+            WHERE
+                exercicio = '{$_SESSION['exercicio']}'
+                AND codigomomento = '".(int)$momento. "'
+
+            UNION ALL
+
+            SELECT
+                'Plano Orçamentário' AS descricao,
+                count(*) qtd
+            FROM wssof.ws_planosorcamentariosdto
+            WHERE
+                exercicio = '{$_SESSION['exercicio']}'
+                AND codigomomento = '".(int)$momento. "'";
 
         return $this->carregar($sql);
     }
 
     public function recuperarFuncionaisSiop($momento)
     {
-        $sql = "select  distinct 
-                        aca.identificadorunico,  aca.exercicio, aca.codigomomento, aca.baselegal, aca.detalhamentoimplementacao,
-                        aca.codigoacao, aca.codigoorgao, aca.codigoprograma, aca.codigoobjetivo, 
-                        aca.descricao acadescricao, aca.titulo acatitulo, loc.codigolocalizador, 
-                        plo.planoorcamentario, loc.descricao locdescricao, plo.titulo plotitulo
-                from wssof.ws_acoesdto aca
-                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '{$_SESSION['exercicio']}' and loc.codigomomento = '$momento'
-                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '{$_SESSION['exercicio']}' and plo.codigomomento = '$momento'
-                where aca.exercicio = '{$_SESSION['exercicio']}'
-                and aca.codigomomento = '$momento'
-                order by aca.codigoacao, aca.codigoprograma, loc.codigolocalizador, aca.codigoorgao, plo.planoorcamentario";
-
+        $sql = "
+            SELECT DISTINCT
+                aca.identificadorunico,
+                aca.exercicio,
+                aca.codigomomento,
+                aca.baselegal,
+                aca.detalhamentoimplementacao,
+                aca.codigoacao,
+                aca.codigoorgao,
+                aca.codigoprograma,
+                aca.codigoobjetivo,
+                aca.descricao acadescricao,
+                aca.titulo acatitulo,
+                loc.codigolocalizador,
+                plo.planoorcamentario,
+                loc.descricao locdescricao,
+                plo.titulo plotitulo
+            FROM wssof.ws_acoesdto aca
+                JOIN wssof.ws_localizadoresdto loc ON(
+                    loc.identificadorunicoacao = aca.identificadorunico
+                    AND loc.exercicio = '{$_SESSION['exercicio']}'
+                    AND loc.codigomomento = '".(int)$momento. "'
+                )
+                JOIN wssof.ws_planosorcamentariosdto plo ON(
+                    plo.identificadorunicoacao = aca.identificadorunico
+                    AND plo.exercicio = '{$_SESSION['exercicio']}'
+                    AND plo.codigomomento = '".(int)$momento. "'
+                )
+            WHERE
+                aca.exercicio = '{$_SESSION['exercicio']}'
+                AND aca.codigomomento = '".(int)$momento. "'
+            ORDER BY
+                aca.codigoacao,
+                aca.codigoprograma,
+                loc.codigolocalizador,
+                aca.codigoorgao,
+                plo.planoorcamentario
+        ";
+//ver($sql);
         return $this->carregar($sql);
     }
 

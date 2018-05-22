@@ -121,16 +121,43 @@ class Spo_Model_Ptres extends Modelo
                 $where = '';
         }
 
-        $sql = "select  p.ptrid, p.ptres, p.acaid, p.ptrano, p.funcod, p.sfucod, p.prgcod, p.acacod, p.loccod, p.plocod, p.esfcod,  
-                        uo.unocod, uo.unonome, uo.suocod, uo.suonome, uo.unofundo, uo.suosigla, uo.unosigla, uo.unoid, uo.suoid
-                from monitora.ptres p
-                        inner join public.vw_subunidadeorcamentaria uo on uo.unocod = p.unicod and uo.prsano = '$prsano' and uo.suostatus = 'A'
-                where ptrano = '$prsano'
-                and p.ptrstatus = 'A'
-                and p.plocod not like 'E%'
+        $sql = "
+            SELECT
+                p.ptrid,
+                p.ptres,
+                p.acaid,
+                p.ptrano,
+                p.funcod,
+                p.sfucod,
+                p.prgcod,
+                p.acacod,
+                p.loccod,
+                p.plocod,
+                p.esfcod,
+                uo.unocod,
+                uo.unonome,
+                uo.suocod,
+                uo.suonome,
+                uo.unofundo,
+                uo.suosigla,
+                uo.unosigla,
+                uo.unoid,
+                uo.suoid
+            FROM monitora.ptres p
+                JOIN public.vw_subunidadeorcamentaria uo ON(
+                    uo.unocod = p.unicod
+                    AND uo.prsano = '$prsano'
+                    AND uo.suostatus = 'A'
+                )
+            WHERE
+                ptrano = '$prsano'
+                AND p.ptrstatus = 'A'
+                AND p.plocod NOT LIKE 'E%'
                 $where
-                order by unofundo, unonome, suonome, acacod, prgcod, loccod, plocod";
-
+            ORDER BY
+                unofundo, unonome, suonome, acacod, prgcod, loccod, plocod
+        ";
+//ver($sql,d);
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
