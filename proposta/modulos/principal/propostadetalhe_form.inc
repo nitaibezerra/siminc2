@@ -43,7 +43,9 @@
     $(function(){
         
         $('#prdvalor').keyup(function(){
-            validarValor();
+            setTimeout(function(){
+                validarValor();
+            }, 500);
         });
         
         $('#ndpid').change(function(){
@@ -51,45 +53,92 @@
         });
         
         $('#btn-salvar-detalhe').click(function(){
-            options = {
-                success : function() {
-                    // Carregar a listagem
-                    jQuery("#div_listagem_detalhe").load('?modulo=principal/proposta_form&acao=A&req=listar-detalhe&proid='+$('#proid').val());
 
-                    // Zerar o formulário
-                    jQuery("#div_formulario_detalhe").load('?modulo=principal/proposta_form&acao=A&req=formulario-detalhe&proid='+$('#proid').val());
+            if(verificarFormularioCusteio() === true){
+                if(validarMaximoValorCusteio() === true){
+                    submeterFormularioDetalhe();
+                }
+            } else {
+                if(validarMaximoValorCapital() === true){
+                    submeterFormularioDetalhe();
                 }
             }
 
-            jQuery("#formulario-detalhe").ajaxForm(options).submit();
+            validarValor();
+
         });
     });
 
-    /*
-     * Se o valor informado no formulário mais o valor total da lista dos que
-     * são de custeio for maior que o limite de custeio da funcional pra 
-     * Unidade, o sistema exibe uma critica.
+    function submeterFormularioDetalhe(){
+        options = {
+            success: function() {
+                // Carregar a listagem
+                jQuery("#div_listagem_detalhe").load('?modulo=principal/proposta_form&acao=A&req=listar-detalhe&proid='+$('#proid').val());
+
+                // Zerar o formulário
+                jQuery("#div_formulario_detalhe").load('?modulo=principal/proposta_form&acao=A&req=formulario-detalhe&proid='+$('#proid').val());
+            }
+        };
+
+        jQuery("#formulario-detalhe").ajaxForm(options).submit();
+    }
+
+    /**
+     * Verifica se o cadastro de dado financeiro é de custeio ou capital
+     * 
+     * @returns {Boolean} retorna true caso seja de custeio
      */
-    function validarValor(){
+    function verificarFormularioCusteio(){
         var textoNatureza = $('#ndpid option:selected').text();
-        if(textoNatureza != ""){
+        var resultado = false;
+        if(textoNatureza !== ""){
             var numeroNatureza = $('#ndpid option:selected').text().substr(0,1);
             if(numeroNatureza <= 3){
-                if(validarMaximoValorCusteio() === false){
-                    var totalValorCusteio = buscarTotalValorCusteio();
-                    swal(
-                        'Atenção',
-                        'A soma de valores de custeio '+ number_format(totalValorCusteio.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_valor_custeio').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
-                        'error'
-                    );
+                resultado = true;
+            }
+        }
+        
+        return resultado;
+    }
+
+    /*
+     * Se o valor informado no formulário mais o valor total referentes a 
+     * custeio ou capital for maior que o limite de custeio ou capital 
+     * respectivamete, o sistema exibe uma critica.
+     */
+    function validarValor(){
+        if(verificarFormularioCusteio() === true){
+            if(validarMaximoValorCusteio() === false){
+                var totalValorCusteio = buscarTotalValorCusteio();
+                swal({
+                    title: 'Atenção',
+                    text: 'A soma de valores de custeio '+ number_format(totalValorCusteio.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_valor_custeio').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
+                    type: "error"
+                },
+                function(){
                     $('input[name="prdvalor"]').val('');
-                }
-            } else {
-//                validarMaximoValorCapital();
+                });
+            }
+        } else {
+            if(validarMaximoValorCapital() === false){
+                var totalValorCapital = buscarTotalValorCapital();
+                swal({
+                    title: 'Atenção',
+                    text: 'A soma de valores de capital '+ number_format(totalValorCapital.toFixed(2), 2, ',', '.')+ ' ultrapassou o Limite Pré-Pi de '+ $('#limite_valor_capital').text()+ '. Por favor, informe um número inferior ou ajuste os valores cadastrados.',
+                    type: "error"
+                },
+                function(){
+                    $('input[name="prdvalor"]').val('');
+                });
             }
         }
     }
     
+    /**
+     * Busca total de custeio para o campo Valor
+     * 
+     * @returns {buscarTotalValorCusteio.totalValorCusteio}
+     */
     function buscarTotalValorCusteio(){
         var valorCusteioForm = $('input[name="prdvalor"]').val()? $('input[name="prdvalor"]').val(): 0;
         var totalValorCusteioLista = $('input[name="totalCusteioValor"]').val()? $('input[name="totalCusteioValor"]').val(): 0;
@@ -98,12 +147,47 @@
         return totalValorCusteio;
     }
     
+    /**
+     * Busca total de capital para o campo Valor
+     * 
+     * @returns {buscarTotalValorCapital.totalValorCapital}
+     */
+    function buscarTotalValorCapital(){
+        var valorCapitalForm = $('input[name="prdvalor"]').val()? $('input[name="prdvalor"]').val(): 0;
+        var totalValorCapitalLista = $('input[name="totalCapitalValor"]').val()? $('input[name="totalCapitalValor"]').val(): 0;
+        var totalValorCapital = textToFloat(valorCapitalForm) + textToFloat(totalValorCapitalLista);
+        
+        return totalValorCapital;
+    }
+    
+    /**
+     * Verifica se o maximo de valor custeio foi alcançado
+     * 
+     * @returns {Boolean}
+     */
     function validarMaximoValorCusteio(){
-        var limiteValorCusteio = $('#limite_valor_custeio').text()? str_replace(['.', ','], ['', '.'], $('#limite_valor_custeio').text()): 0;
+        var limiteValorCusteio = $('#limite_valor_custeio').text()? textToFloat($('#limite_valor_custeio').text()): 0;
         var totalValorCusteio = buscarTotalValorCusteio();
         var resultado = true;
 
         if(totalValorCusteio > limiteValorCusteio){
+            resultado = false;
+        }
+        
+        return resultado;
+    }
+    
+    /**
+     * Verifica se o maximo de valor capital foi alcançado
+     * 
+     * @returns {Boolean}
+     */
+    function validarMaximoValorCapital(){
+        var limiteValorCapital = $('#limite_valor_capital').text()? textToFloat($('#limite_valor_capital').text()): 0;
+        var totalValorCapital = buscarTotalValorCapital();
+        var resultado = true;
+
+        if(totalValorCapital > limiteValorCapital){
             resultado = false;
         }
         
