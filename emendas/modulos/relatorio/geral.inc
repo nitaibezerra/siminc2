@@ -79,7 +79,7 @@
         'pago'
     );
 
-    $sql = (new Emendas_Model_Emenda)->montarSqlRelatorioGeral($_SESSION['exercicio']);
+    $sql = (new Emendas_Model_Emenda)->montarSqlRelatorioGeral($_SESSION['exercicio'],$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf'])));
 //ver($sql);
     $lista = $db->carregar($sql);
 //ver($lista, d);
