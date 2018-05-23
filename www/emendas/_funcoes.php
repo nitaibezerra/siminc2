@@ -83,6 +83,10 @@ function posAcaoGerarPi($benid){
 //ver(WF_TPDID_PLANEJAMENTO_PI, AED_ENVIAR_APROVACAO, $pliid, $resultado, d);
         }
     }
+    
+    # Envia email pra o pessoal do planejamento
+    enviarEmailGerarPi($benid);
+    
 //ver($resultado, $pliid, d);
     return $resultado;
 }
@@ -494,8 +498,7 @@ function montarSqlDadosBeneficiario($benid){
             b.pprid,
             b.picquantidade,
             pi.pliid
-        FROM
-            emendas.beneficiario b
+        FROM emendas.beneficiario b
             JOIN emendas.emenda e ON b.emeid = e.emeid
             LEFT JOIN monitora.pi_planointerno pi ON(
                 b.pliid = pi.pliid
@@ -505,5 +508,208 @@ function montarSqlDadosBeneficiario($benid){
             benid = ". (int)$benid. "
     ";
     return $sql;
+}
+
+function enviarEmailPreenchimentoUnidade($benid){
+    global $db;
+    
+    $acao = "Enviado para Preenchimento da Unidade";
+    
+    # Buscar dados do PI para o corpo do e-mail
+    $modelBeneficiario = new Emendas_Model_Beneficiario();
+    $beneficiario = (object)$modelBeneficiario->buscarBeneficiario($benid);
+    $proponente = new Emendas_Model_Proponente($beneficiario->proid);
+    $modelSubunidade = new Public_Model_SubUnidadeOrcamentaria($beneficiario->suoid);
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    $autor = new Emendas_Model_Autor($emenda->autid);
+    # Buscando numero da Proposta
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($beneficiario->benid);
+    # Buscando dados de Custeio e Capital do Financeiro do Beneficiario
+    $beneficiario->custeio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
+    $beneficiario->capital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
+    # Buscar dados do PI para o corpo do e-mail
+    $pi = carregarPI($beneficiario->pliid);
+    
+    $ptres = buscarUmPTRES((object) array(
+        'ptrid' => $emenda->ptrid,
+        'exercicio' => $_SESSION['exercicio']
+    ));
+
+    $usuario = wf_pegarUltimoUsuarioModificacao($beneficiario->docid);
+    $textoDevolucao = wf_pegarComentarioEstadoAtual($beneficiario->docid);
+
+    # $textoEmail
+    include_once APPRAIZ. 'emendas/modulos/principal/email.inc';
+
+    $listaDestinatario = buscarUsuarioPerfilEmendas((object) array(
+        'sisid' => SISID_EMENDAS,
+        'pflcod' => PFL_SUBUNIDADE,
+        'ungcod' => $modelSubunidade->suocod));
+//echo $textoEmail; die;
+//ver(
+//    array(
+//        # Remetente
+//        'nome' => SIGLA_SISTEMA . ' - SPOA - Planejamento Orçamentário',
+//        'email' => $_SESSION['email_sistema']
+//    ),
+//    array(
+//        # Destinatario
+//        'email' => $listaDestinatario
+//    ),
+//    # Titulo do e-mail
+//    'PI - ' . ($pi['plicod'] ? $pi['plicod'] : $pi['pliid']) . ' - ' . $acao,
+//    $textoEmail,
+//d);
+
+    if($listaDestinatario){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaDestinatario,
+            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
+    
+    return true;
+}
+
+function enviarEmailDevolvidoCorrecao($benid){
+    global $db;
+    
+    $acao = "Enviado para Preenchimento da Unidade";
+    
+    # Buscar dados do PI para o corpo do e-mail
+    $modelBeneficiario = new Emendas_Model_Beneficiario();
+    $beneficiario = (object)$modelBeneficiario->buscarBeneficiario($benid);
+    $proponente = new Emendas_Model_Proponente($beneficiario->proid);
+    $modelSubunidade = new Public_Model_SubUnidadeOrcamentaria($beneficiario->suoid);
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    $autor = new Emendas_Model_Autor($emenda->autid);
+    # Buscando numero da Proposta
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($beneficiario->benid);
+    # Buscando dados de Custeio e Capital do Financeiro do Beneficiario
+    $beneficiario->custeio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
+    $beneficiario->capital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
+    # Buscar dados do PI para o corpo do e-mail
+    $pi = carregarPI($beneficiario->pliid);
+    
+    $ptres = buscarUmPTRES((object) array(
+        'ptrid' => $emenda->ptrid,
+        'exercicio' => $_SESSION['exercicio']
+    ));
+
+    $usuario = wf_pegarUltimoUsuarioModificacao($beneficiario->docid);
+    $textoDevolucao = wf_pegarComentarioEstadoAtual($beneficiario->docid);
+
+    # $textoEmail
+    include_once APPRAIZ. 'emendas/modulos/principal/email.inc';
+
+    $listaDestinatario = buscarUsuarioPerfilEmendas((object) array(
+        'sisid' => SISID_EMENDAS,
+        'pflcod' => PFL_ASPAR,
+        'ungcod' => $modelSubunidade->suocod));
+//echo $textoEmail; die;
+//ver(
+//    array(
+//        # Remetente
+//        'nome' => SIGLA_SISTEMA . ' - SPOA - Planejamento Orçamentário',
+//        'email' => $_SESSION['email_sistema']
+//    ),
+//    array(
+//        # Destinatario
+//        'email' => $listaDestinatario
+//    ),
+//    # Titulo do e-mail
+//    'PI - ' . ($pi['plicod'] ? $pi['plicod'] : $pi['pliid']) . ' - ' . $acao,
+//    $textoEmail,
+//d);
+
+    if($listaDestinatario){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaDestinatario,
+            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
+    
+    return true;
+}
+
+function enviarEmailGerarPi($benid){
+    global $db;
+    
+    $acao = "Enviado para Preenchimento da Unidade";
+    
+    # Buscar dados do PI para o corpo do e-mail
+    $modelBeneficiario = new Emendas_Model_Beneficiario();
+    $beneficiario = (object)$modelBeneficiario->buscarBeneficiario($benid);
+    $proponente = new Emendas_Model_Proponente($beneficiario->proid);
+    $modelSubunidade = new Public_Model_SubUnidadeOrcamentaria($beneficiario->suoid);
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    $autor = new Emendas_Model_Autor($emenda->autid);
+    # Buscando numero da Proposta
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($beneficiario->benid);
+    # Buscando dados de Custeio e Capital do Financeiro do Beneficiario
+    $beneficiario->custeio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
+    $beneficiario->capital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
+    # Buscar dados do PI para o corpo do e-mail
+    $pi = carregarPI($beneficiario->pliid);
+    
+    $ptres = buscarUmPTRES((object) array(
+        'ptrid' => $emenda->ptrid,
+        'exercicio' => $_SESSION['exercicio']
+    ));
+
+    $usuario = wf_pegarUltimoUsuarioModificacao($beneficiario->docid);
+    $textoDevolucao = wf_pegarComentarioEstadoAtual($beneficiario->docid);
+
+    # $textoEmail
+    include_once APPRAIZ. 'emendas/modulos/principal/email.inc';
+
+    $listaDestinatario = buscarUsuarioPerfilPlanejamento((object) array(
+        'sisid' => SISID_PLANEJAMENTO,
+        'pflcod' => PFL_PLANEJAMENTO));
+//echo $textoEmail; die;
+//ver(
+//    array(
+//        # Remetente
+//        'nome' => SIGLA_SISTEMA . ' - SPOA - Planejamento Orçamentário',
+//        'email' => $_SESSION['email_sistema']
+//    ),
+//    array(
+//        # Destinatario
+//        'email' => $listaDestinatario
+//    ),
+//    # Titulo do e-mail
+//    'PI - ' . ($pi['plicod'] ? $pi['plicod'] : $pi['pliid']) . ' - ' . $acao,
+//    $textoEmail,
+//d);
+
+    if($listaDestinatario){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaDestinatario,
+            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
+    
+    return true;
 }
 

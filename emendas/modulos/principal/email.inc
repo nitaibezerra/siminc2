@@ -274,15 +274,12 @@ $textoEmail = "
                                                                                                         <div class='contentEditableContainer contentTextEditable'>
                                                                                                             <div class='contentEditable' style='text-align: left; line-height: 22px;'>
                                                                                                                 <div style='background-color: white;padding-top: 0px;position: relative;width: 100%; border-top: 3px solid #54b3a3;'>
-                                                                                                                    <br>
+                                                                                                                    <br />
 
                                                                                                                     <div class='left'>
-                                                                                                                        <p><b>ID: </b>". $pi['pliid']. "</p>
-
-                                                                                                                        ". ($pi['plicod']? "<p><b>C&oacute;digo PI: </b>". $pi['plicod']. "</p>": NULL ). "
-                                                                                                                        <p><b>T&iacute;tulo: </b>". $pi['plititulo']. "</p>
-                                                                                                                        <br>
-
+                                                                                                                        <p><b>Número da Emenda: </b>". $emenda->emenumero. "</p>
+                                                                                                                        <p><b>Parlamentar: </b>". $autor->autcod. " - ". $autor->autnome. "</p>
+                                                                                                                        <br />
 
                                                                                                                         <p><b>PTRES: </b><a href='#'>". $ptres['ptres']. "</a></p>
                                                                                                                         <p><b>Unidade: </b>". $ptres['unicod']. " &ndash; ". $ptres['unidsc']. "</p>
@@ -290,10 +287,23 @@ $textoEmail = "
                                                                                                                         <p><b>A&ccedil;&atilde;o: </b>". $ptres['acacod']. ' &ndash; '. $ptres['acatitulo']. "</p>
                                                                                                                         <p><b>Localizador: </b>". $ptres['loccod']. ' &ndash; '. $ptres['locdsc'].  "</p>
                                                                                                                         <p><b>PO: </b>". $ptres['plocod']. ' &ndash; '. $ptres['plotitulo']. "</p>
+                                                                                                                        <br />
+                                                                                                                        
+                                                                                                                        <p><b>ID do Beneficiário: </b>". $beneficiario->benid. "</p>
+                                                                                                                        <p><b>Nome do Beneficiário: </b>". formatar_cnpj($proponente->procnpj). ' - '. $proponente->pronome. "</p>
+                                                                                                                        ".($listaDadosSiconv[0]['sicsequencial']? "<p><b>Numero da Proposta: </b>". $listaDadosSiconv[0]['sicsequencial']. "/". $listaDadosSiconv[0]['prsano']. "</p>": NULL). "
+                                                                                                                        <br />
+                                                                                                                        
+                                                                                                                        ".($pi? "
+                                                                                                                        <p><b>ID do PI: </b>". $pi['pliid']. "</p>
+                                                                                                                        ". ($pi['plicod']? "<p><b>C&oacute;digo PI: </b>". $pi['plicod']. "</p>": NULL ). "
+                                                                                                                        <p><b>T&iacute;tulo do PI: </b>". $pi['plititulo']. "</p>
+                                                                                                                        ": NULL). "
 
-                                                                                                                        <br>
-                                                                                                                        <br>
-
+                                                                                                                        <br />
+                                                                                                                        <br />
+                                                                                                                        
+                                                                                                                        ". (($beneficiario->custeio || $beneficiario->capital)? "
                                                                                                                         <table border='1' cellpadding='0' cellspacing='0' style='margin: 0 auto; width:100%; border-color: #273a71;'>
                                                                                                                             <tbody>
                                                                                                                                 <tr>
@@ -303,19 +313,20 @@ $textoEmail = "
                                                                                                                                 </tr>
                                                                                                                                 <tr>
                                                                                                                                     <td>&nbsp;<span>Valor</span></td>
-                                                                                                                                    <td>&nbsp;<span class='valor'>R$ ". number_format($pi['picvalorcusteio'], 2, ',', '.'). "</span></td>
-                                                                                                                                    <td>&nbsp;<span class='valor'>R$ ". number_format($pi['picvalorcapital'], 2, ',', '.'). "</span></td>
+                                                                                                                                    <td>&nbsp;<span class='valor'>R$ ". number_format($beneficiario->custeio, 2, ',', '.'). "</span></td>
+                                                                                                                                    <td>&nbsp;<span class='valor'>R$ ". number_format($beneficiario->capital, 2, ',', '.'). "</span></td>
                                                                                                                                 </tr>
 
                                                                                                                             </tbody>
                                                                                                                         </table>
-                                                                                                                        
+                                                                                                                        ": NULL). "
+                                                                                                                        <br />
                                                                                                                         ".
                                                                                                                         ($textoDevolucao? (" <br /> <br /><p><b>Motivo de devolução: </b>". $textoDevolucao. "</p>"): NULL).
                                                                                                                         "
-                                                                                                                        <br>
-                                                                                                                        <br>
-                                                                                                                        <br>
+                                                                                                                        <br />
+                                                                                                                        <br />
+                                                                                                                        <br />
                                                                                                                         <div class='assinatura'>
                                                                                                                             <p><b>". $acao. " por: </b>". $usuario['usunome']. "</p>
                                                                                                                             <p><b>Fone: </b><a>". $usuario['telefone']. "</a></p>
@@ -334,7 +345,7 @@ $textoEmail = "
                                                                                                             <div class='contentEditable' style='text-align: left;'>
 
 
-                                                                                                                <br>
+                                                                                                                <br />
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </td>
