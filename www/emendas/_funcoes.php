@@ -494,8 +494,7 @@ function montarSqlDadosBeneficiario($benid){
             b.pprid,
             b.picquantidade,
             pi.pliid
-        FROM
-            emendas.beneficiario b
+        FROM emendas.beneficiario b
             JOIN emendas.emenda e ON b.emeid = e.emeid
             LEFT JOIN monitora.pi_planointerno pi ON(
                 b.pliid = pi.pliid
@@ -505,5 +504,69 @@ function montarSqlDadosBeneficiario($benid){
             benid = ". (int)$benid. "
     ";
     return $sql;
+}
+
+function enviarEmailPreenchimentoUnidade($benid){
+    include_once APPRAIZ. 'www/planacomorc/_funcoes.php';
+    
+    global $db;
+    
+    $acao = "Enviado para Preenchimento da Unidade";
+    
+    # Buscar dados do PI para o corpo do e-mail
+    $modelBeneficiario = new Emendas_Model_Beneficiario();
+    $beneficiario = (object)$modelBeneficiario->buscarBeneficiario($benid);
+    $modelSubunidade = new Public_Model_SubUnidadeOrcamentaria($beneficiario->suoid);
+
+    # Buscar dados do PI para o corpo do e-mail
+    $pi = carregarPI($beneficiario->pliid);
+    
+    $ptres = buscarUmPTRES((object) array(
+        'pliid' => $beneficiario->pliid,
+        'exercicio' => $_SESSION['exercicio']
+    ));
+
+    $usuario = wf_pegarUltimoUsuarioModificacao($beneficiario->docid);
+    
+    $textoDevolucao = wf_pegarComentarioEstadoAtual($beneficiario->docid);
+
+    # $textoEmail
+    include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
+
+    $listaDestinatario = buscarUsuarioPerfilPlanejamento((object) array(
+        'sisid' => SISID_EMENDAS,
+        'pflcod' => PFL_SUBUNIDADE,
+        'ungcod' => $modelSubunidade->suocod));
+echo $textoEmail; die;
+//ver(
+//    array(
+//        # Remetente
+//        'nome' => SIGLA_SISTEMA . ' - SPOA - Planejamento Orçamentário',
+//        'email' => $_SESSION['email_sistema']
+//    ),
+//    array(
+//        # Destinatario
+//        'email' => $listaDestinatario
+//    ),
+//    # Titulo do e-mail
+//    'PI - ' . ($pi['plicod'] ? $pi['plicod'] : $pi['pliid']) . ' - ' . $acao,
+//    $textoEmail,
+//d);
+
+//    if($listaDestinatario){
+//        # Envia E-mail para o SOLICITANTE
+//        enviar_email(
+//            array(
+//                # Remetente
+//                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+//                'email' => $_SESSION['email_sistema']
+//            ),
+//            $listaDestinatario,
+//            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+//            $textoEmail
+//        );
+//    }
+    
+    return true;
 }
 

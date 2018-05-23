@@ -1,5 +1,7 @@
 <?php
 
+define('SISID_EMENDAS', 251);
+
 # ESFERA DA AÇÃO
 define( 'ESFERA_FEDERAL_BRASIL', 1 );
 define( 'ESFERA_ESTADUAL_DISTRITO_FEDERAL', 2 );
