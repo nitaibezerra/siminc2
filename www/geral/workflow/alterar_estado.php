@@ -36,6 +36,7 @@ switch ( $_SESSION['sisdiretorio'] ){
         include_once APPRAIZ. "www/emendas/_constantes.php";
         include_once APPRAIZ. "www/emendas/_funcoes.php";
         include_once APPRAIZ. 'www/planacomorc/_funcoespi.php';
+        include_once APPRAIZ. 'www/planacomorc/_funcoes.php';
         include_once APPRAIZ. 'territorios/classes/model/Esfera.class.inc';
         include_once APPRAIZ. 'emendas/classes/model/EmendaDetalhe.inc';
         include_once APPRAIZ. 'planacomorc/classes/model/PiSei.inc';

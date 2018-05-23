@@ -11,8 +11,8 @@
  */
 
 
-require_once APPRAIZ .'includes/classes/Modelo.class.inc';
-include_once APPRAIZ . "emenda/classes/WSIntegracaoSiconv.class.inc";
+require_once APPRAIZ. 'includes/classes/Modelo.class.inc';
+include_once APPRAIZ. 'emendas/classes/service/WSIntegracaoSiconv.class.inc';
 
 
 /**

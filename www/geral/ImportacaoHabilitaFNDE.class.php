@@ -9,7 +9,7 @@
  Finalidade: importar arquivos txt do FNDE
  Data de criação: 24/09/2009
  */
-/*include_once( APPRAIZ. "emenda/classes/validaCPFCNPJ.class.inc" );*/
+/*include_once( APPRAIZ. "emendas/classes/service/validaCPFCNPJ.class.inc" );*/
 //include_once( APPRAIZ. "www/wiki/install-utils.inc" );
 
 class importacaoHabilitaFNDE {

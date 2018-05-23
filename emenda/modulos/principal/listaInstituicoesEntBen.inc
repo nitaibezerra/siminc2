@@ -1,5 +1,0 @@
-<?
-
-include 'listaInstituicoes.inc';
-
-?>

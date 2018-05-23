@@ -145,8 +145,8 @@ class Fnde_Webservice_Client {
             $info = curl_getinfo($handler);
             curl_close($handler);
             if ( $info['http_code'] != 200 ) {
-                if(is_file(APPRAIZ."emenda/classes/http_codes.ini")){
-                	$http_codes = parse_ini_file(APPRAIZ."emenda/classes/http_codes.ini");
+                if(is_file(APPRAIZ."emendas/classes/service/http_codes.ini")){
+                	$http_codes = parse_ini_file(APPRAIZ."emendas/classes/service/http_codes.ini");
                 	throw new exception("Erro de Página: {$http_codes[$info['http_code']]}", $info['http_code'] );	
                 }else{
                 	throw new exception("Erro de Arquivo de Configuração: Arquivo de configuração não encontrado!", $info['http_code'] );
