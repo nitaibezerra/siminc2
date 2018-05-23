@@ -1,6 +1,7 @@
 <?php
 
 define('SISID_EMENDAS', 251);
+define('SISID_PLANEJAMENTO', 157);
 
 # ESFERA DA AÇÃO
 define( 'ESFERA_FEDERAL_BRASIL', 1 );
@@ -31,3 +32,4 @@ define('PFL_SUPERUSUARIO', 1501);
 define("PFL_ADMINISTRADOR", 1507);
 define("PFL_ASPAR", 1508);
 define("PFL_SUBUNIDADE", 1506);
+define("PFL_PLANEJAMENTO", 956);
