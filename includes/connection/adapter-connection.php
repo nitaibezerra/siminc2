@@ -330,6 +330,18 @@ class adapterConnection {
     }
     
     /**
+     * Executa SQL(INSERT, UPDATE, DELETE) no banco de dados
+     * 
+     * @param string $sql
+     * @return boolean/resource
+     */
+    public function executar($sql) {
+        if(is_resource($this->db->getLink())){
+            return $this->db->execute($sql, TRUE);
+        }
+    }
+    
+    /**
      * Ao descarregar o objeto da mémoria encerra a conexão com o Banco de Dados.
      * 
      * @return VOID

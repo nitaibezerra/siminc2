@@ -395,7 +395,7 @@ class connection {
      * @param integer $timeCache
      * @return boolean/string
      */
-    function fetchOne($sql, $numberRow = 0, $timeCache = NULL) {
+    public function fetchOne($sql, $numberRow = 0, $timeCache = NULL) {
         if($_SERVER['HTTP_HOST'] == 'pdeinterativo-local') $timeCache = NULL;
         if($timeCache) {
             # Pegando informações do memcached server, key igual ao md5 do SQL
@@ -434,7 +434,7 @@ class connection {
      * @param boolean $manipulation (opcional) Permiti executar INSERT, UPDATE, DELETE
      * @return mix
      */
-    function execute($sql, $manipulation = FALSE){
+    public function execute($sql, $manipulation = FALSE){
 //        if (!is_resource($this->link)){
 //            throw new Exception("Não foi possível estabelecer uma conexão com o
 //                Banco de Dados para executar o seguinte SQL: <br />".$SQL);
