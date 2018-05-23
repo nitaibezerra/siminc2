@@ -507,8 +507,6 @@ function montarSqlDadosBeneficiario($benid){
 }
 
 function enviarEmailPreenchimentoUnidade($benid){
-    include_once APPRAIZ. 'www/planacomorc/_funcoes.php';
-    
     global $db;
     
     $acao = "Enviado para Preenchimento da Unidade";
@@ -516,28 +514,34 @@ function enviarEmailPreenchimentoUnidade($benid){
     # Buscar dados do PI para o corpo do e-mail
     $modelBeneficiario = new Emendas_Model_Beneficiario();
     $beneficiario = (object)$modelBeneficiario->buscarBeneficiario($benid);
+    $proponente = new Emendas_Model_Proponente($beneficiario->proid);
     $modelSubunidade = new Public_Model_SubUnidadeOrcamentaria($beneficiario->suoid);
-
+    $emenda = new Emendas_Model_Emenda($beneficiario->emeid);
+    $autor = new Emendas_Model_Autor($emenda->autid);
+    # Buscando numero da Proposta
+    $listaDadosSiconv = (new Emendas_Model_Siconv)->recuperarListagem($beneficiario->benid);
+    # Buscando dados de Custeio e Capital do Financeiro do Beneficiario
+    $beneficiario->custeio = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_DESPESAS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_JUROS. ','. Emendas_Model_EmendaDetalhe::GND_COD_CUSTEIO_PESSOAL);
+    $beneficiario->capital = buscarValorTotalBeneficiario($beneficiario->benid, Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVESTIMENTO. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_INVERSOES. ','. Emendas_Model_EmendaDetalhe::GND_COD_CAPITAL_AMORTIZACAO);
     # Buscar dados do PI para o corpo do e-mail
     $pi = carregarPI($beneficiario->pliid);
     
     $ptres = buscarUmPTRES((object) array(
-        'pliid' => $beneficiario->pliid,
+        'ptrid' => $emenda->ptrid,
         'exercicio' => $_SESSION['exercicio']
     ));
 
     $usuario = wf_pegarUltimoUsuarioModificacao($beneficiario->docid);
-    
     $textoDevolucao = wf_pegarComentarioEstadoAtual($beneficiario->docid);
 
     # $textoEmail
-    include_once APPRAIZ. "planacomorc/modulos/principal/unidade/email.inc";
+    include_once APPRAIZ. 'emendas/modulos/principal/email.inc';
 
-    $listaDestinatario = buscarUsuarioPerfilPlanejamento((object) array(
+    $listaDestinatario = buscarUsuarioPerfilEmendas((object) array(
         'sisid' => SISID_EMENDAS,
         'pflcod' => PFL_SUBUNIDADE,
         'ungcod' => $modelSubunidade->suocod));
-echo $textoEmail; die;
+//echo $textoEmail; die;
 //ver(
 //    array(
 //        # Remetente
@@ -553,20 +557,64 @@ echo $textoEmail; die;
 //    $textoEmail,
 //d);
 
-//    if($listaDestinatario){
-//        # Envia E-mail para o SOLICITANTE
-//        enviar_email(
-//            array(
-//                # Remetente
-//                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
-//                'email' => $_SESSION['email_sistema']
-//            ),
-//            $listaDestinatario,
-//            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
-//            $textoEmail
-//        );
-//    }
+    if($listaDestinatario){
+        # Envia E-mail para o SOLICITANTE
+        enviar_email(
+            array(
+                # Remetente
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'email' => $_SESSION['email_sistema']
+            ),
+            $listaDestinatario,
+            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            $textoEmail
+        );
+    }
     
     return true;
 }
+
+/**
+ * Busca todos os usuários de um perfil especifico ou sistema.
+ * 
+ * @global cls_banco $db
+ * @param stdClass $filtro
+ * @return boolean/array
+ */
+function buscarUsuarioPerfilEmendas(stdClass $filtro){
+    global $db;
+    $where = '';
+    $where .= $filtro->sisid? " \n AND s.sisid = {$filtro->sisid}": NULL;
+    $where .= $filtro->pflcod? " \n AND pu.pflcod = {$filtro->pflcod}": NULL;
+    $where .= $filtro->ungcod? " \n AND ur.ungcod = '{$filtro->ungcod}'": NULL;
+    $sql = "
+        SELECT DISTINCT
+            u.usucpf,
+            u.usunome,
+            u.usuemail,
+            CASE WHEN LENGTH(u.usufoneddd) > 0 THEN
+                '(' || u.usufoneddd || ')' || u.usufonenum
+            ELSE
+                NULL
+            END AS telefone
+        FROM seguranca.sistema s
+            JOIN seguranca.usuario_sistema us USING(sisid)
+            JOIN seguranca.usuario u USING(usucpf)
+            JOIN seguranca.perfilusuario pu USING(usucpf)
+            JOIN seguranca.perfil p ON(pu.pflcod = p.pflcod AND p.sisid = s.sisid)
+            LEFT JOIN emendas.usuarioresponsabilidade ur ON(
+                u.usucpf = ur.usucpf
+                AND ur.pflcod = p.pflcod
+                AND ur.rpustatus = 'A')
+        WHERE
+            us.suscod = 'A'
+            AND u.suscod = 'A'
+            AND p.pflstatus = 'A'
+            $where
+    ";
+//ver($sql, d);
+    $listaUsuarioPlanejamento = $db->carregar($sql);
+    return $listaUsuarioPlanejamento;
+}
+
 
