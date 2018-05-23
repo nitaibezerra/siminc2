@@ -937,23 +937,6 @@
             }
         }
     }
-    
-   /**
-    * Transforma o valor de texto pra flutuante pra efetuar operações matematicas.
-    *
-    * @param string text
-    * @return float numero
-    */
-    function textToFloat(text){
-        var numero = 0;
-        text = replaceAll(text, '.', '');
-        text = replaceAll(text, ',', '.');
-        if(!isNaN(parseFloat(text))){
-            numero = parseFloat(text);
-        }
-
-        return numero;
-    }
 
     /**
      * Controla as opções do formulario conforme a opção de tipo de localização selecionada.
