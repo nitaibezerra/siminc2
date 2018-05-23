@@ -570,7 +570,7 @@ function enviarEmailPreenchimentoUnidade($benid){
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
-            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            'Emenda - '. $emenda->emenumero. ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
     }
@@ -638,7 +638,7 @@ function enviarEmailDevolvidoCorrecao($benid){
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
-            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            'Emenda - '. $emenda->emenumero. ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
     }
@@ -705,7 +705,7 @@ function enviarEmailGerarPi($benid){
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
-            'PI - '. ($beneficiario['plicod']? $beneficiario['plicod']: $beneficiario['pliid']). ' - '. $acao, # Titulo do e-mail
+            'Emenda - '. $emenda->emenumero. ' - '. $acao, # Titulo do e-mail
             $textoEmail
         );
     }
