@@ -3792,7 +3792,7 @@ function pegaPerfilGeral($usucpf = null, $sisid = null){
                 FROM seguranca.perfilusuario pu
                     JOIN seguranca.perfil p ON p.pflcod = pu.pflcod
                         AND pu.usucpf = '$usucpf'
-                        AND p.sisid = $ sisid
+                        AND p.sisid = '$sisid'
                         AND pflstatus = 'A'
         ";
 
