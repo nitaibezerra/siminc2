@@ -15,6 +15,9 @@ function initPreplanointernoForm(){
         $('#span-item').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-item&eqdid=' + $(this).val(), function(){
             toggleItem();
         });
+        
+        // Exibe ou Oculta os campos do formulário de acordo com o enquadramento selecionado
+        controlarExibicaoFormularioReduzido();
     });
 
     $('#eqdid, #suoid').change(function(){
@@ -171,3 +174,54 @@ function recuperarMetasEIniciativaPPA() {
     $('#span-metappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-metappa&oppid=' + $('#oppid').val() + '&suoid=' + $('#suoid').val());
     $('#span-iniciativappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-iniciativappa&oppid=' + $('#oppid').val());
 }
+
+/**
+ * Verifica se o formulário é reduzido ou completo.
+ * 
+ * @returns boolean retorna true se o formulário for reduzido.
+ */
+function verificarFormularioReduzido(){
+    var resultado = false;
+    if($.inArray($('#eqdid').val(), listaEqdReduzido) >= 0){
+        resultado = true;
+    }
+
+    return resultado;
+}
+
+/**
+ * Controla e formata a exibição do formulario conforme a opção de enquadramento
+ * está configurada pra ser reduzida ou não.
+ * 
+ * @returns {void}
+ */
+function controlarExibicaoFormularioReduzido(){
+    if(verificarFormularioReduzido()){
+        // Oculta campos
+        $('.div_metas').hide('slow');
+        $('#span-area').hide('slow');
+        $('#span-segmento').hide('slow');
+        
+        // Marca a opção produto com o valor padrão "Não se aplica" se não tiver valor marcado ainda.
+//        if($('#pprid').val() === ""){
+//            $('#pprid').val(intProdNaoAplica).trigger("chosen:updated");
+//            formatarTelaProdutoNaoAplica(intProdNaoAplica);
+//        }
+        
+        // Apaga os valores dos campos ocultados
+        $('#oppid').val('').trigger("chosen:updated");
+        $('#mppid').val('').trigger("chosen:updated");
+        $('#ippid').val('').trigger("chosen:updated");
+        $('#mpnid').val('').trigger("chosen:updated");
+        $('#ipnid').val('').trigger("chosen:updated");
+        
+        
+        
+    } else {
+        // Exibe campos
+        $('.div_metas').show();
+        $('#span-area').show();
+        $('#span-segmento').show();
+    }
+}
+
