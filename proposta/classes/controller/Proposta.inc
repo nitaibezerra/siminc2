@@ -51,10 +51,6 @@ class Proposta_Controller_Proposta
     public function montarFormularioDetalhes($proid = null, $prdid = null)
     {
         global $simec;
-
-        $mPropostaDetalhe = new Proposta_Model_PropostaDetalhe($prdid);
-        if(!$mPropostaDetalhe->proid){ $mPropostaDetalhe->proid = $proid; }
-
         include_once APPRAIZ . 'proposta/modulos/principal/propostadetalhe_form.inc';
     }
 

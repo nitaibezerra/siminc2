@@ -1,6 +1,6 @@
 <?php
 /**
- * Constantes do sistema planacomorc.
+ * Constantes do sistema monitoramento.
  * $Id: _constantes.php 98005 2018-05-07 14:14:53Z Douglas Santana Fontes $
  */
 

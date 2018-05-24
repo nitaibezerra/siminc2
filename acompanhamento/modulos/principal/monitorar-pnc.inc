@@ -2,6 +2,8 @@
 
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+    $listaPerfis = pegaPerfilGeral();
+    
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     
     $mpnid = $_REQUEST['mpnid'];
@@ -332,6 +334,14 @@
                                         </div>
                                     </div>
                                 </fieldset>
+
+<!--                            <div class="form-group">
+                                <div class="text-center">
+                                    <?php if(!in_array(PFL_CONSULTA, $listaPerfis)): ?>
+                                        <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php endif; ?>
+                                </div>
+                            </div>-->
 
                                 <h1 id="form-h-2" tabindex="-1" class="title">Warning</h1>
                                 <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" style="display: none;" aria-hidden="true">

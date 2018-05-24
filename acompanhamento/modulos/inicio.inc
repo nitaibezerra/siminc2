@@ -17,6 +17,8 @@ switch ($_REQUEST['req']) {
 $mEmendas = new Emendas_Model_Emenda();
 $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
 
+$listaPerfis = pegaPerfilGeral();
+
 include_once APPRAIZ . "includes/library/simec/Grafico.php";
 include APPRAIZ . "includes/cabecalho.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
@@ -77,16 +79,29 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
                                 $total = 0;
 
                                 foreach($aPis as $dados){
-                                    $status = $dados['acoid'] ?
-                                        '<a href="?modulo=principal/monitorar-pi&acao=A&pliid=' . $dados['pliid'] . '"><span class="label label-primary">Preenchida</span></a>' :
-                                        '<a href="?modulo=principal/monitorar-pi&acao=A&pliid=' . $dados['pliid'] . '&suoid=' . $dados['suoid'] . '"><span class="label label-danger">Pendente</span></a>';
-                                    if($dados['oppcod']){
-                                        $aObjetivos[$dados['oppcod']] = $dados;
-                                    }
-                                    $total += $dados['valor'];
+                                        # Cria icones e url de acesso conforme o preenchimento.
+                                        if($dados['acoid']){
+                                            $url = '?modulo=principal/monitorar-pi&acao=A&pliid='. $dados['pliid'];
+                                            $icone = '<span class="label label-primary">Preenchida</span>';
+                                        } else {
+                                            $url = '?modulo=principal/monitorar-pi&acao=A&pliid='. $dados['pliid']. '&suoid='. $suoid;
+                                            $icone = '<span class="label label-danger">Pendente</span>';
+                                        }
+                                        
+                                        # Caso seja perfil PNC não exibe o link de acesso a pagina de edição
+                                        if(in_array(PFL_PNC, $listaPerfis)){
+                                            $botao = $icone;
+                                        } else {
+                                            $botao = '<a href="'. $url. '">'. $icone. '</a>';
+                                        }
+                                        
+                                        if($dados['oppcod']){
+                                            $aObjetivos[$dados['oppcod']] = $dados;
+                                        }
+                                        $total += $dados['valor'];
                                     ?>
                                     <tr>
-                                        <td><?php echo $status; ?></td>
+                                        <td><?php echo $botao; ?></td>
                                         <td>
                                             <a href="javascript: exibirEspelhoPi('<?php echo $dados['pliid']; ?>')"><?php echo $dados['plicod'] ?></a>
                                         </td>

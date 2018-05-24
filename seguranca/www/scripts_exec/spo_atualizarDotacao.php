@@ -15,7 +15,7 @@
  * <li>Envia e-mail com resultado da execução.</li></ol>
  *
  * @version $Id: spo_BaixarDadosFinanceirosSIOP.php 101880 2015-08-31 19:50:33Z maykelbraz $
- * @link http://simec.mec.gov.br/seguranca/scripts_exec/spo_BaixarDadosFinanceirosSIOP.php URL de execução.
+ * @link http://siminc2.cultura.gov.br/seguranca/scripts_exec/spo_atualizarDotacao.php URL de execução.
  */
 
 // -- Setup
@@ -640,6 +640,6 @@ if($corpoEmailV3){
     $remetente = '';
     $assunto = '[SIMINC 2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
-//ver($conteudo, d);
+//echo $conteudo; die;
     simec_email($remetente, $destinatario, $assunto, $conteudo);
 }

@@ -3787,9 +3787,14 @@ function pegaPerfilGeral($usucpf = null, $sisid = null){
 	}
 	else
 	{
-		$sql = "select pu.pflcod
-				  from seguranca.perfilusuario pu
-			inner join seguranca.perfil p on p.pflcod = pu.pflcod and pu.usucpf = '$usucpf' and p.sisid = $sisid and pflstatus = 'A'";
+		$sql = "SELECT
+                    pu.pflcod
+                FROM seguranca.perfilusuario pu
+                    JOIN seguranca.perfil p ON p.pflcod = pu.pflcod
+                        AND pu.usucpf = '$usucpf'
+                        AND p.sisid = '$sisid'
+                        AND pflstatus = 'A'
+        ";
 
 		$resultado = $db->carregar($sql);
         if (!$resultado) return false;
@@ -5329,6 +5334,49 @@ function buscarUsuarioPerfilPlanejamento(stdClass $filtro){
             us.suscod = 'A'
             AND u.suscod = 'A'
             AND p.pflstatus = 'A' $where
+    ";
+//ver($sql, d);
+    $listaUsuarioPlanejamento = $db->carregar($sql);
+    return $listaUsuarioPlanejamento;
+}
+
+/**
+ * Busca todos os usuários de um perfil especifico ou sistema.
+ * 
+ * @global cls_banco $db
+ * @param stdClass $filtro
+ * @return boolean/array
+ */
+function buscarUsuarioPerfilEmendas(stdClass $filtro){
+    global $db;
+    $where = '';
+    $where .= $filtro->sisid? " \n AND s.sisid = {$filtro->sisid}": NULL;
+    $where .= $filtro->pflcod? " \n AND pu.pflcod = {$filtro->pflcod}": NULL;
+    $where .= $filtro->ungcod? " \n AND ur.ungcod = '{$filtro->ungcod}'": NULL;
+    $sql = "
+        SELECT DISTINCT
+            u.usucpf,
+            u.usunome,
+            u.usuemail,
+            CASE WHEN LENGTH(u.usufoneddd) > 0 THEN
+                '(' || u.usufoneddd || ')' || u.usufonenum
+            ELSE
+                NULL
+            END AS telefone
+        FROM seguranca.sistema s
+            JOIN seguranca.usuario_sistema us USING(sisid)
+            JOIN seguranca.usuario u USING(usucpf)
+            JOIN seguranca.perfilusuario pu USING(usucpf)
+            JOIN seguranca.perfil p ON(pu.pflcod = p.pflcod AND p.sisid = s.sisid)
+            LEFT JOIN emendas.usuarioresponsabilidade ur ON(
+                u.usucpf = ur.usucpf
+                AND ur.pflcod = p.pflcod
+                AND ur.rpustatus = 'A')
+        WHERE
+            us.suscod = 'A'
+            AND u.suscod = 'A'
+            AND p.pflstatus = 'A'
+            $where
     ";
 //ver($sql, d);
     $listaUsuarioPlanejamento = $db->carregar($sql);
