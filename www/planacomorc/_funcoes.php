@@ -1838,7 +1838,7 @@ function buscarUmPTRES(stdClass $objFiltros) {
     global $db;
 //ver($objFiltros,d);
     /* Filtros */
-    $where .= $objFiltros->pliid ? " AND pip.pliid = ". (int)$objFiltros->pliid: NULL;
+    $where .= $objFiltros->pliid ? " AND ptrpli.pliid = ". (int)$objFiltros->pliid: NULL;
     $where .= $objFiltros->ptrid ? " AND ptr.ptrid = ". (int)$objFiltros->ptrid: NULL;
 
     $sql = "
@@ -1859,14 +1859,14 @@ function buscarUmPTRES(stdClass $objFiltros) {
         FROM monitora.ptres ptr
             JOIN monitora.acao aca on ptr.acaid = aca.acaid
             JOIN public.unidade uni on aca.unicod = uni.unicod
-            LEFT JOIN public.localizador loc ON aca.loccod = loc.loccod -- SELECT * FROM monitora.planoorcamentario   
+            LEFT JOIN public.localizador loc ON aca.loccod = loc.loccod
             LEFT JOIN monitora.programa prog ON aca.prgcod = prog.prgcod
             LEFT JOIN monitora.planoorcamentario po ON(
                 aca.acacod = po.acacod
                 AND aca.prgcod = po.prgcod
                 AND aca.unicod = po.unicod
                 AND ptr.plocod = po.plocodigo)
-            LEFT JOIN siafi.uo_ptrempenho pemp ON (pemp.ptres = ptr.ptres AND pemp.exercicio = ptr.ptrano AND pemp.unicod = ptr.unicod)
+            LEFT JOIN monitora.pi_planointernoptres ptrpli ON ptr.ptrid = ptrpli.ptrid
         WHERE
             ptr.ptrstatus = 'A'
             AND aca.prgano = '$objFiltros->exercicio'
