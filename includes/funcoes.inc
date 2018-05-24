@@ -5379,6 +5379,54 @@ function buscarUsuarioPerfilEmendas(stdClass $filtro){
 }
 
 /**
+ * Busca lista de ids de enquadramentos que estão configurados pra terem formulário
+ * de Pi/Pre-pi reduzidos.
+ * 
+ * @global object $db
+ * @param int $exercicio
+ * @return array
+ */
+function buscarListaCodigoEnquadramentoReduzido($exercicio) {
+    $lista = array();
+    global $db;
+    $sql = "
+        SELECT
+            eqdid
+        FROM monitora.pi_enquadramentodespesa
+        WHERE
+            eqdstatus = 'A'
+            AND eqdstreduzido = 'S'
+            AND eqdano = '". (int)$exercicio. "'
+    ";
+    
+    $listaConsulta = $db->carregar($sql);
+    if($listaConsulta){
+        foreach($listaConsulta as $interacao => $enquadramento){
+            $lista[] = $enquadramento['eqdid'];
+        }
+    }
+    
+    return $lista;
+}
+
+function buscarCodigoProdutoNaoAplica($exercicio) {
+    global $db;
+
+    $sql = "
+        SELECT
+            pprid AS codigo
+        FROM monitora.pi_produto
+        WHERE
+            prsano = '". (int)$exercicio. "'
+            AND pprstatus = 'A'
+            AND tipo = 'N'
+    ";
+    
+    $codigo = $db->pegaUm($sql);
+    return $codigo;
+}
+
+/**
  * Recebe o caractere que representa o sexo e retorna uma string com a descrição Masculino ou Feminino.
  * 
  * @param string $sexo 'M', 'F' ou Vazio
