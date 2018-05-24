@@ -5409,6 +5409,23 @@ function buscarListaCodigoEnquadramentoReduzido($exercicio) {
     return $lista;
 }
 
+function buscarCodigoProdutoNaoAplica($exercicio) {
+    global $db;
+
+    $sql = "
+        SELECT
+            pprid AS codigo
+        FROM monitora.pi_produto
+        WHERE
+            prsano = '". (int)$exercicio. "'
+            AND pprstatus = 'A'
+            AND tipo = 'N'
+    ";
+    
+    $codigo = $db->pegaUm($sql);
+    return $codigo;
+}
+
 /**
  * Recebe o caractere que representa o sexo e retorna uma string com a descrição Masculino ou Feminino.
  * 

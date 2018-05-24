@@ -10,6 +10,9 @@ function initPreplanointernoForm(){
     recuperarValoresLimitesPtres();
     recuperarValoresLimitesSubUnidade();
     // recuperarMetasEIniciativaPPA();
+    
+    controlarExibicaoFormularioReduzido();
+    controlarExibicaoUnidadeMedidaQuantidade($('#pprid').val());
  
     $('#eqdid').change(function(){
         $('#span-item').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-item&eqdid=' + $(this).val(), function(){
@@ -18,6 +21,9 @@ function initPreplanointernoForm(){
         
         // Exibe ou Oculta os campos do formulário de acordo com o enquadramento selecionado
         controlarExibicaoFormularioReduzido();
+        
+        $('#pprid').val(intProdNaoAplica).trigger("chosen:updated");
+        controlarExibicaoUnidadeMedidaQuantidade(intProdNaoAplica);
     });
 
     $('#eqdid, #suoid').change(function(){
@@ -39,6 +45,10 @@ function initPreplanointernoForm(){
 
     $('body').on('change', '#mpnid', function(){
         $('#span-indicadorpnc').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-indicadorpnc&mpnid=' + $(this).val());
+    });
+    
+    $('#pprid').change(function(){
+        controlarExibicaoUnidadeMedidaQuantidade($(this).val());
     });
 
     $('#oppid').change(function(){
@@ -80,6 +90,9 @@ function initPreplanointernoForm(){
             swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
             return false;
         }
+
+        controlarExibicaoFormularioReduzido();
+        controlarExibicaoUnidadeMedidaQuantidade($('#pprid').val());
 
         $('#formulario').find("button[type='submit']").click();
     });
@@ -198,30 +211,61 @@ function verificarFormularioReduzido(){
 function controlarExibicaoFormularioReduzido(){
     if(verificarFormularioReduzido()){
         // Oculta campos
-        $('.div_metas').hide('slow');
-        $('#span-area').hide('slow');
-        $('#span-segmento').hide('slow');
+        $('.div_metas').hide();
+        $('#span-area').hide();
+        $('#span-segmento').hide();
         
-        // Marca a opção produto com o valor padrão "Não se aplica" se não tiver valor marcado ainda.
-//        if($('#pprid').val() === ""){
-//            $('#pprid').val(intProdNaoAplica).trigger("chosen:updated");
-//            formatarTelaProdutoNaoAplica(intProdNaoAplica);
-//        }
-        
-        // Apaga os valores dos campos ocultados
-        $('#oppid').val('').trigger("chosen:updated");
-        $('#mppid').val('').trigger("chosen:updated");
+        // Retira obrigatoriedade e Apaga os valores dos campos ocultados
+        $('#oppid').attr('required', false); $('#oppid').val('').trigger("chosen:updated");
+        $('#mppid').attr('required', false); $('#mppid').val('').trigger("chosen:updated");
         $('#ippid').val('').trigger("chosen:updated");
-        $('#mpnid').val('').trigger("chosen:updated");
-        $('#ipnid').val('').trigger("chosen:updated");
-        
-        
-        
+        $('#mpnid').attr('required', false); $('#mpnid').val('').trigger("chosen:updated");
+        $('#ipnid').attr('required', false); $('#ipnid').val('').trigger("chosen:updated");
+        // Area
+        $('#mdeid').attr('required', false); $('#mdeid').val('').trigger("chosen:updated");
+        // Segmento
+        $('#neeid').attr('required', false); $('#neeid').val('').trigger("chosen:updated");
     } else {
         // Exibe campos
         $('.div_metas').show();
         $('#span-area').show();
         $('#span-segmento').show();
+        
+        // Coloca obrigatoriedade
+        $('#oppid').attr('required', 'required');
+        $('#mppid').attr('required', 'required');
+        $('#mpnid').attr('required', 'required');
+        $('#ipnid').attr('required', 'required');
+        //'required'
+        $('#mdeid').attr('required', 'required');
+        // Seg'required'
+        $('#neeid').attr('required', 'required');
+    }
+}
+
+/**
+ * Formata a tela para exibir ou não as opções Unidade de Medida, Quantidade quando o usuário
+ * selecionar "Não se aplica".
+ * 
+ * @returns VOID
+ */
+function controlarExibicaoUnidadeMedidaQuantidade(codigo){
+    if(codigo == intProdNaoAplica){
+        // Oculta campos
+        $('#span_unidade_medida').hide();
+        $('#span_quantidade').hide();
+        
+        // Retira obrigatoriedade e Apaga o preenchimento dos campos ocultados
+        $('#pumid').attr('required', false); $('#pumid').val('').trigger("chosen:updated");
+        $('#pliquantidade').attr('required', false); $('#pliquantidade').val('');
+    } else {
+        // Exibe os campos
+        $('#span_unidade_medida').show();
+        $('#span_quantidade').show();
+        
+        // Retira obrigatoriedade e Apaga o preenchimento dos campos ocultados
+        $('#pumid').attr('required', 'required');
+        $('#pliquantidade').attr('required', 'required');
     }
 }
 
