@@ -1,6 +1,8 @@
 <?php
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+    $listaPerfis = pegaPerfilGeral();
+    
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     switch ($_REQUEST['req']) {
         case 'salvar':
@@ -51,7 +53,7 @@
 
     $mJanela = new Acompanhamento_Model_Janela($janid);
 
-    $podeEditar = $mJanela->isAtual() == 't' ? 1 : 0;
+    $podeEditar = in_array(PFL_CONSULTA, $listaPerfis)? 0:($mJanela->isAtual() == 't'?1 :0);
 
     // Recuperando Meta Selecionada
     $mppid = $mAcompanhamento->mppid ? $mAcompanhamento->mppid : $_REQUEST['mppid'];

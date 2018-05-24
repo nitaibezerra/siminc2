@@ -30,12 +30,26 @@
                     </thead>
                     <tbody>
                     <?php foreach($aMetasPpa as $dados){
+                        
+                        if($dados['acoid']){
+                            $url = '?modulo=principal/monitorar-ppa&acao=A&acoid='. $dados['acoid'];
+                            $icone = '<span class="label label-primary">Preenchida</span>';
+                        } else {
+                            $url = '?modulo=principal/monitorar-ppa&acao=A&mppid='. $dados['mppid']. '&suoid='. $dados['suoid']. '&janid='. $janid;
+                            $icone = '<span class="label label-danger">Pendente</span>';
+                        }
                         $status = $dados['acoid'] ?
                             '<a href="?modulo=principal/monitorar-ppa&acao=A&acoid=' . $dados['acoid'] . '"><span class="label label-primary">Preenchida</span></a>' :
-                            '<a href="?modulo=principal/monitorar-ppa&acao=A&mppid=' . $dados['mppid'] . '&suoid=' . $dados['suoid'] . '&janid=' . $janid . '"><span class="label label-danger">Pendente</span></a>';
-                        ?>
+                            '<a href="?modulo=principal/monitorar-ppa&acao=A&mppid=' . $dados['mppid'] . '&suoid=' . $dados['suoid'] . '&janid=' . $janid . '"><span class="label label-danger">Pendente</span></a>';                        
+                        # Caso seja perfil PNC não exibe o link de acesso a pagina de edição
+                        if(in_array(PFL_PNC, $listaPerfis)){
+                            $botao = $icone;
+                        } else {
+                            $botao = '<a href="'. $url. '">'. $icone. '</a>';
+                        }
+                    ?>
                         <tr>
-                            <td class="text-center"><?php echo $status; ?></td>
+                            <td class="text-center"><?php echo $botao; ?></td>
                             <td>
                                 <?php
                                 echo $dados['mppcod'] . " - " . $dados['mppdsc'];

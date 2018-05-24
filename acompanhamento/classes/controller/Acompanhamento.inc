@@ -108,6 +108,7 @@ class Acompanhamento_Controller_Acompanhamento
 
     public function listarMetasPpa($suoid, $janid = null)
     {
+        $listaPerfis = pegaPerfilGeral();
         $mAcompanhamento = new Acompanhamento_Model_Acompanhamento();
 
         $mJanela = new Acompanhamento_Model_Janela();

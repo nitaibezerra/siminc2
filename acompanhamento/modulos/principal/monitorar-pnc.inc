@@ -1,6 +1,8 @@
 <?php
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+    $listaPerfis = pegaPerfilGeral();
+    
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     switch ($_REQUEST['req']) {
         case 'salvar':
@@ -208,7 +210,11 @@
                         </div>
                         <div class="ibox-content">
                             <?php
-
+                            
+                            if(in_array(PFL_CONSULTA, $listaPerfis)){
+                                $simec->setPodeEditar(0);
+                            }
+                            
                             echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
                             echo $simec->data('acodata', 'Dt. Referência', $mAcompanhamento->acodata, ['required']);
                             echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise);
@@ -222,7 +228,9 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php if(!in_array(PFL_CONSULTA, $listaPerfis)): ?>
+                                        <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php endif; ?>
                                     <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                     <?php if($mAcompanhamento->acoid){ ?>
     <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $mAcompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
@@ -269,7 +277,9 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php if(!in_array(PFL_CONSULTA, $listaPerfis)): ?>
+                                        <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 

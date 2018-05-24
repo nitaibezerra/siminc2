@@ -195,19 +195,57 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         return $sql;
     }
 
+    /**
+     * Função que retorna a lista de Unidade vinculadas ao tipo de perfil.
+     *
+     * @param null $usucpf
+     * @param null $exercicio
+     * @return array
+     */
     public function recuperarPorUsuario($usucpf = null, $exercicio = null)
     {
         $perfis = pegaPerfilGeral();
         $usucpf = $usucpf ? $usucpf : $_SESSION['usucpf'];
         $exercicio = $exercicio ? $exercicio : $_SESSION['exercicio'];
 
-        $sql = "select suo.suoid, suo.suosigla, suo.suonome, suo.unoid, suo.unosigla, suo.unonome
-                from public.vw_subunidadeorcamentaria suo
-                where suo.prsano = '$exercicio'
-                and suo.suostatus = 'A'
-                and suo.unofundo = 'f'
-                order by suo.unosigla";
+        # Se o perfil for de Unidade.
+        if (in_array(PFL_UNIDADE, $perfis)) {
 
+            $sql = "SELECT
+                        suo.suoid,
+                        suo.suosigla,
+                        suo.suonome,
+                        suo.unoid,
+                        suo.unosigla,
+                        suo.unonome
+                    FROM public.vw_subunidadeorcamentaria suo
+                        JOIN acompanhamento.usuarioresponsabilidade usr ON usr.ungcod = suo.suocod
+                    WHERE
+                        suo.prsano = '$exercicio'
+                        AND suo.suostatus = 'A'
+                        AND suo.unofundo = 'f'
+                        AND usr.usucpf = '$usucpf'
+                        AND usr.rpustatus = 'A'
+                    ORDER BY suo.unosigla
+            ";
+        } else {
+            $sql = "SELECT
+                        suo.suoid,
+                        suo.suosigla,
+                        suo.suonome,
+                        suo.unoid,
+                        suo.unosigla,
+                        suo.unonome
+                    FROM
+                        public.vw_subunidadeorcamentaria suo
+                    WHERE
+                        suo.prsano = '$exercicio'
+                        AND suo.suostatus = 'A'
+                        AND suo.unofundo = 'f'
+                    ORDER BY suo.unosigla
+            ";
+    }
+//ver($sql,d);
         $dados = $this->carregar($sql);
 
         $aUnidades = [];

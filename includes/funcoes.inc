@@ -3787,9 +3787,14 @@ function pegaPerfilGeral($usucpf = null, $sisid = null){
 	}
 	else
 	{
-		$sql = "select pu.pflcod
-				  from seguranca.perfilusuario pu
-			inner join seguranca.perfil p on p.pflcod = pu.pflcod and pu.usucpf = '$usucpf' and p.sisid = $sisid and pflstatus = 'A'";
+		$sql = "SELECT
+                    pu.pflcod
+                FROM seguranca.perfilusuario pu
+                    JOIN seguranca.perfil p ON p.pflcod = pu.pflcod
+                        AND pu.usucpf = '$usucpf'
+                        AND p.sisid = '$sisid'
+                        AND pflstatus = 'A'
+        ";
 
 		$resultado = $db->carregar($sql);
         if (!$resultado) return false;
