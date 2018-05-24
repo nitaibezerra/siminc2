@@ -65,6 +65,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
         'acoanalise' => null,
         'claid' => null,
         'acoprovidencias' => null,
+        'acojustificativa' => null,
         'suoid' => null,
         'mppid' => null,
         'unocod' => null,
@@ -465,7 +466,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                 AND janid = ". (int)$filtro->janid. "
                 AND unocod = '". (int)$filtro->unocod. "'
                 AND suocod = '". (int)$filtro->suocod. "'
-                AND ipncod = '". (int)$filtro->ipncod. "'
+                AND ipncod = '". $filtro->ipncod. "'
                 AND prsano = '". (int)$filtro->prsano. "'
         ";
         

@@ -10,6 +10,7 @@
 
     $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($mAcompanhamento->acoid);
 
+    $listaPerfis = pegaPerfilGeral();
 ?>
 
 <script src="../library/liquify/snap.svg.js"></script>
@@ -113,6 +114,10 @@
                         </div>
                         <div class="ibox-content">
                             <?php
+                                # Caso o usuário logado esteja com perfil de consulta o formulario apresenta como somente leitura
+                                if(in_array(PFL_CONSULTA, $listaPerfis)){
+                                    $simec->setPodeEditar(0);
+                                }
                                 echo $simec->valor('acoquantidade', 'Executado', $mAcompanhamento->acoquantidade, ['required']);
                                 echo $simec->textarea('acoanalise', 'Análise Situacional', $mAcompanhamento->acoanalise, ['rows'=>6]);
                                 echo $simec->select('claid', 'Classificação', $mAcompanhamento->claid, (new Acompanhamento_Model_Classificacao())->recuperarSqlCombo(null, ['tipid = ' . Acompanhamento_Model_Tipo::K_TIPO_PI]));
@@ -124,7 +129,12 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php
+                                        # Caso o usuário logado não esteja com perfil de consulta o formulario exibe o botão de salvar
+                                        if(!in_array(PFL_CONSULTA, $listaPerfis)):
+                                    ?>
+                                        <button class="btn btn-primary" type="button" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <?php endif; ?>
                                     <a href="?modulo=inicio&acao=C" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                     <?php if($mAcompanhamento->acoid){ ?>
     <!--                                        <a href="?modulo=apoio/acompanhamento_form&acao=A&req=excluir&acoid=--><?php //echo $mAcompanhamento->acoid; ?><!--" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>-->
@@ -171,7 +181,12 @@
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <input type="button" id="btn_inserir_anexos_acompanhamento" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php
+                                        # Caso o usuário logado não esteja com perfil de consulta o formulario exibe o botão de salvar
+                                        if(!in_array(PFL_CONSULTA, $listaPerfis)):
+                                    ?>
+                                        <input type="button" id="btn_inserir_anexos_acompanhamento" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 

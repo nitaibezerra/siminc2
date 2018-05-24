@@ -20,7 +20,15 @@ class Acompanhamento_Controller_Acompanhamento
 
             $mAcompanhamento->prsano = $mAcompanhamento->prsano ? $mAcompanhamento->prsano : $_SESSION['exercicio'];
 
-            $mAcompanhamento->salvar(null, null, ['acoanalise', 'acoprovidencias', 'claid']);
+            $mAcompanhamento->salvar(null, null, [
+                'acoanalise',
+                'acoprovidencias',
+                'acojustificativa',
+                'claid',
+                'unocod',
+                'suocod',
+                'ipncod'
+            ]);
 
             $mAcompanhamento->associarAnexo($dados);
             $this->_vincularMedidas($mAcompanhamento->acoid, $dados);
@@ -33,6 +41,40 @@ class Acompanhamento_Controller_Acompanhamento
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+    
+    public function salvarIndicadorPnc($dados)
+    {
+//ver($dados, d);
+        try {
+            $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($dados['acoid']);
+            $mAcompanhamento->popularDadosObjeto($dados);
+
+            $mAcompanhamento->acoquantidade = $mAcompanhamento->acoquantidade? desformata_valor($mAcompanhamento->acoquantidade) : null;
+            $mAcompanhamento->acodata = $mAcompanhamento->acodata?formata_data_sql($mAcompanhamento->acodata): null;
+
+//            $mAcompanhamento->prsano = $mAcompanhamento->prsano? $mAcompanhamento->prsano: $_SESSION['exercicio'];
+
+            $mAcompanhamento->salvar(null, null, [
+                'acoanalise',
+                'acoprovidencias',
+                'acojustificativa',
+                'claid',
+                'suoid'
+            ]);
+
+//            $this->_gravarHistorico($mAcompanhamento->acoid);
+
+            $mAcompanhamento->commit();
+//ver($mAcompanhamento->acoid, d);
+            return array(
+                'success' => utf8_encode('Operação realizada com sucesso!'),
+                'acoid' => $mAcompanhamento->acoid
+            );
+        } catch (Exception $e){
+            $mAcompanhamento->rollback();
+            return array('error' => utf8_encode('Ocorreu um erro ao executar operação!'));
+        }
+    }
     
     public function excluir($acoid)
     {
@@ -116,6 +158,7 @@ class Acompanhamento_Controller_Acompanhamento
 
     public function listarMetasPpa($suoid, $janid = null)
     {
+        $listaPerfis = pegaPerfilGeral();
         $mAcompanhamento = new Acompanhamento_Model_Acompanhamento();
 
         $mJanela = new Acompanhamento_Model_Janela();

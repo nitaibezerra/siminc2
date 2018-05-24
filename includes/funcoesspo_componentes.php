@@ -796,9 +796,13 @@ HTML;
                 break;
             case 'confirmar':
             case 'salvar':
+                $idSalvar = "";
+                if($opcoes['id-salvar']){
+                    $idSalvar = 'id="'. $opcoes['id-salvar']. '"';
+                }
                 $label = ucfirst($botao);
                 echo <<<HTML
-                <button type="button" class="btn btn-primary btn-{$botao}">{$label}</button>
+                <button type="button" class="btn btn-primary btn-{$botao}" $idSalvar >{$label}</button>
 HTML;
                 break;
             case 'fechar':

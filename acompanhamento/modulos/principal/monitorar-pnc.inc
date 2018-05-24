@@ -2,6 +2,8 @@
 
     include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
+    $listaPerfis = pegaPerfilGeral();
+    
     $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
     
     $mpnid = $_REQUEST['mpnid'];
@@ -9,6 +11,13 @@
     switch ($_REQUEST['req']) {
         case 'salvar':
             $cAcompanhamento->salvar($_REQUEST);
+        die;
+        case 'acompanhamento-indicador-pnc-form':
+            include_once APPRAIZ. 'acompanhamento/modulos/principal/acompanhamento_indicador_pnc_form.inc';
+        die;
+        case 'salvar-acompanhamento-indicador-pnc':
+            $resultado = $cAcompanhamento->salvarIndicadorPnc($_REQUEST);
+            echo json_encode($resultado);
         die;
         case 'excluir':
             $cAcompanhamento->excluir($_REQUEST['acoid']);
@@ -260,7 +269,7 @@
                                                         <?php endfor; ?>
                                                     </tr>
                                                 </thead>
-                                                <?php foreach ($listaIndicadorPnc as $indicador): ?>
+                                                <?php foreach($listaIndicadorPnc as $indicador): ?>
                                                     <tbody>
                                                         <tr>
                                                             <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
@@ -325,6 +334,14 @@
                                         </div>
                                     </div>
                                 </fieldset>
+
+<!--                            <div class="form-group">
+                                <div class="text-center">
+                                    <?php if(!in_array(PFL_CONSULTA, $listaPerfis)): ?>
+                                        <input type="button" id="btn_inserir_anexos" title="Inserir Anexos" value="Inserir Anexos" class="btn btn-info"/>
+                                    <?php endif; ?>
+                                </div>
+                            </div>-->
 
                                 <h1 id="form-h-2" tabindex="-1" class="title">Warning</h1>
                                 <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" style="display: none;" aria-hidden="true">
@@ -467,8 +484,73 @@
     </div>
 </div>
 
+<!-- Modal de Cadastro de Indicador -->
+<div class="row">
+    <div class="col-md-6">
+        <div id="div_modal_cadastro_indicador" class="modal fade">
+            <div class="modal_dialog_upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Cadastro de acompanhamento do Indicador PNC</h4>
+                    </div>
+                    <div id="div_modal_cadastro_indicador_body" class="modal-body">
+                        
+                        <!-- Formulario de indicador -->
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" id="Salvar-indicador">Salvar</button>
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+    bootstrapPopup(
+        "Cadastro de acompanhamento do Indicador PNC",
+        'div_modal_acompanhamento_indicador',
+        '',
+        array(
+            'salvar',
+            'fechar'),
+        array(
+            'tamanho' => 'lg'
+        ));
+?>
+
 <script>
     $(function(){
+        
+        $('#div_modal_acompanhamento_indicador').find('.btn-salvar').click(function(){
+            $('#formulario-acompanhamento-indicador').find('[type="submit"]').trigger('click');
+        });
+        
+        $('.editar_indicador').click(function(){
+            var acoid = $(this).attr('data-acoid');
+            var janid = $(this).attr('data-janid');
+            var unocod = $(this).attr('data-unocod');
+            var suocod = $(this).attr('data-suocod');
+            var ipncod = $(this).attr('data-ipncod');
+            var prsano = $(this).attr('data-prsano');
+            var url = '?modulo=principal/monitorar-pnc&acao=A'+
+                '&req=acompanhamento-indicador-pnc-form'+
+                '&acoid='+ acoid+
+                '&janid='+ janid+
+                '&unocod='+ unocod+
+                '&suocod='+ suocod+
+                '&ipncod='+ ipncod+
+                '&prsano='+ prsano;
+            
+            $('#div_modal_acompanhamento_indicador .modal-body').empty();
+            $('#div_modal_acompanhamento_indicador .modal-body').load(url);
+            $('#div_modal_acompanhamento_indicador').modal();
+            return false;
+        });
+        
         $('#claid').change(function(){
             $.ajax({
                 url: '?modulo=principal/monitorar-pnc&acao=A&req=carregarMedida&claid=' + $(this).val(),
