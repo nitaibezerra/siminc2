@@ -43,6 +43,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                                # Inicialização das variáveis do totalizador dos dados.
+                                $totalQtdPo = 0;
+                                $totalQtdExp = 0;
+                                $totalCustoT = 0;
+                                $totalCustoExp = 0;
+                            ?>
+
                             <?php foreach($aProposta as $dados){ ?>
                                 <tr>
                                     <td class="text-center">
@@ -57,9 +65,26 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td align="right"><?php echo number_format($dados['prdvalor'], 0, ',', '.'); ?></td>
                                     <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 0, ',', '.'); ?></td>
                                 </tr>
-                            <?php } ?>        
+                            <?php
+                                # Soma dos Totalizadores.
+                                $totalQtdPo += (int)$dados['proquantidade'];
+                                $totalQtdExp +=  (int)$dados['proquantidadeexpansao'];
+                                $totalCustoT +=  (int)$dados['prdvalor'];
+                                $totalCustoExp +=  (int)$dados['prdvalorexpansao'];
+                            ?>
+                            <?php } ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" style="vertical-align: middle; text-align: right"><h5>Total</h5></td>
+                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalQtdPo , 0, ',', '.'); ?></td>
+                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalQtdExp , 0, ',', '.'); ?></td>
+                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalCustoT,0,',','.'); ?></td>
+                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalCustoExp,0,',','.'); ?></td>
+                                </tr>
+                            </tfoot>
                         </table>
+
                     </div>
                 </div>
             </div>
