@@ -65,6 +65,8 @@ switch($_REQUEST['req']) {
 $perfis = pegaPerfilGeral();
 
 $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
+$listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
+$codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -111,8 +113,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="ibox-content">
                         <?php
                             echo $simec->select('pprid', 'Produto', $mPrePlanoInterno->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(), ['required']);
-                            echo $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']);
-                            echo $simec->valor('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required']);
+                            echo '<span id="span_unidade_medida">'. $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo '<span id="span_quantidade">'. $simec->valor('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required']). '</span>';
                         ?>
                     </div>
                 </div>
@@ -216,7 +218,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
             <div class="col-md-6">
 
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins div_metas">
                     <div class="ibox-title">
                         <h5>Metas</h5>
                     </div>
@@ -245,9 +247,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                        echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
-                        echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                            echo '<span id="span-area">'. $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                         ?>
                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
                             <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
@@ -277,9 +279,12 @@ include APPRAIZ . "includes/cabecalho.inc";
     </form>
 </div>
 
-<?php bootstrapPopup('Importar de PI ' . date('Y'), 'preplanointerno_modal', '', array('salvar'), array('tamanho' => 'lg')); ?>
+<?php bootstrapPopup('Importar de PI ' . date('Y'), 'preplanointerno_modal', '', array('fechar'), array('tamanho' => 'lg')); ?>
 
 <script>
+    
+    listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
+    intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
 
     $(document).ready(function(){
         initPreplanointernoForm();

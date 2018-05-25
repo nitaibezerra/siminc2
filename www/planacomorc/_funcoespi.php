@@ -2271,46 +2271,6 @@ function buscarCodigoEnquadramento($exercicio, $codigo) {
     return $codigoFinalistico;
 }
 
-function buscarCodigoProdutoNaoAplica($exercicio) {
-    global $db;
-
-    $sql = "
-        SELECT
-            pprid AS codigo
-        FROM monitora.pi_produto
-        WHERE
-            prsano = '". (int)$exercicio. "'
-            AND pprstatus = 'A'
-            AND tipo = 'N'
-    ";
-    
-    $codigo = $db->pegaUm($sql);
-    return $codigo;
-}
-
-function buscarListaCodigoEnquadramentoReduzido($exercicio) {
-    $lista = array();
-    global $db;
-    $sql = "
-        SELECT
-            eqdid
-        FROM monitora.pi_enquadramentodespesa
-        WHERE
-            eqdstatus = 'A'
-            AND eqdstreduzido = 'S'
-            AND eqdano = '". (int)$exercicio. "'
-    ";
-    
-    $listaConsulta = $db->carregar($sql);
-    if($listaConsulta){
-        foreach($listaConsulta as $interacao => $enquadramento){
-            $lista[] = $enquadramento['eqdid'];
-        }
-    }
-    
-    return $lista;
-}
-
 function inativarPI($dados) {
     global $db;
     $sql = <<<DML
