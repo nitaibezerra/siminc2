@@ -581,7 +581,7 @@ function enviarEmailPreenchimentoUnidade($benid){
 function enviarEmailDevolvidoCorrecao($benid){
     global $db;
     
-    $acao = "Enviado para Preenchimento da Unidade";
+    $acao = "Devolvido para Correção";
     
     # Buscar dados do PI para o corpo do e-mail
     $modelBeneficiario = new Emendas_Model_Beneficiario();
@@ -649,7 +649,7 @@ function enviarEmailDevolvidoCorrecao($benid){
 function enviarEmailGerarPi($benid){
     global $db;
     
-    $acao = "Enviado para Preenchimento da Unidade";
+    $acao = "PI Gerado";
     
     # Buscar dados do PI para o corpo do e-mail
     $modelBeneficiario = new Emendas_Model_Beneficiario();
