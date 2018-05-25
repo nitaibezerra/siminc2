@@ -1918,7 +1918,9 @@ function enviarEmailAprovacao($pliid){
     
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
+    $listaDestinatario = array_merge(
+        $listaUsuariosPlanejamento? $listaUsuariosPlanejamento: array(),
+        $listaUsuariosResponsaveisDoPi);
 
 //ver(
 //array(
@@ -1980,7 +1982,9 @@ function enviarEmailCorrecao($pliid){
 
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatario = array_merge($listaUsuariosUnidadeDoPi, $listaUsuariosResponsaveisDoPi);
+    $listaDestinatario = array_merge(
+        $listaUsuariosUnidadeDoPi? $listaUsuariosUnidadeDoPi: array(),
+        $listaUsuariosResponsaveisDoPi);
 
 //ver(
 //array(
@@ -2044,7 +2048,9 @@ function enviarEmailAprovado($pliid){
 
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatarioUsuariosTecnicos = array_merge($listaUsuariosPlanejamento, $listaUsuariosUnidadeDoPi);
+    $listaDestinatarioUsuariosTecnicos = array_merge(
+        $listaUsuariosPlanejamento? $listaUsuariosPlanejamento: array(),
+        $listaUsuariosUnidadeDoPi? $listaUsuariosUnidadeDoPi: array());
     
     $listaDestinatario = array_merge($listaDestinatarioUsuariosTecnicos, $listaUsuariosResponsaveisDoPi);
 

@@ -59,22 +59,21 @@ function posAcaoGerarPi($benid){
         associarFuncionalSubunidade((object)$beneficiario);
         # Adapta informações de Emenda e Beneficiario para Salvar o PI.
         $pi = adaptarBeneficioPi((object)$beneficiario);
-//ver($pi, d);
+
         # Salva os dados de PI
         $pliid = salvarPI((array)$pi, TRUE);
         # Salva associação entre o Beneficiario e o PI salvo.
         $modelBeneficiario = new Emendas_Model_Beneficiario($benid);
         $modelBeneficiario->pliid = $pliid;
         $modelBeneficiario->salvar();
-//ver($pliid, WF_TPDID_PLANEJAMENTO_PI, AED_ENVIAR_APROVACAO, d);
+
         $tipoFluxoFNC = verificarPiFnc($pliid);
-//var_dump($tipoFluxoFNC); die;
+
         if($tipoFluxoFNC){
             # Gera número de documento pra workflow
             $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI_FNC);
             # Altera a situação do PI pra Em Análise
             $resultado = wf_alterarEstado($docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, 'PI Gerado pelo Emendas', array('pliid' => $pliid));
-//ver($pliid, $docid, AED_SELECIONAR_PROJETO_EMENDAS_FNC, $resultado, d);
         } else {
             # Gera número de documento pra workflow
             $docid = pegarDocidPi($pliid, WF_TPDID_PLANEJAMENTO_PI);
