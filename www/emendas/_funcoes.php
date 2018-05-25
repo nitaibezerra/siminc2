@@ -566,7 +566,7 @@ function enviarEmailPreenchimentoUnidade($benid){
         enviar_email(
             array(
                 # Remetente
-                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Emendas',
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
@@ -634,7 +634,7 @@ function enviarEmailDevolvidoCorrecao($benid){
         enviar_email(
             array(
                 # Remetente
-                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Emendas',
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
@@ -701,7 +701,7 @@ function enviarEmailGerarPi($benid){
         enviar_email(
             array(
                 # Remetente
-                'nome' => SIGLA_SISTEMA. ' - SPOA - Planejamento Orçamentário',
+                'nome' => SIGLA_SISTEMA. ' - SPOA - Emendas',
                 'email' => $_SESSION['email_sistema']
             ),
             $listaDestinatario,
