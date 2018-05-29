@@ -397,34 +397,76 @@ class Pi_PlanoInterno extends Modelo
     public function recuperarDadosFncPorAcao($exercicio)
     {
 
-        $sql = "SELECT  distinct 'CUSTEIO' tipo, suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc,
-                        ptr.ptrdotacaocusteio dotacao
-                from public.vw_subunidadeorcamentaria suo
-                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
-                    inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
-                    inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
-
-                    left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
-                where suo.suostatus = 'A'
-                and suo.unofundo = 't'
-                and suo.suocod not in ('203003', '420017')
-                and suo.prsano = '$exercicio'
-                union
-                SELECT  distinct 'CAPITAL' tipo, suo.unoid, suo.unocod, suo.unosigla, suo.unonome, lmu.lmuvlr, lmu.lmuid, psu.ptrid, vptr.funcional, vptr.acatitulo, vptr.irpcod, vptr.plodsc,
-                        ptr.ptrdotacaocapital dotacao
-                from public.vw_subunidadeorcamentaria suo
-                    inner join spo.ptressubunidade psu on psu.suoid = suo.suoid
-                    -- ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC
-                    inner join monitora.vw_ptres vptr on vptr.ptrid = psu.ptrid AND vptr.ptrano = suo.prsano
-                    inner join monitora.ptres ptr on ptr.ptrid = vptr.ptrid
-
-                    left join planacomorc.unidadegestora_limite lmu on lmu.unoid = suo.unoid AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
-                where suo.suostatus = 'A'
-                and suo.unofundo = 't'
-                and suo.suocod not in ('203003', '420017')
-                and suo.prsano = '$exercicio'
-                ORDER BY funcional, tipo desc";
+        $sql = "SELECT DISTINCT 'CUSTEIO'
+                        tipo,
+                    suo.unoid,
+                    suo.unocod,
+                    suo.unosigla,
+                    suo.unonome,
+                    lmu.lmuvlr,
+                    lmu.lmuid,
+                    psu.ptrid,
+                    vptr.funcional,
+                    vptr.acatitulo,
+                    vptr.irpcod,
+                    vptr.plodsc,
+                    ptr.ptrdotacaocusteio dotacao
+                FROM
+                    public.vw_subunidadeorcamentaria suo
+                    JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid /* ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC */
+                    JOIN monitora.vw_ptres vptr ON(
+                    vptr.ptrid = psu.ptrid
+                    AND vptr.ptrano = suo.prsano
+                    )
+                    JOIN monitora.ptres ptr ON ptr.ptrid = vptr.ptrid
+                    LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
+                    lmu.unoid = suo.unoid
+                        AND lmu.lmustatus = 'A'
+                        AND lmu.prsano = suo.prsano
+                    )
+                WHERE
+                    suo.suostatus = 'A'
+                    AND vptr.irpcod <> '6'
+                    AND suo.unofundo = 't'
+                    AND suo.suocod NOT IN ('203003', '420017')
+                    AND suo.prsano = '2018'
+                UNION
+                SELECT
+                    DISTINCT 'CAPITAL' tipo,
+                    suo.unoid,
+                    suo.unocod,
+                    suo.unosigla,
+                    suo.unonome,
+                    lmu.lmuvlr,
+                    lmu.lmuid,
+                    psu.ptrid,
+                    vptr.funcional,
+                    vptr.acatitulo,
+                    vptr.irpcod,
+                    vptr.plodsc,
+                    ptr.ptrdotacaocapital dotacao
+                FROM
+                    public.vw_subunidadeorcamentaria suo
+                    JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid /* ESSE JOIN DE PTRES COM A VW_PTRES É NECESSÁRIO PARA RECUPERAR O VALOR DE DOTAÇÃO E CUSTEIO CORRETO EM CASO DO PNC */
+                    JOIN monitora.vw_ptres vptr ON(
+                    vptr.ptrid = psu.ptrid
+                        AND vptr.ptrano = suo.prsano
+                    )
+                    JOIN monitora.ptres ptr ON ptr.ptrid = vptr.ptrid
+                    LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
+                    lmu.unoid = suo.unoid
+                        AND lmu.lmustatus = 'A'
+                        AND lmu.prsano = suo.prsano
+                    )
+                WHERE
+                    suo.suostatus = 'A'
+                    AND vptr.irpcod <> '6'
+                    AND suo.unofundo = 't'
+                    AND suo.suocod NOT IN ('203003', '420017')
+                    AND suo.prsano = '2018'
+                ORDER BY
+                    funcional,
+                    tipo DESC";
 
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
