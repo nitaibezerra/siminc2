@@ -39,7 +39,7 @@
 
 
         toggleDelegacao();
-        $('#delegacao').change(function(){
+        $('#radioDelegacao').change(function(){
             toggleDelegacao();
         });
 
@@ -75,7 +75,13 @@
 
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
-            carregarMetasPPA($(this).val(), null, $('#ungcod').val());
+            if( $('#radioDelegacao').prop('checked') && $('#delegacao').val() ){
+                var suoids = $('#delegacao').val();
+                suoids.push($('#ungcod').val());
+                carregarMetasPPA($(this).val(), null, suoids);
+            } else {
+                carregarMetasPPA($(this).val(), null, $('#ungcod').val());
+            }
             carregarIniciativaPPA($(this).val());
         });
 

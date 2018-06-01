@@ -77,11 +77,19 @@ switch ($_REQUEST['req']) {
         }
         die;
     case 'carregarMetasPPA':
-        $sql = (new Public_Model_MetaPpa())->recuperarSqlCombo(NULL, array(
-            'exercicio' => $_SESSION['exercicio'],
-            'suoid' => $_REQUEST['suoid'],
-            'oppid' => $_REQUEST['oppid']));
-        $listaMetaPpa = $db->carregar($sql);
+        if( is_array($_REQUEST['suoid']) ){
+			$sql = (new Public_Model_MetaPpa())->recuperarSqlMultiplasUnidadesCombo(NULL, array(
+				'exercicio' => $_SESSION['exercicio'],
+				'suoid' => $_REQUEST['suoid'],
+				'oppid' => $_REQUEST['oppid']));
+			$listaMetaPpa = $db->carregar($sql);
+        } else {
+			$sql = (new Public_Model_MetaPpa())->recuperarSqlCombo(NULL, array(
+				'exercicio' => $_SESSION['exercicio'],
+				'suoid' => $_REQUEST['suoid'],
+				'oppid' => $_REQUEST['oppid']));
+			$listaMetaPpa = $db->carregar($sql);
+        }
 
         if($listaMetaPpa){
             echo simec_json_encode($listaMetaPpa);
@@ -667,7 +675,13 @@ include APPRAIZ . "includes/cabecalho.inc";
 
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
-            carregarMetasPPA($(this).val(), null, $('#suoid').val());
+            if( $('#radioDelegacao').prop('checked') && $('#delegacao').val() ){
+                var suoids = $('#delegacao').val();
+                suoids.push($('#suoid').val());
+                carregarMetasPPA($(this).val(), null, suoids);
+            } else {
+                carregarMetasPPA($(this).val(), null, $('#suoid').val());
+            }
             carregarIniciativaPPA($(this).val());
         });
 
@@ -784,22 +798,22 @@ include APPRAIZ . "includes/cabecalho.inc";
     function carregarMetasPPA(oppid, mppid, suoid) {
         var requisicao = '?modulo=principal/beneficiario_form&acao=A';
 
-        carregarSelectPorJson(
-            requisicao,
-            '#mppid',
-            'codigo',
-            'descricao',
-            {
-                'req': 'carregarMetasPPA',
-                'oppid': oppid,
-                'suoid': suoid
-            },
-            'Selecione',
-            mppid,
-            function(){
-                $(".chosen-select").chosen();
-            }
-        );
+            carregarSelectPorJson(
+                requisicao,
+                '#mppid',
+                'codigo',
+                'descricao',
+                {
+                    'req': 'carregarMetasPPA',
+                    'oppid': oppid,
+                    'suoid': suoid
+                },
+                'Selecione',
+                mppid,
+                function(){
+                    $(".chosen-select").chosen();
+                }
+            );
     }
 
     /**
