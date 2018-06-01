@@ -270,16 +270,17 @@ DML;
 /**
  * Monta a combo de metas PPA
  */
-function carregarMetasPPA($oppid, $mppid, $suocod = null) {
+function carregarMetasPPA($oppid, $mppid, $suocod = null, $multiples = false) {
     global $db;
 
     $join = '';
+    $where_clause = $multiples ? "in ('". implode("','", $suocod) ."')" : "= '" . $suocod . "'";
     if($suocod){
         $join = "inner join (
                     select smp.mppid 
                     from spo.subunidademetappa smp
                         inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smp.suoid and suo.prsano = '{$_SESSION['exercicio']}'
-                    where suo.suocod = '$suocod'                    
+                    where suo.suocod $where_clause                    
                     union all
                     select mpp.mppid from public.metappa mpp
                             left join spo.subunidademetappa smp on smp.mppid = mpp.mppid
@@ -302,7 +303,7 @@ function carregarMetasPPA($oppid, $mppid, $suocod = null) {
         ORDER BY
             descricao
     ";
-//ver($sql, d);
+    // ver($sql, d);
     $db->monta_combo('mppid', $sql, 'S', 'Selecione', null, null, null, null, 'N', 'mppid', null, (isset($mppid)? $mppid: null), null, 'class="form-control chosen-select" style="width=100%;"');
 }
 
