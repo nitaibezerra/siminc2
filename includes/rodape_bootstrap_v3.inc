@@ -35,7 +35,7 @@
 								<a style="padding-left: 5px;" href="#" class="profile-picture">Editar foto</a>
 							</div>
 							<div class="col-md-9 col-lg-9 hidden-xs hidden-sm">
-								<table class="table ">
+								<table class="table" id="user-info-table">
 									<tbody>
 									<tr>
 										<td colspan="2"><strong><?php echo ucwords(strtolower($usuarioNome)); ?></strong></td>

@@ -60,12 +60,18 @@
 
 ?>
 <style>
-    .input_fisico, .input_orcamentario, .input_financeiro {
+    .input_fisico, .input_orcamentario, .input_financeiro, #user-info-table {
         display: none;
     }
     .titulo_espelho {
         text-align: center;
         background-color: #c0c0c0c0 !important;
+    }
+
+    div.footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
     }
 </style>
 
@@ -555,7 +561,7 @@
                                     </tr>
                                 </table>
                                 
-                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always;" class="table table-hover table-bordered table-hover" >
+                                <table cellpadding="5" border="0" width="98%" align="center" id="orcamento" style="border:#c9c9c9 1px solid; page-break-before: always; margin-bottom: 15px" class="table table-hover table-bordered table-hover" >
                                     <tr class="titulo_espelho">
                                         <td colspan="2">
                                             <b>Valores</b>
@@ -685,9 +691,15 @@
                                                         <td style="text-align: left;"><?php echo $mes['mesdsc']; ?></td>
                                                         <?php foreach($aCronogramas as $cronogramaValor){
                                                             switch($cronogramaValor['croid']){
-                                                                case Cronograma::K_FISICO:          $class = 'input_fisico inteiro';        break;
-                                                                case Cronograma::K_ORCAMENTARIO:    $class = 'input_orcamentario';  break;
-                                                                case Cronograma::K_FINANCEIRO:      $class = 'input_financeiro';    break;
+                                                                case Cronograma::K_FISICO:
+                                                                    $class = 'input_fisico inteiro';
+                                                                    break;
+                                                                case Cronograma::K_ORCAMENTARIO:
+                                                                    $class = 'input_orcamentario';
+                                                                    break;
+                                                                case Cronograma::K_FINANCEIRO:
+                                                                    $class = 'input_financeiro';
+                                                                    break;
                                                                 default: $class = '';
                                                             }
                                                             
