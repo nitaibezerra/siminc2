@@ -48,7 +48,7 @@ function beneficiario_form(){
         }).change();
 
         function toggleMotivo(){
-            if($('#benimpedimento').is(':checked')){
+            if($('#benimpedimento_1').is(':checked')){
                 $('.div_motivo').show('slow');
             } else {
                 $('#impid').val('').trigger("chosen:updated");

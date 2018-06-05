@@ -341,7 +341,8 @@ class Emendas_Model_Emenda extends Modelo
                 )::TEXT, '{', ''), '}', ''), '\"', '') AS lista_alteracoes,
 		CASE WHEN ben.benparecertecnico = 0 THEN 'Não' WHEN ben.benparecertecnico = 1 THEN 'Sim' WHEN ben.benparecertecnico = 2 THEN 'Não se aplica' END AS parecer_tecnico,
 		CASE WHEN ben.benparecerjuridico = 0 THEN 'Não' WHEN ben.benparecerjuridico = 1 THEN 'Sim' WHEN ben.benparecerjuridico = 2 THEN 'Não se aplica' END AS parecer_juridico,
-                CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
+		CASE WHEN ben.benimpedimento IS NULL THEN 'Não' WHEN ben.benimpedimento = 0 THEN 'Não' WHEN ben.benimpedimento = 1 THEN 'Sim' WHEN ben.benimpedimento = 2 THEN 'Não se aplica' END AS empedimento,
+                --CASE WHEN ben.impid IS NOT NULL THEN 'Sim' ELSE 'Não' END AS empedimento,
                 imp.impdsc as motivo,
                 benmotivoimpedimento as justificativa,
                 -- DADOS FINANCEIROS DO BENFICIÁRIO

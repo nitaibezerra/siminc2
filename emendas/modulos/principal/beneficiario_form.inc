@@ -251,7 +251,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('mdeid', 'Área Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                                             echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
                                             echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                            # setar os campos para "não" por padrão.
+                                            # Setar os campos para "não" por padrão.
                                             $benparecertecnico = $mBeneficiario->benparecertecnico ? $mBeneficiario->benparecertecnico : 0;
                                             $benparecerjuridico = $mBeneficiario->benparecerjuridico ? $mBeneficiario->benparecerjuridico : 0;
                                             echo $simec->radio('benparecertecnico', 'Parecer Técnico', $benparecertecnico, $mBeneficiario->recuperarTiposParecer());
@@ -269,25 +269,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <label class="col-sm-2 control-label">Pago: </label>
                                             <label class="col-md-3 control-label labelTextLeft">R$ <?php echo number_format($beneficiario->pago, 2, ',', '.'); ?></label>
                                         </div>
-                                        <div class="form-group ">
-                                            <label for="benimpedimento"
-                                                   class="col-sm-3 col-md-3 col-lg-3 control-label  control-label">Impedimento: </label>
-                                            <label for="benimpedimento" class="col-sm-3 control-label"></label>
-                                            <div class="col-sm-9 col-md-9 col-lg-9">
-                                                <div class="btn-group" data-toggle="buttons" id="benimpedimento-group">
-                                                    <label class="btn btn-primary btn-campo">
-                                                        <input name="benimpedimento" id="benimpedimento" value="1" type="radio">Sim
-                                                    </label>
-                                                    <label class="btn btn-primary btn-campo active">
-                                                        <input name="benimpedimento" id="" value="0"
-                                                               checked="checked" type="radio">Não
-                                                    </label>
-                                                    <label class="btn btn-primary btn-campo">
-                                                        <input name="benimpedimento" id="" value="2" type="radio">Não
-                                                        se Aplica
-                                                    </label>
-                                                </div>
-                                            </div>
+                                        <?php
+                                            $benimpedimento = $mBeneficiario->benimpedimento ? $mBeneficiario->benimpedimento : 0;
+                                        ?>
+                                        <div id="benimpedimento-group">
+                                        <?php
+                                            echo $simec->radio('benimpedimento', 'Impedimento', $benimpedimento, $mBeneficiario->recuperarTiposParecer());
+                                        ?>
                                         </div>
                                         <div class="form-group ">
                                             <label for="benimpedimento" class="col-sm-3 control-label div_motivo">Motivo: </label>
