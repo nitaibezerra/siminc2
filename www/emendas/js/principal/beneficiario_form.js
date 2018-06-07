@@ -47,6 +47,21 @@ function beneficiario_form(){
 
         }).change();
 
+        function toggleModadelidadeObrigatorio () {
+            if($('#bented').is(':checked')) {
+                $('#capid').removeAttr('required');
+                $('#capid').parent().parent().find('label .campo-obrigatorio').hide()
+            } else {
+                $('#capid').attr('required', 'required');
+                $('#capid').parent().parent().find('label .campo-obrigatorio').show()
+            }
+        };
+        toggleModadelidadeObrigatorio();
+
+        $('#bented').change(function () {
+            toggleModadelidadeObrigatorio();
+        });
+
         function toggleMotivo(){
             if($('#benimpedimento_1').is(':checked')){
                 $('.div_motivo').show('slow');

@@ -241,7 +241,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <?php
                                             echo $simec->input('bennumeroprocesso', 'Número do Processo', $mBeneficiario->bennumeroprocesso, ['maxlength' => 50]);
                                             echo $simec->data('beninicio', 'Data de Início da Vigência', $mBeneficiario->beninicio);
-                                            echo $simec->select('capid', 'Modalidade de Pactuação <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]));
+                                            echo $simec->select('capid', 'Modalidade de Pactuação', $mBeneficiario->capid, (new Monitora_Model_CategoriaApropriacao())->recuperarSqlCombo(null, ["capstatus = 'A'"]), ['required']);
                                             echo $simec->radioBoolean('bented', 'TED', $mBeneficiario->bented);
                                         ?>
                                     </div>
