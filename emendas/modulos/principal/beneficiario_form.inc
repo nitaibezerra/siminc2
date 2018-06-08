@@ -614,5 +614,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 <script src="js/principal/beneficiario_form.js?v=4"></script>
 
 <script>
-    beneficiario_form();
+    $(function(){
+        beneficiario_form_init();
+    });
 </script>
