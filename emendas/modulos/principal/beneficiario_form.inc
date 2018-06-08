@@ -251,7 +251,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             echo $simec->select('mdeid', 'Área Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(null, ["mdestatus = 'A'"]));
                                             echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural <span class="campo-obrigatorio" title="Campo obrigatório">*</span>', $mBeneficiario->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(null, ["neestatus = 'A'", "mdeid = " . (int)$mBeneficiario->mdeid])) . '</span>';
                                             echo $simec->select("alteracao[]", 'Alterações', $mBeneficiario->recuperarAlteracao(), (new Emendas_Model_AlteracaoOrcamentaria())->recuperarSqlCombo(), [], $configPodeEditar);
-                                            # setar os campos para "não" por padrão.
+                                            # Setar os campos para "não" por padrão.
                                             $benparecertecnico = $mBeneficiario->benparecertecnico ? $mBeneficiario->benparecertecnico : 0;
                                             $benparecerjuridico = $mBeneficiario->benparecerjuridico ? $mBeneficiario->benparecerjuridico : 0;
                                             echo $simec->radio('benparecertecnico', 'Parecer Técnico', $benparecertecnico, $mBeneficiario->recuperarTiposParecer());
@@ -269,12 +269,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <label class="col-sm-2 control-label">Pago: </label>
                                             <label class="col-md-3 control-label labelTextLeft">R$ <?php echo number_format($beneficiario->pago, 2, ',', '.'); ?></label>
                                         </div>
+                                        <?php
+                                            $benimpedimento = $mBeneficiario->benimpedimento ? $mBeneficiario->benimpedimento : 0;
+                                        ?>
+                                        <div id="benimpedimento-group">
+                                        <?php
+                                            echo $simec->radio('benimpedimento', 'Impedimento', $benimpedimento, $mBeneficiario->recuperarTiposParecer());
+                                        ?>
+                                        </div>
                                         <div class="form-group ">
-                                            <label for="benimpedimento" class="col-sm-3 control-label">Impedimento: </label>
-                                            <div class="col-md-1 ">
-                                                <input type="checkbox" name="benimpedimento" id="benimpedimento" value="t" class="js-switch" <?php echo $mBeneficiario->impid ? 'checked="checked"' : ''; ?> />
-                                            </div>
-                                            <label for="benimpedimento" class="col-sm-2 control-label div_motivo">Motivo: </label>
+                                            <label for="benimpedimento" class="col-sm-3 control-label div_motivo">Motivo: </label>
                                             <div class="col-md-6 div_motivo">
                                                 <?php echo $simec->select('impid', null, $mBeneficiario->impid, (new Emendas_Model_Impedimento())->recuperarSqlCombo(['impcod', 'impdsc'], ["impstatus = 'A'"], 'impcod'));; ?>
                                             </div>
@@ -599,289 +603,10 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+<script src="js/principal/beneficiario_form.js?v=4"></script>
 
 <script>
     $(function(){
-
-        $('.coluna-parecer').click(function(){
-            // Inverte título com conteúdo
-            var title = $(this).attr('title');
-            var html = $(this).html();
-
-            $(this).attr('title', html);
-            $(this).html(title);
-        });
-
-        toggleMotivo();
-        $('#benimpedimento').change(function(){
-            toggleMotivo();
-        });
-
-        toggleDelegacao();
-        $('#radioDelegacao').change(function(){
-            toggleDelegacao();
-        });
-
-        $('#esfid').change(function(){
-            $('.select-localizacao').hide('slow');
-            $('#div-localizacao_' + $('#esfid').val()).show('slow');
-        }).change();
-
-        $('#bennumeroprocesso').mask('99999.999999/9999-99');
-
-        $('#mdeid').change(function(){
-            $('#span-segmento').load('?modulo=principal/beneficiario_form&acao=A&req=carregarSegmento&mdeid=' + $(this).val());
-        });
-
-        $('#capid').change(function(){
-
-            $.ajax({
-                url: 'emendas.php?modulo=principal/beneficiario_form&acao=A&req=verificarPactuacaoConvenio&capid='+$('#capid').val(),
-                success: function($retorno){
-                    if($retorno){
-                        $('.dados-siconv').show('slow');
-                    } else {
-                        $('.dados-siconv').hide('slow');
-                    }
-                }
-            });
-
-        }).change();
-
-        function toggleMotivo(){
-            if($('#benimpedimento').is(':checked')){
-                $('.div_motivo').show('slow');
-            } else {
-                $('#impid').val('').trigger("chosen:updated");
-                $('.div_motivo').hide('slow');
-            }
-        }
-
-        function toggleDelegacao(){
-            if($('#radioDelegacao').is(':checked')){
-                $('#div_unidades_delegadas').show('slow');
-            } else {
-                $('#div_unidades_delegadas').hide('slow');
-            }
-        }
-
-        // Evento ao mudar opção de Objetivos PPA
-        $('#oppid').change(function(){
-            carregarMetasPPA($(this).val(), null, $('#suoid').val());
-            carregarIniciativaPPA($(this).val());
-        });
-
-        // Evento ao mudar opção de Metas PNC
-        $('#mpnid').change(function(){
-            carregarIndicadorPNC($(this).val());
-        });
-
-        $('#btn_inserir_anexos').click(function(){
-            abrirModalUpload();
-        });
-
-        // Evento de terminar de carregar arquivos
-        Dropzone.options.formularioAnexo = {
-            init: function() {
-
-                this.on("success", function(file, response){
-                    var jsonResponse = $.parseJSON(response);
-                    inserirNovoAnexo(jsonResponse);
-                });
-
-                this.on("queuecomplete", function(file){
-
-                    // Armazena o objeto Dropzone para chamar métodos
-                    objFormularioAnexo = this;
-                    // Chama mensagem de sucesso
-                    swal({
-                      title: "",
-                      text: "Arquivos salvos com sucesso!",
-                      timer: 2000,
-                      showConfirmButton: false,
-                      type: "success"
-                    }, function(){
-                        // Fecha o swal alert
-                        swal.close();
-                        // limpa campo de upload
-                        objFormularioAnexo.removeAllFiles();
-                        // fecha modal após a seleção
-                        $('#modal_upload').modal('hide');
-                    });
-                });
-            }
-        };
-
-        $('#table_anexos').on('click', '.btnRemoverAnexos', function(){
-            var id = $(this).attr('data-anexos');
-            $('.tr_anexos_'+ id).remove();
-        });
-
-        $('#btn_adicionar_sniic').click(function(){
-             var trHtml =
-                '<tr style="height: 30px;" id="tr_sniic_' + $('#input_sniic').val()+ '" >'
-                        + '<td style="text-align: left;">' + $('#input_sniic').val() + '</td>'
-                        + '<td style="text-align: center;">'
-                            + '<input type="hidden" name="lista_sniic[]" value="' + $('#input_sniic').val() + '" />'
-                            + '<span class="glyphicon glyphicon-trash link btnRemoveSniic" data-sniic="' + $('#input_sniic').val()+ '" ></span>'
-                        + '</td>'
-                + '</tr>';
-            $('#table_sniic').append(trHtml);
-            $('#input_sniic').val('');
-        });
-
-        $('#table_sniic').on('click', '.btnRemoveSniic', function(){
-            var sniic = $(this).attr('data-sniic');
-            $('#tr_sniic_'+ sniic).remove();
-        });
-
-        $('#input_sniic').keypress(function(e){
-            if(e.which == 13) {
-                $('#btn_adicionar_sniic').click();
-            }
-        });
-
-        $('#btn_adicionar_pronac').click(function(){
-             var trHtml =
-                '<tr style="height: 30px;" id="tr_pronac_' + $('#input_pronac').val()+ '" >'
-                        + '<td style="text-align: left;">' + $('#input_pronac').val() + '</td>'
-                        + '<td style="text-align: center;">'
-                            + '<input type="hidden" name="lista_pronac[]" value="' + $('#input_pronac').val() + '" />'
-                            + '<span class="glyphicon glyphicon-trash link btnRemovePronac" data-pronac="' + $('#input_pronac').val()+ '" ></span>'
-                        + '</td>'
-                + '</tr>';
-            $('#table_pronac').append(trHtml);
-            $('#input_pronac').val('');
-        });
-
-        $('#table_pronac').on('click', '.btnRemovePronac', function(){
-            var pronac = $(this).attr('data-pronac');
-            $('#tr_pronac_'+ pronac).remove();
-        });
-
-        $('#input_pronac').keypress(function(e){
-            if(e.which == 13) {
-                $('#btn_adicionar_pronac').click();
-            }
-        });
-
-        $('.a_espelho').click(function(){
-            var pliid = $(this).attr('data-pi');
-            exibirEspelhoPi(pliid);
-            return false;
-        });
-
+        beneficiario_form_init();
     });
-
-    /**
-     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     *
-     * @param {integer} oppid
-     * @param {integer} mppid
-     * @param {integer} suoid
-     * @returns {VOID}
-     */
-    function carregarMetasPPA(oppid, mppid, suoid) {
-        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
-
-        carregarSelectPorJson(
-            requisicao,
-            '#mppid',
-            'codigo',
-            'descricao',
-            {
-                'req': 'carregarMetasPPA',
-                'oppid': oppid,
-                'suoid': suoid
-            },
-            'Selecione',
-            mppid,
-            function(){
-                $(".chosen-select").chosen();
-            }
-        );
-    }
-
-    /**
-     * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
-     *
-     * @param {integer} codigo
-     * @returns {VOID}
-     */
-    function carregarIniciativaPPA(codigo){
-        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
-
-        carregarSelectPorJson(
-            requisicao,
-            '#ippid',
-            'codigo',
-            'descricao',
-            {
-                'req': 'carregarIniciativaPPA',
-                'oppid': codigo
-            },
-            'Selecione',
-            '',
-            function(){
-                $(".chosen-select").chosen();
-            }
-        );
-    }
-
-    /**
-     * Carrega novo conteúdo para o select de Indicadores PNC via requisição ajax.
-     *
-     * @param {integer} codigo
-     * @returns {VOID}
-     */
-    function carregarIndicadorPNC(codigo) {
-        var requisicao = '?modulo=principal/beneficiario_form&acao=A';
-
-        carregarSelectPorJson(
-            requisicao,
-            '#ipnid',
-            'codigo',
-            'descricao',
-            {
-                'req': 'carregarIndicadorPNC',
-                'mpnid': codigo
-            },
-            'Selecione',
-            '',
-            function(){
-                $(".chosen-select").chosen();
-            }
-        );
-    }
-
-    function abrirModalUpload() {
-        $('.modal_dialog_upload').show();
-        $('#modal_upload').modal();
-        $('#modal_upload .chosen-container').css('width', '100%');
-    }
-
-    function inserirNovoAnexo(json){
-        var trHtml = '<tr style="height: 30px;" class="tr_anexos_'+ json.arqid +'" >'
-            + '                    <td style="text-align: left;"><a href="#" onclick="javascript:abrirArquivo('+ json.arqid+ '); return false;" >'+ json.arqnome +'</a></td>'
-            + '                    <td style="text-align: left;">'+ json.arqdescricao +'</td>'
-            + '                    <td style="text-align: center;">'
-            + '                         <input type="hidden" value="'+ json.arqid +'" name="listaAnexos[]">'
-            + '                         <span class="glyphicon glyphicon-trash btnRemoverAnexos link" title="Excluir o arquivo '+ json.arqnome+ '" data-anexos="'+ json.arqid +'" >'
-            + '                    </td>'
-            + '                </tr>'
-        ;
-        $('#table_anexos').append(trHtml);
-    }
-
-    /**
-     * Exibe popup com Detalhes do pi. Tela de Espelho de PI.
-     *
-     * @returns VOID
-     */
-    function exibirEspelhoPi(pliid){
-        window.open(
-            '?modulo=principal/beneficiario_form&acao=A&req=espelho-pi&pliid='+ pliid,
-            'popup_espelho_pi',
-            'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
-    }
 </script>
