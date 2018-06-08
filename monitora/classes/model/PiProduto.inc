@@ -58,6 +58,7 @@ class Monitora_Model_PiProduto extends Modelo
         'pprnome' => null,
         'prsano' => null,
         'pprstatus' => null,
+        'pprdescricao' => null,
     );
 
 }//end Class
