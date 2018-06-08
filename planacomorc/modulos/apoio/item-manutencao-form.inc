@@ -20,7 +20,7 @@ switch ($_REQUEST['req']) {
 		die;
 	case 'excluir-subitem':
 		$cManutencaoSubItem = new Public_Controller_ManutencaoSubItem();
-		$cManutencaoSubItem->excluir($_REQUEST);
+		$cManutencaoSubItem->excluir($_REQUEST['masid']);
 		die;
 }
 
@@ -47,14 +47,16 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="maiid" id="maiid" type="hidden" value="<?php echo $mManutencaoItem->maiid; ?>">
 
 						<?php
-						echo $simec->input('mainome', 'Nome', $mManutencaoItem->mainome, ['required','maxlength' => 200]);
-						echo $simec->input('maidescricao', 'Descrição', $mManutencaoItem->maidescricao, ['maxlength' => 500]);
-						echo $simec->radio('maistatus', 'Status', ($mManutencaoItem->maistatus ? $mManutencaoItem->maistatus : 'A'), ['A' => 'Ativo', 'I' => 'Inativo']);
+                            echo $simec->input('mainome', 'Nome', $mManutencaoItem->mainome, ['required','maxlength' => 200]);
+                            echo $simec->input('maidescricao', 'Descrição', $mManutencaoItem->maidescricao, ['maxlength' => 500]);
 						?>
                         <div class="form-group">
                             <label for="eqdid" class="col-sm-3 col-md-3 col-lg-3 control-label  control-label">Enquadramento da Despesa:</label>
                             <div class="col-sm-9 col-md-9 col-lg-9 carregaEnq">
                                 <?php
+                                /**
+                                 * @todo Colocar a consulta na model, usando a prática do MVC.
+                                 */
                                 $sql = "
                                     SELECT
                                         eqdid AS codigo,
@@ -63,6 +65,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     WHERE
                                         eqdstatus = 'A'
                                         AND eqdano = '{$_SESSION['exercicio']}'
+                                        AND eqdcod NOT IN('C', 'E', 'F', 'I', 'N', 'A')
                                     ORDER BY
                                         eqddsc
                                 ";
@@ -94,9 +97,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content">
                     <div id="div_formulario_subitem">
 						<?php
-						if($mManutencaoItem->maiid){
-							$cManutencaoItem->montarFormulario($mManutencaoItem->maiid);
-						}
+                            if($mManutencaoItem->maiid){
+                                $cManutencaoItem->montarFormulario($mManutencaoItem->maiid);
+                            }
 						?>
                     </div>
                     <div id="div_listagem_subitem">

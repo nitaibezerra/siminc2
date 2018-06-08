@@ -24,13 +24,9 @@ class Public_Controller_ManutencaoItem
 		$url = '?modulo=apoio/item-manutencao&acao=A';
 
 		try {
-			// Antes de deletar o Item é necessário deletar seus subitens
-			$listaSubItens = new Planacomorc_Model_ManutencaoSubItem();
-			$SubItensIds = array_column($listaSubItens->recuperarTodos('masid', ['maiid = ' . (int)$maiid]), 'masid');
-			$listaSubItens->excluirVarios('masid IN ('. implode(',', $SubItensIds) .')');
-
 			$mManutencaoItem = new Planacomorc_Model_ManutencaoItem($maiid);
-			$mManutencaoItem->excluir($mManutencaoItem->maiid);
+			$mManutencaoItem->maistatus = 'I';
+            $mManutencaoItem->salvar(null, null, ['maiid', 'maidescricao', 'eqdid']);
 			$mManutencaoItem->commit();
 			simec_redirecionar($url, 'success');
 		} catch (Exception $e){
@@ -68,8 +64,7 @@ class Public_Controller_ManutencaoItem
 		 */
 		$podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 
-		// $lista = (new Planacomorc_Model_ManutencaoSubItem)->recuperarTodos('*', ['maiid = ' . (int)$maiid, "masstatus = 'A'"]);
-		$lista = (new Planacomorc_Model_ManutencaoSubItem)->recuperarTodos('*', ['maiid = ' . (int)$maiid]);
+		$lista = (new Planacomorc_Model_ManutencaoSubItem)->recuperarTodos('*', ['maiid = ' . (int)$maiid, "masstatus = 'A'"]);
 		include_once APPRAIZ . 'planacomorc/modulos/apoio/subitem-manutencao.inc';
 	}
 }

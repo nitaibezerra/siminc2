@@ -25,24 +25,28 @@
                                 <th>Nome</th>
                                 <th>Descrição</th>
                                 <th>Enquadramento</th>
-                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
 							<?php
+                            /**
+                             * @todo Colocar a consulta na model, usando a prática do MVC.
+                             */
 							$sql = "
-                                SELECT 
-                                  maiid AS codigo, 
-                                  mainome AS nome,
-                                  maidescricao AS descricao,
-                                  maistatus AS status,
-                                  eqdid
+                                SELECT DISTINCT
+                                    maiid AS codigo,
+                                    mainome AS nome,
+                                    maidescricao AS descricao,
+                                    eqddsc AS enquadramento
                                 FROM planacomorc.manutencaoitem
-                                WHERE prsano = '{$_SESSION['exercicio']}'
-                                --AND maistatus = 'A'
-                                --AND eqdid = " . (int)$eqdid . "
-                                ORDER BY nome
+                                    LEFT JOIN monitora.pi_enquadramentodespesa eqd ON(manutencaoitem.eqdid = eqd.eqdid)
+                                WHERE
+                                    prsano = '{$_SESSION['exercicio']}'
+                                    AND maistatus = 'A'
+                                ORDER BY
+                                    nome
                             ";
+//							ver($sql,d);
 							$manutencao_itens = $db->carregar($sql);
 
 							if ($manutencao_itens):
@@ -53,17 +57,7 @@
                                         </td>
                                         <td><?php echo $manutencao_item['nome']; ?></td>
                                         <td><?php echo $manutencao_item['descricao']; ?></td>
-                                        <td><?php
-                                            $sql = "
-                                                SELECT
-                                                    eqddsc AS descricao
-                                                FROM monitora.pi_enquadramentodespesa
-                                                WHERE
-                                                    eqdstatus = 'A'
-                                                    AND eqdano = '{$_SESSION['exercicio']}'
-                                                    AND eqdid = {$manutencao_item['eqdid']}
-                                            "; echo $db->pegaUm($sql); ?></td>
-                                        <td><?php echo $manutencao_item['status'] == 'A' ? 'Ativo' : 'Inativo'; ?></td>
+                                        <td><?php echo $manutencao_item['enquadramento']; ?></td>
                                     </tr>
 								<?php endforeach;
 							endif; ?>

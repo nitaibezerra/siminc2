@@ -4,8 +4,7 @@
             <thead>
             <tr class="text-center">
                 <th width="10%">Ações</th>
-                <th>Sub-item</th>
-                <th>Status</th>
+                <th>Subitem</th>
             </tr>
             </thead>
             <tbody>
@@ -18,7 +17,6 @@
                         <?php endif; ?>
                     </td>
                     <td><?php echo $dados['masnome']; ?></td>
-                    <td><?php echo $dados['masstatus'] == 'A' ? 'Ativo' : 'Inativo'; ?></td>
                 </tr>
             <?php } ?>
             </tbody>
