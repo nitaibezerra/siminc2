@@ -51,23 +51,6 @@ function beneficiario_form_init(){
 
     }).change();
 
-    function toggleMotivo(){
-        if($('#benimpedimento_1').is(':checked')){
-            $('.div_motivo').show('slow');
-        } else {
-            $('#impid').val('').trigger("chosen:updated");
-            $('.div_motivo').hide('slow');
-        }
-    }
-
-    function toggleDelegacao(){
-        if($('#radioDelegacao').is(':checked')){
-            $('#div_unidades_delegadas').show('slow');
-        } else {
-            $('#div_unidades_delegadas').hide('slow');
-        }
-    }
-
     // Evento ao mudar opção de Objetivos PPA
     $('#oppid').change(function(){
         carregarMetasPPA($(this).val(), null, $('#suoid').val());
@@ -174,6 +157,23 @@ function beneficiario_form_init(){
         return false;
     });
 
+}
+
+function toggleMotivo(){
+    if($('#benimpedimento_1').is(':checked')){
+        $('.div_motivo').show('slow');
+    } else {
+        $('#impid').val('').trigger("chosen:updated");
+        $('.div_motivo').hide('slow');
+    }
+}
+
+function toggleDelegacao(){
+    if($('#radioDelegacao').is(':checked')){
+        $('#div_unidades_delegadas').show('slow');
+    } else {
+        $('#div_unidades_delegadas').hide('slow');
+    }
 }
 
 /**
