@@ -106,7 +106,8 @@ class Emendas_Model_Beneficiario extends Modelo
         'pumid' => null,
         'pprid' => null,
         'picquantidade' => null,
-        'pliid' => null
+        'pliid' => null,
+        'benimpedimento' => null
     );
 
     /**
@@ -136,6 +137,7 @@ class Emendas_Model_Beneficiario extends Modelo
                 ben.benempenhado,
                 ben.benconveniado,
                 ben.benpago,
+                ben.benimpedimento,
                 ben.benmotivoimpedimento,
                 ben.sicid,
                 ben.impid,
