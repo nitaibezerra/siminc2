@@ -157,6 +157,12 @@ function beneficiario_form_init(){
         return false;
     });
 
+    toggleModadelidadeObrigatorio();
+
+    $('#bented').change(function () {
+        toggleModadelidadeObrigatorio();
+    });
+
 }
 
 function toggleMotivo(){
@@ -286,4 +292,14 @@ function exibirEspelhoPi(pliid){
         '?modulo=principal/beneficiario_form&acao=A&req=espelho-pi&pliid='+ pliid,
         'popup_espelho_pi',
         'width=780,height=1000,status=1,menubar=1,toolbar=0,scrollbars=1,resizable=1');
+}
+
+function toggleModadelidadeObrigatorio () {
+    if($('#bented').is(':checked')) {
+        $('#capid').removeAttr('required');
+        $('#capid').parent().parent().find('label .campo-obrigatorio').hide()
+    } else {
+        $('#capid').attr('required', 'required');
+        $('#capid').parent().parent().find('label .campo-obrigatorio').show()
+    }
 }
