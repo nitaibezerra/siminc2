@@ -96,7 +96,7 @@ function initPreplanointernoForm(){
 
         $('#formulario').find("button[type='submit']").click();
     });
-    
+
     $('#importar-pi-btn').on('click', function () {
         var modal = $('#preplanointerno_modal');
         modal.modal();
@@ -149,8 +149,8 @@ function recuperarValoresLimitesSubUnidade(){
         url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid=' + $('#suoid').val(),
         dataType: 'json',
         success: function(dados){
-            $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.lmuvlr), 2, ',', '.'));
-            $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivelunidade), 2, ',', '.'));
+            $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.lmuvlr), 0, ',', '.'));
+            $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivelunidade), 0, ',', '.'));
         }
     });
 }
@@ -160,8 +160,8 @@ function recuperarValoresLimitesPtres(){
         url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val(),
         dataType: 'json',
         success: function(dados){
-            $('#td_disponivel_funcional_custeio').html(number_format(parseFloat(dados.custeioptres), 2, ',', '.'));
-            $('#td_disponivel_funcional_capital').html(number_format(parseFloat(dados.capitalptres), 2, ',', '.'));
+            $('#td_disponivel_funcional_custeio').html(number_format(parseFloat(dados.custeioptres), 0, ',', '.'));
+            $('#td_disponivel_funcional_capital').html(number_format(parseFloat(dados.capitalptres), 0, ',', '.'));
         }
     });
 }
