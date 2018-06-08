@@ -18,19 +18,13 @@ class Public_Controller_ManutencaoSubItem
         }
     }
 
-    public function excluir($dados)
+    public function excluir($masid)
     {
-      $url = '?modulo=apoio/item-manutencao-form&acao=A&maiid=' . $dados['maiid'];
+        $mManutencaoSubItem = new Planacomorc_Model_ManutencaoSubItem((int)$masid);
+        $url = '?modulo=apoio/item-manutencao-form&acao=A&maiid=' . $mManutencaoSubItem->maiid;
         try {
-            $mManutencaoSubItem = new Planacomorc_Model_ManutencaoSubItem($dados['masid']);
-
-            if($mManutencaoSubItem->existeVinculo()){
-                $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/item-manutencao-form&acao=A&masid=' . $dados['maiid'];
-                simec_redirecionar($url, 'error', $mensagem);
-            }
-
-			$mManutencaoSubItem->excluir($mManutencaoSubItem->masid);
+            $mManutencaoSubItem->masstatus = 'I';
+            $mManutencaoSubItem->salvar(null, null, ['maiid', 'masdescricao']);
             $mManutencaoSubItem->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
