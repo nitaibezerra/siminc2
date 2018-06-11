@@ -26,8 +26,8 @@
                     <td align="center"><?php echo $dados['iducod']; ?></td>
                     <td align="center"><?php echo $dados['foncod']; ?></td>
                     <td align="center"><?php echo $dados['idocod']; ?></td>
-                    <td align="right"><?php echo number_format($dados['prdvalor'], 2, ',', '.'); ?></td>
-                    <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 2, ',', '.'); ?></td>
+                    <td align="right"><?php echo number_format($dados['prdvalor'], 0, ',', '.'); ?></td>
+                    <td align="right"><?php echo number_format($dados['prdvalorexpansao'], 0, ',', '.'); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
