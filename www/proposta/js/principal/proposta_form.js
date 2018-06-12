@@ -71,10 +71,10 @@ function carregarLimitesPrePi(){
         url: '?modulo=principal/proposta_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val() + '&suoid=' + $('#suoid').val(),
         dataType: 'json',
         success: function(dados){
-            $('#limite_valor_custeio').html(number_format(parseFloat(dados.plivalorcusteio), 2, ',', '.'));
-            $('#limite_valor_capital').html(number_format(parseFloat(dados.plivalorcapital), 2, ',', '.'));
-            $('#limite_expansao_custeio').html(number_format(parseFloat(dados.plivalorcusteioadicional), 2, ',', '.'));
-            $('#limite_expansao_capital').html(number_format(parseFloat(dados.plivalorcapitaladicional), 2, ',', '.'));
+            $('#limite_valor_custeio').html(number_format(parseFloat(dados.plivalorcusteio), 0, ',', '.'));
+            $('#limite_valor_capital').html(number_format(parseFloat(dados.plivalorcapital), 0, ',', '.'));
+            $('#limite_expansao_custeio').html(number_format(parseFloat(dados.plivalorcusteioadicional), 0, ',', '.'));
+            $('#limite_expansao_capital').html(number_format(parseFloat(dados.plivalorcapitaladicional), 0, ',', '.'));
         }
     });
 }
@@ -93,7 +93,7 @@ function carregaQuantidadesFuncional(){
             $('#produto_acao').html(dados.produto_acao);
             $('#unidade_po').html(dados.unidade_po);
             $('#produto_po').html(dados.produto_po);
-            $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 2, ',', '.'));
+            $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 0, ',', '.'));
         }
     });
 }

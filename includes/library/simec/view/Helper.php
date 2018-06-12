@@ -152,6 +152,20 @@ class Simec_View_Helper {
         return $this->input->input($name, $label, $value, $attribs, $config);
     }
 
+    /**
+     * Método para uso de valores inteiros.
+     *
+     * @param
+     */
+    public function moedaInteiro($name, $label = null, $value = null, $attribs = array(), $config = array()) {
+        $attribs['class'] = $attribs['class'] . ' moedaInteiro ';
+        $value = is_numeric($value) ? number_format($value, 0, ',', '.') : null;
+
+        $config = $this->montarConfig($name, $config);
+        $this->input->setView(Simec_View_Helper::$view);
+        return $this->input->input($name, $label, $value, $attribs, $config);
+    }
+
     public function cep($name, $label = null, $value = null, $attribs = array(), $config = array()) {
         $config = $this->montarConfig($name, $config);
         $this->cep->setView(Simec_View_Helper::$view);

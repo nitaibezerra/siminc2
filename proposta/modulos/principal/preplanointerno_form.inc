@@ -114,7 +114,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                             echo $simec->select('pprid', 'Produto', $mPrePlanoInterno->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(), ['required']);
                             echo '<span id="span_unidade_medida">'. $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']). '</span>';
-                            echo '<span id="span_quantidade">'. $simec->valor('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required']). '</span>';
+                            echo '<span id="span_quantidade">'. $simec->input('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade? (int)$mPrePlanoInterno->pliquantidade: NULL, ['required', 'class'=>'inteiro']). '</span>';
                         ?>
                     </div>
                 </div>
@@ -134,34 +134,34 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
                                 <td style="text-align: left;">Limite Autorizado na Unidade: </td>
-                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" ><?php echo number_format((int)$limiteSubunidade, 2, ',', '.'); ?></td>
+                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;"><?php echo number_format((int)$limiteSubunidade, 0, ',', '.'); ?></td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">
                                     Limite Disponível na Unidade:
                                     <input id="VlrSUDisponivel" type="hidden" value="" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0</td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>
-                                <td style="text-align: center;"><b>Custeio </b></td>
+                                <td style="text-align: center;"><b>Custeio</b></td>
                                 <td style="text-align: center;"><b>Capital</b></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;">
                                     Total Cadastrado na Funcional:
                                 </td>
-                                <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0,00</td>
-                                <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+                                <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0</td>
+                                <td style="text-align: center;" id="td_disponivel_funcional_capital" >0</td>
                             </tr>
                             <tr>
                                 <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                 <td style="text-align: center;">
-                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 0, ',', '.'); ?>" class="form-control valorPI moedaInteiro " required="required">
                                 </td>
                                 <td align="center">
-                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 0, ',', '.'); ?>" class="form-control valorPI moedaInteiro " required="required">
                                 </td>
                             </tr>
                         </table>
@@ -173,9 +173,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                            echo $simec->valor('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional);
-                            echo $simec->valor('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
-                            echo $simec->valor('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
+                            echo $simec->input('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional, ['class'=>'inteiro']);
+                            echo $simec->moedaInteiro('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
+                            echo $simec->moedaInteiro('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
                             echo $simec->textarea('plijustificativaadicional', 'Justificativa', $mPrePlanoInterno->plijustificativaadicional);
                         ?>
                     </div>

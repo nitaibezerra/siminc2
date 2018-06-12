@@ -11,7 +11,12 @@ $(document).ready(function(){
         prefix: ''
     });
 
-	$('body').on('keyup', '.valor', function(){
+    $('body').on('keyup', '.valor', function(){
         $(this).val(mascaraglobal('###.###.###.###.###,##', $(this).val()));
     });
+
+    $('body').on('keyup', '.moedaInteiro', function(){
+        $(this).val(mascaraglobal('###.###.###.###.###', $(this).val()));
+    });
+
 });

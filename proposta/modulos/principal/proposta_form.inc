@@ -37,7 +37,10 @@ switch ($_REQUEST['req']) {
                   </div>';
         die;
     case 'recuperar-dados-ptres':
-        echo json_encode((new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres());
+        $qtdProposta = (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres();
+        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_acao');
+        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_po');
+        echo json_encode($qtdProposta);
         die;
     case 'recuperar-valores-ptres':
         echo json_encode((new Proposta_Model_PrePlanoInterno())->recuperarValoresPorSubnidadeEPtres($_REQUEST['suoid'], $_REQUEST['ptrid']));
@@ -115,7 +118,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <div style="clear:both"></div>
                         </div>
                         <div class="form-group ">
-                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades</label>
+                            <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Quantidades: <span class="campo-obrigatorio" title="Campo obrigatório">*</span></label>
                             <div class="col-sm-9 col-md-9 col-lg-9 ">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover" >
@@ -123,23 +126,25 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <tr class="text-center">
                                             <th width="20%">Nível</th>
                                             <th width="20%">Quantidade</th>
-                                            <th width="20%">Unidade</th>
                                             <th>Produto</th>
+                                            <th width="20%">Unidade</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>Localizador</td>
                                             <td>
-                                                <input name="locquantidadeproposta" id="locquantidadeproposta" type="text" class="form-control valor " required="required">
+                                                <input name="locquantidadeproposta" id="locquantidadeproposta" type="text" value="" class="form-control inteiro " required="required">
                                             </td>
-                                            <td id="unidade_acao"></td>
                                             <td id="produto_acao"></td>
+                                            <td id="unidade_acao"></td>
+                                            
                                         </tr>
                                         <tr>
                                             <td>PO</td>
                                             <td>
-                                                <input name="proquantidade" id="proquantidade" type="text" value="<?php echo number_format($mProposta->proquantidade, 2, ',', '.'); ?>" class="form-control valor " required="required">
+                                                <input name="proquantidade" id="proquantidade" type="text" value="<?php echo number_format($mProposta->proquantidade, 0, ',', '.'); ?>" class="form-control inteiro " required="required">
                                             </td>
                                             <td id="unidade_po"></td>
                                             <td id="produto_po"></td>
@@ -162,7 +167,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                            echo $simec->valor('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao);
+                            echo $simec->input('proquantidadeexpansao', 'Quantidade Expansão PO', $mProposta->proquantidadeexpansao, ['class'=>'inteiro']);
                             echo $simec->textarea('projustificativaexpansao', 'Justificativa Expansão', $mProposta->projustificativaexpansao, ['cols'=>60, 'rows'=>6]);
                         ?>
                     </div>
