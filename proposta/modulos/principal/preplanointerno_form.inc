@@ -114,7 +114,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                             echo $simec->select('pprid', 'Produto', $mPrePlanoInterno->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(), ['required']);
                             echo '<span id="span_unidade_medida">'. $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']). '</span>';
-                            echo '<span id="span_quantidade">'. $simec->valor('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required']). '</span>';
+                            echo '<span id="span_quantidade">'. $simec->input('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required', 'class'=>'inteiro']). '</span>';
                         ?>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                            echo $simec->valor('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional);
+                            echo $simec->input('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional, ['class'=>'inteiro']);
                             echo $simec->moedaInteiro('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
                             echo $simec->moedaInteiro('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
                             echo $simec->textarea('plijustificativaadicional', 'Justificativa', $mPrePlanoInterno->plijustificativaadicional);
