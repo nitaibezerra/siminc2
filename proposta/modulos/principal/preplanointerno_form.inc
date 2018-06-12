@@ -114,7 +114,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                             echo $simec->select('pprid', 'Produto', $mPrePlanoInterno->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(), ['required']);
                             echo '<span id="span_unidade_medida">'. $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']). '</span>';
-                            echo '<span id="span_quantidade">'. $simec->input('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required', 'class'=>'inteiro']). '</span>';
+                            echo '<span id="span_quantidade">'. $simec->input('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade? (int)$mPrePlanoInterno->pliquantidade: NULL, ['required', 'class'=>'inteiro']). '</span>';
                         ?>
                     </div>
                 </div>
