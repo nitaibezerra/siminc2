@@ -93,7 +93,7 @@ function carregaQuantidadesFuncional(){
             $('#produto_acao').html(dados.produto_acao);
             $('#unidade_po').html(dados.unidade_po);
             $('#produto_po').html(dados.produto_po);
-            $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 2, ',', '.'));
+            $('#locquantidadeproposta').val(number_format(parseFloat(dados.locquantidadeproposta), 0, ',', '.'));
         }
     });
 }
