@@ -37,7 +37,10 @@ switch ($_REQUEST['req']) {
                   </div>';
         die;
     case 'recuperar-dados-ptres':
-        echo json_encode((new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres());
+        $qtdProposta = (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres();
+        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_acao');
+        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_po');
+        echo json_encode($qtdProposta);
         die;
     case 'recuperar-valores-ptres':
         echo json_encode((new Proposta_Model_PrePlanoInterno())->recuperarValoresPorSubnidadeEPtres($_REQUEST['suoid'], $_REQUEST['ptrid']));
@@ -132,7 +135,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         <tr>
                                             <td>Localizador</td>
                                             <td>
-                                                <input name="locquantidadeproposta" id="locquantidadeproposta" type="text" class="form-control inteiro " required="required">
+                                                <input name="locquantidadeproposta" id="locquantidadeproposta" type="text" value="" class="form-control inteiro " required="required">
                                             </td>
                                             <td id="produto_acao"></td>
                                             <td id="unidade_acao"></td>
