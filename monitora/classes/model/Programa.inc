@@ -59,7 +59,11 @@ class Monitora_Model_Programa extends Modelo
         'prgcod' => null,
         'prgdsc' => null,
         'prgstatus' => null,
-        'orgcod' => null
+        'orgcod' => null,
+        'prgdscobjetivo' => null,
+        'prgdscpublicoalvo' => null,
+        'prgdscjustificativa' => null,
+        'prgdscestrategia' => null,
     );
     
     public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
@@ -89,6 +93,26 @@ class Monitora_Model_Programa extends Modelo
                 from {$this->stNomeTabela}
                 $where
                 order by $order   
+        ";
+
+        return $sql;
+    }
+
+    public static function buscarTodos(stdClass $param) {
+
+        $sql = "
+            SELECT
+                prgcod,
+                -- orgcod,
+                prgdsc,
+                prgdscobjetivo,
+                prgdscpublicoalvo
+                -- prgdscjustificativa
+                -- prgdscestrategia
+            FROM monitora.programa
+            WHERE
+                ptr.prgstatus = 'A'
+                AND prgano = '". (int)$param->exercicio. "'
         ";
 
         return $sql;
