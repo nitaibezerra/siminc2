@@ -47,12 +47,16 @@ switch($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), []);
         die;
     case 'recuperar-limite':
-        $limite = array('lmuvlr' => NULL, 'disponivelunidade' => NULL);
-        $resultadoLimite = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($_REQUEST['suoid']);
-        if($resultadoLimite){
-            $limite = array_map("utf8_encode", $resultadoLimite);
+        $limites = array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
+        $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+            ->recuperarLimitePorSuoid( (object)array(
+                'noPliid' => $_REQUEST['pliid'],
+                'suoid' => $_REQUEST['suoid'],
+                'exercicio' => $_SESSION['exercicio']));
+        if($resultadoLimites){
+            $limites = array_map("utf8_encode", $resultadoLimites);
         }
-        echo json_encode($limite);
+        echo json_encode($limites);
         die;
     case 'proposta_modal':
         include 'preplanointerno_modal.inc';
@@ -68,10 +72,19 @@ $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
 $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 
+if($mPrePlanoInterno->suoid){
+    $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+        ->recuperarLimitePorSuoid( (object)array(
+            'noPliid' => $mPrePlanoInterno->pliid,
+            'suoid' => $mPrePlanoInterno->suoid,
+            'exercicio' => $_SESSION['exercicio']));
+    $limites = $resultadoLimites? $resultadoLimites: array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
+}
+
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/principal/preplanointerno_form.js"></script>
+<script src="js/principal/preplanointerno_form.js?v=2"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-5">
@@ -134,7 +147,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
                                 <td style="text-align: left;">Limite Autorizado na Unidade: </td>
-                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;"><?php echo number_format((int)$limiteSubunidade, 0, ',', '.'); ?></td>
+                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;">0</td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">

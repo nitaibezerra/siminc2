@@ -9,7 +9,6 @@ function initPreplanointernoForm(){
     toggleItem();
     recuperarValoresLimitesPtres();
     recuperarValoresLimitesSubUnidade();
-    // recuperarMetasEIniciativaPPA();
     
     controlarExibicaoFormularioReduzido();
     controlarExibicaoUnidadeMedidaQuantidade($('#pprid').val());
@@ -125,15 +124,16 @@ function calcularValores(){
 
     // Calculando valor Disponível
     totalPi = somarCampos('valorPI');
-    limiteDisponivel = $('#td_autorizado_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_autorizado_sub_unidade').html()) : 0;
+    limiteDisponivel = $('#td_disponivel_sub_unidade').html()? str_replace(['.', ','], ['', '.'], $('#td_disponivel_sub_unidade').html()): 0;
 
     valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
 
     if(valorDisponivel < 0){
-        swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
+        swal(
+            'Atenção',
+            'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital',
+            'error');
     }
-
-    $('#td_disponivel_sub_unidade').html(number_format(valorDisponivel, 2, ',', '.'));
 }
 
 function toggleItem(){
@@ -146,11 +146,11 @@ function toggleItem(){
 
 function recuperarValoresLimitesSubUnidade(){
     $.ajax({
-        url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid=' + $('#suoid').val(),
+        url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid='+ $('#suoid').val()+ '&pliid='+ $('#pliid').val(),
         dataType: 'json',
         success: function(dados){
-            $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.lmuvlr), 0, ',', '.'));
-            $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivelunidade), 0, ',', '.'));
+            $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.limite_unidade), 0, ',', '.'));
+            $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivel_unidade), 0, ',', '.'));
         }
     });
 }

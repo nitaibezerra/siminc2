@@ -79,22 +79,13 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
         return $dados ? $dados : [];
     }
 
-    public function recuperarLimitePorSuoid($suoid)
+    public function recuperarLimitePorSuoid(stdClass $dto)
     {
         $sql = "
             SELECT
-                suo.suoid,
-                suo.unoid,
-                suo.suosigla,
-                suo.unosigla,
-                suo.unocod,
-                suo.suonome,
-                suo.unonome,
-                suo.suocod,
-                suo.unofundo,
-                lmu.*,
-                coalesce(vlr.totalunidade, 0) totalunidade,
-                coalesce(lmu.lmuvlr, 0) - coalesce(vlr.totalunidade, 0) disponivelunidade
+                lmu.lmuvlr AS limite_unidade,
+                COALESCE(vlr.total_pre_pi, 0) AS total_pre_pi,
+                COALESCE(lmu.lmuvlr, 0) - COALESCE(vlr.total_pre_pi, 0) AS disponivel_unidade
             FROM public.vw_subunidadeorcamentaria suo
                 JOIN planacomorc.unidadegestora_limite lmu ON(
                     suo.suocod = lmu.ungcod
@@ -102,19 +93,22 @@ class Planacomorc_Model_UnidadegestoraLimite extends Modelo
                 )
                 LEFT JOIN (
                     SELECT
-                        sum(plivalorcapital + plivalorcusteio) totalunidade,
+                        SUM(COALESCE(plivalorcapital, 0) + COALESCE(plivalorcusteio, 0)) AS total_pre_pi,
                         suoid
                     FROM proposta.preplanointerno
                     WHERE
-                        suoid = '". (int)$suoid. "'
+                        plistatus = 'A'
+                        AND suoid = '". (int)$dto->suoid. "'
+                        AND pliid <> ". (int)$dto->noPliid. "
                     GROUP BY
                         suoid
                 ) vlr ON vlr.suoid = suo.suoid
             WHERE
                 suo.unostatus = 'A'
-                AND suo.prsano = '{$_SESSION['exercicio']}'
-                AND suo.suoid = '". (int)$suoid. "'
+                AND suo.prsano = '". (int)$dto->exercicio. "'
+                AND suo.suoid = '". (int)$dto->suoid. "'
         ";
+//ver($sql, d);
         $limite = $this->pegaLinha($sql);
         return $limite;
     }
