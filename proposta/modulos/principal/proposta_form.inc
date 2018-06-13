@@ -147,8 +147,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <td>
                                                 <input name="proquantidade" id="proquantidade" type="text" value="<?php echo number_format($mProposta->proquantidade, 0, ',', '.'); ?>" class="form-control inteiro " required="required">
                                             </td>
-                                            <td id="unidade_po"></td>
                                             <td id="produto_po"></td>
+                                            <td id="unidade_po"></td>
                                         </tr>
                                         </tbody>
                                     </table>
