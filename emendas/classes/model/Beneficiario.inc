@@ -281,16 +281,19 @@ class Emendas_Model_Beneficiario extends Modelo
 
             $mDelegacao = new Emendas_Model_Delegacao();
             $mDelegacao->excluirVarios("benid = '$benid'");
+            if (isset($dados['radioDelegacao'])){
+                if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
 
-            if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
+                    $mDelegacao->benid = $benid;
 
-                $mDelegacao->benid = $benid;
+                    foreach($dados['delegacao'] as $suoid){
+                        if ($suoid!=''){
+                            $mDelegacao->suoid = $suoid;
+                            $mDelegacao->salvar();
 
-                foreach($dados['delegacao'] as $suoid){
-                    $mDelegacao->suoid = $suoid;
-                    $mDelegacao->salvar();
-
-                    $mDelegacao->edeid = null;
+                            $mDelegacao->edeid = null;
+                        }
+                    }
                 }
             }
         }

@@ -204,7 +204,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 <label class="control-label" for="radioDelegacao">Delegação:</label>
                                             </div>
                                             <div class="col-md-1">
-                                                <input <?php echo $podeEditar? NULL: 'disabled="disabled"'; ?> type="checkbox" id="radioDelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                                                <input <?php echo $podeEditar? NULL: 'disabled="disabled"'; ?> type="checkbox" name="radioDelegacao" id="radioDelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
                                             </div>
                                             <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
                                             <?php
