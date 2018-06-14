@@ -12,7 +12,7 @@ class Public_Controller_Programa
             $mPrograma->prgano = $mPrograma->prgano ? $mPrograma->prgano : $_SESSION['exercicio'];
 //            ver($mPrograma,d);
 
-            $mPrograma->salvar(null,null, ['prgcod', 'prgdscobjetivo', 'prgdsc', 'prgdscobjetivo', 'prgdscpublicoalvo']);
+            $mPrograma->salvar(null,null, ['prgdscobjetivo', 'prgdscobjetivo', 'prgdscpublicoalvo']);
             $mPrograma->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
@@ -23,7 +23,7 @@ class Public_Controller_Programa
 
     public function excluir($prgid)
     {
-        $url = '?modulo=apoio/programa_form&acao=A';
+        $url = '?modulo=apoio/programa&acao=A';
 
         try {
             $mPrograma = new Monitora_Model_Programa($prgid);
