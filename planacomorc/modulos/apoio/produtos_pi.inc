@@ -28,7 +28,11 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             <?php
+                            /**
+                             * @todo Colocar a consulta na model, usando a prática do MVC e padronizando com o sistema.
+                             */
 							$sql = "
                                 SELECT
                                     pprid AS codigo,
