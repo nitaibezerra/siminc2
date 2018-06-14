@@ -275,11 +275,18 @@ function carregarMetasPPA($oppid, $mppid, $suocod = null) {
 
     $join = '';
     if($suocod){
+        $ret="";
+        $suocod = explode(',', $suocod);
+        for($i=0;$i<count($suocod);$i++){
+            $ret .= "'".$suocod[$i]."',";
+        }
+        $suocod = substr($ret, 0, strlen($ret)-1);
+
         $join = "inner join (
                     select smp.mppid 
                     from spo.subunidademetappa smp
                         inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smp.suoid and suo.prsano = '{$_SESSION['exercicio']}'
-                    where suo.suocod = '$suocod'                    
+                    where suo.suocod in ($suocod)
                     union all
                     select mpp.mppid from public.metappa mpp
                             left join spo.subunidademetappa smp on smp.mppid = mpp.mppid

@@ -398,7 +398,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 <label class="control-label" for="picted">Delegação:</label>
                                             </div>
                                             <div class="col-md-1">
-                                                <input type="checkbox" name="delegacao" id="delegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                                                <input type="checkbox" name="radiodelegacao" id="radiodelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
                                             </div>
                                             <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
                                                 <?php

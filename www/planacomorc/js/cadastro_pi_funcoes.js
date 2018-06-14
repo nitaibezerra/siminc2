@@ -1203,10 +1203,17 @@
     /**
      * Carrega novo conteúdo para o select de Metas PPA via requisição ajax.
      */
-    function carregarMetasPPA(oppid, mppid, suocod) {
-        $.post(urlPagina+ '&carregarMetasPPA=ok&oppid=' + oppid + '&suocod=' + suocod, function(response) {
+    function carregarMetasPPA(oppid, mppid, suocod, delegacao, mppid) {
+        if (delegacao!==null){
+            delegacao.push(suocod);
+        }else{
+            delegacao = suocod;
+        }
+        $.post(urlPagina+ '&carregarMetasPPA=ok&oppid=' + oppid + '&suocod=' + delegacao, 
+        function(response) {
             $('#mppid').remove();
             $('.div_mppid').html(response);
+            $('#mppid').val(mppid);            
             $(".chosen-select").chosen();
         });
     }
@@ -1530,7 +1537,7 @@
     }
 
     function toggleDelegacao(){
-        if($('#delegacao').is(':checked')){
+        if($('#radiodelegacao').is(':checked')){
             $('#div_unidades_delegadas').show('slow');
         } else {
             $('#div_unidades_delegadas').hide('slow');
