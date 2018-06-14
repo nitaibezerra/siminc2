@@ -29,32 +29,27 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Código</th>
                                     <th>Descrição</th>
-                                    <!--<th>Objetivo</th>
+                                    <th>Objetivo</th>
                                     <th>Publico Alvo</th>
-                                    <th>Jutificativa</th>
-                                    <th>Estratégia</th>-->
                                 </tr>
                             </thead>
                             <tbody>
-                            <?= "<pre>";
-                            print_r($listaPrograma);
-                            die;
-                            ?>
-                                <?php foreach($listaPrograma as $dados){ ?>
+                            <?php if ($listaPrograma) {
+                                foreach ($listaPrograma as $dados) { ?>
                                     <tr>
                                         <td class="text-center">
-                                            <a title="Alterar" href="?modulo=apoio/programa_form&acao=A&prgid=<?php echo $dados['prgid']; ?>">
+                                            <a title="Alterar"
+                                               href="?modulo=apoio/programa_form&acao=A&prgid=<?= $dados['prgid']; ?>">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                         </td>
                                         <td><?= $dados['prgcod']; ?></td>
                                         <td><?= $dados['prgdsc']; ?></td>
-                                        <!--<td><?/*= $dados['prgdscobjetivo']; */?></td>
-                                        <td><?/*= $dados['prgdscpublicoalvo']; */?></td>
-                                        <td><?/*= $dados['prgdscjustificativa']; */?></td>
-                                        <td><?/*= $dados['prgdscestrategia']; */?></td>-->
+                                        <td><?= $dados['prgdscobjetivo']; ?></td>
+                                        <td><?= $dados['prgdscpublicoalvo']; ?></td>
                                     </tr>
-                                <?php } ?>
+                                <?php }
+                            } ?>
                             </tbody>
                         </table>
                     </div>

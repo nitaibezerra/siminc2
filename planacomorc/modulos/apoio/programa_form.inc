@@ -35,10 +35,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="prgid" id="prgid" type="hidden" value="<?= $mPrograma->prgid; ?>">
                         
                         <?php
-                            echo $simec->input('prgcod', 'Código', $mPrograma->prgcod);
-                            echo $simec->input('prgdsc', 'Descrição', $mPrograma->prgdsc);
-                            echo $simec->input('prgdscobjetivo', 'Objetivo', $mPrograma->orgcod);
-                            echo $simec->input('prgdscpublicoalvo', 'Público Alvo', $mPrograma->orgcod);
+                            echo $simec->input('prgcod', 'Código', $mPrograma->prgcod, ['required','maxlength' => 4, 'class' => 'inteiro']);
+                            echo $simec->input('prgdsc', 'Descrição', $mPrograma->prgdsc, ['required','maxlength' => 200]);
+                            echo $simec->input('prgdscobjetivo', 'Objetivo', $mPrograma->prgdscobjetivo);
+                            echo $simec->input('prgdscpublicoalvo', 'Público Alvo', $mPrograma->prgdscpublicoalvo);
                         ?>
 
                         <div class="form-group">

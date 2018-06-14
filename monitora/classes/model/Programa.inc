@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento da entidade monitora.pi_enquadramentodespesa
+ * Classe de mapeamento da entidade monitora.programa
  *
  * @category Class
  * @package  A1
@@ -15,11 +15,11 @@ require_once APPRAIZ .'includes/classes/Modelo.class.inc';
 
 
 /**
- * Monitora_Model_Pi_enquadramentodespesa
+ * Monitora_Model_Programa
  *
  * @category Class
  * @package  A1
- * @author    <>
+ * @author   DOUGLAS SANTANA FONTES <douglas.fontes@cultura.gov.br>
  * @license  GNU simec.mec.gov.br
  * @version  Release: 
  * @link     no link
@@ -98,24 +98,31 @@ class Monitora_Model_Programa extends Modelo
         return $sql;
     }
 
-    public static function buscarTodos(stdClass $param) {
+    /**
+     * Monta listagem de todos os programas na tela de cadastro de Programa.
+     * @param stdClass $dto
+     * @return array
+     */
+    public static function buscarTodos(stdClass $dto) {
+
+        global $db;
+
+        $exercicio = (int)$dto->exercicio;
 
         $sql = "
             SELECT
+                prgid,
                 prgcod,
-                -- orgcod,
                 prgdsc,
                 prgdscobjetivo,
                 prgdscpublicoalvo
-                -- prgdscjustificativa
-                -- prgdscestrategia
             FROM monitora.programa
             WHERE
-                ptr.prgstatus = 'A'
-                AND prgano = '". (int)$param->exercicio. "'
+                prgstatus = 'A'
+                AND prgano = '$exercicio'
         ";
 
-        return $sql;
+        return $db->carregar($sql);
     }
 
 }//end Class

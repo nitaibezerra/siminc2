@@ -9,10 +9,10 @@ class Public_Controller_Programa
         try {
             $mPrograma = new Monitora_Model_Programa($dados['prgid']);
             $mPrograma->popularDadosObjeto($dados);
-            $mPrograma->mdeano = $mPrograma->mdeano ? $mPrograma->mdeano : $_SESSION['exercicio'];
+            $mPrograma->prgano = $mPrograma->prgano ? $mPrograma->prgano : $_SESSION['exercicio'];
 //            ver($mPrograma,d);
 
-            $mPrograma->salvar(null,null, ['prgid', 'prgcod', 'prgdscobjetivo', 'prgdsc', 'prgdscobjetivo', 'prgdscpublicoalvo']);
+            $mPrograma->salvar(null,null, ['prgcod', 'prgdscobjetivo', 'prgdsc', 'prgdscobjetivo', 'prgdscpublicoalvo']);
             $mPrograma->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
@@ -27,13 +27,6 @@ class Public_Controller_Programa
 
         try {
             $mPrograma = new Monitora_Model_Programa($prgid);
-
-/*            if($mPrograma->existeVinculo()){
-                $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/programa_form&acao=A&capid=' . $mPrograma->prgid;
-                simec_redirecionar($url, 'error', $mensagem);
-            }*/
-
             $mPrograma->prgstatus = 'I';
             $mPrograma->salvar();
             $mPrograma->commit();
