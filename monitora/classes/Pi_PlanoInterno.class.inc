@@ -1466,7 +1466,7 @@ class Pi_PlanoInterno extends Modelo
         include_once APPRAIZ . 'planacomorc/modulos/principal/unidade/detalhe-ptres.inc';
     }
 
-    public function recuperarDetalhesValoresGrafico($graficoSubunidade = TRUE, $tipoValor, $sigla)
+    public function recuperarDetalhesValoresGrafico($graficoSubunidade = TRUE, $tipoValor, $sigla, $percentualPlanejamento=false)
     {
         if($graficoSubunidade){
             $filtro = (object)array('suosigla' => $sigla);
@@ -1486,7 +1486,7 @@ class Pi_PlanoInterno extends Modelo
         $dados = $this->carregar($sql);
         if($dados){
             $grafico = new Grafico(Grafico::K_TIPO_PIZZA, false);
-            $grafico->gerarGrafico($dados);
+            $grafico->gerarGrafico($dados, $percentualPlanejamento);
         } else {
             echo "<script>$('#detalhe-grafico').modal('hide'); swal({title: 'Atenção', text: 'Nenhum dado encontrado.', type: 'warning', html: true});</script>";
         }

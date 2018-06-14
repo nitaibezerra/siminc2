@@ -353,21 +353,21 @@ class Grafico {
     }
 
         
-    public function gerarGrafico($dados)
+    public function gerarGrafico($dados, $percentualPlanejamento=false)
     {
         switch($this->tipo){
             case (self::K_TIPO_PIZZA):
 //                $this->montarGraficoPizza($dados);
 //                break;
             default:
-                $this->montarGraficoLinha($dados);
+                $this->montarGraficoLinha($dados, $percentualPlanejamento);
                 break;
         }
     }
 
-    public function montarGraficoLinha($dados)
+    public function montarGraficoLinha($dados, $percentualPlanejamento=false)
     {
-        $this->dados = $this->agrupamentoManual ? $dados : $this->agruparDadosGrafico($dados);
+        $this->dados = $this->agrupamentoManual ? $dados : $this->agruparDadosGrafico($dados, $percentualPlanejamento);
         if(!$this->id){
             $this->id = $this->gerarIdGrafico();
         }
@@ -393,8 +393,7 @@ class Grafico {
                     , '#2F4F4F' // Cinza escuro
                     , '#006400' // Verde escuro
                     , '#FFA500' // Amarelo quemado
-                ";
-
+                ";//ver($this->dados['series'],d);
         ?>
 
         <div style=" <?php echo ($this->width)? "width: {$this->width};": ''; ?>; height: <?php echo $this->height; ?> " id="<?php echo $this->id; ?>" ></div>
@@ -522,7 +521,7 @@ class Grafico {
 
                     series: <?php echo json_encode($this->dados['series']);
                     
-//                    ver( $this->dados['series'] );
+                    
 //                    echo 'aqui';
                     ?>
 
@@ -561,7 +560,7 @@ class Grafico {
      * @return array - Retorna um array com duas informações: series e categories, sendo o primeiro com os dados agrupados e o último com todas as divisões únicas
      * @author Orion Teles de Mesquita
      */
-    public function agruparDadosGrafico($dados)
+    public function agruparDadosGrafico($dados, $percentualPlanejamento=false)
     {
         $categoria = $this->agrupadores['categoria'];
         $name = $this->agrupadores['name'];
@@ -591,12 +590,23 @@ class Grafico {
             } else {
 
                 foreach ($dados as $dado) {
-//                ver($dados, d);
                     $dadosAgrupados[$dado[$categoria]][$dado[$name]] = (float) $dado[$valor];
                     $categories[$dado[$categoria]] = $dado[$categoria];
                     $grupos[$dado[$name]] = $dado[$name];
                 }
-
+                if ($percentualPlanejamento){
+                    $i=0;
+                    foreach($dadosAgrupados as $keyAgrupado => $dadoAgrupado){
+                        foreach ($dadoAgrupado as $key => $dado){
+                            if ($dado>0){
+                                $dadoPercentual[$i][$key]=(float)$dadoAgrupado[$key]/$dadoAgrupado['Limite']*100;
+                            }else{
+                                $dadoPercentual[$i][$key]=0;
+                            }
+                        }
+                        $i++;
+                    }
+                }
                 $dadosFinais = array();
                 foreach ($grupos as $grupo) {
                     foreach ($categories as $divisao) {
@@ -608,8 +618,20 @@ class Grafico {
                     }
                 }
                 $series = array();
-                foreach ($dadosFinais as $divisao => $aDado) {
-                    $series[] = array('name' => (string)$divisao, 'data'=>$aDado);
+                if ($percentualPlanejamento){
+                    $i=0;
+                    foreach ($dadosFinais as $divisao => $aDado) {
+                        if ($i>1){
+                            $series[] = array('nameLegend' => (string)$divisao, 'name' => (string)$divisao." <b>".number_format($dadoPercentual[$i][$divisao],2)."% sob o Limite </b><br>Valor", 'data'=>$aDado);
+                        }else{
+                            $series[] = array('nameLegend' => (string)$divisao, 'name' => (string)$divisao, 'data'=>$aDado);
+                        }
+                        $i++;
+                    }
+                }else{
+                    foreach ($dadosFinais as $divisao => $aDado) {
+                        $series[] = array('name' => (string)$divisao, 'data'=>$aDado);
+                    }                    
                 }
             }
         }
