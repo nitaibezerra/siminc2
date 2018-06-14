@@ -15,9 +15,14 @@ Abaixo temos uma lista de pessoas que já participaram deste projeto.
 
 Nome                              |  E-mail                          |  Cargo                       | Data de Entrada | Data de Saída  | Empresa 
 --------------------------------- | -------------------------------- | ---------------------------- | --------------- | -------------- | --------------------
-Guilherme Adler                   | guiadler@hotmail.com             | Estagiário - Desenvolvimento | ?      | ? | Estagiário do MINC
-Fernão Lopes Ginez de Lara       | fernao@gmail.com                 | Desenvolvedor Sênior         | ? | ? | HEPTA - Sustentação
-Rafael José da Costa Gloria       | rafaeljcg20@gmail.com            | Analista de Sistemas e Dados | 01/03/2016 | Atuando        | HEPTA - Sustentação
-Orion ? | ? | ? | ? | Atuando        | HEPTA - Sustentação
-Christian Moryah Contiero Miranda | christian.miranda@cultura.gov.br |            ?                 | ?               | ?        | MPOG
-Pedro Philipe Alves de Oliveira | pedrophilipe.ti@gmail.com |            Desenvolvedor                 | ?               | ?        | UFABC - LabLivre
+Christian Moryah Contiero Miranda | christian.miranda@cultura.gov.br |            ?                 | ?               | ?              | MPOG
+Douglas Santana                   | douglasantana007@gmail.com       | Estagiário - Desenvolvimento | 03/2018         | Atuando        | Estagiário do MINC
+Fernão Lopes Ginez de Lara        | fernao@gmail.com                 | Desenvolvedor Sênior         | ?               | ?              | HEPTA - Sustentação
+Guilherme Adler                   | guiadler@hotmail.com             | Estagiário - Desenvolvimento | ?               | 04/2018        | Estagiário do MINC
+Isaias Montes                     | isaiassm1113@outlook.com         | Estagiário - Desenvolvimento | 06/2018         | 07/2018        | Estagiário do MINC
+Leonardo Santos                   | leonardo.barreiros@cultura.gov.br| Estagiário - Desenvolvimento | 04/2018         | Atuando        | Estagiário do MINC
+Orion Teles                       | orion.mesquita@cultura.gov.br    | Desenvolvedor Sênior         | ?               | 05/2018        | HEPTA - Sustentação
+Pedro Philipe Alves de Oliveira   | pedrophilipe.ti@gmail.com        | Desenvolvedor                | ?               | ?              | UFABC - LabLivre
+Rafael Carneiro                   | rafael.carneiro@cultura.gov.br   | Desenvolvedor Sênior         | 06/2018         | Atuando        | HEPTA - Sustentação
+Rafael José da Costa Gloria       | rafaeljcg20@gmail.com            | Analista de Sistemas e Dados | 03/2016         | Atuando        | HEPTA - Sustentação
+Ramon Canabarro                   | ramoncanabarro@gmail.com         | Estagiário - Desenvolvimento | ?               | 04/2018        | Estagiário do MINC
