@@ -39,7 +39,7 @@
 
 
         toggleDelegacao();
-        $('#radiodelegacao').change(function(){
+        $('#radioDelegacao').change(function(){
             toggleDelegacao();
         });
 
@@ -76,7 +76,7 @@
         // Evento ao mudar opção de Objetivos PPA
         $('#oppid').change(function(){
             var delegacao = null;
-            if($('#radiodelegacao').is(':checked')){
+            if($('#radioDelegacao').is(':checked')){
                 delegacao = $('#delegacao').val();
             }
             carregarMetasPPA($(this).val(), null, $('#ungcod').val(), delegacao, null);

@@ -1537,7 +1537,7 @@
     }
 
     function toggleDelegacao(){
-        if($('#radiodelegacao').is(':checked')){
+        if($('#radioDelegacao').is(':checked')){
             $('#div_unidades_delegadas').show('slow');
         } else {
             $('#div_unidades_delegadas').hide('slow');
