@@ -77,19 +77,11 @@ switch ($_REQUEST['req']) {
         }
         die;
     case 'carregarMetasPPA':
-        if( is_array($_REQUEST['suoid']) ){
-			$sql = (new Public_Model_MetaPpa())->recuperarSqlMultiplasUnidadesCombo(NULL, array(
-				'exercicio' => $_SESSION['exercicio'],
-				'suoid' => $_REQUEST['suoid'],
-				'oppid' => $_REQUEST['oppid']));
-			$listaMetaPpa = $db->carregar($sql);
-        } else {
-			$sql = (new Public_Model_MetaPpa())->recuperarSqlCombo(NULL, array(
-				'exercicio' => $_SESSION['exercicio'],
-				'suoid' => $_REQUEST['suoid'],
-				'oppid' => $_REQUEST['oppid']));
-			$listaMetaPpa = $db->carregar($sql);
-        }
+        $sql = (new Public_Model_MetaPpa())->recuperarSqlCombo(NULL, array(
+            'exercicio' => $_SESSION['exercicio'],
+            'suoid' => $_REQUEST['suoid'],
+            'oppid' => $_REQUEST['oppid']));
+        $listaMetaPpa = $db->carregar($sql);
 
         if($listaMetaPpa){
             echo simec_json_encode($listaMetaPpa);

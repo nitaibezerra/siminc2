@@ -51,9 +51,7 @@ if ($_REQUEST['carregarComboUG']) {
     die();
 }
 if ($_REQUEST['carregarMetasPPA']) {
-	$_REQUEST['suocod'] = explode(",", $_REQUEST['suocod']);
-    $multipleSuocods = is_array($_REQUEST['suocod']) ? true : false;
-    carregarMetasPPA((int)$_REQUEST['oppid'], null, $_REQUEST['suocod'], $multipleSuocods);
+    carregarMetasPPA((int)$_REQUEST['oppid'], null, $_REQUEST['suocod']);
     die();
 }
 if ($_REQUEST['carregarMetaPNC']) {
@@ -400,11 +398,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                                 <label class="control-label" for="picted">Delegação:</label>
                                             </div>
                                             <div class="col-md-1">
-                                                <input type="checkbox" name="radioDelegacao" id="radioDelegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
+                                                <input type="checkbox" name="delegacao" id="delegacao" value="t" class="js-switch" <?php echo count($listaSubUnidadesDelegadas) ? 'checked="checked"' : ''; ?> />
                                             </div>
                                             <div class="col-md-7" id="div_unidades_delegadas" style="margin-left: 15px;">
                                                 <?php
-                                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suocod as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
+                                                $aSubUnidadeOrcamentaria = simec_preparar_array((new Public_Model_SubUnidadeOrcamentaria())->recuperarTodos("suoid as codigo, unosigla || ' - ' || suonome as descricao", ["prsano = '{$_SESSION['exercicio']}'", "suostatus = 'A'"], 'descricao'));
                                                 echo $simec->select("delegacao[]", '', $listaSubUnidadesDelegadas, $aSubUnidadeOrcamentaria);
                                                 ?>
                                             </div>
