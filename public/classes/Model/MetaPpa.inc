@@ -71,6 +71,10 @@ class Public_Model_MetaPpa extends Modelo
 
         $join = '';
         if($where['suoid']){
+            $suoid = $where['suoid'];
+            if (is_array($where['suoid'])){
+                $suoid = implode(', ', $where['suoid']);
+            }
             $join = "
                 JOIN (
                     SELECT
@@ -78,7 +82,7 @@ class Public_Model_MetaPpa extends Modelo
                     FROM spo.subunidademetappa smp
                         JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = smp.suoid AND suo.prsano = '{$where['exercicio']}'
                     WHERE
-                        suo.suoid = '{$where['suoid']}'                    
+                        suo.suoid in ({$suoid}) 
                 UNION ALL
                     SELECT
                         mpp.mppid
