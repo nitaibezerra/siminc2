@@ -1,96 +1,80 @@
 # Fluxo comum de trabalho
 
-Além da master, existem duas branches principais de trabalho no SIMINC2, identificadas com as duas frentes de trabalho:
+Cada desenvolvedor criará uma branch a partir da master.
 
-               ---- modulo-novo ------
-              /
-    master   o-----------------------
-              \
-               ---- feature ---------
-
-Cada desenvolvedor criará uma branch a partir de uma das duas.
-
-## Criando uma branch a partir da branch feature
+## Criando uma branch a partir da branch master
     
-        $ git checkout feature
-    $ git checkout -b feature-nome-demanda
+    $ git checkout master
+    $ git pull origin master
+    $ git checkout -b tipo-modulo-nºissue-nomeCurto
+    Eg: $ git checkout -b hotfix-007-planejamento-documentos
 
 
     master   o-------------------------------
-              \
-               o------- feature --------------
-                \
-                 o--- feature-nome-demanda ----
+                  |
+                        o------- teste --------------
+                   \
+                    o--- hotfix-007-planejamento-documentos
+                    
 
-## Faça commits na sua branch e envie para o gitlab (origin)
-    $ git commit -m 'fix: funcionalidade x'
-    $ git commit -m 'fix: funcionalidade y'
-    $ git push origin feature-nome-demanda
+## Faça commits na sua branch e envie para o github (origin)
+    $ git add .
+    $ git commit -m '[ FIX ] Módulo X - funcionalidade x. Issue #007'
+    $ git push origin hotfix-007-planejamento-documentos
 
     master   o-----------------------------------------
-              \
-               o---------------- feature ---------------
-                \
-                 o---o----o----- feature-nome-demanda ---
+             |   \
+             |    o---------------- teste ---------------
+             \
+              o---o----o----- hotfix-007-planejamento-documentos ---
 
-## Atualizando sua branch com as alterações mais recentes do feature
+## Atualizando a branch de teste com as alterações mais recentes da demanda feita.
 
-    $ git checkout feature-nome-demanda
-    $ git fetch
-    $ git merge feature
-    $ git push origin feature-nome-demanda
+    $ git pull origin teste
+    $ git merge origin hotfix-007-planejamento-documentos
+    $ git push origin teste
 
     master   o----------------------------------------------
               \
-               o-----o----o----o--- feature -----------------
+               o-----o----o----o--- teste -----------------
                 \               \
-                 o---o----o------o--- feature-nome-demanda ---
-
-## Enviando suas alterações para a branch feature
-
-    $ git checkout feature
-    $ git fetch
-    $ git merge feature-nome-demanda
-    $ git push origin feature
-
-    master   o-----------------------------------------------------------
-              \
-               o-----------------------o ------ feature ------------------
-                \                     /
-                 o---o----o------o---o -------- feature-nome-demanda ------
+                 o---o----o------o--- origin hotfix-007-planejamento-documentos ---
 
 
 ## Homologando e publicando uma versão para a master
 
-Certifique-se de que está na branch correta. Faça os testes; caso encontre bugs pequenos (1), não há problema que a correção seja feita diretamente na branch feature mesmo. Caso se tratem de alterações maiores (2), melhor voltar a trabalhar no seu branch para só então publicar o resultado na feature:
+Certifique-se de que a demanda está sem divergências e se foi criada do local certo como já foi citado acima, caso esteja tudo correto, siga os passoo a passos abaixo
 
-(1)
+(1) Caso de sucesso
 
-    $ git checkout feature
-    $ git commit -m 'fix: pequena correcao'
-    $ git push origin feature
-
-(2)
-
-    $ git checkout feature-nome-demanda
-    $ git commit -m 'fix maior'
-    $ git checkout feature
-    $ git merge feature-nome-demanda
-    $ git push origin feature-nome-demanda
-
-
-Se estiver tudo ok, edite o CHANGELOG e crie a tag
-
-    $ vim CHANGELOG
-    $ git add CHANGELOG
-    $ git commit -m 'adicionando alteracoes do CHANGELOG'
-    $ git tag -a v1.7.1 -m 'release de correcoes na proposta'
-    $ git push origin feature
+    Solicite um pull request [aqui](https://github.com/culturagovbr/siminc2/branches/all) e adicione a revisão de um membro 
     
+    Detalhe: Selecione apenas a branch que foi homologada e solicite um pull request para master.
 
-Na produção:
+(2) Caso de falha
 
-    $ git fetch
-    $ git checkout -b v1.7.1
+    Utilize sua branch para realizar as alterações e depois prossiga o passo de mandar para teste.
 
 
+## Termos e comandos usados neste documento
+
+##### Muda para a branch master
+$ git checkout master
+    
+##### Atualiza a branch master de acordo com as mudanças no remoto (origin)
+$ git pull origin master
+    
+##### Cria uma branch com o padrão usado no SIMINC2
+$ git checkout -b tipo-modulo-nºissue-nomeDemanda
+
+##### Adiciona as alterações feitas
+$ git add docs/Guia_de_operacao-desenvolvimento.md
+
+##### Remover branch local
+$ git branch -D nomebranch
+
+##### Faz download dos últimos commits de todas as branch's remoto (origin)
+$ git fetch
+
+##### Mandar sua branch para remoto (origin)
+$ git push -u --set-upstream origin nomeDemanda
