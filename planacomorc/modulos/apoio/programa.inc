@@ -30,7 +30,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th>Código</th>
                                     <th>Descrição</th>
                                     <th>Objetivo</th>
-                                    <th>Publico Alvo</th>
+                                    <th>Público Alvo</th>
                                 </tr>
                             </thead>
                             <tbody>

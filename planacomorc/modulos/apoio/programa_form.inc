@@ -37,8 +37,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <?php
                             echo $simec->input('prgcod', 'Código', $mPrograma->prgcod, ['required','maxlength' => 4, 'class' => 'inteiro']);
                             echo $simec->input('prgdsc', 'Descrição', $mPrograma->prgdsc, ['required','maxlength' => 200]);
-                            echo $simec->input('prgdscobjetivo', 'Objetivo', $mPrograma->prgdscobjetivo);
-                            echo $simec->input('prgdscpublicoalvo', 'Público Alvo', $mPrograma->prgdscpublicoalvo);
+                            echo $simec->textarea('prgdscobjetivo', 'Objetivo', $mPrograma->prgdscobjetivo, ['cols'=>60, 'rows'=>2]);
+                            echo $simec->textarea('prgdscpublicoalvo', 'Público Alvo', $mPrograma->prgdscpublicoalvo, ['cols'=>60, 'rows'=>2]);
                         ?>
 
                         <div class="form-group">

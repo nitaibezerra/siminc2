@@ -119,7 +119,6 @@ class Monitora_Model_Programa extends Modelo
             FROM monitora.programa
             WHERE
                 prgstatus = 'A'
-                AND prgano = '$exercicio'
         ";
 
         return $db->carregar($sql);
