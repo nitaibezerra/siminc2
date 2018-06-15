@@ -1,21 +1,21 @@
 <?php
-
+$filtroprop = $_SESSION['filtroprop'] = ($_POST? $_POST: $_SESSION['filtroprop']);
+switch ($_REQUEST['requisicao']) {
+    case 'limpar':
+        $filtroprop = $_SESSION['filtroprop'] = array();
+        break;    
+}
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 
 $aProposta = (new Proposta_Model_Proposta)->recuperarListagem((object) array(
     'exercicio' => $_SESSION['exercicio'],
     'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
-));
+), $filtroprop);
 
 $requisicao = $_REQUEST['requisicao'];
 //ver($_REQUEST,d);
 
-switch ($_REQUEST['requisicao']) {
-    case 'limpar':
-        $filtroprop = $_SESSION['filtroprop'] = array();
-        break;
-}
-    $filtroprop = $_SESSION['filtroprop'] = ($_POST? $_POST: $_SESSION['filtroprop']);
+
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -33,26 +33,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="requisicao" id="requisicao" value="" type="hidden">
 
                         <?php
-                            echo $simec->select(
-                                'suoid',
-                                'SubUnidade',
-                                $filtroprop['suoid'],
-                                (new Public_Model_SubUnidadeOrcamentaria())->queryComboChaveSuoid((object)array(
-                                    'unofundo' => 'FALSE',
-                                    'exercicio' => $_SESSION['exercicio'],
-                                    'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)));
-                            /*echo $simec->select(
-                                'eqdid',
-                                'Enquadramento da Despesa',
-                                $filtroprop['eqdid'],
-                                (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo(),
-                                ['required']);
-                            echo $simec->select('ptrid', 'Funcional',
-                                $filtroprop['ptrid'],
-                                (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento(
-                                    $filtroprop['suoid'],
-                                    $filtroprop['eqdid']),
-                                ['required']);*/
+                            echo $simec->select('suoid','SubUnidade',$filtroprop['suoid'],(new Public_Model_SubUnidadeOrcamentaria())->queryComboChaveSuoid((object)array('unofundo' => 'FALSE','exercicio' => $_SESSION['exercicio'],'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)));
+                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtroprop['eqdid'], (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo());
+                            echo '<span id="span-funcional">'.$simec->select('ptrid', 'Funcional', $filtroprop['ptrid'], (new Proposta_Model_Proposta())->recuperarSqlFuncional($filtroprop['suoid'], '')).'</span>';
                         ?>
 
                         <div class="form-group">
@@ -154,5 +137,6 @@ include APPRAIZ . "includes/cabecalho.inc";
 
     $(document).ready(function(){
         initListaProposta();
+        
     });
 </script>
