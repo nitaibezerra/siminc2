@@ -1447,11 +1447,7 @@ defaultOptions = {
 		//floating: false,
 		layout: 'horizontal',
 		labelFormatter: function () {
-                    var name=this.userOptions.nameLegend;
-                    if (this.userOptions.nameLegend==undefined || this.userOptions.nameLegend==''){
-                        name = this.name;
-                    }
-                    return name;
+                    return this.name;
 		},
 		//borderWidth: 0,
 		borderColor: '#909090',

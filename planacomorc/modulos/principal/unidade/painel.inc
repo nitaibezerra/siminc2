@@ -29,7 +29,7 @@
             $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla'], true);
         die;
         case 'detalhe-grafico-uo':
-            $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla'], true);
+            $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
         die;
         case 'carregarGraficoUnidade':
             carregarGraficoUnidade($colors, true);
@@ -293,7 +293,6 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
                 $(this).tab('show');
             }
         });
-
         $('.detalhe-subunidade').click(function(){
             $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid='+ $(this).data('suoid'));
             $('#detalhe-subunidade').modal();
