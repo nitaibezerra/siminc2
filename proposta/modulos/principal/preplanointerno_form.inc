@@ -85,7 +85,7 @@ if($mPrePlanoInterno->suoid){
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/principal/preplanointerno_form.js?v=2"></script>
+<script src="js/principal/preplanointerno_form.js?v=3"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-5">
@@ -148,14 +148,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
                                 <td style="text-align: left;">Limite Autorizado na Unidade: </td>
-                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;">0</td>
+                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;"><?php echo number_format((int)$limites['limite_unidade'], 0, ',', '.'); ?></td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">
                                     Limite Disponível na Unidade:
                                     <input id="input_bd_disponivel_unidade_bd" name="input_bd_disponivel_unidade_bd" type="hidden" value="<?php echo (int)$limites['disponivel_unidade']; ?>" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0</td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo (int)$limites['disponivel_unidade'] -((int)$mPrePlanoInterno->plivalorcusteio + (int)$mPrePlanoInterno->plivalorcapital); ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>
@@ -172,10 +172,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tr>
                                 <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                 <td style="text-align: center;">
-                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 0, ',', '.'); ?>" class="form-control valorPI moedaInteiro " required="required">
+                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 0, ',', '.'); ?>" class="form-control valorPlanoInterno moedaInteiro " required="required">
                                 </td>
                                 <td align="center">
-                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 0, ',', '.'); ?>" class="form-control valorPI moedaInteiro " required="required">
+                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 0, ',', '.'); ?>" class="form-control valorPlanoInterno moedaInteiro " required="required">
                                 </td>
                             </tr>
                         </table>

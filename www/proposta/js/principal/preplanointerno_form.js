@@ -8,7 +8,7 @@ function initPreplanointernoForm(){
 
     toggleItem();
     recuperarValoresLimitesPtres();
-    recuperarValoresLimitesSubUnidade();
+//    recuperarValoresLimitesSubUnidade();
     
     controlarExibicaoFormularioReduzido();
     controlarExibicaoUnidadeMedidaQuantidade($('#pprid').val());
@@ -55,16 +55,16 @@ function initPreplanointernoForm(){
         $('#span-iniciativappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-iniciativappa&oppid=' + $('#oppid').val());
     });
 
-    $('.valorPI').keyup(function(){
+    $('.valorPlanoInterno').keyup(function(){
         atualizaLimiteDisponivelUnidade();
-        calcularValores();
+        criticarValorDoProjeto();
     });
 
-    $('.valorPI').change(function(){
+    $('.valorPlanoInterno').change(function(){
         atualizaLimiteDisponivelUnidade();
-        calcularValores();
+        criticarValorDoProjeto();
     });
-
+    
     $('body').on('change', '#ptrid', function(){
         $.ajax({
             url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-objetivoppa&ptrid=' + $(this).val(),
@@ -122,20 +122,37 @@ function initPreplanointernoForm(){
     });
 }
 
-function calcularValores(){
-
-    // Calculando valor Disponível
-    totalPi = somarCampos('valorPI');
-    limiteDisponivel = $('#td_disponivel_sub_unidade').html()? str_replace(['.', ','], ['', '.'], $('#td_disponivel_sub_unidade').html()): 0;
-
-    valorDisponivel = parseFloat(limiteDisponivel) - parseFloat(totalPi);
-
-    if(valorDisponivel < 0){
+function criticarValorDoProjeto(){
+    if(validarValorDoProjeto() === false){
         swal(
             'Atenção',
             'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital',
             'error');
     }
+}
+
+/**
+ * Verifica se o valor do projeto não ultrapassa o limite disponivel na unidade.
+ * 
+ * @returns {boolean}
+ */
+function validarValorDoProjeto(){
+    var limiteDisponivelMaiorOuIgual = true;
+    
+    // Busca valor total disponivel informado pela base de dados sem o valor do próprio PI em edição.
+    var limiteDisponivelBd = $('#input_bd_disponivel_unidade_bd').val()? str_replace(['.', ','], ['', '.'], $('#input_bd_disponivel_unidade_bd').val()): 0;
+    
+    // Busca valor da soma dos dados preenchidos do usuário em tempo real de custeio e capital.
+    var totalCusteioCapital = somarCampos('valorPlanoInterno');
+    
+    // Calcula o valor disponivel menos o valor digitado em custeio e capital pelo usuário
+    var disponivelSubunidade = parseFloat(limiteDisponivelBd) - parseFloat(totalCusteioCapital);
+    
+    if(disponivelSubunidade < 0){
+        limiteDisponivelMaiorOuIgual = false;
+    }
+    
+    return limiteDisponivelMaiorOuIgual;
 }
 
 /**
@@ -148,10 +165,11 @@ function atualizaLimiteDisponivelUnidade(){
     // Busca valor total disponivel informado pela base de dados sem o valor do próprio PI em edição.
     var limiteDisponivelBd = $('#input_bd_disponivel_unidade_bd').val()? str_replace(['.', ','], ['', '.'], $('#input_bd_disponivel_unidade_bd').val()): 0;
     // Busca valor da soma dos dados preenchidos do usuário em tempo real de custeio e capital.
-    var totalCusteioCapital = somarCampos('valorPI');
-    // Soma o valor disponivel mais o valor digitado em custeio e capital pelo usuário
+    var totalCusteioCapital = somarCampos('valorPlanoInterno');
+    // Calcula o valor disponivel menos o valor digitado em custeio e capital pelo usuário
     var disponivelSubunidade = parseFloat(limiteDisponivelBd) - parseFloat(totalCusteioCapital);
     
+    // Exibe na tela o valor disponivel na Unidade já deduzindo com o valor que o usuário preencheu do Projeto
     $('#td_disponivel_sub_unidade').html(number_format(disponivelSubunidade, 0, ',', '.'));
 }
 
@@ -169,7 +187,8 @@ function recuperarValoresLimitesSubUnidade(){
         dataType: 'json',
         success: function(dados){
             $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.limite_unidade), 0, ',', '.'));
-            $('#td_disponivel_sub_unidade').html(number_format(parseFloat(dados.disponivel_unidade), 0, ',', '.'));
+            $('#input_bd_disponivel_unidade_bd').val(parseInt(dados.disponivel_unidade));
+            atualizaLimiteDisponivelUnidade();
         }
     });
 }
