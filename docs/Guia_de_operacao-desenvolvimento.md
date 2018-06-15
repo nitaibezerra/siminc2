@@ -8,9 +8,9 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git fetch
     $ git checkout master
     $ git pull origin master
-    $ git checkout -b tipo-modulo-nºissue-nomeCurto
+    $ git checkout -b tipo-nºissue-modulo-nomeDemanda
     Eg: $ git checkout -b hotfix-007-planejamento-documentos
-    $ git push -u --set-upstream origin hotfix-007-planejamento-documentos
+    $ git push origin hotfix-007-planejamento-documentos
 
     master   o-----------------------------------------
                   | \
@@ -74,19 +74,19 @@ $ git checkout master
 $ git pull origin master
     
 ##### Criar uma branch com o padrão usado no SIMINC2
-$ git checkout -b tipo-modulo-nºissue-nomeDemanda
+$ git checkout -b tipo-nºissue-modulo-nomeDemanda
 
 ##### Adicionar as alterações feitas
 $ git add docs/Guia_de_operacao-desenvolvimento.md
 
 ##### Remover branch local
-$ git branch -D nomebranch
+$ git branch -D hotfix-007-planejamento-documentos
 
 ##### Fazer download dos últimos commits de todas as branch's remoto (origin)
 $ git fetch
 
 ##### Mandar sua branch para remoto (origin)
-$ git push -u --set-upstream origin nomeDemanda
+$ git push origin hotfix-007-planejamento-documentos
 
 ##### Conferir branch atual 
 $ git branch

@@ -1,18 +1,62 @@
 <?php
-
+$filtroprop = $_SESSION['filtroprop'] = ($_POST? $_POST: $_SESSION['filtroprop']);
+switch ($_REQUEST['requisicao']) {
+    case 'limpar':
+        $filtroprop = $_SESSION['filtroprop'] = array();
+        break;    
+}
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 
 $aProposta = (new Proposta_Model_Proposta)->recuperarListagem((object) array(
     'exercicio' => $_SESSION['exercicio'],
     'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
-));
+), $filtroprop);
+
+$requisicao = $_REQUEST['requisicao'];
+//ver($_REQUEST,d);
+
+
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
+<script src="js/principal/proposta.js?v=0"></script>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2><?php echo $titulo_modulo; ?></h2>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Pesquisa avançada por Proposta</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="filtroprop" name="filtroprop" method="POST" role="form" class="form-horizontal">
+                        <input name="requisicao" id="requisicao" value="" type="hidden">
+
+                        <?php
+                            echo $simec->select('suoid','SubUnidade',$filtroprop['suoid'],(new Public_Model_SubUnidadeOrcamentaria())->queryComboChaveSuoid((object)array('unofundo' => 'FALSE','exercicio' => $_SESSION['exercicio'],'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)));
+                            echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtroprop['eqdid'], (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo());
+                            echo '<span id="span-funcional">'.$simec->select('ptrid', 'Funcional', $filtroprop['ptrid'], (new Proposta_Model_Proposta())->recuperarSqlFuncional($filtroprop['suoid'], '')).'</span>';
+                        ?>
+
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-warning btn-limpar" type="button">
+                                    <span class="glyphicon glyphicon-remove-circle"></span> Limpar
+                                </button>
+                                <button class="btn btn-primary btn-buscar" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button class="btn btn-success btn-novo" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Novo
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -24,9 +68,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <h5>Dados Gerais</h5>
                 </div>
                 <div class="ibox-content">
-                    
-                    <a class="btn btn-small btn-warning" href="?modulo=principal/proposta_form&acao=A">Novo</a>
-                    
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
                             <tbody>
@@ -97,3 +138,11 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        initListaProposta();
+        
+    });
+</script>
