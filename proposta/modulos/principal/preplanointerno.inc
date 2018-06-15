@@ -29,22 +29,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                     
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
-                            <thead>
-                            <tr class="text-center">
-                                <th width="4%">Ações</th>
-                                <th>Id</th>
-                                <th>Subunidade</th>
-                                <th>Funcional</th>
-                                <th>Título</th>
-                                <th>Enquadramento</th>
-                                <th>Estado Atual</th>
-                                <th>Quantidade</th>
-                                <th>Valor Custeio</th>
-                                <th>Valor Capital</th>
-                                <th>Valor Custeio Exp.</th>
-                                <th>Valor Capital Exp.</th>
-                            </tr>
-                            </thead>
                             <tbody>
                             <?php
                                 # Inicialização das variáveis do totalizador dos dados.
@@ -55,6 +39,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 $totalVCapExp   = 0;
                             ?>
                             <?php foreach($aPrePlanoInterno as $dados){ ?>
+                                <?php
+                                    # Soma dos Totalizadores.
+                                    $totalQtd       += (int)$dados['pliquantidade'];
+                                    $totalVCusteio  += (int)$dados['plivalorcusteio'];
+                                    $totalVCapital  += (int)$dados['plivalorcapital'];
+                                    $totalCustExp   += (int)$dados['plivalorcusteioadicional'];
+                                    $totalVCapExp   += (int)$dados['plivalorcapitaladicional'];
+                                ?>
                                 <tr>
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=principal/preplanointerno_form&acao=A&pliid=<?php echo $dados['pliid']; ?>"><i class="fa fa-pencil"></i></a>
@@ -71,24 +63,41 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td align="right"><?php echo number_format($dados['plivalorcusteioadicional'],0,',', '.'); ?></td>
                                     <td align="right"><?php echo number_format($dados['plivalorcapitaladicional'],0,',', '.'); ?></td>
                                 </tr>
-                                <?php
-                                    # Soma dos Totalizadores.
-                                    $totalQtd       += (int)$dados['pliquantidade'];
-                                    $totalVCusteio  += (int)$dados['plivalorcusteio'];
-                                    $totalVCapital  += (int)$dados['plivalorcapital'];
-                                    $totalCustExp   += (int)$dados['plivalorcusteioadicional'];
-                                    $totalVCapExp   += (int)$dados['plivalorcapitaladicional'];
-                                ?>
-                            <?php } ?>        
+
+                            <?php } ?>
                             </tbody>
+                            <thead>
+                                <tr class="text-center">
+                                    <th width="4%">Ações</th>
+                                    <th>Id</th>
+                                    <th>Subunidade</th>
+                                    <th>Funcional</th>
+                                    <th>Título</th>
+                                    <th>Enquadramento</th>
+                                    <th>Estado Atual</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Custeio</th>
+                                    <th>Valor Capital</th>
+                                    <th>Valor Custeio Exp.</th>
+                                    <th>Valor Capital Exp.</th>
+                                </tr>
+                                <tr style="vertical-align: middle" class="text-right">
+                                    <th colspan="7" style="text-align: left"><h5>Total</h5></th>
+                                    <th><?php echo number_format($totalQtd , 0, ',', '.'); ?></th>
+                                    <th><?php echo number_format($totalVCusteio , 0, ',', '.'); ?></th>
+                                    <th><?php echo number_format($totalVCapital,0,',','.'); ?></th>
+                                    <th><?php echo number_format($totalCustExp,0,',','.'); ?></th>
+                                    <th><?php echo number_format($totalVCapExp,0,',','.'); ?></th>
+                                </tr>
+                            </thead>
                             <tfoot>
-                                <tr>
-                                    <td colspan="7" style="vertical-align: middle; text-align: right"><h5>Total</h5></td>
-                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalQtd , 0, ',', '.'); ?></td>
-                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalVCusteio , 0, ',', '.'); ?></td>
-                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalVCapital,0,',','.'); ?></td>
-                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalCustExp,0,',','.'); ?></td>
-                                    <td align="right" style="vertical-align: middle"><?php echo number_format($totalVCapExp,0,',','.'); ?></td>
+                                <tr style="vertical-align: middle" class="text-right">
+                                    <th colspan="7" style="text-align: left"><h5>Total</h5></th>
+                                    <th><?php echo number_format($totalQtd , 0, ',', '.'); ?></th>
+                                    <th><?php echo number_format($totalVCusteio , 0, ',', '.'); ?></th>
+                                    <th><?php echo number_format($totalVCapital,0,',','.'); ?></th>
+                                    <th><?php echo number_format($totalCustExp,0,',','.'); ?></th>
+                                    <th><?php echo number_format($totalVCapExp,0,',','.'); ?></th>
                                 </tr>
                             </tfoot>
                         </table>
