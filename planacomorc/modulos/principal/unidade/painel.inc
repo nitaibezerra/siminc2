@@ -26,19 +26,19 @@
             $oPlanoInterno->recuperarPiPorFuncional((object) array('suoid' => $_REQUEST['suoid'], 'ptrid' => $_REQUEST['ptrid']));
         die;
         case 'detalhe-grafico-subunidade':
-            $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
+            $oPlanoInterno->recuperarDetalhesValoresGrafico(TRUE, $_REQUEST['tipo_valor'], $_REQUEST['sigla'], true);
         die;
         case 'detalhe-grafico-uo':
             $oPlanoInterno->recuperarDetalhesValoresGrafico(FALSE, $_REQUEST['tipo_valor'], $_REQUEST['sigla']);
         die;
         case 'carregarGraficoUnidade':
-            carregarGraficoUnidade($colors);
+            carregarGraficoUnidade($colors, true);
         die;
         case 'carregarGraficoDireta':
-            carregarGraficoDireta($colors);
+            carregarGraficoDireta($colors, true);
         die;
         case 'carregarGraficoCgconCogep':
-            carregarGraficoCgconCogep($colors);
+            carregarGraficoCgconCogep($colors, true);
         die;
     }
 
@@ -118,7 +118,7 @@
                             <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
                                     <!--O grafico 1 será carregado aqui via ajax-->
-                                    <?php carregarGraficoUnidade($colors); ?>
+                                    <?php carregarGraficoUnidade($colors, true); ?>
                                 </div>
                                 <div id="tab-2" class="tab-pane">
                                     <!--O grafico 2 será carregado aqui via ajax-->
@@ -293,7 +293,6 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
                 $(this).tab('show');
             }
         });
-
         $('.detalhe-subunidade').click(function(){
             $('#detalhe-subunidade .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-subunidade&suoid='+ $(this).data('suoid'));
             $('#detalhe-subunidade').modal();
