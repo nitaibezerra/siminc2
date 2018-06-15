@@ -55,12 +55,7 @@ function initPreplanointernoForm(){
         $('#span-iniciativappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-iniciativappa&oppid=' + $('#oppid').val());
     });
 
-    $('.valorPlanoInterno').keyup(function(){
-        atualizaLimiteDisponivelUnidade();
-        criticarValorDoProjeto();
-    });
-
-    $('.valorPlanoInterno').change(function(){
+    $('.valorPlanoInterno').bind('keyup change paste', function(){
         atualizaLimiteDisponivelUnidade();
         criticarValorDoProjeto();
     });
@@ -86,8 +81,7 @@ function initPreplanointernoForm(){
 
     $('#btn-salvar').click(function(){
 
-        valorDisponivel = $('#td_disponivel_sub_unidade').html() ? str_replace(['.', ','], ['', '.'], $('#td_disponivel_sub_unidade').html()) : 0;
-        if(valorDisponivel < 0){
+        if(validarValorDoProjeto() === false){
             swal('Atenção', 'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital', 'error');
             return false;
         }
