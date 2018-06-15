@@ -69,8 +69,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <th>Enquadramento de Despesa</th>
                                 <th>Quantidade PO</th>
                                 <th>Quantidade Expansão</th>
-                                <th>Custo Total</th>
-                                <th>Custo Expansão</th>
+                                <th>Valor Total</th>
+                                <th>Valor Expansão</th>
                             </tr>
                             <tr style="vertical-align: middle" class="text-right">
                                 <th colspan="5" style="text-align: left"><h5>Total</h5></th>
