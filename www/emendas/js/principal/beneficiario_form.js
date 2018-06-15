@@ -53,10 +53,28 @@ function beneficiario_form_init(){
 
     // Evento ao mudar opção de Objetivos PPA
     $('#oppid').change(function(){
-        carregarMetasPPA($(this).val(), null, $('#suoid').val());
+        var delegacao = null;
+        if($('#radioDelegacao').is(':checked')){
+            delegacao = $('#delegacao').val();
+        }
+        carregarMetasPPA($(this).val(), null, $('#suoid').val(), delegacao, null);
         carregarIniciativaPPA($(this).val());
     });
-
+    
+    $('#delegacao').change(function(){    
+        var mppid = $('#mppid').val();
+        carregarMetasPPA($('#oppid').val(), null, $('#suoid').val(), $(this).val(), mppid);
+    });
+    
+    $('#suoid').change(function(){
+        var mppid = $('#mppid').val();
+        var delegacao = null;
+        if($('#radioDelegacao').is(':checked')){
+            delegacao = $('#delegacao').val();
+        }        
+        carregarMetasPPA($('#oppid').val(), null, $(this).val(), delegacao, mppid);
+    });
+//    
     // Evento ao mudar opção de Metas PNC
     $('#mpnid').change(function(){
         carregarIndicadorPNC($(this).val());
@@ -179,6 +197,7 @@ function toggleDelegacao(){
         $('#div_unidades_delegadas').show('slow');
     } else {
         $('#div_unidades_delegadas').hide('slow');
+        $('#delegacao').val('').trigger("chosen:updated");
     }
 }
 
@@ -188,11 +207,16 @@ function toggleDelegacao(){
  * @param {integer} oppid
  * @param {integer} mppid
  * @param {integer} suoid
+ * @param {array} suoid
  * @returns {VOID}
  */
-function carregarMetasPPA(oppid, mppid, suoid) {
+function carregarMetasPPA(oppid, mppid, suoid, delegacao, mppid) {
     var requisicao = '?modulo=principal/beneficiario_form&acao=A';
-
+    if (delegacao!==null){
+        delegacao.push(suoid);
+    }else{
+        delegacao = suoid;
+    }
     carregarSelectPorJson(
         requisicao,
         '#mppid',
@@ -201,12 +225,13 @@ function carregarMetasPPA(oppid, mppid, suoid) {
         {
             'req': 'carregarMetasPPA',
             'oppid': oppid,
-            'suoid': suoid
+            'suoid': delegacao
         },
         'Selecione',
         mppid,
         function(){
             $(".chosen-select").chosen();
+            $('#mppid').val(mppid);
         }
     );
 }
