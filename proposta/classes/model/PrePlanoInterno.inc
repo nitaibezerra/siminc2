@@ -99,15 +99,15 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'plijustificativaadicional' => null,
     );
 
-    public function recuperarListagem(stdClass $filtros, $suoid, $eqdid, $esdid)
+    public function recuperarListagem(stdClass $filtros, $filtroprepi)
     {
         $where = '';
         if($filtros->listaSubUnidadeUsuario && !empty(join_simec(',', $filtros->listaSubUnidadeUsuario))){
             $where .= "\n AND suo.suocod::INTEGER IN(". join_simec(',', $filtros->listaSubUnidadeUsuario). ") ";
         }
-        if ($suoid!=null) $where .= "\n AND pli.suoid = ".$suoid;
-        if ($eqdid!=null) $where .= "\n AND pli.eqdid = ".$eqdid;
-        if ($esdid!=null) $where .= "\n AND esd.esdid in (".implode(',',$esdid).")";
+        if($filtroprepi['suoid']) $where .= "\n AND pli.suoid = ".$filtroprepi['suoid'];
+        if($filtroprepi['eqdid']) $where .= "\n AND pli.eqdid = ".$filtroprepi['eqdid'];
+        if($filtroprepi['esdid']) $where .= "\n AND pli.esdid = ".$filtroprepi['esdid'];
         $sql = "
             SELECT DISTINCT
                 ptr.funcional,
