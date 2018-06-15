@@ -628,7 +628,7 @@ class Grafico {
                         $series[$i]['name'] = (string)$series[$i]['name'];
                         for($j=0;$j<count($categories);$j++){
                             if ($series[$i]['name']!='Dotação' && $series[$i]['name']!= 'Limite'){
-                                $series[$i]['nameLegend'][] = $series[$i]['name']." <b>".number_format($dadoPercentual[$series[$i]['name']][$j],2)."% sob o Limite </b><br>Valor";
+                                $series[$i]['nameLegend'][] = $series[$i]['name']." <b>".number_format($dadoPercentual[$series[$i]['name']][$j],2)."% do Limite </b><br>Valor";
                             }
                         }
                     }
