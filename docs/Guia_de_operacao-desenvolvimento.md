@@ -10,7 +10,6 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git pull origin master
     $ git checkout -b tipo-nºissue-modulo-nomeDemanda
     Eg: $ git checkout -b hotfix-007-planejamento-documentos
-    $ git push origin tipo-nºissue-modulo-nomeDemanda
 
     master  o-------o-------------o---------------------------------------------
                      \
