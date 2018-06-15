@@ -99,13 +99,15 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         'plijustificativaadicional' => null,
     );
 
-    public function recuperarListagem(stdClass $filtros)
+    public function recuperarListagem(stdClass $filtros, $suoid, $eqdid, $esdid)
     {
         $where = '';
         if($filtros->listaSubUnidadeUsuario && !empty(join_simec(',', $filtros->listaSubUnidadeUsuario))){
             $where .= "\n AND suo.suocod::INTEGER IN(". join_simec(',', $filtros->listaSubUnidadeUsuario). ") ";
         }
-        
+        if ($suoid!=null) $where .= "\n AND pli.suoid = ".$suoid;
+        if ($eqdid!=null) $where .= "\n AND pli.eqdid = ".$eqdid;
+        if ($esdid!=null) $where .= "\n AND esd.esdid in (".implode(',',$esdid).")";
         $sql = "
             SELECT DISTINCT
                 ptr.funcional,
@@ -724,6 +726,17 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         ";
 
         return $this->pegaUm($sql);
+    }
+    
+    public function recuperaEstadoDocumento(){
+        $sql = "select distinct esd.esdid as codigo, esd.esddsc as descricao
+                  from proposta.preplanointerno pli
+                 inner join workflow.documento doc
+                    on pli.docid = doc.docid
+                 inner join workflow.estadodocumento esd
+                    on doc.esdid = esd.esdid
+                 where esd.esdstatus = 'A'";
+        return $sql;
     }
 
 }//end Class
