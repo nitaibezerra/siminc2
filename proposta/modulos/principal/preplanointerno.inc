@@ -44,6 +44,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <button class="btn btn-primary btn-buscar" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Buscar
                                 </button>
+                                <button class="btn btn-success btn-novo" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Novo
+                                </button>
+                                <!--<a class="btn btn-small btn-warning" href="?modulo=principal/preplanointerno_form&acao=A">Novo</a>-->
                             </div>
                         </div>
 
@@ -62,7 +67,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="ibox-content">
                     
-                    <a class="btn btn-small btn-warning" href="?modulo=principal/preplanointerno_form&acao=A">Novo</a>
                     
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
@@ -143,6 +147,9 @@ include APPRAIZ . "includes/cabecalho.inc";
         $(".btn-limpar").click(function(){
             $('#requisicao').val('limpar');
             $('#filtropi').submit();            
+        });
+        $(".btn-novo").click(function(){
+            window.location.href='?modulo=principal/preplanointerno_form&acao=A';
         });
     });
 </script>
