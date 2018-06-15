@@ -1,4 +1,4 @@
-# Fluxo comum de trabalho
+# Fluxo comum de trabalho para ser possível fazer entregas parciais(HOTFIX).
 
 Cada desenvolvedor criará uma branch a partir da master.
 
@@ -10,16 +10,13 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git pull origin master
     $ git checkout -b tipo-nºissue-modulo-nomeDemanda
     Eg: $ git checkout -b hotfix-007-planejamento-documentos
-    $ git push origin hotfix-007-planejamento-documentos
 
-    master   o-----------------------------------------
-                  | \
-                  |  o---------------- teste ---------------
-                  |
-                  o---o----o----- hotfix-007-planejamento-documentos ---
+    master  o-------o-------------o---------------------------------------------
+                     \
+                      o------------------- hotfix-007-planejamento-documentos --
                     
 
-## Faça commits na sua branch e envie para o github (origin)
+## Faça commits na sua branch e envie para a branch remota no Github (origin)
     
     $ git branch
     $ git status
@@ -27,13 +24,10 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git status
     $ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
     $ git push origin hotfix-007-planejamento-documentos
-
  
-    master   o-----------------------------------------
-                  | \
-                  |  o---------------- teste ---------------
-                  |
-                  o---o----o----- hotfix-007-planejamento-documentos ---
+    master  o-------o-------------o---------------------------------------------
+                     \
+                      o------o-o-o--o----- hotfix-007-planejamento-documentos --
 
 ## Atualizando a branch de teste com as alterações mais recentes da demanda feita.
 
@@ -44,11 +38,11 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git merge hotfix-007-planejamento-documentos
     $ git push origin teste
 
-    master   o----------------------------------------------
-                    \
-                     o-----o----o----o---o teste -----------------
-                      \                    /
-                       o---o----o------o--- origin hotfix-007-planejamento-documentos
+    master  o-------o-------------o---------------------------------------------
+                     \
+            o----o------------o---o-o---o--------- teste -----------------------
+                       \               /
+                        o------o-o-o--o--- hotfix-007-planejamento-documentos --
 
 
 ## Homologando e publicando uma versão para a master
@@ -57,9 +51,15 @@ Certifique-se de que a demanda está sem divergências e se foi criada do local ce
 
 (1) Caso de sucesso
 
-    Solicite um pull request e adicione a revisão de um membro.
+    Solicite um pull request da branch em que foi feito o trabalho hotfix-007-planejamento-documentos para a branch Master e solicite a revisão de código do pacote de atualização a um membro da equipe de desenvolvimento.
     
     Detalhe: Selecione apenas a branch que foi homologada e solicite um pull request para master.
+
+    master  o-------o-------------o-----o---------------------------------------
+                     \                 /
+                      \               /
+                       o------o-o-o--o---- hotfix-007-planejamento-documentos --
+
 (2) Caso de falha
 
     Utilize sua branch para realizar as alterações e depois prossiga o passo de mandar para teste.
@@ -67,29 +67,38 @@ Certifique-se de que a demanda está sem divergências e se foi criada do local ce
 
 ## Termos e comandos usados neste documento
 
+##### Buscar referências/meta-dados atualizados das branchs remotas(origin)
+$ git fetch
+
+##### Conferir qual é a branch local atual em que se está trabalhando
+$ git branch
+
 ##### Mudar para a branch master
 $ git checkout master
     
 ##### Atualizar a branch master de acordo com as mudanças no remoto (origin)
 $ git pull origin master
     
-##### Criar uma branch com o padrão usado no SIMINC2
+##### Criar uma branch nova a partir da branch atual
 $ git checkout -b tipo-nºissue-modulo-nomeDemanda
 
-##### Adicionar as alterações feitas
+##### Conferir status da branch exibindo arquivos modificados, adicionados pra commit ou conflitos
+$ git status
+
+##### Adicionar arquivos modificados na lista pra serem enviados no próximo commit
 $ git add docs/Guia_de_operacao-desenvolvimento.md
+
+##### Enviar os arquivos modificados para um marco histórico de mundaça na branch local
+$ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
+
+##### Mandar seus commits e sua branch para a branch no remoto do Github (origin)
+$ git push origin hotfix-007-planejamento-documentos
 
 ##### Remover branch local
 $ git branch -D hotfix-007-planejamento-documentos
 
-##### Fazer download dos últimos commits de todas as branch's remoto (origin)
-$ git fetch
+##### Caso tenha começado a modificar arquivos na branch errada e deseje esconder as alterações pra mudar de branch ou fazer outras operações
+$ git stash
 
-##### Mandar sua branch para remoto (origin)
-$ git push origin hotfix-007-planejamento-documentos
-
-##### Conferir branch atual 
-$ git branch
-
-##### Conferir status da branch
-$ git status
+##### Mostrar e voltar alterações escondidas pelo $ git stash
+$ git stash pop
