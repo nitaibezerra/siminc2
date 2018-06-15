@@ -1541,6 +1541,7 @@
             $('#div_unidades_delegadas').show('slow');
         } else {
             $('#div_unidades_delegadas').hide('slow');
+            $("#delegacao").val('').trigger('chosen:updated');
         }
     }
 
