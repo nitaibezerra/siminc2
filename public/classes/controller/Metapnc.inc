@@ -42,4 +42,41 @@ class Public_Controller_Metapnc
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+
+
+    public function montarFormulario($mpnid = null, $ipnid = null)
+    {
+        global $simec;
+
+        $perfis = pegaPerfilGeral();
+        /**
+         * @todo colcoar a constante correta do acompanhamento para atualizar a regra.
+         */
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+        $simec->setPodeEditar($podeEditar);
+
+        $mIndicadorpnc = (new Public_Model_IndicadorPnc())->recuperarTodos('*', ['mpnid = ' . (int)$mpnid]);
+        if(!$podeEditar && $mIndicadorpnc){
+            $ipnid = $ipnid? $ipnid: $mIndicadorpnc[0]['ipnid'];
+        }
+
+        $mIndicadorpnc = new Public_Model_IndicadorPnc($ipnid);
+        // ver($mSubUnidade, d);
+
+        if(!$mIndicadorpnc->mpnid){ $mIndicadorpnc->mpnid = $mpnid; }
+        include_once APPRAIZ. 'planacomorc/modulos/apoio/indicadorpnc_form.inc';
+    }
+
+    public function montarListagem($ipnid)
+    {
+        $perfis = pegaPerfilGeral();
+        /**
+         * @todo colcoar a constante correta do acompanhamento para atualizar a regra.
+         */
+        $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
+
+        $lista = (new Public_Model_IndicadorPnc())->recuperarTodos('*', ['mpnid = ' . (int)$mpnid, "ipnstatus = 'A'"]);
+        include_once APPRAIZ . 'planacomorc/modulos/apoio/indicadorpnc.inc';
+    }
+
 }            

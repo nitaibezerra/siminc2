@@ -1,55 +1,59 @@
-<?php
-
-$aIndicadorpnc = (new Public_Model_IndicadorPnc)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
-
-include APPRAIZ . "includes/cabecalho.inc";
-?>
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2><?php echo $titulo_modulo; ?></h2>
+<?php if($lista): ?>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" >
+            <thead>
+            <tr class="text-center">
+                <th width="10%">Ações</th>
+                <th>Sub-Unidade</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($lista as $dados){?>
+                <tr>
+                    <td class="text-center">
+                        <a title="Alterar" class="editar-medida" href="?modulo=apoio/metapnc_form&acao=A&req=formulario-medida&suoid=<?php echo $dados['ipnid']; ?>"><i class="fa fa-pencil"></i></a>
+                        <?php if($podeEditar): ?>
+                            <a title="excluir" name="req" value="excluir-medida" id="excluir-medida" href="?modulo=apoio/metapnc_form&acao=A&req=excluir-medida&unoid=<?=$dados['mpnid'];?>&suoid=<?=$dados['suoid'];?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <?php endif; ?>
+                    </td>
+                    <td><?php echo $dados['ipndsc']; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
-</div>
+<?php else: ?>
+    <div class="alert alert-danger">Nenhum registro cadastrado</div>
+<?php endif; ?>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                </div>
-                <div class="ibox-content">
-                    
-                    <a class="btn btn-small btn-warning" href="?modulo=apoio/indicadorpnc_form&acao=A">Novo</a>
-                    
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables" >
-                            <thead>
-                            <tr class="text-center">
-                                <th width="10%">Ações</th>
-                                <th>mpnid</th>
-                                <th>ipndsc</th>
-                                <th>prsano</th>
-                                <th>ipncod</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($aIndicadorpnc as $dados){ ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a title="Alterar" href="?modulo=apoio/indicadorpnc_form&acao=A&ipnid=<?php echo $dados['ipnid']; ?>"><i class="fa fa-pencil"></i></a>
-                                    </td>
-                                    <td><?php echo $dados['mpnid']; ?></td>
-                                    <td><?php echo $dados['ipndsc']; ?></td>
-                                    <td><?php echo $dados['prsano']; ?></td>
-                                    <td><?php echo $dados['ipncod']; ?></td>
-                                </tr>
-                            <?php } ?>        
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    $(function(){
+        $('.editar-medida').click(function(){
+            jQuery("#div_formulario_medida").load(jQuery(this).attr('href'));
+            return false;
+        });
+
+        $('.excluir-medida').click(function(){
+            href = $(this).attr('href');
+// alert(href);
+            swal({
+                    title: "Atenção!",
+                    text: "Deseja realmente excluir o registro?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, estou certo!",
+                    closeOnConfirm: true
+                },
+                function(){
+                    $.ajax({
+                        url: href,
+                        success: function (mpnid) {
+                            $("#div_listagem_medida").load('?modulo=apoio/metapnc_form&acao=A&req=excluir-medida&ipnid='+ ipnid);
+                        }
+                    });
+                });
+            return false;
+        });
+    })
+</script>
