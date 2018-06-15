@@ -70,13 +70,15 @@ class Proposta_Model_Proposta extends Modelo
     );
 
 
-    public function recuperarListagem(stdClass $filtros)
+    public function recuperarListagem(stdClass $filtros, $filtroprop)
     {
         $where = '';
         if($filtros->listaSubUnidadeUsuario && !empty(join_simec(',', $filtros->listaSubUnidadeUsuario))){
             $where .= "\n AND suo.suocod::INTEGER IN(". join_simec(',', $filtros->listaSubUnidadeUsuario). ") ";
         }
-        
+        if ($filtroprop['suoid'])$where .= "\n AND suo.suoid = ".$filtroprop['suoid'];
+        if ($filtroprop['ptrid'])$where .= "\n AND pro.ptrid = ".$filtroprop['ptrid'];
+        if ($filtroprop['eqdid'])$where .= "\n AND pro.eqdid = ".$filtroprop['eqdid'];
         $sql = "
             SELECT
                 pro.proid,
@@ -108,7 +110,6 @@ class Proposta_Model_Proposta extends Modelo
                 pro.proquantidade,
                 pro.proquantidadeexpansao
         ";
-
         return $this->carregar($sql);
     }
 
@@ -363,6 +364,31 @@ class Proposta_Model_Proposta extends Modelo
         header('Cache-Control: max-age=0');
         $objWriter->save('php://output');
     }
-
+    
+    Public Function recuperarSqlFuncional($suoid, $eqdid){
+        if ($suoid){
+            $sql = "
+                SELECT distinct 
+                    ptr.ptrid codigo,
+                    coalesce(ptr.prgcod, '') || ' - ' || coalesce(ptr.acacod, '') || ' - ' || coalesce(ptr.loccod, '') || ' - ' || coalesce(ptr.acaobjetivocod, '') || ' - ' || coalesce(ptr.plocod, '') || ' - ' || ptr.acatitulo || ' - ' || ptr.plodsc descricao
+                FROM monitora.vw_ptres ptr
+                    JOIN spo.ptressubunidade psu ON psu.ptrid = ptr.ptrid
+                    JOIN monitora.enquadramentorp erp ON(
+                        erp.irpcod = ptr.irpcod
+                    )
+                WHERE
+                    ptr.ptrano = '{$_SESSION['exercicio']}'
+                    AND ptr.ptrstatus = 'A'
+                    AND ptr.plocod != 'EIND'
+                    and psu.suoid = ".$suoid;
+            if ($eqdid){
+                $sql .= "\n and erp.eqdid = ".$eqdid;
+            }                    
+            $sql .= "\n ORDER BY descricao ";
+            return $sql;        
+        }else{
+            return array();
+        }
+    }
 }//end Class
 ?>

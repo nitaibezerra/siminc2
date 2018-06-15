@@ -13,6 +13,9 @@ switch ($_REQUEST['req']) {
     case 'carregar-funcional':
         echo $simec->select('ptrid', 'Funcional', null, (new Monitora_Model_Ptres())->recuperarSqlPorSubunidadeEEnquadramento($_REQUEST['suoid'], $_REQUEST['eqdid']), ['required']);
         die;
+    case 'carregar-funcional-filtros':
+        echo $simec->select('ptrid', 'Funcional', null, (new Proposta_Model_Proposta())->recuperarSqlFuncional($_REQUEST['suoid'], $_REQUEST['eqdid']));
+        die;        
     case 'formulario-detalhe':
         $cProposta->montarFormularioDetalhes($_REQUEST['proid'], $_REQUEST['prdid']);
         die;

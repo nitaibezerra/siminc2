@@ -1,21 +1,63 @@
 <?php
 
+$requisicao = $_REQUEST['requisicao'];
+$filtroprepi = $_SESSION['filtroprepi'] = ($_POST? $_POST: $_SESSION['filtroprepi']);
+if($requisicao) {
+    switch ($requisicao) {
+        case 'limpar':
+            $filtroprepi = $_SESSION['filtroprepi'] = array();
+        break;
+    }
+}
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-
 $aPrePlanoInterno = (new Proposta_Model_PrePlanoInterno)->recuperarListagem((object) array(
     'exercicio' => $_SESSION['exercicio'],
     'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario
-));
+), $filtroprepi);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2><?php echo $titulo_modulo; ?></h2>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Pesquisa avançada por PI</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
+                        <input name="requisicao" id="requisicao" value="" type="hidden">
+
+                        <?php 
+                        echo $simec->select('suoid','SubUnidade',$filtroprepi['suoid'],(new Public_Model_SubUnidadeOrcamentaria())->queryComboChaveSuoid((object)array('unofundo' => 'FALSE','exercicio' => $_SESSION['exercicio'],'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)));
+                        echo $simec->select('eqdid', 'Enquadramento da Despesa', $filtroprepi['eqdid'], (new Monitora_Model_PiEnquadramentoDespesa())->recuperarSqlCombo());
+                        echo $simec->select('esdid', 'Situação', $filtroprepi['esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => 268)), array('multiple' => 'true'));
+                        ?>
+
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-warning btn-limpar" type="button">
+                                    <span class="glyphicon glyphicon-remove-circle"></span> Limpar
+                                </button>
+                                <button class="btn btn-primary btn-buscar" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button class="btn btn-success btn-novo" type="button">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Novo
+                                </button>
+                                <!--<a class="btn btn-small btn-warning" href="?modulo=principal/preplanointerno_form&acao=A">Novo</a>-->
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-md-12">
@@ -25,7 +67,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <div class="ibox-content">
                     
-                    <a class="btn btn-small btn-warning" href="?modulo=principal/preplanointerno_form&acao=A">Novo</a>
                     
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables" >
@@ -107,3 +148,17 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    sufixoUrl = '';
+
+    $(document).ready(function(){
+        $(".btn-limpar").click(function(){
+            $('#requisicao').val('limpar');
+            $('#filtropi').submit();            
+        });
+        $(".btn-novo").click(function(){
+            window.location.href='?modulo=principal/preplanointerno_form&acao=A';
+        });
+    });
+</script>
