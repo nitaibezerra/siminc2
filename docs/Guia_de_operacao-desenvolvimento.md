@@ -89,7 +89,7 @@ $ git status
 $ git add docs/Guia_de_operacao-desenvolvimento.md
 
 ##### Fazer commit
-$ git commit -m "Primeiro comentário com texto curto no máximo desse tamanho" -m "Segundo comentário com texto de tamanho longo e livre"
+$ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
 
 ##### Mandar seus commits e sua branch para a branch no remoto Github (origin)
 $ git push origin hotfix-007-planejamento-documentos
