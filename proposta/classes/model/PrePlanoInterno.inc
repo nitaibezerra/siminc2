@@ -107,7 +107,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         }
         if($filtroprepi['suoid']) $where .= "\n AND pli.suoid = ".$filtroprepi['suoid'];
         if($filtroprepi['eqdid']) $where .= "\n AND pli.eqdid = ".$filtroprepi['eqdid'];
-        if($filtroprepi['esdid']) $where .= "\n AND pli.esdid = ".$filtroprepi['esdid'];
+        if($filtroprepi['esdid']) $where .= "\n AND esd.esdid in (".implode(',',$filtroprepi['esdid']).")";
         $sql = "
             SELECT DISTINCT
                 ptr.funcional,
