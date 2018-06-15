@@ -9,6 +9,8 @@ $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
 $aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacao();
 
+$limites = array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
+
 switch($_REQUEST['req']) {
     case 'salvar':
         $cPrePlanoInterno->salvar($_REQUEST);
@@ -47,7 +49,6 @@ switch($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), []);
         die;
     case 'recuperar-limite':
-        $limites = array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
         $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
             ->recuperarLimitePorSuoid( (object)array(
                 'noPliid' => $_REQUEST['pliid'],
@@ -152,7 +153,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">
                                     Limite Disponível na Unidade:
-                                    <input id="VlrSUDisponivel" type="hidden" value="" />
+                                    <input id="input_bd_disponivel_unidade_bd" name="input_bd_disponivel_unidade_bd" type="hidden" value="<?php echo (int)$limites['disponivel_unidade']; ?>" />
                                 </td>
                                 <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0</td>
                             </tr>

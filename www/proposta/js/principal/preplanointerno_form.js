@@ -56,10 +56,12 @@ function initPreplanointernoForm(){
     });
 
     $('.valorPI').keyup(function(){
+        atualizaLimiteDisponivelUnidade();
         calcularValores();
     });
 
     $('.valorPI').change(function(){
+        atualizaLimiteDisponivelUnidade();
         calcularValores();
     });
 
@@ -134,6 +136,23 @@ function calcularValores(){
             'O Limite Disponível na Unidade foi ultrapassado. Favor rever valores preenchidos no Custeio e Capital',
             'error');
     }
+}
+
+/**
+ * Atualiza em tempo de execução o valor disponível na unidade deduzindo ou 
+ * somando com o valor que o usuário está preenchendo em custeio e capital.
+ * 
+ * @returns VOID
+ */
+function atualizaLimiteDisponivelUnidade(){
+    // Busca valor total disponivel informado pela base de dados sem o valor do próprio PI em edição.
+    var limiteDisponivelBd = $('#input_bd_disponivel_unidade_bd').val()? str_replace(['.', ','], ['', '.'], $('#input_bd_disponivel_unidade_bd').val()): 0;
+    // Busca valor da soma dos dados preenchidos do usuário em tempo real de custeio e capital.
+    var totalCusteioCapital = somarCampos('valorPI');
+    // Soma o valor disponivel mais o valor digitado em custeio e capital pelo usuário
+    var disponivelSubunidade = parseFloat(limiteDisponivelBd) - parseFloat(totalCusteioCapital);
+    
+    $('#td_disponivel_sub_unidade').html(number_format(disponivelSubunidade, 0, ',', '.'));
 }
 
 function toggleItem(){
