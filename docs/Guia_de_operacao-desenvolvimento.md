@@ -82,16 +82,16 @@ $ git pull origin master
 ##### Criar uma branch nova a partir da branch atual
 $ git checkout -b tipo-nºissue-modulo-nomeDemanda
 
-##### Conferir status da branch
+##### Conferir status da branch exibindo arquivos modificados, adicionados pra commit ou conflitos
 $ git status
 
-##### Adicionar arquivos modificados na lista pra fazer commit
+##### Adicionar arquivos modificados na lista pra serem enviados no próximo commit
 $ git add docs/Guia_de_operacao-desenvolvimento.md
 
-##### Fazer commit
+##### Enviar os arquivos modificados para um marco histórico de mundaça na branch local
 $ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
 
-##### Mandar seus commits e sua branch para a branch no remoto Github (origin)
+##### Mandar seus commits e sua branch para a branch no remoto do Github (origin)
 $ git push origin hotfix-007-planejamento-documentos
 
 ##### Remover branch local
