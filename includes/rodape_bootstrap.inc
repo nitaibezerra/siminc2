@@ -117,7 +117,7 @@
                                 <form class="form-horizontal" id="formulario-simular-usuario" method="post">
                                     <input type="hidden" name="carregarUsuariosSistema" value="true">
                                     <fieldset>
-                                        <legend>Pesquisar usuário neste módutlo</legend>
+                                        <legend>Pesquisar usuário neste módulo</legend>
                                         <div class="form-group">
                                             <label for="nomeUsuario" class="col-lg-2 control-label">Usuário</label>
                                             <div class="col-lg-10">

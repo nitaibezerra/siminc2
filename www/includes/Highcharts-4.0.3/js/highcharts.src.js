@@ -1423,7 +1423,7 @@ defaultOptions = {
 			},
 			stickyTracking: true,
 			//tooltip: {
-				//pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: <b>{point.y}</b>'
+				//pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.nameLegend}: <b>{point.y}</b>'
 				//valueDecimals: null,
 				//xDateFormat: '%A, %b %e, %Y',
 				//valuePrefix: '',
@@ -1447,7 +1447,7 @@ defaultOptions = {
 		//floating: false,
 		layout: 'horizontal',
 		labelFormatter: function () {
-			return this.name;
+                    return this.name;
 		},
 		//borderWidth: 0,
 		borderColor: '#909090',
