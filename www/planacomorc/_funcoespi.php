@@ -1374,12 +1374,13 @@ function associarDelegacao($pliid, $dados)
     if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
 
         $mDelegacao->pliid = $pliid;
-
         foreach($dados['delegacao'] as $suoid){
-            $mDelegacao->suoid = $suoid;
-            $mDelegacao->salvar();
-            
-            $mDelegacao->pdeid = null;
+            if ($suoid!=''){
+                $mDelegacao->suoid = $suoid;
+                $mDelegacao->salvar();
+
+                $mDelegacao->pdeid = null;
+            }
         }
     }
 }
