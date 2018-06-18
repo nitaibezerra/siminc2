@@ -29,8 +29,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <th width="10%">Ações</th>
                                     <th>Código</th>
                                     <th>Descrição</th>
-                                    <th>Objetivo</th>
-                                    <th>Público Alvo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,8 +43,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
                                         <td><?= $dados['prgcod']; ?></td>
                                         <td><?= $dados['prgdsc']; ?></td>
-                                        <td><?= $dados['prgdscobjetivo']; ?></td>
-                                        <td><?= $dados['prgdscpublicoalvo']; ?></td>
                                     </tr>
                                 <?php }
                             } ?>

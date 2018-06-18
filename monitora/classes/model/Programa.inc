@@ -59,11 +59,6 @@ class Monitora_Model_Programa extends Modelo
         'prgcod' => null,
         'prgdsc' => null,
         'prgstatus' => null,
-        'orgcod' => null,
-        'prgdscobjetivo' => null,
-        'prgdscpublicoalvo' => null,
-        'prgdscjustificativa' => null,
-        'prgdscestrategia' => null,
     );
     
     public function recuperarSqlCombo($descricao = null, $where = [], $order = '') {
@@ -113,9 +108,7 @@ class Monitora_Model_Programa extends Modelo
             SELECT
                 prgid,
                 prgcod,
-                prgdsc,
-                prgdscobjetivo,
-                prgdscpublicoalvo
+                prgdsc
             FROM monitora.programa
             WHERE
                 prgstatus = 'A'
