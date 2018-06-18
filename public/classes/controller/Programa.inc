@@ -12,7 +12,7 @@ class Public_Controller_Programa
             $mPrograma->prgano = $mPrograma->prgano ? $mPrograma->prgano : $_SESSION['exercicio'];
 //            ver($mPrograma,d);
 
-            $mPrograma->salvar(null,null, ['prgdscobjetivo', 'prgdscobjetivo', 'prgdscpublicoalvo']);
+            $mPrograma->salvar(null,null );
             $mPrograma->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
