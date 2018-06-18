@@ -1,16 +1,32 @@
 <?php
 
 $cAreaCultural = new Public_Controller_AreaCultural();
-switch ($_REQUEST['req']) {
-	case 'salvar':
-        $cAreaCultural->salvar($_REQUEST);
-		die;
-	case 'excluir':
-        $cAreaCultural->excluir($_REQUEST['mdeid']);
-		die;
-}
+$cSegmentoCultural = new Public_Controller_SegmentoCultural();
 
 $mAreaCultural = new Monitora_Model_PiModalidadeEnsino($_REQUEST['mdeid']);
+
+$mSegmentoCultural = new Monitora_Model_PiNivelEtapaEnsino($_REQUEST['neeid']);
+
+$lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
+
+switch ($_REQUEST['req']) {
+	case 'salvar-area':
+        $cAreaCultural->salvar($_REQUEST);
+		break;
+	case 'excluir-area':
+        $cAreaCultural->excluir($_REQUEST['mdeid']);
+        break;
+    case 'salvar-segmento':
+        $cSegmentoCultural->salvar($_REQUEST);
+        break;
+    case 'excluir-segmento':
+        $cSegmentoCultural->excluir($_REQUEST['neeid']);
+        break;
+    case 'listar-segmento':
+        $lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
+        break;
+
+}
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -23,19 +39,19 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
+                    <h5>Área Cultural</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
-                        <input type="hidden" name="req" id="req" value="salvar" />
+                        <input type="hidden" name="req" id="req" value="salvar-area" />
                         <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
                         
                         <?php
-                        echo $simec->input('mdecod', 'Código PI', $mAreaCultural->mdecod, ['required','maxlength' => 1]);
-                        echo $simec->input('mdedsc', 'Descrição', $mAreaCultural->mdedsc, ['required', 'maxlength' => 250]);
+                            echo $simec->input('mdecod', 'Código PI', $mAreaCultural->mdecod, ['required','maxlength' => 1]);
+                            echo $simec->input('mdedsc', 'Descrição', $mAreaCultural->mdedsc, ['required', 'maxlength' => 250]);
                         ?>
                         
                         <div class="form-group">
@@ -43,7 +59,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                 <a href="?modulo=apoio/area_cultural&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                 <?php if($mAreaCultural->mdeid){ ?>
-                                    <a href="?modulo=apoio/area_cultural_form&acao=A&req=excluir&mdeid=<?php echo $mAreaCultural->mdeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                    <a href="?modulo=apoio/area_cultural_form&acao=A&req=excluir-area&mdeid=<?php echo $mAreaCultural->mdeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
                                 <?php } ?>                                
                             </div>
                         </div>                        
@@ -51,5 +67,71 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Segmento Cultural</h5>
+                </div>
+                <?php if($mAreaCultural->mdeid){ ?>
+                    <div class="ibox-content">
+                        <form id="formulario-segmento" name="formulario" method="post" class="form-horizontal">
+                            <input type="hidden" name="req" id="req" value="salvar-segmento" />
+                            <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
+
+                            <?php
+                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 10]);
+                                echo $simec->input('needsc', 'Descrição', $mSegmentoCultural->needsc, ['maxlength' => 250]);
+                            ?>
+
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="submit" id="btn-salvar-segmento"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <a href="?modulo=apoio/area_cultural&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
+                                    <?php if($mSegmentoCultural->neeid){ ?>
+                                        <a href="?modulo=apoio/area_cultural_form&acao=A&req=excluir-segmento&neeid=<?php echo $mSegmentoCultural->neeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="listagem-segmento-cultural">
+                        <?php $cSegmentoCultural->montarListagem($mSegmentoCultural->neeid)?>
+                    </div>
+
+
+                <?php } else { ?>
+                <div class="ibox-content">
+                    <div class="alert alert-danger">Nenhum registro cadastrado</div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+
+        $("#btn-salvar-segmento").click(function(){
+            options = {
+                success: function() {
+                    // Carregar a listagem
+                    jQuery("#lista-segmento").load('?modulo=apoio/area_cultural_form&acao=A&req=listar-segmento&mdeid='+$('#mdeid').val());
+
+                    // Zerar o formulário
+                    // jQuery("#div_formulario_subitem").load('?modulo=apoio/area_cultural_form&acao=A&req=formulario-subitem&$maiid='+$('#maiid').val());
+                    LimparCamposSegmento();
+                }
+            }
+
+            jQuery("#formulario-segmento").ajaxForm(options).submit();
+            return false;
+        });
+    });
+
+    function LimparCamposSegmento(){
+        $("#neecod").val('');
+        $("#needsc").val('');
+    }
+</script>
