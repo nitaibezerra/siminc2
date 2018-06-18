@@ -190,6 +190,7 @@ foreach($dadosSiminc as $funcional => $dado){
         }
     } elseif(count($dado) > 1){
         $total[3] = $total[4] = 0;
+        $unidades[3] = $unidades[4] = NULL;
         foreach($dado as $subunidade){
             $total[3] += $subunidade['ptrdotacaocusteio'];
             $total[4] += $subunidade['ptrdotacaocapital'];
