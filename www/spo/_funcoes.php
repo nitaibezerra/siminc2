@@ -212,7 +212,7 @@ function carregarTabelasApoio($params, $map, $fm) {
                         $valores = array();
 
                         foreach ($dados as $index => $value)
-                            $valores[] = addslashes($value);
+                            $valores[] = addslashes(trim($value));
 
                         $inserts.= "insert into {$informacoes['tbl']} (" . $campos . ") values ('" . implode("', '", $valores) . "');\n";
                         $count++;

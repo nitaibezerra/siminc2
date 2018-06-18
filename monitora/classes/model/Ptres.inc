@@ -341,11 +341,11 @@ class Monitora_Model_Ptres extends Modelo
                         inner join monitora.acao aca on aca.acaid = ptr.acaid
                         inner join wssof.ws_acoesdto a on a.identificadorunico = aca.ididentificadorunicosiop::int and a.exercicio = '{$this->ptrano}'
                         inner join wssof.ws_localizadoresdto l on l.identificadorunicoacao = a.identificadorunico and l.exercicio = '{$this->ptrano}'
-                        inner join wssof.ws_planosorcamentariosdto po on po.identificadorunicoacao = a.identificadorunico and po.exercicio = '{$this->ptrano}'
+                        inner join wssof.ws_planosorcamentariosdto po on po.identificadorunicoacao = a.identificadorunico and po.exercicio = '{$this->ptrano}' and ptr.plocod = po.planoorcamentario
                         left join wssof.ws_produtosdto ppo on ppo.codigoproduto::text = po.codigoproduto
                         left join wssof.ws_produtosdto pac on pac.codigoproduto::text = a.codigoproduto
-                        left join wssof.ws_unidadesmedidadto upo on upo.codigounidademedida::text = po.codigounidademedida
-                        left join wssof.ws_unidadesmedidadto uac on uac.codigounidademedida::text = a.codigounidademedida 
+                        left join wssof.ws_unidadesmedidadto upo on trim(upo.codigounidademedida)::text = po.codigounidademedida
+                        left join wssof.ws_unidadesmedidadto uac on trim(uac.codigounidademedida)::text = a.codigounidademedida 
                 where ptr.ptrid = " . (int) $this->ptrid . "
                 order by produto_po, produto_acao
                 ";

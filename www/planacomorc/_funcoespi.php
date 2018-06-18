@@ -275,11 +275,18 @@ function carregarMetasPPA($oppid, $mppid, $suocod = null) {
 
     $join = '';
     if($suocod){
+        $ret="";
+        $suocod = explode(',', $suocod);
+        for($i=0;$i<count($suocod);$i++){
+            $ret .= "'".$suocod[$i]."',";
+        }
+        $suocod = substr($ret, 0, strlen($ret)-1);
+
         $join = "inner join (
                     select smp.mppid 
                     from spo.subunidademetappa smp
                         inner join public.vw_subunidadeorcamentaria suo on suo.suoid = smp.suoid and suo.prsano = '{$_SESSION['exercicio']}'
-                    where suo.suocod = '$suocod'                    
+                    where suo.suocod in ($suocod)
                     union all
                     select mpp.mppid from public.metappa mpp
                             left join spo.subunidademetappa smp on smp.mppid = mpp.mppid
@@ -1367,12 +1374,13 @@ function associarDelegacao($pliid, $dados)
     if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
 
         $mDelegacao->pliid = $pliid;
-
         foreach($dados['delegacao'] as $suoid){
-            $mDelegacao->suoid = $suoid;
-            $mDelegacao->salvar();
-            
-            $mDelegacao->pdeid = null;
+            if ($suoid!=''){
+                $mDelegacao->suoid = $suoid;
+                $mDelegacao->salvar();
+
+                $mDelegacao->pdeid = null;
+            }
         }
     }
 }
@@ -2269,46 +2277,6 @@ function buscarCodigoEnquadramento($exercicio, $codigo) {
     
     $codigoFinalistico = $db->pegaUm($sql);
     return $codigoFinalistico;
-}
-
-function buscarCodigoProdutoNaoAplica($exercicio) {
-    global $db;
-
-    $sql = "
-        SELECT
-            pprid AS codigo
-        FROM monitora.pi_produto
-        WHERE
-            prsano = '". (int)$exercicio. "'
-            AND pprstatus = 'A'
-            AND tipo = 'N'
-    ";
-    
-    $codigo = $db->pegaUm($sql);
-    return $codigo;
-}
-
-function buscarListaCodigoEnquadramentoReduzido($exercicio) {
-    $lista = array();
-    global $db;
-    $sql = "
-        SELECT
-            eqdid
-        FROM monitora.pi_enquadramentodespesa
-        WHERE
-            eqdstatus = 'A'
-            AND eqdstreduzido = 'S'
-            AND eqdano = '". (int)$exercicio. "'
-    ";
-    
-    $listaConsulta = $db->carregar($sql);
-    if($listaConsulta){
-        foreach($listaConsulta as $interacao => $enquadramento){
-            $lista[] = $enquadramento['eqdid'];
-        }
-    }
-    
-    return $lista;
 }
 
 function inativarPI($dados) {

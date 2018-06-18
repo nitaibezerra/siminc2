@@ -21,7 +21,7 @@ class Grafico {
     // Formatos
     const K_DECIMAL_0 = "function () { return number_format(this.value, 0, ',', '.'); }";
     const K_DECIMAL_2 = "function () { return number_format(this.value, 2, ',', '.'); }";
-    const K_TOOLTIP_DECIMAL_0 = "function() { return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + this.series.name + '</span>: <b>' + number_format(this.y, 0, ',', '.') + '</b>'; }";
+    const K_TOOLTIP_DECIMAL_0 = "function() { var name = this.series.userOptions.name;if(this.series.userOptions.nameLegend!=undefined){name = this.series.userOptions.nameLegend[this.point.x]}return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + name + '</span>: <b>' + number_format(this.y, 0, ',', '.') + '</b>'; }";
     const K_TOOLTIP_DECIMAL_2 = "function() { return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + this.series.name + '</span>: <b>' + number_format(this.y, 2, ',', '.') + '</b>'; }";
     const K_TOOLTIP_PIE_DECIMAL_0 = "function() { return '<b>' + this.point.name + '</b><br />Valor: <b>' + number_format(this.y, 0, ',', '.') + '</b><br />Porcentagem: <b>' + this.point.percentage.toFixed(2) + '%</b>'; }";
     const K_TOOLTIP_PIE_DECIMAL_2 = "function() { return '<b>' + this.point.name + '</b><br />Valor: <b>' + number_format(this.y, 0, ',', '.') + '</b><br />Porcentagem: <b>' + number_format(this.point.percentage, 2, ',', '.') + '%</b>'; }";
@@ -353,21 +353,21 @@ class Grafico {
     }
 
         
-    public function gerarGrafico($dados)
+    public function gerarGrafico($dados, $percentualPlanejamento=false)
     {
         switch($this->tipo){
             case (self::K_TIPO_PIZZA):
 //                $this->montarGraficoPizza($dados);
 //                break;
             default:
-                $this->montarGraficoLinha($dados);
+                $this->montarGraficoLinha($dados, $percentualPlanejamento);
                 break;
         }
     }
 
-    public function montarGraficoLinha($dados)
+    public function montarGraficoLinha($dados, $percentualPlanejamento=false)
     {
-        $this->dados = $this->agrupamentoManual ? $dados : $this->agruparDadosGrafico($dados);
+        $this->dados = $this->agrupamentoManual ? $dados : $this->agruparDadosGrafico($dados, $percentualPlanejamento);
         if(!$this->id){
             $this->id = $this->gerarIdGrafico();
         }
@@ -393,8 +393,7 @@ class Grafico {
                     , '#2F4F4F' // Cinza escuro
                     , '#006400' // Verde escuro
                     , '#FFA500' // Amarelo quemado
-                ";
-
+                ";//ver($this->dados['series'],d);
         ?>
 
         <div style=" <?php echo ($this->width)? "width: {$this->width};": ''; ?>; height: <?php echo $this->height; ?> " id="<?php echo $this->id; ?>" ></div>
@@ -522,7 +521,7 @@ class Grafico {
 
                     series: <?php echo json_encode($this->dados['series']);
                     
-//                    ver( $this->dados['series'] );
+                    
 //                    echo 'aqui';
                     ?>
 
@@ -561,7 +560,7 @@ class Grafico {
      * @return array - Retorna um array com duas informações: series e categories, sendo o primeiro com os dados agrupados e o último com todas as divisões únicas
      * @author Orion Teles de Mesquita
      */
-    public function agruparDadosGrafico($dados)
+    public function agruparDadosGrafico($dados, $percentualPlanejamento=false)
     {
         $categoria = $this->agrupadores['categoria'];
         $name = $this->agrupadores['name'];
@@ -591,12 +590,24 @@ class Grafico {
             } else {
 
                 foreach ($dados as $dado) {
-//                ver($dados, d);
                     $dadosAgrupados[$dado[$categoria]][$dado[$name]] = (float) $dado[$valor];
                     $categories[$dado[$categoria]] = $dado[$categoria];
                     $grupos[$dado[$name]] = $dado[$name];
                 }
-
+                if ($percentualPlanejamento){
+                    $i=0;
+                    foreach($dadosAgrupados as $keyAgrupado => $dadoAgrupado){
+                        foreach ($dadoAgrupado as $key => $dado){
+                            if ($dado>0){
+                                $dadoPercentual[$key][$i]=(float)$dadoAgrupado[$key]/$dadoAgrupado['Limite']*100;
+                            }else{
+                                $dadoPercentual[$key][$i]=0;
+                            }
+                        }
+                        $i++;
+                    }
+                }
+                
                 $dadosFinais = array();
                 foreach ($grupos as $grupo) {
                     foreach ($categories as $divisao) {
@@ -610,7 +621,34 @@ class Grafico {
                 $series = array();
                 foreach ($dadosFinais as $divisao => $aDado) {
                     $series[] = array('name' => (string)$divisao, 'data'=>$aDado);
+                }                 
+//                ver($series, $dadoPercentual,d);
+                if ($percentualPlanejamento){
+                    for ($i=0;$i<count($series);$i++){
+                        $series[$i]['name'] = (string)$series[$i]['name'];
+                        for($j=0;$j<count($categories);$j++){
+                            if ($series[$i]['name']!='DotaÃ§Ã£o' && $series[$i]['name']!= 'Limite'){
+                                $series[$i]['nameLegend'][] = $series[$i]['name']." <b>".number_format($dadoPercentual[$series[$i]['name']][$j],2)."% do Limite </b><br>Valor";
+                            }
+                        }
+                    }
+//                    ver($categories,$dadosFinais, $dadoPercentual);
+//                    foreach ($dadosFinais as $divisao => $aDado) {
+////                        ver(count($categories));
+//                        for($i=0;$i<count($categories);$i++){
+//                            if ($divisao!='DotaÃ§Ã£o' && $divisao!= 'Limite'){
+//                                $series[]['nameLegend'] = (string)$divisao;
+//                                $series[]['name'] = (string)$divisao." <b>".number_format($dadoPercentual[$divisao][$i],2)."% sob o Limite </b><br>Valor";
+//                            }else{
+//                                $series[] = array('nameLegend' => (string)$divisao, 'name' => (string)$divisao, 'data'=>$aDado);
+//                            }
+//                            
+//                        }
+//                        $series[]['data'] = $aDado;
+//                    }                    
+
                 }
+//                ver($series);
             }
         }
         return array('series'=>$series, 'categories'=>array_values($categories));

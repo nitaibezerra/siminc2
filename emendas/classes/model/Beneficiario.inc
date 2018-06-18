@@ -106,7 +106,8 @@ class Emendas_Model_Beneficiario extends Modelo
         'pumid' => null,
         'pprid' => null,
         'picquantidade' => null,
-        'pliid' => null
+        'pliid' => null,
+        'benimpedimento' => null
     );
 
     /**
@@ -136,6 +137,7 @@ class Emendas_Model_Beneficiario extends Modelo
                 ben.benempenhado,
                 ben.benconveniado,
                 ben.benpago,
+                ben.benimpedimento,
                 ben.benmotivoimpedimento,
                 ben.sicid,
                 ben.impid,
@@ -279,16 +281,19 @@ class Emendas_Model_Beneficiario extends Modelo
 
             $mDelegacao = new Emendas_Model_Delegacao();
             $mDelegacao->excluirVarios("benid = '$benid'");
+            if (isset($dados['radioDelegacao'])){
+                if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
 
-            if(isset($dados['delegacao']) && is_array($dados['delegacao'])){
+                    $mDelegacao->benid = $benid;
 
-                $mDelegacao->benid = $benid;
+                    foreach($dados['delegacao'] as $suoid){
+                        if ($suoid!=''){
+                            $mDelegacao->suoid = $suoid;
+                            $mDelegacao->salvar();
 
-                foreach($dados['delegacao'] as $suoid){
-                    $mDelegacao->suoid = $suoid;
-                    $mDelegacao->salvar();
-
-                    $mDelegacao->edeid = null;
+                            $mDelegacao->edeid = null;
+                        }
+                    }
                 }
             }
         }

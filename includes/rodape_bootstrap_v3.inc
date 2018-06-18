@@ -35,7 +35,7 @@
 								<a style="padding-left: 5px;" href="#" class="profile-picture">Editar foto</a>
 							</div>
 							<div class="col-md-9 col-lg-9 hidden-xs hidden-sm">
-								<table class="table ">
+								<table class="table" id="user-info-table">
 									<tbody>
 									<tr>
 										<td colspan="2"><strong><?php echo ucwords(strtolower($usuarioNome)); ?></strong></td>
@@ -126,7 +126,7 @@
 							<form class="form-horizontal" id="formulario-simular-usuario" method="post">
 								<input type="hidden" name="carregarUsuariosSistema" value="true">
 								<fieldset>
-									<legend>Pesquisar usuário neste módutlo</legend>
+									<legend>Pesquisar usuário neste módulo</legend>
 									<div class="form-group">
 										<label for="nomeUsuario" class="col-lg-2 control-label">Usuário</label>
 										<div class="col-lg-10">

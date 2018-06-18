@@ -9,6 +9,8 @@ $cPrePlanoInterno = new Proposta_Controller_PrePlanoInterno();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno($_REQUEST['pliid']);
 $aLocalizacoes = $mPrePlanoInterno->recuperarLocalizacao();
 
+$limites = array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
+
 switch($_REQUEST['req']) {
     case 'salvar':
         $cPrePlanoInterno->salvar($_REQUEST);
@@ -47,12 +49,15 @@ switch($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), []);
         die;
     case 'recuperar-limite':
-        $limite = array('lmuvlr' => NULL, 'disponivelunidade' => NULL);
-        $resultadoLimite = (new Planacomorc_Model_UnidadegestoraLimite())->recuperarLimitePorSuoid($_REQUEST['suoid']);
-        if($resultadoLimite){
-            $limite = array_map("utf8_encode", $resultadoLimite);
+        $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+            ->recuperarLimitePorSuoid( (object)array(
+                'noPliid' => $_REQUEST['pliid'],
+                'suoid' => $_REQUEST['suoid'],
+                'exercicio' => $_SESSION['exercicio']));
+        if($resultadoLimites){
+            $limites = array_map("utf8_encode", $resultadoLimites);
         }
-        echo json_encode($limite);
+        echo json_encode($limites);
         die;
     case 'proposta_modal':
         include 'preplanointerno_modal.inc';
@@ -65,11 +70,22 @@ switch($_REQUEST['req']) {
 $perfis = pegaPerfilGeral();
 
 $estadoAtual = $mPrePlanoInterno->gerarDocid(WF_TPDID_PREPI, 'Pré-PI');
+$listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((int)$_SESSION['exercicio']));
+$codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
+
+if($mPrePlanoInterno->suoid){
+    $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+        ->recuperarLimitePorSuoid( (object)array(
+            'noPliid' => $mPrePlanoInterno->pliid,
+            'suoid' => $mPrePlanoInterno->suoid,
+            'exercicio' => $_SESSION['exercicio']));
+    $limites = $resultadoLimites? $resultadoLimites: array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
+}
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/principal/preplanointerno_form.js"></script>
+<script src="js/principal/preplanointerno_form.js?v=3"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-5">
@@ -111,8 +127,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <div class="ibox-content">
                         <?php
                             echo $simec->select('pprid', 'Produto', $mPrePlanoInterno->pprid, (new Monitora_Model_PiProduto())->recuperarSqlCombo(), ['required']);
-                            echo $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']);
-                            echo $simec->valor('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade, ['required']);
+                            echo '<span id="span_unidade_medida">'. $simec->select('pumid', 'Unidade de Medida', $mPrePlanoInterno->pumid, (new Monitora_Model_PiUnidadeMedida())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo '<span id="span_quantidade">'. $simec->input('pliquantidade', 'Quantidade', $mPrePlanoInterno->pliquantidade? (int)$mPrePlanoInterno->pliquantidade: NULL, ['required', 'class'=>'inteiro']). '</span>';
                         ?>
                     </div>
                 </div>
@@ -132,34 +148,34 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
                                 <td style="text-align: left;">Limite Autorizado na Unidade: </td>
-                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;" ><?php echo number_format((int)$limiteSubunidade, 2, ',', '.'); ?></td>
+                                <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;"><?php echo number_format((int)$limites['limite_unidade'], 0, ',', '.'); ?></td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">
                                     Limite Disponível na Unidade:
-                                    <input id="VlrSUDisponivel" type="hidden" value="" />
+                                    <input id="input_bd_disponivel_unidade_bd" name="input_bd_disponivel_unidade_bd" type="hidden" value="<?php echo (int)$limites['disponivel_unidade']; ?>" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" >0,00</td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo (int)$limites['disponivel_unidade'] -((int)$mPrePlanoInterno->plivalorcusteio + (int)$mPrePlanoInterno->plivalorcapital); ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>
-                                <td style="text-align: center;"><b>Custeio </b></td>
+                                <td style="text-align: center;"><b>Custeio</b></td>
                                 <td style="text-align: center;"><b>Capital</b></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;">
                                     Total Cadastrado na Funcional:
                                 </td>
-                                <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0,00</td>
-                                <td style="text-align: center;" id="td_disponivel_funcional_capital" >0,00</td>
+                                <td style="text-align: center;" id="td_disponivel_funcional_custeio" >0</td>
+                                <td style="text-align: center;" id="td_disponivel_funcional_capital" >0</td>
                             </tr>
                             <tr>
                                 <td id="" style="text-align: left;">Valor do Projeto: <span title="Campo obrigatório" class="link campo-obrigatorio">*</span></td>
                                 <td style="text-align: center;">
-                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcusteio" id="plivalorcusteio" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcusteio, 0, ',', '.'); ?>" class="form-control valorPlanoInterno moedaInteiro " required="required">
                                 </td>
                                 <td align="center">
-                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 2, ',', '.'); ?>" class="form-control valorPI valor " required="required">
+                                    <input name="plivalorcapital" id="plivalorcapital" type="text" value="<?php echo number_format($mPrePlanoInterno->plivalorcapital, 0, ',', '.'); ?>" class="form-control valorPlanoInterno moedaInteiro " required="required">
                                 </td>
                             </tr>
                         </table>
@@ -171,9 +187,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                            echo $simec->valor('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional);
-                            echo $simec->valor('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
-                            echo $simec->valor('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
+                            echo $simec->input('pliquantidadeadicional', 'Quantidade', $mPrePlanoInterno->pliquantidadeadicional, ['class'=>'inteiro']);
+                            echo $simec->moedaInteiro('plivalorcusteioadicional', 'Valor Custeio', $mPrePlanoInterno->plivalorcusteioadicional);
+                            echo $simec->moedaInteiro('plivalorcapitaladicional', 'Valor Capital', $mPrePlanoInterno->plivalorcapitaladicional);
                             echo $simec->textarea('plijustificativaadicional', 'Justificativa', $mPrePlanoInterno->plijustificativaadicional);
                         ?>
                     </div>
@@ -216,7 +232,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
             <div class="col-md-6">
 
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins div_metas">
                     <div class="ibox-title">
                         <h5>Metas</h5>
                     </div>
@@ -245,9 +261,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                     </div>
                     <div class="ibox-content">
                         <?php
-                        echo $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']);
-                        echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']) . '</span>';
-                        echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
+                            echo '<span id="span-area">'. $simec->select('mdeid', 'Área Cultural', $mPrePlanoInterno->mdeid, (new Monitora_Model_PiModalidadeEnsino())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo '<span id="span-segmento">' . $simec->select('neeid', 'Segmento Cultural', $mPrePlanoInterno->neeid, (new Monitora_Model_PiNivelEtapaEnsino())->recuperarSqlCombo(), ['required']). '</span>';
+                            echo $simec->select('esfid', 'Localização', $mPrePlanoInterno->esfid, (new Territorios_Model_Esfera())->recuperarSqlCombo());
                         ?>
                         <div class="select-localizacao"  id="div-localizacao_<?php echo Territorios_Model_Esfera::K_EXTERIOR ?>">
                             <?php echo $simec->select('paiid[]', 'País', $aLocalizacoes['paiid'], (new Territorios_Model_Pais())->recuperarSqlCombo()); ?>
@@ -277,9 +293,12 @@ include APPRAIZ . "includes/cabecalho.inc";
     </form>
 </div>
 
-<?php bootstrapPopup('Importar de PI ' . date('Y'), 'preplanointerno_modal', '', array('salvar'), array('tamanho' => 'lg')); ?>
+<?php bootstrapPopup('Importar de PI ' . date('Y'), 'preplanointerno_modal', '', array('fechar'), array('tamanho' => 'lg')); ?>
 
 <script>
+    
+    listaEqdReduzido = <?php echo $listaEqdidReduzido; ?>;
+    intProdNaoAplica = "<?php echo $codigoProdutoNaoAplica; ?>";
 
     $(document).ready(function(){
         initPreplanointernoForm();

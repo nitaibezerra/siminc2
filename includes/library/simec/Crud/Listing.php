@@ -510,6 +510,10 @@ class Listing
 			$actions = $this->getActions();
             ?>
             <style>
+                .th_style {
+                    color: #676a6c;
+                    text-align: center;
+                }
                 table thead tr:first-child th:first-child {
                     .border-radius(4px 0 0 0);
                 }
@@ -536,10 +540,10 @@ class Listing
                                     <th>#</th>
                                 <?php endif; ?>
                                 <?php if ($actions): ?>
-                                    <th class="text-center" colspan="<?php echo count($actions) ?>">Ação</th>
+                                    <th class="text-center th_style" colspan="<?php echo count($actions) ?>">Ação</th>
                                 <?php endif; ?>
                                 <?php foreach ($head as $key => $value): ?>
-                                    <th style="cursor: pointer;" class="load-listing-ajax-order" field="<?php echo $key + 1; ?>">
+                                    <th style="cursor: pointer;" class="load-listing-ajax-order th_style" field="<?php echo $key + 1; ?>">
                                         <?php echo $value ?>
                                         <!--                                <span class="caret"></span>-->
                                     </th>

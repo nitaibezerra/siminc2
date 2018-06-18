@@ -1918,7 +1918,9 @@ function enviarEmailAprovacao($pliid){
     
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatario = array_merge($listaUsuariosPlanejamento, $listaUsuariosResponsaveisDoPi);
+    $listaDestinatario = array_merge(
+        $listaUsuariosPlanejamento? $listaUsuariosPlanejamento: array(),
+        $listaUsuariosResponsaveisDoPi);
 
 //ver(
 //array(
@@ -1980,7 +1982,9 @@ function enviarEmailCorrecao($pliid){
 
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatario = array_merge($listaUsuariosUnidadeDoPi, $listaUsuariosResponsaveisDoPi);
+    $listaDestinatario = array_merge(
+        $listaUsuariosUnidadeDoPi? $listaUsuariosUnidadeDoPi: array(),
+        $listaUsuariosResponsaveisDoPi);
 
 //ver(
 //array(
@@ -2044,7 +2048,9 @@ function enviarEmailAprovado($pliid){
 
     $listaUsuariosResponsaveisDoPi = (new Pi_Responsavel())->recuperarPorPlanoInterno($pliid);
     
-    $listaDestinatarioUsuariosTecnicos = array_merge($listaUsuariosPlanejamento, $listaUsuariosUnidadeDoPi);
+    $listaDestinatarioUsuariosTecnicos = array_merge(
+        $listaUsuariosPlanejamento? $listaUsuariosPlanejamento: array(),
+        $listaUsuariosUnidadeDoPi? $listaUsuariosUnidadeDoPi: array());
     
     $listaDestinatario = array_merge($listaDestinatarioUsuariosTecnicos, $listaUsuariosResponsaveisDoPi);
 
@@ -3344,7 +3350,7 @@ function exibirLinkEspelho($pliid){
  * 
  * @param string $colors
  */
-function carregarGraficoUnidade($colors){
+function carregarGraficoUnidade($colors, $percentualPlanejamento=false){
     $oPlanoInterno = new Pi_PlanoInterno();
     echo '<div class="panel-body">';
     $estatistica = $oPlanoInterno->recuperarEstatisticaPagamento((object) array(
@@ -3356,7 +3362,7 @@ function carregarGraficoUnidade($colors){
         ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
         ->setColors($colors)
         ->setEvent(array('click' => "exibirModalDetalheGrafico(0, event.point.series.name, event.point.category);"))
-        ->gerarGrafico($estatistica);
+        ->gerarGrafico($estatistica, $percentualPlanejamento);
     echo '</div>';
 }
 
@@ -3365,7 +3371,7 @@ function carregarGraficoUnidade($colors){
  * 
  * @param string $colors
  */
-function carregarGraficoDireta($colors){
+function carregarGraficoDireta($colors, $percentualPlanejamento=false){
     $oPlanoInterno = new Pi_PlanoInterno();
     echo '<div class="panel-body">';
     $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
@@ -3379,7 +3385,7 @@ function carregarGraficoDireta($colors){
         ->setColors($colors)
         ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
         ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-        ->gerarGrafico($estatistica);
+        ->gerarGrafico($estatistica, $percentualPlanejamento);
     echo '</div>';
 }
 
@@ -3388,7 +3394,7 @@ function carregarGraficoDireta($colors){
  * 
  * @param string $colors
  */
-function carregarGraficoCgconCogep($colors){
+function carregarGraficoCgconCogep($colors, $percentualPlanejamento=false){
     $oPlanoInterno = new Pi_PlanoInterno();
     echo '<div class="panel-body">';
     $estatistica = $oPlanoInterno->recuperarEstatisticaPagamentoDetalhe((object) array(
@@ -3402,7 +3408,7 @@ function carregarGraficoCgconCogep($colors){
         ->setColors($colors)
         ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
         ->setEvent(array('click' => "exibirModalDetalheGrafico(1, event.point.series.name, event.point.category);"))
-        ->gerarGrafico($estatistica);
+        ->gerarGrafico($estatistica, $percentualPlanejamento);
     echo '</div>';
 }
 
