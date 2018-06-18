@@ -21,7 +21,7 @@ class Grafico {
     // Formatos
     const K_DECIMAL_0 = "function () { return number_format(this.value, 0, ',', '.'); }";
     const K_DECIMAL_2 = "function () { return number_format(this.value, 2, ',', '.'); }";
-    const K_TOOLTIP_DECIMAL_0 = "function() { var name = this.name;if(this.series.userOptions.nameLegend!=undefined){name = this.series.userOptions.nameLegend[this.point.x]}return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + name + '</span>: <b>' + number_format(this.y, 0, ',', '.') + '</b>'; }";
+    const K_TOOLTIP_DECIMAL_0 = "function() { var name = this.series.userOptions.name;if(this.series.userOptions.nameLegend!=undefined){name = this.series.userOptions.nameLegend[this.point.x]}return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + name + '</span>: <b>' + number_format(this.y, 0, ',', '.') + '</b>'; }";
     const K_TOOLTIP_DECIMAL_2 = "function() { return '<span>' + this.x + '</b><br /><span style=\"color: ' + this.series.color + '\">' + this.series.name + '</span>: <b>' + number_format(this.y, 2, ',', '.') + '</b>'; }";
     const K_TOOLTIP_PIE_DECIMAL_0 = "function() { return '<b>' + this.point.name + '</b><br />Valor: <b>' + number_format(this.y, 0, ',', '.') + '</b><br />Porcentagem: <b>' + this.point.percentage.toFixed(2) + '%</b>'; }";
     const K_TOOLTIP_PIE_DECIMAL_2 = "function() { return '<b>' + this.point.name + '</b><br />Valor: <b>' + number_format(this.y, 0, ',', '.') + '</b><br />Porcentagem: <b>' + number_format(this.point.percentage, 2, ',', '.') + '%</b>'; }";
