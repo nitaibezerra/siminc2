@@ -79,8 +79,8 @@ class Public_Model_MetaPpa extends Modelo
                         $suoid .= $where['suoid'][$i].', ';
                     }
                 }
+                $suoid = substr($suoid, 0, strlen($suoid)-2);
             }
-            $suoid = substr($suoid, 0, strlen($suoid)-2);
             $join = "
                 JOIN (
                     SELECT
