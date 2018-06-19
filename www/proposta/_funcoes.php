@@ -131,3 +131,24 @@ function montarSqlRelatorioGeralPrePi(stdClass $filtros){
     return $sql;
 }
 
+/**
+ * Retorna o nome da classe css que exibe as cores verde, azul ou
+ * vermelho de acordo com a situação de utilização do recurso financeiro disponível.
+ * 
+ * @param int $valorDisponivel Calculo do Valor de limite menos o valor utilizado.
+ * @return string Nome da classe css que exibe a cor.
+ */
+function controlarCorPorValorDisponivel($valorDisponivel)
+{
+    $resultado = 'green';
+    if($valorDisponivel > 0){
+        $resultado = 'blue';
+    }
+
+    if($valorDisponivel < 0){
+        $resultado = 'red';
+    }
+
+    return $resultado;
+}
+

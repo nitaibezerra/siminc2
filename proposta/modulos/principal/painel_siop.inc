@@ -27,30 +27,31 @@ $mProposta = new Proposta_Model_Proposta();
 $mPtres = new Monitora_Model_Ptres();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 
-$momento = $_POST['momento']? $_POST['momento']: 1000;
+# Busca último momento atualizado
+$ultimoMomento = $mPtres->buscarUltimoMomentoAtualizado((int)$_SESSION['exercicio']);
+
+$momento = $_REQUEST['momento']? $_REQUEST['momento']: ($ultimoMomento? $ultimoMomento: 1000);
 
 switch ($_REQUEST['req']) {
-    case 'importar-siop':
-        $mPtres->importarSiop($_SESSION['exercicio'], $momento);
-        simec_redirecionar('?modulo=inicio&acao=C', 'success');
-        die;
     case 'gerar-planilha':
         $mProposta->gerarPlanilhaImportacao($momento);
         die;
     case 'carregarGraficoUnidade':
-        $mPrePlanoInterno->carregarGrafico();
+        $mPrePlanoInterno->carregarGrafico(NULL, [], TRUE);
         die;
     case 'carregarGraficoDireta':
-        $mPrePlanoInterno->carregarGrafico(['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"]);
+        $mPrePlanoInterno->carregarGrafico(NULL, ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"]);
         die;
     case 'carregarGraficoCgconCogep':
-        $mPrePlanoInterno->carregarGrafico(['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"]);
+        $mPrePlanoInterno->carregarGrafico(NULL, ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"]);
         die;
+    case 'importar-siop':
+        $mPtres->importarSiop($_SESSION['exercicio'], $momento);
 }
 
-$quantidadeSiop = $mPtres->recuperarQuantidadesSiop($momento);
-$funcionaisSiop = $mPtres->recuperarFuncionaisSiop($momento);
-$comparacaoSiop = $mPtres->recuperarComparacaoSiop($momento);
+$quantidadeSiop = $mPtres->recuperarQuantidadesSiop((int)$momento, (int)$_SESSION['exercicio']);
+$funcionaisSiop = $mPtres->recuperarFuncionaisSiop((int)$momento, (int)$_SESSION['exercicio']);
+$comparacaoSiop = $mPtres->recuperarComparacaoSiop((int)$momento, (int)$_SESSION['exercicio']);
 
 /**
  * Cabeçalho padrão do sistema.
@@ -61,12 +62,12 @@ include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
-        <h2>Painel de Acompanhamento</h2>
-    </div>
     <div class="col-lg-8">
+        <h2>Painel de Acompanhamento de envio de Proposta ao SIOP</h2>
+    </div>
+    <div class="col-lg-4">
         <div style="padding-top: 10px;" class="text-right">
-            <a class="btn btn-danger" href="?modulo=inicio&acao=C&req=gerar-planilha">Gerar Planilha</a>
+            <a class="btn btn-danger" href="?modulo=principal/painel_siop&acao=A&req=gerar-planilha">Gerar Planilha</a>
         </div>
     </div>
 </div>
@@ -80,7 +81,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                     <h5>Funcionais SIOP</h5>
                 </div>
                 <div class="ibox-content">
-                    <form name='form_importar' id='form_importar' method="POST" action="?modulo=inicio&acao=C&req=importar-siop" class="form-horizontal">
+                    <form name='form_importar' id='form_importar' method="POST" action="?modulo=principal/painel_siop&acao=A&req=importar-siop" class="form-horizontal">
                         <?php
                             echo $simec->select(
                                 'momento',
@@ -155,13 +156,13 @@ include APPRAIZ . "includes/cabecalho.inc";
                 <div class="ibox-content">
                     <div class="tabs-container tabs">
                         <ul class="nav nav-tabs prodTabs">
-                            <li class="active"><a data-toggle="tab" href="#tab-1" data-url="?modulo=inicio&acao=C&req=carregarGraficoUnidade"> Gráficos das Unidades</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-2" data-url="?modulo=inicio&acao=C&req=carregarGraficoDireta"> Gráficos da Direta</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-3" data-url="?modulo=inicio&acao=C&req=carregarGraficoCgconCogep"> Gráficos da CGCON/COGEP</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab-1" data-url="?modulo=principal/painel_siop&acao=A&req=carregarGraficoUnidade"> Gráficos das Unidades</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2" data-url="?modulo=principal/painel_siop&acao=A&req=carregarGraficoDireta"> Gráficos da Direta</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-3" data-url="?modulo=principal/painel_siop&acao=A&req=carregarGraficoCgconCogep"> Gráficos da CGCON/COGEP</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="tab-1" class="tab-pane active">
-                                <?php $mPrePlanoInterno->carregarGrafico(null, true); ?>
+                                <?php $mPrePlanoInterno->carregarGrafico(NULL, [], TRUE); ?>
                             </div>
                             <div id="tab-2" class="tab-pane">
                                 <!--O grafico 2 será carregado aqui via ajax-->
@@ -226,6 +227,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <script>
+
     $(document).ready(function(){
 
         $('.tabs').on('click', '.tablink, .prodTabs a',function (e) {
@@ -247,6 +249,11 @@ include APPRAIZ . "includes/cabecalho.inc";
         $('#btn-funcionais-siop').click(function(){
             $('#modalFuncionaisSiop').modal();
         });
+        
+        $('#momento').change(function(){
+            window.document.location = '?modulo=principal/painel_siop&acao=A&momento='+ $(this).val();
+        });
+
     });
 
 </script>
