@@ -188,14 +188,21 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $this->pegaLinha($sql);
     }
 
-    function carregarGrafico($tipoCusteio, $filtro = null, $percentual=false){
+    /**
+     * Monta o Grafico com valores de custeio e capital de Pré-Pi ou expansão de custeio e capital.
+     * 
+     * @param string $tipoCusteio Ex: Proposta_Model_PrePlanoInterno::TIPO_CUSTEIO_EXPANSAO
+     * @param array $filtro
+     * @param boolean $percentual
+     * @return VOID
+     */
+    function carregarGrafico($tipoCusteio, $filtro = NULL, $percentual = FALSE){
 
         # Cores dos Graficos
         $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
         echo '<div class="panel-body">';
 
-        $estatistica = $this->recuperarEstatisticaPagamento($filtro,$tipoCusteio);
-//        $estatistica = $this->recuperarEstatisticaPagamento($filtro, $tipoCusteio);
+        $estatistica = $this->recuperarEstatisticaPagamento($filtro, $tipoCusteio);
         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
         $grafico
             ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
@@ -207,11 +214,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
 
     /**
      * Busca Unidades com estatistica de orçamento e valores de pagamento.
-     *
-     * @param stdClass $filtro
+     * 
+     * @param array $aFiltro
+     * @param string $tipo Ex: Proposta_Model_PrePlanoInterno::TIPO_CUSTEIO_EXPANSAO
      * @return array
      */
-    public function recuperarEstatisticaPagamento($aFiltro = null, $tipo)
+    public function recuperarEstatisticaPagamento($aFiltro = NULL, $tipo)
     {
         
         $filtro = '';
