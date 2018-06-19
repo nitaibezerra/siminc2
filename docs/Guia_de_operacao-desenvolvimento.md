@@ -24,7 +24,11 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git status
     $ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007' -m 'Comentário livre e podendo ser com texto longo'
     $ git push origin hotfix-007-planejamento-documentos
- 
+
+
+Para visualizar uma lista completa do padrão de versionamento de código [clique aqui](https://github.com/devbrotherhood/codeversioningpattern).
+
+
     master  o-------o-------------o---------------------------------------------
                      \
                       o------o-o-o--o----- hotfix-007-planejamento-documentos --
