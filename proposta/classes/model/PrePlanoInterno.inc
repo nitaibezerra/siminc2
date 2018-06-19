@@ -247,7 +247,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid AND pli.plistatus = 'A'
+                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid 
+                AND pli.plistatus = 'A'
                 AND pli.prsano = suo.prsano
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
@@ -283,8 +284,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 sum(COALESCE (prod.".$prdvalor.", 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                INNER JOIN proposta.proposta pro ON suo.suoid = pro.suoid
-                inner join proposta.propostadetalhe prod on pro.proid = prod.proid
+                INNER JOIN proposta.proposta pro 
+                   ON suo.suoid = pro.suoid 
+                  and pro.prostatus='A'
+                inner join proposta.propostadetalhe prod 
+                   on pro.proid = prod.proid 
+                  and prod.prdstatus = 'A'
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
                 $filtro
@@ -782,7 +787,6 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
-        $filtro[] = "pli.plistatus = 'A'";
         $where = $this->montarFiltros($filtro);
         $prdvalor = 'prdvalor';
         $plivalorcapital = 'plivalorcapital';
@@ -813,21 +817,29 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 psu.psuid,
                 sum(COALESCE(pli.".$plivalorcapital.", 0)) ptrdotacao_capital,
                 sum(COALESCE(pli.".$plivalorcusteio.", 0)) ptrdotacao_custeio,                    
-                coalesce((select sum(case when cast(substring(ndpcus.ndpcod,1,1) as integer) < 4 then prodcus.".$prdvalor." else 0 end) custeio
-		  from proposta.proposta procus
-		 inner join proposta.propostadetalhe prodcus
-		    on procus.proid = prodcus.proid
-		 JOIN public.naturezadespesa ndpcus ON prodcus.ndpid = ndpcus.ndpid
-		 where procus.ptrid = ptr.ptrid
-                   and procus.prostatus='A'),0) as picvalorcusteio,
-                coalesce((select sum(case when cast(substring(ndpcap.ndpcod,1,1) as integer) > 3 then prodcap.".$prdvalor." else 0 end) capital
-		  from proposta.proposta procap
-		 inner join proposta.propostadetalhe prodcap
-		    on procap.proid = prodcap.proid
-		 JOIN public.naturezadespesa ndpcap ON prodcap.ndpid = ndpcap.ndpid
-		 where procap.ptrid = ptr.ptrid
-                   and procap.prostatus='A'),0) as picvalorcapital, 
-                 (
+                coalesce((
+                    select
+                        sum(case when cast(substring(ndpcus.ndpcod,1,1) as integer) < 4 then prodcus.".$prdvalor." else 0 end) custeio
+                    from proposta.proposta procus
+                        join proposta.propostadetalhe prodcus on procus.proid = prodcus.proid
+                        JOIN public.naturezadespesa ndpcus ON prodcus.ndpid = ndpcus.ndpid
+                    where
+                        procus.ptrid = ptr.ptrid
+                        and procus.prostatus = 'A'
+                        AND prodcus.prdstatus = 'A'
+                ),0) as picvalorcusteio,
+                coalesce((
+                    select
+                        sum(case when cast(substring(ndpcap.ndpcod,1,1) as integer) > 3 then prodcap.".$prdvalor." else 0 end) capital
+                    from proposta.proposta procap
+                    inner join proposta.propostadetalhe prodcap on procap.proid = prodcap.proid
+                    JOIN public.naturezadespesa ndpcap ON prodcap.ndpid = ndpcap.ndpid
+                    where
+                        procap.ptrid = ptr.ptrid
+                        and procap.prostatus = 'A'
+                        AND prodcap.prdstatus = 'A'
+                ),0) as picvalorcapital,
+                (
                     SELECT
                         COUNT(1)
                     FROM spo.ptressubunidade
@@ -837,8 +849,10 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             FROM public.vw_subunidadeorcamentaria suo
                 JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
                 JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                LEFT JOIN proposta.preplanointerno pli ON ptr.ptrid = pli.ptrid
+                LEFT JOIN proposta.preplanointerno pli ON(
+                    ptr.ptrid = pli.ptrid
+                    AND pli.plistatus = 'A'
+                )
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
                 {$where}
