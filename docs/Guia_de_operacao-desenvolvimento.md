@@ -22,7 +22,7 @@ Cada desenvolvedor criará uma branch a partir da master.
     $ git status
     $ git add docs/Guia_de_operacao-desenvolvimento.md
     $ git status
-    $ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
+    $ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007' -m 'Comentário livre e podendo ser com texto longo'
     $ git push origin hotfix-007-planejamento-documentos
  
     master  o-------o-------------o---------------------------------------------
@@ -49,18 +49,20 @@ Cada desenvolvedor criará uma branch a partir da master.
 
 Certifique-se de que a demanda está sem divergências e se foi criada do local certo como já foi citado acima, caso esteja tudo correto, siga os passoo a passos abaixo
 
-(1) Caso de sucesso
+### (1) Caso de sucesso
 
     Solicite um pull request da branch em que foi feito o trabalho hotfix-007-planejamento-documentos para a branch Master e solicite a revisão de código do pacote de atualização a um membro da equipe de desenvolvimento.
     
     Detalhe: Selecione apenas a branch que foi homologada e solicite um pull request para master.
+
 
     master  o-------o-------------o-----o---------------------------------------
                      \                 /
                       \               /
                        o------o-o-o--o---- hotfix-007-planejamento-documentos --
 
-(2) Caso de falha
+
+### (2) Caso de falha
 
     Utilize sua branch para realizar as alterações e depois prossiga o passo de mandar para teste.
 
@@ -85,11 +87,14 @@ $ git checkout -b tipo-nºissue-modulo-nomeDemanda
 ##### Conferir status da branch exibindo arquivos modificados, adicionados pra commit ou conflitos
 $ git status
 
+##### Revisar as alterações feitas nos arquivos modificados antes de adicionar para dar commit e push
+$ git diff docs/Guia_de_operacao-desenvolvimento.md
+
 ##### Adicionar arquivos modificados na lista pra serem enviados no próximo commit
 $ git add docs/Guia_de_operacao-desenvolvimento.md
 
 ##### Enviar os arquivos modificados para um marco histórico de mundaça na branch local
-$ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007'
+$ git commit -m '[ FIX ] Módulo X - funcionalidade y. Issue #007' -m 'Comentário livre e podendo ser com texto longo'
 
 ##### Mandar seus commits e sua branch para a branch no remoto do Github (origin)
 $ git push origin hotfix-007-planejamento-documentos
