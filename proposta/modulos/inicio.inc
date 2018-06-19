@@ -23,34 +23,19 @@ if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
     simec_redirecionar($urlPainel);
 }
 
-$mProposta = new Proposta_Model_Proposta();
-$mPtres = new Monitora_Model_Ptres();
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 
-$momento = $_POST['momento']? $_POST['momento']: 1000;
-
 switch ($_REQUEST['req']) {
-    case 'importar-siop':
-        $mPtres->importarSiop($_SESSION['exercicio'], $momento);
-        simec_redirecionar('?modulo=inicio&acao=C', 'success');
-        die;
-    case 'gerar-planilha':
-        $mProposta->gerarPlanilhaImportacao($momento);
-        die;
     case 'carregarGraficoUnidade':
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true);
-//        include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
         die;
     case 'carregarGraficoDireta':
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"], true);
-//        include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
         die;
     case 'carregarGraficoCgconCogep':
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"], true);
-//        include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
         die;
     case 'trocaAbaGrafico':
-//        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"], true);
         include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
         die;        
     case 'carregarListaAcompanhamentoPis':
@@ -68,7 +53,7 @@ switch ($_REQUEST['req']) {
         if($listaSubUnidadeUsuario){
             $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
         }
-        $oPlanoInterno = new Pi_PlanoInterno();
+
         $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
         $aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo);
         include_once(APPRAIZ . "proposta/modulos/principal/listaAcompanhamentoPI.inc");
@@ -82,9 +67,6 @@ switch ($_REQUEST['req']) {
         die;
 }
 
-$quantidadeSiop = $mPtres->recuperarQuantidadesSiop($momento);
-$funcionaisSiop = $mPtres->recuperarFuncionaisSiop($momento);
-$comparacaoSiop = $mPtres->recuperarComparacaoSiop($momento);
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 $filtros = array(
     "suo.prsano = '". $_SESSION['exercicio']. "'",
@@ -94,7 +76,7 @@ $filtros = array(
 if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
-$oPlanoInterno = new Pi_PlanoInterno();
+
 $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
 $aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo);
 
