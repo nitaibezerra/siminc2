@@ -199,7 +199,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     function carregarGrafico($tipoCusteio, $filtro = NULL, $percentual = FALSE){
 
         # Cores dos Graficos
-        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+//        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
+        $colors = "'#FF0000', '#FFD700', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
         echo '<div class="panel-body">';
 
         $estatistica = $this->recuperarEstatisticaPagamento($filtro, $tipoCusteio);
@@ -240,7 +241,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
        
         $sql = "
             SELECT DISTINCT
-                1 AS ordem,
+                2 AS ordem,
                 'Pré-pi' AS descricao,
                 $descricao AS categoria,
                 (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
@@ -258,7 +259,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 categoria
             UNION ALL
             SELECT DISTINCT
-                2 AS ordem,
+                1 AS ordem,
                 'Limite' AS descricao,
                 $descricao AS categoria,
                 sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
@@ -781,6 +782,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
+        $filtro[] = "pli.plistatus = 'A'";
         $where = $this->montarFiltros($filtro);
         $prdvalor = 'prdvalor';
         $plivalorcapital = 'plivalorcapital';
@@ -809,8 +811,6 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 lmu.lmuvlr,
                 lmu.lmuid,
                 psu.psuid,
-                psu.ptrdotacaocapital ptrdotacao_capital,
-                psu.ptrdotacaocusteio ptrdotacao_custeio, 
                 sum(COALESCE(pli.".$plivalorcapital.", 0)) ptrdotacao_capital,
                 sum(COALESCE(pli.".$plivalorcusteio.", 0)) ptrdotacao_custeio,                    
                 coalesce((select sum(case when cast(substring(ndpcus.ndpcod,1,1) as integer) < 4 then prodcus.".$prdvalor." else 0 end) custeio
@@ -818,13 +818,15 @@ class Proposta_Model_PrePlanoInterno extends Modelo
 		 inner join proposta.propostadetalhe prodcus
 		    on procus.proid = prodcus.proid
 		 JOIN public.naturezadespesa ndpcus ON prodcus.ndpid = ndpcus.ndpid
-		 where procus.ptrid = ptr.ptrid),0) as picvalorcusteio,
+		 where procus.ptrid = ptr.ptrid
+                   and procus.prostatus='A'),0) as picvalorcusteio,
                 coalesce((select sum(case when cast(substring(ndpcap.ndpcod,1,1) as integer) > 3 then prodcap.".$prdvalor." else 0 end) capital
 		  from proposta.proposta procap
 		 inner join proposta.propostadetalhe prodcap
 		    on procap.proid = prodcap.proid
 		 JOIN public.naturezadespesa ndpcap ON prodcap.ndpid = ndpcap.ndpid
-		 where procap.ptrid = ptr.ptrid),0) as picvalorcapital, 
+		 where procap.ptrid = ptr.ptrid
+                   and procap.prostatus='A'),0) as picvalorcapital, 
                  (
                     SELECT
                         COUNT(1)
@@ -863,7 +865,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 suo.suonome,
                 ptr.funcional
         ";
-
+//ver($sql,d);
         return $sql;
     }
 
