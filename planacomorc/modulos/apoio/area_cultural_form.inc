@@ -7,6 +7,7 @@ $mAreaCultural = new Monitora_Model_PiModalidadeEnsino($_REQUEST['mdeid']);
 
 $mSegmentoCultural = new Monitora_Model_PiNivelEtapaEnsino($_REQUEST['neeid']);
 
+if($_REQUEST['mdeid'])
 $lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
 
 switch ($_REQUEST['req']) {
@@ -18,13 +19,14 @@ switch ($_REQUEST['req']) {
         break;
     case 'salvar-segmento':
         $cSegmentoCultural->salvar($_REQUEST);
-        break;
+        die;
     case 'excluir-segmento':
-        $cSegmentoCultural->excluir($_REQUEST['neeid']);
+        $cSegmentoCultural->excluir($_REQUEST);
         break;
     case 'listar-segmento':
         $lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
-        break;
+        include_once(APPRAIZ.'/planacomorc/modulos/apoio/segmento-cultural.inc');
+        die;
 
 }
 
@@ -79,26 +81,23 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
 
                             <?php
-                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 10]);
+                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 3, 'class' => 'inteiro', 'required']);
                                 echo $simec->input('needsc', 'Descrição', $mSegmentoCultural->needsc, ['maxlength' => 250]);
                             ?>
 
                             <div class="form-group">
                                 <div class="text-center">
                                     <button class="btn btn-primary" type="submit" id="btn-salvar-segmento"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                    <a href="?modulo=apoio/area_cultural&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
-                                    <?php if($mSegmentoCultural->neeid){ ?>
-                                        <a href="?modulo=apoio/area_cultural_form&acao=A&req=excluir-segmento&neeid=<?php echo $mSegmentoCultural->neeid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                    <?php } ?>
                                 </div>
                             </div>
                         </form>
-                    </div>
 
-                    <div class="listagem-segmento-cultural">
-                        <?php $cSegmentoCultural->montarListagem($mSegmentoCultural->neeid)?>
+                        <div id="lista-segmento" class="listagem-segmento-cultural">
+                            <?php
+                                include_once(APPRAIZ.'/planacomorc/modulos/apoio/segmento-cultural.inc');
+                            ?>
+                        </div>
                     </div>
-
 
                 <?php } else { ?>
                 <div class="ibox-content">
@@ -120,7 +119,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                     jQuery("#lista-segmento").load('?modulo=apoio/area_cultural_form&acao=A&req=listar-segmento&mdeid='+$('#mdeid').val());
 
                     // Zerar o formulário
-                    // jQuery("#div_formulario_subitem").load('?modulo=apoio/area_cultural_form&acao=A&req=formulario-subitem&$maiid='+$('#maiid').val());
                     LimparCamposSegmento();
                 }
             }

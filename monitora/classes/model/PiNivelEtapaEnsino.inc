@@ -82,7 +82,8 @@ class Monitora_Model_PiNivelEtapaEnsino extends Modelo
                 FROM
                     monitora.pi_niveletapaensino
                 WHERE
-                    mdeid = '$mdeid'
+                    mdeid = $mdeid
+                    AND neestatus = 'A'
         ";
 
         return $db->carregar($sql);

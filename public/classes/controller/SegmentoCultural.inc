@@ -7,53 +7,48 @@ class Public_Controller_SegmentoCultural
         $url = '?modulo=apoio/area_cultural_form&acao=A';
 
         try {
-            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neeid']);
-            $mdsegCultural->popularDadosObjeto($dados);
+            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neecod']);
+            $mdsegCultural->popularDadosObjeto($dados, true);
             $mdsegCultural->neeano = $mdsegCultural->neeano ? $mdsegCultural->neeano : $_SESSION['exercicio'];
-//            ver($mdareaCultural,d);
+//            ver($mdsegCultural,d);
 
             $mdsegCultural->salvar(null,null);
             $mdsegCultural->commit();
-            simec_redirecionar($url . '&neeid= ' . $mdsegCultural->neeid.'&mdeid='.$mdsegCultural->mdeid, 'success');
+            simec_redirecionar($url . '&neeid=' . $mdsegCultural->neeid.'&mdeid='.$mdsegCultural->mdeid, 'success');
         } catch (Exception $e){
             $mdsegCultural->rollback();
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
 
-    public function excluir($neeid)
+    public function excluir($dados)
     {
-        $url = '?modulo=apoio/area_cultural&acao=A';
+        $url = '?modulo=apoio/area_cultural_form&acao=A';
 
         try {
-            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($neeid);
-/*
-            if($mdsegCultural->existeVinculo()){
-                $mdsegCultural = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/area_cultural_form&acao=A&capid=' . $mdsegCultural->mdeid;
-                simec_redirecionar($url, 'error', $mensagem);
-            }*/
+            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neeid']);
 
             $mdsegCultural->neestatus = 'I';
             $mdsegCultural->salvar();
             $mdsegCultural->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . '&mdeid=' . $mdsegCultural->mdeid, 'success');
         } catch (Exception $e){
             $mdsegCultural->rollback();
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
 
-    public function montarListagem($dados, $meeid)
+    public function montarListagem($neeid)
     {
-        $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neeid']);
+        $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($neeid);
         $perfis = pegaPerfilGeral();
         /**
          * @todo colcoar a constante correta do acompanhamento para atualizar a regra.
          */
         $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
 
-//        $lista = (new Monitora_Model_PiNivelEtapaEnsino()->RecuperaSegmentoPorArea($mdsegCultural->mdeid));
+        $lista = (new Monitora_Model_PiNivelEtapaEnsino())->RecuperaSegmentoPorArea($mdsegCultural->neeid);
+
         include_once APPRAIZ . 'planacomorc/modulos/apoio/segmento-cultural.inc';
 
     }
