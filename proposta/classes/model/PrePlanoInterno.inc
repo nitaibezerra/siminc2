@@ -247,7 +247,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid AND pli.plistatus = 'A'
+                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid 
+                AND pli.plistatus = 'A'
                 AND pli.prsano = suo.prsano
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
@@ -283,8 +284,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 sum(COALESCE (prod.".$prdvalor.", 0))::DECIMAL AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                INNER JOIN proposta.proposta pro ON suo.suoid = pro.suoid
-                inner join proposta.propostadetalhe prod on pro.proid = prod.proid
+                INNER JOIN proposta.proposta pro 
+                   ON suo.suoid = pro.suoid 
+                  and pro.prostatus='A'
+                inner join proposta.propostadetalhe prod 
+                   on pro.proid = prod.proid 
+                  and prod.prdstatus = 'A'
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
                 $filtro
@@ -782,7 +787,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
-        $filtro[] = "pli.plistatus = 'A'";
+//        $filtro[] = "pli.plistatus = 'A'";
         $where = $this->montarFiltros($filtro);
         $prdvalor = 'prdvalor';
         $plivalorcapital = 'plivalorcapital';
@@ -838,7 +843,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
                 JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
                 LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                LEFT JOIN proposta.preplanointerno pli ON ptr.ptrid = pli.ptrid
+                LEFT JOIN proposta.preplanointerno pli ON ptr.ptrid = pli.ptrid and pli.plistatus='A'
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
                 {$where}
