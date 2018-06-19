@@ -811,8 +811,6 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 lmu.lmuvlr,
                 lmu.lmuid,
                 psu.psuid,
-                psu.ptrdotacaocapital ptrdotacao_capital,
-                psu.ptrdotacaocusteio ptrdotacao_custeio, 
                 sum(COALESCE(pli.".$plivalorcapital.", 0)) ptrdotacao_capital,
                 sum(COALESCE(pli.".$plivalorcusteio.", 0)) ptrdotacao_custeio,                    
                 coalesce((select sum(case when cast(substring(ndpcus.ndpcod,1,1) as integer) < 4 then prodcus.".$prdvalor." else 0 end) custeio

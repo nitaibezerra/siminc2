@@ -26,6 +26,21 @@ if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 
 switch ($_REQUEST['req']) {
+    case 'lista-inicio-xls':
+        $filtros = array(
+            "suo.prsano = '". $_SESSION['exercicio']. "'",
+            'suo.unofundo = FALSE',
+        );
+        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+        if($listaSubUnidadeUsuario){
+            $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
+        }
+
+        $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
+        $sql = $mPrePlanoInterno->montarSqlExecucaoOrcamentaria($filtros, $tipo);
+        $listaFuncional = $db->carregar($sql);
+//ver($listaFuncional, d);
+        include_once APPRAIZ. "proposta/modulos/lista-inicio-xls.inc";
     case 'carregarGraficoUnidade':
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true);
         die;
@@ -53,17 +68,9 @@ switch ($_REQUEST['req']) {
         if($listaSubUnidadeUsuario){
             $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
         }
-
         $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
         $aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo);
         include_once(APPRAIZ . "proposta/modulos/principal/listaAcompanhamentoPI.inc");
-        die;  
-    case 'exportar-xls':
-        header( 'Content-Type: application/vnd.ms-excel' );
-        header( 'Expires: 0' );
-        header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-        header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
-        echo $_REQUEST['tabela'];
         die;
 }
 
@@ -99,6 +106,15 @@ include APPRAIZ . "includes/cabecalho.inc";
     <div class="col-lg-4">
         <h2>Painel de Acompanhamento</h2>
     </div>
+    <div class="col-lg-8">
+        <div style="padding-top: 10px;" class="text-right">
+            <?php if(!array_intersect($perfis, [PFL_CONSULTA])){ ?>
+                <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
+                    <i class="fa fa-file-excel-o"></i> Exportar XLS
+                </button>
+            <?php }?>
+        </div>
+    </div>
 </div>
 <input type="hidden" id="tipo" value="Normal">
 <div class="tabs-container tabs">
@@ -115,13 +131,9 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
-        <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
-            <i class="fa fa-file-excel-o"></i> Exportar XLS
-        </button>
-    </div>
-</div>
+
+<div class="clearfix" style="margin-top: 10px;">&nbsp;</div>
+
 <div id="listaAcompanhamentoPis">
     <?php include_once(APPRAIZ . "proposta/modulos/principal/listaAcompanhamentoPI.inc");?>
 </div>
@@ -148,7 +160,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         });
         
         $("#btn-exportar-xls").click(function(){
-            window.open('?modulo=inicio&acao=C&req=carregarListaAcompanhamentoPis&tipo='+$("#tipo").val()+'&exportar_xls=1');
+            window.open('?modulo=inicio&acao=C&req=lista-inicio-xls&tipo='+ $("#tipo").val());
         });
         
     });
