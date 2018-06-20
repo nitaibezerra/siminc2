@@ -27,10 +27,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>Descrição</th>
                                 <th>Código</th>
                                 <th>Nome</th>
-                                <th>Ano</th>
+                                <th>Descrição</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,10 +38,9 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <td class="text-center">
                                         <a title="Alterar" href="?modulo=apoio/metapnc_form&acao=A&mpnid=<?php echo $dados['mpnid']; ?>"><i class="fa fa-pencil"></i></a>
                                     </td>
-                                    <td><?php echo $dados['mpndsc']; ?></td>
                                     <td><?php echo $dados['mpncod']; ?></td>
                                     <td><?php echo $dados['mpnnome']; ?></td>
-                                    <td><?php echo $dados['prsano']; ?></td>
+                                    <td><?php echo $dados['mpndsc']; ?></td>
                                 </tr>
                             <?php } ?>        
                             </tbody>

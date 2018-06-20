@@ -5,7 +5,7 @@
 
     <?php
         echo $simec->input('ipndsc', 'Descrição', $mIndicadorpnc->ipndsc, ['required', 'maxlength' => 1000]);
-        echo $simec->input('ipncod', 'Código', $mIndicadorpnc->ipncod, ['required', 'maxlength' => 3]);
+        echo $simec->input('ipncod', 'Código', $mIndicadorpnc->ipncod, ['required', 'maxlength' => 3, 'class' => 'upper-text']);
     ?>
 
     <div class="form-group">

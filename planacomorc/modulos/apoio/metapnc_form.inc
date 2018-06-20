@@ -5,24 +5,24 @@ $cMetapnc = new Public_Controller_Metapnc();
 switch ($_REQUEST['req']) {
 	case 'salvar':
         $cMetapnc->salvar($_REQUEST);
-		break;
+		die;
 	case 'excluir':
         $cMetapnc->excluir($_REQUEST['mpnid']);
-        break;
+        die;
     case 'formulario-medida':
         $cMetapnc->montarFormulario($_REQUEST['mpnid'], $_REQUEST['ipnid']);
-        break;
+        die;
     case 'listar-medida':
         $cMetapnc->montarListagem($_REQUEST['mpnid']);
-        break;
+        die;
     case 'salvar-medida':
         $cIndicadorpnc = new Public_Controller_Indicadorpnc();
         $cIndicadorpnc->salvar($_REQUEST);
-        break;
+        die;
     case 'excluir-medida':
         $cIndicadorpnc = new Public_Controller_Indicadorpnc();
         $cIndicadorpnc->excluir($_REQUEST);
-        break;
+        die;
 }
 
 $mMetapnc = new Public_Model_MetaPnc($_REQUEST['mpnid']);

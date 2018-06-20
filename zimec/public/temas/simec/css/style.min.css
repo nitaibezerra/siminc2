@@ -7656,3 +7656,7 @@ body.skin-3 {
     display: none;
   }
 }
+
+.upper-text{
+  text-transform: uppercase;
+}
