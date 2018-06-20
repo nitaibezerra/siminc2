@@ -58,12 +58,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </tbody>
                             </table>
                         </div>
-                        <div class="form-group">
-                            <div class="text-center">
-                                <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
-                                <a href="planacomorc.php?modulo=inicio&acao=C" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                        <?php if (!(in_array(PFL_CONSULTA, $perfis))) {?>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-primary" name="btg" value="Salvar" />
+                                    <a href="planacomorc.php?modulo=inicio&acao=C" class="btn btn-warning" id="btnVoltar" type="button">Voltar</a>
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
