@@ -40,10 +40,19 @@ switch ($_REQUEST['req']) {
                   </div>';
         die;
     case 'recuperar-dados-ptres':
-        $qtdProposta = (new Monitora_Model_Ptres($_REQUEST['ptrid']))->recuperarProdutosPorPtres();
-        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_acao');
-        $qtdProposta = $cProposta->aplicaUtf8($qtdProposta, 'produto_po');
-        echo json_encode($qtdProposta);
+        # Busca dados de produto e unidade de medida da funcional
+        $modelPtres = new Monitora_Model_Ptres($_REQUEST['ptrid']);
+        $modelPtres->ptrano = (int)$_SESSION['exercicio'];
+        $funcional = $modelPtres->recuperarProdutosPorPtres();
+        
+        # Corrigindo campos de textos pra retornar no formato UTF8
+        $funcional['produto_acao'] = utf8_encode($funcional['produto_acao']);
+        $funcional['produto_po'] = utf8_encode($funcional['produto_po']);
+        $funcional['unidade_po'] = utf8_encode($funcional['unidade_po']);
+        $funcional['unidade_acao'] = utf8_encode($funcional['unidade_acao']);
+
+        # Resposta da requisição ajax
+        echo json_encode($funcional);
         die;
     case 'recuperar-valores-ptres':
         echo json_encode((new Proposta_Model_PrePlanoInterno())->recuperarValoresPorSubnidadeEPtres($_REQUEST['suoid'], $_REQUEST['ptrid']));
