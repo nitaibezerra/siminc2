@@ -1,13 +1,28 @@
 <?php
 
 $cMetapnc = new Public_Controller_Metapnc();
+
 switch ($_REQUEST['req']) {
 	case 'salvar':
         $cMetapnc->salvar($_REQUEST);
-		die;
+		break;
 	case 'excluir':
         $cMetapnc->excluir($_REQUEST['mpnid']);
-		die;
+        break;
+    case 'formulario-medida':
+        $cMetapnc->montarFormulario($_REQUEST['mpnid'], $_REQUEST['ipnid']);
+        break;
+    case 'listar-medida':
+        $cMetapnc->montarListagem($_REQUEST['mpnid']);
+        break;
+    case 'salvar-medida':
+        $cIndicadorpnc = new Public_Controller_Indicadorpnc();
+        $cIndicadorpnc->salvar($_REQUEST);
+        break;
+    case 'excluir-medida':
+        $cIndicadorpnc = new Public_Controller_Indicadorpnc();
+        $cIndicadorpnc->excluir($_REQUEST);
+        break;
 }
 
 $mMetapnc = new Public_Model_MetaPnc($_REQUEST['mpnid']);
@@ -23,10 +38,10 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
+                    <h5>Meta PNC</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="formulario" name="formulario" method="post" class="form-horizontal">
@@ -34,15 +49,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="mpnid" id="mpnid" type="hidden" value="<?php echo $mMetapnc->mpnid; ?>">
                         
                         <?php                         
-                        echo $simec->input('mpndsc', 'mpndsc', $mMetapnc->mpndsc, ['required', 'maxlength' => 1000]);                    
-                        echo $simec->input('mpncod', 'mpncod', $mMetapnc->mpncod, ['maxlength' => 4]);                    
-                        echo $simec->input('mpnnome', 'mpnnome', $mMetapnc->mpnnome, ['maxlength' => 1000]);                    
-                        echo $simec->input('prsano', 'prsano', $mMetapnc->prsano, ['required', 'maxlength' => 4]);                        
+                            echo $simec->input('mpndsc', 'Descrição', $mMetapnc->mpndsc, ['required', 'maxlength' => 1000]);
+                            echo $simec->input('mpncod', 'Código', $mMetapnc->mpncod, ['maxlength' => 4]);
+                            echo $simec->input('mpnnome', 'Nome', $mMetapnc->mpnnome, ['maxlength' => 1000]);
                         ?>
                         
                         <div class="form-group">
                             <div class="text-center">
-                                <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                <button class="btn btn-primary" id="btn-salvar" type="submit" ><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                 <a href="?modulo=apoio/metapnc&acao=A" class="btn btn-warning" id="btn-voltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                                 <?php if($mMetapnc->mpnid){ ?>
                                     <a href="?modulo=apoio/metapnc_form&acao=A&req=excluir&mpnid=<?php echo $mMetapnc->mpnid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
@@ -50,6 +64,26 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </div>
                         </div>                        
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Indicadores PNC</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="div_formulario_medida">
+                        <?php
+                             if($mMetapnc->mpnid){
+                                $cMetapnc->montarFormulario($mMetapnc->mpnid);
+                             }
+                             ?>
+                            </div>
+                    <div id="div_listagem_medida">
+                        <?php $cMetapnc->montarListagem($mMetapnc->mpnid); ?>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,16 +4,16 @@ class Public_Controller_Metapnc
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/metapnc&acao=A';
+        $url = '?modulo=apoio/metapnc_form&acao=A&mpnid=';
 
         try {
             $mMetapnc = new Public_Model_MetaPnc($dados['mpnid']);
             $mMetapnc->popularDadosObjeto($dados);
             $mMetapnc->prsano = $mMetapnc->prsano ? $mMetapnc->prsano : $_SESSION['exercicio'];
                 
-            $mMetapnc->salvar(null, null, ['mpndsc', 'mpnstatus', 'prsano', ]);
+            $mMetapnc->salvar(null, null, ['mpndsc', 'mpnstatus', 'mpncod','mpnnome' , 'prsano', ]);
             $mMetapnc->commit();
-            simec_redirecionar($url, 'success');
+            simec_redirecionar($url . $mMetapnc->mpnid, 'success');
         } catch (Exception $e){
             $mMetapnc->rollback();
             simec_redirecionar($url, 'error');
@@ -55,9 +55,10 @@ class Public_Controller_Metapnc
         $podeEditar = !in_array(PFL_SUBUNIDADE, $perfis)? TRUE: FALSE;
         $simec->setPodeEditar($podeEditar);
 
-        $mIndicadorpnc = (new Public_Model_IndicadorPnc())->recuperarTodos('*', ['mpnid = ' . (int)$mpnid]);
-        if(!$podeEditar && $mIndicadorpnc){
-            $ipnid = $ipnid? $ipnid: $mIndicadorpnc[0]['ipnid'];
+        $listaIndicadores = (new Public_Model_IndicadorPnc())->recuperarTodos('*', ['mpnid = ' . (int)$mpnid]);
+
+        if(!$podeEditar && $listaIndicadores){
+            $ipnid = $ipnid? $ipnid: $listaIndicadores[0]['ipnid'];
         }
 
         $mIndicadorpnc = new Public_Model_IndicadorPnc($ipnid);
@@ -67,7 +68,7 @@ class Public_Controller_Metapnc
         include_once APPRAIZ. 'planacomorc/modulos/apoio/indicadorpnc_form.inc';
     }
 
-    public function montarListagem($ipnid)
+    public function montarListagem($mpnid)
     {
         $perfis = pegaPerfilGeral();
         /**

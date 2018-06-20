@@ -1,6 +1,6 @@
 <?php
 
-$aMetapnc = (new Public_Model_MetaPnc)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
+$aMetapnc = (new Public_Model_MetaPnc)->recuperarTodos('*' , [" mpnstatus = 'A'", " prsano = '{$_SESSION['exercicio']}' "]);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -27,10 +27,10 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <thead>
                             <tr class="text-center">
                                 <th width="10%">Ações</th>
-                                <th>mpndsc</th>
-                                <th>mpncod</th>
-                                <th>mpnnome</th>
-                                <th>prsano</th>
+                                <th>Descrição</th>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Ano</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -4,16 +4,16 @@
             <thead>
             <tr class="text-center">
                 <th width="10%">Ações</th>
-                <th>Sub-Unidade</th>
+                <th>Indicadores</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach($lista as $dados){?>
                 <tr>
                     <td class="text-center">
-                        <a title="Alterar" class="editar-medida" href="?modulo=apoio/metapnc_form&acao=A&req=formulario-medida&suoid=<?php echo $dados['ipnid']; ?>"><i class="fa fa-pencil"></i></a>
+                        <a title="Alterar" class="editar-medida" href="?modulo=apoio/metapnc_form&acao=A&req=formulario-medida&ipnid=<?php echo $dados['ipnid']; ?>"><i class="fa fa-pencil"></i></a>
                         <?php if($podeEditar): ?>
-                            <a title="excluir" name="req" value="excluir-medida" id="excluir-medida" href="?modulo=apoio/metapnc_form&acao=A&req=excluir-medida&unoid=<?=$dados['mpnid'];?>&suoid=<?=$dados['suoid'];?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                            <a title="excluir" name="req" value="excluir-medida" id="excluir-medida" href="?modulo=apoio/metapnc_form&acao=A&req=excluir-medida&mpnid=<?=$dados['mpnid'];?>&ipnid=<?=$dados['ipnid'];?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                         <?php endif; ?>
                     </td>
                     <td><?php echo $dados['ipndsc']; ?></td>
