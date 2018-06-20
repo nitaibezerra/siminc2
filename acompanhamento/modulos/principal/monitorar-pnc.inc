@@ -289,7 +289,7 @@
                                                                             <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
                                                                         </a>
                                                                     <?php else: ?>
-                                                                        <span class="editar_indicador fa fa-pencil link" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo $indicador['ipncod']; ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador"></span>
+                                                                        <span class="editar_indicador fa fa-pencil link" data-acoid="" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo trim($indicador['ipncod']); ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador"></span>
                                                                     <?php endif; ?>
                                                                 </td>
                                                             <?php endfor; ?>
@@ -544,9 +544,9 @@
                 '&suocod='+ suocod+
                 '&ipncod='+ ipncod+
                 '&prsano='+ prsano;
-            
-            $('#div_modal_acompanhamento_indicador .modal-body').empty();
-            $('#div_modal_acompanhamento_indicador .modal-body').load(url);
+
+            $('#div_modal_acompanhamento_indicador').find('div.modal-body').empty();
+            $('#div_modal_acompanhamento_indicador').find('div.modal-body').load(url);
             $('#div_modal_acompanhamento_indicador').modal();
             return false;
         });
