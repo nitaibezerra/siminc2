@@ -376,7 +376,7 @@ class Monitora_Model_Ptres extends Modelo
         return $this->pegaUm($sql);
     }
 
-    public function recuperarQuantidadesSiop($momento)
+    public function recuperarQuantidadesSiop($momento, $exercicio)
     {
         $sql = "
             SELECT
@@ -384,7 +384,7 @@ class Monitora_Model_Ptres extends Modelo
                 count(*) qtd
             FROM wssof.ws_acoesdto
             WHERE
-                exercicio = '{$_SESSION['exercicio']}'
+                exercicio = '". (int)$exercicio. "'
                 AND codigomomento = '".(int)$momento. "'
 
             UNION ALL
@@ -394,7 +394,7 @@ class Monitora_Model_Ptres extends Modelo
                 count(*) qtd
             FROM wssof.ws_localizadoresdto
             WHERE
-                exercicio = '{$_SESSION['exercicio']}'
+                exercicio = '". (int)$exercicio. "'
                 AND codigomomento = '".(int)$momento. "'
 
             UNION ALL
@@ -404,13 +404,34 @@ class Monitora_Model_Ptres extends Modelo
                 count(*) qtd
             FROM wssof.ws_planosorcamentariosdto
             WHERE
-                exercicio = '{$_SESSION['exercicio']}'
+                exercicio = '". (int)$exercicio. "'
                 AND codigomomento = '".(int)$momento. "'";
 
         return $this->carregar($sql);
     }
 
-    public function recuperarFuncionaisSiop($momento)
+    /**
+     * Busca o último momento atualizado.
+     * 
+     * @param int $exercicio
+     * @return int
+     */
+    public function buscarUltimoMomentoAtualizado($exercicio){
+        $sql = "
+            SELECT
+                aca.codigomomento
+            FROM wssof.ws_acoesdto aca
+            WHERE
+                aca.exercicio = ". (int)$exercicio. "
+            ORDER BY
+		aca.dataultimaatualizacao DESC
+	    LIMIT 1
+        ";
+        $resultado = $this->pegaUm($sql);
+        return $momento = $resultado? $resultado: 0;
+    }
+    
+    public function recuperarFuncionaisSiop($momento, $exercicio)
     {
         $sql = "
             SELECT DISTINCT
@@ -432,16 +453,16 @@ class Monitora_Model_Ptres extends Modelo
             FROM wssof.ws_acoesdto aca
                 JOIN wssof.ws_localizadoresdto loc ON(
                     loc.identificadorunicoacao = aca.identificadorunico
-                    AND loc.exercicio = '{$_SESSION['exercicio']}'
+                    AND loc.exercicio = '". (int)$exercicio. "'
                     AND loc.codigomomento = '".(int)$momento. "'
                 )
                 JOIN wssof.ws_planosorcamentariosdto plo ON(
                     plo.identificadorunicoacao = aca.identificadorunico
-                    AND plo.exercicio = '{$_SESSION['exercicio']}'
+                    AND plo.exercicio = '". (int)$exercicio. "'
                     AND plo.codigomomento = '".(int)$momento. "'
                 )
             WHERE
-                aca.exercicio = '{$_SESSION['exercicio']}'
+                aca.exercicio = '". (int)$exercicio. "'
                 AND aca.codigomomento = '".(int)$momento. "'
             ORDER BY
                 aca.codigoacao,
@@ -454,19 +475,35 @@ class Monitora_Model_Ptres extends Modelo
         return $this->carregar($sql);
     }
 
-    public function recuperarComparacaoSiop($momento)
+    public function recuperarComparacaoSiop($momento, $exercicio)
     {
-        $sql = "select 'SIOP' as descricao, count(*) qtd
-                from wssof.ws_acoesdto aca
-                        inner join wssof.ws_localizadoresdto loc on loc.identificadorunicoacao = aca.identificadorunico and loc.exercicio = '{$_SESSION['exercicio']}' and loc.codigomomento = '$momento'
-                        inner join wssof.ws_planosorcamentariosdto plo on plo.identificadorunicoacao = aca.identificadorunico and plo.exercicio = '{$_SESSION['exercicio']}' and plo.codigomomento = '$momento'
-                where aca.exercicio = '{$_SESSION['exercicio']}'
-                and aca.codigomomento = '$momento'
-                union all
-                select 'Propostas' as descricao, count(*) qtd
-                from proposta.proposta pro
-                where pro.prsano = '{$_SESSION['exercicio']}'
-                ;";
+        $sql = "
+            SELECT
+                'SIOP' AS descricao,
+                count(*) qtd
+            FROM wssof.ws_acoesdto aca
+                JOIN wssof.ws_localizadoresdto loc ON(
+                    loc.identificadorunicoacao = aca.identificadorunico
+                    AND loc.exercicio = '". (int)$exercicio. "'
+                    AND loc.codigomomento = '$momento')
+                JOIN wssof.ws_planosorcamentariosdto plo ON(
+                    plo.identificadorunicoacao = aca.identificadorunico
+                    AND plo.exercicio = '". (int)$exercicio. "'
+                    AND plo.codigomomento = '$momento')
+            WHERE
+                aca.exercicio = '". (int)$exercicio. "'
+                AND aca.codigomomento = '$momento'
+
+            UNION ALL
+
+            SELECT
+                'Propostas' AS descricao,
+                count(*) qtd
+            FROM proposta.proposta pro
+            WHERE
+                pro.prostatus = 'A'
+                AND pro.prsano = '". (int)$exercicio. "'
+        ";
 
         return $this->carregar($sql);
     }
