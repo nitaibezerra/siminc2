@@ -60,18 +60,19 @@
         });
         
         $('#btn-salvar-detalhe').click(function(){
+            if (verificaPreenchimentoCamposFormularioDetalhe()){
+                if(verificarFormularioCusteio() === true){
+                    if(validarMaximoValorCusteio() === true && validarMaximoExpansaoCusteio() === true){
+                        submeterFormularioDetalhe();
+                    }
+                } else {
+                    if(validarMaximoValorCapital() === true && validarMaximoExpansaoCapital() === true){
+                        submeterFormularioDetalhe();
+                    }
+                }
 
-            if(verificarFormularioCusteio() === true){
-                if(validarMaximoValorCusteio() === true && validarMaximoExpansaoCusteio() === true){
-                    submeterFormularioDetalhe();
-                }
-            } else {
-                if(validarMaximoValorCapital() === true && validarMaximoExpansaoCapital() === true){
-                    submeterFormularioDetalhe();
-                }
+                validarValor();
             }
-
-            validarValor();
 
         });
     });
@@ -90,6 +91,33 @@
         jQuery("#formulario-detalhe").ajaxForm(options).submit();
     }
 
+    function verificaPreenchimentoCamposFormularioDetalhe(){
+        var textoNatureza = $('#ndpid option:selected').text();
+        if(textoNatureza === ""){
+            swal({title: "Atenção!",text: "O campo Natureza Despesa está em branco!",type: "warning"},function(){$('#ndpid').focus();});
+            return false;
+        }
+        var IDUSO = $('#iducod option:selected').text();
+        if(IDUSO === ""){
+            swal({title: "Atenção!",text: "O campo IDUSO está em branco!",type: "warning"},function(){$('#iducod').focus();});
+            return false;
+        }
+        var foncod = $('#foncod option:selected').text();
+        if(foncod === ""){
+            swal({title: "Atenção!",text: "O campo Fonte está em branco!",type: "warning"},function(){$('#foncod').focus();});
+            return false;
+        }
+        var idoid = $('#idoid option:selected').text();
+        if(idoid === ""){
+            swal({title: "Atenção!",text: "O campo IDOC está em branco!",type: "warning"},function(){$('#idoid').focus();});
+            return false;
+        }
+        var prdvalor = $('#prdvalor').val();
+        if(prdvalor === ""){
+            swal({title: "Atenção!",text: "O campo Valor está em branco!",type: "warning"},function(){$('#prdvalor').focus();});
+            return false;
+        }
+    }
     /**
      * Verifica se o cadastro de dado financeiro é de custeio ou capital
      * 
