@@ -43,7 +43,12 @@
         echo $simec->data('acodata', 'Data', $acompanhamentoIndicadorPnc->acodata, ['required']);
         # Caso o exercicio seja diferente(Na prática anterior ao ano do exercicio selecionado) o sistema exibe o campo de justificativa
         if($acompanhamentoIndicadorPnc->prsano != $_SESSION['exercicio']){
-            echo $simec->input('acojustificativa', 'Justificativa', $acompanhamentoIndicadorPnc->acojustificativa, ['required']);
+            echo $simec->textarea(
+                'acojustificativa',
+                'Justificativa',
+                $acompanhamentoIndicadorPnc->acojustificativa,
+                ['required']
+            );
         }
 
     ?>
