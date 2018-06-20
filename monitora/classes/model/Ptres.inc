@@ -333,23 +333,54 @@ class Monitora_Model_Ptres extends Modelo
         return $listaResultado? $listaResultado: [];
     }
 
+    /**
+     * Recupera produtos e unidade de medida da funcional.
+     * 
+     * @param int $this->ptrano
+     * @param int $this->ptrid
+     * @global cls_banco $db
+     * @return array/boolean
+     */
     function recuperarProdutosPorPtres() {
         global $db;
         
-        $sql = "select distinct ptr.ptrid, aca.ididentificadorunicosiop, pac.descricao produto_acao, ppo.descricao produto_po, upo.descricao unidade_po, uac.descricao unidade_acao, aca.acaid, aca.acacod, aca.locquantidadeproposta
-                from monitora.ptres ptr
-                        inner join monitora.acao aca on aca.acaid = ptr.acaid
-                        inner join wssof.ws_acoesdto a on a.identificadorunico = aca.ididentificadorunicosiop::int and a.exercicio = '{$this->ptrano}'
-                        inner join wssof.ws_localizadoresdto l on l.identificadorunicoacao = a.identificadorunico and l.exercicio = '{$this->ptrano}'
-                        inner join wssof.ws_planosorcamentariosdto po on po.identificadorunicoacao = a.identificadorunico and po.exercicio = '{$this->ptrano}' and ptr.plocod = po.planoorcamentario
-                        left join wssof.ws_produtosdto ppo on ppo.codigoproduto::text = po.codigoproduto
-                        left join wssof.ws_produtosdto pac on pac.codigoproduto::text = a.codigoproduto
-                        left join wssof.ws_unidadesmedidadto upo on trim(upo.codigounidademedida)::text = po.codigounidademedida
-                        left join wssof.ws_unidadesmedidadto uac on trim(uac.codigounidademedida)::text = a.codigounidademedida 
-                where ptr.ptrid = " . (int) $this->ptrid . "
-                order by produto_po, produto_acao
-                ";
-
+        $sql = "
+            SELECT DISTINCT
+                ptr.ptrid,
+                aca.ididentificadorunicosiop,
+                pac.descricao produto_acao,
+                ppo.descricao produto_po,
+                upo.descricao unidade_po,
+                uac.descricao unidade_acao,
+                aca.acaid,
+                aca.acacod,
+                aca.locquantidadeproposta
+            FROM monitora.ptres ptr
+                JOIN monitora.acao aca ON aca.acaid = ptr.acaid
+                JOIN wssof.ws_acoesdto a ON(
+                    a.identificadorunico = aca.ididentificadorunicosiop::int
+                    AND a.exercicio = '".(int)$this->ptrano. "'
+                )
+                JOIN wssof.ws_localizadoresdto l ON(
+                    l.identificadorunicoacao = a.identificadorunico
+                    AND l.exercicio = '".(int)$this->ptrano. "'
+                )
+                JOIN wssof.ws_planosorcamentariosdto po ON(
+                    po.identificadorunicoacao = a.identificadorunico
+                    AND po.exercicio = '".(int)$this->ptrano. "'
+                    AND ptr.plocod = po.planoorcamentario
+                )
+                LEFT JOIN wssof.ws_produtosdto ppo ON ppo.codigoproduto::text = po.codigoproduto
+                LEFT JOIN wssof.ws_produtosdto pac ON pac.codigoproduto::text = a.codigoproduto
+                LEFT JOIN wssof.ws_unidadesmedidadto upo ON trim(upo.codigounidademedida)::text = po.codigounidademedida
+                LEFT JOIN wssof.ws_unidadesmedidadto uac ON trim(uac.codigounidademedida)::text = a.codigounidademedida
+            WHERE
+                ptr.ptrid = ". (int)$this->ptrid. "
+            ORDER BY
+                produto_po,
+                produto_acao
+        ";
+//ver($sql,d);
         return $db->pegaLinha($sql);
     }
 

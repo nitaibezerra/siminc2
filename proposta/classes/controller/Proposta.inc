@@ -58,9 +58,4 @@ class Proposta_Controller_Proposta
     {
         include_once APPRAIZ . 'proposta/modulos/principal/propostadetalhe.inc';
     }
-    
-    public function aplicaUtf8($arrDados, $campo){
-        $arrDados[$campo] = utf8_encode($arrDados[$campo]);
-        return $arrDados;
-    }
 }            
