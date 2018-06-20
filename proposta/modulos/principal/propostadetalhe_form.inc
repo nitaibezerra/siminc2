@@ -117,6 +117,7 @@
             swal({title: "Atenção!",text: "O campo Valor está em branco!",type: "warning"},function(){$('#prdvalor').focus();});
             return false;
         }
+        return true;
     }
     /**
      * Verifica se o cadastro de dado financeiro é de custeio ou capital
