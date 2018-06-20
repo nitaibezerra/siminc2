@@ -29,7 +29,7 @@ class Simec_View_Helper_Data extends Simec_View_Helper_Element
         unset($attribs['id'], $attribs['type'], $attribs['class']);
 
         if($value){
-            $value = Simec_Util::formatarData($value, Zend_Date::DATES);
+            $value = Simec_Util::formatarData($value, 'dd/MM/YYYY');
         }
 
         $podeEditar = isset($config['pode-editar']) ? $config['pode-editar'] : true;
