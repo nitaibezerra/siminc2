@@ -73,7 +73,13 @@ class Public_Model_MetaPpa extends Modelo
         if($where['suoid']){
             $suoid = $where['suoid'];
             if (is_array($where['suoid'])){
-                $suoid = implode(', ', $where['suoid']);
+                $suoid = '';
+                for ($i=0;$i<count($where['suoid']);$i++){
+                    if ($where['suoid'][$i]!=''){
+                        $suoid .= $where['suoid'][$i].', ';
+                    }
+                }
+                $suoid = substr($suoid, 0, strlen($suoid)-2);
             }
             $join = "
                 JOIN (

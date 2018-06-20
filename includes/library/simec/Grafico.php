@@ -622,33 +622,17 @@ class Grafico {
                 foreach ($dadosFinais as $divisao => $aDado) {
                     $series[] = array('name' => (string)$divisao, 'data'=>$aDado);
                 }                 
-//                ver($series, $dadoPercentual,d);
                 if ($percentualPlanejamento){
                     for ($i=0;$i<count($series);$i++){
                         $series[$i]['name'] = (string)$series[$i]['name'];
                         for($j=0;$j<count($categories);$j++){
-                            if ($series[$i]['name']!='Dotação' && $series[$i]['name']!= 'Limite'){
+                            
+                            if ($series[$i]['name']!='Dotação' && $series[$i]['name']!= 'Limite' && $series[$i]['name']!= 'Pré-pi'){
                                 $series[$i]['nameLegend'][] = $series[$i]['name']." <b>".number_format($dadoPercentual[$series[$i]['name']][$j],2)."% do Limite </b><br>Valor";
                             }
                         }
                     }
-//                    ver($categories,$dadosFinais, $dadoPercentual);
-//                    foreach ($dadosFinais as $divisao => $aDado) {
-////                        ver(count($categories));
-//                        for($i=0;$i<count($categories);$i++){
-//                            if ($divisao!='Dotação' && $divisao!= 'Limite'){
-//                                $series[]['nameLegend'] = (string)$divisao;
-//                                $series[]['name'] = (string)$divisao." <b>".number_format($dadoPercentual[$divisao][$i],2)."% sob o Limite </b><br>Valor";
-//                            }else{
-//                                $series[] = array('nameLegend' => (string)$divisao, 'name' => (string)$divisao, 'data'=>$aDado);
-//                            }
-//                            
-//                        }
-//                        $series[]['data'] = $aDado;
-//                    }                    
-
                 }
-//                ver($series);
             }
         }
         return array('series'=>$series, 'categories'=>array_values($categories));

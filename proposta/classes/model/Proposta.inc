@@ -95,7 +95,7 @@ class Proposta_Model_Proposta extends Modelo
                 JOIN monitora.vw_ptres ptr ON pro.ptrid = ptr.ptrid
                 JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = pro.suoid
                 JOIN monitora.pi_enquadramentodespesa eqd ON eqd.eqdid = pro.eqdid
-                LEFT JOIN proposta.propostadetalhe prd ON prd.proid = pro.proid
+                LEFT JOIN proposta.propostadetalhe prd ON prd.proid = pro.proid AND prd.prdstatus = 'A'
             WHERE
                 prostatus = 'A'
                 AND pro.prsano = '". (int)$filtros->exercicio. "'
