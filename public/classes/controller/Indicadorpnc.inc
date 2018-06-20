@@ -4,41 +4,41 @@ class Public_Controller_Indicadorpnc
 {
     public function salvar($dados)
     {
-        $url = '?modulo=apoio/indicadorpnc&acao=A';
+        $url = '?modulo=apoio/metapnc_form&acao=A&mpnid=' . $dados['mpnid'];
 
         try {
-            $mIndicadorpnc = new Public_Model_IndicadorPnc($dados['ipnid']);
-            $mIndicadorpnc->popularDadosObjeto($dados);
-            $mIndicadorpnc->prsano = $mIndicadorpnc->prsano ? $mIndicadorpnc->prsano : $_SESSION['exercicio'];
+            $mMetapnc = new Public_Model_IndicadorPnc($dados['ipnid']);
+            $mMetapnc->popularDadosObjeto($dados);
+            $mMetapnc->prsano = $mMetapnc->prsano ? $mMetapnc->prsano : $_SESSION['exercicio'];
                 
-            $mIndicadorpnc->salvar(null, null, ['ipndsc', 'ipnstatus', 'prsano', 'ipncod', ]);
-            $mIndicadorpnc->commit();
+            $mMetapnc->salvar(null, null, ['ipndsc', 'ipnstatus', 'prsano', 'ipncod', ]);
+            $mMetapnc->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
-            $mIndicadorpnc->rollback();
+            $mMetapnc->rollback();
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
     
-    public function excluir($ipnid)
+    public function excluir($dados)
     {
-        $url = '?modulo=apoio/indicadorpnc&acao=A';
+        $url = '?modulo=apoio/metapnc_form&acao=A&mpnid=' . $dados['mpnid'];
 
         try {
-            $mIndicadorpnc = new Public_Model_IndicadorPnc($ipnid);
+            $mMetapnc = new Public_Model_IndicadorPnc($dados['mpnid']);
             
-            if($mIndicadorpnc->existeVinculo()){
+            if($mMetapnc->existeVinculo()){
                 $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mIndicadorpnc->ipnid;
+                $url = '?modulo=apoio/metapnc_form&acao=A&mpnid=' . $dados['mpnid'];
                 simec_redirecionar($url, 'error', $mensagem);
             }            
             
-            $mIndicadorpnc->ipnstatus = 'I';
-            $mIndicadorpnc->salvar();
-            $mIndicadorpnc->commit();
+            $mMetapnc->ipnstatus = 'I';
+            $mMetapnc->salvar();
+            $mMetapnc->commit();
             simec_redirecionar($url, 'success');
         } catch (Exception $e){
-            $mIndicadorpnc->rollback();
+            $mMetapnc->rollback();
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
