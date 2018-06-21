@@ -223,7 +223,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                         AND aco.acostatus = 'A'
                     )
                 WHERE
-                    ipn.prsano = '$filtro->exercicio'
+                    ipn.prsano = '". (int)$filtro->exercicio. "'
                     AND ipn.ipnstatus = 'A'
                     AND sic.suoid = ". (int)$filtro->suoid. "
                     AND mpn.mpnid = ". (int)$filtro->mpnid. "
@@ -247,7 +247,7 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
                         AND acostatus = 'A'
                     )
                 WHERE
-                    ipn.prsano = '$filtro->exercicio'
+                    ipn.prsano = '". (int)$filtro->exercicio. "'
                     AND ipn.ipnstatus = 'A'
                     AND sic.suoid IS NULL
                     AND ipn.ipncod != '0'

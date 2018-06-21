@@ -75,6 +75,19 @@ class Acompanhamento_Controller_Acompanhamento
             return array('error' => utf8_encode('Ocorreu um erro ao executar operação!'));
         }
     }
+
+    /**
+     * Lista os indicadores PNC do ano atual e anos anteriores
+     * 
+     * @param int $janid
+     * @param int $suoid
+     * @param int $mpnid
+     * @param int $exercicio
+     */
+    public function listarIndicadoresPNC($janid = NULL, $suoid = NULL, $mpnid = NULL, $exercicio = NULL){
+        
+        include APPRAIZ. 'acompanhamento/modulos/principal/listar-indicadores-pnc.inc';
+    }
     
     public function excluir($acoid)
     {
@@ -178,4 +191,5 @@ class Acompanhamento_Controller_Acompanhamento
 
         include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-pnc.inc';
     }
+
 }

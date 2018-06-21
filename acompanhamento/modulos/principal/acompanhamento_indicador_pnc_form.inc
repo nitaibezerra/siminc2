@@ -66,6 +66,19 @@
                 data: $("#formulario-acompanhamento-indicador").serialize(), // serializes the form's elements.
                 success: function(data){
                     $('#div_modal_acompanhamento_indicador').modal('hide');
+
+                    var janid = $('#lista_janid').val();
+                    var suoid = $('#lista_suoid').val();
+                    var mpnid = $('#lista_mpnid').val();
+                    var exercicio = $('#lista_exercicio').val();
+
+                    var url = '?modulo=principal/monitorar-pnc&acao=A'+
+                        '&req=listar-indicadores-pnc'+
+                        '&janid='+ janid+
+                        '&suoid='+ suoid+
+                        '&mpnid='+ mpnid+
+                        '&exercicio='+ exercicio;
+                    $('#div_lista_indicador_pnc').load(url);
                 }
             });
 
