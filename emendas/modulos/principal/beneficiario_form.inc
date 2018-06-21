@@ -35,7 +35,7 @@ switch ($_REQUEST['req']) {
         echo $cBeneficiarioHistorico->excluir($_REQUEST['behid']);
         die;
     case 'formulario-detalhe':
-        $cBeneficiario->montarFormularioDetalhe($_REQUEST['benid'], $_REQUEST['bedid']);
+        $cBeneficiario->montarFormularioDetalhe($_REQUEST['emeid'], $_REQUEST['benid'], $_REQUEST['bedid']);
         die;
     case 'listar-detalhe':
         $cBeneficiario->montarListagemDetalhe($_REQUEST['benid'], $podeEditar);
@@ -349,7 +349,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 <div class="ibox-content">
                                     <div id="div_formulario_detalhe">
                                         <?php if($podeEditar && $mBeneficiario->benid){
-                                            $cBeneficiario->montarFormularioDetalhe($mBeneficiario->benid);
+                                            $cBeneficiario->montarFormularioDetalhe($mBeneficiario->emeid, $mBeneficiario->benid, null);
                                         } ?>
                                     </div>
                                     <div id="div_listagem_detalhe">
