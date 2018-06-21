@@ -240,7 +240,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             Cadastro de PI do FNC
             <?php if(!empty($dadosPI['plicod'])){
                 echo '<span style="color: red; padding: 5px;" id="span-plicod">(' . $dadosPI['plicod'] . ')</span>';
-                echo '<input maxlength="11" type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
+                echo '<input minlength="11" maxlength="11" type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
             } ?>
         </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
