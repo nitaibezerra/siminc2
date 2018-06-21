@@ -12,6 +12,8 @@
     if($subunidade){
         $unidadeOrcamentaria = new Public_Model_UnidadeOrcamentaria($subunidade->unoid);
     }
+    
+    $listaPerfis = pegaPerfilGeral();
 ?>
 
 <!--Informações de origem da tela que não precisam estar no formulário de alteração-->
@@ -44,12 +46,26 @@
                         ));
                 ?>
                     <td>
-                        <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>
-                            <a href="#" class="editar_indicador link" data-acoid="<?php echo $acompanhamentoIndicadorPnc->acoid; ?>" title="Editar Indicador">
-                                <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
-                            </a>
+                        <?php if(
+                                in_array(PFL_SUPERUSUARIO, $listaPerfis)
+                                || in_array(PFL_ADMINISTRADOR, $listaPerfis)
+                                || in_array(PFL_PNC, $listaPerfis)
+                                || (in_array(PFL_UNIDADE, $listaPerfis) && $ano == $exercicio)
+                            ):
+                        ?>
+                            <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>
+                                <a href="#" class="editar_indicador link" data-acoid="<?php echo $acompanhamentoIndicadorPnc->acoid; ?>" title="Editar Indicador PNC">
+                                    <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
+                                </a>
+                            <?php else: ?>
+                                <span class="editar_indicador fa fa-pencil link" data-acoid="" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo trim($indicador['ipncod']); ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador PNC"></span>
+                            <?php endif; ?>
                         <?php else: ?>
-                            <span class="editar_indicador fa fa-pencil link" data-acoid="" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo trim($indicador['ipncod']); ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador"></span>
+                            <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>
+                                <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
+                            <?php else: ?>
+                                <span class="fa fa-pencil" title="Indicador PNC"></span>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </td>
                 <?php endfor; ?>
