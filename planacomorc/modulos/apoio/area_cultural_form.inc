@@ -81,7 +81,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
 
                             <?php
-                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 3, 'class' => 'inteiro', 'required']);
+                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 3, 'class' => 'upper-text', 'required']);
                                 echo $simec->input('needsc', 'Descrição', $mSegmentoCultural->needsc, ['maxlength' => 250]);
                             ?>
 
