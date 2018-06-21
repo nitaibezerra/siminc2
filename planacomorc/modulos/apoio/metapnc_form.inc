@@ -50,8 +50,8 @@ include APPRAIZ . "includes/cabecalho.inc";
                         
                         <?php                         
                             echo $simec->input('mpndsc', 'Descrição', $mMetapnc->mpndsc, ['required', 'maxlength' => 1000]);
-                            echo $simec->input('mpncod', 'Código', $mMetapnc->mpncod, ['maxlength' => 4]);
-                            echo $simec->input('mpnnome', 'Nome', $mMetapnc->mpnnome, ['maxlength' => 1000]);
+                            echo $simec->input('mpncod', 'Código', $mMetapnc->mpncod, ['required','maxlength' => 4]);
+                            echo $simec->input('mpnnome', 'Nome', $mMetapnc->mpnnome, ['required','maxlength' => 1000]);
                         ?>
                         
                         <div class="form-group">
