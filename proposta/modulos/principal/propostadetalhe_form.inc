@@ -91,6 +91,10 @@
         jQuery("#formulario-detalhe").ajaxForm(options).submit();
     }
 
+    /**
+     * Faz a validaçao de campos obrigatórios no formulario detalhe
+     * @returns {Boolean}
+     */
     function verificaPreenchimentoCamposFormularioDetalhe(){
         var textoNatureza = $('#ndpid option:selected').text();
         if(textoNatureza === ""){
