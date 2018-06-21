@@ -113,7 +113,7 @@ class Simec_Util
                 return $date->get($formato);
             }
 
-            $formato = strlen($data) > 10 ? 'dd/MM/YYYYY HH:mm:ss' : 'dd/MM/YYYYY';
+            $formato = strlen($data) > 10 ? 'dd/MM/YYYY HH:mm:ss' : 'dd/MM/YYYY';
             return $date->get($formato);
         }
         return null;

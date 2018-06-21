@@ -79,6 +79,24 @@ class Emendas_Model_BeneficiarioDetalhe extends Modelo
         $dados = $this->carregar($sql);
         return $dados ? $dados : [];
     }
+    
+    /**
+     * Retorna a somatoria dos valores dos beneficiarios agrupados pelo emdid
+     * @param type $benid
+     * @return type
+     */
+    public function recuperarSomaGnd($benid){
+        $sql = "SELECT emd.emdid,
+                       sum(bedvalor) as valor_total
+                  FROM emendas.beneficiariodetalhe bed
+                  JOIN emendas.emendadetalhe emd on emd.emdid = bed.emdid
+                 WHERE bed.benid = ". (int)$benid. "
+                 GROUP BY emd.emdid
+                 ORDER BY emd.emdid
+        ";
+        $dados = $this->carregar($sql);
+        return $dados ? $dados : [];        
+    }
 
 }//end Class
 ?>
