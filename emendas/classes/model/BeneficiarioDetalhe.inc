@@ -85,12 +85,14 @@ class Emendas_Model_BeneficiarioDetalhe extends Modelo
      * @param type $benid
      * @return type
      */
-    public function recuperarSomaGnd($benid){
+    public function recuperarSomaGnd($benid, $bedid=null){
         $sql = "SELECT emd.emdid,
                        sum(bedvalor) as valor_total
                   FROM emendas.beneficiariodetalhe bed
                   JOIN emendas.emendadetalhe emd on emd.emdid = bed.emdid
                  WHERE bed.benid = ". (int)$benid. "
+                   AND bed.bedid <> ".(int)$bedid. "
+                   AND bed.bedstatus = 'A'
                  GROUP BY emd.emdid
                  ORDER BY emd.emdid
         ";
