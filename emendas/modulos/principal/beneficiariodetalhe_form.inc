@@ -8,7 +8,7 @@
     foreach ($valoresGnd as $linha) {
         echo '<input type="hidden" name="vlrGnd'.$linha['emdid'].'" id="vlrGnd'.$linha['emdid'].'" value="'. number_format($linha['emdvalor'], 2, ',', '.').'">';
     }
-    $valorSomaGnd = (new Emendas_Model_BeneficiarioDetalhe)->recuperarSomaGnd($mBeneficiarioDetalhe->benid);
+    $valorSomaGnd = (new Emendas_Model_BeneficiarioDetalhe)->recuperarSomaGnd($mBeneficiarioDetalhe->benid, $mBeneficiarioDetalhe->bedid);
     foreach ($valorSomaGnd as $linha) {
         echo '<input type="hidden" name="vlrSomaGnd'.$linha['emdid'].'" id="vlrSomaGnd'.$linha['emdid'].'" value="'. number_format($linha['valor_total'], 2, ',', '.').'">';
     }    
@@ -81,14 +81,14 @@
                     jQuery("#div_listagem_detalhe").load('?modulo=principal/beneficiario_form&acao=A&req=listar-detalhe&benid='+$('#benid').val());
 
                     // Zerar o formulário
-                    jQuery("#div_formulario_detalhe").load('?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&benid='+$('#benid').val()+'&bedid='+$('#bedid').val()+'&emeid='+$('#emeid').val());
+                    jQuery("#div_formulario_detalhe").load('?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&benid='+$('#benid').val()+'&emeid='+$('#emeid').val());
                 }
             }
 
             jQuery("#formulario-detalhe").ajaxForm(options).submit();
         });
         
-        $("#bedvalor").keyup(function(){
+        $("#bedvalor").change(function(){
             var vlrBedTotal = $("#vlrGnd"+$("#emdid").val()).val() ? $("#vlrGnd"+$("#emdid").val()).val() : 0;
             var vlrSomaTotal = $("#vlrSomaGnd"+$("#emdid").val()).val() ? $("#vlrSomaGnd"+$("#emdid").val()).val() : 0;
             var vlrBed = $(this).val() ? $(this).val() : 0;
