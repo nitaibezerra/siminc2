@@ -1194,7 +1194,7 @@ class Pi_PlanoInterno extends Modelo
     public function getDadosGerais($exercicio, $fundo = null)
     {
 
-        $where = " pli.pliano = '$exercicio' AND pli.plistatus = 'A' ";
+        $where = " pli.pliano = '$exercicio' AND pli.plistatus = 'A' and  rp.rpcod <> 6 ";
 
         if($fundo){
             $where .= " AND suo.unofundo = '{$fundo}' ";
