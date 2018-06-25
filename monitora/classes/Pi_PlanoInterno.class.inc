@@ -1657,7 +1657,7 @@ class Pi_PlanoInterno extends Modelo
         return $resultado;
     }
 
-    public function recuperarPis($filtro)
+    public function recuperarPis($filtro, $unoFundo='false')
     {
       if(is_array($filtro['eqdid']) && count($filtro['eqdid'])){
       	$where = ' and pli.eqdid in (' . implode(',', $filtro['eqdid']) . ')';
@@ -1675,6 +1675,7 @@ class Pi_PlanoInterno extends Modelo
                         inner join public.vw_subunidadeorcamentaria suo on suo.suocod = pli.ungcod and suo.unocod = pli.unicod and suo.prsano = pli.pliano
                 where pli.pliano = '{$filtro['exercicio']}'
                 and pli.plistatus = 'A'
+                and suo.unofundo = ".$unoFundo."
                 and doc.esdid = '{$filtro['esdid']}'
                 $where
                 ";

@@ -13,7 +13,7 @@
         $filtro = $_REQUEST;
         $filtro['exercicio'] = $_SESSION['exercicio'];
         $filtro['suoid'] = $_REQUEST['suoid'];
-        $dadosListagem = $mPlanoInterno->recuperarPis($filtro);
+        $dadosListagem = $mPlanoInterno->recuperarPis($filtro, 'true');
 
     }
     if(isset($_REQUEST['btn-aplicar'])){
@@ -21,47 +21,34 @@
         $filtro = $_REQUEST;
         $filtro['exercicio'] = $_SESSION['exercicio'];
         $filtro['suoid'] = $_REQUEST['suoid'];
-        $dadosListagem = $mPlanoInterno->recuperarPis($filtro);        
+        $dadosListagem = $mPlanoInterno->recuperarPis($filtro, 'true');        
     }
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
 <script src="js/unidade/lista-pi-manter.js?v=1"></script>
-<style>
-/*    .tabela-listagem {
-        font-size: 1em !important;
-    }*/
-</style>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Pesquisa avançada por PI</h5>
+                    <h5>Pesquisa avançada por PI - FNC</h5>
                 </div>
                 <div class="ibox-content">
                     <form id="filtropi" name="filtropi" method="POST" role="form" class="form-horizontal">
                         <input name="" id="filtropi_requisicao" value="" type="hidden">
 
                         <?php
-                        echo $simec->select('esdid', 'Situação Origem', $_REQUEST['esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_PLANEJAMENTO_PI)), array('required'));
+                        echo $simec->select('esdid', 'Situação Origem', $_REQUEST['esdid'], Spo_Model_Unidade::queryComboEstados((object) array('tpdid' => WF_TPDID_PLANEJAMENTO_PI_FNC)), array('required'));
                         echo $simec->select('eqdid[]', 'Enquadramento da Despesa', $_REQUEST['eqdid'], Spo_Model_Ptres::queryComboEnquadramento((object) array('exercicio' => $_SESSION['exercicio'])));
-
-                        // if (!$listaSubUnidadeUsuario) {
-                        //     echo $simec->select('unicod', 'Unidade', $filtropi['unicod'], Spo_Model_Unidade::queryCombo((object)array(
-                        //         'prsano::INTEGER = '. (int)$_SESSION['exercicio'],
-                        //         'suo.unofundo = FALSE')), array('multiple' => 'true'));
-                        // }
                         echo '<div id=div_ungcod >';
                         echo $simec->select('suoid', 'SubUnidade', $_REQUEST['suoid'], Public_Model_SubUnidadeOrcamentaria::queryCombo((object) array(
                             'unofundo' => 'FALSE',
                             'exercicio' => $_SESSION['exercicio'],
                             'listaSubUnidadeUsuario' => $listaSubUnidadeUsuario)), array('multiple' => 'true'));
                         echo '</div>';
-                        // ver($dadosListagem,d);
                         ?>
-
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary btn-buscar" name="btn-buscar" type="submit"><span class="glyphicon glyphicon-search"></span> Buscar</button>
@@ -75,7 +62,7 @@
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listagem de PIs</h5>
+                    <h5>Listagem de PIs - FNC</h5>
                 </div>
                 <div class="ibox-content" id="listagem">
 
@@ -108,7 +95,6 @@
 
                     <?php if(count($dadosListagem)){
                         $dados = current($dadosListagem);
-
                         $estados = wf_pegarProximosEstados($dados['docid']);
                         $aEstados = [];
                         foreach($estados as $estado){
