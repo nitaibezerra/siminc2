@@ -17,7 +17,7 @@
                     <td class="text-center">
                         <?php if($podeEditar){ ?>
                         <a title="Alterar" class="editar-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&bedid=<?php echo $dados['bedid']; ?>&emeid=<?php echo $dados['emeid']; ?>"><i class="fa fa-pencil"></i></a>
-                        <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-detalhe&bedid=<?php echo $dados['bedid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                        <a title="Excluir" class="excluir-detalhe" href="?modulo=principal/beneficiario_form&acao=A&req=excluir-detalhe&bedid=<?php echo $dados['bedid']; ?>&emeid=<?php echo $dados['emeid']; ?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                        <?php } ?>
                     </td>
                     <td><?php echo $dados['gndcod']; ?></td>
@@ -59,6 +59,7 @@
                         url: href,
                         success: function (benid) {
                             jQuery("#div_listagem_detalhe").load('?modulo=principal/beneficiario_form&acao=A&req=listar-detalhe&benid=' + benid);
+                            jQuery("#div_formulario_detalhe").load('?modulo=principal/beneficiario_form&acao=A&req=formulario-detalhe&benid=' + benid + '&emeid='+$('#emeid').val());
                         }
                     });
                 });
