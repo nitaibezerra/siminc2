@@ -8,13 +8,13 @@ $mAreaCultural = new Monitora_Model_PiModalidadeEnsino($_REQUEST['mdeid']);
 $mSegmentoCultural = new Monitora_Model_PiNivelEtapaEnsino($_REQUEST['neeid']);
 
 if($_REQUEST['mdeid'])
-$lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
+    $lista = $mSegmentoCultural->RecuperaSegmentoPorArea($_REQUEST['mdeid']);
 
 switch ($_REQUEST['req']) {
-	case 'salvar-area':
+    case 'salvar-area':
         $cAreaCultural->salvar($_REQUEST);
-		break;
-	case 'excluir-area':
+        break;
+    case 'excluir-area':
         $cAreaCultural->excluir($_REQUEST['mdeid']);
         break;
     case 'salvar-segmento':
@@ -79,10 +79,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <form id="formulario-segmento" name="formulario" method="post" class="form-horizontal">
                             <input type="hidden" name="req" id="req" value="salvar-segmento" />
                             <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
+                            <input name="neeid" id="neeid" type="hidden" value="<?php echo $mSegmentoCultural->neeid; ?>">
 
                             <?php
-                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 3, 'class' => 'inteiro', 'required']);
-                                echo $simec->input('needsc', 'Descrição', $mSegmentoCultural->needsc, ['maxlength' => 250]);
+                                echo $simec->input('neecod', 'Código', $mSegmentoCultural->neecod, ['maxlength' => 3, 'class' => 'upper-text', 'required']);
+                                echo $simec->input('needsc', 'Descrição', $mSegmentoCultural->needsc, ['maxlength' => 250, 'required']);
                             ?>
 
                             <div class="form-group">
@@ -113,6 +114,24 @@ include APPRAIZ . "includes/cabecalho.inc";
     $(function(){
 
         $("#btn-salvar-segmento").click(function(){
+            var neecod = $("#neecod").val();
+            var needsc = $("#needsc").val();
+            if (neecod.trim().length==0){
+                swal({
+                    title: 'Atenção',
+                    text: 'Favor informar o código!',
+                    type: "error"
+                });                
+                return false;
+            }
+            if (needsc.trim().length==0){
+                swal({
+                    title: 'Atenção',
+                    text: 'Favor informar a descrição!',
+                    type: "error"
+                });                
+                return false;
+            }
             options = {
                 success: function() {
                     // Carregar a listagem
