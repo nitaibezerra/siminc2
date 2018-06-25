@@ -174,16 +174,18 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     public function recuperarValoresPorSubnidadeEPtres($suoid, $ptrid)
     {
         $sql = "SELECT
-                    sum(pli.plivalorcapital) plivalorcapital,
-                    sum(pli.plivalorcusteio) plivalorcusteio,
-                    sum(pli.plivalorcapitaladicional) plivalorcapitaladicional,
-                    sum(pli.plivalorcusteioadicional) plivalorcusteioadicional
+                    SUM(COALESCE(pli.plivalorcapital, 0)) plivalorcapital,
+                    SUM(COALESCE(pli.plivalorcusteio, 0)) plivalorcusteio,
+                    SUM(COALESCE(pli.plivalorcapitaladicional, 0)) plivalorcapitaladicional,
+                    SUM(COALESCE(pli.plivalorcusteioadicional, 0)) plivalorcusteioadicional
                 FROM
                     proposta.preplanointerno pli
+                   JOIN workflow.documento doc ON pli.docid = doc.docid
                 WHERE
-                    pli.suoid = " . (int) $suoid . "
-                    AND pli.ptrid = " . (int) $ptrid . " 
-                    AND pli.plistatus = 'A'";
+                    pli.suoid = ". (int)$suoid. "
+                    AND pli.ptrid = ". (int)$ptrid. "
+                    AND pli.plistatus = 'A'
+                    AND esdid = ". (int)ESD_PREPI_APROVADO;
 
         return $this->pegaLinha($sql);
     }
@@ -241,17 +243,16 @@ class Proposta_Model_PrePlanoInterno extends Modelo
        
         $sql = "
             SELECT DISTINCT
-                2 AS ordem,
-                'Pré-pi' AS descricao,
-                $descricao AS categoria,
-                (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
-            FROM
-                public.vw_subunidadeorcamentaria suo
-                LEFT JOIN proposta.preplanointerno pli ON suo.suoid = pli.suoid 
-                AND pli.plistatus = 'A'
-                AND pli.prsano = suo.prsano
-            WHERE
-                suo.prsano = '{$_SESSION['exercicio']}'
+                   2 AS ordem,
+                   'Pré-pi' AS descricao,
+                   $descricao AS categoria,
+                   (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
+              FROM public.vw_subunidadeorcamentaria suo
+              LEFT JOIN proposta.preplanointerno pli 
+                ON suo.suoid = pli.suoid 
+               AND pli.plistatus = 'A'
+               AND pli.prsano = suo.prsano
+            WHERE suo.prsano = '{$_SESSION['exercicio']}'
                 $filtro
                 AND suo.suostatus = 'A'
             GROUP BY
@@ -825,6 +826,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                         JOIN public.naturezadespesa ndpcus ON prodcus.ndpid = ndpcus.ndpid
                     where
                         procus.ptrid = ptr.ptrid
+                        and procus.suoid = suo.suoid
                         and procus.prostatus = 'A'
                         AND prodcus.prdstatus = 'A'
                 ),0) as picvalorcusteio,
@@ -836,6 +838,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                     JOIN public.naturezadespesa ndpcap ON prodcap.ndpid = ndpcap.ndpid
                     where
                         procap.ptrid = ptr.ptrid
+                        and procap.suoid = suo.suoid
                         and procap.prostatus = 'A'
                         AND prodcap.prdstatus = 'A'
                 ),0) as picvalorcapital,
@@ -852,6 +855,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 LEFT JOIN proposta.preplanointerno pli ON(
                     ptr.ptrid = pli.ptrid
                     AND pli.plistatus = 'A'
+                    and suo.suoid = pli.suoid
                 )
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
