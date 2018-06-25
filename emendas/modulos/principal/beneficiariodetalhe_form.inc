@@ -88,10 +88,10 @@
             jQuery("#formulario-detalhe").ajaxForm(options).submit();
         });
         
-        $("#bedvalor").change(function(){
+        $("#bedvalor").on('change blur', function(){
             var vlrBedTotal = $("#vlrGnd"+$("#emdid").val()).val() ? $("#vlrGnd"+$("#emdid").val()).val() : 0;
             var vlrSomaTotal = $("#vlrSomaGnd"+$("#emdid").val()).val() ? $("#vlrSomaGnd"+$("#emdid").val()).val() : 0;
-            var vlrBed = $(this).val() ? $(this).val() : 0;
+            var vlrBed = $("#bedvalor").val() ? $("#bedvalor").val() : 0;
             var totalGeral = textToFloat(vlrBed) + textToFloat(vlrSomaTotal);   
             vlrBedTotal = textToFloat(vlrBedTotal);
             if(totalGeral > vlrBedTotal){
