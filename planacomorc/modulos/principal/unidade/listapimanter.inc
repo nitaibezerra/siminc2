@@ -184,7 +184,7 @@
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">
-                              <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
+                              <?php if(!array_intersect($perfis, [PFL_GESTÃO_CONSULTA])){ ?>
                                 <a href="javascript:alterarPi(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
                               <?php } if (!array_intersect([PFL_SUBUNIDADE, PFL_CONSULTA], $perfis)) {?>
                                 <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
