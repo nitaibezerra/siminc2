@@ -63,5 +63,31 @@ class Monitora_Model_PiNivelEtapaEnsino extends Modelo
         'neecod' => null,
     );
 
+    /**
+     * Retorna os Segmentos por Àrea Cultural.
+     *
+     * @param $mdeid
+     * @return array
+     * @access public
+     */
+    public function RecuperaSegmentoPorArea($mdeid)
+    {
+        global $db;
+
+        $sql ="SELECT
+                    neeid,
+                    needsc,
+                    mdeid,
+                    neecod
+                FROM
+                    monitora.pi_niveletapaensino
+                WHERE
+                    mdeid = $mdeid
+                    AND neestatus = 'A'
+        ";
+
+        return $db->carregar($sql);
+    }
+
 }//end Class
 ?>

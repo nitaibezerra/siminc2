@@ -221,7 +221,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             Cadastro de PI
             <?php if(!empty($dadosPI['plicod'])){
                 echo '<span style="color: red; padding: 5px;" id="span-plicod">(' . $dadosPI['plicod'] . ')</span>';
-                echo '<input maxlength="15" type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
+                echo '<input minlength="11" maxlength="11" type="text" id="plicod" value="' . $dadosPI['plicod'] . '" style="display:none;" />';
             } ?>
         </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>
@@ -1319,14 +1319,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </div>
                             </div>
                         </form>
-
+                    <?php if (!(in_array(PFL_CONSULTA, $perfis))) {?>
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="button" name="btg" onclick="submeter('<?php echo $plicod; ?>//');" <?php echo $disabled; ?>><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                 <a href="planacomorc.php?modulo=principal/unidade/listapimanter&acao=A" class="btn btn-warning" id="btnVoltar" type="button"><i class="fa fa-arrow-left"></i>&nbsp;Voltar</a>
                             </div>
                         </div>
-
+                    <?php }?>
                     </div>
                 </div>
 

@@ -169,10 +169,11 @@
                         ?>
                         <tr>
                             <td class="text-center" nowrap="nowrap">
-                              <?php if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>
-                                <a href="javascript:alterarPiFnc(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
-                                <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
-                              <?php } ?>
+                                <?php if(!array_intersect($perfis, [PFL_GESTÃO_CONSULTA])){ ?>
+                                    <a href="javascript:alterarPiFnc(<?php echo $dados['pliid']; ?>);" title="Editar"><span class="btn btn-primary btn-sm glyphicon glyphicon-pencil"></span></a>
+                                <?php }if(!array_intersect($perfis, [PFL_CONSULTA, PFL_GESTÃO_CONSULTA])){ ?>                                
+                                    <a href="javascript:removerPi(<?php echo $dados['pliid']; ?>);" title="Apagar"><span class="btn btn-danger btn-sm glyphicon glyphicon-trash"></span></a>
+                                <?php } ?>
                             </td>
                             <td><?php echo $dados['id']; ?></td>
                             <td><?php echo $dados['codigo_pi']; ?></td>
