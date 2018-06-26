@@ -181,15 +181,4 @@ class Acompanhamento_Controller_Acompanhamento
         include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-ppa.inc';
     }
 
-    public function listarMetasPnc($suoid, $janid = null)
-    {
-        $mAcompanhamento = new Acompanhamento_Model_Acompanhamento();
-
-        $mJanela = new Acompanhamento_Model_Janela();
-        $janelaAtiva = $mJanela->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
-        $aJanelas = $mJanela->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "janstatus = 'A'", "tipid = " . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC], 'janinicio desc');
-
-        include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-pnc.inc';
-    }
-
 }

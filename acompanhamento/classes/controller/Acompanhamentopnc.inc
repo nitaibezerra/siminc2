@@ -151,7 +151,7 @@ class Acompanhamento_Controller_Acompanhamentopnc
 
     public function listarMetasPnc($suoid, $janid = null)
     {
-        $mAcompanhamento = new Acompanhamento_Model_Acompanhamentopnc();
+        $mAcompanhamentopnc = new Acompanhamento_Model_Acompanhamentopnc();
 
         $mJanela = new Acompanhamento_Model_Janela();
         $janelaAtiva = $mJanela->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);

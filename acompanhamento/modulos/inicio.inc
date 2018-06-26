@@ -2,6 +2,7 @@
 
 //simec_redirecionar('emendas.php?modulo=principal/emenda&acao=A');
 $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
+$cAcompanhamentopnc = new Acompanhamento_Controller_Acompanhamentopnc();
 switch ($_REQUEST['req']) {
     case 'espelho-pi':
         include APPRAIZ. 'planacomorc/modulos/principal/unidade/espelho-pi.inc';
@@ -198,7 +199,7 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
             <?php $cAcompanhamento->listarMetasPpa($suoid); ?>
         </div>
         <div class="col-md-12" id="box-metas-pnc">
-            <?php $cAcompanhamento->listarMetasPnc($suoid); ?>
+            <?php $cAcompanhamentopnc->listarMetasPnc($suoid); ?>
         </div>
     </div>
 </div>
