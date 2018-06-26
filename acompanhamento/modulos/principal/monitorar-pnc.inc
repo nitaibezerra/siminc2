@@ -4,23 +4,23 @@
 
     $listaPerfis = pegaPerfilGeral();
     
-    $cAcompanhamento = new Acompanhamento_Controller_Acompanhamento();
+    $cAcompanhamentopnc = new Acompanhamento_Controller_Acompanhamentopnc();
     
     $mpnid = $_REQUEST['mpnid'];
     
     switch ($_REQUEST['req']) {
         case 'salvar':
-            $cAcompanhamento->salvar($_REQUEST);
+            $cAcompanhamentopnc->salvar($_REQUEST);
         die;
         case 'acompanhamento-indicador-pnc-form':
             include_once APPRAIZ. 'acompanhamento/modulos/principal/acompanhamento_indicador_pnc_form.inc';
         die;
         case 'salvar-acompanhamento-indicador-pnc':
-            $resultado = $cAcompanhamento->salvarIndicadorPnc($_REQUEST);
+            $resultado = $cAcompanhamentopnc->salvarIndicadorPnc($_REQUEST);
             echo json_encode($resultado);
         die;
         case 'listar-indicadores-pnc':
-            $resultado = $cAcompanhamento->listarIndicadoresPNC(
+            $resultado = $cAcompanhamentopnc->listarIndicadoresPNC(
                 $_REQUEST['janid'],
                 $_REQUEST['suoid'],
                 $_REQUEST['mpnid'],
@@ -28,16 +28,16 @@
             );
         die;
         case 'excluir':
-            $cAcompanhamento->excluir($_REQUEST['acoid']);
+            $cAcompanhamentopnc->excluir($_REQUEST['acpid']);
         die;
         case 'detalhe-pi':
-            $cAcompanhamento->recuperarPiPorMetaPncESubunidade($_REQUEST['mpnid'], $_REQUEST['suoid']);
+            $cAcompanhamentopnc->recuperarPiPorMetaPncESubunidade($_REQUEST['mpnid'], $_REQUEST['suoid']);
         die;
         case 'exibir-grafico':
-//            $cAcompanhamento->exibirGrafico($_REQUEST['mpnid'], $_REQUEST['suoid']);
+//            $cAcompanhamentopnc->exibirGrafico($_REQUEST['mpnid'], $_REQUEST['suoid']);
         die;
         case 'ver-historico':
-            $cAcompanhamento->recuperarHistorico($_REQUEST['acoid']);
+            $cAcompanhamentopnc->recuperarHistorico($_REQUEST['acpid']);
             die;
         case 'carregarMedida':
             $mClassificacao = new Acompanhamento_Model_Classificacao($_REQUEST['claid']);
@@ -63,16 +63,16 @@
         die;
     }
 
-    $acompanhamento = new Acompanhamento_Model_Acompanhamento($_REQUEST['acoid']);
-
+    $acompanhamentopnc = new Acompanhamento_Model_Acompanhamentopnc($_REQUEST['acpid']);
+//ver($acompanhamentopnc, d);
     // Recuperando Janela Ativa
     $janela = (new Acompanhamento_Model_Janela())->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
-    $janid = $acompanhamento->janid = $acompanhamento->janid? $acompanhamento->janid: $janela['janid'];
+    $janid = $acompanhamentopnc->janid = $acompanhamentopnc->janid? $acompanhamentopnc->janid: $janela['janid'];
 
     // Recuperando SubUnidade
-    $suoid = $acompanhamento->suoid? $acompanhamento->suoid: $_REQUEST['suoid'];
+    $suoid = $acompanhamentopnc->suoid? $acompanhamentopnc->suoid: $_REQUEST['suoid'];
     
-    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($acompanhamento->acoid);
+    $listaDeAnexos = (new Acompanhamento_Model_AcompanhamentoArquivo())->buscarPorAcompanhamento($acompanhamentopnc->acpid);
 
     include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -135,12 +135,16 @@
                         <div class="clearfix"></div>
 
                         <?php
-                            $listaMetas = $acompanhamento->getMetasPncComPi((object) array('suoid' => $suoid, 'janid' => $acompanhamento->janid, 'exercicio' => $_SESSION['exercicio']));
+                            $listaMetas = $acompanhamentopnc->getMetasPncComPiAntiga((object) array(
+                                'suoid' => $suoid,
+                                'janid' => $janid,
+                                'exercicio' => $_SESSION['exercicio']
+                            ));
                         
                             foreach($listaMetas as $meta){
-                                $cor = $meta['acoid']? 'navy-bg': 'red-bg';
+                                $cor = $meta['acpid']? 'navy-bg': 'red-bg';
                                 $cor = $mpnid == $meta['mpnid']? 'blue-bg': $cor;
-                                $urlAcompanhamento = $meta['acoid']? "?modulo=principal/monitorar-pnc&acao=A&acoid={$meta['acoid']}": "?modulo=principal/monitorar-pnc&acao=A&mpnid={$meta['mpnid']}&suoid={$suoid}";
+                                $urlAcompanhamento = $meta['acpid']? "?modulo=principal/monitorar-pnc&acao=A&acpid={$meta['acpid']}": "?modulo=principal/monitorar-pnc&acao=A&mpnid={$meta['mpnid']}&suoid={$suoid}";
                             ?>
                                 <a class="selecionar-indicador" href="<?php echo $urlAcompanhamento; ?>">
                                     <div class="col-xs-1" title="<?php echo $meta['mpncod'] . ' - ' . $meta['mpndsc']; ?>">
@@ -261,7 +265,7 @@
                                 <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
                                     <div class="row">
                                         <div class="col-lg-8" id="div_lista_indicador_pnc">
-                                            <?php $cAcompanhamento->listarIndicadoresPNC($janid, $suoid, $meta->mpnid, (int)$_SESSION['exercicio']); ?>
+                                            <?php $cAcompanhamentopnc->listarIndicadoresPNC($janid, $suoid, $meta->mpnid, (int)$_SESSION['exercicio']); ?>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="text-center">
@@ -372,7 +376,7 @@
                         <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $acompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acpid=<?php echo 0 //$acompanhamentopnc->acpid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
                             <div class="form-group">
                                 <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
                                 <div class="col-lg-10">
@@ -495,7 +499,7 @@
         });
         
         $('#div_lista_indicador_pnc').on('click', '.editar_indicador', function(){
-            var acoid = $(this).attr('data-acoid');
+            var acpid = $(this).attr('data-acpid');
             var janid = $(this).attr('data-janid');
             var unocod = $(this).attr('data-unocod');
             var suocod = $(this).attr('data-suocod');
@@ -503,7 +507,7 @@
             var prsano = $(this).attr('data-prsano');
             var url = '?modulo=principal/monitorar-pnc&acao=A'+
                 '&req=acompanhamento-indicador-pnc-form'+
-                '&acoid='+ acoid+
+                '&acpid='+ acpid+
                 '&janid='+ janid+
                 '&unocod='+ unocod+
                 '&suocod='+ suocod+
