@@ -25,6 +25,8 @@ include APPRAIZ . "includes/cabecalho.inc";
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 ?>
 
+<script src="js/principal/acompanhamento.js?v=1"></script>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-4">
         <h2>Painel de Acompanhamento</h2>
