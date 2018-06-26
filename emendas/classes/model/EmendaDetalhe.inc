@@ -97,7 +97,7 @@ class Emendas_Model_EmendaDetalhe extends Modelo
                 $where
                 order by $order   
         ";
-
+        
         $dados = $this->carregar($sql);
 
         $dados = $dados ? $dados : [];
@@ -106,6 +106,44 @@ class Emendas_Model_EmendaDetalhe extends Modelo
         }
 
         return $array;
+    }    
+    
+    /**
+     * Retorna o valor de cada GND para ser comparado com a somatoria dos valores
+     * dos beneficiarios
+     * @param type $descricao
+     * @param type $where
+     * @param type $order
+     * @return type
+     */
+    public function recuperarValorGnd($descricao = null, $where = [], $order = '') {
+        $pk = $this->arChavePrimaria[0];
+
+        foreach (array_keys($this->arAtributos) as $atributo) {
+            if (substr($atributo, -6) == 'status') {
+                $where[] = "{$atributo} = 'A'";
+            } elseif (substr($atributo, -3) == 'ano') {
+                $where[] = "$atributo = '{$_SESSION['exercicio']}'";
+            }
+            if ($descricao) {
+                $descricao = implode(" || ' - ' || ", (array)$descricao);
+            } else {
+                $descricao = '*, gndcod';
+                $order = 'gndcod';
+            }
+        }
+        $order = $order ? $order : $descricao;
+        $where = count($where) ? " where  " . implode(' and ', $where) : '';
+
+        $sql = "select {$pk} AS codigo, {$descricao} AS descricao
+                from {$this->stNomeTabela}
+                $where
+                order by $order   
+        ";
+
+        $dados = $this->carregar($sql);
+
+        return $dados ? $dados : [];
     }
 
 }//end Class
