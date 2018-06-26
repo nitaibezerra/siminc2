@@ -135,7 +135,7 @@
                         <div class="clearfix"></div>
 
                         <?php
-                            $listaMetas = $acompanhamentopnc->getMetasPncComPiAntiga((object) array(
+                            $listaMetas = $acompanhamentopnc->getMetasPnc((object) array(
                                 'suoid' => $suoid,
                                 'janid' => $janid,
                                 'exercicio' => $_SESSION['exercicio']
@@ -265,7 +265,14 @@
                                 <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
                                     <div class="row">
                                         <div class="col-lg-8" id="div_lista_indicador_pnc">
-                                            <?php $cAcompanhamentopnc->listarIndicadoresPNC($janid, $suoid, $meta->mpnid, (int)$_SESSION['exercicio']); ?>
+                                            <?php
+                                                $cAcompanhamentopnc->listarIndicadoresPNC(
+                                                    $janid,
+                                                    $suoid,
+                                                    $meta->mpnid,
+                                                    (int)$_SESSION['exercicio']
+                                                );
+                                            ?>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="text-center">

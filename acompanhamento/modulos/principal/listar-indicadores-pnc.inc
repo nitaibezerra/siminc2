@@ -1,8 +1,8 @@
 <?php
     
     # Busca a lista de indicadores do ano selecionado
-    $acompanhamento = new Acompanhamento_Model_Acompanhamento();
-    $listaIndicadorPnc = $acompanhamento->getIndicadoresPnc((object) array(
+    $acompanhamentopnc = new Acompanhamento_Model_Acompanhamentopnc();
+    $listaIndicadorPnc = $acompanhamentopnc->getIndicadoresPnc((object) array(
         'suoid' => $suoid,
         'mpnid' => $mpnid,
         'exercicio' => $exercicio));
