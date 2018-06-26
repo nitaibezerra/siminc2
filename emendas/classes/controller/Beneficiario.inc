@@ -78,11 +78,11 @@ class Emendas_Controller_Beneficiario
         include_once APPRAIZ . 'emendas/modulos/principal/beneficiariohistorico.inc';
     }
 
-
-    public function montarFormularioDetalhe($benid = null, $bedid = null)
+    public function montarFormularioDetalhe($emeid, $benid = null, $bedid = null)
     {
         global $simec;
         $mBeneficiarioDetalhe = new Emendas_Model_BeneficiarioDetalhe($bedid);
+        $emeid = $emeid;
         if(!$mBeneficiarioDetalhe->benid){
             $mBeneficiarioDetalhe->benid = $benid;
         }

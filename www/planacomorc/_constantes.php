@@ -36,6 +36,7 @@ define("ESD_FINALIZADO", 752);
 //--constantes workflow Fluxo de monitoramento da subação ##select * from workflow.estadodocumento where tpdid = 265#
 //Tipo de Documento WORKFLOW PI CONVENCIONAL
 define("WF_TPDID_PLANEJAMENTO_PI", 265);
+define("WF_TPDID_PLANEJAMENTO_PI_FNC", 266);
 # Emendas
 define("WF_TPDID_BENEFICIARIO", 267);
 define("AED_EMENDAS_APROVAR_PI", 4325);

@@ -987,6 +987,7 @@ if( ($permissao == true) && ($habilitar_edicao == 'S') ) {
 			$sql = sprintf("SELECT
 							  s.sisid,
 							  s.sisdsc,
+							  s.sisabrev,
 							  s.sisdiretorio
 							FROM
 							 seguranca.sistema s
@@ -1111,7 +1112,7 @@ if( ($permissao == true) && ($habilitar_edicao == 'S') ) {
 
 			<tr>
 				<td align='right' class="SubTituloDireita">Sistema:</td>
-				<td><b><?= $sistema->sisdsc ?></b></td>
+				<td><h5><b><?= $sistema->sisabrev ?></b></h5></td>
 			</tr>
 			<tr>
 				<td align='right' class="SubTituloDireita">Status:</td>
