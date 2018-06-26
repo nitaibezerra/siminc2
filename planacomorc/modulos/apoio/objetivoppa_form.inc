@@ -8,9 +8,13 @@ switch ($_REQUEST['req']) {
     case 'excluir':
         $cObjetivoppa->excluir($_REQUEST['oppid']);
         die;
+    case 'excluirIniciativa':
+        $cObjetivoppa->excluir($_REQUEST['oppid']);
+        die;        
 }
 
 $mObjetivoppa = new Public_Model_ObjetivoPpa($_REQUEST['oppid']);
+$mIniciativappa = (new Public_Model_IniciativaPpa())->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "ippstatus = 'A'", " oppid = {$_REQUEST['oppid']}"]);
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
@@ -23,7 +27,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Dados Gerais</h5>
@@ -53,5 +57,34 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Dados Gerais</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="formulario" name="formulario" method="post" class="form-horizontal">
+                        <input type="hidden" name="req" id="req" value="salvar" />
+                        <input name="ippid" id="ippid" type="hidden" value="<?php echo $mIniciativappa->ippid; ?>">
+
+                        <?php
+                        echo $simec->input('ippcod', 'Código', $mIniciativappa->ippcod, ['required', 'class'=>'inteiro','maxlength' => 4]);
+                        echo $simec->input('ippnome', 'Nome', $mIniciativappa->ippnome , ['required', 'maxlength' => 250]);
+                        echo $simec->input('ippdsc', 'Descricao', $mIniciativappa->ippdsc, ['required', 'maxlength' => 250]);
+                        // ver($mObjetivoppa->oppid);
+                        ?>
+
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                <?php if($mObjetivoppa->ippid){ ?>
+                                    <a href="?modulo=apoio/objetivoppa_form&acao=A&req=excluirIniciativa&oppid=<?php echo $mObjetivoppa->ippid; ?>" class="btn btn-danger link-excluir" id="btnExcluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>

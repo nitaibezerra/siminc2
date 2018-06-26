@@ -61,5 +61,24 @@ class Public_Model_ObjetivoMetaPpa extends Modelo
         'mppid' => null,
         'mpodata' => null,
     );
+
+    public function recuperarPorExercicio($exercicio)
+    {
+        $sql = "select * from ".$this->stNomeTabela." where oppid in (select oppid from public.objetivoppa where prsano = '{$exercicio}')";
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        $dadosAgrupados = [];
+        foreach($dados as $dado){
+            $dadosAgrupados[$dado['mppid']][] = $dado['oppid'];
+        }
+        return $dadosAgrupados;
+    }
+
+    public function excluirPorExercicio($exercicio)
+    {
+        $sql = "delete from ".$this->stNomeTabela." where oppid in (select oppid from public.objetivoppa where prsano = '{$exercicio}')";
+        return $this->executar($sql);
+    }
 }//end Class
 ?>
