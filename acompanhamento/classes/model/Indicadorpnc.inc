@@ -49,6 +49,7 @@ class Acompanhamento_Model_Indicadorpnc extends Modelo
      * @access protected
      */
     protected $arAtributos = array(
+        'idpid' => null,
         'acpid' => null,
         'ipncod' => null,
         'unocod' => null,

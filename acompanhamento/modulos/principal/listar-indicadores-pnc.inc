@@ -37,7 +37,7 @@
                 <td><?php echo $indicador['ipncod']. ' - '. $indicador['ipndsc']; ?></td>
                 <?php
                     for($ano = 2010; $ano <= ((int)$_SESSION['exercicio']); $ano++):
-                        $acompanhamentoIndicadorPnc = (new Acompanhamento_Model_Acompanhamento())->buscarIndicadorPnc((object) array(
+                        $acompanhamentoIndicadorPnc = (new Acompanhamento_Model_Acompanhamentopnc())->buscarIndicadorPnc((object) array(
                             'janid' => $janid,
                             'unocod' => $unidadeOrcamentaria->unocod,
                             'suocod' => $subunidade->suocod,
@@ -54,11 +54,11 @@
                             ):
                         ?>
                             <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>
-                                <a href="#" class="editar_indicador link" data-acoid="<?php echo $acompanhamentoIndicadorPnc->acoid; ?>" title="Editar Indicador PNC">
+                                <a href="#" class="editar_indicador link" data-idpid="<?php echo $acompanhamentoIndicadorPnc->idpid; ?>" title="Editar Indicador PNC">
                                     <?= $acompanhamentoIndicadorPnc->acoquantidade; ?>
                                 </a>
                             <?php else: ?>
-                                <span class="editar_indicador fa fa-pencil link" data-acoid="" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo trim($indicador['ipncod']); ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador PNC"></span>
+                                <span class="editar_indicador fa fa-pencil link" data-idpid="" data-janid="<?php echo $janid; ?>" data-unocod="<?php echo $unidadeOrcamentaria->unocod; ?>" data-suocod="<?php echo $subunidade->suocod; ?>" data-ipncod="<?php echo trim($indicador['ipncod']); ?>" data-prsano="<?php echo $ano; ?>" title="Editar Indicador PNC"></span>
                             <?php endif; ?>
                         <?php else: ?>
                             <?php if($acompanhamentoIndicadorPnc->acoquantidade): ?>

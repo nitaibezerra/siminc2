@@ -182,5 +182,49 @@ class Acompanhamento_Model_Acompanhamentopnc extends Modelo
 
         return $listaIndicadoresPnc;
     }
+    
+    /**
+     * Monta consulta pra buscar acompanhamento por Janela, UO, Unidade, Indicador e Ano.
+     * 
+     * @param stdClass $filtro
+     * @return string
+     */
+    public function montarSqlBuscarIndicadorPnc(stdClass $filtro){
+        $sql = "
+            SELECT
+                idp.idpid,
+                acp.janid,
+                idp.unocod,
+                idp.suocod,
+                idp.ipncod,
+                idp.prsano,
+                idp.idpquantidade
+            FROM acompanhamento.indicador_pnc idp
+                JOIN acompanhamento.acompanhamento_pnc acp ON(idp.acpid = acp.acpid)
+            WHERE
+                idp.idpstatus = 'A'
+                AND acp.acpstatus = 'A'
+                AND acp.janid = ". (int)$filtro->janid. "
+                AND idp.unocod = '". (int)$filtro->unocod. "'
+                AND idp.suocod = '". (int)$filtro->suocod. "'
+                AND idp.ipncod = '". $filtro->ipncod. "'
+                AND idp.prsano = '". (int)$filtro->prsano. "'
+        ";
+        
+        return $sql;
+    }
+    
+    /**
+     * Buscar acompanhamento por Janela, UO, Unidade, Indicador e Ano.
+     * 
+     * @param stdClass $filtro
+     * @return stdClass
+     */
+    public function buscarIndicadorPnc(stdClass $filtro) {
+        $sql = $this->montarSqlBuscarIndicadorPnc($filtro);
+        $acompanhamento = $this->pegaLinha($sql);
+        
+        return $acompanhamento? (object)$acompanhamento: new stdClass();
+    }
 
 }

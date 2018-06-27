@@ -435,55 +435,5 @@ class Acompanhamento_Model_Acompanhamento extends Modelo
             }
         }
     }
-    
-    /**
-     * Monta consulta pra buscar acompanhamento por Janela, UO, Unidade, Indicador e Ano.
-     * 
-     * @param stdClass $filtro
-     * @return string
-     */
-    public function montarSqlBuscarIndicadorPnc(stdClass $filtro){
-        $sql = "
-            SELECT
-                acoid,
-                acoquantidade,
-                acodata,
-                acoanalise,
-                claid,
-                acoprovidencias,
-                mppid,
-                pliid,
-                janid,
-                prsano,
-                acostatus,
-                suoid,
-                ipncod,
-                unocod,
-                suocod
-            FROM acompanhamento.acompanhamento
-            WHERE
-                acostatus = 'A'
-                AND janid = ". (int)$filtro->janid. "
-                AND unocod = '". (int)$filtro->unocod. "'
-                AND suocod = '". (int)$filtro->suocod. "'
-                AND ipncod = '". $filtro->ipncod. "'
-                AND prsano = '". (int)$filtro->prsano. "'
-        ";
-        
-        return $sql;
-    }
-    
-    /**
-     * Buscar acompanhamento por Janela, UO, Unidade, Indicador e Ano.
-     * 
-     * @param stdClass $filtro
-     * @return stdClass
-     */
-    public function buscarIndicadorPnc(stdClass $filtro) {
-        $sql = $this->montarSqlBuscarIndicadorPnc($filtro);
-        $acompanhamento = $this->pegaLinha($sql);
-        
-        return $acompanhamento? (object)$acompanhamento: new stdClass();
-    }
 
 }

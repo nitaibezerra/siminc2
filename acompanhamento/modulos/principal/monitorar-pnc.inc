@@ -506,7 +506,7 @@
         });
         
         $('#div_lista_indicador_pnc').on('click', '.editar_indicador', function(){
-            var acpid = $(this).attr('data-acpid');
+            var idpid = $(this).attr('data-idpid');
             var janid = $(this).attr('data-janid');
             var unocod = $(this).attr('data-unocod');
             var suocod = $(this).attr('data-suocod');
@@ -514,7 +514,7 @@
             var prsano = $(this).attr('data-prsano');
             var url = '?modulo=principal/monitorar-pnc&acao=A'+
                 '&req=acompanhamento-indicador-pnc-form'+
-                '&acpid='+ acpid+
+                '&idpid='+ idpid+
                 '&janid='+ janid+
                 '&unocod='+ unocod+
                 '&suocod='+ suocod+
