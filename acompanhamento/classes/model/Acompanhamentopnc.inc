@@ -72,8 +72,15 @@ class Acompanhamento_Model_Acompanhamentopnc extends Modelo
         $listaMetas = array();
         $subunidade = new Public_Model_SubUnidadeOrcamentaria($filtro->suoid);
         $uo = new Public_Model_UnidadeOrcamentaria($subunidade->unoid);
-        $sql = "
-            SELECT
+        $sql = "select mpncod,
+                       mpnid,
+                       mpndsc,
+                       suoid,
+                       prsano,
+                       acompanhamento,
+                       pis
+                  from
+            ((SELECT
                 m.mpncod,
                 m.mpnid,
                 m.mpndsc,
@@ -103,9 +110,38 @@ class Acompanhamento_Model_Acompanhamentopnc extends Modelo
             WHERE
                 m.mpnstatus = 'A'
                 AND m.prsano = '". (int)$filtro->exercicio. "'
-                AND sm.suoid = '". (int)$filtro->suoid. "'
+                AND sm.suoid = '". (int)$filtro->suoid. "')
+		union 
+               (select m.mpncod,
+                       m.mpnid,
+                       m.mpndsc,
+                       '". (int)$filtro->suoid. "',
+                       m.prsano,
+                       (select count(0) as qtd
+                          from acompanhamento.acompanhamento_pnc a1
+                         where a1.mpnid = m.mpnid
+                           and a1.acpstatus = 'A'
+                           and a1.janid = ". (int)$filtro->janid. ") as acompanhamento,
+                       (select count(0) as qtd
+                          from planacomorc.pi_complemento c
+                         inner join monitora.pi_planointerno p
+                            on c.pliid = p.pliid
+                         inner join public.vw_subunidadeorcamentaria su
+                            on p.ungcod = su.suocod
+                           and p.unicod = su.unocod
+                           and p.pliano = su.prsano
+                           and p.plistatus = 'A'
+                           and su.suoid = '". (int)$filtro->suoid. "'
+                         where c.mpnid = m.mpnid) as pis 
+                  from public.metapnc m
+                  left join spo.subunidademetapnc sm
+                    on m.mpnid = sm.mpnid
+                   and m.prsano = '". (int)$filtro->exercicio. "'
+                   and m.mpnstatus = 'A'
+                 where sm.mpnid is null
+                   and m.prsano = '". (int)$filtro->exercicio. "')) as x
             ORDER BY
-                m.mpncod::int
+                mpncod::int
         ";
         $listaMetas = $this->carregar($sql);
 

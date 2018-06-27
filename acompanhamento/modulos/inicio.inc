@@ -11,7 +11,7 @@ switch ($_REQUEST['req']) {
         $cAcompanhamento->listarMetasPpa($_REQUEST['suoid'], $_REQUEST['janid']);
         die;
     case 'listar-metas-pnc':
-        $cAcompanhamento->listarMetasPnc($_REQUEST['suoid'], $_REQUEST['janid']);
+        $cAcompanhamentopnc->listarMetasPnc($_REQUEST['suoid'], $_REQUEST['janid']);
         die;
 }
 
