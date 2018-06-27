@@ -72,32 +72,41 @@ class Acompanhamento_Model_Acompanhamentopnc extends Modelo
         $listaMetas = array();
         $subunidade = new Public_Model_SubUnidadeOrcamentaria($filtro->suoid);
         $uo = new Public_Model_UnidadeOrcamentaria($subunidade->unoid);
-        $sql = "select m.mpncod,
-                       m.mpnid,
-                       m.mpndsc,
-                       sm.suoid,
-                       m.prsano,
-                       (select count(0) as qtd
-                          from acompanhamento.acompanhamento_pnc a1
-                         where a1.mpnid = m.mpnid
-                           and a1.acpstatus = 'A'
-                           and a1.janid = ". (int)$filtro->janid. "
-                           and a1.suoid = '". (int)$filtro->suoid. "') as acompanhamento,
-                       (select count(0) as qtd
-                          from planacomorc.pi_complemento c
-                         inner join monitora.pi_planointerno p
-                            on c.pliid = p.pliid
-                         inner join public.vw_subunidadeorcamentaria su
-                            on p.ungcod = su.suocod
-                         where c.mpnid = m.mpnid
-                           and su.suoid = '". (int)$filtro->suoid. "') as pis 
-                  from public.metapnc m
-                 inner join spo.subunidademetapnc sm
-                    on m.mpnid = sm.mpnid
-                 where m.prsano = '". (int)$filtro->exercicio. "'
-                   and m.mpnstatus = 'A'
-                   and sm.suoid = '". (int)$filtro->suoid. "'
-                 order by m.mpncod::int";
+        $sql = "
+            SELECT
+                m.mpncod,
+                m.mpnid,
+                m.mpndsc,
+                sm.suoid,
+                m.prsano,
+                (
+                    SELECT
+                        count(0) as qtd
+                    FROM acompanhamento.acompanhamento_pnc a1
+                    WHERE
+                        a1.acpstatus = 'A'
+                        and a1.mpnid = m.mpnid
+                        and a1.janid = ". (int)$filtro->janid. "
+                        and a1.suoid = '". (int)$filtro->suoid. "') as acompanhamento,
+                (
+                    SELECT
+                        count(0) as qtd
+                    FROM planacomorc.pi_complemento c
+                        JOIN monitora.pi_planointerno p on c.pliid = p.pliid
+                        JOIN public.vw_subunidadeorcamentaria su on p.ungcod = su.suocod
+                    WHERE
+                        c.mpnid = m.mpnid
+                        and su.suoid = '". (int)$filtro->suoid. "'
+                ) as pis
+            FROM public.metapnc m
+                JOIN spo.subunidademetapnc sm ON m.mpnid = sm.mpnid
+            WHERE
+                m.mpnstatus = 'A'
+                AND m.prsano = '". (int)$filtro->exercicio. "'
+                AND sm.suoid = '". (int)$filtro->suoid. "'
+            ORDER BY
+                m.mpncod::int
+        ";
         $listaMetas = $this->carregar($sql);
 
         return $listaMetas? $listaMetas: array();
