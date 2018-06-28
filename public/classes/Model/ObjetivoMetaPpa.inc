@@ -61,5 +61,35 @@ class Public_Model_ObjetivoMetaPpa extends Modelo
         'mppid' => null,
         'mpodata' => null,
     );
+
+    public function recuperarPorExercicio($exercicio, $oppid)
+    {
+        $sql = "select m.mppid as codigo
+                  from public.metappa m
+                 inner join public.objetivometappa om
+                    on m.mppid = om.mppid
+                 inner join public.objetivoppa o
+                    on om.oppid = o.oppid
+                 where o.prsano = '2018'
+                   and o.oppid = ".$oppid;
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+
+        foreach ($dados as $value){
+            $dadosAgrupados[] = $value['codigo'];
+        }
+        return $dadosAgrupados;
+    }
+
+    public function excluirPorObjetivo($oppid)
+    {
+        $sql = "delete from ".$this->stNomeTabela." where oppid = ".$oppid;
+        return $this->executar($sql);
+    }
+    
+    public function salvarMetas($mppid, $oppid){
+        $sql = "insert into ".$this->stNomeTabela." (oppid, mppid, mpodata) values(".$oppid.", ".$mppid.", now())";
+        return $this->executar($sql);
+    }
 }//end Class
 ?>
