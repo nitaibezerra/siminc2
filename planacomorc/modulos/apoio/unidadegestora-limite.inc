@@ -122,11 +122,11 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </span>
                                     </td>
 
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format($dados['dotacaoCusteio'], 0, ',', '.'); ?></td>
+                                    <td class="text-right" style="border-right: 1px black solid;" id="custeio<?php echo $dado['unoid']; ?>"><?php echo number_format($dados['dotacaoCusteio'], 0, ',', '.'); ?></td>
 
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format($dados['dotacaoCapital'], 0, ',', '.'); ?></td>
+                                    <td class="text-right" style="border-right: 1px black solid;" id="capital<?php echo $dado['unoid']; ?>"><?php echo number_format($dados['dotacaoCapital'], 0, ',', '.'); ?></td>
 
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format(($dados['dotacaoCusteio'] + $dados['dotacaoCapital']), 0, ',', '.'); ?></td>
+                                    <td class="text-right" style="border-right: 1px black solid;" id="total<?php echo $dado['unoid']; ?>"><?php echo number_format(($dados['dotacaoCusteio'] + $dados['dotacaoCapital']), 0, ',', '.'); ?></td>
 
                                     <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right">
                                         <input name="limites" type="text" class="input_valor salvar-limite-fnc" value="<?php echo $dado['lmuvlr']; ?>" data-unoid="<?php echo $dado['unoid']; ?>" data-lmuid="<?php echo $dado['lmuid']; ?>" >
@@ -144,14 +144,14 @@ include APPRAIZ . "includes/cabecalho.inc";
                                         </td>
 
                                         <td class="text-right" style="border-right: 1px black solid;">
-                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" value="<?php echo number_format($dado['ptrdotacao_custeio'], 2, '.', ''); ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocusteio" >
+                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" id="custeio<?php echo $dado['ptrid']; ?>" value="<?php echo number_format($dado['ptrdotacao_custeio'], 2, '.', ''); ?>" data-unoid="<?php echo $dado['unoid']; ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocusteio" >
                                         </td>
 
                                         <td class="text-right" style="border-right: 1px black solid;">
-                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" value="<?php echo number_format($dado['ptrdotacao_capital'], 2, '.', ''); ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocapital" >
+                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" id="capital<?php echo $dado['ptrid']; ?>" value="<?php echo number_format($dado['ptrdotacao_capital'], 2, '.', ''); ?>" data-unoid="<?php echo $dado['unoid']; ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocapital" >
                                         </td>
 
-                                        <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format(($dado['ptrdotacao_custeio'] + $dado['ptrdotacao_capital']), 2, ',', '.'); ?></td>
+                                        <td class="text-right" style="border-right: 1px black solid;" id="totalDetalhe<?php echo $dado['ptrid']; ?>"><?php echo number_format(($dado['ptrdotacao_custeio'] + $dado['ptrdotacao_capital']), 2, ',', '.'); ?></td>
                                         <td class="text-center" style="border-right: 1px black solid;"> - </td>
                                     </tr>
                                 <?php } ?>
@@ -283,6 +283,29 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
             var valor = $(this).val() ? str_replace(['.', ','], ['', '.'], $(this).val()) : 0;
             var campo = $(this).data('campo');
             var ptrid = $(this).data('ptrid');
+            var unoid = $(this).data('unoid');
+            var tipo = 'capital';
+            if (campo==='ptrdotacaocusteio'){
+                tipo = 'custeio';
+            }
+            var vlrSoma=0;
+            var vlrSomaTotal=0;
+            $(".salvar-dotacao-fnc").each(function(){
+                if ($(this).data("unoid")===unoid){
+                    valorDotacao = $(this).val() ? str_replace('.','',$(this).val()) : 0;
+                    vlrSomaTotal = parseFloat(vlrSomaTotal) + parseFloat(valorDotacao);                
+                    if ($(this).data("campo")===campo){
+                        vlrSoma = parseFloat(vlrSoma) + parseFloat(valorDotacao);
+                    }
+                } 
+                
+            });
+            var valorCusteio = $("#custeio"+ptrid).val() ? str_replace('.','',$("#custeio"+ptrid).val()) : 0;
+            var valorCapital = $("#capital"+ptrid).val() ? str_replace('.','',$("#capital"+ptrid).val()) : 0;
+            var totalGeral = textToFloat(valorCusteio) + textToFloat(valorCapital);
+            $("#"+tipo+unoid).html(number_format(vlrSoma.toFixed(0), 0, ',', '.'));
+            $("#totalDetalhe"+ptrid).html(number_format(totalGeral.toFixed(2), 2, ',', '.'));
+            $("#total"+unoid).html(number_format(vlrSomaTotal.toFixed(0), 0, ',', '.'));
             $.ajax({
                 url: 'planacomorc.php?modulo=apoio/unidadegestora-limite&acao=A&req=salvar-dotacao-fnc&ptrid=' + ptrid + '&' + campo + '=' + valor
             });
@@ -291,3 +314,4 @@ bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), arr
     });
 
 </script>
+
