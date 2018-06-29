@@ -8,9 +8,9 @@
                 <div class="ibox-content">
                     <div class="tabs-container tabs">
                         <ul class="nav nav-tabs prodTabs">
-                            <li class="active"><a data-toggle="tab" href="#tab-4" tipo="Expansao" data-url="?modulo=inicio&acao=C&req=carregarGraficoUnidade&tipo=Expansao"> Gráficos das Unidades</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-5" tipo="Expansao" data-url="?modulo=inicio&acao=C&req=carregarGraficoDireta&tipo=Expansao"> Gráficos da Direta</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-6" tipo="Expansao" data-url="?modulo=inicio&acao=C&req=carregarGraficoCgconCogep&tipo=Expansao"> Gráficos da CGCON/COGEP</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab-4" tipo="Expansao" data-tab="1" data-url="?modulo=inicio&acao=C&req=carregarGraficoUnidade&tipo=Expansao"> Gráficos das Unidades</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-5" tipo="Expansao" data-tab="2" data-url="?modulo=inicio&acao=C&req=carregarGraficoDireta&tipo=Expansao"> Gráficos da Direta</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-6" tipo="Expansao" data-tab="3" data-url="?modulo=inicio&acao=C&req=carregarGraficoCgconCogep&tipo=Expansao"> Gráficos da CGCON/COGEP</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="tab-4" class="tab-pane active">
