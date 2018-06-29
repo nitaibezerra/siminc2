@@ -1,18 +1,13 @@
 <?php
 
-class Acompanhamento_Controller_Acompanhamento
+class Acompanhamento_Controller_Acompanhamentopnc
 {
     public function salvar($dados, $urlModulo = NULL)
     {
-        $url = '?modulo=principal/monitorar-ppa&acao=A';
-        if(!empty($dados['ipnid'])){
-            $url = '?modulo=principal/monitorar-pnc&acao=A';
-        } elseif(!empty($dados['pliid'])){
-            $url = $urlModulo. '&pliid='. $dados['pliid'];
-        }
+        $url = '?modulo=principal/monitorar-pnc&acao=A';
 
         try {
-            $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($dados['acoid']);
+            $mAcompanhamento = new Acompanhamento_Model_Acompanhamentopnc($dados['acpid']);
             $mAcompanhamento->popularDadosObjeto($dados);
 
             $mAcompanhamento->acoquantidade = $mAcompanhamento->acoquantidade ? desformata_valor($mAcompanhamento->acoquantidade) : null;
@@ -31,11 +26,11 @@ class Acompanhamento_Controller_Acompanhamento
             ]);
 
             $mAcompanhamento->associarAnexo($dados);
-            $this->_vincularMedidas($mAcompanhamento->acoid, $dados);
-            $this->_gravarHistorico($mAcompanhamento->acoid);
+            $this->_vincularMedidas($mAcompanhamento->acpid, $dados);
+            $this->_gravarHistorico($mAcompanhamento->acpid);
 
             $mAcompanhamento->commit();
-            simec_redirecionar($url. '&acoid='. $mAcompanhamento->acoid, 'success');
+            simec_redirecionar($url. '&acpid='. $mAcompanhamento->acpid, 'success');
         } catch (Exception $e){
             $mAcompanhamento->rollback();
             simec_redirecionar($url, 'error');
@@ -46,7 +41,7 @@ class Acompanhamento_Controller_Acompanhamento
     {
 //ver($dados, d);
         try {
-            $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($dados['acoid']);
+            $mAcompanhamento = new Acompanhamento_Model_Acompanhamentopnc($dados['acpid']);
             $mAcompanhamento->popularDadosObjeto($dados);
 
             $mAcompanhamento->acoquantidade = $mAcompanhamento->acoquantidade? desformata_valor($mAcompanhamento->acoquantidade) : null;
@@ -62,13 +57,13 @@ class Acompanhamento_Controller_Acompanhamento
                 'suoid'
             ]);
 
-//            $this->_gravarHistorico($mAcompanhamento->acoid);
+//            $this->_gravarHistorico($mAcompanhamento->acpid);
 
             $mAcompanhamento->commit();
-//ver($mAcompanhamento->acoid, d);
+//ver($mAcompanhamento->acpid, d);
             return array(
                 'success' => utf8_encode('Operação realizada com sucesso!'),
-                'acoid' => $mAcompanhamento->acoid
+                'acpid' => $mAcompanhamento->acpid
             );
         } catch (Exception $e){
             $mAcompanhamento->rollback();
@@ -89,16 +84,16 @@ class Acompanhamento_Controller_Acompanhamento
         include APPRAIZ. 'acompanhamento/modulos/principal/listar-indicadores-pnc.inc';
     }
     
-    public function excluir($acoid)
+    public function excluir($acpid)
     {
         $url = '?modulo=principal/monitorar-ppa&acao=A';
 
         try {
-            $mAcompanhamento = new Acompanhamento_Model_Acompanhamento($acoid);
+            $mAcompanhamento = new Acompanhamento_Model_Acompanhamentopnc($acpid);
             
             if($mAcompanhamento->existeVinculo()){
                 $mensagem = 'O registro não pode ser excluído pois possui vínculo com algum PI.';
-                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mAcompanhamento->acoid;
+                $url = '?modulo=apoio/modalidade-pactuacao-form&acao=A&capid=' . $mAcompanhamento->acpid;
                 simec_redirecionar($url, 'error', $mensagem);
             }            
             
@@ -112,26 +107,11 @@ class Acompanhamento_Controller_Acompanhamento
         }
     } //end salvar()
 
-    private function _vincularMedidas($acoid, $dados)
-    {
-        $mAcompanhamentoMedidas = new Acompanhamento_Model_AcompanhamentoMedida();
-        $mAcompanhamentoMedidas->excluirVarios('acoid = ' . (int)$acoid);
-
-        $mAcompanhamentoMedidas->acoid = $acoid;
-        if(isset($dados['medidas']) && is_array($dados['medidas'])){
-            foreach($dados['medidas'] as $medid){
-                $mAcompanhamentoMedidas->medid = $medid;
-                $mAcompanhamentoMedidas->salvar();
-                $mAcompanhamentoMedidas->acmid = null;
-            }
-        }
-    }
-
-    private function _gravarHistorico($acoid)
+    private function _gravarHistorico($acpid)
     {
         $mHistorico = new Acompanhamento_Model_Historico();
 
-        $mHistorico->acoid = $acoid;
+        $mHistorico->acpid = $acpid;
         $mHistorico->usucpf = $_SESSION['usucpforigem'];
         $mHistorico->hisdata = date('Y-m-d H:i:s');
         
@@ -162,23 +142,22 @@ class Acompanhamento_Controller_Acompanhamento
         include_once APPRAIZ . 'acompanhamento/modulos/principal/detalhe-pi.inc';
     }
 
-    public function recuperarHistorico($acoid)
+    public function recuperarHistorico($acpid)
     {
-        $aHistorico = (new Acompanhamento_Model_Historico())->recuperarHistorico($acoid);
+        $aHistorico = (new Acompanhamento_Model_Historico())->recuperarHistorico($acpid);
 
         include_once APPRAIZ . 'acompanhamento/modulos/principal/historico.inc';
     }
 
-    public function listarMetasPpa($suoid, $janid = null)
+    public function listarMetasPnc($suoid, $janid = null)
     {
-        $listaPerfis = pegaPerfilGeral();
-        $mAcompanhamento = new Acompanhamento_Model_Acompanhamento();
+        $mAcompanhamentopnc = new Acompanhamento_Model_Acompanhamentopnc();
 
         $mJanela = new Acompanhamento_Model_Janela();
-        $janelaAtiva = $mJanela->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_META_PPA);
-        $aJanelas = $mJanela->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "janstatus = 'A'", "tipid = " . Acompanhamento_Model_Tipo::K_TIPO_META_PPA], 'janinicio desc');
+        $janelaAtiva = $mJanela->recuperarJanelaAtiva(Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC);
+        $aJanelas = $mJanela->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "janstatus = 'A'", "tipid = " . Acompanhamento_Model_Tipo::K_TIPO_INDICADOR_PNC], 'janinicio desc');
 
-        include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-ppa.inc';
+        include_once APPRAIZ . 'acompanhamento/modulos/principal/listar-metas-pnc.inc';
     }
 
 }
