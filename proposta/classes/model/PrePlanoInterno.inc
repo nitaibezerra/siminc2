@@ -227,7 +227,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         $filtro = '';
         $filtro .= $aFiltro['unosigla'] ? " AND suo.unosigla = '{$aFiltro['unosigla']}' ": NULL;
         $filtro .= $aFiltro['unidades'] ? " AND {$aFiltro['unidades']} ": NULL;
-
+//ver($aFiltro,d);
         $filtroEsdid = $filtro;
         if ($aFiltro['esdid']){
             if (!is_array($aFiltro['esdid'])){
@@ -302,7 +302,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             SELECT DISTINCT
                 3 AS ordem,
                 'Detalhado' AS descricao,
-                suo.unosigla AS categoria,
+                $descricao AS categoria,
                 coalesce((
                     select
                         sum(prodcap.prdvalor) capital
@@ -821,10 +821,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
     public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
-        if ($filtro['esdid']){
+        if ($filtro['esdid']!='0' && $filtro['esdid']!=''){
             if (!is_array($filtro['esdid'])){
                 $filtro['esdid']= explode(',', $filtro['esdid']);
             }
+        }else{
+            unset($filtro['esdid']);
         }
         $where = $this->montarFiltros($filtro);
         
