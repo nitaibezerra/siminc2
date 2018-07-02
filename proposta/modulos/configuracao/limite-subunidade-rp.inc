@@ -1,28 +1,24 @@
 <?php
-include_once APPRAIZ . "includes/library/simec/Grafico.php";
 
-include_once '_funcoespi.php';
+//ver('OK', d);
 
-require_once APPRAIZ . 'includes/workflow.php';
+//include_once APPRAIZ . "includes/library/simec/Grafico.php";
+
+//include_once APPRAIZ. 'www/planacomorc/_funcoespi.php';
+//
+//require_once APPRAIZ . 'includes/workflow.php';
 include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 # Verifica se o usuário tem vinculo de Sub-Unidades no seu Perfil
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 
 $oPlanoInterno = new Pi_PlanoInterno();
-$cUnidadegestoraLimite = new Planacomorc_Controller_Unidadegestoralimite();
+
+$subunidade = new Public_Model_SubUnidadeOrcamentaria();
 
 switch ($_REQUEST['req']) {
-    case 'detalhe-subunidade':
-        $oPlanoInterno->recuperarPiPorSubunidade($_REQUEST['suoid']);
-        die;
-    case 'detalhe-funcional':
-        $oPlanoInterno->recuperarPiPorFuncional($_REQUEST['ptrid']);
-        die;
-    case 'detalhe-grafico':
-        $oPlanoInterno->recuperarDetalhesValoresGrafico($_REQUEST['unosigla']);
-        die;
     case 'salvar':
+        $cUnidadegestoraLimite = new Planacomorc_Controller_Unidadegestoralimite();
         $cUnidadegestoraLimite->salvar($_REQUEST);
         die;
     case 'salvar-dotacao':
@@ -31,43 +27,27 @@ switch ($_REQUEST['req']) {
         $mPtresSubunidade->salvar(null, null, ['ptrdotacaocusteio', 'ptrdotacaocapital']);
         $mPtresSubunidade->commit();
         die;
-    case 'salvar-dotacao-fnc':
-        $mPtres = new Monitora_Model_Ptres($_GET['ptrid']);
-        $mPtres->popularDadosObjeto($_GET);
-        $mPtres->salvar(null, null, ['ptrdotacaocusteio', 'ptrdotacaocapital']);
-        $mPtres->commit();
-        ver($mPtres, d);
-        die;
 }
 
 $filtros = array(
-    "suo.prsano = '". $_SESSION['exercicio']. "'",
+    "suo.prsano = '". (int)$_SESSION['exercicio']. "'",
     'suo.unofundo = FALSE',
 );
+
 # Filtro por Subunidades do perfil do usuário logado.
 if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
-$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+//$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
+//$listaRp = $subunidade->executar();
 $aFnc = $oPlanoInterno->recuperarExecucaoOrcamentariaFnc();
-
-//var_dump($aPropostas);
-//die('painel');
 
 /**
  * Cabeçalho padrão do sistema.
  * @see cabecalho.inc
  */
 include APPRAIZ . "includes/cabecalho.inc";
-
-
 ?>
-<script>
-    function exibirModalDetalheGrafico(unosigla){
-        $('#detalhe-grafico .modal-body').load('planacomorc.php?modulo=principal/unidade/painel&acao=A&req=detalhe-grafico&unosigla=' + unosigla);
-        $('#detalhe-grafico').modal();
-    }
-</script>
 
 <style>
     .title-disponivel{
@@ -92,9 +72,7 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-12">
 
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                </div>
+
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" >
@@ -211,13 +189,6 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
-
-<?php
-// -- popup de detalhamento do PI
-bootstrapPopup("PI's da Unidade", 'detalhe-subunidade', '', array('fechar'), array('tamanho' => 'lg'));
-bootstrapPopup("PI's da Funcional", 'detalhe-funcional', '', array('fechar'), array('tamanho' => 'lg'));
-bootstrapPopup("Detalhe da Unidade", 'detalhe-grafico', '', array('fechar'), array('tamanho' => 'lg'));
-?>
 
 <script>
     $(document).ready(function(){

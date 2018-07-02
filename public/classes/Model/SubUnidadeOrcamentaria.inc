@@ -305,5 +305,30 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         return $sql;
     }
 
+    
+    
+    /**
+     * Busca lista de RP.
+     * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
+     *
+     * @param array $listaFiltro
+     * @return array
+     */
+    public function buscarRp($listaFiltro = [])
+    {
+        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro);
+//ver($sql, d);
+        $dados = $this->carregar($sql);
+        $dados = $dados ? $dados : [];
+        $dadosAgrupados = [];
+        foreach ($dados as $dado) {
+            $dadosAgrupados[$dado['suocod']]['detalhe'][] = $dado;
+            $dadosAgrupados[$dado['suocod']]['dotacaoCapital'] += $dado['ptrdotacao_capital'];
+            $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
+        }
+
+        return $dadosAgrupados;
+    }
+    
 
 }
