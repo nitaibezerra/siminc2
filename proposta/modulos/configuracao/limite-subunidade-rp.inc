@@ -38,9 +38,9 @@ $filtros = array(
 if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
-//$aPropostas = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros);
-//$listaRp = $subunidade->executar();
-$aFnc = $oPlanoInterno->recuperarExecucaoOrcamentariaFnc();
+//$listaRp = $oPlanoInterno->recuperarExecucaoOrcamentaria($filtros); // antigo
+$listaRp = $subunidade->buscarRp((object)array());
+//$aFnc = $oPlanoInterno->recuperarExecucaoOrcamentariaFnc();
 
 /**
  * Cabeçalho padrão do sistema.
@@ -89,52 +89,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                             </thead>
                             <tbody>
 
-                            <?php foreach($aFnc as $dados){
-                                $dado = $dados['detalhe'][0];
-                                ?>
-                                <tr class="linha_subunidade" style="background-color: #ffe6e1 !important;">
-                                    <td style="border-right: 1px black solid;">
-                                        <i class="fa fa-plus detalhar-linha link" data-suoid="<?php echo $dado['unoid']; ?>"></i>&nbsp;&nbsp;
-                                        <span class="detalhe-subunidade" data-suoid="<?php echo $dado['unoid']; ?>">
-                                            <?php echo $dado['unosigla'] . ' - ' . $dado['unonome'] . ' (' . $dado['unocod'] . ')'; ?>
-                                        </span>
-                                    </td>
-
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format($dados['dotacaoCusteio'], 0, ',', '.'); ?></td>
-
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format($dados['dotacaoCapital'], 0, ',', '.'); ?></td>
-
-                                    <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format(($dados['dotacaoCusteio'] + $dados['dotacaoCapital']), 0, ',', '.'); ?></td>
-
-                                    <td style="color: <?php echo $oPlanoInterno->getCorPainelPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right">
-                                        <input name="limites" type="text" class="input_valor salvar-limite-fnc" value="<?php echo $dado['lmuvlr']; ?>" data-unoid="<?php echo $dado['unoid']; ?>" data-lmuid="<?php echo $dado['lmuid']; ?>" >
-                                    </td>
-                                </tr>
-                                <?php foreach($dados['detalhe'] as $dado){ ?>
-                                    <tr class="tr_<?php echo $dado['unoid']; ?> tr_detalhe" style="display: none; background-color: #fff0e6 !important;">
-                                        <td style="padding-left: 30px; border-right: 1px black solid;" >
-                                            <span class="detalhe-funcional" data-ptrid="<?php echo $dado['ptrid']; ?>">
-                                                <?php echo $dado['funcional'] . ' - ' . $dado['acatitulo'] . ' (RP ' . $dado['irpcod'] . ')'; ?>
-                                            </span>
-                                            <?php if($dado['compartilhada'] > 1): ?>
-                                                &nbsp;<i class="fa fa-handshake-o link" title="Funcional Compartilhada com outras Subunidades."></i>
-                                            <?php endif; ?>
-                                        </td>
-
-                                        <td class="text-right" style="border-right: 1px black solid;">
-                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" value="<?php echo number_format($dado['ptrdotacao_custeio'], 2, '.', ''); ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocusteio" >
-                                        </td>
-
-                                        <td class="text-right" style="border-right: 1px black solid;">
-                                            <input name="limites[]" type="text" class="input_valor salvar-dotacao-fnc" value="<?php echo number_format($dado['ptrdotacao_capital'], 2, '.', ''); ?>" data-ptrid="<?php echo $dado['ptrid']; ?>" data-campo="ptrdotacaocapital" >
-                                        </td>
-
-                                        <td class="text-right" style="border-right: 1px black solid;"><?php echo number_format(($dado['ptrdotacao_custeio'] + $dado['ptrdotacao_capital']), 2, ',', '.'); ?></td>
-                                        <td class="text-center" style="border-right: 1px black solid;"> - </td>
-                                    </tr>
-                                <?php } ?>
-                            <?php } ?>
-                            <?php foreach($aPropostas as $dados){
+                            <?php foreach($listaRp as $dados){
                                 $dado = $dados['detalhe'][0];
                                 ?>
                                 <tr class="linha_subunidade">
