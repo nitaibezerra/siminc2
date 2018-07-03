@@ -10,7 +10,7 @@ class Public_Controller_Objetivoppa
             $mdObjetivoppa->popularDadosObjeto($dados);
             $mdObjetivoppa->prsano = $mdObjetivoppa->prsano ? $mdObjetivoppa->prsano : $_SESSION['exercicio'];
             $mdObjetivoppa->salvar(null,null,['prsano', 'oppdsc',  'oppnome', 'oppcod', 'oppstatus']);
-            $this->salvarMetas($mdObjetivoppa->oppid);
+            $this->salvarMetasObjetivos($mdObjetivoppa->oppid);
             $mdObjetivoppa->commit();
             simec_redirecionar($url."&oppid=".$dados['oppid'], 'success');
         } catch (Exception $e){
@@ -19,7 +19,29 @@ class Public_Controller_Objetivoppa
         }
     } //end salvar()
 
-    public function salvarMetas($oppid){
+    public function salvarMetas($dados){
+//        ver($dados,d);
+        $url = '?modulo=apoio/objetivoppa_form&acao=A&oppid='.$dados['oppid'];
+
+        try {
+            $mMetappa = new Public_Model_MetaPpa($dados['mppid']);
+            $mdObjetivoMetappa = new Public_Model_ObjetivoMetaPpa();
+            $mMetappa->popularDadosObjeto($dados);
+            $mMetappa->prsano = $mMetappa->prsano ? $mMetappa->prsano : $_SESSION['exercicio'];
+            $mMetappa->mppquantificavel = $dados['mppquantificavel'] == 't'? 't': 'f';
+            $mMetappa->mppanualizavel = $dados['mppanualizavel'] == 't'? 't': 'f';
+            
+            $mMetappa->salvar(null, null, ['mppdsc', 'mppcod', 'mppnome', 'mppstatus', 'prsano', 'mppquantificavel', 'mppquantidade', ]);
+            $mdObjetivoMetappa->salvarMetas($mMetappa->mppid, $dados['oppid']);
+            $mMetappa->commit();
+            simec_redirecionar($url, 'success');
+        } catch (Exception $e){
+            $mMetappa->rollback();
+            simec_redirecionar($url, 'error');
+        }        
+    }
+    
+    public function salvarMetasObjetivos($oppid){
         $mdObjetivoMetappa = new Public_Model_ObjetivoMetaPpa();
         $mppid = $_REQUEST['mppid'];
         $mdObjetivoMetappa->excluirPorObjetivo($oppid);
