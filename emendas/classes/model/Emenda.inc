@@ -284,10 +284,12 @@ class Emendas_Model_Emenda extends Modelo
                 CASE WHEN eme.emeimpositiva = 't' THEN 'Sim' ELSE 'Não' END AS impositiva,
                 eme.emejustificativa,
                 -- DADOS FINANCEIROS
-                emed.gndcod,
+                /*emed.gndcod,
                 emed.mapcod AS mod_aplic,
                 emed.foncod AS fonte,
-                emed.emdvalor,
+                emed.emdvalor,*/
+                coalesce((select sum(coalesce(emed.emdvalor,0)) from emendas.emendadetalhe emed where emed.emeid = eme.emeid and gndcod<=3),0) as custeio,
+                coalesce((select sum(coalesce(emed.emdvalor,0)) from emendas.emendadetalhe emed where emed.emeid = eme.emeid and gndcod>3),0) as capital,
                 -- BENEFICIARIOS
 		ben.benid,
                 suo.suocod AS cod_unidade,
@@ -346,9 +348,27 @@ class Emendas_Model_Emenda extends Modelo
                 CASE WHEN ben.benimpedimento = 1 THEN benmotivoimpedimento END as justificativa,
                 
         -- DADOS FINANCEIROS DO BENFICIÁRIO
-		bed.bedvalor,
+		coalesce((select sum(coalesce(bed.bedvalor,0))
+			  from emendas.beneficiariodetalhe bed
+			  left join emendas.emendadetalhe eme
+			    on bed.emdid = eme.emdid
+			 where bed.benid = ben.benid
+			   AND bed.bedstatus = 'A'),0) as bedvalor,
+		coalesce((select sum(coalesce(bed.bedvalorpriorizado,0))
+			  from emendas.beneficiariodetalhe bed
+			  left join emendas.emendadetalhe eme
+			    on bed.emdid = eme.emdid
+			 where bed.benid = ben.benid
+			   AND bed.bedstatus = 'A'),0) as bedvalorpriorizado,	
+		coalesce((select sum(coalesce(bed.bedvalor,0) - coalesce(bed.bedvalorpriorizado,0))
+			  from emendas.beneficiariodetalhe bed
+			  left join emendas.emendadetalhe eme
+			    on bed.emdid = eme.emdid
+			 where bed.benid = ben.benid
+			   AND bed.bedstatus = 'A'),0) as contigenciado,        
+		/*bed.bedvalor,
 		bed.bedvalorpriorizado,
-                bed.bedvalor - bed.bedvalorpriorizado AS contigenciado,
+                bed.bedvalor - bed.bedvalorpriorizado AS contigenciado,*/
 		-- DADOS SICONV
 		CASE WHEN prg.prgcodigo IS NOT NULL THEN substr(prg.prgcodigo::TEXT, 1, 6) || ' ' || substr(prg.prgcodigo::TEXT, 6, 4) || ' ' || substr(prg.prgcodigo::TEXT, 10, 4) ELSE NULL END AS numero_programa,
 		prg.prgtitulo AS titulo_programa,
@@ -371,7 +391,7 @@ class Emendas_Model_Emenda extends Modelo
                 LEFT JOIN emendas.autortipo autip ON aut.atpid = autip.atpid -- SELECT * FROM emendas.autortipo
                 LEFT JOIN emendas.partido p ON aut.parid = p.parid -- SELECT * FROM emendas.partido
                 LEFT JOIN monitora.vw_ptres ptr ON ptr.ptrid = eme.ptrid
-                LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
+                --LEFT JOIN emendas.emendadetalhe emed ON eme.emeid = emed.emeid -- SELECT * FROM emendas.emendadetalhe
                 -- BENEFICIARIOS
                 LEFT JOIN emendas.beneficiario ben ON ben.emeid = eme.emeid
                 LEFT JOIN emendas.proponente pro ON pro.proid = ben.proid -- SELECT * FROM emendas.proponente
@@ -386,7 +406,7 @@ class Emendas_Model_Emenda extends Modelo
 		LEFT JOIN monitora.pi_niveletapaensino nee ON ben.neeid = nee.neeid
 		LEFT JOIN emendas.impedimento imp ON ben.impid = imp.impid
                 -- DADOS FINANCEIROS DO BENFICIÁRIO
-                LEFT JOIN emendas.beneficiariodetalhe bed ON(bed.benid = ben.benid AND emed.emdid = bed.emdid AND bed.bedstatus = 'A')
+                --LEFT JOIN emendas.beneficiariodetalhe bed ON(bed.benid = ben.benid AND emed.emdid = bed.emdid AND bed.bedstatus = 'A')
 		-- DADOS SICONV
 		LEFT JOIN emendas.siconvbeneficiario sib ON(ben.benid = sib.benid) -- sib.sicid
 		LEFT JOIN emendas.siconvprograma sip ON(sib.sicid = sip.sicid) -- SELECT * FROM emendas.siconvprograma
