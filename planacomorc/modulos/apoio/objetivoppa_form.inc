@@ -46,14 +46,24 @@ include APPRAIZ . "includes/cabecalho.inc";
                         echo $simec->input('oppcod', 'Código', $mObjetivoppa->oppcod, ['required', 'class'=>'inteiro','maxlength' => 4]);
                         echo $simec->input('oppnome', 'Nome', $mObjetivoppa->oppnome , ['required', 'maxlength' => 250]);
                         echo $simec->input('oppdsc', 'Descricao', $mObjetivoppa->oppdsc, ['required', 'maxlength' => 250]);
-                        $aVinculos = [];
-                        if ($mObjetivoppa->oppid!=''){
-                            $aVinculos = (new Public_Model_ObjetivoMetaPpa())->recuperarPorExercicio($_SESSION['exercicio'], $mObjetivoppa->oppid);
-                        }
-                        $aMetaPpa = simec_preparar_array((new Public_Model_MetaPpa())->recuperarTodos("mppid as codigo, mppid || ' - ' || mppdsc as descricao", ["prsano = '{$_SESSION['exercicio']}'"]));
-                        echo $simec->select("mppid[]", "Metas", $aVinculos, $aMetaPpa, null, ['input-size'=>9]);
                         ?>
-
+                        <div class="form-group">
+                            <div class="text-center">                        
+                                <label for="" class="col-sm-3 col-md-3 col-lg-3 control-label">Metas: </label>
+                                <div class="col-md-6">
+                                    <?php
+                                    $aVinculos = [];
+                                    if ($mObjetivoppa->oppid!=''){
+                                        $aVinculos = (new Public_Model_ObjetivoMetaPpa())->recuperarPorExercicio($_SESSION['exercicio'], $mObjetivoppa->oppid);
+                                    }                        
+                                    $aMetaPpa = simec_preparar_array((new Public_Model_MetaPpa())->recuperarTodos("mppid as codigo, mppid || ' - ' || mppdsc as descricao", ["prsano = '{$_SESSION['exercicio']}'"]));
+                                    echo $simec->select("mppid[]", null, $aVinculos, $aMetaPpa, null, ['input-size'=>12]);?>
+                                </div>                            
+                                <div class="col-md-3" style="text-align: right;">
+                                    <button class="btn btn-success" type="button" id="btnNovaMeta"><i class="fa fa-check"></i>&nbsp;Nova Meta</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Salvar</button>
@@ -130,9 +140,27 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>        
     </div>
 </div>
+<div class="modal fade" id="detalhe-pi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Pi's Vinculados</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function(){
-        
+        $("#btnNovaMeta").click(function(){
+            $('#detalhe-pi').modal();
+        });
     });
     function alterarIniciativa(ippid, ippcod, ippdsc, ippnome){
         $("#ippid").val(ippid);
