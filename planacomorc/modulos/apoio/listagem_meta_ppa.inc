@@ -10,10 +10,10 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach($aMetappa as $dados){ ?>
+    <?php foreach($mMetappa as $dados){ ?>
         <tr>
             <td class="text-center">
-                <a title="Alterar" href="javascript:alterarCamposMeta(<?= $dados['mppid'] ?>,'<?= $dados['mppcod'] ?>','<?= $dados['mppnome'] ?>','<?= $dados['mppdsc'] ?>','<?= $dados['prsano'] ?>','<?= $dados['mppquantificavel'] ?>','<?= $dados['mppanualizavel'] ?>','<?= $dados['mppquantidade'] ?>');"><i class="fa fa-pencil"></i></a>
+                <a title="Alterar" href="javascript:alterarCamposMeta(<?= $dados['mppid'] ?>,'<?= $_REQUEST['oppid'] ?>');"><i class="fa fa-pencil"></i></a>
             </td>
             <td><?php echo $dados['mppcod']; ?></td>
             <td><?php echo $dados['mppnome']; ?></td>

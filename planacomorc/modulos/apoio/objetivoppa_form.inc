@@ -2,7 +2,7 @@
 // ver($_REQUEST,d);
 $cObjetivoppa = new Public_Controller_Objetivoppa();
 $cIniciativappa = new Public_Controller_Iniciativappa();
-
+$cMetappa = new Public_Controller_Metappa();
 switch ($_REQUEST['req']) {
     case 'salvar':
         $cObjetivoppa->salvar($_REQUEST);
@@ -21,27 +21,17 @@ switch ($_REQUEST['req']) {
         die;
     case 'carregar-form-metappa':
         $mMetappa = new Public_Model_MetaPpa($_REQUEST['mppid']);
-        echo '<input name="mppid" id="mppid" type="hidden" value="'.$mMetappa->mppid.'">';
-        echo $simec->input('mppcod', 'Código', $mMetappa->mppcod, ['required', 'maxlength' => 4]);
-        echo $simec->textarea('mppnome', 'Meta', $mMetappa->mppnome, ['required', 'maxlength' => 400]);
-        echo $simec->textarea('mppdsc', 'Descrição', $mMetappa->mppdsc, ['required', 'maxlength' => 1000]);
-        echo $simec->input('prsano', 'Ano', $mMetappa->prsano, ['class' => 'inteiro', 'required', 'maxlength' => 4]);
-        echo $simec->radioBoolean('mppquantificavel', 'Possui medida quantificável', $mMetappa->mppquantificavel);
-        $teste = $mMetappa->mppquantificavel != 't' ? 'display: none;' : '' ;
-        echo '<div id="div_mppquantidade" style="'.$teste.'">';
-        echo $simec->radioBoolean('mppanualizavel', 'Anualizável', $mMetappa->mppanualizavel);
-        echo $simec->input('mppquantidade', 'Quantidade', $mMetappa->mppquantidade, ['class' => 'inteiro', 'required', 'inteiro']);
-        echo '<div class="modal-footer">';
-        echo'<button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>';
-        echo '<?php if($mMetappa->mppid){ ?>';
-            echo '<a href="?modulo=apoio/metappa_form&acao=A&req=excluir&mppid=<?php echo $mMetappa->mppid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>';
-            <?php } ?>
-        </div>
-        echo '</div>';
+        include_once 'cadastro_meta_ppa.inc';
         die;
+    case 'salvar-meta':
+        $cObjetivoppa->salvarMetas($_REQUEST);
+        die;
+    case 'excluir-meta':
+        $cObjetivoppa->excluirMetas($_REQUEST['mppid']);
+        die;        
 }
 
-$aMetappa = (new Public_Model_MetaPpa)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
+$mMetappa = (new Public_Model_MetaPpa)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
 $mObjetivoppa = new Public_Model_ObjetivoPpa($_REQUEST['oppid']);
 if ($mObjetivoppa->oppid!=''){
     $mIniciativappa = (new Public_Model_IniciativaPpa())->recuperarTodos('*', ["prsano = '{$_SESSION['exercicio']}'", "ippstatus = 'A'", " oppid = {$_REQUEST['oppid']}"]);
@@ -165,7 +155,6 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>        
     </div>
 </div>
-
 <div class="modal fade" id="cadastro-metas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -175,24 +164,8 @@ include APPRAIZ . "includes/cabecalho.inc";
             </div>
             <div class="modal-body">
                 <div id="form_metappa">
-                    <input name="mppid" id="mppid" type="hidden" value="<?php echo $mMetappa->mppid; ?>">
-                    <?php
-                        echo $simec->input('mppcod', 'Código', $mMetappa->mppcod, ['required', 'maxlength' => 4]);
-                        echo $simec->textarea('mppnome', 'Meta', $mMetappa->mppnome, ['required', 'maxlength' => 400]);
-                        echo $simec->textarea('mppdsc', 'Descrição', $mMetappa->mppdsc, ['required', 'maxlength' => 1000]);
-                        echo $simec->input('prsano', 'Ano', $mMetappa->prsano, ['class' => 'inteiro', 'required', 'maxlength' => 4]);
-                        echo $simec->radioBoolean('mppquantificavel', 'Possui medida quantificável', $mMetappa->mppquantificavel);
-                        echo '<div id="div_mppquantidade">';
-                        echo $simec->radioBoolean('mppanualizavel', 'Anualizável', $mMetappa->mppanualizavel);
-                        echo $simec->input('mppquantidade', 'Quantidade', $mMetappa->mppquantidade, ['class' => 'inteiro', 'required', 'inteiro']);
-                        echo '</div>';
-                    ?>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit" id="btn-salvar"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                        <?php if($mMetappa->mppid){ ?>
-                            <a href="?modulo=apoio/metappa_form&acao=A&req=excluir&mppid=<?php echo $mMetappa->mppid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                            <?php } ?>
-                    </div>
+                    
+                    <?php include_once 'cadastro_meta_ppa.inc';?>
                 </div>
                 <div class="table-responsive">
                     <?php include 'listagem_meta_ppa.inc'; ?>
@@ -203,17 +176,6 @@ include APPRAIZ . "includes/cabecalho.inc";
 </div>
 
 <script>
-    $(document).ready(function(){
-        $("#btnNovaMeta").click(function(){
-            $('#cadastro-metas').modal();
-        });
-        $('#cadastro-metas').modal();
-        toggleQuantidade();
-        $('#mppquantificavel').change(function(){
-            toggleQuantidade();
-        });
-    });
-
     function alterarIniciativa(ippid, ippcod, ippdsc, ippnome){
         $("#ippid").val(ippid);
         $("#ippcod").val(ippcod);
@@ -232,8 +194,8 @@ include APPRAIZ . "includes/cabecalho.inc";
         }
     }
 
-    function alterarCamposMeta(mppid) {
-        $('#form_metappa').load('planacomorc.php?modulo=apoio/objetivoppa_form&acao=A&req=carregar-form-metappa&mppid='+ mppid);
+    function alterarCamposMeta(mppid, oppid) {
+        $('#form_metappa').load('planacomorc.php?modulo=apoio/objetivoppa_form&acao=A&req=carregar-form-metappa&mppid='+ mppid+'&oppid='+ oppid);
     }
 
 </script>
