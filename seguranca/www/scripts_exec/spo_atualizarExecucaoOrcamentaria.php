@@ -65,7 +65,7 @@ $ws = new Spo_Ws_Sof_Quantitativo('spo', Spo_Ws_Sof_Quantitativo::PRODUCTION);
 $pagina = 0;
 $continuar = true;
 
-$sql = "DELETE FROM wssof.ws_execucaoorcamentariadto WHERE anoexercicio = $exercicio";
+$sql = "DELETE FROM wssof.ws_execucaoorcamentariadto WHERE anoexercicio = ". (int)$exercicio;
 $db->executar($sql);
 do {
     // -- Consultando os dados no WS
@@ -89,7 +89,7 @@ do {
 } while ($continuar);
 $db->commit();
 
-$sql = "DELETE FROM spo.siopexecucao WHERE exercicio = '{$exercicio}'";
+$sql = "DELETE FROM spo.siopexecucao WHERE exercicio = '". (int)$exercicio. "'";
 $db->executar($sql);
 
 $sql = "
