@@ -29,6 +29,15 @@ $(document).ready(function(){
         }
     });
 
+    $('.dataTablesPg5').DataTable({
+        pageLength: 5,
+        responsive: true,
+        dom: '<"html5buttons"B>lTfgitp',
+        "language": {
+            "url": "/zimec/public/temas/simec/js/plugins/dataTables/Portuguese-Brasil.json"
+        }
+    });
+
     $('.slim-scroll').slimscroll({
         height: '300px'
     });
