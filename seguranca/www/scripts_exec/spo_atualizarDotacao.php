@@ -59,15 +59,35 @@ require_once(APPRAIZ . 'spo/ws/sof/Quantitativo.php');
 $db = new cls_banco();
 
 $exercicio = date('Y');
-$sql = "select  exe.programa, exe.acao, exe.planoorcamentario, exe.unidadeorcamentaria, exe.anoexercicio, exe.anoreferencia, exe.categoriaeconomica,
-                exe.programa || '.' || exe.acao || '.' || exe.planoorcamentario || '.' || exe.unidadeorcamentaria funcional,
-                sum(exe.dotatual::numeric) dotatual, sum(exe.dotinicialsiafi::numeric) dotinicialsiafi,
-                sum(exe.dotacaoantecipada::numeric) dotacaoantecipada, sum(exe.dotacaoinicial::numeric) dotacaoinicial
-        from wssof.ws_execucaoorcamentariadto exe
-        where exe.anoexercicio = '$exercicio'
-        and exe.anoreferencia = '$exercicio'
-        group by exe.acao, exe.planoorcamentario, exe.unidadeorcamentaria,  exe.programa, exe.anoexercicio, exe.anoreferencia, exe.categoriaeconomica
-        order by  funcional";
+$sql = "
+    SELECT
+        exe.programa,
+        exe.acao,
+        exe.planoorcamentario,
+        exe.unidadeorcamentaria,
+        exe.anoexercicio,
+        exe.anoreferencia,
+        exe.categoriaeconomica,
+        exe.programa || '.' || exe.acao || '.' || exe.planoorcamentario || '.' || exe.unidadeorcamentaria AS funcional,
+        sum(exe.dotatual::numeric) AS dotatual,
+        sum(exe.dotinicialsiafi::numeric) AS dotinicialsiafi,
+        sum(exe.dotacaoantecipada::numeric) AS dotacaoantecipada,
+        sum(exe.dotacaoinicial::numeric) AS dotacaoinicial
+    FROM wssof.ws_execucaoorcamentariadto AS exe
+    WHERE
+        exe.anoexercicio = '".(int)$exercicio. "'
+        AND exe.anoreferencia = '".(int)$exercicio. "'
+    GROUP BY
+        exe.acao,
+        exe.planoorcamentario,
+        exe.unidadeorcamentaria,
+        exe.programa,
+        exe.anoexercicio,
+        exe.anoreferencia,
+        exe.categoriaeconomica
+    ORDER BY
+        funcional
+";
 
 $dados = $db->carregar($sql);
 $dados = $dados ? $dados : [];
@@ -77,25 +97,24 @@ foreach($dados as $dado){
     $dadosSiop[$dado['funcional']][$dado['categoriaeconomica']] = $dado['dotatual'];
 }
 
-//$sql = "select  psu.psuid, ptr.ptrid, ptr.unicod, psu.suoid, psu.ptrdotacaocapital, psu.ptrdotacaocusteio, funcional funcionalptres,
 $sql = "
     SELECT
         psu.psuid,
         ptr.ptrid,
         ptr.unicod,
         psu.suoid,
-        coalesce(psu.ptrdotacaocapital, 0) ptrdotacaocapital,
-        coalesce(psu.ptrdotacaocusteio, 0) ptrdotacaocusteio,
-        funcional funcionalptres,
-        ptr.prgcod || '.' || ptr.acacod || '.' || ptr.plocod || '.' || ptr.unicod funcional,
+        coalesce(psu.ptrdotacaocapital, 0) AS ptrdotacaocapital,
+        coalesce(psu.ptrdotacaocusteio, 0) AS ptrdotacaocusteio,
+        funcional AS funcionalptres,
+        ptr.prgcod || '.' || ptr.acacod || '.' || ptr.plocod || '.' || ptr.unicod AS funcional,
         suo.suonome,
         suo.unosigla,
         suo.suosigla
-    FROM spo.ptressubunidade psu
-        JOIN monitora.vw_ptres ptr ON ptr.ptrid = psu.ptrid
-        JOIN public.vw_subunidadeorcamentaria suo ON suo.suoid = psu.suoid
+    FROM spo.ptressubunidade AS psu
+        JOIN monitora.vw_ptres AS ptr ON ptr.ptrid = psu.ptrid
+        JOIN public.vw_subunidadeorcamentaria AS suo ON suo.suoid = psu.suoid
     WHERE
-        ptr.ptrano = '$exercicio'
+        ptr.ptrano = '". (int)$exercicio. "'
         AND suo.unofundo = 'f'
         AND ptr.irpcod != '6'
     ORDER BY
@@ -168,7 +187,7 @@ foreach($dadosSiminc as $funcional => $dado){
                     <td style='text-align: right; color: green;'>" . number_format($dadosSiop[$funcional][3], 0, ',', '.') . "</td>
                 </tr>
             ";
-            $sqls[] = "update spo.ptressubunidade psu set ptrdotacaocusteio = {$dadosSiop[$funcional][3]} where psuid = {$dado[0]['psuid']}";
+            $sqls[] = "UPDATE spo.ptressubunidade psu SET ptrdotacaocusteio = {$dadosSiop[$funcional][3]} WHERE psuid = {$dado[0]['psuid']}";
             $boAlteracao = true;
         }
 
@@ -185,7 +204,7 @@ foreach($dadosSiminc as $funcional => $dado){
                 </tr>
             ";
 
-            $sqls[] = "update spo.ptressubunidade psu set ptrdotacaocapital = {$dadosSiop[$funcional][4]} where psuid = {$dado[0]['psuid']}";
+            $sqls[] = "UPDATE spo.ptressubunidade psu SET ptrdotacaocapital = {$dadosSiop[$funcional][4]} WHERE psuid = {$dado[0]['psuid']}";
             $boAlteracao = true;
         }
     } elseif(count($dado) > 1){
@@ -628,18 +647,30 @@ if($corpoEmailV3){
     include_once APPRAIZ. "includes/email-template.php";
 
     // Recuperando email dos super-usuários e administradores
-    $sql = "select distinct usu.usucpf, usu.usunome, usu.usuemail
-            from seguranca.perfilusuario pu
-                    inner join seguranca.usuario usu on usu.usucpf = pu.usucpf and usu.suscod = 'A'
-                    inner join seguranca.usuario_sistema us on us.usucpf = usu.usucpf and us.suscod = 'A' and us.sisid = 157
-            where pu.pflcod in (" . PFL_ADMINISTRADOR . ", " . PFL_SUPERUSUARIO . ")
-            order by usuemail";
+    $sql = "
+        SELECT DISTINCT
+            usu.usucpf,
+            usu.usunome,
+            usu.usuemail
+        FROM seguranca.perfilusuario pu
+            JOIN seguranca.usuario usu ON(
+                usu.usucpf = pu.usucpf
+                AND usu.suscod = 'A'
+            )
+            JOIN seguranca.usuario_sistema us ON(
+                us.usucpf = usu.usucpf
+                AND us.suscod = 'A'
+                AND us.sisid = 157
+            )
+        WHERE
+            pu.pflcod IN (" . PFL_ADMINISTRADOR . ", " . PFL_SUPERUSUARIO . ")
+        ORDER BY
+            usuemail
+    ";
     $destinatario = $db->carregar($sql);
-
-//    $destinatario = ["teste@teste.com"];
-
+    
     $remetente = '';
-    $assunto = '[SIMINC 2] Alterações de Dotação';
+    $assunto = '[SIMINC2] Alterações de Dotação';
     $conteudo = $textoEmailV3;
 //echo $conteudo; die;
     simec_email($remetente, $destinatario, $assunto, $conteudo);

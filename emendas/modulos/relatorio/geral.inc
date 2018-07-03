@@ -20,10 +20,11 @@
         'Impositiva',
         'Justificativa',
         # DADOS FINANCEIROS
-        'GND',
+        /*'GND',
         'Mod. Aplicação',
-        'Fonte',
-        'Valor',
+        'Fonte',*/
+        'Valor Custeio',
+        'Valor Capital',
         # BENEFICIARIOS
         'Id Beneficiario',
         'Código Subunidade',

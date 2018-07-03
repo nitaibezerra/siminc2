@@ -65,7 +65,7 @@ $ws = new Spo_Ws_Sof_Quantitativo('spo', Spo_Ws_Sof_Quantitativo::PRODUCTION);
 $pagina = 0;
 $continuar = true;
 
-$sql = "delete from wssof.ws_execucaoorcamentariadto where anoexercicio = $exercicio";
+$sql = "DELETE FROM wssof.ws_execucaoorcamentariadto WHERE anoexercicio = ". (int)$exercicio;
 $db->executar($sql);
 do {
     // -- Consultando os dados no WS
@@ -89,18 +89,58 @@ do {
 } while ($continuar);
 $db->commit();
 
-$sql = "DELETE FROM spo.siopexecucao   WHERE exercicio = '{$exercicio}'";
+$sql = "DELETE FROM spo.siopexecucao WHERE exercicio = '". (int)$exercicio. "'";
 $db->executar($sql);
 
-$sql = "INSERT INTO spo.siopexecucao(exercicio,esfcod,unicod,funcod,sfucod,prgcod,acacod,loccod,plocod,ptres,plicod,vlrdotacaoinicial,vlrdotacaoatual,vlrempenhado,vlrliquidado,vlrpago, vlrautorizado)
-        SELECT exo.anoexercicio AS exercicio,
-               exo.esfera AS esfcod, exo.unidadeorcamentaria AS unicod, exo.funcao AS funcod, exo.subfuncao AS sfucod, exo.programa AS prgcod, exo.acao AS acacod,
-               exo.localizador AS loccod, exo.planoorcamentario AS plocod, exo.numeroptres AS ptres, exo.planointerno AS plicod,
-               CASE WHEN exo.dotacaoinicial <> '' THEN exo.dotacaoinicial::NUMERIC ELSE 0 END AS vlrdotacaoinicial ,
-               CASE WHEN exo.dotatual <> '' THEN exo.dotatual::NUMERIC ELSE 0 END AS vlrdotacaoatual , 
-               exo.empliquidado::NUMERIC + exo.empenhadoaliquidar::NUMERIC AS vlrempenhado, exo.empliquidado::NUMERIC AS vlrliquidado
-               , exo.pago::NUMERIC AS vlrpago, exo.autorizado::NUMERIC AS vlrautorizado
-          FROM wssof.ws_execucaoorcamentariadto exo
-          WHERE anoexercicio = '{$exercicio}'";
+$sql = "
+    INSERT INTO spo.siopexecucao(
+        exercicio,
+        esfcod,
+        unicod,
+        funcod,
+        sfucod,
+        prgcod,
+        acacod,
+        loccod,
+        plocod,
+        ptres,
+        plicod,
+        vlrdotacaoinicial,
+        vlrdotacaoatual,
+        vlrempenhado,
+        vlrliquidado,
+        vlrpago,
+        vlrautorizado
+    )
+    SELECT
+        exo.anoexercicio AS exercicio,
+        exo.esfera AS esfcod,
+        exo.unidadeorcamentaria AS unicod,
+        exo.funcao AS funcod,
+        exo.subfuncao AS sfucod,
+        exo.programa AS prgcod,
+        exo.acao AS acacod,
+        exo.localizador AS loccod,
+        exo.planoorcamentario AS plocod,
+        exo.numeroptres AS ptres,
+        exo.planointerno AS plicod,
+        CASE WHEN exo.dotacaoinicial <> '' THEN
+            exo.dotacaoinicial::NUMERIC
+        ELSE
+            0
+        END AS vlrdotacaoinicial,
+        CASE WHEN exo.dotatual <> '' THEN
+            exo.dotatual::NUMERIC
+        ELSE
+            0
+        END AS vlrdotacaoatual,
+        exo.empliquidado::NUMERIC + exo.empenhadoaliquidar::NUMERIC AS vlrempenhado,
+        exo.empliquidado::NUMERIC AS vlrliquidado,
+        exo.pago::NUMERIC AS vlrpago,
+        exo.autorizado::NUMERIC AS vlrautorizado
+    FROM wssof.ws_execucaoorcamentariadto exo
+    WHERE
+        anoexercicio = '".(int)$exercicio. "'";
+
 $db->executar($sql);
 $db->commit();
