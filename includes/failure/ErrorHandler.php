@@ -386,7 +386,7 @@ class ErrorHandler {
      */
     function enviaEmail($msgLog) {
         $msgLog = str_replace ( "<q>", "<br>", $msgLog );
-        $assunto = 'Erro no Simec ' . date ( "d-m-Y H:i:s" ) . " - " . $_SESSION ['ambiente'];
+        $assunto = 'Erro no '. SIGLA_SISTEMA . ' ' . date ( "d-m-Y H:i:s" ) . " - " . $_SESSION ['ambiente'];
 
         $aDestinatarios = carregarUsuariosSessao();
         $remetente     = array("nome"=>SIGLA_SISTEMA. " - ".strtoupper($_SESSION['sisdiretorio'])." - " . $_SESSION['usunome'] . " - " . $_SESSION['usuorgao'], "email"=>"noreply@mec.gov.br");

@@ -5,6 +5,7 @@ Bem vindo à documentação do SIMINC2! Aqui você vai encontrar diversas documentaç
 * [Roteiro de publicação de releases](docs/Roteiro_de_publicacao_de_releases.md)
 * [Regras de versionamento](docs/Regras_versionamento.md)
 * [Guia de operação e desenvolvimento](docs/Guia_de_operacao-desenvolvimento.md)
+* [Guia de fluxo de demandas do Kanban](docs/Fluxo_Kanban.md)
 
 ## Docker
 Utilizamos o Docker como plataforma de desenvolvimento com o intuito de garantir o mesmo ambiente de desenvolvimento 
