@@ -1,10 +1,10 @@
-# Fluxo de Workflow do Kanban
+# Workflow do Kanban
 
 ## Zenhub
 
 <https://www.zenhub.com/>
 
-Como ferramenta, utiliza-se o Zenhub, ferramenta que facilita a comunicação
+Como ferramenta, utiliza-se o Zenhub, que facilita a comunicação
 com o github e torna o processo de desenvolvimento mais fácil.
 
 
@@ -20,34 +20,34 @@ para o Time de Desenvolvimento.
 
 ### Próxima Sprint
 
-Contém apenas as demandas que o demandante irá solicitar para a Sprint seguinte.
-Apenas o demandante move as Issue's para as outras prateleiras.
+Contém apenas as demandas que o demandante solicitará para a Sprint seguinte.
+Apenas o demandante move as Issue's(card's) para as outras prateleiras.
 
 
 ### Prateleira
 
-Contém todas as demandas que o demandante solicitará ao time de desenvolvimento.
+Contém todas as demandas que o demandante solicitará ao Time de Desenvolvimento.
 
 
 ### A Fazer
 
-Contém todas as demandas para o Time de Desenvolvimento atender.<br><br>
+Contém todas as demandas que o Time de Desenvolvimento atenderá.<br>
 <b>Obs:</b> Quando algum membro do Time de Desenvolvimento for realizar a demanda,
 o mesmo deverá mover o card(Issue) para a prateleira de <b>Fazendo</b>
 
 
 ### Fazendo
 
-Contém todas as demandas que o Time de Desenvolvimento está atendendo atualmente.<br><br>
+Contém todas as demandas que o Time de Desenvolvimento está atendendo atualmente.<br>
 <b>Obs:</b> Quando a demanda for finalizada, o responsável deverá mover o card(Issue) para
-a prateleira de <b>Teste</b> e solicitar que outro membro do Time possa testar para liberar
+a prateleira de <b>Teste</b> e solicitar que outro membro do Time de Desenvolvimento possa testar para liberar
 a demanda ao cliente.
 
 
 ### Impedimentos
 
-Contém todas as demandas que não foram realizadas com êxito, ou seja, contém ressalvas.<br><br>
-<b>Obs:</b> Quando o cliente ou algum membro do Time mover algum card(Issue) para este item da
+Contém todas as demandas que não foram realizadas com êxito, ou seja, contém ressalvas.<br>
+<b>Obs:</b> Quando o cliente ou algum membro do Time de Desenvolvimento mover algum card(Issue) para este item da
 prateleira, o mesmo deverá especificar no card(Issue) o motivo do Impedimento, para que o
 responsável pelo desenvolvimento possa corrigir a demanda. Após a correção, pôr a demanda para
 <b>Teste</b> e seguir com o Fluxo a partir do teste.
@@ -55,7 +55,7 @@ responsável pelo desenvolvimento possa corrigir a demanda. Após a correção, pôr 
 
 ### Teste
 
-Contém todas as demandas que necessitam de teste para serem liberadas ao cliente.
+Contém todas as demandas que necessitam de teste para serem liberadas ao cliente.<br>
 <b>Obs:</b> O responsável pela verificação do teste deverá ser, preferencialmente, algum membro
 que não participou do desenvolvimento da demanda.<br>
 Após a correção, o responsável pelo teste deverá mover a demanda para a prateleira <b>Feito</b>
@@ -66,7 +66,7 @@ e exibir a mensagem 'Testado em Homologação : ', informando também a url de onde
 
 ### Feito
 
-Contém todas as demandas que já foram feitas.
+Contém todas as demandas que já foram feitas.<br>
 <b>Obs:</b> Neste Item de prateleira, o cliente fará o seu teste, onde caso a demanda não esteja de acordo
 o mesmo mudará o card(Issue) para <b>Impedimento</b> e especificará o motivo do impedimento. Caso esteja tudo
 de acordo, ele fechará o card(Issue).
@@ -74,8 +74,8 @@ de acordo, ele fechará o card(Issue).
 
 ### Closed
 
-Contém todas as demandas que já foram testadas pelo cliente e estão prontas para serem publicadas.
+Contém todas as demandas que já foram testadas pelo cliente e estão prontas para serem publicadas.<br>
 <b>Obs:</b> Verificar se o card(Issue) possui a label de <b>PUBLICADA</b>, caso tenha, significa que
 a demanda já passou pela fase de publicação. Caso não contenha, deverá ser solicitado o pull request e marcar algum
-membro do Time para revisar e verificar o código antes da publicação.<br>
+membro do Time de Desenvolvimento para revisar e verificar o código antes da publicação.<br><br>
 <b>Após a publicação, adicionar a label de PUBLICADA na demanda, através da ferramenta Zenhub ou pelo próprio GitHub.<b/>
