@@ -13,8 +13,8 @@ switch ($_REQUEST['req']) {
     case 'salvarIniciativa':
         $cIniciativappa->salvar($_REQUEST);
         die;        
-    case 'excluirIniciativa':
-        $cObjetivoppa->excluir($_REQUEST['oppid']);
+    case 'excluir-iniciativa':
+        $cIniciativappa->excluir($_REQUEST);
         die;
     case 'carregar-listagem-metas':
         $aMetappa = (new Public_Model_MetaPpa)->recuperarTodos('*' , ["prsano = '{$_SESSION['exercicio']}'"]);
@@ -115,9 +115,6 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>&nbsp;Salvar</button>
-                                <?php if($mObjetivoppa->oppid){ ?>
-                                    <a href="?modulo=apoio/objetivoppa_form&acao=A&req=excluirIniciativa&oppid=<?php echo $mObjetivoppa->oppid; ?>" class="btn btn-danger link-excluir" id="btnExcluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
-                                <?php } ?>
                             </div>
                         </div>
                         <?php
@@ -137,7 +134,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                             <td class="text-center">
                                                 <a title="Alterar" class="editar-iniciativa" href="javascript:alterarIniciativa(<?= $dados['ippid'];?>,<?= $dados['ippcod'];?>,'<?= $dados['ippdsc'];?>', '<?= $dados['ippnome'];?>')"><i class="fa fa-pencil"></i></a>
                                                 <?php if($podeEditar) { ?>
-                                                    <a title="excluir" name="req" value="excluir-segmento" id="excluir-segmento" href="?modulo=apoio/area_cultural_form&acao=A&req=excluir-segmento&mdeid=<?= $dados['mdeid'];?>&neeid=<?= $dados['neeid'];?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
+                                                    <a title="excluir iniciativa" name="req" value="excluir-iniciativa" id="excluir-segmento" href="?modulo=apoio/objetivoppa_form&acao=A&req=excluir-iniciativa&ippid=<?= $dados['ippid'];?>&oppid=<?= $dados['oppid'];?>" style="margin-left: 5px;"><i class="fa fa-close"></i></a>
                                                 <?php } ?>
                                             </td>
                                             <td><?php echo $dados['ippdsc']; ?></td>

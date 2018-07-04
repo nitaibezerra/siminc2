@@ -17,5 +17,22 @@ class Public_Controller_Iniciativappa
             simec_redirecionar($url, 'error');
         }
     } //end salvar()
+    
+    public function excluir($dados)
+    {
+        $url = "?modulo=apoio/objetivoppa_form&acao=A&oppid=".$dados['oppid'];
+
+        try {
+            $mdObjetivoppa = new Public_Model_IniciativaPpa($dados['ippid']);
+
+            $mdObjetivoppa->ippstatus = 'I';
+            $mdObjetivoppa->salvar();
+            $mdObjetivoppa->commit();
+            simec_redirecionar($url, 'success');
+        } catch (Exception $e){
+            $mdObjetivoppa->rollback();
+            simec_redirecionar($url, 'error');
+        }
+    }
 
 }
