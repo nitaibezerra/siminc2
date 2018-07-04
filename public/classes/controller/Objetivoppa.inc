@@ -27,6 +27,7 @@ class Public_Controller_Objetivoppa
             $mMetappa = new Public_Model_MetaPpa($dados['mppid']);
             $mdObjetivoMetappa = new Public_Model_ObjetivoMetaPpa();
             $mMetappa->popularDadosObjeto($dados);
+            $mMetappa->mppcod = strtoupper($mMetappa->mppcod);
             $mMetappa->prsano = $mMetappa->prsano ? $mMetappa->prsano : $_SESSION['exercicio'];
             $mMetappa->mppquantificavel = $dados['mppquantificavel'] == 't'? 't': 'f';
             $mMetappa->mppanualizavel = $dados['mppanualizavel'] == 't'? 't': 'f';

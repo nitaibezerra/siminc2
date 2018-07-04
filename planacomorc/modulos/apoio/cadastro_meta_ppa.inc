@@ -3,7 +3,7 @@
     <input name="mppid" id="mppid" type="hidden" value="<?php echo $mMetappa->mppid; ?>">
     <input name="oppid" id="oppid" type="hidden" value="<?php echo $_REQUEST['oppid']; ?>">
     <?php
-        echo $simec->input('mppcod', 'Código', $mMetappa->mppcod, ['required', 'maxlength' => 4]);
+        echo $simec->input('mppcod', 'Código', $mMetappa->mppcod, ['required', 'maxlength' => 4, 'class'=> 'upper-text']);
         echo $simec->textarea('mppnome', 'Meta', $mMetappa->mppnome, ['required', 'maxlength' => 400]);
         echo $simec->textarea('mppdsc', 'Descrição', $mMetappa->mppdsc, ['required', 'maxlength' => 1000]);
         echo $simec->input('prsano', 'Ano', $mMetappa->prsano, ['class' => 'inteiro', 'required', 'maxlength' => 4]);
