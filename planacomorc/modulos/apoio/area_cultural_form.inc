@@ -2,7 +2,6 @@
 
 $cAreaCultural = new Public_Controller_AreaCultural();
 $cSegmentoCultural = new Public_Controller_SegmentoCultural();
-
 $mAreaCultural = new Monitora_Model_PiModalidadeEnsino($_REQUEST['mdeid']);
 
 $mSegmentoCultural = new Monitora_Model_PiNivelEtapaEnsino($_REQUEST['neeid']);
@@ -52,7 +51,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                         <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
                         
                         <?php
-                            echo $simec->input('mdecod', 'Código PI', $mAreaCultural->mdecod, ['required','maxlength' => 1]);
+                            echo $simec->input('mdecod', 'Código PI', $mAreaCultural->mdecod, ['required','maxlength' => 1, 'class' => 'upper-text']);
                             echo $simec->input('mdedsc', 'Descrição', $mAreaCultural->mdedsc, ['required', 'maxlength' => 250]);
                         ?>
                         
@@ -76,7 +75,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                 </div>
                 <?php if($mAreaCultural->mdeid){ ?>
                     <div class="ibox-content">
-                        <form id="formulario-segmento" name="formulario" method="post" class="form-horizontal">
+                        <form id="formulario-segmento" name="formulario-segmento" method="post" class="form-horizontal" action="?modulo=apoio/area_cultural_form&acao=A">
                             <input type="hidden" name="req" id="req" value="salvar-segmento" />
                             <input name="mdeid" id="mdeid" type="hidden" value="<?php echo $mAreaCultural->mdeid; ?>">
                             <input name="neeid" id="neeid" type="hidden" value="<?php echo $mSegmentoCultural->neeid; ?>">
@@ -88,7 +87,7 @@ include APPRAIZ . "includes/cabecalho.inc";
 
                             <div class="form-group">
                                 <div class="text-center">
-                                    <button class="btn btn-primary" type="submit" id="btn-salvar-segmento"><i class="fa fa-check"></i>&nbsp;Salvar</button>
+                                    <button class="btn btn-primary" type="button" id="btn-salvar-segmento"><i class="fa fa-check"></i>&nbsp;Salvar</button>
                                 </div>
                             </div>
                         </form>
