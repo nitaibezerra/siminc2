@@ -301,6 +301,37 @@
 			<a class="play-pause"></a>
 			<ol class="indicator"></ol>
 		</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="modal_upload_rodape" class="modal fade">
+            <div class="modal_dialog_upload">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">Anexar arquivos(Documentos)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="dropzone" method="POST" enctype="multipart/form-data" action="acompanhamento.php?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&req=uploadAnexo" id="formularioAnexo" name="formularioAnexo">
+                            <div class="form-group">
+                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                </div>
+                            </div>
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                
 	</body>
 </html>
 <script language="JavaScript">
