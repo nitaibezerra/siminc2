@@ -305,13 +305,20 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         return $sql;
     }
     
-    public function montarSqlBuscarRp(stdClass $parametros){
-//        $filtro[] = "suo.suostatus = 'A'";
-//        $filtro[] = "ptr.irpcod <> '6'";
-//        $where = $this->montarFiltros($filtro);
+    /**
+     * Monta SQL para consultar subunidades com total de pré-pi e total do limite.
+     * 
+     * @param stdClass $parametros
+     * @return string
+     */
+    public function montarSqlPropostaTotaisLimites(stdClass $parametros){
 
+        # Filtros
+        $whereTotalPrePi = $parametros->aprovados? 'AND doc.esdid = '. (int)ESD_PREPI_APROVADO: NULL;
+        $where = $parametros->exercicio? "AND suo.prsano = '". (int)$parametros->exercicio. "'": NULL;
+        
         $sql = "
-            SELECT
+           SELECT DISTINCT
                 suo.suoid,
                 suo.unoid,
                 suo.unocod,
@@ -320,89 +327,51 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
                 suo.suosigla,
                 suo.suocod,
                 suo.suonome,
-                ptr.ptrano,
-                ptr.funcional,
-                ptr.acatitulo,
-                ptr.irpcod,
-                ptr.plodsc,
-                ptr.ptrid,
-                lmu.lmuvlr,
-                lmu.lmuid,
-                psu.psuid,
-                psu.ptrdotacaocapital ptrdotacao_capital,
-                psu.ptrdotacaocusteio ptrdotacao_custeio,
-                sum(COALESCE(pic.picvalorcapital, 0)) picvalorcapital,
-                sum(COALESCE(pic.picvalorcusteio, 0)) picvalorcusteio,
                 (
                     SELECT
-                        COUNT(1)
-                    FROM spo.ptressubunidade
+                        COALESCE(SUM((COALESCE(pre.plivalorcusteio, 0) + COALESCE(pre.plivalorcapital, 0))), 0) AS total_pre_pi
+                    FROM proposta.preplanointerno pre
+                        LEFT JOIN workflow.documento doc ON(pre.docid = doc.docid)
                     WHERE
-                        ptressubunidade.ptrid = ptr.ptrid
-                ) AS compartilhada
+                        pre.plistatus = 'A'
+                        AND pre.prsano = suo.prsano
+                        AND pre.suoid = suo.suoid
+                        ". $whereTotalPrePi. "
+                ) AS total_pre_pi,
+                (
+                    SELECT
+                        COALESCE(SUM(COALESCE(srl.srllimite, 0)), 0) AS total_limite_rp
+                    FROM proposta.subunidaderplimite srl
+                    WHERE
+                        srl.srlstatus = 'A'
+                        AND srl.suoid = suo.suoid
+                ) AS total_limite_rp
             FROM public.vw_subunidadeorcamentaria suo
-                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                LEFT JOIN monitora.pi_planointernoptres ppt on ppt.ptrid = ptr.ptrid
-                LEFT JOIN monitora.pi_planointerno pli ON(
-                    pli.pliid = ppt.pliid
-                    AND pli.ungcod = suo.suocod
-                    AND pli.unicod = suo.unocod
-                    AND plistatus = 'A')
-                LEFT JOIN planacomorc.pi_complemento pic on pic.pliid = pli.pliid
-                LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
             WHERE
-                {$where}
-            GROUP BY
-                suo.suoid,
-                suo.unoid,
-                suo.unocod,
-                suo.unosigla,
-                suo.unonome,
-                suo.suocod,
-                suo.suonome,
-                suo.suosigla,
-                ptr.ptrano,
-                ptr.funcional,
-                ptr.acatitulo,
-                ptr.irpcod,
-                ptr.plodsc,
-                ptr.ptrid,
-                lmu.lmuvlr,
-                lmu.lmuid,
-                psu.psuid,
-                ptrdotacao_capital,
-                ptrdotacao_custeio
+                suo.suostatus = 'A'
+		". $where. "
             ORDER BY
                 suo.unonome,
                 suo.suonome,
-                ptr.funcional
+                total_pre_pi,
+                total_limite_rp
         ";
-
+//ver($sql, d);
         return $sql;
     }
     
     /**
-     * Busca lista de RP.
-     * @example array( 'suo.unocod' => UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod != '. UNIDADEORCAMENTARIA_SUOCOD_FNC, 'suo.unocod' => array(UNIDADEORCAMENTARIA_SUOCOD_FNC, 42101)
-     *
+     * Busca subunidades com total de pré-pi e total do limite.
+     * 
      * @param stdClass $parametros
      * @return array
      */
-    public function buscarRp(stdClass $parametros)
+    public function buscarPropostaTotaisLimites(stdClass $parametros)
     {
-        $sql = $this->montarSqlBuscarRp($parametros);
-//ver($sql, d);
-        $dados = $this->carregar($sql);
-        $dados = $dados ? $dados : [];
-        $dadosAgrupados = [];
-        foreach ($dados as $dado) {
-            $dadosAgrupados[$dado['suocod']]['detalhe'][] = $dado;
-            $dadosAgrupados[$dado['suocod']]['limite'] += $dado['rp_limite'];
-            $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
-        }
-
-        return $dadosAgrupados;
+        $sql = $this->montarSqlPropostaTotaisLimites($parametros);
+        $resultado = $this->carregar($sql);
+        $listaSubunidadeRp = $resultado? $resultado: array();
+        return $listaSubunidadeRp;
     }
     
 
