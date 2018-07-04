@@ -8,6 +8,7 @@ class Public_Controller_Iniciativappa
             $url = "?modulo=apoio/objetivoppa_form&acao=A&oppid=".$dados['oppid'];
             $mdObjetivoppa = new Public_Model_IniciativaPpa($dados['ippid']);
             $mdObjetivoppa->popularDadosObjeto($dados);
+            $mdObjetivoppa->ippcod = strtoupper($mdObjetivoppa->ippcod);
             $mdObjetivoppa->prsano = $mdObjetivoppa->prsano ? $mdObjetivoppa->prsano : $_SESSION['exercicio'];
             $mdObjetivoppa->salvar(null,null);
             $mdObjetivoppa->commit();
