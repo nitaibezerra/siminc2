@@ -3008,9 +3008,9 @@ function naoSomenteNumeros(formName, fieldName, labelCampo){
 }
 
 function abrirRegras(mnuid){
-        $('.modal_upload_rodape').show();
-        $('#modal_upload_rodape').modal();
-        $('#modal_upload .chosen-container').css('width', '100%');    
+        $('#popup_anexo_documentos_modulo').modal();
+//        $('#popup_anexo_documentos_modulo').modal();
+//        $('#modal_upload .chosen-container').css('width', '100%');    
 //	window.open(
 //		'../geral/regra_tela.php?mnuid='+mnuid,
 //		'usuariosonline',
