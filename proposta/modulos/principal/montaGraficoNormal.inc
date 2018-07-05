@@ -8,13 +8,13 @@
                 <div class="ibox-content">
                     <div class="tabs-container tabs">
                         <ul class="nav nav-tabs prodTabs">
-                            <li class="active"><a data-toggle="tab" href="#tab-1" tipo="Normal" data-tab="1" data-url="?modulo=inicio&acao=C&req=carregarGraficoUnidade&tipo=Normal"> Gráficos das Unidades</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-2" tipo="Normal" data-tab="2" data-url="?modulo=inicio&acao=C&req=carregarGraficoDireta&tipo=Normal"> Gráficos da Direta</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-3" tipo="Normal" data-tab="3" data-url="?modulo=inicio&acao=C&req=carregarGraficoCgconCogep&tipo=Normal"> Gráficos da CGCON/COGEP</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab-1" tipo="Normal" data-url="?modulo=inicio&acao=C&req=carregarGraficoUnidade&tipo=Normal"> Gráficos das Unidades</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2" tipo="Normal" data-url="?modulo=inicio&acao=C&req=carregarGraficoDireta&tipo=Normal"> Gráficos da Direta</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-3" tipo="Normal" data-url="?modulo=inicio&acao=C&req=carregarGraficoCgconCogep&tipo=Normal"> Gráficos da CGCON/COGEP</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="tab-1" class="tab-pane active">
-                                <?php $mPrePlanoInterno->carregarGrafico('Normal', $filtros, true); ?>
+                                <?php $mPrePlanoInterno->carregarGrafico('Normal', null, true); ?>
                             </div>
                             <div id="tab-2" class="tab-pane">
                                 <!--O grafico 2 será carregado aqui via ajax-->
