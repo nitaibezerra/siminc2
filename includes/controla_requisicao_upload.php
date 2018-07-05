@@ -7,6 +7,7 @@ switch ($_REQUEST['requisicao_upload']) {
                 'arqid' => $file->getIdArquivo(),
                 'arqnome' => $_FILES['file']['name'],
                 'arqdescricao' => $_REQUEST['arqdescricao'],
+                'arqmddescricao' => $_REQUEST['arqmddescricao'],
                 'arqmdid' => $_REQUEST['arqmdid']
             );
             echo simec_json_encode($dados);

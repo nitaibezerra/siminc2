@@ -7,6 +7,7 @@
                         <th style="text-align: center;">Açoes</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Data</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Arquivo</th>
+                        <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Titulo</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Descriçao</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Responsavel</th>
                     </tr>
@@ -28,6 +29,9 @@
                                 <td style="border: 1px #e5d9c5 solid;">
                                     <?php echo $arquivo['arqdescricao']; ?>
                                 </td>
+                                <td style="border: 1px #e5d9c5 solid;">
+                                    <?php echo $arquivo['arqmddescricao']; ?>
+                                </td>                                
                                 <td style="border: 1px #e5d9c5 solid;">
                                     <?php echo $arquivo['usunome']; ?>
                                 </td>

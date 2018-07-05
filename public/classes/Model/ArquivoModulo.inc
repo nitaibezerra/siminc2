@@ -55,7 +55,8 @@ class Public_Model_ArquivoModulo extends Modelo
      */
     protected $arAtributos = array(
         'arqmdid' => null,
-        'arqid' => null
+        'arqid' => null,
+        'arqmddescricao' => null
     );
     
     public function recuperaArquivosPorModulo(){

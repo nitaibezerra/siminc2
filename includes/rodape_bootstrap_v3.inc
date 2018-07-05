@@ -584,9 +584,17 @@ function listarAnexosModulo(){
                         <form class="dropzone" method="POST" enctype="multipart/form-data" action="?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&requisicao_upload=upload_arquivo" id="formularioAnexo" name="formularioAnexo">
                             <input type="hidden" id="arqmdid" name="arqmdid">
                             <div class="form-group">
-                                <label for="arqdescricao" class="col-lg-2 control-label">Descrição:</label>
-                                <div class="col-lg-10">
-                                    <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                <div class="row">
+                                    <label for="arqdescricao" class="col-lg-2 control-label">Titulo:</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" value="" class="CampoEstilo normal form-control" placeholder="Insira o titulo do arquivo." title="Titulo" id="arqdescricao" name="arqdescricao" maxlength="255" size="2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="arqdescricao" class="col-lg-2 control-label" style="margin-top: 10px;">Descrição:</label>
+                                    <div class="col-lg-10" style="margin-top: 10px;">
+                                        <textarea class="CampoEstilo normal form-control" placeholder="Insira a descrição do arquivo." title="Descrição" id="arqmddescricao" name="arqmddescricao" rows="3" cols="255"></textarea>
+                                    </div>                                
                                 </div>
                             </div>
                             <div class="fallback">
