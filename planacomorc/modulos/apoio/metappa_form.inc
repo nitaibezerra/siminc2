@@ -53,7 +53,7 @@ include APPRAIZ . "includes/cabecalho.inc";
                                     <a href="?modulo=apoio/metappa_form&acao=A&req=excluir&mppid=<?php echo $mMetappa->mppid; ?>" class="btn btn-danger link-excluir" id="btn-excluir" type="button"><i class="fa fa-close"></i>&nbsp;Excluir</a>
                                 <?php } ?>                                
                             </div>
-                        </div>                        
+                        </div>
                     </form>
                 </div>
             </div>
