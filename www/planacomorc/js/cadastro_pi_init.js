@@ -5,7 +5,13 @@
      * @returns VOID
      */
     function initCadastroPi(){
-        
+
+        $('.historico-pi').click(function(){
+            // passar a url correta no load abaixo
+            $('#proposta_modal .modal-body').load('&plicod='+ $(this).data('plicod'));
+            $('#proposta_modal').modal();
+        });
+
         $('#btnApagar').click(function(){
             window.location.href = urlPagina+ '&confirmar-apagar=1&pliid='+ $('#pliid').val();
         });
