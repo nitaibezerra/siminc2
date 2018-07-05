@@ -9,8 +9,6 @@ include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 $perfis = pegaPerfilGeral();
 $filtros =$filtroacompanhamento = $_SESSION['filtroacompanhamento'] = ($_POST? $_POST: $_SESSION['filtroacompanhamento']);
 $filtroacompanhamento['esdid'] = $filtroacompanhamento['esdid']?$filtroacompanhamento['esdid']:0;
-$filtroacompanhamento['tipo'] = $filtroacompanhamento['tipo']?$filtroacompanhamento['tipo']:'Normal';
-$filtroacompanhamento['tabAtiva'] = $filtroacompanhamento['tabAtiva']?$filtroacompanhamento['tabAtiva']:1;
 
 if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
     # Perfil unidade são redirecionados para a tela de lista de Pré-Pis
@@ -31,10 +29,10 @@ $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 switch ($_REQUEST['req']) {
     case 'lista-inicio-xls':
         $unidades='';
-        if ($_REQUEST['tabAtiva']==2 || $_REQUEST['tabAtiva']==5){
+        if ($_REQUEST['tab']==2 || $_REQUEST['tab']==5){
             $unidades="suo.suocod not in ('420009', '420008')";
             $filtro[]="suo.unosigla = 'MINC'";
-        }else if ($_REQUEST['tabAtiva']==3 || $_REQUEST['tabAtiva']==6){
+        }else if ($_REQUEST['tab']==3 || $_REQUEST['tab']==6){
             $unidades="suo.suocod in ('420009', '420008')";
             $filtro[]="suo.unosigla = 'MINC'";
         }
@@ -58,15 +56,29 @@ switch ($_REQUEST['req']) {
 //ver($listaFuncional, d);
         include_once APPRAIZ. "proposta/modulos/lista-inicio-xls.inc";
     case 'carregarGraficoUnidade':
+        if ($_REQUEST['esdid'] && $_REQUEST['esdid']!='0'){
+            $filtro = ["esdid" => $_REQUEST['esdid']];
+        }else{
+            $filtro = [];
+        }
+        $filtros =$filtro;
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], $filtros, true);
         die;
     case 'carregarGraficoDireta':
-        $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')", "esdid" => $_REQUEST['esdid']];
+        if ($_REQUEST['esdid'] && $_REQUEST['esdid']!='0'){            
+            $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')", "esdid" => $_REQUEST['esdid']];
+        }else{
+            $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"];
+        }
         $filtros =$filtro;
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], $filtros, true);
         die;
     case 'carregarGraficoCgconCogep':
-        $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')", "esdid" => $_REQUEST['esdid']];
+        if ($_REQUEST['esdid'] && $_REQUEST['esdid']!='0'){
+            $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')", "esdid" => $_REQUEST['esdid']];
+        }else{
+            $filtro = ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"];
+        }
         $filtros =$filtro;
         $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], $filtros, true);
         die;
@@ -75,16 +87,18 @@ switch ($_REQUEST['req']) {
         die;        
     case 'carregarListaAcompanhamentoPis':
         $unidades='';
-        if ($_REQUEST['tabAtiva']==2 || $_REQUEST['tabAtiva']==5){
+        if ($_REQUEST['tab']==2 || $_REQUEST['tab']==5){
             $unidades="suo.suocod not in ('420009', '420008')";
             $filtro[]="suo.unosigla = 'MINC'";
-        }else if ($_REQUEST['tabAtiva']==3 || $_REQUEST['tabAtiva']==6){
+        }else if ($_REQUEST['tab']==3 || $_REQUEST['tab']==6){
             $unidades="suo.suocod in ('420009', '420008')";
             $filtro[]="suo.unosigla = 'MINC'";
         }
         $filtro[]="suo.prsano = '". $_SESSION['exercicio']. "'";
         $filtro[]='suo.unofundo = FALSE';
-        $filtro["esdid"] = $_REQUEST['esdid'];
+        if ($_REQUEST['esdid'] && $_REQUEST['esdid']!='0'){
+            $filtro["esdid"] = $_REQUEST['esdid'];
+        }
         if ($unidades!=''){
             $filtro[]=$unidades;
         }
@@ -99,13 +113,6 @@ switch ($_REQUEST['req']) {
         die;
 }
 $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-if ($_REQUEST['tabAtiva']==2 || $_REQUEST['tabAtiva']==5){
-    $unidades="suo.suocod not in ('420009', '420008')";
-    $filtro[]="suo.unosigla = 'MINC'";
-}else if ($_REQUEST['tabAtiva']==3 || $_REQUEST['tabAtiva']==6){
-    $unidades="suo.suocod in ('420009', '420008')";
-    $filtro[]="suo.unosigla = 'MINC'";
-}
 $filtro[] = "suo.prsano = '". $_SESSION['exercicio']. "'";
 $filtro[] = 'suo.unofundo = FALSE';
 $filtro['esdid'] = $filtros['esdid'];
@@ -136,10 +143,9 @@ include APPRAIZ . "includes/cabecalho.inc";
     background: #e5e5e5;
 }
 </style>
-<form id="filtroacompanhamento" name="filtroacompanhamento" method="POST" role="form" class="form-horizontal">
+<form id="filtropi" name="filtroacompanhamento" method="POST" role="form" class="form-horizontal">
 <input name="requisicao" id="requisicao" value="" type="hidden">
-<input name="tabAtiva" id="tabAtiva" type="hidden" value="<?php echo $filtroacompanhamento['tabAtiva'];?>">    
-<input name="tipo" type="hidden" id="tipo" value="<?php echo $filtroacompanhamento['tipo'];?>">
+<input name="tabAtiva" id="tabAtiva" value="Normal" type="hidden">    
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10 ibox-title">
         <h2>Painel de Acompanhamento <?php echo $simec->radio('esdid', null, $filtroacompanhamento['esdid'], array("0"=>"Todos", "1787" => "Aprovados"));?></h2> 
@@ -154,10 +160,11 @@ include APPRAIZ . "includes/cabecalho.inc";
         </div>
     </div>
 </div>
+<input type="hidden" id="tipo" value="Normal">
 <div class="tabs-container tabs">
     <ul class="nav nav-tabs prodTabs">
-        <li class="<?php echo $filtroacompanhamento['tipo']=='Normal'?'active':'';?>"><a data-toggle="tab" href="#tab-normal" tipo="Normal" data-url="?modulo=inicio&acao=C&req=trocaAbaGrafico&tipo=Normal"> Normal</a></li>
-        <li class="<?php echo $filtroacompanhamento['tipo']=='Expansao'?'active':'';?>"><a data-toggle="tab" href="#tab-expansao" tipo="Expansao" data-url="?modulo=inicio&acao=C&req=trocaAbaGrafico&tipo=Expansao"> Expansão</a></li>
+        <li class="<?php echo $_REQUEST['tabAtiva']<4?'active':'';?>"><a data-toggle="tab" href="#tab-normal" tipo="Normal" data-url="?modulo=inicio&acao=C&req=trocaAbaGrafico&tipo=Normal"> Normal</a></li>
+        <li class="<?php echo $_REQUEST['tabAtiva']>3?'active':'';?>"><a data-toggle="tab" href="#tab-expansao" tipo="Expansao" data-url="?modulo=inicio&acao=C&req=trocaAbaGrafico&tipo=Expansao"> Expansão</a></li>
     </ul>
     <div class="tab-content">
         <div id="tab-normal" class="tab-pane active">
@@ -195,7 +202,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             }
             $("#tipo").val(tipo);
             $("#tabAtiva").val(tab);
-            $('#listaAcompanhamentoPis').load('?modulo=inicio&acao=C&req=carregarListaAcompanhamentoPis&tipo='+tipo+'&esdid='+$("input[name='esdid']").val()+"&tabAtiva="+tab);
+            $('#listaAcompanhamentoPis').load('?modulo=inicio&acao=C&req=carregarListaAcompanhamentoPis&tipo='+tipo+'&esdid='+$("input[name='esdid']").val()+"&tab="+tab);
             if (typeof url !== "undefined") {
                 var pane = $(this), href = this.hash;
                 url += "&esdid="+$("input[name='esdid']").val();
@@ -219,3 +226,4 @@ include APPRAIZ . "includes/cabecalho.inc";
     });
 
 </script>
+

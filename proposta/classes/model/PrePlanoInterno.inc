@@ -227,12 +227,19 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         $filtro = '';
         $filtro .= $aFiltro['unosigla'] ? " AND suo.unosigla = '{$aFiltro['unosigla']}' ": NULL;
         $filtro .= $aFiltro['unidades'] ? " AND {$aFiltro['unidades']} ": NULL;
-
+//ver($aFiltro,d);
         $filtroEsdid = $filtro;
-        if ($aFiltro['esdid']!='0' && $aFiltro['esdid']!=''){
-            $filtroEsdid .= " AND esdid in (".$aFiltro['esdid'].")";
+        if ($aFiltro['esdid']){
+            if (!is_array($aFiltro['esdid'])){
+                if ($aFiltro['esdid']!=''){
+                    $filtroEsdid .= " AND esdid in (".$aFiltro['esdid'].")";
+                }
+            }
+            if (is_array($aFiltro['esdid'])){
+                $filtroEsdid .= " AND esdid in (".implode(',',$aFiltro['esdid']).")";
+            }
         }
-
+//        ver($filtroEsdid,d);
         $descricao .= $aFiltro['unosigla'] ? "suo.suosigla": "suo.unosigla";
         
         $prdvalor = 'prdvalor';
