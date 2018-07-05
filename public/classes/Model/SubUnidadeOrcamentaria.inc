@@ -314,8 +314,8 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
     public function montarSqlPropostaTotaisLimites(stdClass $parametros){
 
         # Filtros
-        $whereTotalPrePi = $parametros->aprovados? 'AND doc.esdid = '. (int)ESD_PREPI_APROVADO: NULL;
-        $where = $parametros->exercicio? "AND suo.prsano = '". (int)$parametros->exercicio. "'": NULL;
+        $whereTotalPrePi = $parametros->aprovados? "\n AND doc.esdid = ". (int)ESD_PREPI_APROVADO: NULL;
+        $where = $parametros->exercicio? "\n AND suo.prsano = '". (int)$parametros->exercicio. "'": NULL;
         
         $sql = "
            SELECT DISTINCT
@@ -349,7 +349,7 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
             FROM public.vw_subunidadeorcamentaria suo
             WHERE
                 suo.suostatus = 'A'
-                AND suo.unofundo = FALSE
+                AND suo.unofundo IS FALSE
 		". $where. "
             ORDER BY
                 suo.unonome,

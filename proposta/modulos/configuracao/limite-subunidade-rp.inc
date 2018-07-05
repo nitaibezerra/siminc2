@@ -37,9 +37,9 @@ $filtros = array(
 );
 
 $listaSubunidadeTotais = $modelSubunidade->buscarPropostaTotaisLimites((object)array(
-    'exercicio' => $_SESSION['exercicio']
+    'exercicio' => $_SESSION['exercicio'],
+    'fundo' => false
 ));
-
 
 /**
  * Cabeçalho padrão do sistema.
@@ -71,7 +71,9 @@ include APPRAIZ . "includes/cabecalho.inc";
         <div class="col-md-12">
 
             <div class="ibox float-e-margins">
-
+                <div class="ibox-title">
+                    <h5>&nbsp;</h5>
+                </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" >
