@@ -14,7 +14,7 @@
                         </ul>
                         <div class="tab-content">
                             <div id="tab-1" class="tab-pane active">
-                                <?php $mPrePlanoInterno->carregarGrafico('Normal', null, true); ?>
+                                <?php $mPrePlanoInterno->carregarGrafico('Normal', null, true, $filtroPainelProposta['esdid']); ?>
                             </div>
                             <div id="tab-2" class="tab-pane">
                                 <!--O grafico 2 será carregado aqui via ajax-->

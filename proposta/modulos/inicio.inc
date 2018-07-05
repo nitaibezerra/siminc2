@@ -47,13 +47,13 @@ switch ($_REQUEST['req']) {
 //ver($listaFuncional, d);
         include_once APPRAIZ. "proposta/modulos/lista-inicio-xls.inc";
     case 'carregarGraficoUnidade':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true);
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true, $filtroPainelProposta['esdid']);
     die;
     case 'carregarGraficoDireta':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"], true);
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades' => "suocod NOT IN('". SUOCOD_CGCON. "', '". SUOCOD_COGEP. "')"], true, $filtroPainelProposta['esdid']);
     die;
     case 'carregarGraficoCgconCogep':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"], true);
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades' => "suocod IN('". SUOCOD_CGCON. "', '". SUOCOD_COGEP. "')"], true, $filtroPainelProposta['esdid']);
     die;
     case 'trocaAbaGrafico':
         include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
