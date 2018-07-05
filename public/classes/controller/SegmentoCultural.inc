@@ -7,14 +7,14 @@ class Public_Controller_SegmentoCultural
         $url = '?modulo=apoio/area_cultural_form&acao=A';
 
         try {
-            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neecod']);
+            $mdsegCultural = new Monitora_Model_PiNivelEtapaEnsino($dados['neeid']);
             $mdsegCultural->popularDadosObjeto($dados, true);
+            $mdsegCultural->neecod = strtoupper($mdsegCultural->neecod);
             $mdsegCultural->neeano = $mdsegCultural->neeano ? $mdsegCultural->neeano : $_SESSION['exercicio'];
 //            ver($mdsegCultural,d);
 
             $mdsegCultural->salvar(null,null);
             $mdsegCultural->commit();
-            simec_redirecionar($url . '&neeid=' . $mdsegCultural->neeid.'&mdeid='.$mdsegCultural->mdeid, 'success');
         } catch (Exception $e){
             $mdsegCultural->rollback();
             simec_redirecionar($url, 'error');
