@@ -3,10 +3,12 @@
 include_once APPRAIZ . "includes/library/simec/Grafico.php";
 
 require_once APPRAIZ . 'includes/workflow.php';
-include_once APPRAIZ . "monitora/classes/Pi_PlanoInterno.class.inc";
 
 # Lista de perfis vinculados ao usuário logado
 $perfis = pegaPerfilGeral();
+
+# Filtro de Situação na sessão do usuário
+$filtroPainelProposta = $_SESSION['filtroPainelProposta'] = (isset($_REQUEST['esdid'])? $_REQUEST: $_SESSION['filtroPainelProposta']);
 
 if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
     # Perfil unidade são redirecionados para a tela de lista de Pré-Pis
@@ -25,67 +27,44 @@ if(count(array_intersect($perfis, [PFL_SUBUNIDADE]))){
 
 $mPrePlanoInterno = new Proposta_Model_PrePlanoInterno();
 
-switch ($_REQUEST['req']) {
-    case 'lista-inicio-xls':
-        $filtros = array(
-            "suo.prsano = '". $_SESSION['exercicio']. "'",
-            'suo.unofundo = FALSE',
-        );
-        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-        if($listaSubUnidadeUsuario){
-            $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
-        }
-
-        $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
-        $sql = $mPrePlanoInterno->montarSqlExecucaoOrcamentaria($filtros, $tipo);
-        $listaFuncional = $db->carregar($sql);
-//ver($listaFuncional, d);
-        include_once APPRAIZ. "proposta/modulos/lista-inicio-xls.inc";
-    case 'carregarGraficoUnidade':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true);
-        die;
-    case 'carregarGraficoDireta':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"], true);
-        die;
-    case 'carregarGraficoCgconCogep':
-        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"], true);
-        die;
-    case 'trocaAbaGrafico':
-        include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
-        die;        
-    case 'carregarListaAcompanhamentoPis':
-        if ($_REQUEST['exportar_xls']){
-            header( 'Content-Type: application/vnd.ms-excel' );
-            header( 'Expires: 0' );
-            header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-            header( 'Content-Disposition: attachment; filename="relatorio_geral_pi' . '.xls"' );
-        }
-        $filtros = array(
-            "suo.prsano = '". $_SESSION['exercicio']. "'",
-            'suo.unofundo = FALSE',
-        );
-        $listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
-        if($listaSubUnidadeUsuario){
-            $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
-        }
-        $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
-        $aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo);
-        include_once(APPRAIZ . "proposta/modulos/principal/listaAcompanhamentoPI.inc");
-        die;
-}
-
-$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
+# Filtros padrões da consulta
 $filtros = array(
     "suo.prsano = '". $_SESSION['exercicio']. "'",
     'suo.unofundo = FALSE',
 );
 # Filtro por Subunidades do perfil do usuário logado.
+$listaSubUnidadeUsuario = buscarSubUnidadeUsuario((object) array('usucpf' => $_SESSION['usucpf']));
 if($listaSubUnidadeUsuario){
     $filtros[] = "suo.suocod IN('". join("','", $listaSubUnidadeUsuario). "')";
 }
-
+# Define se a tela vai mostrar os dados Custeio e Capital normal ou de Custeio e Capital Expansão
 $tipo = $_REQUEST['tipo']?$_REQUEST['tipo']:'Normal';
-$aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo);
+
+switch ($_REQUEST['req']) {
+    case 'lista-inicio-xls':
+        $sql = $mPrePlanoInterno->montarSqlExecucaoOrcamentaria($filtros, $tipo, $filtroPainelProposta['esdid']);
+        $listaFuncional = $db->carregar($sql);
+//ver($listaFuncional, d);
+        include_once APPRAIZ. "proposta/modulos/lista-inicio-xls.inc";
+    case 'carregarGraficoUnidade':
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], null, true);
+    die;
+    case 'carregarGraficoDireta':
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod not in ('420009', '420008')"], true);
+    die;
+    case 'carregarGraficoCgconCogep':
+        $mPrePlanoInterno->carregarGrafico($_REQUEST['tipo'], ['unosigla' => 'MINC', 'unidades'=>"suocod in ('420009', '420008')"], true);
+    die;
+    case 'trocaAbaGrafico':
+        include_once(APPRAIZ . "proposta/modulos/principal/montaGrafico".$_REQUEST['tipo'].".inc");
+    die;        
+    case 'carregarListaAcompanhamentoPis':
+        $aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo, $filtroPainelProposta['esdid']);
+        include_once(APPRAIZ . "proposta/modulos/principal/listaAcompanhamentoPI.inc");
+    die;
+}
+
+$aPropostas = $mPrePlanoInterno->recuperarExecucaoOrcamentaria($filtros, $tipo, $filtroPainelProposta['esdid']);
 
 /**
  * Cabeçalho padrão do sistema.
@@ -103,10 +82,22 @@ include APPRAIZ . "includes/cabecalho.inc";
 }
 </style>
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-4">
-        <h2>Painel de Acompanhamento</h2>
-    </div>
     <div class="col-lg-8">
+        <h2>Painel de Acompanhamento
+            <?php
+                echo $simec->radio(
+                    'esdid',
+                    null,
+                    ($filtroPainelProposta['esdid']? $filtroPainelProposta['esdid']: ''),
+                    array(
+                        '' => "Todos",
+                        ESD_PREPI_APROVADO => "Aprovados"
+                    )
+                );
+            ?>
+        </h2>
+    </div>
+    <div class="col-lg-4">
         <div style="padding-top: 10px;" class="text-right">
             <?php if(!array_intersect($perfis, [PFL_CONSULTA])){ ?>
                 <button id="btn-exportar-xls" class="btn btn-primary btn-buscar" type="button">
@@ -163,7 +154,10 @@ include APPRAIZ . "includes/cabecalho.inc";
             window.open('?modulo=inicio&acao=C&req=lista-inicio-xls&tipo='+ $("#tipo").val());
         });
         
+        $("input[name='esdid']").change(function(){
+            window.document.location = window.document.location+ '&esdid='+ $(this).val();
+        });
+        
     });
 
 </script>
-

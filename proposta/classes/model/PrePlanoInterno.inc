@@ -766,9 +766,9 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $sql;
     }
     
-    public function recuperarExecucaoOrcamentaria($aFiltro = [], $tipo)
+    public function recuperarExecucaoOrcamentaria($aFiltro = [], $tipo, $situacao = NULL)
     {
-        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro, $tipo);
+        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro, $tipo, $situacao);
 //ver($tipo, d);
         $dados = $this->carregar($sql, $tipo);
         $dados = $dados ? $dados : [];
@@ -785,7 +785,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $dadosAgrupados;
     }
 
-    public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
+    public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo, $situacao = NULL){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
         $where = $this->montarFiltros($filtro);
@@ -797,6 +797,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             $plivalorcapital='plivalorcapitaladicional';
             $plivalorcusteio = 'plivalorcusteioadicional';
         }
+        
+        # Filtro de Valores(Custeio e Capital) de Pré-PI por Situação(Todas/Aprovados)esdid
+        if($situacao){
+            $whereCusteioCapitalPrePi = "\n AND situacao_doc.esdid = ". (int)$situacao;
+        }
+        
         $sql = "
             SELECT
                 suo.suoid,
@@ -850,14 +856,28 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                         ptressubunidade.ptrid = ptr.ptrid
                 ) AS compartilhada
             FROM public.vw_subunidadeorcamentaria suo
-                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                LEFT JOIN proposta.preplanointerno pli ON(
-                    ptr.ptrid = pli.ptrid
-                    AND pli.plistatus = 'A'
-                    and suo.suoid = pli.suoid
+                JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
+                JOIN monitora.vw_ptres ptr ON(
+                    ptr.ptrid = psu.ptrid
+                    AND ptr.ptrano = suo.prsano
                 )
-                LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                LEFT JOIN(
+                    SELECT
+                        *
+                    FROM proposta.preplanointerno situacao_pli
+                        LEFT JOIN workflow.documento situacao_doc ON(situacao_pli.docid = situacao_doc.docid)
+                    WHERE
+                        situacao_pli.plistatus = 'A'
+                        $whereCusteioCapitalPrePi
+                ) pli ON(
+                    ptr.ptrid = pli.ptrid
+                    AND suo.suoid = pli.suoid
+                )
+                LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
+                    lmu.ungcod = suo.suocod
+                    AND lmu.lmustatus = 'A'
+                    AND lmu.prsano = suo.prsano
+                )
             WHERE
                 {$where}
             GROUP BY
