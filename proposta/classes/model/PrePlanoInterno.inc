@@ -224,22 +224,11 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      */
     public function recuperarEstatisticaPagamento($aFiltro = NULL, $tipo)
     {
+        
         $filtro = '';
         $filtro .= $aFiltro['unosigla'] ? " AND suo.unosigla = '{$aFiltro['unosigla']}' ": NULL;
         $filtro .= $aFiltro['unidades'] ? " AND {$aFiltro['unidades']} ": NULL;
 
-        $filtroEsdid = $filtro;
-        if ($aFiltro['esdid']){
-            if (!is_array($aFiltro['esdid'])){
-                if ($aFiltro['esdid']!=''){
-                    $filtroEsdid .= " AND esdid in (".$aFiltro['esdid'].")";
-                }
-            }
-            if (is_array($aFiltro['esdid'])){
-                $filtroEsdid .= " AND esdid in (".implode(',',$aFiltro['esdid']).")";
-            }
-        }
-//        ver($filtroEsdid,d);
         $descricao .= $aFiltro['unosigla'] ? "suo.suosigla": "suo.unosigla";
         
         $prdvalor = 'prdvalor';
@@ -263,9 +252,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 ON suo.suoid = pli.suoid 
                AND pli.plistatus = 'A'
                AND pli.prsano = suo.prsano
-              LEFT JOIN workflow.documento doc ON doc.docid = pli.docid             
             WHERE suo.prsano = '{$_SESSION['exercicio']}'
-                $filtroEsdid
+                $filtro
                 AND suo.suostatus = 'A'
             GROUP BY
                 ordem,
@@ -276,59 +264,37 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 1 AS ordem,
                 'Limite' AS descricao,
                 $descricao AS categoria,
-                coalesce(lmu.lmuvlr,0) AS valor
+                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano                
-              LEFT JOIN proposta.preplanointerno pli 
-                ON suo.suoid = pli.suoid 
-               AND pli.plistatus = 'A'
-               and ptr.ptrid = pli.ptrid
-               AND pli.prsano = suo.prsano
-              LEFT JOIN workflow.documento doc ON doc.docid = pli.docid                 
-              LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano  
+                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
+                AND suo.prsano = lmu.prsano
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
-                $filtroEsdid
+                $filtro
                 and suo.suostatus = 'A'
             GROUP BY
                 ordem,
                 descricao,
-                categoria,
-                lmu.lmuvlr 
+                categoria
             UNION ALL
-            select ordem, descricao, categoria, sum(valor) as valor from (
             SELECT DISTINCT
                 3 AS ordem,
                 'Detalhado' AS descricao,
-                suo.unosigla AS categoria,
-                coalesce((
-                    select
-                        sum(prodcap.prdvalor) capital
-                    from proposta.proposta procap
-                    inner join proposta.propostadetalhe prodcap on procap.proid = prodcap.proid
-                    JOIN public.naturezadespesa ndpcap ON prodcap.ndpid = ndpcap.ndpid
-                    where
-                        procap.ptrid = ptr.ptrid
-                        and procap.suoid = suo.suoid
-                        and procap.prostatus = 'A'
-                        AND prodcap.prdstatus = 'A'
-                ),0) AS valor
+                $descricao AS categoria,
+                sum(COALESCE (prod.".$prdvalor.", 0))::DECIMAL AS valor
             FROM
-                public.vw_subunidadeorcamentaria suo 
-	        JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                LEFT JOIN proposta.preplanointerno pli 
-                ON suo.suoid = pli.suoid 
-               AND pli.plistatus = 'A'
-               and ptr.ptrid = pli.ptrid
-               AND suo.prsano = pli.prsano
-               LEFT JOIN workflow.documento doc ON doc.docid = pli.docid 
+                public.vw_subunidadeorcamentaria suo
+                INNER JOIN proposta.proposta pro 
+                   ON suo.suoid = pro.suoid 
+                  and pro.prostatus='A'
+                inner join proposta.propostadetalhe prod 
+                   on pro.proid = prod.proid 
+                  and prod.prdstatus = 'A'
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
-                $filtroEsdid
-                AND suo.suostatus = 'A') as x    
+                $filtro
+                AND suo.suostatus = 'A'    
             GROUP BY
                 ordem,
                 descricao,
@@ -815,19 +781,14 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             $dadosAgrupados[$dado['suocod']]['planejadoCusteio'] += $dado['picvalorcusteio'];
             $dadosAgrupados[$dado['suocod']]['totalPlanejado'] = ($dadosAgrupados[$dado['suocod']]['planejadoCapital'] + $dadosAgrupados[$dado['suocod']]['planejadoCusteio']);
         }
+
         return $dadosAgrupados;
     }
 
     public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
-        if ($filtro['esdid']){
-            if (!is_array($filtro['esdid'])){
-                $filtro['esdid']= explode(',', $filtro['esdid']);
-            }
-        }
         $where = $this->montarFiltros($filtro);
-        
         $prdvalor = 'prdvalor';
         $plivalorcapital = 'plivalorcapital';
         $plivalorcusteio = 'plivalorcusteio';
@@ -897,9 +858,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                     and suo.suoid = pli.suoid
                 )
                 LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
-                LEFT JOIN workflow.documento doc ON doc.docid = pli.docid   
             WHERE
-                {$where} 
+                {$where}
             GROUP BY
                 suo.suoid,
                 suo.unoid,

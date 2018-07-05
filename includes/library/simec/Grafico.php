@@ -599,11 +599,7 @@ class Grafico {
                     foreach($dadosAgrupados as $keyAgrupado => $dadoAgrupado){
                         foreach ($dadoAgrupado as $key => $dado){
                             if ($dado>0){
-                                if ($dadoAgrupado['Limite']>0){
-                                    $dadoPercentual[$key][$i]=(float)$dadoAgrupado[$key]/$dadoAgrupado['Limite']*100;
-                                }else{
-                                    $dadoPercentual[$key][$i]=0;
-                                }
+                                $dadoPercentual[$key][$i]=(float)$dadoAgrupado[$key]/$dadoAgrupado['Limite']*100;
                             }else{
                                 $dadoPercentual[$key][$i]=0;
                             }
