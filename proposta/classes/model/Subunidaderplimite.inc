@@ -52,5 +52,27 @@ class Proposta_Model_Subunidaderplimite extends Modelo
         'srlstatus' => null
     );
 
+    public function montarSqlBuscarPorSuoidIrpcod(){
+        $sql = "
+            SELECT
+                *
+            FROM $this->stNomeTabela
+            WHERE
+                srlstatus = 'A'
+                AND suoid = ". (int)$this->suoid. "
+                AND irpcod = '". (int)$this->irpcod. "'
+        ";
+        return $sql;
+    }
+    
+    public function buscarPorSuoidIrpcod() {
+        $sql = $this->montarSqlBuscarPorSuoidIrpcod();
+        $resultado = $this->pegaLinha($sql);
+        if($resultado){
+            $this->popularDadosObjeto($resultado);
+        }
+        
+        return $this;
+    }
 }//end Class
 
