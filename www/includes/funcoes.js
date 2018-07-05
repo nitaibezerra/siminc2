@@ -3008,11 +3008,14 @@ function naoSomenteNumeros(formName, fieldName, labelCampo){
 }
 
 function abrirRegras(mnuid){
-	window.open(
-		'../geral/regra_tela.php?mnuid='+mnuid,
-		'usuariosonline',
-		'height=500,width=800,scrollbars=yes,top=50,left=200'
-	);
+        $('.modal_upload_rodape').show();
+        $('#modal_upload_rodape').modal();
+        $('#modal_upload .chosen-container').css('width', '100%');    
+//	window.open(
+//		'../geral/regra_tela.php?mnuid='+mnuid,
+//		'usuariosonline',
+//		'height=500,width=800,scrollbars=yes,top=50,left=200'
+//	);
 }
 
 function abrirPopUpPublicarArquivo(usucpf, sisid){
