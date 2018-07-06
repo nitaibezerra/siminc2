@@ -74,5 +74,59 @@ class Proposta_Model_Subunidaderplimite extends Modelo
         
         return $this;
     }
+    
+    public function recuperarLimitePorSuoid(stdClass $dto)
+    {
+        if($dto->eqdid){
+            $whereEqdid = "
+                SELECT DISTINCT
+                    irpcod
+                FROM
+                    monitora.enquadramentorp
+                WHERE
+                    eqdid = ". (int)$dto->eqdid;
+            # Filtro por RP no disponivel
+            $whereDisponivelUnidade = "
+                AND ptres.irpcod IN(
+                    $whereEqdid
+                )";
+            # Filtro por RP no limite
+            $where = "
+                AND irpcod IN(
+                    $whereEqdid
+                )";
+        }
+        
+        $sql = "
+            SELECT
+                srl.suoid,
+                MIN(srl.irpcod) AS irpcod,
+                SUM(COALESCE(srl.srllimite, 0)) AS limite_unidade,
+                (
+                    SELECT
+                        SUM(COALESCE(plivalorcapital, 0) + COALESCE(plivalorcusteio, 0)) AS total_pre_pi
+                    FROM proposta.preplanointerno
+			JOIN monitora.ptres ON preplanointerno.ptrid = ptres.ptrid
+                    WHERE
+                        plistatus = 'A'
+                        AND suoid = '". (int)$dto->suoid. "'
+                        AND pliid <> ". (int)$dto->noPliid. "
+                        $whereDisponivelUnidade
+                    GROUP BY
+                        suoid
+                ) AS total_pre_pi
+            FROM proposta.subunidaderplimite srl
+            WHERE
+                srlstatus = 'A'
+                AND suoid = '". (int)$dto->suoid. "'
+                $where
+            GROUP BY
+                srl.suoid,
+                total_pre_pi
+        ";
+//ver($sql, d);
+        $limite = $this->pegaLinha($sql);
+        return $limite;
+    }
 }//end Class
 

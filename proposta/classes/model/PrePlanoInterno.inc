@@ -275,11 +275,13 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 1 AS ordem,
                 'Limite' AS descricao,
                 $descricao AS categoria,
-                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
+                SUM(COALESCE(srl.srllimite, 0)) AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
-                AND suo.prsano = lmu.prsano
+                LEFT JOIN proposta.subunidaderplimite srl ON( -- SELECT * FROM proposta.subunidaderplimite
+                    suo.suoid = srl.suoid
+                    AND srl.srlstatus = 'A'
+                )
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
                 AND suo.suostatus = 'A'

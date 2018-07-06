@@ -8,7 +8,6 @@ function initPreplanointernoForm(){
 
     toggleItem();
     recuperarValoresLimitesPtres();
-//    recuperarValoresLimitesSubUnidade();
     
     controlarExibicaoFormularioReduzido();
     controlarExibicaoUnidadeMedidaQuantidade($('#pprid').val());
@@ -26,12 +25,15 @@ function initPreplanointernoForm(){
     });
 
     $('#eqdid, #suoid').change(function(){
+        // Busca opções de funcionais de acordo com a Subunidade e Enquadramento
         $('#span-funcional').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-funcional&eqdid=' + $('#eqdid').val() + '&suoid=' + $('#suoid').val());
+        // Busca valores de limites da Subunidade
+        recuperarValoresLimitesSubUnidade();
     });
 
     $('#suoid').change(function(){
+        // Busca opções de Metas PNC de acordo com a Subunidade
         $('#span-metapnc').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-metapnc&suoid=' + $('#suoid').val());
-        recuperarValoresLimitesSubUnidade();
     });
 
     $('#mdeid').change(function(){
@@ -175,9 +177,17 @@ function toggleItem(){
     }
 }
 
+/**
+ * Busca valores de limites da Subunidade
+ * 
+ * @returns VOID
+ */
 function recuperarValoresLimitesSubUnidade(){
     $.ajax({
-        url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite&suoid='+ $('#suoid').val()+ '&pliid='+ $('#pliid').val(),
+        url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-limite'+
+        '&suoid='+ $('#suoid').val()+
+        '&eqdid='+ $('#eqdid').val()+
+        '&pliid='+ $('#pliid').val(),
         dataType: 'json',
         success: function(dados){
             $('#td_autorizado_sub_unidade').html(number_format(parseFloat(dados.limite_unidade), 0, ',', '.'));
@@ -187,6 +197,11 @@ function recuperarValoresLimitesSubUnidade(){
     });
 }
 
+/**
+ * Busca valores de limites da funcional
+ * 
+ * @returns void
+ */
 function recuperarValoresLimitesPtres(){
     $.ajax({
         url: '?modulo=principal/preplanointerno_form&acao=A&req=recuperar-valores-ptres&ptrid=' + $('#ptrid').val(),
@@ -198,6 +213,13 @@ function recuperarValoresLimitesPtres(){
     });
 }
 
+/**
+ * Importa dados de PI da Capitação executiva(Módulo Planejamento Orçamentário) 
+ * para o formulário de pré-pi.
+ * 
+ * @param integer piID
+ * @returns VOID
+ */
 function importarPIDeAnosAnteriores(piID) {
     $('#preplanointerno_modal').modal('hide');
     console.log('Foobar', piID);
@@ -215,6 +237,12 @@ function importarPIDeAnosAnteriores(piID) {
     recuperarValoresLimitesPtres();
 }
 
+/**
+ * Busca opções de Metas PPA e Iniciativas PPA de acordo com a Subunidade e Objetivo
+ * 
+ * @todo separar responsabilidades, sendo cada responsabilidade pra um método
+ * @returns {undefined}
+ */
 function recuperarMetasEIniciativaPPA() {
     $('#span-metappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-metappa&oppid=' + $('#oppid').val() + '&suoid=' + $('#suoid').val());
     $('#span-iniciativappa').load('?modulo=principal/preplanointerno_form&acao=A&req=carregar-iniciativappa&oppid=' + $('#oppid').val());
