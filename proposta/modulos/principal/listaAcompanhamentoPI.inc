@@ -56,9 +56,9 @@
                                     <?php echo number_format($dados['totalPlanejado'], 0, ',', '.'); ?>
                                 </td>
 
-                                <?php $disponivel = $dado['lmuvlr'] - $dados['totalPlanejado']; ?>
+                                <?php $disponivel = $dado['limite_subunidade'] - $dados['totalPlanejado']; ?>
                                 <td style="color: <?php echo controlarCorPorValorDisponivel($disponivel); ?>; border-right: 1px black solid;" class="text-right title-disponivel" title="Disponível: <?php echo number_format($disponivel, 0, ',', '.'); ?>">
-                                    <?php echo number_format($dado['lmuvlr'], 0, ',', '.'); ?>
+                                    <?php echo number_format($dado['limite_subunidade'], 0, ',', '.'); ?>
                                 </td>
                             </tr>
                             <?php
