@@ -115,6 +115,10 @@ if ($_REQUEST['alterarCodigoPi']) {
     $dadosPI = (new Pi_PlanoInterno($_REQUEST['pliid']))->alterarCodigoPi($_REQUEST['plicod']);
     die();
 }
+if($_REQUEST['proposta_modal']) {
+    include 'historico_pi_modal.inc';
+    die();
+}
 
 /**
  * Processa as requições enviadas a esta página.
@@ -222,7 +226,7 @@ include APPRAIZ . "includes/cabecalho.inc";
             <?php if(!empty($dadosPI['plicod'])){ ?>
                 <span style="color: red; padding: 5px;" id="span-plicod"><?= $dadosPI['plicod'] ?></span>
                 <input minlength="11" maxlength="11" type="text" id="plicod" value="<?= $dadosPI['plicod'] ?>" style="display:none;" />
-                <a style="margin-left: 10px;" class="fa fa-history historico-pi" title="Histórico de alterações"></a>
+                <a style="margin-left: 10px;" class="fa fa-history modal-pi" title="Histórico de alterações"></a>
             <?php } ?>
         </h2>
         <?php echo $dadosPI['pliid'] ? "<span>Id: {$dadosPI['pliid']}</span>" : ''; ?>

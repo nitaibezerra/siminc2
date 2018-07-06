@@ -6,9 +6,8 @@
      */
     function initCadastroPi(){
 
-        $('.historico-pi').click(function(){
-            // passar a url correta no load abaixo
-            $('#proposta_modal .modal-body').load('&plicod='+ $(this).data('plicod'));
+        $('.modal-pi').click(function(){
+            $('#proposta_modal .modal-body').load('?modulo=principal/unidade/cadastro_pi&acao=A&req=proposta_modal&pliid='+ $(this).data('pliid'));
             $('#proposta_modal').modal();
         });
 
