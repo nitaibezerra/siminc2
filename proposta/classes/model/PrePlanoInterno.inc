@@ -198,14 +198,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param boolean $percentual
      * @return VOID
      */
-    function carregarGrafico($tipoCusteio, $filtro = NULL, $percentual = FALSE){
-
+    function carregarGrafico($tipoCusteio, $filtro = NULL, $percentual = FALSE, $situacao = NULL){
         # Cores dos Graficos
-//        $colors = "'#FFD700', '#FF0000', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
         $colors = "'#FF0000', '#FFD700', '#55BF3B', '#eeaaee', '#00BFFF', '#aaeeee', '#7798BF', '#DDDF0D', '#7CCD7C', '#DF5353', '#008000', '#CD0000', '#FF4500', '#ff0066', '#4B0082', '#808000', '#800000', '#2F4F4F', '#006400', '#FFA500'";
         echo '<div class="panel-body">';
 
-        $estatistica = $this->recuperarEstatisticaPagamento($filtro, $tipoCusteio);
+        $estatistica = $this->recuperarEstatisticaPagamento($filtro, $tipoCusteio, $situacao);
         $grafico = new Grafico(Grafico::K_TIPO_COLUNA, false);
         $grafico
             ->setFormatoTooltip(Grafico::K_TOOLTIP_DECIMAL_0)
@@ -222,9 +220,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
      * @param string $tipo Ex: Proposta_Model_PrePlanoInterno::TIPO_CUSTEIO_EXPANSAO
      * @return array
      */
-    public function recuperarEstatisticaPagamento($aFiltro = NULL, $tipo)
+    public function recuperarEstatisticaPagamento($aFiltro = NULL, $tipo, $situacao = NULL)
     {
-        
         $filtro = '';
         $filtro .= $aFiltro['unosigla'] ? " AND suo.unosigla = '{$aFiltro['unosigla']}' ": NULL;
         $filtro .= $aFiltro['unidades'] ? " AND {$aFiltro['unidades']} ": NULL;
@@ -239,22 +236,36 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             $plivalorcapital='plivalorcapitaladicional';
             $plivalorcusteio = 'plivalorcusteioadicional';
         }
+
+        # Filtro de Valores(Custeio e Capital) de Pré-PI por Situação(Todas/Aprovados)esdid
+        if($situacao){
+            $whereCusteioCapitalPrePi = "\n AND situacao_doc.esdid = ". (int)$situacao;
+        }
         
-       
         $sql = "
             SELECT DISTINCT
-                   2 AS ordem,
-                   'Pré-pi' AS descricao,
-                   $descricao AS categoria,
-                   (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
-              FROM public.vw_subunidadeorcamentaria suo
-              LEFT JOIN proposta.preplanointerno pli 
-                ON suo.suoid = pli.suoid 
-               AND pli.plistatus = 'A'
-               AND pli.prsano = suo.prsano
-            WHERE suo.prsano = '{$_SESSION['exercicio']}'
-                $filtro
+                2 AS ordem,
+                'Pré-pi' AS descricao,
+                $descricao AS categoria,
+                (sum(COALESCE (pli.".$plivalorcusteio.", 0)::DECIMAL) + sum(COALESCE (pli.".$plivalorcapital.", 0)::DECIMAL)) AS valor
+            FROM public.vw_subunidadeorcamentaria suo
+            LEFT JOIN(
+                SELECT DISTINCT
+                    situacao_pli.*
+                FROM proposta.preplanointerno situacao_pli
+                    LEFT JOIN workflow.documento situacao_doc ON(situacao_pli.docid = situacao_doc.docid)
+                WHERE
+                    situacao_pli.plistatus = 'A'
+                    $whereCusteioCapitalPrePi
+            ) pli ON(
+                suo.suoid = pli.suoid
+                AND suo.suoid = pli.suoid
+                AND pli.prsano = suo.prsano
+            )
+            WHERE
+                suo.prsano = '{$_SESSION['exercicio']}'
                 AND suo.suostatus = 'A'
+                $filtro
             GROUP BY
                 ordem,
                 descricao,
@@ -271,8 +282,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 AND suo.prsano = lmu.prsano
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
+                AND suo.suostatus = 'A'
                 $filtro
-                and suo.suostatus = 'A'
             GROUP BY
                 ordem,
                 descricao,
@@ -293,8 +304,8 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                   and prod.prdstatus = 'A'
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
+                AND suo.suostatus = 'A'
                 $filtro
-                AND suo.suostatus = 'A'    
             GROUP BY
                 ordem,
                 descricao,
@@ -766,9 +777,9 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $sql;
     }
     
-    public function recuperarExecucaoOrcamentaria($aFiltro = [], $tipo)
+    public function recuperarExecucaoOrcamentaria($aFiltro = [], $tipo, $situacao = NULL)
     {
-        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro, $tipo);
+        $sql = $this->montarSqlExecucaoOrcamentaria($aFiltro, $tipo, $situacao);
 //ver($tipo, d);
         $dados = $this->carregar($sql, $tipo);
         $dados = $dados ? $dados : [];
@@ -785,7 +796,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
         return $dadosAgrupados;
     }
 
-    public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo){
+    public function montarSqlExecucaoOrcamentaria($filtro = [], $tipo, $situacao = NULL){
         $filtro[] = "suo.suostatus = 'A'";
         $filtro[] = "ptr.irpcod <> '6'";
         $where = $this->montarFiltros($filtro);
@@ -797,6 +808,12 @@ class Proposta_Model_PrePlanoInterno extends Modelo
             $plivalorcapital='plivalorcapitaladicional';
             $plivalorcusteio = 'plivalorcusteioadicional';
         }
+        
+        # Filtro de Valores(Custeio e Capital) de Pré-PI por Situação(Todas/Aprovados)esdid
+        if($situacao){
+            $whereCusteioCapitalPrePi = "\n AND situacao_doc.esdid = ". (int)$situacao;
+        }
+        
         $sql = "
             SELECT
                 suo.suoid,
@@ -850,14 +867,28 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                         ptressubunidade.ptrid = ptr.ptrid
                 ) AS compartilhada
             FROM public.vw_subunidadeorcamentaria suo
-                JOIN spo.ptressubunidade psu on psu.suoid = suo.suoid
-                JOIN monitora.vw_ptres ptr on ptr.ptrid = psu.ptrid AND ptr.ptrano = suo.prsano
-                LEFT JOIN proposta.preplanointerno pli ON(
-                    ptr.ptrid = pli.ptrid
-                    AND pli.plistatus = 'A'
-                    and suo.suoid = pli.suoid
+                JOIN spo.ptressubunidade psu ON psu.suoid = suo.suoid
+                JOIN monitora.vw_ptres ptr ON(
+                    ptr.ptrid = psu.ptrid
+                    AND ptr.ptrano = suo.prsano
                 )
-                LEFT JOIN planacomorc.unidadegestora_limite lmu on lmu.ungcod = suo.suocod AND lmu.lmustatus = 'A' AND lmu.prsano = suo.prsano
+                LEFT JOIN(
+                    SELECT DISTINCT
+                        situacao_pli.*
+                    FROM proposta.preplanointerno situacao_pli
+                        LEFT JOIN workflow.documento situacao_doc ON(situacao_pli.docid = situacao_doc.docid)
+                    WHERE
+                        situacao_pli.plistatus = 'A'
+                        $whereCusteioCapitalPrePi
+                ) pli ON(
+                    ptr.ptrid = pli.ptrid
+                    AND suo.suoid = pli.suoid
+                )
+                LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
+                    lmu.ungcod = suo.suocod
+                    AND lmu.lmustatus = 'A'
+                    AND lmu.prsano = suo.prsano
+                )
             WHERE
                 {$where}
             GROUP BY
