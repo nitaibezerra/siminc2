@@ -86,7 +86,20 @@ class Monitora_Model_EnquadramentoRp extends Modelo
 
     public function recuperarPorExercicio($exercicio)
     {
-        $sql = "select * from monitora.enquadramentorp where eqdid in (select eqdid from monitora.pi_enquadramentodespesa where eqdano = '{$exercicio}');";
+        $sql = "
+            SELECT
+                *
+            FROM
+                monitora.enquadramentorp
+            WHERE
+                eqdid IN (
+                    SELECT
+                        eqdid
+                    FROM
+                        monitora.pi_enquadramentodespesa
+                    WHERE
+                        eqdano = '". (int)$exercicio. "')
+        ";
         $dados = $this->carregar($sql);
         $dados = $dados ? $dados : [];
 
