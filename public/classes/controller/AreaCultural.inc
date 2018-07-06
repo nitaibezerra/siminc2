@@ -9,6 +9,7 @@ class Public_Controller_AreaCultural
         try {
             $mdareaCultural = new Monitora_Model_PiModalidadeEnsino($dados['mdeid']);
             $mdareaCultural->popularDadosObjeto($dados);
+            $mdareaCultural->mdecod = strtoupper($mdareaCultural->mdecod);
             $mdareaCultural->mdeano = $mdareaCultural->mdeano ? $mdareaCultural->mdeano : $_SESSION['exercicio'];
 //            ver($mdareaCultural,d);
 
