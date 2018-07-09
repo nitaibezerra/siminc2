@@ -1,4 +1,4 @@
-                <div class="clearfix" style="margin-top: 10px;">&nbsp;</div>
+   <div class="clearfix" style="margin-top: 10px;">&nbsp;</div>
 
 				<div class="footer">
 		            <div class="pull-right">
@@ -6,7 +6,7 @@
 		            	<strong>Último acesso</strong> <?= formata_data( $_SESSION['usuacesso'] ); ?>
 		            </div>
 		            <div class="pull-left footer-actions">
-		                <a href="javascript:abrirRegras(<?=$_SESSION['mnuid']; ?>);"><strong><i class="fa fa-book"></i> Visualizar Regras</strong></a>
+		                <a href="javascript:abrirRegras(<?=$_SESSION['mnuid']; ?>);"><strong><i class="fa fa-book"></i> Anexos</strong></a>
 		            	 <!--| <a href="javascript:abrirUsuariosOnline();"><strong><i class="fa fa-user"></i> <?= $_SESSION['qtdusuariosonline'][$_SESSION['sisid']];?> Usuários On-Line</strong></a>-->
 		            </div>
 		        </div>
@@ -300,9 +300,11 @@
 			<a class="close">×</a>
 			<a class="play-pause"></a>
 			<ol class="indicator"></ol>
-		</div>
-	</body>
+		</div>   
+                               
+	</body>                        
 </html>
+
 <script language="JavaScript">
 	/** Função de fazer com que o sistema informe que esta havendo uma requisição ajax */
 	$(document).ajaxSend(function (e, jqxhr, settings) {
@@ -532,5 +534,8 @@ $(document).ready(function() {
     <?php if (!empty($mensagemCarregar) && isset($mensagemCarregar['text'])) { ?>
         swal({title: "", text: "<?php echo str_replace(array("\n", "\r"), '', $mensagemCarregar['text']); ?>", type: "<?php echo $mensagemCarregar['type']; ?>", html: true});
     <?php } ?>
+               
 });
 </script>
+<?php bootstrapPopup('Anexo de Documentos', 'popup_anexo_documentos_modulo', APPRAIZ. "public/modal_upload_modulo.inc", ['fechar'],['tamanho'=>'lg'])?>
+ 

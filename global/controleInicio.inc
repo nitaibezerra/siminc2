@@ -42,6 +42,8 @@ include_once APPRAIZ . "includes/connection/adapter-connection.php";
 
 initAutoload();
 
+include_once APPRAIZ . "includes/controla_requisicao_upload.php";
+
 // abre conexão com o servidor de banco de dados
 $db = new cls_banco();
 
