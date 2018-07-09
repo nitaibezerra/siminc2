@@ -304,6 +304,139 @@ class Public_Model_SubUnidadeOrcamentaria extends Modelo
         ";
         return $sql;
     }
+    
+    /**
+     * Monta SQL para consultar subunidades com total de pré-pi e total do limite.
+     * 
+     * @param stdClass $parametros
+     * @return string
+     */
+    public function montarSqlPropostaTotaisLimites(stdClass $parametros){
 
+        # Filtros
+        $whereTotalPrePi = $parametros->aprovados? "\n AND doc.esdid = ". (int)ESD_PREPI_APROVADO: NULL;
+        $where = $parametros->exercicio? "\n AND suo.prsano = '". (int)$parametros->exercicio. "'": NULL;
+        
+        $sql = "
+           SELECT DISTINCT
+                suo.suoid,
+                suo.unoid,
+                suo.unocod,
+                suo.unosigla,
+                suo.unonome,
+                suo.suosigla,
+                suo.suocod,
+                suo.suonome,
+                (
+                    SELECT
+                        COALESCE(SUM((COALESCE(pre.plivalorcusteio, 0) + COALESCE(pre.plivalorcapital, 0))), 0) AS total_pre_pi
+                    FROM proposta.preplanointerno pre
+                        LEFT JOIN workflow.documento doc ON(pre.docid = doc.docid)
+                    WHERE
+                        pre.plistatus = 'A'
+                        AND pre.prsano = suo.prsano
+                        AND pre.suoid = suo.suoid
+                        ". $whereTotalPrePi. "
+                ) AS total_pre_pi,
+                (
+                    SELECT
+                        COALESCE(SUM(COALESCE(srl.srllimite, 0)), 0) AS total_limite_rp
+                    FROM proposta.subunidaderplimite srl
+                    WHERE
+                        srl.srlstatus = 'A'
+                        AND srl.suoid = suo.suoid
+                ) AS total_limite_rp
+            FROM public.vw_subunidadeorcamentaria suo
+            WHERE
+                suo.suostatus = 'A'
+                AND suo.unofundo IS FALSE
+		". $where. "
+            ORDER BY
+                suo.unonome,
+                suo.suonome,
+                total_pre_pi,
+                total_limite_rp
+        ";
+//ver($sql, d);
+        return $sql;
+    }
+    
+    /**
+     * Busca subunidades com total de pré-pi e total do limite.
+     * 
+     * @param stdClass $parametros
+     * @return array
+     */
+    public function buscarPropostaTotaisLimites(stdClass $parametros)
+    {
+        $sql = $this->montarSqlPropostaTotaisLimites($parametros);
+        $resultado = $this->carregar($sql);
+        $listaSubunidadeRp = $resultado? $resultado: array();
+        return $listaSubunidadeRp;
+    }
+    
+    /**
+     * Monta SQL para consultar subunidades com total de pré-pi e total do limite.
+     * 
+     * @param stdClass $parametros
+     * @return string
+     */
+    public function montarSqlPropostaRpTotaisLimites(stdClass $parametros){
+
+        # Filtros PrePi
+        $whereTotalPrePi = $parametros->exercicio? "\n AND pre.prsano = '". (int)$parametros->exercicio. "'": NULL;
+        $whereTotalPrePi .= $parametros->suoid? "\n AND pre.suoid = ". (int)$parametros->suoid: NULL;
+        
+        # Filtros Limites
+        $whereTotalLimite = $parametros->suoid? "\n AND srl.suoid = ". (int)$parametros->suoid: NULL;
+        
+        $sql = "
+            SELECT
+                irp.irpcod,
+                irp.irpdsc,
+                (
+                    SELECT
+                        COALESCE(SUM((COALESCE(pre.plivalorcusteio, 0) + COALESCE(pre.plivalorcapital, 0))), 0) AS total_pre_pi
+                    FROM proposta.preplanointerno pre
+                        JOIN monitora.ptres ptr ON pre.ptrid = ptr.ptrid -- SELECT * FROM monitora.ptres
+                        LEFT JOIN workflow.documento doc ON(pre.docid = doc.docid)
+                    WHERE
+                        pre.plistatus = 'A'
+                        AND ptr.irpcod = irp.irpcod
+                        $whereTotalPrePi
+                ) AS total_pre_pi,
+                COALESCE((
+                    SELECT
+                        COALESCE(srl.srllimite, 0) AS total_limite_rp
+                    FROM proposta.subunidaderplimite srl
+                    WHERE
+                        srl.srlstatus = 'A'
+                        AND srl.irpcod = irp.irpcod
+                        $whereTotalLimite
+                ), 0) AS total_limite_rp
+            FROM public.identresultprimario irp
+            WHERE
+                irp.irpstatus = 'A'
+            ORDER BY
+                irp.irpcod
+        ";
+//ver($sql, d);
+        return $sql;
+    }
+    
+    /**
+     * Busca subunidades com total de pré-pi e total do limite.
+     * 
+     * @param stdClass $parametros
+     * @return array
+     */
+    public function buscarPropostaRpTotaisLimites(stdClass $parametros)
+    {
+        $sql = $this->montarSqlPropostaRpTotaisLimites($parametros);
+        $resultado = $this->carregar($sql);
+        $listaSubunidadeRp = $resultado? $resultado: array();
+        return $listaSubunidadeRp;
+    }
+    
 
 }

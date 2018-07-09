@@ -49,12 +49,13 @@ switch($_REQUEST['req']) {
         echo $simec->select('ippid', 'Iniciativa PPA', null, (new Public_Model_IniciativaPpa())->recuperarSqlCombo(null, ['oppid'=>(int)$_REQUEST['oppid']]), []);
         die;
     case 'recuperar-limite':
-        $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+        $resultadoLimites = (new Proposta_Model_Subunidaderplimite())
             ->recuperarLimitePorSuoid( (object)array(
                 'noPliid' => $_REQUEST['pliid'],
                 'suoid' => $_REQUEST['suoid'],
-                'exercicio' => $_SESSION['exercicio']));
+                'eqdid' => $_REQUEST['eqdid']));
         if($resultadoLimites){
+            $resultadoLimites['disponivel_unidade'] = (int)$resultadoLimites['limite_unidade'] - (int)$resultadoLimites['total_pre_pi'];
             $limites = array_map("utf8_encode", $resultadoLimites);
         }
         echo json_encode($limites);
@@ -74,18 +75,21 @@ $listaEqdidReduzido = simec_json_encode(buscarListaCodigoEnquadramentoReduzido((
 $codigoProdutoNaoAplica = buscarCodigoProdutoNaoAplica((int)$_SESSION['exercicio']);
 
 if($mPrePlanoInterno->suoid){
-    $resultadoLimites = (new Planacomorc_Model_UnidadegestoraLimite())
+    $resultadoLimites = (new Proposta_Model_Subunidaderplimite())
         ->recuperarLimitePorSuoid( (object)array(
             'noPliid' => $mPrePlanoInterno->pliid,
             'suoid' => $mPrePlanoInterno->suoid,
-            'exercicio' => $_SESSION['exercicio']));
+            'eqdid' => $mPrePlanoInterno->eqdid));
+    if($resultadoLimites){
+        $resultadoLimites['disponivel_unidade'] = (int)$resultadoLimites['limite_unidade'] - (int)$resultadoLimites['total_pre_pi'];
+    }
     $limites = $resultadoLimites? $resultadoLimites: array('limite_unidade' => NULL, 'disponivel_unidade' => NULL);
 }
 
 include APPRAIZ . "includes/cabecalho.inc";
 ?>
 
-<script src="js/principal/preplanointerno_form.js?v=3"></script>
+<script src="js/principal/preplanointerno_form.js?v=4"></script>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-5">
@@ -147,15 +151,15 @@ include APPRAIZ . "includes/cabecalho.inc";
                                 </td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_autorizado_unidade">
-                                <td style="text-align: left;">Limite Autorizado na Unidade: </td>
+                                <td style="text-align: left;">Limite RP da Unidade: </td>
                                 <td colspan="3" id="td_autorizado_sub_unidade" style="text-align: center;"><?php echo number_format((int)$limites['limite_unidade'], 0, ',', '.'); ?></td>
                             </tr>
                             <tr style="height: 30px;" class="tr_limite_disponivel_unidade">
                                 <td style="text-align: left;">
-                                    Limite Disponível na Unidade:
+                                    Limite RP disponível na Unidade:
                                     <input id="input_bd_disponivel_unidade_bd" name="input_bd_disponivel_unidade_bd" type="hidden" value="<?php echo (int)$limites['disponivel_unidade']; ?>" />
                                 </td>
-                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo (int)$limites['disponivel_unidade'] -((int)$mPrePlanoInterno->plivalorcusteio + (int)$mPrePlanoInterno->plivalorcapital); ?></td>
+                                <td colspan="3" id="td_disponivel_sub_unidade" style="text-align: center;" ><?php echo number_format(((int)$limites['disponivel_unidade'] -((int)$mPrePlanoInterno->plivalorcusteio + (int)$mPrePlanoInterno->plivalorcapital)), 0, ',', '.'); ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left;"></td>

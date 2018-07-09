@@ -275,11 +275,13 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 1 AS ordem,
                 'Limite' AS descricao,
                 $descricao AS categoria,
-                sum(COALESCE (lmu.lmuvlr, 0)::DECIMAL) AS valor
+                SUM(COALESCE(srl.srllimite, 0)) AS valor
             FROM
                 public.vw_subunidadeorcamentaria suo
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON suo.suocod = lmu.ungcod
-                AND suo.prsano = lmu.prsano
+                LEFT JOIN proposta.subunidaderplimite srl ON( -- SELECT * FROM proposta.subunidaderplimite
+                    suo.suoid = srl.suoid
+                    AND srl.srlstatus = 'A'
+                )
             WHERE
                 suo.prsano = '{$_SESSION['exercicio']}'
                 AND suo.suostatus = 'A'
@@ -830,8 +832,14 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 ptr.irpcod,
                 ptr.plodsc,
                 ptr.ptrid,
-                lmu.lmuvlr,
-                lmu.lmuid,
+                (
+                    SELECT
+                        SUM(COALESCE(srl.srllimite, 0)) AS limite_subunidade
+                    FROM proposta.subunidaderplimite srl
+                    WHERE
+                        srl.srlstatus = 'A'
+                        AND srl.suoid = suo.suoid
+                ) AS limite_subunidade,
                 psu.psuid,
                 sum(COALESCE(pli.".$plivalorcapital.", 0)) ptrdotacao_capital,
                 sum(COALESCE(pli.".$plivalorcusteio.", 0)) ptrdotacao_custeio,                    
@@ -884,11 +892,6 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                     ptr.ptrid = pli.ptrid
                     AND suo.suoid = pli.suoid
                 )
-                LEFT JOIN planacomorc.unidadegestora_limite lmu ON(
-                    lmu.ungcod = suo.suocod
-                    AND lmu.lmustatus = 'A'
-                    AND lmu.prsano = suo.prsano
-                )
             WHERE
                 {$where}
             GROUP BY
@@ -906,8 +909,7 @@ class Proposta_Model_PrePlanoInterno extends Modelo
                 ptr.irpcod,
                 ptr.plodsc,
                 ptr.ptrid,
-                lmu.lmuvlr,
-                lmu.lmuid,
+                limite_subunidade,
                 psu.psuid
             ORDER BY
                 suo.unonome,
