@@ -77,17 +77,17 @@ class Planacomorc_Model_HistoricoPi extends Modelo
 
         $sql = "
             SELECT
-                to_char(hpi.hisdata, 'DD/MM/YYYY'),
-                hpi.usucpf,
+                to_char(hpi.hisdata, 'DD/MM/YYYY HH24:mm:ss') AS hisdata,
+                usu.usunome,
                 hpi.hpidscantigo,
-                hpi.hpidscnovo,
-                *
+                hpi.hpidscnovo
             FROM
                 planacomorc.historico_pi AS hpi
                 JOIN seguranca.usuario AS usu ON (hpi.usucpf = usu.usucpf)
                 JOIN monitora.pi_planointerno pi ON (pi.pliid = hpi.pliid)
             WHERE
-                pi.pliid = '" . (int)$pliid . "'  
+                pi.pliid = '" . (int)$pliid . "'
+                AND pi.plistatus = 'A'
             ORDER BY
                 hpi.hisdata DESC
         ";

@@ -6,9 +6,9 @@
      */
     function initCadastroPi(){
 
-        $('.modal-pi').click(function(){
-            $('#proposta_modal .modal-body').load('?modulo=principal/unidade/cadastro_pi&acao=A&req=proposta_modal&pliid='+ $(this).data('pliid'));
-            $('#proposta_modal').modal();
+        $('#modal-historico-pi').click(function(){
+            $('#historico-pi .modal-body').load(urlPagina+'&req=historico-pi&pliid='+ $('#pliid').val());
+            $('#historico-pi').modal();
         });
 
         $('#btnApagar').click(function(){
