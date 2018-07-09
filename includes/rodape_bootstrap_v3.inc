@@ -6,7 +6,7 @@
 		            	<strong>Último acesso</strong> <?= formata_data( $_SESSION['usuacesso'] ); ?>
 		            </div>
 		            <div class="pull-left footer-actions">
-		                <a href="javascript:abrirRegras(<?=$_SESSION['mnuid']; ?>);"><strong><i class="fa fa-book"></i> Visualizar Regras</strong></a>
+		                <a href="javascript:abrirRegras(<?=$_SESSION['mnuid']; ?>);"><strong><i class="fa fa-book"></i> Anexos</strong></a>
 		            	 <!--| <a href="javascript:abrirUsuariosOnline();"><strong><i class="fa fa-user"></i> <?= $_SESSION['qtdusuariosonline'][$_SESSION['sisid']];?> Usuários On-Line</strong></a>-->
 		            </div>
 		        </div>
