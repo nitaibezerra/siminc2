@@ -5,7 +5,12 @@
      * @returns VOID
      */
     function initCadastroPi(){
-        
+
+        $('#modal-historico-pi').click(function(){
+            $('#historico-pi .modal-body').load(urlPagina+'&req=historico-pi&pliid='+ $('#pliid').val());
+            $('#historico-pi').modal();
+        });
+
         $('#btnApagar').click(function(){
             window.location.href = urlPagina+ '&confirmar-apagar=1&pliid='+ $('#pliid').val();
         });
