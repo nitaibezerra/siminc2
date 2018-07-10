@@ -261,7 +261,7 @@ if($_REQUEST['sisid']=='')
 	
 	$sisid =0;
 }
-	$sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from sistema order by DESCRICAO ";
+	$sql = "select distinct sisid as CODIGO,sisdsc as DESCRICAO from seguranca.sistema WHERE sisstatus = 'A' order by DESCRICAO ";
 	$db->monta_combo('sisid',$sql,'S',"Selecione o Sistema",'submete_sistema','');
 
 
