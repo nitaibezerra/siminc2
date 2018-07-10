@@ -78,5 +78,18 @@ class Public_Model_ArquivoModulo extends Modelo
         $sql = "update public.arquivo set arqstatus = 'I' where arqid = ".$this->arqid;
         $this->executar($sql);
     }
+    
+    public function verificaPerfilUsuario(){
+        $sql = "select count(*) as qtd 
+                  from seguranca.perfilusuario pu
+                 inner join seguranca.perfil p
+                    on pu.pflcod = p.pflcod
+                 where p.pflnivel = 1
+                   and p.pflstatus = 'A'
+                   and pu.usucpf = '".$_SESSION['usucpf']."'";
+        $retorno = $this->pegaUm($sql);
+        return $retorno>0?true:false;
+        
+    }
 }//end Class
 ?>
