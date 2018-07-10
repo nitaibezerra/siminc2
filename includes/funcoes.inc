@@ -5201,10 +5201,11 @@ function montaMenuBootstrap($menus = array()) {
 	$html = '<ul class="nav metismenu" id="side-menu">';
 
 	$arrayIcons = array(
-		'Relatórios' => 'fa fa-line-chart',
-		'Principal' => 'fa fa-th-large',
-		'Sistema' => 'fa fa-user-circle',
-		'Apoio' => 'fa fa-gears'
+            'Principal' => 'fa fa-th-large',
+            'Relatórios' => 'fa fa-line-chart',
+            'Sistema' => 'fa fa-user-circle',
+            'Configuração' => 'fa fa-gears',
+            'Apoio' => 'fa fa-cubes'
 	);
 
 	foreach ($menus as $nivel1) {
