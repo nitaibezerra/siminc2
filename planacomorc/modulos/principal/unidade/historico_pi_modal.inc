@@ -14,7 +14,7 @@ $listaHistorico = (new Planacomorc_Model_HistoricoPi())->recuperarListagem($_REQ
                         <tr class="text-center">
                             <th>Data</th>
                             <th>Usuário</th>
-                            <th>Código Antigo</th>
+                            <th>Código Anterior</th>
                             <th>Código Novo</th>
                         </tr>
                         </thead>
