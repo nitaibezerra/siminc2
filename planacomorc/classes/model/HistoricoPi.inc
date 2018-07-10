@@ -77,7 +77,7 @@ class Planacomorc_Model_HistoricoPi extends Modelo
 
         $sql = "
             SELECT
-                to_char(hpi.hisdata, 'DD/MM/YYYY HH24:mm:ss') AS hisdata,
+                to_char(hpi.hisdata, 'DD/MM/YYYY HH24:MI:SS') AS hisdata,
                 usu.usunome,
                 hpi.hpidscantigo,
                 hpi.hpidscnovo
