@@ -4,7 +4,9 @@
             <table width="80%" cellspacing="0" class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th style="text-align: center;">Açoes</th>
+                        <?php if ($arquivoModulo->verificaPerfilUsuario()){?>
+                            <th style="text-align: center;">Açoes</th>
+                        <?php }?>    
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Data</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Arquivo</th>
                         <th style="border: 1px #e5d9c5 solid; background-color: #f4f4f4">Titulo</th>
@@ -17,9 +19,11 @@
                         <tbody>
                         <?php foreach($listaArquivos as $arquivo): ?>
                             <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-trash btnRemoverAnexosModulos link" title="Excluir o arquivo <?php echo $arquivo['arqnome']. '.'. $arquivo['arqextensao']; ?>" data-arqmdid="<?php echo $arquivo['arqmdid']; ?>" />
-                                </td>
+                                <?php if ($arquivoModulo->verificaPerfilUsuario()){?>
+                                    <td>
+                                        <span class="glyphicon glyphicon-trash btnRemoverAnexosModulos link" title="Excluir o arquivo <?php echo $arquivo['arqnome']. '.'. $arquivo['arqextensao']; ?>" data-arqmdid="<?php echo $arquivo['arqmdid']; ?>" />
+                                    </td>
+                                <?php }?>
                                 <td style="border: 1px #e5d9c5 solid;">
                                     <?php echo $arquivo['data']; ?>
                                 </td>
