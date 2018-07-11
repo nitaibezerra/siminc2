@@ -1,3 +1,6 @@
+<?php
+$arquivoModulo = new Public_Model_ArquivoModulo();
+if ($arquivoModulo->verificaPerfilUsuario()){?>
 <div class="form-group">
     <div class="row">
         <label for="farqdescricao" class="col-lg-2 control-label">Titulo:</label>
@@ -12,14 +15,15 @@
         </div>                                
     </div>
 </div>
-<form class="dropzone" method="POST" enctype="multipart/form-data" action="?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&requisicao_upload=upload_arquivo" id="formularioAnexo" name="formularioAnexo">
-    <input type="hidden" id="arqmdid" name="arqmdid">
-    <input type="hidden" id="arqdescricao" name="arqdescricao">
-    <input type="hidden" id="arqmddescricao" name="arqmddescricao">
-    <div class="fallback">
-        <input name="file" type="file" multiple />
-    </div>
-</form>
+    <form class="dropzone" method="POST" enctype="multipart/form-data" action="?modulo=principal/monitorar-pnc&acao=A&acoid=<?php echo $mAcompanhamento->acoid; ?>&aba=1&requisicao_upload=upload_arquivo" id="formularioAnexo" name="formularioAnexo">
+        <input type="hidden" id="arqmdid" name="arqmdid">
+        <input type="hidden" id="arqdescricao" name="arqdescricao">
+        <input type="hidden" id="arqmddescricao" name="arqmddescricao">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+        </div>
+    </form>
+<?php }?>    
 <div id="listaArquivosModulo">
     <?php
     $arquivoModulo = new Public_Model_ArquivoModulo();
